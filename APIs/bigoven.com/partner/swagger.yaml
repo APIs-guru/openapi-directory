@@ -177,6 +177,18 @@ paths:
       summary: Get the user's grocery list.  User is determined by Basic Authentication.
       tags:
         - GroceryList
+  /grocerylist/clearcheckedlines:
+    post:
+      consumes: []
+      deprecated: false
+      operationId: GroceryList_GroceryListRemoveMarkedItems
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BigOven.Model.API2.GroceryList'
+      tags:
+        - GroceryList
   /grocerylist/department:
     post:
       consumes:
@@ -212,7 +224,6 @@ paths:
         - text/xml
         - application/x-www-form-urlencoded
       deprecated: false
-      operationId: GroceryList_Post
       parameters:
         - description: 'name, quantity, unit, notes, department'
           in: body
@@ -273,6 +284,30 @@ paths:
           schema:
             $ref: '#/definitions/System.Object'
       summary: Update a grocery item by GUID
+      tags:
+        - GroceryList
+  /grocerylist/line:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      parameters:
+        - description: 'name, quantity, unit, notes, department'
+          in: body
+          name: newItem
+          required: true
+          schema:
+            $ref: '#/definitions/API2.Controllers.GroceryListController.PostGroceryListAddLineRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BigOven.Model.ShoppingListLine'
+      summary: Add a single line item to the grocery list
       tags:
         - GroceryList
   /grocerylist/recipe:
@@ -430,9 +465,7 @@ paths:
         '200':
           description: OK
           schema:
-            items:
-              $ref: '#/definitions/API2.Controllers.MeController.KeyOption'
-            type: array
+            $ref: '#/definitions/API2.Controllers.MeController.PreferenceOptions'
       tags:
         - Me
   /me/profile:
@@ -1604,6 +1637,11 @@ definitions:
       items:
         type: string
     type: object
+  API2.Controllers.GroceryListController.PostGroceryListAddLineRequest:
+    properties:
+      text:
+        type: string
+    type: object
   API2.Controllers.GroceryListController.PostGroceryListRecipeRequest:
     properties:
       markAsPending:
@@ -1641,6 +1679,8 @@ definitions:
         type: string
       guid:
         type: string
+      ischecked:
+        type: boolean
       name:
         type: string
       notes:
@@ -1660,14 +1700,24 @@ definitions:
           $ref: '#/definitions/BigOven.Model.API2.Photo'
         type: array
     type: object
-  API2.Controllers.MeController.KeyOption:
+  API2.Controllers.MeController.EatingStyle:
     properties:
-      Key:
-        type: string
       Options:
         items:
-          $ref: '#/definitions/API2.Models.Option'
+          $ref: '#/definitions/API2.Controllers.MeController.Option'
         type: array
+    type: object
+  API2.Controllers.MeController.Option:
+    properties:
+      Description:
+        type: string
+      Key:
+        type: string
+    type: object
+  API2.Controllers.MeController.PreferenceOptions:
+    properties:
+      EatingStyle:
+        $ref: '#/definitions/API2.Controllers.MeController.EatingStyle'
     type: object
   API2.Controllers.NoteController.NoteRequest:
     properties:
@@ -1821,13 +1871,6 @@ definitions:
       DMA:
         format: int32
         type: integer
-    type: object
-  API2.Models.Option:
-    properties:
-      Description:
-        type: string
-      Key:
-        type: string
     type: object
   API2.Models.Personal:
     properties:

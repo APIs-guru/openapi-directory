@@ -63,6 +63,15 @@ paths:
           name: resultFormat
           required: false
           type: string
+        - default: false
+          description: Select this option to allow overlapping geometries
+          enum:
+            - false
+            - true
+          in: formData
+          name: allowOverlap
+          required: false
+          type: boolean
         - description: The callback function a JSON result format would be wrapped in to support Ajax requests.
           in: query
           name: callback
@@ -180,6 +189,15 @@ paths:
             - true
           in: formData
           name: multiple
+          required: false
+          type: boolean
+        - default: false
+          description: When multiple=true select this option to allow overlapping geometries
+          enum:
+            - false
+            - true
+          in: formData
+          name: allowOverlap
           required: false
           type: boolean
         - description: The callback function a JSON result format would be wrapped in to support Ajax requests.

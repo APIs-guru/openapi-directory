@@ -30,7 +30,7 @@ info:
     * [Changelog](https://flat.io/developers/docs/api/changelog.html)
   termsOfService: 'https://flat.io/legal'
   title: Flat
-  version: 2.3.0
+  version: 2.5.0
   x-apisguru-categories:
     - media
     - collaboration
@@ -143,6 +143,13 @@ parameters:
       This sharing key must be specified to access to a score with a `privacy` mode set to `privateLink` and the current user is not a collaborator of the document.
     in: query
     name: sharingKey
+    type: string
+  scoreTrack:
+    description: |
+      Unique identifier of a score audio track
+    in: path
+    name: track
+    required: true
     type: string
   user:
     description: |
@@ -1888,6 +1895,163 @@ paths:
       tags:
         - Score
         - Class
+  '/scores/{score}/tracks':
+    get:
+      operationId: listScoreTracks
+      parameters:
+        - $ref: '#/parameters/score'
+        - $ref: '#/parameters/scoreSharingKey'
+      responses:
+        '200':
+          description: List of tracks
+          schema:
+            items:
+              $ref: '#/definitions/ScoreTrack'
+            type: array
+        '403':
+          description: Not granted to access to this score
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+        '404':
+          description: Score not found
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - scores
+            - scores.readonly
+      summary: List the audio or video tracks linked to a score
+      tags:
+        - Score
+    post:
+      description: |
+        Use this method to add new track to the score. This track can then be played on flat.io or in an embedded score.
+        This API method support medias hosted on SoundCloud, YouTube and Vimeo.
+      operationId: addScoreTrack
+      parameters:
+        - $ref: '#/parameters/score'
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ScoreTrackCreation'
+      responses:
+        '200':
+          description: Created track
+          schema:
+            $ref: '#/definitions/ScoreTrack'
+        '403':
+          description: Not granted to access to this score
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+        '404':
+          description: Score not found
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - scores
+      summary: Add a new video or audio track to the score
+      tags:
+        - Score
+  '/scores/{score}/tracks/{track}':
+    delete:
+      operationId: deleteScoreTrack
+      parameters:
+        - $ref: '#/parameters/score'
+        - $ref: '#/parameters/scoreTrack'
+      responses:
+        '204':
+          description: Track removed
+        '403':
+          description: Not granted to access to this score
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+        '404':
+          description: Score or Track not found
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - scores
+      summary: Remove an audio or video track linked to the score
+      tags:
+        - Score
+    get:
+      operationId: getScoreTrack
+      parameters:
+        - $ref: '#/parameters/score'
+        - $ref: '#/parameters/scoreSharingKey'
+        - $ref: '#/parameters/scoreTrack'
+      responses:
+        '200':
+          description: Track details
+          schema:
+            $ref: '#/definitions/ScoreTrack'
+        '403':
+          description: Not granted to access to this score
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+        '404':
+          description: Score or Track not found
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - scores
+            - scores.readonly
+      summary: Retrieve the details of an audio or video track linked to a score
+      tags:
+        - Score
+    put:
+      operationId: updateScoreTrack
+      parameters:
+        - $ref: '#/parameters/score'
+        - $ref: '#/parameters/scoreTrack'
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ScoreTrackUpdate'
+      responses:
+        '200':
+          description: Updated track
+          schema:
+            $ref: '#/definitions/ScoreTrack'
+        '403':
+          description: Not granted to access to this score
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+        '404':
+          description: Score or Track not found
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - scores
+      summary: Update an audio or video track linked to a score
+      tags:
+        - Score
   '/users/{user}':
     get:
       description: |
@@ -3156,6 +3320,13 @@ definitions:
     required:
       - privacy
     type: object
+  ScoreCreationType:
+    description: 'The type of creation (an orginal, an arrangement)'
+    enum:
+      - original
+      - arrangement
+      - other
+    type: string
   ScoreData:
     description: |
       The data of the score file. It must be a MusicXML 3 file (`vnd.recordare.musicxml` or `vnd.recordare.musicxml+xml`), a MIDI file (`audio/midi`) or a Flat.json (aka Adagio.json) file.
@@ -3179,10 +3350,21 @@ definitions:
             type: array
           comments:
             $ref: '#/definitions/ScoreCommentsCounts'
+          composer:
+            description: Composer of the score
+            type: string
           creationDate:
             description: The date when the score was created
             format: date-time
             type: string
+          creationType:
+            $ref: '#/definitions/ScoreCreationType'
+          description:
+            description: Description of the creation
+            type: string
+          durationTime:
+            description: 'In seconds, an approximative duration of the score'
+            type: integer
           googleDriveFileId:
             description: |
               If the user uses Google Drive and the score exists on Google Drive, this field will contain the unique identifier of the Flat score on Google Drive. You can access the document using the url: `https://drive.google.com/open?id={googleDriveFileId}`
@@ -3193,12 +3375,26 @@ definitions:
             items:
               type: string
             type: array
+          license:
+            $ref: '#/definitions/ScoreLicense'
+          licenseText:
+            description: Additional license text written on the exported/printed score
+            type: string
           likes:
             $ref: '#/definitions/ScoreLikesCounts'
+          lyricist:
+            description: Lyricist of the score
+            type: string
+          mainTempoQpm:
+            description: The main tempo of the score (in QPM)
+            type: integer
           modificationDate:
             description: The date of the last revision of the score
             format: date-time
             type: string
+          numberMeasures:
+            description: The number of measures in the score
+            type: integer
           organization:
             description: |
               If the score has been created in an organization, the identifier of this organization. This property is especially used with the score privacy `organizationPublic`.
@@ -3207,8 +3403,21 @@ definitions:
             description: |
               If the score has been forked, the unique identifier of the parent score.
             type: string
+          publicationDate:
+            description: The date when the score was published on Flat
+            format: date-time
+            type: string
           rights:
             $ref: '#/definitions/ScoreRights'
+          subtitle:
+            description: Subtitle of the score
+            type: string
+          tags:
+            description: Tags describing the score
+            items:
+              pattern: '^[a-zA-Z0-9]{1,30}$'
+              type: string
+            type: array
           views:
             $ref: '#/definitions/ScoreViewsCounts'
         type: object
@@ -3240,7 +3449,10 @@ definitions:
         total: 0
         unique: 0
         weekly: 0
+      composer: Mr Awesome
       creationDate: '2017-01-15T20:03:25.771Z'
+      creationType: original
+      durationTime: 70
       googleDriveFileId: 0BCDEFAGA00000000000000
       htmlUrl: 'https://flat.io/score/000000000000000000000000'
       id: '000000000000000000000000'
@@ -3248,18 +3460,24 @@ definitions:
         - keyboards.grand-piano
         - woodwinds.oboe
         - woodwinds.clarinet
+      license: copyright
+      licenseText: Copyright 2017 Mr Awesome
       likes:
         monthly: 0
         total: 0
         weekly: 0
+      lyricist: Lyricist
       modificationDate: '2017-01-26T20:29:10.622Z'
+      numberMeasures: 35
       organization: '000000000000000000000030'
       parentScore: '000000000000000000000040'
       privacy: private
+      publicationDate: '2017-09-10T12:00:00.123Z'
       rights:
         aclAdmin: true
         aclRead: true
         aclWrite: true
+      subtitle: Subtitle of the score
       title: My score
       user:
         id: '000000000000000000000001'
@@ -3275,6 +3493,19 @@ definitions:
   ScoreFork:
     description: Options to fork the score
     type: object
+  ScoreLicense:
+    description: |
+      License of the creation. Read more about the Creative Commons licenses on https://creativecommons.org/licenses/
+    enum:
+      - copyright
+      - cc0
+      - cc-by
+      - cc-by-sa
+      - cc-by-nd
+      - cc-by-nc
+      - cc-by-nc-sa
+      - cc-by-nc-nd
+    type: string
   ScoreLikesCounts:
     description: |
       A computed version of the weekly, monthly and total of number of likes
@@ -3300,15 +3531,25 @@ definitions:
       privacy: private
       title: Edited title
     properties:
+      creationType:
+        $ref: '#/definitions/ScoreCreationType'
+      description:
+        description: Description of the creation
+        maxLength: 1000
+        type: string
+      license:
+        $ref: '#/definitions/ScoreLicense'
       privacy:
         $ref: '#/definitions/ScorePrivacy'
       sharingKey:
         description: 'When using the `privacy` mode `privateLink`, this property can be used to set a custom sharing key, otherwise a new key will be generated.'
         pattern: '^[a-f0-9]{128}$'
         type: string
-      title:
-        description: A new title of the score
-        type: string
+      tags:
+        description: Tags describing the score
+        items:
+          type: string
+        type: array
     type: object
   ScorePrivacy:
     description: |
@@ -3474,6 +3715,166 @@ definitions:
         type: string
       user:
         $ref: '#/definitions/UserPublicSummary'
+    type: object
+  ScoreTrack:
+    description: An audio track for a score
+    example:
+      creationDate: '2017-10-22T14:58:22.753Z'
+      creator: 5815d4b53269d90d2c80b71c
+      default: true
+      id: 59ecb20e563736b1e1f75dce
+      mediaId: dQw4w9WgXcQ
+      modificationDate: '2017-10-22T14:58:33.424Z'
+      score: 59a29d96f35a6411d7508bdd
+      state: completed
+      synchronizationPoints:
+        - measureUuid: 5132a788-69e6-d0c6-84ec-4bd858658d7c
+          time: 0
+          type: measure
+        - time: 213
+          type: end
+      title: Rick Astley - Never Gonna Give You Up
+      type: youtube
+      url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+    properties:
+      creationDate:
+        description: The creation date of the track
+        format: date-time
+        type: string
+      creator:
+        description: The unique identifier of the track creator
+        type: string
+      default:
+        description: True if the track should be used as default audio source
+        type: boolean
+      id:
+        description: The unique identifier of the score track
+        type: string
+      mediaId:
+        description: |
+          The unique identifier of the track when hosted on an external service.
+          For example, if the url is `https://www.youtube.com/watch?v=dQw4w9WgXcQ`, `mediaId` will be `dQw4w9WgXcQ`
+        type: string
+      modificationDate:
+        description: The modification date of the track
+        format: date-time
+        type: string
+      score:
+        description: The unique identifier of the score
+        type: string
+      state:
+        $ref: '#/definitions/ScoreTrackState'
+      synchronizationPoints:
+        items:
+          $ref: '#/definitions/ScoreTrackPoint'
+        type: array
+      title:
+        description: Title of the track
+        type: string
+      type:
+        $ref: '#/definitions/ScoreTrackType'
+      url:
+        description: The URL of the track
+        type: string
+    type: object
+  ScoreTrackCreation:
+    description: |
+      Creation of a new track. This one must contain the URL of the track or the corresponding file
+    example:
+      default: true
+      state: draft
+      synchronizationPoints:
+        - measureUuid: 5132a788-69e6-d0c6-84ec-4bd858658d7c
+          time: 0
+          type: measure
+        - time: 213
+          type: end
+      title: Rick Astley - Never Gonna Give You Up
+      url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+    properties:
+      default:
+        description: True if the track should be used as default audio source
+        type: boolean
+      state:
+        $ref: '#/definitions/ScoreTrackState'
+      synchronizationPoints:
+        items:
+          $ref: '#/definitions/ScoreTrackPoint'
+        type: array
+      title:
+        description: Title of the track
+        type: string
+      url:
+        description: The URL of the track
+        type: string
+    type: object
+  ScoreTrackPoint:
+    description: A track synchronization point
+    example:
+      measureUuid: 5132a788-69e6-d0c6-84ec-4bd858658d7c
+      time: 0
+      type: measure
+    properties:
+      measureUuid:
+        description: The measure unique identifier
+        format: uuid
+        type: string
+      time:
+        description: The corresponding time in seconds
+        type: number
+      type:
+        description: 'The type of the synchronization point. If the type is `measure`, the measure uuid must be present in `measureUuid`'
+        enum:
+          - measure
+          - end
+        type: string
+    required:
+      - type
+      - time
+    type: object
+  ScoreTrackState:
+    default: draft
+    description: State of the track
+    enum:
+      - draft
+      - completed
+      - deleted
+    type: string
+  ScoreTrackType:
+    description: The type of an audio track
+    enum:
+      - audio
+      - soundcloud
+      - youtube
+      - vimeo
+    type: string
+  ScoreTrackUpdate:
+    description: |
+      Update an existing track.
+    example:
+      default: true
+      state: draft
+      synchronizationPoints:
+        - measureUuid: 5132a788-69e6-d0c6-84ec-4bd858658d7c
+          time: 0
+          type: measure
+        - time: 213
+          type: end
+      title: Rick Astley - Never Gonna Give You Up
+      url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+    properties:
+      default:
+        description: True if the track should be used as default audio source
+        type: boolean
+      state:
+        $ref: '#/definitions/ScoreTrackState'
+      synchronizationPoints:
+        items:
+          $ref: '#/definitions/ScoreTrackPoint'
+        type: array
+      title:
+        description: Title of the track
+        type: string
     type: object
   ScoreViewsCounts:
     description: |

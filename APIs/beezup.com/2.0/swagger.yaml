@@ -2748,6 +2748,32 @@ paths:
       summary: Get the last input configuration
       tags:
         - Catalogs - Catalog
+  '/user/catalogs/{storeId}/products':
+    get:
+      operationId: Catalog_GetProductBySku
+      parameters:
+        - $ref: '#/parameters/storeIdOnlyGeneralParameters'
+        - description: The product sku you want to get
+          in: query
+          name: sku
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Product
+          schema:
+            $ref: '#/definitions/product'
+        '404':
+          description: StoreId or Product not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        default:
+          $ref: '#/responses/GeneralError'
+      security:
+        - api_key: []
+      summary: Get product by Sku
+      tags:
+        - Catalogs - Catalog
   '/user/catalogs/{storeId}/products/list':
     post:
       operationId: Catalog_GetProducts
@@ -2798,7 +2824,7 @@ paths:
         - Catalogs - Catalog
   '/user/catalogs/{storeId}/products/{productId}':
     get:
-      operationId: Catalog_GetProduct
+      operationId: Catalog_GetProductByProductId
       parameters:
         - $ref: '#/parameters/storeIdOnlyGeneralParameters'
         - description: The product identifier you want to get
@@ -2820,7 +2846,7 @@ paths:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
-      summary: Get product
+      summary: Get product by ProductId
       tags:
         - Catalogs - Catalog
   /user/channelCatalogs/:
@@ -2870,6 +2896,10 @@ paths:
               x-example: 5
           schema:
             $ref: '#/definitions/links.GetChannelCatalogLink'
+        '404':
+          description: StoreId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2894,13 +2924,13 @@ paths:
       summary: Get channel catalog exclusion filter operators
       tags:
         - Channel Catalogs - Exclusion Filters
-  '/user/channelCatalogs/products/{productId}':
+  /user/channelCatalogs/products:
     post:
       operationId: GetChannelCatalogProductByChannelCatalog
       parameters:
-        - $ref: '#/parameters/productIdParameter'
         - in: body
           name: request
+          required: true
           schema:
             $ref: '#/definitions/channelCatalogProductByChannelCatalogRequest'
       responses:
@@ -2908,6 +2938,10 @@ paths:
           description: The channel catalog product by channel catalog
           schema:
             $ref: '#/definitions/channelCatalogProductByChannelCatalogResponse'
+        '404':
+          description: ProductId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2923,6 +2957,10 @@ paths:
       responses:
         '204':
           description: Channel catalog deleted
+        '404':
+          description: ChannelCatalogId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2939,6 +2977,10 @@ paths:
           description: Channel catalog
           schema:
             $ref: '#/definitions/channelCatalog'
+        '404':
+          description: ChannelCatalogId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2955,7 +2997,11 @@ paths:
         '200':
           description: Channel catalog category mappings
           schema:
-            $ref: '#/definitions/channelCatalogCategoryMappings'
+            $ref: '#/definitions/channelCatalogCategoryMappingList'
+        '404':
+          description: ChannelCatalogId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2971,6 +3017,10 @@ paths:
       responses:
         '204':
           description: Channel catalog category mapping disabled
+        '404':
+          description: ChannelCatalogId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2991,6 +3041,14 @@ paths:
       responses:
         '204':
           description: Channel catalog category mapped
+        '400':
+          description: BadRequest. See Error Response for more details
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        '404':
+          description: ChannelCatalogId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3006,6 +3064,10 @@ paths:
       responses:
         '204':
           description: Channel catalog category mapping reenabled
+        '404':
+          description: ChannelCatalogId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3026,6 +3088,14 @@ paths:
       responses:
         '204':
           description: Channel catalog category unmapped
+        '400':
+          description: BadRequest. See Error Response for more details
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        '404':
+          description: ChannelCatalogId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3046,6 +3116,10 @@ paths:
       responses:
         '204':
           description: Channel catalog column mappings configured
+        '404':
+          description: ChannelCatalogId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3061,6 +3135,10 @@ paths:
       responses:
         '204':
           description: Channel catalog disabled
+        '404':
+          description: Occurs when a user tries to work on the wrong ChanelCatalogId.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3080,6 +3158,10 @@ paths:
           description: You have to upgrade your offer to activate this channel catalog
           schema:
             $ref: '#/definitions/upgradeOfferRequired'
+        '404':
+          description: Occurs when a user tries to work on the wrong ChanelCatalogId.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3097,6 +3179,10 @@ paths:
           description: Channel catalog exclusion filter list
           schema:
             $ref: '#/definitions/exclusionFiltersResponse'
+        '404':
+          description: ChannelCatalogId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3116,6 +3202,14 @@ paths:
       responses:
         '204':
           description: Channel catalog exclusion filter list configured
+        '400':
+          description: BadRequest. See Error Response for more details
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        '404':
+          description: ChannelCatalogId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3133,6 +3227,10 @@ paths:
           description: Channel catalog exportation cache information
           schema:
             $ref: '#/definitions/channelCatalogExportCacheInfoResponse'
+        '404':
+          description: ChannelCatalogId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3148,6 +3246,10 @@ paths:
       responses:
         '204':
           description: Channel catalog exportation cache cleared
+        '404':
+          description: ChannelCatalogId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3167,6 +3269,10 @@ paths:
           description: Channel catalog exportation history
           schema:
             $ref: '#/definitions/channelCatalogExportationHistory'
+        '404':
+          description: ChannelCatalogId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3190,6 +3296,10 @@ paths:
           description: Channel catalog product information
           schema:
             $ref: '#/definitions/channelCatalogProductInfoList'
+        '404':
+          description: ChannelCatalogId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3207,6 +3317,10 @@ paths:
           description: Channel catalog products' counters
           schema:
             $ref: '#/definitions/channelCatalogProductsCounters'
+        '404':
+          description: ChannelCatalogId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3241,6 +3355,10 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/BeezUP.Common.Link3'
+        '404':
+          description: ChannelCatalogId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3259,6 +3377,10 @@ paths:
           description: Channel catalog product information
           schema:
             $ref: '#/definitions/channelCatalogProductInfo'
+        '404':
+          description: ChannelCatalog or ProductId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3279,6 +3401,10 @@ paths:
       responses:
         '204':
           description: Channel catalog product disabled
+        '404':
+          description: ChannelCatalogId Or ProductId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3300,6 +3426,14 @@ paths:
       responses:
         '204':
           description: Channel catalog product overriden
+        '400':
+          description: BadRequest. See Error Response for more details
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        '404':
+          description: ChannelCatalogId or ProductId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3323,6 +3457,10 @@ paths:
       responses:
         '204':
           description: Channel catalog product value override deleted
+        '404':
+          description: ChannelCatalogId or ProductId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3343,6 +3481,10 @@ paths:
       responses:
         '204':
           description: Channel catalog product reenabled
+        '404':
+          description: ChannelCatalogId or ProductId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3363,6 +3505,10 @@ paths:
       responses:
         '204':
           description: Channel catalog cost settings configured
+        '404':
+          description: Occurs when a user tries to work on the wrong ChanelCatalogId.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3383,6 +3529,10 @@ paths:
       responses:
         '204':
           description: Channel catalog general settings configured
+        '404':
+          description: Occurs when a user tries to work on the wrong ChanelCatalogId.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -5142,6 +5292,13 @@ definitions:
           type: string
         type: array
     type: object
+  BeezUP.Common.ApiSettingsStatus:
+    enum:
+      - warning
+      - success
+      - failed
+    example: success
+    type: string
   BeezUP.Common.BeezUPColumnName:
     description: The BeezUP column name
     example: CategoryFirstLevel
@@ -5480,9 +5637,7 @@ definitions:
       parameters:
         additionalProperties:
           $ref: '#/definitions/BeezUP.Common.LinkParameter3'
-        properties:
-          default:
-            $ref: '#/definitions/BeezUP.Common.LinkParameter3'
+        type: object
       urlTemplated:
         description: indicates whether the href is templated or not
         type: boolean
@@ -6878,14 +7033,7 @@ definitions:
       unmapCategory:
         $ref: '#/definitions/links.UnmapChannelCatalogCategoryLink'
     type: object
-  channelCatalogCategoryMappingSettings:
-    properties:
-      categoryMappingDisabledByMerchant:
-        description: Optional parameter. Indicates that you have decided to do not map your categories with the channel's categories.
-        example: false
-        type: boolean
-    type: object
-  channelCatalogCategoryMappings:
+  channelCatalogCategoryMappingList:
     properties:
       channelCatalogCategoryMappings:
         items:
@@ -6896,6 +7044,13 @@ definitions:
     required:
       - links
       - channelCatalogCategoryMappings
+    type: object
+  channelCatalogCategoryMappingSettings:
+    properties:
+      categoryMappingDisabledByMerchant:
+        description: Optional parameter. Indicates that you have decided to do not map your categories with the channel's categories.
+        example: false
+        type: boolean
     type: object
   channelCatalogCategoryMappingsLinks:
     description: The action you can do on the category mappings
@@ -7017,12 +7172,9 @@ definitions:
     properties:
       cacheStatus:
         description: The cache status during the exportation
-        enum:
-          - Error
-          - Available
-          - GeneratedManually
         example: Available
         type: string
+        x-lov: ChannelCatalogExportationCacheGenerationStatus
       clientIpAddress:
         description: The IP address of the client who requests this exportation
         example: 42.101.42.101
@@ -7483,6 +7635,14 @@ definitions:
         items:
           $ref: '#/definitions/BeezUP.Common.ChannelCatalogId'
         type: array
+      productId:
+        $ref: '#/definitions/BeezUP.Common.ProductId'
+      storeId:
+        $ref: '#/definitions/BeezUP.Common.StoreId'
+    required:
+      - storeId
+      - productId
+      - channelCatalogIds
     type: object
   channelCatalogProductByChannelCatalogResponse:
     properties:
@@ -8769,16 +8929,9 @@ definitions:
       - $ref: '#/definitions/catalogColumn'
       - description: The catalog column detected during the first parsing step
         properties:
-          detected:
-            description: Indicates if the column is detected or is from the current catalog
-            example: true
-            type: boolean
-          existingConfiguration:
-            $ref: '#/definitions/existingCatalogColumnConfiguration'
           links:
             $ref: '#/definitions/detectedCatalogColumnLinks'
         required:
-          - detected
           - links
         type: object
   detectedCatalogColumnLinks:
@@ -8989,17 +9142,6 @@ definitions:
     example: 8D4176FA78D5A7Fffa91e9edc694ec5858be9a1b109507c
     format: uuid
     type: string
-  existingCatalogColumnConfiguration:
-    description: In case your catalog column already exists we indicate you the existing configuration.
-    properties:
-      configuration:
-        $ref: '#/definitions/columnConfiguration'
-      userColumName:
-        $ref: '#/definitions/userColumName'
-    required:
-      - userColumName
-      - configuration
-    type: object
   expirationMonth:
     description: Expiration Month
     example: 12

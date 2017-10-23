@@ -15,7 +15,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: swagger
       url: 'https://www.zoomconnect.com/zoom/api-docs'
       version: '1.2'
@@ -761,7 +761,6 @@ paths:
             - FAILED_REFUNDED
             - FAILED_OPTOUT
             - DELIVERED
-            - RECEIVED
           in: query
           name: status
           required: false

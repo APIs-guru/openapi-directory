@@ -1939,6 +1939,28 @@ definitions:
     required:
       - alertId
     type: object
+  AllOnCall:
+    properties:
+      teams:
+        items:
+          $ref: '#/definitions/AllOnCallTeamsResource'
+        type: array
+      username:
+        type: string
+    type: object
+  AllOnCallTeamsResource:
+    properties:
+      escalation_policy:
+        items:
+          $ref: '#/definitions/OnCallEscalationPolicyResource'
+        type: array
+      name:
+        description: Team name
+        type: string
+      slug:
+        description: Team slug
+        type: string
+    type: object
   ContactDevice:
     properties:
       _selfUrl:
@@ -2242,6 +2264,18 @@ definitions:
           $ref: '#/definitions/TeamScheduleResource'
         type: array
       team:
+        type: string
+    type: object
+  OnCallEscalationPolicyResource:
+    properties:
+      id:
+        description: Team ID
+        type: integer
+      name:
+        description: Team name
+        type: string
+      slug:
+        description: Team slug
         type: string
     type: object
   OnCallInterval:

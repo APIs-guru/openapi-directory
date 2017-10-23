@@ -6,7 +6,7 @@ basePath: /latest
 info:
   description: An OpenAPI for EVE Online
   title: EVE Swagger Interface
-  version: 0.5.5
+  version: 0.6.2
   x-apisguru-categories:
     - media
   x-logo:
@@ -27,6 +27,7 @@ securityDefinitions:
       esi-assets.read_assets.v1: EVE SSO scope esi-assets.read_assets.v1
       esi-assets.read_corporation_assets.v1: EVE SSO scope esi-assets.read_corporation_assets.v1
       esi-bookmarks.read_character_bookmarks.v1: EVE SSO scope esi-bookmarks.read_character_bookmarks.v1
+      esi-bookmarks.read_corporation_bookmarks.v1: EVE SSO scope esi-bookmarks.read_corporation_bookmarks.v1
       esi-calendar.read_calendar_events.v1: EVE SSO scope esi-calendar.read_calendar_events.v1
       esi-calendar.respond_calendar_events.v1: EVE SSO scope esi-calendar.respond_calendar_events.v1
       esi-characters.read_agents_research.v1: EVE SSO scope esi-characters.read_agents_research.v1
@@ -44,11 +45,15 @@ securityDefinitions:
       esi-clones.read_clones.v1: EVE SSO scope esi-clones.read_clones.v1
       esi-clones.read_implants.v1: EVE SSO scope esi-clones.read_implants.v1
       esi-contracts.read_character_contracts.v1: EVE SSO scope esi-contracts.read_character_contracts.v1
+      esi-contracts.read_corporation_contracts.v1: EVE SSO scope esi-contracts.read_corporation_contracts.v1
       esi-corporations.read_blueprints.v1: EVE SSO scope esi-corporations.read_blueprints.v1
       esi-corporations.read_contacts.v1: EVE SSO scope esi-corporations.read_contacts.v1
+      esi-corporations.read_container_logs.v1: EVE SSO scope esi-corporations.read_container_logs.v1
       esi-corporations.read_corporation_membership.v1: EVE SSO scope esi-corporations.read_corporation_membership.v1
       esi-corporations.read_divisions.v1: EVE SSO scope esi-corporations.read_divisions.v1
+      esi-corporations.read_standings.v1: EVE SSO scope esi-corporations.read_standings.v1
       esi-corporations.read_structures.v1: EVE SSO scope esi-corporations.read_structures.v1
+      esi-corporations.read_titles.v1: EVE SSO scope esi-corporations.read_titles.v1
       esi-corporations.track_members.v1: EVE SSO scope esi-corporations.track_members.v1
       esi-corporations.write_structures.v1: EVE SSO scope esi-corporations.write_structures.v1
       esi-fittings.read_fittings.v1: EVE SSO scope esi-fittings.read_fittings.v1
@@ -56,6 +61,7 @@ securityDefinitions:
       esi-fleets.read_fleet.v1: EVE SSO scope esi-fleets.read_fleet.v1
       esi-fleets.write_fleet.v1: EVE SSO scope esi-fleets.write_fleet.v1
       esi-industry.read_character_jobs.v1: EVE SSO scope esi-industry.read_character_jobs.v1
+      esi-industry.read_corporation_jobs.v1: EVE SSO scope esi-industry.read_corporation_jobs.v1
       esi-killmails.read_corporation_killmails.v1: EVE SSO scope esi-killmails.read_corporation_killmails.v1
       esi-killmails.read_killmails.v1: EVE SSO scope esi-killmails.read_killmails.v1
       esi-location.read_location.v1: EVE SSO scope esi-location.read_location.v1
@@ -65,6 +71,7 @@ securityDefinitions:
       esi-mail.read_mail.v1: EVE SSO scope esi-mail.read_mail.v1
       esi-mail.send_mail.v1: EVE SSO scope esi-mail.send_mail.v1
       esi-markets.read_character_orders.v1: EVE SSO scope esi-markets.read_character_orders.v1
+      esi-markets.read_corporation_orders.v1: EVE SSO scope esi-markets.read_corporation_orders.v1
       esi-markets.structure_markets.v1: EVE SSO scope esi-markets.structure_markets.v1
       esi-planets.manage_planets.v1: EVE SSO scope esi-planets.manage_planets.v1
       esi-search.search_structures.v1: EVE SSO scope esi-search.search_structures.v1
@@ -460,7 +467,7 @@ paths:
         - $ref: '#/parameters/X-User-Agent'
       responses:
         '200':
-          description: Urls for icons for the given alliance id and server
+          description: Icon URLs for the given alliance id and server
           examples:
             application/json:
               px128x128: 'https://imageserver.eveonline.com/Alliance/503818424_128.png'
@@ -1160,6 +1167,195 @@ paths:
         - legacy
         - v1
       x-cached-seconds: 3600
+  '/characters/{character_id}/assets/locations/':
+    post:
+      description: |
+        Return locations for a set of item ids, which you can get from character assets endpoint. Coordinates for items in hangars or stations are set to (0,0,0)
+
+        ---
+        Alternate route: `/v1/characters/{character_id}/assets/locations/`
+
+        Alternate route: `/legacy/characters/{character_id}/assets/locations/`
+
+        Alternate route: `/dev/characters/{character_id}/assets/locations/`
+      operationId: post_characters_character_id_assets_locations
+      parameters:
+        - $ref: '#/parameters/character_id'
+        - $ref: '#/parameters/datasource'
+        - description: A list of item ids
+          in: body
+          name: item_ids
+          required: true
+          schema:
+            description: item_ids array
+            items:
+              description: item_id integer
+              format: int64
+              title: post_characters_character_id_assets_locations_item_id
+              type: integer
+            maxItems: 1000
+            minItems: 1
+            title: post_characters_character_id_assets_locations_item_ids
+            type: array
+            uniqueItems: true
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: List of asset locations
+          examples:
+            application/json:
+              - item_id: 12345
+                x: 1.2
+                'y': 2.3
+                z: -3.4
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                item_id:
+                  description: item_id integer
+                  format: int64
+                  title: post_characters_character_id_assets_locations_item_id
+                  type: integer
+                x:
+                  description: x number
+                  format: double
+                  title: post_characters_character_id_assets_locations_x
+                  type: number
+                'y':
+                  description: y number
+                  format: double
+                  title: post_characters_character_id_assets_locations_y
+                  type: number
+                z:
+                  description: z number
+                  format: double
+                  title: post_characters_character_id_assets_locations_z
+                  type: number
+              required:
+                - item_id
+                - x
+                - 'y'
+                - z
+              title: post_characters_character_id_assets_locations_200_ok
+              type: object
+            maxItems: 1000
+            title: post_characters_character_id_assets_locations_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-assets.read_assets.v1
+      summary: Get character asset locations
+      tags:
+        - Assets
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+  '/characters/{character_id}/assets/names/':
+    post:
+      description: |
+        Return names for a set of item ids, which you can get from character assets endpoint. Typically used for items that can customize names, like containers or ships.
+
+        ---
+        Alternate route: `/v1/characters/{character_id}/assets/names/`
+
+        Alternate route: `/legacy/characters/{character_id}/assets/names/`
+
+        Alternate route: `/dev/characters/{character_id}/assets/names/`
+      operationId: post_characters_character_id_assets_names
+      parameters:
+        - $ref: '#/parameters/character_id'
+        - $ref: '#/parameters/datasource'
+        - description: A list of item ids
+          in: body
+          name: item_ids
+          required: true
+          schema:
+            description: item_ids array
+            items:
+              description: item_id integer
+              format: int64
+              title: post_characters_character_id_assets_names_item_id
+              type: integer
+            maxItems: 1000
+            minItems: 1
+            title: post_characters_character_id_assets_names_item_ids
+            type: array
+            uniqueItems: true
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: List of asset names
+          examples:
+            application/json:
+              - item_id: 12345
+                name: Awesome Name
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                item_id:
+                  description: item_id integer
+                  format: int64
+                  title: post_characters_character_id_assets_names_item_id
+                  type: integer
+                name:
+                  description: name string
+                  title: post_characters_character_id_assets_names_name
+                  type: string
+              required:
+                - item_id
+                - name
+              title: post_characters_character_id_assets_names_200_ok
+              type: object
+            maxItems: 1000
+            title: post_characters_character_id_assets_names_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-assets.read_assets.v1
+      summary: Get character asset names
+      tags:
+        - Assets
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
   '/characters/{character_id}/attributes/':
     get:
       description: |-
@@ -1280,12 +1476,12 @@ paths:
   '/characters/{character_id}/blueprints/':
     get:
       description: |-
-        Return a list of blueprints the character has
+        Return a list of blueprints the character owns
 
         ---
-        Alternate route: `/v1/characters/{character_id}/blueprints/`
+        Alternate route: `/v2/characters/{character_id}/blueprints/`
 
-        Alternate route: `/legacy/characters/{character_id}/blueprints/`
+        Alternate route: `/dev/characters/{character_id}/blueprints/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -1293,6 +1489,7 @@ paths:
       parameters:
         - $ref: '#/parameters/character_id'
         - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
         - $ref: '#/parameters/token'
         - $ref: '#/parameters/user_agent'
         - $ref: '#/parameters/X-User-Agent'
@@ -1319,18 +1516,23 @@ paths:
             Last-Modified:
               description: RFC7231 formatted datetime string
               type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
           schema:
             description: 200 ok array
             items:
               description: 200 ok object
               properties:
                 item_id:
-                  description: 'Unique ID for this item. The ID of an item is stable if that item is not repackaged, stacked, detached from a stack, assembled, or otherwise altered. If an item is changed in one of these ways, then the ID will also change (see notes below).'
+                  description: Unique ID for this item.
                   format: int64
                   title: get_characters_character_id_blueprints_item_id
                   type: integer
                 location_flag:
-                  description: 'Indicates something about this item''s storage location. The flag is used to differentiate between hangar divisions, drone bay, fitting location, and similar.'
+                  description: Type of the location_id
                   enum:
                     - AutoFit
                     - Cargo
@@ -1411,28 +1613,34 @@ paths:
                   title: get_characters_character_id_blueprints_location_flag
                   type: string
                 location_id:
-                  description: 'References a solar system, station or item_id if this blueprint is located within a container. If an item_id the Character - AssetList API must be queried to find the container using the item_id, from which the correct location of the Blueprint can be derived.'
+                  description: 'References a solar system, station or item_id if this blueprint is located within a container. If the return value is an item_id, then the Character AssetList API must be queried to find the container using the given item_id to determine the correct location of the Blueprint.'
                   format: int64
                   title: get_characters_character_id_blueprints_location_id
                   type: integer
                 material_efficiency:
-                  description: 'Material Efficiency Level of the blueprint, can be any integer between 0 and 10.'
+                  description: Material Efficiency Level of the blueprint.
                   format: int32
+                  maximum: 25
+                  minimum: 0
                   title: get_characters_character_id_blueprints_material_efficiency
                   type: integer
                 quantity:
-                  description: 'Typically will be -1 or -2 designating a singleton item, where -1 is an original and -2 is a copy. It can be a positive integer if it is a stack of blueprint originals fresh from the market (no activities performed on them yet).'
+                  description: A range of numbers with a minimum of -2 and no maximum value where -1 is an original and -2 is a copy. It can be a positive integer if it is a stack of blueprint originals fresh from the market (e.g. no activities performed on them yet).
                   format: int32
+                  minimum: -2
                   title: get_characters_character_id_blueprints_quantity
                   type: integer
                 runs:
                   description: 'Number of runs remaining if the blueprint is a copy, -1 if it is an original.'
                   format: int32
+                  minimum: -1
                   title: get_characters_character_id_blueprints_runs
                   type: integer
                 time_efficiency:
-                  description: 'Time Efficiency Level of the blueprint, can be any even integer between 0 and 20.'
+                  description: Time Efficiency Level of the blueprint.
                   format: int32
+                  maximum: 20
+                  minimum: 0
                   title: get_characters_character_id_blueprints_time_efficiency
                   type: integer
                 type_id:
@@ -1451,7 +1659,7 @@ paths:
                 - runs
               title: get_characters_character_id_blueprints_200_ok
               type: object
-            maxItems: 10000
+            maxItems: 1000
             title: get_characters_character_id_blueprints_ok
             type: array
         '403':
@@ -1475,8 +1683,8 @@ paths:
       tags:
         - Character
       x-alternate-versions:
-        - legacy
-        - v1
+        - dev
+        - v2
       x-cached-seconds: 3600
   '/characters/{character_id}/bookmarks/':
     get:
@@ -1487,8 +1695,6 @@ paths:
         Alternate route: `/v1/characters/{character_id}/bookmarks/`
 
         Alternate route: `/legacy/characters/{character_id}/bookmarks/`
-
-        Alternate route: `/dev/characters/{character_id}/bookmarks/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -1652,7 +1858,6 @@ paths:
       tags:
         - Bookmarks
       x-alternate-versions:
-        - dev
         - legacy
         - v1
       x-cached-seconds: 3600
@@ -1665,8 +1870,6 @@ paths:
         Alternate route: `/v1/characters/{character_id}/bookmarks/folders/`
 
         Alternate route: `/legacy/characters/{character_id}/bookmarks/folders/`
-
-        Alternate route: `/dev/characters/{character_id}/bookmarks/folders/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -1740,7 +1943,6 @@ paths:
       tags:
         - Bookmarks
       x-alternate-versions:
-        - dev
         - legacy
         - v1
       x-cached-seconds: 3600
@@ -2158,7 +2360,7 @@ paths:
   '/characters/{character_id}/chat_channels/':
     get:
       description: |-
-        Return chat channels that a character is the owner or an operator of
+        Return chat channels that a character is the owner or operator of
 
         ---
         Alternate route: `/v1/characters/{character_id}/chat_channels/`
@@ -2277,7 +2479,7 @@ paths:
                   title: get_characters_character_id_chat_channels_comparison_key
                   type: string
                 has_password:
-                  description: Whether this is a password protected channel
+                  description: If this is a password protected channel
                   title: get_characters_character_id_chat_channels_has_password
                   type: boolean
                 motd:
@@ -2623,6 +2825,11 @@ paths:
             Last-Modified:
               description: RFC7231 formatted datetime string
               type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
           schema:
             description: 200 ok array
             items:
@@ -3015,7 +3222,7 @@ paths:
               description: 200 ok object
               properties:
                 acceptor_id:
-                  description: Who will accept the contract. If assignee_id is same as acceptorID then character ID else corporation ID (The contract accepted by the corporation)
+                  description: Who will accept the contract
                   format: int32
                   title: get_characters_character_id_contracts_acceptor_id
                   type: integer
@@ -3235,7 +3442,7 @@ paths:
               description: 200 ok object
               properties:
                 amount:
-                  description: The ammount bid
+                  description: 'The amount bid, in ISK'
                   format: float
                   title: get_characters_character_id_contracts_contract_id_bids_amount
                   type: number
@@ -3292,7 +3499,7 @@ paths:
   '/characters/{character_id}/contracts/{contract_id}/items/':
     get:
       description: |-
-        Lists Items and details of a particular contract
+        Lists items of a particular contract
 
         ---
         Alternate route: `/v1/characters/{character_id}/contracts/{contract_id}/items/`
@@ -3318,7 +3525,7 @@ paths:
         - $ref: '#/parameters/X-User-Agent'
       responses:
         '200':
-          description: A list of items
+          description: A list of items in this contract
           examples:
             application/json:
               - is_included: true
@@ -3959,6 +4166,119 @@ paths:
         - dev
         - legacy
         - v1
+  '/characters/{character_id}/fleet/':
+    get:
+      description: |-
+        Return the fleet ID the character is in, if any.
+
+        ---
+        Alternate route: `/v1/characters/{character_id}/fleet/`
+
+        Alternate route: `/legacy/characters/{character_id}/fleet/`
+
+        Alternate route: `/dev/characters/{character_id}/fleet/`
+
+        ---
+        This route is cached for up to 60 seconds
+      operationId: get_characters_character_id_fleet
+      parameters:
+        - $ref: '#/parameters/character_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: Details about the character's fleet
+          examples:
+            application/json:
+              fleet_id: 1234567890
+              role: fleet_commander
+              squad_id: -1
+              wing_id: -1
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+          schema:
+            description: 200 ok object
+            properties:
+              fleet_id:
+                description: The character's current fleet ID
+                format: int64
+                title: get_characters_character_id_fleet_fleet_id
+                type: integer
+              role:
+                description: Member’s role in fleet
+                enum:
+                  - fleet_commander
+                  - squad_commander
+                  - squad_member
+                  - wing_commander
+                title: get_characters_character_id_fleet_role
+                type: string
+              squad_id:
+                description: 'ID of the squad the member is in. If not applicable, will be set to -1'
+                format: int64
+                title: get_characters_character_id_fleet_squad_id
+                type: integer
+              wing_id:
+                description: 'ID of the wing the member is in. If not applicable, will be set to -1'
+                format: int64
+                title: get_characters_character_id_fleet_wing_id
+                type: integer
+            required:
+              - fleet_id
+              - wing_id
+              - squad_id
+              - role
+            title: get_characters_character_id_fleet_ok
+            type: object
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '404':
+          description: The character is not in a fleet
+          examples:
+            application/json:
+              error: Not found message
+          schema:
+            description: Not found
+            properties:
+              error:
+                description: Not found message
+                title: get_characters_character_id_fleet_404_not_found
+                type: string
+            title: get_characters_character_id_fleet_not_found
+            type: object
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-fleets.read_fleet.v1
+      summary: Get character fleet info
+      tags:
+        - Fleets
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 60
   '/characters/{character_id}/implants/':
     get:
       description: |-
@@ -4868,24 +5188,24 @@ paths:
                       default: '#ffffff'
                       description: color string
                       enum:
-                        - '#ffffff'
-                        - '#ffff01'
-                        - '#ff6600'
-                        - '#fe0000'
-                        - '#9a0000'
-                        - '#660066'
                         - '#0000fe'
-                        - '#0099ff'
-                        - '#01ffff'
-                        - '#00ff33'
-                        - '#349800'
                         - '#006634'
+                        - '#0099ff'
+                        - '#00ff33'
+                        - '#01ffff'
+                        - '#349800'
+                        - '#660066'
                         - '#666666'
                         - '#999999'
-                        - '#e6e6e6'
-                        - '#ffffcd'
                         - '#99ffff'
+                        - '#9a0000'
                         - '#ccff9a'
+                        - '#e6e6e6'
+                        - '#fe0000'
+                        - '#ff6600'
+                        - '#ffff01'
+                        - '#ffffcd'
+                        - '#ffffff'
                       title: get_characters_character_id_mail_labels_color
                       type: string
                     label_id:
@@ -4964,28 +5284,26 @@ paths:
             properties:
               color:
                 default: '#ffffff'
-                description: |
-                  Hexadecimal string representing label color,
-                  in RGB format
+                description: 'Hexadecimal string representing label color, in RGB format'
                 enum:
-                  - '#ffffff'
-                  - '#ffff01'
-                  - '#ff6600'
-                  - '#fe0000'
-                  - '#9a0000'
-                  - '#660066'
                   - '#0000fe'
-                  - '#0099ff'
-                  - '#01ffff'
-                  - '#00ff33'
-                  - '#349800'
                   - '#006634'
+                  - '#0099ff'
+                  - '#00ff33'
+                  - '#01ffff'
+                  - '#349800'
+                  - '#660066'
                   - '#666666'
                   - '#999999'
-                  - '#e6e6e6'
-                  - '#ffffcd'
                   - '#99ffff'
+                  - '#9a0000'
                   - '#ccff9a'
+                  - '#e6e6e6'
+                  - '#fe0000'
+                  - '#ff6600'
+                  - '#ffff01'
+                  - '#ffffcd'
+                  - '#ffffff'
                 title: post_characters_character_id_mail_labels_color
                 type: string
               name:
@@ -5104,7 +5422,6 @@ paths:
     get:
       description: |-
         Return all mailing lists that the character is subscribed to
-
 
         ---
         Alternate route: `/v1/characters/{character_id}/mail/lists/`
@@ -5661,7 +5978,7 @@ paths:
         Alternate route: `/dev/characters/{character_id}/notifications/`
 
         ---
-        This route is cached for up to 1800 seconds
+        This route is cached for up to 600 seconds
       operationId: get_characters_character_id_notifications
       parameters:
         - $ref: '#/parameters/character_id'
@@ -5678,10 +5995,7 @@ paths:
                 notification_id: 1
                 sender_id: 1000132
                 sender_type: corporation
-                text: |
-                  amount: 3731016.4000000004
-                  itemID: 1024881021663
-                  payout: 1
+                text: 'amount: 3731016.4000000004\nitemID: 1024881021663\npayout: 1\n'
                 timestamp: '2017-08-16T10:08:00Z'
                 type: InsurancePayoutMsg
           headers:
@@ -5720,6 +6034,7 @@ paths:
                     - corporation
                     - alliance
                     - faction
+                    - other
                   title: get_characters_character_id_notifications_sender_type
                   type: string
                 text:
@@ -5852,6 +6167,10 @@ paths:
                     - MercOfferedNegotiationMsg
                     - MissionOfferExpirationMsg
                     - MissionTimeoutMsg
+                    - MoonminingAutomaticFracture
+                    - MoonminingExtractionCancelled
+                    - MoonminingExtractionFinished
+                    - MoonminingLaserFired
                     - NPCStandingsGained
                     - NPCStandingsLost
                     - OfferedSurrender
@@ -5905,6 +6224,7 @@ paths:
                     - WarAllyOfferDeclinedMsg
                     - WarSurrenderDeclinedMsg
                     - WarSurrenderOfferMsg
+                    - notificationTypeMoonminingExtractionStarted
                   title: get_characters_character_id_notifications_type
                   type: string
               required:
@@ -5942,7 +6262,7 @@ paths:
         - dev
         - legacy
         - v1
-      x-cached-seconds: 1800
+      x-cached-seconds: 600
   '/characters/{character_id}/notifications/contacts/':
     get:
       description: |-
@@ -6305,18 +6625,18 @@ paths:
                 range:
                   description: 'Valid order range, numbers are ranges in jumps'
                   enum:
-                    - station
+                    - '1'
+                    - '10'
+                    - '2'
+                    - '20'
+                    - '3'
+                    - '30'
+                    - '4'
+                    - '40'
+                    - '5'
                     - region
                     - solarsystem
-                    - '1'
-                    - '2'
-                    - '3'
-                    - '4'
-                    - '5'
-                    - '10'
-                    - '20'
-                    - '30'
-                    - '40'
+                    - station
                   title: get_characters_character_id_orders_range
                   type: string
                 region_id:
@@ -6327,12 +6647,12 @@ paths:
                 state:
                   description: Current order state
                   enum:
-                    - open
+                    - cancelled
+                    - character_deleted
                     - closed
                     - expired
-                    - cancelled
+                    - open
                     - pending
-                    - character_deleted
                   title: get_characters_character_id_orders_state
                   type: string
                 type_id:
@@ -7809,9 +8129,9 @@ paths:
         Retrieve character wallet journal
 
         ---
-        Alternate route: `/v1/characters/{character_id}/wallet/journal/`
+        Alternate route: `/v2/characters/{character_id}/wallet/journal/`
 
-        Alternate route: `/legacy/characters/{character_id}/wallet/journal/`
+        Alternate route: `/dev/characters/{character_id}/wallet/journal/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -7958,33 +8278,116 @@ paths:
                   enum:
                     - player_trading
                     - market_transaction
-                    - player_donation
-                    - office_rental_fee
-                    - bounty_prize_historical
-                    - insurance
+                    - gm_cash_transfer
                     - mission_reward
-                    - mission_reward_bonus
+                    - clone_activation
+                    - inheritance
+                    - player_donation
+                    - corporation_payment
+                    - docking_fee
+                    - office_rental_fee
+                    - factory_slot_rental_fee
+                    - repair_bill
+                    - bounty
+                    - bounty_prize
+                    - insurance
+                    - mission_expiration
+                    - mission_completion
+                    - shares
+                    - courier_mission_escrow
+                    - mission_cost
+                    - agent_miscellaneous
+                    - lp_store
+                    - agent_location_services
+                    - agent_donation
+                    - agent_security_services
+                    - agent_mission_collateral_paid
+                    - agent_mission_collateral_refunded
+                    - agents_preward
+                    - agent_mission_reward
+                    - agent_mission_time_bonus_reward
                     - cspa
-                    - corp_account_withdrawal
-                    - logo_change_fee
+                    - cspaofflinerefund
+                    - corporation_account_withdrawal
+                    - corporation_dividend_payment
+                    - corporation_registration_fee
+                    - corporation_logo_change_cost
+                    - release_of_impounded_property
                     - market_escrow
-                    - broker_fee
-                    - alliance_maintenance_fee
-                    - sales_tax
+                    - agent_services_rendered
+                    - market_fine_paid
+                    - corporation_liquidation
+                    - brokers_fee
+                    - corporation_bulk_payment
+                    - alliance_registration_fee
+                    - war_fee
+                    - alliance_maintainance_fee
+                    - contraband_fine
+                    - clone_transfer
+                    - acceleration_gate_fee
+                    - transaction_tax
                     - jump_clone_installation_fee
                     - manufacturing
-                    - contract
+                    - researching_technology
+                    - researching_time_productivity
+                    - researching_material_productivity
+                    - copying
+                    - reverse_engineering
+                    - contract_auction_bid
+                    - contract_auction_bid_refund
+                    - contract_collateral
+                    - contract_reward_refund
+                    - contract_auction_sold
+                    - contract_reward
+                    - contract_collateral_refund
+                    - contract_collateral_payout
+                    - contract_price
+                    - contract_brokers_fee
+                    - contract_sales_tax
+                    - contract_deposit
+                    - contract_deposit_sales_tax
+                    - contract_auction_bid_corp
+                    - contract_collateral_deposited_corp
+                    - contract_price_payment_corp
+                    - contract_brokers_fee_corp
+                    - contract_deposit_corp
+                    - contract_deposit_refund
+                    - contract_reward_deposited
+                    - contract_reward_deposited_corp
                     - bounty_prizes
-                    - medal_creation_fee
-                    - medal_issuing_fee
-                    - customs_office_import_duty
-                    - customs_office_export_duty
+                    - advertisement_listing_fee
+                    - medal_creation
+                    - medal_issued
+                    - dna_modification_fee
+                    - sovereignity_bill
+                    - bounty_prize_corporation_tax
+                    - agent_mission_reward_corporation_tax
+                    - agent_mission_time_bonus_reward_corporation_tax
+                    - upkeep_adjustment_fee
+                    - planetary_import_tax
+                    - planetary_export_tax
+                    - planetary_construction
                     - corporate_reward_payout
-                    - industry_facility_tax
+                    - bounty_surcharge
+                    - contract_reversal
+                    - corporate_reward_tax
+                    - store_purchase
+                    - store_purchase_refund
+                    - datacore_fee
+                    - war_fee_surrender
+                    - war_ally_contract
+                    - bounty_reimbursement
+                    - kill_right_fee
+                    - security_processing_fee
+                    - industry_job_tax
+                    - infrastructure_hub_maintenance
+                    - asset_safety_recovery_tax
+                    - opportunity_reward
                     - project_discovery_reward
-                    - reprocessing_fee
+                    - project_discovery_tax
+                    - reprocessing_tax
                     - jump_clone_activation_fee
-                    - unknown
+                    - operation_bonus
                   title: get_characters_character_id_wallet_journal_ref_type
                   type: string
                 second_party_id:
@@ -8041,8 +8444,8 @@ paths:
       tags:
         - Wallet
       x-alternate-versions:
-        - legacy
-        - v1
+        - dev
+        - v2
       x-cached-seconds: 3600
   '/characters/{character_id}/wallet/transactions/':
     get:
@@ -8148,7 +8551,7 @@ paths:
                   description: Amount paid per unit
                   format: float
                   title: get_characters_character_id_wallet_transactions_unit_price
-                  type: integer
+                  type: number
               required:
                 - transaction_id
                 - date
@@ -8799,6 +9202,199 @@ paths:
       x-cached-seconds: 3600
       x-required-roles:
         - Director
+  '/corporations/{corporation_id}/assets/locations/':
+    post:
+      description: |
+        Return locations for a set of item ids, which you can get from corporation assets endpoint. Coordinates for items in hangars or stations are set to (0,0,0)
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/assets/locations/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/assets/locations/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/assets/locations/`
+      operationId: post_corporations_corporation_id_assets_locations
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - description: A list of item ids
+          in: body
+          name: item_ids
+          required: true
+          schema:
+            description: item_ids array
+            items:
+              description: item_id integer
+              format: int64
+              title: post_corporations_corporation_id_assets_locations_item_id
+              type: integer
+            maxItems: 1000
+            minItems: 1
+            title: post_corporations_corporation_id_assets_locations_item_ids
+            type: array
+            uniqueItems: true
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: List of asset locations
+          examples:
+            application/json:
+              - item_id: 12345
+                x: 1.2
+                'y': 2.3
+                z: -3.4
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                item_id:
+                  description: item_id integer
+                  format: int64
+                  title: post_corporations_corporation_id_assets_locations_item_id
+                  type: integer
+                x:
+                  description: x number
+                  format: double
+                  title: post_corporations_corporation_id_assets_locations_x
+                  type: number
+                'y':
+                  description: y number
+                  format: double
+                  title: post_corporations_corporation_id_assets_locations_y
+                  type: number
+                z:
+                  description: z number
+                  format: double
+                  title: post_corporations_corporation_id_assets_locations_z
+                  type: number
+              required:
+                - item_id
+                - x
+                - 'y'
+                - z
+              title: post_corporations_corporation_id_assets_locations_200_ok
+              type: object
+            maxItems: 1000
+            title: post_corporations_corporation_id_assets_locations_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-assets.read_corporation_assets.v1
+      summary: Get corporation asset locations
+      tags:
+        - Assets
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-required-roles:
+        - Director
+  '/corporations/{corporation_id}/assets/names/':
+    post:
+      description: |
+        Return names for a set of item ids, which you can get from corporation assets endpoint. Only valid for items that can customize names, like containers or ships.
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/assets/names/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/assets/names/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/assets/names/`
+      operationId: post_corporations_corporation_id_assets_names
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - description: A list of item ids
+          in: body
+          name: item_ids
+          required: true
+          schema:
+            description: item_ids array
+            items:
+              description: item_id integer
+              format: int64
+              title: post_corporations_corporation_id_assets_names_item_id
+              type: integer
+            maxItems: 1000
+            minItems: 1
+            title: post_corporations_corporation_id_assets_names_item_ids
+            type: array
+            uniqueItems: true
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: List of asset names
+          examples:
+            application/json:
+              - item_id: 12345
+                name: Awesome Name
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                item_id:
+                  description: item_id integer
+                  format: int64
+                  title: post_corporations_corporation_id_assets_names_item_id
+                  type: integer
+                name:
+                  description: name string
+                  title: post_corporations_corporation_id_assets_names_name
+                  type: string
+              required:
+                - item_id
+                - name
+              title: post_corporations_corporation_id_assets_names_200_ok
+              type: object
+            maxItems: 1000
+            title: post_corporations_corporation_id_assets_names_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-assets.read_corporation_assets.v1
+      summary: Get coporation asset names
+      tags:
+        - Assets
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-required-roles:
+        - Director
   '/corporations/{corporation_id}/blueprints/':
     get:
       description: |-
@@ -9056,6 +9652,282 @@ paths:
       x-cached-seconds: 3600
       x-required-roles:
         - Director
+  '/corporations/{corporation_id}/bookmarks/':
+    get:
+      description: |-
+        A list of your corporation's bookmarks
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/bookmarks/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/bookmarks/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/bookmarks/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_bookmarks
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: List of corporation owned bookmarks
+          examples:
+            application/json:
+              - bookmark_id: 4
+                created: '2016-08-09T11:57:47Z'
+                creator_id: 2112625428
+                folder_id: 5
+                item:
+                  item_id: 50006722
+                  type_id: 29633
+                label: Stargate
+                location_id: 30003430
+                notes: This is a stargate
+              - bookmark_id: 5
+                coordinates:
+                  x: -2958928814000
+                  'y': -338367275823
+                  z: 2114538075090
+                created: '2016-08-09T11:57:47Z'
+                creator_id: 2112625428
+                folder_id: 5
+                label: Random location
+                location_id: 30003430
+                notes: This is a random location in space
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                bookmark_id:
+                  description: bookmark_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_bookmarks_bookmark_id
+                  type: integer
+                coordinates:
+                  description: Optional object that is returned if a bookmark was made on a planet or a random location in space.
+                  properties:
+                    x:
+                      description: x number
+                      format: double
+                      title: get_corporations_corporation_id_bookmarks_x
+                      type: number
+                    'y':
+                      description: y number
+                      format: double
+                      title: get_corporations_corporation_id_bookmarks_y
+                      type: number
+                    z:
+                      description: z number
+                      format: double
+                      title: get_corporations_corporation_id_bookmarks_z
+                      type: number
+                  required:
+                    - x
+                    - 'y'
+                    - z
+                  title: get_corporations_corporation_id_bookmarks_coordinates
+                  type: object
+                created:
+                  description: created string
+                  format: date-time
+                  title: get_corporations_corporation_id_bookmarks_created
+                  type: string
+                creator_id:
+                  description: creator_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_bookmarks_creator_id
+                  type: integer
+                folder_id:
+                  description: folder_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_bookmarks_folder_id
+                  type: integer
+                item:
+                  description: Optional object that is returned if a bookmark was made on a particular item.
+                  properties:
+                    item_id:
+                      description: item_id integer
+                      format: int64
+                      title: get_corporations_corporation_id_bookmarks_item_id
+                      type: integer
+                    type_id:
+                      description: type_id integer
+                      format: int32
+                      title: get_corporations_corporation_id_bookmarks_type_id
+                      type: integer
+                  required:
+                    - item_id
+                    - type_id
+                  title: get_corporations_corporation_id_bookmarks_item
+                  type: object
+                label:
+                  description: label string
+                  title: get_corporations_corporation_id_bookmarks_label
+                  type: string
+                location_id:
+                  description: location_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_bookmarks_location_id
+                  type: integer
+                notes:
+                  description: notes string
+                  title: get_corporations_corporation_id_bookmarks_notes
+                  type: string
+              required:
+                - bookmark_id
+                - creator_id
+                - created
+                - label
+                - notes
+                - location_id
+              title: get_corporations_corporation_id_bookmarks_200_ok
+              type: object
+            maxItems: 1000
+            title: get_corporations_corporation_id_bookmarks_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-bookmarks.read_corporation_bookmarks.v1
+      summary: List corporation bookmarks
+      tags:
+        - Bookmarks
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+  '/corporations/{corporation_id}/bookmarks/folders/':
+    get:
+      description: |-
+        A list of your corporation's bookmark folders
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/bookmarks/folders/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/bookmarks/folders/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/bookmarks/folders/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_bookmarks_folders
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: List of corporation owned bookmark folders
+          examples:
+            application/json:
+              - folder_id: 5
+                name: Important Locations
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                creator_id:
+                  description: creator_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_bookmarks_folders_creator_id
+                  type: integer
+                folder_id:
+                  description: folder_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_bookmarks_folders_folder_id
+                  type: integer
+                name:
+                  description: name string
+                  title: get_corporations_corporation_id_bookmarks_folders_name
+                  type: string
+              required:
+                - folder_id
+                - name
+              title: get_corporations_corporation_id_bookmarks_folders_200_ok
+              type: object
+            maxItems: 1000
+            title: get_corporations_corporation_id_bookmarks_folders_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-bookmarks.read_corporation_bookmarks.v1
+      summary: List corporation bookmark folders
+      tags:
+        - Bookmarks
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
   '/corporations/{corporation_id}/contacts/':
     get:
       description: |-
@@ -9097,6 +9969,11 @@ paths:
             Last-Modified:
               description: RFC7231 formatted datetime string
               type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
           schema:
             description: 200 ok array
             items:
@@ -9164,6 +10041,767 @@ paths:
         - legacy
         - v1
       x-cached-seconds: 300
+      x-required-roles: []
+  '/corporations/{corporation_id}/containers/logs/':
+    get:
+      description: |-
+        Returns logs recorded in the past seven days from all audit log secure containers (ALSC) owned by a given corporation
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/containers/logs/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/containers/logs/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/containers/logs/`
+
+        ---
+        This route is cached for up to 600 seconds
+      operationId: get_corporations_corporation_id_containers_logs
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: List of corporation ALSC logs
+          examples:
+            application/json:
+              - action: set_password
+                character_id: 2112625428
+                container_id: 1000000012279
+                container_type_id: 17365
+                location_flag: CorpSAG1
+                location_id: 1000000012278
+                logged_at: '2017-10-10T14:00:00Z'
+                password_type: general
+              - action: lock
+                character_id: 2112625428
+                container_id: 1000000012279
+                container_type_id: 17365
+                location_flag: CorpSAG1
+                location_id: 1000000012278
+                logged_at: '2017-10-11T12:04:33'
+                quantity: 30
+                type_id: 1230
+              - action: configure
+                character_id: 2112625428
+                container_id: 1000000012279
+                container_type_id: 17365
+                location_flag: CorpSAG2
+                location_id: 1000000012278
+                logged_at: '2017-10-11T12:06:29Z'
+                new_config_bitmask: 31
+                old_config_bitmask: 23
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                action:
+                  description: action string
+                  enum:
+                    - add
+                    - assemble
+                    - configure
+                    - enter_password
+                    - lock
+                    - move
+                    - repackage
+                    - set_name
+                    - set_password
+                    - unlock
+                  title: get_corporations_corporation_id_containers_logs_action
+                  type: string
+                character_id:
+                  description: ID of the character who performed the action.
+                  format: int32
+                  title: get_corporations_corporation_id_containers_logs_character_id
+                  type: integer
+                container_id:
+                  description: ID of the container
+                  format: int64
+                  title: get_corporations_corporation_id_containers_logs_container_id
+                  type: integer
+                container_type_id:
+                  description: Type ID of the container
+                  format: int32
+                  title: get_corporations_corporation_id_containers_logs_container_type_id
+                  type: integer
+                location_flag:
+                  description: location_flag string
+                  enum:
+                    - AssetSafety
+                    - AutoFit
+                    - Bonus
+                    - Booster
+                    - BoosterBay
+                    - Capsule
+                    - Cargo
+                    - CorpDeliveries
+                    - CorpSAG1
+                    - CorpSAG2
+                    - CorpSAG3
+                    - CorpSAG4
+                    - CorpSAG5
+                    - CorpSAG6
+                    - CorpSAG7
+                    - CrateLoot
+                    - Deliveries
+                    - DroneBay
+                    - DustBattle
+                    - DustDatabank
+                    - FighterBay
+                    - FighterTube0
+                    - FighterTube1
+                    - FighterTube2
+                    - FighterTube3
+                    - FighterTube4
+                    - FleetHangar
+                    - Hangar
+                    - HangarAll
+                    - HiSlot0
+                    - HiSlot1
+                    - HiSlot2
+                    - HiSlot3
+                    - HiSlot4
+                    - HiSlot5
+                    - HiSlot6
+                    - HiSlot7
+                    - HiddenModifers
+                    - Implant
+                    - Impounded
+                    - JunkyardReprocessed
+                    - JunkyardTrashed
+                    - LoSlot0
+                    - LoSlot1
+                    - LoSlot2
+                    - LoSlot3
+                    - LoSlot4
+                    - LoSlot5
+                    - LoSlot6
+                    - LoSlot7
+                    - Locked
+                    - MedSlot0
+                    - MedSlot1
+                    - MedSlot2
+                    - MedSlot3
+                    - MedSlot4
+                    - MedSlot5
+                    - MedSlot6
+                    - MedSlot7
+                    - OfficeFolder
+                    - Pilot
+                    - PlanetSurface
+                    - QuafeBay
+                    - Reward
+                    - RigSlot0
+                    - RigSlot1
+                    - RigSlot2
+                    - RigSlot3
+                    - RigSlot4
+                    - RigSlot5
+                    - RigSlot6
+                    - RigSlot7
+                    - SecondaryStorage
+                    - ServiceSlot0
+                    - ServiceSlot1
+                    - ServiceSlot2
+                    - ServiceSlot3
+                    - ServiceSlot4
+                    - ServiceSlot5
+                    - ServiceSlot6
+                    - ServiceSlot7
+                    - ShipHangar
+                    - ShipOffline
+                    - Skill
+                    - SkillInTraining
+                    - SpecializedAmmoHold
+                    - SpecializedCommandCenterHold
+                    - SpecializedFuelBay
+                    - SpecializedGasHold
+                    - SpecializedIndustrialShipHold
+                    - SpecializedLargeShipHold
+                    - SpecializedMaterialBay
+                    - SpecializedMediumShipHold
+                    - SpecializedMineralHold
+                    - SpecializedOreHold
+                    - SpecializedPlanetaryCommoditiesHold
+                    - SpecializedSalvageHold
+                    - SpecializedShipHold
+                    - SpecializedSmallShipHold
+                    - StructureActive
+                    - StructureFuel
+                    - StructureInactive
+                    - StructureOffline
+                    - SubSystemSlot0
+                    - SubSystemSlot1
+                    - SubSystemSlot2
+                    - SubSystemSlot3
+                    - SubSystemSlot4
+                    - SubSystemSlot5
+                    - SubSystemSlot6
+                    - SubSystemSlot7
+                    - SubsystemBay
+                    - Unlocked
+                    - Wallet
+                    - Wardrobe
+                  title: get_corporations_corporation_id_containers_logs_location_flag
+                  type: string
+                location_id:
+                  description: location_id integer
+                  format: int64
+                  title: get_corporations_corporation_id_containers_logs_location_id
+                  type: integer
+                logged_at:
+                  description: Timestamp when this log was created
+                  format: date-time
+                  title: get_corporations_corporation_id_containers_logs_logged_at
+                  type: string
+                new_config_bitmask:
+                  description: new_config_bitmask integer
+                  format: int32
+                  title: get_corporations_corporation_id_containers_logs_new_config_bitmask
+                  type: integer
+                old_config_bitmask:
+                  description: old_config_bitmask integer
+                  format: int32
+                  title: get_corporations_corporation_id_containers_logs_old_config_bitmask
+                  type: integer
+                password_type:
+                  description: Type of password set if action is of type SetPassword or EnterPassword
+                  enum:
+                    - config
+                    - general
+                  title: get_corporations_corporation_id_containers_logs_password_type
+                  type: string
+                quantity:
+                  description: Quantity of the item being acted upon
+                  format: int32
+                  title: get_corporations_corporation_id_containers_logs_quantity
+                  type: integer
+                type_id:
+                  description: Type ID of the item being acted upon
+                  format: int32
+                  title: get_corporations_corporation_id_containers_logs_type_id
+                  type: integer
+              required:
+                - logged_at
+                - container_id
+                - container_type_id
+                - character_id
+                - location_id
+                - action
+                - location_flag
+              title: get_corporations_corporation_id_containers_logs_200_ok
+              type: object
+            maxItems: 1000
+            title: get_corporations_corporation_id_containers_logs_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-corporations.read_container_logs.v1
+      summary: Get all corporation ALSC logs
+      tags:
+        - Corporation
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 600
+      x-required-roles:
+        - Director
+  '/corporations/{corporation_id}/contracts/':
+    get:
+      description: |-
+        Returns contracts available to a coporation, only if the corporation is issuer, acceptor or assignee. Only returns contracts no older than 30 days, or if the status is "in_progress".
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/contracts/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/contracts/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/contracts/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_contracts
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: A list of contracts
+          examples:
+            application/json:
+              - acceptor_id: 0
+                assignee_id: 0
+                availability: public
+                buyout: 10000000000
+                contract_id: 1
+                date_accepted: '2017-06-06T13:12:32Z'
+                date_completed: '2017-06-06T13:12:32Z'
+                date_expired: '2017-06-13T13:12:32Z'
+                date_issued: '2017-06-06T13:12:32Z'
+                days_to_complete: 0
+                end_location_id: 60014719
+                for_corporation: true
+                issuer_corporation_id: 456
+                issuer_id: 123
+                price: 1000000
+                reward: 0
+                start_location_id: 60014719
+                status: outstanding
+                type: auction
+                volume: 0.01
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                acceptor_id:
+                  description: Who will accept the contract
+                  format: int32
+                  title: get_corporations_corporation_id_contracts_acceptor_id
+                  type: integer
+                assignee_id:
+                  description: 'ID to whom the contract is assigned, can be corporation or character ID'
+                  format: int32
+                  title: get_corporations_corporation_id_contracts_assignee_id
+                  type: integer
+                availability:
+                  description: To whom the contract is available
+                  enum:
+                    - public
+                    - personal
+                    - corporation
+                    - alliance
+                  title: get_corporations_corporation_id_contracts_availability
+                  type: string
+                buyout:
+                  description: Buyout price (for Auctions only)
+                  format: float
+                  title: get_corporations_corporation_id_contracts_buyout
+                  type: number
+                collateral:
+                  description: Collateral price (for Couriers only)
+                  format: float
+                  title: get_corporations_corporation_id_contracts_collateral
+                  type: number
+                contract_id:
+                  description: contract_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_contracts_contract_id
+                  type: integer
+                date_accepted:
+                  description: Date of confirmation of contract
+                  format: date-time
+                  title: get_corporations_corporation_id_contracts_date_accepted
+                  type: string
+                date_completed:
+                  description: Date of completed of contract
+                  format: date-time
+                  title: get_corporations_corporation_id_contracts_date_completed
+                  type: string
+                date_expired:
+                  description: Expiration date of the contract
+                  format: date-time
+                  title: get_corporations_corporation_id_contracts_date_expired
+                  type: string
+                date_issued:
+                  description: Сreation date of the contract
+                  format: date-time
+                  title: get_corporations_corporation_id_contracts_date_issued
+                  type: string
+                days_to_complete:
+                  description: Number of days to perform the contract
+                  format: int32
+                  title: get_corporations_corporation_id_contracts_days_to_complete
+                  type: integer
+                end_location_id:
+                  description: End location ID (for Couriers contract)
+                  format: int64
+                  title: get_corporations_corporation_id_contracts_end_location_id
+                  type: integer
+                for_corporation:
+                  description: true if the contract was issued on behalf of the issuer's corporation
+                  title: get_corporations_corporation_id_contracts_for_corporation
+                  type: boolean
+                issuer_corporation_id:
+                  description: Character's corporation ID for the issuer
+                  format: int32
+                  title: get_corporations_corporation_id_contracts_issuer_corporation_id
+                  type: integer
+                issuer_id:
+                  description: Character ID for the issuer
+                  format: int32
+                  title: get_corporations_corporation_id_contracts_issuer_id
+                  type: integer
+                price:
+                  description: Price of contract (for ItemsExchange and Auctions)
+                  format: float
+                  title: get_corporations_corporation_id_contracts_price
+                  type: number
+                reward:
+                  description: Remuneration for contract (for Couriers only)
+                  format: float
+                  title: get_corporations_corporation_id_contracts_reward
+                  type: number
+                start_location_id:
+                  description: Start location ID (for Couriers contract)
+                  format: int64
+                  title: get_corporations_corporation_id_contracts_start_location_id
+                  type: integer
+                status:
+                  description: Status of the the contract
+                  enum:
+                    - outstanding
+                    - in_progress
+                    - finished_issuer
+                    - finished_contractor
+                    - finished
+                    - cancelled
+                    - rejected
+                    - failed
+                    - deleted
+                    - reversed
+                  title: get_corporations_corporation_id_contracts_status
+                  type: string
+                title:
+                  description: Title of the contract
+                  title: get_corporations_corporation_id_contracts_title
+                  type: string
+                type:
+                  description: Type of the contract
+                  enum:
+                    - unknown
+                    - item_exchange
+                    - auction
+                    - courier
+                    - loan
+                  title: get_corporations_corporation_id_contracts_type
+                  type: string
+                volume:
+                  description: Volume of items in the contract
+                  format: float
+                  title: get_corporations_corporation_id_contracts_volume
+                  type: number
+              required:
+                - contract_id
+                - issuer_id
+                - issuer_corporation_id
+                - assignee_id
+                - acceptor_id
+                - type
+                - status
+                - for_corporation
+                - availability
+                - date_issued
+                - date_expired
+              title: get_corporations_corporation_id_contracts_200_ok
+              type: object
+            maxItems: 10000
+            title: get_corporations_corporation_id_contracts_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-contracts.read_corporation_contracts.v1
+      summary: Get coporation contracts
+      tags:
+        - Contracts
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles: []
+  '/corporations/{corporation_id}/contracts/{contract_id}/bids/':
+    get:
+      description: |-
+        Lists bids on a particular auction contract
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/contracts/{contract_id}/bids/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/contracts/{contract_id}/bids/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/contracts/{contract_id}/bids/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_contracts_contract_id_bids
+      parameters:
+        - description: ID of a contract
+          format: int32
+          in: path
+          name: contract_id
+          required: true
+          type: integer
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: A list of bids
+          examples:
+            application/json:
+              - amount: 1.23
+                bid_id: 1
+                bidder_id: 123
+                date_bid: '2017-01-01T10:10:10Z'
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                amount:
+                  description: 'The amount bid, in ISK'
+                  format: float
+                  title: get_corporations_corporation_id_contracts_contract_id_bids_amount
+                  type: number
+                bid_id:
+                  description: Unique ID for the bid
+                  format: int32
+                  title: get_corporations_corporation_id_contracts_contract_id_bids_bid_id
+                  type: integer
+                bidder_id:
+                  description: Character ID of the bidder
+                  format: int32
+                  title: get_corporations_corporation_id_contracts_contract_id_bids_bidder_id
+                  type: integer
+                date_bid:
+                  description: Datetime when the bid was placed
+                  format: date-time
+                  title: get_corporations_corporation_id_contracts_contract_id_bids_date_bid
+                  type: string
+              required:
+                - bid_id
+                - bidder_id
+                - date_bid
+                - amount
+              title: get_corporations_corporation_id_contracts_contract_id_bids_200_ok
+              type: object
+            maxItems: 1000
+            title: get_corporations_corporation_id_contracts_contract_id_bids_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-contracts.read_corporation_contracts.v1
+      summary: Get corporation contract bids
+      tags:
+        - Contracts
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles: []
+  '/corporations/{corporation_id}/contracts/{contract_id}/items/':
+    get:
+      description: |-
+        Lists items of a particular contract
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/contracts/{contract_id}/items/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/contracts/{contract_id}/items/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/contracts/{contract_id}/items/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_contracts_contract_id_items
+      parameters:
+        - description: ID of a contract
+          format: int32
+          in: path
+          name: contract_id
+          required: true
+          type: integer
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: A list of items in this contract
+          examples:
+            application/json:
+              - is_included: true
+                is_singleton: false
+                quantity: 1
+                record_id: 123456
+                type_id: 587
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                is_included:
+                  description: 'true if the contract issuer has submitted this item with the contract, false if the isser is asking for this item in the contract.'
+                  title: get_corporations_corporation_id_contracts_contract_id_items_is_included
+                  type: boolean
+                is_singleton:
+                  description: is_singleton boolean
+                  title: get_corporations_corporation_id_contracts_contract_id_items_is_singleton
+                  type: boolean
+                quantity:
+                  description: Number of items in the stack
+                  format: int32
+                  title: get_corporations_corporation_id_contracts_contract_id_items_quantity
+                  type: integer
+                raw_quantity:
+                  description: '-1 indicates that the item is a singleton (non-stackable). If the item happens to be a Blueprint, -1 is an Original and -2 is a Blueprint Copy'
+                  format: int32
+                  title: get_corporations_corporation_id_contracts_contract_id_items_raw_quantity
+                  type: integer
+                record_id:
+                  description: Unique ID for the item
+                  format: int64
+                  title: get_corporations_corporation_id_contracts_contract_id_items_record_id
+                  type: integer
+                type_id:
+                  description: Type ID for item
+                  format: int32
+                  title: get_corporations_corporation_id_contracts_contract_id_items_type_id
+                  type: integer
+              required:
+                - record_id
+                - type_id
+                - quantity
+                - is_singleton
+                - is_included
+              title: get_corporations_corporation_id_contracts_contract_id_items_200_ok
+              type: object
+            maxItems: 2000
+            title: get_corporations_corporation_id_contracts_contract_id_items_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-contracts.read_corporation_contracts.v1
+      summary: Get corporation contract items
+      tags:
+        - Contracts
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
       x-required-roles: []
   '/corporations/{corporation_id}/divisions/':
     get:
@@ -9367,6 +11005,238 @@ paths:
         - legacy
         - v1
       x-cached-seconds: 3600
+  '/corporations/{corporation_id}/industry/jobs/':
+    get:
+      description: |-
+        List industry jobs run by a corporation
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/industry/jobs/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/industry/jobs/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/industry/jobs/`
+
+        ---
+        This route is cached for up to 300 seconds
+      operationId: get_corporations_corporation_id_industry_jobs
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - default: false
+          description: Whether retrieve completed industry jobs as well
+          in: query
+          name: include_completed
+          required: false
+          type: boolean
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: A list of corporation industry jobs
+          examples:
+            application/json:
+              - activity_id: 1
+                blueprint_id: 1015116533326
+                blueprint_location_id: 60006382
+                blueprint_type_id: 2047
+                cost: 118
+                duration: 548
+                end_date: '2014-07-19T15:56:14Z'
+                facility_id: 60006382
+                installer_id: 498338451
+                job_id: 229136101
+                licensed_runs: 200
+                location_id: 60006382
+                output_location_id: 60006382
+                runs: 1
+                start_date: '2014-07-19T15:47:06Z'
+                status: active
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                activity_id:
+                  description: Job activity ID
+                  format: int32
+                  title: get_corporations_corporation_id_industry_jobs_activity_id
+                  type: integer
+                blueprint_id:
+                  description: blueprint_id integer
+                  format: int64
+                  title: get_corporations_corporation_id_industry_jobs_blueprint_id
+                  type: integer
+                blueprint_location_id:
+                  description: 'Location ID of the location from which the blueprint was installed. Normally a station ID, but can also be an asset (e.g. container) or corporation facility'
+                  format: int64
+                  title: get_corporations_corporation_id_industry_jobs_blueprint_location_id
+                  type: integer
+                blueprint_type_id:
+                  description: blueprint_type_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_industry_jobs_blueprint_type_id
+                  type: integer
+                completed_character_id:
+                  description: ID of the character which completed this job
+                  format: int32
+                  title: get_corporations_corporation_id_industry_jobs_completed_character_id
+                  type: integer
+                completed_date:
+                  description: Date and time when this job was completed
+                  format: date-time
+                  title: get_corporations_corporation_id_industry_jobs_completed_date
+                  type: string
+                cost:
+                  description: The sume of job installation fee and industry facility tax
+                  format: float
+                  title: get_corporations_corporation_id_industry_jobs_cost
+                  type: number
+                duration:
+                  description: Job duration in seconds
+                  format: int32
+                  title: get_corporations_corporation_id_industry_jobs_duration
+                  type: integer
+                end_date:
+                  description: Date and time when this job finished
+                  format: date-time
+                  title: get_corporations_corporation_id_industry_jobs_end_date
+                  type: string
+                facility_id:
+                  description: ID of the facility where this job is running
+                  format: int64
+                  title: get_corporations_corporation_id_industry_jobs_facility_id
+                  type: integer
+                installer_id:
+                  description: ID of the character which installed this job
+                  format: int32
+                  title: get_corporations_corporation_id_industry_jobs_installer_id
+                  type: integer
+                job_id:
+                  description: Unique job ID
+                  format: int32
+                  title: get_corporations_corporation_id_industry_jobs_job_id
+                  type: integer
+                licensed_runs:
+                  description: Number of runs blueprint is licensed for
+                  format: int32
+                  title: get_corporations_corporation_id_industry_jobs_licensed_runs
+                  type: integer
+                location_id:
+                  description: ID of the location for the industry facility
+                  format: int64
+                  title: get_corporations_corporation_id_industry_jobs_location_id
+                  type: integer
+                output_location_id:
+                  description: 'Location ID of the location to which the output of the job will be delivered. Normally a station ID, but can also be a corporation facility'
+                  format: int64
+                  title: get_corporations_corporation_id_industry_jobs_output_location_id
+                  type: integer
+                pause_date:
+                  description: Date and time when this job was paused (i.e. time when the facility where this job was installed went offline)
+                  format: date-time
+                  title: get_corporations_corporation_id_industry_jobs_pause_date
+                  type: string
+                probability:
+                  description: Chance of success for invention
+                  format: float
+                  title: get_corporations_corporation_id_industry_jobs_probability
+                  type: number
+                product_type_id:
+                  description: 'Type ID of product (manufactured, copied or invented)'
+                  format: int32
+                  title: get_corporations_corporation_id_industry_jobs_product_type_id
+                  type: integer
+                runs:
+                  description: 'Number of runs for a manufacturing job, or number of copies to make for a blueprint copy'
+                  format: int32
+                  title: get_corporations_corporation_id_industry_jobs_runs
+                  type: integer
+                start_date:
+                  description: Date and time when this job started
+                  format: date-time
+                  title: get_corporations_corporation_id_industry_jobs_start_date
+                  type: string
+                status:
+                  description: status string
+                  enum:
+                    - active
+                    - paused
+                    - ready
+                    - delivered
+                    - cancelled
+                    - reverted
+                  title: get_corporations_corporation_id_industry_jobs_status
+                  type: string
+                successful_runs:
+                  description: Number of successful runs for this job. Equal to runs unless this is an invention job
+                  format: int32
+                  title: get_corporations_corporation_id_industry_jobs_successful_runs
+                  type: integer
+              required:
+                - job_id
+                - installer_id
+                - facility_id
+                - location_id
+                - activity_id
+                - blueprint_id
+                - blueprint_type_id
+                - blueprint_location_id
+                - output_location_id
+                - runs
+                - status
+                - duration
+                - start_date
+                - end_date
+              title: get_corporations_corporation_id_industry_jobs_200_ok
+              type: object
+            maxItems: 1000
+            title: get_corporations_corporation_id_industry_jobs_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-industry.read_corporation_jobs.v1
+      summary: List corporation industry jobs
+      tags:
+        - Industry
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 300
+      x-required-roles:
+        - FactoryManager
   '/corporations/{corporation_id}/killmails/recent/':
     get:
       description: |-
@@ -9729,6 +11599,211 @@ paths:
       x-cached-seconds: 3600
       x-required-roles:
         - Director
+  '/corporations/{corporation_id}/orders/':
+    get:
+      description: |-
+        List market orders placed on behalf of a corporation
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/orders/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/orders/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/orders/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_orders
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: A list of market orders
+          examples:
+            application/json:
+              - duration: 30
+                escrow: 45.6
+                is_buy_order: true
+                issued: '2016-09-03T05:12:25Z'
+                location_id: 456
+                min_volume: 1
+                order_id: 123
+                price: 33.3
+                range: station
+                region_id: 123
+                state: open
+                type_id: 456
+                volume_remain: 4422
+                volume_total: 123456
+                wallet_division: 1
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                duration:
+                  description: Numer of days for which order is valid (starting from the issued date). An order expires at time issued + duration
+                  format: int32
+                  title: get_corporations_corporation_id_orders_duration
+                  type: integer
+                escrow:
+                  description: 'For buy orders, the amount of ISK in escrow'
+                  format: float
+                  title: get_corporations_corporation_id_orders_escrow
+                  type: number
+                is_buy_order:
+                  description: True for a bid (buy) order. False for an offer (sell) order
+                  title: get_corporations_corporation_id_orders_is_buy_order
+                  type: boolean
+                issued:
+                  description: Date and time when this order was issued
+                  format: date-time
+                  title: get_corporations_corporation_id_orders_issued
+                  type: string
+                location_id:
+                  description: ID of the location where order was placed
+                  format: int64
+                  title: get_corporations_corporation_id_orders_location_id
+                  type: integer
+                min_volume:
+                  description: 'For bids (buy orders), the minimum quantity that will be accepted in a matching offer (sell order)'
+                  format: int32
+                  title: get_corporations_corporation_id_orders_min_volume
+                  type: integer
+                order_id:
+                  description: Unique order ID
+                  format: int64
+                  title: get_corporations_corporation_id_orders_order_id
+                  type: integer
+                price:
+                  description: Cost per unit for this order
+                  format: float
+                  title: get_corporations_corporation_id_orders_price
+                  type: number
+                range:
+                  description: 'Valid order range, numbers are ranges in jumps'
+                  enum:
+                    - '1'
+                    - '10'
+                    - '2'
+                    - '20'
+                    - '3'
+                    - '30'
+                    - '4'
+                    - '40'
+                    - '5'
+                    - region
+                    - solarsystem
+                    - station
+                  title: get_corporations_corporation_id_orders_range
+                  type: string
+                region_id:
+                  description: ID of the region where order was placed
+                  format: int32
+                  title: get_corporations_corporation_id_orders_region_id
+                  type: integer
+                state:
+                  description: Current order state
+                  enum:
+                    - cancelled
+                    - character_deleted
+                    - closed
+                    - expired
+                    - open
+                    - pending
+                  title: get_corporations_corporation_id_orders_state
+                  type: string
+                type_id:
+                  description: The type ID of the item transacted in this order
+                  format: int32
+                  title: get_corporations_corporation_id_orders_type_id
+                  type: integer
+                volume_remain:
+                  description: Quantity of items still required or offered
+                  format: int32
+                  title: get_corporations_corporation_id_orders_volume_remain
+                  type: integer
+                volume_total:
+                  description: Quantity of items required or offered at time order was placed
+                  format: int32
+                  title: get_corporations_corporation_id_orders_volume_total
+                  type: integer
+                wallet_division:
+                  description: Wallet division of which this order used
+                  format: int32
+                  maximum: 7
+                  minimum: 1
+                  title: get_corporations_corporation_id_orders_wallet_division
+                  type: integer
+              required:
+                - order_id
+                - type_id
+                - region_id
+                - location_id
+                - range
+                - is_buy_order
+                - price
+                - volume_total
+                - volume_remain
+                - issued
+                - state
+                - min_volume
+                - wallet_division
+                - duration
+                - escrow
+              title: get_corporations_corporation_id_orders_200_ok
+              type: object
+            maxItems: 1000
+            title: get_corporations_corporation_id_orders_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-markets.read_corporation_orders.v1
+      summary: List orders from a corporation
+      tags:
+        - Market
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles:
+        - Accountant
+        - Trader
   '/corporations/{corporation_id}/roles/':
     get:
       description: |-
@@ -10299,6 +12374,227 @@ paths:
         - legacy
         - v1
       x-cached-seconds: 3600
+  '/corporations/{corporation_id}/shareholders/':
+    get:
+      description: |-
+        Return the current member list of a corporation, the token's character need to be a member of the corporation.
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/shareholders/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/shareholders/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/shareholders/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_shareholders
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: List of member character IDs
+          examples:
+            application/json:
+              - share_count: 580
+                shareholder_id: 98000001
+                shareholder_type: corporation
+              - share_count: 20
+                shareholder_id: 2112000003
+                shareholder_type: character
+              - share_count: 300
+                shareholder_id: 2112000004
+                shareholder_type: character
+              - share_count: 100
+                shareholder_id: 2112000001
+                shareholder_type: character
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: A list of character IDs
+            items:
+              description: 200 ok object
+              properties:
+                share_count:
+                  description: share_count integer
+                  format: int64
+                  title: get_corporations_corporation_id_shareholders_share_count
+                  type: integer
+                shareholder_id:
+                  description: shareholder_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_shareholders_shareholder_id
+                  type: integer
+                shareholder_type:
+                  description: shareholder_type string
+                  enum:
+                    - character
+                    - corporation
+                  title: get_corporations_corporation_id_shareholders_shareholder_type
+                  type: string
+              required:
+                - shareholder_id
+                - shareholder_type
+                - share_count
+              title: get_corporations_corporation_id_shareholders_200_ok
+              type: object
+            maxItems: 1000
+            title: get_corporations_corporation_id_shareholders_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-wallet.read_corporation_wallets.v1
+      summary: Get corporation members
+      tags:
+        - Corporation
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+  '/corporations/{corporation_id}/standings/':
+    get:
+      description: |-
+        Return corporation standings from agents, NPC corporations, and factions
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/standings/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/standings/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/standings/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_standings
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: A list of standings
+          examples:
+            application/json:
+              - from_id: 3009841
+                from_type: agent
+                standing: 0.1
+              - from_id: 1000061
+                from_type: npc_corp
+                standing: 0
+              - from_id: 500003
+                from_type: faction
+                standing: -1
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                from_id:
+                  description: from_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_standings_from_id
+                  type: integer
+                from_type:
+                  description: from_type string
+                  enum:
+                    - agent
+                    - npc_corp
+                    - faction
+                  title: get_corporations_corporation_id_standings_from_type
+                  type: string
+                standing:
+                  description: standing number
+                  format: float
+                  maximum: 10
+                  minimum: -10
+                  title: get_corporations_corporation_id_standings_standing
+                  type: number
+              required:
+                - from_id
+                - from_type
+                - standing
+              title: get_corporations_corporation_id_standings_200_ok
+              type: object
+            maxItems: 1000
+            title: get_corporations_corporation_id_standings_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-corporations.read_standings.v1
+      summary: Get corporation standings
+      tags:
+        - Corporation
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles: []
   '/corporations/{corporation_id}/structures/':
     get:
       description: |-
@@ -10358,6 +12654,11 @@ paths:
             Last-Modified:
               description: RFC7231 formatted datetime string
               type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
           schema:
             description: 200 ok array
             items:
@@ -10517,6 +12818,8 @@ paths:
         - legacy
         - v1
       x-cached-seconds: 3600
+      x-required-roles:
+        - StationManager
   '/corporations/{corporation_id}/structures/{structure_id}/':
     put:
       description: |
@@ -10600,6 +12903,581 @@ paths:
         - dev
         - legacy
         - v1
+  '/corporations/{corporation_id}/titles/':
+    get:
+      description: |-
+        Returns a corporation's titles
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/titles/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/titles/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/titles/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_titles
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: A list of titles
+          examples:
+            application/json:
+              - name: Awesome Title
+                roles:
+                  - Hangar_Take_6
+                  - Hangar_Query_2
+                title_id: 1
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                grantable_roles:
+                  description: grantable_roles array
+                  items:
+                    description: grantable_role string
+                    enum:
+                      - Account_Take_1
+                      - Account_Take_2
+                      - Account_Take_3
+                      - Account_Take_4
+                      - Account_Take_5
+                      - Account_Take_6
+                      - Account_Take_7
+                      - Accountant
+                      - Auditor
+                      - Communications_Officer
+                      - Config_Equipment
+                      - Config_Starbase_Equipment
+                      - Container_Take_1
+                      - Container_Take_2
+                      - Container_Take_3
+                      - Container_Take_4
+                      - Container_Take_5
+                      - Container_Take_6
+                      - Container_Take_7
+                      - Contract_Manager
+                      - Diplomat
+                      - Director
+                      - Factory_Manager
+                      - Fitting_Manager
+                      - Hangar_Query_1
+                      - Hangar_Query_2
+                      - Hangar_Query_3
+                      - Hangar_Query_4
+                      - Hangar_Query_5
+                      - Hangar_Query_6
+                      - Hangar_Query_7
+                      - Hangar_Take_1
+                      - Hangar_Take_2
+                      - Hangar_Take_3
+                      - Hangar_Take_4
+                      - Hangar_Take_5
+                      - Hangar_Take_6
+                      - Hangar_Take_7
+                      - Junior_Accountant
+                      - Personnel_Manager
+                      - Rent_Factory_Facility
+                      - Rent_Office
+                      - Rent_Research_Facility
+                      - Security_Officer
+                      - Starbase_Defense_Operator
+                      - Starbase_Fuel_Technician
+                      - Station_Manager
+                      - Terrestrial_Combat_Officer
+                      - Terrestrial_Logistics_Officer
+                      - Trader
+                    title: get_corporations_corporation_id_titles_grantable_role
+                    type: string
+                    uniqueItems: true
+                  maxItems: 50
+                  title: get_corporations_corporation_id_titles_grantable_roles
+                  type: array
+                grantable_roles_at_base:
+                  description: grantable_roles_at_base array
+                  items:
+                    description: grantable_roles_at_base string
+                    enum:
+                      - Account_Take_1
+                      - Account_Take_2
+                      - Account_Take_3
+                      - Account_Take_4
+                      - Account_Take_5
+                      - Account_Take_6
+                      - Account_Take_7
+                      - Accountant
+                      - Auditor
+                      - Communications_Officer
+                      - Config_Equipment
+                      - Config_Starbase_Equipment
+                      - Container_Take_1
+                      - Container_Take_2
+                      - Container_Take_3
+                      - Container_Take_4
+                      - Container_Take_5
+                      - Container_Take_6
+                      - Container_Take_7
+                      - Contract_Manager
+                      - Diplomat
+                      - Director
+                      - Factory_Manager
+                      - Fitting_Manager
+                      - Hangar_Query_1
+                      - Hangar_Query_2
+                      - Hangar_Query_3
+                      - Hangar_Query_4
+                      - Hangar_Query_5
+                      - Hangar_Query_6
+                      - Hangar_Query_7
+                      - Hangar_Take_1
+                      - Hangar_Take_2
+                      - Hangar_Take_3
+                      - Hangar_Take_4
+                      - Hangar_Take_5
+                      - Hangar_Take_6
+                      - Hangar_Take_7
+                      - Junior_Accountant
+                      - Personnel_Manager
+                      - Rent_Factory_Facility
+                      - Rent_Office
+                      - Rent_Research_Facility
+                      - Security_Officer
+                      - Starbase_Defense_Operator
+                      - Starbase_Fuel_Technician
+                      - Station_Manager
+                      - Terrestrial_Combat_Officer
+                      - Terrestrial_Logistics_Officer
+                      - Trader
+                    title: get_corporations_corporation_id_titles_grantable_roles_at_base
+                    type: string
+                    uniqueItems: true
+                  maxItems: 50
+                  title: get_corporations_corporation_id_titles_grantable_roles_at_base
+                  type: array
+                grantable_roles_at_hq:
+                  description: grantable_roles_at_hq array
+                  items:
+                    description: grantable_roles_at_hq string
+                    enum:
+                      - Account_Take_1
+                      - Account_Take_2
+                      - Account_Take_3
+                      - Account_Take_4
+                      - Account_Take_5
+                      - Account_Take_6
+                      - Account_Take_7
+                      - Accountant
+                      - Auditor
+                      - Communications_Officer
+                      - Config_Equipment
+                      - Config_Starbase_Equipment
+                      - Container_Take_1
+                      - Container_Take_2
+                      - Container_Take_3
+                      - Container_Take_4
+                      - Container_Take_5
+                      - Container_Take_6
+                      - Container_Take_7
+                      - Contract_Manager
+                      - Diplomat
+                      - Director
+                      - Factory_Manager
+                      - Fitting_Manager
+                      - Hangar_Query_1
+                      - Hangar_Query_2
+                      - Hangar_Query_3
+                      - Hangar_Query_4
+                      - Hangar_Query_5
+                      - Hangar_Query_6
+                      - Hangar_Query_7
+                      - Hangar_Take_1
+                      - Hangar_Take_2
+                      - Hangar_Take_3
+                      - Hangar_Take_4
+                      - Hangar_Take_5
+                      - Hangar_Take_6
+                      - Hangar_Take_7
+                      - Junior_Accountant
+                      - Personnel_Manager
+                      - Rent_Factory_Facility
+                      - Rent_Office
+                      - Rent_Research_Facility
+                      - Security_Officer
+                      - Starbase_Defense_Operator
+                      - Starbase_Fuel_Technician
+                      - Station_Manager
+                      - Terrestrial_Combat_Officer
+                      - Terrestrial_Logistics_Officer
+                      - Trader
+                    title: get_corporations_corporation_id_titles_grantable_roles_at_hq
+                    type: string
+                    uniqueItems: true
+                  maxItems: 50
+                  title: get_corporations_corporation_id_titles_grantable_roles_at_hq
+                  type: array
+                grantable_roles_at_other:
+                  description: grantable_roles_at_other array
+                  items:
+                    description: grantable_roles_at_other string
+                    enum:
+                      - Account_Take_1
+                      - Account_Take_2
+                      - Account_Take_3
+                      - Account_Take_4
+                      - Account_Take_5
+                      - Account_Take_6
+                      - Account_Take_7
+                      - Accountant
+                      - Auditor
+                      - Communications_Officer
+                      - Config_Equipment
+                      - Config_Starbase_Equipment
+                      - Container_Take_1
+                      - Container_Take_2
+                      - Container_Take_3
+                      - Container_Take_4
+                      - Container_Take_5
+                      - Container_Take_6
+                      - Container_Take_7
+                      - Contract_Manager
+                      - Diplomat
+                      - Director
+                      - Factory_Manager
+                      - Fitting_Manager
+                      - Hangar_Query_1
+                      - Hangar_Query_2
+                      - Hangar_Query_3
+                      - Hangar_Query_4
+                      - Hangar_Query_5
+                      - Hangar_Query_6
+                      - Hangar_Query_7
+                      - Hangar_Take_1
+                      - Hangar_Take_2
+                      - Hangar_Take_3
+                      - Hangar_Take_4
+                      - Hangar_Take_5
+                      - Hangar_Take_6
+                      - Hangar_Take_7
+                      - Junior_Accountant
+                      - Personnel_Manager
+                      - Rent_Factory_Facility
+                      - Rent_Office
+                      - Rent_Research_Facility
+                      - Security_Officer
+                      - Starbase_Defense_Operator
+                      - Starbase_Fuel_Technician
+                      - Station_Manager
+                      - Terrestrial_Combat_Officer
+                      - Terrestrial_Logistics_Officer
+                      - Trader
+                    title: get_corporations_corporation_id_titles_grantable_roles_at_other
+                    type: string
+                    uniqueItems: true
+                  maxItems: 50
+                  title: get_corporations_corporation_id_titles_grantable_roles_at_other
+                  type: array
+                name:
+                  description: name string
+                  title: get_corporations_corporation_id_titles_name
+                  type: string
+                roles:
+                  description: roles array
+                  items:
+                    description: role string
+                    enum:
+                      - Account_Take_1
+                      - Account_Take_2
+                      - Account_Take_3
+                      - Account_Take_4
+                      - Account_Take_5
+                      - Account_Take_6
+                      - Account_Take_7
+                      - Accountant
+                      - Auditor
+                      - Communications_Officer
+                      - Config_Equipment
+                      - Config_Starbase_Equipment
+                      - Container_Take_1
+                      - Container_Take_2
+                      - Container_Take_3
+                      - Container_Take_4
+                      - Container_Take_5
+                      - Container_Take_6
+                      - Container_Take_7
+                      - Contract_Manager
+                      - Diplomat
+                      - Director
+                      - Factory_Manager
+                      - Fitting_Manager
+                      - Hangar_Query_1
+                      - Hangar_Query_2
+                      - Hangar_Query_3
+                      - Hangar_Query_4
+                      - Hangar_Query_5
+                      - Hangar_Query_6
+                      - Hangar_Query_7
+                      - Hangar_Take_1
+                      - Hangar_Take_2
+                      - Hangar_Take_3
+                      - Hangar_Take_4
+                      - Hangar_Take_5
+                      - Hangar_Take_6
+                      - Hangar_Take_7
+                      - Junior_Accountant
+                      - Personnel_Manager
+                      - Rent_Factory_Facility
+                      - Rent_Office
+                      - Rent_Research_Facility
+                      - Security_Officer
+                      - Starbase_Defense_Operator
+                      - Starbase_Fuel_Technician
+                      - Station_Manager
+                      - Terrestrial_Combat_Officer
+                      - Terrestrial_Logistics_Officer
+                      - Trader
+                    title: get_corporations_corporation_id_titles_role
+                    type: string
+                    uniqueItems: true
+                  maxItems: 50
+                  title: get_corporations_corporation_id_titles_roles
+                  type: array
+                roles_at_base:
+                  description: roles_at_base array
+                  items:
+                    description: roles_at_base string
+                    enum:
+                      - Account_Take_1
+                      - Account_Take_2
+                      - Account_Take_3
+                      - Account_Take_4
+                      - Account_Take_5
+                      - Account_Take_6
+                      - Account_Take_7
+                      - Accountant
+                      - Auditor
+                      - Communications_Officer
+                      - Config_Equipment
+                      - Config_Starbase_Equipment
+                      - Container_Take_1
+                      - Container_Take_2
+                      - Container_Take_3
+                      - Container_Take_4
+                      - Container_Take_5
+                      - Container_Take_6
+                      - Container_Take_7
+                      - Contract_Manager
+                      - Diplomat
+                      - Director
+                      - Factory_Manager
+                      - Fitting_Manager
+                      - Hangar_Query_1
+                      - Hangar_Query_2
+                      - Hangar_Query_3
+                      - Hangar_Query_4
+                      - Hangar_Query_5
+                      - Hangar_Query_6
+                      - Hangar_Query_7
+                      - Hangar_Take_1
+                      - Hangar_Take_2
+                      - Hangar_Take_3
+                      - Hangar_Take_4
+                      - Hangar_Take_5
+                      - Hangar_Take_6
+                      - Hangar_Take_7
+                      - Junior_Accountant
+                      - Personnel_Manager
+                      - Rent_Factory_Facility
+                      - Rent_Office
+                      - Rent_Research_Facility
+                      - Security_Officer
+                      - Starbase_Defense_Operator
+                      - Starbase_Fuel_Technician
+                      - Station_Manager
+                      - Terrestrial_Combat_Officer
+                      - Terrestrial_Logistics_Officer
+                      - Trader
+                    title: get_corporations_corporation_id_titles_roles_at_base
+                    type: string
+                    uniqueItems: true
+                  maxItems: 50
+                  title: get_corporations_corporation_id_titles_roles_at_base
+                  type: array
+                roles_at_hq:
+                  description: roles_at_hq array
+                  items:
+                    description: roles_at_hq string
+                    enum:
+                      - Account_Take_1
+                      - Account_Take_2
+                      - Account_Take_3
+                      - Account_Take_4
+                      - Account_Take_5
+                      - Account_Take_6
+                      - Account_Take_7
+                      - Accountant
+                      - Auditor
+                      - Communications_Officer
+                      - Config_Equipment
+                      - Config_Starbase_Equipment
+                      - Container_Take_1
+                      - Container_Take_2
+                      - Container_Take_3
+                      - Container_Take_4
+                      - Container_Take_5
+                      - Container_Take_6
+                      - Container_Take_7
+                      - Contract_Manager
+                      - Diplomat
+                      - Director
+                      - Factory_Manager
+                      - Fitting_Manager
+                      - Hangar_Query_1
+                      - Hangar_Query_2
+                      - Hangar_Query_3
+                      - Hangar_Query_4
+                      - Hangar_Query_5
+                      - Hangar_Query_6
+                      - Hangar_Query_7
+                      - Hangar_Take_1
+                      - Hangar_Take_2
+                      - Hangar_Take_3
+                      - Hangar_Take_4
+                      - Hangar_Take_5
+                      - Hangar_Take_6
+                      - Hangar_Take_7
+                      - Junior_Accountant
+                      - Personnel_Manager
+                      - Rent_Factory_Facility
+                      - Rent_Office
+                      - Rent_Research_Facility
+                      - Security_Officer
+                      - Starbase_Defense_Operator
+                      - Starbase_Fuel_Technician
+                      - Station_Manager
+                      - Terrestrial_Combat_Officer
+                      - Terrestrial_Logistics_Officer
+                      - Trader
+                    title: get_corporations_corporation_id_titles_roles_at_hq
+                    type: string
+                    uniqueItems: true
+                  maxItems: 50
+                  title: get_corporations_corporation_id_titles_roles_at_hq
+                  type: array
+                roles_at_other:
+                  description: roles_at_other array
+                  items:
+                    description: roles_at_other string
+                    enum:
+                      - Account_Take_1
+                      - Account_Take_2
+                      - Account_Take_3
+                      - Account_Take_4
+                      - Account_Take_5
+                      - Account_Take_6
+                      - Account_Take_7
+                      - Accountant
+                      - Auditor
+                      - Communications_Officer
+                      - Config_Equipment
+                      - Config_Starbase_Equipment
+                      - Container_Take_1
+                      - Container_Take_2
+                      - Container_Take_3
+                      - Container_Take_4
+                      - Container_Take_5
+                      - Container_Take_6
+                      - Container_Take_7
+                      - Contract_Manager
+                      - Diplomat
+                      - Director
+                      - Factory_Manager
+                      - Fitting_Manager
+                      - Hangar_Query_1
+                      - Hangar_Query_2
+                      - Hangar_Query_3
+                      - Hangar_Query_4
+                      - Hangar_Query_5
+                      - Hangar_Query_6
+                      - Hangar_Query_7
+                      - Hangar_Take_1
+                      - Hangar_Take_2
+                      - Hangar_Take_3
+                      - Hangar_Take_4
+                      - Hangar_Take_5
+                      - Hangar_Take_6
+                      - Hangar_Take_7
+                      - Junior_Accountant
+                      - Personnel_Manager
+                      - Rent_Factory_Facility
+                      - Rent_Office
+                      - Rent_Research_Facility
+                      - Security_Officer
+                      - Starbase_Defense_Operator
+                      - Starbase_Fuel_Technician
+                      - Station_Manager
+                      - Terrestrial_Combat_Officer
+                      - Terrestrial_Logistics_Officer
+                      - Trader
+                    title: get_corporations_corporation_id_titles_roles_at_other
+                    type: string
+                    uniqueItems: true
+                  maxItems: 50
+                  title: get_corporations_corporation_id_titles_roles_at_other
+                  type: array
+                title_id:
+                  description: title_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_titles_title_id
+                  type: integer
+              title: get_corporations_corporation_id_titles_200_ok
+              type: object
+            maxItems: 16
+            title: get_corporations_corporation_id_titles_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-corporations.read_titles.v1
+      summary: Get corporation titles
+      tags:
+        - Corporation
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles:
+        - Director
   '/corporations/{corporation_id}/wallets/':
     get:
       description: |-
@@ -11142,7 +14020,7 @@ paths:
                   description: Amount paid per unit
                   format: float
                   title: get_corporations_corporation_id_wallets_division_transactions_unit_price
-                  type: integer
+                  type: number
               required:
                 - transaction_id
                 - date
@@ -12023,7 +14901,7 @@ paths:
       x-cached-seconds: 5
     post:
       description: |
-        Invite a character into the fleet, if a character has a CSPA charge set, it is not possible to invite them to the fleet using ESI
+        Invite a character into the fleet. If a character has a CSPA charge set it is not possible to invite them to the fleet using ESI
 
         ---
         Alternate route: `/v1/fleets/{fleet_id}/members/`
@@ -12053,8 +14931,7 @@ paths:
                 title: post_fleets_fleet_id_members_character_id
                 type: integer
               role:
-                description: |
-                  - If a character is invited with the `fleet_commander` role, neither `wing_id` or `squad_id` should be specified - If a character is invited with the `wing_commander` role, only `wing_id` should be specified - If a character is invited with the `squad_commander` role, both `wing_id` and `squad_id` should be specified - If a character is invited with the `squad_member` role, `wing_id` and `squad_id` should either both be specified or not specified at all. If they aren’t specified, the invited character will join any squad with available positions
+                description: 'If a character is invited with the `fleet_commander` role, neither `wing_id` or `squad_id` should be specified. If a character is invited with the `wing_commander` role, only `wing_id` should be specified. If a character is invited with the `squad_commander` role, both `wing_id` and `squad_id` should be specified. If a character is invited with the `squad_member` role, `wing_id` and `squad_id` should either both be specified or not specified at all. If they aren’t specified, the invited character will join any squad with available positions.'
                 enum:
                   - fleet_commander
                   - wing_commander
@@ -12240,8 +15117,7 @@ paths:
             description: movement object
             properties:
               role:
-                description: |
-                  - If a character is moved to the `fleet_commander` role, neither `wing_id` or `squad_id` should be specified - If a character is moved to the `wing_commander` role, only `wing_id` should be specified - If a character is moved to the `squad_commander` role, both `wing_id` and `squad_id` should be specified - If a character is moved to the `squad_member` role, both `wing_id` and `squad_id` should be specified
+                description: 'If a character is moved to the `fleet_commander` role, neither `wing_id` or `squad_id` should be specified. If a character is moved to the `wing_commander` role, only `wing_id` should be specified. If a character is moved to the `squad_commander` role, both `wing_id` and `squad_id` should be specified. If a character is moved to the `squad_member` role, both `wing_id` and `squad_id` should be specified.'
                 enum:
                   - fleet_commander
                   - wing_commander
@@ -15164,6 +18040,11 @@ paths:
             Last-Modified:
               description: RFC7231 formatted datetime string
               type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
           schema:
             description: 200 ok array
             items:
@@ -17953,6 +20834,11 @@ paths:
             Last-Modified:
               description: RFC7231 formatted datetime string
               type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
           schema:
             description: 200 ok array
             items:
@@ -20053,6 +22939,11 @@ paths:
             Last-Modified:
               description: RFC7231 formatted datetime string
               type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
           schema:
             description: 200 ok array
             items:
@@ -20083,9 +22974,9 @@ paths:
         Get information on a type
 
         ---
-        Alternate route: `/v2/universe/types/{type_id}/`
+        Alternate route: `/v3/universe/types/{type_id}/`
 
-        Alternate route: `/legacy/universe/types/{type_id}/`
+        Alternate route: `/dev/universe/types/{type_id}/`
 
         ---
         This route expires daily at 11:05
@@ -20203,6 +23094,11 @@ paths:
                 format: int32
                 title: get_universe_types_type_id_icon_id
                 type: integer
+              market_group_id:
+                description: This only exists for types that can be put on the market
+                format: int32
+                title: get_universe_types_type_id_market_group_id
+                type: integer
               mass:
                 description: mass number
                 format: float
@@ -20212,6 +23108,11 @@ paths:
                 description: name string
                 title: get_universe_types_type_id_name
                 type: string
+              packaged_volume:
+                description: packaged_volume number
+                format: float
+                title: get_universe_types_type_id_packaged_volume
+                type: number
               portion_size:
                 description: portion_size integer
                 format: int32
@@ -20269,8 +23170,8 @@ paths:
       tags:
         - Universe
       x-alternate-versions:
-        - legacy
-        - v2
+        - dev
+        - v3
   /wars/:
     get:
       description: |-
@@ -20586,6 +23487,11 @@ paths:
             Last-Modified:
               description: RFC7231 formatted datetime string
               type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
           schema:
             description: 200 ok array
             items:

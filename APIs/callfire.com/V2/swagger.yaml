@@ -5373,15 +5373,14 @@ definitions:
         type: string
     type: object
   CallerIdList:
-    allOf:
-      - $ref: '#/definitions/ItemList'
-      - properties:
-          items:
-            items:
-              $ref: '#/definitions/CallerId'
-            type: array
-        type: object
     description: '~'
+    properties:
+      items:
+        description: '~'
+        items:
+          $ref: '#/definitions/CallerId'
+        type: array
+    type: object
   CallerIdVerificationRequest:
     description: Request which is used to verify a new caller id number
     properties:
@@ -5420,6 +5419,7 @@ definitions:
           - UPLOAD
           - RECORDING
           - ACTIVE
+          - ACTIVE_SYSTEM
           - FAILED
           - ARCHIVED
           - SCRUBBED
@@ -5847,15 +5847,14 @@ definitions:
         type: integer
     type: object
   KeywordList:
-    allOf:
-      - $ref: '#/definitions/ItemList'
-      - properties:
-          items:
-            items:
-              $ref: '#/definitions/Keyword'
-            type: array
-        type: object
     description: '~'
+    properties:
+      items:
+        description: '~'
+        items:
+          $ref: '#/definitions/Keyword'
+        type: array
+    type: object
   KeywordPurchaseRequest:
     description: Request object is used to purchase keywords
     properties:
@@ -6101,15 +6100,14 @@ definitions:
         type: integer
     type: object
   NumberList:
-    allOf:
-      - $ref: '#/definitions/ItemList'
-      - properties:
-          items:
-            items:
-              $ref: '#/definitions/Number'
-            type: array
-        type: object
     description: '~'
+    properties:
+      items:
+        description: '~'
+        items:
+          $ref: '#/definitions/Number'
+        type: array
+    type: object
   NumberOrder:
     description: Represents an order created on the CallFire platform
     properties:
@@ -6300,15 +6298,14 @@ definitions:
         type: integer
     type: object
   ResourceIdList:
-    allOf:
-      - $ref: '#/definitions/ItemList'
-      - properties:
-          items:
-            items:
-              $ref: '#/definitions/ResourceId'
-            type: array
-        type: object
     description: '~'
+    properties:
+      items:
+        description: '~'
+        items:
+          $ref: '#/definitions/ResourceId'
+        type: array
+    type: object
   RetryConfig:
     description: Retry configuration will help you to resend a call or text if it was not delivered first time
     properties:

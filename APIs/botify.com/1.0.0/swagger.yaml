@@ -401,6 +401,39 @@ paths:
         name: analysis_slug
         required: true
         type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/features/search_console/stats':
+    get:
+      description: List clicks and impressions per day
+      operationId: getKeywordsStats
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/KeywordsStats'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: List clicks and impressions per day
+      tags:
+        - Analysis
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Project's identifier
+        in: path
+        name: project_slug
+        required: true
+        type: string
+      - description: Analysis' identifier
+        in: path
+        name: analysis_slug
+        required: true
+        type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/features/sitemaps/report':
     get:
       description: 'Get global information of the sitemaps found (sitemaps indexes, invalid sitemaps urls, etc.)'
@@ -1928,6 +1961,69 @@ definitions:
     required:
       - value
       - nb_urls
+    type: object
+  KeywordsStat:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/KeywordsStatData'
+        type: array
+      type:
+        type: string
+      url:
+        type: string
+    required:
+      - type
+      - data
+    type: object
+  KeywordsStatData:
+    properties:
+      all:
+        $ref: '#/definitions/KeywordsStatDetail'
+      date:
+        format: int64
+        type: integer
+      desktop:
+        $ref: '#/definitions/KeywordsStatDetail'
+      mobile:
+        $ref: '#/definitions/KeywordsStatDetail'
+      tablet:
+        $ref: '#/definitions/KeywordsStatDetail'
+    required:
+      - date
+      - all
+      - desktop
+      - mobile
+      - tablet
+    type: object
+  KeywordsStatDetail:
+    properties:
+      clicks:
+        format: int64
+        type: integer
+      impressions:
+        format: int64
+        type: integer
+      sampled_clicks:
+        format: int64
+        type: integer
+      sampled_impressions:
+        format: int64
+        type: integer
+    required:
+      - clicks
+      - impressions
+      - sampled_clicks
+      - sampled_impressions
+    type: object
+  KeywordsStats:
+    properties:
+      stats:
+        items:
+          $ref: '#/definitions/KeywordsStat'
+        type: array
+    required:
+      - stats
     type: object
   LinksPercentiles:
     properties:

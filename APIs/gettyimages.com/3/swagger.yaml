@@ -48,95 +48,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: 'Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.'
-          enum:
-            - id
-            - alternative_ids
-            - asset_family
-            - asset_type
-            - collection_code
-            - collection_name
-            - comp
-            - date_submitted
-            - keywords
-          in: query
-          items:
-            enum:
-              - id
-              - alternative_ids
-              - asset_family
-              - asset_type
-              - collection_code
-              - collection_name
-              - comp
-              - date_submitted
-              - keywords
-            type: string
-          name: fields
-          required: false
-          type: array
-        - description: Identifies page to return. Default page is 1.
-          format: int32
-          in: query
-          name: page
-          required: false
-          type: integer
-        - description: 'Specifies page size. Default page_size is 10, maximum page_size is 100.'
-          format: int32
-          in: query
-          name: page_size
-          required: false
-          type: integer
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/System.Object'
-        '400':
-          description: InvalidParameterValue
-        '401':
-          description: Unauthorized
-      summary: '***BETA*** Search for images by a photographer'
-      tags:
-        - Artists
-  /v3/artists/videos:
-    get:
-      consumes: []
-      deprecated: false
-      operationId: Artists_GetVideosByArtist
-      parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
-          name: Accept-Language
-          required: false
-          type: string
-        - description: 'Provide access token in the format of ''Bearer {token}''.'
-          in: header
-          name: Authorization
-          required: false
-          type: string
-        - description: Name of artist for desired images
-          in: query
-          name: artist_name
-          required: true
-          type: string
-        - collectionFormat: multi
-          description: 'Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.'
-          enum:
-            - id
-            - alternative_ids
-            - asset_family
-            - asset_type
-            - caption
-            - collection_code
-            - collection_name
-            - comp
-            - date_submitted
-            - keywords
-            - license_model
-            - title
           in: query
           items:
             enum:
@@ -175,7 +86,76 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/System.Object'
+            $ref: '#/definitions/GettyImages.Models.Artists.ImageSearchResults'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+      summary: '***BETA*** Search for images by a photographer'
+      tags:
+        - Artists
+  /v3/artists/videos:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Artists_GetVideosByArtist
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          type: string
+        - description: Name of artist for desired images
+          in: query
+          name: artist_name
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: 'Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.'
+          in: query
+          items:
+            enum:
+              - id
+              - alternative_ids
+              - asset_family
+              - asset_type
+              - caption
+              - collection_code
+              - collection_name
+              - comp
+              - date_submitted
+              - keywords
+              - license_model
+              - title
+            type: string
+          name: fields
+          required: false
+          type: array
+        - description: Identifies page to return. Default page is 1.
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: 'Specifies page size. Default page_size is 10, maximum page_size is 100.'
+          format: int32
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GettyImages.Models.Artists.VideoSearchResults'
         '400':
           description: InvalidParameterValue
         '401':
@@ -910,11 +890,11 @@ paths:
           type: integer
         - description: 'Specifies product type to be included in the previous download results. To get previous iStockPhoto credit downloads, credit_pack must be selected.'
           enum:
-            - easy_access
-            - editorial_subscription
-            - image_pack
-            - premium_access
-            - royalty_free_subscription
+            - easyaccess
+            - editorialsubscription
+            - imagepack
+            - premiumaccess
+            - royaltyfreesubscription
             - credit_pack
           in: query
           name: product_type
@@ -999,11 +979,11 @@ paths:
           type: integer
         - description: "<remarks>\r\n                    Product type.\r\n                </remarks>"
           enum:
-            - easy_access
-            - editorial_subscription
-            - image_pack
-            - premium_access
-            - royalty_free_subscription
+            - easyaccess
+            - editorialsubscription
+            - imagepack
+            - premiumaccess
+            - royaltyfreesubscription
             - credit_pack
           in: query
           name: product_type
@@ -1105,16 +1085,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: A comma separated list of fields to return in the response.
-          enum:
-            - id
-            - child_event_count
-            - editorial_segments
-            - hero_image
-            - image_count
-            - location
-            - name
-            - start_date
-            - type
           in: query
           items:
             enum:
@@ -1182,16 +1152,6 @@ paths:
           type: integer
         - collectionFormat: multi
           description: A comma separated list of fields to return in the response.
-          enum:
-            - id
-            - child_event_count
-            - editorial_segments
-            - hero_image
-            - image_count
-            - location
-            - name
-            - start_date
-            - type
           in: query
           items:
             enum:
@@ -1252,54 +1212,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - allowed_use
-            - alternative_ids
-            - artist
-            - artist_title
-            - asset_family
-            - call_for_image
-            - caption
-            - city
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - comp
-            - copyright
-            - country
-            - credit_line
-            - date_camera_shot
-            - date_created
-            - date_submitted
-            - detail_set
-            - display_set
-            - download_sizes
-            - downloads
-            - editorial_segments
-            - editorial_source
-            - entity_details
-            - event_ids
-            - graphical_style
-            - id
-            - istock_licenses
-            - keywords
-            - largest_downloads
-            - license_model
-            - links
-            - max_dimensions
-            - orientation
-            - people
-            - prestige
-            - preview
-            - product_types
-            - quality_rank
-            - referral_destinations
-            - state_province
-            - summary_set
-            - thumb
-            - title
-            - uri_oembed
           in: query
           items:
             enum:
@@ -1338,6 +1250,7 @@ paths:
               - license_model
               - links
               - max_dimensions
+              - object_name
               - orientation
               - people
               - prestige
@@ -1397,54 +1310,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - allowed_use
-            - alternative_ids
-            - artist
-            - artist_title
-            - asset_family
-            - call_for_image
-            - caption
-            - city
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - comp
-            - copyright
-            - country
-            - credit_line
-            - date_camera_shot
-            - date_created
-            - date_submitted
-            - detail_set
-            - display_set
-            - download_sizes
-            - downloads
-            - editorial_segments
-            - editorial_source
-            - entity_details
-            - event_ids
-            - graphical_style
-            - id
-            - istock_licenses
-            - keywords
-            - largest_downloads
-            - license_model
-            - links
-            - max_dimensions
-            - orientation
-            - people
-            - prestige
-            - preview
-            - product_types
-            - quality_rank
-            - referral_destinations
-            - state_province
-            - summary_set
-            - thumb
-            - title
-            - uri_oembed
           in: query
           items:
             enum:
@@ -1483,6 +1348,7 @@ paths:
               - license_model
               - links
               - max_dimensions
+              - object_name
               - orientation
               - people
               - prestige
@@ -1541,45 +1407,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - accessrestriction
-            - allowed_use
-            - alternative_ids
-            - artist
-            - asset_family
-            - call_for_image
-            - caption
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - comp
-            - copyright
-            - date_camera_shot
-            - date_created
-            - detail_set
-            - display_set
-            - editorial_segments
-            - editorial_source
-            - entity_details
-            - event_ids
-            - graphical_style
-            - id
-            - keywords
-            - largest_downloads
-            - license_model
-            - max_dimensions
-            - orientation
-            - people
-            - prestige
-            - preview
-            - product_types
-            - quality_rank
-            - referral_destinations
-            - summary_set
-            - thumb
-            - title
-            - uri_oembed
           in: query
           items:
             enum:
@@ -1644,7 +1471,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/System.Object'
+            $ref: '#/definitions/GettyImages.Models.Search.SearchResults[GettyImages.Models.Search.ImageSearchItem]'
         '400':
           description: InvalidParameterValue
         '401':
@@ -1674,8 +1501,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Comma separated list of fields. Allows product download requirements to be returned.
-          enum:
-            - download_requirements
           in: query
           items:
             enum:
@@ -1851,17 +1676,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: 'Specifies fields to return. Default set is ''id'',''name'',''start_date''.'
-          enum:
-            - id
-            - child_event_count
-            - editorial_segments
-            - hero_image
-            - image_count
-            - keywords
-            - location
-            - name
-            - start_date
-            - type
           in: query
           items:
             enum:
@@ -1931,49 +1745,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter based on the age of individuals in an image.
-          enum:
-            - newborn
-            - baby
-            - child
-            - teenager
-            - young_adult
-            - adult
-            - adults_only
-            - mature_adult
-            - senior_adult
-            - months_0_1
-            - months_2_5
-            - months_6_11
-            - months_12_17
-            - months_18_23
-            - years_2_3
-            - years_4_5
-            - years_6_7
-            - years_8_9
-            - years_10_11
-            - years_12_13
-            - years_14_15
-            - years_16_17
-            - years_18_19
-            - years_20_24
-            - years_20_29
-            - years_25_29
-            - years_30_34
-            - years_30_39
-            - years_35_39
-            - years_40_44
-            - years_40_49
-            - years_45_49
-            - years_50_54
-            - years_50_59
-            - years_55_59
-            - years_60_64
-            - years_60_69
-            - years_65_69
-            - years_70_79
-            - years_80_89
-            - over_90
-            - over_100
           in: query
           items:
             enum:
@@ -1986,39 +1757,39 @@ paths:
               - adults_only
               - mature_adult
               - senior_adult
-              - months_0_1
-              - months_2_5
-              - months_6_11
-              - months_12_17
-              - months_18_23
-              - years_2_3
-              - years_4_5
-              - years_6_7
-              - years_8_9
-              - years_10_11
-              - years_12_13
-              - years_14_15
-              - years_16_17
-              - years_18_19
-              - years_20_24
-              - years_20_29
-              - years_25_29
-              - years_30_34
-              - years_30_39
-              - years_35_39
-              - years_40_44
-              - years_40_49
-              - years_45_49
-              - years_50_54
-              - years_50_59
-              - years_55_59
-              - years_60_64
-              - years_60_69
-              - years_65_69
-              - years_70_79
-              - years_80_89
-              - over_90
-              - over_100
+              - 0-1_months
+              - 2-5_months
+              - 6-11_months
+              - 12-17_months
+              - 18-23_months
+              - 2-3_years
+              - 4-5_years
+              - 6-7_years
+              - 8-9_years
+              - 10-11_years
+              - 12-13_years
+              - 14-15_years
+              - 16-17_years
+              - 18-19_years
+              - 20-24_years
+              - 20-29_years
+              - 25-29_years
+              - 30-34_years
+              - 30-39_years
+              - 35-39_years
+              - 40-44_years
+              - 40-49_years
+              - 45-49_years
+              - 50-54_years
+              - 50-59_years
+              - 55-59_years
+              - 60-64_years
+              - 60-69_years
+              - 65-69_years
+              - 70-79_years
+              - 80-89_years
+              - 90_plus_years
+              - 100_over
             type: string
           name: age_of_people
           required: false
@@ -2051,22 +1822,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter based on image composition.
-          enum:
-            - abstract
-            - candid
-            - close_up
-            - copy_space
-            - cut_out
-            - full_frame
-            - full_length
-            - headshot
-            - looking_at_camera
-            - macro
-            - portrait
-            - sparse
-            - still_life
-            - three_quarter_length
-            - waist_up
           in: query
           items:
             enum:
@@ -2096,19 +1851,6 @@ paths:
           type: boolean
         - collectionFormat: multi
           description: Filter search results based on the ethnicity of individuals in an image.
-          enum:
-            - black
-            - caucasian
-            - east_asian
-            - hispanic_latino
-            - japanese
-            - middle_eastern
-            - mixed_race_person
-            - multiethnic_group
-            - native_american_first_nations
-            - pacific_islander
-            - south_asian
-            - southeast_asian
           in: query
           items:
             enum:
@@ -2144,45 +1886,6 @@ paths:
           type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - accessrestriction
-            - allowed_use
-            - alternative_ids
-            - artist
-            - asset_family
-            - call_for_image
-            - caption
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - comp
-            - copyright
-            - date_camera_shot
-            - date_created
-            - detail_set
-            - display_set
-            - editorial_segments
-            - editorial_source
-            - entity_details
-            - event_ids
-            - graphical_style
-            - id
-            - keywords
-            - largest_downloads
-            - license_model
-            - max_dimensions
-            - orientation
-            - people
-            - prestige
-            - preview
-            - product_types
-            - quality_rank
-            - referral_destinations
-            - summary_set
-            - thumb
-            - title
-            - uri_oembed
           in: query
           items:
             enum:
@@ -2230,9 +1933,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Return only images having a specific file type.
-          enum:
-            - eps
-            - jpg
           in: query
           items:
             enum:
@@ -2244,10 +1944,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Filter based on graphical style of the image.
-          enum:
-            - fine_art
-            - illustration
-            - photography
           in: query
           items:
             enum:
@@ -2269,14 +1965,11 @@ paths:
           type: array
         - collectionFormat: multi
           description: Specifies the image licensing model(s).
-          enum:
-            - rights_managed
-            - royalty_free
           in: query
           items:
             enum:
-              - rights_managed
-              - royalty_free
+              - rightsmanaged
+              - royaltyfree
             type: string
           name: license_models
           required: false
@@ -2295,11 +1988,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter based on the number of people in the image.
-          enum:
-            - none
-            - one
-            - two
-            - group
           in: query
           items:
             enum:
@@ -2313,20 +2001,14 @@ paths:
           type: array
         - collectionFormat: multi
           description: Return only images with selected aspect ratios.
-          enum:
-            - horizontal
-            - vertical
-            - square
-            - panoramic_horizontal
-            - panoramic_vertical
           in: query
           items:
             enum:
-              - horizontal
-              - vertical
-              - square
-              - panoramic_horizontal
-              - panoramic_vertical
+              - Horizontal
+              - Vertical
+              - Square
+              - PanoramicHorizontal
+              - PanoramicVertical
             type: string
           name: orientations
           required: false
@@ -2355,22 +2037,14 @@ paths:
           type: boolean
         - collectionFormat: multi
           description: Filter images to those having product types from the selected list.
-          enum:
-            - easy_access
-            - editorial_subscription
-            - image_pack
-            - premium_access
-            - royalty_free_subscription
-            - credit_pack
           in: query
           items:
             enum:
-              - easy_access
-              - editorial_subscription
-              - image_pack
-              - premium_access
-              - royalty_free_subscription
-              - credit_pack
+              - easyaccess
+              - editorialsubscription
+              - imagepack
+              - premiumaccess
+              - royaltyfreesubscription
             type: string
           name: product_types
           required: false
@@ -2427,49 +2101,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter based on the age of individuals in an image.
-          enum:
-            - newborn
-            - baby
-            - child
-            - teenager
-            - young_adult
-            - adult
-            - adults_only
-            - mature_adult
-            - senior_adult
-            - months_0_1
-            - months_2_5
-            - months_6_11
-            - months_12_17
-            - months_18_23
-            - years_2_3
-            - years_4_5
-            - years_6_7
-            - years_8_9
-            - years_10_11
-            - years_12_13
-            - years_14_15
-            - years_16_17
-            - years_18_19
-            - years_20_24
-            - years_20_29
-            - years_25_29
-            - years_30_34
-            - years_30_39
-            - years_35_39
-            - years_40_44
-            - years_40_49
-            - years_45_49
-            - years_50_54
-            - years_50_59
-            - years_55_59
-            - years_60_64
-            - years_60_69
-            - years_65_69
-            - years_70_79
-            - years_80_89
-            - over_90
-            - over_100
           in: query
           items:
             enum:
@@ -2482,39 +2113,39 @@ paths:
               - adults_only
               - mature_adult
               - senior_adult
-              - months_0_1
-              - months_2_5
-              - months_6_11
-              - months_12_17
-              - months_18_23
-              - years_2_3
-              - years_4_5
-              - years_6_7
-              - years_8_9
-              - years_10_11
-              - years_12_13
-              - years_14_15
-              - years_16_17
-              - years_18_19
-              - years_20_24
-              - years_20_29
-              - years_25_29
-              - years_30_34
-              - years_30_39
-              - years_35_39
-              - years_40_44
-              - years_40_49
-              - years_45_49
-              - years_50_54
-              - years_50_59
-              - years_55_59
-              - years_60_64
-              - years_60_69
-              - years_65_69
-              - years_70_79
-              - years_80_89
-              - over_90
-              - over_100
+              - 0-1_months
+              - 2-5_months
+              - 6-11_months
+              - 12-17_months
+              - 18-23_months
+              - 2-3_years
+              - 4-5_years
+              - 6-7_years
+              - 8-9_years
+              - 10-11_years
+              - 12-13_years
+              - 14-15_years
+              - 16-17_years
+              - 18-19_years
+              - 20-24_years
+              - 20-29_years
+              - 25-29_years
+              - 30-34_years
+              - 30-39_years
+              - 35-39_years
+              - 40-44_years
+              - 40-49_years
+              - 45-49_years
+              - 50-54_years
+              - 50-59_years
+              - 55-59_years
+              - 60-64_years
+              - 60-69_years
+              - 65-69_years
+              - 70-79_years
+              - 80-89_years
+              - 90_plus_years
+              - 100_over
             type: string
           name: age_of_people
           required: false
@@ -2547,22 +2178,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter based on image composition.
-          enum:
-            - abstract
-            - candid
-            - close_up
-            - copy_space
-            - cut_out
-            - full_frame
-            - full_length
-            - headshot
-            - looking_at_camera
-            - macro
-            - portrait
-            - sparse
-            - still_life
-            - three_quarter_length
-            - waist_up
           in: query
           items:
             enum:
@@ -2592,19 +2207,6 @@ paths:
           type: boolean
         - collectionFormat: multi
           description: Filter search results based on the ethnicity of individuals in an image.
-          enum:
-            - black
-            - caucasian
-            - east_asian
-            - hispanic_latino
-            - japanese
-            - middle_eastern
-            - mixed_race_person
-            - multiethnic_group
-            - native_american_first_nations
-            - pacific_islander
-            - south_asian
-            - southeast_asian
           in: query
           items:
             enum:
@@ -2631,39 +2233,6 @@ paths:
           type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - allowed_use
-            - alternative_ids
-            - artist
-            - asset_family
-            - call_for_image
-            - caption
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - comp
-            - copyright
-            - date_camera_shot
-            - date_created
-            - detail_set
-            - display_set
-            - graphical_style
-            - id
-            - keywords
-            - largest_downloads
-            - license_model
-            - max_dimensions
-            - orientation
-            - prestige
-            - preview
-            - product_types
-            - quality_rank
-            - referral_destinations
-            - summary_set
-            - thumb
-            - title
-            - uri_oembed
           in: query
           items:
             enum:
@@ -2705,9 +2274,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Return only images having a specific file type.
-          enum:
-            - eps
-            - jpg
           in: query
           items:
             enum:
@@ -2719,10 +2285,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Filter based on graphical style of the image.
-          enum:
-            - fine_art
-            - illustration
-            - photography
           in: query
           items:
             enum:
@@ -2744,14 +2306,11 @@ paths:
           type: array
         - collectionFormat: multi
           description: Specifies the image licensing model(s).
-          enum:
-            - rights_managed
-            - royalty_free
           in: query
           items:
             enum:
-              - rights_managed
-              - royalty_free
+              - rightsmanaged
+              - royaltyfree
             type: string
           name: license_models
           required: false
@@ -2770,11 +2329,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter based on the number of people in the image.
-          enum:
-            - none
-            - one
-            - two
-            - group
           in: query
           items:
             enum:
@@ -2788,20 +2342,14 @@ paths:
           type: array
         - collectionFormat: multi
           description: Return only images with selected aspect ratios.
-          enum:
-            - horizontal
-            - vertical
-            - square
-            - panoramic_horizontal
-            - panoramic_vertical
           in: query
           items:
             enum:
-              - horizontal
-              - vertical
-              - square
-              - panoramic_horizontal
-              - panoramic_vertical
+              - Horizontal
+              - Vertical
+              - Square
+              - PanoramicHorizontal
+              - PanoramicVertical
             type: string
           name: orientations
           required: false
@@ -2830,22 +2378,14 @@ paths:
           type: boolean
         - collectionFormat: multi
           description: Filter images to those having product types from the selected list.
-          enum:
-            - easy_access
-            - editorial_subscription
-            - image_pack
-            - premium_access
-            - royalty_free_subscription
-            - credit_pack
           in: query
           items:
             enum:
-              - easy_access
-              - editorial_subscription
-              - image_pack
-              - premium_access
-              - royalty_free_subscription
-              - credit_pack
+              - easyaccess
+              - editorialsubscription
+              - imagepack
+              - premiumaccess
+              - royaltyfreesubscription
             type: string
           name: product_types
           required: false
@@ -2894,49 +2434,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter based on the age of individuals in an image.
-          enum:
-            - newborn
-            - baby
-            - child
-            - teenager
-            - young_adult
-            - adult
-            - adults_only
-            - mature_adult
-            - senior_adult
-            - months_0_1
-            - months_2_5
-            - months_6_11
-            - months_12_17
-            - months_18_23
-            - years_2_3
-            - years_4_5
-            - years_6_7
-            - years_8_9
-            - years_10_11
-            - years_12_13
-            - years_14_15
-            - years_16_17
-            - years_18_19
-            - years_20_24
-            - years_20_29
-            - years_25_29
-            - years_30_34
-            - years_30_39
-            - years_35_39
-            - years_40_44
-            - years_40_49
-            - years_45_49
-            - years_50_54
-            - years_50_59
-            - years_55_59
-            - years_60_64
-            - years_60_69
-            - years_65_69
-            - years_70_79
-            - years_80_89
-            - over_90
-            - over_100
           in: query
           items:
             enum:
@@ -2949,39 +2446,39 @@ paths:
               - adults_only
               - mature_adult
               - senior_adult
-              - months_0_1
-              - months_2_5
-              - months_6_11
-              - months_12_17
-              - months_18_23
-              - years_2_3
-              - years_4_5
-              - years_6_7
-              - years_8_9
-              - years_10_11
-              - years_12_13
-              - years_14_15
-              - years_16_17
-              - years_18_19
-              - years_20_24
-              - years_20_29
-              - years_25_29
-              - years_30_34
-              - years_30_39
-              - years_35_39
-              - years_40_44
-              - years_40_49
-              - years_45_49
-              - years_50_54
-              - years_50_59
-              - years_55_59
-              - years_60_64
-              - years_60_69
-              - years_65_69
-              - years_70_79
-              - years_80_89
-              - over_90
-              - over_100
+              - 0-1_months
+              - 2-5_months
+              - 6-11_months
+              - 12-17_months
+              - 18-23_months
+              - 2-3_years
+              - 4-5_years
+              - 6-7_years
+              - 8-9_years
+              - 10-11_years
+              - 12-13_years
+              - 14-15_years
+              - 16-17_years
+              - 18-19_years
+              - 20-24_years
+              - 20-29_years
+              - 25-29_years
+              - 30-34_years
+              - 30-39_years
+              - 35-39_years
+              - 40-44_years
+              - 40-49_years
+              - 45-49_years
+              - 50-54_years
+              - 50-59_years
+              - 55-59_years
+              - 60-64_years
+              - 60-69_years
+              - 65-69_years
+              - 70-79_years
+              - 80-89_years
+              - 90_plus_years
+              - 100_over
             type: string
           name: age_of_people
           required: false
@@ -3009,22 +2506,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter based on image composition.
-          enum:
-            - abstract
-            - candid
-            - close_up
-            - copy_space
-            - cut_out
-            - full_frame
-            - full_length
-            - headshot
-            - looking_at_camera
-            - macro
-            - portrait
-            - sparse
-            - still_life
-            - three_quarter_length
-            - waist_up
           in: query
           items:
             enum:
@@ -3049,13 +2530,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Return only events with a matching editorial segment.
-          enum:
-            - archival
-            - entertainment
-            - news
-            - publicity
-            - royalty
-            - sport
           in: query
           items:
             enum:
@@ -3090,19 +2564,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Filter search results based on the ethnicity of individuals in an image.
-          enum:
-            - black
-            - caucasian
-            - east_asian
-            - hispanic_latino
-            - japanese
-            - middle_eastern
-            - mixed_race_person
-            - multiethnic_group
-            - native_american_first_nations
-            - pacific_islander
-            - south_asian
-            - southeast_asian
           in: query
           items:
             enum:
@@ -3138,43 +2599,6 @@ paths:
           type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - allowed_use
-            - alternative_ids
-            - artist
-            - asset_family
-            - call_for_image
-            - caption
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - comp
-            - copyright
-            - date_camera_shot
-            - date_created
-            - detail_set
-            - display_set
-            - editorial_segments
-            - editorial_source
-            - entity_details
-            - event_ids
-            - graphical_style
-            - id
-            - keywords
-            - largest_downloads
-            - license_model
-            - max_dimensions
-            - orientation
-            - people
-            - preview
-            - product_types
-            - quality_rank
-            - referral_destinations
-            - summary_set
-            - thumb
-            - title
-            - uri_oembed
           in: query
           items:
             enum:
@@ -3220,9 +2644,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Return only images having a specific file type.
-          enum:
-            - eps
-            - jpg
           in: query
           items:
             enum:
@@ -3234,9 +2655,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Filter based on graphical style of the image.
-          enum:
-            - photography
-            - illustration
           in: query
           items:
             enum:
@@ -3275,11 +2693,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter based on the number of people in the image.
-          enum:
-            - none
-            - one
-            - two
-            - group
           in: query
           items:
             enum:
@@ -3293,20 +2706,14 @@ paths:
           type: array
         - collectionFormat: multi
           description: Return only images with selected aspect ratios.
-          enum:
-            - horizontal
-            - vertical
-            - square
-            - panoramic_horizontal
-            - panoramic_vertical
           in: query
           items:
             enum:
-              - horizontal
-              - vertical
-              - square
-              - panoramic_horizontal
-              - panoramic_vertical
+              - Horizontal
+              - Vertical
+              - Square
+              - PanoramicHorizontal
+              - PanoramicVertical
             type: string
           name: orientations
           required: false
@@ -3330,22 +2737,14 @@ paths:
           type: string
         - collectionFormat: multi
           description: Filter images to those having product types from the selected list.
-          enum:
-            - easy_access
-            - editorial_subscription
-            - image_pack
-            - premium_access
-            - royalty_free_subscription
-            - credit_pack
           in: query
           items:
             enum:
-              - easy_access
-              - editorial_subscription
-              - image_pack
-              - premium_access
-              - royalty_free_subscription
-              - credit_pack
+              - easyaccess
+              - editorialsubscription
+              - imagepack
+              - premiumaccess
+              - royaltyfreesubscription
             type: string
           name: product_types
           required: false
@@ -3409,49 +2808,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Provides filtering according to the age of individuals in a video.
-          enum:
-            - newborn
-            - baby
-            - child
-            - teenager
-            - young_adult
-            - adult
-            - adults_only
-            - mature_adult
-            - senior_adult
-            - months_0_1
-            - months_2_5
-            - months_6_11
-            - months_12_17
-            - months_18_23
-            - years_2_3
-            - years_4_5
-            - years_6_7
-            - years_8_9
-            - years_10_11
-            - years_12_13
-            - years_14_15
-            - years_16_17
-            - years_18_19
-            - years_20_24
-            - years_20_29
-            - years_25_29
-            - years_30_34
-            - years_30_39
-            - years_35_39
-            - years_40_44
-            - years_40_49
-            - years_45_49
-            - years_50_54
-            - years_50_59
-            - years_55_59
-            - years_60_64
-            - years_60_69
-            - years_65_69
-            - years_70_79
-            - years_80_89
-            - over_90
-            - over_100
           in: query
           items:
             enum:
@@ -3464,39 +2820,39 @@ paths:
               - adults_only
               - mature_adult
               - senior_adult
-              - months_0_1
-              - months_2_5
-              - months_6_11
-              - months_12_17
-              - months_18_23
-              - years_2_3
-              - years_4_5
-              - years_6_7
-              - years_8_9
-              - years_10_11
-              - years_12_13
-              - years_14_15
-              - years_16_17
-              - years_18_19
-              - years_20_24
-              - years_20_29
-              - years_25_29
-              - years_30_34
-              - years_30_39
-              - years_35_39
-              - years_40_44
-              - years_40_49
-              - years_45_49
-              - years_50_54
-              - years_50_59
-              - years_55_59
-              - years_60_64
-              - years_60_69
-              - years_65_69
-              - years_70_79
-              - years_80_89
-              - over_90
-              - over_100
+              - 0-1_months
+              - 2-5_months
+              - 6-11_months
+              - 12-17_months
+              - 18-23_months
+              - 2-3_years
+              - 4-5_years
+              - 6-7_years
+              - 8-9_years
+              - 10-11_years
+              - 12-13_years
+              - 14-15_years
+              - 16-17_years
+              - 18-19_years
+              - 20-24_years
+              - 20-29_years
+              - 25-29_years
+              - 30-34_years
+              - 30-39_years
+              - 35-39_years
+              - 40-44_years
+              - 40-49_years
+              - 45-49_years
+              - 50-54_years
+              - 50-59_years
+              - 55-59_years
+              - 60-64_years
+              - 60-69_years
+              - 65-69_years
+              - 70-79_years
+              - 80-89_years
+              - 90_plus_years
+              - 100_over
             type: string
           name: age_of_people
           required: false
@@ -3517,6 +2873,17 @@ paths:
           name: collections_filter_type
           required: false
           type: string
+        - collectionFormat: multi
+          description: Allows filtering by types of video.
+          in: query
+          items:
+            enum:
+              - raw
+              - produced
+            type: string
+          name: editorial_video_types
+          required: false
+          type: array
         - description: Excludes images containing nudity. The default is false.
           in: query
           name: exclude_nudity
@@ -3524,39 +2891,6 @@ paths:
           type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - allowed_use
-            - artist
-            - asset_family
-            - caption
-            - clip_length
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - comp
-            - copyright
-            - date_created
-            - detail_set
-            - display_set
-            - editorial_segments
-            - entity_details
-            - era
-            - id
-            - keywords
-            - largest_downloads
-            - license_model
-            - mastered_to
-            - originally_shot_on
-            - preview
-            - product_types
-            - referral_destinations
-            - shot_speed
-            - source
-            - summary_set
-            - thumb
-            - title
-            - istock_licenses
           in: query
           items:
             enum:
@@ -3583,6 +2917,7 @@ paths:
               - license_model
               - mastered_to
               - originally_shot_on
+              - object_name
               - preview
               - product_types
               - referral_destinations
@@ -3600,11 +2935,28 @@ paths:
           enum:
             - sd
             - hd
-            - fourK
+            - 4k
           in: query
           name: format_available
           required: false
           type: string
+        - collectionFormat: multi
+          description: Provides filtering by video frame rate (frames/second).
+          in: query
+          items:
+            enum:
+              - '23.98'
+              - '24'
+              - '25'
+              - '29.97'
+              - '30'
+              - '50'
+              - '59.94'
+              - '60'
+            type: string
+          name: frame_rates
+          required: false
+          type: array
         - collectionFormat: multi
           description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
           in: query
@@ -3616,14 +2968,11 @@ paths:
           type: array
         - collectionFormat: multi
           description: Specifies the video licensing model(s).
-          enum:
-            - rights_ready
-            - royalty_free
           in: query
           items:
             enum:
-              - rights_ready
-              - royalty_free
+              - rightsready
+              - royaltyfree
             type: string
           name: license_models
           required: false
@@ -3647,22 +2996,14 @@ paths:
           type: string
         - collectionFormat: multi
           description: Provides filtering by a list of product types.
-          enum:
-            - easy_access
-            - editorial_subscription
-            - image_pack
-            - premium_access
-            - royalty_free_subscription
-            - credit_pack
           in: query
           items:
             enum:
-              - easy_access
-              - editorial_subscription
-              - image_pack
-              - premium_access
-              - royalty_free_subscription
-              - credit_pack
+              - easyaccess
+              - editorialsubscription
+              - imagepack
+              - premiumaccess
+              - royaltyfreesubscription
             type: string
           name: product_types
           required: false
@@ -3720,49 +3061,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Provides filtering according to the age of individuals in a video.
-          enum:
-            - newborn
-            - baby
-            - child
-            - teenager
-            - young_adult
-            - adult
-            - adults_only
-            - mature_adult
-            - senior_adult
-            - months_0_1
-            - months_2_5
-            - months_6_11
-            - months_12_17
-            - months_18_23
-            - years_2_3
-            - years_4_5
-            - years_6_7
-            - years_8_9
-            - years_10_11
-            - years_12_13
-            - years_14_15
-            - years_16_17
-            - years_18_19
-            - years_20_24
-            - years_20_29
-            - years_25_29
-            - years_30_34
-            - years_30_39
-            - years_35_39
-            - years_40_44
-            - years_40_49
-            - years_45_49
-            - years_50_54
-            - years_50_59
-            - years_55_59
-            - years_60_64
-            - years_60_69
-            - years_65_69
-            - years_70_79
-            - years_80_89
-            - over_90
-            - over_100
           in: query
           items:
             enum:
@@ -3775,39 +3073,39 @@ paths:
               - adults_only
               - mature_adult
               - senior_adult
-              - months_0_1
-              - months_2_5
-              - months_6_11
-              - months_12_17
-              - months_18_23
-              - years_2_3
-              - years_4_5
-              - years_6_7
-              - years_8_9
-              - years_10_11
-              - years_12_13
-              - years_14_15
-              - years_16_17
-              - years_18_19
-              - years_20_24
-              - years_20_29
-              - years_25_29
-              - years_30_34
-              - years_30_39
-              - years_35_39
-              - years_40_44
-              - years_40_49
-              - years_45_49
-              - years_50_54
-              - years_50_59
-              - years_55_59
-              - years_60_64
-              - years_60_69
-              - years_65_69
-              - years_70_79
-              - years_80_89
-              - over_90
-              - over_100
+              - 0-1_months
+              - 2-5_months
+              - 6-11_months
+              - 12-17_months
+              - 18-23_months
+              - 2-3_years
+              - 4-5_years
+              - 6-7_years
+              - 8-9_years
+              - 10-11_years
+              - 12-13_years
+              - 14-15_years
+              - 16-17_years
+              - 18-19_years
+              - 20-24_years
+              - 20-29_years
+              - 25-29_years
+              - 30-34_years
+              - 30-39_years
+              - 35-39_years
+              - 40-44_years
+              - 40-49_years
+              - 45-49_years
+              - 50-54_years
+              - 50-59_years
+              - 55-59_years
+              - 60-64_years
+              - 60-69_years
+              - 65-69_years
+              - 70-79_years
+              - 80-89_years
+              - 90_plus_years
+              - 100_over
             type: string
           name: age_of_people
           required: false
@@ -3835,36 +3133,6 @@ paths:
           type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - allowed_use
-            - artist
-            - asset_family
-            - caption
-            - clip_length
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - comp
-            - copyright
-            - date_created
-            - detail_set
-            - display_set
-            - era
-            - id
-            - keywords
-            - largest_downloads
-            - license_model
-            - mastered_to
-            - originally_shot_on
-            - preview
-            - product_types
-            - referral_destinations
-            - shot_speed
-            - source
-            - summary_set
-            - thumb
-            - title
           in: query
           items:
             enum:
@@ -3889,6 +3157,7 @@ paths:
               - license_model
               - mastered_to
               - originally_shot_on
+              - object_name
               - preview
               - product_types
               - referral_destinations
@@ -3905,11 +3174,28 @@ paths:
           enum:
             - sd
             - hd
-            - fourK
+            - 4k
           in: query
           name: format_available
           required: false
           type: string
+        - collectionFormat: multi
+          description: Provides filtering by video frame rate (frames/second).
+          in: query
+          items:
+            enum:
+              - '23.98'
+              - '24'
+              - '25'
+              - '29.97'
+              - '30'
+              - '50'
+              - '59.94'
+              - '60'
+            type: string
+          name: frame_rates
+          required: false
+          type: array
         - collectionFormat: multi
           description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
           in: query
@@ -3921,14 +3207,11 @@ paths:
           type: array
         - collectionFormat: multi
           description: Specifies the video licensing model(s).
-          enum:
-            - rights_ready
-            - royalty_free
           in: query
           items:
             enum:
-              - rights_ready
-              - royalty_free
+              - rightsready
+              - royaltyfree
             type: string
           name: license_models
           required: false
@@ -3952,22 +3235,14 @@ paths:
           type: string
         - collectionFormat: multi
           description: Allows filtering by a list of product types.
-          enum:
-            - easy_access
-            - editorial_subscription
-            - image_pack
-            - premium_access
-            - royalty_free_subscription
-            - credit_pack
           in: query
           items:
             enum:
-              - easy_access
-              - editorial_subscription
-              - image_pack
-              - premium_access
-              - royalty_free_subscription
-              - credit_pack
+              - easyaccess
+              - editorialsubscription
+              - imagepack
+              - premiumaccess
+              - royaltyfreesubscription
             type: string
           name: product_types
           required: false
@@ -3975,6 +3250,7 @@ paths:
         - description: Allows sorting of results.
           enum:
             - best_match
+            - most_popular
             - newest
           in: query
           name: sort_order
@@ -4015,49 +3291,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: Provides filtering according to the age of individuals in a video.
-          enum:
-            - newborn
-            - baby
-            - child
-            - teenager
-            - young_adult
-            - adult
-            - adults_only
-            - mature_adult
-            - senior_adult
-            - months_0_1
-            - months_2_5
-            - months_6_11
-            - months_12_17
-            - months_18_23
-            - years_2_3
-            - years_4_5
-            - years_6_7
-            - years_8_9
-            - years_10_11
-            - years_12_13
-            - years_14_15
-            - years_16_17
-            - years_18_19
-            - years_20_24
-            - years_20_29
-            - years_25_29
-            - years_30_34
-            - years_30_39
-            - years_35_39
-            - years_40_44
-            - years_40_49
-            - years_45_49
-            - years_50_54
-            - years_50_59
-            - years_55_59
-            - years_60_64
-            - years_60_69
-            - years_65_69
-            - years_70_79
-            - years_80_89
-            - over_90
-            - over_100
           in: query
           items:
             enum:
@@ -4070,39 +3303,39 @@ paths:
               - adults_only
               - mature_adult
               - senior_adult
-              - months_0_1
-              - months_2_5
-              - months_6_11
-              - months_12_17
-              - months_18_23
-              - years_2_3
-              - years_4_5
-              - years_6_7
-              - years_8_9
-              - years_10_11
-              - years_12_13
-              - years_14_15
-              - years_16_17
-              - years_18_19
-              - years_20_24
-              - years_20_29
-              - years_25_29
-              - years_30_34
-              - years_30_39
-              - years_35_39
-              - years_40_44
-              - years_40_49
-              - years_45_49
-              - years_50_54
-              - years_50_59
-              - years_55_59
-              - years_60_64
-              - years_60_69
-              - years_65_69
-              - years_70_79
-              - years_80_89
-              - over_90
-              - over_100
+              - 0-1_months
+              - 2-5_months
+              - 6-11_months
+              - 12-17_months
+              - 18-23_months
+              - 2-3_years
+              - 4-5_years
+              - 6-7_years
+              - 8-9_years
+              - 10-11_years
+              - 12-13_years
+              - 14-15_years
+              - 16-17_years
+              - 18-19_years
+              - 20-24_years
+              - 20-29_years
+              - 25-29_years
+              - 30-34_years
+              - 30-39_years
+              - 35-39_years
+              - 40-44_years
+              - 40-49_years
+              - 45-49_years
+              - 50-54_years
+              - 50-59_years
+              - 55-59_years
+              - 60-64_years
+              - 60-69_years
+              - 65-69_years
+              - 70-79_years
+              - 80-89_years
+              - 90_plus_years
+              - 100_over
             type: string
           name: age_of_people
           required: false
@@ -4124,6 +3357,17 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
+          description: Allows filtering by types of video.
+          in: query
+          items:
+            enum:
+              - raw
+              - produced
+            type: string
+          name: editorial_video_types
+          required: false
+          type: array
+        - collectionFormat: multi
           description: specify link data entity uri.
           in: query
           items:
@@ -4138,39 +3382,6 @@ paths:
           type: boolean
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - allowed_use
-            - artist
-            - asset_family
-            - caption
-            - clip_length
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - comp
-            - copyright
-            - date_created
-            - detail_set
-            - display_set
-            - editorial_segments
-            - entity_details
-            - era
-            - id
-            - keywords
-            - largest_downloads
-            - license_model
-            - mastered_to
-            - originally_shot_on
-            - preview
-            - product_types
-            - referral_destinations
-            - shot_speed
-            - source
-            - summary_set
-            - thumb
-            - title
-            - istock_licenses
           in: query
           items:
             enum:
@@ -4197,6 +3408,7 @@ paths:
               - license_model
               - mastered_to
               - originally_shot_on
+              - object_name
               - preview
               - product_types
               - referral_destinations
@@ -4214,11 +3426,28 @@ paths:
           enum:
             - sd
             - hd
-            - fourK
+            - 4k
           in: query
           name: format_available
           required: false
           type: string
+        - collectionFormat: multi
+          description: Provides filtering by video frame rate (frames/second).
+          in: query
+          items:
+            enum:
+              - '23.98'
+              - '24'
+              - '25'
+              - '29.97'
+              - '30'
+              - '50'
+              - '59.94'
+              - '60'
+            type: string
+          name: frame_rates
+          required: false
+          type: array
         - collectionFormat: multi
           description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
           in: query
@@ -4247,22 +3476,14 @@ paths:
           type: string
         - collectionFormat: multi
           description: Allows filtering by a list of product types.
-          enum:
-            - easy_access
-            - editorial_subscription
-            - image_pack
-            - premium_access
-            - royalty_free_subscription
-            - credit_pack
           in: query
           items:
             enum:
-              - easy_access
-              - editorial_subscription
-              - image_pack
-              - premium_access
-              - royalty_free_subscription
-              - credit_pack
+              - easyaccess
+              - editorialsubscription
+              - imagepack
+              - premiumaccess
+              - royaltyfreesubscription
             type: string
           name: product_types
           required: false
@@ -4370,40 +3591,6 @@ paths:
           type: array
         - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
-          enum:
-            - id
-            - allowed_use
-            - artist
-            - asset_family
-            - caption
-            - clip_length
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - copyright
-            - video_comp
-            - date_created
-            - detail_set
-            - display_set
-            - download_sizes
-            - downloads
-            - era
-            - editorial_segments
-            - entity_details
-            - keywords
-            - license_model
-            - mastered_to
-            - originally_shot_on
-            - video_preview
-            - product_types
-            - referral_destinations
-            - shot_speed
-            - source
-            - summary_set
-            - video_thumb
-            - title
-            - istock_licenses
           in: query
           items:
             enum:
@@ -4418,7 +3605,7 @@ paths:
               - collection_name
               - color_type
               - copyright
-              - video_comp
+              - comp
               - date_created
               - detail_set
               - display_set
@@ -4431,13 +3618,14 @@ paths:
               - license_model
               - mastered_to
               - originally_shot_on
-              - video_preview
+              - object_name
+              - preview
               - product_types
               - referral_destinations
               - shot_speed
               - source
               - summary_set
-              - video_thumb
+              - thumb
               - title
               - istock_licenses
             type: string
@@ -4486,40 +3674,6 @@ paths:
           type: string
         - collectionFormat: multi
           description: comma delimited list of fields to retrive for the video
-          enum:
-            - id
-            - allowed_use
-            - artist
-            - asset_family
-            - caption
-            - clip_length
-            - collection_code
-            - collection_id
-            - collection_name
-            - color_type
-            - copyright
-            - video_comp
-            - date_created
-            - detail_set
-            - display_set
-            - download_sizes
-            - downloads
-            - era
-            - editorial_segments
-            - entity_details
-            - keywords
-            - license_model
-            - mastered_to
-            - originally_shot_on
-            - video_preview
-            - product_types
-            - referral_destinations
-            - shot_speed
-            - source
-            - summary_set
-            - video_thumb
-            - title
-            - istock_licenses
           in: query
           items:
             enum:
@@ -4534,7 +3688,7 @@ paths:
               - collection_name
               - color_type
               - copyright
-              - video_comp
+              - comp
               - date_created
               - detail_set
               - display_set
@@ -4547,13 +3701,14 @@ paths:
               - license_model
               - mastered_to
               - originally_shot_on
-              - video_preview
+              - object_name
+              - preview
               - product_types
               - referral_destinations
               - shot_speed
               - source
               - summary_set
-              - video_thumb
+              - thumb
               - title
               - istock_licenses
             type: string
@@ -4577,6 +3732,100 @@ paths:
         '404':
           description: VideosNotFound
       summary: Get metadata for a single video by supplying one video id
+      tags:
+        - Videos
+  '/v3/videos/{id}/similar':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Videos_GetSimilarVideos
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          type: string
+        - description: A video id.
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: comma delimited list of fields to retrive for the videos
+          in: query
+          items:
+            enum:
+              - allowed_use
+              - artist
+              - asset_family
+              - caption
+              - clip_length
+              - collection_code
+              - collection_id
+              - collection_name
+              - color_type
+              - comp
+              - copyright
+              - date_created
+              - detail_set
+              - display_set
+              - editorial_segments
+              - entity_details
+              - era
+              - id
+              - keywords
+              - largest_downloads
+              - license_model
+              - mastered_to
+              - originally_shot_on
+              - object_name
+              - preview
+              - product_types
+              - referral_destinations
+              - shot_speed
+              - source
+              - summary_set
+              - thumb
+              - title
+              - istock_licenses
+            type: string
+          name: fields
+          required: false
+          type: array
+        - description: Identifies page to return. Default is 1.
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: 'Specifies page size. Default is 30, maximum page_size is 100.'
+          format: int32
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GettyImages.Models.Artists.VideoSearchResults'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: AuthorizationTokenRequired
+        '403':
+          description: UnauthorizedDisplaySize
+        '404':
+          description: VideosNotFound
+      summary: '***BETA*** Get videos similar to a video by supplying one video id'
       tags:
         - Videos
 definitions:
@@ -4827,6 +4076,8 @@ definitions:
           - Image
           - Film
         type: string
+      caption:
+        type: string
       collection_code:
         type: string
       collection_name:
@@ -4844,6 +4095,10 @@ definitions:
         items:
           $ref: '#/definitions/GettyImages.Models.Artists.Keyword'
         type: array
+      license_model:
+        type: string
+      title:
+        type: string
     type: object
   GettyImages.Models.Artists.ImageSearchResults:
     properties:
@@ -4900,6 +4155,16 @@ definitions:
         type: string
       title:
         type: string
+    type: object
+  GettyImages.Models.Artists.VideoSearchResults:
+    properties:
+      result_count:
+        format: int32
+        type: integer
+      videos:
+        items:
+          $ref: '#/definitions/GettyImages.Models.Artists.VideoSearchItem'
+        type: array
     type: object
   GettyImages.Models.Collections.Collection:
     properties:
@@ -5859,7 +5124,7 @@ definitions:
         type: string
       display_sizes:
         items:
-          $ref: '#/definitions/GettyImages.Models.Search.ImageSearchItemDisplaySize'
+          $ref: '#/definitions/GettyImages.Models.Search.VideoSearchItemDisplaySize'
         type: array
       era:
         type: string
@@ -5896,6 +5161,17 @@ definitions:
       source:
         type: string
       title:
+        type: string
+    type: object
+  GettyImages.Models.Search.VideoSearchItemDisplaySize:
+    properties:
+      aspect_ratio:
+        type: string
+      is_watermarked:
+        type: boolean
+      name:
+        type: string
+      uri:
         type: string
     type: object
   'GettyImages.Models.Search.VideoSearchResults[GettyImages.Models.Artists.VideoSearchItem]':
@@ -5936,7 +5212,7 @@ definitions:
         type: string
       display_sizes:
         items:
-          $ref: '#/definitions/GettyImages.Models.Search.ImageSearchItemDisplaySize'
+          $ref: '#/definitions/GettyImages.Models.Videos.VideoDetailDisplaySize'
         type: array
       download_sizes:
         items:
@@ -5977,6 +5253,21 @@ definitions:
       source:
         type: string
       title:
+        type: string
+    type: object
+  GettyImages.Models.Videos.VideoDetailDisplaySize:
+    properties:
+      aspect_ratio:
+        description: Identifies the URI for the image
+        type: string
+      is_watermarked:
+        description: Indicates whether the image is watermarked.
+        type: boolean
+      name:
+        description: Identifies the name of the display size
+        type: string
+      uri:
+        description: Identifies the URI for the image
         type: string
     type: object
   GettyImages.Models.Videos.VideoDownloadAuthorization:

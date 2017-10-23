@@ -163,7 +163,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/APIDistrict'
-      summary: Returns a detailed record for one district district
+      summary: Returns a detailed record for one district
       tags:
         - Districts
   '/v1/rankings/districts/{st}':
@@ -450,7 +450,7 @@ definitions:
         readOnly: false
         type: boolean
       polylineCollection:
-        description: Collection of one or more polylines that can be used to create the boundary on a map
+        description: 'Collection of one or more polylines that can be used to create the boundary on a map. NOTE: this value is JSON encoded. Specifically, backslashes will be returned escaped (two backslashes). Make sure to decode the polyline before you use it'
         items:
           $ref: '#/definitions/APIPolyline'
         readOnly: false
@@ -878,7 +878,7 @@ definitions:
         format: int32
         type: integer
       polylineOverlayEncodedPoints:
-        description: Polyline for use with Google Maps or other mapping software
+        description: 'Polyline for use with Google Maps or other mapping software. NOTE: this value is JSON encoded. Specifically, backslashes will be returned escaped (two backslashes). Make sure to decode the polyline before you use it'
         type: string
     type: object
   APIRankHistory:

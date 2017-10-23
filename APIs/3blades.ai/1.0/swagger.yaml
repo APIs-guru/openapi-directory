@@ -1721,6 +1721,379 @@ paths:
       summary: Replace a host
       tags:
         - hosts
+  '/v1/{namespace}/notifications/':
+    get:
+      operationId: notifications_list
+      parameters:
+        - description: User or team data.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - description: Limit when getting items.
+          in: query
+          name: limit
+          required: false
+          type: string
+        - description: Offset when getting items.
+          in: query
+          name: offset
+          required: false
+          type: string
+        - description: Ordering when getting items.
+          in: query
+          name: ordering
+          required: false
+          type: string
+        - description: 'When true, get only read notifications. When false, get only unread notifications. Default behavior is to return both read and unread.'
+          in: query
+          name: read
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: List of notifications
+          schema:
+            items:
+              $ref: '#/definitions/Notification'
+            type: array
+      summary: Get notifications of all types and entities for the authenticated user.
+      tags:
+        - notifications
+    patch:
+      operationId: notifications_update_list
+      parameters:
+        - description: User or team name.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - in: body
+          name: notification_data
+          required: true
+          schema:
+            $ref: '#/definitions/NotificationListUpdateData'
+      responses:
+        '200':
+          description: Notification updated
+          schema:
+            $ref: '#/definitions/Notification'
+        '400':
+          description: Invalid data supplied
+          schema:
+            $ref: '#/definitions/NotificationError'
+      summary: Mark a list of notifications as either read or unread.
+      tags:
+        - notifications
+  '/v1/{namespace}/notifications/entity/{entity}':
+    get:
+      operationId: notifications_list_entity
+      parameters:
+        - description: User or team data.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - description: Limit when getting items.
+          in: query
+          name: limit
+          required: false
+          type: string
+        - description: Offset when getting items.
+          in: query
+          name: offset
+          required: false
+          type: string
+        - description: Ordering when getting items.
+          in: query
+          name: ordering
+          required: false
+          type: string
+        - description: Entity to filter notifications by.
+          enum:
+            - billing
+          in: path
+          name: entity
+          required: true
+          type: string
+        - description: 'When true, get only read notifications. When false, get only unread notifications. Default behavior is to return both read and unread.'
+          in: query
+          name: read
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: List of notifications
+          schema:
+            items:
+              $ref: '#/definitions/Notification'
+            type: array
+      summary: Get notifications of all types and entities for the authenticated user.
+      tags:
+        - notifications
+    patch:
+      operationId: notifications_update_entity_list
+      parameters:
+        - description: User or team name.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - description: Entity to filter notifications by.
+          enum:
+            - billing
+          in: path
+          name: entity
+          required: true
+          type: string
+        - in: body
+          name: notification_data
+          required: true
+          schema:
+            $ref: '#/definitions/NotificationListUpdateData'
+      responses:
+        '200':
+          description: Notification updated
+          schema:
+            $ref: '#/definitions/Notification'
+        '400':
+          description: Invalid data supplied
+          schema:
+            $ref: '#/definitions/NotificationError'
+      summary: Mark a list of notifications as either read or unread.
+      tags:
+        - notifications
+  '/v1/{namespace}/notifications/settings/':
+    get:
+      operationId: notification_settings_read
+      parameters:
+        - description: User or team data.
+          in: path
+          name: namespace
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Global notification settings
+          schema:
+            items:
+              $ref: '#/definitions/NotificationSettings'
+            type: array
+        '404':
+          description: Notification not found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve global notification settings for the authenticated user
+      tags:
+        - notifications
+    patch:
+      operationId: notification_settings_update
+      parameters:
+        - description: User or team name.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - in: body
+          name: notification_settings_data
+          schema:
+            $ref: '#/definitions/NotificationSettingsData'
+      responses:
+        '200':
+          description: Notification Settings updated
+          schema:
+            $ref: '#/definitions/NotificationSettings'
+        '400':
+          description: Invalid data supplied
+          schema:
+            $ref: '#/definitions/NotificationSettingsError'
+        '404':
+          description: Notification Settings not found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Modify global notification settings.
+      tags:
+        - notifications
+    post:
+      operationId: notification_settings_create
+      parameters:
+        - description: User or team name.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - in: body
+          name: notification_settings_data
+          required: true
+          schema:
+            $ref: '#/definitions/NotificationSettingsData'
+      responses:
+        '201':
+          description: Global Notification Settings created successfully.
+          schema:
+            $ref: '#/definitions/NotificationSettings'
+        '400':
+          description: Invalid data supplied.
+          schema:
+            $ref: '#/definitions/NotificationSettingsError'
+      summary: Create global notification settings
+      tags:
+        - notifications
+  '/v1/{namespace}/notifications/settings/entity/{entity}':
+    get:
+      operationId: notification_settings_entity_read
+      parameters:
+        - description: User or team data.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - description: Entity whose settings should be retrieved.
+          enum:
+            - billing
+          in: path
+          name: entity
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Global notification settings
+          schema:
+            items:
+              $ref: '#/definitions/NotificationSettings'
+            type: array
+        '404':
+          description: Notification not found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve global notification settings for the authenticated user
+      tags:
+        - notifications
+    patch:
+      operationId: notification_settings_entity_update
+      parameters:
+        - description: User or team name.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - description: Entity whose settings should be retrieved.
+          enum:
+            - billing
+          in: path
+          name: entity
+          required: true
+          type: string
+        - in: body
+          name: notification_settings_data
+          schema:
+            $ref: '#/definitions/NotificationSettingsData'
+      responses:
+        '200':
+          description: Notification Settings updated
+          schema:
+            $ref: '#/definitions/NotificationSettings'
+        '400':
+          description: Invalid data supplied
+          schema:
+            $ref: '#/definitions/NotificationSettingsError'
+        '404':
+          description: Notification Settings not found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Modify global notification settings.
+      tags:
+        - notifications
+    post:
+      operationId: notification_settings_entity_create
+      parameters:
+        - description: User or team name.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - description: Entity whose settings should be retrieved.
+          enum:
+            - billing
+          in: path
+          name: entity
+          required: true
+          type: string
+        - in: body
+          name: notification_settings_data
+          schema:
+            $ref: '#/definitions/NotificationSettingsData'
+      responses:
+        '201':
+          description: Global Notification Settings created successfully.
+          schema:
+            $ref: '#/definitions/NotificationSettings'
+        '400':
+          description: Invalid data supplied.
+          schema:
+            $ref: '#/definitions/NotificationSettingsError'
+      summary: Create global notification settings
+      tags:
+        - notifications
+  '/v1/{namespace}/notifications/{notification_id}':
+    get:
+      operationId: notification_read
+      parameters:
+        - description: User or team data.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - description: Notification UUID.
+          in: path
+          name: notification_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Retrieve a notification.
+          schema:
+            $ref: '#/definitions/Notification'
+        '404':
+          description: Notification not found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve a specific notification.
+      tags:
+        - notifications
+    patch:
+      operationId: notification_update
+      parameters:
+        - description: User or team data.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - description: Notification UUID.
+          in: path
+          name: notification_id
+          required: true
+          type: string
+        - in: body
+          name: notification_data
+          schema:
+            $ref: '#/definitions/NotificationUpdateData'
+      responses:
+        '200':
+          description: Notification updated
+          schema:
+            $ref: '#/definitions/Notification'
+        '400':
+          description: Invalid data supplied
+          schema:
+            $ref: '#/definitions/NotificationError'
+        '404':
+          description: Notification not found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Mark a specific notification as either read or unread.
+      tags:
+        - notifications
   '/v1/{namespace}/projects/':
     get:
       operationId: projects_list
@@ -1799,6 +2172,66 @@ paths:
           schema:
             $ref: '#/definitions/ProjectError'
       summary: Create a new project
+      tags:
+        - projects
+  '/v1/{namespace}/projects/project-copy-check/':
+    head:
+      operationId: project_copy_check
+      parameters:
+        - description: User or team name.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - in: body
+          name: project_copy_data
+          required: true
+          schema:
+            properties:
+              project:
+                description: UUID of the project the user wishes to copy.
+                type: string
+            required:
+              - project
+            type: object
+      responses:
+        '200':
+          description: The authenticated has permission to copy this project
+        '404':
+          description: Project not found.
+      summary: Check if you are able to copy a project to your account.
+      tags:
+        - projects
+  '/v1/{namespace}/projects/project-copy/':
+    post:
+      operationId: project_copy
+      parameters:
+        - description: User or team name.
+          in: path
+          name: namespace
+          required: true
+          type: string
+        - in: body
+          name: project_copy_data
+          required: true
+          schema:
+            properties:
+              project:
+                description: UUID of the project the user wishes to copy.
+                type: string
+            required:
+              - project
+            type: object
+      responses:
+        '201':
+          description: Project copied
+          schema:
+            $ref: '#/definitions/Project'
+        '404':
+          description: Project not found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Copy a project to your own account.
       tags:
         - projects
   '/v1/{namespace}/projects/{project}/':
@@ -4693,6 +5126,111 @@ definitions:
       detail:
         description: Requested item not found.
         type: string
+    type: object
+  Notification:
+    properties:
+      actor:
+        description: Unique identifier of the object that triggered the notification.
+        type: string
+      id:
+        description: Notification unique identifier expressed as a UUID
+        type: string
+      read:
+        description: Whether or not the notification has been marked as read by the user.
+        type: boolean
+      target:
+        description: Unique identifier of the object that was acted upon by the object referred to in actor.
+        type: string
+      timestamp:
+        description: Timestamp that the notification was created at.
+        type: string
+      type:
+        description: 'Type of the notification, e.g. invoice.created, subscription.created, etc.'
+        type: string
+    required:
+      - read
+    type: object
+  NotificationError:
+    properties:
+      non_field_errors:
+        description: Errors not connected to any field
+        items:
+          type: string
+        type: array
+      read:
+        description: read field errors
+        items:
+          type: string
+        type: array
+    type: object
+  NotificationListUpdateData:
+    properties:
+      notifications:
+        description: An array of notification IDs to update.
+        items:
+          type: string
+        type: array
+      read:
+        description: Mark the notification as either read or unread
+        type: boolean
+    required:
+      - notifications
+      - read
+    type: object
+  NotificationSettings:
+    properties:
+      emails_enabled:
+        description: Turn emails on or off.
+        type: boolean
+      enabled:
+        description: Turn notifications on or off entirely.
+        type: boolean
+      entity:
+        description: The entity type that the settings pertain to.
+        enum:
+          - global
+          - billing
+        type: string
+      id:
+        description: Notification unique identifier expressed as a UUID
+        type: string
+    required:
+      - enabled
+      - emails_enabled
+    type: object
+  NotificationSettingsData:
+    properties:
+      emails_enabled:
+        description: Turn emails on or off.
+        type: boolean
+      enabled:
+        description: Turn notifications on or off entirely.
+        type: boolean
+    required:
+      - enabled
+      - emails_enabled
+    type: object
+  NotificationSettingsError:
+    properties:
+      emails_enabled:
+        description: emails_enabled field errors
+        type: boolean
+      enabled:
+        description: enabled field errors
+        type: boolean
+      non_field_errors:
+        description: Errors not connected to any field
+        items:
+          type: string
+        type: array
+    type: object
+  NotificationUpdateData:
+    properties:
+      read:
+        description: Mark the notification as either read or unread
+        type: boolean
+    required:
+      - read
     type: object
   Plan:
     properties:

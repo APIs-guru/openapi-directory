@@ -1088,7 +1088,10 @@ definitions:
     description: RETS MLS Vendor Data
     properties:
       area:
-        description: MLS Area. Generally a subdivision or community name.
+        description: 'MLS Area major. The major marketing area name, as defined by the MLS or other non-governmental organization.'
+        type: string
+      areaMinor:
+        description: 'MLS Area minor. The minor/sub marketing area name, as defined by the MLS or other non-governmental organization.'
         type: string
       daysOnMarket:
         description: Amount of days the property has been Active

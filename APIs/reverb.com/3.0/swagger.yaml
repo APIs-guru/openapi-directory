@@ -54,45 +54,6 @@ securityDefinitions:
     tokenUrl: 'https://reverb.com/oauth/token'
     type: oauth2
 paths:
-  /accounts:
-    post:
-      description: Create an account.
-      parameters:
-        - description: the content of the request
-          in: body
-          name: body
-          schema:
-            properties:
-              accept_terms:
-                description: Accept the Reverb terms of use and privacy policy
-                type: boolean
-              email:
-                description: Email address.
-                type: string
-              first_name:
-                description: First Name
-                type: string
-              last_name:
-                description: Last Name
-                type: string
-              newsletter_opt_in:
-                description: Subscribe to gear deals by email
-                type: boolean
-              password:
-                description: Password (at least 8 characters).
-                type: string
-            required:
-              - email
-              - password
-              - first_name
-              - last_name
-            type: object
-      responses:
-        default:
-          description: Unexpected error
-      summary: Create an account.
-      tags:
-        - accounts
   /articles:
     get:
       parameters:
@@ -125,239 +86,6 @@ paths:
           description: Unexpected error
       tags:
         - articles
-  /articles/featured:
-    get:
-      description: See featured Reverb blog posts
-      responses:
-        default:
-          description: Unexpected error
-      summary: See featured Reverb blog posts
-      tags:
-        - articles
-  /articles/multiple:
-    get:
-      responses:
-        default:
-          description: Unexpected error
-      tags:
-        - articles
-  /articles/recently_featured:
-    get:
-      responses:
-        default:
-          description: Unexpected error
-      tags:
-        - articles
-  '/articles/{slug}':
-    get:
-      description: Display a single article
-      parameters:
-        - in: path
-          name: slug
-          required: true
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      summary: Display a single article
-      tags:
-        - articles
-  '/articles/{slug}/related-listings':
-    get:
-      description: Find listings related to an article
-      parameters:
-        - in: path
-          name: slug
-          required: true
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      summary: Find listings related to an article
-      tags:
-        - articles
-  /auth/forgot_password:
-    post:
-      description: Send a password reset email
-      parameters:
-        - description: the content of the request
-          in: body
-          name: body
-          schema:
-            properties:
-              email:
-                type: string
-            required:
-              - email
-            type: object
-      responses:
-        default:
-          description: Unexpected error
-      summary: Send a password reset email
-      tags:
-        - auth
-  /auth/logout:
-    put:
-      description: Logout (primarily for mobile clients)
-      parameters:
-        - description: the content of the request
-          in: body
-          name: body
-          schema:
-            properties:
-              device_token:
-                type: string
-              device_type:
-                enum:
-                  - ios
-                  - android
-                type: string
-            required:
-              - device_type
-            type: object
-      responses:
-        default:
-          description: Unexpected error
-      summary: Logout (primarily for mobile clients)
-      tags:
-        - auth
-  /autosuggest:
-    get:
-      description: Autosuggest terms for searches
-      responses:
-        default:
-          description: Unexpected error
-      summary: Autosuggest terms for searches
-      tags:
-        - autosuggest
-  /bump/new/bids:
-    delete:
-      description: Remove bump for new bids
-      parameters:
-        - description: An array of product IDs to set bids for
-          in: query
-          items:
-            type: string
-          name: products
-          required: true
-          type: array
-      responses:
-        default:
-          description: Unexpected error
-      security:
-        - oauth2:
-            - write_listings
-      summary: Remove bump for new bids
-      tags:
-        - bump
-    get:
-      description: See available tiers for bump bids
-      responses:
-        default:
-          description: Unexpected error
-      summary: See available tiers for bump bids
-      tags:
-        - bump
-    put:
-      description: Update bump for new bids
-      parameters:
-        - description: the content of the request
-          in: body
-          name: body
-          schema:
-            properties:
-              bid:
-                description: 'The bid for the product as a decimal, i.e. ''0.035'' means a 3.5% bid'
-                enum:
-                  - '0.005'
-                  - '0.01'
-                  - '0.015'
-                  - '0.02'
-                  - '0.025'
-                  - '0.03'
-                  - '0.035'
-                type: string
-              products:
-                description: An array of product IDs to set bids for
-                items:
-                  type: integer
-                type: array
-            required:
-              - products
-              - bid
-            type: object
-      responses:
-        default:
-          description: Unexpected error
-      security:
-        - oauth2:
-            - write_listings
-      summary: Update bump for new bids
-      tags:
-        - bump
-  /cart:
-    get:
-      description: Get all cart items
-      responses:
-        default:
-          description: Unexpected error
-      summary: Get all cart items
-      tags:
-        - cart
-  '/cart/move_to_watch_list/{cart_item_id}':
-    post:
-      description: Remove a cart item and add it to watch list
-      parameters:
-        - in: path
-          name: cart_item_id
-          required: true
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      summary: Remove a cart item and add it to watch list
-      tags:
-        - cart
-  '/cart/{id}':
-    delete:
-      description: Remove a product from the cart
-      parameters:
-        - in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      summary: Remove a product from the cart
-      tags:
-        - cart
-    post:
-      description: Add product to the cart
-      parameters:
-        - in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      summary: Add product to the cart
-      tags:
-        - cart
-    put:
-      description: Update cart item details
-      parameters:
-        - in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      summary: Update cart item details
-      tags:
-        - cart
   /categories:
     get:
       description: List of supported product categories
@@ -415,29 +143,6 @@ paths:
       summary: Get category details
       tags:
         - categories
-  /collections:
-    get:
-      description: List of curated collections
-      responses:
-        default:
-          description: Unexpected error
-      summary: List of curated collections
-      tags:
-        - collections
-  '/collections/{slug}':
-    get:
-      description: Collection details
-      parameters:
-        - in: path
-          name: slug
-          required: true
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      summary: Collection details
-      tags:
-        - collections
   /comparison_shopping_pages:
     get:
       description: Returns a set of comparison shopping pages based on the current params
@@ -445,24 +150,6 @@ paths:
         default:
           description: Unexpected error
       summary: Returns a set of comparison shopping pages based on the current params
-      tags:
-        - comparison_shopping_pages
-  /comparison_shopping_pages/also_purchased:
-    get:
-      description: Returns a set of comparison shopping pages that have also been purchased by similar users
-      responses:
-        default:
-          description: Unexpected error
-      summary: Returns a set of comparison shopping pages that have also been purchased by similar users
-      tags:
-        - comparison_shopping_pages
-  /comparison_shopping_pages/also_viewed:
-    get:
-      description: Returns a set of comparison shopping pages that have also been viewed by similar users
-      responses:
-        default:
-          description: Unexpected error
-      summary: Returns a set of comparison shopping pages that have also been viewed by similar users
       tags:
         - comparison_shopping_pages
   /comparison_shopping_pages/find:
@@ -483,15 +170,6 @@ paths:
         default:
           description: Unexpected error
       summary: Show comparison shopping page
-      tags:
-        - comparison_shopping_pages
-  /comparison_shopping_pages/similar:
-    get:
-      description: Returns a set of comparison shopping pages related to another one
-      responses:
-        default:
-          description: Unexpected error
-      summary: Returns a set of comparison shopping pages related to another one
       tags:
         - comparison_shopping_pages
   '/comparison_shopping_pages/{id}':
@@ -539,6 +217,94 @@ paths:
       summary: View reviews of a comparison shopping page
       tags:
         - comparison_shopping_pages
+  '/conversations/{conversation_id}/offer':
+    post:
+      description: Make an offer to the other participant in the conversation
+      parameters:
+        - in: path
+          name: conversation_id
+          required: true
+          type: string
+        - description: the content of the request
+          in: body
+          name: body
+          schema:
+            properties:
+              country_code:
+                type: string
+              message:
+                description: Message to include with counter offer
+                type: string
+              offer_items:
+                items:
+                  properties:
+                    listing_id:
+                      type: string
+                    price:
+                      type: string
+                    shipping_price:
+                      type: string
+                  required:
+                    - price
+                    - shipping_price
+                    - listing_id
+                  type: object
+                type: array
+              price:
+                properties:
+                  amount:
+                    description: 'The amount of money being expressed, as a POSIX-compliant decimal number'
+                    type: string
+                  currency:
+                    description: The currency the money will be expressed in
+                    enum:
+                      - USD
+                      - CAD
+                      - EUR
+                      - GBP
+                      - AUD
+                      - JPY
+                      - NZD
+                      - MXN
+                    type: string
+                required:
+                  - amount
+                  - currency
+                type: object
+              region_code:
+                type: string
+              shipping_price:
+                description: Shipping price (sellers only)
+                properties:
+                  amount:
+                    description: 'The amount of money being expressed, as a POSIX-compliant decimal number'
+                    type: string
+                  currency:
+                    description: The currency the money will be expressed in
+                    enum:
+                      - USD
+                      - CAD
+                      - EUR
+                      - GBP
+                      - AUD
+                      - JPY
+                      - NZD
+                      - MXN
+                    type: string
+                required:
+                  - amount
+                  - currency
+                type: object
+            type: object
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_offers
+      summary: Make an offer to the other participant in the conversation
+      tags:
+        - conversations
   '/conversations/{id}/offer':
     post:
       description: Make an offer to the other participant in the conversation
@@ -556,48 +322,11 @@ paths:
                 description: Message to include with counter offer
                 type: string
               price:
-                properties:
-                  amount:
-                    description: 'The amount of money being expressed, as a decimal number'
-                    type: string
-                  currency:
-                    description: The currency the money will be expressed in
-                    enum:
-                      - USD
-                      - CAD
-                      - EUR
-                      - GBP
-                      - AUD
-                      - JPY
-                      - NZD
-                      - MXN
-                    type: string
-                required:
-                  - amount
-                  - currency
-                type: object
+                description: Offer price
+                type: string
               shipping_price:
                 description: Shipping price (sellers only)
-                properties:
-                  amount:
-                    description: 'The amount of money being expressed, as a decimal number'
-                    type: string
-                  currency:
-                    description: The currency the money will be expressed in
-                    enum:
-                      - USD
-                      - CAD
-                      - EUR
-                      - GBP
-                      - AUD
-                      - JPY
-                      - NZD
-                      - MXN
-                    type: string
-                required:
-                  - amount
-                  - currency
-                type: object
+                type: string
             required:
               - price
             type: object
@@ -619,43 +348,6 @@ paths:
       summary: Retrieve a list of country codes with corresponding subregions
       tags:
         - countries
-  '/curated_set/{user_id}/handpicked':
-    get:
-      parameters:
-        - in: path
-          name: user_id
-          required: true
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      tags:
-        - curated_set
-  '/curated_sets/{id}':
-    put:
-      parameters:
-        - in: path
-          name: id
-          required: true
-          type: string
-        - description: the content of the request
-          in: body
-          name: body
-          schema:
-            properties:
-              curated_set:
-                properties:
-                  name:
-                    type: string
-                type: object
-            required:
-              - curated_set
-            type: object
-      responses:
-        default:
-          description: Unexpected error
-      tags:
-        - curated_sets
   '/curated_sets/{slug}':
     get:
       parameters:
@@ -702,16 +394,189 @@ paths:
         - feedback
   '/handpicked/{slug}':
     get:
-      description: Handpicked collection details
+      description: Get results from a handpicked collection
       parameters:
         - in: path
           name: slug
           required: true
           type: string
+        - description: Search query.
+          in: query
+          name: query
+          required: false
+          type: string
+        - description: Maximum current auction price
+          format: float
+          in: query
+          name: auction_price_max
+          required: false
+          type: number
+        - description: Category slug from /api/categories
+          in: query
+          name: category
+          required: false
+          type: string
+        - description: Product type slug from /api/categories
+          in: query
+          name: product_type
+          required: false
+          type: string
+        - description: 'Condition: all,new,b-stock,used,non-functioning'
+          in: query
+          items:
+            type: string
+          name: conditions
+          required: false
+          type: array
+        - description: 'Decade: e.g. 1970s, early 70s'
+          in: query
+          name: decade
+          required: false
+          type: string
+        - description: 'Visual finish of the item, common for guitars'
+          in: query
+          name: finish
+          required: false
+          type: string
+        - description: Handmade items only
+          in: query
+          name: handmade
+          required: false
+          type: boolean
+        - description: City where item is located
+          in: query
+          name: item_city
+          required: false
+          type: string
+        - description: DEPRECATED - Country code where item is located
+          in: query
+          name: item_country
+          required: false
+          type: string
+        - description: Country code where item is located
+          in: query
+          name: item_region
+          required: false
+          type: string
+        - description: State or region code where item is located
+          in: query
+          name: item_state
+          required: false
+          type: string
+        - description: Make(s)/brand of item (e.g. Fender). Can take a single value or an array.
+          in: query
+          items:
+            type: string
+          name: make
+          required: false
+          type: array
+        - description: Model of item (e.g. Stratocaster)
+          in: query
+          name: model
+          required: false
+          type: string
+        - description: 'Search term negation. If you want to exclude a term, add it here'
+          in: query
+          name: must_not
+          required: false
+          type: string
+        - description: Maximum price of search results (USD)
+          format: float
+          in: query
+          name: price_max
+          required: false
+          type: number
+        - description: Minimum price of search results (USD)
+          format: float
+          in: query
+          name: price_min
+          required: false
+          type: number
+        - description: The currency to be used for the price filters
+          in: query
+          name: currency
+          required: false
+          type: string
+        - description: Maximum year of manufacture
+          in: query
+          name: year_max
+          required: false
+          type: integer
+        - description: Minumum year of manufacture
+          in: query
+          name: year_min
+          required: false
+          type: integer
+        - description: 'If true, include only items that accept gift cards'
+          in: query
+          name: accepts_gift_cards
+          required: false
+          type: boolean
+        - description: 'If true, include only items by Reverb Preferred Sellers'
+          in: query
+          name: preferred_seller
+          required: false
+          type: boolean
+        - description: Slug of shop to search
+          in: query
+          name: shop
+          required: false
+          type: string
+        - description: ID of shop to search
+          in: query
+          name: shop_id
+          required: false
+          type: string
+        - description: 'Type of listing: auctions,offers'
+          in: query
+          name: listing_type
+          required: false
+          type: string
+        - description: Limit search to items that ship to this country code
+          in: query
+          name: ships_to
+          required: false
+          type: string
+        - description: 'If true, exclude auctions'
+          in: query
+          name: exclude_auctions
+          required: false
+          type: boolean
+        - description: 'If true, only show items that can be purchased with a payment plan'
+          in: query
+          name: accepts_payment_plans
+          required: false
+          type: boolean
+        - description: Minimum number of watchers (used to find popular items)
+          in: query
+          name: watchers_count_min
+          required: false
+          type: integer
+        - description: 'Listing ID negation. If you want to exclude a listing, add it here.'
+          in: query
+          items:
+            type: string
+          name: not_ids
+          required: false
+          type: array
+        - default: 1
+          in: query
+          name: page
+          required: false
+          type: integer
+        - default: 24
+          in: query
+          name: per_page
+          required: false
+          type: integer
+        - in: query
+          name: offset
+          required: false
+          type: integer
       responses:
         default:
           description: Unexpected error
-      summary: Handpicked collection details
+      summary: Get results from a handpicked collection
       tags:
         - handpicked
   /listing_conditions:
@@ -954,9 +819,6 @@ paths:
               inventory:
                 description: Number of items available for sale. Reverb will increment and decrement automatically.
                 type: integer
-              item_location:
-                description: Internal note used by sellers to back reference their catalog system when entering a listing
-                type: string
               location:
                 properties:
                   country_code:
@@ -989,7 +851,7 @@ paths:
               price:
                 properties:
                   amount:
-                    description: 'The amount of money being expressed, as a decimal number'
+                    description: 'The amount of money being expressed, as a POSIX-compliant decimal number'
                     type: string
                   currency:
                     description: The currency the money will be expressed in
@@ -1016,7 +878,7 @@ paths:
                     type: string
                 type: object
               seller_cost:
-                description: 'Cost of goods in your currency (internal use only, not shown to buyers)'
+                description: 'Cost of goods in your currency as a POSIX-compliant decimal number (internal use only, not shown to buyers)'
                 type: string
               shipping:
                 properties:
@@ -1030,7 +892,7 @@ paths:
                         rate:
                           properties:
                             amount:
-                              description: 'The amount of money being expressed, as a decimal number'
+                              description: 'The amount of money being expressed, as a POSIX-compliant decimal number'
                               type: string
                             currency:
                               description: The currency the money will be expressed in
@@ -1066,6 +928,9 @@ paths:
               sold_as_is:
                 description: This item is sold As-Is and cannot be returned
                 type: boolean
+              storage_location:
+                description: Internal note used by sellers to back reference their catalog system when entering a listing
+                type: string
               tax_exempt:
                 description: Listing is exempt from taxes / VAT
                 type: boolean
@@ -1543,9 +1408,6 @@ paths:
               inventory:
                 description: Number of items available for sale. Reverb will increment and decrement automatically.
                 type: integer
-              item_location:
-                description: Internal note used by sellers to back reference their catalog system when entering a listing
-                type: string
               location:
                 properties:
                   country_code:
@@ -1578,7 +1440,7 @@ paths:
               price:
                 properties:
                   amount:
-                    description: 'The amount of money being expressed, as a decimal number'
+                    description: 'The amount of money being expressed, as a POSIX-compliant decimal number'
                     type: string
                   currency:
                     description: The currency the money will be expressed in
@@ -1605,7 +1467,7 @@ paths:
                     type: string
                 type: object
               seller_cost:
-                description: 'Cost of goods in your currency (internal use only, not shown to buyers)'
+                description: 'Cost of goods in your currency as a POSIX-compliant decimal number (internal use only, not shown to buyers)'
                 type: string
               shipping:
                 properties:
@@ -1619,7 +1481,7 @@ paths:
                         rate:
                           properties:
                             amount:
-                              description: 'The amount of money being expressed, as a decimal number'
+                              description: 'The amount of money being expressed, as a POSIX-compliant decimal number'
                               type: string
                             currency:
                               description: The currency the money will be expressed in
@@ -1655,6 +1517,9 @@ paths:
               sold_as_is:
                 description: This item is sold As-Is and cannot be returned
                 type: boolean
+              storage_location:
+                description: Internal note used by sellers to back reference their catalog system when entering a listing
+                type: string
               tax_exempt:
                 description: Listing is exempt from taxes / VAT
                 type: boolean
@@ -3146,13 +3011,30 @@ paths:
           name: body
           schema:
             properties:
+              country_code:
+                type: string
               message:
                 description: Message to include with counter offer
                 type: string
+              offer_items:
+                items:
+                  properties:
+                    listing_id:
+                      type: string
+                    price:
+                      type: string
+                    shipping_price:
+                      type: string
+                  required:
+                    - price
+                    - shipping_price
+                    - listing_id
+                  type: object
+                type: array
               price:
                 properties:
                   amount:
-                    description: 'The amount of money being expressed, as a decimal number'
+                    description: 'The amount of money being expressed, as a POSIX-compliant decimal number'
                     type: string
                   currency:
                     description: The currency the money will be expressed in
@@ -3170,11 +3052,13 @@ paths:
                   - amount
                   - currency
                 type: object
+              region_code:
+                type: string
               shipping_price:
                 description: Shipping price (sellers only)
                 properties:
                   amount:
-                    description: 'The amount of money being expressed, as a decimal number'
+                    description: 'The amount of money being expressed, as a POSIX-compliant decimal number'
                     type: string
                   currency:
                     description: The currency the money will be expressed in
@@ -3192,8 +3076,6 @@ paths:
                   - amount
                   - currency
                 type: object
-            required:
-              - price
             type: object
       responses:
         default:
@@ -3528,6 +3410,23 @@ paths:
       summary: Marks an order as shipped
       tags:
         - my
+  '/my/orders/selling/{order_id}/refund_requests':
+    post:
+      description: Initiate a refund for a sold order
+      parameters:
+        - in: path
+          name: order_id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_orders
+      summary: Initiate a refund for a sold order
+      tags:
+        - my
   /my/payments/selling:
     get:
       description: Get payments
@@ -3595,6 +3494,35 @@ paths:
         - oauth2:
             - read_orders
       summary: Get payment
+      tags:
+        - my
+  /my/refund_requests/selling:
+    get:
+      description: Get a list of refund requests as a seller
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_orders
+      summary: Get a list of refund requests as a seller
+      tags:
+        - my
+  '/my/refund_requests/selling/{id}':
+    put:
+      description: Update a refund request for a sold order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_orders
+      summary: Update a refund request for a sold order
       tags:
         - my
   /my/viewed_listings:
@@ -3795,18 +3723,6 @@ paths:
       summary: Get a summary of transactions for a given price guide
       tags:
         - priceguide
-  '/private/shops/by_slug/{slug}':
-    get:
-      parameters:
-        - in: path
-          name: slug
-          required: true
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      tags:
-        - private
   '/products/reviews/{id}':
     get:
       description: View a review
@@ -4319,41 +4235,6 @@ paths:
       summary: Get accepted payment methods
       tags:
         - shop
-  /shop/stats:
-    get:
-      description: Get listings stats
-      responses:
-        default:
-          description: Unexpected error
-      security:
-        - oauth2:
-            - read_profile
-      summary: Get listings stats
-      tags:
-        - shop
-  /shop/stats/activity:
-    get:
-      description: Get shop activity for a particular time period
-      parameters:
-        - description: 'Filter by date in ISO8601 format - e.g: 2015-04-09T10:52:23-05:00'
-          in: query
-          name: start_time
-          required: true
-          type: string
-        - description: 'Filter by date in ISO8601 format - e.g: 2015-04-09T10:52:23-05:00'
-          in: query
-          name: end_time
-          required: false
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      security:
-        - oauth2:
-            - read_profile
-      summary: Get shop activity for a particular time period
-      tags:
-        - shop
   /shop/vacation:
     delete:
       description: Disable vacation mode. All listings will be re-enabled.
@@ -4413,6 +4294,11 @@ paths:
           name: slug
           required: true
           type: string
+        - description: Include the live listing count in the response.
+          in: query
+          name: include_listing_count
+          required: false
+          type: boolean
       responses:
         default:
           description: Unexpected error

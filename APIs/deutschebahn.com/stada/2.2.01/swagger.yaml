@@ -5,9 +5,9 @@ schemes:
 host: api.deutschebahn.com
 basePath: /stada/v2
 info:
-  description: 'An API providing master data for german railway stations by DB Station&Service AG. '
+  description: An API providing master data for german railway stations by DB Station&Service AG.
   title: Stationsdatenbereitstellung
-  version: 2.1.02
+  version: 2.2.01
   x-apisguru-categories:
     - transport
     - open_data
@@ -113,7 +113,7 @@ paths:
         '200':
           description: station data
           schema:
-            $ref: '#/definitions/QueryResult'
+            $ref: '#/definitions/StationQuery'
         '400':
           description: bad request (illegal parameter or illegal parameter value)
           schema:
@@ -145,7 +145,7 @@ paths:
         '200':
           description: station data
           schema:
-            $ref: '#/definitions/QueryResult'
+            $ref: '#/definitions/StationQuery'
         '400':
           description: bad request (illegal parameter or illegal parameter value)
           schema:
@@ -165,7 +165,6 @@ paths:
     get:
       description: |
         Get a QueryResult object containing SZentralen objects from the database applying to the parameters described below. 
-
         QueryResult is a container providing the following information about the query result.
           1. the total number of hits
           2. the maximum number of hits to be returned in that QueryResult object
@@ -178,7 +177,7 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: 'The maximum number of hits to be returned by that query. If ''limit'' is set greater than 100, it will be reset to 100 internally and only 100 hits will be returned.'
+        - description: 'The maximum number of hits to be returned by that query. If ''limit'' is set greater than 10000, it will be reset to 10000 internally and only 100 hits will be returned.'
           format: int64
           in: query
           name: limit
@@ -188,7 +187,7 @@ paths:
         '200':
           description: 3-S-Zentralen data
           schema:
-            $ref: '#/definitions/QueryResult'
+            $ref: '#/definitions/SZentraleQuery'
         '400':
           description: bad request (illegal parameter or illegal parameter value)
           schema:
@@ -218,7 +217,7 @@ paths:
         '200':
           description: 3-S-Zentralen data
           schema:
-            $ref: '#/definitions/QueryResult'
+            $ref: '#/definitions/SZentraleQuery'
         '400':
           description: bad request (illegal parameter or illegal parameter value)
           schema:
@@ -278,7 +277,7 @@ definitions:
         type: integer
     type: object
   GeographicPoint:
-    description: GEOJSON objekt of type point. By default WGS84 is the coordinate system in GEOJSON.
+    description: GEOJSON object of type point. By default WGS84 is the coordinate system in GEOJSON.
     properties:
       coordinates:
         description: 'first value is longitude, second latitude third altitude (currently not provided)'
@@ -306,26 +305,6 @@ definitions:
       - 'no'
       - partial
     type: string
-  QueryResult:
-    properties:
-      limit:
-        description: maximum number of result objects to be returned
-        format: int64
-        type: integer
-      offset:
-        description: offset of the first result object with respect to the total number of hits produced by the query
-        format: int64
-        type: integer
-      result:
-        description: result objects produced by that query
-        items:
-          $ref: '#/definitions/ResultObject'
-        type: array
-      total:
-        description: total number of hits produced by that query
-        format: int64
-        type: integer
-    type: object
   RegionalBereichRef:
     description: 'reference object. an internal organization type of Station&Service, regional department.'
     properties:
@@ -351,9 +330,6 @@ definitions:
         type: integer
       shortName:
         type: string
-    type: object
-  ResultObject:
-    description: An object of type Station or of type SZentrale depending on the query submitted
     type: object
   RiL100Identifier:
     properties:
@@ -399,6 +375,26 @@ definitions:
       publicPhoneNumber:
         type: string
     type: object
+  SZentraleQuery:
+    properties:
+      limit:
+        description: maximum number of result objects to be returned
+        format: int64
+        type: integer
+      offset:
+        description: offset of the first result object with respect to the total number of  hits produced by the query
+        format: int64
+        type: integer
+      result:
+        description: result objects produced by that query
+        items:
+          $ref: '#/definitions/SZentrale'
+        type: array
+      total:
+        description: total number of hits produced by that query
+        format: int64
+        type: integer
+    type: object
   SZentraleRef:
     description: reference object contained in station
     properties:
@@ -439,7 +435,7 @@ definitions:
       aufgabentraeger:
         $ref: '#/definitions/Aufgabentraeger'
       category:
-        description: the stations category (1..7)
+        description: 'the stations category (-1...7). Stations with category -1 or 0 are not in production, e.g. planned, saled, without train stops.'
         format: int32
         type: integer
       evaNumbers:
@@ -539,6 +535,26 @@ definitions:
         type: string
       number:
         description: identifier
+        type: integer
+    type: object
+  StationQuery:
+    properties:
+      limit:
+        description: maximum number of result objects to be returned
+        format: int64
+        type: integer
+      offset:
+        description: offset of the first result object with respect to the total number  of hits produced by the query
+        format: int64
+        type: integer
+      result:
+        description: result objects produced by that query
+        items:
+          $ref: '#/definitions/Station'
+        type: array
+      total:
+        description: total number of hits produced by that query
+        format: int64
         type: integer
     type: object
   TimetableOffice:

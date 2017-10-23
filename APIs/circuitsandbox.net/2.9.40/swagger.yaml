@@ -9,7 +9,7 @@ info:
 
     [Learn more about the Circuit Development Community](https://www.circuit.com/web/developers/home)
   title: REST API Version 2
-  version: 2.9.33
+  version: 2.9.40
   x-apisguru-categories:
     - messaging
   x-logo:
@@ -34,6 +34,20 @@ securityDefinitions:
       WRITE_USER_PROFILE: allows to update the user profile of the authenticated user
     type: oauth2
 paths:
+  /alexaIntent:
+    post:
+      operationId: alexaRequest
+      responses:
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+      tags: []
   /conversations:
     get:
       consumes:

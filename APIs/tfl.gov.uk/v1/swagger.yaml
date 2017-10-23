@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: api.tfl.gov.uk
+host: 'push-api-neon.tfl.gov.uk:8001'
 info:
   description: 'Our unified API brings together data across all modes of transport into a single RESTful API. This API provides access to the most highly requested realtime and status infomation across all the modes of transport, in a single and consistent way. Access to the developer documentation is available at https://api.tfl.gov.uk'
   title: Transport for London Unified
@@ -2832,7 +2832,7 @@ paths:
   /Vehicle/EmissionSurcharge:
     get:
       deprecated: false
-      operationId: Vehicle_GetVehicle
+      operationId: Vehicle_GetEmissionsSurchargeCompliance
       parameters:
         - description: The Vehicle Registration Mark
           in: query
@@ -2848,8 +2848,31 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/EmissionsSurchargeVehicle'
+            $ref: '#/definitions/VehicleMatch'
       summary: Gets the Emissions Surcharge compliance for the Vehicle
+      tags:
+        - Vehicle
+  /Vehicle/UlezCompliance:
+    get:
+      deprecated: false
+      operationId: Vehicle_GetUlezCompliance
+      parameters:
+        - description: The Vehicle Registration Mark
+          in: query
+          name: vrm
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/VehicleMatch'
+      summary: Gets the Ulez Surcharge compliance for the Vehicle
       tags:
         - Vehicle
   '/Vehicle/{ids}/Arrivals':
@@ -3208,28 +3231,11 @@ definitions:
         description: Gets or sets the date/time when this disruption was last updated.
         format: date-time
         type: string
+      summary:
+        description: Gets or sets the summary of this disruption.
+        type: string
       type:
         description: Gets or sets the disruption type of this dispruption.
-        type: string
-    type: object
-  EmissionsSurchargeVehicle:
-    description: ''
-    properties:
-      colour:
-        type: string
-      compliance:
-        enum:
-          - NotCompliant
-          - Compliant
-          - Exempt
-        type: string
-      make:
-        type: string
-      model:
-        type: string
-      type:
-        type: string
-      vrm:
         type: string
     type: object
   Fare:
@@ -5088,5 +5094,26 @@ definitions:
   Vehicle:
     properties:
       type:
+        type: string
+    type: object
+  VehicleMatch:
+    description: ''
+    properties:
+      colour:
+        type: string
+      compliance:
+        enum:
+          - NotAvailable
+          - NotCompliant
+          - Compliant
+          - Exempt
+        type: string
+      make:
+        type: string
+      model:
+        type: string
+      type:
+        type: string
+      vrm:
         type: string
     type: object

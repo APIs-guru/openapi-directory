@@ -10154,6 +10154,34 @@ paths:
         - Tracking
     parameters:
       - $ref: '#/parameters/resourceId'
+  '/tracking/webhooks/{id}/history':
+    get:
+      responses:
+        '200':
+          description: Webhook tracking related attempts were retrieved successfully.
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/WebhookTracking'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve related webhook attempts for specified webhook tracking.
+      tags:
+        - Tracking
+    parameters:
+      - $ref: '#/parameters/resourceId'
   /tracking/website-webhooks:
     get:
       parameters:
@@ -11461,6 +11489,7 @@ definitions:
       - HSBC
       - iCheque
       - Ilixium
+      - Intuit
       - Jeton
       - Masapay
       - Merrick
@@ -13553,6 +13582,7 @@ definitions:
       - Gpaysafe
       - iCheque
       - Ilixium
+      - Intuit
       - JetPay
       - Jeton
       - Moneris
@@ -13786,6 +13816,27 @@ definitions:
     required:
       - name
     type: object
+  Intuit:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              clientId:
+                description: The Intuit client_id key
+                type: string
+              clientSecret:
+                description: The Intuit client_secret key
+                format: password
+                type: string
+            required:
+              - clientId
+              - clientSecret
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Intuit Gateway config
   InvalidError:
     allOf:
       - $ref: '#/definitions/Error'
@@ -15719,6 +15770,10 @@ definitions:
         maxLength: 2
         readOnly: true
         type: string
+      distance:
+        description: Distance between IP Address and Billing Address geolocation (kilometers)
+        readOnly: true
+        type: integer
       fingerprint:
         description: The fingerprint
         type: string
@@ -17371,6 +17426,9 @@ definitions:
         minItems: 1
         readOnly: true
         type: array
+      attempt:
+        description: The Webhook's attempt number
+        type: integer
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -17396,8 +17454,8 @@ definitions:
         example: POST
         type: string
       payload:
-        description: Event's data information
-        type: object
+        description: Webhook's payload
+        type: string
       responseBody:
         description: Response body received
         type: string
@@ -17408,6 +17466,12 @@ definitions:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
         description: Sent time
+      source:
+        description: The Webhook's source
+        enum:
+          - webhooks
+          - rules
+        type: string
       url:
         description: Url where webhook was sent
         type: string

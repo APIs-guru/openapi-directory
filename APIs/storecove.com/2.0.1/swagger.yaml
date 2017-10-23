@@ -1006,11 +1006,15 @@ definitions:
   InvoiceRecipient:
     description: 'Ids that identify this invoice recipient. The list of identifiers should match with the accountingCustomerParty. I.e., you should not be sending an invoice for one accountingCustomerParty to the publicIdentifier of another.'
     properties:
-      fallbackEmail:
-        description: The email address the invoice should be sent to if none of the other identifiers can be used
-        format: email
+      emails:
+        description: The email addresses the invoice should be sent to if none of the other identifiers can be used
+        items:
+          description: The email address the invoice should be sent to
+          format: email
+          title: Email
+          type: string
         title: Fallback email
-        type: string
+        type: array
       id:
         description: Your id for this organization. This should match the id that you use for the Storecove widget (if you use that).
         minLength: 2
