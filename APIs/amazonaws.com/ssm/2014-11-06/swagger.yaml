@@ -532,6 +532,10 @@ paths:
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
+        '483':
+          description: TooManyUpdates
+          schema:
+            $ref: '#/definitions/TooManyUpdates'
       parameters:
         - name: body
           in: body
@@ -2217,6 +2221,10 @@ paths:
           description: ParameterNotFound
           schema:
             $ref: '#/definitions/ParameterNotFound'
+        '483':
+          description: ParameterVersionNotFound
+          schema:
+            $ref: '#/definitions/ParameterVersionNotFound'
       parameters:
         - name: body
           in: body
@@ -3163,10 +3171,14 @@ paths:
           schema:
             $ref: '#/definitions/InvalidAllowedPatternException'
         '488':
+          description: ParameterMaxVersionLimitExceeded
+          schema:
+            $ref: '#/definitions/ParameterMaxVersionLimitExceeded'
+        '489':
           description: ParameterPatternMismatchException
           schema:
             $ref: '#/definitions/ParameterPatternMismatchException'
-        '489':
+        '490':
           description: UnsupportedParameterType
           schema:
             $ref: '#/definitions/UnsupportedParameterType'
@@ -4027,7 +4039,7 @@ definitions:
         description: Specifies the type of resource you are tagging.
       ResourceId:
         $ref: '#/definitions/ResourceId'
-        description: The resource ID you want to tag.
+        description: '<p>The resource ID you want to tag.</p> <p>For the ManagedInstance, MaintenanceWindow, and PatchBaseline values, use the ID of the resource, such as mw-01234361858c9b57b for a Maintenance Window.</p> <p>For the Document and Parameter values, use the name of the resource.</p>'
       Tags:
         $ref: '#/definitions/TagList'
         description: ' One or more tags. The value parameter is required, but if you don''t want the tag to have a value, specify the parameter with no value, and we set the value to an empty string. '
@@ -8648,11 +8660,13 @@ definitions:
   PSParameterName:
     type: string
     minLength: 1
-    maxLength: 1024
+    maxLength: 2048
   PSParameterValue:
     type: string
     minLength: 1
     maxLength: 4096
+  PSParameterVersion:
+    type: integer
   Parameter:
     type: object
     properties:
@@ -8665,6 +8679,9 @@ definitions:
       Value:
         $ref: '#/definitions/PSParameterValue'
         description: The parameter value.
+      Version:
+        $ref: '#/definitions/PSParameterVersion'
+        description: The parameter version.
     description: An Amazon EC2 Systems Manager parameter in Parameter Store.
   ParameterAlreadyExists:
     type: object
@@ -8674,7 +8691,7 @@ definitions:
     description: The parameter already exists. You can't create duplicate parameters.
   ParameterDescription:
     type: string
-    minLength: 1
+    minLength: 0
     maxLength: 1024
   ParameterHistory:
     type: object
@@ -8703,6 +8720,9 @@ definitions:
       AllowedPattern:
         $ref: '#/definitions/AllowedPattern'
         description: <p>Parameter names can include the following letters and symbols.</p> <p>a-zA-Z0-9_.-</p>
+      Version:
+        $ref: '#/definitions/PSParameterVersion'
+        description: The parameter version.
     description: Information about parameter usage.
   ParameterHistoryList:
     type: array
@@ -8723,6 +8743,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Parameter'
+  ParameterMaxVersionLimitExceeded:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: The parameter exceeded the maximum number of allowed versions.
   ParameterMetadata:
     type: object
     properties:
@@ -8747,6 +8773,9 @@ definitions:
       AllowedPattern:
         $ref: '#/definitions/AllowedPattern'
         description: <p>A parameter name can include only the following letters and symbols.</p> <p>a-zA-Z0-9_.-</p>
+      Version:
+        $ref: '#/definitions/PSParameterVersion'
+        description: The parameter version.
     description: Metada includes information like the ARN of the last user and the date/time the parameter was last used.
   ParameterMetadataList:
     type: array
@@ -8823,6 +8852,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ParameterValue'
+  ParameterVersionNotFound:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: 'The specified parameter version was not found. Verify the parameter name and version, and try again.'
   Parameters:
     type: array
     items:
@@ -9284,7 +9319,10 @@ definitions:
         description: 'A regular expression used to validate the parameter value. For example, for String types with values restricted to numbers, you can specify the following: AllowedPattern=^\d+$ '
   PutParameterResult:
     type: object
-    properties: {}
+    properties:
+      Version:
+        $ref: '#/definitions/PSParameterVersion'
+        description: 'The new version number of a parameter. If you edit a parameter value, Parameter Store automatically creates a new version and assigns this new version a unique ID. You can reference a parameter version ID in API actions or in Systems Manager documents (SSM documents). By default, if you don''t specify a specific version, the system returns the latest parameter value when a parameter is called.'
   RegisterDefaultPatchBaselineRequest:
     type: object
     required:

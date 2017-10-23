@@ -5078,7 +5078,7 @@ paths:
   '/#GetReservedInstancesExchangeQuote':
     post:
       operationId: GetReservedInstancesExchangeQuote
-      description: 'Returns details about the values and term of your specified Convertible Reserved Instances. When a target configuration is specified, it returns information about whether the exchange is valid and can be performed.'
+      description: 'Returns a quote and exchange information for exchanging one or more specified Convertible Reserved Instances for a new Convertible Reserved Instance. If the exchange cannot be performed, the reason is returned in the response. Use <a>AcceptReservedInstancesExchangeQuote</a> to perform the exchange.'
       responses:
         '200':
           description: Success
@@ -5418,7 +5418,7 @@ paths:
   '/#ModifyReservedInstances':
     post:
       operationId: ModifyReservedInstances
-      description: '<p>Modifies the Availability Zone, instance count, instance type, or network platform (EC2-Classic or EC2-VPC) of your Standard Reserved Instances. The Reserved Instances to be modified must be identical, except for Availability Zone, network platform, and instance type.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html">Modifying Reserved Instances</a> in the Amazon Elastic Compute Cloud User Guide.</p>'
+      description: '<p>Modifies the Availability Zone, instance count, instance type, or network platform (EC2-Classic or EC2-VPC) of your Reserved Instances. The Reserved Instances to be modified must be identical, except for Availability Zone, network platform, and instance type.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html">Modifying Reserved Instances</a> in the Amazon Elastic Compute Cloud User Guide.</p>'
       responses:
         '200':
           description: Success
@@ -5622,6 +5622,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ModifyVpcPeeringConnectionOptionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyVpcTenancy':
+    post:
+      operationId: ModifyVpcTenancy
+      description: '<p>Modifies the instance tenancy attribute of the specified VPC. You can change the instance tenancy attribute of a VPC to <code>default</code> only. You cannot change the instance tenancy attribute to <code>dedicated</code>.</p> <p>After you modify the tenancy of the VPC, any new instances that you launch into the VPC have a tenancy of <code>default</code>, unless you specify otherwise during launch. The tenancy of any existing instances in the VPC is not affected.</p> <p>For more information about Dedicated Instances, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html">Dedicated Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyVpcTenancyResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyVpcTenancyRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -6519,10 +6544,10 @@ definitions:
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ReservedInstanceIds:
         $ref: '#/definitions/ReservedInstanceIdSet'
-        description: The IDs of the Convertible Reserved Instances to exchange for other Convertible Reserved Instances of the same or higher value.
+        description: The IDs of the Convertible Reserved Instances to exchange for another Convertible Reserved Instance of the same or higher value.
       TargetConfigurations:
         $ref: '#/definitions/TargetConfigurationRequestSet'
-        description: The configurations of the Convertible Reserved Instance offerings that you are purchasing in this exchange.
+        description: The configuration of the target Convertible Reserved Instance to exchange for your current Convertible Reserved Instances.
     description: Contains the parameters for accepting the quote.
   AcceptReservedInstancesExchangeQuoteResult:
     type: object
@@ -10682,6 +10707,12 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to request the next page of results.
+      MaxResults:
+        $ref: '#/definitions/Integer'
+        description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000.'
     description: Contains the parameters for DescribeSecurityGroups.
   DescribeSecurityGroupsResult:
     type: object
@@ -10689,6 +10720,9 @@ definitions:
       SecurityGroups:
         $ref: '#/definitions/SecurityGroupList'
         description: Information about one or more security groups.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     description: Contains the output of DescribeSecurityGroups.
   DescribeSnapshotAttributeRequest:
     type: object
@@ -12513,7 +12547,7 @@ definitions:
         description: The IDs of the Convertible Reserved Instances to exchange.
       TargetConfigurations:
         $ref: '#/definitions/TargetConfigurationRequestSet'
-        description: The configuration requirements of the Convertible Reserved Instances to exchange for your current Convertible Reserved Instances.
+        description: The configuration of the target Convertible Reserved Instance to exchange for your current Convertible Reserved Instances.
     description: Contains the parameters for GetReservedInstanceExchangeQuote.
   GetReservedInstancesExchangeQuoteResult:
     type: object
@@ -14211,7 +14245,7 @@ definitions:
         description: Deprecated.
       BlockDeviceMappings:
         $ref: '#/definitions/BlockDeviceMappingList'
-        description: '<p>One or more block device mapping entries.</p> <p>Although you can specify encrypted EBS volumes in this block device mapping for your Spot Instances, these volumes are not encrypted.</p>'
+        description: One or more block device mapping entries.
       EbsOptimized:
         $ref: '#/definitions/Boolean'
         description: '<p>Indicates whether the instance is optimized for EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal EBS I/O performance. This optimization isn''t available with all instance types. Additional usage charges apply when using an EBS Optimized instance.</p> <p>Default: <code>false</code> </p>'
@@ -14769,6 +14803,29 @@ definitions:
       RequesterPeeringConnectionOptions:
         $ref: '#/definitions/PeeringConnectionOptions'
         description: Information about the VPC peering connection options for the requester VPC.
+  ModifyVpcTenancyRequest:
+    type: object
+    required:
+      - VpcId
+      - InstanceTenancy
+    properties:
+      VpcId:
+        $ref: '#/definitions/String'
+        description: The ID of the VPC.
+      InstanceTenancy:
+        $ref: '#/definitions/VpcTenancy'
+        description: 'The instance tenancy attribute for the VPC. '
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    description: Contains the parameters for ModifyVpcTenancy.
+  ModifyVpcTenancyResult:
+    type: object
+    properties:
+      ReturnValue:
+        $ref: '#/definitions/Boolean'
+        description: 'Returns <code>true</code> if the request succeeds; otherwise, returns an error.'
+    description: Contains the output of ModifyVpcTenancy.
   MonitorInstancesRequest:
     type: object
     required:
@@ -16214,7 +16271,7 @@ definitions:
         description: Deprecated.
       BlockDeviceMappings:
         $ref: '#/definitions/BlockDeviceMappingList'
-        description: '<p>One or more block device mapping entries.</p> <p>Although you can specify encrypted EBS volumes in this block device mapping for your Spot Instances, these volumes are not encrypted.</p>'
+        description: One or more block device mapping entries.
       EbsOptimized:
         $ref: '#/definitions/Boolean'
         description: '<p>Indicates whether the instance is optimized for EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal EBS I/O performance. This optimization isn''t available with all instance types. Additional usage charges apply when using an EBS Optimized instance.</p> <p>Default: <code>false</code> </p>'
@@ -16971,7 +17028,7 @@ definitions:
         description: '[EC2-VPC] The ID of the subnet to launch the instance into.'
       UserData:
         $ref: '#/definitions/String'
-        description: 'The user data to make available to the instance. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html">Running Commands on Your Linux Instance at Launch</a> (Linux) and <a href="http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data">Adding User Data</a> (Windows). If you are using an AWS SDK or command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text.'
+        description: 'The user data to make available to the instance. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html">Running Commands on Your Linux Instance at Launch</a> (Linux) and <a href="http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data">Adding User Data</a> (Windows). If you are using a command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text.'
       AdditionalInfo:
         $ref: '#/definitions/String'
         description: Reserved.
@@ -19106,6 +19163,10 @@ definitions:
     enum:
       - pending
       - available
+  VpcTenancy:
+    type: string
+    enum:
+      - default
   VpnConnection:
     type: object
     properties:
