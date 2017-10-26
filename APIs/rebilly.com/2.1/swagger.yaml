@@ -13480,7 +13480,7 @@ definitions:
         description: Monthly Limit
         format: double
         minimum: 0
-        type: integer
+        type: number
       organizationId:
         allOf:
           - $ref: '#/definitions/ResourceId'
@@ -14792,7 +14792,7 @@ definitions:
       amount:
         description: The payment amount
         format: double
-        type: integer
+        type: number
       billingAddress:
         allOf:
           - $ref: '#/definitions/ContactObject'
