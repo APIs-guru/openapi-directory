@@ -1,0 +1,746 @@
+swagger: '2.0'
+schemes:
+  - https
+host: wft-geo-db.p.mashape.com
+basePath: /
+info:
+  description: 'This developer-centric REST API focuses on getting global city and region data. Easily obtain country, region, and city data for use in your apps! <ul><li>Filter cities by name prefix, country, location, and even minimum population.</li> <li>Get all country regions.</li> <li>Get all cities in a given region.</li> <li>Developer-friendly RESTful API adheres to industry best-practices, including HATEOS-style links to facilitate paging results.</li> <li>Backed by Amazon AWS load-balanced infrastructure for resiliency and performance!</li> <li>Data is periodically refreshed from GeoNames.org.</li></ul><p>Notes:<ul><li>All endpoints implicitly support JSONP-style invocation via an optional <tt>callback</tt> param.</li><li>Since the database is periodically updated, this may <strong>very rarely</strong> result in certain cities being marked deleted (e.g., duplicates removed). By default, endpoints returning city data will exclude cities marked deleted. However, in the unlikely event that this occurs while your app is paging through a set of affected results - and you care about the paged results suddenly changing underneath - specify <tt>includeDeleted=SINCE_YESTERDAY</tt> (or <tt>SINCE_LAST_WEEK</tt> if you''re really paranoid!).</li></ul><hr/><h3>Useful Resources</h3><ul><li>SDKs<ul><li><a href=''https://www.npmjs.com/package/wft-geodb-angular-client''>Angular</a>, <a href=''https://github.com/wirefreethought/geo-db-sample-angular-app''>Sample App</a></li><li><a href=''https://github.com/wirefreethought/geo-db-java-client''>Java</a></li></ul><li><a href=''swagger.json''>Swagger Docs</a></li><li><a href=''http://creativecommons.org/licenses/by/3.0/''>Usage License</a></i></li></ul>'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  title: Geo DB
+  version: 1.0.0
+  x-apisguru-categories:
+    - developer_tools
+    - location
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://wirefreethought.github.io/geo-db-city-api-docs/images/logo.png'
+  x-origin:
+    - format: swagger
+      url: 'https://wirefreethought.github.io/geo-db-city-api-docs/swagger.json'
+      version: '2.0'
+  x-providerName: mashape.com
+  x-serviceName: geodb
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  UserSecurity:
+    in: header
+    name: X-Mashape-Key
+    type: apiKey
+security:
+  - UserSecurity: []
+tags:
+  - description: Geo Endpoints
+    name: Geo
+  - description: Locale Endpoints
+    name: Locale
+paths:
+  /v1/geo/cities:
+    get:
+      description: 'Get cities, filtering by optional criteria. If no criteria are set, you will get back all known cities with a population of at least 1000. (Currently over 115,000.) If countryCode is specified, the country info will be omitted in the response.'
+      operationId: findCitiesUsingGET
+      parameters:
+        - description: Only cities whose names start with this prefix
+          in: query
+          name: namePrefix
+          required: false
+          type: string
+        - description: Only cities in these countries (comma-delimited country codes)
+          in: query
+          name: countryCodes
+          required: false
+          type: string
+        - description: Only cities NOT in these countries (comma-delimited country codes)
+          in: query
+          name: excludedCountryCodes
+          required: false
+          type: string
+        - description: Only cities having at least this population
+          format: int32
+          in: query
+          name: minPopulation
+          required: false
+          type: integer
+        - description: 'Only cities near this location. Latitude/longitude in ISO-6709 format: ±DD.DDDD±DDD.DDDD'
+          in: query
+          name: nearLocation
+          required: false
+          type: string
+        - description: The location radius within which to find cities
+          format: int32
+          in: query
+          name: nearLocationRadius
+          required: false
+          type: integer
+        - default: MI
+          description: 'The location radius unit of distance: MI | KM'
+          in: query
+          name: nearLocationRadiusUnit
+          required: false
+          type: string
+        - default: NONE
+          description: 'Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
+          in: query
+          name: includeDeleted
+          required: false
+          type: string
+        - default: 10
+          description: The maximum number of results to retrieve
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: The zero-ary offset index into the results
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CitiesResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get cities
+      tags:
+        - Geo
+  '/v1/geo/cities/{cityId}':
+    get:
+      description: 'Get the details for a specific city, including location coordinates, population, and elevation above sea-level (if available).'
+      operationId: getCityUsingGET
+      parameters:
+        - description: The city id
+          format: int32
+          in: path
+          name: cityId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CityResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get city details
+      tags:
+        - Geo
+  '/v1/geo/cities/{cityId}/nearbyCities':
+    get:
+      description: Get nearby cities
+      operationId: findNearbyCitiesUsingGET
+      parameters:
+        - description: cityId
+          format: int32
+          in: path
+          name: cityId
+          required: true
+          type: integer
+        - description: Only cities having at least this population
+          format: int32
+          in: query
+          name: minPopulation
+          required: false
+          type: integer
+        - description: The location radius within which to find cities
+          format: int32
+          in: query
+          name: nearLocationRadius
+          required: false
+          type: integer
+        - default: MI
+          description: 'The location radius unit of distance: MI | KM'
+          in: query
+          name: nearLocationRadiusUnit
+          required: false
+          type: string
+        - default: NONE
+          description: 'Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
+          in: query
+          name: includeDeleted
+          required: false
+          type: string
+        - default: 10
+          description: The maximum number of results to retrieve
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: The zero-ary offset index into the results
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CitiesResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: 'Get cities near the given city, filtering by optional criteria.'
+      tags:
+        - Geo
+  /v1/geo/countries:
+    get:
+      description: 'Get countries, filtering by optional criteria. If no criteria are set, you will get back all known countries.'
+      operationId: getCountriesUsingGET
+      parameters:
+        - description: Only countries supporting this currency
+          in: query
+          name: currencyCode
+          required: false
+          type: string
+        - default: 10
+          description: The maximum number of results to retrieve
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: The zero-ary offset index into the results
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CountriesResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get countries
+      tags:
+        - Geo
+  '/v1/geo/countries/{countryCode}':
+    get:
+      description: 'Get the details for a specific country, including number of regions.'
+      operationId: getCountryUsingGET
+      parameters:
+        - description: An ISO-3166 country code
+          in: path
+          name: countryCode
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CountryResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get country details
+      tags:
+        - Geo
+  '/v1/geo/countries/{countryCode}/regions':
+    get:
+      description: 'Get all regions in a specific country. These could be states, provinces, districts, or otherwise major political divisions.'
+      operationId: getRegionsUsingGET
+      parameters:
+        - description: An ISO-3166 country code
+          in: path
+          name: countryCode
+          required: true
+          type: string
+        - default: 10
+          description: The maximum number of results to retrieve
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: The zero-ary offset index into the results
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RegionsResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get country regions
+      tags:
+        - Geo
+  '/v1/geo/countries/{countryCode}/regions/{regionCode}':
+    get:
+      description: 'Get the details of a specific country region, including number of cities.'
+      operationId: getRegionUsingGET
+      parameters:
+        - description: An ISO-3166 country code
+          in: path
+          name: countryCode
+          required: true
+          type: string
+        - description: 'An HASC, ISO-3166, or FIPS region code'
+          in: path
+          name: regionCode
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RegionResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get region details
+      tags:
+        - Geo
+  '/v1/geo/countries/{countryCode}/regions/{regionCode}/cities':
+    get:
+      description: Get the cities in a specific country region. The country and region info is omitted in the response.
+      operationId: findRegionCitiesUsingGET
+      parameters:
+        - description: An ISO-3166 country code
+          in: path
+          name: countryCode
+          required: true
+          type: string
+        - description: 'An HASC, ISO-3166, or FIPS region code'
+          in: path
+          name: regionCode
+          required: true
+          type: string
+        - description: Only cities having at least this population
+          format: int32
+          in: query
+          name: minPopulation
+          required: false
+          type: integer
+        - default: NONE
+          description: 'Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
+          in: query
+          name: includeDeleted
+          required: false
+          type: string
+        - default: 10
+          description: The maximum number of results to retrieve
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: The zero-ary offset index into the results
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CitiesResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get country region cities
+      tags:
+        - Geo
+  /v1/locale/currencies:
+    get:
+      description: 'Get currencies, filtering by optional criteria. If no criteria are set, you will get back all known currencies.'
+      operationId: getCurrenciesUsingGET
+      parameters:
+        - description: Only currencies supported by this country
+          in: query
+          name: countryCode
+          required: false
+          type: string
+        - default: 10
+          description: The maximum number of results to retrieve
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: The zero-ary offset index into the results
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CurrenciesResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get currencies
+      tags:
+        - Locale
+  /v1/locale/locales:
+    get:
+      description: Get all known locales
+      operationId: getLocalesUsingGET
+      parameters:
+        - default: 10
+          description: The maximum number of results to retrieve
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: The zero-ary offset index into the results
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/LocalesResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get locales
+      tags:
+        - Locale
+definitions:
+  CitiesResponse:
+    properties:
+      data:
+        description: A list of CitySummaries
+        items:
+          $ref: '#/definitions/CitySummary'
+        type: array
+      errors:
+        description: A list of WftErrors
+        items:
+          $ref: '#/definitions/WftError'
+        type: array
+      links:
+        description: A list of Links
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      metadata:
+        $ref: '#/definitions/Metadata'
+    type: object
+  CityDetails:
+    properties:
+      city:
+        type: string
+      country:
+        type: string
+      countryCode:
+        type: string
+      deleted:
+        type: boolean
+      elevationMeters:
+        format: int32
+        type: integer
+      id:
+        format: int32
+        type: integer
+      location:
+        $ref: '#/definitions/GeoLocation'
+      population:
+        format: int32
+        type: integer
+      region:
+        type: string
+      regionCode:
+        type: string
+    type: object
+  CityResponse:
+    properties:
+      data:
+        $ref: '#/definitions/CityDetails'
+      errors:
+        description: A list of WftErrors
+        items:
+          $ref: '#/definitions/WftError'
+        type: array
+    type: object
+  CitySummary:
+    properties:
+      city:
+        type: string
+      country:
+        type: string
+      countryCode:
+        type: string
+      id:
+        format: int32
+        type: integer
+      region:
+        type: string
+      regionCode:
+        type: string
+    type: object
+  CountriesResponse:
+    properties:
+      data:
+        description: A list of CountrySummarys
+        items:
+          $ref: '#/definitions/CountrySummary'
+        type: array
+      errors:
+        description: A list of WftErrors
+        items:
+          $ref: '#/definitions/WftError'
+        type: array
+      links:
+        description: A list of Links
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      metadata:
+        $ref: '#/definitions/Metadata'
+    type: object
+  CountryDetails:
+    properties:
+      code:
+        type: string
+      currencyCode:
+        description: A ISO-4217 currency code
+        type: string
+      name:
+        type: string
+      numRegions:
+        format: int32
+        type: integer
+    type: object
+  CountryResponse:
+    properties:
+      data:
+        $ref: '#/definitions/CountryDetails'
+      errors:
+        description: A list of WftErrors
+        items:
+          $ref: '#/definitions/WftError'
+        type: array
+    type: object
+  CountrySummary:
+    properties:
+      code:
+        type: string
+      currencyCode:
+        description: A ISO-4217 currency code
+        type: string
+      name:
+        type: string
+    type: object
+  CurrenciesResponse:
+    properties:
+      data:
+        description: A list of CurrencyDescriptors
+        items:
+          $ref: '#/definitions/CurrencyDescriptor'
+        type: array
+      errors:
+        description: A list of WftErrors
+        items:
+          $ref: '#/definitions/WftError'
+        type: array
+      links:
+        description: A list of Links
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      metadata:
+        $ref: '#/definitions/Metadata'
+    type: object
+  CurrencyDescriptor:
+    properties:
+      code:
+        description: A ISO-4217 currency code
+        type: string
+      countryCodes:
+        description: A list of ISO-3166 country codes
+        items:
+          type: string
+        type: array
+    type: object
+  GeoLocation:
+    properties:
+      latitude:
+        format: double
+        type: number
+      longitude:
+        format: double
+        type: number
+    type: object
+  Link:
+    properties:
+      href:
+        type: string
+      rel:
+        type: string
+    type: object
+  LocaleDescriptor:
+    properties:
+      code:
+        type: string
+    type: object
+  LocalesResponse:
+    properties:
+      data:
+        description: A list of LocalDescriptors
+        items:
+          $ref: '#/definitions/LocaleDescriptor'
+        type: array
+      errors:
+        description: A list of WftErrors
+        items:
+          $ref: '#/definitions/WftError'
+        type: array
+      links:
+        description: A list of Links
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      metadata:
+        $ref: '#/definitions/Metadata'
+    type: object
+  Metadata:
+    properties:
+      currentOffset:
+        format: int64
+        type: integer
+      totalCount:
+        format: int64
+        type: integer
+    type: object
+  RegionDetails:
+    properties:
+      capital:
+        type: string
+      countryCode:
+        description: An ISO-3166 country code
+        type: string
+      fipsCode:
+        type: string
+      hascCode:
+        type: string
+      isoCode:
+        type: string
+      name:
+        description: The well-known internationally recognized name for this region
+        type: string
+      numCities:
+        format: int32
+        type: integer
+    type: object
+  RegionResponse:
+    properties:
+      data:
+        $ref: '#/definitions/RegionDetails'
+      errors:
+        description: A list of WftErrors
+        items:
+          $ref: '#/definitions/WftError'
+        type: array
+    type: object
+  RegionSummary:
+    properties:
+      countryCode:
+        description: An ISO-3166 country code
+        type: string
+      fipsCode:
+        type: string
+      hascCode:
+        type: string
+      isoCode:
+        type: string
+      name:
+        type: string
+    type: object
+  RegionsResponse:
+    properties:
+      data:
+        description: A list of RegionSummaries
+        items:
+          $ref: '#/definitions/RegionSummary'
+        type: array
+      errors:
+        description: A list of WftErrors
+        items:
+          $ref: '#/definitions/WftError'
+        type: array
+      links:
+        description: A list of Links
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      metadata:
+        $ref: '#/definitions/Metadata'
+    type: object
+  WftError:
+    properties:
+      code:
+        $ref: '#/definitions/WftErrorCode'
+      message:
+        type: string
+    type: object
+  WftErrorCode:
+    enum:
+      - ACCESS_DENIED
+      - ENTITY_NOT_FOUND
+      - PARAM_INVALID
+      - PARAMS_MUTUALLY_EXCLUSIVE
+    type: string
