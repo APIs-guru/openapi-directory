@@ -919,11 +919,10 @@ paths:
       operationId: cloudtasks.projects.locations.queues.tasks.list
       parameters:
         - description: |-
-
-            Sort order used for the query. The fields supported for sorting
-            are Task.schedule_time and PullMessage.tag. All results will be
+            Sort order used for the query. The only fields supported for sorting
+            are `schedule_time` and `pull_message.tag`. All results will be
             returned in approximately ascending order. The default ordering is by
-            Task.schedule_time.
+            `schedule_time`.
           in: query
           name: orderBy
           type: string

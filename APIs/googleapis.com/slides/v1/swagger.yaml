@@ -603,7 +603,7 @@ definitions:
           cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
           format.
 
-          The provided URL can be at maximum 2K bytes large.
+          The provided URL can be at most 2 kB in length.
         type: string
     type: object
   CreateImageResponse:
@@ -1789,9 +1789,9 @@ definitions:
         description: |-
           The outline property state.
 
-          Updating the the outline on a page element will implicitly update this
-          field to`RENDERED`, unless another value is specified in the same request.
-          To have no outline on a page element, set this field to `NOT_RENDERED`. In
+          Updating the outline on a page element will implicitly update this field
+          to `RENDERED`, unless another value is specified in the same request. To
+          have no outline on a page element, set this field to `NOT_RENDERED`. In
           this case, any other outline fields set in the same request will be
           ignored.
         enum:
@@ -2293,7 +2293,7 @@ definitions:
           cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
           format.
 
-          The provided URL can be at maximum 2K bytes large.
+          The provided URL can be at most 2 kB in length.
         type: string
       pageObjectIds:
         description: |-
@@ -2619,9 +2619,9 @@ definitions:
         description: |-
           The shadow property state.
 
-          Updating the the shadow on a page element will implicitly update this field
-          to `RENDERED`, unless another value is specified in the same request. To
-          have no shadow on a page element, set this field to `NOT_RENDERED`. In this
+          Updating the shadow on a page element will implicitly update this field to
+          `RENDERED`, unless another value is specified in the same request. To have
+          no shadow on a page element, set this field to `NOT_RENDERED`. In this
           case, any other shadow fields set in the same request will be ignored.
         enum:
           - RENDERED
@@ -2978,7 +2978,7 @@ definitions:
           cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
           format.
 
-          The provided URL can be at maximum 2K bytes large.
+          The provided URL can be at most 2 kB in length.
         type: string
       size:
         $ref: '#/definitions/Size'

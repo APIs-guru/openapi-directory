@@ -401,7 +401,7 @@ paths:
   '/v2beta1/{name}':
     delete:
       description: This method is not supported and the server returns `UNIMPLEMENTED`.
-      operationId: dlp.inspect.operations.delete
+      operationId: dlp.riskAnalysis.operations.delete
       parameters:
         - description: The name of the operation resource to be deleted.
           in: path
@@ -420,13 +420,13 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - inspect
+        - riskAnalysis
     get:
       description: |-
         Gets the latest state of a long-running operation.  Clients can use this
         method to poll the operation result at intervals as recommended by the API
         service.
-      operationId: dlp.inspect.operations.get
+      operationId: dlp.riskAnalysis.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
@@ -445,7 +445,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - inspect
+        - riskAnalysis
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -543,7 +543,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Cancels an operation. Use the `inspect.operations.get` to check whether the cancellation succeeded or the operation completed despite cancellation.
-      operationId: dlp.inspect.operations.cancel
+      operationId: dlp.riskAnalysis.operations.cancel
       parameters:
         - in: body
           name: body
@@ -566,7 +566,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - inspect
+        - riskAnalysis
 definitions:
   GoogleLongrunningCancelOperationRequest:
     description: The request message for Operations.CancelOperation.
@@ -958,13 +958,13 @@ definitions:
     type: object
   GooglePrivacyDlpV2beta1CryptoReplaceFfxFpeConfig:
     description: |-
-      Replaces an identifier with an surrogate using FPE with the FFX
+      Replaces an identifier with a surrogate using FPE with the FFX
       mode of operation.
       The identifier must be representable by the US-ASCII character set.
       For a given crypto key and context, the same identifier will be
       replaced with the same surrogate.
-      Note that a given identifier must be either the empty string or be at
-      least two characters long.
+      Identifiers must be at least two characters long.
+      In the case that the identifier is the empty string, it will be skipped.
     properties:
       commonAlphabet:
         enum:
@@ -1127,7 +1127,7 @@ definitions:
 
       Dictionary words are case-insensitive and all characters other than letters
       and digits in the unicode [Basic Multilingual
-      Plane](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane)
+      Plane](https://en.wikipedia.org/wiki/Plane_%28Unicode%29#Basic_Multilingual_Plane)
       will be replaced with whitespace when scanning for matches, so the
       dictionary phrase "Sam Johnson" will match all three phrases "sam johnson",
       "Sam, Johnson", and "Sam (Johnson)". Additionally, the characters
@@ -1538,6 +1538,17 @@ definitions:
         description: |-
           Optional message indicating that each distinct `EntityId` should not
           contribute to the k-anonymity count more than once per equivalence class.
+          If an entity_id appears on several rows with different quasi-identifier
+          tuples, it will contribute to each count exactly once. This can lead to
+          unexpected results, consider for example the following table:
+            entity_id | quasi_id
+            --------------------
+                    1 |    "foo"
+                    2 |    "bar"
+                    3 |    "foo"
+                    3 |    "bar"
+          The anonymity value associated to entity_id 3 will be 2, even if it is
+          the only entity_id to be associated to both values "foo" and "bar".
       quasiIds:
         description: |-
           Set of fields to compute k-anonymity over. When multiple fields are

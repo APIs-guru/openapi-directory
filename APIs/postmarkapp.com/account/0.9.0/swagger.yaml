@@ -594,6 +594,8 @@ definitions:
     properties:
       BounceHookUrl:
         type: string
+      ClickHookUrl:
+        type: string
       Color:
         type: string
       DeliveryHookUrl:
@@ -614,6 +616,13 @@ definitions:
         type: boolean
       SmtpApiActivated:
         type: boolean
+      TrackLinks:
+        enum:
+          - None
+          - HtmlAndTextTracking
+          - HtmlOnlyTracking
+          - TextOnlyTracking
+        type: string
       TrackOpens:
         type: boolean
   DKIMRotationResponse:
@@ -735,6 +744,8 @@ definitions:
     properties:
       BounceHookUrl:
         type: string
+      ClickHookUrl:
+        type: string
       Color:
         type: string
       DeliveryHookUrl:
@@ -755,6 +766,13 @@ definitions:
         type: boolean
       SmtpApiActivated:
         type: boolean
+      TrackLinks:
+        enum:
+          - None
+          - HtmlAndTextTracking
+          - HtmlOnlyTracking
+          - TextOnlyTracking
+        type: string
       TrackOpens:
         type: boolean
   ExtendedServerInfo:
@@ -765,6 +783,8 @@ definitions:
           type: string
         type: array
       BounceHookUrl:
+        type: string
+      ClickHookUrl:
         type: string
       Color:
         type: string

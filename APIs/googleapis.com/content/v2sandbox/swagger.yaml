@@ -101,7 +101,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Retrieves or modifies multiple orders in a single request. This method can only be called for non-multi-client accounts.
+      description: Retrieves or modifies multiple orders in a single request.
       operationId: content.orders.custombatch
       parameters:
         - in: body
@@ -122,14 +122,9 @@ paths:
         - orders
   '/{merchantId}/orders':
     get:
-      description: Lists the orders in your Merchant Center account. This method can only be called for non-multi-client accounts.
+      description: Lists the orders in your Merchant Center account.
       operationId: content.orders.list
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: |-
             Obtains orders that match the acknowledgement status. When set to true, obtains orders that have been acknowledged. When false, obtains orders that have not been acknowledged.
             We recommend using this filter set to false, in conjunction with the acknowledge call, such that only un-acknowledged orders are returned.
@@ -142,6 +137,11 @@ paths:
           in: query
           name: maxResults
           type: integer
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
         - description: 'The ordering of the returned list. The only supported value are placedDate desc and placedDate asc for now, which returns orders sorted by placement date. "placedDate desc" stands for listing orders by placement date, from oldest to most recent. "placedDate asc" stands for listing orders by placement date, from most recent to oldest. In future releases we''ll support other sorting criteria.'
           enum:
             - placedDate asc
@@ -202,10 +202,10 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{merchantId}/orders/{orderId}':
     get:
-      description: Retrieves an order from your Merchant Center account. This method can only be called for non-multi-client accounts.
+      description: Retrieves an order from your Merchant Center account.
       operationId: content.orders.get
       parameters:
-        - description: The ID of the managing account.
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -245,10 +245,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Marks an order as acknowledged. This method can only be called for non-multi-client accounts.
+      description: Marks an order as acknowledged.
       operationId: content.orders.acknowledge
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersAcknowledgeRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -258,10 +262,6 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersAcknowledgeRequest'
       responses:
         '200':
           description: Successful response
@@ -284,10 +284,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Cancels all line items in an order, making a full refund. This method can only be called for non-multi-client accounts.'
+      description: 'Cancels all line items in an order, making a full refund.'
       operationId: content.orders.cancel
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersCancelRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -297,10 +301,6 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersCancelRequest'
       responses:
         '200':
           description: Successful response
@@ -323,10 +323,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Cancels a line item, making a full refund. This method can only be called for non-multi-client accounts.'
+      description: 'Cancels a line item, making a full refund.'
       operationId: content.orders.cancellineitem
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersCancelLineItemRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -336,10 +340,6 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersCancelLineItemRequest'
       responses:
         '200':
           description: Successful response
@@ -362,10 +362,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Refund a portion of the order, up to the full amount paid. This method can only be called for non-multi-client accounts.'
+      description: 'Refund a portion of the order, up to the full amount paid.'
       operationId: content.orders.refund
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersRefundRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -375,10 +379,6 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersRefundRequest'
       responses:
         '200':
           description: Successful response
@@ -401,10 +401,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Returns a line item. This method can only be called for non-multi-client accounts.
+      description: Returns a line item.
       operationId: content.orders.returnlineitem
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersReturnLineItemRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -414,10 +418,6 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersReturnLineItemRequest'
       responses:
         '200':
           description: Successful response
@@ -440,10 +440,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Marks line item(s) as shipped. This method can only be called for non-multi-client accounts.
+      description: Marks line item(s) as shipped.
       operationId: content.orders.shiplineitems
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersShipLineItemsRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -453,10 +457,6 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersShipLineItemsRequest'
       responses:
         '200':
           description: Successful response
@@ -479,10 +479,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Updates the merchant order ID for a given order. This method can only be called for non-multi-client accounts.
+      description: Updates the merchant order ID for a given order.
       operationId: content.orders.updatemerchantorderid
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersUpdateMerchantOrderIdRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -492,10 +496,6 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersUpdateMerchantOrderIdRequest'
       responses:
         '200':
           description: Successful response
@@ -518,10 +518,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Updates a shipment''s status, carrier, and/or tracking ID. This method can only be called for non-multi-client accounts.'
+      description: 'Updates a shipment''s status, carrier, and/or tracking ID.'
       operationId: content.orders.updateshipment
       parameters:
-        - description: The ID of the managing account.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersUpdateShipmentRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -531,10 +535,6 @@ paths:
           name: orderId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersUpdateShipmentRequest'
       responses:
         '200':
           description: Successful response
@@ -549,10 +549,10 @@ paths:
         - orders
   '/{merchantId}/ordersbymerchantid/{merchantOrderId}':
     get:
-      description: Retrieves an order using merchant order id. This method can only be called for non-multi-client accounts.
+      description: Retrieves an order using merchant order id.
       operationId: content.orders.getbymerchantorderid
       parameters:
-        - description: The ID of the managing account.
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -592,18 +592,18 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Sandbox only. Creates a test order. This method can only be called for non-multi-client accounts.
+      description: Sandbox only. Creates a test order.
       operationId: content.orders.createtestorder
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/OrdersCreateTestOrderRequest'
+        - description: The ID of the account that should manage the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -626,10 +626,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Sandbox only. Moves a test order from state "inProgress" to state "pendingShipment". This method can only be called for non-multi-client accounts.
+      description: Sandbox only. Moves a test order from state "inProgress" to state "pendingShipment".
       operationId: content.orders.advancetestorder
       parameters:
-        - description: The ID of the managing account.
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true
@@ -653,10 +653,10 @@ paths:
         - orders
   '/{merchantId}/testordertemplates/{templateName}':
     get:
-      description: Sandbox only. Retrieves an order template that can be used to quickly create a new order in sandbox. This method can only be called for non-multi-client accounts.
+      description: Sandbox only. Retrieves an order template that can be used to quickly create a new order in sandbox.
       operationId: content.orders.gettestordertemplate
       parameters:
-        - description: The ID of the managing account.
+        - description: The ID of the account that should manage the order. This cannot be a multi-client account.
           in: path
           name: merchantId
           required: true

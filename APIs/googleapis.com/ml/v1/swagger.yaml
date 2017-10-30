@@ -130,38 +130,19 @@ paths:
   '/v1/{name}':
     delete:
       description: |-
-        Deletes a long-running operation. This method indicates that the client is
-        no longer interested in the operation result. It does not cancel the
-        operation. If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: ml.projects.operations.delete
+        Deletes a model version.
+
+        Each model can have multiple versions deployed and in use at any given
+        time. Use this method to remove a single version.
+
+        Note: You cannot delete the version that is set as the default version
+        of the model unless it is the only remaining version.
+      operationId: ml.projects.models.versions.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/GoogleProtobuf__Empty'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-    get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: ml.projects.operations.get
-      parameters:
-        - description: The name of the operation resource.
+        - description: |-
+            Required. The name of the version. You can get the names of all the
+            versions of a model by calling
+            [projects.models.versions.list](/ml-engine/reference/rest/v1/projects.models.versions/list).
           in: path
           name: name
           required: true
@@ -172,6 +153,28 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/GoogleLongrunning__Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    get:
+      description: Describes a job.
+      operationId: ml.projects.jobs.get
+      parameters:
+        - description: Required. The name of the job to get the description of.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleCloudMlV1__Job'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -317,24 +320,14 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
     post:
-      description: |-
-        Starts asynchronous cancellation on a long-running operation.  The server
-        makes a best effort to cancel the operation, but success is not
-        guaranteed.  If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-        Operations.GetOperation or
-        other methods to check whether the cancellation succeeded or whether the
-        operation completed despite cancellation. On successful cancellation,
-        the operation is not deleted; instead, it becomes an operation with
-        an Operation.error value with a google.rpc.Status.code of 1,
-        corresponding to `Code.CANCELLED`.
-      operationId: ml.projects.operations.cancel
+      description: Cancels a running job.
+      operationId: ml.projects.jobs.cancel
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/GoogleCloudMlV1__CancelJobRequest'
-        - description: The name of the operation resource to be cancelled.
+        - description: Required. The name of the job to cancel.
           in: path
           name: name
           required: true
@@ -585,6 +578,10 @@ paths:
         versions.
       operationId: ml.projects.models.list
       parameters:
+        - description: Optional. Specifies the subset of models to retrieve.
+          in: query
+          name: filter
+          type: string
         - description: |-
             Optional. The number of models to retrieve per "page" of results. If there
             are more remaining results than this number, the response message will
@@ -675,6 +672,10 @@ paths:
         be retrieved in batches (called pages):
       operationId: ml.projects.models.versions.list
       parameters:
+        - description: Optional. Specifies the subset of versions to retrieve.
+          in: query
+          name: filter
+          type: string
         - description: |-
             Optional. The number of versions to retrieve per "page" of results. If
             there are more remaining results than this number, the response message
@@ -764,7 +765,7 @@ paths:
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
-      operationId: ml.projects.models.getIamPolicy
+      operationId: ml.projects.jobs.getIamPolicy
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
@@ -819,7 +820,7 @@ paths:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
-      operationId: ml.projects.models.setIamPolicy
+      operationId: ml.projects.jobs.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -869,7 +870,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: ml.projects.models.testIamPermissions
+      operationId: ml.projects.jobs.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -1672,15 +1673,34 @@ definitions:
             <dt>standard_gpu</dt>
             <dd>
             A machine equivalent to <code suppresswarning="true">standard</code> that
-            also includes a
+            also includes a single NVIDIA Tesla K80 GPU. See more about
             <a href="/ml-engine/docs/how-tos/using-gpus">
-            GPU that you can use in your trainer</a>.
+            using GPUs for training your model</a>.
             </dd>
             <dt>complex_model_m_gpu</dt>
             <dd>
             A machine equivalent to
             <code suppresswarning="true">complex_model_m</code> that also includes
-            four GPUs.
+            four NVIDIA Tesla K80 GPUs.
+            </dd>
+            <dt>complex_model_l_gpu</dt>
+            <dd>
+            A machine equivalent to
+            <code suppresswarning="true">complex_model_l</code> that also includes
+            eight NVIDIA Tesla K80 GPUs.
+            </dd>
+            <dt>standard_p100</dt>
+            <dd>
+            A machine equivalent to <code suppresswarning="true">standard</code> that
+            also includes a single NVIDIA Tesla P100 GPU. The availability of these
+            GPUs is in the Alpha launch stage.
+            </dd>
+            <dt>complex_model_m_p100</dt>
+            <dd>
+            A machine equivalent to
+            <code suppresswarning="true">complex_model_m</code> that also includes
+            four NVIDIA Tesla P100 GPUs. The availability of these GPUs is in
+            the Alpha launch stage.
             </dd>
           </dl>
 

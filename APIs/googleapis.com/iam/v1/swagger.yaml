@@ -748,6 +748,9 @@ paths:
           name: pageSize
           type: integer
         - description: Optional pagination token returned in an earlier ListRolesResponse.
+          enum:
+            - BASIC
+            - FULL
           in: query
           name: pageToken
           type: string
@@ -1063,6 +1066,7 @@ definitions:
           - KEY_ALG_UNSPECIFIED
           - KEY_ALG_RSA_1024
           - KEY_ALG_RSA_2048
+          - KEY_ALG_GCS_SYMMETRIC_HMAC
         type: string
       privateKeyType:
         description: |-
@@ -1479,6 +1483,7 @@ definitions:
           - KEY_ALG_UNSPECIFIED
           - KEY_ALG_RSA_1024
           - KEY_ALG_RSA_2048
+          - KEY_ALG_GCS_SYMMETRIC_HMAC
         type: string
       name:
         description: |-

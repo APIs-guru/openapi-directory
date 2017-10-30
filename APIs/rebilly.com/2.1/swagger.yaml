@@ -12540,22 +12540,22 @@ definitions:
         description: Coupon's redemption code
     type: object
   CouponRestriction:
-    allOf:
-      - $ref: '#/definitions/GenericRestriction'
-      - properties:
-          type:
-            description: Coupon's restriction type
-            enum:
-              - discounts-per-redemption
-              - redemptions-per-customer
-              - restrict-to-invoices
-              - restrict-to-plans
-              - restrict-to-subscriptions
-              - minimum-order-amount
-              - total-redemptions
-            type: string
-        type: object
     description: Coupon restrictions
+    discriminator: type
+    properties:
+      type:
+        description: Coupon's restriction type
+        enum:
+          - discounts-per-redemption
+          - minimum-order-amount
+          - redemptions-per-customer
+          - restrict-to-invoices
+          - restrict-to-plans
+          - restrict-to-subscriptions
+          - total-redemptions
+        type: string
+    required:
+      - type
     type: object
   Credential:
     properties:
@@ -13221,6 +13221,7 @@ definitions:
       - dispute-created
       - gateway-account-requested
       - transaction-processed
+      - subscription-activated
       - subscription-canceled
       - subscription-created
       - subscription-renewed
@@ -13612,14 +13613,6 @@ definitions:
       - Wirecard
       - Worldpay
     type: string
-  GenericRestriction:
-    description: All restriction
-    discriminator: type
-    properties:
-      type:
-        description: Restriction type
-        type: string
-    type: object
   GlobalCollect:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -13854,8 +13847,6 @@ definitions:
           - $ref: '#/definitions/SelfLink'
           - $ref: '#/definitions/CustomerLink'
           - $ref: '#/definitions/WebsiteLink'
-          - $ref: '#/definitions/BillingContactLink'
-          - $ref: '#/definitions/DeliveryContactLink'
           - $ref: '#/definitions/OrganizationLink'
           - $ref: '#/definitions/LeadSourceLink'
         maxItems: 6
@@ -15620,20 +15611,20 @@ definitions:
       - name
     type: object
   RedemptionRestriction:
-    allOf:
-      - $ref: '#/definitions/GenericRestriction'
-      - properties:
-          type:
-            description: Redemption's additional restriction type
-            enum:
-              - discounts-per-redemption
-              - restrict-to-invoices
-              - restrict-to-plans
-              - restrict-to-subscriptions
-              - minimum-order-amount
-            type: string
-        type: object
     description: Redemption restrictions
+    discriminator: type
+    properties:
+      type:
+        description: Redemption's additional restriction type
+        enum:
+          - discounts-per-redemption
+          - minimum-order-amount
+          - restrict-to-invoices
+          - restrict-to-plans
+          - restrict-to-subscriptions
+        type: string
+    required:
+      - type
     type: object
   RedirectUrls:
     description: The redirect URIs
@@ -17879,7 +17870,8 @@ definitions:
         type: object
   discounts-per-redemption:
     allOf:
-      - $ref: '#/definitions/GenericRestriction'
+      - $ref: '#/definitions/CouponRestriction'
+      - $ref: '#/definitions/RedemptionRestriction'
       - properties:
           quantity:
             description: Restriction quantity
@@ -18096,7 +18088,8 @@ definitions:
     type: object
   minimum-order-amount:
     allOf:
-      - $ref: '#/definitions/GenericRestriction'
+      - $ref: '#/definitions/CouponRestriction'
+      - $ref: '#/definitions/RedemptionRestriction'
       - properties:
           amount:
             description: Minimum order quantity
@@ -18222,7 +18215,8 @@ definitions:
       - $ref: '#/definitions/UserPasswordAuthorization'
   redemptions-per-customer:
     allOf:
-      - $ref: '#/definitions/GenericRestriction'
+      - $ref: '#/definitions/CouponRestriction'
+      - $ref: '#/definitions/RedemptionRestriction'
       - properties:
           quantity:
             description: Restriction value
@@ -18233,7 +18227,8 @@ definitions:
     description: Quantity per Customer restrictions
   restrict-to-invoices:
     allOf:
-      - $ref: '#/definitions/GenericRestriction'
+      - $ref: '#/definitions/CouponRestriction'
+      - $ref: '#/definitions/RedemptionRestriction'
       - properties:
           invoiceIds:
             description: Invoice IDs coupon can be applied to
@@ -18246,7 +18241,8 @@ definitions:
     description: restrict-to-invoices restrictions
   restrict-to-plans:
     allOf:
-      - $ref: '#/definitions/GenericRestriction'
+      - $ref: '#/definitions/CouponRestriction'
+      - $ref: '#/definitions/RedemptionRestriction'
       - properties:
           planIds:
             description: Plan IDs coupon can be applied to
@@ -18259,7 +18255,8 @@ definitions:
     description: restrict-to-plans restrictions
   restrict-to-subscriptions:
     allOf:
-      - $ref: '#/definitions/GenericRestriction'
+      - $ref: '#/definitions/CouponRestriction'
+      - $ref: '#/definitions/RedemptionRestriction'
       - properties:
           subscriptionIds:
             description: Subscription IDs coupon can be applied to
@@ -18303,7 +18300,8 @@ definitions:
     description: Stop active subscriptions
   total-redemptions:
     allOf:
-      - $ref: '#/definitions/GenericRestriction'
+      - $ref: '#/definitions/CouponRestriction'
+      - $ref: '#/definitions/RedemptionRestriction'
       - properties:
           quantity:
             description: Total redemptions quantity

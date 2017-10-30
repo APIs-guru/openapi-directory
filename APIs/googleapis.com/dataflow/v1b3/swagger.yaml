@@ -2282,8 +2282,10 @@ definitions:
       originNamespace:
         description: A string containing a more specific namespace of the counter's origin.
         type: string
-      originalShuffleStepName:
-        description: The GroupByKey step name from the original graph.
+      originalRequestingStepName:
+        description: |-
+          The step name requesting an operation, such as GBK.
+          I.e. the ParDo causing a read/write from shuffle to occur.
         type: string
       originalStepName:
         description: |-
@@ -2302,7 +2304,7 @@ definitions:
         description: |-
           ID of a side input being read from/written to. Side inputs are identified
           by a pair of (reader, input_index). The reader is usually equal to the
-          original name, but it may be different, if a ParDo emits it's Iterator /
+          original name, but it may be different, if a ParDo emits its Iterator /
           Map side input object.
       workerId:
         description: ID of a particular worker.
@@ -4087,9 +4089,27 @@ definitions:
       getMetadata:
         $ref: '#/definitions/SourceGetMetadataRequest'
         description: Information about a request to get metadata about a source.
+      name:
+        description: User-provided name of the Read instruction for this source.
+        type: string
+      originalName:
+        description: |-
+          System-defined name for the Read instruction for this source
+          in the original workflow graph.
+        type: string
       split:
         $ref: '#/definitions/SourceSplitRequest'
         description: Information about a request to split a source.
+      stageName:
+        description: |-
+          System-defined name of the stage containing the source operation.
+          Unique across the workflow.
+        type: string
+      systemName:
+        description: |-
+          System-defined name of the Read instruction for this source.
+          Unique across the workflow.
+        type: string
     type: object
   SourceOperationResponse:
     description: |-

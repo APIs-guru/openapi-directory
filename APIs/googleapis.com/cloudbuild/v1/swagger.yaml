@@ -298,6 +298,78 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1/projects/{projectId}/builds/{id}:retry':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Creates a new build based on the given build.
+
+        This API creates a new build using the original build request,  which may
+        or may not result in an identical build.
+
+        For triggered builds:
+
+        * Triggered builds resolve to a precise revision, so a retry of a triggered
+        build will result in a build that uses the same revision.
+
+        For non-triggered builds that specify RepoSource:
+
+        * If the original build built from the tip of a branch, the retried build
+        will build from the tip of that branch, which may not be the same revision
+        as the original build.
+        * If the original build specified a commit sha or revision ID, the retried
+        build will use the identical source.
+
+        For builds that specify StorageSource:
+
+        * If the original build pulled source from Cloud Storage without specifying
+        the generation of the object, the new build will use the current object,
+        which may be different from the original build source.
+        * If the original build pulled source from Cloud Storage and specified the
+        generation of the object, the new build will attempt to use the same
+        object, which may or may not be available depending on the bucket's
+        lifecycle management settings.
+      operationId: cloudbuild.projects.builds.retry
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RetryBuildRequest'
+        - description: Build ID of the original build.
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: ID of the project.
+          in: path
+          name: projectId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v1/projects/{projectId}/triggers':
     get:
       description: |-
@@ -464,6 +536,51 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/BuildTrigger'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/projects/{projectId}/triggers/{triggerId}:run':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Runs a BuildTrigger at a particular source revision.
+      operationId: cloudbuild.projects.triggers.run
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RepoSource'
+        - description: ID of the project.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: ID of the trigger.
+          in: path
+          name: triggerId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -740,6 +857,15 @@ definitions:
   BuildOptions:
     description: Optional arguments to enable specific features of builds.
     properties:
+      logStreamingOption:
+        description: |-
+          LogStreamingOption to define build log streaming behavior to Google Cloud
+          Storage.
+        enum:
+          - STREAM_DEFAULT
+          - STREAM_ON
+          - STREAM_OFF
+        type: string
       requestedVerifyOption:
         description: Requested verifiability options.
         enum:
@@ -1065,6 +1191,10 @@ definitions:
         items:
           $ref: '#/definitions/BuiltImage'
         type: array
+    type: object
+  RetryBuildRequest:
+    description: RetryBuildRequest specifies a build to retry.
+    properties: {}
     type: object
   Secret:
     description: |-

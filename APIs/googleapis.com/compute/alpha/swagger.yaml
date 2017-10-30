@@ -29116,6 +29116,11 @@ definitions:
 
           For a full list of restrictions, read the Specifications for custom machine types.
         type: string
+      maintenancePolicies:
+        description: Maintenance policies applied to this instance.
+        items:
+          type: string
+        type: array
       metadata:
         $ref: '#/definitions/Metadata'
         description: The metadata key/value pairs assigned to this instance. This includes custom metadata and predefined keys.

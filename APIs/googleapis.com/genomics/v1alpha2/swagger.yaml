@@ -1046,6 +1046,21 @@ definitions:
   PipelineResources:
     description: The system resources for the pipeline run.
     properties:
+      acceleratorCount:
+        description: |-
+          Optional. The number of accelerators of the specified type to attach.
+          By specifying this parameter, you will download and install the following
+          third-party software onto your managed GCE instances: NVIDIA® Tesla®
+          drivers and NVIDIA® CUDA toolkit.
+        format: int64
+        type: string
+      acceleratorType:
+        description: |-
+          Optional. The GCE defined accelerator type.
+          By specifying this parameter, you will download and install the following
+          third-party software onto your managed GCE instances: NVIDIA® Tesla®
+          drivers and NVIDIA® CUDA toolkit.
+        type: string
       bootDiskSizeGb:
         description: The size of the boot disk. Defaults to 10 (GB).
         format: int32

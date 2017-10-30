@@ -6,7 +6,7 @@ basePath: /latest
 info:
   description: An OpenAPI for EVE Online
   title: EVE Swagger Interface
-  version: 0.6.2
+  version: 0.7.0
   x-apisguru-categories:
     - media
   x-logo:
@@ -61,7 +61,9 @@ securityDefinitions:
       esi-fleets.read_fleet.v1: EVE SSO scope esi-fleets.read_fleet.v1
       esi-fleets.write_fleet.v1: EVE SSO scope esi-fleets.write_fleet.v1
       esi-industry.read_character_jobs.v1: EVE SSO scope esi-industry.read_character_jobs.v1
+      esi-industry.read_character_mining.v1: EVE SSO scope esi-industry.read_character_mining.v1
       esi-industry.read_corporation_jobs.v1: EVE SSO scope esi-industry.read_corporation_jobs.v1
+      esi-industry.read_corporation_mining.v1: EVE SSO scope esi-industry.read_corporation_mining.v1
       esi-killmails.read_corporation_killmails.v1: EVE SSO scope esi-killmails.read_corporation_killmails.v1
       esi-killmails.read_killmails.v1: EVE SSO scope esi-killmails.read_killmails.v1
       esi-location.read_location.v1: EVE SSO scope esi-location.read_location.v1
@@ -5965,6 +5967,117 @@ paths:
         - legacy
         - v1
       x-cached-seconds: 3600
+  '/characters/{character_id}/mining/':
+    get:
+      description: |-
+        Paginated record of all mining done by a character for the past 30 days
+
+
+        ---
+        Alternate route: `/v1/characters/{character_id}/mining/`
+
+        Alternate route: `/legacy/characters/{character_id}/mining/`
+
+        Alternate route: `/dev/characters/{character_id}/mining/`
+
+        ---
+        This route is cached for up to 600 seconds
+      operationId: get_characters_character_id_mining
+      parameters:
+        - $ref: '#/parameters/character_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: Mining ledger of a character
+          examples:
+            application/json:
+              - date: '2017-09-19'
+                quantity: 7004
+                solar_system_id: 30003707
+                type_id: 17471
+              - date: '2017-09-18'
+                quantity: 5199
+                solar_system_id: 30003707
+                type_id: 17471
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                date:
+                  description: date string
+                  format: date
+                  title: get_characters_character_id_mining_date
+                  type: string
+                quantity:
+                  description: quantity integer
+                  format: int64
+                  title: get_characters_character_id_mining_quantity
+                  type: integer
+                solar_system_id:
+                  description: solar_system_id integer
+                  format: int32
+                  title: get_characters_character_id_mining_solar_system_id
+                  type: integer
+                type_id:
+                  description: type_id integer
+                  format: int32
+                  title: get_characters_character_id_mining_type_id
+                  type: integer
+              required:
+                - date
+                - solar_system_id
+                - type_id
+                - quantity
+              title: get_characters_character_id_mining_200_ok
+              type: object
+            maxItems: 1000
+            title: get_characters_character_id_mining_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-industry.read_character_mining.v1
+      summary: Character mining ledger
+      tags:
+        - Industry
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 600
   '/characters/{character_id}/notifications/':
     get:
       description: |-
@@ -8593,6 +8706,347 @@ paths:
         - legacy
         - v1
       x-cached-seconds: 3600
+  '/corporation/{corporation_id}/mining/extractions/':
+    get:
+      description: |-
+        Extraction timers for all moon chunks being extracted by refineries belonging to a corporation.
+
+
+        ---
+        Alternate route: `/v1/corporation/{corporation_id}/mining/extractions/`
+
+        Alternate route: `/legacy/corporation/{corporation_id}/mining/extractions/`
+
+        Alternate route: `/dev/corporation/{corporation_id}/mining/extractions/`
+
+        ---
+        This route is cached for up to 1800 seconds
+      operationId: get_corporation_corporation_id_mining_extractions
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: A list of chunk timers
+          examples:
+            application/json:
+              - chunk_arrival_time: '2017-10-17T11:00:59Z'
+                extraction_start_time: '2017-10-11T10:37:04Z'
+                moon_id: 40307229
+                natural_decay_time: '2017-10-17T14:00:59Z'
+                structure_id: 1000000010579
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                chunk_arrival_time:
+                  description: |
+                    The time at which the chunk being extracted will arrive and can be fractured by the moon mining drill.
+                  format: date-time
+                  title: get_corporation_corporation_id_mining_extractions_chunk_arrival_time
+                  type: string
+                extraction_start_time:
+                  description: |
+                    The time at which the current extraction was initiated.
+                  format: date-time
+                  title: get_corporation_corporation_id_mining_extractions_extraction_start_time
+                  type: string
+                moon_id:
+                  description: moon_id integer
+                  format: int32
+                  title: get_corporation_corporation_id_mining_extractions_moon_id
+                  type: integer
+                natural_decay_time:
+                  description: |
+                    The time at which the chunk being extracted will naturally fracture if it is not first fractured by the moon mining drill.
+                  format: date-time
+                  title: get_corporation_corporation_id_mining_extractions_natural_decay_time
+                  type: string
+                structure_id:
+                  description: structure_id integer
+                  format: int64
+                  title: get_corporation_corporation_id_mining_extractions_structure_id
+                  type: integer
+              required:
+                - structure_id
+                - moon_id
+                - extraction_start_time
+                - chunk_arrival_time
+                - natural_decay_time
+              title: get_corporation_corporation_id_mining_extractions_200_ok
+              type: object
+            maxItems: 1000
+            title: get_corporation_corporation_id_mining_extractions_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-industry.read_corporation_mining.v1
+      summary: Moon extraction timers
+      tags:
+        - Industry
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 1800
+      x-required-roles:
+        - Structure_manager
+  '/corporation/{corporation_id}/mining/observers/':
+    get:
+      description: |-
+        Paginated list of all entities capable of observing and recording mining for a corporation
+
+
+        ---
+        Alternate route: `/v1/corporation/{corporation_id}/mining/observers/`
+
+        Alternate route: `/legacy/corporation/{corporation_id}/mining/observers/`
+
+        Alternate route: `/dev/corporation/{corporation_id}/mining/observers/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporation_corporation_id_mining_observers
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: Observer list of a corporation
+          examples:
+            application/json:
+              - last_updated: '2017-09-19'
+                observer_id: 1
+                observer_type: structure
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                last_updated:
+                  description: last_updated string
+                  format: date
+                  title: get_corporation_corporation_id_mining_observers_last_updated
+                  type: string
+                observer_id:
+                  description: |
+                    The entity that was observing the asteroid field when it was mined.
+                  format: int64
+                  title: get_corporation_corporation_id_mining_observers_observer_id
+                  type: integer
+                observer_type:
+                  description: The category of the observing entity
+                  enum:
+                    - structure
+                  title: get_corporation_corporation_id_mining_observers_observer_type
+                  type: string
+              required:
+                - last_updated
+                - observer_id
+                - observer_type
+              title: get_corporation_corporation_id_mining_observers_200_ok
+              type: object
+            maxItems: 1000
+            title: get_corporation_corporation_id_mining_observers_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-industry.read_corporation_mining.v1
+      summary: Corporation mining observers
+      tags:
+        - Industry
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles:
+        - Accountant
+  '/corporation/{corporation_id}/mining/observers/{observer_id}/':
+    get:
+      description: |-
+        Paginated record of all mining seen by an observer
+
+
+        ---
+        Alternate route: `/v1/corporation/{corporation_id}/mining/observers/{observer_id}/`
+
+        Alternate route: `/legacy/corporation/{corporation_id}/mining/observers/{observer_id}/`
+
+        Alternate route: `/dev/corporation/{corporation_id}/mining/observers/{observer_id}/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporation_corporation_id_mining_observers_observer_id
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - description: A mining observer id
+          format: int64
+          in: path
+          name: observer_id
+          required: true
+          type: integer
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: Mining ledger of an observer
+          examples:
+            application/json:
+              - character_id: 95465499
+                last_updated: '2017-09-19'
+                quantity: 500
+                recorded_corporation_id: 109299958
+                type_id: 1230
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                character_id:
+                  description: |
+                    The character that did the mining
+                  format: int32
+                  title: get_corporation_corporation_id_mining_observers_observer_id_character_id
+                  type: integer
+                last_updated:
+                  description: last_updated string
+                  format: date
+                  title: get_corporation_corporation_id_mining_observers_observer_id_last_updated
+                  type: string
+                quantity:
+                  description: quantity integer
+                  format: int64
+                  title: get_corporation_corporation_id_mining_observers_observer_id_quantity
+                  type: integer
+                recorded_corporation_id:
+                  description: |
+                    The corporation id of the character at the time data was recorded.
+                  format: int32
+                  title: get_corporation_corporation_id_mining_observers_observer_id_recorded_corporation_id
+                  type: integer
+                type_id:
+                  description: type_id integer
+                  format: int32
+                  title: get_corporation_corporation_id_mining_observers_observer_id_type_id
+                  type: integer
+              required:
+                - last_updated
+                - character_id
+                - recorded_corporation_id
+                - type_id
+                - quantity
+              title: get_corporation_corporation_id_mining_observers_observer_id_200_ok
+              type: object
+            maxItems: 1000
+            title: get_corporation_corporation_id_mining_observers_observer_id_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-industry.read_corporation_mining.v1
+      summary: Observed corporation mining
+      tags:
+        - Industry
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles:
+        - Accountant
   /corporations/names/:
     get:
       description: |-
@@ -13578,6 +14032,9 @@ paths:
         - legacy
         - v1
       x-cached-seconds: 300
+      x-required-roles:
+        - Accountant
+        - Junior_Accountant
   '/corporations/{corporation_id}/wallets/{division}/journal/':
     get:
       description: |-
@@ -13913,6 +14370,9 @@ paths:
         - legacy
         - v1
       x-cached-seconds: 3600
+      x-required-roles:
+        - Accountant
+        - Junior_Accountant
   '/corporations/{corporation_id}/wallets/{division}/transactions/':
     get:
       description: |-
@@ -14061,6 +14521,9 @@ paths:
         - legacy
         - v1
       x-cached-seconds: 3600
+      x-required-roles:
+        - Accountant
+        - Junior_Accountant
   /dogma/attributes/:
     get:
       description: |-
@@ -17084,14 +17547,15 @@ paths:
                       activity:
                         description: activity string
                         enum:
-                          - none
-                          - manufacturing
-                          - researching_technology
-                          - researching_time_efficiency
-                          - researching_material_efficiency
                           - copying
                           - duplicating
                           - invention
+                          - manufacturing
+                          - none
+                          - reaction
+                          - researching_material_efficiency
+                          - researching_technology
+                          - researching_time_efficiency
                           - reverse_engineering
                         title: get_industry_systems_activity
                         type: string
@@ -18022,7 +18486,7 @@ paths:
               - duration: 90
                 is_buy_order: false
                 issued: '2016-09-03T05:12:25Z'
-                location_id: 60005599
+                location_id: 1020988381992
                 min_volume: 1
                 order_id: 4623824223
                 price: 9.9
@@ -22309,8 +22773,8 @@ paths:
           description: List of public structure IDs
           examples:
             application/json:
-              - 1000000017013
-              - 1000000025062
+              - 1020988381992
+              - 1020988381991
           headers:
             Cache-Control:
               description: The caching mechanism used

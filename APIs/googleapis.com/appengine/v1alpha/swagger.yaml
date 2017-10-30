@@ -450,6 +450,14 @@ paths:
           in: query
           name: noManagedCertificate
           type: boolean
+        - description: 'Whether the domain creation should override any existing mappings for this domain. By default, overrides are rejected.'
+          enum:
+            - UNSPECIFIED_DOMAIN_OVERRIDE_STRATEGY
+            - STRICT
+            - OVERRIDE
+          in: query
+          name: overrideStrategy
+          type: string
       responses:
         '200':
           description: Successful response
@@ -978,6 +986,8 @@ definitions:
           - FAILED_RETRYING_INTERNAL
           - FAILED_RETRYING_NOT_VISIBLE
           - FAILED_PERMANENTLY_NOT_VISIBLE
+          - FAILED_RETRYING_CAA_FORBIDDEN
+          - FAILED_RETRYING_CAA_CHECKING
         type: string
     type: object
   Operation:
@@ -1022,27 +1032,6 @@ definitions:
         type: string
       target:
         description: 'Name of the resource that this operation is acting on. Example: apps/myapp/modules/default.@OutputOnly'
-        type: string
-      user:
-        description: User who requested this operation.@OutputOnly
-        type: string
-    type: object
-  OperationMetadataExperimental:
-    description: Metadata for the given google.longrunning.Operation.
-    properties:
-      endTime:
-        description: Time that this operation completed.@OutputOnly
-        format: google-datetime
-        type: string
-      insertTime:
-        description: Time that this operation was created.@OutputOnly
-        format: google-datetime
-        type: string
-      method:
-        description: 'API method that initiated this operation. Example: google.appengine.experimental.CustomDomains.CreateCustomDomain.@OutputOnly'
-        type: string
-      target:
-        description: 'Name of the resource that this operation is acting on. Example: apps/myapp/customDomains/example.com.@OutputOnly'
         type: string
       user:
         description: User who requested this operation.@OutputOnly

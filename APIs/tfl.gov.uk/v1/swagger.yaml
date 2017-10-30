@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: 'push-api-neon.tfl.gov.uk:8001'
+host: api.tfl.gov.uk
 info:
   description: 'Our unified API brings together data across all modes of transport into a single RESTful API. This API provides access to the most highly requested realtime and status infomation across all the modes of transport, in a single and consistent way. Access to the developer documentation is available at https://api.tfl.gov.uk'
   title: Transport for London Unified
@@ -3215,6 +3215,7 @@ definitions:
         description: Gets or sets the description of the category.
         type: string
       closureText:
+        description: Text describing the closure type
         type: string
       created:
         description: Gets or sets the date/time when this disruption was created.
@@ -3223,10 +3224,6 @@ definitions:
       description:
         description: Gets or sets the description of this disruption.
         type: string
-      isBlocking:
-        type: boolean
-      isWholeLine:
-        type: boolean
       lastUpdate:
         description: Gets or sets the date/time when this disruption was last updated.
         format: date-time

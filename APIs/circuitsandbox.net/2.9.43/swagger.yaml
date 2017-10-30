@@ -9,7 +9,7 @@ info:
 
     [Learn more about the Circuit Development Community](https://www.circuit.com/web/developers/home)
   title: REST API Version 2
-  version: 2.9.40
+  version: 2.9.43
   x-apisguru-categories:
     - messaging
   x-logo:
@@ -1674,6 +1674,12 @@ paths:
           name: dndUntil
           required: false
           type: string
+        - default: false
+          description: not available
+          in: formData
+          name: clearDND
+          required: false
+          type: boolean
         - description: An optional status message that is displayed instead of the location
           in: formData
           maxLength: 255

@@ -334,6 +334,45 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - documents
+  '/v1/documents:classifyText':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Classifies a document into categories.
+      operationId: language.documents.classifyText
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ClassifyTextRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ClassifyTextResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-language'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-language'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - documents
 definitions:
   AnalyzeEntitiesRequest:
     description: The entity analysis request message.
@@ -486,6 +525,11 @@ definitions:
   AnnotateTextResponse:
     description: The text annotations response message.
     properties:
+      categories:
+        description: Categories identified in the input document.
+        items:
+          $ref: '#/definitions/ClassificationCategory'
+        type: array
       documentSentiment:
         $ref: '#/definitions/Sentiment'
         description: |-
@@ -519,6 +563,35 @@ definitions:
           AnnotateTextRequest.Features.extract_syntax.
         items:
           $ref: '#/definitions/Token'
+        type: array
+    type: object
+  ClassificationCategory:
+    description: Represents a category returned from the text classifier.
+    properties:
+      confidence:
+        description: |-
+          The classifier's confidence of the category. Number represents how certain
+          the classifier is that this category represents the given text.
+        format: float
+        type: number
+      name:
+        description: The name of the category representing the document.
+        type: string
+    type: object
+  ClassifyTextRequest:
+    description: The document classification request message.
+    properties:
+      document:
+        $ref: '#/definitions/Document'
+        description: Input document.
+    type: object
+  ClassifyTextResponse:
+    description: The document classification response message.
+    properties:
+      categories:
+        description: Categories representing the input document.
+        items:
+          $ref: '#/definitions/ClassificationCategory'
         type: array
     type: object
   DependencyEdge:
@@ -744,6 +817,9 @@ definitions:
       All available features for sentiment, syntax, and semantic analysis.
       Setting each one to true will enable that specific analysis for the input.
     properties:
+      classifyText:
+        description: Classify the full document into categories.
+        type: boolean
       extractDocumentSentiment:
         description: Extract document-level sentiment.
         type: boolean

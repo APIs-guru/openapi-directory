@@ -197,6 +197,20 @@ paths:
           name: condition
           required: true
           type: string
+        - default: 1
+          in: query
+          name: page
+          required: false
+          type: integer
+        - default: 24
+          in: query
+          name: per_page
+          required: false
+          type: integer
+        - in: query
+          name: offset
+          required: false
+          type: integer
       responses:
         default:
           description: Unexpected error
@@ -1137,6 +1151,15 @@ paths:
         default:
           description: Unexpected error
       summary: 'All listings including used, handmade, and brand new'
+      tags:
+        - listings
+  /listings/facets/seller_location:
+    get:
+      description: Individual facets
+      responses:
+        default:
+          description: Unexpected error
+      summary: Individual facets
       tags:
         - listings
   '/listings/{id}/negotiation':
@@ -4199,8 +4222,6 @@ paths:
                 type: string
               website:
                 type: string
-            required:
-              - legal_country_code_confirmed
             type: object
       responses:
         default:

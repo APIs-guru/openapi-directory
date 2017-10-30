@@ -313,8 +313,16 @@ responses:
           The ETag value to identify the resource.\
           For more details go to this link: http://tools.ietf.org/html/rfc7232#section-2.3
         type: string
+  BadRequestResponse:
+    description: Invalid request
+    schema:
+      $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
   GeneralError:
     description: Occurs when something goes wrong
+    schema:
+      $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+  StoreNotFoundResponse:
+    description: Store or resource not found
     schema:
       $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
   importAlreadyInProgress:
@@ -371,7 +379,7 @@ tags:
   - description: All store share operations
     name: Customer - Shares
     x-displayName: Shares
-  - description: All stores's alerts operations
+  - description: All stores' alerts operations
     name: Customer - Alerts
     x-displayName: Alerts
   - description: All store rights operations
@@ -458,6 +466,9 @@ tags:
   - description: All Order report exportation operations
     name: Marketplaces - Orders - Exports
     x-displayName: Exports
+  - description: All global operations concerning Analytics API
+    name: Analytics - Global
+    x-displayName: Global
   - description: All tracking operations
     name: Analytics - Tracking
     x-displayName: Tracking
@@ -704,6 +715,21 @@ paths:
       summary: User Registration
       tags:
         - Public - Security - Security
+  /user/analytics/:
+    get:
+      operationId: AnalyticsIndex
+      responses:
+        '200':
+          description: Analytics API operation index
+          schema:
+            $ref: '#/definitions/analyticsIndex'
+        default:
+          $ref: '#/responses/GeneralError'
+      security:
+        - api_key: []
+      summary: Get the Analytics API operation index
+      tags:
+        - Analytics - Global
   /user/analytics/tracking/status:
     get:
       description: |
@@ -722,11 +748,30 @@ paths:
       summary: Display the synchronization status of the clicks and orders
       tags:
         - Analytics - Tracking
+  '/user/analytics/{storeId}':
+    get:
+      operationId: AnalyticsStoreIndex
+      parameters:
+        - $ref: '#/parameters/storeIdOnlyGeneralParameters'
+      responses:
+        '200':
+          description: Analytics API operation index for one store
+          schema:
+            $ref: '#/definitions/analyticsStoreIndex'
+        '404':
+          $ref: '#/responses/StoreNotFoundResponse'
+        default:
+          $ref: '#/responses/GeneralError'
+      security:
+        - api_key: []
+      summary: Get the Analytics API operation index for one store
+      tags:
+        - Analytics - Global
   '/user/analytics/{storeId}/optimisations/bycategory/{catalogCategoryId}/{actionName}':
     post:
       description: |
         /!\ WARNING /!\ \
-        This operation will reenable or disable products's category for every channel indicated in the body. 
+        This operation will reenable or disable products's category for every channel indicated in the body.
       operationId: OptimiseByCategory
       parameters:
         - $ref: '#/parameters/storeIdOnlyGeneralParameters'
@@ -754,6 +799,10 @@ paths:
       responses:
         '204':
           description: Products optimisatized
+        '400':
+          $ref: '#/responses/BadRequestResponse'
+        '404':
+          $ref: '#/responses/StoreNotFoundResponse'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -779,6 +828,10 @@ paths:
       responses:
         '204':
           description: Products optimisatized
+        '400':
+          $ref: '#/responses/BadRequestResponse'
+        '404':
+          $ref: '#/responses/StoreNotFoundResponse'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -790,7 +843,7 @@ paths:
     post:
       description: |
         /!\ WARNING /!\ \
-        This operation will reenable or disable this product for every channel indicated in the body. 
+        This operation will reenable or disable this product for every channel indicated in the body.
       operationId: OptimiseByProduct
       parameters:
         - $ref: '#/parameters/storeIdOnlyGeneralParameters'
@@ -818,11 +871,39 @@ paths:
       responses:
         '204':
           description: Product(s) optimisatized
+        '400':
+          $ref: '#/responses/BadRequestResponse'
+        '404':
+          $ref: '#/responses/StoreNotFoundResponse'
         default:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
       summary: Optimise products
+      tags:
+        - Analytics - Optimisations
+  '/user/analytics/{storeId}/optimisations/copy':
+    post:
+      operationId: CopyOptimisation
+      parameters:
+        - $ref: '#/parameters/storeIdOnlyGeneralParameters'
+        - in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/copyOptimisationRequest'
+      responses:
+        '204':
+          description: Products optimisatisation copied
+        '400':
+          $ref: '#/responses/BadRequestResponse'
+        '404':
+          $ref: '#/responses/StoreNotFoundResponse'
+        default:
+          $ref: '#/responses/GeneralError'
+      security:
+        - api_key: []
+      summary: Copy products optimisation between 2 channels
       tags:
         - Analytics - Optimisations
   '/user/analytics/{storeId}/optimisations/{actionName}':
@@ -843,6 +924,10 @@ paths:
       responses:
         '204':
           description: Products optimisatized
+        '400':
+          $ref: '#/responses/BadRequestResponse'
+        '404':
+          $ref: '#/responses/StoreNotFoundResponse'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -866,45 +951,15 @@ paths:
           description: Your reporting by channel
           schema:
             $ref: '#/definitions/reportByCategoryResponse'
+        '400':
+          $ref: '#/responses/BadRequestResponse'
+        '404':
+          $ref: '#/responses/StoreNotFoundResponse'
         default:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
       summary: Get the report by category
-      tags:
-        - Analytics - Reports
-  '/user/analytics/{storeId}/reports/bycategory/export':
-    post:
-      description: Export the report by category
-      operationId: ExportStoreReportByCategory
-      parameters:
-        - $ref: '#/parameters/storeIdOnlyGeneralParameters'
-        - $ref: '#/parameters/exportFormatInQueryGeneralParameter'
-        - in: body
-          name: request
-          required: true
-          schema:
-            $ref: '#/definitions/reportByCategoryRequest'
-      responses:
-        '200':
-          description: Your reporting by category exported
-          examples:
-            application/json:
-              href: 'https://beezupchannel.blob.core.windows.net/reports/exports/Excel_Report_Channels.xslx'
-              method: GET
-          headers:
-            Location:
-              description: |
-                To indicate the url of the export file
-                Example: https://beezupchannel.blob.core.windows.net/reports/exports/Excel_Report_Categories.xslx
-              type: string
-          schema:
-            $ref: '#/definitions/BeezUP.Common.Link3'
-        default:
-          $ref: '#/responses/GeneralError'
-      security:
-        - api_key: []
-      summary: Export the report by category
       tags:
         - Analytics - Reports
   '/user/analytics/{storeId}/reports/bychannel':
@@ -923,45 +978,15 @@ paths:
           description: Your reporting by channel
           schema:
             $ref: '#/definitions/reportByChannelResponse'
+        '400':
+          $ref: '#/responses/BadRequestResponse'
+        '404':
+          $ref: '#/responses/StoreNotFoundResponse'
         default:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
       summary: Get the report by channel
-      tags:
-        - Analytics - Reports
-  '/user/analytics/{storeId}/reports/bychannel/export':
-    post:
-      description: Export the report by channel
-      operationId: ExportStoreReportByChannel
-      parameters:
-        - $ref: '#/parameters/storeIdOnlyGeneralParameters'
-        - $ref: '#/parameters/exportFormatInQueryGeneralParameter'
-        - in: body
-          name: request
-          required: true
-          schema:
-            $ref: '#/definitions/reportByChannelRequest'
-      responses:
-        '200':
-          description: Your reporting by channel exported
-          examples:
-            application/json:
-              href: 'https://beezupchannel.blob.core.windows.net/reports/exports/Excel_Report_Channels.xslx'
-              method: GET
-          headers:
-            Location:
-              description: |
-                To indicate the url of the export file
-                Example: https://beezupchannel.blob.core.windows.net/reports/exports/Excel_Report_Channels.xslx
-              type: string
-          schema:
-            $ref: '#/definitions/BeezUP.Common.Link3'
-        default:
-          $ref: '#/responses/GeneralError'
-      security:
-        - api_key: []
-      summary: Export the report by channel
       tags:
         - Analytics - Reports
   '/user/analytics/{storeId}/reports/byday':
@@ -980,41 +1005,10 @@ paths:
           description: Your reporting by day
           schema:
             $ref: '#/definitions/reportByDayResponse'
-        default:
-          $ref: '#/responses/GeneralError'
-      security:
-        - api_key: []
-      summary: Get the report by day
-      tags:
-        - Analytics - Reports
-  '/user/analytics/{storeId}/reports/byday/export':
-    post:
-      description: Get the report by day
-      operationId: GetStoreReportByDayExport
-      parameters:
-        - $ref: '#/parameters/storeIdOnlyGeneralParameters'
-        - $ref: '#/parameters/exportFormatInQueryGeneralParameter'
-        - in: body
-          name: request
-          required: true
-          schema:
-            $ref: '#/definitions/reportByDayRequest'
-      responses:
-        '200':
-          description: Your reporting by day exported into a file
-          examples:
-            application/json:
-              href: 'https://beezupchannel.blob.core.windows.net/reports/exports/Excel_Report_Days.xslx'
-              method: GET
-          headers:
-            Location:
-              description: |
-                To indicate the url of the export file
-                Example: https://beezupchannel.blob.core.windows.net/reports/exports/Excel_Report_Days.xslx
-              type: string
-              x-example: 'https://beezupchannel.blob.core.windows.net/reports/exports/Excel_Report_Days.xslx'
-          schema:
-            $ref: '#/definitions/BeezUP.Common.Link3'
+        '400':
+          $ref: '#/responses/BadRequestResponse'
+        '404':
+          $ref: '#/responses/StoreNotFoundResponse'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1038,45 +1032,15 @@ paths:
           description: Your reporting by product
           schema:
             $ref: '#/definitions/reportByProductResponse'
+        '400':
+          $ref: '#/responses/BadRequestResponse'
+        '404':
+          $ref: '#/responses/StoreNotFoundResponse'
         default:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
       summary: Get the report by product
-      tags:
-        - Analytics - Reports
-  '/user/analytics/{storeId}/reports/byproduct/export':
-    post:
-      description: Export the report by product
-      operationId: ExportStoreReportByProduct
-      parameters:
-        - $ref: '#/parameters/storeIdOnlyGeneralParameters'
-        - $ref: '#/parameters/exportFormatInQueryGeneralParameter'
-        - in: body
-          name: request
-          required: true
-          schema:
-            $ref: '#/definitions/reportByProductRequest'
-      responses:
-        '200':
-          description: Your reporting by product exported
-          examples:
-            application/json:
-              href: 'https://beezupchannel.blob.core.windows.net/reports/exports/Excel_Report_Channels.xslx'
-              method: GET
-          headers:
-            Location:
-              description: |
-                To indicate the url of the export file
-                Example: https://beezupchannel.blob.core.windows.net/reports/exports/Excel_Report_Products.xslx
-              type: string
-          schema:
-            $ref: '#/definitions/BeezUP.Common.Link3'
-        default:
-          $ref: '#/responses/GeneralError'
-      security:
-        - api_key: []
-      summary: Export the report by product
       tags:
         - Analytics - Reports
   '/user/analytics/{storeId}/reports/filters':
@@ -1088,7 +1052,9 @@ paths:
         '200':
           description: Report filter list
           schema:
-            $ref: '#/definitions/reportFilters'
+            $ref: '#/definitions/reportFilterList'
+        '404':
+          $ref: '#/responses/StoreNotFoundResponse'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1111,6 +1077,8 @@ paths:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: Report filter not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1130,6 +1098,8 @@ paths:
             $ref: '#/definitions/reportFilter'
         '404':
           description: Report filter not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1150,12 +1120,22 @@ paths:
       responses:
         '204':
           description: Report filter saved
+        '400':
+          $ref: '#/responses/BadRequestResponse'
         '401':
           description: This report filter is used by rule. In the error message you will find the rule identifier.
           schema:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        '403':
+          description: 'This report filter identifier is already used by another store, please check your identifiers.'
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        '404':
+          $ref: '#/responses/StoreNotFoundResponse'
         '409':
           description: Report filter name already exists
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1173,6 +1153,8 @@ paths:
           description: Rule list
           schema:
             $ref: '#/definitions/ruleList'
+        '404':
+          $ref: '#/responses/StoreNotFoundResponse'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1195,10 +1177,18 @@ paths:
           description: Rule created
         '400':
           description: Period on filter cannot be custom or filter does not exist
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '401':
           description: Store not allowed to use rules. Please upgrade your offer or contact us.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '403':
           description: Reached the maximum amount of rules allowed for your offer. Please upgrade your offer or contact us.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        '404':
+          $ref: '#/responses/StoreNotFoundResponse'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1231,6 +1221,10 @@ paths:
           description: Rules executions list
           schema:
             $ref: '#/definitions/ruleExecutionReportings'
+        '400':
+          $ref: '#/responses/BadRequestResponse'
+        '404':
+          $ref: '#/responses/StoreNotFoundResponse'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1248,10 +1242,16 @@ paths:
           description: All rules executed.
         '401':
           description: Store not allowed to use rules. Please upgrade your offer or contact us.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: Rule not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Rules for this store are currently running. Please try again later.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1270,8 +1270,12 @@ paths:
           description: Rule deleted
         '404':
           description: Rule not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Rules for this store are currently running. Please try again later.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1289,6 +1293,8 @@ paths:
           description: Get Rule
           schema:
             $ref: '#/definitions/rule'
+        '404':
+          $ref: '#/responses/StoreNotFoundResponse'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1311,12 +1317,20 @@ paths:
           description: Rule updated
         '400':
           description: Filter does not exist or period on filter cannot be custom
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '401':
           description: Store not allowed to use rules. Please upgrade your offer or contact us.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: Rule not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Rules for this store are currently running. Please try again later.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1335,8 +1349,12 @@ paths:
           description: Rule disabled
         '404':
           description: Rule not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Rules for this store are currently running. Please try again later.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1355,8 +1373,12 @@ paths:
           description: Rune enabled
         '404':
           description: Rule not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Rules for this store are currently running. Please try again later.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1375,10 +1397,16 @@ paths:
           description: Rule moved down
         '400':
           description: Priority can only be changed when more than one rule is defined
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: Rule not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Rules for this store are currently running. Please try again later.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1397,10 +1425,16 @@ paths:
           description: Rule moved up
         '400':
           description: Priority can only be changed when more than one rule is defined
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: Rule not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Rules for this store are currently running. Please try again later.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1419,12 +1453,20 @@ paths:
           description: Rule executed
         '400':
           description: Rule is not enabled. Please enable this run before trying to run it.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '401':
           description: Store not allowed to use rules. Please upgrade your offer or contact us.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: Rule not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Rules for this store are currently running. Please try again later.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1451,7 +1493,7 @@ paths:
           schema:
             $ref: '#/definitions/trackedClicks'
         '404':
-          description: Store not found
+          $ref: '#/responses/StoreNotFoundResponse'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1477,8 +1519,10 @@ paths:
           description: External Order list
           schema:
             $ref: '#/definitions/trackedExternalOrders'
+        '400':
+          $ref: '#/responses/BadRequestResponse'
         '404':
-          description: Store not found
+          $ref: '#/responses/StoreNotFoundResponse'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1504,8 +1548,10 @@ paths:
           description: Order list
           schema:
             $ref: '#/definitions/trackedOrders'
+        '400':
+          $ref: '#/responses/BadRequestResponse'
         '404':
-          description: Store not found
+          $ref: '#/responses/StoreNotFoundResponse'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1527,7 +1573,7 @@ paths:
           schema:
             $ref: '#/definitions/storeTrackingStatus'
         '404':
-          description: Store not found
+          $ref: '#/responses/StoreNotFoundResponse'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -4669,7 +4715,7 @@ paths:
         - Marketplaces - Channel catalogs - Settings
     post:
       description: |
-        Allow you to configure your marketplace settings. 
+        Allow you to configure your marketplace settings.
         Partial update accepted.
       operationId: SetChannelCatalogMarketplaceSettings
       parameters:
@@ -6296,6 +6342,85 @@ definitions:
     description: The property value
     example: '2'
     type: string
+  analyticsIndex:
+    description: The analytics API operation index.
+    properties:
+      links:
+        $ref: '#/definitions/analyticsIndexLinks'
+      lovLinks:
+        $ref: '#/definitions/analyticsIndexLovLinks'
+      stores:
+        items:
+          $ref: '#/definitions/analyticsStoreIndex'
+        type: array
+    required:
+      - links
+      - stores
+    type: object
+  analyticsIndexLinks:
+    properties:
+      self:
+        $ref: '#/definitions/links.AnalyticsIndexLink'
+      trackingStatus:
+        $ref: '#/definitions/links.GetTrackingStatusLink'
+    required:
+      - self
+    type: object
+  analyticsIndexLovLinks:
+    properties:
+      performanceIndicatorFormulaParameterTypeLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      performanceIndicatorLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      storeOptimisationRuleExecutionStatusLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+    type: object
+  analyticsStoreIndex:
+    properties:
+      links:
+        $ref: '#/definitions/analyticsStoreIndexLinks'
+    required:
+      - links
+    type: object
+  analyticsStoreIndexLinks:
+    properties:
+      optimise:
+        $ref: '#/definitions/links.OptimiseLink'
+      optimiseByCategory:
+        $ref: '#/definitions/links.OptimiseByCategoryLink'
+      optimiseByChannel:
+        $ref: '#/definitions/links.OptimiseByChannelLink'
+      optimiseByProduct:
+        $ref: '#/definitions/links.OptimiseByProductLink'
+      reportByCategory:
+        $ref: '#/definitions/links.GetStoreReportByCategoryLink'
+      reportByChannel:
+        $ref: '#/definitions/links.GetStoreReportByChannelLink'
+      reportByDay:
+        $ref: '#/definitions/links.GetStoreReportByDayLink'
+      reportByProduct:
+        $ref: '#/definitions/links.GetStoreReportByProductLink'
+      reportFilters:
+        $ref: '#/definitions/links.GetReportFiltersLink'
+      rules:
+        $ref: '#/definitions/links.GetRulesLink'
+      self:
+        $ref: '#/definitions/links.AnalyticsIndexLink'
+      trackedClicks:
+        $ref: '#/definitions/links.GetStoreTrackedClicksLink'
+      trackedExternalOrders:
+        $ref: '#/definitions/links.GetStoreTrackedExternalOrdersLink'
+      trackedOrders:
+        $ref: '#/definitions/links.GetStoreTrackedOrdersLink'
+      trackingStatus:
+        $ref: '#/definitions/links.GetStoreTrackingStatusLink'
+    required:
+      - self
+      - trackingStatus
+      - trackedClicks
+      - trackedOrders
+      - reportFilters
+    type: object
   apiCredential:
     description: Your api credential
     properties:
@@ -7272,6 +7397,72 @@ definitions:
       channelCatalogExportCacheStatusLov:
         $ref: '#/definitions/BeezUP.Common.LOVLink3'
     type: object
+  channelCatalogMarketplaceBooleanProperty:
+    allOf:
+      - $ref: '#/definitions/channelCatalogMarketplaceProperty'
+      - properties:
+          default:
+            description: Indicate the default values of the property
+            example: false
+            type: boolean
+        type: object
+  channelCatalogMarketplaceBooleanSetting:
+    allOf:
+      - $ref: '#/definitions/channelCatalogMarketplaceSetting'
+      - properties:
+          value:
+            description: Channel catalog marketplace property values
+            example: false
+            type: boolean
+        type: object
+  channelCatalogMarketplaceIntegerProperty:
+    allOf:
+      - $ref: '#/definitions/channelCatalogMarketplaceProperty'
+      - properties:
+          default:
+            description: Indicate the default values of the property
+            example:
+              - 201
+            items:
+              type: integer
+            type: array
+        type: object
+  channelCatalogMarketplaceIntegerSetting:
+    allOf:
+      - $ref: '#/definitions/channelCatalogMarketplaceSetting'
+      - properties:
+          values:
+            description: Channel catalog marketplace property values
+            example:
+              - 201
+            items:
+              type: integer
+            type: array
+        type: object
+  channelCatalogMarketplaceNumberProperty:
+    allOf:
+      - $ref: '#/definitions/channelCatalogMarketplaceProperty'
+      - properties:
+          default:
+            description: Indicate the default values of the property
+            example:
+              - 201.69
+            items:
+              type: number
+            type: array
+        type: object
+  channelCatalogMarketplaceNumberSetting:
+    allOf:
+      - $ref: '#/definitions/channelCatalogMarketplaceSetting'
+      - properties:
+          values:
+            description: Channel catalog marketplace property values
+            example:
+              - 201.69
+            items:
+              type: number
+            type: array
+        type: object
   channelCatalogMarketplaceProperties:
     properties:
       info:
@@ -7397,93 +7588,100 @@ definitions:
       - self
     type: object
   channelCatalogMarketplaceProperty:
-    allOf:
-      - $ref: '#/definitions/channelCatalogMarketplaceSetting'
-      - description: Model for fetching a channel catalog marketplace property
-        properties:
-          default:
-            description: Indicate the default values of the property
-            example:
-              - 'true'
-            items:
-              type: string
-            type: array
-          description:
-            description: Indicate the description of the property
-            example: If true allows to retireve one marketplace country only
-            type: string
-          info:
-            $ref: '#/definitions/BeezUP.Common.InfoSummaries'
-          lovLink:
-            $ref: '#/definitions/BeezUP.Common.LOVLink3'
-          lovRequired:
-            default: false
-            description: Indicates if the property value must be in the list of value.
-            example: true
-            type: boolean
-          maxItems:
-            default: 1
-            description: Indicates the maximum item count of the property value
-            example: 2
-            format: int32
-            minimum: 1
-            type: integer
-          maxLength:
-            description: Indicates the maximum size of the property value
-            example: 500
-            format: int32
-            minimum: 1
-            type: integer
-          minItems:
-            default: 1
-            description: Indicates the minimum item count of the property value.
-            example: 1
-            format: int32
-            minimum: 0
-            type: integer
-          minLength:
-            default: 0
-            description: Indicates the minimum size of the property value
-            example: 1
-            format: int32
-            minimum: 0
-            type: integer
-          offerIdRequired:
-            description: Indicates the offer identifier required to configure this property.
-            example: 10
-            type: integer
-          pattern:
-            description: Channel catalog marketplace setting value format validation regular expression
-            example: '(?:[a-z0-9!#$%&''*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&''*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])'
-            type: string
-          position:
-            description: Indicate the position of the property in the display group
-            example: 1
-            minimum: 1
-            type: integer
-          readOnly:
-            default: false
-            description: Indicate if the value cannot be changed. This is used for example for ebay token that should not be changed.
-            example: false
-            type: boolean
-          required:
-            default: false
-            description: Indicate if the property is required or not
-            example: true
-            type: boolean
-          type:
-            $ref: '#/definitions/type'
-          visible:
-            default: true
-            description: Indicates if this property should be displayed in the configuration page.
-            example: true
-            type: boolean
-        required:
-          - position
-          - readOnly
-          - required
-          - visible
-        type: object
+    description: Model for fetching a channel catalog marketplace property
+    discriminator: discriminatorType
+    properties:
+      description:
+        description: Indicate the description of the property
+        example: If true allows to retireve one marketplace country only
+        type: string
+      discriminatorType:
+        $ref: '#/definitions/channelCatalogMarketplacePropertyDiscriminatorType'
+      info:
+        $ref: '#/definitions/BeezUP.Common.InfoSummaries'
+      lovLink:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      lovRequired:
+        default: false
+        description: Indicates if the property value must be in the list of value.
+        example: true
+        type: boolean
+      maxItems:
+        default: 1
+        description: Indicates the maximum item count of the property value
+        example: 2
+        format: int32
+        minimum: 1
+        type: integer
+      maxLength:
+        description: Indicates the maximum size of the property value
+        example: 500
+        format: int32
+        minimum: 1
+        type: integer
+      minItems:
+        default: 1
+        description: Indicates the minimum item count of the property value.
+        example: 1
+        format: int32
+        minimum: 0
+        type: integer
+      minLength:
+        default: 0
+        description: Indicates the minimum size of the property value
+        example: 1
+        format: int32
+        minimum: 0
+        type: integer
+      name:
+        $ref: '#/definitions/channelCatalogMarketplacePropertyName'
+      offerIdRequired:
+        description: Indicates the offer identifier required to configure this property.
+        example: 10
+        type: integer
+      pattern:
+        description: Channel catalog marketplace setting value format validation regular expression
+        example: '(?:[a-z0-9!#$%&''*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&''*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])'
+        type: string
+      position:
+        description: Indicate the position of the property in the display group
+        example: 1
+        minimum: 1
+        type: integer
+      readOnly:
+        default: false
+        description: Indicate if the value cannot be changed. This is used for example for ebay token that should not be changed.
+        example: false
+        type: boolean
+      required:
+        default: false
+        description: Indicate if the property is required or not
+        example: true
+        type: boolean
+      type:
+        $ref: '#/definitions/type'
+      visible:
+        default: true
+        description: Indicates if this property should be displayed in the configuration page.
+        example: true
+        type: boolean
+    required:
+      - name
+      - position
+      - readOnly
+      - required
+      - visible
+      - type
+      - discriminatorType
+    type: object
+  channelCatalogMarketplacePropertyDiscriminatorType:
+    enum:
+      - channelCatalogMarketplaceStringProperty
+      - channelCatalogMarketplaceIntegerProperty
+      - channelCatalogMarketplaceBooleanProperty
+      - channelCatalogMarketplaceNumberProperty
+    example: string
+    type: string
   channelCatalogMarketplacePropertyGroup:
     properties:
       displayGroupCode:
@@ -7515,23 +7713,22 @@ definitions:
       - displayGroupCode
       - displayGroupPosition
       - properties
+  channelCatalogMarketplacePropertyName:
+    description: Channel catalog marketplace property name
+    example: PaypalAddress
+    type: string
+    x-lov: MarketplaceStoreProperty
   channelCatalogMarketplaceSetting:
     description: Model for fetching a channel catalog marketplace setting
+    discriminator: discriminatorType
     properties:
+      discriminatorType:
+        $ref: '#/definitions/channelCatalogMarketplaceSettingDiscriminatorType'
       name:
-        description: Channel catalog marketplace property name
-        example: PaypalAddress
-        type: string
-        x-lov: MarketplaceStoreProperty
-      values:
-        description: Channel catalog marketplace property values
-        example:
-          - myemail@mydomain.com
-        items:
-          type: string
-        type: array
+        $ref: '#/definitions/channelCatalogMarketplacePropertyName'
     required:
       - name
+      - discriminatorType
     type: object
   channelCatalogMarketplaceSettingArray:
     example:
@@ -7571,6 +7768,14 @@ definitions:
     items:
       $ref: '#/definitions/channelCatalogMarketplaceSetting'
     type: array
+  channelCatalogMarketplaceSettingDiscriminatorType:
+    enum:
+      - channelCatalogMarketplaceStringSetting
+      - channelCatalogMarketplaceIntegerSetting
+      - channelCatalogMarketplaceBooleanSetting
+      - channelCatalogMarketplaceNumberSetting
+    example: string
+    type: string
   channelCatalogMarketplaceSettings:
     description: The channel catalog marketplace settings
     properties:
@@ -7628,6 +7833,30 @@ definitions:
       - self
       - save
     type: object
+  channelCatalogMarketplaceStringProperty:
+    allOf:
+      - $ref: '#/definitions/channelCatalogMarketplaceProperty'
+      - properties:
+          default:
+            description: Indicate the default values of the property
+            example:
+              - My default value
+            items:
+              type: string
+            type: array
+        type: object
+  channelCatalogMarketplaceStringSetting:
+    allOf:
+      - $ref: '#/definitions/channelCatalogMarketplaceSetting'
+      - properties:
+          values:
+            description: Channel catalog marketplace property values
+            example:
+              - myemail@mydomain.com
+            items:
+              type: string
+            type: array
+        type: object
   channelCatalogProductByChannelCatalogRequest:
     properties:
       channelCatalogIds:
@@ -8586,6 +8815,22 @@ definitions:
         $ref: '#/definitions/links.createContractLink'
       self:
         $ref: '#/definitions/links.getContractsLink'
+    type: object
+  copyOptimisationRequest:
+    description: Copy the optimisation between 2 channels
+    properties:
+      channelIdSource:
+        $ref: '#/definitions/BeezUP.Common.ChannelId'
+      channelIdTarget:
+        $ref: '#/definitions/BeezUP.Common.ChannelId'
+      keepExistingOptimisation:
+        description: If true the existing optimisation will be kept
+        example: false
+        type: boolean
+    required:
+      - channelIdSource
+      - channelIdTarget
+      - keepExistingOptimisation
     type: object
   costSettings:
     description: |
@@ -9919,6 +10164,12 @@ definitions:
       - example:
           href: /v2/user/channelCatalogs
           method: POST
+  links.AnalyticsIndexLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/analytics
+          method: GET
   links.Auto_ConfigureAutoImportIntervalLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -10496,6 +10747,80 @@ definitions:
       - example:
           href: /v2/user/analytics/10af9486-e28e-47ab-b045-e13e4acd55c3/rules
           method: GET
+  links.GetStoreReportByCategoryLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/analytics/8f95eb1a-3691-4750-950d-a13c4a8a9bcc/reports/bycategory
+          method: POST
+          parameters:
+            request:
+              in: body
+              schema: reportByCategoryRequest
+              type: object
+  links.GetStoreReportByChannelLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/analytics/8f95eb1a-3691-4750-950d-a13c4a8a9bcc/reports/bychannel
+          method: POST
+          parameters:
+            request:
+              in: body
+              schema: reportByChannelRequest
+              type: object
+  links.GetStoreReportByDayLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/analytics/8f95eb1a-3691-4750-950d-a13c4a8a9bcc/reports/byday
+          method: POST
+          parameters:
+            request:
+              in: body
+              schema: reportByDayRequest
+              type: object
+  links.GetStoreReportByProductLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/analytics/8f95eb1a-3691-4750-950d-a13c4a8a9bcc/reports/byproduct
+          method: POST
+          parameters:
+            request:
+              in: body
+              schema: reportByProductRequest
+              type: object
+  links.GetStoreTrackedClicksLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/analytics/8f95eb1a-3691-4750-950d-a13c4a8a9bcc/tracking/clicks
+          method: GET
+  links.GetStoreTrackedExternalOrdersLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/analytics/8f95eb1a-3691-4750-950d-a13c4a8a9bcc/tracking/externalorders
+          method: GET
+  links.GetStoreTrackedOrdersLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/analytics/8f95eb1a-3691-4750-950d-a13c4a8a9bcc/tracking/orders
+          method: GET
+  links.GetStoreTrackingStatusLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/analytics/8f95eb1a-3691-4750-950d-a13c4a8a9bcc/tracking/status
+          method: GET
+  links.GetTrackingStatusLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/analytics/tracking/status
+          method: GET
   links.GetUserListOfValuesLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -10735,7 +11060,7 @@ definitions:
           parameters:
             request:
               in: body
-              type: array
+              type: â€‹array
               value:
                 - a2d38563-50f0-43f1-be2b-b16e7ec4f007
   links.OptimiseByChannelLink:
@@ -10753,7 +11078,7 @@ definitions:
           parameters:
             request:
               in: body
-              type: array
+              type: â€‹array
               value:
                 - a2d38563-50f0-43f1-be2b-b16e7ec4f007
   links.OptimiseLink:
@@ -10769,10 +11094,10 @@ definitions:
               type: object
               value:
                 advancedFilters:
-                  globalMarginPercent: 10
+                  globalmarginPercent: 10
                   linkClickToOrderMaxDay: 5
                   linkClickToOrderType: OnClickDate
-                  margingType: Global
+                  marginType: Global
                   onlyDirectSales: true
                   onlyPaymentValidatedOrders: true
                   performanceIndicatorFormula:
@@ -11146,7 +11471,7 @@ definitions:
       - autoMapNewSubCategories
       - channelCatalogCategoryMapping
     type: object
-  margingType:
+  marginType:
     default: Tracker
     enum:
       - Tracker
@@ -11156,6 +11481,8 @@ definitions:
   marketplaceChannelCatalog:
     description: This object indicates you the association between a channel catalog and a marketplace. The account identifier will be automatically defined based on your marketplace merchant identfier.
     properties:
+      apiSettingsStatus:
+        $ref: '#/definitions/BeezUP.Common.ApiSettingsStatus'
       beezUPChannelCatalogId:
         $ref: '#/definitions/BeezUP.Common.ChannelCatalogId'
       beezUPChannelId:
@@ -11199,6 +11526,7 @@ definitions:
       marketplaceTechnicalCode:
         $ref: '#/definitions/BeezUP.Common.MarketplaceTechnicalCode'
     required:
+      - apiSettingsStatus
       - enabled
       - marketplaceTechnicalCode
       - marketplaceBusinessCode
@@ -11394,9 +11722,13 @@ definitions:
       - $ref: '#/definitions/paginationRequestParameters'
       - properties:
           productFilters:
-            $ref: '#/definitions/productFilters'
+            $ref: '#/definitions/BeezUP.Common.ProductFilters'
           productState:
             $ref: '#/definitions/productStateFilter'
+          reportType:
+            $ref: '#/definitions/reportType'
+        required:
+          - reportType
         type: object
   order:
     allOf:
@@ -12262,9 +12594,9 @@ definitions:
   paginationRequestParameters:
     properties:
       pageNumber:
-        $ref: '#/definitions/pageNumber'
+        $ref: '#/definitions/BeezUP.Common.PageNumber'
       pageSize:
-        $ref: '#/definitions/pageSize'
+        $ref: '#/definitions/BeezUP.Common.PageSize'
     type: object
   paymentMethod:
     default: OnlinePayment
@@ -12310,9 +12642,11 @@ definitions:
       - Cost
       - Turnover
       - Margin
+      - TunoverMinusCost
+      - MarginMinusCost
       - OrderCount
       - ClickCount
-      - TotalSales
+      - SoldProductCount
       - One
     example: Cost
     type: string
@@ -12325,6 +12659,9 @@ definitions:
       - OrderCount
       - ClickCount
       - TotalSales
+      - SoldProductCount
+      - DisabledProductCount
+      - EnabledProductCount
     example: Cost
     type: string
   personalInfo:
@@ -12413,26 +12750,14 @@ definitions:
       - categoryId
       - values
       - exists
-  productFilters:
-    properties:
-      additionalProductFilters:
-        example:
-          - columnId: 672644c7-5bd0-4e25-88c1-1f732bda5e4c
-            operatorName: GreaterTo
-            values:
-              - 100
-        items:
-          $ref: '#/definitions/reportProductFilter'
-        type: array
-      sku:
-        description: The product sku filter
-        example: M1234
-        type: string
-      title:
-        description: The product title filter
-        example: RefrigÃ©rateur
-        type: string
-    type: object
+  productColumnsToDisplay:
+    example:
+      - 4b460e31-3d1f-4117-922d-b159a64ec1d2
+    items:
+      $ref: '#/definitions/BeezUP.Common.CatalogColumnId'
+    maxItems: 1
+    minItems: 0
+    type: array
   productList:
     properties:
       paginationResult:
@@ -12853,8 +13178,8 @@ definitions:
         type: integer
       linkClickToOrderType:
         $ref: '#/definitions/linkClickToOrderType'
-      margingType:
-        $ref: '#/definitions/margingType'
+      marginType:
+        $ref: '#/definitions/marginType'
       onlyDirectSales:
         default: false
         description: 'If true, you will get only direct sales. Otherwise the indirect sales will be included.'
@@ -12868,7 +13193,7 @@ definitions:
       performanceIndicatorFormula:
         $ref: '#/definitions/performanceIndicatorFormula'
     required:
-      - margingType
+      - marginType
       - linkClickToOrderType
       - onlyPaymentValidatedOrders
       - onlyDirectSales
@@ -12910,6 +13235,14 @@ definitions:
         description: The performance indicator based on the performance indicator formula indicated in the request for this category
         example: 25.33
         type: number
+      soldProductCount:
+        description: The product sold count count for this category
+        example: 2
+        type: integer
+      totalSales:
+        description: The total sales related to this category
+        example: 234.42
+        type: number
       turnOver:
         description: The Turnover for this category
         example: 25.33
@@ -12924,6 +13257,9 @@ definitions:
       - turnOver
       - margin
       - performanceIndicator
+      - totalSales
+      - soldProductCount
+      - links
     type: object
   reportByCategoryLinks:
     properties:
@@ -12986,6 +13322,14 @@ definitions:
         description: The performance indicator based on the performance indicator formula indicated in the request for this channel
         example: 12.21
         type: number
+      soldProductCount:
+        description: The product sold count count for this channel
+        example: 2
+        type: integer
+      totalSales:
+        description: The total sales related to this channel
+        example: 234.42
+        type: number
       turnOver:
         description: The Turnover for this channel
         example: 42.42
@@ -13000,6 +13344,9 @@ definitions:
       - turnOver
       - margin
       - performanceIndicator
+      - totalSales
+      - soldProductCount
+      - links
     type: object
   reportByChannelLinks:
     properties:
@@ -13060,27 +13407,35 @@ definitions:
   reportByDayAllChannels:
     properties:
       clickCount:
-        description: The click count for this channel
+        description: The click count for this day and all channels
         example: 101
         type: integer
       cost:
-        description: The cost for this channel
+        description: The cost  for this day and all channels
         example: 10.42
         type: number
       margin:
-        description: The margin for this channel
+        description: The margin for this day and all channels
         example: 42.42
         type: number
       orderCount:
-        description: The order count for this channel
+        description: The order count for this day and all channels
         example: 42
         type: integer
       performanceIndicator:
-        description: The performance indicator based on the performance indicator formula indicated in the request for this channel
+        description: The performance indicator based on the performance indicator formula indicated in the request for this day and all channels
         example: 23.09
         type: number
+      soldProductCount:
+        description: The product sold count count for this day and all channels
+        example: 2
+        type: integer
+      totalSales:
+        description: The total sales related to this day and all channels
+        example: 234.42
+        type: number
       turnOver:
-        description: The Turnover for this channel
+        description: The Turnover for this day and all channels
         example: 23.11
         type: number
     required:
@@ -13090,33 +13445,43 @@ definitions:
       - turnOver
       - margin
       - performanceIndicator
+      - totalSales
+      - soldProductCount
     type: object
   reportByDayByChannel:
     properties:
       channel:
         $ref: '#/definitions/BeezUP.Common.ChannelBasicInfo'
       clickCount:
-        description: The click count for this channel
+        description: The click count for this day and this channel
         example: 101
         type: integer
       cost:
-        description: The cost for this channel
+        description: The cost for this day and this channel
         example: 10.42
         type: number
       margin:
-        description: The margin for this channel
+        description: The margin for this day and this channel
         example: 42.42
         type: number
       orderCount:
-        description: The order count for this channel
+        description: The order count for this day and this channel
         example: 42
         type: integer
       performanceIndicator:
-        description: The performance indicator based on the performance indicator formula indicated in the request for this channel
+        description: The performance indicator based on the performance indicator formula indicated in the request for this day and this channel
         example: 23.09
         type: number
+      soldProductCount:
+        description: The product sold count count for this day and this channel
+        example: 2
+        type: integer
+      totalSales:
+        description: The total sales related to this day and this channel
+        example: 234.42
+        type: number
       turnOver:
-        description: The Turnover for this channel
+        description: The Turnover for this day and this channel
         example: 23.11
         type: number
     required:
@@ -13127,6 +13492,8 @@ definitions:
       - turnOver
       - margin
       - performanceIndicator
+      - totalSales
+      - soldProductCount
     type: object
   reportByDayRequest:
     properties:
@@ -13208,6 +13575,14 @@ definitions:
         type: number
       product:
         $ref: '#/definitions/BeezUP.Common.ProductBasicInfo'
+      soldProductCount:
+        description: The product sold count count for this product
+        example: 2
+        type: integer
+      totalSales:
+        description: The total sales related to this product
+        example: 234.42
+        type: number
       turnOver:
         description: The Turnover for this product
         example: 42.01
@@ -13222,16 +13597,35 @@ definitions:
       - turnOver
       - margin
       - performanceIndicator
+      - totalSales
+      - soldProductCount
       - links
     type: object
-  reportByProductLinks:
+  reportByProductAllChannelsLinks:
     properties:
-      disableProduct:
+      disableProductForAllChannels:
         $ref: '#/definitions/links.OptimiseByProductLink'
-      editProduct:
+      enableProductForAllChannels:
+        $ref: '#/definitions/links.OptimiseByProductLink'
+    required:
+      - enableProductForAllChannels
+      - disableProductForAllChannels
+    type: object
+  reportByProductLinks:
+    description: Depending if the report concerned multiple channels or one channel.
+    properties:
+      allChannelsLinks:
+        $ref: '#/definitions/reportByProductAllChannelsLinks'
+      oneChannelLinks:
+        $ref: '#/definitions/reportByProductOneChannelLinks'
+    type: object
+  reportByProductOneChannelLinks:
+    description: If the report concerned one product for one channel the channel catalog product info will give you all you need to enable or disable the product.
+    properties:
+      productInfo:
         $ref: '#/definitions/links.GetChannelCatalogProductInfoLink'
-      enableProduct:
-        $ref: '#/definitions/links.OptimiseByProductLink'
+    required:
+      - productInfo
     type: object
   reportByProductRequest:
     allOf:
@@ -13239,15 +13633,9 @@ definitions:
       - $ref: '#/definitions/paginationRequestParameters'
       - properties:
           productColumnsToDisplay:
-            example:
-              - 4b460e31-3d1f-4117-922d-b159a64ec1d2
-            items:
-              $ref: '#/definitions/BeezUP.Common.CatalogColumnId'
-            maxItems: 1
-            minItems: 0
-            type: array
+            $ref: '#/definitions/productColumnsToDisplay'
           productFilters:
-            $ref: '#/definitions/productFilters'
+            $ref: '#/definitions/BeezUP.Common.ProductFilters'
           productState:
             $ref: '#/definitions/productStateFilter'
         required:
@@ -13255,6 +13643,8 @@ definitions:
         type: object
   reportByProductResponse:
     properties:
+      currencyCode:
+        $ref: '#/definitions/BeezUP.Common.CurrencyCode'
       links:
         $ref: '#/definitions/reportByProductResponseLinks'
       paginationResult:
@@ -13265,23 +13655,13 @@ definitions:
         type: array
     required:
       - paginationResult
+      - currencyCode
       - products
       - links
     type: object
   reportByProductResponseLinks:
     allOf:
       - $ref: '#/definitions/reportByCommonResponseLinks'
-  reportCategoryFilter:
-    properties:
-      categoryPath:
-        description: Indicates on which category path you want to make the filter
-        example:
-          - Home
-          - Bedroom
-        items:
-          type: string
-        type: array
-    type: object
   reportFilter:
     properties:
       links:
@@ -13308,16 +13688,16 @@ definitions:
       advancedFilters:
         $ref: '#/definitions/reportAdvancedFilters'
       beginPeriodUtcDate:
-        description: The begin date period you want to get the report
+        description: The begin date period you want to get the report. It's required only in case of custom period type !
         example: '2006-11-20T00:00:00Z'
         format: date-time
         type: string
       categoryFilter:
-        $ref: '#/definitions/reportCategoryFilter'
+        $ref: '#/definitions/BeezUP.Common.CatalogCategoryFilter'
       channelId:
         $ref: '#/definitions/BeezUP.Common.ChannelId'
       endPeriodUtcDate:
-        description: The end date period you want to get the report.
+        description: The end date period you want to get the report. It's required only in case of custom period type !
         example: '2006-12-20T00:00:00Z'
         format: date-time
         type: string
@@ -13329,9 +13709,10 @@ definitions:
         items:
           $ref: '#/definitions/reportIndicatorFilter'
         type: array
+      periodType:
+        $ref: '#/definitions/reportFilterPeriodType'
     required:
-      - beginPeriodUtcDate
-      - endPeriodUtcDate
+      - periodType
       - advancedFilters
     type: object
   reportFilterHeader:
@@ -13359,6 +13740,8 @@ definitions:
     properties:
       self:
         $ref: '#/definitions/links.GetReportFilterLink'
+    required:
+      - self
     type: object
   reportFilterLinks:
     description: Indicates the actions you can do on this report filter
@@ -13370,20 +13753,7 @@ definitions:
       self:
         $ref: '#/definitions/links.GetReportFilterLink'
     type: object
-  reportFilterParameters:
-    allOf:
-      - $ref: '#/definitions/reportFilterCommonParameters'
-      - properties:
-          productFilters:
-            $ref: '#/definitions/productFilters'
-          productState:
-            $ref: '#/definitions/productStateFilter'
-          reportType:
-            $ref: '#/definitions/reportType'
-        required:
-          - reportType
-        type: object
-  reportFilters:
+  reportFilterList:
     properties:
       links:
         $ref: '#/definitions/reportFiltersLinks'
@@ -13391,13 +13761,48 @@ definitions:
         items:
           $ref: '#/definitions/reportFilterHeader'
         type: array
+    required:
+      - reportFilters
+      - links
     type: object
+  reportFilterParameters:
+    allOf:
+      - $ref: '#/definitions/reportFilterCommonParameters'
+      - properties:
+          productColumnsToDisplay:
+            $ref: '#/definitions/productColumnsToDisplay'
+          productFilters:
+            $ref: '#/definitions/BeezUP.Common.ProductFilters'
+          productState:
+            $ref: '#/definitions/productStateFilter'
+          reportType:
+            $ref: '#/definitions/reportType'
+        required:
+          - reportType
+        type: object
+  reportFilterPeriodType:
+    description: Indicates the period type we want use for the report filter
+    enum:
+      - Custom
+      - Yesterday
+      - Last7Days
+      - LastWeek
+      - ThisMonth
+      - Last30Days
+      - LastMonth
+      - Last60Days
+      - Last90Days
+      - Last3Months
+    type: string
   reportFiltersLinks:
     properties:
       save:
         $ref: '#/definitions/links.SaveReportFilterLink'
       self:
         $ref: '#/definitions/links.GetReportFiltersLink'
+    required:
+      - self
+      - save
     type: object
   reportIndicatorFilter:
     properties:
@@ -13421,38 +13826,6 @@ definitions:
       - GreaterTo
       - LowerTo
     example: Equals
-    type: string
-  reportProductFilter:
-    description: Describe a filter on a product's column
-    properties:
-      columnId:
-        description: The column identifier of your catalog or a custom column.
-        example: 672644c7-5bd0-4e25-88c1-1f732bda5e4c
-        format: guid
-        type: string
-      operatorName:
-        $ref: '#/definitions/reportProductFilterOperatorName'
-      values:
-        description: Must be null if the operator is "IsNull" or "IsNotNull". Can contains multiple value in case of "InList" operator. Otherwise a single value is expected.
-        example:
-          - My value
-        items:
-          type: string
-        type: array
-    required:
-      - columnId
-      - operatorName
-    type: object
-  reportProductFilterOperatorName:
-    description: Indicate the operator you want to make on the columnId
-    enum:
-      - Equals
-      - Contains
-      - GreaterTo
-      - LowerTo
-      - InList
-      - IsNull
-      - IsNotNull
     type: string
   reportType:
     description: The report type
@@ -13600,6 +13973,8 @@ definitions:
     enum:
       - InProgress
       - Succeeded
+      - AlreadyInProgress
+      - Aborted
       - Failed
       - Unknown
     example: Succeeded
@@ -13644,6 +14019,8 @@ definitions:
         $ref: '#/definitions/links.GetRuleLink'
       update:
         $ref: '#/definitions/links.UpdateRuleLink'
+    required:
+      - self
     type: object
   ruleList:
     properties:
@@ -13669,6 +14046,11 @@ definitions:
         $ref: '#/definitions/links.RunRulesLink'
       self:
         $ref: '#/definitions/links.GetRulesLink'
+    required:
+      - self
+      - create
+      - history
+      - run
     type: object
   saveReportFilterRequest:
     properties:
@@ -14169,7 +14551,7 @@ definitions:
     type: string
   storeUserRole:
     description: |
-      Indicates the role can have a user on a store. 
+      Indicates the role can have a user on a store.
       * Owner: Indicates that you are the owner of this store
       * User: Indicates that you are a simple user on this store
     enum:
@@ -14640,6 +15022,7 @@ x-tagGroups:
       - Marketplaces - Orders - Exports
   - name: Analytics
     tags:
+      - Analytics - Global
       - Analytics - Tracking
       - Analytics - Statistics
       - Analytics - Rules
