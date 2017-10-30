@@ -3,7 +3,7 @@ info:
   version: '2017-03-31'
   x-release: v4
   title: AWS Glue
-  description: Defines service operations used by the GlueFrontendService
+  description: <fullname>AWS Glue</fullname> <p>Defines the public endpoint for the AWS Glue service.</p>
   x-logo:
     url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
     backgroundColor: '#FFFFFF'
@@ -293,6 +293,43 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchGetPartitionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#BatchStopJobRun':
+    post:
+      operationId: BatchStopJobRun
+      description: Stops a batch of job runs for a given job.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchStopJobRunResponse'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '482':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchStopJobRunRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3219,8 +3256,11 @@ definitions:
     properties:
       JobName:
         $ref: '#/definitions/NameString'
+        description: The name of a job to be executed.
       Arguments:
         $ref: '#/definitions/GenericMap'
+        description: Arguments to be passed to the job.
+    description: Defines an action to be initiated by a trigger.
   ActionList:
     type: array
     items:
@@ -3371,6 +3411,64 @@ definitions:
       $ref: '#/definitions/PartitionValueList'
     minItems: 0
     maxItems: 1000
+  BatchStopJobRunError:
+    type: object
+    properties:
+      JobName:
+        $ref: '#/definitions/NameString'
+        description: The name of the job.
+      JobRunId:
+        $ref: '#/definitions/IdString'
+        description: The job run Id.
+      ErrorDetail:
+        $ref: '#/definitions/ErrorDetail'
+        description: The details of the error that occurred.
+    description: Details about the job run and the error that occurred while trying to submit it for stopping.
+  BatchStopJobRunErrorList:
+    type: array
+    items:
+      $ref: '#/definitions/BatchStopJobRunError'
+  BatchStopJobRunJobRunIdList:
+    type: array
+    items:
+      $ref: '#/definitions/IdString'
+    minItems: 1
+    maxItems: 25
+  BatchStopJobRunRequest:
+    type: object
+    required:
+      - JobName
+      - JobRunIds
+    properties:
+      JobName:
+        $ref: '#/definitions/NameString'
+        description: The name of the job whose job runs are to be stopped.
+      JobRunIds:
+        $ref: '#/definitions/BatchStopJobRunJobRunIdList'
+        description: A list of job run Ids of the given job to be stopped.
+  BatchStopJobRunResponse:
+    type: object
+    properties:
+      SuccessfulSubmissions:
+        $ref: '#/definitions/BatchStopJobRunSuccessfulSubmissionList'
+        description: A list of job runs which are successfully submitted for stopping.
+      Errors:
+        $ref: '#/definitions/BatchStopJobRunErrorList'
+        description: A list containing the job run Ids and details of the error that occurred for each job run while submitting to stop.
+  BatchStopJobRunSuccessfulSubmission:
+    type: object
+    properties:
+      JobName:
+        $ref: '#/definitions/NameString'
+        description: The name of the job.
+      JobRunId:
+        $ref: '#/definitions/IdString'
+        description: The job run Id.
+    description: Details about the job run which is submitted successfully for stopping.
+  BatchStopJobRunSuccessfulSubmissionList:
+    type: array
+    items:
+      $ref: '#/definitions/BatchStopJobRunSuccessfulSubmission'
   Boolean:
     type: boolean
   BooleanValue:
@@ -3556,10 +3654,14 @@ definitions:
     properties:
       LogicalOperator:
         $ref: '#/definitions/LogicalOperator'
+        description: A logical operator.
       JobName:
         $ref: '#/definitions/NameString'
+        description: The name of the job in question.
       State:
         $ref: '#/definitions/JobRunState'
+        description: The condition state.
+    description: Defines a condition under which a trigger fires.
   ConditionList:
     type: array
     items:
@@ -3575,7 +3677,7 @@ definitions:
         description: Description of the connection.
       ConnectionType:
         $ref: '#/definitions/ConnectionType'
-        description: The type of the connection.
+        description: 'The type of the connection. Currently, only JDBC is supported; SFTP is not supported.'
       MatchCriteria:
         $ref: '#/definitions/MatchCriteria'
         description: A list of criteria that can be used in selecting this connection.
@@ -3606,7 +3708,7 @@ definitions:
         description: Description of the connection.
       ConnectionType:
         $ref: '#/definitions/ConnectionType'
-        description: The type of the connection.
+        description: 'The type of the connection. Currently, only JDBC is supported; SFTP is not supported.'
       MatchCriteria:
         $ref: '#/definitions/MatchCriteria'
         description: A list of criteria that can be used in selecting this connection.
@@ -3668,7 +3770,7 @@ definitions:
         description: The <code>Crawler</code> name.
       Role:
         $ref: '#/definitions/RoleArn'
-        description: The ARN of an IAM role used to access customer resources such as data in S3.
+        description: The IAM role (or ARN of an IAM role) used to access customer resources such as data in S3.
       Targets:
         $ref: '#/definitions/CrawlerTargets'
         description: A collection of targets to crawl.
@@ -3708,7 +3810,7 @@ definitions:
       Version:
         $ref: '#/definitions/VersionId'
         description: The version of the Crawler.
-    description: 'Specifies a crawler program that examines a data source and uses classifiers to try to its schema. If successful, the crawler records metatdata concerning the data source in the Data Catalog.'
+    description: 'Specifies a crawler program that examines a data source and uses classifiers to try to determine its schema. If successful, the crawler records metatdata concerning the data source in the Data Catalog.'
   CrawlerList:
     type: array
     items:
@@ -3824,7 +3926,7 @@ definitions:
         description: Name of the new <code>Crawler</code>.
       Role:
         $ref: '#/definitions/RoleArn'
-        description: The AWS ARN of the IAM role used by the new <code>Crawler</code> to access customer resources.
+        description: The IAM role (or ARN of an IAM role) used by the new <code>Crawler</code> to access customer resources.
       DatabaseName:
         $ref: '#/definitions/DatabaseName'
         description: 'The Glue <code>Database</code> where results will be stored, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.'
@@ -3836,7 +3938,7 @@ definitions:
         description: A list of collection of targets to crawl.
       Schedule:
         $ref: '#/definitions/CronExpression'
-        description: 'A cron expression that can be used as a Cloudwatch event (see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html">CloudWatch Schedule Expression Syntax</a>. For example, to run every day at 12:15 UTC, specify: <code>cron(15 12 * * ? *)</code>.'
+        description: 'A <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
       Classifiers:
         $ref: '#/definitions/ClassifierNameList'
         description: 'A list of custom <code>Classifier</code> names that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.'
@@ -3868,8 +3970,7 @@ definitions:
     required:
       - EndpointName
       - RoleArn
-      - SecurityGroupIds
-      - SubnetId
+      - PublicKey
     properties:
       EndpointName:
         $ref: '#/definitions/GenericString'
@@ -3888,10 +3989,10 @@ definitions:
         description: The public key to use for authentication.
       NumberOfNodes:
         $ref: '#/definitions/IntegerValue'
-        description: The number of nodes to use.
+        description: The number of AWS Glue Data Processing Units (DPUs) to allocate to this DevEndpoint.
       ExtraPythonLibsS3Path:
         $ref: '#/definitions/GenericString'
-        description: Path to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint.
+        description: '<p>Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma.</p> <p>Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the <a href="http://pandas.pydata.org/">pandas</a> Python data analysis library, are not yet supported.</p>'
       ExtraJarsS3Path:
         $ref: '#/definitions/GenericString'
         description: Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.
@@ -3916,9 +4017,12 @@ definitions:
       YarnEndpointAddress:
         $ref: '#/definitions/GenericString'
         description: The address of the YARN endpoint used by this DevEndpoint.
+      ZeppelinRemoteSparkInterpreterPort:
+        $ref: '#/definitions/IntegerValue'
+        description: The Apache Zeppelin port for the remote Apache Spark interpreter.
       NumberOfNodes:
         $ref: '#/definitions/IntegerValue'
-        description: The number of nodes in this DevEndpoint.
+        description: The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
       AvailabilityZone:
         $ref: '#/definitions/GenericString'
         description: The AWS availability zone where this DevEndpoint is located.
@@ -3927,7 +4031,7 @@ definitions:
         description: The ID of the VPC used by this DevEndpoint.
       ExtraPythonLibsS3Path:
         $ref: '#/definitions/GenericString'
-        description: Path to one or more Python libraries in an S3 bucket that will be loaded in your DevEndpoint.
+        description: Path(s) to one or more Python libraries in an S3 bucket that will be loaded in your DevEndpoint.
       ExtraJarsS3Path:
         $ref: '#/definitions/GenericString'
         description: Path to one or more Java Jars in an S3 bucket that will be loaded in your DevEndpoint.
@@ -3972,7 +4076,7 @@ definitions:
         description: Description of the job.
       LogUri:
         $ref: '#/definitions/UriString'
-        description: Location of the logs for this job.
+        description: This field is reserved for future use.
       Role:
         $ref: '#/definitions/RoleString'
         description: The role associated with this job.
@@ -4070,7 +4174,7 @@ definitions:
         description: The type of the new trigger.
       Schedule:
         $ref: '#/definitions/GenericString'
-        description: A cron schedule expression for the new trigger.
+        description: 'A <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
       Predicate:
         $ref: '#/definitions/Predicate'
         description: A predicate to specify when the new trigger should fire.
@@ -4351,6 +4455,9 @@ definitions:
       YarnEndpointAddress:
         $ref: '#/definitions/GenericString'
         description: The YARN endpoint address used by this DevEndpoint.
+      ZeppelinRemoteSparkInterpreterPort:
+        $ref: '#/definitions/IntegerValue'
+        description: The Apache Zeppelin port for the remote Apache Spark interpreter.
       PublicAddress:
         $ref: '#/definitions/GenericString'
         description: The public address used by this DevEndpoint.
@@ -4359,7 +4466,7 @@ definitions:
         description: The current status of this DevEndpoint.
       NumberOfNodes:
         $ref: '#/definitions/IntegerValue'
-        description: The number of nodes used by this DevEndpoint.
+        description: The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
       AvailabilityZone:
         $ref: '#/definitions/GenericString'
         description: The AWS availability zone where this DevEndpoint is located.
@@ -4368,10 +4475,10 @@ definitions:
         description: The ID of the virtual private cloud (VPC) used by this DevEndpoint.
       ExtraPythonLibsS3Path:
         $ref: '#/definitions/GenericString'
-        description: Path to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint.
+        description: '<p>Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma.</p> <p>Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the <a href="http://pandas.pydata.org/">pandas</a> Python data analysis library, are not yet supported.</p>'
       ExtraJarsS3Path:
         $ref: '#/definitions/GenericString'
-        description: Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.
+        description: <p>Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.</p> <p>Please note that only pure Java/Scala libraries can currently be used on a DevEndpoint.</p>
       FailureReason:
         $ref: '#/definitions/GenericString'
         description: The reason for a current failure in this DevEndpoint.
@@ -4393,10 +4500,10 @@ definitions:
     properties:
       ExtraPythonLibsS3Path:
         $ref: '#/definitions/GenericString'
-        description: Path to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint.
+        description: '<p>Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma.</p> <p>Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the <a href="http://pandas.pydata.org/">pandas</a> Python data analysis library, are not yet supported.</p>'
       ExtraJarsS3Path:
         $ref: '#/definitions/GenericString'
-        description: Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.
+        description: <p>Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.</p> <p>Please note that only pure Java/Scala libraries can currently be used on a DevEndpoint.</p>
     description: Custom libraries to be loaded into a DevEndpoint.
   DevEndpointList:
     type: array
@@ -4528,7 +4635,7 @@ definitions:
         description: A criteria string that must match the criteria recorded in the connection definition for that connection definition to be returned.
       ConnectionType:
         $ref: '#/definitions/ConnectionType'
-        description: The type of connections to return.
+        description: 'The type of connections to return. Currently, only JDBC is supported; SFTP is not supported.'
     description: Filters the connection definitions returned by the <code>GetConnections</code> API.
   GetConnectionsRequest:
     type: object
@@ -5152,7 +5259,7 @@ definitions:
         description: Description of this job.
       LogUri:
         $ref: '#/definitions/UriString'
-        description: Location of the logs for this job.
+        description: This field is reserved for future use.
       Role:
         $ref: '#/definitions/RoleString'
         description: The role associated with this job.
@@ -5280,7 +5387,7 @@ definitions:
         description: Description of the job.
       LogUri:
         $ref: '#/definitions/UriString'
-        description: Location of the logs for this job.
+        description: This field is reserved for future use.
       Role:
         $ref: '#/definitions/RoleString'
         description: The role associated with this job.
@@ -5565,6 +5672,8 @@ definitions:
     properties:
       Values:
         $ref: '#/definitions/ValueStringList'
+        description: The list of values.
+    description: Contains a list of values defining partitions.
   Path:
     type: string
   PathList:
@@ -5688,7 +5797,7 @@ definitions:
     properties:
       ScheduleExpression:
         $ref: '#/definitions/CronExpression'
-        description: 'A <code>cron</code> expression that can be used as a Cloudwatch event to schedule something (see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html">CloudWatch Schedule Expression Syntax</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
+        description: 'A <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
       State:
         $ref: '#/definitions/ScheduleState'
         description: The state of the schedule.
@@ -6046,8 +6155,11 @@ definitions:
     properties:
       Table:
         $ref: '#/definitions/Table'
+        description: The table in question
       VersionId:
         $ref: '#/definitions/VersionString'
+        description: The ID value that identifies this table version.
+    description: Specifies a version of a table.
   Timestamp:
     type: string
     format: date-time
@@ -6080,7 +6192,7 @@ definitions:
         description: A description of this trigger.
       Schedule:
         $ref: '#/definitions/GenericString'
-        description: A cron schedule expression.
+        description: 'A <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
       Actions:
         $ref: '#/definitions/ActionList'
         description: The actions initiated by this trigger.
@@ -6120,7 +6232,7 @@ definitions:
         description: A description of this trigger.
       Schedule:
         $ref: '#/definitions/GenericString'
-        description: A cron expression specifying the schedule.
+        description: 'An updated <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
       Actions:
         $ref: '#/definitions/ActionList'
         description: The actions initiated by this trigger.
@@ -6175,7 +6287,7 @@ definitions:
         description: Name of the new <code>Crawler</code>.
       Role:
         $ref: '#/definitions/RoleArn'
-        description: The AWS ARN of the IAM role used by the new <code>Crawler</code> to access customer resources.
+        description: The IAM role (or ARN of an IAM role) used by the new <code>Crawler</code> to access customer resources.
       DatabaseName:
         $ref: '#/definitions/DatabaseName'
         description: 'The Glue <code>Database</code> where results will be stored, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.'
@@ -6187,7 +6299,7 @@ definitions:
         description: A list of collection of targets to crawl.
       Schedule:
         $ref: '#/definitions/CronExpression'
-        description: 'A cron expression that can be used as a Cloudwatch event (see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html">CloudWatch Schedule Expression Syntax</a>. For example, to run every day at 12:15 UTC, specify: <code>cron(15 12 * * ? *)</code>.'
+        description: 'A <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
       Classifiers:
         $ref: '#/definitions/ClassifierNameList'
         description: 'A list of custom <code>Classifier</code> names that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.'
@@ -6210,7 +6322,7 @@ definitions:
         description: Name of the crawler whose schedule to update.
       Schedule:
         $ref: '#/definitions/CronExpression'
-        description: Cron expression of the updated schedule.
+        description: 'The updated <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
   UpdateCrawlerScheduleResponse:
     type: object
     properties: {}
@@ -6245,7 +6357,10 @@ definitions:
         description: The public key for the DevEndpoint to use.
       CustomLibraries:
         $ref: '#/definitions/DevEndpointCustomLibraries'
-        description: Custom Python or Java custom libraries to be loaded in the DevEndpoint.
+        description: Custom Python or Java libraries to be loaded in the DevEndpoint.
+      UpdateEtlLibraries:
+        $ref: '#/definitions/BooleanValue'
+        description: 'True if the list of custom libraries to be loaded in the development endpoint needs to be updated, or False otherwise.'
   UpdateDevEndpointResponse:
     type: object
     properties: {}

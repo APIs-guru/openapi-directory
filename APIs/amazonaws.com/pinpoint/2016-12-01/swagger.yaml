@@ -464,6 +464,112 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/channels/apns_voip':
+    put:
+      operationId: UpdateApnsVoipChannel
+      description: Update an APNS VoIP channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateApnsVoipChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateApnsVoipChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/channels/apns_voip_sandbox':
+    put:
+      operationId: UpdateApnsVoipSandboxChannel
+      description: Update an APNS VoIP sandbox channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateApnsVoipSandboxChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateApnsVoipSandboxChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/apps/{application-id}':
     get:
       operationId: GetApp
@@ -1598,6 +1704,9 @@ definitions:
       Enabled:
         $ref: '#/definitions/__boolean'
         description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a credential for authentication.
       Id:
         $ref: '#/definitions/__string'
         description: 'Channel ID. Not used, only for backwards compatibility.'
@@ -1644,9 +1753,6 @@ definitions:
       ImageUrl:
         $ref: '#/definitions/__string'
         description: The URL that points to an image used in the push notification.
-      JsonData:
-        $ref: '#/definitions/__string'
-        description: The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
       MD5:
         $ref: '#/definitions/__string'
         description: Optional. Base-64-encoded MD5 checksum of the data parameter. Used to verify data integrity
@@ -1709,9 +1815,18 @@ definitions:
       CreationDate:
         $ref: '#/definitions/__string'
         description: When was this segment created
+      DefaultAuthenticationMethod:
+        $ref: '#/definitions/__string'
+        description: The default authentication method used for APNs.
       Enabled:
         $ref: '#/definitions/__boolean'
         description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a credential for authentication.
+      HasTokenKey:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a token key for authentication.
       Id:
         $ref: '#/definitions/__string'
         description: Channel ID. Not used. Present only for backwards compatibility.
@@ -1746,11 +1861,11 @@ definitions:
       Category:
         $ref: '#/definitions/__string'
         description: Provide this key with a string value that represents the notification's type. This value corresponds to the value in the identifier property of one of your app's registered categories.
+      CollapseId:
+        $ref: '#/definitions/__string'
+        description: Multiple notifications with the same collapse identifier are displayed to the user as a single notification. The value of this key must not exceed 64 bytes.
       Data:
         $ref: '#/definitions/MapOf__string'
-        description: The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
-      JsonData:
-        $ref: '#/definitions/__string'
         description: The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
       MediaUrl:
         $ref: '#/definitions/__string'
@@ -1758,6 +1873,9 @@ definitions:
       PreferredAuthenticationMethod:
         $ref: '#/definitions/__string'
         description: 'The preferred authentication method, either "CERTIFICATE" or "TOKEN"'
+      Priority:
+        $ref: '#/definitions/__string'
+        description: Is this a transaction priority message or lower priority.
       RawContent:
         $ref: '#/definitions/__string'
         description: The Raw JSON formatted string to be used as the payload. This value overrides the message.
@@ -1773,6 +1891,9 @@ definitions:
       ThreadId:
         $ref: '#/definitions/__string'
         description: 'Provide this key with a string value that represents the app-specific identifier for grouping notifications. If you provide a Notification Content app extension, you can use this value to group your notifications together.'
+      TimeToLive:
+        $ref: '#/definitions/__integer'
+        description: 'This parameter specifies how long (in seconds) the message should be kept if APNS is unable to deliver the notification the first time. If the value is 0, APNS treats the notification as if it expires immediately and does not store the notification or attempt to redeliver it. This value is converted to the expiration field when sent to APNS'
       Title:
         $ref: '#/definitions/__string'
         description: The message title that displays above the message on the user's device.
@@ -1817,9 +1938,18 @@ definitions:
       CreationDate:
         $ref: '#/definitions/__string'
         description: When was this segment created
+      DefaultAuthenticationMethod:
+        $ref: '#/definitions/__string'
+        description: The default authentication method used for APNs.
       Enabled:
         $ref: '#/definitions/__boolean'
         description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a credential for authentication.
+      HasTokenKey:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a token key for authentication.
       Id:
         $ref: '#/definitions/__string'
         description: 'Channel ID. Not used, only for backwards compatibility.'
@@ -1839,6 +1969,142 @@ definitions:
         $ref: '#/definitions/__integer'
         description: Version of channel
     description: Apple Development Push Notification Service channel definition.
+  APNSVoipChannelRequest:
+    type: object
+    properties:
+      BundleId:
+        $ref: '#/definitions/__string'
+        description: The bundle id used for APNs Tokens.
+      Certificate:
+        $ref: '#/definitions/__string'
+        description: The distribution certificate from Apple.
+      DefaultAuthenticationMethod:
+        $ref: '#/definitions/__string'
+        description: The default authentication method used for APNs.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      PrivateKey:
+        $ref: '#/definitions/__string'
+        description: The certificate private key.
+      TeamId:
+        $ref: '#/definitions/__string'
+        description: The team id used for APNs Tokens.
+      TokenKey:
+        $ref: '#/definitions/__string'
+        description: The token key used for APNs Tokens.
+      TokenKeyId:
+        $ref: '#/definitions/__string'
+        description: The token key used for APNs Tokens.
+    description: Apple VoIP Push Notification Service channel definition.
+  APNSVoipChannelResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: Application id
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: When was this segment created
+      DefaultAuthenticationMethod:
+        $ref: '#/definitions/__string'
+        description: The default authentication method used for APNs.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a credential for authentication.
+      HasTokenKey:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a token key for authentication.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'Channel ID. Not used, only for backwards compatibility.'
+      IsArchived:
+        $ref: '#/definitions/__boolean'
+        description: Is this channel archived
+      LastModifiedBy:
+        $ref: '#/definitions/__string'
+        description: Who made the last change
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: Last date this was updated
+      Platform:
+        $ref: '#/definitions/__string'
+        description: The platform type. Will be APNS.
+      Version:
+        $ref: '#/definitions/__integer'
+        description: Version of channel
+    description: Apple VoIP Push Notification Service channel definition.
+  APNSVoipSandboxChannelRequest:
+    type: object
+    properties:
+      BundleId:
+        $ref: '#/definitions/__string'
+        description: The bundle id used for APNs Tokens.
+      Certificate:
+        $ref: '#/definitions/__string'
+        description: The distribution certificate from Apple.
+      DefaultAuthenticationMethod:
+        $ref: '#/definitions/__string'
+        description: The default authentication method used for APNs.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      PrivateKey:
+        $ref: '#/definitions/__string'
+        description: The certificate private key.
+      TeamId:
+        $ref: '#/definitions/__string'
+        description: The team id used for APNs Tokens.
+      TokenKey:
+        $ref: '#/definitions/__string'
+        description: The token key used for APNs Tokens.
+      TokenKeyId:
+        $ref: '#/definitions/__string'
+        description: The token key used for APNs Tokens.
+    description: Apple VoIP Developer Push Notification Service channel definition.
+  APNSVoipSandboxChannelResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: Application id
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: When was this segment created
+      DefaultAuthenticationMethod:
+        $ref: '#/definitions/__string'
+        description: The default authentication method used for APNs.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a credential for authentication.
+      HasTokenKey:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a token key for authentication.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'Channel ID. Not used, only for backwards compatibility.'
+      IsArchived:
+        $ref: '#/definitions/__boolean'
+        description: Is this channel archived
+      LastModifiedBy:
+        $ref: '#/definitions/__string'
+        description: Who made the last change
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: Last date this was updated
+      Platform:
+        $ref: '#/definitions/__string'
+        description: The platform type. Will be APNS.
+      Version:
+        $ref: '#/definitions/__integer'
+        description: Version of channel
+    description: Apple VoIP Developer Push Notification Service channel definition.
   Action:
     type: string
     enum:
@@ -2018,6 +2284,9 @@ definitions:
       Enabled:
         $ref: '#/definitions/__boolean'
         description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a credential for authentication.
       Id:
         $ref: '#/definitions/__string'
         description: 'Channel ID. Not used, only for backwards compatibility.'
@@ -2058,9 +2327,6 @@ definitions:
       ImageUrl:
         $ref: '#/definitions/__string'
         description: The URL that points to an image used in the push notification.
-      JsonData:
-        $ref: '#/definitions/__string'
-        description: The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
       RawContent:
         $ref: '#/definitions/__string'
         description: The Raw JSON formatted string to be used as the payload. This value overrides the message.
@@ -2226,6 +2492,8 @@ definitions:
       - GCM
       - APNS
       - APNS_SANDBOX
+      - APNS_VOIP
+      - APNS_VOIP_SANDBOX
       - ADM
       - SMS
       - EMAIL
@@ -2315,9 +2583,6 @@ definitions:
       Data:
         $ref: '#/definitions/MapOf__string'
         description: The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
-      JsonData:
-        $ref: '#/definitions/__string'
-        description: The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
       SilentPush:
         $ref: '#/definitions/__boolean'
         description: Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases.
@@ -2361,6 +2626,26 @@ definitions:
     properties:
       APNSSandboxChannelResponse:
         $ref: '#/definitions/APNSSandboxChannelResponse'
+  DeleteApnsVoipChannelRequest:
+    type: object
+    properties: {}
+  DeleteApnsVoipChannelResponse:
+    type: object
+    required:
+      - APNSVoipChannelResponse
+    properties:
+      APNSVoipChannelResponse:
+        $ref: '#/definitions/APNSVoipChannelResponse'
+  DeleteApnsVoipSandboxChannelRequest:
+    type: object
+    properties: {}
+  DeleteApnsVoipSandboxChannelResponse:
+    type: object
+    required:
+      - APNSVoipSandboxChannelResponse
+    properties:
+      APNSVoipSandboxChannelResponse:
+        $ref: '#/definitions/APNSVoipSandboxChannelResponse'
   DeleteAppRequest:
     type: object
     properties: {}
@@ -2475,9 +2760,6 @@ definitions:
       DefaultPushNotificationMessage:
         $ref: '#/definitions/DefaultPushNotificationMessage'
         description: The default push notification message for all push channels.
-      EmailMessage:
-        $ref: '#/definitions/EmailMessage'
-        description: The message to Email channels. Overrides the default message.
       GCMMessage:
         $ref: '#/definitions/GCMMessage'
         description: The message to GCM channels. Overrides the default push notification message.
@@ -2523,6 +2805,9 @@ definitions:
       FromAddress:
         $ref: '#/definitions/__string'
         description: The email address used to send emails from.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a credential for authentication.
       Id:
         $ref: '#/definitions/__string'
         description: 'Channel ID. Not used, only for backwards compatibility.'
@@ -2548,28 +2833,6 @@ definitions:
         $ref: '#/definitions/__integer'
         description: Version of channel
     description: Email Channel Response.
-  EmailMessage:
-    type: object
-    properties:
-      Body:
-        $ref: '#/definitions/__string'
-        description: 'The message body of the notification, the email body or the text message.'
-      FromAddress:
-        $ref: '#/definitions/__string'
-        description: The email address used to send the email from. Defaults to use FromAddress specified in the Email Channel.
-      HtmlBody:
-        $ref: '#/definitions/__string'
-        description: The HTML part of the email.
-      Substitutions:
-        $ref: '#/definitions/MapOfListOf__string'
-        description: Default message substitutions. Can be overridden by individual address substitutions.
-      TemplateArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the template to use for the email.
-      Title:
-        $ref: '#/definitions/__string'
-        description: The subject of the email.
-    description: Email Message.
   EndpointBatchItem:
     type: object
     properties:
@@ -2793,9 +3056,6 @@ definitions:
       RequestId:
         $ref: '#/definitions/__string'
         description: The unique ID for the most recent request to update the endpoint.
-      ShardId:
-        $ref: '#/definitions/__string'
-        description: The ShardId of endpoint.
       User:
         $ref: '#/definitions/EndpointUser'
         description: Custom user-specific attributes that your app reports to Amazon Pinpoint.
@@ -2902,6 +3162,9 @@ definitions:
       Enabled:
         $ref: '#/definitions/__boolean'
         description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a credential for authentication.
       Id:
         $ref: '#/definitions/__string'
         description: Channel ID. Not used. Present only for backwards compatibility.
@@ -2945,9 +3208,9 @@ definitions:
       ImageUrl:
         $ref: '#/definitions/__string'
         description: The URL that points to an image used in the push notification.
-      JsonData:
+      Priority:
         $ref: '#/definitions/__string'
-        description: The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
+        description: Is this a transaction priority message or lower priority.
       RawContent:
         $ref: '#/definitions/__string'
         description: The Raw JSON formatted string to be used as the payload. This value overrides the message.
@@ -2966,6 +3229,9 @@ definitions:
       Substitutions:
         $ref: '#/definitions/MapOfListOf__string'
         description: Default message substitutions. Can be overridden by individual address substitutions.
+      TimeToLive:
+        $ref: '#/definitions/__integer'
+        description: 'This parameter specifies how long (in seconds) the message should be kept in GCM storage if the device is offline. The maximum time to live supported is 4 weeks, and the default value is 4 weeks.'
       Title:
         $ref: '#/definitions/__string'
         description: The message title that displays above the message on the user's device.
@@ -3003,6 +3269,26 @@ definitions:
     properties:
       APNSSandboxChannelResponse:
         $ref: '#/definitions/APNSSandboxChannelResponse'
+  GetApnsVoipChannelRequest:
+    type: object
+    properties: {}
+  GetApnsVoipChannelResponse:
+    type: object
+    required:
+      - APNSVoipChannelResponse
+    properties:
+      APNSVoipChannelResponse:
+        $ref: '#/definitions/APNSVoipChannelResponse'
+  GetApnsVoipSandboxChannelRequest:
+    type: object
+    properties: {}
+  GetApnsVoipSandboxChannelResponse:
+    type: object
+    required:
+      - APNSVoipSandboxChannelResponse
+    properties:
+      APNSVoipSandboxChannelResponse:
+        $ref: '#/definitions/APNSVoipSandboxChannelResponse'
   GetAppRequest:
     type: object
     properties: {}
@@ -3116,7 +3402,7 @@ definitions:
   GetEventStreamRequest:
     type: object
     properties: {}
-    description: GetEventStream Request
+    description: GetEventStreamRequest
   GetEventStreamResponse:
     type: object
     required:
@@ -3540,9 +3826,15 @@ definitions:
   MessageConfiguration:
     type: object
     properties:
+      ADMMessage:
+        $ref: '#/definitions/Message'
+        description: The message that the campaign delivers to ADM channels. Overrides the default message.
       APNSMessage:
         $ref: '#/definitions/Message'
         description: The message that the campaign delivers to APNS channels. Overrides the default message.
+      BaiduMessage:
+        $ref: '#/definitions/Message'
+        description: The message that the campaign delivers to Baidu channels. Overrides the default message.
       DefaultMessage:
         $ref: '#/definitions/Message'
         description: The default message for all channels.
@@ -3562,9 +3854,6 @@ definitions:
       Addresses:
         $ref: '#/definitions/MapOfAddressConfiguration'
         description: 'A map of destination addresses, with the address as the key(Email address, phone number or push token) and the Address Configuration as the value.'
-      Campaign:
-        $ref: '#/definitions/MapOf__string'
-        description: 'The JSON payload used for campaign attributes. This payload is added to the notifications'' data->pinpoint->campaign'' object in iOS and flattened to pinpoint.campaign.{AttributeName} keys in Android. Email will use the attribute campaign_id to save the templates.'
       Context:
         $ref: '#/definitions/MapOf__string'
         description: A map of custom attributes to attributes to be attached to the message. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes.
@@ -3574,9 +3863,6 @@ definitions:
       MessageConfiguration:
         $ref: '#/definitions/DirectMessageConfiguration'
         description: Message configuration.
-      RequestId:
-        $ref: '#/definitions/__string'
-        description: Original request Id for which this message is delivered.
     description: Send message request.
   MessageResponse:
     type: object
@@ -3705,6 +3991,9 @@ definitions:
       Enabled:
         $ref: '#/definitions/__boolean'
         description: If the channel is enabled for sending messages.
+      HasCredential:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is registered with a credential for authentication.
       Id:
         $ref: '#/definitions/__string'
         description: 'Channel ID. Not used, only for backwards compatibility.'
@@ -3956,9 +4245,6 @@ definitions:
       MessageConfiguration:
         $ref: '#/definitions/DirectMessageConfiguration'
         description: Message configuration.
-      RequestId:
-        $ref: '#/definitions/__string'
-        description: Original request Id for which this message is delivered.
       Users:
         $ref: '#/definitions/MapOfEndpointSendConfiguration'
         description: 'A map of destination endpoints, with the EndpointId as the key Endpoint Message Configuration as the value.'
@@ -4080,6 +4366,34 @@ definitions:
     properties:
       APNSSandboxChannelResponse:
         $ref: '#/definitions/APNSSandboxChannelResponse'
+  UpdateApnsVoipChannelRequest:
+    type: object
+    required:
+      - APNSVoipChannelRequest
+    properties:
+      APNSVoipChannelRequest:
+        $ref: '#/definitions/APNSVoipChannelRequest'
+  UpdateApnsVoipChannelResponse:
+    type: object
+    required:
+      - APNSVoipChannelResponse
+    properties:
+      APNSVoipChannelResponse:
+        $ref: '#/definitions/APNSVoipChannelResponse'
+  UpdateApnsVoipSandboxChannelRequest:
+    type: object
+    required:
+      - APNSVoipSandboxChannelRequest
+    properties:
+      APNSVoipSandboxChannelRequest:
+        $ref: '#/definitions/APNSVoipSandboxChannelRequest'
+  UpdateApnsVoipSandboxChannelResponse:
+    type: object
+    required:
+      - APNSVoipSandboxChannelResponse
+    properties:
+      APNSVoipSandboxChannelResponse:
+        $ref: '#/definitions/APNSVoipSandboxChannelResponse'
   UpdateApplicationSettingsRequest:
     type: object
     required:
@@ -4249,9 +4563,6 @@ definitions:
       SegmentVersion:
         $ref: '#/definitions/__integer'
         description: The version of the segment to which the campaign sends messages.
-      Trace:
-        $ref: '#/definitions/__boolean'
-        description: Whether or not to enable trace logging for the campaign. Undocumented
       TreatmentDescription:
         $ref: '#/definitions/__string'
         description: A custom description for the treatment.
@@ -4268,9 +4579,6 @@ definitions:
           The Amazon Resource Name (ARN) of the Amazon Kinesis stream or Firehose delivery stream to which you want to publish events.
            Firehose ARN: arn:aws:firehose:REGION:ACCOUNT_ID:deliverystream/STREAM_NAME
            Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME
-      ExternalId:
-        $ref: '#/definitions/__string'
-        description: The external ID assigned the IAM role that authorizes Amazon Pinpoint to publish to the stream.
       RoleArn:
         $ref: '#/definitions/__string'
         description: The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
