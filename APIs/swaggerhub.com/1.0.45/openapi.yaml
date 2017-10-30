@@ -1,0 +1,1827 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.swaggerhub.com/'
+info:
+  contact:
+    email: info@swaggerhub.com
+    name: SwaggerHub
+    url: 'http://swaggerhub.com'
+  description: |
+    # Introduction
+    This is the registry API for SwaggerHub. It allows you to access, manage, and update your APIs and Domains in SwaggerHub bypassing the Web application.
+
+    # Authentication
+    Use your personal API Key: you may find it by visiting the   [API Key page](https://app.swaggerhub.com/settings/apiKey).
+  title: SwaggerHub Registry
+  version: 1.0.45
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    url: 'https://pbs.twimg.com/profile_images/725794797592690688/r20oBBuu_400x400.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://api.swaggerhub.com/apis/swagger-hub/registry-api/1.0.45'
+      version: '2.0'
+  x-providerName: swaggerhub.com
+tags:
+  - description: Operations for APIs
+    name: APIs
+  - description: Operations for Domains
+    name: Domains
+paths:
+  /apis:
+    get:
+      description: ''
+      operationId: searchApis
+      parameters:
+        - description: free text query to match
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+        - description: |
+            matches against published state of the spec
+            * UNPUBLISHED - spec is a draft, a work in progress
+            * PUBLISHED - spec is a stable version ready for consuming from client applications
+            * ANY - either PUBLISHED or UNPUBLISHED
+          in: query
+          name: state
+          required: false
+          schema:
+            type: string
+            enum:
+              - ALL
+              - PUBLISHED
+              - UNPUBLISHED
+            default: ALL
+        - description: matches against tags associated with an API
+          in: query
+          name: tag
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: page to return
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - description: number of results per page
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - description: |
+            sort criteria or result set
+            * NAME -
+            * UPATED
+            * CREATED
+            * OWNER
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+            enum:
+              - NAME
+              - UPDATED
+              - CREATED
+              - OWNER
+            default: NAME
+        - description: sort order
+          in: query
+          name: order
+          required: false
+          schema:
+            type: string
+            enum:
+              - ASC
+              - DESC
+            default: ASC
+      responses:
+        '303':
+          description: 303 response
+          headers:
+            Location:
+              schema:
+                type: string
+      security:
+        - TokenSecured: []
+      summary: Retrieves a list of currently defined APIs in APIs.json format.
+      tags:
+        - APIs
+  '/apis/{owner}':
+    get:
+      description: ''
+      operationId: getOwnerApis
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: page to return
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - description: number of results per page
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - description: |
+            sort criteria or result set
+            * NAME -
+            * UPATED
+            * CREATED
+            * OWNER
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+            enum:
+              - NAME
+              - UPDATED
+              - CREATED
+              - OWNER
+            default: NAME
+        - description: sort order
+          in: query
+          name: order
+          required: false
+          schema:
+            type: string
+            enum:
+              - ASC
+              - DESC
+            default: ASC
+      responses:
+        '200':
+          description: a list of APIs in APIs.json format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApisJson'
+      security:
+        - TokenSecured: []
+      summary: Retrieves an APIs.json listing of all APIs defined for this owner
+      tags:
+        - APIs
+  '/apis/{owner}/{api}':
+    delete:
+      description: ''
+      operationId: deleteApi
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: the API was successfully deleted
+        '403':
+          description: access denied
+        '404':
+          description: specified API not found
+        '409':
+          description: the API has published versions and can not be deleted
+      security:
+        - TokenSecured: []
+      summary: Deletes the specified API
+      tags:
+        - APIs
+    get:
+      operationId: getApiVersions
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: a list of API versions in APIs.json format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApisJson'
+      security:
+        - TokenSecured: []
+      summary: Retrieves an APIs.json listing for all API versions for this owner and API
+      tags:
+        - APIs
+    post:
+      description: Saves the provided Swagger definition; the owner must match the token owner. The version will be extracted from the Swagger definitions itself.
+      operationId: saveDefinition
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          schema:
+            type: string
+        - description: Defines whether the API has to be private
+          in: query
+          name: isPrivate
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - description: api version
+          in: query
+          name: version
+          required: false
+          schema:
+            type: string
+        - description: force update
+          in: query
+          name: force
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: the API was successfully saved
+        '201':
+          description: new API was successfully saved
+        '205':
+          description: the API was successfully saved and should be reloaded
+        '400':
+          description: the Swagger definition was invalid
+        '403':
+          description: maximum number of APIs reached
+        '409':
+          description: can not overwrite a published API version
+        '415':
+          description: invalid content type
+      security:
+        - TokenSecured: []
+      summary: Saves the provided Swagger definition
+      tags:
+        - APIs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+          application/yaml:
+            schema:
+              type: string
+        description: the Swagger definition of this API
+        required: true
+  '/apis/{owner}/{api}/.collaboration':
+    delete:
+      operationId: deleteCollaboration
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: successfully deleted a collaboration
+      security:
+        - TokenSecured: []
+      summary: Deletes API's collaboration
+      tags:
+        - APIs
+    get:
+      operationId: getCollaboration
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expandTeams
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: the existing collaboration on an API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collaboration'
+      security:
+        - TokenSecured: []
+      summary: Gets API's collaboration
+      tags:
+        - APIs
+    put:
+      operationId: updateCollaboration
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: successfully updated API collaboration
+      security:
+        - TokenSecured: []
+      summary: Updates API's collaboration
+      tags:
+        - APIs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Collaboration'
+  '/apis/{owner}/{api}/{version}':
+    delete:
+      description: ''
+      operationId: deleteApiVersion
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          schema:
+            type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: the API version was successfully deleted
+        '403':
+          description: access denied
+        '404':
+          description: specified API not found
+        '409':
+          description: the API version is published and can not be deleted or it is the only version of this API
+      security:
+        - TokenSecured: []
+      summary: Deletes a particular version of the specified API
+      tags:
+        - APIs
+    get:
+      description: ''
+      operationId: getDefinition
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          schema:
+            type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: the Swagger API in requested format
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+            application/yaml:
+              schema:
+                properties: {}
+                type: object
+        '404':
+          description: specified API not found
+      security:
+        - TokenSecured: []
+      summary: Retrieves the Swagger definition for the specified API and version
+      tags:
+        - APIs
+  '/apis/{owner}/{api}/{version}/swagger.json':
+    get:
+      description: ''
+      operationId: getJsonDefinition
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          schema:
+            type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: the Swagger API in JSON format
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+        '404':
+          description: specified API not found
+      security:
+        - TokenSecured: []
+      summary: Retrieves the Swagger definition for the specified API and version in JSON format
+      tags:
+        - APIs
+  '/apis/{owner}/{api}/{version}/swagger.yaml':
+    get:
+      description: ''
+      operationId: getYamlDefinition
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: API identifier
+          in: path
+          name: api
+          required: true
+          schema:
+            type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: the Swagger API in YAML format
+          content:
+            application/yaml:
+              schema:
+                properties: {}
+                type: object
+            application/json:
+              schema:
+                properties: {}
+                type: object
+        '404':
+          description: specified API not found
+      security:
+        - TokenSecured: []
+      summary: Retrieves the Swagger definition for the specified API and version in YAML format
+      tags:
+        - APIs
+  /domains:
+    get:
+      operationId: searchDomains
+      parameters:
+        - description: free text query to match
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+        - description: |
+            matches against published state of the spec
+            * UNPUBLISHED - spec is a draft, a work in progress
+            * PUBLISHED - spec is a stable version ready for consuming from client applications
+            * ANY - either PUBLISHED or UNPUBLISHED
+          in: query
+          name: state
+          required: false
+          schema:
+            type: string
+            enum:
+              - ALL
+              - PUBLISHED
+              - UNPUBLISHED
+            default: ALL
+        - description: matches against tags associated with a domain
+          in: query
+          name: tag
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: page to return
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - description: number of results per page
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - description: |
+            sort criteria or result set
+            * NAME -
+            * UPATED
+            * CREATED
+            * OWNER
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+            enum:
+              - NAME
+              - UPDATED
+              - CREATED
+              - OWNER
+            default: NAME
+        - description: sort order
+          in: query
+          name: order
+          required: false
+          schema:
+            type: string
+            enum:
+              - ASC
+              - DESC
+            default: ASC
+      responses:
+        '303':
+          description: 303 response
+          headers:
+            Location:
+              schema:
+                type: string
+      security:
+        - TokenSecured: []
+      summary: Retrieves a list of currently defined domains in APIs.json format
+      tags:
+        - Domains
+  '/domains/{owner}':
+    get:
+      operationId: getOwnerDomains
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: page to return
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - description: number of results per page
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - description: |
+            sort criteria or result set
+            * NAME -
+            * UPATED
+            * CREATED
+            * OWNER
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+            enum:
+              - NAME
+              - UPDATED
+              - CREATED
+              - OWNER
+            default: NAME
+        - description: sort order
+          in: query
+          name: order
+          required: false
+          schema:
+            type: string
+            enum:
+              - ASC
+              - DESC
+            default: ASC
+      responses:
+        '200':
+          description: a list of domains in APIs.json format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApisJson'
+      security:
+        - TokenSecured: []
+      summary: Retrieves an APIs.json listing of all domains defined for this owner
+      tags:
+        - Domains
+  '/domains/{owner}/{domain}':
+    delete:
+      operationId: deleteDomain
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+        - description: force update
+          in: query
+          name: force
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: the domain was successfully deleted
+        '403':
+          description: access denied
+        '404':
+          description: specified domain not found
+        '409':
+          description: the domain has published versions and can not be deleted
+        '424':
+          description: can't delete because there are some dependencies for domain
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page'
+      security:
+        - TokenSecured: []
+      summary: Deletes the specified domain
+      tags:
+        - Domains
+    get:
+      operationId: getDomainVersions
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: a list of domain versions in APIs.json format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApisJson'
+      security:
+        - TokenSecured: []
+      summary: Retrieves an APIs.json listing for all domain versions for this owner and domain
+      tags:
+        - Domains
+    post:
+      operationId: saveDomainDefinition
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+        - description: Defines whether the API has to be private
+          in: query
+          name: isPrivate
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - description: domain version
+          in: query
+          name: version
+          required: true
+          schema:
+            type: string
+        - description: force update
+          in: query
+          name: force
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: the domain was successfully saved
+        '201':
+          description: new domain was successfully saved
+        '205':
+          description: the domain was successfully saved and should be reloaded
+        '403':
+          description: maximum number of domains reached
+        '409':
+          description: can not overwrite a published domain version
+        '415':
+          description: invalid content type
+      security:
+        - TokenSecured: []
+      summary: Saves the provided Swagger definition of a domain
+      tags:
+        - Domains
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+          application/yaml:
+            schema:
+              type: string
+        description: the Swagger definition of this Domain
+  '/domains/{owner}/{domain}/{version}':
+    delete:
+      operationId: deleteDomainVersion
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          schema:
+            type: string
+        - description: force update
+          in: query
+          name: force
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: the domain version was successfully deleted
+        '403':
+          description: access denied
+        '404':
+          description: specified domain not found
+        '409':
+          description: the domain version is published and can not be deleted or it is the only version of this API
+        '424':
+          description: can't delete because there are some dependencies for domain
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page'
+      security:
+        - TokenSecured: []
+      summary: Deletes a particular version of the specified domain
+      tags:
+        - Domains
+    get:
+      operationId: getDomainDefinition
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: the Swagger domain in requested format
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+            application/yaml:
+              schema:
+                properties: {}
+                type: object
+        '404':
+          description: specified domain not found
+      security:
+        - TokenSecured: []
+      summary: Retrieves the Swagger definition for the specified domain and version
+      tags:
+        - Domains
+  '/domains/{owner}/{domain}/{version}/domain.json':
+    get:
+      operationId: getDomainJsonDefinition
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: definition in JSON format
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+        '404':
+          description: specified domain not found
+      security:
+        - TokenSecured: []
+      summary: Retrieves the definition for the specified domain and version in JSON format
+      tags:
+        - Domains
+  '/domains/{owner}/{domain}/{version}/domain.yaml':
+    get:
+      operationId: getDomainYamlDefinition
+      parameters:
+        - description: API or Domaion owner identifier
+          in: path
+          name: owner
+          required: true
+          schema:
+            type: string
+        - description: domain identifier
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+        - description: version identifier
+          in: path
+          name: version
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: definition in YAML format
+          content:
+            application/yaml:
+              schema:
+                properties: {}
+                type: object
+            application/json:
+              schema:
+                properties: {}
+                type: object
+        '404':
+          description: specified domain not found
+      security:
+        - TokenSecured: []
+      summary: Retrieves the definition for the specified domain and version in YAML format
+      tags:
+        - Domains
+  /specs:
+    get:
+      description: ''
+      operationId: searchApisAndDomains
+      parameters:
+        - description: |
+            Type of Swagger specs to search
+            * API - APIs only
+            * DOMAIN - Domains only
+            * ANY - Both APIs and Domains
+          in: query
+          name: specType
+          required: false
+          schema:
+            type: string
+            enum:
+              - API
+              - DOMAIN
+              - ANY
+            default: ANY
+        - description: |
+            The visibility of a spec in SwaggerHub
+            * PUBLIC - can be viewed by anyone
+            * PRIVATE - can only be viewed by you or your Org and those that you are collaborating with or have shared it with
+            * ANY - either PUBLIC or PRIVATE
+          in: query
+          name: visibility
+          required: false
+          schema:
+            type: string
+            enum:
+              - PUBLIC
+              - PRIVATE
+              - ANY
+            default: ANY
+        - description: |
+            matches against published state of the spec
+            * UNPUBLISHED - spec is a draft, a work in progress
+            * PUBLISHED - spec is a stable version ready for consuming from client applications
+            * ANY - either PUBLISHED or UNPUBLISHED
+          in: query
+          name: state
+          required: false
+          schema:
+            type: string
+            enum:
+              - ALL
+              - PUBLISHED
+              - UNPUBLISHED
+            default: ALL
+        - description: API or Domaion owner identifier. Can be username or Organization name
+          in: query
+          name: owner
+          required: false
+          schema:
+            type: string
+        - description: free text query to match
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+        - description: page to return
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - description: number of results per page
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - description: |
+            sort criteria or result set
+            * NAME -
+            * UPATED
+            * CREATED
+            * OWNER
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+            enum:
+              - NAME
+              - UPDATED
+              - CREATED
+              - OWNER
+            default: NAME
+        - description: sort order
+          in: query
+          name: order
+          required: false
+          schema:
+            type: string
+            enum:
+              - ASC
+              - DESC
+            default: ASC
+      responses:
+        '200':
+          description: a list of APIs and Domains in APIs.json format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApisJson'
+      security:
+        - TokenSecured: []
+      summary: Retrieves a list of currently defined APIs and Domains in APIs.json format
+      tags:
+        - APIs
+        - Domains
+components:
+  schemas:
+    AccessToken:
+      properties:
+        token:
+          type: string
+      type: object
+    ApiMetadata:
+      properties:
+        categories:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        defaultVersion:
+          type: string
+        links:
+          items:
+            $ref: '#/components/schemas/ApiMetadataLink'
+          type: array
+          uniqueItems: true
+        tags:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      required:
+        - categories
+        - tags
+      type: object
+    ApiMetadataLink:
+      properties:
+        type:
+          type: string
+        url:
+          type: string
+      required:
+        - type
+        - url
+      type: object
+    ApisJson:
+      properties:
+        apis:
+          items:
+            $ref: '#/components/schemas/ApisJsonApi'
+          type: array
+        created:
+          format: date-time
+          type: string
+        description:
+          type: string
+        modified:
+          format: date-time
+          type: string
+        name:
+          type: string
+        offset:
+          format: int32
+          type: integer
+        specificationVersion:
+          type: string
+        totalCount:
+          format: int64
+          type: integer
+        url:
+          type: string
+      type: object
+    ApisJsonApi:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        properties:
+          items:
+            $ref: '#/components/schemas/ApisJsonProperty'
+          type: array
+        tags:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    ApisJsonProperty:
+      description: an API property
+      properties:
+        type:
+          type: string
+      type: object
+    ApisJsonUrlProperty:
+      allOf:
+        - $ref: '#/components/schemas/ApisJsonProperty'
+        - description: an API property where the value is a URL
+          properties:
+            url:
+              format: url
+              type: string
+          type: object
+    ApisJsonValueProperty:
+      allOf:
+        - $ref: '#/components/schemas/ApisJsonProperty'
+        - description: an API property with a string value
+          properties:
+            value:
+              type: string
+          type: object
+    ClosableComment:
+      allOf:
+        - $ref: '#/components/schemas/Comment'
+        - properties:
+            position:
+              format: int32
+              type: integer
+            replies:
+              items:
+                $ref: '#/components/schemas/Comment'
+              type: array
+            status:
+              enum:
+                - OPEN
+                - RESOLVED
+              type: string
+          type: object
+    ClosableCommentPatch:
+      allOf:
+        - $ref: '#/components/schemas/CommentPatch'
+        - properties:
+            position:
+              format: int32
+              type: integer
+          type: object
+    CodegenLanguage:
+      properties:
+        customValues:
+          additionalProperties:
+            type: string
+          type: object
+        visible:
+          default: true
+          type: boolean
+      required:
+        - visible
+      type: object
+    CodegenSettings:
+      properties:
+        client:
+          additionalProperties:
+            $ref: '#/components/schemas/CodegenLanguage'
+          type: object
+        server:
+          additionalProperties:
+            $ref: '#/components/schemas/CodegenLanguage'
+          type: object
+      type: object
+    Collaboration:
+      properties:
+        hint:
+          $ref: '#/components/schemas/CollaborationHint'
+        members:
+          items:
+            $ref: '#/components/schemas/CollaborationMembership'
+          type: array
+        owner:
+          readOnly: true
+          type: string
+        owners:
+          items:
+            type: string
+          type: array
+        pendingMembers:
+          items:
+            $ref: '#/components/schemas/CollaborationMembership'
+          type: array
+        teams:
+          items:
+            $ref: '#/components/schemas/CollaborationTeamMembership'
+          type: array
+      required:
+        - hint
+      type: object
+    CollaborationHint:
+      properties:
+        type:
+          description: type identifier of the managed entity
+          format: uuid
+          type: string
+      required:
+        - type
+      type: object
+    CollaborationMember:
+      properties:
+        name:
+          type: string
+        startTime:
+          format: date-time
+          readOnly: true
+          type: string
+        title:
+          readOnly: true
+          type: string
+        uuid:
+          readOnly: true
+          type: string
+      required:
+        - name
+      type: object
+    CollaborationMembership:
+      allOf:
+        - $ref: '#/components/schemas/CollaborationMember'
+        - properties:
+            blocked:
+              readOnly: true
+              type: boolean
+            donotdisturb:
+              readOnly: true
+              type: boolean
+            roles:
+              items:
+                enum:
+                  - EDIT
+                  - COMMENT
+                  - VIEW
+                type: string
+              type: array
+          required:
+            - roles
+          type: object
+    CollaborationMembershipList:
+      properties:
+        hint:
+          $ref: '#/components/schemas/CollaborationHint'
+        items:
+          items:
+            $ref: '#/components/schemas/CollaborationMembership'
+          type: array
+      required:
+        - hint
+      type: object
+    CollaborationRoles:
+      properties:
+        api:
+          type: string
+        owner:
+          type: string
+        roles:
+          items:
+            enum:
+              - EDIT
+              - COMMENT
+              - VIEW
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    CollaborationTeamMembership:
+      allOf:
+        - $ref: '#/components/schemas/CollaborationMembership'
+        - properties:
+            members:
+              items:
+                $ref: '#/components/schemas/CollaborationMember'
+              type: array
+          type: object
+    Comment:
+      properties:
+        body:
+          type: string
+        created:
+          format: date-time
+          type: string
+        id:
+          type: string
+        modified:
+          format: date-time
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+      required:
+        - body
+        - created
+        - id
+        - user
+      type: object
+    CommentPatch:
+      properties:
+        body:
+          type: string
+      type: object
+    CommentsBatch:
+      properties:
+        addComment:
+          items:
+            $ref: '#/components/schemas/NewComment'
+          type: array
+        addReply:
+          additionalProperties:
+            items:
+              $ref: '#/components/schemas/NewReply'
+            type: array
+          type: object
+        deleteComment:
+          items:
+            type: string
+          type: array
+        deleteReply:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+            uniqueItems: true
+          type: object
+        updateComment:
+          additionalProperties:
+            $ref: '#/components/schemas/ClosableCommentPatch'
+          type: object
+        updateReply:
+          additionalProperties:
+            additionalProperties:
+              $ref: '#/components/schemas/CommentPatch'
+            type: object
+          type: object
+        updateStatus:
+          additionalProperties:
+            enum:
+              - OPEN
+              - RESOLVED
+            type: string
+          type: object
+      type: object
+    Comparison:
+      description: a list of differences between two APIs
+      items:
+        $ref: '#/components/schemas/ComparisonPart'
+      properties: {}
+      type: array
+    ComparisonDetail:
+      description: details for one side of a ComparisonPart
+      properties:
+        content:
+          description: the content of the API definition between `startPosition` and `endPosition`
+          type: string
+        endPosition:
+          $ref: '#/components/schemas/Position'
+        path:
+          description: the path to the object (notation similar to JSONPath)
+          type: string
+        startPosition:
+          $ref: '#/components/schemas/Position'
+      required:
+        - content
+        - endPosition
+        - startPosition
+      type: object
+    ComparisonPart:
+      description: a part of the API that was (or wasn't) changed
+      properties:
+        base:
+          $ref: '#/components/schemas/ComparisonDetail'
+        other:
+          $ref: '#/components/schemas/ComparisonDetail'
+        type:
+          description: |
+            the type of change that this part describes
+            * UNMODIFIED - this part is the same in both APIs. Only available for FULL compare.
+            * INSERTED - this is present in `other` but missing in `base`. `base` will not be present.
+            * DELETED - this is present in `base` but missing in `other`. `other` will not be present.
+            * CHANGED - this has been changed between `base` and `other`. Both `base` and `other` present.
+          enum:
+            - UNMODIFIED
+            - INSERTED
+            - DELETED
+            - CHANGED
+          type: string
+      required:
+        - type
+      type: object
+    EntryId:
+      properties:
+        name:
+          type: string
+        owner:
+          type: string
+        version:
+          type: string
+      type: object
+    GitHubExportSettings:
+      properties:
+        branch:
+          type: string
+        notificationEmail:
+          type: string
+        owner:
+          type: string
+        path:
+          type: string
+        repository:
+          type: string
+        token:
+          type: string
+        yamlPath:
+          type: string
+      required:
+        - branch
+        - notificationEmail
+        - owner
+        - repository
+        - token
+      type: object
+    LifecycleSettings:
+      properties:
+        published:
+          type: boolean
+      type: object
+    MissingSpecMembers:
+      properties:
+        names:
+          items:
+            type: string
+          type: array
+        spec:
+          $ref: '#/components/schemas/SimpleSpec'
+      type: object
+    NewComment:
+      properties:
+        body:
+          type: string
+        position:
+          format: int32
+          type: integer
+        replies:
+          items:
+            $ref: '#/components/schemas/NewReply'
+          type: array
+      required:
+        - body
+        - position
+      type: object
+    NewReply:
+      properties:
+        body:
+          type: string
+      required:
+        - body
+      type: object
+    NotCollaboratorProjectMembers:
+      properties:
+        missingApisMembers:
+          items:
+            $ref: '#/components/schemas/MissingSpecMembers'
+          type: array
+        missingApisTeams:
+          items:
+            $ref: '#/components/schemas/MissingSpecMembers'
+          type: array
+        missingDomainsMembers:
+          items:
+            $ref: '#/components/schemas/MissingSpecMembers'
+          type: array
+        missingDomainsTeams:
+          items:
+            $ref: '#/components/schemas/MissingSpecMembers'
+          type: array
+      type: object
+    Page:
+      properties:
+        items:
+          items:
+            properties: {}
+            type: object
+          type: array
+        offset:
+          format: int32
+          type: integer
+        total:
+          format: int64
+          type: integer
+      type: object
+    PluginConfiguration:
+      properties:
+        configuration:
+          additionalProperties:
+            type: string
+          type: object
+        definitionId:
+          type: string
+        draft:
+          type: boolean
+        id:
+          format: UUID
+          type: string
+        lifecycles:
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        objectId:
+          type: string
+        ownerName:
+          type: string
+        path:
+          type: string
+      required:
+        - definitionId
+        - lifecycles
+        - name
+        - objectId
+        - ownerName
+        - path
+      type: object
+    PluginDefinition:
+      properties:
+        configurationSchema:
+          properties: {}
+          type: object
+        createdBy:
+          type: string
+        createdOn:
+          format: date-time
+          type: string
+        enabled:
+          type: boolean
+        id:
+          type: string
+        implementingClass:
+          type: string
+        limit:
+          description: count of allowed configurations
+          format: int64
+          type: integer
+        name:
+          type: string
+        version:
+          type: string
+      required:
+        - configurationSchema
+        - createdBy
+        - createdOn
+        - enabled
+        - implementingClass
+        - name
+        - version
+      type: object
+    Position:
+      description: a position in a text document
+      properties:
+        column:
+          type: integer
+        line:
+          type: integer
+      required:
+        - column
+        - line
+      type: object
+    Private:
+      properties:
+        private:
+          type: boolean
+      required:
+        - private
+      type: object
+    ProjectEntry:
+      properties:
+        apis:
+          items:
+            $ref: '#/components/schemas/EntryId'
+          type: array
+        domains:
+          items:
+            $ref: '#/components/schemas/EntryId'
+          type: array
+        groupId:
+          type: string
+        name:
+          type: string
+        projectId:
+          type: string
+      required:
+        - groupId
+        - name
+        - projectId
+      type: object
+    ProjectMember:
+      properties:
+        name:
+          type: string
+        roles:
+          items:
+            type: string
+          type: array
+        type:
+          default: USER
+          enum:
+            - USER
+            - TEAM
+          type: string
+      required:
+        - name
+        - roles
+        - type
+      type: object
+    ProjectMemberList:
+      properties:
+        members:
+          items:
+            $ref: '#/components/schemas/ProjectMember'
+          type: array
+      type: object
+    ProjectsJson:
+      properties:
+        offset:
+          format: int32
+          type: integer
+        projects:
+          items:
+            $ref: '#/components/schemas/ProjectEntry'
+          type: array
+        totalCount:
+          format: int64
+          type: integer
+      type: object
+    SimpleSpec:
+      properties:
+        name:
+          type: string
+        owner:
+          type: string
+      type: object
+    SpecId:
+      properties:
+        name:
+          type: string
+        owner:
+          type: string
+        version:
+          type: string
+      required:
+        - name
+        - owner
+        - version
+      type: object
+    SystemPluginConfiguration:
+      properties:
+        configuration:
+          additionalProperties:
+            type: string
+          type: object
+        id:
+          format: UUID
+          type: string
+        implementingClass:
+          type: string
+        lifecycles:
+          items:
+            type: string
+          type: array
+        version:
+          type: string
+      required:
+        - implementingClass
+        - lifecycles
+        - version
+      type: object
+    Template:
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+      required:
+        - id
+        - title
+      type: object
+    TemplateCatalog:
+      properties:
+        default:
+          $ref: '#/components/schemas/Template'
+        templates:
+          items:
+            $ref: '#/components/schemas/Template'
+          type: array
+      type: object
+    User:
+      properties:
+        active:
+          type: boolean
+        id:
+          type: string
+      type: object
+    UserCredentials:
+      properties:
+        password:
+          type: string
+        username:
+          type: string
+      type: object
+    VersionMetadata:
+      properties:
+        codegenSettings:
+          $ref: '#/components/schemas/CodegenSettings'
+      type: object
+  securitySchemes:
+    TokenSecured:
+      in: header
+      name: Authorization
+      type: apiKey

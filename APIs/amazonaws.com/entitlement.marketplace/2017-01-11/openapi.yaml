@@ -1,0 +1,261 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://entitlement.marketplace.amazonaws.com/'
+info:
+  version: '2017-01-11'
+  x-release: v4
+  title: AWS Marketplace Entitlement Service
+  description: '<fullname>AWS Marketplace Entitlement Service</fullname> <p>This reference provides descriptions of the AWS Marketplace Entitlement Service API.</p> <p>AWS Marketplace Entitlement Service is used to determine the entitlement of a customer to a given product. An entitlement represents capacity in a product owned by the customer. For example, a customer might own some number of users or seats in an SaaS application or some amount of data capacity in a multi-tenant database.</p> <p> <b>Getting Entitlement Records</b> </p> <ul> <li> <p> <i>GetEntitlements</i>- Gets the entitlements for a Marketplace product.</p> </li> </ul>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: entitlement.marketplace
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/entitlement.marketplace-2017-01-11.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/marketplace/'
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: GetEntitlements
+      description: GetEntitlements retrieves entitlement values for a given product. The results can be filtered based on customer identifier or product dimensions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEntitlementsResult'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetEntitlementsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    Boolean:
+      type: boolean
+    Double:
+      type: number
+      format: double
+    Entitlement:
+      type: object
+      properties:
+        ProductCode:
+          $ref: '#/components/schemas/ProductCode'
+        Dimension:
+          $ref: '#/components/schemas/NonEmptyString'
+        CustomerIdentifier:
+          $ref: '#/components/schemas/NonEmptyString'
+        Value:
+          $ref: '#/components/schemas/EntitlementValue'
+        ExpirationDate:
+          $ref: '#/components/schemas/Timestamp'
+      description: 'An entitlement represents capacity in a product owned by the customer. For example, a customer might own some number of users or seats in an SaaS application or some amount of data capacity in a multi-tenant database.'
+    EntitlementList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Entitlement'
+      minItems: 0
+    EntitlementValue:
+      type: object
+      properties:
+        IntegerValue:
+          $ref: '#/components/schemas/Integer'
+        DoubleValue:
+          $ref: '#/components/schemas/Double'
+        BooleanValue:
+          $ref: '#/components/schemas/Boolean'
+        StringValue:
+          $ref: '#/components/schemas/String'
+      description: The EntitlementValue represents the amount of capacity that the customer is entitled to for the product.
+    ErrorMessage:
+      type: string
+    FilterValue:
+      type: string
+    FilterValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FilterValue'
+      minItems: 1
+    GetEntitlementFilterName:
+      type: string
+      enum:
+        - CUSTOMER_IDENTIFIER
+        - DIMENSION
+    GetEntitlementFilters:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/GetEntitlementFilterName'
+          value:
+            $ref: '#/components/schemas/FilterValueList'
+    GetEntitlementsRequest:
+      type: object
+      required:
+        - ProductCode
+      properties:
+        ProductCode:
+          $ref: '#/components/schemas/ProductCode'
+        Filter:
+          $ref: '#/components/schemas/GetEntitlementFilters'
+        NextToken:
+          $ref: '#/components/schemas/NonEmptyString'
+        MaxResults:
+          $ref: '#/components/schemas/Integer'
+      description: The GetEntitlementsRequest contains parameters for the GetEntitlements operation.
+    GetEntitlementsResult:
+      type: object
+      properties:
+        Entitlements:
+          $ref: '#/components/schemas/EntitlementList'
+        NextToken:
+          $ref: '#/components/schemas/NonEmptyString'
+      description: The GetEntitlementsRequest contains results from the GetEntitlements operation.
+    Integer:
+      type: integer
+    InternalServiceErrorException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: 'An internal error has occurred. Retry your request. If the problem persists, post a message with details on the AWS forums.'
+    InvalidParameterException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: One or more parameters in your request was invalid.
+    NonEmptyString:
+      type: string
+      pattern: \S+
+    ProductCode:
+      type: string
+      minLength: 1
+      maxLength: 255
+    String:
+      type: string
+    ThrottlingException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The calls to the GetEntitlements API are throttled.
+    Timestamp:
+      type: string
+      format: date-time
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

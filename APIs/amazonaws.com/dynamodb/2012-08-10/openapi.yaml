@@ -1,0 +1,2641 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://dynamodb.amazonaws.com/'
+info:
+  version: '2012-08-10'
+  x-release: v4
+  title: Amazon DynamoDB
+  description: '<fullname>Amazon DynamoDB</fullname> <p>Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability. DynamoDB lets you offload the administrative burdens of operating and scaling a distributed database, so that you don''t have to worry about hardware provisioning, setup and configuration, replication, software patching, or cluster scaling.</p> <p>With DynamoDB, you can create database tables that can store and retrieve any amount of data, and serve any level of request traffic. You can scale up or scale down your tables'' throughput capacity without downtime or performance degradation, and use the AWS Management Console to monitor resource utilization and performance metrics.</p> <p>DynamoDB automatically spreads the data and traffic for your tables over a sufficient number of servers to handle your throughput and storage requirements, while maintaining consistent and fast performance. All of your data is stored on solid state disks (SSDs) and automatically replicated across multiple Availability Zones in an AWS region, providing built-in high availability and data durability. </p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: dynamodb
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/dynamodb-2012-08-10.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/dynamodb/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: BatchGetItem
+      description: '<p>The <code>BatchGetItem</code> operation returns the attributes of one or more items from one or more tables. You identify requested items by primary key.</p> <p>A single operation can retrieve up to 16 MB of data, which can contain as many as 100 items. <code>BatchGetItem</code> will return a partial result if the response size limit is exceeded, the table''s provisioned throughput is exceeded, or an internal processing failure occurs. If a partial result is returned, the operation returns a value for <code>UnprocessedKeys</code>. You can use this value to retry the operation starting with the next item to get.</p> <important> <p>If you request more than 100 items <code>BatchGetItem</code> will return a <code>ValidationException</code> with the message "Too many items requested for the BatchGetItem call".</p> </important> <p>For example, if you ask to retrieve 100 items, but each individual item is 300 KB in size, the system returns 52 items (so as not to exceed the 16 MB limit). It also returns an appropriate <code>UnprocessedKeys</code> value so you can get the next page of results. If desired, your application can include its own logic to assemble the pages of results into one data set.</p> <p>If <i>none</i> of the items can be processed due to insufficient provisioned throughput on all of the tables in the request, then <code>BatchGetItem</code> will return a <code>ProvisionedThroughputExceededException</code>. If <i>at least one</i> of the items is successfully processed, then <code>BatchGetItem</code> completes successfully, while returning the keys of the unread items in <code>UnprocessedKeys</code>.</p> <important> <p>If DynamoDB returns any unprocessed items, you should retry the batch operation on those items. However, <i>we strongly recommend that you use an exponential backoff algorithm</i>. If you retry the batch operation immediately, the underlying read or write requests can still fail due to throttling on the individual tables. If you delay the batch operation using exponential backoff, the individual requests in the batch are much more likely to succeed.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#BatchOperations">Batch Operations and Error Handling</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p> </important> <p>By default, <code>BatchGetItem</code> performs eventually consistent reads on every table in the request. If you want strongly consistent reads instead, you can set <code>ConsistentRead</code> to <code>true</code> for any or all tables.</p> <p>In order to minimize response latency, <code>BatchGetItem</code> retrieves items in parallel.</p> <p>When designing your application, keep in mind that DynamoDB does not return items in any particular order. To help parse the response by item, include the primary key values for the items in your request in the <code>ProjectionExpression</code> parameter.</p> <p>If a requested item does not exist, it is not returned in the result. Requests for nonexistent items consume the minimum read capacity units according to the type of read. For more information, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#CapacityUnitCalculations">Capacity Units Calculations</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetItemOutput'
+        '480':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      parameters:
+        - name: RequestItems
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetItemInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#BatchWriteItem':
+    post:
+      operationId: BatchWriteItem
+      description: '<p>The <code>BatchWriteItem</code> operation puts or deletes multiple items in one or more tables. A single call to <code>BatchWriteItem</code> can write up to 16 MB of data, which can comprise as many as 25 put or delete requests. Individual items to be written can be as large as 400 KB.</p> <note> <p> <code>BatchWriteItem</code> cannot update items. To update items, use the <code>UpdateItem</code> action.</p> </note> <p>The individual <code>PutItem</code> and <code>DeleteItem</code> operations specified in <code>BatchWriteItem</code> are atomic; however <code>BatchWriteItem</code> as a whole is not. If any requested operations fail because the table''s provisioned throughput is exceeded or an internal processing failure occurs, the failed operations are returned in the <code>UnprocessedItems</code> response parameter. You can investigate and optionally resend the requests. Typically, you would call <code>BatchWriteItem</code> in a loop. Each iteration would check for unprocessed items and submit a new <code>BatchWriteItem</code> request with those unprocessed items until all items have been processed.</p> <p>Note that if <i>none</i> of the items can be processed due to insufficient provisioned throughput on all of the tables in the request, then <code>BatchWriteItem</code> will return a <code>ProvisionedThroughputExceededException</code>.</p> <important> <p>If DynamoDB returns any unprocessed items, you should retry the batch operation on those items. However, <i>we strongly recommend that you use an exponential backoff algorithm</i>. If you retry the batch operation immediately, the underlying read or write requests can still fail due to throttling on the individual tables. If you delay the batch operation using exponential backoff, the individual requests in the batch are much more likely to succeed.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#BatchOperations">Batch Operations and Error Handling</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p> </important> <p>With <code>BatchWriteItem</code>, you can efficiently write or delete large amounts of data, such as from Amazon Elastic MapReduce (EMR), or copy data from another database into DynamoDB. In order to improve performance with these large-scale operations, <code>BatchWriteItem</code> does not behave in the same way as individual <code>PutItem</code> and <code>DeleteItem</code> calls would. For example, you cannot specify conditions on individual put and delete requests, and <code>BatchWriteItem</code> does not return deleted items in the response.</p> <p>If you use a programming language that supports concurrency, you can use threads to write items in parallel. Your application must include the necessary logic to manage the threads. With languages that don''t support threading, you must update or delete the specified items one at a time. In both situations, <code>BatchWriteItem</code> performs the specified put and delete operations in parallel, giving you the power of the thread pool approach without having to introduce complexity into your application.</p> <p>Parallel processing reduces latency, but each specified put and delete request consumes the same number of write capacity units whether it is processed in parallel or not. Delete operations on nonexistent items consume one write capacity unit.</p> <p>If one or more of the following is true, DynamoDB rejects the entire batch write operation:</p> <ul> <li> <p>One or more tables specified in the <code>BatchWriteItem</code> request does not exist.</p> </li> <li> <p>Primary key attributes specified on an item in the request do not match those in the corresponding table''s primary key schema.</p> </li> <li> <p>You try to perform multiple operations on the same item in the same <code>BatchWriteItem</code> request. For example, you cannot put and delete the same item in the same <code>BatchWriteItem</code> request. </p> </li> <li> <p>There are more than 25 requests in the batch.</p> </li> <li> <p>Any individual item in a batch exceeds 400 KB.</p> </li> <li> <p>The total request size exceeds 16 MB.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchWriteItemOutput'
+        '480':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ItemCollectionSizeLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemCollectionSizeLimitExceededException'
+        '483':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchWriteItemInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateTable':
+    post:
+      operationId: CreateTable
+      description: '<p>The <code>CreateTable</code> operation adds a new table to your account. In an AWS account, table names must be unique within each region. That is, you can have two tables with same name if you create the tables in different regions.</p> <p> <code>CreateTable</code> is an asynchronous operation. Upon receiving a <code>CreateTable</code> request, DynamoDB immediately returns a response with a <code>TableStatus</code> of <code>CREATING</code>. After the table is created, DynamoDB sets the <code>TableStatus</code> to <code>ACTIVE</code>. You can perform read and write operations only on an <code>ACTIVE</code> table. </p> <p>You can optionally define secondary indexes on the new table, as part of the <code>CreateTable</code> operation. If you want to create multiple tables with secondary indexes on them, you must create the tables sequentially. Only one table with secondary indexes can be in the <code>CREATING</code> state at any given time.</p> <p>You can use the <code>DescribeTable</code> action to check the table status.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTableOutput'
+        '480':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTableInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteItem':
+    post:
+      operationId: DeleteItem
+      description: '<p>Deletes a single item in a table by primary key. You can perform a conditional delete operation that deletes the item if it exists, or if it has an expected attribute value.</p> <p>In addition to deleting an item, you can also return the item''s attribute values in the same operation, using the <code>ReturnValues</code> parameter.</p> <p>Unless you specify conditions, the <code>DeleteItem</code> is an idempotent operation; running it multiple times on the same item or attribute does <i>not</i> result in an error response.</p> <p>Conditional deletes are useful for deleting items only if specific conditions are met. If those conditions are met, DynamoDB performs the delete. Otherwise, the item is not deleted.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteItemOutput'
+        '480':
+          description: ConditionalCheckFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConditionalCheckFailedException'
+        '481':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ItemCollectionSizeLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemCollectionSizeLimitExceededException'
+        '484':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteItemInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTable':
+    post:
+      operationId: DeleteTable
+      description: '<p>The <code>DeleteTable</code> operation deletes a table and all of its items. After a <code>DeleteTable</code> request, the specified table is in the <code>DELETING</code> state until DynamoDB completes the deletion. If the table is in the <code>ACTIVE</code> state, you can delete it. If a table is in <code>CREATING</code> or <code>UPDATING</code> states, then DynamoDB returns a <code>ResourceInUseException</code>. If the specified table does not exist, DynamoDB returns a <code>ResourceNotFoundException</code>. If table is already in the <code>DELETING</code> state, no error is returned. </p> <note> <p>DynamoDB might continue to accept data read and write operations, such as <code>GetItem</code> and <code>PutItem</code>, on a table in the <code>DELETING</code> state until the table deletion is complete.</p> </note> <p>When you delete a table, any indexes on that table are also deleted.</p> <p>If you have DynamoDB Streams enabled on the table, then the corresponding stream on that table goes into the <code>DISABLED</code> state, and the stream is automatically deleted after 24 hours.</p> <p>Use the <code>DescribeTable</code> action to check the status of the table. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTableOutput'
+        '480':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTableInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeLimits':
+    post:
+      operationId: DescribeLimits
+      description: '<p>Returns the current provisioned-capacity limits for your AWS account in a region, both for the region as a whole and for any one DynamoDB table that you create there.</p> <p>When you establish an AWS account, the account has initial limits on the maximum read capacity units and write capacity units that you can provision across all of your DynamoDB tables in a given region. Also, there are per-table limits that apply when you create a table there. For more information, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html">Limits</a> page in the <i>Amazon DynamoDB Developer Guide</i>.</p> <p>Although you can increase these limits by filing a case at <a href="https://console.aws.amazon.com/support/home#/">AWS Support Center</a>, obtaining the increase is not instantaneous. The <code>DescribeLimits</code> action lets you write code to compare the capacity you are currently using to those limits imposed by your account so that you have enough time to apply for an increase before you hit a limit.</p> <p>For example, you could use one of the AWS SDKs to do the following:</p> <ol> <li> <p>Call <code>DescribeLimits</code> for a particular region to obtain your current account limits on provisioned capacity there.</p> </li> <li> <p>Create a variable to hold the aggregate read capacity units provisioned for all your tables in that region, and one to hold the aggregate write capacity units. Zero them both.</p> </li> <li> <p>Call <code>ListTables</code> to obtain a list of all your DynamoDB tables.</p> </li> <li> <p>For each table name listed by <code>ListTables</code>, do the following:</p> <ul> <li> <p>Call <code>DescribeTable</code> with the table name.</p> </li> <li> <p>Use the data returned by <code>DescribeTable</code> to add the read capacity units and write capacity units provisioned for the table itself to your variables.</p> </li> <li> <p>If the table has one or more global secondary indexes (GSIs), loop over these GSIs and add their provisioned capacity values to your variables as well.</p> </li> </ul> </li> <li> <p>Report the account limits for that region returned by <code>DescribeLimits</code>, along with the total current provisioned capacity levels you have calculated.</p> </li> </ol> <p>This will let you see whether you are getting close to your account-level limits.</p> <p>The per-table limits apply only when you are creating a new table. They restrict the sum of the provisioned capacity of the new table itself and all its global secondary indexes.</p> <p>For existing tables and their GSIs, DynamoDB will not let you increase provisioned capacity extremely rapidly, but the only upper limit that applies is that the aggregate provisioned capacity over all your tables and GSIs cannot exceed either of the per-account limits.</p> <note> <p> <code>DescribeLimits</code> should only be called periodically. You can expect throttling errors if you call it more than once in a minute.</p> </note> <p>The <code>DescribeLimits</code> Request element has no content.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeLimitsOutput'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeLimitsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTable':
+    post:
+      operationId: DescribeTable
+      description: '<p>Returns information about the table, including the current status of the table, when it was created, the primary key schema, and any indexes on the table.</p> <note> <p>If you issue a <code>DescribeTable</code> request immediately after a <code>CreateTable</code> request, DynamoDB might return a <code>ResourceNotFoundException</code>. This is because <code>DescribeTable</code> uses an eventually consistent query, and the metadata for your table might not be available at that moment. Wait for a few seconds, and then try the <code>DescribeTable</code> request again.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTableOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      x-waiters:
+        - delay: 20
+          operation: DescribeTable
+          maxAttempts: 25
+          acceptors:
+            - expected: ACTIVE
+              matcher: path
+              state: success
+              argument: Table.TableStatus
+            - expected: ResourceNotFoundException
+              matcher: error
+              state: retry
+        - delay: 20
+          operation: DescribeTable
+          maxAttempts: 25
+          acceptors:
+            - expected: ResourceNotFoundException
+              matcher: error
+              state: success
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTableInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTimeToLive':
+    post:
+      operationId: DescribeTimeToLive
+      description: 'Gives a description of the Time to Live (TTL) status on the specified table. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTimeToLiveOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTimeToLiveInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetItem':
+    post:
+      operationId: GetItem
+      description: '<p>The <code>GetItem</code> operation returns a set of attributes for the item with the given primary key. If there is no matching item, <code>GetItem</code> does not return any data and there will be no <code>Item</code> element in the response.</p> <p> <code>GetItem</code> provides an eventually consistent read by default. If your application requires a strongly consistent read, set <code>ConsistentRead</code> to <code>true</code>. Although a strongly consistent read might take more time than an eventually consistent read, it always returns the last updated value.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetItemOutput'
+        '480':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetItemInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListTables':
+    post:
+      operationId: ListTables
+      description: 'Returns an array of table names associated with the current account and endpoint. The output from <code>ListTables</code> is paginated, with each page returning a maximum of 100 table names.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTablesOutput'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: ExclusiveStartTableName
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTablesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListTagsOfResource':
+    post:
+      operationId: ListTagsOfResource
+      description: '<p>List all tags on an Amazon DynamoDB resource. You can call ListTagsOfResource up to 10 times per second, per account.</p> <p>For an overview on tagging DynamoDB resources, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html">Tagging for DynamoDB</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsOfResourceOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsOfResourceInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutItem':
+    post:
+      operationId: PutItem
+      description: '<p>Creates a new item, or replaces an old item with a new item. If an item that has the same primary key as the new item already exists in the specified table, the new item completely replaces the existing item. You can perform a conditional put operation (add a new item if one with the specified primary key doesn''t exist), or replace an existing item if it has certain attribute values.</p> <p>In addition to putting an item, you can also return the item''s attribute values in the same operation, using the <code>ReturnValues</code> parameter.</p> <p>When you add an item, the primary key attribute(s) are the only required attributes. Attribute values cannot be null. String and Binary type attributes must have lengths greater than zero. Set type attributes cannot be empty. Requests with empty values will be rejected with a <code>ValidationException</code> exception.</p> <note> <p>To prevent a new item from replacing an existing item, use a conditional expression that contains the <code>attribute_not_exists</code> function with the name of the attribute being used as the partition key for the table. Since every record must contain that attribute, the <code>attribute_not_exists</code> function will only succeed if no matching item exists.</p> </note> <p>For more information about <code>PutItem</code>, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html">Working with Items</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutItemOutput'
+        '480':
+          description: ConditionalCheckFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConditionalCheckFailedException'
+        '481':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ItemCollectionSizeLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemCollectionSizeLimitExceededException'
+        '484':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutItemInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#Query':
+    post:
+      operationId: Query
+      description: '<p>A <code>Query</code> operation uses the primary key of a table or a secondary index to directly access items from that table or index.</p> <p>Use the <code>KeyConditionExpression</code> parameter to provide a specific value for the partition key. The <code>Query</code> operation will return all of the items from the table or index with that partition key value. You can optionally narrow the scope of the <code>Query</code> operation by specifying a sort key value and a comparison operator in <code>KeyConditionExpression</code>. You can use the <code>ScanIndexForward</code> parameter to get results in forward or reverse order, by sort key.</p> <p>Queries that do not return results consume the minimum number of read capacity units for that type of read operation.</p> <p>If the total number of items meeting the query criteria exceeds the result set size limit of 1 MB, the query stops and results are returned to the user with the <code>LastEvaluatedKey</code> element to continue the query in a subsequent operation. Unlike a <code>Scan</code> operation, a <code>Query</code> operation never returns both an empty result set and a <code>LastEvaluatedKey</code> value. <code>LastEvaluatedKey</code> is only provided if you have used the <code>Limit</code> parameter, or if the result set exceeds 1 MB (prior to applying a filter). </p> <p>You can query a table, a local secondary index, or a global secondary index. For a query on a table or on a local secondary index, you can set the <code>ConsistentRead</code> parameter to <code>true</code> and obtain a strongly consistent result. Global secondary indexes support eventually consistent reads only, so do not specify <code>ConsistentRead</code> when querying a global secondary index.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryOutput'
+        '480':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: ExclusiveStartKey
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#Scan':
+    post:
+      operationId: Scan
+      description: '<p>The <code>Scan</code> operation returns one or more items and item attributes by accessing every item in a table or a secondary index. To have DynamoDB return fewer items, you can provide a <code>FilterExpression</code> operation.</p> <p>If the total number of scanned items exceeds the maximum data set size limit of 1 MB, the scan stops and results are returned to the user as a <code>LastEvaluatedKey</code> value to continue the scan in a subsequent operation. The results also include the number of items exceeding the limit. A scan can result in no table data meeting the filter criteria. </p> <p>By default, <code>Scan</code> operations proceed sequentially; however, for faster performance on a large table or secondary index, applications can request a parallel <code>Scan</code> operation by providing the <code>Segment</code> and <code>TotalSegments</code> parameters. For more information, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#QueryAndScanParallelScan">Parallel Scan</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p> <p>By default, <code>Scan</code> uses eventually consistent reads when accessing the data in a table; therefore, the result set might not include the changes to data in the table immediately before the operation began. If you need a consistent copy of the data, as of the time that the Scan begins, you can set the <code>ConsistentRead</code> parameter to <code>true</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanOutput'
+        '480':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: ExclusiveStartKey
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScanInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#TagResource':
+    post:
+      operationId: TagResource
+      description: '<p>Associate a set of tags with an Amazon DynamoDB resource. You can then activate these user-defined tags so that they appear on the Billing and Cost Management console for cost allocation tracking. You can call TagResource up to 5 times per second, per account. </p> <p>For an overview on tagging DynamoDB resources, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html">Tagging for DynamoDB</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '483':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UntagResource':
+    post:
+      operationId: UntagResource
+      description: '<p>Removes the association of tags from an Amazon DynamoDB resource. You can call UntagResource up to 5 times per second, per account. </p> <p>For an overview on tagging DynamoDB resources, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html">Tagging for DynamoDB</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '483':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UntagResourceInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateItem':
+    post:
+      operationId: UpdateItem
+      description: '<p>Edits an existing item''s attributes, or adds a new item to the table if it does not already exist. You can put, delete, or add attribute values. You can also perform a conditional update on an existing item (insert a new attribute name-value pair if it doesn''t exist, or replace an existing name-value pair if it has certain expected attribute values).</p> <p>You can also return the item''s attribute values in the same <code>UpdateItem</code> operation using the <code>ReturnValues</code> parameter.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateItemOutput'
+        '480':
+          description: ConditionalCheckFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConditionalCheckFailedException'
+        '481':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ItemCollectionSizeLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemCollectionSizeLimitExceededException'
+        '484':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateItemInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateTable':
+    post:
+      operationId: UpdateTable
+      description: '<p>Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table.</p> <p>You can only perform one of the following operations at once:</p> <ul> <li> <p>Modify the provisioned throughput settings of the table.</p> </li> <li> <p>Enable or disable Streams on the table.</p> </li> <li> <p>Remove a global secondary index from the table.</p> </li> <li> <p>Create a new global secondary index on the table. Once the index begins backfilling, you can use <code>UpdateTable</code> to perform other operations.</p> </li> </ul> <p> <code>UpdateTable</code> is an asynchronous operation; while it is executing, the table status changes from <code>ACTIVE</code> to <code>UPDATING</code>. While it is <code>UPDATING</code>, you cannot issue another <code>UpdateTable</code> request. When the table returns to the <code>ACTIVE</code> state, the <code>UpdateTable</code> operation is complete.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTableOutput'
+        '480':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTableInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateTimeToLive':
+    post:
+      operationId: UpdateTimeToLive
+      description: '<p>Specify the lifetime of individual table items. The database automatically removes the item at the expiration of the item. The UpdateTimeToLive method will enable or disable TTL for the specified table. A successful <code>UpdateTimeToLive</code> call returns the current <code>TimeToLiveSpecification</code>; it may take up to one hour for the change to fully process. </p> <p>TTL compares the current time in epoch time format to the time stored in the TTL attribute of an item. If the epoch time value stored in the attribute is less than the current time, the item is marked as expired and subsequently deleted.</p> <note> <p> The epoch time format is the number of seconds elapsed since 12:00:00 AM January 1st, 1970 UTC. </p> </note> <p>DynamoDB deletes expired items on a best-effort basis to ensure availability of throughput for other data operations. </p> <important> <p>DynamoDB typically deletes expired items within two days of expiration. The exact duration within which an item gets deleted after expiration is specific to the nature of the workload. Items that have expired and not been deleted will still show up in reads, queries, and scans.</p> </important> <p>As items are deleted, they are removed from any Local Secondary Index and Global Secondary Index immediately in the same eventually consistent way as a standard delete operation.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html">Time To Live</a> in the Amazon DynamoDB Developer Guide. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTimeToLiveOutput'
+        '480':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTimeToLiveInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AttributeAction:
+      type: string
+      enum:
+        - ADD
+        - PUT
+        - DELETE
+    AttributeDefinition:
+      type: object
+      required:
+        - AttributeName
+        - AttributeType
+      properties:
+        AttributeName:
+          $ref: '#/components/schemas/KeySchemaAttributeName'
+        AttributeType:
+          $ref: '#/components/schemas/ScalarAttributeType'
+      description: Represents an attribute for describing the key schema for the table and indexes.
+    AttributeDefinitions:
+      type: array
+      items:
+        $ref: '#/components/schemas/AttributeDefinition'
+    AttributeMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/AttributeName'
+          value:
+            $ref: '#/components/schemas/AttributeValue'
+    AttributeName:
+      type: string
+      maxLength: 65535
+    AttributeNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AttributeName'
+      minItems: 1
+    AttributeUpdates:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/AttributeName'
+          value:
+            $ref: '#/components/schemas/AttributeValueUpdate'
+    AttributeValue:
+      type: object
+      properties:
+        S:
+          $ref: '#/components/schemas/StringAttributeValue'
+        'N':
+          $ref: '#/components/schemas/NumberAttributeValue'
+        B:
+          $ref: '#/components/schemas/BinaryAttributeValue'
+        SS:
+          $ref: '#/components/schemas/StringSetAttributeValue'
+        NS:
+          $ref: '#/components/schemas/NumberSetAttributeValue'
+        BS:
+          $ref: '#/components/schemas/BinarySetAttributeValue'
+        M:
+          $ref: '#/components/schemas/MapAttributeValue'
+        L:
+          $ref: '#/components/schemas/ListAttributeValue'
+        'NULL':
+          $ref: '#/components/schemas/NullAttributeValue'
+        BOOL:
+          $ref: '#/components/schemas/BooleanAttributeValue'
+      description: '<p>Represents the data for an attribute.</p> <p>Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes">Data Types</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>'
+    AttributeValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AttributeValue'
+    AttributeValueUpdate:
+      type: object
+      properties:
+        Value:
+          $ref: '#/components/schemas/AttributeValue'
+        Action:
+          $ref: '#/components/schemas/AttributeAction'
+      description: '<p>For the <code>UpdateItem</code> operation, represents the attributes to be modified, the action to perform on each, and the new value for each.</p> <note> <p>You cannot use <code>UpdateItem</code> to update any primary key attributes. Instead, you will need to delete the item, and then use <code>PutItem</code> to create a new item with new attributes.</p> </note> <p>Attribute values cannot be null; string and binary type attributes must have lengths greater than zero; and set type attributes must not be empty. Requests with empty values will be rejected with a <code>ValidationException</code> exception.</p>'
+    Backfilling:
+      type: boolean
+    BatchGetItemInput:
+      type: object
+      required:
+        - RequestItems
+      example:
+        RequestItems:
+          Music:
+            Keys:
+              - Artist:
+                  S: No One You Know
+                SongTitle:
+                  S: Call Me Today
+              - Artist:
+                  S: Acme Band
+                SongTitle:
+                  S: Happy Day
+              - Artist:
+                  S: No One You Know
+                SongTitle:
+                  S: Scared of My Shadow
+            ProjectionExpression: AlbumTitle
+      properties:
+        RequestItems:
+          $ref: '#/components/schemas/BatchGetRequestMap'
+        ReturnConsumedCapacity:
+          $ref: '#/components/schemas/ReturnConsumedCapacity'
+      description: Represents the input of a <code>BatchGetItem</code> operation.
+    BatchGetItemOutput:
+      type: object
+      example:
+        Responses:
+          Music:
+            - AlbumTitle:
+                S: Somewhat Famous
+            - AlbumTitle:
+                S: Blue Sky Blues
+            - AlbumTitle:
+                S: Louder Than Ever
+      properties:
+        Responses:
+          $ref: '#/components/schemas/BatchGetResponseMap'
+        UnprocessedKeys:
+          $ref: '#/components/schemas/BatchGetRequestMap'
+        ConsumedCapacity:
+          $ref: '#/components/schemas/ConsumedCapacityMultiple'
+      description: Represents the output of a <code>BatchGetItem</code> operation.
+    BatchGetRequestMap:
+      type: array
+      minItems: 1
+      maxItems: 100
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/TableName'
+          value:
+            $ref: '#/components/schemas/KeysAndAttributes'
+    BatchGetResponseMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/TableName'
+          value:
+            $ref: '#/components/schemas/ItemList'
+    BatchWriteItemInput:
+      type: object
+      required:
+        - RequestItems
+      example:
+        RequestItems:
+          Music:
+            - PutRequest:
+                Item:
+                  AlbumTitle:
+                    S: Somewhat Famous
+                  Artist:
+                    S: No One You Know
+                  SongTitle:
+                    S: Call Me Today
+            - PutRequest:
+                Item:
+                  AlbumTitle:
+                    S: Songs About Life
+                  Artist:
+                    S: Acme Band
+                  SongTitle:
+                    S: Happy Day
+            - PutRequest:
+                Item:
+                  AlbumTitle:
+                    S: Blue Sky Blues
+                  Artist:
+                    S: No One You Know
+                  SongTitle:
+                    S: Scared of My Shadow
+      properties:
+        RequestItems:
+          $ref: '#/components/schemas/BatchWriteItemRequestMap'
+        ReturnConsumedCapacity:
+          $ref: '#/components/schemas/ReturnConsumedCapacity'
+        ReturnItemCollectionMetrics:
+          $ref: '#/components/schemas/ReturnItemCollectionMetrics'
+      description: Represents the input of a <code>BatchWriteItem</code> operation.
+    BatchWriteItemOutput:
+      type: object
+      example: {}
+      properties:
+        UnprocessedItems:
+          $ref: '#/components/schemas/BatchWriteItemRequestMap'
+        ItemCollectionMetrics:
+          $ref: '#/components/schemas/ItemCollectionMetricsPerTable'
+        ConsumedCapacity:
+          $ref: '#/components/schemas/ConsumedCapacityMultiple'
+      description: Represents the output of a <code>BatchWriteItem</code> operation.
+    BatchWriteItemRequestMap:
+      type: array
+      minItems: 1
+      maxItems: 25
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/TableName'
+          value:
+            $ref: '#/components/schemas/WriteRequests'
+    BinaryAttributeValue:
+      type: string
+    BinarySetAttributeValue:
+      type: array
+      items:
+        $ref: '#/components/schemas/BinaryAttributeValue'
+    BooleanAttributeValue:
+      type: boolean
+    BooleanObject:
+      type: boolean
+    Capacity:
+      type: object
+      properties:
+        CapacityUnits:
+          $ref: '#/components/schemas/ConsumedCapacityUnits'
+      description: Represents the amount of provisioned throughput capacity consumed on a table or an index.
+    ComparisonOperator:
+      type: string
+      enum:
+        - EQ
+        - NE
+        - IN
+        - LE
+        - LT
+        - GE
+        - GT
+        - BETWEEN
+        - NOT_NULL
+        - 'NULL'
+        - CONTAINS
+        - NOT_CONTAINS
+        - BEGINS_WITH
+    Condition:
+      type: object
+      required:
+        - ComparisonOperator
+      properties:
+        AttributeValueList:
+          $ref: '#/components/schemas/AttributeValueList'
+        ComparisonOperator:
+          $ref: '#/components/schemas/ComparisonOperator'
+      description: '<p>Represents the selection criteria for a <code>Query</code> or <code>Scan</code> operation:</p> <ul> <li> <p>For a <code>Query</code> operation, <code>Condition</code> is used for specifying the <code>KeyConditions</code> to use when querying a table or an index. For <code>KeyConditions</code>, only the following comparison operators are supported:</p> <p> <code>EQ | LE | LT | GE | GT | BEGINS_WITH | BETWEEN</code> </p> <p> <code>Condition</code> is also used in a <code>QueryFilter</code>, which evaluates the query results and returns only the desired values.</p> </li> <li> <p>For a <code>Scan</code> operation, <code>Condition</code> is used in a <code>ScanFilter</code>, which evaluates the scan results and returns only the desired values.</p> </li> </ul>'
+    ConditionExpression:
+      type: string
+    ConditionalCheckFailedException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: A condition specified in the operation could not be evaluated.
+    ConditionalOperator:
+      type: string
+      enum:
+        - AND
+        - OR
+    ConsistentRead:
+      type: boolean
+    ConsumedCapacity:
+      type: object
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        CapacityUnits:
+          $ref: '#/components/schemas/ConsumedCapacityUnits'
+        Table:
+          $ref: '#/components/schemas/Capacity'
+        LocalSecondaryIndexes:
+          $ref: '#/components/schemas/SecondaryIndexesCapacityMap'
+        GlobalSecondaryIndexes:
+          $ref: '#/components/schemas/SecondaryIndexesCapacityMap'
+      description: 'The capacity units consumed by an operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. <code>ConsumedCapacity</code> is only returned if the request asked for it. For more information, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html">Provisioned Throughput</a> in the <i>Amazon DynamoDB Developer Guide</i>.'
+    ConsumedCapacityMultiple:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConsumedCapacity'
+    ConsumedCapacityUnits:
+      type: number
+      format: double
+    CreateGlobalSecondaryIndexAction:
+      type: object
+      required:
+        - IndexName
+        - KeySchema
+        - Projection
+        - ProvisionedThroughput
+      properties:
+        IndexName:
+          $ref: '#/components/schemas/IndexName'
+        KeySchema:
+          $ref: '#/components/schemas/KeySchema'
+        Projection:
+          $ref: '#/components/schemas/Projection'
+        ProvisionedThroughput:
+          $ref: '#/components/schemas/ProvisionedThroughput'
+      description: Represents a new global secondary index to be added to an existing table.
+    CreateTableInput:
+      type: object
+      required:
+        - AttributeDefinitions
+        - TableName
+        - KeySchema
+        - ProvisionedThroughput
+      example:
+        AttributeDefinitions:
+          - AttributeName: Artist
+            AttributeType: S
+          - AttributeName: SongTitle
+            AttributeType: S
+        KeySchema:
+          - AttributeName: Artist
+            KeyType: HASH
+          - AttributeName: SongTitle
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        TableName: Music
+      properties:
+        AttributeDefinitions:
+          $ref: '#/components/schemas/AttributeDefinitions'
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        KeySchema:
+          $ref: '#/components/schemas/KeySchema'
+        LocalSecondaryIndexes:
+          $ref: '#/components/schemas/LocalSecondaryIndexList'
+        GlobalSecondaryIndexes:
+          $ref: '#/components/schemas/GlobalSecondaryIndexList'
+        ProvisionedThroughput:
+          $ref: '#/components/schemas/ProvisionedThroughput'
+        StreamSpecification:
+          $ref: '#/components/schemas/StreamSpecification'
+      description: Represents the input of a <code>CreateTable</code> operation.
+    CreateTableOutput:
+      type: object
+      example:
+        TableDescription:
+          AttributeDefinitions:
+            - AttributeName: Artist
+              AttributeType: S
+            - AttributeName: SongTitle
+              AttributeType: S
+          CreationDateTime: '1421866952.062'
+          ItemCount: 0
+          KeySchema:
+            - AttributeName: Artist
+              KeyType: HASH
+            - AttributeName: SongTitle
+              KeyType: RANGE
+          ProvisionedThroughput:
+            ReadCapacityUnits: 5
+            WriteCapacityUnits: 5
+          TableName: Music
+          TableSizeBytes: 0
+          TableStatus: CREATING
+      properties:
+        TableDescription:
+          $ref: '#/components/schemas/TableDescription'
+      description: Represents the output of a <code>CreateTable</code> operation.
+    Date:
+      type: string
+      format: date-time
+    DeleteGlobalSecondaryIndexAction:
+      type: object
+      required:
+        - IndexName
+      properties:
+        IndexName:
+          $ref: '#/components/schemas/IndexName'
+      description: Represents a global secondary index to be deleted from an existing table.
+    DeleteItemInput:
+      type: object
+      required:
+        - TableName
+        - Key
+      example:
+        Key:
+          Artist:
+            S: No One You Know
+          SongTitle:
+            S: Scared of My Shadow
+        TableName: Music
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        Key:
+          $ref: '#/components/schemas/Key'
+        Expected:
+          $ref: '#/components/schemas/ExpectedAttributeMap'
+        ConditionalOperator:
+          $ref: '#/components/schemas/ConditionalOperator'
+        ReturnValues:
+          $ref: '#/components/schemas/ReturnValue'
+        ReturnConsumedCapacity:
+          $ref: '#/components/schemas/ReturnConsumedCapacity'
+        ReturnItemCollectionMetrics:
+          $ref: '#/components/schemas/ReturnItemCollectionMetrics'
+        ConditionExpression:
+          $ref: '#/components/schemas/ConditionExpression'
+        ExpressionAttributeNames:
+          $ref: '#/components/schemas/ExpressionAttributeNameMap'
+        ExpressionAttributeValues:
+          $ref: '#/components/schemas/ExpressionAttributeValueMap'
+      description: Represents the input of a <code>DeleteItem</code> operation.
+    DeleteItemOutput:
+      type: object
+      example:
+        ConsumedCapacity:
+          CapacityUnits: 1
+          TableName: Music
+      properties:
+        Attributes:
+          $ref: '#/components/schemas/AttributeMap'
+        ConsumedCapacity:
+          $ref: '#/components/schemas/ConsumedCapacity'
+        ItemCollectionMetrics:
+          $ref: '#/components/schemas/ItemCollectionMetrics'
+      description: Represents the output of a <code>DeleteItem</code> operation.
+    DeleteRequest:
+      type: object
+      required:
+        - Key
+      properties:
+        Key:
+          $ref: '#/components/schemas/Key'
+      description: Represents a request to perform a <code>DeleteItem</code> operation on an item.
+    DeleteTableInput:
+      type: object
+      required:
+        - TableName
+      example:
+        TableName: Music
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+      description: Represents the input of a <code>DeleteTable</code> operation.
+    DeleteTableOutput:
+      type: object
+      example:
+        TableDescription:
+          ItemCount: 0
+          ProvisionedThroughput:
+            NumberOfDecreasesToday: 1
+            ReadCapacityUnits: 5
+            WriteCapacityUnits: 5
+          TableName: Music
+          TableSizeBytes: 0
+          TableStatus: DELETING
+      properties:
+        TableDescription:
+          $ref: '#/components/schemas/TableDescription'
+      description: Represents the output of a <code>DeleteTable</code> operation.
+    DescribeLimitsInput:
+      type: object
+      example: {}
+      properties: {}
+      description: Represents the input of a <code>DescribeLimits</code> operation. Has no content.
+    DescribeLimitsOutput:
+      type: object
+      example:
+        AccountMaxReadCapacityUnits: 20000
+        AccountMaxWriteCapacityUnits: 20000
+        TableMaxReadCapacityUnits: 10000
+        TableMaxWriteCapacityUnits: 10000
+      properties:
+        AccountMaxReadCapacityUnits:
+          $ref: '#/components/schemas/PositiveLongObject'
+        AccountMaxWriteCapacityUnits:
+          $ref: '#/components/schemas/PositiveLongObject'
+        TableMaxReadCapacityUnits:
+          $ref: '#/components/schemas/PositiveLongObject'
+        TableMaxWriteCapacityUnits:
+          $ref: '#/components/schemas/PositiveLongObject'
+      description: Represents the output of a <code>DescribeLimits</code> operation.
+    DescribeTableInput:
+      type: object
+      required:
+        - TableName
+      example:
+        TableName: Music
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+      description: Represents the input of a <code>DescribeTable</code> operation.
+    DescribeTableOutput:
+      type: object
+      example:
+        Table:
+          AttributeDefinitions:
+            - AttributeName: Artist
+              AttributeType: S
+            - AttributeName: SongTitle
+              AttributeType: S
+          CreationDateTime: '1421866952.062'
+          ItemCount: 0
+          KeySchema:
+            - AttributeName: Artist
+              KeyType: HASH
+            - AttributeName: SongTitle
+              KeyType: RANGE
+          ProvisionedThroughput:
+            NumberOfDecreasesToday: 1
+            ReadCapacityUnits: 5
+            WriteCapacityUnits: 5
+          TableName: Music
+          TableSizeBytes: 0
+          TableStatus: ACTIVE
+      properties:
+        Table:
+          $ref: '#/components/schemas/TableDescription'
+      description: Represents the output of a <code>DescribeTable</code> operation.
+    DescribeTimeToLiveInput:
+      type: object
+      required:
+        - TableName
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+    DescribeTimeToLiveOutput:
+      type: object
+      properties:
+        TimeToLiveDescription:
+          $ref: '#/components/schemas/TimeToLiveDescription'
+    ErrorMessage:
+      type: string
+    ExpectedAttributeMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/AttributeName'
+          value:
+            $ref: '#/components/schemas/ExpectedAttributeValue'
+    ExpectedAttributeValue:
+      type: object
+      properties:
+        Value:
+          $ref: '#/components/schemas/AttributeValue'
+        Exists:
+          $ref: '#/components/schemas/BooleanObject'
+        ComparisonOperator:
+          $ref: '#/components/schemas/ComparisonOperator'
+        AttributeValueList:
+          $ref: '#/components/schemas/AttributeValueList'
+      description: '<p>Represents a condition to be compared with an attribute value. This condition can be used with <code>DeleteItem</code>, <code>PutItem</code> or <code>UpdateItem</code> operations; if the comparison evaluates to true, the operation succeeds; if not, the operation fails. You can use <code>ExpectedAttributeValue</code> in one of two different ways:</p> <ul> <li> <p>Use <code>AttributeValueList</code> to specify one or more values to compare against an attribute. Use <code>ComparisonOperator</code> to specify how you want to perform the comparison. If the comparison evaluates to true, then the conditional operation succeeds.</p> </li> <li> <p>Use <code>Value</code> to specify a value that DynamoDB will compare against an attribute. If the values match, then <code>ExpectedAttributeValue</code> evaluates to true and the conditional operation succeeds. Optionally, you can also set <code>Exists</code> to false, indicating that you <i>do not</i> expect to find the attribute value in the table. In this case, the conditional operation succeeds only if the comparison evaluates to false.</p> </li> </ul> <p> <code>Value</code> and <code>Exists</code> are incompatible with <code>AttributeValueList</code> and <code>ComparisonOperator</code>. Note that if you use both sets of parameters at once, DynamoDB will return a <code>ValidationException</code> exception.</p>'
+    ExpressionAttributeNameMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/ExpressionAttributeNameVariable'
+          value:
+            $ref: '#/components/schemas/AttributeName'
+    ExpressionAttributeNameVariable:
+      type: string
+    ExpressionAttributeValueMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/ExpressionAttributeValueVariable'
+          value:
+            $ref: '#/components/schemas/AttributeValue'
+    ExpressionAttributeValueVariable:
+      type: string
+    FilterConditionMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/AttributeName'
+          value:
+            $ref: '#/components/schemas/Condition'
+    GetItemInput:
+      type: object
+      required:
+        - TableName
+        - Key
+      example:
+        Key:
+          Artist:
+            S: Acme Band
+          SongTitle:
+            S: Happy Day
+        TableName: Music
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        Key:
+          $ref: '#/components/schemas/Key'
+        AttributesToGet:
+          $ref: '#/components/schemas/AttributeNameList'
+        ConsistentRead:
+          $ref: '#/components/schemas/ConsistentRead'
+        ReturnConsumedCapacity:
+          $ref: '#/components/schemas/ReturnConsumedCapacity'
+        ProjectionExpression:
+          $ref: '#/components/schemas/ProjectionExpression'
+        ExpressionAttributeNames:
+          $ref: '#/components/schemas/ExpressionAttributeNameMap'
+      description: Represents the input of a <code>GetItem</code> operation.
+    GetItemOutput:
+      type: object
+      example:
+        Item:
+          AlbumTitle:
+            S: Songs About Life
+          Artist:
+            S: Acme Band
+          SongTitle:
+            S: Happy Day
+      properties:
+        Item:
+          $ref: '#/components/schemas/AttributeMap'
+        ConsumedCapacity:
+          $ref: '#/components/schemas/ConsumedCapacity'
+      description: Represents the output of a <code>GetItem</code> operation.
+    GlobalSecondaryIndex:
+      type: object
+      required:
+        - IndexName
+        - KeySchema
+        - Projection
+        - ProvisionedThroughput
+      properties:
+        IndexName:
+          $ref: '#/components/schemas/IndexName'
+        KeySchema:
+          $ref: '#/components/schemas/KeySchema'
+        Projection:
+          $ref: '#/components/schemas/Projection'
+        ProvisionedThroughput:
+          $ref: '#/components/schemas/ProvisionedThroughput'
+      description: Represents the properties of a global secondary index.
+    GlobalSecondaryIndexDescription:
+      type: object
+      properties:
+        IndexName:
+          $ref: '#/components/schemas/IndexName'
+        KeySchema:
+          $ref: '#/components/schemas/KeySchema'
+        Projection:
+          $ref: '#/components/schemas/Projection'
+        IndexStatus:
+          $ref: '#/components/schemas/IndexStatus'
+        Backfilling:
+          $ref: '#/components/schemas/Backfilling'
+        ProvisionedThroughput:
+          $ref: '#/components/schemas/ProvisionedThroughputDescription'
+        IndexSizeBytes:
+          $ref: '#/components/schemas/Long'
+        ItemCount:
+          $ref: '#/components/schemas/Long'
+        IndexArn:
+          $ref: '#/components/schemas/String'
+      description: Represents the properties of a global secondary index.
+    GlobalSecondaryIndexDescriptionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GlobalSecondaryIndexDescription'
+    GlobalSecondaryIndexList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GlobalSecondaryIndex'
+    GlobalSecondaryIndexUpdate:
+      type: object
+      properties:
+        Update:
+          $ref: '#/components/schemas/UpdateGlobalSecondaryIndexAction'
+        Create:
+          $ref: '#/components/schemas/CreateGlobalSecondaryIndexAction'
+        Delete:
+          $ref: '#/components/schemas/DeleteGlobalSecondaryIndexAction'
+      description: '<p>Represents one of the following:</p> <ul> <li> <p>A new global secondary index to be added to an existing table.</p> </li> <li> <p>New provisioned throughput parameters for an existing global secondary index.</p> </li> <li> <p>An existing global secondary index to be removed from an existing table.</p> </li> </ul>'
+    GlobalSecondaryIndexUpdateList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GlobalSecondaryIndexUpdate'
+    IndexName:
+      type: string
+      pattern: '[a-zA-Z0-9_.-]+'
+      minLength: 3
+      maxLength: 255
+    IndexStatus:
+      type: string
+      enum:
+        - CREATING
+        - UPDATING
+        - DELETING
+        - ACTIVE
+    Integer:
+      type: integer
+    InternalServerError:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: An error occurred on the server side.
+    ItemCollectionKeyAttributeMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/AttributeName'
+          value:
+            $ref: '#/components/schemas/AttributeValue'
+    ItemCollectionMetrics:
+      type: object
+      properties:
+        ItemCollectionKey:
+          $ref: '#/components/schemas/ItemCollectionKeyAttributeMap'
+        SizeEstimateRangeGB:
+          $ref: '#/components/schemas/ItemCollectionSizeEstimateRange'
+      description: 'Information about item collections, if any, that were affected by the operation. <code>ItemCollectionMetrics</code> is only returned if the request asked for it. If the table does not have any local secondary indexes, this information is not returned in the response.'
+    ItemCollectionMetricsMultiple:
+      type: array
+      items:
+        $ref: '#/components/schemas/ItemCollectionMetrics'
+    ItemCollectionMetricsPerTable:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/TableName'
+          value:
+            $ref: '#/components/schemas/ItemCollectionMetricsMultiple'
+    ItemCollectionSizeEstimateBound:
+      type: number
+      format: double
+    ItemCollectionSizeEstimateRange:
+      type: array
+      items:
+        $ref: '#/components/schemas/ItemCollectionSizeEstimateBound'
+    ItemCollectionSizeLimitExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: An item collection is too large. This exception is only returned for tables that have one or more local secondary indexes.
+    ItemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AttributeMap'
+    Key:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/AttributeName'
+          value:
+            $ref: '#/components/schemas/AttributeValue'
+    KeyConditions:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/AttributeName'
+          value:
+            $ref: '#/components/schemas/Condition'
+    KeyExpression:
+      type: string
+    KeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Key'
+      minItems: 1
+      maxItems: 100
+    KeySchema:
+      type: array
+      items:
+        $ref: '#/components/schemas/KeySchemaElement'
+      minItems: 1
+      maxItems: 2
+    KeySchemaAttributeName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    KeySchemaElement:
+      type: object
+      required:
+        - AttributeName
+        - KeyType
+      properties:
+        AttributeName:
+          $ref: '#/components/schemas/KeySchemaAttributeName'
+        KeyType:
+          $ref: '#/components/schemas/KeyType'
+      description: '<p>Represents <i>a single element</i> of a key schema. A key schema specifies the attributes that make up the primary key of a table, or the key attributes of an index.</p> <p>A <code>KeySchemaElement</code> represents exactly one attribute of the primary key. For example, a simple primary key would be represented by one <code>KeySchemaElement</code> (for the partition key). A composite primary key would require one <code>KeySchemaElement</code> for the partition key, and another <code>KeySchemaElement</code> for the sort key.</p> <p>A <code>KeySchemaElement</code> must be a scalar, top-level attribute (not a nested attribute). The data type must be one of String, Number, or Binary. The attribute cannot be nested within a List or a Map.</p>'
+    KeyType:
+      type: string
+      enum:
+        - HASH
+        - RANGE
+    KeysAndAttributes:
+      type: object
+      required:
+        - Keys
+      properties:
+        Keys:
+          $ref: '#/components/schemas/KeyList'
+        AttributesToGet:
+          $ref: '#/components/schemas/AttributeNameList'
+        ConsistentRead:
+          $ref: '#/components/schemas/ConsistentRead'
+        ProjectionExpression:
+          $ref: '#/components/schemas/ProjectionExpression'
+        ExpressionAttributeNames:
+          $ref: '#/components/schemas/ExpressionAttributeNameMap'
+      description: '<p>Represents a set of primary keys and, for each key, the attributes to retrieve from the table.</p> <p>For each primary key, you must provide <i>all</i> of the key attributes. For example, with a simple primary key, you only need to provide the partition key. For a composite primary key, you must provide <i>both</i> the partition key and the sort key.</p>'
+    LimitExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: '<p>The number of concurrent table requests (cumulative number of tables in the <code>CREATING</code>, <code>DELETING</code> or <code>UPDATING</code> state) exceeds the maximum allowed of 10.</p> <p>Also, for tables with secondary indexes, only one of those tables can be in the <code>CREATING</code> state at any point in time. Do not attempt to create more than one such table simultaneously.</p> <p>The total limit of tables in the <code>ACTIVE</code> state is 250.</p>'
+    ListAttributeValue:
+      type: array
+      items:
+        $ref: '#/components/schemas/AttributeValue'
+    ListTablesInput:
+      type: object
+      example: {}
+      properties:
+        ExclusiveStartTableName:
+          $ref: '#/components/schemas/TableName'
+        Limit:
+          $ref: '#/components/schemas/ListTablesInputLimit'
+      description: Represents the input of a <code>ListTables</code> operation.
+    ListTablesInputLimit:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListTablesOutput:
+      type: object
+      example:
+        TableNames:
+          - Forum
+          - ProductCatalog
+          - Reply
+          - Thread
+      properties:
+        TableNames:
+          $ref: '#/components/schemas/TableNameList'
+        LastEvaluatedTableName:
+          $ref: '#/components/schemas/TableName'
+      description: Represents the output of a <code>ListTables</code> operation.
+    ListTagsOfResourceInput:
+      type: object
+      required:
+        - ResourceArn
+      properties:
+        ResourceArn:
+          $ref: '#/components/schemas/ResourceArnString'
+        NextToken:
+          $ref: '#/components/schemas/NextTokenString'
+    ListTagsOfResourceOutput:
+      type: object
+      properties:
+        Tags:
+          $ref: '#/components/schemas/TagList'
+        NextToken:
+          $ref: '#/components/schemas/NextTokenString'
+    LocalSecondaryIndex:
+      type: object
+      required:
+        - IndexName
+        - KeySchema
+        - Projection
+      properties:
+        IndexName:
+          $ref: '#/components/schemas/IndexName'
+        KeySchema:
+          $ref: '#/components/schemas/KeySchema'
+        Projection:
+          $ref: '#/components/schemas/Projection'
+      description: Represents the properties of a local secondary index.
+    LocalSecondaryIndexDescription:
+      type: object
+      properties:
+        IndexName:
+          $ref: '#/components/schemas/IndexName'
+        KeySchema:
+          $ref: '#/components/schemas/KeySchema'
+        Projection:
+          $ref: '#/components/schemas/Projection'
+        IndexSizeBytes:
+          $ref: '#/components/schemas/Long'
+        ItemCount:
+          $ref: '#/components/schemas/Long'
+        IndexArn:
+          $ref: '#/components/schemas/String'
+      description: Represents the properties of a local secondary index.
+    LocalSecondaryIndexDescriptionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LocalSecondaryIndexDescription'
+    LocalSecondaryIndexList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LocalSecondaryIndex'
+    Long:
+      type: integer
+    MapAttributeValue:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/AttributeName'
+          value:
+            $ref: '#/components/schemas/AttributeValue'
+    NextTokenString:
+      type: string
+    NonKeyAttributeName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    NonKeyAttributeNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonKeyAttributeName'
+      minItems: 1
+      maxItems: 20
+    NullAttributeValue:
+      type: boolean
+    NumberAttributeValue:
+      type: string
+    NumberSetAttributeValue:
+      type: array
+      items:
+        $ref: '#/components/schemas/NumberAttributeValue'
+    PositiveIntegerObject:
+      type: integer
+      minimum: 1
+    PositiveLongObject:
+      type: integer
+      minimum: 1
+    Projection:
+      type: object
+      properties:
+        ProjectionType:
+          $ref: '#/components/schemas/ProjectionType'
+        NonKeyAttributes:
+          $ref: '#/components/schemas/NonKeyAttributeNameList'
+      description: 'Represents attributes that are copied (projected) from the table into an index. These are in addition to the primary key attributes and index key attributes, which are automatically projected.'
+    ProjectionExpression:
+      type: string
+    ProjectionType:
+      type: string
+      enum:
+        - ALL
+        - KEYS_ONLY
+        - INCLUDE
+    ProvisionedThroughput:
+      type: object
+      required:
+        - ReadCapacityUnits
+        - WriteCapacityUnits
+      properties:
+        ReadCapacityUnits:
+          $ref: '#/components/schemas/PositiveLongObject'
+        WriteCapacityUnits:
+          $ref: '#/components/schemas/PositiveLongObject'
+      description: '<p>Represents the provisioned throughput settings for a specified table or index. The settings can be modified using the <code>UpdateTable</code> operation.</p> <p>For current minimum and maximum provisioned throughput values, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html">Limits</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>'
+    ProvisionedThroughputDescription:
+      type: object
+      properties:
+        LastIncreaseDateTime:
+          $ref: '#/components/schemas/Date'
+        LastDecreaseDateTime:
+          $ref: '#/components/schemas/Date'
+        NumberOfDecreasesToday:
+          $ref: '#/components/schemas/PositiveLongObject'
+        ReadCapacityUnits:
+          $ref: '#/components/schemas/PositiveLongObject'
+        WriteCapacityUnits:
+          $ref: '#/components/schemas/PositiveLongObject'
+      description: 'Represents the provisioned throughput settings for the table, consisting of read and write capacity units, along with data about increases and decreases.'
+    ProvisionedThroughputExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: 'Your request rate is too high. The AWS SDKs for DynamoDB automatically retry requests that receive this exception. Your request is eventually successful, unless your retry queue is too large to finish. Reduce the frequency of requests and use exponential backoff. For more information, go to <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.Errors.html#Programming.Errors.RetryAndBackoff">Error Retries and Exponential Backoff</a> in the <i>Amazon DynamoDB Developer Guide</i>.'
+    PutItemInput:
+      type: object
+      required:
+        - TableName
+        - Item
+      example:
+        Item:
+          AlbumTitle:
+            S: Somewhat Famous
+          Artist:
+            S: No One You Know
+          SongTitle:
+            S: Call Me Today
+        ReturnConsumedCapacity: TOTAL
+        TableName: Music
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        Item:
+          $ref: '#/components/schemas/PutItemInputAttributeMap'
+        Expected:
+          $ref: '#/components/schemas/ExpectedAttributeMap'
+        ReturnValues:
+          $ref: '#/components/schemas/ReturnValue'
+        ReturnConsumedCapacity:
+          $ref: '#/components/schemas/ReturnConsumedCapacity'
+        ReturnItemCollectionMetrics:
+          $ref: '#/components/schemas/ReturnItemCollectionMetrics'
+        ConditionalOperator:
+          $ref: '#/components/schemas/ConditionalOperator'
+        ConditionExpression:
+          $ref: '#/components/schemas/ConditionExpression'
+        ExpressionAttributeNames:
+          $ref: '#/components/schemas/ExpressionAttributeNameMap'
+        ExpressionAttributeValues:
+          $ref: '#/components/schemas/ExpressionAttributeValueMap'
+      description: Represents the input of a <code>PutItem</code> operation.
+    PutItemInputAttributeMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/AttributeName'
+          value:
+            $ref: '#/components/schemas/AttributeValue'
+    PutItemOutput:
+      type: object
+      example:
+        ConsumedCapacity:
+          CapacityUnits: 1
+          TableName: Music
+      properties:
+        Attributes:
+          $ref: '#/components/schemas/AttributeMap'
+        ConsumedCapacity:
+          $ref: '#/components/schemas/ConsumedCapacity'
+        ItemCollectionMetrics:
+          $ref: '#/components/schemas/ItemCollectionMetrics'
+      description: Represents the output of a <code>PutItem</code> operation.
+    PutRequest:
+      type: object
+      required:
+        - Item
+      properties:
+        Item:
+          $ref: '#/components/schemas/PutItemInputAttributeMap'
+      description: Represents a request to perform a <code>PutItem</code> operation on an item.
+    QueryInput:
+      type: object
+      required:
+        - TableName
+      example:
+        ExpressionAttributeValues:
+          ':v1':
+            S: No One You Know
+        KeyConditionExpression: 'Artist = :v1'
+        ProjectionExpression: SongTitle
+        TableName: Music
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        IndexName:
+          $ref: '#/components/schemas/IndexName'
+        Select:
+          $ref: '#/components/schemas/Select'
+        AttributesToGet:
+          $ref: '#/components/schemas/AttributeNameList'
+        Limit:
+          $ref: '#/components/schemas/PositiveIntegerObject'
+        ConsistentRead:
+          $ref: '#/components/schemas/ConsistentRead'
+        KeyConditions:
+          $ref: '#/components/schemas/KeyConditions'
+        QueryFilter:
+          $ref: '#/components/schemas/FilterConditionMap'
+        ConditionalOperator:
+          $ref: '#/components/schemas/ConditionalOperator'
+        ScanIndexForward:
+          $ref: '#/components/schemas/BooleanObject'
+        ExclusiveStartKey:
+          $ref: '#/components/schemas/Key'
+        ReturnConsumedCapacity:
+          $ref: '#/components/schemas/ReturnConsumedCapacity'
+        ProjectionExpression:
+          $ref: '#/components/schemas/ProjectionExpression'
+        FilterExpression:
+          $ref: '#/components/schemas/ConditionExpression'
+        KeyConditionExpression:
+          $ref: '#/components/schemas/KeyExpression'
+        ExpressionAttributeNames:
+          $ref: '#/components/schemas/ExpressionAttributeNameMap'
+        ExpressionAttributeValues:
+          $ref: '#/components/schemas/ExpressionAttributeValueMap'
+      description: Represents the input of a <code>Query</code> operation.
+    QueryOutput:
+      type: object
+      example:
+        ConsumedCapacity: {}
+        Count: 2
+        Items:
+          - SongTitle:
+              S: Call Me Today
+        ScannedCount: 2
+      properties:
+        Items:
+          $ref: '#/components/schemas/ItemList'
+        Count:
+          $ref: '#/components/schemas/Integer'
+        ScannedCount:
+          $ref: '#/components/schemas/Integer'
+        LastEvaluatedKey:
+          $ref: '#/components/schemas/Key'
+        ConsumedCapacity:
+          $ref: '#/components/schemas/ConsumedCapacity'
+      description: Represents the output of a <code>Query</code> operation.
+    ResourceArnString:
+      type: string
+      minLength: 1
+      maxLength: 1283
+    ResourceInUseException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: 'The operation conflicts with the resource''s availability. For example, you attempted to recreate an existing table, or tried to delete a table currently in the <code>CREATING</code> state.'
+    ResourceNotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: 'The operation tried to access a nonexistent table or index. The resource might not be specified correctly, or its status might not be <code>ACTIVE</code>.'
+    ReturnConsumedCapacity:
+      type: string
+      enum:
+        - INDEXES
+        - TOTAL
+        - NONE
+      description: '<p>Determines the level of detail about provisioned throughput consumption that is returned in the response:</p> <ul> <li> <p> <code>INDEXES</code> - The response includes the aggregate <code>ConsumedCapacity</code> for the operation, together with <code>ConsumedCapacity</code> for each table and secondary index that was accessed.</p> <p>Note that some operations, such as <code>GetItem</code> and <code>BatchGetItem</code>, do not access any indexes at all. In these cases, specifying <code>INDEXES</code> will only return <code>ConsumedCapacity</code> information for table(s).</p> </li> <li> <p> <code>TOTAL</code> - The response includes only the aggregate <code>ConsumedCapacity</code> for the operation.</p> </li> <li> <p> <code>NONE</code> - No <code>ConsumedCapacity</code> details are included in the response.</p> </li> </ul>'
+    ReturnItemCollectionMetrics:
+      type: string
+      enum:
+        - SIZE
+        - NONE
+    ReturnValue:
+      type: string
+      enum:
+        - NONE
+        - ALL_OLD
+        - UPDATED_OLD
+        - ALL_NEW
+        - UPDATED_NEW
+    ScalarAttributeType:
+      type: string
+      enum:
+        - S
+        - 'N'
+        - B
+    ScanInput:
+      type: object
+      required:
+        - TableName
+      example:
+        ExpressionAttributeNames:
+          AT: AlbumTitle
+          ST: SongTitle
+        ExpressionAttributeValues:
+          ':a':
+            S: No One You Know
+        FilterExpression: 'Artist = :a'
+        ProjectionExpression: '#ST, #AT'
+        TableName: Music
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        IndexName:
+          $ref: '#/components/schemas/IndexName'
+        AttributesToGet:
+          $ref: '#/components/schemas/AttributeNameList'
+        Limit:
+          $ref: '#/components/schemas/PositiveIntegerObject'
+        Select:
+          $ref: '#/components/schemas/Select'
+        ScanFilter:
+          $ref: '#/components/schemas/FilterConditionMap'
+        ConditionalOperator:
+          $ref: '#/components/schemas/ConditionalOperator'
+        ExclusiveStartKey:
+          $ref: '#/components/schemas/Key'
+        ReturnConsumedCapacity:
+          $ref: '#/components/schemas/ReturnConsumedCapacity'
+        TotalSegments:
+          $ref: '#/components/schemas/ScanTotalSegments'
+        Segment:
+          $ref: '#/components/schemas/ScanSegment'
+        ProjectionExpression:
+          $ref: '#/components/schemas/ProjectionExpression'
+        FilterExpression:
+          $ref: '#/components/schemas/ConditionExpression'
+        ExpressionAttributeNames:
+          $ref: '#/components/schemas/ExpressionAttributeNameMap'
+        ExpressionAttributeValues:
+          $ref: '#/components/schemas/ExpressionAttributeValueMap'
+        ConsistentRead:
+          $ref: '#/components/schemas/ConsistentRead'
+      description: Represents the input of a <code>Scan</code> operation.
+    ScanOutput:
+      type: object
+      example:
+        ConsumedCapacity: {}
+        Count: 2
+        Items:
+          - AlbumTitle:
+              S: Somewhat Famous
+            SongTitle:
+              S: Call Me Today
+          - AlbumTitle:
+              S: Blue Sky Blues
+            SongTitle:
+              S: Scared of My Shadow
+        ScannedCount: 3
+      properties:
+        Items:
+          $ref: '#/components/schemas/ItemList'
+        Count:
+          $ref: '#/components/schemas/Integer'
+        ScannedCount:
+          $ref: '#/components/schemas/Integer'
+        LastEvaluatedKey:
+          $ref: '#/components/schemas/Key'
+        ConsumedCapacity:
+          $ref: '#/components/schemas/ConsumedCapacity'
+      description: Represents the output of a <code>Scan</code> operation.
+    ScanSegment:
+      type: integer
+      minimum: 0
+      maximum: 999999
+    ScanTotalSegments:
+      type: integer
+      minimum: 1
+      maximum: 1000000
+    SecondaryIndexesCapacityMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/IndexName'
+          value:
+            $ref: '#/components/schemas/Capacity'
+    Select:
+      type: string
+      enum:
+        - ALL_ATTRIBUTES
+        - ALL_PROJECTED_ATTRIBUTES
+        - SPECIFIC_ATTRIBUTES
+        - COUNT
+    StreamArn:
+      type: string
+      minLength: 37
+      maxLength: 1024
+    StreamEnabled:
+      type: boolean
+    StreamSpecification:
+      type: object
+      properties:
+        StreamEnabled:
+          $ref: '#/components/schemas/StreamEnabled'
+        StreamViewType:
+          $ref: '#/components/schemas/StreamViewType'
+      description: Represents the DynamoDB Streams configuration for a table in DynamoDB.
+    StreamViewType:
+      type: string
+      enum:
+        - NEW_IMAGE
+        - OLD_IMAGE
+        - NEW_AND_OLD_IMAGES
+        - KEYS_ONLY
+    String:
+      type: string
+    StringAttributeValue:
+      type: string
+    StringSetAttributeValue:
+      type: array
+      items:
+        $ref: '#/components/schemas/StringAttributeValue'
+    TableDescription:
+      type: object
+      properties:
+        AttributeDefinitions:
+          $ref: '#/components/schemas/AttributeDefinitions'
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        KeySchema:
+          $ref: '#/components/schemas/KeySchema'
+        TableStatus:
+          $ref: '#/components/schemas/TableStatus'
+        CreationDateTime:
+          $ref: '#/components/schemas/Date'
+        ProvisionedThroughput:
+          $ref: '#/components/schemas/ProvisionedThroughputDescription'
+        TableSizeBytes:
+          $ref: '#/components/schemas/Long'
+        ItemCount:
+          $ref: '#/components/schemas/Long'
+        TableArn:
+          $ref: '#/components/schemas/String'
+        LocalSecondaryIndexes:
+          $ref: '#/components/schemas/LocalSecondaryIndexDescriptionList'
+        GlobalSecondaryIndexes:
+          $ref: '#/components/schemas/GlobalSecondaryIndexDescriptionList'
+        StreamSpecification:
+          $ref: '#/components/schemas/StreamSpecification'
+        LatestStreamLabel:
+          $ref: '#/components/schemas/String'
+        LatestStreamArn:
+          $ref: '#/components/schemas/StreamArn'
+      description: Represents the properties of a table.
+    TableName:
+      type: string
+      pattern: '[a-zA-Z0-9_.-]+'
+      minLength: 3
+      maxLength: 255
+    TableNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TableName'
+    TableStatus:
+      type: string
+      enum:
+        - CREATING
+        - UPDATING
+        - DELETING
+        - ACTIVE
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKeyString'
+        Value:
+          $ref: '#/components/schemas/TagValueString'
+      description: '<p>Describes a tag. A tag is a key-value pair. You can add up to 50 tags to a single DynamoDB table. </p> <p> AWS-assigned tag names and values are automatically assigned the aws: prefix, which the user cannot assign. AWS-assigned tag names do not count towards the tag limit of 50. User-assigned tag names have the prefix user: in the Cost Allocation Report. You cannot backdate the application of a tag. </p> <p>For an overview on tagging DynamoDB resources, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html">Tagging for DynamoDB</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>'
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKeyString'
+    TagKeyString:
+      type: string
+      minLength: 1
+      maxLength: 128
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    TagResourceInput:
+      type: object
+      required:
+        - ResourceArn
+        - Tags
+      properties:
+        ResourceArn:
+          $ref: '#/components/schemas/ResourceArnString'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    TagValueString:
+      type: string
+      minLength: 0
+      maxLength: 256
+    TimeToLiveAttributeName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    TimeToLiveDescription:
+      type: object
+      properties:
+        TimeToLiveStatus:
+          $ref: '#/components/schemas/TimeToLiveStatus'
+        AttributeName:
+          $ref: '#/components/schemas/TimeToLiveAttributeName'
+      description: 'The description of the Time to Live (TTL) status on the specified table. '
+    TimeToLiveEnabled:
+      type: boolean
+    TimeToLiveSpecification:
+      type: object
+      required:
+        - Enabled
+        - AttributeName
+      properties:
+        Enabled:
+          $ref: '#/components/schemas/TimeToLiveEnabled'
+        AttributeName:
+          $ref: '#/components/schemas/TimeToLiveAttributeName'
+      description: Represents the settings used to enable or disable Time to Live for the specified table.
+    TimeToLiveStatus:
+      type: string
+      enum:
+        - ENABLING
+        - DISABLING
+        - ENABLED
+        - DISABLED
+    UntagResourceInput:
+      type: object
+      required:
+        - ResourceArn
+        - TagKeys
+      properties:
+        ResourceArn:
+          $ref: '#/components/schemas/ResourceArnString'
+        TagKeys:
+          $ref: '#/components/schemas/TagKeyList'
+    UpdateExpression:
+      type: string
+    UpdateGlobalSecondaryIndexAction:
+      type: object
+      required:
+        - IndexName
+        - ProvisionedThroughput
+      properties:
+        IndexName:
+          $ref: '#/components/schemas/IndexName'
+        ProvisionedThroughput:
+          $ref: '#/components/schemas/ProvisionedThroughput'
+      description: Represents the new provisioned throughput settings to be applied to a global secondary index.
+    UpdateItemInput:
+      type: object
+      required:
+        - TableName
+        - Key
+      example:
+        ExpressionAttributeNames:
+          '#AT': AlbumTitle
+          '#Y': Year
+        ExpressionAttributeValues:
+          ':t':
+            S: Louder Than Ever
+          ':y':
+            'N': '2015'
+        Key:
+          Artist:
+            S: Acme Band
+          SongTitle:
+            S: Happy Day
+        ReturnValues: ALL_NEW
+        TableName: Music
+        UpdateExpression: 'SET #Y = :y, #AT = :t'
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        Key:
+          $ref: '#/components/schemas/Key'
+        AttributeUpdates:
+          $ref: '#/components/schemas/AttributeUpdates'
+        Expected:
+          $ref: '#/components/schemas/ExpectedAttributeMap'
+        ConditionalOperator:
+          $ref: '#/components/schemas/ConditionalOperator'
+        ReturnValues:
+          $ref: '#/components/schemas/ReturnValue'
+        ReturnConsumedCapacity:
+          $ref: '#/components/schemas/ReturnConsumedCapacity'
+        ReturnItemCollectionMetrics:
+          $ref: '#/components/schemas/ReturnItemCollectionMetrics'
+        UpdateExpression:
+          $ref: '#/components/schemas/UpdateExpression'
+        ConditionExpression:
+          $ref: '#/components/schemas/ConditionExpression'
+        ExpressionAttributeNames:
+          $ref: '#/components/schemas/ExpressionAttributeNameMap'
+        ExpressionAttributeValues:
+          $ref: '#/components/schemas/ExpressionAttributeValueMap'
+      description: Represents the input of an <code>UpdateItem</code> operation.
+    UpdateItemOutput:
+      type: object
+      example:
+        Attributes:
+          AlbumTitle:
+            S: Songs About Life
+          Artist:
+            S: Acme Band
+          SongTitle:
+            S: Happy Day
+      properties:
+        Attributes:
+          $ref: '#/components/schemas/AttributeMap'
+        ConsumedCapacity:
+          $ref: '#/components/schemas/ConsumedCapacity'
+        ItemCollectionMetrics:
+          $ref: '#/components/schemas/ItemCollectionMetrics'
+      description: Represents the output of an <code>UpdateItem</code> operation.
+    UpdateTableInput:
+      type: object
+      required:
+        - TableName
+      example:
+        ProvisionedThroughput:
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
+        TableName: MusicCollection
+      properties:
+        AttributeDefinitions:
+          $ref: '#/components/schemas/AttributeDefinitions'
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        ProvisionedThroughput:
+          $ref: '#/components/schemas/ProvisionedThroughput'
+        GlobalSecondaryIndexUpdates:
+          $ref: '#/components/schemas/GlobalSecondaryIndexUpdateList'
+        StreamSpecification:
+          $ref: '#/components/schemas/StreamSpecification'
+      description: Represents the input of an <code>UpdateTable</code> operation.
+    UpdateTableOutput:
+      type: object
+      example:
+        TableDescription:
+          AttributeDefinitions:
+            - AttributeName: Artist
+              AttributeType: S
+            - AttributeName: SongTitle
+              AttributeType: S
+          CreationDateTime: '1421866952.062'
+          ItemCount: 0
+          KeySchema:
+            - AttributeName: Artist
+              KeyType: HASH
+            - AttributeName: SongTitle
+              KeyType: RANGE
+          ProvisionedThroughput:
+            LastIncreaseDateTime: '1421874759.194'
+            NumberOfDecreasesToday: 1
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+          TableName: MusicCollection
+          TableSizeBytes: 0
+          TableStatus: UPDATING
+      properties:
+        TableDescription:
+          $ref: '#/components/schemas/TableDescription'
+      description: Represents the output of an <code>UpdateTable</code> operation.
+    UpdateTimeToLiveInput:
+      type: object
+      required:
+        - TableName
+        - TimeToLiveSpecification
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        TimeToLiveSpecification:
+          $ref: '#/components/schemas/TimeToLiveSpecification'
+      description: Represents the input of an <code>UpdateTimeToLive</code> operation.
+    UpdateTimeToLiveOutput:
+      type: object
+      properties:
+        TimeToLiveSpecification:
+          $ref: '#/components/schemas/TimeToLiveSpecification'
+    WriteRequest:
+      type: object
+      properties:
+        PutRequest:
+          $ref: '#/components/schemas/PutRequest'
+        DeleteRequest:
+          $ref: '#/components/schemas/DeleteRequest'
+      description: 'Represents an operation to perform - either <code>DeleteItem</code> or <code>PutItem</code>. You can only request one of these operations, not both, in a single <code>WriteRequest</code>. If you do need to perform both of these operations, you will need to provide two separate <code>WriteRequest</code> objects.'
+    WriteRequests:
+      type: array
+      items:
+        $ref: '#/components/schemas/WriteRequest'
+      minItems: 1
+      maxItems: 25
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

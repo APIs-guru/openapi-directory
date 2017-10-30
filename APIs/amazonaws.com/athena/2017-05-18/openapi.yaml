@@ -1,0 +1,1033 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://athena.amazonaws.com/'
+info:
+  version: '2017-05-18'
+  x-release: v4
+  title: Amazon Athena
+  description: '<p>Amazon Athena is an interactive query service that lets you use standard SQL to analyze data directly in Amazon S3. You can point Athena at your data in Amazon S3 and run ad-hoc queries and get results in seconds. Athena is serverless, so there is no infrastructure to set up or manage. You pay only for the queries you run. Athena scales automatically—executing queries in parallel—so results are fast, even with large datasets and complex queries. For more information, see <a href="http://docs.aws.amazon.com/athena/latest/ug/what-is.html">What is Amazon Athena</a> in the <i>Amazon Athena User Guide</i>.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: athena
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/athena-2017-05-18.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/athena/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: BatchGetNamedQuery
+      description: 'Returns the details of a single named query or a list of up to 50 queries, which you provide as an array of query ID strings. Use <a>ListNamedQueries</a> to get the list of named query IDs. If information could not be retrieved for a submitted query ID, information about the query ID submitted is listed under <a>UnprocessedNamedQueryId</a>. Named queries are different from executed queries. Use <a>BatchGetQueryExecution</a> to get details about each unique query execution, and <a>ListQueryExecutions</a> to get a list of query execution IDs.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetNamedQueryOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetNamedQueryInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#BatchGetQueryExecution':
+    post:
+      operationId: BatchGetQueryExecution
+      description: 'Returns the details of a single query execution or a list of up to 50 query executions, which you provide as an array of query execution ID strings. To get a list of query execution IDs, use <a>ListQueryExecutions</a>. Query executions are different from named (saved) queries. Use <a>BatchGetNamedQuery</a> to get details about named queries.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetQueryExecutionOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetQueryExecutionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateNamedQuery':
+    post:
+      operationId: CreateNamedQuery
+      description: '<p>Creates a named query.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateNamedQueryOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNamedQueryInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteNamedQuery':
+    post:
+      operationId: DeleteNamedQuery
+      description: '<p>Deletes a named query.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteNamedQueryOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteNamedQueryInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetNamedQuery':
+    post:
+      operationId: GetNamedQuery
+      description: Returns information about a single query.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetNamedQueryOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetNamedQueryInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetQueryExecution':
+    post:
+      operationId: GetQueryExecution
+      description: 'Returns information about a single execution of a query. Each time a query executes, information about the query execution is saved with a unique ID.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQueryExecutionOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetQueryExecutionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetQueryResults':
+    post:
+      operationId: GetQueryResults
+      description: Returns the results of a single query execution specified by <code>QueryExecutionId</code>. This request does not execute the query but returns results. Use <a>StartQueryExecution</a> to run a query.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQueryResultsOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      parameters:
+        - name: MaxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetQueryResultsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListNamedQueries':
+    post:
+      operationId: ListNamedQueries
+      description: '<p>Provides a list of all available query IDs.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListNamedQueriesOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      parameters:
+        - name: MaxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListNamedQueriesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListQueryExecutions':
+    post:
+      operationId: ListQueryExecutions
+      description: '<p>Provides a list of all available query execution IDs.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListQueryExecutionsOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      parameters:
+        - name: MaxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListQueryExecutionsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StartQueryExecution':
+    post:
+      operationId: StartQueryExecution
+      description: '<p>Runs (executes) the SQL query statements contained in the <code>Query</code> string.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartQueryExecutionOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartQueryExecutionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StopQueryExecution':
+    post:
+      operationId: StopQueryExecution
+      description: '<p>Stops a query execution.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopQueryExecutionOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopQueryExecutionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    BatchGetNamedQueryInput:
+      type: object
+      required:
+        - NamedQueryIds
+      properties:
+        NamedQueryIds:
+          $ref: '#/components/schemas/NamedQueryIdList'
+    BatchGetNamedQueryOutput:
+      type: object
+      properties:
+        NamedQueries:
+          $ref: '#/components/schemas/NamedQueryList'
+        UnprocessedNamedQueryIds:
+          $ref: '#/components/schemas/UnprocessedNamedQueryIdList'
+    BatchGetQueryExecutionInput:
+      type: object
+      required:
+        - QueryExecutionIds
+      properties:
+        QueryExecutionIds:
+          $ref: '#/components/schemas/QueryExecutionIdList'
+    BatchGetQueryExecutionOutput:
+      type: object
+      properties:
+        QueryExecutions:
+          $ref: '#/components/schemas/QueryExecutionList'
+        UnprocessedQueryExecutionIds:
+          $ref: '#/components/schemas/UnprocessedQueryExecutionIdList'
+    Boolean:
+      type: boolean
+    ColumnInfo:
+      type: object
+      required:
+        - Name
+        - Type
+      properties:
+        CatalogName:
+          $ref: '#/components/schemas/String'
+        SchemaName:
+          $ref: '#/components/schemas/String'
+        TableName:
+          $ref: '#/components/schemas/String'
+        Name:
+          $ref: '#/components/schemas/String'
+        Label:
+          $ref: '#/components/schemas/String'
+        Type:
+          $ref: '#/components/schemas/String'
+        Precision:
+          $ref: '#/components/schemas/Integer'
+        Scale:
+          $ref: '#/components/schemas/Integer'
+        Nullable:
+          $ref: '#/components/schemas/ColumnNullable'
+        CaseSensitive:
+          $ref: '#/components/schemas/Boolean'
+      description: Information about the columns in a query execution result.
+    ColumnInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ColumnInfo'
+    ColumnNullable:
+      type: string
+      enum:
+        - NOT_NULL
+        - NULLABLE
+        - UNKNOWN
+    CreateNamedQueryInput:
+      type: object
+      required:
+        - Name
+        - Database
+        - QueryString
+      properties:
+        Name:
+          $ref: '#/components/schemas/NameString'
+        Description:
+          $ref: '#/components/schemas/DescriptionString'
+        Database:
+          $ref: '#/components/schemas/DatabaseString'
+        QueryString:
+          $ref: '#/components/schemas/QueryString'
+        ClientRequestToken:
+          $ref: '#/components/schemas/IdempotencyToken'
+    CreateNamedQueryOutput:
+      type: object
+      properties:
+        NamedQueryId:
+          $ref: '#/components/schemas/NamedQueryId'
+    DatabaseString:
+      type: string
+      minLength: 1
+      maxLength: 32
+    Date:
+      type: string
+      format: date-time
+    Datum:
+      type: object
+      properties:
+        VarCharValue:
+          $ref: '#/components/schemas/datumString'
+      description: A piece of data (a field in the table).
+    DeleteNamedQueryInput:
+      type: object
+      required:
+        - NamedQueryId
+      properties:
+        NamedQueryId:
+          $ref: '#/components/schemas/NamedQueryId'
+    DeleteNamedQueryOutput:
+      type: object
+      properties: {}
+    DescriptionString:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    EncryptionConfiguration:
+      type: object
+      required:
+        - EncryptionOption
+      properties:
+        EncryptionOption:
+          $ref: '#/components/schemas/EncryptionOption'
+        KmsKey:
+          $ref: '#/components/schemas/String'
+      description: 'If query results are encrypted in Amazon S3, indicates the Amazon S3 encryption option used.'
+    EncryptionOption:
+      type: string
+      enum:
+        - SSE_S3
+        - SSE_KMS
+        - CSE_KMS
+    ErrorCode:
+      type: string
+      minLength: 1
+      maxLength: 256
+    ErrorMessage:
+      type: string
+    GetNamedQueryInput:
+      type: object
+      required:
+        - NamedQueryId
+      properties:
+        NamedQueryId:
+          $ref: '#/components/schemas/NamedQueryId'
+    GetNamedQueryOutput:
+      type: object
+      properties:
+        NamedQuery:
+          $ref: '#/components/schemas/NamedQuery'
+    GetQueryExecutionInput:
+      type: object
+      required:
+        - QueryExecutionId
+      properties:
+        QueryExecutionId:
+          $ref: '#/components/schemas/QueryExecutionId'
+    GetQueryExecutionOutput:
+      type: object
+      properties:
+        QueryExecution:
+          $ref: '#/components/schemas/QueryExecution'
+    GetQueryResultsInput:
+      type: object
+      required:
+        - QueryExecutionId
+      properties:
+        QueryExecutionId:
+          $ref: '#/components/schemas/QueryExecutionId'
+        NextToken:
+          $ref: '#/components/schemas/Token'
+        MaxResults:
+          $ref: '#/components/schemas/MaxQueryResults'
+    GetQueryResultsOutput:
+      type: object
+      properties:
+        ResultSet:
+          $ref: '#/components/schemas/ResultSet'
+        NextToken:
+          $ref: '#/components/schemas/Token'
+    IdempotencyToken:
+      type: string
+      minLength: 32
+      maxLength: 128
+    Integer:
+      type: integer
+    InternalServerException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: 'Indicates a platform issue, which may be due to a transient condition or outage.'
+    InvalidRequestException:
+      type: object
+      properties:
+        AthenaErrorCode:
+          $ref: '#/components/schemas/ErrorCode'
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: 'Indicates that something is wrong with the input to the request. For example, a required parameter may be missing or out of range.'
+    ListNamedQueriesInput:
+      type: object
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/Token'
+        MaxResults:
+          $ref: '#/components/schemas/MaxNamedQueriesCount'
+    ListNamedQueriesOutput:
+      type: object
+      properties:
+        NamedQueryIds:
+          $ref: '#/components/schemas/NamedQueryIdList'
+        NextToken:
+          $ref: '#/components/schemas/Token'
+    ListQueryExecutionsInput:
+      type: object
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/Token'
+        MaxResults:
+          $ref: '#/components/schemas/MaxQueryExecutionsCount'
+    ListQueryExecutionsOutput:
+      type: object
+      properties:
+        QueryExecutionIds:
+          $ref: '#/components/schemas/QueryExecutionIdList'
+        NextToken:
+          $ref: '#/components/schemas/Token'
+    Long:
+      type: integer
+    MaxNamedQueriesCount:
+      type: integer
+      minimum: 0
+      maximum: 50
+    MaxQueryExecutionsCount:
+      type: integer
+      minimum: 0
+      maximum: 50
+    MaxQueryResults:
+      type: integer
+      minimum: 0
+      maximum: 1000
+    NameString:
+      type: string
+      minLength: 1
+      maxLength: 128
+    NamedQuery:
+      type: object
+      required:
+        - Name
+        - Database
+        - QueryString
+      properties:
+        Name:
+          $ref: '#/components/schemas/NameString'
+        Description:
+          $ref: '#/components/schemas/DescriptionString'
+        Database:
+          $ref: '#/components/schemas/DatabaseString'
+        QueryString:
+          $ref: '#/components/schemas/QueryString'
+        NamedQueryId:
+          $ref: '#/components/schemas/NamedQueryId'
+      description: 'A query, where <code>QueryString</code> is the SQL query statements that comprise the query.'
+    NamedQueryId:
+      type: string
+    NamedQueryIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NamedQueryId'
+      minItems: 1
+      maxItems: 50
+    NamedQueryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NamedQuery'
+    QueryExecution:
+      type: object
+      properties:
+        QueryExecutionId:
+          $ref: '#/components/schemas/QueryExecutionId'
+        Query:
+          $ref: '#/components/schemas/QueryString'
+        ResultConfiguration:
+          $ref: '#/components/schemas/ResultConfiguration'
+        QueryExecutionContext:
+          $ref: '#/components/schemas/QueryExecutionContext'
+        Status:
+          $ref: '#/components/schemas/QueryExecutionStatus'
+        Statistics:
+          $ref: '#/components/schemas/QueryExecutionStatistics'
+      description: Information about a single instance of a query execution.
+    QueryExecutionContext:
+      type: object
+      properties:
+        Database:
+          $ref: '#/components/schemas/DatabaseString'
+      description: The database in which the query execution occurs.
+    QueryExecutionId:
+      type: string
+    QueryExecutionIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/QueryExecutionId'
+      minItems: 1
+      maxItems: 50
+    QueryExecutionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/QueryExecution'
+    QueryExecutionState:
+      type: string
+      enum:
+        - QUEUED
+        - RUNNING
+        - SUCCEEDED
+        - FAILED
+        - CANCELLED
+    QueryExecutionStatistics:
+      type: object
+      properties:
+        EngineExecutionTimeInMillis:
+          $ref: '#/components/schemas/Long'
+        DataScannedInBytes:
+          $ref: '#/components/schemas/Long'
+      description: The amount of data scanned during the query execution and the amount of time that it took to execute.
+    QueryExecutionStatus:
+      type: object
+      properties:
+        State:
+          $ref: '#/components/schemas/QueryExecutionState'
+        StateChangeReason:
+          $ref: '#/components/schemas/String'
+        SubmissionDateTime:
+          $ref: '#/components/schemas/Date'
+        CompletionDateTime:
+          $ref: '#/components/schemas/Date'
+      description: 'The completion date, current state, submission time, and state change reason (if applicable) for the query execution.'
+    QueryString:
+      type: string
+      minLength: 1
+      maxLength: 262144
+    ResultConfiguration:
+      type: object
+      required:
+        - OutputLocation
+      properties:
+        OutputLocation:
+          $ref: '#/components/schemas/String'
+        EncryptionConfiguration:
+          $ref: '#/components/schemas/EncryptionConfiguration'
+      description: 'The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results.'
+    ResultSet:
+      type: object
+      properties:
+        Rows:
+          $ref: '#/components/schemas/RowList'
+        ResultSetMetadata:
+          $ref: '#/components/schemas/ResultSetMetadata'
+      description: The metadata and rows that comprise a query result set. The metadata describes the column structure and data types.
+    ResultSetMetadata:
+      type: object
+      properties:
+        ColumnInfo:
+          $ref: '#/components/schemas/ColumnInfoList'
+      description: The metadata that describes the column structure and data types of a table of query results.
+    Row:
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/datumList'
+      description: The rows that comprise a query result table.
+    RowList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Row'
+    StartQueryExecutionInput:
+      type: object
+      required:
+        - QueryString
+        - ResultConfiguration
+      properties:
+        QueryString:
+          $ref: '#/components/schemas/QueryString'
+        ClientRequestToken:
+          $ref: '#/components/schemas/IdempotencyToken'
+        QueryExecutionContext:
+          $ref: '#/components/schemas/QueryExecutionContext'
+        ResultConfiguration:
+          $ref: '#/components/schemas/ResultConfiguration'
+    StartQueryExecutionOutput:
+      type: object
+      properties:
+        QueryExecutionId:
+          $ref: '#/components/schemas/QueryExecutionId'
+    StopQueryExecutionInput:
+      type: object
+      required:
+        - QueryExecutionId
+      properties:
+        QueryExecutionId:
+          $ref: '#/components/schemas/QueryExecutionId'
+    StopQueryExecutionOutput:
+      type: object
+      properties: {}
+    String:
+      type: string
+    ThrottleReason:
+      type: string
+      enum:
+        - CONCURRENT_QUERY_LIMIT_EXCEEDED
+    Token:
+      type: string
+    TooManyRequestsException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+        Reason:
+          $ref: '#/components/schemas/ThrottleReason'
+      description: Indicates that the request was throttled.
+    UnprocessedNamedQueryId:
+      type: object
+      properties:
+        NamedQueryId:
+          $ref: '#/components/schemas/NamedQueryId'
+        ErrorCode:
+          $ref: '#/components/schemas/ErrorCode'
+        ErrorMessage:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: Information about a named query ID that could not be processed.
+    UnprocessedNamedQueryIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UnprocessedNamedQueryId'
+    UnprocessedQueryExecutionId:
+      type: object
+      properties:
+        QueryExecutionId:
+          $ref: '#/components/schemas/QueryExecutionId'
+        ErrorCode:
+          $ref: '#/components/schemas/ErrorCode'
+        ErrorMessage:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: Describes a query execution that failed to process.
+    UnprocessedQueryExecutionIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UnprocessedQueryExecutionId'
+    datumList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Datum'
+    datumString:
+      type: string
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

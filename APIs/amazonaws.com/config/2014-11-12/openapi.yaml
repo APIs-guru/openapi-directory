@@ -1,0 +1,2327 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://config.amazonaws.com/'
+info:
+  version: '2014-11-12'
+  x-release: v4
+  title: AWS Config
+  description: '<fullname>AWS Config</fullname> <p>AWS Config provides a way to keep track of the configurations of all the AWS resources associated with your AWS account. You can use AWS Config to get the current and historical configurations of each AWS resource and also to get information about the relationship between the resources. An AWS resource can be an Amazon Compute Cloud (Amazon EC2) instance, an Elastic Block Store (EBS) volume, an Elastic network Interface (ENI), or a security group. For a complete list of resources currently supported by AWS Config, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported AWS Resources</a>.</p> <p>You can access and manage AWS Config through the AWS Management Console, the AWS Command Line Interface (AWS CLI), the AWS Config API, or the AWS SDKs for AWS Config</p> <p>This reference guide contains documentation for the AWS Config API and the AWS CLI commands that you can use to manage AWS Config.</p> <p>The AWS Config API uses the Signature Version 4 protocol for signing requests. For more information about how to sign a request with this protocol, see <a href="http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a>.</p> <p>For detailed information about AWS Config features and their associated actions or commands, as well as how to work with AWS Management Console, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html">What Is AWS Config?</a> in the <i>AWS Config Developer Guide</i>.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: config
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/config-2014-11-12.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/config/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: DeleteConfigRule
+      description: '<p>Deletes the specified AWS Config rule and all of its evaluation results.</p> <p>AWS Config sets the state of a rule to <code>DELETING</code> until the deletion is complete. You cannot update a rule while it is in this state. If you make a <code>PutConfigRule</code> or <code>DeleteConfigRule</code> request for the rule, you will receive a <code>ResourceInUseException</code>.</p> <p>You can check the state of a rule by using the <code>DescribeConfigRules</code> request.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NoSuchConfigRuleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchConfigRuleException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteConfigRuleRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteConfigurationRecorder':
+    post:
+      operationId: DeleteConfigurationRecorder
+      description: '<p>Deletes the configuration recorder.</p> <p>After the configuration recorder is deleted, AWS Config will not record resource configuration changes until you create a new configuration recorder.</p> <p>This action does not delete the configuration information that was previously recorded. You will be able to access the previously recorded information by using the <code>GetResourceConfigHistory</code> action, but you will not be able to access this information in the AWS Config console until you create a new configuration recorder.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NoSuchConfigurationRecorderException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchConfigurationRecorderException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteConfigurationRecorderRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDeliveryChannel':
+    post:
+      operationId: DeleteDeliveryChannel
+      description: '<p>Deletes the delivery channel.</p> <p>Before you can delete the delivery channel, you must stop the configuration recorder by using the <a>StopConfigurationRecorder</a> action.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NoSuchDeliveryChannelException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchDeliveryChannelException'
+        '481':
+          description: LastDeliveryChannelDeleteFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LastDeliveryChannelDeleteFailedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDeliveryChannelRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteEvaluationResults':
+    post:
+      operationId: DeleteEvaluationResults
+      description: 'Deletes the evaluation results for the specified Config rule. You can specify one Config rule per request. After you delete the evaluation results, you can call the <a>StartConfigRulesEvaluation</a> API to start evaluating your AWS resources against the rule.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteEvaluationResultsResponse'
+        '480':
+          description: NoSuchConfigRuleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchConfigRuleException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteEvaluationResultsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeliverConfigSnapshot':
+    post:
+      operationId: DeliverConfigSnapshot
+      description: '<p>Schedules delivery of a configuration snapshot to the Amazon S3 bucket in the specified delivery channel. After the delivery has started, AWS Config sends following notifications using an Amazon SNS topic that you have specified.</p> <ul> <li> <p>Notification of starting the delivery.</p> </li> <li> <p>Notification of delivery completed, if the delivery was successfully completed.</p> </li> <li> <p>Notification of delivery failure, if the delivery failed to complete.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliverConfigSnapshotResponse'
+        '480':
+          description: NoSuchDeliveryChannelException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchDeliveryChannelException'
+        '481':
+          description: NoAvailableConfigurationRecorderException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoAvailableConfigurationRecorderException'
+        '482':
+          description: NoRunningConfigurationRecorderException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoRunningConfigurationRecorderException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliverConfigSnapshotRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeComplianceByConfigRule':
+    post:
+      operationId: DescribeComplianceByConfigRule
+      description: '<p>Indicates whether the specified AWS Config rules are compliant. If a rule is noncompliant, this action returns the number of AWS resources that do not comply with the rule.</p> <p>A rule is compliant if all of the evaluated resources comply with it, and it is noncompliant if any of these resources do not comply.</p> <p>If AWS Config has no current evaluation results for the rule, it returns <code>INSUFFICIENT_DATA</code>. This result might indicate one of the following conditions:</p> <ul> <li> <p>AWS Config has never invoked an evaluation for the rule. To check whether it has, use the <code>DescribeConfigRuleEvaluationStatus</code> action to get the <code>LastSuccessfulInvocationTime</code> and <code>LastFailedInvocationTime</code>.</p> </li> <li> <p>The rule''s AWS Lambda function is failing to send evaluation results to AWS Config. Verify that the role that you assigned to your configuration recorder includes the <code>config:PutEvaluations</code> permission. If the rule is a custom rule, verify that the AWS Lambda execution role includes the <code>config:PutEvaluations</code> permission.</p> </li> <li> <p>The rule''s AWS Lambda function has returned <code>NOT_APPLICABLE</code> for all evaluation results. This can occur if the resources were deleted or removed from the rule''s scope.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeComplianceByConfigRuleResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: NoSuchConfigRuleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchConfigRuleException'
+        '482':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeComplianceByConfigRuleRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeComplianceByResource':
+    post:
+      operationId: DescribeComplianceByResource
+      description: '<p>Indicates whether the specified AWS resources are compliant. If a resource is noncompliant, this action returns the number of AWS Config rules that the resource does not comply with.</p> <p>A resource is compliant if it complies with all the AWS Config rules that evaluate it. It is noncompliant if it does not comply with one or more of these rules.</p> <p>If AWS Config has no current evaluation results for the resource, it returns <code>INSUFFICIENT_DATA</code>. This result might indicate one of the following conditions about the rules that evaluate the resource:</p> <ul> <li> <p>AWS Config has never invoked an evaluation for the rule. To check whether it has, use the <code>DescribeConfigRuleEvaluationStatus</code> action to get the <code>LastSuccessfulInvocationTime</code> and <code>LastFailedInvocationTime</code>.</p> </li> <li> <p>The rule''s AWS Lambda function is failing to send evaluation results to AWS Config. Verify that the role that you assigned to your configuration recorder includes the <code>config:PutEvaluations</code> permission. If the rule is a custom rule, verify that the AWS Lambda execution role includes the <code>config:PutEvaluations</code> permission.</p> </li> <li> <p>The rule''s AWS Lambda function has returned <code>NOT_APPLICABLE</code> for all evaluation results. This can occur if the resources were deleted or removed from the rule''s scope.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeComplianceByResourceResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeComplianceByResourceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeConfigRuleEvaluationStatus':
+    post:
+      operationId: DescribeConfigRuleEvaluationStatus
+      description: 'Returns status information for each of your AWS managed Config rules. The status includes information such as the last time AWS Config invoked the rule, the last time AWS Config failed to invoke the rule, and the related error for the last failure.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeConfigRuleEvaluationStatusResponse'
+        '480':
+          description: NoSuchConfigRuleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchConfigRuleException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConfigRuleEvaluationStatusRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeConfigRules':
+    post:
+      operationId: DescribeConfigRules
+      description: Returns details about your AWS Config rules.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeConfigRulesResponse'
+        '480':
+          description: NoSuchConfigRuleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchConfigRuleException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConfigRulesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeConfigurationRecorderStatus':
+    post:
+      operationId: DescribeConfigurationRecorderStatus
+      description: '<p>Returns the current status of the specified configuration recorder. If a configuration recorder is not specified, this action returns the status of all configuration recorder associated with the account.</p> <note> <p>Currently, you can specify only one configuration recorder per region in your account.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeConfigurationRecorderStatusResponse'
+        '480':
+          description: NoSuchConfigurationRecorderException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchConfigurationRecorderException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConfigurationRecorderStatusRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeConfigurationRecorders':
+    post:
+      operationId: DescribeConfigurationRecorders
+      description: '<p>Returns the details for the specified configuration recorders. If the configuration recorder is not specified, this action returns the details for all configuration recorders associated with the account.</p> <note> <p>Currently, you can specify only one configuration recorder per region in your account.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeConfigurationRecordersResponse'
+        '480':
+          description: NoSuchConfigurationRecorderException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchConfigurationRecorderException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConfigurationRecordersRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDeliveryChannelStatus':
+    post:
+      operationId: DescribeDeliveryChannelStatus
+      description: '<p>Returns the current status of the specified delivery channel. If a delivery channel is not specified, this action returns the current status of all delivery channels associated with the account.</p> <note> <p>Currently, you can specify only one delivery channel per region in your account.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDeliveryChannelStatusResponse'
+        '480':
+          description: NoSuchDeliveryChannelException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchDeliveryChannelException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDeliveryChannelStatusRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDeliveryChannels':
+    post:
+      operationId: DescribeDeliveryChannels
+      description: '<p>Returns details about the specified delivery channel. If a delivery channel is not specified, this action returns the details of all delivery channels associated with the account.</p> <note> <p>Currently, you can specify only one delivery channel per region in your account.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDeliveryChannelsResponse'
+        '480':
+          description: NoSuchDeliveryChannelException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchDeliveryChannelException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDeliveryChannelsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetComplianceDetailsByConfigRule':
+    post:
+      operationId: GetComplianceDetailsByConfigRule
+      description: 'Returns the evaluation results for the specified AWS Config rule. The results indicate which AWS resources were evaluated by the rule, when each resource was last evaluated, and whether each resource complies with the rule.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetComplianceDetailsByConfigRuleResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '482':
+          description: NoSuchConfigRuleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchConfigRuleException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetComplianceDetailsByConfigRuleRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetComplianceDetailsByResource':
+    post:
+      operationId: GetComplianceDetailsByResource
+      description: 'Returns the evaluation results for the specified AWS resource. The results indicate which AWS Config rules were used to evaluate the resource, when each rule was last used, and whether the resource complies with each rule.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetComplianceDetailsByResourceResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetComplianceDetailsByResourceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetComplianceSummaryByConfigRule':
+    post:
+      operationId: GetComplianceSummaryByConfigRule
+      description: 'Returns the number of AWS Config rules that are compliant and noncompliant, up to a maximum of 25 for each.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetComplianceSummaryByConfigRuleResponse'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetComplianceSummaryByResourceType':
+    post:
+      operationId: GetComplianceSummaryByResourceType
+      description: Returns the number of resources that are compliant and the number that are noncompliant. You can specify one or more resource types to get these numbers for each resource type. The maximum number returned is 100.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetComplianceSummaryByResourceTypeResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetComplianceSummaryByResourceTypeRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetResourceConfigHistory':
+    post:
+      operationId: GetResourceConfigHistory
+      description: '<p>Returns a list of configuration items for the specified resource. The list contains details about each state of the resource during the specified time interval.</p> <p>The response is paginated, and by default, AWS Config returns a limit of 10 configuration items per page. You can customize this number with the <code>limit</code> parameter. The response includes a <code>nextToken</code> string, and to get the next page of results, run the request again and enter this string for the <code>nextToken</code> parameter.</p> <note> <p>Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified <code>limit</code>. In such cases, you can make another call, using the <code>nextToken</code>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetResourceConfigHistoryResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidTimeRangeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTimeRangeException'
+        '482':
+          description: InvalidLimitException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidLimitException'
+        '483':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '484':
+          description: NoAvailableConfigurationRecorderException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoAvailableConfigurationRecorderException'
+        '485':
+          description: ResourceNotDiscoveredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotDiscoveredException'
+      parameters:
+        - name: limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetResourceConfigHistoryRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListDiscoveredResources':
+    post:
+      operationId: ListDiscoveredResources
+      description: '<p>Accepts a resource type and returns a list of resource identifiers for the resources of that type. A resource identifier includes the resource type, ID, and (if available) the custom resource name. The results consist of resources that AWS Config has discovered, including those that AWS Config is not currently recording. You can narrow the results to include only resources that have specific resource IDs or a resource name.</p> <note> <p>You can specify either resource IDs or a resource name but not both in the same request.</p> </note> <p>The response is paginated, and by default AWS Config lists 100 resource identifiers on each page. You can customize this number with the <code>limit</code> parameter. The response includes a <code>nextToken</code> string, and to get the next page of results, run the request again and enter this string for the <code>nextToken</code> parameter.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDiscoveredResourcesResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidLimitException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidLimitException'
+        '482':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '483':
+          description: NoAvailableConfigurationRecorderException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoAvailableConfigurationRecorderException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDiscoveredResourcesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutConfigRule':
+    post:
+      operationId: PutConfigRule
+      description: '<p>Adds or updates an AWS Config rule for evaluating whether your AWS resources comply with your desired configurations.</p> <p>You can use this action for custom Config rules and AWS managed Config rules. A custom Config rule is a rule that you develop and maintain. An AWS managed Config rule is a customizable, predefined rule that AWS Config provides.</p> <p>If you are adding a new custom Config rule, you must first create the AWS Lambda function that the rule invokes to evaluate your resources. When you use the <code>PutConfigRule</code> action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. Specify the ARN for the <code>SourceIdentifier</code> key. This key is part of the <code>Source</code> object, which is part of the <code>ConfigRule</code> object. </p> <p>If you are adding an AWS managed Config rule, specify the rule''s identifier for the <code>SourceIdentifier</code> key. To reference AWS managed Config rule identifiers, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html">About AWS Managed Config Rules</a>.</p> <p>For any new rule that you add, specify the <code>ConfigRuleName</code> in the <code>ConfigRule</code> object. Do not specify the <code>ConfigRuleArn</code> or the <code>ConfigRuleId</code>. These values are generated by AWS Config for new rules.</p> <p>If you are updating a rule that you added previously, you can specify the rule by <code>ConfigRuleName</code>, <code>ConfigRuleId</code>, or <code>ConfigRuleArn</code> in the <code>ConfigRule</code> data type that you use in this request.</p> <p>The maximum number of rules that AWS Config supports is 50.</p> <p>For more information about requesting a rule limit increase, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config">AWS Config Limits</a> in the <i>AWS General Reference Guide</i>.</p> <p>For more information about developing and using AWS Config rules, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html">Evaluating AWS Resource Configurations with AWS Config</a> in the <i>AWS Config Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: MaxNumberOfConfigRulesExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaxNumberOfConfigRulesExceededException'
+        '482':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '483':
+          description: InsufficientPermissionsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsufficientPermissionsException'
+        '484':
+          description: NoAvailableConfigurationRecorderException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoAvailableConfigurationRecorderException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutConfigRuleRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutConfigurationRecorder':
+    post:
+      operationId: PutConfigurationRecorder
+      description: '<p>Creates a new configuration recorder to record the selected resource configurations.</p> <p>You can use this action to change the role <code>roleARN</code> and/or the <code>recordingGroup</code> of an existing recorder. To change the role, call the action on the existing configuration recorder and specify a role.</p> <note> <p>Currently, you can specify only one configuration recorder per region in your account.</p> <p>If <code>ConfigurationRecorder</code> does not have the <b>recordingGroup</b> parameter specified, the default is to record all supported resource types.</p> </note>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: MaxNumberOfConfigurationRecordersExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaxNumberOfConfigurationRecordersExceededException'
+        '481':
+          description: InvalidConfigurationRecorderNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationRecorderNameException'
+        '482':
+          description: InvalidRoleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRoleException'
+        '483':
+          description: InvalidRecordingGroupException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRecordingGroupException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutConfigurationRecorderRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutDeliveryChannel':
+    post:
+      operationId: PutDeliveryChannel
+      description: '<p>Creates a delivery channel object to deliver configuration information to an Amazon S3 bucket and Amazon SNS topic.</p> <p>Before you can create a delivery channel, you must create a configuration recorder.</p> <p>You can use this action to change the Amazon S3 bucket or an Amazon SNS topic of the existing delivery channel. To change the Amazon S3 bucket or an Amazon SNS topic, call this action and specify the changed values for the S3 bucket and the SNS topic. If you specify a different value for either the S3 bucket or the SNS topic, this action will keep the existing value for the parameter that is not changed.</p> <note> <p>You can have only one delivery channel per region in your account.</p> </note>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: MaxNumberOfDeliveryChannelsExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaxNumberOfDeliveryChannelsExceededException'
+        '481':
+          description: NoAvailableConfigurationRecorderException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoAvailableConfigurationRecorderException'
+        '482':
+          description: InvalidDeliveryChannelNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeliveryChannelNameException'
+        '483':
+          description: NoSuchBucketException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchBucketException'
+        '484':
+          description: InvalidS3KeyPrefixException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidS3KeyPrefixException'
+        '485':
+          description: InvalidSNSTopicARNException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidSNSTopicARNException'
+        '486':
+          description: InsufficientDeliveryPolicyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsufficientDeliveryPolicyException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutDeliveryChannelRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutEvaluations':
+    post:
+      operationId: PutEvaluations
+      description: Used by an AWS Lambda function to deliver evaluation results to AWS Config. This action is required in every AWS Lambda function that is invoked by an AWS Config rule.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutEvaluationsResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: InvalidResultTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResultTokenException'
+        '482':
+          description: NoSuchConfigRuleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchConfigRuleException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutEvaluationsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StartConfigRulesEvaluation':
+    post:
+      operationId: StartConfigRulesEvaluation
+      description: '<p>Runs an on-demand evaluation for the specified Config rules against the last known configuration state of the resources. Use <code>StartConfigRulesEvaluation</code> when you want to test a rule that you updated is working as expected. <code>StartConfigRulesEvaluation</code> does not re-record the latest configuration state for your resources; it re-runs an evaluation against the last known state of your resources. </p> <p>You can specify up to 25 Config rules per request. </p> <p>An existing <code>StartConfigRulesEvaluation</code> call must complete for the specified rules before you can call the API again. If you chose to have AWS Config stream to an Amazon SNS topic, you will receive a <code>ConfigRuleEvaluationStarted</code> notification when the evaluation starts.</p> <note> <p>You don''t need to call the <code>StartConfigRulesEvaluation</code> API to run an evaluation for a new rule. When you create a new rule, AWS Config automatically evaluates your resources against the rule. </p> </note> <p>The <code>StartConfigRulesEvaluation</code> API is useful if you want to run on-demand evaluations, such as the following example:</p> <ol> <li> <p>You have a custom rule that evaluates your IAM resources every 24 hours.</p> </li> <li> <p>You update your Lambda function to add additional conditions to your rule.</p> </li> <li> <p>Instead of waiting for the next periodic evaluation, you call the <code>StartConfigRulesEvaluation</code> API.</p> </li> <li> <p>AWS Config invokes your Lambda function and evaluates your IAM resources.</p> </li> <li> <p>Your custom rule will still run periodic evaluations every 24 hours.</p> </li> </ol>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartConfigRulesEvaluationResponse'
+        '480':
+          description: NoSuchConfigRuleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchConfigRuleException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartConfigRulesEvaluationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StartConfigurationRecorder':
+    post:
+      operationId: StartConfigurationRecorder
+      description: <p>Starts recording configurations of the AWS resources you have selected to record in your AWS account.</p> <p>You must have created at least one delivery channel to successfully start the configuration recorder.</p>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NoSuchConfigurationRecorderException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchConfigurationRecorderException'
+        '481':
+          description: NoAvailableDeliveryChannelException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoAvailableDeliveryChannelException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartConfigurationRecorderRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StopConfigurationRecorder':
+    post:
+      operationId: StopConfigurationRecorder
+      description: Stops recording configurations of the AWS resources you have selected to record in your AWS account.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NoSuchConfigurationRecorderException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchConfigurationRecorderException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopConfigurationRecorderRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    ARN:
+      type: string
+    AccountId:
+      type: string
+    AllSupported:
+      type: boolean
+    AvailabilityZone:
+      type: string
+    AwsRegion:
+      type: string
+    Boolean:
+      type: boolean
+    ChannelName:
+      type: string
+      minLength: 1
+      maxLength: 256
+    ChronologicalOrder:
+      type: string
+      enum:
+        - Reverse
+        - Forward
+    Compliance:
+      type: object
+      properties:
+        ComplianceType:
+          $ref: '#/components/schemas/ComplianceType'
+        ComplianceContributorCount:
+          $ref: '#/components/schemas/ComplianceContributorCount'
+      description: Indicates whether an AWS resource or AWS Config rule is compliant and provides the number of contributors that affect the compliance.
+    ComplianceByConfigRule:
+      type: object
+      properties:
+        ConfigRuleName:
+          $ref: '#/components/schemas/StringWithCharLimit64'
+        Compliance:
+          $ref: '#/components/schemas/Compliance'
+      description: 'Indicates whether an AWS Config rule is compliant. A rule is compliant if all of the resources that the rule evaluated comply with it, and it is noncompliant if any of these resources do not comply.'
+    ComplianceByConfigRules:
+      type: array
+      items:
+        $ref: '#/components/schemas/ComplianceByConfigRule'
+    ComplianceByResource:
+      type: object
+      properties:
+        ResourceType:
+          $ref: '#/components/schemas/StringWithCharLimit256'
+        ResourceId:
+          $ref: '#/components/schemas/StringWithCharLimit256'
+        Compliance:
+          $ref: '#/components/schemas/Compliance'
+      description: 'Indicates whether an AWS resource that is evaluated according to one or more AWS Config rules is compliant. A resource is compliant if it complies with all of the rules that evaluate it, and it is noncompliant if it does not comply with one or more of these rules.'
+    ComplianceByResources:
+      type: array
+      items:
+        $ref: '#/components/schemas/ComplianceByResource'
+    ComplianceContributorCount:
+      type: object
+      properties:
+        CappedCount:
+          $ref: '#/components/schemas/Integer'
+        CapExceeded:
+          $ref: '#/components/schemas/Boolean'
+      description: 'The number of AWS resources or AWS Config rules responsible for the current compliance of the item, up to a maximum number.'
+    ComplianceResourceTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/StringWithCharLimit256'
+      minItems: 0
+      maxItems: 100
+    ComplianceSummariesByResourceType:
+      type: array
+      items:
+        $ref: '#/components/schemas/ComplianceSummaryByResourceType'
+    ComplianceSummary:
+      type: object
+      properties:
+        CompliantResourceCount:
+          $ref: '#/components/schemas/ComplianceContributorCount'
+        NonCompliantResourceCount:
+          $ref: '#/components/schemas/ComplianceContributorCount'
+        ComplianceSummaryTimestamp:
+          $ref: '#/components/schemas/Date'
+      description: The number of AWS Config rules or AWS resources that are compliant and noncompliant.
+    ComplianceSummaryByResourceType:
+      type: object
+      properties:
+        ResourceType:
+          $ref: '#/components/schemas/StringWithCharLimit256'
+        ComplianceSummary:
+          $ref: '#/components/schemas/ComplianceSummary'
+      description: 'The number of AWS resources of a specific type that are compliant or noncompliant, up to a maximum of 100 for each compliance.'
+    ComplianceType:
+      type: string
+      enum:
+        - COMPLIANT
+        - NON_COMPLIANT
+        - NOT_APPLICABLE
+        - INSUFFICIENT_DATA
+    ComplianceTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/ComplianceType'
+      minItems: 0
+      maxItems: 3
+    ConfigExportDeliveryInfo:
+      type: object
+      properties:
+        lastStatus:
+          $ref: '#/components/schemas/DeliveryStatus'
+        lastErrorCode:
+          $ref: '#/components/schemas/String'
+        lastErrorMessage:
+          $ref: '#/components/schemas/String'
+        lastAttemptTime:
+          $ref: '#/components/schemas/Date'
+        lastSuccessfulTime:
+          $ref: '#/components/schemas/Date'
+        nextDeliveryTime:
+          $ref: '#/components/schemas/Date'
+      description: A list that contains the status of the delivery of either the snapshot or the configuration history to the specified Amazon S3 bucket.
+    ConfigRule:
+      type: object
+      required:
+        - Source
+      properties:
+        ConfigRuleName:
+          $ref: '#/components/schemas/StringWithCharLimit64'
+        ConfigRuleArn:
+          $ref: '#/components/schemas/String'
+        ConfigRuleId:
+          $ref: '#/components/schemas/String'
+        Description:
+          $ref: '#/components/schemas/EmptiableStringWithCharLimit256'
+        Scope:
+          $ref: '#/components/schemas/Scope'
+        Source:
+          $ref: '#/components/schemas/Source'
+        InputParameters:
+          $ref: '#/components/schemas/StringWithCharLimit1024'
+        MaximumExecutionFrequency:
+          $ref: '#/components/schemas/MaximumExecutionFrequency'
+        ConfigRuleState:
+          $ref: '#/components/schemas/ConfigRuleState'
+      description: '<p>An AWS Config rule represents an AWS Lambda function that you create for a custom rule or a predefined function for an AWS managed rule. The function evaluates configuration items to assess whether your AWS resources comply with your desired configurations. This function can run when AWS Config detects a configuration change to an AWS resource and at a periodic frequency that you choose (for example, every 24 hours).</p> <note> <p>You can use the AWS CLI and AWS SDKs if you want to create a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot. For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p> </note> <p>For more information about developing and using AWS Config rules, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html">Evaluating AWS Resource Configurations with AWS Config</a> in the <i>AWS Config Developer Guide</i>.</p>'
+    ConfigRuleEvaluationStatus:
+      type: object
+      properties:
+        ConfigRuleName:
+          $ref: '#/components/schemas/StringWithCharLimit64'
+        ConfigRuleArn:
+          $ref: '#/components/schemas/String'
+        ConfigRuleId:
+          $ref: '#/components/schemas/String'
+        LastSuccessfulInvocationTime:
+          $ref: '#/components/schemas/Date'
+        LastFailedInvocationTime:
+          $ref: '#/components/schemas/Date'
+        LastSuccessfulEvaluationTime:
+          $ref: '#/components/schemas/Date'
+        LastFailedEvaluationTime:
+          $ref: '#/components/schemas/Date'
+        FirstActivatedTime:
+          $ref: '#/components/schemas/Date'
+        LastErrorCode:
+          $ref: '#/components/schemas/String'
+        LastErrorMessage:
+          $ref: '#/components/schemas/String'
+        FirstEvaluationStarted:
+          $ref: '#/components/schemas/Boolean'
+      description: '<p>Status information for your AWS managed Config rules. The status includes information such as the last time the rule ran, the last time it failed, and the related error for the last failure.</p> <p>This action does not return status information about custom Config rules.</p>'
+    ConfigRuleEvaluationStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfigRuleEvaluationStatus'
+    ConfigRuleNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/StringWithCharLimit64'
+      minItems: 0
+      maxItems: 25
+    ConfigRuleState:
+      type: string
+      enum:
+        - ACTIVE
+        - DELETING
+        - DELETING_RESULTS
+        - EVALUATING
+    ConfigRules:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfigRule'
+    ConfigSnapshotDeliveryProperties:
+      type: object
+      properties:
+        deliveryFrequency:
+          $ref: '#/components/schemas/MaximumExecutionFrequency'
+      description: '<p>Provides options for how often AWS Config delivers configuration snapshots to the Amazon S3 bucket in your delivery channel.</p> <note> <p>If you want to create a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot, see the following:</p> </note> <p>The frequency for a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot is set by one of two values, depending on which is less frequent:</p> <ul> <li> <p>The value for the <code>deliveryFrequency</code> parameter within the delivery channel configuration, which sets how often AWS Config delivers configuration snapshots. This value also sets how often AWS Config invokes evaluations for Config rules.</p> </li> <li> <p>The value for the <code>MaximumExecutionFrequency</code> parameter, which sets the maximum frequency with which AWS Config invokes evaluations for the rule. For more information, see <a>ConfigRule</a>.</p> </li> </ul> <p>If the <code>deliveryFrequency</code> value is less frequent than the <code>MaximumExecutionFrequency</code> value for a rule, AWS Config invokes the rule only as often as the <code>deliveryFrequency</code> value.</p> <ol> <li> <p>For example, you want your rule to run evaluations when AWS Config delivers the configuration snapshot.</p> </li> <li> <p>You specify the <code>MaximumExecutionFrequency</code> value for <code>Six_Hours</code>. </p> </li> <li> <p>You then specify the delivery channel <code>deliveryFrequency</code> value for <code>TwentyFour_Hours</code>.</p> </li> <li> <p>Because the value for <code>deliveryFrequency</code> is less frequent than <code>MaximumExecutionFrequency</code>, AWS Config invokes evaluations for the rule every 24 hours. </p> </li> </ol> <p>You should set the <code>MaximumExecutionFrequency</code> value to be at least as frequent as the <code>deliveryFrequency</code> value. You can view the <code>deliveryFrequency</code> value by using the <code>DescribeDeliveryChannnels</code> action.</p> <p>To update the <code>deliveryFrequency</code> with which AWS Config delivers your configuration snapshots, use the <code>PutDeliveryChannel</code> action.</p>'
+    ConfigStreamDeliveryInfo:
+      type: object
+      properties:
+        lastStatus:
+          $ref: '#/components/schemas/DeliveryStatus'
+        lastErrorCode:
+          $ref: '#/components/schemas/String'
+        lastErrorMessage:
+          $ref: '#/components/schemas/String'
+        lastStatusChangeTime:
+          $ref: '#/components/schemas/Date'
+      description: A list that contains the status of the delivery of the configuration stream notification to the Amazon SNS topic.
+    Configuration:
+      type: string
+    ConfigurationItem:
+      type: object
+      properties:
+        version:
+          $ref: '#/components/schemas/Version'
+        accountId:
+          $ref: '#/components/schemas/AccountId'
+        configurationItemCaptureTime:
+          $ref: '#/components/schemas/ConfigurationItemCaptureTime'
+        configurationItemStatus:
+          $ref: '#/components/schemas/ConfigurationItemStatus'
+        configurationStateId:
+          $ref: '#/components/schemas/ConfigurationStateId'
+        configurationItemMD5Hash:
+          $ref: '#/components/schemas/ConfigurationItemMD5Hash'
+        arn:
+          $ref: '#/components/schemas/ARN'
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+        resourceId:
+          $ref: '#/components/schemas/ResourceId'
+        resourceName:
+          $ref: '#/components/schemas/ResourceName'
+        awsRegion:
+          $ref: '#/components/schemas/AwsRegion'
+        availabilityZone:
+          $ref: '#/components/schemas/AvailabilityZone'
+        resourceCreationTime:
+          $ref: '#/components/schemas/ResourceCreationTime'
+        tags:
+          $ref: '#/components/schemas/Tags'
+        relatedEvents:
+          $ref: '#/components/schemas/RelatedEventList'
+        relationships:
+          $ref: '#/components/schemas/RelationshipList'
+        configuration:
+          $ref: '#/components/schemas/Configuration'
+        supplementaryConfiguration:
+          $ref: '#/components/schemas/SupplementaryConfiguration'
+      description: A list that contains detailed configurations of a specified resource.
+    ConfigurationItemCaptureTime:
+      type: string
+      format: date-time
+    ConfigurationItemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfigurationItem'
+    ConfigurationItemMD5Hash:
+      type: string
+    ConfigurationItemStatus:
+      type: string
+      enum:
+        - Ok
+        - Failed
+        - Discovered
+        - Deleted
+    ConfigurationRecorder:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/RecorderName'
+        roleARN:
+          $ref: '#/components/schemas/String'
+        recordingGroup:
+          $ref: '#/components/schemas/RecordingGroup'
+      description: An object that represents the recording of configuration changes of an AWS resource.
+    ConfigurationRecorderList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfigurationRecorder'
+    ConfigurationRecorderNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecorderName'
+    ConfigurationRecorderStatus:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/String'
+        lastStartTime:
+          $ref: '#/components/schemas/Date'
+        lastStopTime:
+          $ref: '#/components/schemas/Date'
+        recording:
+          $ref: '#/components/schemas/Boolean'
+        lastStatus:
+          $ref: '#/components/schemas/RecorderStatus'
+        lastErrorCode:
+          $ref: '#/components/schemas/String'
+        lastErrorMessage:
+          $ref: '#/components/schemas/String'
+        lastStatusChangeTime:
+          $ref: '#/components/schemas/Date'
+      description: The current status of the configuration recorder.
+    ConfigurationRecorderStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfigurationRecorderStatus'
+    ConfigurationStateId:
+      type: string
+    Date:
+      type: string
+      format: date-time
+    DeleteConfigRuleRequest:
+      type: object
+      required:
+        - ConfigRuleName
+      properties:
+        ConfigRuleName:
+          $ref: '#/components/schemas/StringWithCharLimit64'
+      description: <p/>
+    DeleteConfigurationRecorderRequest:
+      type: object
+      required:
+        - ConfigurationRecorderName
+      properties:
+        ConfigurationRecorderName:
+          $ref: '#/components/schemas/RecorderName'
+      description: The request object for the <code>DeleteConfigurationRecorder</code> action.
+    DeleteDeliveryChannelRequest:
+      type: object
+      required:
+        - DeliveryChannelName
+      properties:
+        DeliveryChannelName:
+          $ref: '#/components/schemas/ChannelName'
+      description: 'The input for the <a>DeleteDeliveryChannel</a> action. The action accepts the following data in JSON format. '
+    DeleteEvaluationResultsRequest:
+      type: object
+      required:
+        - ConfigRuleName
+      properties:
+        ConfigRuleName:
+          $ref: '#/components/schemas/StringWithCharLimit64'
+      description: <p/>
+    DeleteEvaluationResultsResponse:
+      type: object
+      properties: {}
+      description: The output when you delete the evaluation results for the specified Config rule.
+    DeliverConfigSnapshotRequest:
+      type: object
+      required:
+        - deliveryChannelName
+      properties:
+        deliveryChannelName:
+          $ref: '#/components/schemas/ChannelName'
+      description: The input for the <a>DeliverConfigSnapshot</a> action.
+    DeliverConfigSnapshotResponse:
+      type: object
+      properties:
+        configSnapshotId:
+          $ref: '#/components/schemas/String'
+      description: The output for the <a>DeliverConfigSnapshot</a> action in JSON format.
+    DeliveryChannel:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/ChannelName'
+        s3BucketName:
+          $ref: '#/components/schemas/String'
+        s3KeyPrefix:
+          $ref: '#/components/schemas/String'
+        snsTopicARN:
+          $ref: '#/components/schemas/String'
+        configSnapshotDeliveryProperties:
+          $ref: '#/components/schemas/ConfigSnapshotDeliveryProperties'
+      description: The channel through which AWS Config delivers notifications and updated configuration states.
+    DeliveryChannelList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeliveryChannel'
+    DeliveryChannelNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChannelName'
+    DeliveryChannelStatus:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/String'
+        configSnapshotDeliveryInfo:
+          $ref: '#/components/schemas/ConfigExportDeliveryInfo'
+        configHistoryDeliveryInfo:
+          $ref: '#/components/schemas/ConfigExportDeliveryInfo'
+        configStreamDeliveryInfo:
+          $ref: '#/components/schemas/ConfigStreamDeliveryInfo'
+      description: '<p>The status of a specified delivery channel.</p> <p>Valid values: <code>Success</code> | <code>Failure</code> </p>'
+    DeliveryChannelStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeliveryChannelStatus'
+    DeliveryStatus:
+      type: string
+      enum:
+        - Success
+        - Failure
+        - Not_Applicable
+    DescribeComplianceByConfigRuleRequest:
+      type: object
+      properties:
+        ConfigRuleNames:
+          $ref: '#/components/schemas/ConfigRuleNames'
+        ComplianceTypes:
+          $ref: '#/components/schemas/ComplianceTypes'
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DescribeComplianceByConfigRuleResponse:
+      type: object
+      properties:
+        ComplianceByConfigRules:
+          $ref: '#/components/schemas/ComplianceByConfigRules'
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DescribeComplianceByResourceRequest:
+      type: object
+      properties:
+        ResourceType:
+          $ref: '#/components/schemas/StringWithCharLimit256'
+        ResourceId:
+          $ref: '#/components/schemas/StringWithCharLimit256'
+        ComplianceTypes:
+          $ref: '#/components/schemas/ComplianceTypes'
+        Limit:
+          $ref: '#/components/schemas/Limit'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: <p/>
+    DescribeComplianceByResourceResponse:
+      type: object
+      properties:
+        ComplianceByResources:
+          $ref: '#/components/schemas/ComplianceByResources'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: <p/>
+    DescribeConfigRuleEvaluationStatusRequest:
+      type: object
+      properties:
+        ConfigRuleNames:
+          $ref: '#/components/schemas/ConfigRuleNames'
+        NextToken:
+          $ref: '#/components/schemas/String'
+        Limit:
+          $ref: '#/components/schemas/RuleLimit'
+      description: <p/>
+    DescribeConfigRuleEvaluationStatusResponse:
+      type: object
+      properties:
+        ConfigRulesEvaluationStatus:
+          $ref: '#/components/schemas/ConfigRuleEvaluationStatusList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DescribeConfigRulesRequest:
+      type: object
+      properties:
+        ConfigRuleNames:
+          $ref: '#/components/schemas/ConfigRuleNames'
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DescribeConfigRulesResponse:
+      type: object
+      properties:
+        ConfigRules:
+          $ref: '#/components/schemas/ConfigRules'
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DescribeConfigurationRecorderStatusRequest:
+      type: object
+      properties:
+        ConfigurationRecorderNames:
+          $ref: '#/components/schemas/ConfigurationRecorderNameList'
+      description: The input for the <a>DescribeConfigurationRecorderStatus</a> action.
+    DescribeConfigurationRecorderStatusResponse:
+      type: object
+      properties:
+        ConfigurationRecordersStatus:
+          $ref: '#/components/schemas/ConfigurationRecorderStatusList'
+      description: The output for the <a>DescribeConfigurationRecorderStatus</a> action in JSON format.
+    DescribeConfigurationRecordersRequest:
+      type: object
+      properties:
+        ConfigurationRecorderNames:
+          $ref: '#/components/schemas/ConfigurationRecorderNameList'
+      description: The input for the <a>DescribeConfigurationRecorders</a> action.
+    DescribeConfigurationRecordersResponse:
+      type: object
+      properties:
+        ConfigurationRecorders:
+          $ref: '#/components/schemas/ConfigurationRecorderList'
+      description: The output for the <a>DescribeConfigurationRecorders</a> action.
+    DescribeDeliveryChannelStatusRequest:
+      type: object
+      properties:
+        DeliveryChannelNames:
+          $ref: '#/components/schemas/DeliveryChannelNameList'
+      description: The input for the <a>DeliveryChannelStatus</a> action.
+    DescribeDeliveryChannelStatusResponse:
+      type: object
+      properties:
+        DeliveryChannelsStatus:
+          $ref: '#/components/schemas/DeliveryChannelStatusList'
+      description: The output for the <a>DescribeDeliveryChannelStatus</a> action.
+    DescribeDeliveryChannelsRequest:
+      type: object
+      properties:
+        DeliveryChannelNames:
+          $ref: '#/components/schemas/DeliveryChannelNameList'
+      description: The input for the <a>DescribeDeliveryChannels</a> action.
+    DescribeDeliveryChannelsResponse:
+      type: object
+      properties:
+        DeliveryChannels:
+          $ref: '#/components/schemas/DeliveryChannelList'
+      description: The output for the <a>DescribeDeliveryChannels</a> action.
+    EarlierTime:
+      type: string
+      format: date-time
+    EmptiableStringWithCharLimit256:
+      type: string
+      minLength: 0
+      maxLength: 256
+    Evaluation:
+      type: object
+      required:
+        - ComplianceResourceType
+        - ComplianceResourceId
+        - ComplianceType
+        - OrderingTimestamp
+      properties:
+        ComplianceResourceType:
+          $ref: '#/components/schemas/StringWithCharLimit256'
+        ComplianceResourceId:
+          $ref: '#/components/schemas/StringWithCharLimit256'
+        ComplianceType:
+          $ref: '#/components/schemas/ComplianceType'
+        Annotation:
+          $ref: '#/components/schemas/StringWithCharLimit256'
+        OrderingTimestamp:
+          $ref: '#/components/schemas/OrderingTimestamp'
+      description: Identifies an AWS resource and indicates whether it complies with the AWS Config rule that it was evaluated against.
+    EvaluationResult:
+      type: object
+      properties:
+        EvaluationResultIdentifier:
+          $ref: '#/components/schemas/EvaluationResultIdentifier'
+        ComplianceType:
+          $ref: '#/components/schemas/ComplianceType'
+        ResultRecordedTime:
+          $ref: '#/components/schemas/Date'
+        ConfigRuleInvokedTime:
+          $ref: '#/components/schemas/Date'
+        Annotation:
+          $ref: '#/components/schemas/StringWithCharLimit256'
+        ResultToken:
+          $ref: '#/components/schemas/String'
+      description: 'The details of an AWS Config evaluation. Provides the AWS resource that was evaluated, the compliance of the resource, related timestamps, and supplementary information.'
+    EvaluationResultIdentifier:
+      type: object
+      properties:
+        EvaluationResultQualifier:
+          $ref: '#/components/schemas/EvaluationResultQualifier'
+        OrderingTimestamp:
+          $ref: '#/components/schemas/Date'
+      description: Uniquely identifies an evaluation result.
+    EvaluationResultQualifier:
+      type: object
+      properties:
+        ConfigRuleName:
+          $ref: '#/components/schemas/StringWithCharLimit64'
+        ResourceType:
+          $ref: '#/components/schemas/StringWithCharLimit256'
+        ResourceId:
+          $ref: '#/components/schemas/StringWithCharLimit256'
+      description: 'Identifies an AWS Config rule that evaluated an AWS resource, and provides the type and ID of the resource that the rule evaluated.'
+    EvaluationResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/EvaluationResult'
+    Evaluations:
+      type: array
+      items:
+        $ref: '#/components/schemas/Evaluation'
+      minItems: 0
+      maxItems: 100
+    EventSource:
+      type: string
+      enum:
+        - aws.config
+    GetComplianceDetailsByConfigRuleRequest:
+      type: object
+      required:
+        - ConfigRuleName
+      properties:
+        ConfigRuleName:
+          $ref: '#/components/schemas/StringWithCharLimit64'
+        ComplianceTypes:
+          $ref: '#/components/schemas/ComplianceTypes'
+        Limit:
+          $ref: '#/components/schemas/Limit'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: <p/>
+    GetComplianceDetailsByConfigRuleResponse:
+      type: object
+      properties:
+        EvaluationResults:
+          $ref: '#/components/schemas/EvaluationResults'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: <p/>
+    GetComplianceDetailsByResourceRequest:
+      type: object
+      required:
+        - ResourceType
+        - ResourceId
+      properties:
+        ResourceType:
+          $ref: '#/components/schemas/StringWithCharLimit256'
+        ResourceId:
+          $ref: '#/components/schemas/StringWithCharLimit256'
+        ComplianceTypes:
+          $ref: '#/components/schemas/ComplianceTypes'
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    GetComplianceDetailsByResourceResponse:
+      type: object
+      properties:
+        EvaluationResults:
+          $ref: '#/components/schemas/EvaluationResults'
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    GetComplianceSummaryByConfigRuleResponse:
+      type: object
+      properties:
+        ComplianceSummary:
+          $ref: '#/components/schemas/ComplianceSummary'
+      description: <p/>
+    GetComplianceSummaryByResourceTypeRequest:
+      type: object
+      properties:
+        ResourceTypes:
+          $ref: '#/components/schemas/ResourceTypes'
+      description: <p/>
+    GetComplianceSummaryByResourceTypeResponse:
+      type: object
+      properties:
+        ComplianceSummariesByResourceType:
+          $ref: '#/components/schemas/ComplianceSummariesByResourceType'
+      description: <p/>
+    GetResourceConfigHistoryRequest:
+      type: object
+      required:
+        - resourceType
+        - resourceId
+      properties:
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+        resourceId:
+          $ref: '#/components/schemas/ResourceId'
+        laterTime:
+          $ref: '#/components/schemas/LaterTime'
+        earlierTime:
+          $ref: '#/components/schemas/EarlierTime'
+        chronologicalOrder:
+          $ref: '#/components/schemas/ChronologicalOrder'
+        limit:
+          $ref: '#/components/schemas/Limit'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The input for the <a>GetResourceConfigHistory</a> action.
+    GetResourceConfigHistoryResponse:
+      type: object
+      properties:
+        configurationItems:
+          $ref: '#/components/schemas/ConfigurationItemList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The output for the <a>GetResourceConfigHistory</a> action.
+    IncludeGlobalResourceTypes:
+      type: boolean
+    InsufficientDeliveryPolicyException:
+      type: object
+      properties: {}
+      description: Your Amazon S3 bucket policy does not permit AWS Config to write to it.
+    InsufficientPermissionsException:
+      type: object
+      properties: {}
+      description: '<p>Indicates one of the following errors:</p> <ul> <li> <p>The rule cannot be created because the IAM role assigned to AWS Config lacks permissions to perform the config:Put* action.</p> </li> <li> <p>The AWS Lambda function cannot be invoked. Check the function ARN, and check the function''s permissions.</p> </li> </ul>'
+    Integer:
+      type: integer
+    InvalidConfigurationRecorderNameException:
+      type: object
+      properties: {}
+      description: You have provided a configuration recorder name that is not valid.
+    InvalidDeliveryChannelNameException:
+      type: object
+      properties: {}
+      description: The specified delivery channel name is not valid.
+    InvalidLimitException:
+      type: object
+      properties: {}
+      description: The specified limit is outside the allowable range.
+    InvalidNextTokenException:
+      type: object
+      properties: {}
+      description: The specified next token is invalid. Specify the <code>NextToken</code> string that was returned in the previous response to get the next page of results.
+    InvalidParameterValueException:
+      type: object
+      properties: {}
+      description: One or more of the specified parameters are invalid. Verify that your parameters are valid and try again.
+    InvalidRecordingGroupException:
+      type: object
+      properties: {}
+      description: AWS Config throws an exception if the recording group does not contain a valid list of resource types. Invalid values could also be incorrectly formatted.
+    InvalidResultTokenException:
+      type: object
+      properties: {}
+      description: The specified <code>ResultToken</code> is invalid.
+    InvalidRoleException:
+      type: object
+      properties: {}
+      description: You have provided a null or empty role ARN.
+    InvalidS3KeyPrefixException:
+      type: object
+      properties: {}
+      description: The specified Amazon S3 key prefix is not valid.
+    InvalidSNSTopicARNException:
+      type: object
+      properties: {}
+      description: The specified Amazon SNS topic does not exist.
+    InvalidTimeRangeException:
+      type: object
+      properties: {}
+      description: The specified time range is not valid. The earlier time is not chronologically before the later time.
+    LastDeliveryChannelDeleteFailedException:
+      type: object
+      properties: {}
+      description: You cannot delete the delivery channel you specified because the configuration recorder is running.
+    LaterTime:
+      type: string
+      format: date-time
+    Limit:
+      type: integer
+      minimum: 0
+      maximum: 100
+    LimitExceededException:
+      type: object
+      properties: {}
+      description: This exception is thrown if an evaluation is in progress or if you call the <a>StartConfigRulesEvaluation</a> API more than once per minute.
+    ListDiscoveredResourcesRequest:
+      type: object
+      required:
+        - resourceType
+      properties:
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+        resourceIds:
+          $ref: '#/components/schemas/ResourceIdList'
+        resourceName:
+          $ref: '#/components/schemas/ResourceName'
+        limit:
+          $ref: '#/components/schemas/Limit'
+        includeDeletedResources:
+          $ref: '#/components/schemas/Boolean'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: <p/>
+    ListDiscoveredResourcesResponse:
+      type: object
+      properties:
+        resourceIdentifiers:
+          $ref: '#/components/schemas/ResourceIdentifierList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: <p/>
+    MaxNumberOfConfigRulesExceededException:
+      type: object
+      properties: {}
+      description: Failed to add the AWS Config rule because the account already contains the maximum number of 50 rules. Consider deleting any deactivated rules before adding new rules.
+    MaxNumberOfConfigurationRecordersExceededException:
+      type: object
+      properties: {}
+      description: You have reached the limit on the number of recorders you can create.
+    MaxNumberOfDeliveryChannelsExceededException:
+      type: object
+      properties: {}
+      description: You have reached the limit on the number of delivery channels you can create.
+    MaximumExecutionFrequency:
+      type: string
+      enum:
+        - One_Hour
+        - Three_Hours
+        - Six_Hours
+        - Twelve_Hours
+        - TwentyFour_Hours
+    MessageType:
+      type: string
+      enum:
+        - ConfigurationItemChangeNotification
+        - ConfigurationSnapshotDeliveryCompleted
+        - ScheduledNotification
+        - OversizedConfigurationItemChangeNotification
+    Name:
+      type: string
+    NextToken:
+      type: string
+    NoAvailableConfigurationRecorderException:
+      type: object
+      properties: {}
+      description: There are no configuration recorders available to provide the role needed to describe your resources. Create a configuration recorder.
+    NoAvailableDeliveryChannelException:
+      type: object
+      properties: {}
+      description: There is no delivery channel available to record configurations.
+    NoRunningConfigurationRecorderException:
+      type: object
+      properties: {}
+      description: There is no configuration recorder running.
+    NoSuchBucketException:
+      type: object
+      properties: {}
+      description: The specified Amazon S3 bucket does not exist.
+    NoSuchConfigRuleException:
+      type: object
+      properties: {}
+      description: One or more AWS Config rules in the request are invalid. Verify that the rule names are correct and try again.
+    NoSuchConfigurationRecorderException:
+      type: object
+      properties: {}
+      description: You have specified a configuration recorder that does not exist.
+    NoSuchDeliveryChannelException:
+      type: object
+      properties: {}
+      description: You have specified a delivery channel that does not exist.
+    OrderingTimestamp:
+      type: string
+      format: date-time
+    Owner:
+      type: string
+      enum:
+        - CUSTOM_LAMBDA
+        - AWS
+    PutConfigRuleRequest:
+      type: object
+      required:
+        - ConfigRule
+      properties:
+        ConfigRule:
+          $ref: '#/components/schemas/ConfigRule'
+    PutConfigurationRecorderRequest:
+      type: object
+      required:
+        - ConfigurationRecorder
+      properties:
+        ConfigurationRecorder:
+          $ref: '#/components/schemas/ConfigurationRecorder'
+      description: The input for the <a>PutConfigurationRecorder</a> action.
+    PutDeliveryChannelRequest:
+      type: object
+      required:
+        - DeliveryChannel
+      properties:
+        DeliveryChannel:
+          $ref: '#/components/schemas/DeliveryChannel'
+      description: The input for the <a>PutDeliveryChannel</a> action.
+    PutEvaluationsRequest:
+      type: object
+      required:
+        - ResultToken
+      properties:
+        Evaluations:
+          $ref: '#/components/schemas/Evaluations'
+        ResultToken:
+          $ref: '#/components/schemas/String'
+        TestMode:
+          $ref: '#/components/schemas/Boolean'
+      description: <p/>
+    PutEvaluationsResponse:
+      type: object
+      properties:
+        FailedEvaluations:
+          $ref: '#/components/schemas/Evaluations'
+      description: <p/>
+    RecorderName:
+      type: string
+      minLength: 1
+      maxLength: 256
+    RecorderStatus:
+      type: string
+      enum:
+        - Pending
+        - Success
+        - Failure
+    RecordingGroup:
+      type: object
+      properties:
+        allSupported:
+          $ref: '#/components/schemas/AllSupported'
+        includeGlobalResourceTypes:
+          $ref: '#/components/schemas/IncludeGlobalResourceTypes'
+        resourceTypes:
+          $ref: '#/components/schemas/ResourceTypeList'
+      description: '<p>Specifies the types of AWS resource for which AWS Config records configuration changes.</p> <p>In the recording group, you specify whether all supported types or specific types of resources are recorded.</p> <p>By default, AWS Config records configuration changes for all supported types of regional resources that AWS Config discovers in the region in which it is running. Regional resources are tied to a region and can be used only in that region. Examples of regional resources are EC2 instances and EBS volumes.</p> <p>You can also have AWS Config record configuration changes for supported types of global resources (for example, IAM resources). Global resources are not tied to an individual region and can be used in all regions.</p> <important> <p>The configuration details for any global resource are the same in all regions. If you customize AWS Config in multiple regions to record global resources, it will create multiple configuration items each time a global resource changes: one configuration item for each region. These configuration items will contain identical data. To prevent duplicate configuration items, you should consider customizing AWS Config in only one region to record global resources, unless you want the configuration items to be available in multiple regions.</p> </important> <p>If you don''t want AWS Config to record all resources, you can specify which types of resources it will record with the <code>resourceTypes</code> parameter.</p> <p>For a list of supported resource types, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported resource types</a>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/select-resources.html">Selecting Which Resources AWS Config Records</a>.</p>'
+    ReevaluateConfigRuleNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/StringWithCharLimit64'
+      minItems: 1
+      maxItems: 25
+    RelatedEvent:
+      type: string
+    RelatedEventList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RelatedEvent'
+    Relationship:
+      type: object
+      properties:
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+        resourceId:
+          $ref: '#/components/schemas/ResourceId'
+        resourceName:
+          $ref: '#/components/schemas/ResourceName'
+        relationshipName:
+          $ref: '#/components/schemas/RelationshipName'
+      description: The relationship of the related resource to the main resource.
+    RelationshipList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Relationship'
+    RelationshipName:
+      type: string
+    ResourceCreationTime:
+      type: string
+      format: date-time
+    ResourceDeletionTime:
+      type: string
+      format: date-time
+    ResourceId:
+      type: string
+    ResourceIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceId'
+    ResourceIdentifier:
+      type: object
+      properties:
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+        resourceId:
+          $ref: '#/components/schemas/ResourceId'
+        resourceName:
+          $ref: '#/components/schemas/ResourceName'
+        resourceDeletionTime:
+          $ref: '#/components/schemas/ResourceDeletionTime'
+      description: 'The details that identify a resource that is discovered by AWS Config, including the resource type, ID, and (if available) the custom resource name.'
+    ResourceIdentifierList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceIdentifier'
+    ResourceInUseException:
+      type: object
+      properties: {}
+      description: The rule is currently being deleted or the rule is deleting your evaluation results. Try your request again later.
+    ResourceName:
+      type: string
+    ResourceNotDiscoveredException:
+      type: object
+      properties: {}
+      description: You have specified a resource that is either unknown or has not been discovered.
+    ResourceType:
+      type: string
+      enum:
+        - 'AWS::EC2::CustomerGateway'
+        - 'AWS::EC2::EIP'
+        - 'AWS::EC2::Host'
+        - 'AWS::EC2::Instance'
+        - 'AWS::EC2::InternetGateway'
+        - 'AWS::EC2::NetworkAcl'
+        - 'AWS::EC2::NetworkInterface'
+        - 'AWS::EC2::RouteTable'
+        - 'AWS::EC2::SecurityGroup'
+        - 'AWS::EC2::Subnet'
+        - 'AWS::CloudTrail::Trail'
+        - 'AWS::EC2::Volume'
+        - 'AWS::EC2::VPC'
+        - 'AWS::EC2::VPNConnection'
+        - 'AWS::EC2::VPNGateway'
+        - 'AWS::IAM::Group'
+        - 'AWS::IAM::Policy'
+        - 'AWS::IAM::Role'
+        - 'AWS::IAM::User'
+        - 'AWS::ACM::Certificate'
+        - 'AWS::RDS::DBInstance'
+        - 'AWS::RDS::DBSubnetGroup'
+        - 'AWS::RDS::DBSecurityGroup'
+        - 'AWS::RDS::DBSnapshot'
+        - 'AWS::RDS::EventSubscription'
+        - 'AWS::ElasticLoadBalancingV2::LoadBalancer'
+        - 'AWS::S3::Bucket'
+        - 'AWS::SSM::ManagedInstanceInventory'
+        - 'AWS::Redshift::Cluster'
+        - 'AWS::Redshift::ClusterSnapshot'
+        - 'AWS::Redshift::ClusterParameterGroup'
+        - 'AWS::Redshift::ClusterSecurityGroup'
+        - 'AWS::Redshift::ClusterSubnetGroup'
+        - 'AWS::Redshift::EventSubscription'
+        - 'AWS::CloudWatch::Alarm'
+    ResourceTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceType'
+    ResourceTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/StringWithCharLimit256'
+      minItems: 0
+      maxItems: 20
+    RuleLimit:
+      type: integer
+      minimum: 0
+      maximum: 50
+    Scope:
+      type: object
+      properties:
+        ComplianceResourceTypes:
+          $ref: '#/components/schemas/ComplianceResourceTypes'
+        TagKey:
+          $ref: '#/components/schemas/StringWithCharLimit128'
+        TagValue:
+          $ref: '#/components/schemas/StringWithCharLimit256'
+        ComplianceResourceId:
+          $ref: '#/components/schemas/StringWithCharLimit256'
+      description: 'Defines which resources trigger an evaluation for an AWS Config rule. The scope can include one or more resource types, a combination of a tag key and value, or a combination of one resource type and one resource ID. Specify a scope to constrain which resources trigger an evaluation for a rule. Otherwise, evaluations for the rule are triggered when any resource in your recording group changes in configuration.'
+    Source:
+      type: object
+      required:
+        - Owner
+        - SourceIdentifier
+      properties:
+        Owner:
+          $ref: '#/components/schemas/Owner'
+        SourceIdentifier:
+          $ref: '#/components/schemas/StringWithCharLimit256'
+        SourceDetails:
+          $ref: '#/components/schemas/SourceDetails'
+      description: 'Provides the AWS Config rule owner (AWS or customer), the rule identifier, and the events that trigger the evaluation of your AWS resources.'
+    SourceDetail:
+      type: object
+      properties:
+        EventSource:
+          $ref: '#/components/schemas/EventSource'
+        MessageType:
+          $ref: '#/components/schemas/MessageType'
+        MaximumExecutionFrequency:
+          $ref: '#/components/schemas/MaximumExecutionFrequency'
+      description: 'Provides the source and the message types that trigger AWS Config to evaluate your AWS resources against a rule. It also provides the frequency with which you want AWS Config to run evaluations for the rule if the trigger type is periodic. You can specify the parameter values for <code>SourceDetail</code> only for custom rules. '
+    SourceDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/SourceDetail'
+      minItems: 0
+      maxItems: 25
+    StartConfigRulesEvaluationRequest:
+      type: object
+      properties:
+        ConfigRuleNames:
+          $ref: '#/components/schemas/ReevaluateConfigRuleNames'
+      description: <p/>
+    StartConfigRulesEvaluationResponse:
+      type: object
+      properties: {}
+      description: The output when you start the evaluation for the specified Config rule.
+    StartConfigurationRecorderRequest:
+      type: object
+      required:
+        - ConfigurationRecorderName
+      properties:
+        ConfigurationRecorderName:
+          $ref: '#/components/schemas/RecorderName'
+      description: The input for the <a>StartConfigurationRecorder</a> action.
+    StopConfigurationRecorderRequest:
+      type: object
+      required:
+        - ConfigurationRecorderName
+      properties:
+        ConfigurationRecorderName:
+          $ref: '#/components/schemas/RecorderName'
+      description: The input for the <a>StopConfigurationRecorder</a> action.
+    String:
+      type: string
+    StringWithCharLimit1024:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    StringWithCharLimit128:
+      type: string
+      minLength: 1
+      maxLength: 128
+    StringWithCharLimit256:
+      type: string
+      minLength: 1
+      maxLength: 256
+    StringWithCharLimit64:
+      type: string
+      minLength: 1
+      maxLength: 64
+    SupplementaryConfiguration:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/SupplementaryConfigurationName'
+          value:
+            $ref: '#/components/schemas/SupplementaryConfigurationValue'
+    SupplementaryConfigurationName:
+      type: string
+    SupplementaryConfigurationValue:
+      type: string
+    Tags:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/Name'
+          value:
+            $ref: '#/components/schemas/Value'
+    ValidationException:
+      type: object
+      properties: {}
+      description: The requested action is not valid.
+    Value:
+      type: string
+    Version:
+      type: string
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

@@ -1,0 +1,6152 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.gettyimages.com/'
+info:
+  description: Build applications using the world's most powerful imagery
+  title: Getty Images
+  version: '3'
+  x-apisguru-categories:
+    - media
+  x-logo:
+    url: 'http://developers.gettyimages.com/images/getty-api-logo.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://api.gettyimages.com/swagger/docs/3'
+      version: '2.0'
+  x-providerName: gettyimages.com
+security:
+  - Api-Key: []
+paths:
+  /v3/asset-registrations:
+    post:
+      deprecated: false
+      operationId: AssetRegistration_Register
+      responses:
+        '200':
+          description: Success - The assets were successfully registered.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+        '401':
+          description: AuthorizationTokenRequired - Authorization token was missing or not valid.
+        '500':
+          description: AssetRegistrationFailed - There was a failure when registering assets.
+      summary: Register a list of customer assets.
+      tags:
+        - AssetRegistration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterAssetsRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RegisterAssetsRequest'
+        description: Specify JSON containing an array of asset ids to register.  Limited to 500 asset ids per call.
+        required: true
+  /v3/boards:
+    get:
+      deprecated: false
+      operationId: Boards_GetAllBoards
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: Search for boards the user owns or has been invited to as an editor.
+          in: query
+          name: board_relationship
+          required: false
+          schema:
+            type: string
+            enum:
+              - owned
+              - invited
+        - description: Request results starting at a page number (default is 1).
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Request number of boards to return in each page. (default is 30).
+          in: query
+          name: pageSize
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Sort the list of boards by last update date or name. Defaults to date_last_updated_descending.
+          in: query
+          name: sort_order
+          required: false
+          schema:
+            type: string
+            enum:
+              - date_last_updated_descending
+              - date_last_updated_ascending
+              - name_ascending
+              - name_decending
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoardList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BoardList'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+      summary: '***BETA*** Get all boards that the user participates in'
+      tags:
+        - Boards
+    post:
+      deprecated: false
+      operationId: Boards_CreateBoard
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoardCreated'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BoardCreated'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+      summary: '***BETA*** Create a new board'
+      tags:
+        - Boards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BoardInfo'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BoardInfo'
+        description: Specify a name and description of the board to create (name is required).
+        required: true
+  '/v3/boards/{board_id}':
+    delete:
+      deprecated: false
+      operationId: Boards_DeleteBoard
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - in: path
+          name: board_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+        '403':
+          description: InsufficientAccess
+        '404':
+          description: BoardNotFound
+      summary: '***BETA*** Delete a board'
+      tags:
+        - Boards
+    get:
+      deprecated: false
+      operationId: Boards_GetBoard
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - in: path
+          name: board_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoardDetail'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BoardDetail'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+        '404':
+          description: BoardNotFound
+      summary: '***BETA*** Get assets and metadata for a specific board'
+      tags:
+        - Boards
+    put:
+      deprecated: false
+      operationId: Boards_UpdateBoard
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - in: path
+          name: board_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Updated
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+        '403':
+          description: InsufficientAccess
+        '404':
+          description: BoardNotFound
+      summary: '***BETA*** Update a board'
+      tags:
+        - Boards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BoardInfo'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BoardInfo'
+        description: Specify a new name and description for the board (name is required).
+        required: true
+  '/v3/boards/{board_id}/assets':
+    delete:
+      deprecated: false
+      operationId: Boards_RemoveAssets
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - in: path
+          name: board_id
+          required: true
+          schema:
+            type: string
+        - description: List the assets to be removed from the board.
+          in: query
+          name: asset_ids
+          required: true
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+        '403':
+          description: InsufficientAccess
+        '404':
+          description: BoardNotFound
+      summary: '***BETA*** Remove assets from a board'
+      tags:
+        - Boards
+    put:
+      deprecated: false
+      operationId: Boards_AddAssets
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - in: path
+          name: board_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddBoardAssetsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AddBoardAssetsResult'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+        '403':
+          description: InsufficientAccess
+        '404':
+          description: BoardNotFound
+      summary: '***BETA*** Add assets to a board'
+      tags:
+        - Boards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/BoardAsset'
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/BoardAsset'
+              type: array
+        description: List assets to add to the board.
+        required: true
+  '/v3/boards/{board_id}/assets/{asset_id}':
+    delete:
+      deprecated: false
+      operationId: Boards_RemoveAsset
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - in: path
+          name: asset_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: board_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+        '403':
+          description: InsufficientAccess
+        '404':
+          description: BoardNotFound
+      summary: '***BETA*** Remove an asset from a board'
+      tags:
+        - Boards
+    put:
+      deprecated: false
+      operationId: Boards_AddAsset
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - in: path
+          name: asset_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: board_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+        '403':
+          description: AssetNotFound
+        '404':
+          description: BoardNotFound
+      summary: '***BETA*** Add an asset to a board'
+      tags:
+        - Boards
+  '/v3/boards/{board_id}/comments':
+    get:
+      deprecated: false
+      operationId: Boards_GetComments
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - in: path
+          name: board_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentsList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CommentsList'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+        '404':
+          description: BoardNotFound
+      summary: '***BETA*** Get comments from a board'
+      tags:
+        - Boards
+    post:
+      deprecated: false
+      operationId: Boards_AddComment
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - in: path
+          name: board_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentCreated'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CommentCreated'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+        '403':
+          description: InsufficientAccess
+        '404':
+          description: BoardNotFound
+      summary: '***BETA*** Add a comment to a board'
+      tags:
+        - Boards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CommentRequest'
+        description: Comment to be added to the board.
+        required: true
+  '/v3/boards/{board_id}/comments/{comment_id}':
+    delete:
+      deprecated: false
+      operationId: Boards_DeleteComment
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - in: path
+          name: board_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: comment_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: CommentDeleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+        '403':
+          description: InsufficientAccess
+        '404':
+          description: BoardNotFound
+      summary: '***BETA*** Delete a comment from a board'
+      tags:
+        - Boards
+  /v3/collections:
+    get:
+      deprecated: false
+      operationId: Collections_GetCollections
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Collections.CollectionsList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Collections.CollectionsList'
+        '401':
+          description: Unauthorized
+      summary: Gets collections applicable for the customer.
+      tags:
+        - Collections
+  /v3/countries:
+    get:
+      deprecated: false
+      operationId: Countries_GetCountries
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Countries.CountriesList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Countries.CountriesList'
+        '401':
+          description: Unauthorized
+      summary: Gets countries codes and names.
+      tags:
+        - Countries
+  /v3/downloads:
+    get:
+      deprecated: false
+      operationId: Downloads_GetDownloads
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'If specified, returns the list of previously downloaded images for all users in your company. Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false.'
+          in: query
+          name: company_downloads
+          required: false
+          schema:
+            type: boolean
+        - description: "If specified, select assets downloaded on or before this date. Dates should be submitted in ISO\r\n                8601 format (i.e., YYYY-MM-DD hh:mm:ss.sss). If time is omitted, midnight is assumed. Date/times are UTC."
+          in: query
+          name: end_date
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - description: Identifies page to return. Default is 1.
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: 'Specifies page size. Default is 30, maximum page_size is 100.'
+          in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: 'Specifies product type to be included in the previous download results. To get previous iStockPhoto credit downloads, credit_pack must be selected.'
+          in: query
+          name: product_type
+          required: false
+          schema:
+            type: string
+            enum:
+              - easy_access
+              - editorial_subscription
+              - image_pack
+              - premium_access
+              - royalty_free_subscription
+              - credit_pack
+        - description: "If specified, select assets downloaded on or after this date. Dates should be submitted in ISO\r\n                8601 format (i.e., YYYY-MM-DD hh:mm:ss.sss). If time is omitted, midnight is assumed. Date/times are UTC."
+          in: query
+          name: start_date
+          required: false
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Downloads.GetDownloadsResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Downloads.GetDownloadsResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: AuthorizationTokenRequired
+        '403':
+          description: Forbidden
+      summary: Returns information about a customer's downloaded assets.
+      tags:
+        - Downloads
+  '/v3/downloads/images/{id}':
+    post:
+      deprecated: false
+      description: "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                image available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200."
+      operationId: Downloads_PostDownloads
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: "<remarks>\r\n                    Id of image to download.\r\n                </remarks>"
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: "<remarks>\r\n                    Specifies whether to auto-download the image. If true is specified, a 303 SeeOther status is returned with a\r\n                    Location header set to the location of the image.\r\n                    If false is specified, the download URI will be returned in the response message.\r\n                </remarks>"
+          in: query
+          name: auto_download
+          required: false
+          schema:
+            type: boolean
+        - description: "<remarks>\r\n                    File Type expressed with three character file extension.\r\n                </remarks>"
+          in: query
+          name: file_type
+          required: false
+          schema:
+            type: string
+            enum:
+              - eps
+              - jpg
+        - description: "<remarks>\r\n                    Specifies the pixel height of the particular image to download.\r\n                    Available heights can be found in the images/{ids} response for the specific image.\r\n                    If left blank, it will return the largest available size.\r\n                </remarks>"
+          in: query
+          name: height
+          required: false
+          schema:
+            type: string
+        - description: "<remarks>\r\n                    Identifier of the instance for the selected product offering type.\r\n                </remarks>"
+          in: query
+          name: product_id
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: "<remarks>\r\n                    Product type.\r\n                </remarks>"
+          in: query
+          name: product_type
+          required: false
+          schema:
+            type: string
+            enum:
+              - easy_access
+              - editorial_subscription
+              - image_pack
+              - premium_access
+              - royalty_free_subscription
+              - credit_pack
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+        '303':
+          description: See Other
+        '400':
+          description: InvalidRequestParameterValue
+        '401':
+          description: AuthorizationTokenRequired
+        '404':
+          description: ImageNotFound
+      summary: Download an image
+      tags:
+        - Downloads
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GettyImages.Models.Downloads.PremiumAccessDownloadData'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GettyImages.Models.Downloads.PremiumAccessDownloadData'
+        description: "<remarks>\r\n                    Additional information required from specific customers when downloading. \r\n                    Only users who have been set up with a project code by Getty Images Sales need to use this field.\r\n                </remarks>"
+  '/v3/downloads/videos/{id}':
+    post:
+      deprecated: false
+      description: "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                video available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200."
+      operationId: Downloads_PostVideoDownloads
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: "<remarks>\r\n                    Id of video to download.\r\n                </remarks>"
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: "<remarks>\r\n                    Specifies whether to auto-download the video. If true is specified, a 303 SeeOther status is returned with a\r\n                    Location header set to the location of the video.\r\n                    If false is specified, the download URI will be returned in the response message.\r\n                </remarks>"
+          in: query
+          name: auto_download
+          required: false
+          schema:
+            type: boolean
+        - description: "<remarks>\r\n                    Identifier of the instance for the selected product offering type.\r\n                </remarks>"
+          in: query
+          name: product_id
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Specifies the size to be downloaded.
+          in: query
+          name: size
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+        '303':
+          description: See Other
+        '400':
+          description: ProductIdNotSpecified
+        '401':
+          description: AuthorizationTokenRequired
+        '404':
+          description: VideoNotFound
+      summary: Download a video
+      tags:
+        - Downloads
+  '/v3/downloads/{id}': {}
+  /v3/events:
+    get:
+      deprecated: false
+      description: Returns an array of event metadata
+      operationId: Events_GetBatch
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          schema:
+            type: string
+        - description: A comma separated list of fields to return in the response.
+          in: query
+          name: fields
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - id
+                - child_event_count
+                - editorial_segments
+                - hero_image
+                - image_count
+                - location
+                - name
+                - start_date
+                - type
+              type: string
+            enum:
+              - id
+              - child_event_count
+              - editorial_segments
+              - hero_image
+              - image_count
+              - location
+              - name
+              - start_date
+              - type
+        - description: A comma separated list of event ids.
+          in: query
+          name: ids
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              format: int32
+              type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Events.EventsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Events.EventsResult'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+        '404':
+          description: EventNotFound
+      summary: Get metadata for multiple events
+      tags:
+        - Events
+  '/v3/events/{id}':
+    get:
+      deprecated: false
+      description: Returns an array of event metadata
+      operationId: Events_Get
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          schema:
+            type: string
+        - description: An event id.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: A comma separated list of fields to return in the response.
+          in: query
+          name: fields
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - id
+                - child_event_count
+                - editorial_segments
+                - hero_image
+                - image_count
+                - location
+                - name
+                - start_date
+                - type
+              type: string
+            enum:
+              - id
+              - child_event_count
+              - editorial_segments
+              - hero_image
+              - image_count
+              - location
+              - name
+              - start_date
+              - type
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Events.Event'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Events.Event'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+        '404':
+          description: EventNotFound
+      summary: Get metadata for a single event
+      tags:
+        - Events
+  /v3/images:
+    get:
+      deprecated: false
+      description: ''
+      operationId: Images_GetBatch
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          schema:
+            type: string
+        - description: Specifies one or more image ids to return. Use comma delimiter when requesting multiple ids.
+          in: query
+          name: ids
+          required: true
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Specifies fields to return. Defaults to 'summary_set'.
+          in: query
+          name: fields
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - allowed_use
+                - alternative_ids
+                - artist
+                - artist_title
+                - asset_family
+                - call_for_image
+                - caption
+                - city
+                - collection_code
+                - collection_id
+                - collection_name
+                - color_type
+                - comp
+                - copyright
+                - country
+                - credit_line
+                - date_camera_shot
+                - date_created
+                - date_submitted
+                - detail_set
+                - display_set
+                - download_sizes
+                - downloads
+                - editorial_segments
+                - editorial_source
+                - entity_details
+                - event_ids
+                - graphical_style
+                - id
+                - istock_licenses
+                - keywords
+                - largest_downloads
+                - license_model
+                - links
+                - max_dimensions
+                - orientation
+                - people
+                - prestige
+                - preview
+                - product_types
+                - quality_rank
+                - referral_destinations
+                - state_province
+                - summary_set
+                - thumb
+                - title
+                - uri_oembed
+              type: string
+            enum:
+              - allowed_use
+              - alternative_ids
+              - artist
+              - artist_title
+              - asset_family
+              - call_for_image
+              - caption
+              - city
+              - collection_code
+              - collection_id
+              - collection_name
+              - color_type
+              - comp
+              - copyright
+              - country
+              - credit_line
+              - date_camera_shot
+              - date_created
+              - date_submitted
+              - detail_set
+              - display_set
+              - download_sizes
+              - downloads
+              - editorial_segments
+              - editorial_source
+              - entity_details
+              - event_ids
+              - graphical_style
+              - id
+              - istock_licenses
+              - keywords
+              - largest_downloads
+              - license_model
+              - links
+              - max_dimensions
+              - orientation
+              - people
+              - prestige
+              - preview
+              - product_types
+              - quality_rank
+              - referral_destinations
+              - state_province
+              - summary_set
+              - thumb
+              - title
+              - uri_oembed
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Images.ImagesDetail'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Images.ImagesDetail'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: AuthorizationTokenRequired
+        '403':
+          description: UnauthorizedDisplaySize
+        '404':
+          description: ImageNotFound
+      summary: Get metadata for multiple images by supplying multiple image ids
+      tags:
+        - Images
+  '/v3/images/{id}':
+    get:
+      deprecated: false
+      description: ''
+      operationId: Images_Get
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          schema:
+            type: string
+        - description: An image id. For more than one image please use the /v3/images endpoint.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: Specifies fields to return. Defaults to 'summary_set'.
+          in: query
+          name: fields
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - allowed_use
+                - alternative_ids
+                - artist
+                - artist_title
+                - asset_family
+                - call_for_image
+                - caption
+                - city
+                - collection_code
+                - collection_id
+                - collection_name
+                - color_type
+                - comp
+                - copyright
+                - country
+                - credit_line
+                - date_camera_shot
+                - date_created
+                - date_submitted
+                - detail_set
+                - display_set
+                - download_sizes
+                - downloads
+                - editorial_segments
+                - editorial_source
+                - entity_details
+                - event_ids
+                - graphical_style
+                - id
+                - istock_licenses
+                - keywords
+                - largest_downloads
+                - license_model
+                - links
+                - max_dimensions
+                - orientation
+                - people
+                - prestige
+                - preview
+                - product_types
+                - quality_rank
+                - referral_destinations
+                - state_province
+                - summary_set
+                - thumb
+                - title
+                - uri_oembed
+              type: string
+            enum:
+              - allowed_use
+              - alternative_ids
+              - artist
+              - artist_title
+              - asset_family
+              - call_for_image
+              - caption
+              - city
+              - collection_code
+              - collection_id
+              - collection_name
+              - color_type
+              - comp
+              - copyright
+              - country
+              - credit_line
+              - date_camera_shot
+              - date_created
+              - date_submitted
+              - detail_set
+              - display_set
+              - download_sizes
+              - downloads
+              - editorial_segments
+              - editorial_source
+              - entity_details
+              - event_ids
+              - graphical_style
+              - id
+              - istock_licenses
+              - keywords
+              - largest_downloads
+              - license_model
+              - links
+              - max_dimensions
+              - orientation
+              - people
+              - prestige
+              - preview
+              - product_types
+              - quality_rank
+              - referral_destinations
+              - state_province
+              - summary_set
+              - thumb
+              - title
+              - uri_oembed
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Images.ImagesDetail'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Images.ImagesDetail'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: AuthorizationTokenRequired
+        '403':
+          description: UnauthorizedDisplaySize
+        '404':
+          description: ImageNotFound
+      summary: Get metadata for a single image by supplying one image id
+      tags:
+        - Images
+  '/v3/images/{id}/similar':
+    get:
+      deprecated: false
+      operationId: Images_GetSimilarImages
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          schema:
+            type: string
+        - description: Identifies an existing image
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: Specifies fields to return. Defaults to 'summary_set'.
+          in: query
+          name: fields
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - accessrestriction
+                - allowed_use
+                - alternative_ids
+                - artist
+                - asset_family
+                - call_for_image
+                - caption
+                - collection_code
+                - collection_id
+                - collection_name
+                - color_type
+                - comp
+                - copyright
+                - date_camera_shot
+                - date_created
+                - detail_set
+                - display_set
+                - editorial_segments
+                - editorial_source
+                - entity_details
+                - event_ids
+                - graphical_style
+                - id
+                - keywords
+                - largest_downloads
+                - license_model
+                - max_dimensions
+                - orientation
+                - people
+                - prestige
+                - preview
+                - product_types
+                - quality_rank
+                - referral_destinations
+                - summary_set
+                - thumb
+                - title
+                - uri_oembed
+              type: string
+            enum:
+              - accessrestriction
+              - allowed_use
+              - alternative_ids
+              - artist
+              - asset_family
+              - call_for_image
+              - caption
+              - collection_code
+              - collection_id
+              - collection_name
+              - color_type
+              - comp
+              - copyright
+              - date_camera_shot
+              - date_created
+              - detail_set
+              - display_set
+              - editorial_segments
+              - editorial_source
+              - entity_details
+              - event_ids
+              - graphical_style
+              - id
+              - keywords
+              - largest_downloads
+              - license_model
+              - max_dimensions
+              - orientation
+              - people
+              - prestige
+              - preview
+              - product_types
+              - quality_rank
+              - referral_destinations
+              - summary_set
+              - thumb
+              - title
+              - uri_oembed
+        - description: Identifies page to return. Default is 1.
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: 'Specifies page size. Default is 30, maximum page_size is 100.'
+          in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/System.Object'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: AuthorizationTokenRequired
+        '403':
+          description: UnauthorizedDisplaySize
+        '404':
+          description: ImageNotFound
+      summary: Search for images similar to an image
+      tags:
+        - Images
+  /v3/products:
+    get:
+      deprecated: false
+      operationId: Products_GetProducts
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: Comma separated list of fields. Allows product download requirements to be returned.
+          in: query
+          name: fields
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - download_requirements
+              type: string
+            enum:
+              - download_requirements
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Products.ProductsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Products.ProductsResult'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+      summary: Get Products
+      tags:
+        - Products
+  /v3/purchased-assets:
+    get:
+      deprecated: false
+      operationId: Purchases_GetPreviousAssetPurchases
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'If specified, retrieves previous purchases on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).'
+          in: query
+          name: end_date
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - description: Identifies page to return. Default is 1.
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: 'Specifies page size. Default is 75, maximum page_size is 100.'
+          in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: 'If specified, retrieves previous purchases on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).'
+          in: query
+          name: start_date
+          required: false
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Purchases.PreviousAssetPurchases'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Purchases.PreviousAssetPurchases'
+        '400':
+          description: PageNumberLessThanOne
+        '401':
+          description: Unauthorized
+      summary: Get Previously Purchased Images and Video
+      tags:
+        - Purchases
+  /v3/purchased-images:
+    get:
+      deprecated: false
+      operationId: Purchases_GetPreviousPurchases
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'If specified, retrieves previous purchases on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).'
+          in: query
+          name: end_date
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - description: Identifies page to return. Default is 1.
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: 'Specifies page size. Default is 75, maximum page_size is 100.'
+          in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: 'If specified, retrieves previous purchases on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).'
+          in: query
+          name: start_date
+          required: false
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Purchases.PreviousPurchases'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Purchases.PreviousPurchases'
+        '400':
+          description: PageNumberLessThanOne
+        '401':
+          description: Unauthorized
+      summary: Get Previously Purchased Images
+      tags:
+        - Purchases
+  /v3/search/events:
+    get:
+      deprecated: false
+      operationId: Search_GetEvents
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          schema:
+            type: string
+        - description: 'Filters to events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31).'
+          in: query
+          name: date_from
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - description: 'Filters to events that start on or before this date. Use ISO 8601 format (e.g., 1999-12-31).'
+          in: query
+          name: date_to
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - description: Filters to events with a matching editorial segment.
+          in: query
+          name: editorial_segment
+          required: false
+          schema:
+            type: string
+            enum:
+              - archival
+              - entertainment
+              - news
+              - publicity
+              - royalty
+              - sport
+        - description: 'Specifies fields to return. Default set is ''id'',''name'',''start_date''.'
+          in: query
+          name: fields
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - id
+                - child_event_count
+                - editorial_segments
+                - hero_image
+                - image_count
+                - keywords
+                - location
+                - name
+                - start_date
+                - type
+              type: string
+            enum:
+              - id
+              - child_event_count
+              - editorial_segments
+              - hero_image
+              - image_count
+              - keywords
+              - location
+              - name
+              - start_date
+              - type
+        - description: Request results starting at a page number (default is 1).
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Request number of images to return in each page.
+          in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Filters to events related to this phrase
+          in: query
+          name: phrase
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Search.EventsSearchResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Search.EventsSearchResult'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: AuthorizationTokenRequired
+        '403':
+          description: UnauthorizedDisplaySize
+      summary: Search for events
+      tags:
+        - Search
+  /v3/search/images:
+    get:
+      deprecated: false
+      operationId: Search_GetImagesByPhrase
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          schema:
+            type: string
+        - description: Filter based on the age of individuals in an image.
+          in: query
+          name: age_of_people
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - newborn
+                - baby
+                - child
+                - teenager
+                - young_adult
+                - adult
+                - adults_only
+                - mature_adult
+                - senior_adult
+                - months_0_1
+                - months_2_5
+                - months_6_11
+                - months_12_17
+                - months_18_23
+                - years_2_3
+                - years_4_5
+                - years_6_7
+                - years_8_9
+                - years_10_11
+                - years_12_13
+                - years_14_15
+                - years_16_17
+                - years_18_19
+                - years_20_24
+                - years_20_29
+                - years_25_29
+                - years_30_34
+                - years_30_39
+                - years_35_39
+                - years_40_44
+                - years_40_49
+                - years_45_49
+                - years_50_54
+                - years_50_59
+                - years_55_59
+                - years_60_64
+                - years_60_69
+                - years_65_69
+                - years_70_79
+                - years_80_89
+                - over_90
+                - over_100
+              type: string
+            enum:
+              - newborn
+              - baby
+              - child
+              - teenager
+              - young_adult
+              - adult
+              - adults_only
+              - mature_adult
+              - senior_adult
+              - months_0_1
+              - months_2_5
+              - months_6_11
+              - months_12_17
+              - months_18_23
+              - years_2_3
+              - years_4_5
+              - years_6_7
+              - years_8_9
+              - years_10_11
+              - years_12_13
+              - years_14_15
+              - years_16_17
+              - years_18_19
+              - years_20_24
+              - years_20_29
+              - years_25_29
+              - years_30_34
+              - years_30_39
+              - years_35_39
+              - years_40_44
+              - years_40_49
+              - years_45_49
+              - years_50_54
+              - years_50_59
+              - years_55_59
+              - years_60_64
+              - years_60_69
+              - years_65_69
+              - years_70_79
+              - years_80_89
+              - over_90
+              - over_100
+        - description: 'Search for images by specific artists (free-text, comma-separated list of artists).'
+          in: query
+          name: artists
+          required: false
+          schema:
+            type: string
+        - description: Filter by collection codes (comma-separated list). Include or exclude based on collections_filter_type.
+          in: query
+          name: collection_codes
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Provides searching based on specified collection(s).
+          in: query
+          name: collections_filter_type
+          required: false
+          schema:
+            type: string
+            enum:
+              - include
+              - exclude
+        - description: 'Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244). Note: when specified, results will not contain editorial images.'
+          in: query
+          name: color
+          required: false
+          schema:
+            type: string
+        - description: Filter based on image composition.
+          in: query
+          name: compositions
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - abstract
+                - candid
+                - close_up
+                - copy_space
+                - cut_out
+                - full_frame
+                - full_length
+                - headshot
+                - looking_at_camera
+                - macro
+                - portrait
+                - sparse
+                - still_life
+                - three_quarter_length
+                - waist_up
+              type: string
+            enum:
+              - abstract
+              - candid
+              - close_up
+              - copy_space
+              - cut_out
+              - full_frame
+              - full_length
+              - headshot
+              - looking_at_camera
+              - macro
+              - portrait
+              - sparse
+              - still_life
+              - three_quarter_length
+              - waist_up
+        - description: Restrict search results to embeddable images. The default is false.
+          in: query
+          name: embed_content_only
+          required: false
+          schema:
+            type: boolean
+        - description: Filter search results based on the ethnicity of individuals in an image.
+          in: query
+          name: ethnicity
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - black
+                - caucasian
+                - east_asian
+                - hispanic_latino
+                - japanese
+                - middle_eastern
+                - mixed_race_person
+                - multiethnic_group
+                - native_american_first_nations
+                - pacific_islander
+                - south_asian
+                - southeast_asian
+              type: string
+            enum:
+              - black
+              - caucasian
+              - east_asian
+              - hispanic_latino
+              - japanese
+              - middle_eastern
+              - mixed_race_person
+              - multiethnic_group
+              - native_american_first_nations
+              - pacific_islander
+              - south_asian
+              - southeast_asian
+        - description: Filter based on specific events
+          in: query
+          name: event_ids
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              format: int32
+              type: integer
+        - description: Excludes images containing nudity. The default is false.
+          in: query
+          name: exclude_nudity
+          required: false
+          schema:
+            type: boolean
+        - description: Specifies fields to return. Defaults to 'summary_set'.
+          in: query
+          name: fields
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - accessrestriction
+                - allowed_use
+                - alternative_ids
+                - artist
+                - asset_family
+                - call_for_image
+                - caption
+                - collection_code
+                - collection_id
+                - collection_name
+                - color_type
+                - comp
+                - copyright
+                - date_camera_shot
+                - date_created
+                - detail_set
+                - display_set
+                - editorial_segments
+                - editorial_source
+                - entity_details
+                - event_ids
+                - graphical_style
+                - id
+                - keywords
+                - largest_downloads
+                - license_model
+                - max_dimensions
+                - orientation
+                - people
+                - prestige
+                - preview
+                - product_types
+                - quality_rank
+                - referral_destinations
+                - summary_set
+                - thumb
+                - title
+                - uri_oembed
+              type: string
+            enum:
+              - accessrestriction
+              - allowed_use
+              - alternative_ids
+              - artist
+              - asset_family
+              - call_for_image
+              - caption
+              - collection_code
+              - collection_id
+              - collection_name
+              - color_type
+              - comp
+              - copyright
+              - date_camera_shot
+              - date_created
+              - detail_set
+              - display_set
+              - editorial_segments
+              - editorial_source
+              - entity_details
+              - event_ids
+              - graphical_style
+              - id
+              - keywords
+              - largest_downloads
+              - license_model
+              - max_dimensions
+              - orientation
+              - people
+              - prestige
+              - preview
+              - product_types
+              - quality_rank
+              - referral_destinations
+              - summary_set
+              - thumb
+              - title
+              - uri_oembed
+        - description: Return only images having a specific file type.
+          in: query
+          name: file_types
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - eps
+                - jpg
+              type: string
+            enum:
+              - eps
+              - jpg
+        - description: Filter based on graphical style of the image.
+          in: query
+          name: graphical_styles
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - fine_art
+                - illustration
+                - photography
+              type: string
+            enum:
+              - fine_art
+              - illustration
+              - photography
+        - description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
+          in: query
+          name: keyword_ids
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              format: int32
+              type: integer
+        - description: Specifies the image licensing model(s).
+          in: query
+          name: license_models
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - rights_managed
+                - royalty_free
+              type: string
+            enum:
+              - rights_managed
+              - royalty_free
+        - description: Filter based on minimum size requested.
+          in: query
+          name: minimum_size
+          required: false
+          schema:
+            type: string
+            enum:
+              - x_small
+              - small
+              - medium
+              - large
+              - x_large
+              - xx_large
+        - description: Filter based on the number of people in the image.
+          in: query
+          name: number_of_people
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - none
+                - one
+                - two
+                - group
+              type: string
+            enum:
+              - none
+              - one
+              - two
+              - group
+        - description: Return only images with selected aspect ratios.
+          in: query
+          name: orientations
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - horizontal
+                - vertical
+                - square
+                - panoramic_horizontal
+                - panoramic_vertical
+              type: string
+            enum:
+              - horizontal
+              - vertical
+              - square
+              - panoramic_horizontal
+              - panoramic_vertical
+        - description: Request results starting at a page number (default is 1).
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Request number of images to return in each page.
+          in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Search images using a search phrase.
+          in: query
+          name: phrase
+          required: false
+          schema:
+            type: string
+        - description: Restrict search results to prestige images. The default is false.
+          in: query
+          name: prestige_content_only
+          required: false
+          schema:
+            type: boolean
+        - description: Filter images to those having product types from the selected list.
+          in: query
+          name: product_types
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - easy_access
+                - editorial_subscription
+                - image_pack
+                - premium_access
+                - royalty_free_subscription
+                - credit_pack
+              type: string
+            enum:
+              - easy_access
+              - editorial_subscription
+              - image_pack
+              - premium_access
+              - royalty_free_subscription
+              - credit_pack
+        - description: Select sort order of results.
+          in: query
+          name: sort_order
+          required: false
+          schema:
+            type: string
+            enum:
+              - best_match
+              - most_popular
+              - newest
+        - description: Return only images associated with specific people (using a comma-delimited list).
+          in: query
+          name: specific_people
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Search.SearchResults_GettyImages.Models.Search.ImageSearchItem_'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Search.SearchResults_GettyImages.Models.Search.ImageSearchItem_'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: AuthorizationTokenRequired
+        '403':
+          description: UnauthorizedDisplaySize
+      summary: Search for both creative and editorial images
+      tags:
+        - Search
+  /v3/search/images/artists:
+    get:
+      deprecated: false
+      operationId: Artists_GetArtistImages
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          schema:
+            type: string
+        - description: Name of artist for desired images
+          in: query
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: 'Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.'
+          in: query
+          name: fields
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - id
+                - alternative_ids
+                - asset_family
+                - asset_type
+                - collection_code
+                - collection_name
+                - comp
+                - date_submitted
+                - keywords
+              type: string
+            enum:
+              - id
+              - alternative_ids
+              - asset_family
+              - asset_type
+              - collection_code
+              - collection_name
+              - comp
+              - date_submitted
+              - keywords
+        - description: Identifies page to return. Default page is 1.
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: 'Specifies page size. Default page_size is 3, maximum page_size is 100.'
+          in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Artists.ImageSearchResults'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Artists.ImageSearchResults'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+      summary: '***BETA*** Search for images by a photographer'
+      tags:
+        - Artists
+  /v3/search/images/creative:
+    get:
+      deprecated: false
+      operationId: Search_GetCreativeImagesByPhrase
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          schema:
+            type: string
+        - description: Filter based on the age of individuals in an image.
+          in: query
+          name: age_of_people
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - newborn
+                - baby
+                - child
+                - teenager
+                - young_adult
+                - adult
+                - adults_only
+                - mature_adult
+                - senior_adult
+                - months_0_1
+                - months_2_5
+                - months_6_11
+                - months_12_17
+                - months_18_23
+                - years_2_3
+                - years_4_5
+                - years_6_7
+                - years_8_9
+                - years_10_11
+                - years_12_13
+                - years_14_15
+                - years_16_17
+                - years_18_19
+                - years_20_24
+                - years_20_29
+                - years_25_29
+                - years_30_34
+                - years_30_39
+                - years_35_39
+                - years_40_44
+                - years_40_49
+                - years_45_49
+                - years_50_54
+                - years_50_59
+                - years_55_59
+                - years_60_64
+                - years_60_69
+                - years_65_69
+                - years_70_79
+                - years_80_89
+                - over_90
+                - over_100
+              type: string
+            enum:
+              - newborn
+              - baby
+              - child
+              - teenager
+              - young_adult
+              - adult
+              - adults_only
+              - mature_adult
+              - senior_adult
+              - months_0_1
+              - months_2_5
+              - months_6_11
+              - months_12_17
+              - months_18_23
+              - years_2_3
+              - years_4_5
+              - years_6_7
+              - years_8_9
+              - years_10_11
+              - years_12_13
+              - years_14_15
+              - years_16_17
+              - years_18_19
+              - years_20_24
+              - years_20_29
+              - years_25_29
+              - years_30_34
+              - years_30_39
+              - years_35_39
+              - years_40_44
+              - years_40_49
+              - years_45_49
+              - years_50_54
+              - years_50_59
+              - years_55_59
+              - years_60_64
+              - years_60_69
+              - years_65_69
+              - years_70_79
+              - years_80_89
+              - over_90
+              - over_100
+        - description: 'Search for images by specific artists (free-text, comma-separated list of artists).'
+          in: query
+          name: artists
+          required: false
+          schema:
+            type: string
+        - description: Filter by collection codes (comma-separated list). Include or exclude based on collections_filter_type.
+          in: query
+          name: collection_codes
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Use to include or exclude collections from search.
+          in: query
+          name: collections_filter_type
+          required: false
+          schema:
+            type: string
+            enum:
+              - include
+              - exclude
+        - description: 'Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244).'
+          in: query
+          name: color
+          required: false
+          schema:
+            type: string
+        - description: Filter based on image composition.
+          in: query
+          name: compositions
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - abstract
+                - candid
+                - close_up
+                - copy_space
+                - cut_out
+                - full_frame
+                - full_length
+                - headshot
+                - looking_at_camera
+                - macro
+                - portrait
+                - sparse
+                - still_life
+                - three_quarter_length
+                - waist_up
+              type: string
+            enum:
+              - abstract
+              - candid
+              - close_up
+              - copy_space
+              - cut_out
+              - full_frame
+              - full_length
+              - headshot
+              - looking_at_camera
+              - macro
+              - portrait
+              - sparse
+              - still_life
+              - three_quarter_length
+              - waist_up
+        - description: Restrict search results to embeddable images. The default is false.
+          in: query
+          name: embed_content_only
+          required: false
+          schema:
+            type: boolean
+        - description: Filter search results based on the ethnicity of individuals in an image.
+          in: query
+          name: ethnicity
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - black
+                - caucasian
+                - east_asian
+                - hispanic_latino
+                - japanese
+                - middle_eastern
+                - mixed_race_person
+                - multiethnic_group
+                - native_american_first_nations
+                - pacific_islander
+                - south_asian
+                - southeast_asian
+              type: string
+            enum:
+              - black
+              - caucasian
+              - east_asian
+              - hispanic_latino
+              - japanese
+              - middle_eastern
+              - mixed_race_person
+              - multiethnic_group
+              - native_american_first_nations
+              - pacific_islander
+              - south_asian
+              - southeast_asian
+        - description: Excludes images containing nudity. The default is false.
+          in: query
+          name: exclude_nudity
+          required: false
+          schema:
+            type: boolean
+        - description: Specifies fields to return. Defaults to 'summary_set'.
+          in: query
+          name: fields
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - allowed_use
+                - alternative_ids
+                - artist
+                - asset_family
+                - call_for_image
+                - caption
+                - collection_code
+                - collection_id
+                - collection_name
+                - color_type
+                - comp
+                - copyright
+                - date_camera_shot
+                - date_created
+                - detail_set
+                - display_set
+                - graphical_style
+                - id
+                - keywords
+                - largest_downloads
+                - license_model
+                - max_dimensions
+                - orientation
+                - prestige
+                - preview
+                - product_types
+                - quality_rank
+                - referral_destinations
+                - summary_set
+                - thumb
+                - title
+                - uri_oembed
+              type: string
+            enum:
+              - allowed_use
+              - alternative_ids
+              - artist
+              - asset_family
+              - call_for_image
+              - caption
+              - collection_code
+              - collection_id
+              - collection_name
+              - color_type
+              - comp
+              - copyright
+              - date_camera_shot
+              - date_created
+              - detail_set
+              - display_set
+              - graphical_style
+              - id
+              - keywords
+              - largest_downloads
+              - license_model
+              - max_dimensions
+              - orientation
+              - prestige
+              - preview
+              - product_types
+              - quality_rank
+              - referral_destinations
+              - summary_set
+              - thumb
+              - title
+              - uri_oembed
+        - description: Return only images having a specific file type.
+          in: query
+          name: file_types
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - eps
+                - jpg
+              type: string
+            enum:
+              - eps
+              - jpg
+        - description: Filter based on graphical style of the image.
+          in: query
+          name: graphical_styles
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - fine_art
+                - illustration
+                - photography
+              type: string
+            enum:
+              - fine_art
+              - illustration
+              - photography
+        - description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
+          in: query
+          name: keyword_ids
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              format: int32
+              type: integer
+        - description: Specifies the image licensing model(s).
+          in: query
+          name: license_models
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - rights_managed
+                - royalty_free
+              type: string
+            enum:
+              - rights_managed
+              - royalty_free
+        - description: Filter based on minimum size requested.
+          in: query
+          name: minimum_size
+          required: false
+          schema:
+            type: string
+            enum:
+              - x_small
+              - small
+              - medium
+              - large
+              - x_large
+              - xx_large
+        - description: Filter based on the number of people in the image.
+          in: query
+          name: number_of_people
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - none
+                - one
+                - two
+                - group
+              type: string
+            enum:
+              - none
+              - one
+              - two
+              - group
+        - description: Return only images with selected aspect ratios.
+          in: query
+          name: orientations
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - horizontal
+                - vertical
+                - square
+                - panoramic_horizontal
+                - panoramic_vertical
+              type: string
+            enum:
+              - horizontal
+              - vertical
+              - square
+              - panoramic_horizontal
+              - panoramic_vertical
+        - description: Request results starting at a page number (default is 1).
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Request number of images to return in each page.
+          in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Search images using a search phrase.
+          in: query
+          name: phrase
+          required: false
+          schema:
+            type: string
+        - description: Restrict search results to prestige images. The default is false.
+          in: query
+          name: prestige_content_only
+          required: false
+          schema:
+            type: boolean
+        - description: Filter images to those having product types from the selected list.
+          in: query
+          name: product_types
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - easy_access
+                - editorial_subscription
+                - image_pack
+                - premium_access
+                - royalty_free_subscription
+                - credit_pack
+              type: string
+            enum:
+              - easy_access
+              - editorial_subscription
+              - image_pack
+              - premium_access
+              - royalty_free_subscription
+              - credit_pack
+        - description: Select sort order of results.
+          in: query
+          name: sort_order
+          required: false
+          schema:
+            type: string
+            enum:
+              - best_match
+              - most_popular
+              - newest
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Search.CreativeImageSearchResults'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Search.CreativeImageSearchResults'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: AuthorizationTokenRequired
+        '403':
+          description: UnauthorizedDisplaySize
+      summary: Search for creative images only
+      tags:
+        - Search
+  /v3/search/images/editorial:
+    get:
+      deprecated: false
+      operationId: Search_GetEditorialImagesByPhrase
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          schema:
+            type: string
+        - description: Filter based on the age of individuals in an image.
+          in: query
+          name: age_of_people
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - newborn
+                - baby
+                - child
+                - teenager
+                - young_adult
+                - adult
+                - adults_only
+                - mature_adult
+                - senior_adult
+                - months_0_1
+                - months_2_5
+                - months_6_11
+                - months_12_17
+                - months_18_23
+                - years_2_3
+                - years_4_5
+                - years_6_7
+                - years_8_9
+                - years_10_11
+                - years_12_13
+                - years_14_15
+                - years_16_17
+                - years_18_19
+                - years_20_24
+                - years_20_29
+                - years_25_29
+                - years_30_34
+                - years_30_39
+                - years_35_39
+                - years_40_44
+                - years_40_49
+                - years_45_49
+                - years_50_54
+                - years_50_59
+                - years_55_59
+                - years_60_64
+                - years_60_69
+                - years_65_69
+                - years_70_79
+                - years_80_89
+                - over_90
+                - over_100
+              type: string
+            enum:
+              - newborn
+              - baby
+              - child
+              - teenager
+              - young_adult
+              - adult
+              - adults_only
+              - mature_adult
+              - senior_adult
+              - months_0_1
+              - months_2_5
+              - months_6_11
+              - months_12_17
+              - months_18_23
+              - years_2_3
+              - years_4_5
+              - years_6_7
+              - years_8_9
+              - years_10_11
+              - years_12_13
+              - years_14_15
+              - years_16_17
+              - years_18_19
+              - years_20_24
+              - years_20_29
+              - years_25_29
+              - years_30_34
+              - years_30_39
+              - years_35_39
+              - years_40_44
+              - years_40_49
+              - years_45_49
+              - years_50_54
+              - years_50_59
+              - years_55_59
+              - years_60_64
+              - years_60_69
+              - years_65_69
+              - years_70_79
+              - years_80_89
+              - over_90
+              - over_100
+        - description: 'Search for images by specific artists (free-text, comma-separated list of artists).'
+          in: query
+          name: artists
+          required: false
+          schema:
+            type: string
+        - description: Filter by collections (comma-separated list of collection codes). Include or exclude based on collections_filter_type.
+          in: query
+          name: collection_codes
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Use to include or exclude collections from search.
+          in: query
+          name: collections_filter_type
+          required: false
+          schema:
+            type: string
+            enum:
+              - include
+              - exclude
+        - description: Filter based on image composition.
+          in: query
+          name: compositions
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - abstract
+                - candid
+                - close_up
+                - copy_space
+                - cut_out
+                - full_frame
+                - full_length
+                - headshot
+                - looking_at_camera
+                - macro
+                - portrait
+                - sparse
+                - still_life
+                - three_quarter_length
+                - waist_up
+              type: string
+            enum:
+              - abstract
+              - candid
+              - close_up
+              - copy_space
+              - cut_out
+              - full_frame
+              - full_length
+              - headshot
+              - looking_at_camera
+              - macro
+              - portrait
+              - sparse
+              - still_life
+              - three_quarter_length
+              - waist_up
+        - description: Return only events with a matching editorial segment.
+          in: query
+          name: editorial_segments
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - archival
+                - entertainment
+                - news
+                - publicity
+                - royalty
+                - sport
+              type: string
+            enum:
+              - archival
+              - entertainment
+              - news
+              - publicity
+              - royalty
+              - sport
+        - description: Restrict search results to embeddable images. The default is false.
+          in: query
+          name: embed_content_only
+          required: false
+          schema:
+            type: boolean
+        - description: 'Return only images that are created on or before this date. Use ISO 8601 format (e.g., 1999-12-31).'
+          in: query
+          name: end_date
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - description: specify linked data entity uri.
+          in: query
+          name: entity_uris
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Filter search results based on the ethnicity of individuals in an image.
+          in: query
+          name: ethnicity
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - black
+                - caucasian
+                - east_asian
+                - hispanic_latino
+                - japanese
+                - middle_eastern
+                - mixed_race_person
+                - multiethnic_group
+                - native_american_first_nations
+                - pacific_islander
+                - south_asian
+                - southeast_asian
+              type: string
+            enum:
+              - black
+              - caucasian
+              - east_asian
+              - hispanic_latino
+              - japanese
+              - middle_eastern
+              - mixed_race_person
+              - multiethnic_group
+              - native_american_first_nations
+              - pacific_islander
+              - south_asian
+              - southeast_asian
+        - description: Filter based on specific events
+          in: query
+          name: event_ids
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              format: int32
+              type: integer
+        - description: Excludes images containing nudity. The default is false.
+          in: query
+          name: exclude_nudity
+          required: false
+          schema:
+            type: boolean
+        - description: Specifies fields to return. Defaults to 'summary_set'.
+          in: query
+          name: fields
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - allowed_use
+                - alternative_ids
+                - artist
+                - asset_family
+                - call_for_image
+                - caption
+                - collection_code
+                - collection_id
+                - collection_name
+                - color_type
+                - comp
+                - copyright
+                - date_camera_shot
+                - date_created
+                - detail_set
+                - display_set
+                - editorial_segments
+                - editorial_source
+                - entity_details
+                - event_ids
+                - graphical_style
+                - id
+                - keywords
+                - largest_downloads
+                - license_model
+                - max_dimensions
+                - orientation
+                - people
+                - preview
+                - product_types
+                - quality_rank
+                - referral_destinations
+                - summary_set
+                - thumb
+                - title
+                - uri_oembed
+              type: string
+            enum:
+              - allowed_use
+              - alternative_ids
+              - artist
+              - asset_family
+              - call_for_image
+              - caption
+              - collection_code
+              - collection_id
+              - collection_name
+              - color_type
+              - comp
+              - copyright
+              - date_camera_shot
+              - date_created
+              - detail_set
+              - display_set
+              - editorial_segments
+              - editorial_source
+              - entity_details
+              - event_ids
+              - graphical_style
+              - id
+              - keywords
+              - largest_downloads
+              - license_model
+              - max_dimensions
+              - orientation
+              - people
+              - preview
+              - product_types
+              - quality_rank
+              - referral_destinations
+              - summary_set
+              - thumb
+              - title
+              - uri_oembed
+        - description: Return only images having a specific file type.
+          in: query
+          name: file_types
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - eps
+                - jpg
+              type: string
+            enum:
+              - eps
+              - jpg
+        - description: Filter based on graphical style of the image.
+          in: query
+          name: graphical_styles
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - photography
+                - illustration
+              type: string
+            enum:
+              - photography
+              - illustration
+        - description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
+          in: query
+          name: keyword_ids
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              format: int32
+              type: integer
+        - description: 'Filter search results based on minimum quality ranking. Possible values 1, 2, 3 with 1 being best.'
+          in: query
+          name: minimum_quality_rank
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Filter based on minimum size requested.
+          in: query
+          name: minimum_size
+          required: false
+          schema:
+            type: string
+            enum:
+              - x_small
+              - small
+              - medium
+              - large
+              - x_large
+              - xx_large
+        - description: Filter based on the number of people in the image.
+          in: query
+          name: number_of_people
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - none
+                - one
+                - two
+                - group
+              type: string
+            enum:
+              - none
+              - one
+              - two
+              - group
+        - description: Return only images with selected aspect ratios.
+          in: query
+          name: orientations
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - horizontal
+                - vertical
+                - square
+                - panoramic_horizontal
+                - panoramic_vertical
+              type: string
+            enum:
+              - horizontal
+              - vertical
+              - square
+              - panoramic_horizontal
+              - panoramic_vertical
+        - description: Request results starting at a page number (default is 1).
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Request number of images to return in each page.
+          in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Search images using a search phrase.
+          in: query
+          name: phrase
+          required: false
+          schema:
+            type: string
+        - description: Filter images to those having product types from the selected list.
+          in: query
+          name: product_types
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - easy_access
+                - editorial_subscription
+                - image_pack
+                - premium_access
+                - royalty_free_subscription
+                - credit_pack
+              type: string
+            enum:
+              - easy_access
+              - editorial_subscription
+              - image_pack
+              - premium_access
+              - royalty_free_subscription
+              - credit_pack
+        - description: Select sort order of results.
+          in: query
+          name: sort_order
+          required: false
+          schema:
+            type: string
+            enum:
+              - best_match
+              - most_popular
+              - newest
+              - oldest
+        - description: Return only images associated with specific people (using a comma-delimited list).
+          in: query
+          name: specific_people
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'Return only images that are created on or after this date. Use ISO 8601 format (e.g., 1999-12-31).'
+          in: query
+          name: start_date
+          required: false
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Search.EditorialImageSearchResults'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Search.EditorialImageSearchResults'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: AuthorizationTokenRequired
+        '403':
+          description: UnauthorizedDisplaySize
+      summary: Search for editorial images only
+      tags:
+        - Search
+  /v3/search/videos:
+    get:
+      deprecated: false
+      operationId: Search_GetVideosByPhrase
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          schema:
+            type: string
+        - description: Provides filtering according to the age of individuals in a video.
+          in: query
+          name: age_of_people
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - newborn
+                - baby
+                - child
+                - teenager
+                - young_adult
+                - adult
+                - adults_only
+                - mature_adult
+                - senior_adult
+                - months_0_1
+                - months_2_5
+                - months_6_11
+                - months_12_17
+                - months_18_23
+                - years_2_3
+                - years_4_5
+                - years_6_7
+                - years_8_9
+                - years_10_11
+                - years_12_13
+                - years_14_15
+                - years_16_17
+                - years_18_19
+                - years_20_24
+                - years_20_29
+                - years_25_29
+                - years_30_34
+                - years_30_39
+                - years_35_39
+                - years_40_44
+                - years_40_49
+                - years_45_49
+                - years_50_54
+                - years_50_59
+                - years_55_59
+                - years_60_64
+                - years_60_69
+                - years_65_69
+                - years_70_79
+                - years_80_89
+                - over_90
+                - over_100
+              type: string
+            enum:
+              - newborn
+              - baby
+              - child
+              - teenager
+              - young_adult
+              - adult
+              - adults_only
+              - mature_adult
+              - senior_adult
+              - months_0_1
+              - months_2_5
+              - months_6_11
+              - months_12_17
+              - months_18_23
+              - years_2_3
+              - years_4_5
+              - years_6_7
+              - years_8_9
+              - years_10_11
+              - years_12_13
+              - years_14_15
+              - years_16_17
+              - years_18_19
+              - years_20_24
+              - years_20_29
+              - years_25_29
+              - years_30_34
+              - years_30_39
+              - years_35_39
+              - years_40_44
+              - years_40_49
+              - years_45_49
+              - years_50_54
+              - years_50_59
+              - years_55_59
+              - years_60_64
+              - years_60_69
+              - years_65_69
+              - years_70_79
+              - years_80_89
+              - over_90
+              - over_100
+        - description: Provides filtering by collection code.
+          in: query
+          name: collection_codes
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Provides searching based on specified collection(s).
+          in: query
+          name: collections_filter_type
+          required: false
+          schema:
+            type: string
+            enum:
+              - include
+              - exclude
+        - description: Excludes images containing nudity. The default is false.
+          in: query
+          name: exclude_nudity
+          required: false
+          schema:
+            type: boolean
+        - description: Specifies fields to return. Defaults to 'summary_set'.
+          in: query
+          name: fields
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - allowed_use
+                - artist
+                - asset_family
+                - caption
+                - clip_length
+                - collection_code
+                - collection_id
+                - collection_name
+                - color_type
+                - comp
+                - copyright
+                - date_created
+                - detail_set
+                - display_set
+                - editorial_segments
+                - entity_details
+                - era
+                - id
+                - keywords
+                - largest_downloads
+                - license_model
+                - mastered_to
+                - originally_shot_on
+                - preview
+                - product_types
+                - referral_destinations
+                - shot_speed
+                - source
+                - summary_set
+                - thumb
+                - title
+                - istock_licenses
+              type: string
+            enum:
+              - allowed_use
+              - artist
+              - asset_family
+              - caption
+              - clip_length
+              - collection_code
+              - collection_id
+              - collection_name
+              - color_type
+              - comp
+              - copyright
+              - date_created
+              - detail_set
+              - display_set
+              - editorial_segments
+              - entity_details
+              - era
+              - id
+              - keywords
+              - largest_downloads
+              - license_model
+              - mastered_to
+              - originally_shot_on
+              - preview
+              - product_types
+              - referral_destinations
+              - shot_speed
+              - source
+              - summary_set
+              - thumb
+              - title
+              - istock_licenses
+        - description: Filters according to the digital video format available on a film asset.
+          in: query
+          name: format_available
+          required: false
+          schema:
+            type: string
+            enum:
+              - sd
+              - hd
+              - fourK
+        - description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
+          in: query
+          name: keyword_ids
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              format: int32
+              type: integer
+        - description: Specifies the video licensing model(s).
+          in: query
+          name: license_models
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - rights_ready
+                - royalty_free
+              type: string
+            enum:
+              - rights_ready
+              - royalty_free
+        - description: Identifies page to return. Default is 1.
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: 'Specifies page size. Default is 30, maximum page_size is 100.'
+          in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Free-text search query.
+          in: query
+          name: phrase
+          required: false
+          schema:
+            type: string
+        - description: Provides filtering by a list of product types.
+          in: query
+          name: product_types
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - easy_access
+                - editorial_subscription
+                - image_pack
+                - premium_access
+                - royalty_free_subscription
+                - credit_pack
+              type: string
+            enum:
+              - easy_access
+              - editorial_subscription
+              - image_pack
+              - premium_access
+              - royalty_free_subscription
+              - credit_pack
+        - description: Allows sorting of results.
+          in: query
+          name: sort_order
+          required: false
+          schema:
+            type: string
+            enum:
+              - best_match
+              - most_popular
+              - newest
+              - oldest
+        - description: Provides filtering by specific peoples' names.
+          in: query
+          name: specific_people
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Search.VideoSearchResults_GettyImages.Models.Search.VideoSearchItem_'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Search.VideoSearchResults_GettyImages.Models.Search.VideoSearchItem_'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: AuthorizationTokenRequired
+        '403':
+          description: UnauthorizedDisplaySize
+      summary: Search for both creative and editorial videos
+      tags:
+        - Search
+  /v3/search/videos/creative:
+    get:
+      deprecated: false
+      operationId: Search_GetCreativeVideosByPhrase
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          schema:
+            type: string
+        - description: Provides filtering according to the age of individuals in a video.
+          in: query
+          name: age_of_people
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - newborn
+                - baby
+                - child
+                - teenager
+                - young_adult
+                - adult
+                - adults_only
+                - mature_adult
+                - senior_adult
+                - months_0_1
+                - months_2_5
+                - months_6_11
+                - months_12_17
+                - months_18_23
+                - years_2_3
+                - years_4_5
+                - years_6_7
+                - years_8_9
+                - years_10_11
+                - years_12_13
+                - years_14_15
+                - years_16_17
+                - years_18_19
+                - years_20_24
+                - years_20_29
+                - years_25_29
+                - years_30_34
+                - years_30_39
+                - years_35_39
+                - years_40_44
+                - years_40_49
+                - years_45_49
+                - years_50_54
+                - years_50_59
+                - years_55_59
+                - years_60_64
+                - years_60_69
+                - years_65_69
+                - years_70_79
+                - years_80_89
+                - over_90
+                - over_100
+              type: string
+            enum:
+              - newborn
+              - baby
+              - child
+              - teenager
+              - young_adult
+              - adult
+              - adults_only
+              - mature_adult
+              - senior_adult
+              - months_0_1
+              - months_2_5
+              - months_6_11
+              - months_12_17
+              - months_18_23
+              - years_2_3
+              - years_4_5
+              - years_6_7
+              - years_8_9
+              - years_10_11
+              - years_12_13
+              - years_14_15
+              - years_16_17
+              - years_18_19
+              - years_20_24
+              - years_20_29
+              - years_25_29
+              - years_30_34
+              - years_30_39
+              - years_35_39
+              - years_40_44
+              - years_40_49
+              - years_45_49
+              - years_50_54
+              - years_50_59
+              - years_55_59
+              - years_60_64
+              - years_60_69
+              - years_65_69
+              - years_70_79
+              - years_80_89
+              - over_90
+              - over_100
+        - description: Provides filtering by collection code.
+          in: query
+          name: collection_codes
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Provides searching based on specified collection(s).
+          in: query
+          name: collections_filter_type
+          required: false
+          schema:
+            type: string
+            enum:
+              - include
+              - exclude
+        - description: Excludes images containing nudity. The default is false.
+          in: query
+          name: exclude_nudity
+          required: false
+          schema:
+            type: boolean
+        - description: Specifies fields to return. Defaults to 'summary_set'.
+          in: query
+          name: fields
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - allowed_use
+                - artist
+                - asset_family
+                - caption
+                - clip_length
+                - collection_code
+                - collection_id
+                - collection_name
+                - color_type
+                - comp
+                - copyright
+                - date_created
+                - detail_set
+                - display_set
+                - era
+                - id
+                - keywords
+                - largest_downloads
+                - license_model
+                - mastered_to
+                - originally_shot_on
+                - preview
+                - product_types
+                - referral_destinations
+                - shot_speed
+                - source
+                - summary_set
+                - thumb
+                - title
+              type: string
+            enum:
+              - allowed_use
+              - artist
+              - asset_family
+              - caption
+              - clip_length
+              - collection_code
+              - collection_id
+              - collection_name
+              - color_type
+              - comp
+              - copyright
+              - date_created
+              - detail_set
+              - display_set
+              - era
+              - id
+              - keywords
+              - largest_downloads
+              - license_model
+              - mastered_to
+              - originally_shot_on
+              - preview
+              - product_types
+              - referral_destinations
+              - shot_speed
+              - source
+              - summary_set
+              - thumb
+              - title
+        - description: Filters according to the digital video format available on a film asset.
+          in: query
+          name: format_available
+          required: false
+          schema:
+            type: string
+            enum:
+              - sd
+              - hd
+              - fourK
+        - description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
+          in: query
+          name: keyword_ids
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              format: int32
+              type: integer
+        - description: Specifies the video licensing model(s).
+          in: query
+          name: license_models
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - rights_ready
+                - royalty_free
+              type: string
+            enum:
+              - rights_ready
+              - royalty_free
+        - description: Identifies page to return. Default is 1.
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: 'Specifies page size. Default is 30, maximum page_size is 100.'
+          in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Free-text search query.
+          in: query
+          name: phrase
+          required: false
+          schema:
+            type: string
+        - description: Allows filtering by a list of product types.
+          in: query
+          name: product_types
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - easy_access
+                - editorial_subscription
+                - image_pack
+                - premium_access
+                - royalty_free_subscription
+                - credit_pack
+              type: string
+            enum:
+              - easy_access
+              - editorial_subscription
+              - image_pack
+              - premium_access
+              - royalty_free_subscription
+              - credit_pack
+        - description: Allows sorting of results.
+          in: query
+          name: sort_order
+          required: false
+          schema:
+            type: string
+            enum:
+              - best_match
+              - newest
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Search.CreativeVideoSearchResults'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Search.CreativeVideoSearchResults'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: AuthorizationTokenRequired
+        '403':
+          description: UnauthorizedDisplaySize
+      summary: Search for creative videos
+      tags:
+        - Search
+  /v3/search/videos/editorial:
+    get:
+      deprecated: false
+      operationId: Search_GetEditorialVideosByPhrase
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          schema:
+            type: string
+        - description: Provides filtering according to the age of individuals in a video.
+          in: query
+          name: age_of_people
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - newborn
+                - baby
+                - child
+                - teenager
+                - young_adult
+                - adult
+                - adults_only
+                - mature_adult
+                - senior_adult
+                - months_0_1
+                - months_2_5
+                - months_6_11
+                - months_12_17
+                - months_18_23
+                - years_2_3
+                - years_4_5
+                - years_6_7
+                - years_8_9
+                - years_10_11
+                - years_12_13
+                - years_14_15
+                - years_16_17
+                - years_18_19
+                - years_20_24
+                - years_20_29
+                - years_25_29
+                - years_30_34
+                - years_30_39
+                - years_35_39
+                - years_40_44
+                - years_40_49
+                - years_45_49
+                - years_50_54
+                - years_50_59
+                - years_55_59
+                - years_60_64
+                - years_60_69
+                - years_65_69
+                - years_70_79
+                - years_80_89
+                - over_90
+                - over_100
+              type: string
+            enum:
+              - newborn
+              - baby
+              - child
+              - teenager
+              - young_adult
+              - adult
+              - adults_only
+              - mature_adult
+              - senior_adult
+              - months_0_1
+              - months_2_5
+              - months_6_11
+              - months_12_17
+              - months_18_23
+              - years_2_3
+              - years_4_5
+              - years_6_7
+              - years_8_9
+              - years_10_11
+              - years_12_13
+              - years_14_15
+              - years_16_17
+              - years_18_19
+              - years_20_24
+              - years_20_29
+              - years_25_29
+              - years_30_34
+              - years_30_39
+              - years_35_39
+              - years_40_44
+              - years_40_49
+              - years_45_49
+              - years_50_54
+              - years_50_59
+              - years_55_59
+              - years_60_64
+              - years_60_69
+              - years_65_69
+              - years_70_79
+              - years_80_89
+              - over_90
+              - over_100
+        - description: Provides filtering by collection code.
+          in: query
+          name: collection_codes
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Provides searching based on specified collection(s).
+          in: query
+          name: collections_filter_type
+          required: false
+          schema:
+            type: string
+            enum:
+              - include
+              - exclude
+        - description: specify link data entity uri.
+          in: query
+          name: entity_uris
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Excludes images containing nudity. The default is false.
+          in: query
+          name: exclude_nudity
+          required: false
+          schema:
+            type: boolean
+        - description: Specifies fields to return. Defaults to 'summary_set'.
+          in: query
+          name: fields
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - allowed_use
+                - artist
+                - asset_family
+                - caption
+                - clip_length
+                - collection_code
+                - collection_id
+                - collection_name
+                - color_type
+                - comp
+                - copyright
+                - date_created
+                - detail_set
+                - display_set
+                - editorial_segments
+                - entity_details
+                - era
+                - id
+                - keywords
+                - largest_downloads
+                - license_model
+                - mastered_to
+                - originally_shot_on
+                - preview
+                - product_types
+                - referral_destinations
+                - shot_speed
+                - source
+                - summary_set
+                - thumb
+                - title
+                - istock_licenses
+              type: string
+            enum:
+              - allowed_use
+              - artist
+              - asset_family
+              - caption
+              - clip_length
+              - collection_code
+              - collection_id
+              - collection_name
+              - color_type
+              - comp
+              - copyright
+              - date_created
+              - detail_set
+              - display_set
+              - editorial_segments
+              - entity_details
+              - era
+              - id
+              - keywords
+              - largest_downloads
+              - license_model
+              - mastered_to
+              - originally_shot_on
+              - preview
+              - product_types
+              - referral_destinations
+              - shot_speed
+              - source
+              - summary_set
+              - thumb
+              - title
+              - istock_licenses
+        - description: Filters according to the digital video format available on a film asset.
+          in: query
+          name: format_available
+          required: false
+          schema:
+            type: string
+            enum:
+              - sd
+              - hd
+              - fourK
+        - description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
+          in: query
+          name: keyword_ids
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              format: int32
+              type: integer
+        - description: Identifies page to return. Default is 1.
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: 'Specifies page size. Default is 30, maximum page_size is 100.'
+          in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Free-text search query.
+          in: query
+          name: phrase
+          required: false
+          schema:
+            type: string
+        - description: Allows filtering by a list of product types.
+          in: query
+          name: product_types
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - easy_access
+                - editorial_subscription
+                - image_pack
+                - premium_access
+                - royalty_free_subscription
+                - credit_pack
+              type: string
+            enum:
+              - easy_access
+              - editorial_subscription
+              - image_pack
+              - premium_access
+              - royalty_free_subscription
+              - credit_pack
+        - description: Allows sorting of results.
+          in: query
+          name: sort_order
+          required: false
+          schema:
+            type: string
+            enum:
+              - best_match
+              - most_popular
+              - newest
+              - oldest
+        - description: Allows filtering by specific peoples' names.
+          in: query
+          name: specific_people
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Search.EditorialVideoSearchResults'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Search.EditorialVideoSearchResults'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: AuthorizationTokenRequired
+        '403':
+          description: UnauthorizedDisplaySize
+      summary: Search for editorial videos
+      tags:
+        - Search
+  '/v3/usage-batches/{id}':
+    put:
+      deprecated: false
+      operationId: Usage_Put
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: Specifies a unique batch transaction id to identify the report.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success - All usages reported were successfully recorded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/report_usage_batch_response'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/report_usage_batch_response'
+        '400':
+          description: 'InvalidRequest - The content of the request was invalid. Most commonly this is due to either too many assets specified, no assets or invalid JSON.'
+        '401':
+          description: AuthorizationTokenRequired - Authorization token was missing or not valid.
+        '409':
+          description: TransactionIdDuplicated - The id parameter supplied was already used in a previous usage report.
+      summary: Report usage of assets via a batch format.
+      tags:
+        - Usage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/report_usage_batch_request'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/report_usage_batch_request'
+        description: "Specifies up to 1000 sets of asset Id, usage count, and date of use to submit usages for. \r\n            Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded. \r\n            The date format should be ISO 8601 (ex: YYYY-MM-DD), time is not needed."
+        required: true
+  /v3/videos:
+    get:
+      deprecated: false
+      description: ''
+      operationId: Videos_GetBatch
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          schema:
+            type: string
+        - description: Specifies one or more video ids to return. Use comma delimiter when requesting multiple ids.
+          in: query
+          name: ids
+          required: true
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Specifies fields to return. Defaults to 'summary_set'.
+          in: query
+          name: fields
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - id
+                - allowed_use
+                - artist
+                - asset_family
+                - caption
+                - clip_length
+                - collection_code
+                - collection_id
+                - collection_name
+                - color_type
+                - copyright
+                - video_comp
+                - date_created
+                - detail_set
+                - display_set
+                - download_sizes
+                - downloads
+                - era
+                - editorial_segments
+                - entity_details
+                - keywords
+                - license_model
+                - mastered_to
+                - originally_shot_on
+                - video_preview
+                - product_types
+                - referral_destinations
+                - shot_speed
+                - source
+                - summary_set
+                - video_thumb
+                - title
+                - istock_licenses
+              type: string
+            enum:
+              - id
+              - allowed_use
+              - artist
+              - asset_family
+              - caption
+              - clip_length
+              - collection_code
+              - collection_id
+              - collection_name
+              - color_type
+              - copyright
+              - video_comp
+              - date_created
+              - detail_set
+              - display_set
+              - download_sizes
+              - downloads
+              - era
+              - editorial_segments
+              - entity_details
+              - keywords
+              - license_model
+              - mastered_to
+              - originally_shot_on
+              - video_preview
+              - product_types
+              - referral_destinations
+              - shot_speed
+              - source
+              - summary_set
+              - video_thumb
+              - title
+              - istock_licenses
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Videos.VideosDetail'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Videos.VideosDetail'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: AuthorizationTokenRequired
+        '403':
+          description: UnauthorizedDisplaySize
+        '404':
+          description: VideosNotFound
+      summary: Get metadata for multiple videos by supplying multiple video ids
+      tags:
+        - Videos
+  '/v3/videos/{id}':
+    get:
+      deprecated: false
+      operationId: Videos_Get
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          schema:
+            type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          schema:
+            type: string
+        - description: A video id. For more than one video please use the /v3/video endpoint.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: comma delimited list of fields to retrive for the video
+          in: query
+          name: fields
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - id
+                - allowed_use
+                - artist
+                - asset_family
+                - caption
+                - clip_length
+                - collection_code
+                - collection_id
+                - collection_name
+                - color_type
+                - copyright
+                - video_comp
+                - date_created
+                - detail_set
+                - display_set
+                - download_sizes
+                - downloads
+                - era
+                - editorial_segments
+                - entity_details
+                - keywords
+                - license_model
+                - mastered_to
+                - originally_shot_on
+                - video_preview
+                - product_types
+                - referral_destinations
+                - shot_speed
+                - source
+                - summary_set
+                - video_thumb
+                - title
+                - istock_licenses
+              type: string
+            enum:
+              - id
+              - allowed_use
+              - artist
+              - asset_family
+              - caption
+              - clip_length
+              - collection_code
+              - collection_id
+              - collection_name
+              - color_type
+              - copyright
+              - video_comp
+              - date_created
+              - detail_set
+              - display_set
+              - download_sizes
+              - downloads
+              - era
+              - editorial_segments
+              - entity_details
+              - keywords
+              - license_model
+              - mastered_to
+              - originally_shot_on
+              - video_preview
+              - product_types
+              - referral_destinations
+              - shot_speed
+              - source
+              - summary_set
+              - video_thumb
+              - title
+              - istock_licenses
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Videos.VideoDetail'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GettyImages.Models.Videos.VideoDetail'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: AuthorizationTokenRequired
+        '403':
+          description: UnauthorizedDisplaySize
+        '404':
+          description: VideosNotFound
+      summary: Get metadata for a single video by supplying one video id
+      tags:
+        - Videos
+components:
+  schemas:
+    AddBoardAssetsResult:
+      properties:
+        assets_added:
+          items:
+            $ref: '#/components/schemas/BoardAsset'
+          type: array
+        assets_not_added:
+          items:
+            type: string
+          type: array
+      type: object
+    Asset:
+      properties:
+        asset_type:
+          type: string
+        date_added:
+          format: date-time
+          type: string
+        display_sizes:
+          items:
+            $ref: '#/components/schemas/DisplaySize'
+          type: array
+        id:
+          type: string
+      type: object
+    BoardAsset:
+      properties:
+        asset_id:
+          type: string
+      required:
+        - asset_id
+      type: object
+    BoardCommentPermissions:
+      properties:
+        can_add_comment:
+          type: boolean
+      type: object
+    BoardCreated:
+      properties:
+        id:
+          type: string
+      type: object
+    BoardDetail:
+      properties:
+        asset_count:
+          format: int32
+          type: integer
+        assets:
+          items:
+            $ref: '#/components/schemas/Asset'
+          type: array
+        comment_count:
+          format: int32
+          type: integer
+        date_created:
+          format: date-time
+          type: string
+        date_last_updated:
+          format: date-time
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        links:
+          $ref: '#/components/schemas/Links'
+        name:
+          type: string
+        permissions:
+          $ref: '#/components/schemas/BoardPermissions'
+      type: object
+    BoardInfo:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+      required:
+        - name
+      type: object
+    BoardList:
+      properties:
+        board_count:
+          format: int32
+          type: integer
+        boards:
+          items:
+            $ref: '#/components/schemas/BoardListBoard'
+          type: array
+      type: object
+    BoardListBoard:
+      properties:
+        asset_count:
+          format: int32
+          type: integer
+        board_relationship:
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        date_last_updated:
+          format: date-time
+          type: string
+        description:
+          type: string
+        hero_asset:
+          $ref: '#/components/schemas/Asset'
+        id:
+          type: string
+        name:
+          type: string
+      type: object
+    BoardPermissions:
+      properties:
+        can_add_assets:
+          type: boolean
+        can_delete_board:
+          type: boolean
+        can_invite_to_board:
+          type: boolean
+        can_remove_assets:
+          type: boolean
+        can_update_description:
+          type: boolean
+        can_update_name:
+          type: boolean
+      type: object
+    Collaborator:
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+      type: object
+    Comment:
+      properties:
+        created_by:
+          $ref: '#/components/schemas/Collaborator'
+        date_created:
+          format: date-time
+          type: string
+        id:
+          type: string
+        permissions:
+          $ref: '#/components/schemas/CommentPermissions'
+        text:
+          type: string
+      type: object
+    CommentCreated:
+      properties:
+        id:
+          type: string
+      type: object
+    CommentPermissions:
+      properties:
+        can_delete_comment:
+          type: boolean
+      type: object
+    CommentRequest:
+      properties:
+        text:
+          type: string
+      type: object
+    CommentsList:
+      properties:
+        comments:
+          items:
+            $ref: '#/components/schemas/Comment'
+          type: array
+        permissions:
+          $ref: '#/components/schemas/BoardCommentPermissions'
+      type: object
+    DisplaySize:
+      properties:
+        name:
+          type: string
+        uri:
+          type: string
+      type: object
+    GettyImages.Models.AllowedUse:
+      properties:
+        how_can_i_use_it:
+          description: Indicates how the asset can be used
+          type: string
+        release_info:
+          description: Indicates release status
+          type: string
+        usage_restrictions:
+          description: 'Indicates asset usage restriction, if any'
+          items:
+            type: string
+          type: array
+      type: object
+    GettyImages.Models.Artists.DisplaySize:
+      properties:
+        is_watermarked:
+          type: boolean
+        name:
+          type: string
+        uri:
+          type: string
+      type: object
+    GettyImages.Models.Artists.ImageSearchItem:
+      properties:
+        alternative_ids:
+          additionalProperties:
+            type: string
+          type: object
+        asset_family:
+          type: string
+        asset_type:
+          enum:
+            - Image
+            - Film
+          type: string
+        collection_code:
+          type: string
+        collection_name:
+          type: string
+        date_submitted:
+          format: date-time
+          type: string
+        display_sizes:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Artists.DisplaySize'
+          type: array
+        id:
+          type: string
+        keywords:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Artists.Keyword'
+          type: array
+      type: object
+    GettyImages.Models.Artists.ImageSearchResults:
+      properties:
+        images:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Artists.ImageSearchItem'
+          type: array
+        result_count:
+          format: int32
+          type: integer
+      type: object
+    GettyImages.Models.Artists.Keyword:
+      properties:
+        keyword_id:
+          type: string
+        text:
+          type: string
+        type:
+          type: string
+      type: object
+    GettyImages.Models.Collections.Collection:
+      properties:
+        asset_family:
+          type: string
+        code:
+          type: string
+        id:
+          format: int32
+          type: integer
+        license_model:
+          type: string
+        name:
+          type: string
+        product_types:
+          items:
+            type: string
+          type: array
+      type: object
+    GettyImages.Models.Collections.CollectionsList:
+      properties:
+        collections:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Collections.Collection'
+          type: array
+      type: object
+    GettyImages.Models.Countries.CountriesList:
+      properties:
+        countries:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Countries.Country'
+          type: array
+      type: object
+    GettyImages.Models.Countries.Country:
+      properties:
+        iso_alpha_2:
+          type: string
+        iso_alpha_3:
+          type: string
+        name:
+          type: string
+      type: object
+    GettyImages.Models.CuratedSets.CuratedSet:
+      properties:
+        assets:
+          items:
+            type: string
+          type: array
+        date_created:
+          format: date-time
+          type: string
+        date_last_updated:
+          format: date-time
+          type: string
+        description:
+          type: string
+        hero_image_uri:
+          type: string
+        keywords:
+          items:
+            type: string
+          type: array
+        set_id:
+          type: string
+        title:
+          type: string
+      type: object
+    GettyImages.Models.Customers.CustomerInfoResponse:
+      properties:
+        email_address:
+          type: string
+        is_active:
+          type: boolean
+        user_name:
+          type: string
+      type: object
+    GettyImages.Models.Download:
+      properties:
+        agreement_name:
+          type: string
+        product_id:
+          type: string
+        product_type:
+          type: string
+        uri:
+          type: string
+      type: object
+    GettyImages.Models.Downloads.GetDownloadsResponse:
+      properties:
+        downloads:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Downloads.GetDownloadsResponse.Download'
+          type: array
+        result_count:
+          format: int32
+          type: integer
+      type: object
+    GettyImages.Models.Downloads.GetDownloadsResponse.Download:
+      properties:
+        agreement_name:
+          type: string
+        date_downloaded:
+          format: date-time
+          type: string
+        download_details:
+          $ref: '#/components/schemas/GettyImages.Models.Downloads.GetDownloadsResponse.DownloadDetails'
+        id:
+          type: string
+        product_type:
+          type: string
+        thumb_uri:
+          type: string
+      type: object
+    GettyImages.Models.Downloads.GetDownloadsResponse.DownloadDetails:
+      properties:
+        download_notes:
+          type: string
+        project_code:
+          type: string
+      type: object
+    GettyImages.Models.Downloads.PremiumAccessDownloadData:
+      properties:
+        download_notes:
+          type: string
+        project_code:
+          type: string
+      type: object
+    GettyImages.Models.Events.Event:
+      properties:
+        child_event_count:
+          format: int32
+          type: integer
+        editorial_segments:
+          items:
+            type: string
+          type: array
+        hero_image:
+          $ref: '#/components/schemas/GettyImages.Models.HeroImage'
+        id:
+          format: int32
+          type: integer
+        image_count:
+          format: int32
+          type: integer
+        location:
+          $ref: '#/components/schemas/GettyImages.Models.LocationEvent'
+        name:
+          type: string
+        start_date:
+          format: date-time
+          type: string
+      type: object
+    GettyImages.Models.Events.EventsResult:
+      properties:
+        events:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Events.Event'
+          type: array
+        events_not_found:
+          items:
+            format: int32
+            type: integer
+          type: array
+      type: object
+    GettyImages.Models.HeroImage:
+      properties:
+        display_sizes:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.HeroImageDisplaySize'
+          type: array
+        id:
+          type: string
+      type: object
+    GettyImages.Models.HeroImageDisplaySize:
+      properties:
+        is_watermarked:
+          type: boolean
+        name:
+          type: string
+        uri:
+          type: string
+      type: object
+    GettyImages.Models.IStockLicense:
+      properties:
+        credits:
+          format: int32
+          type: integer
+        license_type:
+          type: string
+      type: object
+    GettyImages.Models.Images.EditorialSource:
+      properties:
+        id:
+          format: int32
+          type: integer
+        name:
+          type: string
+      type: object
+    GettyImages.Models.Images.ImageDetail:
+      properties:
+        allowed_use:
+          $ref: '#/components/schemas/GettyImages.Models.AllowedUse'
+        alternative_ids:
+          additionalProperties:
+            type: string
+          type: object
+        artist:
+          type: string
+        artist_title:
+          type: string
+        asset_family:
+          type: string
+        asset_type:
+          type: string
+        call_for_image:
+          type: boolean
+        caption:
+          type: string
+        city:
+          type: string
+        collection_code:
+          type: string
+        collection_id:
+          format: int32
+          type: integer
+        collection_name:
+          type: string
+        color_type:
+          type: string
+        copyright:
+          type: string
+        country:
+          type: string
+        credit_line:
+          type: string
+        date_camera_shot:
+          format: date-time
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        date_submitted:
+          format: date-time
+          type: string
+        display_sizes:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Images.ImageDetailDisplaySize'
+          type: array
+        download_sizes:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Images.ImageDownloadSize'
+          type: array
+        editorial_segments:
+          items:
+            type: string
+          type: array
+        editorial_source:
+          $ref: '#/components/schemas/GettyImages.Models.Images.EditorialSource'
+        event_ids:
+          items:
+            format: int32
+            type: integer
+          type: array
+        graphical_style:
+          type: string
+        id:
+          type: string
+        istock_licenses:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.IStockLicense'
+          type: array
+        keywords:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Keyword'
+          type: array
+        largest_downloads:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Images.ImageDownloadSize'
+          type: array
+        license_model:
+          type: string
+        links:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Images.Link'
+          type: array
+        max_dimensions:
+          $ref: '#/components/schemas/GettyImages.Models.MaxDimensions'
+        orientation:
+          type: string
+        people:
+          items:
+            type: string
+          type: array
+        prestige:
+          type: boolean
+        product_types:
+          items:
+            type: string
+          type: array
+        quality_rank:
+          format: int32
+          type: integer
+        referral_destinations:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.ReferralDestination'
+          type: array
+        state_province:
+          type: string
+        title:
+          type: string
+        uri_oembed:
+          type: string
+      type: object
+    GettyImages.Models.Images.ImageDetailDisplaySize:
+      properties:
+        height:
+          description: Indicates the height in pixels
+          format: int32
+          type: integer
+        is_watermarked:
+          description: Indicates whether the image is watermarked.
+          type: boolean
+        name:
+          description: Identifies the name of the display size
+          type: string
+        uri:
+          description: Identifies the URI for the image
+          type: string
+        width:
+          description: Indicates the width in pixels
+          format: int32
+          type: integer
+      type: object
+    GettyImages.Models.Images.ImageDownloadAuthorization:
+      properties:
+        agreement_name:
+          type: string
+        product_id:
+          type: string
+        product_type:
+          type: string
+        uri:
+          type: string
+      type: object
+    GettyImages.Models.Images.ImageDownloadSize:
+      properties:
+        bytes:
+          format: int32
+          type: integer
+        downloads:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Images.ImageDownloadAuthorization'
+          type: array
+        height:
+          format: int32
+          type: integer
+        media_type:
+          type: string
+        name:
+          enum:
+            - x_small
+            - small
+            - medium
+            - large
+            - x_large
+            - xx_large
+          type: string
+        width:
+          format: int32
+          type: integer
+      type: object
+    GettyImages.Models.Images.ImagesDetail:
+      properties:
+        images:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Images.ImageDetail'
+          type: array
+        images_not_found:
+          items:
+            type: string
+          type: array
+      type: object
+    GettyImages.Models.Images.Link:
+      properties:
+        rel:
+          type: string
+        uri:
+          type: string
+      type: object
+    GettyImages.Models.Keyword:
+      properties:
+        entity_types:
+          items:
+            type: string
+          type: array
+        entity_uris:
+          items:
+            type: string
+          type: array
+        keyword_id:
+          type: string
+        relevance:
+          format: int32
+          type: integer
+        text:
+          type: string
+        type:
+          type: string
+      type: object
+    GettyImages.Models.LocationEvent:
+      properties:
+        city:
+          type: string
+        country:
+          type: string
+        state_province:
+          type: string
+        venue:
+          type: string
+      type: object
+    GettyImages.Models.MaxDimensions:
+      properties:
+        height:
+          format: int32
+          type: integer
+        width:
+          format: int32
+          type: integer
+      type: object
+    GettyImages.Models.Products.DownloadRequirements:
+      properties:
+        is_note_required:
+          type: boolean
+        is_project_code_required:
+          type: boolean
+        project_codes:
+          items:
+            type: string
+          type: array
+      type: object
+    GettyImages.Models.Products.OverageDetails:
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        overages_reached:
+          type: boolean
+        remaining:
+          format: int32
+          type: integer
+      type: object
+    GettyImages.Models.Products.Product:
+      properties:
+        agreement_name:
+          type: string
+        application_website:
+          type: string
+        credits_remaining:
+          format: int32
+          type: integer
+        download_limit:
+          format: int32
+          type: integer
+        download_limit_duration:
+          type: string
+        download_limit_reset_utc_date:
+          format: date-time
+          type: string
+        download_requirements:
+          $ref: '#/components/schemas/GettyImages.Models.Products.DownloadRequirements'
+        downloads_remaining:
+          format: int32
+          type: integer
+        expiration_utc_date:
+          format: date-time
+          type: string
+        id:
+          format: int32
+          type: integer
+        imagepack_resolution:
+          type: string
+        name:
+          type: string
+        overage:
+          $ref: '#/components/schemas/GettyImages.Models.Products.OverageDetails'
+        premium_access_download_requirements:
+          $ref: '#/components/schemas/GettyImages.Models.Products.DownloadRequirements'
+        status:
+          enum:
+            - active
+            - inactive
+          type: string
+        type:
+          enum:
+            - easyaccess
+            - editorialsubscription
+            - imagepack
+            - premiumaccess
+            - royaltyfreesubscription
+            - creditpack
+          type: string
+      type: object
+    GettyImages.Models.Products.ProductsResult:
+      properties:
+        products:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Products.Product'
+          type: array
+      type: object
+    GettyImages.Models.Purchases.PreviousAssetPurchase:
+      properties:
+        asset_id:
+          type: string
+        asset_type:
+          type: string
+        date_purchased:
+          format: date-time
+          type: string
+        license_model:
+          type: string
+        order_id:
+          type: string
+        thumb_uri:
+          type: string
+      type: object
+    GettyImages.Models.Purchases.PreviousAssetPurchases:
+      properties:
+        previous_purchases:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Purchases.PreviousAssetPurchase'
+          type: array
+        result_count:
+          format: int32
+          type: integer
+      type: object
+    GettyImages.Models.Purchases.PreviousPurchase:
+      properties:
+        date_purchased:
+          format: date-time
+          type: string
+        image_id:
+          type: string
+        license_model:
+          type: string
+        order_id:
+          type: string
+        thumb_uri:
+          type: string
+      type: object
+    GettyImages.Models.Purchases.PreviousPurchases:
+      properties:
+        previous_purchases:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Purchases.PreviousPurchase'
+          type: array
+        result_count:
+          format: int32
+          type: integer
+      type: object
+    GettyImages.Models.ReferralDestination:
+      properties:
+        site_name:
+          type: string
+        uri:
+          type: string
+      type: object
+    GettyImages.Models.Search.CreativeImageSearchResults:
+      properties:
+        images:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Search.ImageSearchItemCreative'
+          type: array
+        result_count:
+          format: int32
+          type: integer
+      type: object
+    GettyImages.Models.Search.CreativeVideoSearchResults:
+      properties:
+        result_count:
+          format: int32
+          type: integer
+        videos:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Search.VideoSearchItem'
+          type: array
+      type: object
+    GettyImages.Models.Search.EditorialImageSearchResults:
+      properties:
+        images:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Search.ImageSearchItemEditorial'
+          type: array
+        result_count:
+          format: int32
+          type: integer
+      type: object
+    GettyImages.Models.Search.EditorialSource:
+      properties:
+        id:
+          format: int32
+          type: integer
+      type: object
+    GettyImages.Models.Search.EditorialVideoSearchResults:
+      properties:
+        result_count:
+          format: int32
+          type: integer
+        videos:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Search.VideoSearchItem'
+          type: array
+      type: object
+    GettyImages.Models.Search.EventsSearchResult:
+      properties:
+        events:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Events.Event'
+          type: array
+        result_count:
+          format: int32
+          type: integer
+      type: object
+    GettyImages.Models.Search.ImageSearchItem:
+      properties:
+        allowed_use:
+          $ref: '#/components/schemas/GettyImages.Models.AllowedUse'
+        alternative_ids:
+          additionalProperties:
+            type: string
+          type: object
+        artist:
+          type: string
+        asset_family:
+          type: string
+        call_for_image:
+          type: boolean
+        caption:
+          type: string
+        collection_code:
+          type: string
+        collection_id:
+          format: int32
+          type: integer
+        collection_name:
+          type: string
+        color_type:
+          type: string
+        copyright:
+          type: string
+        date_camera_shot:
+          format: date-time
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        display_sizes:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Search.ImageSearchItemDisplaySize'
+          type: array
+        editorial_segments:
+          items:
+            type: string
+          type: array
+        event_ids:
+          items:
+            format: int32
+            type: integer
+          type: array
+        graphical_style:
+          type: string
+        id:
+          type: string
+        istock_licenses:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.IStockLicense'
+          type: array
+        keywords:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Keyword'
+          type: array
+        largest_downloads:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Download'
+          type: array
+        license_model:
+          type: string
+        max_dimensions:
+          $ref: '#/components/schemas/GettyImages.Models.MaxDimensions'
+        orientation:
+          type: string
+        people:
+          items:
+            type: string
+          type: array
+        prestige:
+          type: boolean
+        product_types:
+          items:
+            type: string
+          type: array
+        quality_rank:
+          format: int32
+          type: integer
+        referral_destinations:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.ReferralDestination'
+          type: array
+        title:
+          type: string
+        uri_oembed:
+          type: string
+      type: object
+    GettyImages.Models.Search.ImageSearchItemCreative:
+      properties:
+        allowed_use:
+          $ref: '#/components/schemas/GettyImages.Models.AllowedUse'
+        alternative_ids:
+          additionalProperties:
+            type: string
+          type: object
+        artist:
+          type: string
+        asset_family:
+          type: string
+        call_for_image:
+          type: boolean
+        caption:
+          type: string
+        collection_code:
+          type: string
+        collection_id:
+          format: int32
+          type: integer
+        collection_name:
+          type: string
+        color_type:
+          type: string
+        copyright:
+          type: string
+        date_camera_shot:
+          format: date-time
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        display_sizes:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Search.ImageSearchItemDisplaySize'
+          type: array
+        graphical_style:
+          type: string
+        id:
+          type: string
+        keywords:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Keyword'
+          type: array
+        largest_downloads:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Download'
+          type: array
+        license_model:
+          type: string
+        max_dimensions:
+          $ref: '#/components/schemas/GettyImages.Models.MaxDimensions'
+        orientation:
+          type: string
+        prestige:
+          type: boolean
+        product_types:
+          items:
+            type: string
+          type: array
+        quality_rank:
+          format: int32
+          type: integer
+        referral_destinations:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.ReferralDestination'
+          type: array
+        title:
+          type: string
+        uri_oembed:
+          type: string
+      type: object
+    GettyImages.Models.Search.ImageSearchItemDisplaySize:
+      properties:
+        is_watermarked:
+          type: boolean
+        name:
+          type: string
+        uri:
+          type: string
+      type: object
+    GettyImages.Models.Search.ImageSearchItemEditorial:
+      properties:
+        allowed_use:
+          $ref: '#/components/schemas/GettyImages.Models.AllowedUse'
+        alternative_ids:
+          additionalProperties:
+            type: string
+          type: object
+        artist:
+          type: string
+        asset_family:
+          type: string
+        call_for_image:
+          type: boolean
+        caption:
+          type: string
+        collection_code:
+          type: string
+        collection_id:
+          format: int32
+          type: integer
+        collection_name:
+          type: string
+        color_type:
+          type: string
+        copyright:
+          type: string
+        date_camera_shot:
+          format: date-time
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        display_sizes:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Search.ImageSearchItemDisplaySize'
+          type: array
+        editorial_segments:
+          items:
+            type: string
+          type: array
+        editorial_source:
+          $ref: '#/components/schemas/GettyImages.Models.Search.EditorialSource'
+        event_ids:
+          items:
+            format: int32
+            type: integer
+          type: array
+        graphical_style:
+          type: string
+        id:
+          type: string
+        keywords:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Keyword'
+          type: array
+        largest_downloads:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Download'
+          type: array
+        license_model:
+          type: string
+        max_dimensions:
+          $ref: '#/components/schemas/GettyImages.Models.MaxDimensions'
+        orientation:
+          type: string
+        people:
+          items:
+            type: string
+          type: array
+        product_types:
+          items:
+            type: string
+          type: array
+        quality_rank:
+          format: int32
+          type: integer
+        referral_destinations:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.ReferralDestination'
+          type: array
+        title:
+          type: string
+        uri_oembed:
+          type: string
+      type: object
+    GettyImages.Models.Search.VideoSearchItem:
+      properties:
+        allowed_use:
+          $ref: '#/components/schemas/GettyImages.Models.AllowedUse'
+        artist:
+          type: string
+        asset_family:
+          type: string
+        caption:
+          type: string
+        clip_length:
+          type: string
+        collection_code:
+          type: string
+        collection_id:
+          format: int32
+          type: integer
+        collection_name:
+          type: string
+        color_type:
+          type: string
+        copyright:
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        display_sizes:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Search.ImageSearchItemDisplaySize'
+          type: array
+        era:
+          type: string
+        id:
+          type: string
+        istock_licenses:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.IStockLicense'
+          type: array
+        keywords:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Keyword'
+          type: array
+        largest_downloads:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Download'
+          type: array
+        license_model:
+          type: string
+        mastered_to:
+          type: string
+        originally_shot_on:
+          type: string
+        product_types:
+          items:
+            type: string
+          type: array
+        referral_destinations:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.ReferralDestination'
+          type: array
+        shot_speed:
+          type: string
+        source:
+          type: string
+        title:
+          type: string
+      type: object
+    GettyImages.Models.Videos.VideoDetail:
+      properties:
+        allowed_use:
+          $ref: '#/components/schemas/GettyImages.Models.AllowedUse'
+        artist:
+          type: string
+        asset_family:
+          type: string
+        caption:
+          type: string
+        clip_length:
+          type: string
+        collection_code:
+          type: string
+        collection_id:
+          format: int32
+          type: integer
+        collection_name:
+          type: string
+        color_type:
+          type: string
+        copyright:
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        display_sizes:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Search.ImageSearchItemDisplaySize'
+          type: array
+        download_sizes:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Videos.VideoDownloadSize'
+          type: array
+        editorial_segments:
+          items:
+            type: string
+          type: array
+        era:
+          type: string
+        id:
+          type: string
+        istock_licenses:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.IStockLicense'
+          type: array
+        keywords:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Keyword'
+          type: array
+        license_model:
+          type: string
+        mastered_to:
+          type: string
+        originally_shot_on:
+          type: string
+        product_types:
+          items:
+            type: string
+          type: array
+        referral_destinations:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.ReferralDestination'
+          type: array
+        shot_speed:
+          type: string
+        source:
+          type: string
+        title:
+          type: string
+      type: object
+    GettyImages.Models.Videos.VideoDownloadAuthorization:
+      properties:
+        agreement_name:
+          type: string
+        product_id:
+          type: string
+        product_type:
+          type: string
+        uri:
+          type: string
+      type: object
+    GettyImages.Models.Videos.VideoDownloadSize:
+      properties:
+        bit_depth:
+          type: string
+        broadcast_video_standard:
+          type: string
+        compression:
+          type: string
+        content_type:
+          type: string
+        description:
+          type: string
+        downloads:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Videos.VideoDownloadAuthorization'
+          type: array
+        format:
+          type: string
+        frame_rate:
+          format: double
+          type: number
+        frame_size:
+          type: string
+        height:
+          format: double
+          type: number
+        interlaced:
+          type: boolean
+        name:
+          type: string
+        width:
+          format: int32
+          type: integer
+      type: object
+    GettyImages.Models.Videos.VideosDetail:
+      properties:
+        videos:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Videos.VideoDetail'
+          type: array
+        videos_not_found:
+          items:
+            type: string
+          type: array
+      type: object
+    GettyImages.Services.Core.SecurityToken:
+      properties:
+        ActAsSystemId:
+          type: string
+        AdminId:
+          type: string
+        AuthId:
+          type: string
+        ClientIP:
+          type: string
+        ClientId:
+          type: string
+        Created:
+          format: date-time
+          type: string
+        Expires:
+          format: date-time
+          type: string
+        RememberedUser:
+          type: boolean
+        RenewalEnds:
+          format: date-time
+          type: string
+        SecureOnly:
+          type: boolean
+        SystemId:
+          type: string
+        SystemRole:
+          enum:
+            - CustomerFacing
+            - Admin
+            - Automation
+          type: string
+        UserId:
+          type: string
+        VisitorId:
+          type: string
+      type: object
+    Links:
+      properties:
+        invitation:
+          type: string
+        share:
+          type: string
+      type: object
+    Object:
+      properties: {}
+      type: object
+    RegisterAssetsRequest:
+      description: Specify request containing the list of asset ids you want to register.
+      properties:
+        asset_ids:
+          description: Specifies the list of asset ids you want to register.
+          items:
+            type: string
+          type: array
+      type: object
+    System.Object:
+      properties: {}
+      type: object
+    asset_usage:
+      description: 'Specifies the id, usage quantity, and date of when an asset was used.'
+      properties:
+        asset_id:
+          description: Specifies the Id of the asset that was used.
+          type: string
+        quantity:
+          description: Specifies the number of times the asset was used.
+          format: int32
+          type: integer
+        usage_date:
+          description: 'Identifies the date the asset was used, in ISO 8601 format (e.g., YYYY-MM-DD), time is not needed.'
+          format: date-time
+          type: string
+      type: object
+    report_usage_batch_request:
+      description: Specifies the request information for the Batch Usages endpoint.
+      properties:
+        asset_usages:
+          description: 'Identifies the list of asset id, usage count and date of usage combinations to record.'
+          items:
+            $ref: '#/components/schemas/asset_usage'
+          type: array
+      type: object
+    report_usage_batch_response:
+      description: Specifies the response from the Batch Usages endpoint.
+      properties:
+        invalid_assets:
+          description: Identifies a list of asset ids submitted that did not match known Getty asset ids.
+          items:
+            type: string
+          type: array
+        total_asset_usages_processed:
+          description: Specifies the number of asset usage records that were successfully recorded.
+          format: int32
+          type: integer
+      type: object
+    GettyImages.Models.Search.SearchResults_GettyImages.Models.Search.ImageSearchItem_:
+      properties:
+        images:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Search.ImageSearchItem'
+          type: array
+        result_count:
+          format: int32
+          type: integer
+      type: object
+    GettyImages.Models.Search.VideoSearchResults_GettyImages.Models.Search.VideoSearchItem_:
+      properties:
+        result_count:
+          format: int32
+          type: integer
+        videos:
+          items:
+            $ref: '#/components/schemas/GettyImages.Models.Search.VideoSearchItem'
+          type: array
+      type: object
+  securitySchemes:
+    Api-Key:
+      description: Provide your API key.
+      in: header
+      name: Api-Key
+      type: apiKey

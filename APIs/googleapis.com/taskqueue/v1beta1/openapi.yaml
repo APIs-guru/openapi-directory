@@ -1,0 +1,435 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://www.googleapis.com/taskqueue/v1beta1/projects'
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Accesses a Google App Engine Pull Task Queue over REST.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: TaskQueue
+  version: v1beta1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
+      url: 'https://www.googleapis.com/discovery/v1/apis/taskqueue/v1beta1/rest'
+      version: v1
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: taskqueue
+externalDocs:
+  url: 'https://developers.google.com/appengine/docs/python/taskqueue/rest'
+tags:
+  - name: taskqueues
+  - name: tasks
+paths:
+  '/{project}/taskqueues/{taskqueue}':
+    get:
+      description: Get detailed information about a TaskQueue.
+      operationId: taskqueue.taskqueues.get
+      parameters:
+        - description: The project under which the queue lies.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The id of the taskqueue to get the properties of.
+          in: path
+          name: taskqueue
+          required: true
+          schema:
+            type: string
+        - description: Whether to get stats. Optional.
+          in: query
+          name: getStats
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TaskQueue'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/taskqueue'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/taskqueue'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/taskqueue.consumer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/taskqueue.consumer'
+      tags:
+        - taskqueues
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/{project}/taskqueues/{taskqueue}/tasks':
+    get:
+      description: List Tasks in a TaskQueue
+      operationId: taskqueue.tasks.list
+      parameters:
+        - description: The project under which the queue lies.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The id of the taskqueue to list tasks from.
+          in: path
+          name: taskqueue
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Tasks2'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/taskqueue'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/taskqueue'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/taskqueue.consumer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/taskqueue.consumer'
+      tags:
+        - tasks
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/{project}/taskqueues/{taskqueue}/tasks/lease':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Lease 1 or more tasks from a TaskQueue.
+      operationId: taskqueue.tasks.lease
+      parameters:
+        - description: The project under which the queue lies.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The taskqueue to lease a task from.
+          in: path
+          name: taskqueue
+          required: true
+          schema:
+            type: string
+        - description: The number of tasks to lease.
+          in: query
+          name: numTasks
+          required: true
+          schema:
+            type: integer
+        - description: The lease in seconds.
+          in: query
+          name: leaseSecs
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Tasks'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/taskqueue'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/taskqueue'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/taskqueue.consumer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/taskqueue.consumer'
+      tags:
+        - tasks
+  '/{project}/taskqueues/{taskqueue}/tasks/{task}':
+    delete:
+      description: Delete a task from a TaskQueue.
+      operationId: taskqueue.tasks.delete
+      parameters:
+        - description: The project under which the queue lies.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The taskqueue to delete a task from.
+          in: path
+          name: taskqueue
+          required: true
+          schema:
+            type: string
+        - description: The id of the task to delete.
+          in: path
+          name: task
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/taskqueue'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/taskqueue'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/taskqueue.consumer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/taskqueue.consumer'
+      tags:
+        - tasks
+    get:
+      description: Get a particular task from a TaskQueue.
+      operationId: taskqueue.tasks.get
+      parameters:
+        - description: The project under which the queue lies.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The taskqueue in which the task belongs.
+          in: path
+          name: taskqueue
+          required: true
+          schema:
+            type: string
+        - description: The task to get properties of.
+          in: path
+          name: task
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Task'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/taskqueue'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/taskqueue'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/taskqueue.consumer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/taskqueue.consumer'
+      tags:
+        - tasks
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+components:
+  schemas:
+    Task:
+      properties:
+        enqueueTimestamp:
+          description: Time (in seconds since the epoch) at which the task was enqueued.
+          format: int64
+          type: string
+        id:
+          description: Name of the task.
+          type: string
+        kind:
+          default: 'taskqueues#task'
+          description: 'The kind of object returned, in this case set to task.'
+          type: string
+        leaseTimestamp:
+          description: Time (in seconds since the epoch) at which the task lease will expire. This value is 0 if the task isnt currently leased out to a worker.
+          format: int64
+          type: string
+        payloadBase64:
+          description: A bag of bytes which is the task payload. The payload on the JSON side is always Base64 encoded.
+          type: string
+        queueName:
+          description: Name of the queue that the task is in.
+          type: string
+      type: object
+    TaskQueue:
+      properties:
+        acl:
+          description: ACLs that are applicable to this TaskQueue object.
+          properties:
+            adminEmails:
+              description: 'Email addresses of users who are "admins" of the TaskQueue. This means they can control the queue, eg set ACLs for the queue.'
+              items:
+                type: string
+              type: array
+            consumerEmails:
+              description: Email addresses of users who can "consume" tasks from the TaskQueue. This means they can Dequeue and Delete tasks from the queue.
+              items:
+                type: string
+              type: array
+            producerEmails:
+              description: Email addresses of users who can "produce" tasks into the TaskQueue. This means they can Insert tasks into the queue.
+              items:
+                type: string
+              type: array
+          type: object
+        id:
+          description: Name of the taskqueue.
+          type: string
+        kind:
+          default: 'taskqueues#taskqueue'
+          description: 'The kind of REST object returned, in this case taskqueue.'
+          type: string
+        maxLeases:
+          description: The number of times we should lease out tasks before giving up on them. If unset we lease them out forever until a worker deletes the task.
+          format: int32
+          type: integer
+        stats:
+          description: Statistics for the TaskQueue object in question.
+          properties:
+            leasedLastHour:
+              description: Number of tasks leased in the last hour.
+              format: int64
+              type: string
+            leasedLastMinute:
+              description: Number of tasks leased in the last minute.
+              format: int64
+              type: string
+            oldestTask:
+              description: The timestamp (in seconds since the epoch) of the oldest unfinished task.
+              format: int64
+              type: string
+            totalTasks:
+              description: Number of tasks in the queue.
+              format: int32
+              type: integer
+          type: object
+      type: object
+    Tasks:
+      properties:
+        items:
+          description: The actual list of tasks returned as a result of the lease operation.
+          items:
+            $ref: '#/components/schemas/Task'
+          type: array
+        kind:
+          default: 'taskqueue#tasks'
+          description: 'The kind of object returned, a list of tasks.'
+          type: string
+      type: object
+    Tasks2:
+      properties:
+        items:
+          description: The actual list of tasks currently active in the TaskQueue.
+          items:
+            $ref: '#/components/schemas/Task'
+          type: array
+        kind:
+          default: 'taskqueues#tasks'
+          description: 'The kind of object returned, a list of tasks.'
+          type: string
+      type: object
+  parameters:
+    alt:
+      description: Data format for the response.
+      in: query
+      name: alt
+      schema:
+        type: string
+        enum:
+          - json
+        default: json
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+        default: true
+    quotaUser:
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    userIp:
+      description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      in: query
+      name: userIp
+      schema:
+        type: string
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          scopes:
+            'https://www.googleapis.com/auth/taskqueue': Manage your Tasks and Taskqueues
+            'https://www.googleapis.com/auth/taskqueue.consumer': Consume Tasks from your Taskqueues
+    Oauth2c:
+      description: Oauth 2.0 accessCode authentication
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+          scopes:
+            'https://www.googleapis.com/auth/taskqueue': Manage your Tasks and Taskqueues
+            'https://www.googleapis.com/auth/taskqueue.consumer': Consume Tasks from your Taskqueues

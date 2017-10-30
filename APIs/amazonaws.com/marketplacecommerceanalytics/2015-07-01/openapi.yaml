@@ -1,0 +1,309 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://marketplacecommerceanalytics.amazonaws.com/'
+info:
+  version: '2015-07-01'
+  x-release: v4
+  title: AWS Marketplace Commerce Analytics
+  description: Provides AWS Marketplace business intelligence data on-demand.
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: marketplacecommerceanalytics
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/marketplacecommerceanalytics-2015-07-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/marketplacecommerceanalytics/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: GenerateDataSet
+      description: 'Given a data set type and data set publication date, asynchronously publishes the requested data set to the specified S3 bucket and notifies the specified SNS topic once the data is available. Returns a unique request identifier that can be used to correlate requests with notifications from the SNS topic. Data sets will be published in comma-separated values (CSV) format with the file name {data_set_type}_YYYY-MM-DD.csv. If a file with the same name already exists (e.g. if the same data set is requested twice), the original file will be overwritten by the new file. Requires a Role with an attached permissions policy providing Allow permissions for the following actions: s3:PutObject, s3:GetBucketLocation, sns:GetTopicAttributes, sns:Publish, iam:GetRolePolicy.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateDataSetResult'
+        '480':
+          description: MarketplaceCommerceAnalyticsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketplaceCommerceAnalyticsException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateDataSetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StartSupportDataExport':
+    post:
+      operationId: StartSupportDataExport
+      description: 'Given a data set type and a from date, asynchronously publishes the requested customer support data to the specified S3 bucket and notifies the specified SNS topic once the data is available. Returns a unique request identifier that can be used to correlate requests with notifications from the SNS topic. Data sets will be published in comma-separated values (CSV) format with the file name {data_set_type}_YYYY-MM-DD''T''HH-mm-ss''Z''.csv. If a file with the same name already exists (e.g. if the same data set is requested twice), the original file will be overwritten by the new file. Requires a Role with an attached permissions policy providing Allow permissions for the following actions: s3:PutObject, s3:GetBucketLocation, sns:GetTopicAttributes, sns:Publish, iam:GetRolePolicy.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartSupportDataExportResult'
+        '480':
+          description: MarketplaceCommerceAnalyticsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketplaceCommerceAnalyticsException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartSupportDataExportRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    CustomerDefinedValues:
+      type: array
+      minItems: 1
+      maxItems: 5
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/OptionalKey'
+          value:
+            $ref: '#/components/schemas/OptionalValue'
+    DataSetPublicationDate:
+      type: string
+      format: date-time
+    DataSetRequestId:
+      type: string
+    DataSetType:
+      type: string
+      enum:
+        - customer_subscriber_hourly_monthly_subscriptions
+        - customer_subscriber_annual_subscriptions
+        - daily_business_usage_by_instance_type
+        - daily_business_fees
+        - daily_business_free_trial_conversions
+        - daily_business_new_instances
+        - daily_business_new_product_subscribers
+        - daily_business_canceled_product_subscribers
+        - monthly_revenue_billing_and_revenue_data
+        - monthly_revenue_annual_subscriptions
+        - disbursed_amount_by_product
+        - disbursed_amount_by_product_with_uncollected_funds
+        - disbursed_amount_by_instance_hours
+        - disbursed_amount_by_customer_geo
+        - disbursed_amount_by_age_of_uncollected_funds
+        - disbursed_amount_by_age_of_disbursed_funds
+        - customer_profile_by_industry
+        - customer_profile_by_revenue
+        - customer_profile_by_geography
+        - sales_compensation_billed_revenue
+        - us_sales_and_use_tax_records
+      minLength: 1
+      maxLength: 255
+    DestinationS3BucketName:
+      type: string
+      minLength: 1
+    DestinationS3Prefix:
+      type: string
+    ExceptionMessage:
+      type: string
+    FromDate:
+      type: string
+      format: date-time
+    GenerateDataSetRequest:
+      type: object
+      required:
+        - dataSetType
+        - dataSetPublicationDate
+        - roleNameArn
+        - destinationS3BucketName
+        - snsTopicArn
+      properties:
+        dataSetType:
+          $ref: '#/components/schemas/DataSetType'
+        dataSetPublicationDate:
+          $ref: '#/components/schemas/DataSetPublicationDate'
+        roleNameArn:
+          $ref: '#/components/schemas/RoleNameArn'
+        destinationS3BucketName:
+          $ref: '#/components/schemas/DestinationS3BucketName'
+        destinationS3Prefix:
+          $ref: '#/components/schemas/DestinationS3Prefix'
+        snsTopicArn:
+          $ref: '#/components/schemas/SnsTopicArn'
+        customerDefinedValues:
+          $ref: '#/components/schemas/CustomerDefinedValues'
+      description: Container for the parameters to the GenerateDataSet operation.
+    GenerateDataSetResult:
+      type: object
+      properties:
+        dataSetRequestId:
+          $ref: '#/components/schemas/DataSetRequestId'
+      description: Container for the result of the GenerateDataSet operation.
+    MarketplaceCommerceAnalyticsException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: This exception is thrown when an internal service error occurs.
+    OptionalKey:
+      type: string
+      minLength: 1
+      maxLength: 255
+    OptionalValue:
+      type: string
+      minLength: 1
+      maxLength: 255
+    RoleNameArn:
+      type: string
+      minLength: 1
+    SnsTopicArn:
+      type: string
+      minLength: 1
+    StartSupportDataExportRequest:
+      type: object
+      required:
+        - dataSetType
+        - fromDate
+        - roleNameArn
+        - destinationS3BucketName
+        - snsTopicArn
+      properties:
+        dataSetType:
+          $ref: '#/components/schemas/SupportDataSetType'
+        fromDate:
+          $ref: '#/components/schemas/FromDate'
+        roleNameArn:
+          $ref: '#/components/schemas/RoleNameArn'
+        destinationS3BucketName:
+          $ref: '#/components/schemas/DestinationS3BucketName'
+        destinationS3Prefix:
+          $ref: '#/components/schemas/DestinationS3Prefix'
+        snsTopicArn:
+          $ref: '#/components/schemas/SnsTopicArn'
+        customerDefinedValues:
+          $ref: '#/components/schemas/CustomerDefinedValues'
+      description: Container for the parameters to the StartSupportDataExport operation.
+    StartSupportDataExportResult:
+      type: object
+      properties:
+        dataSetRequestId:
+          $ref: '#/components/schemas/DataSetRequestId'
+      description: Container for the result of the StartSupportDataExport operation.
+    SupportDataSetType:
+      type: string
+      enum:
+        - customer_support_contacts_data
+        - test_customer_support_contacts_data
+      minLength: 1
+      maxLength: 255
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

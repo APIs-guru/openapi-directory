@@ -1,0 +1,816 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.slideroom.com/'
+info:
+  description: SlideRoom provides a RESTful API for exporting data out of your organization's SlideRoom account.
+  title: SlideRoom API V2
+  version: v2
+  x-logo:
+    backgroundColor: '#000000'
+    url: 'http://www.slideroom.com/assets/img/sr_logo.png'
+  x-origin:
+    - format: swagger
+      url: 'https://api.slideroom.com/schema/v2'
+      version: '2.0'
+  x-providerName: slideroom.com
+paths:
+  /api/v2/applicant/attributes:
+    delete:
+      deprecated: false
+      operationId: Applicant_DeleteAttributesV2
+      parameters:
+        - description: The email address of the applicant.
+          in: query
+          name: email
+          required: true
+          schema:
+            type: string
+        - description: The name of the attribute to be deleted.
+          in: query
+          name: name
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: pool
+          required: false
+          schema:
+            type: string
+            enum:
+              - Standard
+              - CommonAppSDS
+        - in: query
+          name: commonAppYear
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+      summary: Deletes a custom attribute for an applicant.
+      tags:
+        - Applicant
+    get:
+      deprecated: false
+      operationId: Applicant_GetAttributesV2
+      parameters:
+        - description: The email address of the applicant.
+          in: query
+          name: email
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: pool
+          required: false
+          schema:
+            type: string
+            enum:
+              - Standard
+              - CommonAppSDS
+        - in: query
+          name: commonAppYear
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+              examples:
+                response:
+                  value:
+                    name1: Value1
+                    name2: Value2
+            text/json:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+            application/xml:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+            text/xml:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+      summary: Gets the custom attributes for an applicant.
+      tags:
+        - Applicant
+    post:
+      deprecated: false
+      description: 'This method only adds or updates attributes. Null values will be updated as nulls, but not deleted. API Import is available in the Advanced Plan.'
+      operationId: Applicant_PostAttributesV2
+      parameters:
+        - description: The email address of the applicant.
+          in: query
+          name: email
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: pool
+          required: false
+          schema:
+            type: string
+            enum:
+              - Standard
+              - CommonAppSDS
+        - in: query
+          name: commonAppYear
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+      summary: Updates the custom attributes for an applicant.
+      tags:
+        - Applicant
+      requestBody:
+        $ref: '#/components/requestBodies/Applicant_PostAttributesV2Data'
+  /api/v2/applicant/attributes/names:
+    get:
+      deprecated: false
+      operationId: Applicant_GetAttributeNamesV2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+      summary: Gets the custom applicant attributes used by the organization.
+      tags:
+        - Applicant
+  /api/v2/application/attributes/names:
+    get:
+      deprecated: false
+      operationId: Application_GetAttributeNamesV2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+      summary: Gets the custom application attributes used by the organization.
+      tags:
+        - Application
+  /api/v2/application/request-export:
+    post:
+      deprecated: false
+      description: "Exports are generated asynchronously within SlideRoom.  To retrieve the export file generated by this request, use the api/v#/export/{token} endpoint to check the progress/result of the generation process.\r\n            PDF and ZIP exports are available in the Advanced Plan."
+      operationId: Application_RequestExportV2
+      parameters:
+        - in: query
+          name: format
+          required: false
+          schema:
+            type: string
+            enum:
+              - csv
+              - tsv
+              - txt
+              - tab
+              - xlsx
+              - pdf
+              - zip
+              - json
+        - in: query
+          name: roundType
+          required: false
+          schema:
+            type: string
+            enum:
+              - Assigned
+              - Current
+              - Named
+              - All
+        - in: query
+          name: roundName
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: tab.export
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: pdf.includeForms
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: pdf.includeReferences
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: pdf.includeMedia
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: pdf.includeApplicantAttachments
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: pdf.includeOrganizationAttachments
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: pdf.includeRatings
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: pdf.includeFullPageMedia
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: pdf.includeHighlights
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: pdf.includeComments
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: pdf.includeCommonApp
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: zip.originalMedia
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: zip.includeForms
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: zip.includeReferences
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: zip.includeMedia
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: zip.includeApplicantAttachments
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: zip.includeOrganizationAttachments
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: zip.includeRatings
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: zip.includeComments
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: zip.includeCommonApp
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: delivery.account
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: delivery.folder
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: since
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: pool
+          required: false
+          schema:
+            type: string
+            enum:
+              - All
+              - Current
+              - Archived
+              - CommonAppSDS
+        - in: query
+          name: status
+          required: false
+          schema:
+            type: string
+            enum:
+              - All
+              - InProgress
+              - Submitted
+        - in: query
+          name: searchName
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: email
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestApplicationExportResultV2'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RequestApplicationExportResultV2'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RequestApplicationExportResultV2'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RequestApplicationExportResultV2'
+      summary: 'Requests the generation of application export files (tabular, pdf, zip).'
+      tags:
+        - Application
+  '/api/v2/application/{applicationId}/attributes':
+    delete:
+      deprecated: false
+      operationId: Application_DeleteAttributesV2
+      parameters:
+        - description: The ID of the application.
+          in: path
+          name: applicationId
+          required: true
+          schema:
+            type: string
+        - description: The name of the attribute to be deleted.
+          in: query
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+      summary: Deletes a custom attribute for an application.
+      tags:
+        - Application
+    get:
+      deprecated: false
+      operationId: Application_GetAttributesV2
+      parameters:
+        - description: The ID of the application.
+          in: path
+          name: applicationId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+              examples:
+                response:
+                  value:
+                    name1: Value1
+                    name2: Value2
+            text/json:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+            application/xml:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+            text/xml:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+      summary: Gets the custom attributes for an application.
+      tags:
+        - Application
+    post:
+      deprecated: false
+      description: 'This method only adds or updates attributes. Null values will be updated as nulls, but not deleted.'
+      operationId: Application_PostAttributesV2
+      parameters:
+        - description: The ID of the application.
+          in: path
+          name: applicationId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+      summary: Updates the custom attributes for an application. API Import is available in the Advanced Plan.
+      tags:
+        - Application
+      requestBody:
+        $ref: '#/components/requestBodies/Applicant_PostAttributesV2Data'
+  '/api/v2/application/{applicationId}/request-export':
+    post:
+      deprecated: false
+      description: 'Exports are generated asynchronously within SlideRoom.  To retrieve the export file generated by this request, use the api/v#/export/{token} endpoint to check the progress/result of the generation process.'
+      operationId: Application_RequestExportByApplicationIdV2
+      parameters:
+        - description: The id of the application to export
+          in: path
+          name: applicationId
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: format
+          required: false
+          schema:
+            type: string
+            enum:
+              - csv
+              - tsv
+              - txt
+              - tab
+              - xlsx
+              - pdf
+              - zip
+              - json
+        - in: query
+          name: roundType
+          required: false
+          schema:
+            type: string
+            enum:
+              - Assigned
+              - Current
+              - Named
+              - All
+        - in: query
+          name: roundName
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: tab.export
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: pdf.includeForms
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: pdf.includeReferences
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: pdf.includeMedia
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: pdf.includeApplicantAttachments
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: pdf.includeOrganizationAttachments
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: pdf.includeRatings
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: pdf.includeFullPageMedia
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: pdf.includeHighlights
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: pdf.includeComments
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: pdf.includeCommonApp
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: zip.originalMedia
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: zip.includeForms
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: zip.includeReferences
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: zip.includeMedia
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: zip.includeApplicantAttachments
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: zip.includeOrganizationAttachments
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: zip.includeRatings
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: zip.includeComments
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: zip.includeCommonApp
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: delivery.account
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: delivery.folder
+          required: false
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestApplicationExportResultV2'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RequestApplicationExportResultV2'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RequestApplicationExportResultV2'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RequestApplicationExportResultV2'
+        '400':
+          description: Bad Request
+      summary: 'Requests the generation of a single application export file (tabular, pdf, zip).'
+      tags:
+        - Application
+  '/api/v2/export/{token}':
+    get:
+      deprecated: false
+      operationId: Export_GetV2
+      parameters:
+        - description: ''
+          in: path
+          name: token
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportResultV2'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ExportResultV2'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ExportResultV2'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ExportResultV2'
+      summary: Gets the status/result of a requested export.
+      tags:
+        - Export
+components:
+  schemas:
+    ExportResultV2:
+      properties:
+        completed_files:
+          format: int32
+          type: integer
+        file_urls:
+          items:
+            type: string
+          type: array
+        status:
+          type: string
+        total_files:
+          format: int32
+          type: integer
+      type: object
+    RequestApplicationExportResultV2:
+      properties:
+        message:
+          type: string
+        submissions:
+          format: int32
+          type: integer
+        token:
+          format: int32
+          type: integer
+      type: object
+    WebhookResultV2: {}
+  requestBodies:
+    Applicant_PostAttributesV2Data:
+      content:
+        application/json:
+          schema:
+            additionalProperties:
+              type: string
+            example:
+              name1: Value1
+              name2: Value2
+            type: object
+        text/json:
+          schema:
+            additionalProperties:
+              type: string
+            example:
+              name1: Value1
+              name2: Value2
+            type: object
+        application/xml:
+          schema:
+            additionalProperties:
+              type: string
+            example:
+              name1: Value1
+              name2: Value2
+            type: object
+        text/xml:
+          schema:
+            additionalProperties:
+              type: string
+            example:
+              name1: Value1
+              name2: Value2
+            type: object
+        application/x-www-form-urlencoded:
+          schema:
+            additionalProperties:
+              type: string
+            example:
+              name1: Value1
+              name2: Value2
+            type: object
+      description: The name/value pairs of the attributes.
+      required: true

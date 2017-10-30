@@ -1,0 +1,1296 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://demo.traccar.org/api'
+info:
+  description: Open Source GPS Tracking Platform
+  title: traccar
+  version: '3.10'
+  x-apisguru-categories:
+    - location
+  x-logo:
+    url: 'https://www.traccar.org/wp-content/uploads/2015/04/logo2x.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/tananaev/traccar/master/swagger.json'
+      version: '2.0'
+  x-providerName: traccar.org
+security:
+  - basicAuth: []
+paths:
+  /attributes/aliases:
+    get:
+      description: 'Without params, it returns a list of AttributeAlias from all the user''s Devices'
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AttributeAlias'
+                type: array
+      summary: Fetch a list of AttributeAlias
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeAlias'
+      summary: Set an AttributeAlias
+      requestBody:
+        $ref: '#/components/requestBodies/AttributeAlias'
+  '/attributes/aliases/{id}':
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/entityId'
+      responses:
+        '204':
+          description: No Content
+      summary: Delete an AttributeAlias
+    put:
+      parameters:
+        - $ref: '#/components/parameters/entityId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeAlias'
+      summary: Update an AttributeAlias
+      requestBody:
+        $ref: '#/components/requestBodies/AttributeAlias'
+  /calendars:
+    get:
+      description: 'Without params, it returns a list of Calendars the user has access to'
+      parameters:
+        - $ref: '#/components/parameters/all'
+        - $ref: '#/components/parameters/userId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Calendar'
+                type: array
+      summary: Fetch a list of Calendars
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Calendar'
+      summary: Create a Calendar
+      requestBody:
+        $ref: '#/components/requestBodies/Calendar'
+  '/calendars/{id}':
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/entityId'
+      responses:
+        '204':
+          description: No Content
+      summary: Delete a Calendar
+    put:
+      parameters:
+        - $ref: '#/components/parameters/entityId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Calendar'
+      summary: Update a Calendar
+      requestBody:
+        $ref: '#/components/requestBodies/Calendar'
+  /commands:
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Command'
+        '400':
+          description: 'Could happen when dispatching to a device that is offline, the user doesn''t have permission or an incorrect command _type_ for the device'
+      summary: Dispatch commands to device
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Command'
+        required: true
+  /commandtypes:
+    get:
+      parameters:
+        - in: query
+          name: deviceId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CommandType'
+                type: array
+        '400':
+          description: Could happen when trying to fetch from an offline device or the user does not have permission
+      summary: Fetch a list of available Commands for the Device
+  /devices:
+    get:
+      description: 'Without any params, returns a list of the user''s devices'
+      parameters:
+        - $ref: '#/components/parameters/all'
+        - $ref: '#/components/parameters/userId'
+        - description: To fetch one or more devices. Multiple params can be passed like `id=31&id=42`
+          in: query
+          name: id
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Device'
+                type: array
+        '400':
+          description: No permission
+      summary: Fetch a list of Devices
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+      summary: Create a Device
+      requestBody:
+        $ref: '#/components/requestBodies/Device'
+  /devices/geofences:
+    delete:
+      responses:
+        '204':
+          description: No Content
+      summary: Remove a Geofence from a Device
+      requestBody:
+        $ref: '#/components/requestBodies/DeviceGeofence'
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceGeofence'
+      summary: Link a Geofence to a Device
+      requestBody:
+        $ref: '#/components/requestBodies/DeviceGeofence'
+  '/devices/{id}':
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/entityId'
+      responses:
+        '204':
+          description: No Content
+      summary: Delete a Device
+    put:
+      parameters:
+        - $ref: '#/components/parameters/entityId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+      summary: Update a Device
+      requestBody:
+        $ref: '#/components/requestBodies/Device'
+  '/devices/{id}/distance':
+    put:
+      parameters:
+        - $ref: '#/components/parameters/entityId'
+      responses:
+        '204':
+          description: No Content
+      summary: Update the distance counter of the Device
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceTotalDistance'
+        required: true
+  '/events/{id}':
+    get:
+      parameters:
+        - $ref: '#/components/parameters/entityId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+  /geofences:
+    get:
+      description: 'Without params, it returns a list of Geofences the user has access to'
+      parameters:
+        - $ref: '#/components/parameters/all'
+        - $ref: '#/components/parameters/userId'
+        - in: query
+          name: groupId
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/deviceId'
+        - in: query
+          name: refresh
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Geofence'
+                type: array
+      summary: Fetch a list of Geofences
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Geofence'
+      summary: Create a Geofence
+      requestBody:
+        $ref: '#/components/requestBodies/Geofence'
+  '/geofences/{id}':
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/entityId'
+      responses:
+        '204':
+          description: No Content
+      summary: Delete a Geofence
+    put:
+      parameters:
+        - $ref: '#/components/parameters/entityId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Geofence'
+      summary: Update a Geofence
+      requestBody:
+        $ref: '#/components/requestBodies/Geofence'
+  /groups:
+    get:
+      description: 'Without any params, returns a list of the Groups the user belongs to'
+      parameters:
+        - $ref: '#/components/parameters/all'
+        - $ref: '#/components/parameters/userId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Group'
+                type: array
+      summary: Fetch a list of Groups
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '400':
+          description: No permission
+      summary: Create a Group
+      requestBody:
+        $ref: '#/components/requestBodies/Group'
+  /groups/geofences:
+    delete:
+      responses:
+        '204':
+          description: No Content
+      summary: Remove a Geofence from a Group
+      requestBody:
+        $ref: '#/components/requestBodies/GroupGeofence'
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupGeofence'
+      summary: Link a Geofence to a Group
+      requestBody:
+        $ref: '#/components/requestBodies/GroupGeofence'
+  '/groups/{id}':
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/entityId'
+      responses:
+        '204':
+          description: No Content
+      summary: Delete a Group
+    put:
+      parameters:
+        - $ref: '#/components/parameters/entityId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+      summary: Update a Group
+      requestBody:
+        $ref: '#/components/requestBodies/Group'
+  /permissions/calendars:
+    delete:
+      responses:
+        '204':
+          description: No Content
+      summary: Remove a Calendar from a User
+      requestBody:
+        $ref: '#/components/requestBodies/CalendarPermission'
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalendarPermission'
+      summary: Link a Calendar to a User
+      requestBody:
+        $ref: '#/components/requestBodies/CalendarPermission'
+  /permissions/devices:
+    delete:
+      responses:
+        '204':
+          description: No Content
+      summary: Remove a Device from a User
+      requestBody:
+        $ref: '#/components/requestBodies/DevicePermission'
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevicePermission'
+        '400':
+          description: No permission
+      summary: Link a Device to a User
+      requestBody:
+        $ref: '#/components/requestBodies/DevicePermission'
+  /permissions/geofences:
+    delete:
+      responses:
+        '204':
+          description: No Content
+      summary: Remove a Geofence from a User
+      requestBody:
+        $ref: '#/components/requestBodies/GeofencePermission'
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeofencePermission'
+      summary: Link a Geofence to a User
+      requestBody:
+        $ref: '#/components/requestBodies/GeofencePermission'
+  /permissions/groups:
+    delete:
+      responses:
+        '204':
+          description: No Content
+      summary: Remove a Group from a User
+      requestBody:
+        $ref: '#/components/requestBodies/GroupPermission'
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupPermission'
+      summary: Link a Group to a User
+      requestBody:
+        $ref: '#/components/requestBodies/GroupPermission'
+  /permissions/users:
+    delete:
+      responses:
+        '204':
+          description: No Content
+      summary: Remove a User from a manager User
+      requestBody:
+        $ref: '#/components/requestBodies/UserPermission'
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPermission'
+      summary: Link a User to a manager User
+      requestBody:
+        $ref: '#/components/requestBodies/UserPermission'
+  /positions:
+    get:
+      description: 'Without any params, it returns a list of last known positions for all the user''s Devices. _from_ and _to_ fields are not required with _id_'
+      parameters:
+        - description: '_deviceId_ is optional, but requires the _from_ and _to_ parameters when used'
+          in: query
+          name: deviceId
+          required: false
+          schema:
+            type: integer
+        - description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+          in: query
+          name: from
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+          in: query
+          name: to
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - description: To fetch one or more positions. Multiple params can be passed like `id=31&id=42`
+          in: query
+          name: id
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Position'
+                type: array
+            text/csv:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Position'
+                type: array
+            application/gpx+xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Position'
+                type: array
+      summary: Fetches a list of Positions
+  /reports/events:
+    get:
+      description: At least one _deviceId_ or one _groupId_ must be passed
+      parameters:
+        - $ref: '#/components/parameters/deviceIdArray'
+        - $ref: '#/components/parameters/groupIdArray'
+        - description: '% can be used to return events of all types'
+          in: query
+          name: type
+          schema:
+            type: array
+            items:
+              type: string
+        - $ref: '#/components/parameters/fromTime'
+        - $ref: '#/components/parameters/toTime'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Event'
+                type: array
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Event'
+                type: array
+      summary: Fetch a list of Events within the time period for the Devices or Groups
+  /reports/route:
+    get:
+      description: At least one _deviceId_ or one _groupId_ must be passed
+      parameters:
+        - $ref: '#/components/parameters/deviceIdArray'
+        - $ref: '#/components/parameters/groupIdArray'
+        - $ref: '#/components/parameters/fromTime'
+        - $ref: '#/components/parameters/toTime'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Position'
+                type: array
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Position'
+                type: array
+      summary: Fetch a list of Positions within the time period for the Devices or Groups
+  /reports/summary:
+    get:
+      description: At least one _deviceId_ or one _groupId_ must be passed
+      parameters:
+        - $ref: '#/components/parameters/deviceIdArray'
+        - $ref: '#/components/parameters/groupIdArray'
+        - $ref: '#/components/parameters/fromTime'
+        - $ref: '#/components/parameters/toTime'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ReportSummary'
+                type: array
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ReportSummary'
+                type: array
+      summary: Fetch a list of ReportSummary within the time period for the Devices or Groups
+  /reports/trips:
+    get:
+      description: At least one _deviceId_ or one _groupId_ must be passed
+      parameters:
+        - $ref: '#/components/parameters/deviceIdArray'
+        - $ref: '#/components/parameters/groupIdArray'
+        - $ref: '#/components/parameters/fromTime'
+        - $ref: '#/components/parameters/toTime'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ReportTrips'
+                type: array
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ReportTrips'
+                type: array
+      summary: Fetch a list of ReportTrips within the time period for the Devices or Groups
+  /server:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Server'
+      summary: Fetch Server information
+    put:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Server'
+      summary: Update Server information
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Server'
+        required: true
+  /session:
+    delete:
+      responses:
+        '204':
+          description: No Content
+      summary: Close the Session
+    get:
+      parameters:
+        - in: query
+          name: token
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: Not Found
+      summary: Fetch Session information
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+      summary: Create a new Session
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                  format: password
+              required:
+                - email
+  /statistics:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/fromTime'
+        - $ref: '#/components/parameters/toTime'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Statistics'
+                type: array
+      summary: Fetch server Statistics
+  /users:
+    get:
+      parameters:
+        - description: Can only be used by admin or manager users
+          in: query
+          name: userId
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/User'
+                type: array
+        '400':
+          description: No Permission
+      summary: Fetch a list of Users
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      summary: Create a User
+      requestBody:
+        $ref: '#/components/requestBodies/User'
+  /users/notifications:
+    get:
+      description: 'Without params, it returns a list of the user''s enabled Notifications'
+      parameters:
+        - description: To fetch a list of all available Notifications
+          in: query
+          name: all
+          schema:
+            type: boolean
+        - $ref: '#/components/parameters/userId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Notification'
+                type: array
+      summary: Fetch a list of Notification types
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+      summary: Set or unset a Notification
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Notification'
+        required: true
+  '/users/{id}':
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/entityId'
+      responses:
+        '204':
+          description: No Content
+      summary: Delete a User
+    put:
+      parameters:
+        - $ref: '#/components/parameters/entityId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      summary: Update a User
+      requestBody:
+        $ref: '#/components/requestBodies/User'
+components:
+  schemas:
+    AttributeAlias:
+      properties:
+        alias:
+          type: string
+        attribute:
+          type: string
+        deviceId:
+          type: integer
+        id:
+          type: integer
+    Calendar:
+      properties:
+        atributes: {}
+        data:
+          description: base64 encoded in iCalendar format
+          type: string
+        id:
+          type: integer
+        name:
+          type: string
+    CalendarPermission:
+      properties:
+        calendarId:
+          type: integer
+        userId:
+          type: integer
+    Command:
+      properties:
+        attributes: {}
+        deviceId:
+          type: integer
+        type:
+          type: string
+    CommandType:
+      properties:
+        type:
+          type: string
+    Device:
+      properties:
+        attributes: {}
+        category:
+          type: string
+        contact:
+          type: string
+        geofenceIds:
+          items:
+            type: integer
+          type: array
+        groupId:
+          type: integer
+        id:
+          type: integer
+        lastUpdate:
+          description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+          format: date-time
+          type: string
+        model:
+          type: string
+        name:
+          type: string
+        phone:
+          type: string
+        positionId:
+          type: integer
+        status:
+          type: string
+        uniqueId:
+          type: string
+    DeviceGeofence:
+      properties:
+        deviceId:
+          type: integer
+        geofenceId:
+          type: integer
+    DevicePermission:
+      properties:
+        deviceId:
+          type: integer
+        userId:
+          type: integer
+    DeviceTotalDistance:
+      properties:
+        deviceId:
+          type: integer
+        totalDistance:
+          description: in meters
+          type: number
+    Event:
+      properties:
+        attributes: {}
+        deviceId:
+          type: integer
+        geofenceId:
+          type: integer
+        id:
+          type: integer
+        positionId:
+          type: integer
+        serverTime:
+          description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+          format: date-time
+          type: string
+        type:
+          type: string
+    Geofence:
+      properties:
+        area:
+          type: string
+        attributes: {}
+        calendarId:
+          type: integer
+        description:
+          type: string
+        id:
+          type: integer
+        name:
+          type: string
+    GeofencePermission:
+      properties:
+        geofenceId:
+          type: integer
+        userId:
+          type: integer
+    Group:
+      properties:
+        attributes: {}
+        groupId:
+          type: integer
+        id:
+          type: integer
+        name:
+          type: string
+    GroupGeofence:
+      properties:
+        geofenceId:
+          type: integer
+        groupId:
+          type: integer
+    GroupPermission:
+      properties:
+        groupId:
+          type: integer
+        userId:
+          type: integer
+    Notification:
+      properties:
+        attributes: {}
+        id:
+          type: integer
+        mail:
+          type: boolean
+        type:
+          type: string
+        userId:
+          type: integer
+        web:
+          type: boolean
+    Position:
+      properties:
+        accuracy:
+          type: number
+        address:
+          type: string
+        altitude:
+          type: number
+        attributes: {}
+        course:
+          type: number
+        deviceId:
+          type: integer
+        deviceTime:
+          description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+          format: date-time
+          type: string
+        fixTime:
+          description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+          format: date-time
+          type: string
+        id:
+          type: integer
+        latitude:
+          type: number
+        longitude:
+          type: number
+        network:
+          type: string
+        outdated:
+          type: boolean
+        protocol:
+          type: string
+        serverTime:
+          description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+          format: date-time
+          type: string
+        speed:
+          description: in knots
+          type: number
+        valid:
+          type: boolean
+    ReportSummary:
+      properties:
+        averageSpeed:
+          description: in knots
+          type: number
+        deviceId:
+          type: integer
+        deviceName:
+          type: string
+        distance:
+          description: in meters
+          type: number
+        engineHours:
+          type: integer
+        maxSpeed:
+          description: in knots
+          type: number
+    ReportTrips:
+      properties:
+        averageSpeed:
+          description: in knots
+          type: number
+        deviceId:
+          type: integer
+        deviceName:
+          type: string
+        distance:
+          description: in meters
+          type: number
+        duration:
+          type: integer
+        endAddress:
+          type: string
+        endLat:
+          type: number
+        endLon:
+          type: number
+        endTime:
+          description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+          format: date-time
+          type: string
+        maxSpeed:
+          description: in knots
+          type: number
+        startAddress:
+          type: string
+        startLat:
+          type: number
+        startLon:
+          type: number
+        startTime:
+          description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+          format: date-time
+          type: string
+    Server:
+      properties:
+        attributes: {}
+        bingKey:
+          type: string
+        coordinateFormat:
+          type: string
+        distanceUnit:
+          type: string
+        forceSettings:
+          type: boolean
+        id:
+          type: integer
+        latitude:
+          type: number
+        longitude:
+          type: number
+        map:
+          type: string
+        mapUrl:
+          type: string
+        readonly:
+          type: boolean
+        registration:
+          type: boolean
+        speedUnit:
+          type: string
+        twelveHourFormat:
+          type: boolean
+        version:
+          type: string
+        zoom:
+          type: integer
+    Statistics:
+      properties:
+        activeDevices:
+          type: integer
+        activeUsers:
+          type: integer
+        captureTime:
+          description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+          format: date-time
+          type: string
+        messagesReceived:
+          type: integer
+        messagesStored:
+          type: integer
+        requests:
+          type: integer
+    User:
+      properties:
+        admin:
+          type: boolean
+        attributes: {}
+        coordinateFormat:
+          type: string
+        deviceLimit:
+          type: integer
+        deviceReadonly:
+          type: boolean
+        disabled:
+          type: boolean
+        distanceUnit:
+          type: string
+        email:
+          type: string
+        expirationTime:
+          description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+          format: date-time
+          type: string
+        id:
+          type: integer
+        latitude:
+          type: number
+        longitude:
+          type: number
+        map:
+          type: string
+        name:
+          type: string
+        password:
+          type: string
+        readonly:
+          type: boolean
+        speedUnit:
+          type: string
+        token:
+          type: string
+        twelveHourFormat:
+          type: boolean
+        userLimit:
+          type: integer
+        zoom:
+          type: integer
+    UserPermission:
+      properties:
+        managedUserId:
+          type: integer
+        userId:
+          type: integer
+  parameters:
+    all:
+      description: Can only be used by admins or managers to fetch all entities
+      in: query
+      name: all
+      schema:
+        type: boolean
+    deviceId:
+      description: 'Standard users can use this only with _deviceId_s, they have access to'
+      in: query
+      name: deviceId
+      schema:
+        type: integer
+    deviceIdArray:
+      in: query
+      name: deviceId
+      explode: true
+      schema:
+        type: array
+        items:
+          type: integer
+    entityId:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+    fromTime:
+      description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+      in: query
+      name: from
+      required: true
+      schema:
+        type: string
+        format: date-time
+    groupIdArray:
+      in: query
+      name: groupId
+      explode: true
+      schema:
+        type: array
+        items:
+          type: integer
+    toTime:
+      description: 'in IS0 8601 format. eg. `1963-11-22T18:30:00Z`'
+      in: query
+      name: to
+      required: true
+      schema:
+        type: string
+        format: date-time
+    userId:
+      description: Standard users can use this only with their own _userId_
+      in: query
+      name: userId
+      schema:
+        type: integer
+  requestBodies:
+    AttributeAlias:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AttributeAlias'
+      required: true
+    Calendar:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Calendar'
+      required: true
+    Device:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Device'
+      required: true
+    DeviceGeofence:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DeviceGeofence'
+      required: true
+    Geofence:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Geofence'
+      required: true
+    Group:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Group'
+      required: true
+    GroupGeofence:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GroupGeofence'
+      required: true
+    CalendarPermission:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CalendarPermission'
+      required: true
+    DevicePermission:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DevicePermission'
+      required: true
+    GeofencePermission:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GeofencePermission'
+      required: true
+    GroupPermission:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GroupPermission'
+      required: true
+    UserPermission:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserPermission'
+      required: true
+    User:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+      required: true
+  securitySchemes:
+    basicAuth:
+      description: Basic HTTP authorization with _email_ and _password_
+      type: http
+      scheme: basic

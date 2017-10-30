@@ -1,0 +1,284 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.apitore.com/api/7'
+info:
+  description: 'Kuromoji: japanese morphological analyzer.<BR />[Endpoint] https://api.apitore.com/api/7'
+  title: Kuromoji APIs
+  version: 1.0.1
+  x-description-language: jp
+  x-logo:
+    url: 'https://apitore.com/img/apis/7.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://api.apitore.com/json/7'
+      version: '2.0'
+  x-providerName: apitore.com
+  x-serviceName: kuromojiApis
+tags:
+  - description: Kuromoji Ipadic Neologd Controller
+    name: kuromoji-ipadic-neologd-controller
+  - description: Kuromoji Ipadic Controller
+    name: kuromoji-ipadic-controller
+paths:
+  /kuromoji-ipadic-neologd/tokenize:
+    get:
+      description: 'Kuromoji IPADIC NEologd dictionary.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/kuromoji-response">kuromoji-response</a><BR />&nbsp; Class: com.apitore.banana.response.com.atilika.kuromoji.TokenResponseEntity<BR />'
+      operationId: tokenizeUsingGET_1
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: 'Text [up to 400 characters]'
+          in: query
+          name: text
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponseEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Kuromoji IPADIC NEologd
+      tags:
+        - kuromoji-ipadic-neologd-controller
+    post:
+      description: 'Kuromoji IPADIC NEologd dictionary.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/kuromoji-response">kuromoji-response</a><BR />&nbsp; Class: com.apitore.banana.response.com.atilika.kuromoji.TokenResponseEntity<BR />'
+      operationId: tokenizeUsingPOST_1
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokensResponseEntity'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Kuromoji IPADIC NEologd
+      tags:
+        - kuromoji-ipadic-neologd-controller
+      requestBody:
+        $ref: '#/components/requestBodies/KuromojiRequestEntity'
+  /kuromoji-ipadic/tokenize:
+    get:
+      description: 'Kuromoji IPADIC dictionary.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/kuromoji-response">kuromoji-response</a><BR />&nbsp; Class: com.apitore.banana.response.com.atilika.kuromoji.TokenResponseEntity<BR />'
+      operationId: tokenizeUsingGET
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: 'Text [up to 400 characters]'
+          in: query
+          name: text
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponseEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Kuromoji IPADIC
+      tags:
+        - kuromoji-ipadic-controller
+    post:
+      description: 'Kuromoji IPADIC dictionary.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/kuromoji-response">kuromoji-response</a><BR />&nbsp; Class: com.apitore.banana.response.com.atilika.kuromoji.TokenResponseEntity<BR />'
+      operationId: tokenizeUsingPOST
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokensResponseEntity'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Kuromoji IPADIC
+      tags:
+        - kuromoji-ipadic-controller
+      requestBody:
+        $ref: '#/components/requestBodies/KuromojiRequestEntity'
+components:
+  schemas:
+    KuromojiRequestEntity:
+      properties:
+        texts:
+          description: 'texts [max 1MB]'
+          items:
+            type: string
+          type: array
+      required:
+        - texts
+      type: object
+    TokenEntity:
+      properties:
+        allFeatures:
+          description: All features
+          type: string
+        allFeaturesArray:
+          description: All features array
+          items:
+            type: string
+          type: array
+        baseForm:
+          description: Base form
+          type: string
+        conjugationForm:
+          description: Conjugation form
+          type: string
+        conjugationType:
+          description: Conjugation type
+          type: string
+        known:
+          description: Known
+          example: false
+          type: boolean
+        partOfSpeechLevel1:
+          description: Part of speech level1
+          type: string
+        partOfSpeechLevel2:
+          description: Part of speech level2
+          type: string
+        partOfSpeechLevel3:
+          description: Part of speech level3
+          type: string
+        partOfSpeechLevel4:
+          description: Part of speech level4
+          type: string
+        position:
+          description: Position
+          format: int32
+          type: integer
+        pronunciation:
+          description: Pronunciation
+          type: string
+        reading:
+          description: Reading
+          type: string
+        surface:
+          description: Surface
+          type: string
+      required:
+        - allFeatures
+        - allFeaturesArray
+        - baseForm
+        - conjugationForm
+        - conjugationType
+        - known
+        - partOfSpeechLevel1
+        - partOfSpeechLevel2
+        - partOfSpeechLevel3
+        - partOfSpeechLevel4
+        - position
+        - pronunciation
+        - reading
+        - surface
+      type: object
+    TokenResponseEntity:
+      properties:
+        endTime:
+          description: End date
+          type: string
+        log:
+          description: Log message
+          type: string
+        processTime:
+          description: 'Process time [millisecond]'
+          type: string
+        startTime:
+          description: Start date
+          type: string
+        tokens:
+          description: Tokens
+          items:
+            $ref: '#/components/schemas/TokenEntity'
+          type: array
+      required:
+        - endTime
+        - log
+        - processTime
+        - startTime
+      type: object
+    TokensResponseEntity:
+      properties:
+        endTime:
+          description: End date
+          type: string
+        log:
+          description: Log message
+          type: string
+        processTime:
+          description: 'Process time [millisecond]'
+          type: string
+        startTime:
+          description: Start date
+          type: string
+        tokens:
+          description: Tokens
+          items:
+            items:
+              $ref: '#/components/schemas/TokenEntity'
+            type: array
+          type: array
+      required:
+        - endTime
+        - log
+        - processTime
+        - startTime
+      type: object
+  requestBodies:
+    KuromojiRequestEntity:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/KuromojiRequestEntity'
+      description: Input Text
+      required: true

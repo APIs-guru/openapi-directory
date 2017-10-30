@@ -1,0 +1,820 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://xray.amazonaws.com/'
+info:
+  version: '2016-04-12'
+  x-release: v4
+  title: AWS X-Ray
+  description: AWS X-Ray provides APIs for managing debug traces and retrieving service maps and other data created by processing those traces.
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: xray
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/xray-2016-04-12.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/xray/'
+security:
+  - hmac: []
+paths:
+  /Traces:
+    post:
+      operationId: BatchGetTraces
+      description: Retrieves a list of traces specified by ID. Each trace is a collection of segment documents that originates from a single request. Use <code>GetTraceSummaries</code> to get a list of trace IDs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetTracesResult'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetTracesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ServiceGraph:
+    post:
+      operationId: GetServiceGraph
+      description: 'Retrieves a document that describes services that process incoming requests, and downstream services that they call as a result. Root services process incoming requests and make calls to downstream services. Root services are applications that use the AWS X-Ray SDK. Downstream services can be other applications, AWS resources, HTTP web APIs, or SQL databases.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetServiceGraphResult'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetServiceGraphRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /TraceGraph:
+    post:
+      operationId: GetTraceGraph
+      description: Retrieves a service graph for one or more specific trace IDs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTraceGraphResult'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetTraceGraphRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /TraceSummaries:
+    post:
+      operationId: GetTraceSummaries
+      description: '<p>Retrieves IDs and metadata for traces available for a specified time frame using an optional filter. To get the full traces, pass the trace IDs to <code>BatchGetTraces</code>.</p> <p>A filter expression can target traced requests that hit specific service nodes or edges, have errors, or come from a known user. For example, the following filter expression targets traces that pass through <code>api.example.com</code>:</p> <p> <code>service("api.example.com")</code> </p> <p>This filter expression finds traces that have an annotation named <code>account</code> with the value <code>12345</code>:</p> <p> <code>annotation.account = "12345"</code> </p> <p>For a full list of indexed fields and keywords that you can use in filter expressions, see <a href="http://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html">Using Filter Expressions</a> in the <i>AWS X-Ray Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTraceSummariesResult'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetTraceSummariesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /TelemetryRecords:
+    post:
+      operationId: PutTelemetryRecords
+      description: Used by the AWS X-Ray daemon to upload telemetry.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutTelemetryRecordsResult'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutTelemetryRecordsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /TraceSegments:
+    post:
+      operationId: PutTraceSegments
+      description: '<p>Uploads segment documents to AWS X-Ray. The X-Ray SDK generates segment documents and sends them to the X-Ray daemon, which uploads them in batches. A segment document can be a completed segment, an in-progress segment, or an array of subsegments.</p> <p>Segments must include the following fields. For the full segment document schema, see <a href="http://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html">AWS X-Ray Segment Documents</a> in the <i>AWS X-Ray Developer Guide</i>.</p> <p class="title"> <b>Required Segment Document Fields</b> </p> <ul> <li> <p> <code>name</code> - The name of the service that handled the request.</p> </li> <li> <p> <code>id</code> - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.</p> </li> <li> <p> <code>trace_id</code> - A unique identifier that connects all segments and subsegments originating from a single client request.</p> </li> <li> <p> <code>start_time</code> - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, <code>1480615200.010</code> or <code>1.480615200010E9</code>.</p> </li> <li> <p> <code>end_time</code> - Time the segment or subsegment was closed. For example, <code>1480615200.090</code> or <code>1.480615200090E9</code>. Specify either an <code>end_time</code> or <code>in_progress</code>.</p> </li> <li> <p> <code>in_progress</code> - Set to <code>true</code> instead of specifying an <code>end_time</code> to record that a segment has been started, but is not complete. Send an in progress segment when your application receives a request that will take a long time to serve, to trace the fact that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.</p> </li> </ul> <p>A <code>trace_id</code> consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979. This includes:</p> <p class="title"> <b>Trace ID Format</b> </p> <ul> <li> <p>The version number, i.e. <code>1</code>.</p> </li> <li> <p>The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is <code>1480615200</code> seconds, or <code>58406520</code> in hexadecimal.</p> </li> <li> <p>A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutTraceSegmentsResult'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutTraceSegmentsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    Alias:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        Names:
+          $ref: '#/components/schemas/AliasNames'
+        Type:
+          $ref: '#/components/schemas/String'
+      description: An alias for an edge.
+    AliasList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Alias'
+    AliasNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    AnnotationKey:
+      type: string
+    AnnotationValue:
+      type: object
+      properties:
+        NumberValue:
+          $ref: '#/components/schemas/NullableDouble'
+        BooleanValue:
+          $ref: '#/components/schemas/NullableBoolean'
+        StringValue:
+          $ref: '#/components/schemas/String'
+      description: 'Value of a segment annotation. Has one of three value types: Number, Boolean or String.'
+    Annotations:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/AnnotationKey'
+          value:
+            $ref: '#/components/schemas/ValuesWithServiceIds'
+    BackendConnectionErrors:
+      type: object
+      properties:
+        TimeoutCount:
+          $ref: '#/components/schemas/NullableInteger'
+        ConnectionRefusedCount:
+          $ref: '#/components/schemas/NullableInteger'
+        HTTPCode4XXCount:
+          $ref: '#/components/schemas/NullableInteger'
+        HTTPCode5XXCount:
+          $ref: '#/components/schemas/NullableInteger'
+        UnknownHostCount:
+          $ref: '#/components/schemas/NullableInteger'
+        OtherCount:
+          $ref: '#/components/schemas/NullableInteger'
+      description: <p/>
+    BatchGetTracesRequest:
+      type: object
+      required:
+        - TraceIds
+      properties:
+        TraceIds:
+          $ref: '#/components/schemas/TraceIdList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    BatchGetTracesResult:
+      type: object
+      properties:
+        Traces:
+          $ref: '#/components/schemas/TraceList'
+        UnprocessedTraceIds:
+          $ref: '#/components/schemas/UnprocessedTraceIdList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    Double:
+      type: number
+      format: double
+    Edge:
+      type: object
+      properties:
+        ReferenceId:
+          $ref: '#/components/schemas/NullableInteger'
+        StartTime:
+          $ref: '#/components/schemas/Timestamp'
+        EndTime:
+          $ref: '#/components/schemas/Timestamp'
+        SummaryStatistics:
+          $ref: '#/components/schemas/EdgeStatistics'
+        ResponseTimeHistogram:
+          $ref: '#/components/schemas/Histogram'
+        Aliases:
+          $ref: '#/components/schemas/AliasList'
+      description: Information about a connection between two services.
+    EdgeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Edge'
+    EdgeStatistics:
+      type: object
+      properties:
+        OkCount:
+          $ref: '#/components/schemas/NullableLong'
+        ErrorStatistics:
+          $ref: '#/components/schemas/ErrorStatistics'
+        FaultStatistics:
+          $ref: '#/components/schemas/FaultStatistics'
+        TotalCount:
+          $ref: '#/components/schemas/NullableLong'
+        TotalResponseTime:
+          $ref: '#/components/schemas/NullableDouble'
+      description: Response statistics for an edge.
+    ErrorStatistics:
+      type: object
+      properties:
+        ThrottleCount:
+          $ref: '#/components/schemas/NullableLong'
+        OtherCount:
+          $ref: '#/components/schemas/NullableLong'
+        TotalCount:
+          $ref: '#/components/schemas/NullableLong'
+      description: Information about requests that failed with a 4xx Client Error status code.
+    FaultStatistics:
+      type: object
+      properties:
+        OtherCount:
+          $ref: '#/components/schemas/NullableLong'
+        TotalCount:
+          $ref: '#/components/schemas/NullableLong'
+      description: Information about requests that failed with a 5xx Server Error status code.
+    FilterExpression:
+      type: string
+      minLength: 0
+      maxLength: 2000
+    GetServiceGraphRequest:
+      type: object
+      required:
+        - StartTime
+        - EndTime
+      properties:
+        StartTime:
+          $ref: '#/components/schemas/Timestamp'
+        EndTime:
+          $ref: '#/components/schemas/Timestamp'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    GetServiceGraphResult:
+      type: object
+      properties:
+        StartTime:
+          $ref: '#/components/schemas/Timestamp'
+        EndTime:
+          $ref: '#/components/schemas/Timestamp'
+        Services:
+          $ref: '#/components/schemas/ServiceList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    GetTraceGraphRequest:
+      type: object
+      required:
+        - TraceIds
+      properties:
+        TraceIds:
+          $ref: '#/components/schemas/TraceIdList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    GetTraceGraphResult:
+      type: object
+      properties:
+        Services:
+          $ref: '#/components/schemas/ServiceList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    GetTraceSummariesRequest:
+      type: object
+      required:
+        - StartTime
+        - EndTime
+      properties:
+        StartTime:
+          $ref: '#/components/schemas/Timestamp'
+        EndTime:
+          $ref: '#/components/schemas/Timestamp'
+        Sampling:
+          $ref: '#/components/schemas/NullableBoolean'
+        FilterExpression:
+          $ref: '#/components/schemas/FilterExpression'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    GetTraceSummariesResult:
+      type: object
+      properties:
+        TraceSummaries:
+          $ref: '#/components/schemas/TraceSummaryList'
+        ApproximateTime:
+          $ref: '#/components/schemas/Timestamp'
+        TracesProcessedCount:
+          $ref: '#/components/schemas/NullableLong'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    Histogram:
+      type: array
+      items:
+        $ref: '#/components/schemas/HistogramEntry'
+    HistogramEntry:
+      type: object
+      properties:
+        Value:
+          $ref: '#/components/schemas/Double'
+        Count:
+          $ref: '#/components/schemas/Integer'
+      description: 'An entry in a histogram for a statistic. A histogram maps the range of observed values on the X axis, and the prevalence of each value on the Y axis.'
+    Http:
+      type: object
+      properties:
+        HttpURL:
+          $ref: '#/components/schemas/String'
+        HttpStatus:
+          $ref: '#/components/schemas/NullableInteger'
+        HttpMethod:
+          $ref: '#/components/schemas/String'
+        UserAgent:
+          $ref: '#/components/schemas/String'
+        ClientIp:
+          $ref: '#/components/schemas/String'
+      description: Information about an HTTP request.
+    Integer:
+      type: integer
+    InvalidRequestException:
+      type: object
+      properties: {}
+      description: The request is missing required parameters or has invalid parameters.
+    NullableBoolean:
+      type: boolean
+    NullableDouble:
+      type: number
+      format: double
+    NullableInteger:
+      type: integer
+    NullableLong:
+      type: integer
+    PutTelemetryRecordsRequest:
+      type: object
+      required:
+        - TelemetryRecords
+      properties:
+        TelemetryRecords:
+          $ref: '#/components/schemas/TelemetryRecordList'
+        EC2InstanceId:
+          $ref: '#/components/schemas/String'
+        Hostname:
+          $ref: '#/components/schemas/String'
+        ResourceARN:
+          $ref: '#/components/schemas/String'
+    PutTelemetryRecordsResult:
+      type: object
+      properties: {}
+    PutTraceSegmentsRequest:
+      type: object
+      required:
+        - TraceSegmentDocuments
+      properties:
+        TraceSegmentDocuments:
+          $ref: '#/components/schemas/TraceSegmentDocumentList'
+    PutTraceSegmentsResult:
+      type: object
+      properties:
+        UnprocessedTraceSegments:
+          $ref: '#/components/schemas/UnprocessedTraceSegmentList'
+    Segment:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/SegmentId'
+        Document:
+          $ref: '#/components/schemas/SegmentDocument'
+      description: 'A segment from a trace that has been ingested by the X-Ray service. The segment can be compiled from documents uploaded with <a>PutTraceSegments</a>, or an <code>inferred</code> segment for a downstream service, generated from a subsegment sent by the service that called it.'
+    SegmentDocument:
+      type: string
+      minLength: 1
+    SegmentId:
+      type: string
+      minLength: 16
+      maxLength: 16
+    SegmentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Segment'
+    Service:
+      type: object
+      properties:
+        ReferenceId:
+          $ref: '#/components/schemas/NullableInteger'
+        Name:
+          $ref: '#/components/schemas/String'
+        Names:
+          $ref: '#/components/schemas/ServiceNames'
+        Root:
+          $ref: '#/components/schemas/NullableBoolean'
+        AccountId:
+          $ref: '#/components/schemas/String'
+        Type:
+          $ref: '#/components/schemas/String'
+        State:
+          $ref: '#/components/schemas/String'
+        StartTime:
+          $ref: '#/components/schemas/Timestamp'
+        EndTime:
+          $ref: '#/components/schemas/Timestamp'
+        Edges:
+          $ref: '#/components/schemas/EdgeList'
+        SummaryStatistics:
+          $ref: '#/components/schemas/ServiceStatistics'
+        DurationHistogram:
+          $ref: '#/components/schemas/Histogram'
+        ResponseTimeHistogram:
+          $ref: '#/components/schemas/Histogram'
+      description: 'Information about an application that processed requests, users that made requests, or downstream services, resources and applications that an application used.'
+    ServiceId:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        Names:
+          $ref: '#/components/schemas/ServiceNames'
+        AccountId:
+          $ref: '#/components/schemas/String'
+        Type:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    ServiceIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServiceId'
+    ServiceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Service'
+    ServiceNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ServiceStatistics:
+      type: object
+      properties:
+        OkCount:
+          $ref: '#/components/schemas/NullableLong'
+        ErrorStatistics:
+          $ref: '#/components/schemas/ErrorStatistics'
+        FaultStatistics:
+          $ref: '#/components/schemas/FaultStatistics'
+        TotalCount:
+          $ref: '#/components/schemas/NullableLong'
+        TotalResponseTime:
+          $ref: '#/components/schemas/NullableDouble'
+      description: Response statistics for a service.
+    String:
+      type: string
+    TelemetryRecord:
+      type: object
+      properties:
+        Timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        SegmentsReceivedCount:
+          $ref: '#/components/schemas/NullableInteger'
+        SegmentsSentCount:
+          $ref: '#/components/schemas/NullableInteger'
+        SegmentsSpilloverCount:
+          $ref: '#/components/schemas/NullableInteger'
+        SegmentsRejectedCount:
+          $ref: '#/components/schemas/NullableInteger'
+        BackendConnectionErrors:
+          $ref: '#/components/schemas/BackendConnectionErrors'
+      description: <p/>
+    TelemetryRecordList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TelemetryRecord'
+    ThrottledException:
+      type: object
+      properties: {}
+      description: The request exceeds the maximum number of requests per second.
+    Timestamp:
+      type: string
+      format: date-time
+    Trace:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/TraceId'
+        Duration:
+          $ref: '#/components/schemas/NullableDouble'
+        Segments:
+          $ref: '#/components/schemas/SegmentList'
+      description: A collection of segment documents with matching trace IDs.
+    TraceId:
+      type: string
+      minLength: 35
+      maxLength: 35
+    TraceIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TraceId'
+    TraceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Trace'
+    TraceSegmentDocument:
+      type: string
+    TraceSegmentDocumentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TraceSegmentDocument'
+    TraceSummary:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/TraceId'
+        Duration:
+          $ref: '#/components/schemas/NullableDouble'
+        ResponseTime:
+          $ref: '#/components/schemas/NullableDouble'
+        HasFault:
+          $ref: '#/components/schemas/NullableBoolean'
+        HasError:
+          $ref: '#/components/schemas/NullableBoolean'
+        HasThrottle:
+          $ref: '#/components/schemas/NullableBoolean'
+        IsPartial:
+          $ref: '#/components/schemas/NullableBoolean'
+        Http:
+          $ref: '#/components/schemas/Http'
+        Annotations:
+          $ref: '#/components/schemas/Annotations'
+        Users:
+          $ref: '#/components/schemas/TraceUsers'
+        ServiceIds:
+          $ref: '#/components/schemas/ServiceIds'
+      description: Metadata generated from the segment documents in a trace.
+    TraceSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TraceSummary'
+    TraceUser:
+      type: object
+      properties:
+        UserName:
+          $ref: '#/components/schemas/String'
+        ServiceIds:
+          $ref: '#/components/schemas/ServiceIds'
+      description: Information about a user recorded in segment documents.
+    TraceUsers:
+      type: array
+      items:
+        $ref: '#/components/schemas/TraceUser'
+    UnprocessedTraceIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TraceId'
+    UnprocessedTraceSegment:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/String'
+        ErrorCode:
+          $ref: '#/components/schemas/String'
+        Message:
+          $ref: '#/components/schemas/String'
+      description: Information about a segment that failed processing.
+    UnprocessedTraceSegmentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UnprocessedTraceSegment'
+    ValueWithServiceIds:
+      type: object
+      properties:
+        AnnotationValue:
+          $ref: '#/components/schemas/AnnotationValue'
+        ServiceIds:
+          $ref: '#/components/schemas/ServiceIds'
+      description: Information about a segment annotation.
+    ValuesWithServiceIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/ValueWithServiceIds'
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

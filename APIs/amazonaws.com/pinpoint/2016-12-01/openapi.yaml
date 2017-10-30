@@ -1,0 +1,3381 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://pinpoint.amazonaws.com/'
+info:
+  version: '2016-12-01'
+  x-release: v4
+  title: Amazon Pinpoint
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: pinpoint
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/pinpoint-2016-12-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/pinpoint/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  '/v1/apps/{application-id}/campaigns':
+    get:
+      operationId: GetCampaigns
+      description: Returns information about your campaigns.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCampaignsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCampaignsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/jobs/import':
+    get:
+      operationId: GetImportJobs
+      description: Returns information about your import jobs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetImportJobsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetImportJobsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/segments':
+    get:
+      operationId: GetSegments
+      description: Used to get information about your segments.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSegmentsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSegmentsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/channels/apns':
+    put:
+      operationId: UpdateApnsChannel
+      description: Use to update the APNs channel for an app.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateApnsChannelResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApnsChannelRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/channels/apns_sandbox':
+    put:
+      operationId: UpdateApnsSandboxChannel
+      description: Update an APNS sandbox channel
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateApnsSandboxChannelResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApnsSandboxChannelRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/campaigns/{campaign-id}':
+    put:
+      operationId: UpdateCampaign
+      description: Use to update a campaign.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCampaignResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: campaign-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCampaignRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/channels/email':
+    put:
+      operationId: UpdateEmailChannel
+      description: Update an email channel
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateEmailChannelResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmailChannelRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/eventstream':
+    post:
+      operationId: PutEventStream
+      description: Use to create or update the event stream for an app.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutEventStreamResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutEventStreamRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/channels/gcm':
+    put:
+      operationId: UpdateGcmChannel
+      description: Use to update the GCM channel for an app.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateGcmChannelResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGcmChannelRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/segments/{segment-id}':
+    put:
+      operationId: UpdateSegment
+      description: Use to update a segment.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSegmentResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: segment-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSegmentRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/channels/sms':
+    put:
+      operationId: UpdateSmsChannel
+      description: Update an SMS channel
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSmsChannelResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSmsChannelRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/settings':
+    put:
+      operationId: UpdateApplicationSettings
+      description: Used to update the settings for an app.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateApplicationSettingsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApplicationSettingsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/campaigns/{campaign-id}/activities':
+    get:
+      operationId: GetCampaignActivities
+      description: Returns information about the activity performed by a campaign.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCampaignActivitiesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: campaign-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCampaignActivitiesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/campaigns/{campaign-id}/versions/{version}':
+    get:
+      operationId: GetCampaignVersion
+      description: Returns information about a specific version of a campaign.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCampaignVersionResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: campaign-id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCampaignVersionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/campaigns/{campaign-id}/versions':
+    get:
+      operationId: GetCampaignVersions
+      description: Returns information about your campaign versions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCampaignVersionsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: campaign-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCampaignVersionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/endpoints/{endpoint-id}':
+    put:
+      operationId: UpdateEndpoint
+      description: Use to update an endpoint.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateEndpointResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: endpoint-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEndpointRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/jobs/import/{job-id}':
+    get:
+      operationId: GetImportJob
+      description: Returns information about an import job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetImportJobResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: job-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetImportJobRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/segments/{segment-id}/jobs/import':
+    get:
+      operationId: GetSegmentImportJobs
+      description: Returns a list of import jobs for a specific segment.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSegmentImportJobsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: segment-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSegmentImportJobsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/segments/{segment-id}/versions/{version}':
+    get:
+      operationId: GetSegmentVersion
+      description: Returns information about a segment version.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSegmentVersionResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: segment-id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSegmentVersionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/segments/{segment-id}/versions':
+    get:
+      operationId: GetSegmentVersions
+      description: Returns information about your segment versions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSegmentVersionsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: segment-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSegmentVersionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/messages':
+    post:
+      operationId: SendMessages
+      description: Send a batch of messages
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendMessagesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendMessagesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/endpoints':
+    put:
+      operationId: UpdateEndpointsBatch
+      description: Use to update a batch of endpoints.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateEndpointsBatchResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEndpointsBatchRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    APNSChannelRequest:
+      type: object
+      properties:
+        Certificate:
+          $ref: '#/components/schemas/__string'
+        Enabled:
+          $ref: '#/components/schemas/__boolean'
+        PrivateKey:
+          $ref: '#/components/schemas/__string'
+      description: Apple Push Notification Service channel definition.
+    APNSChannelResponse:
+      type: object
+      properties:
+        ApplicationId:
+          $ref: '#/components/schemas/__string'
+        CreationDate:
+          $ref: '#/components/schemas/__string'
+        Enabled:
+          $ref: '#/components/schemas/__boolean'
+        Id:
+          $ref: '#/components/schemas/__string'
+        IsArchived:
+          $ref: '#/components/schemas/__boolean'
+        LastModifiedBy:
+          $ref: '#/components/schemas/__string'
+        LastModifiedDate:
+          $ref: '#/components/schemas/__string'
+        Platform:
+          $ref: '#/components/schemas/__string'
+        Version:
+          $ref: '#/components/schemas/__integer'
+      description: Apple Distribution Push Notification Service channel definition.
+    APNSMessage:
+      type: object
+      properties:
+        Action:
+          $ref: '#/components/schemas/Action'
+        Badge:
+          $ref: '#/components/schemas/__integer'
+        Body:
+          $ref: '#/components/schemas/__string'
+        Category:
+          $ref: '#/components/schemas/__string'
+        Data:
+          $ref: '#/components/schemas/MapOf__string'
+        MediaUrl:
+          $ref: '#/components/schemas/__string'
+        RawContent:
+          $ref: '#/components/schemas/__string'
+        SilentPush:
+          $ref: '#/components/schemas/__boolean'
+        Sound:
+          $ref: '#/components/schemas/__string'
+        Substitutions:
+          $ref: '#/components/schemas/MapOfListOf__string'
+        ThreadId:
+          $ref: '#/components/schemas/__string'
+        Title:
+          $ref: '#/components/schemas/__string'
+        Url:
+          $ref: '#/components/schemas/__string'
+      description: APNS Message.
+    APNSSandboxChannelRequest:
+      type: object
+      properties:
+        Certificate:
+          $ref: '#/components/schemas/__string'
+        Enabled:
+          $ref: '#/components/schemas/__boolean'
+        PrivateKey:
+          $ref: '#/components/schemas/__string'
+      description: Apple Development Push Notification Service channel definition.
+    APNSSandboxChannelResponse:
+      type: object
+      properties:
+        ApplicationId:
+          $ref: '#/components/schemas/__string'
+        CreationDate:
+          $ref: '#/components/schemas/__string'
+        Enabled:
+          $ref: '#/components/schemas/__boolean'
+        Id:
+          $ref: '#/components/schemas/__string'
+        IsArchived:
+          $ref: '#/components/schemas/__boolean'
+        LastModifiedBy:
+          $ref: '#/components/schemas/__string'
+        LastModifiedDate:
+          $ref: '#/components/schemas/__string'
+        Platform:
+          $ref: '#/components/schemas/__string'
+        Version:
+          $ref: '#/components/schemas/__integer'
+      description: Apple Development Push Notification Service channel definition.
+    Action:
+      type: string
+      enum:
+        - OPEN_APP
+        - DEEP_LINK
+        - URL
+    ActivitiesResponse:
+      type: object
+      properties:
+        Item:
+          $ref: '#/components/schemas/ListOfActivityResponse'
+      description: Activities for campaign.
+    ActivityResponse:
+      type: object
+      properties:
+        ApplicationId:
+          $ref: '#/components/schemas/__string'
+        CampaignId:
+          $ref: '#/components/schemas/__string'
+        End:
+          $ref: '#/components/schemas/__string'
+        Id:
+          $ref: '#/components/schemas/__string'
+        Result:
+          $ref: '#/components/schemas/__string'
+        ScheduledStart:
+          $ref: '#/components/schemas/__string'
+        Start:
+          $ref: '#/components/schemas/__string'
+        State:
+          $ref: '#/components/schemas/__string'
+        SuccessfulEndpointCount:
+          $ref: '#/components/schemas/__integer'
+        TimezonesCompletedCount:
+          $ref: '#/components/schemas/__integer'
+        TimezonesTotalCount:
+          $ref: '#/components/schemas/__integer'
+        TotalEndpointCount:
+          $ref: '#/components/schemas/__integer'
+        TreatmentId:
+          $ref: '#/components/schemas/__string'
+      description: Activity definition
+    AddressConfiguration:
+      type: object
+      properties:
+        BodyOverride:
+          $ref: '#/components/schemas/__string'
+        ChannelType:
+          $ref: '#/components/schemas/ChannelType'
+        Context:
+          $ref: '#/components/schemas/MapOf__string'
+        RawContent:
+          $ref: '#/components/schemas/__string'
+        Substitutions:
+          $ref: '#/components/schemas/MapOfListOf__string'
+        TitleOverride:
+          $ref: '#/components/schemas/__string'
+      description: Address configuration.
+    ApplicationSettingsResource:
+      type: object
+      properties:
+        ApplicationId:
+          $ref: '#/components/schemas/__string'
+        LastModifiedDate:
+          $ref: '#/components/schemas/__string'
+        Limits:
+          $ref: '#/components/schemas/CampaignLimits'
+        QuietTime:
+          $ref: '#/components/schemas/QuietTime'
+      description: Application settings.
+    AttributeDimension:
+      type: object
+      properties:
+        AttributeType:
+          $ref: '#/components/schemas/AttributeType'
+        Values:
+          $ref: '#/components/schemas/ListOf__string'
+      description: Custom attibute dimension
+    AttributeType:
+      type: string
+      enum:
+        - INCLUSIVE
+        - EXCLUSIVE
+    BadRequestException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/__string'
+        RequestID:
+          $ref: '#/components/schemas/__string'
+      description: Simple message object.
+    CampaignEmailMessage:
+      type: object
+      properties:
+        Body:
+          $ref: '#/components/schemas/__string'
+        HtmlBody:
+          $ref: '#/components/schemas/__string'
+        Title:
+          $ref: '#/components/schemas/__string'
+      description: The email message configuration.
+    CampaignLimits:
+      type: object
+      properties:
+        Daily:
+          $ref: '#/components/schemas/__integer'
+        Total:
+          $ref: '#/components/schemas/__integer'
+      description: Campaign Limits are used to limit the number of messages that can be sent to a user.
+    CampaignResponse:
+      type: object
+      properties:
+        AdditionalTreatments:
+          $ref: '#/components/schemas/ListOfTreatmentResource'
+        ApplicationId:
+          $ref: '#/components/schemas/__string'
+        CreationDate:
+          $ref: '#/components/schemas/__string'
+        DefaultState:
+          $ref: '#/components/schemas/CampaignState'
+        Description:
+          $ref: '#/components/schemas/__string'
+        HoldoutPercent:
+          $ref: '#/components/schemas/__integer'
+        Id:
+          $ref: '#/components/schemas/__string'
+        IsPaused:
+          $ref: '#/components/schemas/__boolean'
+        LastModifiedDate:
+          $ref: '#/components/schemas/__string'
+        Limits:
+          $ref: '#/components/schemas/CampaignLimits'
+        MessageConfiguration:
+          $ref: '#/components/schemas/MessageConfiguration'
+        Name:
+          $ref: '#/components/schemas/__string'
+        Schedule:
+          $ref: '#/components/schemas/Schedule'
+        SegmentId:
+          $ref: '#/components/schemas/__string'
+        SegmentVersion:
+          $ref: '#/components/schemas/__integer'
+        State:
+          $ref: '#/components/schemas/CampaignState'
+        TreatmentDescription:
+          $ref: '#/components/schemas/__string'
+        TreatmentName:
+          $ref: '#/components/schemas/__string'
+        Version:
+          $ref: '#/components/schemas/__integer'
+      description: Campaign definition
+    CampaignSmsMessage:
+      type: object
+      properties:
+        Body:
+          $ref: '#/components/schemas/__string'
+        MessageType:
+          $ref: '#/components/schemas/MessageType'
+        SenderId:
+          $ref: '#/components/schemas/__string'
+      description: SMS message configuration.
+    CampaignState:
+      type: object
+      properties:
+        CampaignStatus:
+          $ref: '#/components/schemas/CampaignStatus'
+      description: State of the Campaign
+    CampaignStatus:
+      type: string
+      enum:
+        - SCHEDULED
+        - EXECUTING
+        - PENDING_NEXT_RUN
+        - COMPLETED
+        - PAUSED
+    CampaignsResponse:
+      type: object
+      properties:
+        Item:
+          $ref: '#/components/schemas/ListOfCampaignResponse'
+        NextToken:
+          $ref: '#/components/schemas/__string'
+      description: List of available campaigns.
+    ChannelType:
+      type: string
+      enum:
+        - GCM
+        - APNS
+        - APNS_SANDBOX
+        - ADM
+        - SMS
+        - EMAIL
+    CreateCampaignRequest:
+      type: object
+      required:
+        - WriteCampaignRequest
+      properties:
+        WriteCampaignRequest:
+          $ref: '#/components/schemas/WriteCampaignRequest'
+    CreateCampaignResponse:
+      type: object
+      required:
+        - CampaignResponse
+      properties:
+        CampaignResponse:
+          $ref: '#/components/schemas/CampaignResponse'
+    CreateImportJobRequest:
+      type: object
+      required:
+        - ImportJobRequest
+      properties:
+        ImportJobRequest:
+          $ref: '#/components/schemas/ImportJobRequest'
+    CreateImportJobResponse:
+      type: object
+      required:
+        - ImportJobResponse
+      properties:
+        ImportJobResponse:
+          $ref: '#/components/schemas/ImportJobResponse'
+    CreateSegmentRequest:
+      type: object
+      required:
+        - WriteSegmentRequest
+      properties:
+        WriteSegmentRequest:
+          $ref: '#/components/schemas/WriteSegmentRequest'
+    CreateSegmentResponse:
+      type: object
+      required:
+        - SegmentResponse
+      properties:
+        SegmentResponse:
+          $ref: '#/components/schemas/SegmentResponse'
+    DefaultMessage:
+      type: object
+      properties:
+        Body:
+          $ref: '#/components/schemas/__string'
+        Substitutions:
+          $ref: '#/components/schemas/MapOfListOf__string'
+      description: 'Default Message across push notification, email, and sms.'
+    DefaultPushNotificationMessage:
+      type: object
+      properties:
+        Action:
+          $ref: '#/components/schemas/Action'
+        Body:
+          $ref: '#/components/schemas/__string'
+        Data:
+          $ref: '#/components/schemas/MapOf__string'
+        SilentPush:
+          $ref: '#/components/schemas/__boolean'
+        Substitutions:
+          $ref: '#/components/schemas/MapOfListOf__string'
+        Title:
+          $ref: '#/components/schemas/__string'
+        Url:
+          $ref: '#/components/schemas/__string'
+      description: Default Push Notification Message.
+    DeleteApnsChannelRequest:
+      type: object
+      properties: {}
+    DeleteApnsChannelResponse:
+      type: object
+      required:
+        - APNSChannelResponse
+      properties:
+        APNSChannelResponse:
+          $ref: '#/components/schemas/APNSChannelResponse'
+    DeleteApnsSandboxChannelRequest:
+      type: object
+      properties: {}
+    DeleteApnsSandboxChannelResponse:
+      type: object
+      required:
+        - APNSSandboxChannelResponse
+      properties:
+        APNSSandboxChannelResponse:
+          $ref: '#/components/schemas/APNSSandboxChannelResponse'
+    DeleteCampaignRequest:
+      type: object
+      properties: {}
+    DeleteCampaignResponse:
+      type: object
+      required:
+        - CampaignResponse
+      properties:
+        CampaignResponse:
+          $ref: '#/components/schemas/CampaignResponse'
+    DeleteEmailChannelRequest:
+      type: object
+      properties: {}
+    DeleteEmailChannelResponse:
+      type: object
+      required:
+        - EmailChannelResponse
+      properties:
+        EmailChannelResponse:
+          $ref: '#/components/schemas/EmailChannelResponse'
+    DeleteEventStreamRequest:
+      type: object
+      properties: {}
+      description: DeleteEventStream Request
+    DeleteEventStreamResponse:
+      type: object
+      required:
+        - EventStream
+      properties:
+        EventStream:
+          $ref: '#/components/schemas/EventStream'
+      description: DeleteEventStream Response
+    DeleteGcmChannelRequest:
+      type: object
+      properties: {}
+    DeleteGcmChannelResponse:
+      type: object
+      required:
+        - GCMChannelResponse
+      properties:
+        GCMChannelResponse:
+          $ref: '#/components/schemas/GCMChannelResponse'
+    DeleteSegmentRequest:
+      type: object
+      properties: {}
+    DeleteSegmentResponse:
+      type: object
+      required:
+        - SegmentResponse
+      properties:
+        SegmentResponse:
+          $ref: '#/components/schemas/SegmentResponse'
+    DeleteSmsChannelRequest:
+      type: object
+      properties: {}
+    DeleteSmsChannelResponse:
+      type: object
+      required:
+        - SMSChannelResponse
+      properties:
+        SMSChannelResponse:
+          $ref: '#/components/schemas/SMSChannelResponse'
+    DeliveryStatus:
+      type: string
+      enum:
+        - SUCCESSFUL
+        - THROTTLED
+        - TEMPORARY_FAILURE
+        - PERMANENT_FAILURE
+    DimensionType:
+      type: string
+      enum:
+        - INCLUSIVE
+        - EXCLUSIVE
+    DirectMessageConfiguration:
+      type: object
+      properties:
+        APNSMessage:
+          $ref: '#/components/schemas/APNSMessage'
+        DefaultMessage:
+          $ref: '#/components/schemas/DefaultMessage'
+        DefaultPushNotificationMessage:
+          $ref: '#/components/schemas/DefaultPushNotificationMessage'
+        GCMMessage:
+          $ref: '#/components/schemas/GCMMessage'
+        SMSMessage:
+          $ref: '#/components/schemas/SMSMessage'
+      description: The message configuration.
+    Duration:
+      type: string
+      enum:
+        - HR_24
+        - DAY_7
+        - DAY_14
+        - DAY_30
+    EmailChannelRequest:
+      type: object
+      properties:
+        Enabled:
+          $ref: '#/components/schemas/__boolean'
+        FromAddress:
+          $ref: '#/components/schemas/__string'
+        Identity:
+          $ref: '#/components/schemas/__string'
+        RoleArn:
+          $ref: '#/components/schemas/__string'
+      description: Email Channel Request
+    EmailChannelResponse:
+      type: object
+      properties:
+        ApplicationId:
+          $ref: '#/components/schemas/__string'
+        CreationDate:
+          $ref: '#/components/schemas/__string'
+        Enabled:
+          $ref: '#/components/schemas/__boolean'
+        FromAddress:
+          $ref: '#/components/schemas/__string'
+        Id:
+          $ref: '#/components/schemas/__string'
+        Identity:
+          $ref: '#/components/schemas/__string'
+        IsArchived:
+          $ref: '#/components/schemas/__boolean'
+        LastModifiedBy:
+          $ref: '#/components/schemas/__string'
+        LastModifiedDate:
+          $ref: '#/components/schemas/__string'
+        Platform:
+          $ref: '#/components/schemas/__string'
+        RoleArn:
+          $ref: '#/components/schemas/__string'
+        Version:
+          $ref: '#/components/schemas/__integer'
+      description: Email Channel Response.
+    EndpointBatchItem:
+      type: object
+      properties:
+        Address:
+          $ref: '#/components/schemas/__string'
+        Attributes:
+          $ref: '#/components/schemas/MapOfListOf__string'
+        ChannelType:
+          $ref: '#/components/schemas/ChannelType'
+        Demographic:
+          $ref: '#/components/schemas/EndpointDemographic'
+        EffectiveDate:
+          $ref: '#/components/schemas/__string'
+        EndpointStatus:
+          $ref: '#/components/schemas/__string'
+        Id:
+          $ref: '#/components/schemas/__string'
+        Location:
+          $ref: '#/components/schemas/EndpointLocation'
+        Metrics:
+          $ref: '#/components/schemas/MapOf__double'
+        OptOut:
+          $ref: '#/components/schemas/__string'
+        RequestId:
+          $ref: '#/components/schemas/__string'
+        User:
+          $ref: '#/components/schemas/EndpointUser'
+      description: Endpoint update request
+    EndpointBatchRequest:
+      type: object
+      properties:
+        Item:
+          $ref: '#/components/schemas/ListOfEndpointBatchItem'
+      description: Endpoint batch update request.
+    EndpointDemographic:
+      type: object
+      properties:
+        AppVersion:
+          $ref: '#/components/schemas/__string'
+        Locale:
+          $ref: '#/components/schemas/__string'
+        Make:
+          $ref: '#/components/schemas/__string'
+        Model:
+          $ref: '#/components/schemas/__string'
+        ModelVersion:
+          $ref: '#/components/schemas/__string'
+        Platform:
+          $ref: '#/components/schemas/__string'
+        PlatformVersion:
+          $ref: '#/components/schemas/__string'
+        Timezone:
+          $ref: '#/components/schemas/__string'
+      description: Endpoint demographic data
+    EndpointLocation:
+      type: object
+      properties:
+        City:
+          $ref: '#/components/schemas/__string'
+        Country:
+          $ref: '#/components/schemas/__string'
+        Latitude:
+          $ref: '#/components/schemas/__double'
+        Longitude:
+          $ref: '#/components/schemas/__double'
+        PostalCode:
+          $ref: '#/components/schemas/__string'
+        Region:
+          $ref: '#/components/schemas/__string'
+      description: Endpoint location data
+    EndpointRequest:
+      type: object
+      properties:
+        Address:
+          $ref: '#/components/schemas/__string'
+        Attributes:
+          $ref: '#/components/schemas/MapOfListOf__string'
+        ChannelType:
+          $ref: '#/components/schemas/ChannelType'
+        Demographic:
+          $ref: '#/components/schemas/EndpointDemographic'
+        EffectiveDate:
+          $ref: '#/components/schemas/__string'
+        EndpointStatus:
+          $ref: '#/components/schemas/__string'
+        Location:
+          $ref: '#/components/schemas/EndpointLocation'
+        Metrics:
+          $ref: '#/components/schemas/MapOf__double'
+        OptOut:
+          $ref: '#/components/schemas/__string'
+        RequestId:
+          $ref: '#/components/schemas/__string'
+        User:
+          $ref: '#/components/schemas/EndpointUser'
+      description: Endpoint update request
+    EndpointResponse:
+      type: object
+      properties:
+        Address:
+          $ref: '#/components/schemas/__string'
+        ApplicationId:
+          $ref: '#/components/schemas/__string'
+        Attributes:
+          $ref: '#/components/schemas/MapOfListOf__string'
+        ChannelType:
+          $ref: '#/components/schemas/ChannelType'
+        CohortId:
+          $ref: '#/components/schemas/__string'
+        CreationDate:
+          $ref: '#/components/schemas/__string'
+        Demographic:
+          $ref: '#/components/schemas/EndpointDemographic'
+        EffectiveDate:
+          $ref: '#/components/schemas/__string'
+        EndpointStatus:
+          $ref: '#/components/schemas/__string'
+        Id:
+          $ref: '#/components/schemas/__string'
+        Location:
+          $ref: '#/components/schemas/EndpointLocation'
+        Metrics:
+          $ref: '#/components/schemas/MapOf__double'
+        OptOut:
+          $ref: '#/components/schemas/__string'
+        RequestId:
+          $ref: '#/components/schemas/__string'
+        User:
+          $ref: '#/components/schemas/EndpointUser'
+        ShardId:
+          $ref: '#/components/schemas/__string'
+      description: Endpoint response
+    EndpointUser:
+      type: object
+      properties:
+        UserAttributes:
+          $ref: '#/components/schemas/MapOfListOf__string'
+        UserId:
+          $ref: '#/components/schemas/__string'
+      description: Endpoint user specific custom userAttributes
+    EventStream:
+      type: object
+      properties:
+        ApplicationId:
+          $ref: '#/components/schemas/__string'
+        DestinationStreamArn:
+          $ref: '#/components/schemas/__string'
+        ExternalId:
+          $ref: '#/components/schemas/__string'
+        LastModifiedDate:
+          $ref: '#/components/schemas/__string'
+        LastUpdatedBy:
+          $ref: '#/components/schemas/__string'
+        RoleArn:
+          $ref: '#/components/schemas/__string'
+      description: Model for an event publishing subscription export.
+    ForbiddenException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/__string'
+        RequestID:
+          $ref: '#/components/schemas/__string'
+      description: Simple message object.
+    Format:
+      type: string
+      enum:
+        - CSV
+        - JSON
+    Frequency:
+      type: string
+      enum:
+        - ONCE
+        - HOURLY
+        - DAILY
+        - WEEKLY
+        - MONTHLY
+    GCMChannelRequest:
+      type: object
+      properties:
+        ApiKey:
+          $ref: '#/components/schemas/__string'
+        Enabled:
+          $ref: '#/components/schemas/__boolean'
+      description: Google Cloud Messaging credentials
+    GCMChannelResponse:
+      type: object
+      properties:
+        ApplicationId:
+          $ref: '#/components/schemas/__string'
+        CreationDate:
+          $ref: '#/components/schemas/__string'
+        Credential:
+          $ref: '#/components/schemas/__string'
+        Enabled:
+          $ref: '#/components/schemas/__boolean'
+        Id:
+          $ref: '#/components/schemas/__string'
+        IsArchived:
+          $ref: '#/components/schemas/__boolean'
+        LastModifiedBy:
+          $ref: '#/components/schemas/__string'
+        LastModifiedDate:
+          $ref: '#/components/schemas/__string'
+        Platform:
+          $ref: '#/components/schemas/__string'
+        Version:
+          $ref: '#/components/schemas/__integer'
+      description: Google Cloud Messaging channel definition
+    GCMMessage:
+      type: object
+      properties:
+        Action:
+          $ref: '#/components/schemas/Action'
+        Body:
+          $ref: '#/components/schemas/__string'
+        CollapseKey:
+          $ref: '#/components/schemas/__string'
+        Data:
+          $ref: '#/components/schemas/MapOf__string'
+        IconReference:
+          $ref: '#/components/schemas/__string'
+        ImageIconUrl:
+          $ref: '#/components/schemas/__string'
+        ImageUrl:
+          $ref: '#/components/schemas/__string'
+        RawContent:
+          $ref: '#/components/schemas/__string'
+        RestrictedPackageName:
+          $ref: '#/components/schemas/__string'
+        SilentPush:
+          $ref: '#/components/schemas/__boolean'
+        SmallImageIconUrl:
+          $ref: '#/components/schemas/__string'
+        Sound:
+          $ref: '#/components/schemas/__string'
+        Substitutions:
+          $ref: '#/components/schemas/MapOfListOf__string'
+        Title:
+          $ref: '#/components/schemas/__string'
+        Url:
+          $ref: '#/components/schemas/__string'
+      description: GCM Message.
+    GetApnsChannelRequest:
+      type: object
+      properties: {}
+    GetApnsChannelResponse:
+      type: object
+      required:
+        - APNSChannelResponse
+      properties:
+        APNSChannelResponse:
+          $ref: '#/components/schemas/APNSChannelResponse'
+    GetApnsSandboxChannelRequest:
+      type: object
+      properties: {}
+    GetApnsSandboxChannelResponse:
+      type: object
+      required:
+        - APNSSandboxChannelResponse
+      properties:
+        APNSSandboxChannelResponse:
+          $ref: '#/components/schemas/APNSSandboxChannelResponse'
+    GetApplicationSettingsRequest:
+      type: object
+      properties: {}
+    GetApplicationSettingsResponse:
+      type: object
+      required:
+        - ApplicationSettingsResource
+      properties:
+        ApplicationSettingsResource:
+          $ref: '#/components/schemas/ApplicationSettingsResource'
+    GetCampaignActivitiesRequest:
+      type: object
+      properties: {}
+    GetCampaignActivitiesResponse:
+      type: object
+      required:
+        - ActivitiesResponse
+      properties:
+        ActivitiesResponse:
+          $ref: '#/components/schemas/ActivitiesResponse'
+    GetCampaignRequest:
+      type: object
+      properties: {}
+    GetCampaignResponse:
+      type: object
+      required:
+        - CampaignResponse
+      properties:
+        CampaignResponse:
+          $ref: '#/components/schemas/CampaignResponse'
+    GetCampaignVersionRequest:
+      type: object
+      properties: {}
+    GetCampaignVersionResponse:
+      type: object
+      required:
+        - CampaignResponse
+      properties:
+        CampaignResponse:
+          $ref: '#/components/schemas/CampaignResponse'
+    GetCampaignVersionsRequest:
+      type: object
+      properties: {}
+    GetCampaignVersionsResponse:
+      type: object
+      required:
+        - CampaignsResponse
+      properties:
+        CampaignsResponse:
+          $ref: '#/components/schemas/CampaignsResponse'
+    GetCampaignsRequest:
+      type: object
+      properties: {}
+    GetCampaignsResponse:
+      type: object
+      required:
+        - CampaignsResponse
+      properties:
+        CampaignsResponse:
+          $ref: '#/components/schemas/CampaignsResponse'
+    GetEmailChannelRequest:
+      type: object
+      properties: {}
+    GetEmailChannelResponse:
+      type: object
+      required:
+        - EmailChannelResponse
+      properties:
+        EmailChannelResponse:
+          $ref: '#/components/schemas/EmailChannelResponse'
+    GetEndpointRequest:
+      type: object
+      properties: {}
+    GetEndpointResponse:
+      type: object
+      required:
+        - EndpointResponse
+      properties:
+        EndpointResponse:
+          $ref: '#/components/schemas/EndpointResponse'
+    GetEventStreamRequest:
+      type: object
+      properties: {}
+      description: GetEventStream Request
+    GetEventStreamResponse:
+      type: object
+      required:
+        - EventStream
+      properties:
+        EventStream:
+          $ref: '#/components/schemas/EventStream'
+      description: GetEventStream Response
+    GetGcmChannelRequest:
+      type: object
+      properties: {}
+    GetGcmChannelResponse:
+      type: object
+      required:
+        - GCMChannelResponse
+      properties:
+        GCMChannelResponse:
+          $ref: '#/components/schemas/GCMChannelResponse'
+    GetImportJobRequest:
+      type: object
+      properties: {}
+    GetImportJobResponse:
+      type: object
+      required:
+        - ImportJobResponse
+      properties:
+        ImportJobResponse:
+          $ref: '#/components/schemas/ImportJobResponse'
+    GetImportJobsRequest:
+      type: object
+      properties: {}
+    GetImportJobsResponse:
+      type: object
+      required:
+        - ImportJobsResponse
+      properties:
+        ImportJobsResponse:
+          $ref: '#/components/schemas/ImportJobsResponse'
+    GetSegmentImportJobsRequest:
+      type: object
+      properties: {}
+    GetSegmentImportJobsResponse:
+      type: object
+      required:
+        - ImportJobsResponse
+      properties:
+        ImportJobsResponse:
+          $ref: '#/components/schemas/ImportJobsResponse'
+    GetSegmentRequest:
+      type: object
+      properties: {}
+    GetSegmentResponse:
+      type: object
+      required:
+        - SegmentResponse
+      properties:
+        SegmentResponse:
+          $ref: '#/components/schemas/SegmentResponse'
+    GetSegmentVersionRequest:
+      type: object
+      properties: {}
+    GetSegmentVersionResponse:
+      type: object
+      required:
+        - SegmentResponse
+      properties:
+        SegmentResponse:
+          $ref: '#/components/schemas/SegmentResponse'
+    GetSegmentVersionsRequest:
+      type: object
+      properties: {}
+    GetSegmentVersionsResponse:
+      type: object
+      required:
+        - SegmentsResponse
+      properties:
+        SegmentsResponse:
+          $ref: '#/components/schemas/SegmentsResponse'
+    GetSegmentsRequest:
+      type: object
+      properties: {}
+    GetSegmentsResponse:
+      type: object
+      required:
+        - SegmentsResponse
+      properties:
+        SegmentsResponse:
+          $ref: '#/components/schemas/SegmentsResponse'
+    GetSmsChannelRequest:
+      type: object
+      properties: {}
+    GetSmsChannelResponse:
+      type: object
+      required:
+        - SMSChannelResponse
+      properties:
+        SMSChannelResponse:
+          $ref: '#/components/schemas/SMSChannelResponse'
+    ImportJobRequest:
+      type: object
+      properties:
+        DefineSegment:
+          $ref: '#/components/schemas/__boolean'
+        ExternalId:
+          $ref: '#/components/schemas/__string'
+        Format:
+          $ref: '#/components/schemas/Format'
+        RegisterEndpoints:
+          $ref: '#/components/schemas/__boolean'
+        RoleArn:
+          $ref: '#/components/schemas/__string'
+        S3Url:
+          $ref: '#/components/schemas/__string'
+        SegmentId:
+          $ref: '#/components/schemas/__string'
+        SegmentName:
+          $ref: '#/components/schemas/__string'
+    ImportJobResource:
+      type: object
+      properties:
+        DefineSegment:
+          $ref: '#/components/schemas/__boolean'
+        ExternalId:
+          $ref: '#/components/schemas/__string'
+        Format:
+          $ref: '#/components/schemas/Format'
+        RegisterEndpoints:
+          $ref: '#/components/schemas/__boolean'
+        RoleArn:
+          $ref: '#/components/schemas/__string'
+        S3Url:
+          $ref: '#/components/schemas/__string'
+        SegmentId:
+          $ref: '#/components/schemas/__string'
+        SegmentName:
+          $ref: '#/components/schemas/__string'
+    ImportJobResponse:
+      type: object
+      properties:
+        ApplicationId:
+          $ref: '#/components/schemas/__string'
+        CompletedPieces:
+          $ref: '#/components/schemas/__integer'
+        CompletionDate:
+          $ref: '#/components/schemas/__string'
+        CreationDate:
+          $ref: '#/components/schemas/__string'
+        Definition:
+          $ref: '#/components/schemas/ImportJobResource'
+        FailedPieces:
+          $ref: '#/components/schemas/__integer'
+        Failures:
+          $ref: '#/components/schemas/ListOf__string'
+        Id:
+          $ref: '#/components/schemas/__string'
+        JobStatus:
+          $ref: '#/components/schemas/JobStatus'
+        TotalFailures:
+          $ref: '#/components/schemas/__integer'
+        TotalPieces:
+          $ref: '#/components/schemas/__integer'
+        TotalProcessed:
+          $ref: '#/components/schemas/__integer'
+        Type:
+          $ref: '#/components/schemas/__string'
+    ImportJobsResponse:
+      type: object
+      properties:
+        Item:
+          $ref: '#/components/schemas/ListOfImportJobResponse'
+        NextToken:
+          $ref: '#/components/schemas/__string'
+      description: Import job list.
+    InternalServerErrorException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/__string'
+        RequestID:
+          $ref: '#/components/schemas/__string'
+      description: Simple message object.
+    JobStatus:
+      type: string
+      enum:
+        - CREATED
+        - INITIALIZING
+        - PROCESSING
+        - COMPLETING
+        - COMPLETED
+        - FAILING
+        - FAILED
+    ListOfActivityResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/ActivityResponse'
+    ListOfCampaignResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/CampaignResponse'
+    ListOfEndpointBatchItem:
+      type: array
+      items:
+        $ref: '#/components/schemas/EndpointBatchItem'
+    ListOfImportJobResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImportJobResponse'
+    ListOfSegmentResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/SegmentResponse'
+    ListOfTreatmentResource:
+      type: array
+      items:
+        $ref: '#/components/schemas/TreatmentResource'
+    ListOfWriteTreatmentResource:
+      type: array
+      items:
+        $ref: '#/components/schemas/WriteTreatmentResource'
+    ListOf__string:
+      type: array
+      items:
+        $ref: '#/components/schemas/__string'
+    MapOfAddressConfiguration:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/__string'
+          value:
+            $ref: '#/components/schemas/AddressConfiguration'
+    MapOfAttributeDimension:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/__string'
+          value:
+            $ref: '#/components/schemas/AttributeDimension'
+    MapOfListOf__string:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/__string'
+          value:
+            $ref: '#/components/schemas/ListOf__string'
+    MapOfMessageResult:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/__string'
+          value:
+            $ref: '#/components/schemas/MessageResult'
+    MapOf__double:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/__string'
+          value:
+            $ref: '#/components/schemas/__double'
+    MapOf__integer:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/__string'
+          value:
+            $ref: '#/components/schemas/__integer'
+    MapOf__string:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/__string'
+          value:
+            $ref: '#/components/schemas/__string'
+    Message:
+      type: object
+      properties:
+        Action:
+          $ref: '#/components/schemas/Action'
+        Body:
+          $ref: '#/components/schemas/__string'
+        ImageIconUrl:
+          $ref: '#/components/schemas/__string'
+        ImageSmallIconUrl:
+          $ref: '#/components/schemas/__string'
+        ImageUrl:
+          $ref: '#/components/schemas/__string'
+        JsonBody:
+          $ref: '#/components/schemas/__string'
+        MediaUrl:
+          $ref: '#/components/schemas/__string'
+        SilentPush:
+          $ref: '#/components/schemas/__boolean'
+        Title:
+          $ref: '#/components/schemas/__string'
+        Url:
+          $ref: '#/components/schemas/__string'
+    MessageBody:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/__string'
+        RequestID:
+          $ref: '#/components/schemas/__string'
+      description: Simple message object.
+    MessageConfiguration:
+      type: object
+      properties:
+        APNSMessage:
+          $ref: '#/components/schemas/Message'
+        DefaultMessage:
+          $ref: '#/components/schemas/Message'
+        EmailMessage:
+          $ref: '#/components/schemas/CampaignEmailMessage'
+        GCMMessage:
+          $ref: '#/components/schemas/Message'
+        SMSMessage:
+          $ref: '#/components/schemas/CampaignSmsMessage'
+      description: Message configuration for a campaign.
+    MessageRequest:
+      type: object
+      properties:
+        Addresses:
+          $ref: '#/components/schemas/MapOfAddressConfiguration'
+        Context:
+          $ref: '#/components/schemas/MapOf__string'
+        MessageConfiguration:
+          $ref: '#/components/schemas/DirectMessageConfiguration'
+      description: Send message request.
+    MessageResponse:
+      type: object
+      properties:
+        ApplicationId:
+          $ref: '#/components/schemas/__string'
+        RequestId:
+          $ref: '#/components/schemas/__string'
+        Result:
+          $ref: '#/components/schemas/MapOfMessageResult'
+      description: Send message response.
+    MessageResult:
+      type: object
+      properties:
+        DeliveryStatus:
+          $ref: '#/components/schemas/DeliveryStatus'
+        StatusCode:
+          $ref: '#/components/schemas/__integer'
+        StatusMessage:
+          $ref: '#/components/schemas/__string'
+        UpdatedToken:
+          $ref: '#/components/schemas/__string'
+      description: The result from sending a message to an address.
+    MessageType:
+      type: string
+      enum:
+        - TRANSACTIONAL
+        - PROMOTIONAL
+    MethodNotAllowedException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/__string'
+        RequestID:
+          $ref: '#/components/schemas/__string'
+      description: Simple message object.
+    NotFoundException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/__string'
+        RequestID:
+          $ref: '#/components/schemas/__string'
+      description: Simple message object.
+    PutEventStreamRequest:
+      type: object
+      required:
+        - WriteEventStream
+      properties:
+        WriteEventStream:
+          $ref: '#/components/schemas/WriteEventStream'
+      description: PutEventStream Request
+    PutEventStreamResponse:
+      type: object
+      required:
+        - EventStream
+      properties:
+        EventStream:
+          $ref: '#/components/schemas/EventStream'
+      description: PutEventStream Response
+    QuietTime:
+      type: object
+      properties:
+        End:
+          $ref: '#/components/schemas/__string'
+        Start:
+          $ref: '#/components/schemas/__string'
+      description: Quiet Time
+    RecencyDimension:
+      type: object
+      properties:
+        Duration:
+          $ref: '#/components/schemas/Duration'
+        RecencyType:
+          $ref: '#/components/schemas/RecencyType'
+      description: Define how a segment based on recency of use.
+    RecencyType:
+      type: string
+      enum:
+        - ACTIVE
+        - INACTIVE
+    SMSChannelRequest:
+      type: object
+      properties:
+        Enabled:
+          $ref: '#/components/schemas/__boolean'
+        SenderId:
+          $ref: '#/components/schemas/__string'
+      description: SMS Channel Request
+    SMSChannelResponse:
+      type: object
+      properties:
+        ApplicationId:
+          $ref: '#/components/schemas/__string'
+        CreationDate:
+          $ref: '#/components/schemas/__string'
+        Enabled:
+          $ref: '#/components/schemas/__boolean'
+        Id:
+          $ref: '#/components/schemas/__string'
+        IsArchived:
+          $ref: '#/components/schemas/__boolean'
+        LastModifiedBy:
+          $ref: '#/components/schemas/__string'
+        LastModifiedDate:
+          $ref: '#/components/schemas/__string'
+        Platform:
+          $ref: '#/components/schemas/__string'
+        SenderId:
+          $ref: '#/components/schemas/__string'
+        ShortCode:
+          $ref: '#/components/schemas/__string'
+        Version:
+          $ref: '#/components/schemas/__integer'
+      description: SMS Channel Response.
+    SMSMessage:
+      type: object
+      properties:
+        Body:
+          $ref: '#/components/schemas/__string'
+        MessageType:
+          $ref: '#/components/schemas/MessageType'
+        SenderId:
+          $ref: '#/components/schemas/__string'
+        Substitutions:
+          $ref: '#/components/schemas/MapOfListOf__string'
+      description: SMS Message.
+    Schedule:
+      type: object
+      properties:
+        EndTime:
+          $ref: '#/components/schemas/__string'
+        Frequency:
+          $ref: '#/components/schemas/Frequency'
+        IsLocalTime:
+          $ref: '#/components/schemas/__boolean'
+        QuietTime:
+          $ref: '#/components/schemas/QuietTime'
+        StartTime:
+          $ref: '#/components/schemas/__string'
+        Timezone:
+          $ref: '#/components/schemas/__string'
+      description: Shcedule that defines when a campaign is run.
+    SegmentBehaviors:
+      type: object
+      properties:
+        Recency:
+          $ref: '#/components/schemas/RecencyDimension'
+      description: Segment behavior dimensions
+    SegmentDemographics:
+      type: object
+      properties:
+        AppVersion:
+          $ref: '#/components/schemas/SetDimension'
+        Channel:
+          $ref: '#/components/schemas/SetDimension'
+        DeviceType:
+          $ref: '#/components/schemas/SetDimension'
+        Make:
+          $ref: '#/components/schemas/SetDimension'
+        Model:
+          $ref: '#/components/schemas/SetDimension'
+        Platform:
+          $ref: '#/components/schemas/SetDimension'
+      description: Segment demographic dimensions
+    SegmentDimensions:
+      type: object
+      properties:
+        Attributes:
+          $ref: '#/components/schemas/MapOfAttributeDimension'
+        Behavior:
+          $ref: '#/components/schemas/SegmentBehaviors'
+        Demographic:
+          $ref: '#/components/schemas/SegmentDemographics'
+        Location:
+          $ref: '#/components/schemas/SegmentLocation'
+        UserAttributes:
+          $ref: '#/components/schemas/MapOfAttributeDimension'
+      description: Segment dimensions
+    SegmentImportResource:
+      type: object
+      properties:
+        ChannelCounts:
+          $ref: '#/components/schemas/MapOf__integer'
+        ExternalId:
+          $ref: '#/components/schemas/__string'
+        Format:
+          $ref: '#/components/schemas/Format'
+        RoleArn:
+          $ref: '#/components/schemas/__string'
+        S3Url:
+          $ref: '#/components/schemas/__string'
+        Size:
+          $ref: '#/components/schemas/__integer'
+      description: Segment import definition.
+    SegmentLocation:
+      type: object
+      properties:
+        Country:
+          $ref: '#/components/schemas/SetDimension'
+      description: Segment location dimensions
+    SegmentResponse:
+      type: object
+      properties:
+        ApplicationId:
+          $ref: '#/components/schemas/__string'
+        CreationDate:
+          $ref: '#/components/schemas/__string'
+        Dimensions:
+          $ref: '#/components/schemas/SegmentDimensions'
+        Id:
+          $ref: '#/components/schemas/__string'
+        ImportDefinition:
+          $ref: '#/components/schemas/SegmentImportResource'
+        LastModifiedDate:
+          $ref: '#/components/schemas/__string'
+        Name:
+          $ref: '#/components/schemas/__string'
+        SegmentType:
+          $ref: '#/components/schemas/SegmentType'
+        Version:
+          $ref: '#/components/schemas/__integer'
+      description: Segment definition.
+    SegmentType:
+      type: string
+      enum:
+        - DIMENSIONAL
+        - IMPORT
+    SegmentsResponse:
+      type: object
+      properties:
+        Item:
+          $ref: '#/components/schemas/ListOfSegmentResponse'
+        NextToken:
+          $ref: '#/components/schemas/__string'
+      description: Segments in your account.
+    SendMessagesRequest:
+      type: object
+      required:
+        - MessageRequest
+      properties:
+        MessageRequest:
+          $ref: '#/components/schemas/MessageRequest'
+    SendMessagesResponse:
+      type: object
+      required:
+        - MessageResponse
+      properties:
+        MessageResponse:
+          $ref: '#/components/schemas/MessageResponse'
+    SetDimension:
+      type: object
+      properties:
+        DimensionType:
+          $ref: '#/components/schemas/DimensionType'
+        Values:
+          $ref: '#/components/schemas/ListOf__string'
+      description: Dimension specification of a segment.
+    TooManyRequestsException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/__string'
+        RequestID:
+          $ref: '#/components/schemas/__string'
+      description: Simple message object.
+    TreatmentResource:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/__string'
+        MessageConfiguration:
+          $ref: '#/components/schemas/MessageConfiguration'
+        Schedule:
+          $ref: '#/components/schemas/Schedule'
+        SizePercent:
+          $ref: '#/components/schemas/__integer'
+        State:
+          $ref: '#/components/schemas/CampaignState'
+        TreatmentDescription:
+          $ref: '#/components/schemas/__string'
+        TreatmentName:
+          $ref: '#/components/schemas/__string'
+      description: Treatment resource
+    UpdateApnsChannelRequest:
+      type: object
+      required:
+        - APNSChannelRequest
+      properties:
+        APNSChannelRequest:
+          $ref: '#/components/schemas/APNSChannelRequest'
+    UpdateApnsChannelResponse:
+      type: object
+      required:
+        - APNSChannelResponse
+      properties:
+        APNSChannelResponse:
+          $ref: '#/components/schemas/APNSChannelResponse'
+    UpdateApnsSandboxChannelRequest:
+      type: object
+      required:
+        - APNSSandboxChannelRequest
+      properties:
+        APNSSandboxChannelRequest:
+          $ref: '#/components/schemas/APNSSandboxChannelRequest'
+    UpdateApnsSandboxChannelResponse:
+      type: object
+      required:
+        - APNSSandboxChannelResponse
+      properties:
+        APNSSandboxChannelResponse:
+          $ref: '#/components/schemas/APNSSandboxChannelResponse'
+    UpdateApplicationSettingsRequest:
+      type: object
+      required:
+        - WriteApplicationSettingsRequest
+      properties:
+        WriteApplicationSettingsRequest:
+          $ref: '#/components/schemas/WriteApplicationSettingsRequest'
+    UpdateApplicationSettingsResponse:
+      type: object
+      required:
+        - ApplicationSettingsResource
+      properties:
+        ApplicationSettingsResource:
+          $ref: '#/components/schemas/ApplicationSettingsResource'
+    UpdateCampaignRequest:
+      type: object
+      required:
+        - WriteCampaignRequest
+      properties:
+        WriteCampaignRequest:
+          $ref: '#/components/schemas/WriteCampaignRequest'
+    UpdateCampaignResponse:
+      type: object
+      required:
+        - CampaignResponse
+      properties:
+        CampaignResponse:
+          $ref: '#/components/schemas/CampaignResponse'
+    UpdateEmailChannelRequest:
+      type: object
+      required:
+        - EmailChannelRequest
+      properties:
+        EmailChannelRequest:
+          $ref: '#/components/schemas/EmailChannelRequest'
+    UpdateEmailChannelResponse:
+      type: object
+      required:
+        - EmailChannelResponse
+      properties:
+        EmailChannelResponse:
+          $ref: '#/components/schemas/EmailChannelResponse'
+    UpdateEndpointRequest:
+      type: object
+      required:
+        - EndpointRequest
+      properties:
+        EndpointRequest:
+          $ref: '#/components/schemas/EndpointRequest'
+    UpdateEndpointResponse:
+      type: object
+      required:
+        - MessageBody
+      properties:
+        MessageBody:
+          $ref: '#/components/schemas/MessageBody'
+    UpdateEndpointsBatchRequest:
+      type: object
+      required:
+        - EndpointBatchRequest
+      properties:
+        EndpointBatchRequest:
+          $ref: '#/components/schemas/EndpointBatchRequest'
+    UpdateEndpointsBatchResponse:
+      type: object
+      required:
+        - MessageBody
+      properties:
+        MessageBody:
+          $ref: '#/components/schemas/MessageBody'
+    UpdateGcmChannelRequest:
+      type: object
+      required:
+        - GCMChannelRequest
+      properties:
+        GCMChannelRequest:
+          $ref: '#/components/schemas/GCMChannelRequest'
+    UpdateGcmChannelResponse:
+      type: object
+      required:
+        - GCMChannelResponse
+      properties:
+        GCMChannelResponse:
+          $ref: '#/components/schemas/GCMChannelResponse'
+    UpdateSegmentRequest:
+      type: object
+      required:
+        - WriteSegmentRequest
+      properties:
+        WriteSegmentRequest:
+          $ref: '#/components/schemas/WriteSegmentRequest'
+    UpdateSegmentResponse:
+      type: object
+      required:
+        - SegmentResponse
+      properties:
+        SegmentResponse:
+          $ref: '#/components/schemas/SegmentResponse'
+    UpdateSmsChannelRequest:
+      type: object
+      required:
+        - SMSChannelRequest
+      properties:
+        SMSChannelRequest:
+          $ref: '#/components/schemas/SMSChannelRequest'
+    UpdateSmsChannelResponse:
+      type: object
+      required:
+        - SMSChannelResponse
+      properties:
+        SMSChannelResponse:
+          $ref: '#/components/schemas/SMSChannelResponse'
+    WriteApplicationSettingsRequest:
+      type: object
+      properties:
+        Limits:
+          $ref: '#/components/schemas/CampaignLimits'
+        QuietTime:
+          $ref: '#/components/schemas/QuietTime'
+      description: Creating application setting request
+    WriteCampaignRequest:
+      type: object
+      properties:
+        AdditionalTreatments:
+          $ref: '#/components/schemas/ListOfWriteTreatmentResource'
+        Description:
+          $ref: '#/components/schemas/__string'
+        HoldoutPercent:
+          $ref: '#/components/schemas/__integer'
+        IsPaused:
+          $ref: '#/components/schemas/__boolean'
+        Limits:
+          $ref: '#/components/schemas/CampaignLimits'
+        MessageConfiguration:
+          $ref: '#/components/schemas/MessageConfiguration'
+        Name:
+          $ref: '#/components/schemas/__string'
+        Schedule:
+          $ref: '#/components/schemas/Schedule'
+        SegmentId:
+          $ref: '#/components/schemas/__string'
+        SegmentVersion:
+          $ref: '#/components/schemas/__integer'
+        TreatmentDescription:
+          $ref: '#/components/schemas/__string'
+        TreatmentName:
+          $ref: '#/components/schemas/__string'
+      description: Used to create a campaign.
+    WriteEventStream:
+      type: object
+      properties:
+        DestinationStreamArn:
+          $ref: '#/components/schemas/__string'
+        ExternalId:
+          $ref: '#/components/schemas/__string'
+        RoleArn:
+          $ref: '#/components/schemas/__string'
+      description: Request to save an EventStream.
+    WriteSegmentRequest:
+      type: object
+      properties:
+        Dimensions:
+          $ref: '#/components/schemas/SegmentDimensions'
+        Name:
+          $ref: '#/components/schemas/__string'
+      description: Segment definition.
+    WriteTreatmentResource:
+      type: object
+      properties:
+        MessageConfiguration:
+          $ref: '#/components/schemas/MessageConfiguration'
+        Schedule:
+          $ref: '#/components/schemas/Schedule'
+        SizePercent:
+          $ref: '#/components/schemas/__integer'
+        TreatmentDescription:
+          $ref: '#/components/schemas/__string'
+        TreatmentName:
+          $ref: '#/components/schemas/__string'
+      description: Used to create a campaign treatment.
+    __boolean:
+      type: boolean
+    __double:
+      type: number
+      format: double
+    __integer:
+      type: integer
+    __string:
+      type: string
+    __timestamp:
+      type: string
+      format: date-time
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

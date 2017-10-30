@@ -1,0 +1,445 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://www.googleapis.com/'
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Obtains end-user authorization grants for use with other Google APIs.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: Google OAuth2
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
+      url: 'https://www.googleapis.com/discovery/v1/apis/oauth2/v1/rest'
+      version: v1
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: oauth2
+externalDocs:
+  url: 'https://developers.google.com/accounts/docs/OAuth2'
+tags:
+  - name: userinfo
+paths:
+  /oauth2/v1/certs:
+    get:
+      operationId: oauth2.getCertForOpenIdConnect
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/X509'
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  /oauth2/v1/raw_public_keys:
+    get:
+      operationId: oauth2.getCertForOpenIdConnectRaw
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Raw'
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  /oauth2/v1/tokeninfo:
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Get token info
+      operationId: oauth2.tokeninfo
+      parameters:
+        - description: The oauth2 access token
+          in: query
+          name: access_token
+          schema:
+            type: string
+        - description: The ID token
+          in: query
+          name: id_token
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Tokeninfo'
+  /oauth2/v1/userinfo:
+    get:
+      description: Get user info
+      operationId: oauth2.userinfo.get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Userinfoplus'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.me'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.profile'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/userinfo.profile'
+      tags:
+        - userinfo
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/service_accounts/v1/jwk/{robotEmail}':
+    get:
+      operationId: oauth2.getRobotJwk
+      parameters:
+        - description: The email of robot account.
+          in: path
+          name: robotEmail
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Jwk'
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/service_accounts/v1/metadata/raw/{robotEmail}':
+    get:
+      operationId: oauth2.getRobotMetadataRaw
+      parameters:
+        - description: The email of robot account.
+          in: path
+          name: robotEmail
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Raw'
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/service_accounts/v1/metadata/x509/{robotEmail}':
+    get:
+      operationId: oauth2.getRobotMetadataX509
+      parameters:
+        - description: The email of robot account.
+          in: path
+          name: robotEmail
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/X509'
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  /userinfo/v2/me:
+    get:
+      description: Get user info
+      operationId: oauth2.userinfo.v2.me.get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Userinfoplus'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.me'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.profile'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/userinfo.profile'
+      tags:
+        - userinfo
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+components:
+  schemas:
+    Jwk:
+      properties:
+        keys:
+          items:
+            properties:
+              alg:
+                default: RS256
+                type: string
+              e:
+                type: string
+              kid:
+                type: string
+              kty:
+                default: RSA
+                type: string
+              'n':
+                type: string
+              use:
+                default: sig
+                type: string
+            type: object
+          type: array
+      type: object
+    Raw:
+      properties:
+        keyvalues:
+          items:
+            properties:
+              algorithm:
+                default: RSA
+                type: string
+              exponent:
+                type: string
+              keyid:
+                type: string
+              modulus:
+                type: string
+            type: object
+          type: array
+      type: object
+    Tokeninfo:
+      properties:
+        access_type:
+          description: The access type granted with this token. It can be offline or online.
+          type: string
+        audience:
+          description: Who is the intended audience for this token. In general the same as issued_to.
+          type: string
+        email:
+          description: The email address of the user. Present only if the email scope is present in the request.
+          type: string
+        email_verified:
+          description: Boolean flag which is true if the email address is verified. Present only if the email scope is present in the request.
+          type: boolean
+        expires_in:
+          description: 'The expiry time of the token, as number of seconds left until expiry.'
+          format: int32
+          type: integer
+        issued_at:
+          description: 'The issue time of the token, as number of seconds.'
+          format: int32
+          type: integer
+        issued_to:
+          description: To whom was the token issued to. In general the same as audience.
+          type: string
+        issuer:
+          description: Who issued the token.
+          type: string
+        nonce:
+          description: Nonce of the id token.
+          type: string
+        scope:
+          description: The space separated list of scopes granted to this token.
+          type: string
+        user_id:
+          description: The obfuscated user id.
+          type: string
+        verified_email:
+          description: Boolean flag which is true if the email address is verified. Present only if the email scope is present in the request.
+          type: boolean
+      type: object
+    Userinfoplus:
+      properties:
+        email:
+          description: The user's email address.
+          type: string
+        family_name:
+          description: The user's last name.
+          type: string
+        gender:
+          description: The user's gender.
+          type: string
+        given_name:
+          description: The user's first name.
+          type: string
+        hd:
+          description: The hosted domain e.g. example.com if the user is Google apps user.
+          type: string
+        id:
+          description: The obfuscated ID of the user.
+          type: string
+        link:
+          description: URL of the profile page.
+          type: string
+        locale:
+          description: The user's preferred locale.
+          type: string
+        name:
+          description: The user's full name.
+          type: string
+        picture:
+          description: URL of the user's picture image.
+          type: string
+        verified_email:
+          default: true
+          description: Boolean flag which is true if the email address is verified. Always verified because we only return the user's primary email address.
+          type: boolean
+      type: object
+    X509:
+      additionalProperties:
+        type: string
+      type: object
+  parameters:
+    alt:
+      description: Data format for the response.
+      in: query
+      name: alt
+      schema:
+        type: string
+        enum:
+          - json
+        default: json
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+        default: true
+    quotaUser:
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    userIp:
+      description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      in: query
+      name: userIp
+      schema:
+        type: string
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          scopes:
+            'https://www.googleapis.com/auth/plus.login': 'Know the list of people in your circles, your age range, and language'
+            'https://www.googleapis.com/auth/plus.me': Know who you are on Google
+            'https://www.googleapis.com/auth/userinfo.email': View your email address
+            'https://www.googleapis.com/auth/userinfo.profile': View your basic profile info
+    Oauth2c:
+      description: Oauth 2.0 accessCode authentication
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+          scopes:
+            'https://www.googleapis.com/auth/plus.login': 'Know the list of people in your circles, your age range, and language'
+            'https://www.googleapis.com/auth/plus.me': Know who you are on Google
+            'https://www.googleapis.com/auth/userinfo.email': View your email address
+            'https://www.googleapis.com/auth/userinfo.profile': View your basic profile info

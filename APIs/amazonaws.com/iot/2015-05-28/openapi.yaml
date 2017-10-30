@@ -1,0 +1,3769 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://iot.amazonaws.com/'
+info:
+  version: '2015-05-28'
+  x-release: v4
+  title: AWS IoT
+  description: '<fullname>AWS IoT</fullname> <p>AWS IoT provides secure, bi-directional communication between Internet-connected things (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. You can discover your custom IoT-Data endpoint to communicate with, configure rules for data processing and integration with other services, organize resources associated with each thing (Thing Registry), configure logging, and create and manage policies and credentials to authenticate things.</p> <p>For more information about how AWS IoT works, see the <a href="http://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html">Developer Guide</a>.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: iot
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/iot-2015-05-28.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/iot/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  '/accept-certificate-transfer/{certificateId}':
+    patch:
+      operationId: AcceptCertificateTransfer
+      description: '<p>Accepts a pending certificate transfer. The default state of the certificate is INACTIVE.</p> <p>To check for pending certificate transfers, call <a>ListCertificates</a> to enumerate your certificates.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: TransferAlreadyCompletedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferAlreadyCompletedException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: certificateId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptCertificateTransferRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/principal-policies/{policyName}':
+    delete:
+      operationId: DetachPrincipalPolicy
+      description: Removes the specified policy from the specified certificate.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: policyName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetachPrincipalPolicyRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/things/{thingName}/principals':
+    get:
+      operationId: ListThingPrincipals
+      description: Lists the principals associated with the specified thing.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListThingPrincipalsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: thingName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListThingPrincipalsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/cancel-certificate-transfer/{certificateId}':
+    patch:
+      operationId: CancelCertificateTransfer
+      description: '<p>Cancels a pending transfer for the specified certificate.</p> <p> <b>Note</b> Only the transfer source account can use this operation to cancel a transfer. (Transfer destinations can use <a>RejectCertificateTransfer</a> instead.) After transfer, AWS IoT returns the certificate to the source account in the INACTIVE state. After the destination account has accepted the transfer, the transfer cannot be cancelled.</p> <p>After a certificate transfer is cancelled, the status of the certificate changes from PENDING_TRANSFER to INACTIVE.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: TransferAlreadyCompletedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferAlreadyCompletedException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: certificateId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelCertificateTransferRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /certificates:
+    get:
+      operationId: ListCertificates
+      description: <p>Lists the certificates registered in your AWS account.</p> <p>The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCertificatesResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListCertificatesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /keys-and-certificate:
+    post:
+      operationId: CreateKeysAndCertificate
+      description: '<p>Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key.</p> <p> <b>Note</b> This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateKeysAndCertificateResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKeysAndCertificateRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/policies/{policyName}':
+    get:
+      operationId: GetPolicy
+      description: Gets information about the specified policy with the policy document of the default version.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPolicyResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: policyName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetPolicyRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/policies/{policyName}/version':
+    get:
+      operationId: ListPolicyVersions
+      description: Lists the versions of the specified policy and identifies the default version.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPolicyVersionsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: policyName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPolicyVersionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/things/{thingName}':
+    patch:
+      operationId: UpdateThing
+      description: Updates the data for a thing.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateThingResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: VersionConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionConflictException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '486':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: thingName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateThingRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/thing-types/{thingTypeName}':
+    get:
+      operationId: DescribeThingType
+      description: Gets information about the specified thing type.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeThingTypeResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: thingTypeName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: thingTypeName
+          in: query
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeThingTypeRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/rules/{ruleName}':
+    patch:
+      operationId: ReplaceTopicRule
+      description: Replaces the specified rule. You must specify all parameters for the new rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: SqlParseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SqlParseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+      parameters:
+        - name: ruleName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReplaceTopicRuleRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/cacertificate/{caCertificateId}':
+    put:
+      operationId: UpdateCACertificate
+      description: Updates a registered CA certificate.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: caCertificateId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCACertificateRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/certificates/{certificateId}':
+    put:
+      operationId: UpdateCertificate
+      description: '<p>Updates the status of the specified certificate. This operation is idempotent.</p> <p>Moving a certificate from the ACTIVE state (including REVOKED) will not disconnect currently connected devices, but these devices will be unable to reconnect.</p> <p>The ACTIVE state is required to authenticate devices connecting to AWS IoT using a certificate.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: CertificateStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateStateException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: certificateId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCertificateRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/policies/{policyName}/version/{policyVersionId}':
+    patch:
+      operationId: SetDefaultPolicyVersion
+      description: 'Sets the specified version of the specified policy as the policy''s default (operative) version. This action affects all certificates to which the policy is attached. To list the principals the policy is attached to, use the ListPrincipalPolicy API.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: policyName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: policyVersionId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetDefaultPolicyVersionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /registrationcode:
+    get:
+      operationId: GetRegistrationCode
+      description: Gets a registration code used to register a CA certificate with AWS IoT.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRegistrationCodeResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRegistrationCodeRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/thing-types/{thingTypeName}/deprecate':
+    post:
+      operationId: DeprecateThingType
+      description: Deprecates a thing type. You can not associate new things with deprecated thing type.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeprecateThingTypeResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: thingTypeName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: thingTypeName
+          in: query
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeprecateThingTypeRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /endpoint:
+    get:
+      operationId: DescribeEndpoint
+      description: Returns a unique endpoint specific to the AWS account making the call.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEndpointResponse'
+        '480':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEndpointRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/rules/{ruleName}/disable':
+    post:
+      operationId: DisableTopicRule
+      description: Disables the specified rule.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+      parameters:
+        - name: ruleName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisableTopicRuleRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/rules/{ruleName}/enable':
+    post:
+      operationId: EnableTopicRule
+      description: Enables the specified rule.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+      parameters:
+        - name: ruleName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnableTopicRuleRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /loggingOptions:
+    post:
+      operationId: SetLoggingOptions
+      description: Sets the logging options.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetLoggingOptionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /cacertificates:
+    get:
+      operationId: ListCACertificates
+      description: <p>Lists the CA certificates registered for your AWS account.</p> <p>The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCACertificatesResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListCACertificatesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/certificates-by-ca/{caCertificateId}':
+    get:
+      operationId: ListCertificatesByCA
+      description: List the device certificates signed by the specified CA certificate.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCertificatesByCAResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: caCertificateId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListCertificatesByCARequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /certificates-out-going:
+    get:
+      operationId: ListOutgoingCertificates
+      description: Lists certificates that are being transfered but not yet accepted.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOutgoingCertificatesResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListOutgoingCertificatesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /policies:
+    get:
+      operationId: ListPolicies
+      description: Lists your policies.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPoliciesResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPoliciesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /policy-principals:
+    get:
+      operationId: ListPolicyPrincipals
+      description: Lists the principals associated with the specified policy.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPolicyPrincipalsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPolicyPrincipalsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /principal-policies:
+    get:
+      operationId: ListPrincipalPolicies
+      description: 'Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in <a href="http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax">AmazonCognito Identity format</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPrincipalPoliciesResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPrincipalPoliciesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /principals/things:
+    get:
+      operationId: ListPrincipalThings
+      description: Lists the things associated with the specified principal.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPrincipalThingsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPrincipalThingsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /thing-types:
+    get:
+      operationId: ListThingTypes
+      description: Lists the existing thing types.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListThingTypesResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListThingTypesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /things:
+    get:
+      operationId: ListThings
+      description: 'Lists your things. Use the <b>attributeName</b> and <b>attributeValue</b> parameters to filter your things. For example, calling <code>ListThings</code> with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute <b>Color</b> with the value <b>Red</b>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListThingsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListThingsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /rules:
+    get:
+      operationId: ListTopicRules
+      description: Lists the rules for the specific topic.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTopicRulesResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTopicRulesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /cacertificate:
+    post:
+      operationId: RegisterCACertificate
+      description: 'Registers a CA certificate with AWS IoT. This CA certificate can then be used to sign device certificates, which can be then registered with AWS IoT. You can register up to 10 CA certificates per AWS account that have the same subject field. This enables you to have up to 10 certificate authorities sign your device certificates. If you have more than one CA certificate registered, make sure you pass the CA certificate when you register your device certificates with the RegisterCertificate API.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterCACertificateResponse'
+        '480':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '481':
+          description: RegistrationCodeValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistrationCodeValidationException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: CertificateValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '486':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '487':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '488':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterCACertificateRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /certificate/register:
+    post:
+      operationId: RegisterCertificate
+      description: 'Registers a device certificate with AWS IoT. If you have more than one CA certificate that has the same subject field, you must specify the CA certificate that was used to sign the device certificate being registered.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterCertificateResponse'
+        '480':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: CertificateValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateValidationException'
+        '483':
+          description: CertificateStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateStateException'
+        '484':
+          description: CertificateConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateConflictException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '487':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '488':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterCertificateRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/reject-certificate-transfer/{certificateId}':
+    patch:
+      operationId: RejectCertificateTransfer
+      description: '<p>Rejects a pending certificate transfer. After AWS IoT rejects a certificate transfer, the certificate status changes from <b>PENDING_TRANSFER</b> to <b>INACTIVE</b>.</p> <p>To check for pending certificate transfers, call <a>ListCertificates</a> to enumerate your certificates.</p> <p>This operation can only be called by the transfer destination. After it is called, the certificate will be returned to the source''s account in the INACTIVE state.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: TransferAlreadyCompletedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferAlreadyCompletedException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: certificateId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RejectCertificateTransferRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/transfer-certificate/{certificateId}':
+    patch:
+      operationId: TransferCertificate
+      description: <p>Transfers the specified certificate to the specified AWS account.</p> <p>You can cancel the transfer until it is acknowledged by the recipient.</p> <p>No notification is sent to the transfer destination's account. It is up to the caller to notify the transfer target.</p> <p>The certificate being transferred must not be in the ACTIVE state. You can use the UpdateCertificate API to deactivate it.</p> <p>The certificate must not have any policies attached to it. You can use the DetachPrincipalPolicy API to detach them.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferCertificateResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: CertificateStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateStateException'
+        '483':
+          description: TransferConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferConflictException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: certificateId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferCertificateRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AcceptCertificateTransferRequest:
+      type: object
+      properties: {}
+      description: The input for the AcceptCertificateTransfer operation.
+    Action:
+      type: object
+      properties:
+        dynamoDB:
+          $ref: '#/components/schemas/DynamoDBAction'
+        dynamoDBv2:
+          $ref: '#/components/schemas/DynamoDBv2Action'
+        lambda:
+          $ref: '#/components/schemas/LambdaAction'
+        sns:
+          $ref: '#/components/schemas/SnsAction'
+        sqs:
+          $ref: '#/components/schemas/SqsAction'
+        kinesis:
+          $ref: '#/components/schemas/KinesisAction'
+        republish:
+          $ref: '#/components/schemas/RepublishAction'
+        s3:
+          $ref: '#/components/schemas/S3Action'
+        firehose:
+          $ref: '#/components/schemas/FirehoseAction'
+        cloudwatchMetric:
+          $ref: '#/components/schemas/CloudwatchMetricAction'
+        cloudwatchAlarm:
+          $ref: '#/components/schemas/CloudwatchAlarmAction'
+        elasticsearch:
+          $ref: '#/components/schemas/ElasticsearchAction'
+        salesforce:
+          $ref: '#/components/schemas/SalesforceAction'
+      description: Describes the actions associated with a rule.
+    ActionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Action'
+      minItems: 0
+      maxItems: 10
+    AlarmName:
+      type: string
+    AllowAutoRegistration:
+      type: boolean
+    AscendingOrder:
+      type: boolean
+    AttachPrincipalPolicyRequest:
+      type: object
+      properties: {}
+      description: The input for the AttachPrincipalPolicy operation.
+    AttachThingPrincipalRequest:
+      type: object
+      properties: {}
+      description: The input for the AttachThingPrincipal operation.
+    AttachThingPrincipalResponse:
+      type: object
+      properties: {}
+      description: The output from the AttachThingPrincipal operation.
+    AttributeName:
+      type: string
+      pattern: '[a-zA-Z0-9_.,@/:#-]+'
+      maxLength: 128
+    AttributePayload:
+      type: object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/Attributes'
+        merge:
+          $ref: '#/components/schemas/Flag'
+      description: The attribute payload.
+    AttributeValue:
+      type: string
+      pattern: '[a-zA-Z0-9_.,@/:#-]*'
+      description: An attribute value for an Thing. An empty or null value in Update means that existing value for that attribute should be deleted. Empty and null values in create are ignored.
+      maxLength: 800
+    Attributes:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/AttributeName'
+          value:
+            $ref: '#/components/schemas/AttributeValue'
+    AutoRegistrationStatus:
+      type: string
+      enum:
+        - ENABLE
+        - DISABLE
+    AwsAccountId:
+      type: string
+      pattern: '[0-9]{12}'
+    AwsArn:
+      type: string
+    AwsIotSqlVersion:
+      type: string
+    Boolean:
+      type: boolean
+    BucketName:
+      type: string
+    CACertificate:
+      type: object
+      properties:
+        certificateArn:
+          $ref: '#/components/schemas/CertificateArn'
+        certificateId:
+          $ref: '#/components/schemas/CertificateId'
+        status:
+          $ref: '#/components/schemas/CACertificateStatus'
+        creationDate:
+          $ref: '#/components/schemas/DateType'
+      description: A CA certificate.
+    CACertificateDescription:
+      type: object
+      properties:
+        certificateArn:
+          $ref: '#/components/schemas/CertificateArn'
+        certificateId:
+          $ref: '#/components/schemas/CertificateId'
+        status:
+          $ref: '#/components/schemas/CACertificateStatus'
+        certificatePem:
+          $ref: '#/components/schemas/CertificatePem'
+        ownedBy:
+          $ref: '#/components/schemas/AwsAccountId'
+        creationDate:
+          $ref: '#/components/schemas/DateType'
+        autoRegistrationStatus:
+          $ref: '#/components/schemas/AutoRegistrationStatus'
+      description: Describes a CA certificate.
+    CACertificateStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - INACTIVE
+    CACertificates:
+      type: array
+      items:
+        $ref: '#/components/schemas/CACertificate'
+    CancelCertificateTransferRequest:
+      type: object
+      properties: {}
+      description: The input for the CancelCertificateTransfer operation.
+    CannedAccessControlList:
+      type: string
+      enum:
+        - private
+        - public-read
+        - public-read-write
+        - aws-exec-read
+        - authenticated-read
+        - bucket-owner-read
+        - bucket-owner-full-control
+        - log-delivery-write
+    Certificate:
+      type: object
+      properties:
+        certificateArn:
+          $ref: '#/components/schemas/CertificateArn'
+        certificateId:
+          $ref: '#/components/schemas/CertificateId'
+        status:
+          $ref: '#/components/schemas/CertificateStatus'
+        creationDate:
+          $ref: '#/components/schemas/DateType'
+      description: Information about a certificate.
+    CertificateArn:
+      type: string
+    CertificateConflictException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: Unable to verify the CA certificate used to sign the device certificate you are attempting to register. This is happens when you have registered more than one CA certificate that has the same subject field and public key.
+    CertificateDescription:
+      type: object
+      properties:
+        certificateArn:
+          $ref: '#/components/schemas/CertificateArn'
+        certificateId:
+          $ref: '#/components/schemas/CertificateId'
+        caCertificateId:
+          $ref: '#/components/schemas/CertificateId'
+        status:
+          $ref: '#/components/schemas/CertificateStatus'
+        certificatePem:
+          $ref: '#/components/schemas/CertificatePem'
+        ownedBy:
+          $ref: '#/components/schemas/AwsAccountId'
+        previousOwnedBy:
+          $ref: '#/components/schemas/AwsAccountId'
+        creationDate:
+          $ref: '#/components/schemas/DateType'
+        lastModifiedDate:
+          $ref: '#/components/schemas/DateType'
+        transferData:
+          $ref: '#/components/schemas/TransferData'
+      description: Describes a certificate.
+    CertificateId:
+      type: string
+      pattern: '(0x)?[a-fA-F0-9]+'
+      minLength: 64
+      maxLength: 64
+    CertificatePem:
+      type: string
+      minLength: 1
+      maxLength: 65536
+    CertificateSigningRequest:
+      type: string
+      minLength: 1
+    CertificateStateException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: The certificate operation is not allowed.
+    CertificateStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - INACTIVE
+        - REVOKED
+        - PENDING_TRANSFER
+        - REGISTER_INACTIVE
+        - PENDING_ACTIVATION
+    CertificateValidationException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: The certificate is invalid.
+    Certificates:
+      type: array
+      items:
+        $ref: '#/components/schemas/Certificate'
+    ClientId:
+      type: string
+    CloudwatchAlarmAction:
+      type: object
+      required:
+        - roleArn
+        - alarmName
+        - stateReason
+        - stateValue
+      properties:
+        roleArn:
+          $ref: '#/components/schemas/AwsArn'
+        alarmName:
+          $ref: '#/components/schemas/AlarmName'
+        stateReason:
+          $ref: '#/components/schemas/StateReason'
+        stateValue:
+          $ref: '#/components/schemas/StateValue'
+      description: Describes an action that updates a CloudWatch alarm.
+    CloudwatchMetricAction:
+      type: object
+      required:
+        - roleArn
+        - metricNamespace
+        - metricName
+        - metricValue
+        - metricUnit
+      properties:
+        roleArn:
+          $ref: '#/components/schemas/AwsArn'
+        metricNamespace:
+          $ref: '#/components/schemas/MetricNamespace'
+        metricName:
+          $ref: '#/components/schemas/MetricName'
+        metricValue:
+          $ref: '#/components/schemas/MetricValue'
+        metricUnit:
+          $ref: '#/components/schemas/MetricUnit'
+        metricTimestamp:
+          $ref: '#/components/schemas/MetricTimestamp'
+      description: Describes an action that captures a CloudWatch metric.
+    CreateCertificateFromCsrRequest:
+      type: object
+      required:
+        - certificateSigningRequest
+      properties:
+        certificateSigningRequest:
+          $ref: '#/components/schemas/CertificateSigningRequest'
+      description: The input for the CreateCertificateFromCsr operation.
+    CreateCertificateFromCsrResponse:
+      type: object
+      properties:
+        certificateArn:
+          $ref: '#/components/schemas/CertificateArn'
+        certificateId:
+          $ref: '#/components/schemas/CertificateId'
+        certificatePem:
+          $ref: '#/components/schemas/CertificatePem'
+      description: The output from the CreateCertificateFromCsr operation.
+    CreateKeysAndCertificateRequest:
+      type: object
+      properties: {}
+      description: The input for the CreateKeysAndCertificate operation.
+    CreateKeysAndCertificateResponse:
+      type: object
+      properties:
+        certificateArn:
+          $ref: '#/components/schemas/CertificateArn'
+        certificateId:
+          $ref: '#/components/schemas/CertificateId'
+        certificatePem:
+          $ref: '#/components/schemas/CertificatePem'
+        keyPair:
+          $ref: '#/components/schemas/KeyPair'
+      description: The output of the CreateKeysAndCertificate operation.
+    CreatePolicyRequest:
+      type: object
+      required:
+        - policyDocument
+      properties:
+        policyDocument:
+          $ref: '#/components/schemas/PolicyDocument'
+      description: The input for the CreatePolicy operation.
+    CreatePolicyResponse:
+      type: object
+      properties:
+        policyName:
+          $ref: '#/components/schemas/PolicyName'
+        policyArn:
+          $ref: '#/components/schemas/PolicyArn'
+        policyDocument:
+          $ref: '#/components/schemas/PolicyDocument'
+        policyVersionId:
+          $ref: '#/components/schemas/PolicyVersionId'
+      description: The output from the CreatePolicy operation.
+    CreatePolicyVersionRequest:
+      type: object
+      required:
+        - policyDocument
+      properties:
+        policyDocument:
+          $ref: '#/components/schemas/PolicyDocument'
+      description: The input for the CreatePolicyVersion operation.
+    CreatePolicyVersionResponse:
+      type: object
+      properties:
+        policyArn:
+          $ref: '#/components/schemas/PolicyArn'
+        policyDocument:
+          $ref: '#/components/schemas/PolicyDocument'
+        policyVersionId:
+          $ref: '#/components/schemas/PolicyVersionId'
+        isDefaultVersion:
+          $ref: '#/components/schemas/IsDefaultVersion'
+      description: The output of the CreatePolicyVersion operation.
+    CreateThingRequest:
+      type: object
+      properties:
+        thingTypeName:
+          $ref: '#/components/schemas/ThingTypeName'
+        attributePayload:
+          $ref: '#/components/schemas/AttributePayload'
+      description: The input for the CreateThing operation.
+    CreateThingResponse:
+      type: object
+      properties:
+        thingName:
+          $ref: '#/components/schemas/ThingName'
+        thingArn:
+          $ref: '#/components/schemas/ThingArn'
+      description: The output of the CreateThing operation.
+    CreateThingTypeRequest:
+      type: object
+      properties:
+        thingTypeProperties:
+          $ref: '#/components/schemas/ThingTypeProperties'
+      description: The input for the CreateThingType operation.
+    CreateThingTypeResponse:
+      type: object
+      properties:
+        thingTypeName:
+          $ref: '#/components/schemas/ThingTypeName'
+        thingTypeArn:
+          $ref: '#/components/schemas/ThingTypeArn'
+      description: The output of the CreateThingType operation.
+    CreateTopicRuleRequest:
+      type: object
+      required:
+        - topicRulePayload
+      properties:
+        topicRulePayload:
+          $ref: '#/components/schemas/TopicRulePayload'
+      description: The input for the CreateTopicRule operation.
+    CreatedAtDate:
+      type: string
+      format: date-time
+    CreationDate:
+      type: string
+      format: date-time
+    DateType:
+      type: string
+      format: date-time
+    DeleteCACertificateRequest:
+      type: object
+      properties: {}
+      description: Input for the DeleteCACertificate operation.
+    DeleteCACertificateResponse:
+      type: object
+      properties: {}
+      description: The output for the DeleteCACertificate operation.
+    DeleteCertificateRequest:
+      type: object
+      properties: {}
+      description: The input for the DeleteCertificate operation.
+    DeleteConflictException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: You can't delete the resource because it is attached to one or more resources.
+    DeletePolicyRequest:
+      type: object
+      properties: {}
+      description: The input for the DeletePolicy operation.
+    DeletePolicyVersionRequest:
+      type: object
+      properties: {}
+      description: The input for the DeletePolicyVersion operation.
+    DeleteRegistrationCodeRequest:
+      type: object
+      properties: {}
+      description: The input for the DeleteRegistrationCode operation.
+    DeleteRegistrationCodeResponse:
+      type: object
+      properties: {}
+      description: The output for the DeleteRegistrationCode operation.
+    DeleteThingRequest:
+      type: object
+      properties: {}
+      description: The input for the DeleteThing operation.
+    DeleteThingResponse:
+      type: object
+      properties: {}
+      description: The output of the DeleteThing operation.
+    DeleteThingTypeRequest:
+      type: object
+      properties: {}
+      description: The input for the DeleteThingType operation.
+    DeleteThingTypeResponse:
+      type: object
+      properties: {}
+      description: The output for the DeleteThingType operation.
+    DeleteTopicRuleRequest:
+      type: object
+      properties: {}
+      description: The input for the DeleteTopicRule operation.
+    DeliveryStreamName:
+      type: string
+    DeprecateThingTypeRequest:
+      type: object
+      properties:
+        undoDeprecate:
+          $ref: '#/components/schemas/UndoDeprecate'
+      description: The input for the DeprecateThingType operation.
+    DeprecateThingTypeResponse:
+      type: object
+      properties: {}
+      description: The output for the DeprecateThingType operation.
+    DeprecationDate:
+      type: string
+      format: date-time
+    DescribeCACertificateRequest:
+      type: object
+      properties: {}
+      description: The input for the DescribeCACertificate operation.
+    DescribeCACertificateResponse:
+      type: object
+      properties:
+        certificateDescription:
+          $ref: '#/components/schemas/CACertificateDescription'
+      description: The output from the DescribeCACertificate operation.
+    DescribeCertificateRequest:
+      type: object
+      properties: {}
+      description: The input for the DescribeCertificate operation.
+    DescribeCertificateResponse:
+      type: object
+      properties:
+        certificateDescription:
+          $ref: '#/components/schemas/CertificateDescription'
+      description: The output of the DescribeCertificate operation.
+    DescribeEndpointRequest:
+      type: object
+      properties: {}
+      description: The input for the DescribeEndpoint operation.
+    DescribeEndpointResponse:
+      type: object
+      properties:
+        endpointAddress:
+          $ref: '#/components/schemas/EndpointAddress'
+      description: The output from the DescribeEndpoint operation.
+    DescribeThingRequest:
+      type: object
+      properties: {}
+      description: The input for the DescribeThing operation.
+    DescribeThingResponse:
+      type: object
+      properties:
+        defaultClientId:
+          $ref: '#/components/schemas/ClientId'
+        thingName:
+          $ref: '#/components/schemas/ThingName'
+        thingTypeName:
+          $ref: '#/components/schemas/ThingTypeName'
+        attributes:
+          $ref: '#/components/schemas/Attributes'
+        version:
+          $ref: '#/components/schemas/Version'
+      description: The output from the DescribeThing operation.
+    DescribeThingTypeRequest:
+      type: object
+      properties: {}
+      description: The input for the DescribeThingType operation.
+    DescribeThingTypeResponse:
+      type: object
+      properties:
+        thingTypeName:
+          $ref: '#/components/schemas/ThingTypeName'
+        thingTypeProperties:
+          $ref: '#/components/schemas/ThingTypeProperties'
+        thingTypeMetadata:
+          $ref: '#/components/schemas/ThingTypeMetadata'
+      description: The output for the DescribeThingType operation.
+    Description:
+      type: string
+    DetachPrincipalPolicyRequest:
+      type: object
+      properties: {}
+      description: The input for the DetachPrincipalPolicy operation.
+    DetachThingPrincipalRequest:
+      type: object
+      properties: {}
+      description: The input for the DetachThingPrincipal operation.
+    DetachThingPrincipalResponse:
+      type: object
+      properties: {}
+      description: The output from the DetachThingPrincipal operation.
+    DisableTopicRuleRequest:
+      type: object
+      properties: {}
+      description: The input for the DisableTopicRuleRequest operation.
+    DynamoDBAction:
+      type: object
+      required:
+        - tableName
+        - roleArn
+        - hashKeyField
+        - hashKeyValue
+      properties:
+        tableName:
+          $ref: '#/components/schemas/TableName'
+        roleArn:
+          $ref: '#/components/schemas/AwsArn'
+        operation:
+          $ref: '#/components/schemas/DynamoOperation'
+        hashKeyField:
+          $ref: '#/components/schemas/HashKeyField'
+        hashKeyValue:
+          $ref: '#/components/schemas/HashKeyValue'
+        hashKeyType:
+          $ref: '#/components/schemas/DynamoKeyType'
+        rangeKeyField:
+          $ref: '#/components/schemas/RangeKeyField'
+        rangeKeyValue:
+          $ref: '#/components/schemas/RangeKeyValue'
+        rangeKeyType:
+          $ref: '#/components/schemas/DynamoKeyType'
+        payloadField:
+          $ref: '#/components/schemas/PayloadField'
+      description: '<p>Describes an action to write to a DynamoDB table.</p> <p>The <code>tableName</code>, <code>hashKeyField</code>, and <code>rangeKeyField</code> values must match the values used when you created the table.</p> <p>The <code>hashKeyValue</code> and <code>rangeKeyvalue</code> fields use a substitution template syntax. These templates provide data at runtime. The syntax is as follows: ${<i>sql-expression</i>}.</p> <p>You can specify any valid expression in a WHERE or SELECT clause, including JSON properties, comparisons, calculations, and functions. For example, the following field uses the third level of the topic:</p> <p> <code>"hashKeyValue": "${topic(3)}"</code> </p> <p>The following field uses the timestamp:</p> <p> <code>"rangeKeyValue": "${timestamp()}"</code> </p>'
+    DynamoDBv2Action:
+      type: object
+      properties:
+        roleArn:
+          $ref: '#/components/schemas/AwsArn'
+        putItem:
+          $ref: '#/components/schemas/PutItemInput'
+      description: <p>Describes an action to write to a DynamoDB table.</p> <p>This DynamoDB action writes each attribute in the message payload into it's own column in the DynamoDB table.</p>
+    DynamoKeyType:
+      type: string
+      enum:
+        - STRING
+        - NUMBER
+    DynamoOperation:
+      type: string
+    ElasticsearchAction:
+      type: object
+      required:
+        - roleArn
+        - endpoint
+        - index
+        - type
+        - id
+      properties:
+        roleArn:
+          $ref: '#/components/schemas/AwsArn'
+        endpoint:
+          $ref: '#/components/schemas/ElasticsearchEndpoint'
+        index:
+          $ref: '#/components/schemas/ElasticsearchIndex'
+        type:
+          $ref: '#/components/schemas/ElasticsearchType'
+        id:
+          $ref: '#/components/schemas/ElasticsearchId'
+      description: Describes an action that writes data to an Amazon Elasticsearch Service domain.
+    ElasticsearchEndpoint:
+      type: string
+      pattern: 'https?://.*'
+    ElasticsearchId:
+      type: string
+    ElasticsearchIndex:
+      type: string
+    ElasticsearchType:
+      type: string
+    EnableTopicRuleRequest:
+      type: object
+      properties: {}
+      description: The input for the EnableTopicRuleRequest operation.
+    EndpointAddress:
+      type: string
+    FirehoseAction:
+      type: object
+      required:
+        - roleArn
+        - deliveryStreamName
+      properties:
+        roleArn:
+          $ref: '#/components/schemas/AwsArn'
+        deliveryStreamName:
+          $ref: '#/components/schemas/DeliveryStreamName'
+        separator:
+          $ref: '#/components/schemas/FirehoseSeparator'
+      description: Describes an action that writes data to an Amazon Kinesis Firehose stream.
+    FirehoseSeparator:
+      type: string
+      pattern: '([\n\t])|(\r\n)|(,)'
+    Flag:
+      type: boolean
+    FunctionArn:
+      type: string
+    GetLoggingOptionsRequest:
+      type: object
+      properties: {}
+      description: The input for the GetLoggingOptions operation.
+    GetLoggingOptionsResponse:
+      type: object
+      properties:
+        roleArn:
+          $ref: '#/components/schemas/AwsArn'
+        logLevel:
+          $ref: '#/components/schemas/LogLevel'
+      description: The output from the GetLoggingOptions operation.
+    GetPolicyRequest:
+      type: object
+      properties: {}
+      description: The input for the GetPolicy operation.
+    GetPolicyResponse:
+      type: object
+      properties:
+        policyName:
+          $ref: '#/components/schemas/PolicyName'
+        policyArn:
+          $ref: '#/components/schemas/PolicyArn'
+        policyDocument:
+          $ref: '#/components/schemas/PolicyDocument'
+        defaultVersionId:
+          $ref: '#/components/schemas/PolicyVersionId'
+      description: The output from the GetPolicy operation.
+    GetPolicyVersionRequest:
+      type: object
+      properties: {}
+      description: The input for the GetPolicyVersion operation.
+    GetPolicyVersionResponse:
+      type: object
+      properties:
+        policyArn:
+          $ref: '#/components/schemas/PolicyArn'
+        policyName:
+          $ref: '#/components/schemas/PolicyName'
+        policyDocument:
+          $ref: '#/components/schemas/PolicyDocument'
+        policyVersionId:
+          $ref: '#/components/schemas/PolicyVersionId'
+        isDefaultVersion:
+          $ref: '#/components/schemas/IsDefaultVersion'
+      description: The output from the GetPolicyVersion operation.
+    GetRegistrationCodeRequest:
+      type: object
+      properties: {}
+      description: The input to the GetRegistrationCode operation.
+    GetRegistrationCodeResponse:
+      type: object
+      properties:
+        registrationCode:
+          $ref: '#/components/schemas/RegistrationCode'
+      description: The output from the GetRegistrationCode operation.
+    GetTopicRuleRequest:
+      type: object
+      properties: {}
+      description: The input for the GetTopicRule operation.
+    GetTopicRuleResponse:
+      type: object
+      properties:
+        ruleArn:
+          $ref: '#/components/schemas/RuleArn'
+        rule:
+          $ref: '#/components/schemas/TopicRule'
+      description: The output from the GetTopicRule operation.
+    HashKeyField:
+      type: string
+    HashKeyValue:
+      type: string
+    InternalException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: An unexpected error has occurred.
+    InternalFailureException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: An unexpected error has occurred.
+    InvalidRequestException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: The request is not valid.
+    IsDefaultVersion:
+      type: boolean
+    IsDisabled:
+      type: boolean
+    Key:
+      type: string
+    KeyPair:
+      type: object
+      properties:
+        PublicKey:
+          $ref: '#/components/schemas/PublicKey'
+        PrivateKey:
+          $ref: '#/components/schemas/PrivateKey'
+      description: Describes a key pair.
+    KinesisAction:
+      type: object
+      required:
+        - roleArn
+        - streamName
+      properties:
+        roleArn:
+          $ref: '#/components/schemas/AwsArn'
+        streamName:
+          $ref: '#/components/schemas/StreamName'
+        partitionKey:
+          $ref: '#/components/schemas/PartitionKey'
+      description: Describes an action to write data to an Amazon Kinesis stream.
+    LambdaAction:
+      type: object
+      required:
+        - functionArn
+      properties:
+        functionArn:
+          $ref: '#/components/schemas/FunctionArn'
+      description: Describes an action to invoke a Lambda function.
+    LimitExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: The number of attached entities exceeds the limit.
+    ListCACertificatesRequest:
+      type: object
+      properties: {}
+      description: Input for the ListCACertificates operation.
+    ListCACertificatesResponse:
+      type: object
+      properties:
+        certificates:
+          $ref: '#/components/schemas/CACertificates'
+        nextMarker:
+          $ref: '#/components/schemas/Marker'
+      description: The output from the ListCACertificates operation.
+    ListCertificatesByCARequest:
+      type: object
+      properties: {}
+      description: The input to the ListCertificatesByCA operation.
+    ListCertificatesByCAResponse:
+      type: object
+      properties:
+        certificates:
+          $ref: '#/components/schemas/Certificates'
+        nextMarker:
+          $ref: '#/components/schemas/Marker'
+      description: The output of the ListCertificatesByCA operation.
+    ListCertificatesRequest:
+      type: object
+      properties: {}
+      description: The input for the ListCertificates operation.
+    ListCertificatesResponse:
+      type: object
+      properties:
+        certificates:
+          $ref: '#/components/schemas/Certificates'
+        nextMarker:
+          $ref: '#/components/schemas/Marker'
+      description: The output of the ListCertificates operation.
+    ListOutgoingCertificatesRequest:
+      type: object
+      properties: {}
+      description: The input to the ListOutgoingCertificates operation.
+    ListOutgoingCertificatesResponse:
+      type: object
+      properties:
+        outgoingCertificates:
+          $ref: '#/components/schemas/OutgoingCertificates'
+        nextMarker:
+          $ref: '#/components/schemas/Marker'
+      description: The output from the ListOutgoingCertificates operation.
+    ListPoliciesRequest:
+      type: object
+      properties: {}
+      description: The input for the ListPolicies operation.
+    ListPoliciesResponse:
+      type: object
+      properties:
+        policies:
+          $ref: '#/components/schemas/Policies'
+        nextMarker:
+          $ref: '#/components/schemas/Marker'
+      description: The output from the ListPolicies operation.
+    ListPolicyPrincipalsRequest:
+      type: object
+      properties: {}
+      description: The input for the ListPolicyPrincipals operation.
+    ListPolicyPrincipalsResponse:
+      type: object
+      properties:
+        principals:
+          $ref: '#/components/schemas/Principals'
+        nextMarker:
+          $ref: '#/components/schemas/Marker'
+      description: The output from the ListPolicyPrincipals operation.
+    ListPolicyVersionsRequest:
+      type: object
+      properties: {}
+      description: The input for the ListPolicyVersions operation.
+    ListPolicyVersionsResponse:
+      type: object
+      properties:
+        policyVersions:
+          $ref: '#/components/schemas/PolicyVersions'
+      description: The output from the ListPolicyVersions operation.
+    ListPrincipalPoliciesRequest:
+      type: object
+      properties: {}
+      description: The input for the ListPrincipalPolicies operation.
+    ListPrincipalPoliciesResponse:
+      type: object
+      properties:
+        policies:
+          $ref: '#/components/schemas/Policies'
+        nextMarker:
+          $ref: '#/components/schemas/Marker'
+      description: The output from the ListPrincipalPolicies operation.
+    ListPrincipalThingsRequest:
+      type: object
+      properties: {}
+      description: The input for the ListPrincipalThings operation.
+    ListPrincipalThingsResponse:
+      type: object
+      properties:
+        things:
+          $ref: '#/components/schemas/ThingNameList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The output from the ListPrincipalThings operation.
+    ListThingPrincipalsRequest:
+      type: object
+      properties: {}
+      description: The input for the ListThingPrincipal operation.
+    ListThingPrincipalsResponse:
+      type: object
+      properties:
+        principals:
+          $ref: '#/components/schemas/Principals'
+      description: The output from the ListThingPrincipals operation.
+    ListThingTypesRequest:
+      type: object
+      properties: {}
+      description: The input for the ListThingTypes operation.
+    ListThingTypesResponse:
+      type: object
+      properties:
+        thingTypes:
+          $ref: '#/components/schemas/ThingTypeList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The output for the ListThingTypes operation.
+    ListThingsRequest:
+      type: object
+      properties: {}
+      description: The input for the ListThings operation.
+    ListThingsResponse:
+      type: object
+      properties:
+        things:
+          $ref: '#/components/schemas/ThingAttributeList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The output from the ListThings operation.
+    ListTopicRulesRequest:
+      type: object
+      properties: {}
+      description: The input for the ListTopicRules operation.
+    ListTopicRulesResponse:
+      type: object
+      properties:
+        rules:
+          $ref: '#/components/schemas/TopicRuleList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The output from the ListTopicRules operation.
+    LogLevel:
+      type: string
+      enum:
+        - DEBUG
+        - INFO
+        - ERROR
+        - WARN
+        - DISABLED
+    LoggingOptionsPayload:
+      type: object
+      required:
+        - roleArn
+      properties:
+        roleArn:
+          $ref: '#/components/schemas/AwsArn'
+        logLevel:
+          $ref: '#/components/schemas/LogLevel'
+      description: Describes the logging options payload.
+    MalformedPolicyException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: The policy documentation is not valid.
+    Marker:
+      type: string
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 10000
+    Message:
+      type: string
+      maxLength: 128
+    MessageFormat:
+      type: string
+      enum:
+        - RAW
+        - JSON
+    MetricName:
+      type: string
+    MetricNamespace:
+      type: string
+    MetricTimestamp:
+      type: string
+    MetricUnit:
+      type: string
+    MetricValue:
+      type: string
+    NextToken:
+      type: string
+    OptionalVersion:
+      type: integer
+    OutgoingCertificate:
+      type: object
+      properties:
+        certificateArn:
+          $ref: '#/components/schemas/CertificateArn'
+        certificateId:
+          $ref: '#/components/schemas/CertificateId'
+        transferredTo:
+          $ref: '#/components/schemas/AwsAccountId'
+        transferDate:
+          $ref: '#/components/schemas/DateType'
+        transferMessage:
+          $ref: '#/components/schemas/Message'
+        creationDate:
+          $ref: '#/components/schemas/DateType'
+      description: A certificate that has been transfered but not yet accepted.
+    OutgoingCertificates:
+      type: array
+      items:
+        $ref: '#/components/schemas/OutgoingCertificate'
+    PageSize:
+      type: integer
+      minimum: 1
+      maximum: 250
+    PartitionKey:
+      type: string
+    PayloadField:
+      type: string
+    Policies:
+      type: array
+      items:
+        $ref: '#/components/schemas/Policy'
+    Policy:
+      type: object
+      properties:
+        policyName:
+          $ref: '#/components/schemas/PolicyName'
+        policyArn:
+          $ref: '#/components/schemas/PolicyArn'
+      description: Describes an AWS IoT policy.
+    PolicyArn:
+      type: string
+    PolicyDocument:
+      type: string
+    PolicyName:
+      type: string
+      pattern: '[\w+=,.@-]+'
+      minLength: 1
+      maxLength: 128
+    PolicyVersion:
+      type: object
+      properties:
+        versionId:
+          $ref: '#/components/schemas/PolicyVersionId'
+        isDefaultVersion:
+          $ref: '#/components/schemas/IsDefaultVersion'
+        createDate:
+          $ref: '#/components/schemas/DateType'
+      description: Describes a policy version.
+    PolicyVersionId:
+      type: string
+      pattern: '[0-9]+'
+    PolicyVersions:
+      type: array
+      items:
+        $ref: '#/components/schemas/PolicyVersion'
+    Principal:
+      type: string
+    PrincipalArn:
+      type: string
+    Principals:
+      type: array
+      items:
+        $ref: '#/components/schemas/PrincipalArn'
+    PrivateKey:
+      type: string
+      minLength: 1
+      format: password
+    PublicKey:
+      type: string
+      minLength: 1
+    PutItemInput:
+      type: object
+      required:
+        - tableName
+      properties:
+        tableName:
+          $ref: '#/components/schemas/TableName'
+      description: The input for the DynamoActionVS action that specifies the DynamoDB table to which the message data will be written.
+    QueueUrl:
+      type: string
+    RangeKeyField:
+      type: string
+    RangeKeyValue:
+      type: string
+    RegisterCACertificateRequest:
+      type: object
+      required:
+        - caCertificate
+        - verificationCertificate
+      properties:
+        caCertificate:
+          $ref: '#/components/schemas/CertificatePem'
+        verificationCertificate:
+          $ref: '#/components/schemas/CertificatePem'
+      description: The input to the RegisterCACertificate operation.
+    RegisterCACertificateResponse:
+      type: object
+      properties:
+        certificateArn:
+          $ref: '#/components/schemas/CertificateArn'
+        certificateId:
+          $ref: '#/components/schemas/CertificateId'
+      description: The output from the RegisterCACertificateResponse operation.
+    RegisterCertificateRequest:
+      type: object
+      required:
+        - certificatePem
+      properties:
+        certificatePem:
+          $ref: '#/components/schemas/CertificatePem'
+        caCertificatePem:
+          $ref: '#/components/schemas/CertificatePem'
+        status:
+          $ref: '#/components/schemas/CertificateStatus'
+      description: The input to the RegisterCertificate operation.
+    RegisterCertificateResponse:
+      type: object
+      properties:
+        certificateArn:
+          $ref: '#/components/schemas/CertificateArn'
+        certificateId:
+          $ref: '#/components/schemas/CertificateId'
+      description: The output from the RegisterCertificate operation.
+    RegistrationCode:
+      type: string
+      pattern: '(0x)?[a-fA-F0-9]+'
+      minLength: 64
+      maxLength: 64
+    RegistrationCodeValidationException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: The registration code is invalid.
+    RegistryMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 250
+    RejectCertificateTransferRequest:
+      type: object
+      properties:
+        rejectReason:
+          $ref: '#/components/schemas/Message'
+      description: The input for the RejectCertificateTransfer operation.
+    RemoveThingType:
+      type: boolean
+    ReplaceTopicRuleRequest:
+      type: object
+      required:
+        - topicRulePayload
+      properties:
+        topicRulePayload:
+          $ref: '#/components/schemas/TopicRulePayload'
+      description: The input for the ReplaceTopicRule operation.
+    RepublishAction:
+      type: object
+      required:
+        - roleArn
+        - topic
+      properties:
+        roleArn:
+          $ref: '#/components/schemas/AwsArn'
+        topic:
+          $ref: '#/components/schemas/TopicPattern'
+      description: Describes an action to republish to another topic.
+    ResourceAlreadyExistsException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+        resourceId:
+          $ref: '#/components/schemas/resourceId'
+        resourceArn:
+          $ref: '#/components/schemas/resourceArn'
+      description: The resource already exists.
+    ResourceNotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: The specified resource does not exist.
+    RuleArn:
+      type: string
+    RuleName:
+      type: string
+      pattern: '^[a-zA-Z0-9_]+$'
+      minLength: 1
+      maxLength: 128
+    S3Action:
+      type: object
+      required:
+        - roleArn
+        - bucketName
+        - key
+      properties:
+        roleArn:
+          $ref: '#/components/schemas/AwsArn'
+        bucketName:
+          $ref: '#/components/schemas/BucketName'
+        key:
+          $ref: '#/components/schemas/Key'
+        cannedAcl:
+          $ref: '#/components/schemas/CannedAccessControlList'
+      description: Describes an action to write data to an Amazon S3 bucket.
+    SQL:
+      type: string
+    SalesforceAction:
+      type: object
+      required:
+        - token
+        - url
+      properties:
+        token:
+          $ref: '#/components/schemas/SalesforceToken'
+        url:
+          $ref: '#/components/schemas/SalesforceEndpoint'
+      description: Describes an action to write a message to a Salesforce IoT Cloud Input Stream.
+    SalesforceEndpoint:
+      type: string
+      pattern: 'https://ingestion-[a-zA-Z0-9]{1,12}\.[a-zA-Z0-9]+\.((sfdc-matrix\.net)|(sfdcnow\.com))/streams/\w{1,20}/\w{1,20}/event'
+      maxLength: 2000
+    SalesforceToken:
+      type: string
+      minLength: 40
+    SearchableAttributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/AttributeName'
+    ServiceUnavailableException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: The service is temporarily unavailable.
+    SetAsActive:
+      type: boolean
+    SetAsActiveFlag:
+      type: boolean
+    SetAsDefault:
+      type: boolean
+    SetDefaultPolicyVersionRequest:
+      type: object
+      properties: {}
+      description: The input for the SetDefaultPolicyVersion operation.
+    SetLoggingOptionsRequest:
+      type: object
+      required:
+        - loggingOptionsPayload
+      properties:
+        loggingOptionsPayload:
+          $ref: '#/components/schemas/LoggingOptionsPayload'
+      description: The input for the SetLoggingOptions operation.
+    SnsAction:
+      type: object
+      required:
+        - targetArn
+        - roleArn
+      properties:
+        targetArn:
+          $ref: '#/components/schemas/AwsArn'
+        roleArn:
+          $ref: '#/components/schemas/AwsArn'
+        messageFormat:
+          $ref: '#/components/schemas/MessageFormat'
+      description: Describes an action to publish to an Amazon SNS topic.
+    SqlParseException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: The Rule-SQL expression can't be parsed correctly.
+    SqsAction:
+      type: object
+      required:
+        - roleArn
+        - queueUrl
+      properties:
+        roleArn:
+          $ref: '#/components/schemas/AwsArn'
+        queueUrl:
+          $ref: '#/components/schemas/QueueUrl'
+        useBase64:
+          $ref: '#/components/schemas/UseBase64'
+      description: Describes an action to publish data to an Amazon SQS queue.
+    StateReason:
+      type: string
+    StateValue:
+      type: string
+    StreamName:
+      type: string
+    TableName:
+      type: string
+    ThingArn:
+      type: string
+    ThingAttribute:
+      type: object
+      properties:
+        thingName:
+          $ref: '#/components/schemas/ThingName'
+        thingTypeName:
+          $ref: '#/components/schemas/ThingTypeName'
+        attributes:
+          $ref: '#/components/schemas/Attributes'
+        version:
+          $ref: '#/components/schemas/Version'
+      description: 'The properties of the thing, including thing name, thing type name, and a list of thing attributes.'
+    ThingAttributeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ThingAttribute'
+    ThingName:
+      type: string
+      pattern: '[a-zA-Z0-9:_-]+'
+      minLength: 1
+      maxLength: 128
+    ThingNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ThingName'
+    ThingTypeArn:
+      type: string
+    ThingTypeDefinition:
+      type: object
+      properties:
+        thingTypeName:
+          $ref: '#/components/schemas/ThingTypeName'
+        thingTypeProperties:
+          $ref: '#/components/schemas/ThingTypeProperties'
+        thingTypeMetadata:
+          $ref: '#/components/schemas/ThingTypeMetadata'
+      description: 'The definition of the thing type, including thing type name and description.'
+    ThingTypeDescription:
+      type: string
+      pattern: '[\p{Graph}\x20]*'
+      maxLength: 2028
+    ThingTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ThingTypeDefinition'
+    ThingTypeMetadata:
+      type: object
+      properties:
+        deprecationDate:
+          $ref: '#/components/schemas/DeprecationDate'
+        creationDate:
+          $ref: '#/components/schemas/CreationDate'
+      description: 'The ThingTypeMetadata contains additional information about the thing type including: creation date and time, a value indicating whether the thing type is deprecated, and a date and time when time was deprecated.'
+    ThingTypeName:
+      type: string
+      pattern: '[a-zA-Z0-9:_-]+'
+      minLength: 1
+      maxLength: 128
+    ThingTypeProperties:
+      type: object
+      properties:
+        thingTypeDescription:
+          $ref: '#/components/schemas/ThingTypeDescription'
+        searchableAttributes:
+          $ref: '#/components/schemas/SearchableAttributes'
+      description: 'The ThingTypeProperties contains information about the thing type including: a thing type description, and a list of searchable thing attribute names.'
+    ThrottlingException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: The rate exceeds the limit.
+    Topic:
+      type: string
+    TopicPattern:
+      type: string
+    TopicRule:
+      type: object
+      properties:
+        ruleName:
+          $ref: '#/components/schemas/RuleName'
+        sql:
+          $ref: '#/components/schemas/SQL'
+        description:
+          $ref: '#/components/schemas/Description'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAtDate'
+        actions:
+          $ref: '#/components/schemas/ActionList'
+        ruleDisabled:
+          $ref: '#/components/schemas/IsDisabled'
+        awsIotSqlVersion:
+          $ref: '#/components/schemas/AwsIotSqlVersion'
+      description: Describes a rule.
+    TopicRuleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TopicRuleListItem'
+    TopicRuleListItem:
+      type: object
+      properties:
+        ruleArn:
+          $ref: '#/components/schemas/RuleArn'
+        ruleName:
+          $ref: '#/components/schemas/RuleName'
+        topicPattern:
+          $ref: '#/components/schemas/TopicPattern'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAtDate'
+        ruleDisabled:
+          $ref: '#/components/schemas/IsDisabled'
+      description: Describes a rule.
+    TopicRulePayload:
+      type: object
+      required:
+        - sql
+        - actions
+      properties:
+        sql:
+          $ref: '#/components/schemas/SQL'
+        description:
+          $ref: '#/components/schemas/Description'
+        actions:
+          $ref: '#/components/schemas/ActionList'
+        ruleDisabled:
+          $ref: '#/components/schemas/IsDisabled'
+        awsIotSqlVersion:
+          $ref: '#/components/schemas/AwsIotSqlVersion'
+      description: Describes a rule.
+    TransferAlreadyCompletedException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: You can't revert the certificate transfer because the transfer is already complete.
+    TransferCertificateRequest:
+      type: object
+      properties:
+        transferMessage:
+          $ref: '#/components/schemas/Message'
+      description: The input for the TransferCertificate operation.
+    TransferCertificateResponse:
+      type: object
+      properties:
+        transferredCertificateArn:
+          $ref: '#/components/schemas/CertificateArn'
+      description: The output from the TransferCertificate operation.
+    TransferConflictException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: You can't transfer the certificate because authorization policies are still attached.
+    TransferData:
+      type: object
+      properties:
+        transferMessage:
+          $ref: '#/components/schemas/Message'
+        rejectReason:
+          $ref: '#/components/schemas/Message'
+        transferDate:
+          $ref: '#/components/schemas/DateType'
+        acceptDate:
+          $ref: '#/components/schemas/DateType'
+        rejectDate:
+          $ref: '#/components/schemas/DateType'
+      description: Data used to transfer a certificate to an AWS account.
+    UnauthorizedException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: You are not authorized to perform this operation.
+    UndoDeprecate:
+      type: boolean
+    UpdateCACertificateRequest:
+      type: object
+      properties: {}
+      description: The input to the UpdateCACertificate operation.
+    UpdateCertificateRequest:
+      type: object
+      properties: {}
+      description: The input for the UpdateCertificate operation.
+    UpdateThingRequest:
+      type: object
+      properties:
+        thingTypeName:
+          $ref: '#/components/schemas/ThingTypeName'
+        attributePayload:
+          $ref: '#/components/schemas/AttributePayload'
+        expectedVersion:
+          $ref: '#/components/schemas/OptionalVersion'
+        removeThingType:
+          $ref: '#/components/schemas/RemoveThingType'
+      description: The input for the UpdateThing operation.
+    UpdateThingResponse:
+      type: object
+      properties: {}
+      description: The output from the UpdateThing operation.
+    UseBase64:
+      type: boolean
+    Version:
+      type: integer
+    VersionConflictException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: An exception thrown when the version of a thing passed to a command is different than the version specified with the --version parameter.
+    VersionsLimitExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: The number of policy versions exceeds the limit.
+    errorMessage:
+      type: string
+    resourceArn:
+      type: string
+    resourceId:
+      type: string
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

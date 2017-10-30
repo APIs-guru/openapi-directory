@@ -1,0 +1,878 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://www.europeana.eu/api'
+info:
+  contact:
+    name: 'http://labs.europeana.eu/api'
+  description: 'This Swagger API console provides an overview of an interface to the Europeana REST API. You can build and test anything from the simplest search to a complex query using facetList such as dates, geotags and permissions. For more help and information, head to our comprehensive <a href="http://labs.europeana.eu/api/">online documentation</a>.'
+  license:
+    name: API terms of use
+    url: 'http://www.europeana.eu/portal/en/rights/api.html'
+  termsOfService: 'http://www.europeana.eu/portal/en/rights.html'
+  title: Europeana
+  version: 2.3.0
+  x-apisguru-categories:
+    - open_data
+  x-logo:
+    url: 'http://labs.europeana.eu/files/labs/footer/150203-solid-black-logo-128px.fw-1-.png'
+  x-origin:
+    - format: swagger
+      url: 'http://www.europeana.eu/api/api-docs/'
+      version: '2.0'
+  x-providerName: europeana.eu
+tags:
+  - description: ' '
+    name: Search
+  - description: ' '
+    name: Providers and Datasets
+  - description: ' '
+    name: Record
+paths:
+  '/v2/dataset/{id}.json':
+    get:
+      operationId: getDataset
+      parameters:
+        - description: id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: wskey
+          in: query
+          name: wskey
+          required: false
+          schema:
+            type: string
+        - description: callback
+          in: query
+          name: callback
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: get information about a specific dataset
+      tags:
+        - Providers and Datasets
+  /v2/datasets.json:
+    get:
+      operationId: listDatasets
+      parameters:
+        - description: wskey
+          in: query
+          name: wskey
+          required: false
+          schema:
+            type: string
+        - description: callback
+          in: query
+          name: callback
+          required: false
+          schema:
+            type: string
+        - description: edmDatasetName
+          in: query
+          name: edmDatasetName
+          required: false
+          schema:
+            type: string
+        - description: countryCode
+          in: query
+          name: countryCode
+          required: false
+          schema:
+            type: string
+        - description: status
+          in: query
+          name: status
+          required: false
+          schema:
+            type: string
+        - description: offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: string
+        - description: pagesize
+          in: query
+          name: pagesize
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: get the list of Europeana datasets
+      tags:
+        - Providers and Datasets
+  /v2/opensearch.rss:
+    get:
+      operationId: openSearch
+      parameters:
+        - description: searchTerms
+          in: query
+          name: searchTerms
+          required: true
+          schema:
+            type: string
+        - description: startIndex
+          in: query
+          name: startIndex
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: count
+          in: query
+          name: count
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RssResponse'
+            application/rss+xml:
+              schema:
+                $ref: '#/components/schemas/RssResponse'
+            application/xhtml+xml:
+              schema:
+                $ref: '#/components/schemas/RssResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: basic search function following the OpenSearch specification
+      tags:
+        - Search
+  '/v2/provider/{id}.json':
+    get:
+      operationId: getProvider
+      parameters:
+        - description: id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: wskey
+          in: query
+          name: wskey
+          required: false
+          schema:
+            type: string
+        - description: callback
+          in: query
+          name: callback
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: get information about a specific Europeana provider
+      tags:
+        - Providers and Datasets
+  '/v2/provider/{id}/datasets.json':
+    get:
+      operationId: listProviderDatasets
+      parameters:
+        - description: id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: wskey
+          in: query
+          name: wskey
+          required: false
+          schema:
+            type: string
+        - description: callback
+          in: query
+          name: callback
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: get the list of datasets provided by a specific provider
+      tags:
+        - Providers and Datasets
+  /v2/providers.json:
+    get:
+      operationId: listProviders
+      parameters:
+        - description: wskey
+          in: query
+          name: wskey
+          required: false
+          schema:
+            type: string
+        - description: callback
+          in: query
+          name: callback
+          required: false
+          schema:
+            type: string
+        - description: countryCode
+          in: query
+          name: countryCode
+          required: false
+          schema:
+            type: string
+        - description: offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: string
+        - description: pagesize
+          in: query
+          name: pagesize
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: get the list of Europeana data providers
+      tags:
+        - Providers and Datasets
+  '/v2/record/{collectionId}/{recordId}.json':
+    get:
+      operationId: getSingleRecordJson
+      parameters:
+        - description: collectionId
+          in: path
+          name: collectionId
+          required: true
+          schema:
+            type: string
+        - description: recordId
+          in: path
+          name: recordId
+          required: true
+          schema:
+            type: string
+        - description: profile
+          in: query
+          name: profile
+          required: false
+          schema:
+            type: string
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          schema:
+            type: string
+        - description: callback
+          in: query
+          name: callback
+          required: false
+          schema:
+            type: string
+        - description: hierarchytimeout
+          in: query
+          name: hierarchytimeout
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: get a single record in JSON format
+      tags:
+        - Record
+  '/v2/record/{collectionId}/{recordId}.jsonld':
+    get:
+      operationId: getSingleRecordJsonLD
+      parameters:
+        - description: collectionId
+          in: path
+          name: collectionId
+          required: true
+          schema:
+            type: string
+        - description: recordId
+          in: path
+          name: recordId
+          required: true
+          schema:
+            type: string
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          schema:
+            type: string
+        - description: format
+          in: query
+          name: format
+          required: false
+          schema:
+            type: string
+        - description: callback
+          in: query
+          name: callback
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: get single record in JSON LD format
+      tags:
+        - Record
+  '/v2/record/{collectionId}/{recordId}.rdf':
+    get:
+      operationId: getSingleRecordRDF
+      parameters:
+        - description: collectionId
+          in: path
+          name: collectionId
+          required: true
+          schema:
+            type: string
+        - description: recordId
+          in: path
+          name: recordId
+          required: true
+          schema:
+            type: string
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/rdf+xml:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: get single record in RDF format)
+      tags:
+        - Record
+  /v2/search.json:
+    get:
+      operationId: searchRecords
+      parameters:
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          schema:
+            type: string
+        - description: query
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+        - description: qf
+          in: query
+          name: qf
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: reusability
+          in: query
+          name: reusability
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: profile
+          in: query
+          name: profile
+          required: false
+          schema:
+            type: string
+        - description: start
+          in: query
+          name: start
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: rows
+          in: query
+          name: rows
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: facet
+          in: query
+          name: facet
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: sort
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+        - description: colourpalette
+          in: query
+          name: colourpalette
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: thumbnail
+          in: query
+          name: thumbnail
+          required: false
+          schema:
+            type: boolean
+        - description: media
+          in: query
+          name: media
+          required: false
+          schema:
+            type: boolean
+        - description: text_fulltext
+          in: query
+          name: text_fulltext
+          required: false
+          schema:
+            type: boolean
+        - description: landingpage
+          in: query
+          name: landingpage
+          required: false
+          schema:
+            type: boolean
+        - description: cursor
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+        - description: callback
+          in: query
+          name: callback
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: search for records
+      tags:
+        - Search
+  /v2/search.rss:
+    get:
+      operationId: fieldTrip
+      parameters:
+        - description: query
+          in: query
+          name: query
+          required: true
+          schema:
+            type: string
+        - description: offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: limit
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: profile
+          in: query
+          name: profile
+          required: false
+          schema:
+            type: string
+        - description: language
+          in: query
+          name: language
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Google Fieldtrip formatted RSS of selected collections
+      tags:
+        - Search
+  /v2/suggestions.json:
+    get:
+      operationId: suggestions
+      parameters:
+        - description: query
+          in: query
+          name: query
+          required: true
+          schema:
+            type: string
+        - description: rows
+          in: query
+          name: rows
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: phrases
+          in: query
+          name: phrases
+          required: false
+          schema:
+            type: boolean
+        - description: callback
+          in: query
+          name: callback
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: get autocompletion recommendations for search queries
+      tags:
+        - Search
+  /v2/translateQuery.json:
+    get:
+      operationId: translateQueryUsingGET
+      parameters:
+        - description: term
+          in: query
+          name: term
+          required: true
+          schema:
+            type: string
+        - description: languageCodes
+          in: query
+          name: languageCodes
+          required: true
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          schema:
+            type: string
+        - description: profile
+          in: query
+          name: profile
+          required: false
+          schema:
+            type: string
+        - description: callback
+          in: query
+          name: callback
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: translate a term to different languages
+      tags:
+        - Search
+components:
+  schemas:
+    AtomLink:
+      properties:
+        href:
+          type: string
+    Channel:
+      properties:
+        atomLink:
+          $ref: '#/components/schemas/AtomLink'
+        image:
+          $ref: '#/components/schemas/ChannelImage'
+        items:
+          items:
+            $ref: '#/components/schemas/Item'
+          type: array
+        itemsPerPage:
+          $ref: '#/components/schemas/Statistic'
+        query:
+          $ref: '#/components/schemas/Query'
+        startIndex:
+          $ref: '#/components/schemas/Statistic'
+        totalResults:
+          $ref: '#/components/schemas/Statistic'
+    ChannelImage: {}
+    Enclosure:
+      properties:
+        url:
+          type: string
+    Item:
+      properties:
+        dcCreator:
+          type: string
+        dcTermsHasPart:
+          items:
+            type: string
+          type: array
+        dcTermsIsPartOf:
+          items:
+            type: string
+          type: array
+        description:
+          type: string
+        enclosure:
+          $ref: '#/components/schemas/Enclosure'
+        enrichmentAgentLabel:
+          items:
+            type: string
+          type: array
+        enrichmentAgentTerm:
+          items:
+            type: string
+          type: array
+        enrichmentConceptLabel:
+          items:
+            type: string
+          type: array
+        enrichmentConceptTerm:
+          items:
+            type: string
+          type: array
+        enrichmentPeriodBegin:
+          type: string
+        enrichmentPeriodEnd:
+          type: string
+        enrichmentPeriodLabel:
+          items:
+            type: string
+          type: array
+        enrichmentPeriodTerm:
+          items:
+            type: string
+          type: array
+        enrichmentPlaceLabel:
+          items:
+            type: string
+          type: array
+        enrichmentPlaceLatitude:
+          format: float
+          type: number
+        enrichmentPlaceLongitude:
+          format: float
+          type: number
+        enrichmentPlaceTerm:
+          items:
+            type: string
+          type: array
+        europeanaDataProvider:
+          type: string
+        europeanaLanguage:
+          type: string
+        europeanaProvider:
+          type: string
+        europeanaRights:
+          items:
+            type: string
+          type: array
+        europeanaType:
+          type: string
+        europeanaYear:
+          type: string
+        guid:
+          type: string
+        link:
+          type: string
+        title:
+          type: string
+    ModelAndView:
+      properties:
+        empty:
+          type: boolean
+        model:
+          type: object
+        modelMap:
+          additionalProperties:
+            type: object
+          type: object
+        reference:
+          type: boolean
+        view:
+          $ref: '#/components/schemas/View'
+        viewName:
+          type: string
+    ModelMap:
+      additionalProperties:
+        type: object
+      type: object
+    Query:
+      properties:
+        searchTerms:
+          type: string
+        startPage:
+          format: int32
+          type: integer
+    RssResponse:
+      properties:
+        channel:
+          $ref: '#/components/schemas/Channel'
+    Statistic:
+      properties:
+        value:
+          format: int64
+          type: integer
+    View:
+      properties:
+        contentType:
+          type: string
+      type: object

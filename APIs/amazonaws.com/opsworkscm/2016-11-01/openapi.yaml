@@ -1,0 +1,1312 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://opsworks-cm.amazonaws.com/'
+info:
+  version: '2016-11-01'
+  x-release: v4
+  title: AWS OpsWorks for Chef Automate
+  description: '<fullname>AWS OpsWorks for Chef Automate</fullname> <p> AWS OpsWorks for Chef Automate is a service that runs and manages configuration management servers. </p> <p> <b>Glossary of terms</b> </p> <ul> <li> <p> <b>Server</b>: A configuration management server that can be highly-available. The configuration manager runs on your instances by using various AWS services, such as Amazon Elastic Compute Cloud (EC2), and potentially Amazon Relational Database Service (RDS). A server is a generic abstraction over the configuration manager that you want to use, much like Amazon RDS. In AWS OpsWorks for Chef Automate, you do not start or stop servers. After you create servers, they continue to run until they are deleted.</p> </li> <li> <p> <b>Engine</b>: The specific configuration manager that you want to use (such as <code>Chef</code>) is the engine.</p> </li> <li> <p> <b>Backup</b>: This is an application-level backup of the data that the configuration manager stores. A backup creates a .tar.gz file that is stored in an Amazon Simple Storage Service (S3) bucket in your account. AWS OpsWorks for Chef Automate creates the S3 bucket when you launch the first instance. A backup maintains a snapshot of all of a server''s important attributes at the time of the backup.</p> </li> <li> <p> <b>Events</b>: Events are always related to a server. Events are written during server creation, when health checks run, when backups are created, etc. When you delete a server, the server''s events are also deleted.</p> </li> <li> <p> <b>AccountAttributes</b>: Every account has attributes that are assigned in the AWS OpsWorks for Chef Automate database. These attributes store information about configuration limits (servers, backups, etc.) and your customer account. </p> </li> </ul> <p> <b>Endpoints</b> </p> <p>AWS OpsWorks for Chef Automate supports the following endpoints, all HTTPS. You must connect to one of the following endpoints. Chef servers can only be accessed or managed within the endpoint in which they are created.</p> <ul> <li> <p>opsworks-cm.us-east-1.amazonaws.com</p> </li> <li> <p>opsworks-cm.us-west-2.amazonaws.com</p> </li> <li> <p>opsworks-cm.eu-west-1.amazonaws.com</p> </li> </ul> <p> <b>Throttling limits</b> </p> <p>All API operations allow for five requests per second with a burst of 10 requests per second.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: opsworks-cm
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/opsworkscm-2016-11-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/opsworks-cm/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AssociateNode
+      description: '<p> Associates a new node with the Chef server. This command is an alternative to <code>knife bootstrap</code>. For more information about how to disassociate a node, see <a>DisassociateNode</a>.</p> <p> A node can can only be associated with servers that are in a <code>HEALTHY</code> state. Otherwise, an <code>InvalidStateException</code> is thrown. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. The AssociateNode API call can be integrated into Auto Scaling configurations, AWS Cloudformation templates, or the user data of a server''s instance. </p> <p> Example: <code>aws opsworks-cm associate-node --server-name <i>MyServer</i> --node-name <i>MyManagedNode</i> --engine-attributes "Name=<i>MyOrganization</i>,Value=default" "Name=<i>Chef_node_public_key</i>,Value=<i>Public_key_contents</i>"</code> </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateNodeResponse'
+        '480':
+          description: InvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidStateException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateNodeRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateBackup':
+    post:
+      operationId: CreateBackup
+      description: '<p> Creates an application-level backup of a server. While the server is in the <code>BACKING_UP</code> state, the server cannot be changed, and no additional backup can be created. </p> <p> Backups can be created for servers in <code>RUNNING</code>, <code>HEALTHY</code>, and <code>UNHEALTHY</code> states. By default, you can create a maximum of 50 manual backups. </p> <p> This operation is asynchronous. </p> <p> A <code>LimitExceededException</code> is thrown when the maximum number of manual backups is reached. An <code>InvalidStateException</code> is thrown when the server is not in any of the following states: RUNNING, HEALTHY, or UNHEALTHY. A <code>ResourceNotFoundException</code> is thrown when the server is not found. A <code>ValidationException</code> is thrown when parameters of the request are not valid. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBackupResponse'
+        '480':
+          description: InvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidStateException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBackupRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateServer':
+    post:
+      operationId: CreateServer
+      description: '<p> Creates and immedately starts a new server. The server is ready to use when it is in the <code>HEALTHY</code> state. By default, you can create a maximum of 10 servers. </p> <p> This operation is asynchronous. </p> <p> A <code>LimitExceededException</code> is thrown when you have created the maximum number of servers (10). A <code>ResourceAlreadyExistsException</code> is thrown when a server with the same name already exists in the account. A <code>ResourceNotFoundException</code> is thrown when you specify a backup ID that is not valid or is for a backup that does not exist. A <code>ValidationException</code> is thrown when parameters of the request are not valid. </p> <p> If you do not specify a security group by adding the <code>SecurityGroupIds</code> parameter, AWS OpsWorks creates a new security group. The default security group opens the Chef server to the world on TCP port 443. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22. </p> <p>By default, the Chef Server is accessible from any IP address. We recommend that you update your security group rules to allow access from known IP addresses and address ranges only. To edit security group rules, open Security Groups in the navigation pane of the EC2 management console. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateServerResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateServerRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteBackup':
+    post:
+      operationId: DeleteBackup
+      description: <p> Deletes a backup. You can delete both manual and automated backups. This operation is asynchronous. </p> <p> An <code>InvalidStateException</code> is thrown when a backup deletion is already in progress. A <code>ResourceNotFoundException</code> is thrown when the backup does not exist. A <code>ValidationException</code> is thrown when parameters of the request are not valid. </p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteBackupResponse'
+        '480':
+          description: InvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidStateException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteBackupRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteServer':
+    post:
+      operationId: DeleteServer
+      description: '<p> Deletes the server and the underlying AWS CloudFormation stack (including the server''s EC2 instance). When you run this command, the server state is updated to <code>DELETING</code>. After the server is deleted, it is no longer returned by <code>DescribeServer</code> requests. If the AWS CloudFormation stack cannot be deleted, the server cannot be deleted. </p> <p> This operation is asynchronous. </p> <p> An <code>InvalidStateException</code> is thrown when a server deletion is already in progress. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p> <p> </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteServerResponse'
+        '480':
+          description: InvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidStateException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteServerRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAccountAttributes':
+    post:
+      operationId: DescribeAccountAttributes
+      description: '<p> Describes your account attributes, and creates requests to increase limits before they are reached or exceeded. </p> <p> This operation is synchronous. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAccountAttributesResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAccountAttributesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeBackups':
+    post:
+      operationId: DescribeBackups
+      description: '<p> Describes backups. The results are ordered by time, with newest backups first. If you do not specify a BackupId or ServerName, the command returns all backups. </p> <p> This operation is synchronous. </p> <p> A <code>ResourceNotFoundException</code> is thrown when the backup does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeBackupsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeBackupsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEvents':
+    post:
+      operationId: DescribeEvents
+      description: '<p> Describes events for a specified server. Results are ordered by time, with newest events first. </p> <p> This operation is synchronous. </p> <p> A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEventsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEventsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeNodeAssociationStatus':
+    post:
+      operationId: DescribeNodeAssociationStatus
+      description: '<p> Returns the current status of an existing association or disassociation request. </p> <p> A <code>ResourceNotFoundException</code> is thrown when no recent association or disassociation request with the specified token is found, or when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeNodeAssociationStatusResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeNodeAssociationStatusRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeServers':
+    post:
+      operationId: DescribeServers
+      description: <p> Lists all configuration management servers that are identified with your account. Only the stored results from Amazon DynamoDB are returned. AWS OpsWorks for Chef Automate does not query other services. </p> <p> This operation is synchronous. </p> <p> A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeServersResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeServersRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateNode':
+    post:
+      operationId: DisassociateNode
+      description: '<p> Disassociates a node from a Chef server, and removes the node from the Chef server''s managed nodes. After a node is disassociated, the node key pair is no longer valid for accessing the Chef API. For more information about how to associate a node, see <a>AssociateNode</a>. </p> <p>A node can can only be disassociated from a server that is in a <code>HEALTHY</code> state. Otherwise, an <code>InvalidStateException</code> is thrown. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateNodeResponse'
+        '480':
+          description: InvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidStateException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateNodeRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RestoreServer':
+    post:
+      operationId: RestoreServer
+      description: '<p> Restores a backup to a server that is in a <code>CONNECTION_LOST</code>, <code>HEALTHY</code>, <code>RUNNING</code>, <code>UNHEALTHY</code>, or <code>TERMINATED</code> state. When you run RestoreServer, the server''s EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains the existing server endpoint, so configuration management of the server''s client devices (nodes) should continue to work. </p> <p> This operation is asynchronous. </p> <p> An <code>InvalidStateException</code> is thrown when the server is not in a valid state. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestoreServerResponse'
+        '480':
+          description: InvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidStateException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestoreServerRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StartMaintenance':
+    post:
+      operationId: StartMaintenance
+      description: '<p> Manually starts server maintenance. This command can be useful if an earlier maintenance attempt failed, and the underlying cause of maintenance failure has been resolved. The server is in an <code>UNDER_MAINTENANCE</code> state while maintenance is in progress. </p> <p> Maintenance can only be started on servers in <code>HEALTHY</code> and <code>UNHEALTHY</code> states. Otherwise, an <code>InvalidStateException</code> is thrown. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartMaintenanceResponse'
+        '480':
+          description: InvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidStateException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartMaintenanceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateServer':
+    post:
+      operationId: UpdateServer
+      description: <p> Updates settings for a server. </p> <p> This operation is synchronous. </p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateServerResponse'
+        '480':
+          description: InvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidStateException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateServerRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateServerEngineAttributes':
+    post:
+      operationId: UpdateServerEngineAttributes
+      description: '<p> Updates engine-specific attributes on a specified server. The server enters the <code>MODIFYING</code> state when this operation is in progress. Only one update can occur at a time. You can use this command to reset the Chef server''s private key (<code>CHEF_PIVOTAL_KEY</code>). </p> <p> This operation is asynchronous. </p> <p> This operation can only be called for servers in <code>HEALTHY</code> or <code>UNHEALTHY</code> states. Otherwise, an <code>InvalidStateException</code> is raised. A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateServerEngineAttributesResponse'
+        '480':
+          description: InvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidStateException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateServerEngineAttributesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AccountAttribute:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        Maximum:
+          $ref: '#/components/schemas/Integer'
+        Used:
+          $ref: '#/components/schemas/Integer'
+      description: 'Stores account attributes. '
+    AccountAttributes:
+      type: array
+      description: ' A list of individual account attributes. '
+      items:
+        $ref: '#/components/schemas/AccountAttribute'
+    AssociateNodeRequest:
+      type: object
+      required:
+        - ServerName
+        - NodeName
+        - EngineAttributes
+      properties:
+        ServerName:
+          $ref: '#/components/schemas/ServerName'
+        NodeName:
+          $ref: '#/components/schemas/NodeName'
+        EngineAttributes:
+          $ref: '#/components/schemas/EngineAttributes'
+    AssociateNodeResponse:
+      type: object
+      properties:
+        NodeAssociationStatusToken:
+          $ref: '#/components/schemas/NodeAssociationStatusToken'
+    AttributeName:
+      type: string
+      pattern: '[A-Z][A-Z0-9_]*'
+      minLength: 1
+      maxLength: 64
+    AttributeValue:
+      type: string
+    Backup:
+      type: object
+      properties:
+        BackupArn:
+          $ref: '#/components/schemas/String'
+        BackupId:
+          $ref: '#/components/schemas/BackupId'
+        BackupType:
+          $ref: '#/components/schemas/BackupType'
+        CreatedAt:
+          $ref: '#/components/schemas/Timestamp'
+        Description:
+          $ref: '#/components/schemas/String'
+        Engine:
+          $ref: '#/components/schemas/String'
+        EngineModel:
+          $ref: '#/components/schemas/String'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        InstanceProfileArn:
+          $ref: '#/components/schemas/String'
+        InstanceType:
+          $ref: '#/components/schemas/String'
+        KeyPair:
+          $ref: '#/components/schemas/String'
+        PreferredBackupWindow:
+          $ref: '#/components/schemas/TimeWindowDefinition'
+        PreferredMaintenanceWindow:
+          $ref: '#/components/schemas/TimeWindowDefinition'
+        S3DataSize:
+          $ref: '#/components/schemas/Integer'
+        S3DataUrl:
+          $ref: '#/components/schemas/String'
+        S3LogUrl:
+          $ref: '#/components/schemas/String'
+        SecurityGroupIds:
+          $ref: '#/components/schemas/Strings'
+        ServerName:
+          $ref: '#/components/schemas/ServerName'
+        ServiceRoleArn:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/BackupStatus'
+        StatusDescription:
+          $ref: '#/components/schemas/String'
+        SubnetIds:
+          $ref: '#/components/schemas/Strings'
+        ToolsVersion:
+          $ref: '#/components/schemas/String'
+        UserArn:
+          $ref: '#/components/schemas/String'
+      description: 'Describes a single backup. '
+    BackupId:
+      type: string
+      maxLength: 79
+    BackupRetentionCountDefinition:
+      type: integer
+      minimum: 1
+    BackupStatus:
+      type: string
+      enum:
+        - IN_PROGRESS
+        - OK
+        - FAILED
+        - DELETING
+    BackupType:
+      type: string
+      enum:
+        - AUTOMATED
+        - MANUAL
+    Backups:
+      type: array
+      items:
+        $ref: '#/components/schemas/Backup'
+    Boolean:
+      type: boolean
+    CreateBackupRequest:
+      type: object
+      required:
+        - ServerName
+      properties:
+        ServerName:
+          $ref: '#/components/schemas/ServerName'
+        Description:
+          $ref: '#/components/schemas/String'
+    CreateBackupResponse:
+      type: object
+      properties:
+        Backup:
+          $ref: '#/components/schemas/Backup'
+    CreateServerRequest:
+      type: object
+      required:
+        - ServerName
+        - InstanceProfileArn
+        - InstanceType
+        - ServiceRoleArn
+      properties:
+        AssociatePublicIpAddress:
+          $ref: '#/components/schemas/Boolean'
+        DisableAutomatedBackup:
+          $ref: '#/components/schemas/Boolean'
+        Engine:
+          $ref: '#/components/schemas/String'
+        EngineModel:
+          $ref: '#/components/schemas/String'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        EngineAttributes:
+          $ref: '#/components/schemas/EngineAttributes'
+        BackupRetentionCount:
+          $ref: '#/components/schemas/BackupRetentionCountDefinition'
+        ServerName:
+          $ref: '#/components/schemas/ServerName'
+        InstanceProfileArn:
+          $ref: '#/components/schemas/InstanceProfileArn'
+        InstanceType:
+          $ref: '#/components/schemas/String'
+        KeyPair:
+          $ref: '#/components/schemas/KeyPair'
+        PreferredMaintenanceWindow:
+          $ref: '#/components/schemas/TimeWindowDefinition'
+        PreferredBackupWindow:
+          $ref: '#/components/schemas/TimeWindowDefinition'
+        SecurityGroupIds:
+          $ref: '#/components/schemas/Strings'
+        ServiceRoleArn:
+          $ref: '#/components/schemas/ServiceRoleArn'
+        SubnetIds:
+          $ref: '#/components/schemas/Strings'
+        BackupId:
+          $ref: '#/components/schemas/BackupId'
+    CreateServerResponse:
+      type: object
+      properties:
+        Server:
+          $ref: '#/components/schemas/Server'
+    DeleteBackupRequest:
+      type: object
+      required:
+        - BackupId
+      properties:
+        BackupId:
+          $ref: '#/components/schemas/BackupId'
+    DeleteBackupResponse:
+      type: object
+      properties: {}
+    DeleteServerRequest:
+      type: object
+      required:
+        - ServerName
+      properties:
+        ServerName:
+          $ref: '#/components/schemas/ServerName'
+    DeleteServerResponse:
+      type: object
+      properties: {}
+    DescribeAccountAttributesRequest:
+      type: object
+      properties: {}
+    DescribeAccountAttributesResponse:
+      type: object
+      properties:
+        Attributes:
+          $ref: '#/components/schemas/AccountAttributes'
+    DescribeBackupsRequest:
+      type: object
+      properties:
+        BackupId:
+          $ref: '#/components/schemas/BackupId'
+        ServerName:
+          $ref: '#/components/schemas/ServerName'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+    DescribeBackupsResponse:
+      type: object
+      properties:
+        Backups:
+          $ref: '#/components/schemas/Backups'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    DescribeEventsRequest:
+      type: object
+      required:
+        - ServerName
+      properties:
+        ServerName:
+          $ref: '#/components/schemas/ServerName'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+    DescribeEventsResponse:
+      type: object
+      properties:
+        ServerEvents:
+          $ref: '#/components/schemas/ServerEvents'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    DescribeNodeAssociationStatusRequest:
+      type: object
+      required:
+        - NodeAssociationStatusToken
+        - ServerName
+      properties:
+        NodeAssociationStatusToken:
+          $ref: '#/components/schemas/NodeAssociationStatusToken'
+        ServerName:
+          $ref: '#/components/schemas/ServerName'
+    DescribeNodeAssociationStatusResponse:
+      type: object
+      properties:
+        NodeAssociationStatus:
+          $ref: '#/components/schemas/NodeAssociationStatus'
+    DescribeServersRequest:
+      type: object
+      properties:
+        ServerName:
+          $ref: '#/components/schemas/ServerName'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+    DescribeServersResponse:
+      type: object
+      properties:
+        Servers:
+          $ref: '#/components/schemas/Servers'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    DisassociateNodeRequest:
+      type: object
+      required:
+        - ServerName
+        - NodeName
+      properties:
+        ServerName:
+          $ref: '#/components/schemas/ServerName'
+        NodeName:
+          $ref: '#/components/schemas/NodeName'
+        EngineAttributes:
+          $ref: '#/components/schemas/EngineAttributes'
+    DisassociateNodeResponse:
+      type: object
+      properties:
+        NodeAssociationStatusToken:
+          $ref: '#/components/schemas/NodeAssociationStatusToken'
+    EngineAttribute:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/EngineAttributeName'
+        Value:
+          $ref: '#/components/schemas/EngineAttributeValue'
+      description: 'A name and value pair that is specific to the engine of the server. '
+    EngineAttributeName:
+      type: string
+    EngineAttributeValue:
+      type: string
+      format: password
+    EngineAttributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/EngineAttribute'
+    InstanceProfileArn:
+      type: string
+      pattern: 'arn:aws:iam::[0-9]{12}:instance-profile/.*'
+    Integer:
+      type: integer
+    InvalidNextTokenException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/String'
+      description: 'This occurs when the provided nextToken is not valid. '
+    InvalidStateException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/String'
+      description: 'The resource is in a state that does not allow you to perform a specified action. '
+    KeyPair:
+      type: string
+    LimitExceededException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/String'
+      description: 'The limit of servers or backups has been reached. '
+    MaintenanceStatus:
+      type: string
+      enum:
+        - SUCCESS
+        - FAILED
+    MaxResults:
+      type: integer
+      minimum: 1
+    NextToken:
+      type: string
+    NodeAssociationStatus:
+      type: string
+      enum:
+        - SUCCESS
+        - FAILED
+        - IN_PROGRESS
+      description: '<p>The status of the association or disassociation request. </p> <p class="title"> <b>Possible values:</b> </p> <ul> <li> <p> <code>SUCCESS</code>: The association or disassociation succeeded. </p> </li> <li> <p> <code>FAILED</code>: The association or disassociation failed. </p> </li> <li> <p> <code>IN_PROGRESS</code>: The association or disassociation is still in progress. </p> </li> </ul>'
+    NodeAssociationStatusToken:
+      type: string
+    NodeName:
+      type: string
+      pattern: '^[\-\p{Alnum}_:.]+$'
+      description: 'The node name that is used by <code>chef-client</code> for a new node. For more information, see the <a href="http://docs.aws.amazon.com/https:/docs.chef.io/nodes.html#about-node-names">Chef Documentation</a>. '
+    ResourceAlreadyExistsException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/String'
+      description: 'The requested resource cannot be created because it already exists. '
+    ResourceNotFoundException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/String'
+      description: 'The requested resource does not exist, or access was denied. '
+    RestoreServerRequest:
+      type: object
+      required:
+        - BackupId
+        - ServerName
+      properties:
+        BackupId:
+          $ref: '#/components/schemas/BackupId'
+        ServerName:
+          $ref: '#/components/schemas/ServerName'
+        InstanceType:
+          $ref: '#/components/schemas/String'
+        KeyPair:
+          $ref: '#/components/schemas/KeyPair'
+    RestoreServerResponse:
+      type: object
+      properties: {}
+    Server:
+      type: object
+      properties:
+        AssociatePublicIpAddress:
+          $ref: '#/components/schemas/Boolean'
+        BackupRetentionCount:
+          $ref: '#/components/schemas/Integer'
+        ServerName:
+          $ref: '#/components/schemas/String'
+        CreatedAt:
+          $ref: '#/components/schemas/Timestamp'
+        CloudFormationStackArn:
+          $ref: '#/components/schemas/String'
+        DisableAutomatedBackup:
+          $ref: '#/components/schemas/Boolean'
+        Endpoint:
+          $ref: '#/components/schemas/String'
+        Engine:
+          $ref: '#/components/schemas/String'
+        EngineModel:
+          $ref: '#/components/schemas/String'
+        EngineAttributes:
+          $ref: '#/components/schemas/EngineAttributes'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        InstanceProfileArn:
+          $ref: '#/components/schemas/String'
+        InstanceType:
+          $ref: '#/components/schemas/String'
+        KeyPair:
+          $ref: '#/components/schemas/String'
+        MaintenanceStatus:
+          $ref: '#/components/schemas/MaintenanceStatus'
+        PreferredMaintenanceWindow:
+          $ref: '#/components/schemas/TimeWindowDefinition'
+        PreferredBackupWindow:
+          $ref: '#/components/schemas/TimeWindowDefinition'
+        SecurityGroupIds:
+          $ref: '#/components/schemas/Strings'
+        ServiceRoleArn:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/ServerStatus'
+        StatusReason:
+          $ref: '#/components/schemas/String'
+        SubnetIds:
+          $ref: '#/components/schemas/Strings'
+        ServerArn:
+          $ref: '#/components/schemas/String'
+      description: 'Describes a configuration management server. '
+    ServerEvent:
+      type: object
+      properties:
+        CreatedAt:
+          $ref: '#/components/schemas/Timestamp'
+        ServerName:
+          $ref: '#/components/schemas/String'
+        Message:
+          $ref: '#/components/schemas/String'
+        LogUrl:
+          $ref: '#/components/schemas/String'
+      description: 'An event that is related to the server, such as the start of maintenance or backup. '
+    ServerEvents:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServerEvent'
+    ServerName:
+      type: string
+      pattern: '[a-zA-Z][a-zA-Z0-9\-]*'
+      minLength: 1
+      maxLength: 40
+    ServerStatus:
+      type: string
+      enum:
+        - BACKING_UP
+        - CONNECTION_LOST
+        - CREATING
+        - DELETING
+        - MODIFYING
+        - FAILED
+        - HEALTHY
+        - RUNNING
+        - RESTORING
+        - SETUP
+        - UNDER_MAINTENANCE
+        - UNHEALTHY
+        - TERMINATED
+    Servers:
+      type: array
+      items:
+        $ref: '#/components/schemas/Server'
+    ServiceRoleArn:
+      type: string
+      pattern: 'arn:aws:iam::[0-9]{12}:role/.*'
+    StartMaintenanceRequest:
+      type: object
+      required:
+        - ServerName
+      properties:
+        ServerName:
+          $ref: '#/components/schemas/ServerName'
+    StartMaintenanceResponse:
+      type: object
+      properties:
+        Server:
+          $ref: '#/components/schemas/Server'
+    String:
+      type: string
+    Strings:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    TimeWindowDefinition:
+      type: string
+      pattern: '^((Mon|Tue|Wed|Thu|Fri|Sat|Sun):)?([0-1][0-9]|2[0-3]):[0-5][0-9]$'
+      description: '<p> <code>DDD:HH:MM</code> (weekly start time) or <code>HH:MM</code> (daily start time). </p> <p> Time windows always use coordinated universal time (UTC). Valid strings for day of week (<code>DDD</code>) are: <code>Mon</code>, <code>Tue</code>, <code>Wed</code>, <code>Thr</code>, <code>Fri</code>, <code>Sat</code>, or <code>Sun</code>.</p>'
+    Timestamp:
+      type: string
+      format: date-time
+    UpdateServerEngineAttributesRequest:
+      type: object
+      required:
+        - ServerName
+        - AttributeName
+      properties:
+        ServerName:
+          $ref: '#/components/schemas/ServerName'
+        AttributeName:
+          $ref: '#/components/schemas/AttributeName'
+        AttributeValue:
+          $ref: '#/components/schemas/AttributeValue'
+    UpdateServerEngineAttributesResponse:
+      type: object
+      properties:
+        Server:
+          $ref: '#/components/schemas/Server'
+    UpdateServerRequest:
+      type: object
+      required:
+        - ServerName
+      properties:
+        DisableAutomatedBackup:
+          $ref: '#/components/schemas/Boolean'
+        BackupRetentionCount:
+          $ref: '#/components/schemas/Integer'
+        ServerName:
+          $ref: '#/components/schemas/ServerName'
+        PreferredMaintenanceWindow:
+          $ref: '#/components/schemas/TimeWindowDefinition'
+        PreferredBackupWindow:
+          $ref: '#/components/schemas/TimeWindowDefinition'
+    UpdateServerResponse:
+      type: object
+      properties:
+        Server:
+          $ref: '#/components/schemas/Server'
+    ValidationException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/String'
+      description: 'One or more of the provided request parameters are not valid. '
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

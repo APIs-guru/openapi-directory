@@ -1,0 +1,828 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.msrc.microsoft.com/'
+info:
+  title: Microsoft Security Updates
+  version: 1.0.0
+  x-apisguru-categories:
+    - security
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/200px-Microsoft_logo_%282012%29.svg.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Microsoft/MSRC-Microsoft-Security-Updates-API/master/docs/swagger.yaml'
+      version: '2.0'
+  x-providerName: microsoft.com
+security:
+  - api-key: []
+paths:
+  /Updates:
+    get:
+      description: |
+        Get all updates with a link to the CVRF document
+      parameters:
+        - in: query
+          name: api-version
+          required: true
+          schema:
+            type: string
+            default: '2016-08-01'
+      responses:
+        '200':
+          description: Successful responset
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatesReturnTypes200'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UpdatesReturnTypes200'
+  '/Updates(''{id}'')':
+    get:
+      description: |
+        Get updates with a link to the CVRF document for a particular ID.
+
+        ID can be:
+
+          * Update ID (ie: 2016-Aug)
+          * Vulnerability ID (ie: CVE-2016-0128)
+          * Year (ie: 2016)
+      parameters:
+        - in: query
+          name: api-version
+          required: true
+          schema:
+            type: string
+            default: '2016-08-01'
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful responset
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatesReturnTypes200'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UpdatesReturnTypes200'
+  '/cvrf/{id}':
+    get:
+      description: |
+        Gets a CVRF document by ID (ie: 2016-Aug)
+
+        Note: to view the correct XML response, please change *$ref: '#/definitions/cvrfReturnTypes200'* to *$ref: '#/definitions/cvrfReturnTypes200_xml'* in the swagger.json or swagger.yaml file
+      parameters:
+        - in: query
+          name: api-version
+          required: true
+          schema:
+            type: string
+            default: '2016-08-01'
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful responset
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/cvrfReturnTypes200'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cvrfReturnTypes200'
+components:
+  schemas:
+    UpdatesReturnTypes200:
+      properties:
+        '@odata.context':
+          type: string
+        value:
+          description: array of files returned
+          items:
+            properties:
+              Alias:
+                type: string
+              CurrentReleaseDate:
+                type: string
+              CvrfUrl:
+                type: string
+              DocumentTitle:
+                type: string
+              ID:
+                type: string
+              InitialReleaseData:
+                type: string
+              Severity:
+                type: string
+            type: object
+          type: array
+      title: Sucessful returned Updates object
+      type: object
+    cvrfReturnTypes200:
+      properties:
+        DocumentNotes:
+          items:
+            properties:
+              Audience:
+                type: string
+              Ordinal:
+                type: string
+              Title:
+                type: string
+              Type:
+                type: integer
+              Value:
+                type: string
+            type: object
+          type: array
+        DocumentPublisher:
+          properties:
+            ContactDetails:
+              properties:
+                Value:
+                  type: string
+              type: object
+            IssuingAthority:
+              properties:
+                Value:
+                  type: string
+              type: object
+            Type:
+              type: integer
+          type: object
+        DocumentTitle:
+          properties:
+            Value:
+              type: string
+          type: object
+        DocumentTracking:
+          properties:
+            CurrentReleaseDate:
+              format: date-time
+              type: string
+            Identification:
+              properties:
+                Alias:
+                  properties:
+                    Value:
+                      type: string
+                  type: object
+                ID:
+                  properties:
+                    Value:
+                      type: string
+                  type: object
+              type: object
+            InitialReleaseDate:
+              format: date-time
+              type: string
+            RevisionHistory:
+              items:
+                properties:
+                  Date:
+                    format: date-time
+                    type: string
+                  Description:
+                    properties:
+                      Value:
+                        type: string
+                    type: object
+                  Number:
+                    type: string
+                type: object
+              type: array
+            Status:
+              type: integer
+            Version:
+              type: string
+          type: object
+        DocumentType:
+          properties:
+            Value:
+              type: string
+          type: object
+        ProductTree:
+          properties:
+            Branch:
+              items:
+                properties:
+                  Items:
+                    items:
+                      properties:
+                        Items:
+                          items:
+                            properties:
+                              ProductID:
+                                type: string
+                              Value:
+                                type: string
+                            type: object
+                          type: array
+                        Name:
+                          type: string
+                        Type:
+                          type: integer
+                      type: object
+                    type: array
+                type: object
+              type: array
+            FullProductName:
+              items:
+                properties:
+                  ProductID:
+                    type: string
+                  Value:
+                    type: string
+                type: object
+              type: array
+          type: object
+        Vulnerability:
+          items:
+            properties:
+              Acknowledgements:
+                items:
+                  properties:
+                    Name:
+                      items:
+                        properties:
+                          Value:
+                            type: string
+                        type: object
+                      type: array
+                    URL:
+                      items:
+                        type: string
+                      type: array
+                  type: object
+                type: array
+              CVE:
+                type: string
+              CVSSScoreSets:
+                items:
+                  properties:
+                    BaseScore:
+                      type: number
+                    ProductID:
+                      items:
+                        type: string
+                      type: array
+                    TemporalScore:
+                      type: number
+                    Vector:
+                      type: string
+                  type: object
+                type: array
+              DiscoveryDateSpecified:
+                type: boolean
+              Notes:
+                items:
+                  properties:
+                    Ordinal:
+                      type: string
+                    Title:
+                      type: string
+                    Type:
+                      type: integer
+                    Value:
+                      type: string
+                  type: object
+                type: array
+              Ordinal:
+                type: string
+              ProductStatuses:
+                items:
+                  properties:
+                    ProductID:
+                      items:
+                        type: string
+                      type: array
+                    Type:
+                      type: integer
+                  type: object
+                type: array
+              ReleaseDateSpecified:
+                type: boolean
+              Remediations:
+                items:
+                  properties:
+                    AffectedFiles:
+                      items:
+                        properties:
+                          FileArchitecture:
+                            type: string
+                          FileLastModified:
+                            format: date-time
+                            type: string
+                          FileName:
+                            type: string
+                          FilePath:
+                            type: string
+                          FileVersion:
+                            type: string
+                          ProductId:
+                            type: string
+                        type: object
+                      type: array
+                    DateSpecified:
+                      type: boolean
+                    Description:
+                      properties:
+                        Value:
+                          type: string
+                      type: object
+                    ProductID:
+                      items:
+                        type: string
+                      type: array
+                    RestartRequired:
+                      properties:
+                        Value:
+                          type: string
+                      type: object
+                    SubType:
+                      type: string
+                    Supercedence:
+                      type: string
+                    Type:
+                      type: integer
+                    URL:
+                      type: string
+                  type: object
+                type: array
+              RevisionHistory:
+                items:
+                  properties:
+                    Date:
+                      format: date-time
+                      type: string
+                    Description:
+                      properties:
+                        Value:
+                          type: string
+                      type: object
+                    Number:
+                      type: string
+                  type: object
+                type: array
+              Threats:
+                items:
+                  properties:
+                    DateSpecified:
+                      type: boolean
+                    Description:
+                      properties:
+                        Value:
+                          type: string
+                      type: object
+                    ProductID:
+                      items:
+                        type: string
+                      type: array
+                    Type:
+                      type: integer
+                  type: object
+                type: array
+              Title:
+                properties:
+                  Value:
+                    type: string
+                type: object
+            type: object
+          type: array
+      title: Sucessful returned cvrf json
+      type: object
+    cvrfReturnTypes200_xml:
+      description: 'Swagger has some limitations and can not display complex XML documents in a model, please refer to the ICASI CVRF schema online. for a more exact specification on return schema.'
+      properties:
+        cvrfdoc:
+          properties:
+            DocumentNotes:
+              items:
+                properties:
+                  Note:
+                    description: has a string in <Note>...</Note>
+                    properties:
+                      Audience:
+                        type: string
+                        xml:
+                          attribute: true
+                      Ordinal:
+                        type: string
+                        xml:
+                          attribute: true
+                      Title:
+                        type: string
+                        xml:
+                          attribute: true
+                      Type:
+                        type: string
+                        xml:
+                          attribute: true
+                    type: object
+                    xml:
+                      prefix: cvrf
+                type: object
+              type: array
+              xml:
+                prefix: cvrf
+                wrapped: false
+            DocumentPublisher:
+              properties:
+                ContactDetails:
+                  type: string
+                  xml:
+                    prefix: cvrf
+                IssuingAuthority:
+                  type: string
+                  xml:
+                    prefix: cvrf
+                Type:
+                  type: string
+                  xml:
+                    attribute: true
+              type: object
+            DocumentTitle:
+              type: string
+              xml:
+                prefix: cvrf
+            DocumentTracking:
+              properties:
+                CurrentReleaseDate:
+                  format: date-time
+                  type: string
+                  xml:
+                    prefix: cvrf
+                Identification:
+                  properties:
+                    Alias:
+                      type: string
+                      xml:
+                        prefix: cvrf
+                    ID:
+                      type: string
+                      xml:
+                        prefix: cvrf
+                  type: object
+                  xml:
+                    prefix: cvrf
+                InitialReleaseDate:
+                  format: date-time
+                  type: string
+                  xml:
+                    prefix: cvrf
+                RevisionHistory:
+                  properties:
+                    Revision:
+                      properties:
+                        Date:
+                          format: date-time
+                          type: string
+                          xml:
+                            prefix: cvrf
+                        Description:
+                          type: string
+                          xml:
+                            prefix: cvrf
+                        Number:
+                          type: integer
+                          xml:
+                            prefix: cvrf
+                      type: object
+                      xml:
+                        prefix: cvrf
+                  type: object
+                  xml:
+                    prefix: cvrf
+                Status:
+                  type: string
+                  xml:
+                    prefix: cvrf
+                Version:
+                  type: number
+                  xml:
+                    prefix: cvrf
+              type: object
+              xml:
+                prefix: cvrf
+            DocumentType:
+              type: string
+              xml:
+                prefix: cvrf
+            ProductTree:
+              properties:
+                Branch:
+                  items:
+                    properties:
+                      Branch:
+                        items:
+                          properties:
+                            FullProductName:
+                              items:
+                                properties:
+                                  ProductID:
+                                    type: string
+                                    xml:
+                                      attribute: true
+                                type: object
+                              type: array
+                              xml:
+                                prefix: prod
+                                wrapped: false
+                            Name:
+                              type: string
+                              xml:
+                                attribute: true
+                            Type:
+                              type: string
+                              xml:
+                                attribute: true
+                          type: object
+                          xml:
+                            name: Branch
+                            prefix: prod
+                        type: array
+                        xml:
+                          prefix: prod
+                          wrapped: false
+                      Name:
+                        type: string
+                        xml:
+                          attribute: true
+                      Type:
+                        type: string
+                        xml:
+                          attribute: true
+                    type: object
+                    xml:
+                      name: Branch
+                      prefix: prod
+                  type: array
+                  xml:
+                    prefix: prod
+                    wrapped: false
+                FullProductName:
+                  items:
+                    description: 'has a string in between <prod:FullProductName>...</prod:FullProductName>'
+                    properties:
+                      ProductID:
+                        type: string
+                        xml:
+                          attribute: true
+                    type: object
+                    xml:
+                      name: FullProductName
+                      prefix: prod
+                  type: array
+                  xml:
+                    prefix: prod
+                    wrapped: false
+              type: object
+              xml:
+                prefix: prod
+            Vulnerability:
+              properties:
+                Acknowledgements:
+                  items:
+                    properties:
+                      Name:
+                        type: string
+                        xml:
+                          prefix: vuln
+                      URL:
+                        type: string
+                        xml:
+                          prefix: vuln
+                    type: object
+                    xml:
+                      name: Acknowledgement
+                      prefix: vuln
+                  type: array
+                  xml:
+                    prefix: vuln
+                    wrapped: true
+                CVE:
+                  type: string
+                  xml:
+                    prefix: vuln
+                CVSSScoreSets:
+                  items:
+                    properties:
+                      BaseScore:
+                        type: number
+                        xml:
+                          prefix: vuln
+                      ProductID:
+                        type: number
+                        xml:
+                          prefix: vuln
+                      TemporalScore:
+                        type: number
+                        xml:
+                          prefix: vuln
+                      Vector:
+                        type: string
+                        xml:
+                          prefix: vuln
+                    type: object
+                    xml:
+                      name: ScoreSet
+                      prefix: vuln
+                  type: array
+                  xml:
+                    prefix: vuln
+                    wrapped: true
+                Notes:
+                  properties:
+                    Note:
+                      description: has a string in <Note>...</Note>
+                      properties:
+                        Ordianl:
+                          type: string
+                          xml:
+                            attribute: true
+                        Title:
+                          type: string
+                          xml:
+                            attribute: true
+                        Type:
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
+                      xml:
+                        prefix: vuln
+                  type: object
+                  xml:
+                    prefix: vuln
+                Ordinal:
+                  type: string
+                  xml:
+                    attribute: true
+                ProductStatuses:
+                  items:
+                    properties:
+                      ProductID:
+                        type: string
+                        xml:
+                          prefix: vuln
+                      Type:
+                        type: string
+                        xml:
+                          attribute: true
+                    type: object
+                    xml:
+                      name: Status
+                      prefix: vuln
+                  type: array
+                  xml:
+                    prefix: vuln
+                    wrapped: true
+                Remediations:
+                  items:
+                    properties:
+                      AffectedFiles:
+                        items:
+                          properties:
+                            FileArchitecture:
+                              type: string
+                              xml:
+                                prefix: vuln
+                            FileLastModified:
+                              format: date-time
+                              type: string
+                              xml:
+                                prefix: vuln
+                            FileName:
+                              type: string
+                              xml:
+                                prefix: vuln
+                            FilePath:
+                              type: string
+                              xml:
+                                prefix: vuln
+                            FileVersion:
+                              type: string
+                              xml:
+                                prefix: vuln
+                            ProductId:
+                              type: string
+                              xml:
+                                prefix: vuln
+                          type: object
+                        type: array
+                        xml:
+                          prefix: vuln
+                          wrapped: false
+                      Description:
+                        type: integer
+                        xml:
+                          prefix: vuln
+                      ProductID:
+                        items:
+                          type: string
+                          xml:
+                            name: ProductID
+                            prefix: vuln
+                        type: array
+                      RestartRequired:
+                        type: string
+                        xml:
+                          prefix: vuln
+                      SubType:
+                        type: string
+                        xml:
+                          prefix: vuln
+                      Supercedence:
+                        type: string
+                        xml:
+                          prefix: vuln
+                      Type:
+                        type: string
+                        xml:
+                          attribute: true
+                      URL:
+                        type: string
+                        xml:
+                          prefix: vuln
+                    type: object
+                    xml:
+                      name: Remediation
+                      prefix: vuln
+                  type: array
+                  xml:
+                    prefix: vuln
+                    wrapped: true
+                RevisionHistory:
+                  items:
+                    properties:
+                      Date:
+                        format: date-time
+                        type: string
+                        xml:
+                          prefix: vuln
+                      Description:
+                        type: string
+                        xml:
+                          prefix: vuln
+                      Number:
+                        type: number
+                        xml:
+                          prefix: vuln
+                    type: object
+                    xml:
+                      name: Revision
+                      prefix: vuln
+                  type: array
+                  xml:
+                    prefix: vuln
+                    wrapped: true
+                Threats:
+                  items:
+                    properties:
+                      Threat:
+                        properties:
+                          Description:
+                            type: string
+                            xml:
+                              prefix: vuln
+                          ProductID:
+                            type: string
+                            xml:
+                              prefix: vuln
+                          Type:
+                            type: string
+                            xml:
+                              attribute: true
+                        type: object
+                        xml:
+                          prefix: vuln
+                    type: object
+                  type: array
+                  xml:
+                    prefix: vuln
+                    wrapped: false
+                Title:
+                  type: string
+                  xml:
+                    prefix: vuln
+              type: object
+              xml:
+                prefix: vuln
+          type: object
+          xml:
+            prefix: cvrf
+      title: Sucessful returned cvrf object __XML__
+      type: object
+  securitySchemes:
+    api-key:
+      in: header
+      name: api-key
+      type: apiKey

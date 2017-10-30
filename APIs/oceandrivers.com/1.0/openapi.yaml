@@ -1,0 +1,285 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://api.oceandrivers.com/'
+info:
+  contact:
+    email: matiasbonet@oceandrivers.com
+  description: This is the api to access the ODWeather API information
+  title: ODWeather
+  version: '1.0'
+  x-apisguru-categories:
+    - open_data
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: swagger
+      url: 'http://api.oceandrivers.com/static/resources.json'
+      version: '1.2'
+  x-providerName: oceandrivers.com
+tags:
+  - description: ODWeather API service
+    name: ODWeather
+paths:
+  '/v1.0/compareStation/{stationName}/':
+    get:
+      description: Get forecast and realtime information for known points<br/>None
+      operationId: compareStation
+      parameters:
+        - description: 'Weather station to compare, values: cnareanl|cmsap|boyaenderrocat|areopuertopalma'
+          in: path
+          name: stationName
+          required: true
+          schema:
+            type: string
+            default: cnarenal
+      responses:
+        '200':
+          description: No response was specified
+      tags:
+        - ODWeather
+  '/v1.0/getAemetStation/{stationName}/{period}/':
+    get:
+      description: Get data from the aemet stations<br/>None
+      operationId: getAemetStation
+      parameters:
+        - description: 'station name currently: aeropuertopalma | caboblanco '
+          in: path
+          name: stationName
+          required: true
+          schema:
+            type: string
+            default: aeropuertopalma
+        - description: 'Period of time to get the data. Options: lastdata lastday'
+          in: path
+          name: period
+          required: true
+          schema:
+            type: string
+            default: lastdata
+      responses:
+        '200':
+          description: No response was specified
+      tags:
+        - ODWeather
+  '/v1.0/getForecastPoints/{yatchclubid}/language/{language}':
+    get:
+      description: Get forecast points of a yatchclub<br/>None
+      operationId: getForecastPoints
+      parameters:
+        - description: base URL for the the
+          in: path
+          name: yatchclubid
+          required: true
+          schema:
+            type: string
+            default: cnarenal
+        - in: path
+          name: language
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+      tags:
+        - ODWeather
+  '/v1.0/getForecastTimeSeries/{latitude}/{longitude}/':
+    get:
+      description: Get timeseries forecast information<br/>None
+      operationId: getForecastTimeSeries
+      parameters:
+        - description: latitude for the forecast
+          in: path
+          name: latitude
+          required: true
+          schema:
+            type: number
+            format: float
+            default: 39.49
+        - description: longitude for the forecast
+          in: path
+          name: longitude
+          required: true
+          schema:
+            type: number
+            format: float
+            default: 2.74
+        - description: 'initial date for the forecast ISO string YYYY-MM-DDTHH:mm:SS.SZ'
+          in: query
+          name: inittime
+          required: false
+          schema:
+            type: string
+        - description: 'end date for the forecast ISO string YYYY-MM-DDTHH:mm:SS.SZ'
+          in: query
+          name: endtime
+          required: false
+          schema:
+            type: string
+        - description: optional number of days in string. Will be added to init forecast date
+          in: query
+          name: days
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: optional number of hours in string. Will be added to init forecast date
+          in: query
+          name: hours
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: ' Comma separated values for the weather parameteres temperature,rain,wind_u,wind_v,gust,pressure,cloud,humidity&wave=height,direction,period'
+          in: query
+          name: weather
+          required: true
+          schema:
+            type: string
+        - description: ' Comma separated values for the wave parameteres height,direction,period'
+          in: query
+          name: wave
+          required: false
+          schema:
+            type: string
+        - description: Direct file I want to extract
+          in: query
+          name: entryid
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+      tags:
+        - ODWeather
+  '/v1.0/getForecastTimeSeriesWrf/{latitude}/{longitude}/':
+    get:
+      description: Get timeseries forecast information<br/>None
+      operationId: getForecastTimeSeriesWrf
+      parameters:
+        - description: latitude for the forecast
+          in: path
+          name: latitude
+          required: true
+          schema:
+            type: number
+            format: float
+            default: 39.49
+        - description: longitude for the forecast
+          in: path
+          name: longitude
+          required: true
+          schema:
+            type: number
+            format: float
+            default: 2.74
+        - description: 'initial date for the forecast ISO string YYYY-MM-DDTHH:mm:SS.SZ'
+          in: query
+          name: inittime
+          required: false
+          schema:
+            type: string
+        - description: 'end date for the forecast ISO string YYYY-MM-DDTHH:mm:SS.SZ'
+          in: query
+          name: endtime
+          required: false
+          schema:
+            type: string
+        - description: optional number of days in string. Will be added to init forecast date
+          in: query
+          name: days
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: optional number of hours in string. Will be added to init forecast date
+          in: query
+          name: hours
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: ' Comma separated values for the weather parameteres temperature,rain,wind_u,wind_v,gust,pressure,cloud,humidity&wave=height,direction,period'
+          in: query
+          name: weather
+          required: true
+          schema:
+            type: string
+        - description: ' Comma separated values for the wave parameteres height,direction,period'
+          in: query
+          name: wave
+          required: false
+          schema:
+            type: string
+        - description: Direct file I want to extract
+          in: query
+          name: entryid
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+      tags:
+        - ODWeather
+  '/v1.0/getSocibWeatherStation/{stationName}/{period}/':
+    get:
+      description: Get data from the socib bahia de palma buoy<br/>None
+      operationId: getSocibWeatherStation
+      parameters:
+        - description: 'station name currently: boyaenderrocat | playadepalma'
+          in: path
+          name: stationName
+          required: true
+          schema:
+            type: string
+            default: boyaenderrocat
+        - description: 'Period of time to get the data. Options: lastdata lasthour lastday'
+          in: path
+          name: period
+          required: true
+          schema:
+            type: string
+            default: lastdata
+      responses:
+        '200':
+          description: No response was specified
+      tags:
+        - ODWeather
+  '/v1.0/getWeatherDisplay/{stationName}/':
+    get:
+      description: Get data from the weather display software<br/>None
+      operationId: getWeatherDisplay
+      parameters:
+        - description: 'currently: ''cnarenal''|''campastilla'' | ''cncg'''
+          in: path
+          name: stationName
+          required: true
+          schema:
+            type: string
+            default: cnarenal
+        - description: Period of time to get the data latestdata|latesthour|latestday|dailylog
+          in: query
+          name: period
+          required: true
+          schema:
+            type: string
+            default: latestdata
+      responses:
+        '200':
+          description: No response was specified
+      tags:
+        - ODWeather
+  /v1.0/getWebCams/:
+    get:
+      description: Get forecast and realtime information for known points<br/>None
+      operationId: getWebCams
+      responses:
+        '200':
+          description: No response was specified
+      tags:
+        - ODWeather
+components:
+  schemas: {}

@@ -1,0 +1,762 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://management.azure.com/'
+info:
+  description: Client for managing DNS zones and record.
+  title: DnsManagementClient
+  version: 2015-05-04-preview
+  x-apisguru-categories:
+    - hosting
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-dns/2015-05-04-preview/swagger/dns.json'
+      version: '2.0'
+  x-preferred: false
+  x-providerName: azure.com
+  x-serviceName: arm-dns
+  x-tags:
+    - Azure
+    - Microsoft
+    - DNS
+security:
+  - azure_auth:
+      - user_impersonation
+paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones':
+    get:
+      description: Lists the DNS zones within a resource group.
+      operationId: Zones_ListZonesInSubscription
+      parameters:
+        - description: Query parameters. If null is passed returns the default number of zones.
+          in: query
+          name: $top
+          required: false
+          schema:
+            type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZoneListResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ZoneListResult'
+      tags:
+        - Zones
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/Zone'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnszones':
+    get:
+      description: Lists the DNS zones within a resource group.
+      operationId: Zones_ListZonesInResourceGroup
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: Query parameters. If null is passed returns the default number of zones.
+          in: query
+          name: $top
+          required: false
+          schema:
+            type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZoneListResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ZoneListResult'
+      tags:
+        - Zones
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/Zone'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnszones/{zoneName}':
+    delete:
+      description: Removes a DNS zone from a resource group.
+      operationId: Zones_Delete
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone without a terminating dot.
+          in: path
+          name: zoneName
+          required: true
+          schema:
+            type: string
+        - description: Defines the If-Match condition. The delete operation will be performed only if the ETag of the zone on the server matches this value.
+          in: header
+          name: If-Match
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+      tags:
+        - Zones
+    get:
+      description: Gets a DNS zone.
+      operationId: Zones_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone without a terminating dot.
+          in: path
+          name: zoneName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zone'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Zone'
+      tags:
+        - Zones
+    put:
+      description: Creates a DNS zone within a resource group.
+      operationId: Zones_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone without a terminating dot.
+          in: path
+          name: zoneName
+          required: true
+          schema:
+            type: string
+        - description: The etag of Zone.
+          in: header
+          name: If-Match
+          schema:
+            type: string
+        - description: Defines the If-None-Match condition. Set to '*' to force Create-If-Not-Exist. Other values will be ignored.
+          in: header
+          name: If-None-Match
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zone'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Zone'
+        '202':
+          description: Accepted
+      tags:
+        - Zones
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zone'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Zone'
+        description: Parameters supplied to the CreateOrUpdate operation.
+        required: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnszones/{zoneName}/recordsets':
+    get:
+      description: Lists all RecordSets in a DNS zone.
+      operationId: RecordSets_ListAll
+      parameters:
+        - description: The name of the resource group that contains the zone.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone from which to enumerate RecordSets.
+          in: path
+          name: zoneName
+          required: true
+          schema:
+            type: string
+        - description: Query parameters. If null is passed returns the default number of zones.
+          in: query
+          name: $top
+          required: false
+          schema:
+            type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordSetListResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RecordSetListResult'
+      tags:
+        - RecordSets
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/RecordSet'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnszones/{zoneName}/{recordType}':
+    get:
+      description: Lists the RecordSets of a specified type in a DNS zone.
+      operationId: RecordSets_List
+      parameters:
+        - description: The name of the resource group that contains the zone.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone from which to enumerate RecordsSets.
+          in: path
+          name: zoneName
+          required: true
+          schema:
+            type: string
+        - description: The type of record sets to enumerate.
+          in: path
+          name: recordType
+          required: true
+          x-ms-enum:
+            name: RecordType
+          schema:
+            type: string
+            enum:
+              - A
+              - AAAA
+              - CNAME
+              - MX
+              - NS
+              - PTR
+              - SOA
+              - SRV
+              - TXT
+        - description: Query parameters. If null is passed returns the default number of zones.
+          in: query
+          name: $top
+          required: false
+          schema:
+            type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordSetListResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RecordSetListResult'
+      tags:
+        - RecordSets
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/RecordSet'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnszones/{zoneName}/{recordType}/{relativeRecordSetName}':
+    delete:
+      description: Removes a RecordSet from a DNS zone.
+      operationId: RecordSets_Delete
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone without a terminating dot.
+          in: path
+          name: zoneName
+          required: true
+          schema:
+            type: string
+        - description: The type of DNS record.
+          in: path
+          name: recordType
+          required: true
+          x-ms-enum:
+            name: RecordType
+          schema:
+            type: string
+            enum:
+              - A
+              - AAAA
+              - CNAME
+              - MX
+              - NS
+              - PTR
+              - SOA
+              - SRV
+              - TXT
+        - description: 'The name of the RecordSet, relative to the name of the zone.'
+          in: path
+          name: relativeRecordSetName
+          required: true
+          x-ms-skip-url-encoding: true
+          schema:
+            type: string
+          allowReserved: true
+        - description: Defines the If-Match condition. The delete operation will be performed only if the ETag of the zone on the server matches this value.
+          in: header
+          name: If-Match
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+      tags:
+        - RecordSets
+    get:
+      description: Gets a RecordSet.
+      operationId: RecordSets_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone without a terminating dot.
+          in: path
+          name: zoneName
+          required: true
+          schema:
+            type: string
+        - description: The type of DNS record.
+          in: path
+          name: recordType
+          required: true
+          x-ms-enum:
+            name: RecordType
+          schema:
+            type: string
+            enum:
+              - A
+              - AAAA
+              - CNAME
+              - MX
+              - NS
+              - PTR
+              - SOA
+              - SRV
+              - TXT
+        - description: 'The name of the RecordSet, relative to the name of the zone.'
+          in: path
+          name: relativeRecordSetName
+          required: true
+          x-ms-skip-url-encoding: true
+          schema:
+            type: string
+          allowReserved: true
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordSet'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RecordSet'
+      tags:
+        - RecordSets
+    put:
+      description: Creates a RecordSet within a DNS zone.
+      operationId: RecordSets_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone without a terminating dot.
+          in: path
+          name: zoneName
+          required: true
+          schema:
+            type: string
+        - description: The type of DNS record.
+          in: path
+          name: recordType
+          required: true
+          x-ms-enum:
+            name: RecordType
+          schema:
+            type: string
+            enum:
+              - A
+              - AAAA
+              - CNAME
+              - MX
+              - NS
+              - PTR
+              - SOA
+              - SRV
+              - TXT
+        - description: 'The name of the RecordSet, relative to the name of the zone.'
+          in: path
+          name: relativeRecordSetName
+          required: true
+          x-ms-skip-url-encoding: true
+          schema:
+            type: string
+          allowReserved: true
+        - description: The etag of RecordSet.
+          in: header
+          name: If-Match
+          schema:
+            type: string
+        - description: Defines the If-None-Match condition. Set to '*' to force Create-If-Not-Exist. Other values will be ignored.
+          in: header
+          name: If-None-Match
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordSet'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RecordSet'
+        '202':
+          description: Accepted
+      tags:
+        - RecordSets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordSet'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RecordSet'
+        description: Parameters supplied to the CreateOrUpdate operation.
+        required: true
+components:
+  schemas:
+    ARecord:
+      description: An A record.
+      properties:
+        ipv4Address:
+          description: Gets or sets the IPv4 address of this A record in string notation.
+          type: string
+    AaaaRecord:
+      description: An AAAA record.
+      properties:
+        ipv6Address:
+          description: Gets or sets the IPv6 address of this AAAA record in string notation.
+          type: string
+    CnameRecord:
+      description: A CNAME record.
+      properties:
+        cname:
+          description: Gets or sets the canonical name for this record without a terminating dot.
+          type: string
+    MxRecord:
+      description: An MX record.
+      properties:
+        exchange:
+          description: 'Gets or sets the domain name of the mail host, without a terminating dot.'
+          type: string
+        preference:
+          description: Gets or sets the preference metric for this record.
+          format: int32
+          type: integer
+    NsRecord:
+      description: An NS record.
+      properties:
+        nsdname:
+          description: 'Gets or sets the name server name for this record, without a terminating dot.'
+          type: string
+    PtrRecord:
+      description: A PTR record.
+      properties:
+        ptrdname:
+          description: Gets or sets the PTR target domain name for this record without a terminating dot.
+          type: string
+    RecordSet:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+      description: Describes a DNS RecordSet (a set of DNS records with the same name and type).
+      properties:
+        etag:
+          description: Gets or sets the ETag of the RecordSet.
+          type: string
+        properties:
+          $ref: '#/components/schemas/RecordSetProperties'
+    RecordSetListResult:
+      description: The response to a RecordSet List operation.
+      properties:
+        nextLink:
+          description: Gets or sets the continuation token for the next page.
+          type: string
+        value:
+          description: Gets or sets information about the RecordSets in the response.
+          items:
+            $ref: '#/components/schemas/RecordSet'
+          type: array
+    RecordSetProperties:
+      description: Represents the properties of the records in the RecordSet.
+      properties:
+        AAAARecords:
+          description: Gets or sets the list of AAAA records in the RecordSet.
+          items:
+            $ref: '#/components/schemas/AaaaRecord'
+          type: array
+        ARecords:
+          description: Gets or sets the list of A records in the RecordSet.
+          items:
+            $ref: '#/components/schemas/ARecord'
+          type: array
+        CNAMERecord:
+          $ref: '#/components/schemas/CnameRecord'
+        MXRecords:
+          description: Gets or sets the list of MX records in the RecordSet.
+          items:
+            $ref: '#/components/schemas/MxRecord'
+          type: array
+        NSRecords:
+          description: Gets or sets the list of NS records in the RecordSet.
+          items:
+            $ref: '#/components/schemas/NsRecord'
+          type: array
+        PTRRecords:
+          description: Gets or sets the list of PTR records in the RecordSet.
+          items:
+            $ref: '#/components/schemas/PtrRecord'
+          type: array
+        SOARecord:
+          $ref: '#/components/schemas/SoaRecord'
+        SRVRecords:
+          description: Gets or sets the list of SRV records in the RecordSet.
+          items:
+            $ref: '#/components/schemas/SrvRecord'
+          type: array
+        TTL:
+          description: Gets or sets the TTL of the records in the RecordSet.
+          format: int64
+          type: integer
+        TXTRecords:
+          description: Gets or sets the list of TXT records in the RecordSet.
+          items:
+            $ref: '#/components/schemas/TxtRecord'
+          type: array
+    Resource:
+      properties:
+        id:
+          description: Resource Id
+          readOnly: true
+          type: string
+        location:
+          description: Resource location
+          type: string
+        name:
+          description: Resource name
+          readOnly: true
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          description: Resource tags
+          type: object
+        type:
+          description: Resource type
+          readOnly: true
+          type: string
+      required:
+        - location
+      x-ms-external: true
+    SoaRecord:
+      description: An SOA record.
+      properties:
+        email:
+          description: Gets or sets the email for this record.
+          type: string
+        expireTime:
+          description: Gets or sets the expire time for this record.
+          format: int64
+          type: integer
+        host:
+          description: 'Gets or sets the domain name of the authoritative name server, without a temrinating dot.'
+          type: string
+        minimumTTL:
+          description: Gets or sets the minimum TTL value for this record.
+          format: int64
+          type: integer
+        refreshTime:
+          description: Gets or sets the refresh value for this record.
+          format: int64
+          type: integer
+        retryTime:
+          description: Gets or sets the retry time for this record.
+          format: int64
+          type: integer
+        serialNumber:
+          description: Gets or sets the serial number for this record.
+          format: int64
+          type: integer
+    SrvRecord:
+      description: An SRV record.
+      properties:
+        port:
+          description: Gets or sets the port of the service for this record.
+          format: int32
+          type: integer
+        priority:
+          description: Gets or sets the priority metric for this record.
+          format: int32
+          type: integer
+        target:
+          description: 'Gets or sets the domain name of the target for this record, without a terminating dot.'
+          type: string
+        weight:
+          description: Gets or sets the weight metric for this this record.
+          format: int32
+          type: integer
+    SubResource:
+      properties:
+        id:
+          description: Resource Id
+          type: string
+      x-ms-external: true
+    TxtRecord:
+      description: A TXT record.
+      properties:
+        value:
+          description: Gets or sets the text value of this record.
+          items:
+            type: string
+          type: array
+    Zone:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+      description: Describes a DNS zone.
+      properties:
+        etag:
+          description: 'Gets or sets the ETag of the zone that is being updated, as received from a Get operation.'
+          type: string
+        properties:
+          $ref: '#/components/schemas/ZoneProperties'
+    ZoneListResult:
+      description: The response to a Zone List or ListAll operation.
+      properties:
+        nextLink:
+          description: Gets or sets the continuation token for the next page.
+          type: string
+        value:
+          description: Gets or sets information about the zones in the response.
+          items:
+            $ref: '#/components/schemas/Zone'
+          type: array
+    ZoneProperties:
+      description: Represents the properties of the zone.
+      properties:
+        maxNumberOfRecordSets:
+          description: Gets or sets the maximum number of record sets that can be created in this zone.
+          format: int64
+          type: integer
+        numberOfRecordSets:
+          description: Gets or sets the current number of record sets in this zone.
+          format: int64
+          type: integer
+  parameters:
+    ApiVersionParameter:
+      description: Client Api Version.
+      in: query
+      name: api-version
+      required: true
+      schema:
+        type: string
+    SubscriptionIdParameter:
+      description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+      in: path
+      name: subscriptionId
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    azure_auth:
+      description: Azure Active Directory OAuth2 Flow
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+          scopes:
+            user_impersonation: impersonate your user account

@@ -1,0 +1,1468 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://dynamodb.amazonaws.com/'
+info:
+  version: '2011-12-05'
+  x-release: v4
+  title: Amazon DynamoDB
+  description: '<p>Amazon DynamoDB is a fast, highly scalable, highly available, cost-effective non-relational database service.</p> <p>Amazon DynamoDB removes traditional scalability limitations on data storage while maintaining low latency and predictable performance.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: dynamodb
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/dynamodb-2011-12-05.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: false
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/dynamodb/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: BatchGetItem
+      description: '<p>Retrieves the attributes for multiple items from multiple tables using their primary keys.</p> <p>The maximum number of item attributes that can be retrieved for a single operation is 100. Also, the number of items retrieved is constrained by a 1 MB the size limit. If the response size limit is exceeded or a partial result is returned due to an internal processing failure, Amazon DynamoDB returns an <code>UnprocessedKeys</code> value so you can retry the operation starting with the next item to get.</p> <p>Amazon DynamoDB automatically adjusts the number of items returned per page to enforce this limit. For example, even if you ask to retrieve 100 items, but each individual item is 50k in size, the system returns 20 items and an appropriate <code>UnprocessedKeys</code> value so you can get the next page of results. If necessary, your application needs its own logic to assemble the pages of results into one set.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetItemOutput'
+        '480':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      parameters:
+        - name: RequestItems
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetItemInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#BatchWriteItem':
+    post:
+      operationId: BatchWriteItem
+      description: <p>Allows to execute a batch of Put and/or Delete Requests for many tables in a single call. A total of 25 requests are allowed.</p> <p>There are no transaction guarantees provided by this API. It does not allow conditional puts nor does it support return values.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchWriteItemOutput'
+        '480':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchWriteItemInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateTable':
+    post:
+      operationId: CreateTable
+      description: '<p>Adds a new table to your account.</p> <p>The table name must be unique among those associated with the AWS Account issuing the request, and the AWS Region that receives the request (e.g. <code>us-east-1</code>).</p> <p>The <code>CreateTable</code> operation triggers an asynchronous workflow to begin creating the table. Amazon DynamoDB immediately returns the state of the table (<code>CREATING</code>) until the table is in the <code>ACTIVE</code> state. Once the table is in the <code>ACTIVE</code> state, you can perform data plane operations.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTableOutput'
+        '480':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTableInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteItem':
+    post:
+      operationId: DeleteItem
+      description: '<p>Deletes a single item in a table by primary key.</p> <p>You can perform a conditional delete operation that deletes the item if it exists, or if it has an expected attribute value.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteItemOutput'
+        '480':
+          description: ConditionalCheckFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConditionalCheckFailedException'
+        '481':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteItemInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTable':
+    post:
+      operationId: DeleteTable
+      description: '<p>Deletes a table and all of its items.</p> <p>If the table is in the <code>ACTIVE</code> state, you can delete it. If a table is in <code>CREATING</code> or <code>UPDATING</code> states then Amazon DynamoDB returns a <code>ResourceInUseException</code>. If the specified table does not exist, Amazon DynamoDB returns a <code>ResourceNotFoundException</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTableOutput'
+        '480':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTableInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTable':
+    post:
+      operationId: DescribeTable
+      description: '<p>Retrieves information about the table, including the current status of the table, the primary key schema and when the table was created.</p> <p>If the table does not exist, Amazon DynamoDB returns a <code>ResourceNotFoundException</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTableOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      x-waiters:
+        - delay: 20
+          operation: DescribeTable
+          maxAttempts: 25
+          acceptors:
+            - expected: ACTIVE
+              matcher: path
+              state: success
+              argument: Table.TableStatus
+            - expected: ResourceNotFoundException
+              matcher: error
+              state: retry
+        - delay: 20
+          operation: DescribeTable
+          maxAttempts: 25
+          acceptors:
+            - expected: ResourceNotFoundException
+              matcher: error
+              state: success
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTableInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetItem':
+    post:
+      operationId: GetItem
+      description: '<p>Retrieves a set of Attributes for an item that matches the primary key.</p> <p>The <code>GetItem</code> operation provides an eventually-consistent read by default. If eventually-consistent reads are not acceptable for your application, use <code>ConsistentRead</code>. Although this operation might take longer than a standard read, it always returns the last updated value.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetItemOutput'
+        '480':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetItemInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListTables':
+    post:
+      operationId: ListTables
+      description: Retrieves a paginated list of table names created by the AWS Account of the caller in the AWS Region (e.g. <code>us-east-1</code>).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTablesOutput'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: ExclusiveStartTableName
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTablesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutItem':
+    post:
+      operationId: PutItem
+      description: '<p>Creates a new item, or replaces an old item with a new item (including all the attributes).</p> <p>If an item already exists in the specified table with the same primary key, the new item completely replaces the existing item. You can perform a conditional put (insert a new item if one with the specified primary key doesn''t exist), or replace an existing item if it has certain attribute values.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutItemOutput'
+        '480':
+          description: ConditionalCheckFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConditionalCheckFailedException'
+        '481':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutItemInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#Query':
+    post:
+      operationId: Query
+      description: '<p>Gets the values of one or more items and its attributes by primary key (composite primary key, only).</p> <p>Narrow the scope of the query using comparison operators on the <code>RangeKeyValue</code> of the composite key. Use the <code>ScanIndexForward</code> parameter to get results in forward or reverse order by range key.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryOutput'
+        '480':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: ExclusiveStartKey
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#Scan':
+    post:
+      operationId: Scan
+      description: <p>Retrieves one or more items and its attributes by performing a full scan of a table.</p> <p>Provide a <code>ScanFilter</code> to get more specific results.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanOutput'
+        '480':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: ExclusiveStartKey
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScanInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateItem':
+    post:
+      operationId: UpdateItem
+      description: '<p>Edits an existing item''s attributes.</p> <p>You can perform a conditional update (insert a new attribute name-value pair if it doesn''t exist, or replace an existing name-value pair if it has certain expected attribute values).</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateItemOutput'
+        '480':
+          description: ConditionalCheckFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConditionalCheckFailedException'
+        '481':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateItemInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateTable':
+    post:
+      operationId: UpdateTable
+      description: <p>Updates the provisioned throughput for the given table.</p> <p>Setting the throughput for a table helps you manage performance and is part of the Provisioned Throughput feature of Amazon DynamoDB.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTableOutput'
+        '480':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTableInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AttributeAction:
+      type: string
+      enum:
+        - ADD
+        - PUT
+        - DELETE
+      description: 'The type of action for an item update operation. Only use the add action for numbers or sets; the specified value is added to the existing value. If a set of values is specified, the values are added to the existing set. Adds the specified attribute. If the attribute exists, it is replaced by the new value. If no value is specified, this removes the attribute and its value. If a set of values is specified, then the values in the specified set are removed from the old set.'
+    AttributeMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/AttributeName'
+          value:
+            $ref: '#/components/schemas/AttributeValue'
+    AttributeName:
+      type: string
+      maxLength: 65535
+    AttributeNameList:
+      type: array
+      description: 'List of <code>Attribute</code> names. If attribute names are not specified then all attributes will be returned. If some attributes are not found, they will not appear in the result.'
+      items:
+        $ref: '#/components/schemas/AttributeName'
+      minItems: 1
+    AttributeUpdates:
+      type: array
+      description: 'Map of attribute name to the new value and action for the update. The attribute names specify the attributes to modify, and cannot contain any primary key attributes.'
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/AttributeName'
+          value:
+            $ref: '#/components/schemas/AttributeValueUpdate'
+    AttributeValue:
+      type: object
+      properties:
+        S:
+          $ref: '#/components/schemas/StringAttributeValue'
+        'N':
+          $ref: '#/components/schemas/NumberAttributeValue'
+        B:
+          $ref: '#/components/schemas/BinaryAttributeValue'
+        SS:
+          $ref: '#/components/schemas/StringSetAttributeValue'
+        NS:
+          $ref: '#/components/schemas/NumberSetAttributeValue'
+        BS:
+          $ref: '#/components/schemas/BinarySetAttributeValue'
+      description: 'AttributeValue can be <code>String</code>, <code>Number</code>, <code>Binary</code>, <code>StringSet</code>, <code>NumberSet</code>, <code>BinarySet</code>.'
+    AttributeValueList:
+      type: array
+      description: 'A list of attribute values to be used with a comparison operator for a scan or query operation. For comparisons that require more than one value, such as a <code>BETWEEN</code> comparison, the AttributeValueList contains two attribute values and the comparison operator.'
+      items:
+        $ref: '#/components/schemas/AttributeValue'
+    AttributeValueUpdate:
+      type: object
+      properties:
+        Value:
+          $ref: '#/components/schemas/AttributeValue'
+        Action:
+          $ref: '#/components/schemas/AttributeAction'
+      description: 'Specifies the attribute to update and how to perform the update. Possible values: <code>PUT</code> (default), <code>ADD</code> or <code>DELETE</code>.'
+    BatchGetItemInput:
+      type: object
+      required:
+        - RequestItems
+      properties:
+        RequestItems:
+          $ref: '#/components/schemas/BatchGetRequestMap'
+    BatchGetItemOutput:
+      type: object
+      properties:
+        Responses:
+          $ref: '#/components/schemas/BatchGetResponseMap'
+        UnprocessedKeys:
+          $ref: '#/components/schemas/BatchGetRequestMap'
+    BatchGetRequestMap:
+      type: array
+      description: 'A map of the table name and corresponding items to get by primary key. While requesting items, each table name can be invoked only once per operation.'
+      minItems: 1
+      maxItems: 100
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/TableName'
+          value:
+            $ref: '#/components/schemas/KeysAndAttributes'
+    BatchGetResponseMap:
+      type: array
+      description: Table names and the respective item attributes from the tables.
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/TableName'
+          value:
+            $ref: '#/components/schemas/BatchResponse'
+    BatchResponse:
+      type: object
+      properties:
+        Items:
+          $ref: '#/components/schemas/ItemList'
+        ConsumedCapacityUnits:
+          $ref: '#/components/schemas/ConsumedCapacityUnits'
+      description: 'The item attributes from a response in a specific table, along with the read resources consumed on the table during the request.'
+    BatchWriteItemInput:
+      type: object
+      required:
+        - RequestItems
+      properties:
+        RequestItems:
+          $ref: '#/components/schemas/BatchWriteItemRequestMap'
+    BatchWriteItemOutput:
+      type: object
+      properties:
+        Responses:
+          $ref: '#/components/schemas/BatchWriteResponseMap'
+        UnprocessedItems:
+          $ref: '#/components/schemas/BatchWriteItemRequestMap'
+      description: A container for <code>BatchWriteItem</code> response
+    BatchWriteItemRequestMap:
+      type: array
+      description: '<p>A map of table name to list-of-write-requests.</p> <p>Key: The table name corresponding to the list of requests</p> <p>Value: Essentially a list of request items. Each request item could contain either a <code>PutRequest</code> or <code>DeleteRequest</code>. Never both.</p>'
+      minItems: 1
+      maxItems: 25
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/TableName'
+          value:
+            $ref: '#/components/schemas/WriteRequests'
+    BatchWriteResponse:
+      type: object
+      properties:
+        ConsumedCapacityUnits:
+          $ref: '#/components/schemas/ConsumedCapacityUnits'
+    BatchWriteResponseMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/TableName'
+          value:
+            $ref: '#/components/schemas/BatchWriteResponse'
+    BinaryAttributeValue:
+      type: string
+    BinarySetAttributeValue:
+      type: array
+      items:
+        $ref: '#/components/schemas/BinaryAttributeValue'
+    BooleanObject:
+      type: boolean
+    ComparisonOperator:
+      type: string
+      enum:
+        - EQ
+        - NE
+        - IN
+        - LE
+        - LT
+        - GE
+        - GT
+        - BETWEEN
+        - NOT_NULL
+        - 'NULL'
+        - CONTAINS
+        - NOT_CONTAINS
+        - BEGINS_WITH
+      description: '<p>A comparison operator is an enumeration of several operations:</p> <ul> <li><code>EQ</code> for <em>equal</em>.</li> <li><code>NE</code> for <em>not equal</em>.</li> <li><code>IN</code> checks for exact matches.</li> <li><code>LE</code> for <em>less than or equal to</em>.</li> <li><code>LT</code> for <em>less than</em>.</li> <li><code>GE</code> for <em>greater than or equal to</em>.</li> <li><code>GT</code> for <em>greater than</em>.</li> <li><code>BETWEEN</code> for <em>between</em>.</li> <li><code>NOT_NULL</code> for <em>exists</em>.</li> <li><code>NULL</code> for <em>not exists</em>.</li> <li><code>CONTAINS</code> for substring or value in a set.</li> <li><code>NOT_CONTAINS</code> for absence of a substring or absence of a value in a set.</li> <li><code>BEGINS_WITH</code> for a substring prefix.</li> </ul> <p>Scan operations support all available comparison operators.</p> <p>Query operations support a subset of the available comparison operators: EQ, LE, LT, GE, GT, BETWEEN, and BEGINS_WITH.</p>'
+    Condition:
+      type: object
+      required:
+        - ComparisonOperator
+      properties:
+        AttributeValueList:
+          $ref: '#/components/schemas/AttributeValueList'
+        ComparisonOperator:
+          $ref: '#/components/schemas/ComparisonOperator'
+    ConditionalCheckFailedException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: This exception is thrown when an expected value does not match what was found in the system.
+    ConsistentRead:
+      type: boolean
+      description: 'If set to <code>true</code>, then a consistent read is issued. Otherwise eventually-consistent is used.'
+    ConsumedCapacityUnits:
+      type: number
+      description: 'The number of Capacity Units of the provisioned throughput of the table consumed during the operation. <code>GetItem</code>, <code>BatchGetItem</code>, <code>BatchWriteItem</code>, <code>Query</code>, and <code>Scan</code> operations consume <code>ReadCapacityUnits</code>, while <code>PutItem</code>, <code>UpdateItem</code>, and <code>DeleteItem</code> operations consume <code>WriteCapacityUnits</code>.'
+      format: double
+    CreateTableInput:
+      type: object
+      required:
+        - TableName
+        - KeySchema
+        - ProvisionedThroughput
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        KeySchema:
+          $ref: '#/components/schemas/KeySchema'
+        ProvisionedThroughput:
+          $ref: '#/components/schemas/ProvisionedThroughput'
+    CreateTableOutput:
+      type: object
+      properties:
+        TableDescription:
+          $ref: '#/components/schemas/TableDescription'
+    Date:
+      type: string
+      format: date-time
+    DeleteItemInput:
+      type: object
+      required:
+        - TableName
+        - Key
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        Key:
+          $ref: '#/components/schemas/Key'
+        Expected:
+          $ref: '#/components/schemas/ExpectedAttributeMap'
+        ReturnValues:
+          $ref: '#/components/schemas/ReturnValue'
+    DeleteItemOutput:
+      type: object
+      properties:
+        Attributes:
+          $ref: '#/components/schemas/AttributeMap'
+        ConsumedCapacityUnits:
+          $ref: '#/components/schemas/ConsumedCapacityUnits'
+    DeleteRequest:
+      type: object
+      required:
+        - Key
+      properties:
+        Key:
+          $ref: '#/components/schemas/Key'
+      description: A container for a Delete BatchWrite request
+    DeleteTableInput:
+      type: object
+      required:
+        - TableName
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+    DeleteTableOutput:
+      type: object
+      properties:
+        TableDescription:
+          $ref: '#/components/schemas/TableDescription'
+    DescribeTableInput:
+      type: object
+      required:
+        - TableName
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+    DescribeTableOutput:
+      type: object
+      properties:
+        Table:
+          $ref: '#/components/schemas/TableDescription'
+    ErrorMessage:
+      type: string
+    ExpectedAttributeMap:
+      type: array
+      description: 'Designates an attribute for a conditional modification. The <code>Expected</code> parameter allows you to provide an attribute name, and whether or not Amazon DynamoDB should check to see if the attribute has a particular value before modifying it.'
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/AttributeName'
+          value:
+            $ref: '#/components/schemas/ExpectedAttributeValue'
+    ExpectedAttributeValue:
+      type: object
+      properties:
+        Value:
+          $ref: '#/components/schemas/AttributeValue'
+        Exists:
+          $ref: '#/components/schemas/BooleanObject'
+      description: 'Allows you to provide an attribute name, and whether or not Amazon DynamoDB should check to see if the attribute value already exists; or if the attribute value exists and has a particular value before changing it.'
+    FilterConditionMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/Condition'
+    GetItemInput:
+      type: object
+      required:
+        - TableName
+        - Key
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        Key:
+          $ref: '#/components/schemas/Key'
+        AttributesToGet:
+          $ref: '#/components/schemas/AttributeNameList'
+        ConsistentRead:
+          $ref: '#/components/schemas/ConsistentRead'
+    GetItemOutput:
+      type: object
+      properties:
+        Item:
+          $ref: '#/components/schemas/AttributeMap'
+        ConsumedCapacityUnits:
+          $ref: '#/components/schemas/ConsumedCapacityUnits'
+    Integer:
+      type: integer
+    InternalServerError:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: This exception is thrown when the service has a problem when trying to process the request.
+    ItemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AttributeMap'
+    Key:
+      type: object
+      required:
+        - HashKeyElement
+      properties:
+        HashKeyElement:
+          $ref: '#/components/schemas/AttributeValue'
+        RangeKeyElement:
+          $ref: '#/components/schemas/AttributeValue'
+      description: The primary key that uniquely identifies each item in a table. A primary key can be a one attribute (hash) primary key or a two attribute (hash-and-range) primary key.
+    KeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Key'
+      minItems: 1
+      maxItems: 100
+    KeySchema:
+      type: object
+      required:
+        - HashKeyElement
+      properties:
+        HashKeyElement:
+          $ref: '#/components/schemas/KeySchemaElement'
+        RangeKeyElement:
+          $ref: '#/components/schemas/KeySchemaElement'
+      description: 'The KeySchema identifies the primary key as a one attribute primary key (hash) or a composite two attribute (hash-and-range) primary key. Single attribute primary keys have one index value: a <code>HashKeyElement</code>. A composite hash-and-range primary key contains two attribute values: a <code>HashKeyElement</code> and a <code>RangeKeyElement</code>.'
+    KeySchemaAttributeName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    KeySchemaElement:
+      type: object
+      required:
+        - AttributeName
+        - AttributeType
+      properties:
+        AttributeName:
+          $ref: '#/components/schemas/KeySchemaAttributeName'
+        AttributeType:
+          $ref: '#/components/schemas/ScalarAttributeType'
+      description: <code>KeySchemaElement</code> is the primary key (hash or hash-and-range) structure for the table.
+    KeysAndAttributes:
+      type: object
+      required:
+        - Keys
+      properties:
+        Keys:
+          $ref: '#/components/schemas/KeyList'
+        AttributesToGet:
+          $ref: '#/components/schemas/AttributeNameList'
+        ConsistentRead:
+          $ref: '#/components/schemas/ConsistentRead'
+    LimitExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: This exception is thrown when the subscriber exceeded the limits on the number of objects or operations.
+    ListTablesInput:
+      type: object
+      properties:
+        ExclusiveStartTableName:
+          $ref: '#/components/schemas/TableName'
+        Limit:
+          $ref: '#/components/schemas/ListTablesInputLimit'
+    ListTablesInputLimit:
+      type: integer
+      description: A number of maximum table names to return.
+      minimum: 1
+      maximum: 100
+    ListTablesOutput:
+      type: object
+      properties:
+        TableNames:
+          $ref: '#/components/schemas/TableNameList'
+        LastEvaluatedTableName:
+          $ref: '#/components/schemas/TableName'
+    Long:
+      type: integer
+    NumberAttributeValue:
+      type: string
+    NumberSetAttributeValue:
+      type: array
+      items:
+        $ref: '#/components/schemas/NumberAttributeValue'
+    PositiveIntegerObject:
+      type: integer
+      minimum: 1
+    PositiveLongObject:
+      type: integer
+      minimum: 1
+    ProvisionedThroughput:
+      type: object
+      required:
+        - ReadCapacityUnits
+        - WriteCapacityUnits
+      properties:
+        ReadCapacityUnits:
+          $ref: '#/components/schemas/PositiveLongObject'
+        WriteCapacityUnits:
+          $ref: '#/components/schemas/PositiveLongObject'
+      description: 'Provisioned throughput reserves the required read and write resources for your table in terms of <code>ReadCapacityUnits</code> and <code>WriteCapacityUnits</code>. Values for provisioned throughput depend upon your expected read/write rates, item size, and consistency. Provide the expected number of read and write operations, assuming an item size of 1k and strictly consistent reads. For 2k item size, double the value. For 3k, triple the value, etc. Eventually-consistent reads consume half the resources of strictly consistent reads.'
+    ProvisionedThroughputDescription:
+      type: object
+      properties:
+        LastIncreaseDateTime:
+          $ref: '#/components/schemas/Date'
+        LastDecreaseDateTime:
+          $ref: '#/components/schemas/Date'
+        NumberOfDecreasesToday:
+          $ref: '#/components/schemas/PositiveLongObject'
+        ReadCapacityUnits:
+          $ref: '#/components/schemas/PositiveLongObject'
+        WriteCapacityUnits:
+          $ref: '#/components/schemas/PositiveLongObject'
+    ProvisionedThroughputExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: This exception is thrown when the level of provisioned throughput defined for the table is exceeded.
+    PutItemInput:
+      type: object
+      required:
+        - TableName
+        - Item
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        Item:
+          $ref: '#/components/schemas/PutItemInputAttributeMap'
+        Expected:
+          $ref: '#/components/schemas/ExpectedAttributeMap'
+        ReturnValues:
+          $ref: '#/components/schemas/ReturnValue'
+    PutItemInputAttributeMap:
+      type: array
+      description: 'A map of the attributes for the item, and must include the primary key values that define the item. Other attribute name-value pairs can be provided for the item.'
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/AttributeName'
+          value:
+            $ref: '#/components/schemas/AttributeValue'
+    PutItemOutput:
+      type: object
+      properties:
+        Attributes:
+          $ref: '#/components/schemas/AttributeMap'
+        ConsumedCapacityUnits:
+          $ref: '#/components/schemas/ConsumedCapacityUnits'
+    PutRequest:
+      type: object
+      required:
+        - Item
+      properties:
+        Item:
+          $ref: '#/components/schemas/PutItemInputAttributeMap'
+      description: A container for a Put BatchWrite request
+    QueryInput:
+      type: object
+      required:
+        - TableName
+        - HashKeyValue
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        AttributesToGet:
+          $ref: '#/components/schemas/AttributeNameList'
+        Limit:
+          $ref: '#/components/schemas/PositiveIntegerObject'
+        ConsistentRead:
+          $ref: '#/components/schemas/ConsistentRead'
+        Count:
+          $ref: '#/components/schemas/BooleanObject'
+        HashKeyValue:
+          $ref: '#/components/schemas/AttributeValue'
+        RangeKeyCondition:
+          $ref: '#/components/schemas/Condition'
+        ScanIndexForward:
+          $ref: '#/components/schemas/BooleanObject'
+        ExclusiveStartKey:
+          $ref: '#/components/schemas/Key'
+    QueryOutput:
+      type: object
+      properties:
+        Items:
+          $ref: '#/components/schemas/ItemList'
+        Count:
+          $ref: '#/components/schemas/Integer'
+        LastEvaluatedKey:
+          $ref: '#/components/schemas/Key'
+        ConsumedCapacityUnits:
+          $ref: '#/components/schemas/ConsumedCapacityUnits'
+    ResourceInUseException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: This exception is thrown when the resource which is being attempted to be changed is in use.
+    ResourceNotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: This exception is thrown when the resource which is being attempted to be changed is in use.
+    ReturnValue:
+      type: string
+      enum:
+        - NONE
+        - ALL_OLD
+        - UPDATED_OLD
+        - ALL_NEW
+        - UPDATED_NEW
+      description: '<p>Use this parameter if you want to get the attribute name-value pairs before or after they are modified. For <code>PUT</code> operations, the possible parameter values are <code>NONE</code> (default) or <code>ALL_OLD</code>. For update operations, the possible parameter values are <code>NONE</code> (default) or <code>ALL_OLD</code>, <code>UPDATED_OLD</code>, <code>ALL_NEW</code> or <code>UPDATED_NEW</code>.</p> <ul> <li><code>NONE</code>: Nothing is returned.</li> <li><code>ALL_OLD</code>: Returns the attributes of the item as they were before the operation.</li> <li><code>UPDATED_OLD</code>: Returns the values of the updated attributes, only, as they were before the operation.</li> <li><code>ALL_NEW</code>: Returns all the attributes and their new values after the operation.</li> <li><code>UPDATED_NEW</code>: Returns the values of the updated attributes, only, as they are after the operation.</li> </ul>'
+    ScalarAttributeType:
+      type: string
+      enum:
+        - S
+        - 'N'
+        - B
+    ScanInput:
+      type: object
+      required:
+        - TableName
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        AttributesToGet:
+          $ref: '#/components/schemas/AttributeNameList'
+        Limit:
+          $ref: '#/components/schemas/PositiveIntegerObject'
+        Count:
+          $ref: '#/components/schemas/BooleanObject'
+        ScanFilter:
+          $ref: '#/components/schemas/FilterConditionMap'
+        ExclusiveStartKey:
+          $ref: '#/components/schemas/Key'
+    ScanOutput:
+      type: object
+      properties:
+        Items:
+          $ref: '#/components/schemas/ItemList'
+        Count:
+          $ref: '#/components/schemas/Integer'
+        ScannedCount:
+          $ref: '#/components/schemas/Integer'
+        LastEvaluatedKey:
+          $ref: '#/components/schemas/Key'
+        ConsumedCapacityUnits:
+          $ref: '#/components/schemas/ConsumedCapacityUnits'
+    String:
+      type: string
+    StringAttributeValue:
+      type: string
+    StringSetAttributeValue:
+      type: array
+      items:
+        $ref: '#/components/schemas/StringAttributeValue'
+    TableDescription:
+      type: object
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        KeySchema:
+          $ref: '#/components/schemas/KeySchema'
+        TableStatus:
+          $ref: '#/components/schemas/TableStatus'
+        CreationDateTime:
+          $ref: '#/components/schemas/Date'
+        ProvisionedThroughput:
+          $ref: '#/components/schemas/ProvisionedThroughputDescription'
+        TableSizeBytes:
+          $ref: '#/components/schemas/Long'
+        ItemCount:
+          $ref: '#/components/schemas/Long'
+    TableName:
+      type: string
+      pattern: '[a-zA-Z0-9_.-]+'
+      minLength: 3
+      maxLength: 255
+    TableNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TableName'
+    TableStatus:
+      type: string
+      enum:
+        - CREATING
+        - UPDATING
+        - DELETING
+        - ACTIVE
+    UpdateItemInput:
+      type: object
+      required:
+        - TableName
+        - Key
+        - AttributeUpdates
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        Key:
+          $ref: '#/components/schemas/Key'
+        AttributeUpdates:
+          $ref: '#/components/schemas/AttributeUpdates'
+        Expected:
+          $ref: '#/components/schemas/ExpectedAttributeMap'
+        ReturnValues:
+          $ref: '#/components/schemas/ReturnValue'
+    UpdateItemOutput:
+      type: object
+      properties:
+        Attributes:
+          $ref: '#/components/schemas/AttributeMap'
+        ConsumedCapacityUnits:
+          $ref: '#/components/schemas/ConsumedCapacityUnits'
+    UpdateTableInput:
+      type: object
+      required:
+        - TableName
+        - ProvisionedThroughput
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        ProvisionedThroughput:
+          $ref: '#/components/schemas/ProvisionedThroughput'
+    UpdateTableOutput:
+      type: object
+      properties:
+        TableDescription:
+          $ref: '#/components/schemas/TableDescription'
+    WriteRequest:
+      type: object
+      properties:
+        PutRequest:
+          $ref: '#/components/schemas/PutRequest'
+        DeleteRequest:
+          $ref: '#/components/schemas/DeleteRequest'
+      description: This structure is a Union of PutRequest and DeleteRequest. It can contain exactly one of <code>PutRequest</code> or <code>DeleteRequest</code>. Never Both. This is enforced in the code.
+    WriteRequests:
+      type: array
+      items:
+        $ref: '#/components/schemas/WriteRequest'
+      minItems: 1
+      maxItems: 25
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

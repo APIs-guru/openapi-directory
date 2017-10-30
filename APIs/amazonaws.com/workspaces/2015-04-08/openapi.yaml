@@ -1,0 +1,1334 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://workspaces.amazonaws.com/'
+info:
+  version: '2015-04-08'
+  x-release: v4
+  title: Amazon WorkSpaces
+  description: <fullname>Amazon WorkSpaces Service</fullname> <p>This reference provides detailed information about the Amazon WorkSpaces operations.</p>
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: workspaces
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/workspaces-2015-04-08.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/workspaces/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: CreateTags
+      description: Creates tags for a WorkSpace.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTagsResult'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '482':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTagsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateWorkspaces':
+    post:
+      operationId: CreateWorkspaces
+      description: <p>Creates one or more WorkSpaces.</p> <note> <p>This operation is asynchronous and returns before the WorkSpaces are created.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkspacesResult'
+        '480':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '481':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkspacesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTags':
+    post:
+      operationId: DeleteTags
+      description: Deletes tags from a WorkSpace.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTagsResult'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTagsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTags':
+    post:
+      operationId: DescribeTags
+      description: Describes tags for a WorkSpace.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTagsResult'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTagsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeWorkspaceBundles':
+    post:
+      operationId: DescribeWorkspaceBundles
+      description: '<p>Obtains information about the WorkSpace bundles that are available to your account in the specified region.</p> <p>You can filter the results with either the <code>BundleIds</code> parameter, or the <code>Owner</code> parameter, but not both.</p> <p>This operation supports pagination with the use of the <code>NextToken</code> request and response parameters. If more results are available, the <code>NextToken</code> response member contains a token that you pass in the next call to this operation to retrieve the next set of items.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeWorkspaceBundlesResult'
+        '480':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+      parameters:
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeWorkspaceBundlesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeWorkspaceDirectories':
+    post:
+      operationId: DescribeWorkspaceDirectories
+      description: '<p>Retrieves information about the AWS Directory Service directories in the region that are registered with Amazon WorkSpaces and are available to your account.</p> <p>This operation supports pagination with the use of the <code>NextToken</code> request and response parameters. If more results are available, the <code>NextToken</code> response member contains a token that you pass in the next call to this operation to retrieve the next set of items.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeWorkspaceDirectoriesResult'
+        '480':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+      parameters:
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeWorkspaceDirectoriesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeWorkspaces':
+    post:
+      operationId: DescribeWorkspaces
+      description: '<p>Obtains information about the specified WorkSpaces.</p> <p>Only one of the filter parameters, such as <code>BundleId</code>, <code>DirectoryId</code>, or <code>WorkspaceIds</code>, can be specified at a time.</p> <p>This operation supports pagination with the use of the <code>NextToken</code> request and response parameters. If more results are available, the <code>NextToken</code> response member contains a token that you pass in the next call to this operation to retrieve the next set of items.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeWorkspacesResult'
+        '480':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '481':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeWorkspacesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeWorkspacesConnectionStatus':
+    post:
+      operationId: DescribeWorkspacesConnectionStatus
+      description: Describes the connection status of a specified WorkSpace.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeWorkspacesConnectionStatusResult'
+        '480':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeWorkspacesConnectionStatusRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ModifyWorkspaceProperties':
+    post:
+      operationId: ModifyWorkspaceProperties
+      description: 'Modifies the WorkSpace properties, including the running mode and AutoStop time.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyWorkspacePropertiesResult'
+        '480':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '481':
+          description: InvalidResourceStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateException'
+        '482':
+          description: OperationInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationInProgressException'
+        '483':
+          description: UnsupportedWorkspaceConfigurationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedWorkspaceConfigurationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyWorkspacePropertiesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RebootWorkspaces':
+    post:
+      operationId: RebootWorkspaces
+      description: '<p>Reboots the specified WorkSpaces.</p> <p>To be able to reboot a WorkSpace, the WorkSpace must have a <b>State</b> of <code>AVAILABLE</code>, <code>IMPAIRED</code>, or <code>INOPERABLE</code>.</p> <note> <p>This operation is asynchronous and returns before the WorkSpaces have rebooted.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RebootWorkspacesResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RebootWorkspacesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RebuildWorkspaces':
+    post:
+      operationId: RebuildWorkspaces
+      description: '<p>Rebuilds the specified WorkSpaces.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. Rebuilding a WorkSpace causes the following to occur:</p> <ul> <li> <p>The system is restored to the image of the bundle that the WorkSpace is created from. Any applications that have been installed, or system settings that have been made since the WorkSpace was created will be lost.</p> </li> <li> <p>The data drive (D drive) is re-created from the last automatic snapshot taken of the data drive. The current contents of the data drive are overwritten. Automatic snapshots of the data drive are taken every 12 hours, so the snapshot can be as much as 12 hours old.</p> </li> </ul> <p>To be able to rebuild a WorkSpace, the WorkSpace must have a <b>State</b> of <code>AVAILABLE</code> or <code>ERROR</code>.</p> <note> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RebuildWorkspacesResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RebuildWorkspacesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StartWorkspaces':
+    post:
+      operationId: StartWorkspaces
+      description: Starts the specified WorkSpaces. The WorkSpaces must have a running mode of AutoStop and a state of STOPPED.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartWorkspacesResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartWorkspacesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StopWorkspaces':
+    post:
+      operationId: StopWorkspaces
+      description: ' Stops the specified WorkSpaces. The WorkSpaces must have a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopWorkspacesResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopWorkspacesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#TerminateWorkspaces':
+    post:
+      operationId: TerminateWorkspaces
+      description: '<p>Terminates the specified WorkSpaces.</p> <p>Terminating a WorkSpace is a permanent action and cannot be undone. The user''s data is not maintained and will be destroyed. If you need to archive any user data, contact Amazon Web Services before terminating the WorkSpace.</p> <p>You can terminate a WorkSpace that is in any state except <code>SUSPENDED</code>.</p> <note> <p>This operation is asynchronous and returns before the WorkSpaces have been completely terminated.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TerminateWorkspacesResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TerminateWorkspacesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    ARN:
+      type: string
+      pattern: '^arn:aws:[A-Za-z0-9][A-za-z0-9_/.-]{0,62}:[A-za-z0-9_/.-]{0,63}:[A-za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.-]{0,127}$'
+    AccessDeniedException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The user is not authorized to access a resource.
+    Alias:
+      type: string
+    BooleanObject:
+      type: boolean
+    BundleId:
+      type: string
+      pattern: '^wsb-[0-9a-z]{8,63}$'
+    BundleIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BundleId'
+      minItems: 1
+      maxItems: 25
+    BundleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkspaceBundle'
+    BundleOwner:
+      type: string
+    Compute:
+      type: string
+      enum:
+        - VALUE
+        - STANDARD
+        - PERFORMANCE
+    ComputeType:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/Compute'
+      description: Contains information about the compute type of a WorkSpace bundle.
+    ComputerName:
+      type: string
+    ConnectionState:
+      type: string
+      enum:
+        - CONNECTED
+        - DISCONNECTED
+        - UNKNOWN
+    CreateTagsRequest:
+      type: object
+      required:
+        - ResourceId
+        - Tags
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/NonEmptyString'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+      description: The request of the <a>CreateTags</a> operation.
+    CreateTagsResult:
+      type: object
+      properties: {}
+      description: The result of the <a>CreateTags</a> operation.
+    CreateWorkspacesRequest:
+      type: object
+      required:
+        - Workspaces
+      properties:
+        Workspaces:
+          $ref: '#/components/schemas/WorkspaceRequestList'
+      description: Contains the inputs for the <a>CreateWorkspaces</a> operation.
+    CreateWorkspacesResult:
+      type: object
+      properties:
+        FailedRequests:
+          $ref: '#/components/schemas/FailedCreateWorkspaceRequests'
+        PendingRequests:
+          $ref: '#/components/schemas/WorkspaceList'
+      description: Contains the result of the <a>CreateWorkspaces</a> operation.
+    DefaultOu:
+      type: string
+    DefaultWorkspaceCreationProperties:
+      type: object
+      properties:
+        EnableWorkDocs:
+          $ref: '#/components/schemas/BooleanObject'
+        EnableInternetAccess:
+          $ref: '#/components/schemas/BooleanObject'
+        DefaultOu:
+          $ref: '#/components/schemas/DefaultOu'
+        CustomSecurityGroupId:
+          $ref: '#/components/schemas/SecurityGroupId'
+        UserEnabledAsLocalAdministrator:
+          $ref: '#/components/schemas/BooleanObject'
+      description: Contains default WorkSpace creation information.
+    DeleteTagsRequest:
+      type: object
+      required:
+        - ResourceId
+        - TagKeys
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/NonEmptyString'
+        TagKeys:
+          $ref: '#/components/schemas/TagKeyList'
+      description: The request of the <a>DeleteTags</a> operation.
+    DeleteTagsResult:
+      type: object
+      properties: {}
+      description: The result of the <a>DeleteTags</a> operation.
+    DescribeTagsRequest:
+      type: object
+      required:
+        - ResourceId
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/NonEmptyString'
+      description: The request of the <a>DescribeTags</a> operation.
+    DescribeTagsResult:
+      type: object
+      properties:
+        TagList:
+          $ref: '#/components/schemas/TagList'
+      description: The result of the <a>DescribeTags</a> operation.
+    DescribeWorkspaceBundlesRequest:
+      type: object
+      properties:
+        BundleIds:
+          $ref: '#/components/schemas/BundleIdList'
+        Owner:
+          $ref: '#/components/schemas/BundleOwner'
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Contains the inputs for the <a>DescribeWorkspaceBundles</a> operation.
+    DescribeWorkspaceBundlesResult:
+      type: object
+      properties:
+        Bundles:
+          $ref: '#/components/schemas/BundleList'
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Contains the results of the <a>DescribeWorkspaceBundles</a> operation.
+    DescribeWorkspaceDirectoriesRequest:
+      type: object
+      properties:
+        DirectoryIds:
+          $ref: '#/components/schemas/DirectoryIdList'
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Contains the inputs for the <a>DescribeWorkspaceDirectories</a> operation.
+    DescribeWorkspaceDirectoriesResult:
+      type: object
+      properties:
+        Directories:
+          $ref: '#/components/schemas/DirectoryList'
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Contains the results of the <a>DescribeWorkspaceDirectories</a> operation.
+    DescribeWorkspacesConnectionStatusRequest:
+      type: object
+      properties:
+        WorkspaceIds:
+          $ref: '#/components/schemas/WorkspaceIdList'
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+    DescribeWorkspacesConnectionStatusResult:
+      type: object
+      properties:
+        WorkspacesConnectionStatus:
+          $ref: '#/components/schemas/WorkspaceConnectionStatusList'
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+    DescribeWorkspacesRequest:
+      type: object
+      properties:
+        WorkspaceIds:
+          $ref: '#/components/schemas/WorkspaceIdList'
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        UserName:
+          $ref: '#/components/schemas/UserName'
+        BundleId:
+          $ref: '#/components/schemas/BundleId'
+        Limit:
+          $ref: '#/components/schemas/Limit'
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Contains the inputs for the <a>DescribeWorkspaces</a> operation.
+    DescribeWorkspacesResult:
+      type: object
+      properties:
+        Workspaces:
+          $ref: '#/components/schemas/WorkspaceList'
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Contains the results for the <a>DescribeWorkspaces</a> operation.
+    Description:
+      type: string
+    DirectoryId:
+      type: string
+      pattern: '^d-[0-9a-f]{8,63}$'
+    DirectoryIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DirectoryId'
+      minItems: 1
+      maxItems: 25
+    DirectoryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkspaceDirectory'
+    DirectoryName:
+      type: string
+    DnsIpAddresses:
+      type: array
+      items:
+        $ref: '#/components/schemas/IpAddress'
+    ErrorType:
+      type: string
+    ExceptionMessage:
+      type: string
+    FailedCreateWorkspaceRequest:
+      type: object
+      properties:
+        WorkspaceRequest:
+          $ref: '#/components/schemas/WorkspaceRequest'
+        ErrorCode:
+          $ref: '#/components/schemas/ErrorType'
+        ErrorMessage:
+          $ref: '#/components/schemas/Description'
+      description: Contains information about a WorkSpace that could not be created.
+    FailedCreateWorkspaceRequests:
+      type: array
+      items:
+        $ref: '#/components/schemas/FailedCreateWorkspaceRequest'
+    FailedRebootWorkspaceRequests:
+      type: array
+      items:
+        $ref: '#/components/schemas/FailedWorkspaceChangeRequest'
+    FailedRebuildWorkspaceRequests:
+      type: array
+      items:
+        $ref: '#/components/schemas/FailedWorkspaceChangeRequest'
+    FailedStartWorkspaceRequests:
+      type: array
+      items:
+        $ref: '#/components/schemas/FailedWorkspaceChangeRequest'
+    FailedStopWorkspaceRequests:
+      type: array
+      items:
+        $ref: '#/components/schemas/FailedWorkspaceChangeRequest'
+    FailedTerminateWorkspaceRequests:
+      type: array
+      items:
+        $ref: '#/components/schemas/FailedWorkspaceChangeRequest'
+    FailedWorkspaceChangeRequest:
+      type: object
+      properties:
+        WorkspaceId:
+          $ref: '#/components/schemas/WorkspaceId'
+        ErrorCode:
+          $ref: '#/components/schemas/ErrorType'
+        ErrorMessage:
+          $ref: '#/components/schemas/Description'
+      description: 'Contains information about a WorkSpace that could not be rebooted (<a>RebootWorkspaces</a>), rebuilt (<a>RebuildWorkspaces</a>), terminated (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped (<a>StopWorkspaces</a>).'
+    InvalidParameterValuesException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: One or more parameter values are not valid.
+    InvalidResourceStateException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The state of the WorkSpace is not valid for this operation.
+    IpAddress:
+      type: string
+    Limit:
+      type: integer
+      minimum: 1
+      maximum: 25
+    ModifyWorkspacePropertiesRequest:
+      type: object
+      required:
+        - WorkspaceId
+        - WorkspaceProperties
+      properties:
+        WorkspaceId:
+          $ref: '#/components/schemas/WorkspaceId'
+        WorkspaceProperties:
+          $ref: '#/components/schemas/WorkspaceProperties'
+    ModifyWorkspacePropertiesResult:
+      type: object
+      properties: {}
+    NonEmptyString:
+      type: string
+      minLength: 1
+    OperationInProgressException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The properties of this WorkSpace are currently being modified. Try again in a moment.
+    PaginationToken:
+      type: string
+      minLength: 1
+      maxLength: 63
+    RebootRequest:
+      type: object
+      required:
+        - WorkspaceId
+      properties:
+        WorkspaceId:
+          $ref: '#/components/schemas/WorkspaceId'
+      description: Contains information used with the <a>RebootWorkspaces</a> operation to reboot a WorkSpace.
+    RebootWorkspaceRequests:
+      type: array
+      items:
+        $ref: '#/components/schemas/RebootRequest'
+      minItems: 1
+      maxItems: 25
+    RebootWorkspacesRequest:
+      type: object
+      required:
+        - RebootWorkspaceRequests
+      properties:
+        RebootWorkspaceRequests:
+          $ref: '#/components/schemas/RebootWorkspaceRequests'
+      description: Contains the inputs for the <a>RebootWorkspaces</a> operation.
+    RebootWorkspacesResult:
+      type: object
+      properties:
+        FailedRequests:
+          $ref: '#/components/schemas/FailedRebootWorkspaceRequests'
+      description: Contains the results of the <a>RebootWorkspaces</a> operation.
+    RebuildRequest:
+      type: object
+      required:
+        - WorkspaceId
+      properties:
+        WorkspaceId:
+          $ref: '#/components/schemas/WorkspaceId'
+      description: Contains information used with the <a>RebuildWorkspaces</a> operation to rebuild a WorkSpace.
+    RebuildWorkspaceRequests:
+      type: array
+      items:
+        $ref: '#/components/schemas/RebuildRequest'
+      minItems: 1
+      maxItems: 1
+    RebuildWorkspacesRequest:
+      type: object
+      required:
+        - RebuildWorkspaceRequests
+      properties:
+        RebuildWorkspaceRequests:
+          $ref: '#/components/schemas/RebuildWorkspaceRequests'
+      description: Contains the inputs for the <a>RebuildWorkspaces</a> operation.
+    RebuildWorkspacesResult:
+      type: object
+      properties:
+        FailedRequests:
+          $ref: '#/components/schemas/FailedRebuildWorkspaceRequests'
+      description: Contains the results of the <a>RebuildWorkspaces</a> operation.
+    RegistrationCode:
+      type: string
+      minLength: 1
+      maxLength: 20
+    ResourceLimitExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: Your resource limits have been exceeded.
+    ResourceNotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+        ResourceId:
+          $ref: '#/components/schemas/NonEmptyString'
+      description: The resource could not be found.
+    ResourceUnavailableException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+        ResourceId:
+          $ref: '#/components/schemas/NonEmptyString'
+      description: The specified resource is not available.
+    RunningMode:
+      type: string
+      enum:
+        - AUTO_STOP
+        - ALWAYS_ON
+    RunningModeAutoStopTimeoutInMinutes:
+      type: integer
+    SecurityGroupId:
+      type: string
+      pattern: '^(sg-[0-9a-f]{8})$'
+    StartRequest:
+      type: object
+      properties:
+        WorkspaceId:
+          $ref: '#/components/schemas/WorkspaceId'
+      description: Describes the start request.
+    StartWorkspaceRequests:
+      type: array
+      items:
+        $ref: '#/components/schemas/StartRequest'
+      minItems: 1
+      maxItems: 25
+    StartWorkspacesRequest:
+      type: object
+      required:
+        - StartWorkspaceRequests
+      properties:
+        StartWorkspaceRequests:
+          $ref: '#/components/schemas/StartWorkspaceRequests'
+    StartWorkspacesResult:
+      type: object
+      properties:
+        FailedRequests:
+          $ref: '#/components/schemas/FailedStartWorkspaceRequests'
+    StopRequest:
+      type: object
+      properties:
+        WorkspaceId:
+          $ref: '#/components/schemas/WorkspaceId'
+      description: Describes the stop request.
+    StopWorkspaceRequests:
+      type: array
+      items:
+        $ref: '#/components/schemas/StopRequest'
+      minItems: 1
+      maxItems: 25
+    StopWorkspacesRequest:
+      type: object
+      required:
+        - StopWorkspaceRequests
+      properties:
+        StopWorkspaceRequests:
+          $ref: '#/components/schemas/StopWorkspaceRequests'
+    StopWorkspacesResult:
+      type: object
+      properties:
+        FailedRequests:
+          $ref: '#/components/schemas/FailedStopWorkspaceRequests'
+    SubnetId:
+      type: string
+      pattern: '^(subnet-[0-9a-f]{8})$'
+    SubnetIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubnetId'
+    Tag:
+      type: object
+      required:
+        - Key
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+        Value:
+          $ref: '#/components/schemas/TagValue'
+      description: Describes the tag of the WorkSpace.
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 127
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    TagValue:
+      type: string
+      maxLength: 255
+    TerminateRequest:
+      type: object
+      required:
+        - WorkspaceId
+      properties:
+        WorkspaceId:
+          $ref: '#/components/schemas/WorkspaceId'
+      description: Contains information used with the <a>TerminateWorkspaces</a> operation to terminate a WorkSpace.
+    TerminateWorkspaceRequests:
+      type: array
+      items:
+        $ref: '#/components/schemas/TerminateRequest'
+      minItems: 1
+      maxItems: 25
+    TerminateWorkspacesRequest:
+      type: object
+      required:
+        - TerminateWorkspaceRequests
+      properties:
+        TerminateWorkspaceRequests:
+          $ref: '#/components/schemas/TerminateWorkspaceRequests'
+      description: Contains the inputs for the <a>TerminateWorkspaces</a> operation.
+    TerminateWorkspacesResult:
+      type: object
+      properties:
+        FailedRequests:
+          $ref: '#/components/schemas/FailedTerminateWorkspaceRequests'
+      description: Contains the results of the <a>TerminateWorkspaces</a> operation.
+    Timestamp:
+      type: string
+      format: date-time
+    UnsupportedWorkspaceConfigurationException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: 'The configuration of this WorkSpace is not supported for this operation. For more information, see the <a href="http://docs.aws.amazon.com/workspaces/latest/adminguide/">Amazon WorkSpaces Administration Guide</a>. '
+    UserName:
+      type: string
+      minLength: 1
+      maxLength: 63
+    UserStorage:
+      type: object
+      properties:
+        Capacity:
+          $ref: '#/components/schemas/NonEmptyString'
+      description: Contains information about the user storage for a WorkSpace bundle.
+    VolumeEncryptionKey:
+      type: string
+    Workspace:
+      type: object
+      properties:
+        WorkspaceId:
+          $ref: '#/components/schemas/WorkspaceId'
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        UserName:
+          $ref: '#/components/schemas/UserName'
+        IpAddress:
+          $ref: '#/components/schemas/IpAddress'
+        State:
+          $ref: '#/components/schemas/WorkspaceState'
+        BundleId:
+          $ref: '#/components/schemas/BundleId'
+        SubnetId:
+          $ref: '#/components/schemas/SubnetId'
+        ErrorMessage:
+          $ref: '#/components/schemas/Description'
+        ErrorCode:
+          $ref: '#/components/schemas/WorkspaceErrorCode'
+        ComputerName:
+          $ref: '#/components/schemas/ComputerName'
+        VolumeEncryptionKey:
+          $ref: '#/components/schemas/VolumeEncryptionKey'
+        UserVolumeEncryptionEnabled:
+          $ref: '#/components/schemas/BooleanObject'
+        RootVolumeEncryptionEnabled:
+          $ref: '#/components/schemas/BooleanObject'
+        WorkspaceProperties:
+          $ref: '#/components/schemas/WorkspaceProperties'
+      description: Contains information about a WorkSpace.
+    WorkspaceBundle:
+      type: object
+      properties:
+        BundleId:
+          $ref: '#/components/schemas/BundleId'
+        Name:
+          $ref: '#/components/schemas/NonEmptyString'
+        Owner:
+          $ref: '#/components/schemas/BundleOwner'
+        Description:
+          $ref: '#/components/schemas/Description'
+        UserStorage:
+          $ref: '#/components/schemas/UserStorage'
+        ComputeType:
+          $ref: '#/components/schemas/ComputeType'
+      description: Contains information about a WorkSpace bundle.
+    WorkspaceConnectionStatus:
+      type: object
+      properties:
+        WorkspaceId:
+          $ref: '#/components/schemas/WorkspaceId'
+        ConnectionState:
+          $ref: '#/components/schemas/ConnectionState'
+        ConnectionStateCheckTimestamp:
+          $ref: '#/components/schemas/Timestamp'
+        LastKnownUserConnectionTimestamp:
+          $ref: '#/components/schemas/Timestamp'
+      description: Describes the connection status of a WorkSpace.
+    WorkspaceConnectionStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkspaceConnectionStatus'
+    WorkspaceDirectory:
+      type: object
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        Alias:
+          $ref: '#/components/schemas/Alias'
+        DirectoryName:
+          $ref: '#/components/schemas/DirectoryName'
+        RegistrationCode:
+          $ref: '#/components/schemas/RegistrationCode'
+        SubnetIds:
+          $ref: '#/components/schemas/SubnetIds'
+        DnsIpAddresses:
+          $ref: '#/components/schemas/DnsIpAddresses'
+        CustomerUserName:
+          $ref: '#/components/schemas/UserName'
+        IamRoleId:
+          $ref: '#/components/schemas/ARN'
+        DirectoryType:
+          $ref: '#/components/schemas/WorkspaceDirectoryType'
+        WorkspaceSecurityGroupId:
+          $ref: '#/components/schemas/SecurityGroupId'
+        State:
+          $ref: '#/components/schemas/WorkspaceDirectoryState'
+        WorkspaceCreationProperties:
+          $ref: '#/components/schemas/DefaultWorkspaceCreationProperties'
+      description: Contains information about an AWS Directory Service directory for use with Amazon WorkSpaces.
+    WorkspaceDirectoryState:
+      type: string
+      enum:
+        - REGISTERING
+        - REGISTERED
+        - DEREGISTERING
+        - DEREGISTERED
+        - ERROR
+    WorkspaceDirectoryType:
+      type: string
+      enum:
+        - SIMPLE_AD
+        - AD_CONNECTOR
+    WorkspaceErrorCode:
+      type: string
+    WorkspaceId:
+      type: string
+      pattern: '^ws-[0-9a-z]{8,63}$'
+    WorkspaceIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkspaceId'
+      minItems: 1
+      maxItems: 25
+    WorkspaceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Workspace'
+    WorkspaceProperties:
+      type: object
+      properties:
+        RunningMode:
+          $ref: '#/components/schemas/RunningMode'
+        RunningModeAutoStopTimeoutInMinutes:
+          $ref: '#/components/schemas/RunningModeAutoStopTimeoutInMinutes'
+      description: Describes the properties of a WorkSpace.
+    WorkspaceRequest:
+      type: object
+      required:
+        - DirectoryId
+        - UserName
+        - BundleId
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        UserName:
+          $ref: '#/components/schemas/UserName'
+        BundleId:
+          $ref: '#/components/schemas/BundleId'
+        VolumeEncryptionKey:
+          $ref: '#/components/schemas/VolumeEncryptionKey'
+        UserVolumeEncryptionEnabled:
+          $ref: '#/components/schemas/BooleanObject'
+        RootVolumeEncryptionEnabled:
+          $ref: '#/components/schemas/BooleanObject'
+        WorkspaceProperties:
+          $ref: '#/components/schemas/WorkspaceProperties'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+      description: Contains information about a WorkSpace creation request.
+    WorkspaceRequestList:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkspaceRequest'
+      minItems: 1
+      maxItems: 25
+    WorkspaceState:
+      type: string
+      enum:
+        - PENDING
+        - AVAILABLE
+        - IMPAIRED
+        - UNHEALTHY
+        - REBOOTING
+        - STARTING
+        - REBUILDING
+        - MAINTENANCE
+        - TERMINATING
+        - TERMINATED
+        - SUSPENDED
+        - STOPPING
+        - STOPPED
+        - ERROR
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

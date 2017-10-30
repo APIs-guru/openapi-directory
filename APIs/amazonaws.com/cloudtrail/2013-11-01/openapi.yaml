@@ -1,0 +1,1720 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://cloudtrail.amazonaws.com/'
+info:
+  version: '2013-11-01'
+  x-release: v4
+  title: AWS CloudTrail
+  description: '<fullname>AWS CloudTrail</fullname> <p>This is the CloudTrail API Reference. It provides descriptions of actions, data types, common parameters, and common errors for CloudTrail.</p> <p>CloudTrail is a web service that records AWS API calls for your AWS account and delivers log files to an Amazon S3 bucket. The recorded information includes the identity of the user, the start time of the AWS API call, the source IP address, the request parameters, and the response elements returned by the service.</p> <note> <p>As an alternative to the API, you can use one of the AWS SDKs, which consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc.). The SDKs provide a convenient way to create programmatic access to AWSCloudTrail. For example, the SDKs take care of cryptographically signing requests, managing errors, and retrying requests automatically. For information about the AWS SDKs, including how to download and install them, see the <a href="http://aws.amazon.com/tools/">Tools for Amazon Web Services page</a>.</p> </note> <p>See the <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html">AWS CloudTrail User Guide</a> for information about the data that is included with each AWS API call listed in the log files.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: cloudtrail
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cloudtrail-2013-11-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/cloudtrail/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AddTags
+      description: 'Adds one or more tags to a trail, up to a limit of 50. Tags must be unique per trail. Overwrites an existing tag''s value when a new value is specified for an existing tag key. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail that applies to all regions only from the region in which the trail was created (that is, from its home region).'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddTagsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: CloudTrailARNInvalidException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudTrailARNInvalidException'
+        '482':
+          description: ResourceTypeNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceTypeNotSupportedException'
+        '483':
+          description: TagsLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagsLimitExceededException'
+        '484':
+          description: InvalidTrailNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTrailNameException'
+        '485':
+          description: InvalidTagParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTagParameterException'
+        '486':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '487':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddTagsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateTrail':
+    post:
+      operationId: CreateTrail
+      description: 'Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. A maximum of five trails can exist in a region, irrespective of the region in which they were created.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTrailResponse'
+        '480':
+          description: MaximumNumberOfTrailsExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaximumNumberOfTrailsExceededException'
+        '481':
+          description: TrailAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrailAlreadyExistsException'
+        '482':
+          description: S3BucketDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3BucketDoesNotExistException'
+        '483':
+          description: InsufficientS3BucketPolicyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsufficientS3BucketPolicyException'
+        '484':
+          description: InsufficientSnsTopicPolicyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsufficientSnsTopicPolicyException'
+        '485':
+          description: InsufficientEncryptionPolicyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsufficientEncryptionPolicyException'
+        '486':
+          description: InvalidS3BucketNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidS3BucketNameException'
+        '487':
+          description: InvalidS3PrefixException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidS3PrefixException'
+        '488':
+          description: InvalidSnsTopicNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidSnsTopicNameException'
+        '489':
+          description: InvalidKmsKeyIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidKmsKeyIdException'
+        '490':
+          description: InvalidTrailNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTrailNameException'
+        '491':
+          description: TrailNotProvidedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrailNotProvidedException'
+        '492':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '493':
+          description: KmsKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KmsKeyNotFoundException'
+        '494':
+          description: KmsKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KmsKeyDisabledException'
+        '495':
+          description: KmsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KmsException'
+        '496':
+          description: InvalidCloudWatchLogsLogGroupArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCloudWatchLogsLogGroupArnException'
+        '497':
+          description: InvalidCloudWatchLogsRoleArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCloudWatchLogsRoleArnException'
+        '498':
+          description: CloudWatchLogsDeliveryUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWatchLogsDeliveryUnavailableException'
+        '499':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '500':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTrailRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTrail':
+    post:
+      operationId: DeleteTrail
+      description: Deletes a trail. This operation must be called from the region in which the trail was created. <code>DeleteTrail</code> cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTrailResponse'
+        '480':
+          description: TrailNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrailNotFoundException'
+        '481':
+          description: InvalidTrailNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTrailNameException'
+        '482':
+          description: InvalidHomeRegionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidHomeRegionException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTrailRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTrails':
+    post:
+      operationId: DescribeTrails
+      description: Retrieves settings for the trail associated with the current region for your account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTrailsResponse'
+        '480':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '481':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTrailsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetEventSelectors':
+    post:
+      operationId: GetEventSelectors
+      description: '<p>Describes the settings for the event selectors that you configured for your trail. The information returned for your event selectors includes the following:</p> <ul> <li> <p>The S3 objects that you are logging for data events.</p> </li> <li> <p>If your event selector includes management events.</p> </li> <li> <p>If your event selector includes read-only events, write-only events, or all. </p> </li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html">Logging Data and Management Events for Trails </a> in the <i>AWS CloudTrail User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEventSelectorsResponse'
+        '480':
+          description: TrailNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrailNotFoundException'
+        '481':
+          description: InvalidTrailNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTrailNameException'
+        '482':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '483':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetEventSelectorsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetTrailStatus':
+    post:
+      operationId: GetTrailStatus
+      description: 'Returns a JSON-formatted list of information about the specified trail. Fields include information on delivery errors, Amazon SNS and Amazon S3 errors, and start and stop logging times for each trail. This operation returns trail status from a single region. To return trail status from all regions, you must call the operation on each region.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTrailStatusResponse'
+        '480':
+          description: TrailNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrailNotFoundException'
+        '481':
+          description: InvalidTrailNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTrailNameException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetTrailStatusRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListPublicKeys':
+    post:
+      operationId: ListPublicKeys
+      description: '<p>Returns all public keys whose private keys were used to sign the digest files within the specified time range. The public key is needed to validate digest files that were signed with its corresponding private key.</p> <note> <p>CloudTrail uses different private/public key pairs per region. Each digest file is signed with a private key unique to its region. Therefore, when you validate a digest file from a particular region, you must look in the same region for its corresponding public key.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPublicKeysResponse'
+        '480':
+          description: InvalidTimeRangeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTimeRangeException'
+        '481':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '482':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '483':
+          description: InvalidTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPublicKeysRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListTags':
+    post:
+      operationId: ListTags
+      description: Lists the tags for the trail in the current region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: CloudTrailARNInvalidException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudTrailARNInvalidException'
+        '482':
+          description: ResourceTypeNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceTypeNotSupportedException'
+        '483':
+          description: InvalidTrailNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTrailNameException'
+        '484':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '485':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '486':
+          description: InvalidTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#LookupEvents':
+    post:
+      operationId: LookupEvents
+      description: '<p>Looks up API activity events captured by CloudTrail that create, update, or delete resources in your account. Events for a region can be looked up for the times in which you had CloudTrail turned on in that region during the last seven days. Lookup supports the following attributes:</p> <ul> <li> <p>Event ID</p> </li> <li> <p>Event name</p> </li> <li> <p>Event source</p> </li> <li> <p>Resource name</p> </li> <li> <p>Resource type</p> </li> <li> <p>User name</p> </li> </ul> <p>All attributes are optional. The default number of results returned is 10, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.</p> <important> <p>The rate of lookup requests is limited to one per second per account. If this limit is exceeded, a throttling error occurs.</p> </important> <important> <p>Events that occurred during the selected time range will not be available for lookup if CloudTrail logging was not enabled when the events occurred.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LookupEventsResponse'
+        '480':
+          description: InvalidLookupAttributesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidLookupAttributesException'
+        '481':
+          description: InvalidTimeRangeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTimeRangeException'
+        '482':
+          description: InvalidMaxResultsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidMaxResultsException'
+        '483':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      parameters:
+        - name: MaxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LookupEventsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutEventSelectors':
+    post:
+      operationId: PutEventSelectors
+      description: '<p>Configures an event selector for your trail. Use event selectors to specify whether you want your trail to log management and/or data events. When an event occurs in your account, CloudTrail evaluates the event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn''t match any event selector, the trail doesn''t log the event. </p> <p>Example</p> <ol> <li> <p>You create an event selector for a trail and specify that you want write-only events.</p> </li> <li> <p>The EC2 <code>GetConsoleOutput</code> and <code>RunInstances</code> API operations occur in your account.</p> </li> <li> <p>CloudTrail evaluates whether the events match your event selectors.</p> </li> <li> <p>The <code>RunInstances</code> is a write-only event and it matches your event selector. The trail logs the event.</p> </li> <li> <p>The <code>GetConsoleOutput</code> is a read-only event but it doesn''t match your event selector. The trail doesn''t log the event. </p> </li> </ol> <p>The <code>PutEventSelectors</code> operation must be called from the region in which the trail was created; otherwise, an <code>InvalidHomeRegionException</code> is thrown.</p> <p>You can configure up to five event selectors for each trail. For more information, see <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html">Logging Data and Management Events for Trails </a> in the <i>AWS CloudTrail User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutEventSelectorsResponse'
+        '480':
+          description: TrailNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrailNotFoundException'
+        '481':
+          description: InvalidTrailNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTrailNameException'
+        '482':
+          description: InvalidHomeRegionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidHomeRegionException'
+        '483':
+          description: InvalidEventSelectorsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidEventSelectorsException'
+        '484':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '485':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutEventSelectorsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RemoveTags':
+    post:
+      operationId: RemoveTags
+      description: Removes the specified tags from a trail.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveTagsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: CloudTrailARNInvalidException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudTrailARNInvalidException'
+        '482':
+          description: ResourceTypeNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceTypeNotSupportedException'
+        '483':
+          description: InvalidTrailNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTrailNameException'
+        '484':
+          description: InvalidTagParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTagParameterException'
+        '485':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '486':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveTagsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StartLogging':
+    post:
+      operationId: StartLogging
+      description: 'Starts the recording of AWS API calls and log file delivery for a trail. For a trail that is enabled in all regions, this operation must be called from the region in which the trail was created. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartLoggingResponse'
+        '480':
+          description: TrailNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrailNotFoundException'
+        '481':
+          description: InvalidTrailNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTrailNameException'
+        '482':
+          description: InvalidHomeRegionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidHomeRegionException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartLoggingRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StopLogging':
+    post:
+      operationId: StopLogging
+      description: 'Suspends the recording of AWS API calls and log file delivery for the specified trail. Under most circumstances, there is no need to use this action. You can update a trail without stopping it first. This action is the only way to stop recording. For a trail enabled in all regions, this operation must be called from the region in which the trail was created, or an <code>InvalidHomeRegionException</code> will occur. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail enabled in all regions.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopLoggingResponse'
+        '480':
+          description: TrailNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrailNotFoundException'
+        '481':
+          description: InvalidTrailNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTrailNameException'
+        '482':
+          description: InvalidHomeRegionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidHomeRegionException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopLoggingRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateTrail':
+    post:
+      operationId: UpdateTrail
+      description: 'Updates the settings that specify delivery of log files. Changes to a trail do not require stopping the CloudTrail service. Use this action to designate an existing bucket for log delivery. If the existing bucket has previously been a target for CloudTrail log files, an IAM policy exists for the bucket. <code>UpdateTrail</code> must be called from the region in which the trail was created; otherwise, an <code>InvalidHomeRegionException</code> is thrown.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTrailResponse'
+        '480':
+          description: S3BucketDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3BucketDoesNotExistException'
+        '481':
+          description: InsufficientS3BucketPolicyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsufficientS3BucketPolicyException'
+        '482':
+          description: InsufficientSnsTopicPolicyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsufficientSnsTopicPolicyException'
+        '483':
+          description: InsufficientEncryptionPolicyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsufficientEncryptionPolicyException'
+        '484':
+          description: TrailNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrailNotFoundException'
+        '485':
+          description: InvalidS3BucketNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidS3BucketNameException'
+        '486':
+          description: InvalidS3PrefixException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidS3PrefixException'
+        '487':
+          description: InvalidSnsTopicNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidSnsTopicNameException'
+        '488':
+          description: InvalidKmsKeyIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidKmsKeyIdException'
+        '489':
+          description: InvalidTrailNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTrailNameException'
+        '490':
+          description: TrailNotProvidedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrailNotProvidedException'
+        '491':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '492':
+          description: InvalidHomeRegionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidHomeRegionException'
+        '493':
+          description: KmsKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KmsKeyNotFoundException'
+        '494':
+          description: KmsKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KmsKeyDisabledException'
+        '495':
+          description: KmsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KmsException'
+        '496':
+          description: InvalidCloudWatchLogsLogGroupArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCloudWatchLogsLogGroupArnException'
+        '497':
+          description: InvalidCloudWatchLogsRoleArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCloudWatchLogsRoleArnException'
+        '498':
+          description: CloudWatchLogsDeliveryUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWatchLogsDeliveryUnavailableException'
+        '499':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '500':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTrailRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AddTagsRequest:
+      type: object
+      required:
+        - ResourceId
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/String'
+        TagsList:
+          $ref: '#/components/schemas/TagsList'
+      description: Specifies the tags to add to a trail.
+    AddTagsResponse:
+      type: object
+      properties: {}
+      description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
+    Boolean:
+      type: boolean
+    ByteBuffer:
+      type: string
+    CloudTrailARNInvalidException:
+      type: object
+      properties: {}
+      description: '<p>This exception is thrown when an operation is called with an invalid trail ARN. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail</code> </p>'
+    CloudWatchLogsDeliveryUnavailableException:
+      type: object
+      properties: {}
+      description: Cannot set a CloudWatch Logs delivery for this region.
+    CreateTrailRequest:
+      type: object
+      required:
+        - Name
+        - S3BucketName
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        S3BucketName:
+          $ref: '#/components/schemas/String'
+        S3KeyPrefix:
+          $ref: '#/components/schemas/String'
+        SnsTopicName:
+          $ref: '#/components/schemas/String'
+        IncludeGlobalServiceEvents:
+          $ref: '#/components/schemas/Boolean'
+        IsMultiRegionTrail:
+          $ref: '#/components/schemas/Boolean'
+        EnableLogFileValidation:
+          $ref: '#/components/schemas/Boolean'
+        CloudWatchLogsLogGroupArn:
+          $ref: '#/components/schemas/String'
+        CloudWatchLogsRoleArn:
+          $ref: '#/components/schemas/String'
+        KmsKeyId:
+          $ref: '#/components/schemas/String'
+      description: Specifies the settings for each trail.
+    CreateTrailResponse:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        S3BucketName:
+          $ref: '#/components/schemas/String'
+        S3KeyPrefix:
+          $ref: '#/components/schemas/String'
+        SnsTopicName:
+          $ref: '#/components/schemas/String'
+        SnsTopicARN:
+          $ref: '#/components/schemas/String'
+        IncludeGlobalServiceEvents:
+          $ref: '#/components/schemas/Boolean'
+        IsMultiRegionTrail:
+          $ref: '#/components/schemas/Boolean'
+        TrailARN:
+          $ref: '#/components/schemas/String'
+        LogFileValidationEnabled:
+          $ref: '#/components/schemas/Boolean'
+        CloudWatchLogsLogGroupArn:
+          $ref: '#/components/schemas/String'
+        CloudWatchLogsRoleArn:
+          $ref: '#/components/schemas/String'
+        KmsKeyId:
+          $ref: '#/components/schemas/String'
+      description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
+    DataResource:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/String'
+        Values:
+          $ref: '#/components/schemas/DataResourceValues'
+      description: '<p>The Amazon S3 objects that you specify in your event selectors for your trail to log data events. Data events are object-level API operations that access S3 objects, such as <code>GetObject</code>, <code>DeleteObject</code>, and <code>PutObject</code>. You can specify up to 250 S3 buckets and object prefixes for a trail. </p> <p>Example</p> <ol> <li> <p>You create an event selector for a trail and specify an S3 bucket and an empty prefix, such as <code>arn:aws:s3:::bucket-1/</code>.</p> </li> <li> <p>You upload an image file to <code>bucket-1</code>.</p> </li> <li> <p>The <code>PutObject</code> API operation occurs on an object in the S3 bucket that you specified in the event selector. The trail processes and logs the event.</p> </li> <li> <p>You upload another image file to a different S3 bucket named <code>arn:aws:s3:::bucket-2</code>.</p> </li> <li> <p>The event occurs on an object in an S3 bucket that you didn''t specify in the event selector. The trail doesn’t log the event.</p> </li> </ol>'
+    DataResourceValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    DataResources:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataResource'
+    Date:
+      type: string
+      format: date-time
+    DeleteTrailRequest:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+      description: The request that specifies the name of a trail to delete.
+    DeleteTrailResponse:
+      type: object
+      properties: {}
+      description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
+    DescribeTrailsRequest:
+      type: object
+      properties:
+        trailNameList:
+          $ref: '#/components/schemas/TrailNameList'
+        includeShadowTrails:
+          $ref: '#/components/schemas/Boolean'
+      description: Returns information about the trail.
+    DescribeTrailsResponse:
+      type: object
+      properties:
+        trailList:
+          $ref: '#/components/schemas/TrailList'
+      description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
+    Event:
+      type: object
+      properties:
+        EventId:
+          $ref: '#/components/schemas/String'
+        EventName:
+          $ref: '#/components/schemas/String'
+        EventTime:
+          $ref: '#/components/schemas/Date'
+        EventSource:
+          $ref: '#/components/schemas/String'
+        Username:
+          $ref: '#/components/schemas/String'
+        Resources:
+          $ref: '#/components/schemas/ResourceList'
+        CloudTrailEvent:
+          $ref: '#/components/schemas/String'
+      description: Contains information about an event that was returned by a lookup request. The result includes a representation of a CloudTrail event.
+    EventSelector:
+      type: object
+      properties:
+        ReadWriteType:
+          $ref: '#/components/schemas/ReadWriteType'
+        IncludeManagementEvents:
+          $ref: '#/components/schemas/Boolean'
+        DataResources:
+          $ref: '#/components/schemas/DataResources'
+      description: '<p>Use event selectors to specify whether you want your trail to log management and/or data events. When an event occurs in your account, CloudTrail evaluates the event selector for all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn''t match any event selector, the trail doesn''t log the event.</p> <p>You can configure up to five event selectors for a trail.</p>'
+    EventSelectors:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventSelector'
+    EventsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Event'
+    GetEventSelectorsRequest:
+      type: object
+      required:
+        - TrailName
+      properties:
+        TrailName:
+          $ref: '#/components/schemas/String'
+    GetEventSelectorsResponse:
+      type: object
+      properties:
+        TrailARN:
+          $ref: '#/components/schemas/String'
+        EventSelectors:
+          $ref: '#/components/schemas/EventSelectors'
+    GetTrailStatusRequest:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+      description: The name of a trail about which you want the current status.
+    GetTrailStatusResponse:
+      type: object
+      properties:
+        IsLogging:
+          $ref: '#/components/schemas/Boolean'
+        LatestDeliveryError:
+          $ref: '#/components/schemas/String'
+        LatestNotificationError:
+          $ref: '#/components/schemas/String'
+        LatestDeliveryTime:
+          $ref: '#/components/schemas/Date'
+        LatestNotificationTime:
+          $ref: '#/components/schemas/Date'
+        StartLoggingTime:
+          $ref: '#/components/schemas/Date'
+        StopLoggingTime:
+          $ref: '#/components/schemas/Date'
+        LatestCloudWatchLogsDeliveryError:
+          $ref: '#/components/schemas/String'
+        LatestCloudWatchLogsDeliveryTime:
+          $ref: '#/components/schemas/Date'
+        LatestDigestDeliveryTime:
+          $ref: '#/components/schemas/Date'
+        LatestDigestDeliveryError:
+          $ref: '#/components/schemas/String'
+        LatestDeliveryAttemptTime:
+          $ref: '#/components/schemas/String'
+        LatestNotificationAttemptTime:
+          $ref: '#/components/schemas/String'
+        LatestNotificationAttemptSucceeded:
+          $ref: '#/components/schemas/String'
+        LatestDeliveryAttemptSucceeded:
+          $ref: '#/components/schemas/String'
+        TimeLoggingStarted:
+          $ref: '#/components/schemas/String'
+        TimeLoggingStopped:
+          $ref: '#/components/schemas/String'
+      description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
+    InsufficientEncryptionPolicyException:
+      type: object
+      properties: {}
+      description: This exception is thrown when the policy on the S3 bucket or KMS key is not sufficient.
+    InsufficientS3BucketPolicyException:
+      type: object
+      properties: {}
+      description: This exception is thrown when the policy on the S3 bucket is not sufficient.
+    InsufficientSnsTopicPolicyException:
+      type: object
+      properties: {}
+      description: This exception is thrown when the policy on the SNS topic is not sufficient.
+    InvalidCloudWatchLogsLogGroupArnException:
+      type: object
+      properties: {}
+      description: This exception is thrown when the provided CloudWatch log group is not valid.
+    InvalidCloudWatchLogsRoleArnException:
+      type: object
+      properties: {}
+      description: This exception is thrown when the provided role is not valid.
+    InvalidEventSelectorsException:
+      type: object
+      properties: {}
+      description: '<p>This exception is thrown when the <code>PutEventSelectors</code> operation is called with an invalid number of event selectors, data resources, or an invalid value for a parameter:</p> <ul> <li> <p>Specify a valid number of event selectors (1 to 5) for a trail.</p> </li> <li> <p>Specify a valid number of data resources (1 to 250) for an event selector.</p> </li> <li> <p>Specify a valid value for a parameter. For example, specifying the <code>ReadWriteType</code> parameter with a value of <code>read-only</code> is invalid.</p> </li> </ul>'
+    InvalidHomeRegionException:
+      type: object
+      properties: {}
+      description: This exception is thrown when an operation is called on a trail from a region other than the region in which the trail was created.
+    InvalidKmsKeyIdException:
+      type: object
+      properties: {}
+      description: This exception is thrown when the KMS key ARN is invalid.
+    InvalidLookupAttributesException:
+      type: object
+      properties: {}
+      description: Occurs when an invalid lookup attribute is specified.
+    InvalidMaxResultsException:
+      type: object
+      properties: {}
+      description: This exception is thrown if the limit specified is invalid.
+    InvalidNextTokenException:
+      type: object
+      properties: {}
+      description: Invalid token or token that was previously used in a request with different parameters. This exception is thrown if the token is invalid.
+    InvalidParameterCombinationException:
+      type: object
+      properties: {}
+      description: This exception is thrown when the combination of parameters provided is not valid.
+    InvalidS3BucketNameException:
+      type: object
+      properties: {}
+      description: This exception is thrown when the provided S3 bucket name is not valid.
+    InvalidS3PrefixException:
+      type: object
+      properties: {}
+      description: This exception is thrown when the provided S3 prefix is not valid.
+    InvalidSnsTopicNameException:
+      type: object
+      properties: {}
+      description: This exception is thrown when the provided SNS topic name is not valid.
+    InvalidTagParameterException:
+      type: object
+      properties: {}
+      description: 'This exception is thrown when the key or value specified for the tag does not match the regular expression <code>^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$</code>.'
+    InvalidTimeRangeException:
+      type: object
+      properties: {}
+      description: Occurs if the timestamp values are invalid. Either the start time occurs after the end time or the time range is outside the range of possible values.
+    InvalidTokenException:
+      type: object
+      properties: {}
+      description: Reserved for future use.
+    InvalidTrailNameException:
+      type: object
+      properties: {}
+      description: '<p>This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:</p> <ul> <li> <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p> </li> <li> <p>Start with a letter or number, and end with a letter or number</p> </li> <li> <p>Be between 3 and 128 characters</p> </li> <li> <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code> and <code>my--namespace</code> are invalid.</p> </li> <li> <p>Not be in IP address format (for example, 192.168.5.4)</p> </li> </ul>'
+    KmsException:
+      type: object
+      properties: {}
+      description: This exception is thrown when there is an issue with the specified KMS key and the trail can’t be updated.
+    KmsKeyDisabledException:
+      type: object
+      properties: {}
+      description: This exception is deprecated.
+    KmsKeyNotFoundException:
+      type: object
+      properties: {}
+      description: 'This exception is thrown when the KMS key does not exist, or when the S3 bucket and the KMS key are not in the same region.'
+    ListPublicKeysRequest:
+      type: object
+      properties:
+        StartTime:
+          $ref: '#/components/schemas/Date'
+        EndTime:
+          $ref: '#/components/schemas/Date'
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: Requests the public keys for a specified time range.
+    ListPublicKeysResponse:
+      type: object
+      properties:
+        PublicKeyList:
+          $ref: '#/components/schemas/PublicKeyList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
+    ListTagsRequest:
+      type: object
+      required:
+        - ResourceIdList
+      properties:
+        ResourceIdList:
+          $ref: '#/components/schemas/ResourceIdList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: Specifies a list of trail tags to return.
+    ListTagsResponse:
+      type: object
+      properties:
+        ResourceTagList:
+          $ref: '#/components/schemas/ResourceTagList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
+    LookupAttribute:
+      type: object
+      required:
+        - AttributeKey
+        - AttributeValue
+      properties:
+        AttributeKey:
+          $ref: '#/components/schemas/LookupAttributeKey'
+        AttributeValue:
+          $ref: '#/components/schemas/String'
+      description: Specifies an attribute and value that filter the events returned.
+    LookupAttributeKey:
+      type: string
+      enum:
+        - EventId
+        - EventName
+        - Username
+        - ResourceType
+        - ResourceName
+        - EventSource
+    LookupAttributesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LookupAttribute'
+    LookupEventsRequest:
+      type: object
+      properties:
+        LookupAttributes:
+          $ref: '#/components/schemas/LookupAttributesList'
+        StartTime:
+          $ref: '#/components/schemas/Date'
+        EndTime:
+          $ref: '#/components/schemas/Date'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Contains a request for LookupEvents.
+    LookupEventsResponse:
+      type: object
+      properties:
+        Events:
+          $ref: '#/components/schemas/EventsList'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Contains a response to a LookupEvents action.
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 50
+    MaximumNumberOfTrailsExceededException:
+      type: object
+      properties: {}
+      description: This exception is thrown when the maximum number of trails is reached.
+    NextToken:
+      type: string
+    OperationNotPermittedException:
+      type: object
+      properties: {}
+      description: This exception is thrown when the requested operation is not permitted.
+    PublicKey:
+      type: object
+      properties:
+        Value:
+          $ref: '#/components/schemas/ByteBuffer'
+        ValidityStartTime:
+          $ref: '#/components/schemas/Date'
+        ValidityEndTime:
+          $ref: '#/components/schemas/Date'
+        Fingerprint:
+          $ref: '#/components/schemas/String'
+      description: Contains information about a returned public key.
+    PublicKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PublicKey'
+    PutEventSelectorsRequest:
+      type: object
+      required:
+        - TrailName
+        - EventSelectors
+      properties:
+        TrailName:
+          $ref: '#/components/schemas/String'
+        EventSelectors:
+          $ref: '#/components/schemas/EventSelectors'
+    PutEventSelectorsResponse:
+      type: object
+      properties:
+        TrailARN:
+          $ref: '#/components/schemas/String'
+        EventSelectors:
+          $ref: '#/components/schemas/EventSelectors'
+    ReadWriteType:
+      type: string
+      enum:
+        - ReadOnly
+        - WriteOnly
+        - All
+    RemoveTagsRequest:
+      type: object
+      required:
+        - ResourceId
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/String'
+        TagsList:
+          $ref: '#/components/schemas/TagsList'
+      description: Specifies the tags to remove from a trail.
+    RemoveTagsResponse:
+      type: object
+      properties: {}
+      description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
+    Resource:
+      type: object
+      properties:
+        ResourceType:
+          $ref: '#/components/schemas/String'
+        ResourceName:
+          $ref: '#/components/schemas/String'
+      description: Specifies the type and name of a resource referenced by an event.
+    ResourceIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ResourceList:
+      type: array
+      description: A list of resources referenced by the event returned.
+      items:
+        $ref: '#/components/schemas/Resource'
+    ResourceNotFoundException:
+      type: object
+      properties: {}
+      description: This exception is thrown when the specified resource is not found.
+    ResourceTag:
+      type: object
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/String'
+        TagsList:
+          $ref: '#/components/schemas/TagsList'
+      description: A resource tag.
+    ResourceTagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceTag'
+    ResourceTypeNotSupportedException:
+      type: object
+      properties: {}
+      description: This exception is thrown when the specified resource type is not supported by CloudTrail.
+    S3BucketDoesNotExistException:
+      type: object
+      properties: {}
+      description: This exception is thrown when the specified S3 bucket does not exist.
+    StartLoggingRequest:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+      description: The request to CloudTrail to start logging AWS API calls for an account.
+    StartLoggingResponse:
+      type: object
+      properties: {}
+      description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
+    StopLoggingRequest:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+      description: Passes the request to CloudTrail to stop logging AWS API calls for the specified account.
+    StopLoggingResponse:
+      type: object
+      properties: {}
+      description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
+    String:
+      type: string
+    Tag:
+      type: object
+      required:
+        - Key
+      properties:
+        Key:
+          $ref: '#/components/schemas/String'
+        Value:
+          $ref: '#/components/schemas/String'
+      description: A custom key-value pair associated with a resource such as a CloudTrail trail.
+    TagsLimitExceededException:
+      type: object
+      properties: {}
+      description: 'The number of tags per trail has exceeded the permitted amount. Currently, the limit is 50.'
+    TagsList:
+      type: array
+      description: A list of tags.
+      items:
+        $ref: '#/components/schemas/Tag'
+    Trail:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        S3BucketName:
+          $ref: '#/components/schemas/String'
+        S3KeyPrefix:
+          $ref: '#/components/schemas/String'
+        SnsTopicName:
+          $ref: '#/components/schemas/String'
+        SnsTopicARN:
+          $ref: '#/components/schemas/String'
+        IncludeGlobalServiceEvents:
+          $ref: '#/components/schemas/Boolean'
+        IsMultiRegionTrail:
+          $ref: '#/components/schemas/Boolean'
+        HomeRegion:
+          $ref: '#/components/schemas/String'
+        TrailARN:
+          $ref: '#/components/schemas/String'
+        LogFileValidationEnabled:
+          $ref: '#/components/schemas/Boolean'
+        CloudWatchLogsLogGroupArn:
+          $ref: '#/components/schemas/String'
+        CloudWatchLogsRoleArn:
+          $ref: '#/components/schemas/String'
+        KmsKeyId:
+          $ref: '#/components/schemas/String'
+        HasCustomEventSelectors:
+          $ref: '#/components/schemas/Boolean'
+      description: The settings for a trail.
+    TrailAlreadyExistsException:
+      type: object
+      properties: {}
+      description: This exception is thrown when the specified trail already exists.
+    TrailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Trail'
+    TrailNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    TrailNotFoundException:
+      type: object
+      properties: {}
+      description: This exception is thrown when the trail with the given name is not found.
+    TrailNotProvidedException:
+      type: object
+      properties: {}
+      description: This exception is deprecated.
+    UnsupportedOperationException:
+      type: object
+      properties: {}
+      description: This exception is thrown when the requested operation is not supported.
+    UpdateTrailRequest:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        S3BucketName:
+          $ref: '#/components/schemas/String'
+        S3KeyPrefix:
+          $ref: '#/components/schemas/String'
+        SnsTopicName:
+          $ref: '#/components/schemas/String'
+        IncludeGlobalServiceEvents:
+          $ref: '#/components/schemas/Boolean'
+        IsMultiRegionTrail:
+          $ref: '#/components/schemas/Boolean'
+        EnableLogFileValidation:
+          $ref: '#/components/schemas/Boolean'
+        CloudWatchLogsLogGroupArn:
+          $ref: '#/components/schemas/String'
+        CloudWatchLogsRoleArn:
+          $ref: '#/components/schemas/String'
+        KmsKeyId:
+          $ref: '#/components/schemas/String'
+      description: Specifies settings to update for the trail.
+    UpdateTrailResponse:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        S3BucketName:
+          $ref: '#/components/schemas/String'
+        S3KeyPrefix:
+          $ref: '#/components/schemas/String'
+        SnsTopicName:
+          $ref: '#/components/schemas/String'
+        SnsTopicARN:
+          $ref: '#/components/schemas/String'
+        IncludeGlobalServiceEvents:
+          $ref: '#/components/schemas/Boolean'
+        IsMultiRegionTrail:
+          $ref: '#/components/schemas/Boolean'
+        TrailARN:
+          $ref: '#/components/schemas/String'
+        LogFileValidationEnabled:
+          $ref: '#/components/schemas/Boolean'
+        CloudWatchLogsLogGroupArn:
+          $ref: '#/components/schemas/String'
+        CloudWatchLogsRoleArn:
+          $ref: '#/components/schemas/String'
+        KmsKeyId:
+          $ref: '#/components/schemas/String'
+      description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

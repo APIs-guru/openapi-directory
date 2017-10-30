@@ -1,0 +1,4262 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://codedeploy.amazonaws.com/'
+info:
+  version: '2014-10-06'
+  x-release: v4
+  title: AWS CodeDeploy
+  description: '<fullname>AWS CodeDeploy</fullname> <p>AWS CodeDeploy is a deployment service that automates application deployments to Amazon EC2 instances or on-premises instances running in your own facility.</p> <p>You can deploy a nearly unlimited variety of application content, such as code, web and configuration files, executables, packages, scripts, multimedia files, and so on. AWS CodeDeploy can deploy application content stored in Amazon S3 buckets, GitHub repositories, or Bitbucket repositories. You do not need to make changes to your existing code before you can use AWS CodeDeploy.</p> <p>AWS CodeDeploy makes it easier for you to rapidly release new features, helps you avoid downtime during application deployment, and handles the complexity of updating your applications, without many of the risks associated with error-prone manual deployments.</p> <p> <b>AWS CodeDeploy Components</b> </p> <p>Use the information in this guide to help you work with the following AWS CodeDeploy components:</p> <ul> <li> <p> <b>Application</b>: A name that uniquely identifies the application you want to deploy. AWS CodeDeploy uses this name, which functions as a container, to ensure the correct combination of revision, deployment configuration, and deployment group are referenced during a deployment.</p> </li> <li> <p> <b>Deployment group</b>: A set of individual instances. A deployment group contains individually tagged instances, Amazon EC2 instances in Auto Scaling groups, or both. </p> </li> <li> <p> <b>Deployment configuration</b>: A set of deployment rules and deployment success and failure conditions used by AWS CodeDeploy during a deployment.</p> </li> <li> <p> <b>Deployment</b>: The process, and the components involved in the process, of installing content on one or more instances. </p> </li> <li> <p> <b>Application revisions</b>: An archive file containing source content—source code, web pages, executable files, and deployment scripts—along with an application specification file (AppSpec file). Revisions are stored in Amazon S3 buckets or GitHub repositories. For Amazon S3, a revision is uniquely identified by its Amazon S3 object key and its ETag, version, or both. For GitHub, a revision is uniquely identified by its commit ID.</p> </li> </ul> <p>This guide also contains information to help you get details about the instances in your deployments and to make on-premises instances available for AWS CodeDeploy deployments.</p> <p> <b>AWS CodeDeploy Information Resources</b> </p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/codedeploy/latest/userguide">AWS CodeDeploy User Guide</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/codedeploy/latest/APIReference/">AWS CodeDeploy API Reference Guide</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/cli/latest/reference/deploy/index.html">AWS CLI Reference for AWS CodeDeploy</a> </p> </li> <li> <p> <a href="https://forums.aws.amazon.com/forum.jspa?forumID=179">AWS CodeDeploy Developer Forum</a> </p> </li> </ul>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: codedeploy
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/codedeploy-2014-10-06.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/codedeploy/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AddTagsToOnPremisesInstances
+      description: Adds tags to on-premises instances.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InstanceNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceNameRequiredException'
+        '481':
+          description: TagRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagRequiredException'
+        '482':
+          description: InvalidTagException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTagException'
+        '483':
+          description: TagLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagLimitExceededException'
+        '484':
+          description: InstanceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceLimitExceededException'
+        '485':
+          description: InstanceNotRegisteredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceNotRegisteredException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddTagsToOnPremisesInstancesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#BatchGetApplicationRevisions':
+    post:
+      operationId: BatchGetApplicationRevisions
+      description: Gets information about one or more application revisions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetApplicationRevisionsOutput'
+        '480':
+          description: ApplicationDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDoesNotExistException'
+        '481':
+          description: ApplicationNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNameRequiredException'
+        '482':
+          description: InvalidApplicationNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationNameException'
+        '483':
+          description: RevisionRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevisionRequiredException'
+        '484':
+          description: InvalidRevisionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRevisionException'
+        '485':
+          description: BatchLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchLimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetApplicationRevisionsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#BatchGetApplications':
+    post:
+      operationId: BatchGetApplications
+      description: Gets information about one or more applications.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetApplicationsOutput'
+        '480':
+          description: ApplicationNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNameRequiredException'
+        '481':
+          description: InvalidApplicationNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationNameException'
+        '482':
+          description: ApplicationDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDoesNotExistException'
+        '483':
+          description: BatchLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchLimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetApplicationsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#BatchGetDeploymentGroups':
+    post:
+      operationId: BatchGetDeploymentGroups
+      description: Gets information about one or more deployment groups.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetDeploymentGroupsOutput'
+        '480':
+          description: ApplicationNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNameRequiredException'
+        '481':
+          description: InvalidApplicationNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationNameException'
+        '482':
+          description: ApplicationDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDoesNotExistException'
+        '483':
+          description: DeploymentGroupNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGroupNameRequiredException'
+        '484':
+          description: InvalidDeploymentGroupNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentGroupNameException'
+        '485':
+          description: BatchLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchLimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetDeploymentGroupsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#BatchGetDeploymentInstances':
+    post:
+      operationId: BatchGetDeploymentInstances
+      description: Gets information about one or more instance that are part of a deployment group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetDeploymentInstancesOutput'
+        '480':
+          description: DeploymentIdRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentIdRequiredException'
+        '481':
+          description: DeploymentDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentDoesNotExistException'
+        '482':
+          description: InstanceIdRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceIdRequiredException'
+        '483':
+          description: InvalidDeploymentIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentIdException'
+        '484':
+          description: InvalidInstanceNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInstanceNameException'
+        '485':
+          description: BatchLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchLimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetDeploymentInstancesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#BatchGetDeployments':
+    post:
+      operationId: BatchGetDeployments
+      description: Gets information about one or more deployments.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetDeploymentsOutput'
+        '480':
+          description: DeploymentIdRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentIdRequiredException'
+        '481':
+          description: InvalidDeploymentIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentIdException'
+        '482':
+          description: BatchLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchLimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetDeploymentsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#BatchGetOnPremisesInstances':
+    post:
+      operationId: BatchGetOnPremisesInstances
+      description: Gets information about one or more on-premises instances.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetOnPremisesInstancesOutput'
+        '480':
+          description: InstanceNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceNameRequiredException'
+        '481':
+          description: InvalidInstanceNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInstanceNameException'
+        '482':
+          description: BatchLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchLimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetOnPremisesInstancesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ContinueDeployment':
+    post:
+      operationId: ContinueDeployment
+      description: 'For a blue/green deployment, starts the process of rerouting traffic from instances in the original environment to instances in the replacement environment without waiting for a specified wait time to elapse. (Traffic rerouting, which is achieved by registering instances in the replacement environment with the load balancer, can start as soon as all instances have a status of Ready.) '
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: DeploymentIdRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentIdRequiredException'
+        '481':
+          description: DeploymentDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentDoesNotExistException'
+        '482':
+          description: DeploymentAlreadyCompletedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentAlreadyCompletedException'
+        '483':
+          description: InvalidDeploymentIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentIdException'
+        '484':
+          description: DeploymentIsNotInReadyStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentIsNotInReadyStateException'
+        '485':
+          description: UnsupportedActionForDeploymentTypeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedActionForDeploymentTypeException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContinueDeploymentInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateApplication':
+    post:
+      operationId: CreateApplication
+      description: Creates an application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateApplicationOutput'
+        '480':
+          description: ApplicationNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNameRequiredException'
+        '481':
+          description: InvalidApplicationNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationNameException'
+        '482':
+          description: ApplicationAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationAlreadyExistsException'
+        '483':
+          description: ApplicationLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationLimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApplicationInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateDeployment':
+    post:
+      operationId: CreateDeployment
+      description: Deploys an application revision through the specified deployment group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDeploymentOutput'
+        '480':
+          description: ApplicationNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNameRequiredException'
+        '481':
+          description: InvalidApplicationNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationNameException'
+        '482':
+          description: ApplicationDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDoesNotExistException'
+        '483':
+          description: DeploymentGroupNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGroupNameRequiredException'
+        '484':
+          description: InvalidDeploymentGroupNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentGroupNameException'
+        '485':
+          description: DeploymentGroupDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGroupDoesNotExistException'
+        '486':
+          description: RevisionRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevisionRequiredException'
+        '487':
+          description: RevisionDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevisionDoesNotExistException'
+        '488':
+          description: InvalidRevisionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRevisionException'
+        '489':
+          description: InvalidDeploymentConfigNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentConfigNameException'
+        '490':
+          description: DeploymentConfigDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentConfigDoesNotExistException'
+        '491':
+          description: DescriptionTooLongException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescriptionTooLongException'
+        '492':
+          description: DeploymentLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentLimitExceededException'
+        '493':
+          description: InvalidTargetInstancesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTargetInstancesException'
+        '494':
+          description: InvalidAutoRollbackConfigException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAutoRollbackConfigException'
+        '495':
+          description: InvalidLoadBalancerInfoException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidLoadBalancerInfoException'
+        '496':
+          description: InvalidFileExistsBehaviorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFileExistsBehaviorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDeploymentInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateDeploymentConfig':
+    post:
+      operationId: CreateDeploymentConfig
+      description: Creates a deployment configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDeploymentConfigOutput'
+        '480':
+          description: InvalidDeploymentConfigNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentConfigNameException'
+        '481':
+          description: DeploymentConfigNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentConfigNameRequiredException'
+        '482':
+          description: DeploymentConfigAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentConfigAlreadyExistsException'
+        '483':
+          description: InvalidMinimumHealthyHostValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidMinimumHealthyHostValueException'
+        '484':
+          description: DeploymentConfigLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentConfigLimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDeploymentConfigInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateDeploymentGroup':
+    post:
+      operationId: CreateDeploymentGroup
+      description: Creates a deployment group to which application revisions will be deployed.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDeploymentGroupOutput'
+        '480':
+          description: ApplicationNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNameRequiredException'
+        '481':
+          description: InvalidApplicationNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationNameException'
+        '482':
+          description: ApplicationDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDoesNotExistException'
+        '483':
+          description: DeploymentGroupNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGroupNameRequiredException'
+        '484':
+          description: InvalidDeploymentGroupNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentGroupNameException'
+        '485':
+          description: DeploymentGroupAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGroupAlreadyExistsException'
+        '486':
+          description: InvalidEC2TagException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidEC2TagException'
+        '487':
+          description: InvalidTagException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTagException'
+        '488':
+          description: InvalidAutoScalingGroupException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAutoScalingGroupException'
+        '489':
+          description: InvalidDeploymentConfigNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentConfigNameException'
+        '490':
+          description: DeploymentConfigDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentConfigDoesNotExistException'
+        '491':
+          description: RoleRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleRequiredException'
+        '492':
+          description: InvalidRoleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRoleException'
+        '493':
+          description: DeploymentGroupLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGroupLimitExceededException'
+        '494':
+          description: LifecycleHookLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LifecycleHookLimitExceededException'
+        '495':
+          description: InvalidTriggerConfigException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTriggerConfigException'
+        '496':
+          description: TriggerTargetsLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerTargetsLimitExceededException'
+        '497':
+          description: InvalidAlarmConfigException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAlarmConfigException'
+        '498':
+          description: AlarmsLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlarmsLimitExceededException'
+        '499':
+          description: InvalidAutoRollbackConfigException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAutoRollbackConfigException'
+        '500':
+          description: InvalidLoadBalancerInfoException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidLoadBalancerInfoException'
+        '501':
+          description: InvalidDeploymentStyleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentStyleException'
+        '502':
+          description: InvalidBlueGreenDeploymentConfigurationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBlueGreenDeploymentConfigurationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDeploymentGroupInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteApplication':
+    post:
+      operationId: DeleteApplication
+      description: Deletes an application.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ApplicationNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNameRequiredException'
+        '481':
+          description: InvalidApplicationNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationNameException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteApplicationInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDeploymentConfig':
+    post:
+      operationId: DeleteDeploymentConfig
+      description: <p>Deletes a deployment configuration.</p> <note> <p>A deployment configuration cannot be deleted if it is currently in use. Predefined configurations cannot be deleted.</p> </note>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidDeploymentConfigNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentConfigNameException'
+        '481':
+          description: DeploymentConfigNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentConfigNameRequiredException'
+        '482':
+          description: DeploymentConfigInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentConfigInUseException'
+        '483':
+          description: InvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOperationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDeploymentConfigInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDeploymentGroup':
+    post:
+      operationId: DeleteDeploymentGroup
+      description: Deletes a deployment group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDeploymentGroupOutput'
+        '480':
+          description: ApplicationNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNameRequiredException'
+        '481':
+          description: InvalidApplicationNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationNameException'
+        '482':
+          description: DeploymentGroupNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGroupNameRequiredException'
+        '483':
+          description: InvalidDeploymentGroupNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentGroupNameException'
+        '484':
+          description: InvalidRoleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRoleException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDeploymentGroupInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeregisterOnPremisesInstance':
+    post:
+      operationId: DeregisterOnPremisesInstance
+      description: Deregisters an on-premises instance.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InstanceNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceNameRequiredException'
+        '481':
+          description: InvalidInstanceNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInstanceNameException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeregisterOnPremisesInstanceInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetApplication':
+    post:
+      operationId: GetApplication
+      description: Gets information about an application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetApplicationOutput'
+        '480':
+          description: ApplicationNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNameRequiredException'
+        '481':
+          description: InvalidApplicationNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationNameException'
+        '482':
+          description: ApplicationDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDoesNotExistException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetApplicationInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetApplicationRevision':
+    post:
+      operationId: GetApplicationRevision
+      description: Gets information about an application revision.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetApplicationRevisionOutput'
+        '480':
+          description: ApplicationDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDoesNotExistException'
+        '481':
+          description: ApplicationNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNameRequiredException'
+        '482':
+          description: InvalidApplicationNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationNameException'
+        '483':
+          description: RevisionDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevisionDoesNotExistException'
+        '484':
+          description: RevisionRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevisionRequiredException'
+        '485':
+          description: InvalidRevisionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRevisionException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetApplicationRevisionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetDeployment':
+    post:
+      operationId: GetDeployment
+      description: Gets information about a deployment.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDeploymentOutput'
+        '480':
+          description: DeploymentIdRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentIdRequiredException'
+        '481':
+          description: InvalidDeploymentIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentIdException'
+        '482':
+          description: DeploymentDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentDoesNotExistException'
+      x-waiters:
+        - delay: 15
+          operation: GetDeployment
+          maxAttempts: 120
+          acceptors:
+            - expected: Succeeded
+              matcher: path
+              state: success
+              argument: deploymentInfo.status
+            - expected: Failed
+              matcher: path
+              state: failure
+              argument: deploymentInfo.status
+            - expected: Stopped
+              matcher: path
+              state: failure
+              argument: deploymentInfo.status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDeploymentInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetDeploymentConfig':
+    post:
+      operationId: GetDeploymentConfig
+      description: Gets information about a deployment configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDeploymentConfigOutput'
+        '480':
+          description: InvalidDeploymentConfigNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentConfigNameException'
+        '481':
+          description: DeploymentConfigNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentConfigNameRequiredException'
+        '482':
+          description: DeploymentConfigDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentConfigDoesNotExistException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDeploymentConfigInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetDeploymentGroup':
+    post:
+      operationId: GetDeploymentGroup
+      description: Gets information about a deployment group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDeploymentGroupOutput'
+        '480':
+          description: ApplicationNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNameRequiredException'
+        '481':
+          description: InvalidApplicationNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationNameException'
+        '482':
+          description: ApplicationDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDoesNotExistException'
+        '483':
+          description: DeploymentGroupNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGroupNameRequiredException'
+        '484':
+          description: InvalidDeploymentGroupNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentGroupNameException'
+        '485':
+          description: DeploymentGroupDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGroupDoesNotExistException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDeploymentGroupInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetDeploymentInstance':
+    post:
+      operationId: GetDeploymentInstance
+      description: Gets information about an instance as part of a deployment.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDeploymentInstanceOutput'
+        '480':
+          description: DeploymentIdRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentIdRequiredException'
+        '481':
+          description: DeploymentDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentDoesNotExistException'
+        '482':
+          description: InstanceIdRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceIdRequiredException'
+        '483':
+          description: InvalidDeploymentIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentIdException'
+        '484':
+          description: InstanceDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceDoesNotExistException'
+        '485':
+          description: InvalidInstanceNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInstanceNameException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDeploymentInstanceInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetOnPremisesInstance':
+    post:
+      operationId: GetOnPremisesInstance
+      description: Gets information about an on-premises instance.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOnPremisesInstanceOutput'
+        '480':
+          description: InstanceNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceNameRequiredException'
+        '481':
+          description: InstanceNotRegisteredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceNotRegisteredException'
+        '482':
+          description: InvalidInstanceNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInstanceNameException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetOnPremisesInstanceInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListApplicationRevisions':
+    post:
+      operationId: ListApplicationRevisions
+      description: Lists information about revisions for an application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApplicationRevisionsOutput'
+        '480':
+          description: ApplicationDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDoesNotExistException'
+        '481':
+          description: ApplicationNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNameRequiredException'
+        '482':
+          description: InvalidApplicationNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationNameException'
+        '483':
+          description: InvalidSortByException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidSortByException'
+        '484':
+          description: InvalidSortOrderException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidSortOrderException'
+        '485':
+          description: InvalidBucketNameFilterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBucketNameFilterException'
+        '486':
+          description: InvalidKeyPrefixFilterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidKeyPrefixFilterException'
+        '487':
+          description: BucketNameFilterRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BucketNameFilterRequiredException'
+        '488':
+          description: InvalidDeployedStateFilterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeployedStateFilterException'
+        '489':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListApplicationRevisionsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListApplications':
+    post:
+      operationId: ListApplications
+      description: Lists the applications registered with the applicable IAM user or AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApplicationsOutput'
+        '480':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListApplicationsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListDeploymentConfigs':
+    post:
+      operationId: ListDeploymentConfigs
+      description: Lists the deployment configurations with the applicable IAM user or AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDeploymentConfigsOutput'
+        '480':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDeploymentConfigsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListDeploymentGroups':
+    post:
+      operationId: ListDeploymentGroups
+      description: Lists the deployment groups for an application registered with the applicable IAM user or AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDeploymentGroupsOutput'
+        '480':
+          description: ApplicationNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNameRequiredException'
+        '481':
+          description: InvalidApplicationNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationNameException'
+        '482':
+          description: ApplicationDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDoesNotExistException'
+        '483':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDeploymentGroupsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListDeploymentInstances':
+    post:
+      operationId: ListDeploymentInstances
+      description: Lists the instance for a deployment associated with the applicable IAM user or AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDeploymentInstancesOutput'
+        '480':
+          description: DeploymentIdRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentIdRequiredException'
+        '481':
+          description: DeploymentDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentDoesNotExistException'
+        '482':
+          description: DeploymentNotStartedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentNotStartedException'
+        '483':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '484':
+          description: InvalidDeploymentIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentIdException'
+        '485':
+          description: InvalidInstanceStatusException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInstanceStatusException'
+        '486':
+          description: InvalidInstanceTypeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInstanceTypeException'
+        '487':
+          description: InvalidDeploymentInstanceTypeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentInstanceTypeException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDeploymentInstancesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListDeployments':
+    post:
+      operationId: ListDeployments
+      description: Lists the deployments in a deployment group for an application registered with the applicable IAM user or AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDeploymentsOutput'
+        '480':
+          description: ApplicationNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNameRequiredException'
+        '481':
+          description: InvalidApplicationNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationNameException'
+        '482':
+          description: ApplicationDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDoesNotExistException'
+        '483':
+          description: InvalidDeploymentGroupNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentGroupNameException'
+        '484':
+          description: DeploymentGroupDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGroupDoesNotExistException'
+        '485':
+          description: DeploymentGroupNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGroupNameRequiredException'
+        '486':
+          description: InvalidTimeRangeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTimeRangeException'
+        '487':
+          description: InvalidDeploymentStatusException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentStatusException'
+        '488':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDeploymentsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListGitHubAccountTokenNames':
+    post:
+      operationId: ListGitHubAccountTokenNames
+      description: Lists the names of stored connections to GitHub accounts.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListGitHubAccountTokenNamesOutput'
+        '480':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '481':
+          description: ResourceValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListGitHubAccountTokenNamesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListOnPremisesInstances':
+    post:
+      operationId: ListOnPremisesInstances
+      description: '<p>Gets a list of names for one or more on-premises instances.</p> <p>Unless otherwise specified, both registered and deregistered on-premises instance names will be listed. To list only registered or deregistered on-premises instance names, use the registration status parameter.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOnPremisesInstancesOutput'
+        '480':
+          description: InvalidRegistrationStatusException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRegistrationStatusException'
+        '481':
+          description: InvalidTagFilterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTagFilterException'
+        '482':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListOnPremisesInstancesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RegisterApplicationRevision':
+    post:
+      operationId: RegisterApplicationRevision
+      description: Registers with AWS CodeDeploy a revision for the specified application.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ApplicationDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDoesNotExistException'
+        '481':
+          description: ApplicationNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNameRequiredException'
+        '482':
+          description: InvalidApplicationNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationNameException'
+        '483':
+          description: DescriptionTooLongException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescriptionTooLongException'
+        '484':
+          description: RevisionRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevisionRequiredException'
+        '485':
+          description: InvalidRevisionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRevisionException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterApplicationRevisionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RegisterOnPremisesInstance':
+    post:
+      operationId: RegisterOnPremisesInstance
+      description: <p>Registers an on-premises instance.</p> <note> <p>Only one IAM ARN (an IAM session ARN or IAM user ARN) is supported in the request. You cannot use both.</p> </note>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InstanceNameAlreadyRegisteredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceNameAlreadyRegisteredException'
+        '481':
+          description: IamArnRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IamArnRequiredException'
+        '482':
+          description: IamSessionArnAlreadyRegisteredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IamSessionArnAlreadyRegisteredException'
+        '483':
+          description: IamUserArnAlreadyRegisteredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IamUserArnAlreadyRegisteredException'
+        '484':
+          description: InstanceNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceNameRequiredException'
+        '485':
+          description: IamUserArnRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IamUserArnRequiredException'
+        '486':
+          description: InvalidInstanceNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInstanceNameException'
+        '487':
+          description: InvalidIamSessionArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidIamSessionArnException'
+        '488':
+          description: InvalidIamUserArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidIamUserArnException'
+        '489':
+          description: MultipleIamArnsProvidedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MultipleIamArnsProvidedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterOnPremisesInstanceInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RemoveTagsFromOnPremisesInstances':
+    post:
+      operationId: RemoveTagsFromOnPremisesInstances
+      description: Removes one or more tags from one or more on-premises instances.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InstanceNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceNameRequiredException'
+        '481':
+          description: TagRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagRequiredException'
+        '482':
+          description: InvalidTagException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTagException'
+        '483':
+          description: TagLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagLimitExceededException'
+        '484':
+          description: InstanceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceLimitExceededException'
+        '485':
+          description: InstanceNotRegisteredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceNotRegisteredException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveTagsFromOnPremisesInstancesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SkipWaitTimeForInstanceTermination':
+    post:
+      operationId: SkipWaitTimeForInstanceTermination
+      description: 'In a blue/green deployment, overrides any specified wait time and starts terminating instances immediately after the traffic routing is completed.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: DeploymentIdRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentIdRequiredException'
+        '481':
+          description: DeploymentDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentDoesNotExistException'
+        '482':
+          description: DeploymentAlreadyCompletedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentAlreadyCompletedException'
+        '483':
+          description: InvalidDeploymentIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentIdException'
+        '484':
+          description: DeploymentNotStartedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentNotStartedException'
+        '485':
+          description: UnsupportedActionForDeploymentTypeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedActionForDeploymentTypeException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SkipWaitTimeForInstanceTerminationInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StopDeployment':
+    post:
+      operationId: StopDeployment
+      description: Attempts to stop an ongoing deployment.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopDeploymentOutput'
+        '480':
+          description: DeploymentIdRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentIdRequiredException'
+        '481':
+          description: DeploymentDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentDoesNotExistException'
+        '482':
+          description: DeploymentAlreadyCompletedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentAlreadyCompletedException'
+        '483':
+          description: InvalidDeploymentIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentIdException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopDeploymentInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateApplication':
+    post:
+      operationId: UpdateApplication
+      description: Changes the name of an application.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ApplicationNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNameRequiredException'
+        '481':
+          description: InvalidApplicationNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationNameException'
+        '482':
+          description: ApplicationAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationAlreadyExistsException'
+        '483':
+          description: ApplicationDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDoesNotExistException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApplicationInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateDeploymentGroup':
+    post:
+      operationId: UpdateDeploymentGroup
+      description: Changes information about a deployment group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDeploymentGroupOutput'
+        '480':
+          description: ApplicationNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNameRequiredException'
+        '481':
+          description: InvalidApplicationNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationNameException'
+        '482':
+          description: ApplicationDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDoesNotExistException'
+        '483':
+          description: InvalidDeploymentGroupNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentGroupNameException'
+        '484':
+          description: DeploymentGroupAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGroupAlreadyExistsException'
+        '485':
+          description: DeploymentGroupNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGroupNameRequiredException'
+        '486':
+          description: DeploymentGroupDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGroupDoesNotExistException'
+        '487':
+          description: InvalidEC2TagException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidEC2TagException'
+        '488':
+          description: InvalidTagException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTagException'
+        '489':
+          description: InvalidAutoScalingGroupException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAutoScalingGroupException'
+        '490':
+          description: InvalidDeploymentConfigNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentConfigNameException'
+        '491':
+          description: DeploymentConfigDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentConfigDoesNotExistException'
+        '492':
+          description: InvalidRoleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRoleException'
+        '493':
+          description: LifecycleHookLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LifecycleHookLimitExceededException'
+        '494':
+          description: InvalidTriggerConfigException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTriggerConfigException'
+        '495':
+          description: TriggerTargetsLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerTargetsLimitExceededException'
+        '496':
+          description: InvalidAlarmConfigException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAlarmConfigException'
+        '497':
+          description: AlarmsLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlarmsLimitExceededException'
+        '498':
+          description: InvalidAutoRollbackConfigException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAutoRollbackConfigException'
+        '499':
+          description: InvalidLoadBalancerInfoException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidLoadBalancerInfoException'
+        '500':
+          description: InvalidDeploymentStyleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDeploymentStyleException'
+        '501':
+          description: InvalidBlueGreenDeploymentConfigurationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBlueGreenDeploymentConfigurationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDeploymentGroupInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AddTagsToOnPremisesInstancesInput:
+      type: object
+      required:
+        - tags
+        - instanceNames
+      properties:
+        tags:
+          $ref: '#/components/schemas/TagList'
+        instanceNames:
+          $ref: '#/components/schemas/InstanceNameList'
+      description: 'Represents the input of, and adds tags to, an on-premises instance operation.'
+    AdditionalDeploymentStatusInfo:
+      type: string
+    Alarm:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/AlarmName'
+      description: Information about an alarm.
+    AlarmConfiguration:
+      type: object
+      properties:
+        enabled:
+          $ref: '#/components/schemas/Boolean'
+        ignorePollAlarmFailure:
+          $ref: '#/components/schemas/Boolean'
+        alarms:
+          $ref: '#/components/schemas/AlarmList'
+      description: Information about alarms associated with the deployment group.
+    AlarmList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Alarm'
+    AlarmName:
+      type: string
+    AlarmsLimitExceededException:
+      type: object
+      properties: {}
+      description: The maximum number of alarms for a deployment group (10) was exceeded.
+    ApplicationAlreadyExistsException:
+      type: object
+      properties: {}
+      description: An application with the specified name already exists with the applicable IAM user or AWS account.
+    ApplicationDoesNotExistException:
+      type: object
+      properties: {}
+      description: The application does not exist with the applicable IAM user or AWS account.
+    ApplicationId:
+      type: string
+    ApplicationInfo:
+      type: object
+      properties:
+        applicationId:
+          $ref: '#/components/schemas/ApplicationId'
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        createTime:
+          $ref: '#/components/schemas/Timestamp'
+        linkedToGitHub:
+          $ref: '#/components/schemas/Boolean'
+        gitHubAccountName:
+          $ref: '#/components/schemas/GitHubAccountTokenName'
+      description: Information about an application.
+    ApplicationLimitExceededException:
+      type: object
+      properties: {}
+      description: More applications were attempted to be created than are allowed.
+    ApplicationName:
+      type: string
+      minLength: 1
+      maxLength: 100
+    ApplicationNameRequiredException:
+      type: object
+      properties: {}
+      description: The minimum number of required application names was not specified.
+    ApplicationRevisionSortBy:
+      type: string
+      enum:
+        - registerTime
+        - firstUsedTime
+        - lastUsedTime
+    ApplicationsInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationInfo'
+    ApplicationsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationName'
+    AutoRollbackConfiguration:
+      type: object
+      properties:
+        enabled:
+          $ref: '#/components/schemas/Boolean'
+        events:
+          $ref: '#/components/schemas/AutoRollbackEventsList'
+      description: Information about a configuration for automatically rolling back to a previous version of an application revision when a deployment doesn't complete successfully.
+    AutoRollbackEvent:
+      type: string
+      enum:
+        - DEPLOYMENT_FAILURE
+        - DEPLOYMENT_STOP_ON_ALARM
+        - DEPLOYMENT_STOP_ON_REQUEST
+    AutoRollbackEventsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AutoRollbackEvent'
+    AutoScalingGroup:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/AutoScalingGroupName'
+        hook:
+          $ref: '#/components/schemas/AutoScalingGroupHook'
+      description: Information about an Auto Scaling group.
+    AutoScalingGroupHook:
+      type: string
+    AutoScalingGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AutoScalingGroup'
+    AutoScalingGroupName:
+      type: string
+    AutoScalingGroupNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AutoScalingGroupName'
+    BatchGetApplicationRevisionsInput:
+      type: object
+      required:
+        - applicationName
+        - revisions
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        revisions:
+          $ref: '#/components/schemas/RevisionLocationList'
+      description: Represents the input of a BatchGetApplicationRevisions operation.
+    BatchGetApplicationRevisionsOutput:
+      type: object
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        errorMessage:
+          $ref: '#/components/schemas/ErrorMessage'
+        revisions:
+          $ref: '#/components/schemas/RevisionInfoList'
+      description: Represents the output of a BatchGetApplicationRevisions operation.
+    BatchGetApplicationsInput:
+      type: object
+      properties:
+        applicationNames:
+          $ref: '#/components/schemas/ApplicationsList'
+      description: Represents the input of a BatchGetApplications operation.
+    BatchGetApplicationsOutput:
+      type: object
+      properties:
+        applicationsInfo:
+          $ref: '#/components/schemas/ApplicationsInfoList'
+      description: Represents the output of a BatchGetApplications operation.
+    BatchGetDeploymentGroupsInput:
+      type: object
+      required:
+        - applicationName
+        - deploymentGroupNames
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        deploymentGroupNames:
+          $ref: '#/components/schemas/DeploymentGroupsList'
+      description: Represents the input of a BatchGetDeploymentGroups operation.
+    BatchGetDeploymentGroupsOutput:
+      type: object
+      properties:
+        deploymentGroupsInfo:
+          $ref: '#/components/schemas/DeploymentGroupInfoList'
+        errorMessage:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: Represents the output of a BatchGetDeploymentGroups operation.
+    BatchGetDeploymentInstancesInput:
+      type: object
+      required:
+        - deploymentId
+        - instanceIds
+      properties:
+        deploymentId:
+          $ref: '#/components/schemas/DeploymentId'
+        instanceIds:
+          $ref: '#/components/schemas/InstancesList'
+      description: Represents the input of a BatchGetDeploymentInstances operation.
+    BatchGetDeploymentInstancesOutput:
+      type: object
+      properties:
+        instancesSummary:
+          $ref: '#/components/schemas/InstanceSummaryList'
+        errorMessage:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: Represents the output of a BatchGetDeploymentInstances operation.
+    BatchGetDeploymentsInput:
+      type: object
+      properties:
+        deploymentIds:
+          $ref: '#/components/schemas/DeploymentsList'
+      description: Represents the input of a BatchGetDeployments operation.
+    BatchGetDeploymentsOutput:
+      type: object
+      properties:
+        deploymentsInfo:
+          $ref: '#/components/schemas/DeploymentsInfoList'
+      description: Represents the output of a BatchGetDeployments operation.
+    BatchGetOnPremisesInstancesInput:
+      type: object
+      properties:
+        instanceNames:
+          $ref: '#/components/schemas/InstanceNameList'
+      description: Represents the input of a BatchGetOnPremisesInstances operation.
+    BatchGetOnPremisesInstancesOutput:
+      type: object
+      properties:
+        instanceInfos:
+          $ref: '#/components/schemas/InstanceInfoList'
+      description: Represents the output of a BatchGetOnPremisesInstances operation.
+    BatchLimitExceededException:
+      type: object
+      properties: {}
+      description: The maximum number of names or IDs allowed for this request (100) was exceeded.
+    BlueGreenDeploymentConfiguration:
+      type: object
+      properties:
+        terminateBlueInstancesOnDeploymentSuccess:
+          $ref: '#/components/schemas/BlueInstanceTerminationOption'
+        deploymentReadyOption:
+          $ref: '#/components/schemas/DeploymentReadyOption'
+        greenFleetProvisioningOption:
+          $ref: '#/components/schemas/GreenFleetProvisioningOption'
+      description: Information about blue/green deployment options for a deployment group.
+    BlueInstanceTerminationOption:
+      type: object
+      properties:
+        action:
+          $ref: '#/components/schemas/InstanceAction'
+        terminationWaitTimeInMinutes:
+          $ref: '#/components/schemas/Duration'
+      description: Information about whether instances in the original environment are terminated when a blue/green deployment is successful.
+    Boolean:
+      type: boolean
+    BucketNameFilterRequiredException:
+      type: object
+      properties: {}
+      description: 'A bucket name is required, but was not provided.'
+    BundleType:
+      type: string
+      enum:
+        - tar
+        - tgz
+        - zip
+    CommitId:
+      type: string
+    ContinueDeploymentInput:
+      type: object
+      properties:
+        deploymentId:
+          $ref: '#/components/schemas/DeploymentId'
+    CreateApplicationInput:
+      type: object
+      required:
+        - applicationName
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+      description: Represents the input of a CreateApplication operation.
+    CreateApplicationOutput:
+      type: object
+      properties:
+        applicationId:
+          $ref: '#/components/schemas/ApplicationId'
+      description: Represents the output of a CreateApplication operation.
+    CreateDeploymentConfigInput:
+      type: object
+      required:
+        - deploymentConfigName
+      properties:
+        deploymentConfigName:
+          $ref: '#/components/schemas/DeploymentConfigName'
+        minimumHealthyHosts:
+          $ref: '#/components/schemas/MinimumHealthyHosts'
+      description: Represents the input of a CreateDeploymentConfig operation.
+    CreateDeploymentConfigOutput:
+      type: object
+      properties:
+        deploymentConfigId:
+          $ref: '#/components/schemas/DeploymentConfigId'
+      description: Represents the output of a CreateDeploymentConfig operation.
+    CreateDeploymentGroupInput:
+      type: object
+      required:
+        - applicationName
+        - deploymentGroupName
+        - serviceRoleArn
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        deploymentGroupName:
+          $ref: '#/components/schemas/DeploymentGroupName'
+        deploymentConfigName:
+          $ref: '#/components/schemas/DeploymentConfigName'
+        ec2TagFilters:
+          $ref: '#/components/schemas/EC2TagFilterList'
+        onPremisesInstanceTagFilters:
+          $ref: '#/components/schemas/TagFilterList'
+        autoScalingGroups:
+          $ref: '#/components/schemas/AutoScalingGroupNameList'
+        serviceRoleArn:
+          $ref: '#/components/schemas/Role'
+        triggerConfigurations:
+          $ref: '#/components/schemas/TriggerConfigList'
+        alarmConfiguration:
+          $ref: '#/components/schemas/AlarmConfiguration'
+        autoRollbackConfiguration:
+          $ref: '#/components/schemas/AutoRollbackConfiguration'
+        deploymentStyle:
+          $ref: '#/components/schemas/DeploymentStyle'
+        blueGreenDeploymentConfiguration:
+          $ref: '#/components/schemas/BlueGreenDeploymentConfiguration'
+        loadBalancerInfo:
+          $ref: '#/components/schemas/LoadBalancerInfo'
+      description: Represents the input of a CreateDeploymentGroup operation.
+    CreateDeploymentGroupOutput:
+      type: object
+      properties:
+        deploymentGroupId:
+          $ref: '#/components/schemas/DeploymentGroupId'
+      description: Represents the output of a CreateDeploymentGroup operation.
+    CreateDeploymentInput:
+      type: object
+      required:
+        - applicationName
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        deploymentGroupName:
+          $ref: '#/components/schemas/DeploymentGroupName'
+        revision:
+          $ref: '#/components/schemas/RevisionLocation'
+        deploymentConfigName:
+          $ref: '#/components/schemas/DeploymentConfigName'
+        description:
+          $ref: '#/components/schemas/Description'
+        ignoreApplicationStopFailures:
+          $ref: '#/components/schemas/Boolean'
+        targetInstances:
+          $ref: '#/components/schemas/TargetInstances'
+        autoRollbackConfiguration:
+          $ref: '#/components/schemas/AutoRollbackConfiguration'
+        updateOutdatedInstancesOnly:
+          $ref: '#/components/schemas/Boolean'
+        fileExistsBehavior:
+          $ref: '#/components/schemas/FileExistsBehavior'
+      description: Represents the input of a CreateDeployment operation.
+    CreateDeploymentOutput:
+      type: object
+      properties:
+        deploymentId:
+          $ref: '#/components/schemas/DeploymentId'
+      description: Represents the output of a CreateDeployment operation.
+    DeleteApplicationInput:
+      type: object
+      required:
+        - applicationName
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+      description: Represents the input of a DeleteApplication operation.
+    DeleteDeploymentConfigInput:
+      type: object
+      required:
+        - deploymentConfigName
+      properties:
+        deploymentConfigName:
+          $ref: '#/components/schemas/DeploymentConfigName'
+      description: Represents the input of a DeleteDeploymentConfig operation.
+    DeleteDeploymentGroupInput:
+      type: object
+      required:
+        - applicationName
+        - deploymentGroupName
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        deploymentGroupName:
+          $ref: '#/components/schemas/DeploymentGroupName'
+      description: Represents the input of a DeleteDeploymentGroup operation.
+    DeleteDeploymentGroupOutput:
+      type: object
+      properties:
+        hooksNotCleanedUp:
+          $ref: '#/components/schemas/AutoScalingGroupList'
+      description: Represents the output of a DeleteDeploymentGroup operation.
+    DeploymentAlreadyCompletedException:
+      type: object
+      properties: {}
+      description: The deployment is already complete.
+    DeploymentConfigAlreadyExistsException:
+      type: object
+      properties: {}
+      description: A deployment configuration with the specified name already exists with the applicable IAM user or AWS account.
+    DeploymentConfigDoesNotExistException:
+      type: object
+      properties: {}
+      description: The deployment configuration does not exist with the applicable IAM user or AWS account.
+    DeploymentConfigId:
+      type: string
+    DeploymentConfigInUseException:
+      type: object
+      properties: {}
+      description: The deployment configuration is still in use.
+    DeploymentConfigInfo:
+      type: object
+      properties:
+        deploymentConfigId:
+          $ref: '#/components/schemas/DeploymentConfigId'
+        deploymentConfigName:
+          $ref: '#/components/schemas/DeploymentConfigName'
+        minimumHealthyHosts:
+          $ref: '#/components/schemas/MinimumHealthyHosts'
+        createTime:
+          $ref: '#/components/schemas/Timestamp'
+      description: Information about a deployment configuration.
+    DeploymentConfigLimitExceededException:
+      type: object
+      properties: {}
+      description: The deployment configurations limit was exceeded.
+    DeploymentConfigName:
+      type: string
+      minLength: 1
+      maxLength: 100
+    DeploymentConfigNameRequiredException:
+      type: object
+      properties: {}
+      description: The deployment configuration name was not specified.
+    DeploymentConfigsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeploymentConfigName'
+    DeploymentCreator:
+      type: string
+      enum:
+        - user
+        - autoscaling
+        - codeDeployRollback
+    DeploymentDoesNotExistException:
+      type: object
+      properties: {}
+      description: The deployment does not exist with the applicable IAM user or AWS account.
+    DeploymentGroupAlreadyExistsException:
+      type: object
+      properties: {}
+      description: A deployment group with the specified name already exists with the applicable IAM user or AWS account.
+    DeploymentGroupDoesNotExistException:
+      type: object
+      properties: {}
+      description: The named deployment group does not exist with the applicable IAM user or AWS account.
+    DeploymentGroupId:
+      type: string
+    DeploymentGroupInfo:
+      type: object
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        deploymentGroupId:
+          $ref: '#/components/schemas/DeploymentGroupId'
+        deploymentGroupName:
+          $ref: '#/components/schemas/DeploymentGroupName'
+        deploymentConfigName:
+          $ref: '#/components/schemas/DeploymentConfigName'
+        ec2TagFilters:
+          $ref: '#/components/schemas/EC2TagFilterList'
+        onPremisesInstanceTagFilters:
+          $ref: '#/components/schemas/TagFilterList'
+        autoScalingGroups:
+          $ref: '#/components/schemas/AutoScalingGroupList'
+        serviceRoleArn:
+          $ref: '#/components/schemas/Role'
+        targetRevision:
+          $ref: '#/components/schemas/RevisionLocation'
+        triggerConfigurations:
+          $ref: '#/components/schemas/TriggerConfigList'
+        alarmConfiguration:
+          $ref: '#/components/schemas/AlarmConfiguration'
+        autoRollbackConfiguration:
+          $ref: '#/components/schemas/AutoRollbackConfiguration'
+        deploymentStyle:
+          $ref: '#/components/schemas/DeploymentStyle'
+        blueGreenDeploymentConfiguration:
+          $ref: '#/components/schemas/BlueGreenDeploymentConfiguration'
+        loadBalancerInfo:
+          $ref: '#/components/schemas/LoadBalancerInfo'
+        lastSuccessfulDeployment:
+          $ref: '#/components/schemas/LastDeploymentInfo'
+        lastAttemptedDeployment:
+          $ref: '#/components/schemas/LastDeploymentInfo'
+      description: Information about a deployment group.
+    DeploymentGroupInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeploymentGroupInfo'
+    DeploymentGroupLimitExceededException:
+      type: object
+      properties: {}
+      description: ' The deployment groups limit was exceeded.'
+    DeploymentGroupName:
+      type: string
+      minLength: 1
+      maxLength: 100
+    DeploymentGroupNameRequiredException:
+      type: object
+      properties: {}
+      description: The deployment group name was not specified.
+    DeploymentGroupsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeploymentGroupName'
+    DeploymentId:
+      type: string
+    DeploymentIdRequiredException:
+      type: object
+      properties: {}
+      description: At least one deployment ID must be specified.
+    DeploymentInfo:
+      type: object
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        deploymentGroupName:
+          $ref: '#/components/schemas/DeploymentGroupName'
+        deploymentConfigName:
+          $ref: '#/components/schemas/DeploymentConfigName'
+        deploymentId:
+          $ref: '#/components/schemas/DeploymentId'
+        previousRevision:
+          $ref: '#/components/schemas/RevisionLocation'
+        revision:
+          $ref: '#/components/schemas/RevisionLocation'
+        status:
+          $ref: '#/components/schemas/DeploymentStatus'
+        errorInformation:
+          $ref: '#/components/schemas/ErrorInformation'
+        createTime:
+          $ref: '#/components/schemas/Timestamp'
+        startTime:
+          $ref: '#/components/schemas/Timestamp'
+        completeTime:
+          $ref: '#/components/schemas/Timestamp'
+        deploymentOverview:
+          $ref: '#/components/schemas/DeploymentOverview'
+        description:
+          $ref: '#/components/schemas/Description'
+        creator:
+          $ref: '#/components/schemas/DeploymentCreator'
+        ignoreApplicationStopFailures:
+          $ref: '#/components/schemas/Boolean'
+        autoRollbackConfiguration:
+          $ref: '#/components/schemas/AutoRollbackConfiguration'
+        updateOutdatedInstancesOnly:
+          $ref: '#/components/schemas/Boolean'
+        rollbackInfo:
+          $ref: '#/components/schemas/RollbackInfo'
+        deploymentStyle:
+          $ref: '#/components/schemas/DeploymentStyle'
+        targetInstances:
+          $ref: '#/components/schemas/TargetInstances'
+        instanceTerminationWaitTimeStarted:
+          $ref: '#/components/schemas/Boolean'
+        blueGreenDeploymentConfiguration:
+          $ref: '#/components/schemas/BlueGreenDeploymentConfiguration'
+        loadBalancerInfo:
+          $ref: '#/components/schemas/LoadBalancerInfo'
+        additionalDeploymentStatusInfo:
+          $ref: '#/components/schemas/AdditionalDeploymentStatusInfo'
+        fileExistsBehavior:
+          $ref: '#/components/schemas/FileExistsBehavior'
+      description: Information about a deployment.
+    DeploymentIsNotInReadyStateException:
+      type: object
+      properties: {}
+      description: The deployment does not have a status of Ready and can't continue yet.
+    DeploymentLimitExceededException:
+      type: object
+      properties: {}
+      description: The number of allowed deployments was exceeded.
+    DeploymentNotStartedException:
+      type: object
+      properties: {}
+      description: The specified deployment has not started.
+    DeploymentOption:
+      type: string
+      enum:
+        - WITH_TRAFFIC_CONTROL
+        - WITHOUT_TRAFFIC_CONTROL
+    DeploymentOverview:
+      type: object
+      properties:
+        Pending:
+          $ref: '#/components/schemas/InstanceCount'
+        InProgress:
+          $ref: '#/components/schemas/InstanceCount'
+        Succeeded:
+          $ref: '#/components/schemas/InstanceCount'
+        Failed:
+          $ref: '#/components/schemas/InstanceCount'
+        Skipped:
+          $ref: '#/components/schemas/InstanceCount'
+        Ready:
+          $ref: '#/components/schemas/InstanceCount'
+      description: Information about the deployment status of the instances in the deployment.
+    DeploymentReadyAction:
+      type: string
+      enum:
+        - CONTINUE_DEPLOYMENT
+        - STOP_DEPLOYMENT
+    DeploymentReadyOption:
+      type: object
+      properties:
+        actionOnTimeout:
+          $ref: '#/components/schemas/DeploymentReadyAction'
+        waitTimeInMinutes:
+          $ref: '#/components/schemas/Duration'
+      description: Information about how traffic is rerouted to instances in a replacement environment in a blue/green deployment.
+    DeploymentStatus:
+      type: string
+      enum:
+        - Created
+        - Queued
+        - InProgress
+        - Succeeded
+        - Failed
+        - Stopped
+        - Ready
+    DeploymentStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeploymentStatus'
+    DeploymentStyle:
+      type: object
+      properties:
+        deploymentType:
+          $ref: '#/components/schemas/DeploymentType'
+        deploymentOption:
+          $ref: '#/components/schemas/DeploymentOption'
+      description: 'Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer.'
+    DeploymentType:
+      type: string
+      enum:
+        - IN_PLACE
+        - BLUE_GREEN
+    DeploymentsInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeploymentInfo'
+    DeploymentsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeploymentId'
+    DeregisterOnPremisesInstanceInput:
+      type: object
+      required:
+        - instanceName
+      properties:
+        instanceName:
+          $ref: '#/components/schemas/InstanceName'
+      description: Represents the input of a DeregisterOnPremisesInstance operation.
+    Description:
+      type: string
+    DescriptionTooLongException:
+      type: object
+      properties: {}
+      description: The description is too long.
+    Diagnostics:
+      type: object
+      properties:
+        errorCode:
+          $ref: '#/components/schemas/LifecycleErrorCode'
+        scriptName:
+          $ref: '#/components/schemas/ScriptName'
+        message:
+          $ref: '#/components/schemas/LifecycleMessage'
+        logTail:
+          $ref: '#/components/schemas/LogTail'
+      description: Diagnostic information about executable scripts that are part of a deployment.
+    Duration:
+      type: integer
+    EC2TagFilter:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/Key'
+        Value:
+          $ref: '#/components/schemas/Value'
+        Type:
+          $ref: '#/components/schemas/EC2TagFilterType'
+      description: Information about an EC2 tag filter.
+    EC2TagFilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EC2TagFilter'
+    EC2TagFilterType:
+      type: string
+      enum:
+        - KEY_ONLY
+        - VALUE_ONLY
+        - KEY_AND_VALUE
+    ELBInfo:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/ELBName'
+      description: Information about a load balancer in Elastic Load Balancing to use in a deployment.
+    ELBInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ELBInfo'
+    ELBName:
+      type: string
+    ETag:
+      type: string
+    ErrorCode:
+      type: string
+      enum:
+        - DEPLOYMENT_GROUP_MISSING
+        - APPLICATION_MISSING
+        - REVISION_MISSING
+        - IAM_ROLE_MISSING
+        - IAM_ROLE_PERMISSIONS
+        - NO_EC2_SUBSCRIPTION
+        - OVER_MAX_INSTANCES
+        - NO_INSTANCES
+        - TIMEOUT
+        - HEALTH_CONSTRAINTS_INVALID
+        - HEALTH_CONSTRAINTS
+        - INTERNAL_ERROR
+        - THROTTLED
+        - ALARM_ACTIVE
+        - AGENT_ISSUE
+        - AUTO_SCALING_IAM_ROLE_PERMISSIONS
+        - AUTO_SCALING_CONFIGURATION
+        - MANUAL_STOP
+    ErrorInformation:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/ErrorCode'
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: Information about a deployment error.
+    ErrorMessage:
+      type: string
+    FileExistsBehavior:
+      type: string
+      enum:
+        - DISALLOW
+        - OVERWRITE
+        - RETAIN
+    GenericRevisionInfo:
+      type: object
+      properties:
+        description:
+          $ref: '#/components/schemas/Description'
+        deploymentGroups:
+          $ref: '#/components/schemas/DeploymentGroupsList'
+        firstUsedTime:
+          $ref: '#/components/schemas/Timestamp'
+        lastUsedTime:
+          $ref: '#/components/schemas/Timestamp'
+        registerTime:
+          $ref: '#/components/schemas/Timestamp'
+      description: Information about an application revision.
+    GetApplicationInput:
+      type: object
+      required:
+        - applicationName
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+      description: Represents the input of a GetApplication operation.
+    GetApplicationOutput:
+      type: object
+      properties:
+        application:
+          $ref: '#/components/schemas/ApplicationInfo'
+      description: Represents the output of a GetApplication operation.
+    GetApplicationRevisionInput:
+      type: object
+      required:
+        - applicationName
+        - revision
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        revision:
+          $ref: '#/components/schemas/RevisionLocation'
+      description: Represents the input of a GetApplicationRevision operation.
+    GetApplicationRevisionOutput:
+      type: object
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        revision:
+          $ref: '#/components/schemas/RevisionLocation'
+        revisionInfo:
+          $ref: '#/components/schemas/GenericRevisionInfo'
+      description: Represents the output of a GetApplicationRevision operation.
+    GetDeploymentConfigInput:
+      type: object
+      required:
+        - deploymentConfigName
+      properties:
+        deploymentConfigName:
+          $ref: '#/components/schemas/DeploymentConfigName'
+      description: Represents the input of a GetDeploymentConfig operation.
+    GetDeploymentConfigOutput:
+      type: object
+      properties:
+        deploymentConfigInfo:
+          $ref: '#/components/schemas/DeploymentConfigInfo'
+      description: Represents the output of a GetDeploymentConfig operation.
+    GetDeploymentGroupInput:
+      type: object
+      required:
+        - applicationName
+        - deploymentGroupName
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        deploymentGroupName:
+          $ref: '#/components/schemas/DeploymentGroupName'
+      description: Represents the input of a GetDeploymentGroup operation.
+    GetDeploymentGroupOutput:
+      type: object
+      properties:
+        deploymentGroupInfo:
+          $ref: '#/components/schemas/DeploymentGroupInfo'
+      description: Represents the output of a GetDeploymentGroup operation.
+    GetDeploymentInput:
+      type: object
+      required:
+        - deploymentId
+      properties:
+        deploymentId:
+          $ref: '#/components/schemas/DeploymentId'
+      description: Represents the input of a GetDeployment operation.
+    GetDeploymentInstanceInput:
+      type: object
+      required:
+        - deploymentId
+        - instanceId
+      properties:
+        deploymentId:
+          $ref: '#/components/schemas/DeploymentId'
+        instanceId:
+          $ref: '#/components/schemas/InstanceId'
+      description: Represents the input of a GetDeploymentInstance operation.
+    GetDeploymentInstanceOutput:
+      type: object
+      properties:
+        instanceSummary:
+          $ref: '#/components/schemas/InstanceSummary'
+      description: Represents the output of a GetDeploymentInstance operation.
+    GetDeploymentOutput:
+      type: object
+      properties:
+        deploymentInfo:
+          $ref: '#/components/schemas/DeploymentInfo'
+      description: Represents the output of a GetDeployment operation.
+    GetOnPremisesInstanceInput:
+      type: object
+      required:
+        - instanceName
+      properties:
+        instanceName:
+          $ref: '#/components/schemas/InstanceName'
+      description: Represents the input of a GetOnPremisesInstance operation.
+    GetOnPremisesInstanceOutput:
+      type: object
+      properties:
+        instanceInfo:
+          $ref: '#/components/schemas/InstanceInfo'
+      description: Represents the output of a GetOnPremisesInstance operation.
+    GitHubAccountTokenDoesNotExistException:
+      type: object
+      properties: {}
+      description: No GitHub account connection exists with the named specified in the call.
+    GitHubAccountTokenName:
+      type: string
+    GitHubAccountTokenNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GitHubAccountTokenName'
+    GitHubLocation:
+      type: object
+      properties:
+        repository:
+          $ref: '#/components/schemas/Repository'
+        commitId:
+          $ref: '#/components/schemas/CommitId'
+      description: Information about the location of application artifacts stored in GitHub.
+    GreenFleetProvisioningAction:
+      type: string
+      enum:
+        - DISCOVER_EXISTING
+        - COPY_AUTO_SCALING_GROUP
+    GreenFleetProvisioningOption:
+      type: object
+      properties:
+        action:
+          $ref: '#/components/schemas/GreenFleetProvisioningAction'
+      description: Information about the instances that belong to the replacement environment in a blue/green deployment.
+    IamArnRequiredException:
+      type: object
+      properties: {}
+      description: No IAM ARN was included in the request. You must use an IAM session ARN or IAM user ARN in the request.
+    IamSessionArn:
+      type: string
+    IamSessionArnAlreadyRegisteredException:
+      type: object
+      properties: {}
+      description: The request included an IAM session ARN that has already been used to register a different instance.
+    IamUserArn:
+      type: string
+    IamUserArnAlreadyRegisteredException:
+      type: object
+      properties: {}
+      description: The specified IAM user ARN is already registered with an on-premises instance.
+    IamUserArnRequiredException:
+      type: object
+      properties: {}
+      description: An IAM user ARN was not specified.
+    InstanceAction:
+      type: string
+      enum:
+        - TERMINATE
+        - KEEP_ALIVE
+    InstanceArn:
+      type: string
+    InstanceCount:
+      type: integer
+    InstanceDoesNotExistException:
+      type: object
+      properties: {}
+      description: The specified instance does not exist in the deployment group.
+    InstanceId:
+      type: string
+    InstanceIdRequiredException:
+      type: object
+      properties: {}
+      description: The instance ID was not specified.
+    InstanceInfo:
+      type: object
+      properties:
+        instanceName:
+          $ref: '#/components/schemas/InstanceName'
+        iamSessionArn:
+          $ref: '#/components/schemas/IamSessionArn'
+        iamUserArn:
+          $ref: '#/components/schemas/IamUserArn'
+        instanceArn:
+          $ref: '#/components/schemas/InstanceArn'
+        registerTime:
+          $ref: '#/components/schemas/Timestamp'
+        deregisterTime:
+          $ref: '#/components/schemas/Timestamp'
+        tags:
+          $ref: '#/components/schemas/TagList'
+      description: Information about an on-premises instance.
+    InstanceInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceInfo'
+    InstanceLimitExceededException:
+      type: object
+      properties: {}
+      description: The maximum number of allowed on-premises instances in a single call was exceeded.
+    InstanceName:
+      type: string
+    InstanceNameAlreadyRegisteredException:
+      type: object
+      properties: {}
+      description: The specified on-premises instance name is already registered.
+    InstanceNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceName'
+    InstanceNameRequiredException:
+      type: object
+      properties: {}
+      description: An on-premises instance name was not specified.
+    InstanceNotRegisteredException:
+      type: object
+      properties: {}
+      description: The specified on-premises instance is not registered.
+    InstanceStatus:
+      type: string
+      enum:
+        - Pending
+        - InProgress
+        - Succeeded
+        - Failed
+        - Skipped
+        - Unknown
+        - Ready
+    InstanceStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceStatus'
+    InstanceSummary:
+      type: object
+      properties:
+        deploymentId:
+          $ref: '#/components/schemas/DeploymentId'
+        instanceId:
+          $ref: '#/components/schemas/InstanceId'
+        status:
+          $ref: '#/components/schemas/InstanceStatus'
+        lastUpdatedAt:
+          $ref: '#/components/schemas/Timestamp'
+        lifecycleEvents:
+          $ref: '#/components/schemas/LifecycleEventList'
+        instanceType:
+          $ref: '#/components/schemas/InstanceType'
+      description: Information about an instance in a deployment.
+    InstanceSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceSummary'
+    InstanceType:
+      type: string
+      enum:
+        - Blue
+        - Green
+    InstanceTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceType'
+    InstancesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceId'
+    InvalidAlarmConfigException:
+      type: object
+      properties: {}
+      description: '<p>The format of the alarm configuration is invalid. Possible causes include:</p> <ul> <li> <p>The alarm list is null.</p> </li> <li> <p>The alarm object is null.</p> </li> <li> <p>The alarm name is empty or null or exceeds the 255 character limit.</p> </li> <li> <p>Two alarms with the same name have been specified.</p> </li> <li> <p>The alarm configuration is enabled but the alarm list is empty.</p> </li> </ul>'
+    InvalidApplicationNameException:
+      type: object
+      properties: {}
+      description: The application name was specified in an invalid format.
+    InvalidAutoRollbackConfigException:
+      type: object
+      properties: {}
+      description: 'The automatic rollback configuration was specified in an invalid format. For example, automatic rollback is enabled but an invalid triggering event type or no event types were listed.'
+    InvalidAutoScalingGroupException:
+      type: object
+      properties: {}
+      description: The Auto Scaling group was specified in an invalid format or does not exist.
+    InvalidBlueGreenDeploymentConfigurationException:
+      type: object
+      properties: {}
+      description: 'The configuration for the blue/green deployment group was provided in an invalid format. For information about deployment configuration format, see <a>CreateDeploymentConfig</a>.'
+    InvalidBucketNameFilterException:
+      type: object
+      properties: {}
+      description: The bucket name either doesn't exist or was specified in an invalid format.
+    InvalidDeployedStateFilterException:
+      type: object
+      properties: {}
+      description: The deployed state filter was specified in an invalid format.
+    InvalidDeploymentConfigNameException:
+      type: object
+      properties: {}
+      description: The deployment configuration name was specified in an invalid format.
+    InvalidDeploymentGroupNameException:
+      type: object
+      properties: {}
+      description: The deployment group name was specified in an invalid format.
+    InvalidDeploymentIdException:
+      type: object
+      properties: {}
+      description: At least one of the deployment IDs was specified in an invalid format.
+    InvalidDeploymentInstanceTypeException:
+      type: object
+      properties: {}
+      description: An instance type was specified for an in-place deployment. Instance types are supported for blue/green deployments only.
+    InvalidDeploymentStatusException:
+      type: object
+      properties: {}
+      description: The specified deployment status doesn't exist or cannot be determined.
+    InvalidDeploymentStyleException:
+      type: object
+      properties: {}
+      description: An invalid deployment style was specified. Valid deployment types include "IN_PLACE" and "BLUE_GREEN". Valid deployment options include "WITH_TRAFFIC_CONTROL" and "WITHOUT_TRAFFIC_CONTROL".
+    InvalidEC2TagException:
+      type: object
+      properties: {}
+      description: The tag was specified in an invalid format.
+    InvalidFileExistsBehaviorException:
+      type: object
+      properties: {}
+      description: 'An invalid fileExistsBehavior option was specified to determine how AWS CodeDeploy handles files or directories that already exist in a deployment target location but weren''t part of the previous successful deployment. Valid values include "DISALLOW", "OVERWRITE", and "RETAIN".'
+    InvalidIamSessionArnException:
+      type: object
+      properties: {}
+      description: The IAM session ARN was specified in an invalid format.
+    InvalidIamUserArnException:
+      type: object
+      properties: {}
+      description: The IAM user ARN was specified in an invalid format.
+    InvalidInstanceNameException:
+      type: object
+      properties: {}
+      description: The specified on-premises instance name was specified in an invalid format.
+    InvalidInstanceStatusException:
+      type: object
+      properties: {}
+      description: The specified instance status does not exist.
+    InvalidInstanceTypeException:
+      type: object
+      properties: {}
+      description: An invalid instance type was specified for instances in a blue/green deployment. Valid values include "Blue" for an original environment and "Green" for a replacement environment.
+    InvalidKeyPrefixFilterException:
+      type: object
+      properties: {}
+      description: The specified key prefix filter was specified in an invalid format.
+    InvalidLoadBalancerInfoException:
+      type: object
+      properties: {}
+      description: 'An invalid load balancer name, or no load balancer name, was specified.'
+    InvalidMinimumHealthyHostValueException:
+      type: object
+      properties: {}
+      description: The minimum healthy instance value was specified in an invalid format.
+    InvalidNextTokenException:
+      type: object
+      properties: {}
+      description: The next token was specified in an invalid format.
+    InvalidOperationException:
+      type: object
+      properties: {}
+      description: An invalid operation was detected.
+    InvalidRegistrationStatusException:
+      type: object
+      properties: {}
+      description: The registration status was specified in an invalid format.
+    InvalidRevisionException:
+      type: object
+      properties: {}
+      description: The revision was specified in an invalid format.
+    InvalidRoleException:
+      type: object
+      properties: {}
+      description: 'The service role ARN was specified in an invalid format. Or, if an Auto Scaling group was specified, the specified service role does not grant the appropriate permissions to Auto Scaling.'
+    InvalidSortByException:
+      type: object
+      properties: {}
+      description: The column name to sort by is either not present or was specified in an invalid format.
+    InvalidSortOrderException:
+      type: object
+      properties: {}
+      description: The sort order was specified in an invalid format.
+    InvalidTagException:
+      type: object
+      properties: {}
+      description: The specified tag was specified in an invalid format.
+    InvalidTagFilterException:
+      type: object
+      properties: {}
+      description: The specified tag filter was specified in an invalid format.
+    InvalidTargetInstancesException:
+      type: object
+      properties: {}
+      description: '<p>The target instance configuration is invalid. Possible causes include:</p> <ul> <li> <p>Configuration data for target instances was entered for an in-place deployment.</p> </li> <li> <p>The limit of 10 tags for a tag type was exceeded.</p> </li> <li> <p>The combined length of the tag names exceeded the limit. </p> </li> <li> <p>A specified tag is not currently applied to any instances.</p> </li> </ul>'
+    InvalidTimeRangeException:
+      type: object
+      properties: {}
+      description: The specified time range was specified in an invalid format.
+    InvalidTriggerConfigException:
+      type: object
+      properties: {}
+      description: The trigger was specified in an invalid format.
+    Key:
+      type: string
+    LastDeploymentInfo:
+      type: object
+      properties:
+        deploymentId:
+          $ref: '#/components/schemas/DeploymentId'
+        status:
+          $ref: '#/components/schemas/DeploymentStatus'
+        endTime:
+          $ref: '#/components/schemas/Timestamp'
+        createTime:
+          $ref: '#/components/schemas/Timestamp'
+      description: Information about the most recent attempted or successful deployment to a deployment group.
+    LifecycleErrorCode:
+      type: string
+      enum:
+        - Success
+        - ScriptMissing
+        - ScriptNotExecutable
+        - ScriptTimedOut
+        - ScriptFailed
+        - UnknownError
+    LifecycleEvent:
+      type: object
+      properties:
+        lifecycleEventName:
+          $ref: '#/components/schemas/LifecycleEventName'
+        diagnostics:
+          $ref: '#/components/schemas/Diagnostics'
+        startTime:
+          $ref: '#/components/schemas/Timestamp'
+        endTime:
+          $ref: '#/components/schemas/Timestamp'
+        status:
+          $ref: '#/components/schemas/LifecycleEventStatus'
+      description: Information about a deployment lifecycle event.
+    LifecycleEventList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LifecycleEvent'
+    LifecycleEventName:
+      type: string
+    LifecycleEventStatus:
+      type: string
+      enum:
+        - Pending
+        - InProgress
+        - Succeeded
+        - Failed
+        - Skipped
+        - Unknown
+    LifecycleHookLimitExceededException:
+      type: object
+      properties: {}
+      description: The limit for lifecycle hooks was exceeded.
+    LifecycleMessage:
+      type: string
+    ListApplicationRevisionsInput:
+      type: object
+      required:
+        - applicationName
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        sortBy:
+          $ref: '#/components/schemas/ApplicationRevisionSortBy'
+        sortOrder:
+          $ref: '#/components/schemas/SortOrder'
+        s3Bucket:
+          $ref: '#/components/schemas/S3Bucket'
+        s3KeyPrefix:
+          $ref: '#/components/schemas/S3Key'
+        deployed:
+          $ref: '#/components/schemas/ListStateFilterAction'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Represents the input of a ListApplicationRevisions operation.
+    ListApplicationRevisionsOutput:
+      type: object
+      properties:
+        revisions:
+          $ref: '#/components/schemas/RevisionLocationList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Represents the output of a ListApplicationRevisions operation.
+    ListApplicationsInput:
+      type: object
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Represents the input of a ListApplications operation.
+    ListApplicationsOutput:
+      type: object
+      properties:
+        applications:
+          $ref: '#/components/schemas/ApplicationsList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Represents the output of a ListApplications operation.
+    ListDeploymentConfigsInput:
+      type: object
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Represents the input of a ListDeploymentConfigs operation.
+    ListDeploymentConfigsOutput:
+      type: object
+      properties:
+        deploymentConfigsList:
+          $ref: '#/components/schemas/DeploymentConfigsList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Represents the output of a ListDeploymentConfigs operation.
+    ListDeploymentGroupsInput:
+      type: object
+      required:
+        - applicationName
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Represents the input of a ListDeploymentGroups operation.
+    ListDeploymentGroupsOutput:
+      type: object
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        deploymentGroups:
+          $ref: '#/components/schemas/DeploymentGroupsList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Represents the output of a ListDeploymentGroups operation.
+    ListDeploymentInstancesInput:
+      type: object
+      required:
+        - deploymentId
+      properties:
+        deploymentId:
+          $ref: '#/components/schemas/DeploymentId'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+        instanceStatusFilter:
+          $ref: '#/components/schemas/InstanceStatusList'
+        instanceTypeFilter:
+          $ref: '#/components/schemas/InstanceTypeList'
+      description: Represents the input of a ListDeploymentInstances operation.
+    ListDeploymentInstancesOutput:
+      type: object
+      properties:
+        instancesList:
+          $ref: '#/components/schemas/InstancesList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Represents the output of a ListDeploymentInstances operation.
+    ListDeploymentsInput:
+      type: object
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        deploymentGroupName:
+          $ref: '#/components/schemas/DeploymentGroupName'
+        includeOnlyStatuses:
+          $ref: '#/components/schemas/DeploymentStatusList'
+        createTimeRange:
+          $ref: '#/components/schemas/TimeRange'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Represents the input of a ListDeployments operation.
+    ListDeploymentsOutput:
+      type: object
+      properties:
+        deployments:
+          $ref: '#/components/schemas/DeploymentsList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Represents the output of a ListDeployments operation.
+    ListGitHubAccountTokenNamesInput:
+      type: object
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Represents the input of a ListGitHubAccountTokenNames operation.
+    ListGitHubAccountTokenNamesOutput:
+      type: object
+      properties:
+        tokenNameList:
+          $ref: '#/components/schemas/GitHubAccountTokenNameList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Represents the output of a ListGitHubAccountTokenNames operation.
+    ListOnPremisesInstancesInput:
+      type: object
+      properties:
+        registrationStatus:
+          $ref: '#/components/schemas/RegistrationStatus'
+        tagFilters:
+          $ref: '#/components/schemas/TagFilterList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Represents the input of a ListOnPremisesInstances operation.
+    ListOnPremisesInstancesOutput:
+      type: object
+      properties:
+        instanceNames:
+          $ref: '#/components/schemas/InstanceNameList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Represents the output of list on-premises instances operation.
+    ListStateFilterAction:
+      type: string
+      enum:
+        - include
+        - exclude
+        - ignore
+    LoadBalancerInfo:
+      type: object
+      properties:
+        elbInfoList:
+          $ref: '#/components/schemas/ELBInfoList'
+      description: Information about the load balancer used in a deployment.
+    LogTail:
+      type: string
+    Message:
+      type: string
+    MinimumHealthyHosts:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/MinimumHealthyHostsValue'
+        type:
+          $ref: '#/components/schemas/MinimumHealthyHostsType'
+      description: Information about minimum healthy instance.
+    MinimumHealthyHostsType:
+      type: string
+      enum:
+        - HOST_COUNT
+        - FLEET_PERCENT
+    MinimumHealthyHostsValue:
+      type: integer
+    MultipleIamArnsProvidedException:
+      type: object
+      properties: {}
+      description: Both an IAM user ARN and an IAM session ARN were included in the request. Use only one ARN type.
+    NextToken:
+      type: string
+    NullableBoolean:
+      type: boolean
+    RegisterApplicationRevisionInput:
+      type: object
+      required:
+        - applicationName
+        - revision
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        description:
+          $ref: '#/components/schemas/Description'
+        revision:
+          $ref: '#/components/schemas/RevisionLocation'
+      description: Represents the input of a RegisterApplicationRevision operation.
+    RegisterOnPremisesInstanceInput:
+      type: object
+      required:
+        - instanceName
+      properties:
+        instanceName:
+          $ref: '#/components/schemas/InstanceName'
+        iamSessionArn:
+          $ref: '#/components/schemas/IamSessionArn'
+        iamUserArn:
+          $ref: '#/components/schemas/IamUserArn'
+      description: Represents the input of the register on-premises instance operation.
+    RegistrationStatus:
+      type: string
+      enum:
+        - Registered
+        - Deregistered
+    RemoveTagsFromOnPremisesInstancesInput:
+      type: object
+      required:
+        - tags
+        - instanceNames
+      properties:
+        tags:
+          $ref: '#/components/schemas/TagList'
+        instanceNames:
+          $ref: '#/components/schemas/InstanceNameList'
+      description: Represents the input of a RemoveTagsFromOnPremisesInstances operation.
+    Repository:
+      type: string
+    ResourceValidationException:
+      type: object
+      properties: {}
+      description: The specified resource could not be validated.
+    RevisionDoesNotExistException:
+      type: object
+      properties: {}
+      description: The named revision does not exist with the applicable IAM user or AWS account.
+    RevisionInfo:
+      type: object
+      properties:
+        revisionLocation:
+          $ref: '#/components/schemas/RevisionLocation'
+        genericRevisionInfo:
+          $ref: '#/components/schemas/GenericRevisionInfo'
+      description: Information about an application revision.
+    RevisionInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RevisionInfo'
+    RevisionLocation:
+      type: object
+      properties:
+        revisionType:
+          $ref: '#/components/schemas/RevisionLocationType'
+        s3Location:
+          $ref: '#/components/schemas/S3Location'
+        gitHubLocation:
+          $ref: '#/components/schemas/GitHubLocation'
+      description: Information about the location of an application revision.
+    RevisionLocationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RevisionLocation'
+    RevisionLocationType:
+      type: string
+      enum:
+        - S3
+        - GitHub
+    RevisionRequiredException:
+      type: object
+      properties: {}
+      description: The revision ID was not specified.
+    Role:
+      type: string
+    RoleRequiredException:
+      type: object
+      properties: {}
+      description: The role ID was not specified.
+    RollbackInfo:
+      type: object
+      properties:
+        rollbackDeploymentId:
+          $ref: '#/components/schemas/DeploymentId'
+        rollbackTriggeringDeploymentId:
+          $ref: '#/components/schemas/DeploymentId'
+        rollbackMessage:
+          $ref: '#/components/schemas/Description'
+      description: Information about a deployment rollback.
+    S3Bucket:
+      type: string
+    S3Key:
+      type: string
+    S3Location:
+      type: object
+      properties:
+        bucket:
+          $ref: '#/components/schemas/S3Bucket'
+        key:
+          $ref: '#/components/schemas/S3Key'
+        bundleType:
+          $ref: '#/components/schemas/BundleType'
+        version:
+          $ref: '#/components/schemas/VersionId'
+        eTag:
+          $ref: '#/components/schemas/ETag'
+      description: Information about the location of application artifacts stored in Amazon S3.
+    ScriptName:
+      type: string
+    SkipWaitTimeForInstanceTerminationInput:
+      type: object
+      properties:
+        deploymentId:
+          $ref: '#/components/schemas/DeploymentId'
+    SortOrder:
+      type: string
+      enum:
+        - ascending
+        - descending
+    StopDeploymentInput:
+      type: object
+      required:
+        - deploymentId
+      properties:
+        deploymentId:
+          $ref: '#/components/schemas/DeploymentId'
+        autoRollbackEnabled:
+          $ref: '#/components/schemas/NullableBoolean'
+      description: Represents the input of a StopDeployment operation.
+    StopDeploymentOutput:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/StopStatus'
+        statusMessage:
+          $ref: '#/components/schemas/Message'
+      description: Represents the output of a StopDeployment operation.
+    StopStatus:
+      type: string
+      enum:
+        - Pending
+        - Succeeded
+    Tag:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/Key'
+        Value:
+          $ref: '#/components/schemas/Value'
+      description: Information about a tag.
+    TagFilter:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/Key'
+        Value:
+          $ref: '#/components/schemas/Value'
+        Type:
+          $ref: '#/components/schemas/TagFilterType'
+      description: Information about an on-premises instance tag filter.
+    TagFilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagFilter'
+    TagFilterType:
+      type: string
+      enum:
+        - KEY_ONLY
+        - VALUE_ONLY
+        - KEY_AND_VALUE
+    TagLimitExceededException:
+      type: object
+      properties: {}
+      description: The maximum allowed number of tags was exceeded.
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    TagRequiredException:
+      type: object
+      properties: {}
+      description: A tag was not specified.
+    TargetInstances:
+      type: object
+      properties:
+        tagFilters:
+          $ref: '#/components/schemas/EC2TagFilterList'
+        autoScalingGroups:
+          $ref: '#/components/schemas/AutoScalingGroupNameList'
+      description: Information about the instances to be used in the replacement environment in a blue/green deployment.
+    TimeRange:
+      type: object
+      properties:
+        start:
+          $ref: '#/components/schemas/Timestamp'
+        end:
+          $ref: '#/components/schemas/Timestamp'
+      description: Information about a time range.
+    Timestamp:
+      type: string
+      format: date-time
+    TriggerConfig:
+      type: object
+      properties:
+        triggerName:
+          $ref: '#/components/schemas/TriggerName'
+        triggerTargetArn:
+          $ref: '#/components/schemas/TriggerTargetArn'
+        triggerEvents:
+          $ref: '#/components/schemas/TriggerEventTypeList'
+      description: Information about notification triggers for the deployment group.
+    TriggerConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TriggerConfig'
+    TriggerEventType:
+      type: string
+      enum:
+        - DeploymentStart
+        - DeploymentSuccess
+        - DeploymentFailure
+        - DeploymentStop
+        - DeploymentRollback
+        - DeploymentReady
+        - InstanceStart
+        - InstanceSuccess
+        - InstanceFailure
+        - InstanceReady
+    TriggerEventTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TriggerEventType'
+    TriggerName:
+      type: string
+    TriggerTargetArn:
+      type: string
+    TriggerTargetsLimitExceededException:
+      type: object
+      properties: {}
+      description: The maximum allowed number of triggers was exceeded.
+    UnsupportedActionForDeploymentTypeException:
+      type: object
+      properties: {}
+      description: A call was submitted that is not supported for the specified deployment type.
+    UpdateApplicationInput:
+      type: object
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        newApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+      description: Represents the input of an UpdateApplication operation.
+    UpdateDeploymentGroupInput:
+      type: object
+      required:
+        - applicationName
+        - currentDeploymentGroupName
+      properties:
+        applicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        currentDeploymentGroupName:
+          $ref: '#/components/schemas/DeploymentGroupName'
+        newDeploymentGroupName:
+          $ref: '#/components/schemas/DeploymentGroupName'
+        deploymentConfigName:
+          $ref: '#/components/schemas/DeploymentConfigName'
+        ec2TagFilters:
+          $ref: '#/components/schemas/EC2TagFilterList'
+        onPremisesInstanceTagFilters:
+          $ref: '#/components/schemas/TagFilterList'
+        autoScalingGroups:
+          $ref: '#/components/schemas/AutoScalingGroupNameList'
+        serviceRoleArn:
+          $ref: '#/components/schemas/Role'
+        triggerConfigurations:
+          $ref: '#/components/schemas/TriggerConfigList'
+        alarmConfiguration:
+          $ref: '#/components/schemas/AlarmConfiguration'
+        autoRollbackConfiguration:
+          $ref: '#/components/schemas/AutoRollbackConfiguration'
+        deploymentStyle:
+          $ref: '#/components/schemas/DeploymentStyle'
+        blueGreenDeploymentConfiguration:
+          $ref: '#/components/schemas/BlueGreenDeploymentConfiguration'
+        loadBalancerInfo:
+          $ref: '#/components/schemas/LoadBalancerInfo'
+      description: Represents the input of an UpdateDeploymentGroup operation.
+    UpdateDeploymentGroupOutput:
+      type: object
+      properties:
+        hooksNotCleanedUp:
+          $ref: '#/components/schemas/AutoScalingGroupList'
+      description: Represents the output of an UpdateDeploymentGroup operation.
+    Value:
+      type: string
+    VersionId:
+      type: string
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

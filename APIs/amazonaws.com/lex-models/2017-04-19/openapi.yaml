@@ -1,0 +1,3474 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://models.lex.amazonaws.com/'
+info:
+  version: '2017-04-19'
+  x-release: v4
+  title: Amazon Lex Model Building Service
+  description: '<fullname>Amazon Lex Build-Time Actions</fullname> <p> Amazon Lex is an AWS service for building conversational voice and text interfaces. Use these actions to create, update, and delete conversational bots for new and existing client applications. </p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: models.lex
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/lex-models-2017-04-19.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/lex/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  '/bots/{name}/versions':
+    post:
+      operationId: CreateBotVersion
+      description: '<p>Creates a new version of the bot based on the <code>$LATEST</code> version. If the <code>$LATEST</code> version of this resource hasn''t changed since you created the last version, Amazon Lex doesn''t create a new version. It returns the last created version.</p> <note> <p>You can update only the <code>$LATEST</code> version of the bot. You can''t update the numbered versions that you create with the <code>CreateBotVersion</code> operation.</p> </note> <p> When you create the first version of a bot, Amazon Lex sets the version to 1. Subsequent versions increment by 1. For more information, see <a>versioning-intro</a>. </p> <p> This operation requires permission for the <code>lex:CreateBotVersion</code> action. </p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBotVersionResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '485':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBotVersionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/intents/{name}/versions':
+    post:
+      operationId: CreateIntentVersion
+      description: '<p>Creates a new version of an intent based on the <code>$LATEST</code> version of the intent. If the <code>$LATEST</code> version of this intent hasn''t changed since you last updated it, Amazon Lex doesn''t create a new version. It returns the last version you created.</p> <note> <p>You can update only the <code>$LATEST</code> version of the intent. You can''t update the numbered versions that you create with the <code>CreateIntentVersion</code> operation.</p> </note> <p> When you create a version of an intent, Amazon Lex sets the version to 1. Subsequent versions increment by 1. For more information, see <a>versioning-intro</a>. </p> <p>This operation requires permissions to perform the <code>lex:CreateIntentVersion</code> action. </p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateIntentVersionResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '485':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIntentVersionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/slottypes/{name}/versions':
+    post:
+      operationId: CreateSlotTypeVersion
+      description: '<p>Creates a new version of a slot type based on the <code>$LATEST</code> version of the specified slot type. If the <code>$LATEST</code> version of this resource has not changed since the last version that you created, Amazon Lex doesn''t create a new version. It returns the last version that you created. </p> <note> <p>You can update only the <code>$LATEST</code> version of a slot type. You can''t update the numbered versions that you create with the <code>CreateSlotTypeVersion</code> operation.</p> </note> <p>When you create a version of a slot type, Amazon Lex sets the version to 1. Subsequent versions increment by 1. For more information, see <a>versioning-intro</a>. </p> <p>This operation requires permissions for the <code>lex:CreateSlotTypeVersion</code> action.</p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSlotTypeVersionResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '485':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSlotTypeVersionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/bots/{name}':
+    delete:
+      operationId: DeleteBot
+      description: '<p>Deletes all versions of the bot, including the <code>$LATEST</code> version. To delete a specific version of the bot, use the operation.</p> <p>If a bot has an alias, you can''t delete it. Instead, the <code>DeleteBot</code> operation returns a <code>ResourceInUseException</code> exception that includes a reference to the alias that refers to the bot. To remove the reference to the bot, delete the alias. If you get the same exception again, delete the referring alias until the <code>DeleteBot</code> operation is successful.</p> <p>This operation requires permissions for the <code>lex:DeleteBot</code> action.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '485':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteBotRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/bots/{botName}/aliases/{name}':
+    put:
+      operationId: PutBotAlias
+      description: '<p>Creates an alias for the specified version of the bot or replaces an alias for the specified bot. To change the version of the bot that the alias points to, replace the alias. For more information about aliases, see <a>versioning-aliases</a>.</p> <p>This operation requires permissions for the <code>lex:PutBotAlias</code> action. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutBotAliasResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: botName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutBotAliasRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/bots/{botName}/aliases/{aliasName}/channels/{name}':
+    get:
+      operationId: GetBotChannelAssociation
+      description: '<p>Returns information about the association between an Amazon Lex bot and a messaging platform.</p> <p>This operation requires permissions for the <code>lex:GetBotChannelAssociation</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBotChannelAssociationResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: botName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: aliasName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBotChannelAssociationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/bots/{name}/versions/{version}':
+    delete:
+      operationId: DeleteBotVersion
+      description: '<p>Deletes a specific version of a bot. To delete all versions of a bot, use the operation. </p> <p>This operation requires permissions for the <code>lex:DeleteBotVersion</code> action.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '485':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteBotVersionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/intents/{name}':
+    delete:
+      operationId: DeleteIntent
+      description: '<p>Deletes all versions of the intent, including the <code>$LATEST</code> version. To delete a specific version of the intent, use the operation.</p> <p> You can delete a version of an intent only if it is not referenced. To delete an intent that is referred to in one or more bots (see <a>how-it-works</a>), you must remove those references first. </p> <note> <p> If you get the <code>ResourceInUseException</code> exception, it provides an example reference that shows where the intent is referenced. To remove the reference to the intent, either update the bot or delete it. If you get the same exception when you attempt to delete the intent again, repeat until the intent has no references and the call to <code>DeleteIntent</code> is successful. </p> </note> <p> This operation requires permission for the <code>lex:DeleteIntent</code> action. </p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '485':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteIntentRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/intents/{name}/versions/{version}':
+    get:
+      operationId: GetIntent
+      description: '<p> Returns information about an intent. In addition to the intent name, you must specify the intent version. </p> <p> This operation requires permissions to perform the <code>lex:GetIntent</code> action. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetIntentResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetIntentRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/slottypes/{name}':
+    delete:
+      operationId: DeleteSlotType
+      description: '<p>Deletes all versions of the slot type, including the <code>$LATEST</code> version. To delete a specific version of the slot type, use the operation.</p> <p> You can delete a version of a slot type only if it is not referenced. To delete a slot type that is referred to in one or more intents, you must remove those references first. </p> <note> <p> If you get the <code>ResourceInUseException</code> exception, the exception provides an example reference that shows the intent where the slot type is referenced. To remove the reference to the slot type, either update the intent or delete it. If you get the same exception when you attempt to delete the slot type again, repeat until the slot type has no references and the <code>DeleteSlotType</code> call is successful. </p> </note> <p>This operation requires permission for the <code>lex:DeleteSlotType</code> action.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '485':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteSlotTypeRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/slottypes/{name}/version/{version}':
+    delete:
+      operationId: DeleteSlotTypeVersion
+      description: '<p>Deletes a specific version of a slot type. To delete all versions of a slot type, use the operation. </p> <p>This operation requires permissions for the <code>lex:DeleteSlotTypeVersion</code> action.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '485':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteSlotTypeVersionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/bots/{botName}/utterances/{userId}':
+    delete:
+      operationId: DeleteUtterances
+      description: '<p>Deletes stored utterances.</p> <p>Amazon Lex stores the utterances that users send to your bot unless the <code>childDirected</code> field in the bot is set to <code>true</code>. Utterances are stored for 15 days for use with the operation, and then stored indefinately for use in improving the ability of your bot to respond to user input.</p> <p>Use the <code>DeleteStoredUtterances</code> operation to manually delete stored utterances for a specific user.</p> <p>This operation requires permissions for the <code>lex:DeleteUtterances</code> action.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: botName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteUtterancesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/bots/{name}/versions/{versionoralias}':
+    get:
+      operationId: GetBot
+      description: '<p>Returns metadata information for a specific bot. You must provide the bot name and the bot version or alias. </p> <p> The GetBot operation requires permissions for the <code>lex:GetBot</code> action. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBotResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: versionoralias
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBotRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/bots/{botName}/aliases/':
+    get:
+      operationId: GetBotAliases
+      description: '<p>Returns a list of aliases for a specified Amazon Lex bot.</p> <p>This operation requires permissions for the <code>lex:GetBotAliases</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBotAliasesResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+        - name: botName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBotAliasesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/bots/{botName}/aliases/{aliasName}/channels/':
+    get:
+      operationId: GetBotChannelAssociations
+      description: '<p> Returns a list of all of the channels associated with the specified bot. </p> <p>The <code>GetBotChannelAssociations</code> operation requires permissions for the <code>lex:GetBotChannelAssociations</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBotChannelAssociationsResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+        - name: botName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: aliasName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBotChannelAssociationsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/bots/{name}/versions/':
+    get:
+      operationId: GetBotVersions
+      description: '<p>Gets information about all of the versions of a bot.</p> <p>The <code>GetBotVersions</code> operation returns a <code>BotMetadata</code> object for each version of a bot. For example, if a bot has three numbered versions, the <code>GetBotVersions</code> operation returns four <code>BotMetadata</code> objects in the response, one for each numbered version and one for the <code>$LATEST</code> version. </p> <p>The <code>GetBotVersions</code> operation always returns at least one version, the <code>$LATEST</code> version.</p> <p>This operation requires permissions for the <code>lex:GetBotVersions</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBotVersionsResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBotVersionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /bots/:
+    get:
+      operationId: GetBots
+      description: '<p>Returns bot information as follows: </p> <ul> <li> <p>If you provide the <code>nameContains</code> field, the response includes information for the <code>$LATEST</code> version of all bots whose name contains the specified string.</p> </li> <li> <p>If you don''t specify the <code>nameContains</code> field, the operation returns information about the <code>$LATEST</code> version of all of your bots.</p> </li> </ul> <p>This operation requires permission for the <code>lex:GetBots</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBotsResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBotsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/builtins/intents/{signature}':
+    get:
+      operationId: GetBuiltinIntent
+      description: '<p>Returns information about a built-in intent.</p> <p>This operation requires permission for the <code>lex:GetBuiltinIntent</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBuiltinIntentResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: signature
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBuiltinIntentRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /builtins/intents/:
+    get:
+      operationId: GetBuiltinIntents
+      description: '<p>Gets a list of built-in intents that meet the specified criteria.</p> <p>This operation requires permission for the <code>lex:GetBuiltinIntents</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBuiltinIntentsResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBuiltinIntentsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /builtins/slottypes/:
+    get:
+      operationId: GetBuiltinSlotTypes
+      description: '<p>Gets a list of built-in slot types that meet the specified criteria.</p> <p>For a list of built-in slot types, see <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference">Slot Type Reference</a> in the <i>Alexa Skills Kit</i>.</p> <p>This operation requires permission for the <code>lex:GetBuiltInSlotTypes</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBuiltinSlotTypesResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBuiltinSlotTypesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/intents/{name}/versions/':
+    get:
+      operationId: GetIntentVersions
+      description: '<p>Gets information about all of the versions of an intent.</p> <p>The <code>GetIntentVersions</code> operation returns an <code>IntentMetadata</code> object for each version of an intent. For example, if an intent has three numbered versions, the <code>GetIntentVersions</code> operation returns four <code>IntentMetadata</code> objects in the response, one for each numbered version and one for the <code>$LATEST</code> version. </p> <p>The <code>GetIntentVersions</code> operation always returns at least one version, the <code>$LATEST</code> version.</p> <p>This operation requires permissions for the <code>lex:GetIntentVersions</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetIntentVersionsResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetIntentVersionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /intents/:
+    get:
+      operationId: GetIntents
+      description: '<p>Returns intent information as follows: </p> <ul> <li> <p>If you specify the <code>nameContains</code> field, returns the <code>$LATEST</code> version of all intents that contain the specified string.</p> </li> <li> <p> If you don''t specify the <code>nameContains</code> field, returns information about the <code>$LATEST</code> version of all intents. </p> </li> </ul> <p> The operation requires permission for the <code>lex:GetIntents</code> action. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetIntentsResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetIntentsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/slottypes/{name}/versions/{version}':
+    get:
+      operationId: GetSlotType
+      description: '<p>Returns information about a specific version of a slot type. In addition to specifying the slot type name, you must specify the slot type version.</p> <p>This operation requires permissions for the <code>lex:GetSlotType</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSlotTypeResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSlotTypeRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/slottypes/{name}/versions/':
+    get:
+      operationId: GetSlotTypeVersions
+      description: '<p>Gets information about all versions of a slot type.</p> <p>The <code>GetSlotTypeVersions</code> operation returns a <code>SlotTypeMetadata</code> object for each version of a slot type. For example, if a slot type has three numbered versions, the <code>GetSlotTypeVersions</code> operation returns four <code>SlotTypeMetadata</code> objects in the response, one for each numbered version and one for the <code>$LATEST</code> version. </p> <p>The <code>GetSlotTypeVersions</code> operation always returns at least one version, the <code>$LATEST</code> version.</p> <p>This operation requires permissions for the <code>lex:GetSlotTypeVersions</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSlotTypeVersionsResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSlotTypeVersionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /slottypes/:
+    get:
+      operationId: GetSlotTypes
+      description: '<p>Returns slot type information as follows: </p> <ul> <li> <p>If you specify the <code>nameContains</code> field, returns the <code>$LATEST</code> version of all slot types that contain the specified string.</p> </li> <li> <p> If you don''t specify the <code>nameContains</code> field, returns information about the <code>$LATEST</code> version of all slot types. </p> </li> </ul> <p> The operation requires permission for the <code>lex:GetSlotTypes</code> action. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSlotTypesResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSlotTypesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/bots/{botname}/utterances?view=aggregation':
+    get:
+      operationId: GetUtterancesView
+      description: '<p>Use the <code>GetUtterancesView</code> operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to.</p> <p>For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the <code>GetUtterancesView</code> operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the <code>OrderFlowers</code> intent so that your bot recognizes that utterance.</p> <p>After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions. </p> <p>Data is available for the last 15 days. You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version.</p> <p>If the bot''s <code>childDirected</code> field is set to <code>true</code>, utterances for the bot are not stored and cannot be retrieved with the <code>GetUtterancesView</code> operation. For more information, see .</p> <p>This operation requires permissions for the <code>lex:GetUtterancesView</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUtterancesViewResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: botname
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetUtterancesViewRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/bots/{name}/versions/$LATEST':
+    put:
+      operationId: PutBot
+      description: '<p>Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you only required to specify a name. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with a name only, the bot is created or updated but Amazon Lex returns the <code/> response <code>FAILED</code>. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see <a>how-it-works</a>. </p> <p>If you specify the name of an existing bot, the fields in the request replace the existing values in the <code>$LATEST</code> version of the bot. Amazon Lex removes any fields that you don''t provide values for in the request, except for the <code>idleTTLInSeconds</code> and <code>privacySettings</code> fields, which are set to their default values. If you don''t specify values for required fields, Amazon Lex throws an exception.</p> <p>This operation requires permissions for the <code>lex:PutBot</code> action. For more information, see <a>auth-and-access-control</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutBotResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutBotRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/intents/{name}/versions/$LATEST':
+    put:
+      operationId: PutIntent
+      description: '<p>Creates an intent or replaces an existing intent.</p> <p>To define the interaction between the user and your bot, you use one or more intents. For a pizza ordering bot, for example, you would create an <code>OrderPizza</code> intent. </p> <p>To create an intent or replace an existing intent, you must provide the following:</p> <ul> <li> <p>Intent name. For example, <code>OrderPizza</code>.</p> </li> <li> <p>Sample utterances. For example, "Can I order a pizza, please." and "I want to order a pizza."</p> </li> <li> <p>Information to be gathered. You specify slot types for the information that your bot will request from the user. You can specify standard slot types, such as a date or a time, or custom slot types such as the size and crust of a pizza.</p> </li> <li> <p>How the intent will be fulfilled. You can provide a Lambda function or configure the intent to return the intent information to the client application. If you use a Lambda function, when all of the intent information is available, Amazon Lex invokes your Lambda function. If you configure your intent to return the intent information to the client application. </p> </li> </ul> <p>You can specify other optional information in the request, such as:</p> <ul> <li> <p>A confirmation prompt to ask the user to confirm an intent. For example, "Shall I order your pizza?"</p> </li> <li> <p>A conclusion statement to send to the user after the intent has been fulfilled. For example, "I placed your pizza order."</p> </li> <li> <p>A follow-up prompt that asks the user for additional activity. For example, asking "Do you want to order a drink with your pizza?"</p> </li> </ul> <p>If you specify an existing intent name to update the intent, Amazon Lex replaces the values in the <code>$LATEST</code> version of the slot type with the values in the request. Amazon Lex removes fields that you don''t provide in the request. If you don''t specify the required fields, Amazon Lex throws an exception.</p> <p>For more information, see <a>how-it-works</a>.</p> <p>This operation requires permissions for the <code>lex:PutIntent</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutIntentResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutIntentRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/slottypes/{name}/versions/$LATEST':
+    put:
+      operationId: PutSlotType
+      description: '<p>Creates a custom slot type or replaces an existing custom slot type.</p> <p>To create a custom slot type, specify a name for the slot type and a set of enumeration values, which are the values that a slot of this type can assume. For more information, see <a>how-it-works</a>.</p> <p>If you specify the name of an existing slot type, the fields in the request replace the existing values in the <code>$LATEST</code> version of the slot type. Amazon Lex removes the fields that you don''t provide in the request. If you don''t specify required fields, Amazon Lex throws an exception.</p> <p>This operation requires permissions for the <code>lex:PutSlotType</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutSlotTypeResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutSlotTypeRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AliasName:
+      type: string
+      pattern: '^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
+      minLength: 1
+      maxLength: 100
+    AliasNameOrListAll:
+      type: string
+      pattern: '^(-|^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*))$'
+      minLength: 1
+      maxLength: 100
+    BadRequestException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: 'The request is not well formed. For example, a value is invalid or a required field is missing. Check the field values, and try again.'
+    Boolean:
+      type: boolean
+    BotAliasMetadata:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/AliasName'
+        description:
+          $ref: '#/components/schemas/Description'
+        botVersion:
+          $ref: '#/components/schemas/Version'
+        botName:
+          $ref: '#/components/schemas/BotName'
+        lastUpdatedDate:
+          $ref: '#/components/schemas/Timestamp'
+        createdDate:
+          $ref: '#/components/schemas/Timestamp'
+        checksum:
+          $ref: '#/components/schemas/String'
+      description: Provides information about a bot alias.
+    BotAliasMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BotAliasMetadata'
+    BotChannelAssociation:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/BotChannelName'
+        description:
+          $ref: '#/components/schemas/Description'
+        botAlias:
+          $ref: '#/components/schemas/AliasName'
+        botName:
+          $ref: '#/components/schemas/BotName'
+        createdDate:
+          $ref: '#/components/schemas/Timestamp'
+        type:
+          $ref: '#/components/schemas/ChannelType'
+        botConfiguration:
+          $ref: '#/components/schemas/ChannelConfigurationMap'
+      description: Represents an association between an Amazon Lex bot and an external messaging platform.
+    BotChannelAssociationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BotChannelAssociation'
+    BotChannelName:
+      type: string
+      pattern: '^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
+      minLength: 1
+      maxLength: 100
+    BotMetadata:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/BotName'
+        description:
+          $ref: '#/components/schemas/Description'
+        status:
+          $ref: '#/components/schemas/Status'
+        lastUpdatedDate:
+          $ref: '#/components/schemas/Timestamp'
+        createdDate:
+          $ref: '#/components/schemas/Timestamp'
+        version:
+          $ref: '#/components/schemas/Version'
+      description: Provides information about a bot. .
+    BotMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BotMetadata'
+    BotName:
+      type: string
+      pattern: '^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
+      minLength: 2
+      maxLength: 50
+    BotVersions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Version'
+      minItems: 1
+      maxItems: 5
+    BuiltinIntentMetadata:
+      type: object
+      properties:
+        signature:
+          $ref: '#/components/schemas/BuiltinIntentSignature'
+        supportedLocales:
+          $ref: '#/components/schemas/LocaleList'
+      description: Provides metadata for a built-in intent.
+    BuiltinIntentMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BuiltinIntentMetadata'
+    BuiltinIntentSignature:
+      type: string
+    BuiltinIntentSlot:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/String'
+      description: Provides information about a slot used in a built-in intent.
+    BuiltinIntentSlotList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BuiltinIntentSlot'
+    BuiltinSlotTypeMetadata:
+      type: object
+      properties:
+        signature:
+          $ref: '#/components/schemas/BuiltinSlotTypeSignature'
+        supportedLocales:
+          $ref: '#/components/schemas/LocaleList'
+      description: Provides information about a built in slot type.
+    BuiltinSlotTypeMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BuiltinSlotTypeMetadata'
+    BuiltinSlotTypeSignature:
+      type: string
+    ChannelConfigurationMap:
+      type: array
+      minItems: 1
+      maxItems: 10
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/String'
+    ChannelType:
+      type: string
+      enum:
+        - Facebook
+        - Slack
+        - Twilio-Sms
+    CodeHook:
+      type: object
+      required:
+        - uri
+        - messageVersion
+      properties:
+        uri:
+          $ref: '#/components/schemas/LambdaARN'
+        messageVersion:
+          $ref: '#/components/schemas/MessageVersion'
+      description: Specifies a Lambda function that verifies requests to a bot or fulfills the user's request to a bot..
+    ConflictException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: ' There was a conflict processing the request. Try your request again. '
+    ContentString:
+      type: string
+      minLength: 1
+      maxLength: 1000
+    ContentType:
+      type: string
+      enum:
+        - PlainText
+        - SSML
+    Count:
+      type: integer
+    CreateBotVersionRequest:
+      type: object
+      properties:
+        checksum:
+          $ref: '#/components/schemas/String'
+    CreateBotVersionResponse:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/BotName'
+        description:
+          $ref: '#/components/schemas/Description'
+        intents:
+          $ref: '#/components/schemas/IntentList'
+        clarificationPrompt:
+          $ref: '#/components/schemas/Prompt'
+        abortStatement:
+          $ref: '#/components/schemas/Statement'
+        status:
+          $ref: '#/components/schemas/Status'
+        failureReason:
+          $ref: '#/components/schemas/String'
+        lastUpdatedDate:
+          $ref: '#/components/schemas/Timestamp'
+        createdDate:
+          $ref: '#/components/schemas/Timestamp'
+        idleSessionTTLInSeconds:
+          $ref: '#/components/schemas/SessionTTL'
+        voiceId:
+          $ref: '#/components/schemas/String'
+        checksum:
+          $ref: '#/components/schemas/String'
+        version:
+          $ref: '#/components/schemas/Version'
+        locale:
+          $ref: '#/components/schemas/Locale'
+        childDirected:
+          $ref: '#/components/schemas/Boolean'
+    CreateIntentVersionRequest:
+      type: object
+      properties:
+        checksum:
+          $ref: '#/components/schemas/String'
+    CreateIntentVersionResponse:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/IntentName'
+        description:
+          $ref: '#/components/schemas/Description'
+        slots:
+          $ref: '#/components/schemas/SlotList'
+        sampleUtterances:
+          $ref: '#/components/schemas/IntentUtteranceList'
+        confirmationPrompt:
+          $ref: '#/components/schemas/Prompt'
+        rejectionStatement:
+          $ref: '#/components/schemas/Statement'
+        followUpPrompt:
+          $ref: '#/components/schemas/FollowUpPrompt'
+        conclusionStatement:
+          $ref: '#/components/schemas/Statement'
+        dialogCodeHook:
+          $ref: '#/components/schemas/CodeHook'
+        fulfillmentActivity:
+          $ref: '#/components/schemas/FulfillmentActivity'
+        parentIntentSignature:
+          $ref: '#/components/schemas/BuiltinIntentSignature'
+        lastUpdatedDate:
+          $ref: '#/components/schemas/Timestamp'
+        createdDate:
+          $ref: '#/components/schemas/Timestamp'
+        version:
+          $ref: '#/components/schemas/Version'
+        checksum:
+          $ref: '#/components/schemas/String'
+    CreateSlotTypeVersionRequest:
+      type: object
+      properties:
+        checksum:
+          $ref: '#/components/schemas/String'
+    CreateSlotTypeVersionResponse:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/SlotTypeName'
+        description:
+          $ref: '#/components/schemas/Description'
+        enumerationValues:
+          $ref: '#/components/schemas/EnumerationValues'
+        lastUpdatedDate:
+          $ref: '#/components/schemas/Timestamp'
+        createdDate:
+          $ref: '#/components/schemas/Timestamp'
+        version:
+          $ref: '#/components/schemas/Version'
+        checksum:
+          $ref: '#/components/schemas/String'
+    CustomOrBuiltinSlotTypeName:
+      type: string
+      pattern: '^([a-zA-Z]|AMAZON.)+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
+      minLength: 1
+      maxLength: 100
+    DeleteBotAliasRequest:
+      type: object
+      properties: {}
+    DeleteBotChannelAssociationRequest:
+      type: object
+      properties: {}
+    DeleteBotRequest:
+      type: object
+      properties: {}
+    DeleteBotVersionRequest:
+      type: object
+      properties: {}
+    DeleteIntentRequest:
+      type: object
+      properties: {}
+    DeleteIntentVersionRequest:
+      type: object
+      properties: {}
+    DeleteSlotTypeRequest:
+      type: object
+      properties: {}
+    DeleteSlotTypeVersionRequest:
+      type: object
+      properties: {}
+    DeleteUtterancesRequest:
+      type: object
+      properties: {}
+    Description:
+      type: string
+      minLength: 0
+      maxLength: 200
+    EnumerationValue:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          $ref: '#/components/schemas/Value'
+      description: '<p>Each slot type can have a set of values. Each enumeration value represents a value the slot type can take. </p> <p>For example, a pizza ordering bot could have a slot type that specifies the type of crust that the pizza should have. The slot type could include the values </p> <ul> <li> <p>thick</p> </li> <li> <p>thin</p> </li> <li> <p>stuffed</p> </li> </ul>'
+    EnumerationValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/EnumerationValue'
+      minItems: 1
+      maxItems: 10000
+    FollowUpPrompt:
+      type: object
+      required:
+        - prompt
+        - rejectionStatement
+      properties:
+        prompt:
+          $ref: '#/components/schemas/Prompt'
+        rejectionStatement:
+          $ref: '#/components/schemas/Statement'
+      description: 'After an intent is fulfilled, you might prompt the user for additional activity. For example, after the <code>OrderPizza</code> intent is fulfilled (the pizza order is placed with a pizzeria), you might prompt the user to find out whether the user wants to order drinks (another intent you defined in your bot).'
+    FulfillmentActivity:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/FulfillmentActivityType'
+        codeHook:
+          $ref: '#/components/schemas/CodeHook'
+      description: '<p> Describes how the intent is fulfilled after the user provides all of the information required for the intent. You can provide a Lambda function to process the intent, or you can return the intent information to the client application. We recommend that you use a Lambda function so that the relevant logic lives in the Cloud and limit the client-side code primarily to presentation. If you need to update the logic, you only update the Lambda function; you don''t need to upgrade your client application. </p> <p>Consider the following examples:</p> <ul> <li> <p>In a pizza ordering application, after the user provides all of the information for placing an order, you use a Lambda function to place an order with a pizzeria. </p> </li> <li> <p>In a gaming application, when a user says "pick up a rock," this information must go back to the client application so that it can perform the operation and update the graphics. In this case, you want Amazon Lex to return the intent data to the client. </p> </li> </ul>'
+    FulfillmentActivityType:
+      type: string
+      enum:
+        - ReturnIntent
+        - CodeHook
+    GetBotAliasRequest:
+      type: object
+      properties: {}
+    GetBotAliasResponse:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/AliasName'
+        description:
+          $ref: '#/components/schemas/Description'
+        botVersion:
+          $ref: '#/components/schemas/Version'
+        botName:
+          $ref: '#/components/schemas/BotName'
+        lastUpdatedDate:
+          $ref: '#/components/schemas/Timestamp'
+        createdDate:
+          $ref: '#/components/schemas/Timestamp'
+        checksum:
+          $ref: '#/components/schemas/String'
+    GetBotAliasesRequest:
+      type: object
+      properties: {}
+    GetBotAliasesResponse:
+      type: object
+      properties:
+        BotAliases:
+          $ref: '#/components/schemas/BotAliasMetadataList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    GetBotChannelAssociationRequest:
+      type: object
+      properties: {}
+    GetBotChannelAssociationResponse:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/BotChannelName'
+        description:
+          $ref: '#/components/schemas/Description'
+        botAlias:
+          $ref: '#/components/schemas/AliasName'
+        botName:
+          $ref: '#/components/schemas/BotName'
+        createdDate:
+          $ref: '#/components/schemas/Timestamp'
+        type:
+          $ref: '#/components/schemas/ChannelType'
+        botConfiguration:
+          $ref: '#/components/schemas/ChannelConfigurationMap'
+    GetBotChannelAssociationsRequest:
+      type: object
+      properties: {}
+    GetBotChannelAssociationsResponse:
+      type: object
+      properties:
+        botChannelAssociations:
+          $ref: '#/components/schemas/BotChannelAssociationList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    GetBotRequest:
+      type: object
+      example:
+        name: DocOrderPizza
+        versionOrAlias: $LATEST
+      properties: {}
+    GetBotResponse:
+      type: object
+      example:
+        version: $LATEST
+        name: DocOrderPizzaBot
+        abortStatement:
+          messages:
+            - content: I don't understand. Can you try again?
+              contentType: PlainText
+            - content: 'I''m sorry, I don''t understand.'
+              contentType: PlainText
+        checksum: 20172ee3-fa06-49b2-bbc5-667c090303e9
+        childDirected: true
+        clarificationPrompt:
+          maxAttempts: 1
+          messages:
+            - content: 'I''m sorry, I didn''t hear that. Can you repeate what you just said?'
+              contentType: PlainText
+            - content: Can you say that again?
+              contentType: PlainText
+        createdDate: 1494360160.133
+        description: Orders a pizza from a local pizzeria.
+        idleSessionTTLInSeconds: 300
+        intents:
+          - intentName: DocOrderPizza
+            intentVersion: $LATEST
+        lastUpdatedDate: 1494360160.133
+        locale: en-US
+        status: NOT_BUILT
+      properties:
+        name:
+          $ref: '#/components/schemas/BotName'
+        description:
+          $ref: '#/components/schemas/Description'
+        intents:
+          $ref: '#/components/schemas/IntentList'
+        clarificationPrompt:
+          $ref: '#/components/schemas/Prompt'
+        abortStatement:
+          $ref: '#/components/schemas/Statement'
+        status:
+          $ref: '#/components/schemas/Status'
+        failureReason:
+          $ref: '#/components/schemas/String'
+        lastUpdatedDate:
+          $ref: '#/components/schemas/Timestamp'
+        createdDate:
+          $ref: '#/components/schemas/Timestamp'
+        idleSessionTTLInSeconds:
+          $ref: '#/components/schemas/SessionTTL'
+        voiceId:
+          $ref: '#/components/schemas/String'
+        checksum:
+          $ref: '#/components/schemas/String'
+        version:
+          $ref: '#/components/schemas/Version'
+        locale:
+          $ref: '#/components/schemas/Locale'
+        childDirected:
+          $ref: '#/components/schemas/Boolean'
+    GetBotVersionsRequest:
+      type: object
+      properties: {}
+    GetBotVersionsResponse:
+      type: object
+      properties:
+        bots:
+          $ref: '#/components/schemas/BotMetadataList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    GetBotsRequest:
+      type: object
+      example:
+        maxResults: 5
+        nextToken: ''
+      properties: {}
+    GetBotsResponse:
+      type: object
+      example:
+        bots:
+          - version: $LATEST
+            name: DocOrderPizzaBot
+            createdDate: 1494360160.133
+            description: Orders a pizza from a local pizzeria.
+            lastUpdatedDate: 1494360160.133
+            status: NOT_BUILT
+      properties:
+        bots:
+          $ref: '#/components/schemas/BotMetadataList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    GetBuiltinIntentRequest:
+      type: object
+      properties: {}
+    GetBuiltinIntentResponse:
+      type: object
+      properties:
+        signature:
+          $ref: '#/components/schemas/BuiltinIntentSignature'
+        supportedLocales:
+          $ref: '#/components/schemas/LocaleList'
+        slots:
+          $ref: '#/components/schemas/BuiltinIntentSlotList'
+    GetBuiltinIntentsRequest:
+      type: object
+      properties: {}
+    GetBuiltinIntentsResponse:
+      type: object
+      properties:
+        intents:
+          $ref: '#/components/schemas/BuiltinIntentMetadataList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    GetBuiltinSlotTypesRequest:
+      type: object
+      properties: {}
+    GetBuiltinSlotTypesResponse:
+      type: object
+      properties:
+        slotTypes:
+          $ref: '#/components/schemas/BuiltinSlotTypeMetadataList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    GetIntentRequest:
+      type: object
+      example:
+        version: $LATEST
+        name: DocOrderPizza
+      properties: {}
+    GetIntentResponse:
+      type: object
+      example:
+        version: $LATEST
+        name: DocOrderPizza
+        checksum: ca9bc13d-afc8-4706-bbaf-091f7a5935d6
+        conclusionStatement:
+          messages:
+            - content: 'All right, I ordered  you a {Crust} crust {Type} pizza with {Sauce} sauce.'
+              contentType: PlainText
+            - content: 'OK, your {Crust} crust {Type} pizza with {Sauce} sauce is on the way.'
+              contentType: PlainText
+          responseCard: foo
+        confirmationPrompt:
+          maxAttempts: 1
+          messages:
+            - content: 'Should I order  your {Crust} crust {Type} pizza with {Sauce} sauce?'
+              contentType: PlainText
+        createdDate: 1494359783.453
+        description: Order a pizza from a local pizzeria.
+        fulfillmentActivity:
+          type: ReturnIntent
+        lastUpdatedDate: 1494359783.453
+        rejectionStatement:
+          messages:
+            - content: 'Ok, I''ll cancel your order.'
+              contentType: PlainText
+            - content: I cancelled your order.
+              contentType: PlainText
+        sampleUtterances:
+          - Order me a pizza.
+          - 'Order me a {Type} pizza.'
+          - 'I want a {Crust} crust {Type} pizza'
+          - 'I want a {Crust} crust {Type} pizza with {Sauce} sauce.'
+        slots:
+          - name: Type
+            description: The type of pizza to order.
+            priority: 1
+            sampleUtterances:
+              - 'Get me a {Type} pizza.'
+              - 'A {Type} pizza please.'
+              - 'I''d like a {Type} pizza.'
+            slotConstraint: Required
+            slotType: DocPizzaType
+            slotTypeVersion: $LATEST
+            valueElicitationPrompt:
+              maxAttempts: 1
+              messages:
+                - content: What type of pizza would you like?
+                  contentType: PlainText
+                - content: Vegie or cheese pizza?
+                  contentType: PlainText
+                - content: I can get you a vegie or a cheese pizza.
+                  contentType: PlainText
+          - name: Crust
+            description: The type of pizza crust to order.
+            priority: 2
+            sampleUtterances:
+              - 'Make it a {Crust} crust.'
+              - 'I''d like a {Crust} crust.'
+            slotConstraint: Required
+            slotType: DocPizzaCrustType
+            slotTypeVersion: $LATEST
+            valueElicitationPrompt:
+              maxAttempts: 1
+              messages:
+                - content: What type of crust would you like?
+                  contentType: PlainText
+                - content: Thick or thin crust?
+                  contentType: PlainText
+          - name: Sauce
+            description: The type of sauce to use on the pizza.
+            priority: 3
+            sampleUtterances:
+              - 'Make it {Sauce} sauce.'
+              - 'I''d like {Sauce} sauce.'
+            slotConstraint: Required
+            slotType: DocPizzaSauceType
+            slotTypeVersion: $LATEST
+            valueElicitationPrompt:
+              maxAttempts: 1
+              messages:
+                - content: White or red sauce?
+                  contentType: PlainText
+                - content: Garlic or tomato sauce?
+                  contentType: PlainText
+      properties:
+        name:
+          $ref: '#/components/schemas/IntentName'
+        description:
+          $ref: '#/components/schemas/Description'
+        slots:
+          $ref: '#/components/schemas/SlotList'
+        sampleUtterances:
+          $ref: '#/components/schemas/IntentUtteranceList'
+        confirmationPrompt:
+          $ref: '#/components/schemas/Prompt'
+        rejectionStatement:
+          $ref: '#/components/schemas/Statement'
+        followUpPrompt:
+          $ref: '#/components/schemas/FollowUpPrompt'
+        conclusionStatement:
+          $ref: '#/components/schemas/Statement'
+        dialogCodeHook:
+          $ref: '#/components/schemas/CodeHook'
+        fulfillmentActivity:
+          $ref: '#/components/schemas/FulfillmentActivity'
+        parentIntentSignature:
+          $ref: '#/components/schemas/BuiltinIntentSignature'
+        lastUpdatedDate:
+          $ref: '#/components/schemas/Timestamp'
+        createdDate:
+          $ref: '#/components/schemas/Timestamp'
+        version:
+          $ref: '#/components/schemas/Version'
+        checksum:
+          $ref: '#/components/schemas/String'
+    GetIntentVersionsRequest:
+      type: object
+      properties: {}
+    GetIntentVersionsResponse:
+      type: object
+      properties:
+        intents:
+          $ref: '#/components/schemas/IntentMetadataList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    GetIntentsRequest:
+      type: object
+      example:
+        maxResults: 10
+        nextToken: ''
+      properties: {}
+    GetIntentsResponse:
+      type: object
+      example:
+        intents:
+          - version: $LATEST
+            name: DocOrderPizza
+            createdDate: 1494359783.453
+            description: Order a pizza from a local pizzeria.
+            lastUpdatedDate: 1494359783.453
+      properties:
+        intents:
+          $ref: '#/components/schemas/IntentMetadataList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    GetSlotTypeRequest:
+      type: object
+      example:
+        version: $LATEST
+        name: DocPizzaCrustType
+      properties: {}
+    GetSlotTypeResponse:
+      type: object
+      example:
+        version: $LATEST
+        name: DocPizzaCrustType
+        checksum: 210b3d5a-90a3-4b22-ac7e-f50c2c71095f
+        createdDate: 1494359274.403
+        description: Available crust types
+        enumerationValues:
+          - value: thick
+          - value: thin
+        lastUpdatedDate: 1494359274.403
+      properties:
+        name:
+          $ref: '#/components/schemas/SlotTypeName'
+        description:
+          $ref: '#/components/schemas/Description'
+        enumerationValues:
+          $ref: '#/components/schemas/EnumerationValues'
+        lastUpdatedDate:
+          $ref: '#/components/schemas/Timestamp'
+        createdDate:
+          $ref: '#/components/schemas/Timestamp'
+        version:
+          $ref: '#/components/schemas/Version'
+        checksum:
+          $ref: '#/components/schemas/String'
+    GetSlotTypeVersionsRequest:
+      type: object
+      properties: {}
+    GetSlotTypeVersionsResponse:
+      type: object
+      properties:
+        slotTypes:
+          $ref: '#/components/schemas/SlotTypeMetadataList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    GetSlotTypesRequest:
+      type: object
+      example:
+        maxResults: 10
+        nextToken: ''
+      properties: {}
+    GetSlotTypesResponse:
+      type: object
+      example:
+        slotTypes:
+          - version: $LATEST
+            name: DocPizzaCrustType
+            createdDate: 1494359274.403
+            description: Available crust types
+            lastUpdatedDate: 1494359274.403
+          - version: $LATEST
+            name: DocPizzaSauceType
+            createdDate: 1494356442.23
+            description: Available pizza sauces
+            lastUpdatedDate: 1494356442.23
+          - version: $LATEST
+            name: DocPizzaType
+            createdDate: 1494359198.656
+            description: Available pizzas
+            lastUpdatedDate: 1494359198.656
+      properties:
+        slotTypes:
+          $ref: '#/components/schemas/SlotTypeMetadataList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    GetUtterancesViewRequest:
+      type: object
+      properties: {}
+    GetUtterancesViewResponse:
+      type: object
+      properties:
+        botName:
+          $ref: '#/components/schemas/BotName'
+        utterances:
+          $ref: '#/components/schemas/ListsOfUtterances'
+    Intent:
+      type: object
+      required:
+        - intentName
+        - intentVersion
+      properties:
+        intentName:
+          $ref: '#/components/schemas/IntentName'
+        intentVersion:
+          $ref: '#/components/schemas/Version'
+      description: Identifies the specific version of an intent.
+    IntentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Intent'
+      minItems: 1
+      maxItems: 100
+    IntentMetadata:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/IntentName'
+        description:
+          $ref: '#/components/schemas/Description'
+        lastUpdatedDate:
+          $ref: '#/components/schemas/Timestamp'
+        createdDate:
+          $ref: '#/components/schemas/Timestamp'
+        version:
+          $ref: '#/components/schemas/Version'
+      description: Provides information about an intent.
+    IntentMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/IntentMetadata'
+    IntentName:
+      type: string
+      pattern: '^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
+      minLength: 1
+      maxLength: 100
+    IntentUtteranceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Utterance'
+      minItems: 0
+      maxItems: 1500
+    InternalFailureException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: An internal Amazon Lex error occurred. Try your request again.
+    LambdaARN:
+      type: string
+      pattern: 'arn:aws:lambda:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:function:[a-zA-Z0-9-_]+(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?(:[a-zA-Z0-9-_]+)?'
+      minLength: 20
+      maxLength: 2048
+    LimitExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: The request exceeded a limit. Try your request again.
+    ListOfUtterance:
+      type: array
+      items:
+        $ref: '#/components/schemas/UtteranceData'
+    ListsOfUtterances:
+      type: array
+      items:
+        $ref: '#/components/schemas/UtteranceList'
+    Locale:
+      type: string
+      enum:
+        - en-US
+    LocaleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Locale'
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 50
+    Message:
+      type: object
+      required:
+        - contentType
+        - content
+      properties:
+        contentType:
+          $ref: '#/components/schemas/ContentType'
+        content:
+          $ref: '#/components/schemas/ContentString'
+      description: The message object that provides the message text and its type.
+    MessageList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Message'
+      minItems: 1
+      maxItems: 5
+    MessageVersion:
+      type: string
+      minLength: 1
+      maxLength: 5
+    Name:
+      type: string
+      pattern: '[a-zA-Z]+'
+      minLength: 1
+      maxLength: 64
+    NextToken:
+      type: string
+    NotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: The resource specified in the request was not found. Check the resource and try again.
+    NumericalVersion:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 1
+      maxLength: 64
+    PreconditionFailedException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: ' The checksum of the resource that you are trying to change does not match the checksum in the request. Check the resource''s checksum and try again.'
+    Priority:
+      type: integer
+      minimum: 0
+      maximum: 100
+    ProcessBehavior:
+      type: string
+      enum:
+        - SAVE
+        - BUILD
+    Prompt:
+      type: object
+      required:
+        - messages
+        - maxAttempts
+      properties:
+        messages:
+          $ref: '#/components/schemas/MessageList'
+        maxAttempts:
+          $ref: '#/components/schemas/PromptMaxAttempts'
+        responseCard:
+          $ref: '#/components/schemas/ResponseCard'
+      description: 'Obtains information from the user. To define a prompt, provide one or more messages and specify the number of attempts to get information from the user. If you provide more than one message, Amazon Lex chooses one of the messages to use to prompt the user. For more information, see <a>how-it-works</a>.'
+    PromptMaxAttempts:
+      type: integer
+      minimum: 1
+      maximum: 5
+    PutBotAliasRequest:
+      type: object
+      required:
+        - botVersion
+      properties:
+        description:
+          $ref: '#/components/schemas/Description'
+        botVersion:
+          $ref: '#/components/schemas/Version'
+        checksum:
+          $ref: '#/components/schemas/String'
+    PutBotAliasResponse:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/AliasName'
+        description:
+          $ref: '#/components/schemas/Description'
+        botVersion:
+          $ref: '#/components/schemas/Version'
+        botName:
+          $ref: '#/components/schemas/BotName'
+        lastUpdatedDate:
+          $ref: '#/components/schemas/Timestamp'
+        createdDate:
+          $ref: '#/components/schemas/Timestamp'
+        checksum:
+          $ref: '#/components/schemas/String'
+    PutBotRequest:
+      type: object
+      required:
+        - locale
+        - childDirected
+      example:
+        name: DocOrderPizzaBot
+        abortStatement:
+          messages:
+            - content: I don't understand. Can you try again?
+              contentType: PlainText
+            - content: 'I''m sorry, I don''t understand.'
+              contentType: PlainText
+        childDirected: true
+        clarificationPrompt:
+          maxAttempts: 1
+          messages:
+            - content: 'I''m sorry, I didn''t hear that. Can you repeate what you just said?'
+              contentType: PlainText
+            - content: Can you say that again?
+              contentType: PlainText
+        description: Orders a pizza from a local pizzeria.
+        idleSessionTTLInSeconds: 300
+        intents:
+          - intentName: DocOrderPizza
+            intentVersion: $LATEST
+        locale: en-US
+        processBehavior: SAVE
+      properties:
+        description:
+          $ref: '#/components/schemas/Description'
+        intents:
+          $ref: '#/components/schemas/IntentList'
+        clarificationPrompt:
+          $ref: '#/components/schemas/Prompt'
+        abortStatement:
+          $ref: '#/components/schemas/Statement'
+        idleSessionTTLInSeconds:
+          $ref: '#/components/schemas/SessionTTL'
+        voiceId:
+          $ref: '#/components/schemas/String'
+        checksum:
+          $ref: '#/components/schemas/String'
+        processBehavior:
+          $ref: '#/components/schemas/ProcessBehavior'
+        locale:
+          $ref: '#/components/schemas/Locale'
+        childDirected:
+          $ref: '#/components/schemas/Boolean'
+    PutBotResponse:
+      type: object
+      example:
+        version: $LATEST
+        name: DocOrderPizzaBot
+        abortStatement:
+          messages:
+            - content: I don't understand. Can you try again?
+              contentType: PlainText
+            - content: 'I''m sorry, I don''t understand.'
+              contentType: PlainText
+        checksum: 20172ee3-fa06-49b2-bbc5-667c090303e9
+        childDirected: true
+        clarificationPrompt:
+          maxAttempts: 1
+          messages:
+            - content: 'I''m sorry, I didn''t hear that. Can you repeate what you just said?'
+              contentType: PlainText
+            - content: Can you say that again?
+              contentType: PlainText
+        createdDate: 1494360160.133
+        description: Orders a pizza from a local pizzeria.
+        idleSessionTTLInSeconds: 300
+        intents:
+          - intentName: DocOrderPizza
+            intentVersion: $LATEST
+        lastUpdatedDate: 1494360160.133
+        locale: en-US
+        status: NOT_BUILT
+      properties:
+        name:
+          $ref: '#/components/schemas/BotName'
+        description:
+          $ref: '#/components/schemas/Description'
+        intents:
+          $ref: '#/components/schemas/IntentList'
+        clarificationPrompt:
+          $ref: '#/components/schemas/Prompt'
+        abortStatement:
+          $ref: '#/components/schemas/Statement'
+        status:
+          $ref: '#/components/schemas/Status'
+        failureReason:
+          $ref: '#/components/schemas/String'
+        lastUpdatedDate:
+          $ref: '#/components/schemas/Timestamp'
+        createdDate:
+          $ref: '#/components/schemas/Timestamp'
+        idleSessionTTLInSeconds:
+          $ref: '#/components/schemas/SessionTTL'
+        voiceId:
+          $ref: '#/components/schemas/String'
+        checksum:
+          $ref: '#/components/schemas/String'
+        version:
+          $ref: '#/components/schemas/Version'
+        locale:
+          $ref: '#/components/schemas/Locale'
+        childDirected:
+          $ref: '#/components/schemas/Boolean'
+    PutIntentRequest:
+      type: object
+      example:
+        name: DocOrderPizza
+        conclusionStatement:
+          messages:
+            - content: 'All right, I ordered  you a {Crust} crust {Type} pizza with {Sauce} sauce.'
+              contentType: PlainText
+            - content: 'OK, your {Crust} crust {Type} pizza with {Sauce} sauce is on the way.'
+              contentType: PlainText
+          responseCard: foo
+        confirmationPrompt:
+          maxAttempts: 1
+          messages:
+            - content: 'Should I order  your {Crust} crust {Type} pizza with {Sauce} sauce?'
+              contentType: PlainText
+        description: Order a pizza from a local pizzeria.
+        fulfillmentActivity:
+          type: ReturnIntent
+        rejectionStatement:
+          messages:
+            - content: 'Ok, I''ll cancel your order.'
+              contentType: PlainText
+            - content: I cancelled your order.
+              contentType: PlainText
+        sampleUtterances:
+          - Order me a pizza.
+          - 'Order me a {Type} pizza.'
+          - 'I want a {Crust} crust {Type} pizza'
+          - 'I want a {Crust} crust {Type} pizza with {Sauce} sauce.'
+        slots:
+          - name: Type
+            description: The type of pizza to order.
+            priority: 1
+            sampleUtterances:
+              - 'Get me a {Type} pizza.'
+              - 'A {Type} pizza please.'
+              - 'I''d like a {Type} pizza.'
+            slotConstraint: Required
+            slotType: DocPizzaType
+            slotTypeVersion: $LATEST
+            valueElicitationPrompt:
+              maxAttempts: 1
+              messages:
+                - content: What type of pizza would you like?
+                  contentType: PlainText
+                - content: Vegie or cheese pizza?
+                  contentType: PlainText
+                - content: I can get you a vegie or a cheese pizza.
+                  contentType: PlainText
+          - name: Crust
+            description: The type of pizza crust to order.
+            priority: 2
+            sampleUtterances:
+              - 'Make it a {Crust} crust.'
+              - 'I''d like a {Crust} crust.'
+            slotConstraint: Required
+            slotType: DocPizzaCrustType
+            slotTypeVersion: $LATEST
+            valueElicitationPrompt:
+              maxAttempts: 1
+              messages:
+                - content: What type of crust would you like?
+                  contentType: PlainText
+                - content: Thick or thin crust?
+                  contentType: PlainText
+          - name: Sauce
+            description: The type of sauce to use on the pizza.
+            priority: 3
+            sampleUtterances:
+              - 'Make it {Sauce} sauce.'
+              - 'I''d like {Sauce} sauce.'
+            slotConstraint: Required
+            slotType: DocPizzaSauceType
+            slotTypeVersion: $LATEST
+            valueElicitationPrompt:
+              maxAttempts: 1
+              messages:
+                - content: White or red sauce?
+                  contentType: PlainText
+                - content: Garlic or tomato sauce?
+                  contentType: PlainText
+      properties:
+        description:
+          $ref: '#/components/schemas/Description'
+        slots:
+          $ref: '#/components/schemas/SlotList'
+        sampleUtterances:
+          $ref: '#/components/schemas/IntentUtteranceList'
+        confirmationPrompt:
+          $ref: '#/components/schemas/Prompt'
+        rejectionStatement:
+          $ref: '#/components/schemas/Statement'
+        followUpPrompt:
+          $ref: '#/components/schemas/FollowUpPrompt'
+        conclusionStatement:
+          $ref: '#/components/schemas/Statement'
+        dialogCodeHook:
+          $ref: '#/components/schemas/CodeHook'
+        fulfillmentActivity:
+          $ref: '#/components/schemas/FulfillmentActivity'
+        parentIntentSignature:
+          $ref: '#/components/schemas/BuiltinIntentSignature'
+        checksum:
+          $ref: '#/components/schemas/String'
+    PutIntentResponse:
+      type: object
+      example:
+        version: $LATEST
+        name: DocOrderPizza
+        checksum: ca9bc13d-afc8-4706-bbaf-091f7a5935d6
+        conclusionStatement:
+          messages:
+            - content: 'All right, I ordered  you a {Crust} crust {Type} pizza with {Sauce} sauce.'
+              contentType: PlainText
+            - content: 'OK, your {Crust} crust {Type} pizza with {Sauce} sauce is on the way.'
+              contentType: PlainText
+          responseCard: foo
+        confirmationPrompt:
+          maxAttempts: 1
+          messages:
+            - content: 'Should I order  your {Crust} crust {Type} pizza with {Sauce} sauce?'
+              contentType: PlainText
+        createdDate: 1494359783.453
+        description: Order a pizza from a local pizzeria.
+        fulfillmentActivity:
+          type: ReturnIntent
+        lastUpdatedDate: 1494359783.453
+        rejectionStatement:
+          messages:
+            - content: 'Ok, I''ll cancel your order.'
+              contentType: PlainText
+            - content: I cancelled your order.
+              contentType: PlainText
+        sampleUtterances:
+          - Order me a pizza.
+          - 'Order me a {Type} pizza.'
+          - 'I want a {Crust} crust {Type} pizza'
+          - 'I want a {Crust} crust {Type} pizza with {Sauce} sauce.'
+        slots:
+          - name: Sauce
+            description: The type of sauce to use on the pizza.
+            priority: 3
+            sampleUtterances:
+              - 'Make it {Sauce} sauce.'
+              - 'I''d like {Sauce} sauce.'
+            slotConstraint: Required
+            slotType: DocPizzaSauceType
+            slotTypeVersion: $LATEST
+            valueElicitationPrompt:
+              maxAttempts: 1
+              messages:
+                - content: White or red sauce?
+                  contentType: PlainText
+                - content: Garlic or tomato sauce?
+                  contentType: PlainText
+          - name: Type
+            description: The type of pizza to order.
+            priority: 1
+            sampleUtterances:
+              - 'Get me a {Type} pizza.'
+              - 'A {Type} pizza please.'
+              - 'I''d like a {Type} pizza.'
+            slotConstraint: Required
+            slotType: DocPizzaType
+            slotTypeVersion: $LATEST
+            valueElicitationPrompt:
+              maxAttempts: 1
+              messages:
+                - content: What type of pizza would you like?
+                  contentType: PlainText
+                - content: Vegie or cheese pizza?
+                  contentType: PlainText
+                - content: I can get you a vegie or a cheese pizza.
+                  contentType: PlainText
+          - name: Crust
+            description: The type of pizza crust to order.
+            priority: 2
+            sampleUtterances:
+              - 'Make it a {Crust} crust.'
+              - 'I''d like a {Crust} crust.'
+            slotConstraint: Required
+            slotType: DocPizzaCrustType
+            slotTypeVersion: $LATEST
+            valueElicitationPrompt:
+              maxAttempts: 1
+              messages:
+                - content: What type of crust would you like?
+                  contentType: PlainText
+                - content: Thick or thin crust?
+                  contentType: PlainText
+      properties:
+        name:
+          $ref: '#/components/schemas/IntentName'
+        description:
+          $ref: '#/components/schemas/Description'
+        slots:
+          $ref: '#/components/schemas/SlotList'
+        sampleUtterances:
+          $ref: '#/components/schemas/IntentUtteranceList'
+        confirmationPrompt:
+          $ref: '#/components/schemas/Prompt'
+        rejectionStatement:
+          $ref: '#/components/schemas/Statement'
+        followUpPrompt:
+          $ref: '#/components/schemas/FollowUpPrompt'
+        conclusionStatement:
+          $ref: '#/components/schemas/Statement'
+        dialogCodeHook:
+          $ref: '#/components/schemas/CodeHook'
+        fulfillmentActivity:
+          $ref: '#/components/schemas/FulfillmentActivity'
+        parentIntentSignature:
+          $ref: '#/components/schemas/BuiltinIntentSignature'
+        lastUpdatedDate:
+          $ref: '#/components/schemas/Timestamp'
+        createdDate:
+          $ref: '#/components/schemas/Timestamp'
+        version:
+          $ref: '#/components/schemas/Version'
+        checksum:
+          $ref: '#/components/schemas/String'
+    PutSlotTypeRequest:
+      type: object
+      example:
+        name: PizzaSauceType
+        description: Available pizza sauces
+        enumerationValues:
+          - value: red
+          - value: white
+      properties:
+        description:
+          $ref: '#/components/schemas/Description'
+        enumerationValues:
+          $ref: '#/components/schemas/EnumerationValues'
+        checksum:
+          $ref: '#/components/schemas/String'
+    PutSlotTypeResponse:
+      type: object
+      example:
+        version: $LATEST
+        name: DocPizzaSauceType
+        checksum: cfd00ed1-775d-4357-947c-aca7e73b44ba
+        createdDate: 1494356442.23
+        description: Available pizza sauces
+        enumerationValues:
+          - value: red
+          - value: white
+        lastUpdatedDate: 1494356442.23
+      properties:
+        name:
+          $ref: '#/components/schemas/SlotTypeName'
+        description:
+          $ref: '#/components/schemas/Description'
+        enumerationValues:
+          $ref: '#/components/schemas/EnumerationValues'
+        lastUpdatedDate:
+          $ref: '#/components/schemas/Timestamp'
+        createdDate:
+          $ref: '#/components/schemas/Timestamp'
+        version:
+          $ref: '#/components/schemas/Version'
+        checksum:
+          $ref: '#/components/schemas/String'
+    ReferenceType:
+      type: string
+      enum:
+        - Intent
+        - Bot
+        - BotAlias
+        - BotChannel
+    ResourceInUseException:
+      type: object
+      properties:
+        referenceType:
+          $ref: '#/components/schemas/ReferenceType'
+        exampleReference:
+          $ref: '#/components/schemas/ResourceReference'
+      description: '<p>The resource that you are attempting to delete is referred to by another resource. Use this information to remove references to the resource that you are trying to delete.</p> <p>The body of the exception contains a JSON object that describes the resource.</p> <p> <code>{ "resourceType": BOT | BOTALIAS | BOTCHANNEL | INTENT,</code> </p> <p> <code>"resourceReference": {</code> </p> <p> <code>"name": <i>string</i>, "version": <i>string</i> } }</code> </p>'
+    ResourceReference:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/Name'
+        version:
+          $ref: '#/components/schemas/Version'
+      description: 'Describes the resource that refers to the resource that you are attempting to delete. This object is returned as part of the <code>ResourceInUseException</code> exception. '
+    ResponseCard:
+      type: string
+      minLength: 1
+      maxLength: 50000
+    SessionTTL:
+      type: integer
+      minimum: 60
+      maximum: 86400
+    Slot:
+      type: object
+      required:
+        - name
+        - slotConstraint
+      properties:
+        name:
+          $ref: '#/components/schemas/SlotName'
+        description:
+          $ref: '#/components/schemas/Description'
+        slotConstraint:
+          $ref: '#/components/schemas/SlotConstraint'
+        slotType:
+          $ref: '#/components/schemas/CustomOrBuiltinSlotTypeName'
+        slotTypeVersion:
+          $ref: '#/components/schemas/Version'
+        valueElicitationPrompt:
+          $ref: '#/components/schemas/Prompt'
+        priority:
+          $ref: '#/components/schemas/Priority'
+        sampleUtterances:
+          $ref: '#/components/schemas/SlotUtteranceList'
+        responseCard:
+          $ref: '#/components/schemas/ResponseCard'
+      description: Identifies the version of a specific slot.
+    SlotConstraint:
+      type: string
+      enum:
+        - Required
+        - Optional
+    SlotList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Slot'
+      minItems: 0
+      maxItems: 100
+    SlotName:
+      type: string
+      pattern: '^[a-zA-Z]+(((_|.)[a-zA-Z]+)*|([a-zA-Z]+(_|.))*|(_|.))'
+      minLength: 1
+      maxLength: 100
+    SlotTypeMetadata:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/SlotTypeName'
+        description:
+          $ref: '#/components/schemas/Description'
+        lastUpdatedDate:
+          $ref: '#/components/schemas/Timestamp'
+        createdDate:
+          $ref: '#/components/schemas/Timestamp'
+        version:
+          $ref: '#/components/schemas/Version'
+      description: Provides information about a slot type..
+    SlotTypeMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SlotTypeMetadata'
+    SlotTypeName:
+      type: string
+      pattern: '^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
+      minLength: 1
+      maxLength: 100
+    SlotUtteranceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Utterance'
+      minItems: 0
+      maxItems: 10
+    Statement:
+      type: object
+      required:
+        - messages
+      properties:
+        messages:
+          $ref: '#/components/schemas/MessageList'
+        responseCard:
+          $ref: '#/components/schemas/ResponseCard'
+      description: 'A collection of messages that convey information to the user. At runtime, Amazon Lex selects the message to convey. '
+    Status:
+      type: string
+      enum:
+        - BUILDING
+        - READY
+        - FAILED
+        - NOT_BUILT
+    StatusType:
+      type: string
+      enum:
+        - Detected
+        - Missed
+    String:
+      type: string
+    Timestamp:
+      type: string
+      format: date-time
+    UserId:
+      type: string
+      minLength: 2
+      maxLength: 100
+    Utterance:
+      type: string
+      minLength: 1
+      maxLength: 200
+    UtteranceData:
+      type: object
+      properties:
+        utteranceString:
+          $ref: '#/components/schemas/UtteranceString'
+        count:
+          $ref: '#/components/schemas/Count'
+        distinctUsers:
+          $ref: '#/components/schemas/Count'
+        firstUtteredDate:
+          $ref: '#/components/schemas/Timestamp'
+        lastUtteredDate:
+          $ref: '#/components/schemas/Timestamp'
+      description: 'Provides information about a single utterance that was made to your bot. '
+    UtteranceList:
+      type: object
+      properties:
+        botVersion:
+          $ref: '#/components/schemas/Version'
+        utterances:
+          $ref: '#/components/schemas/ListOfUtterance'
+      description: Provides a list of utterances that have been made to a specific version of your bot. The list contains a maximum of 100 utterances.
+    UtteranceString:
+      type: string
+      minLength: 1
+      maxLength: 2000
+    Value:
+      type: string
+      minLength: 1
+      maxLength: 140
+    Version:
+      type: string
+      pattern: '\$LATEST|[0-9]+'
+      minLength: 1
+      maxLength: 64
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

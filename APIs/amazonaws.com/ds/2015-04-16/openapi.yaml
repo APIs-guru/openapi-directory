@@ -1,0 +1,3905 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://ds.amazonaws.com/'
+info:
+  version: '2015-04-16'
+  x-release: v4
+  title: AWS Directory Service
+  description: '<fullname>AWS Directory Service</fullname> <p>AWS Directory Service is a web service that makes it easy for you to setup and run directories in the AWS cloud, or connect your AWS resources with an existing on-premises Microsoft Active Directory. This guide provides detailed information about AWS Directory Service operations, data types, parameters, and errors. For information about AWS Directory Services features, see <a href="https://aws.amazon.com/directoryservice/">AWS Directory Service</a> and the <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html">AWS Directory Service Administration Guide</a>.</p> <note> <p>AWS provides SDKs that consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .Net, iOS, Android, etc.). The SDKs provide a convenient way to create programmatic access to AWS Directory Service and other AWS services. For more information about the AWS SDKs, including how to download and install them, see <a href="http://aws.amazon.com/tools/">Tools for Amazon Web Services</a>.</p> </note>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: ds
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/ds-2015-04-16.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/ds/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AddIpRoutes
+      description: '<p>If the DNS server for your on-premises domain uses a publicly addressable IP address, you must add a CIDR address block to correctly route traffic to and from your Microsoft AD on Amazon Web Services. <i>AddIpRoutes</i> adds this address block. You can also use <i>AddIpRoutes</i> to facilitate routing traffic that uses public IP ranges from your Microsoft AD on AWS to a peer VPC. </p> <p>Before you call <i>AddIpRoutes</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>AddIpRoutes</i> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddIpRoutesResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: EntityAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityAlreadyExistsException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: DirectoryUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryUnavailableException'
+        '484':
+          description: IpRouteLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IpRouteLimitExceededException'
+        '485':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '486':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddIpRoutesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AddTagsToResource':
+    post:
+      operationId: AddTagsToResource
+      description: Adds or overwrites one or more tags for the specified directory. Each directory can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique to each resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddTagsToResourceResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: TagLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagLimitExceededException'
+        '483':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '484':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddTagsToResourceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CancelSchemaExtension':
+    post:
+      operationId: CancelSchemaExtension
+      description: 'Cancels an in-progress schema extension to a Microsoft AD directory. Once a schema extension has started replicating to all domain controllers, the task can no longer be canceled. A schema extension can be canceled during any of the following states; <code>Initializing</code>, <code>CreatingSnapshot</code>, and <code>UpdatingSchema</code>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelSchemaExtensionResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelSchemaExtensionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ConnectDirectory':
+    post:
+      operationId: ConnectDirectory
+      description: '<p>Creates an AD Connector to connect to an on-premises directory.</p> <p>Before you call <i>ConnectDirectory</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>ConnectDirectory</i> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectDirectoryResult'
+        '480':
+          description: DirectoryLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryLimitExceededException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectDirectoryRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateAlias':
+    post:
+      operationId: CreateAlias
+      description: '<p>Creates an alias for a directory and assigns the alias to the directory. The alias is used to construct the access URL for the directory, such as <code>http://&lt;alias&gt;.awsapps.com</code>.</p> <important> <p>After an alias has been created, it cannot be deleted or reused, so this operation should only be used when absolutely necessary.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAliasResult'
+        '480':
+          description: EntityAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityAlreadyExistsException'
+        '481':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '484':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAliasRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateComputer':
+    post:
+      operationId: CreateComputer
+      description: 'Creates a computer account in the specified directory, and joins the computer to the directory.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateComputerResult'
+        '480':
+          description: AuthenticationFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationFailedException'
+        '481':
+          description: DirectoryUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryUnavailableException'
+        '482':
+          description: EntityAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityAlreadyExistsException'
+        '483':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '484':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '485':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '486':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '487':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateComputerRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateConditionalForwarder':
+    post:
+      operationId: CreateConditionalForwarder
+      description: Creates a conditional forwarder associated with your AWS directory. Conditional forwarders are required in order to set up a trust relationship with another domain. The conditional forwarder points to the trusted domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateConditionalForwarderResult'
+        '480':
+          description: EntityAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityAlreadyExistsException'
+        '481':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '482':
+          description: DirectoryUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryUnavailableException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '485':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '486':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConditionalForwarderRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateDirectory':
+    post:
+      operationId: CreateDirectory
+      description: '<p>Creates a Simple AD directory.</p> <p>Before you call <i>CreateDirectory</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>CreateDirectory</i> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDirectoryResult'
+        '480':
+          description: DirectoryLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryLimitExceededException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDirectoryRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateMicrosoftAD':
+    post:
+      operationId: CreateMicrosoftAD
+      description: '<p>Creates a Microsoft AD in the AWS cloud.</p> <p>Before you call <i>CreateMicrosoftAD</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>CreateMicrosoftAD</i> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMicrosoftADResult'
+        '480':
+          description: DirectoryLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryLimitExceededException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '484':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMicrosoftADRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateSnapshot':
+    post:
+      operationId: CreateSnapshot
+      description: <p>Creates a snapshot of a Simple AD or Microsoft AD directory in the AWS cloud.</p> <note> <p>You cannot take snapshots of AD Connector directories.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSnapshotResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: SnapshotLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotLimitExceededException'
+        '483':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '484':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSnapshotRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateTrust':
+    post:
+      operationId: CreateTrust
+      description: '<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your Microsoft AD in the AWS cloud, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p> <p>This action initiates the creation of the AWS side of a trust relationship between a Microsoft AD in the AWS cloud and an external domain.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTrustResult'
+        '480':
+          description: EntityAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityAlreadyExistsException'
+        '481':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '484':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '485':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTrustRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteConditionalForwarder':
+    post:
+      operationId: DeleteConditionalForwarder
+      description: Deletes a conditional forwarder that has been set up for your AWS directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteConditionalForwarderResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: DirectoryUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryUnavailableException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '484':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '485':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteConditionalForwarderRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDirectory':
+    post:
+      operationId: DeleteDirectory
+      description: '<p>Deletes an AWS Directory Service directory.</p> <p>Before you call <i>DeleteDirectory</i>, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the <i>DeleteDirectory</i> operation, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html">AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDirectoryResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDirectoryRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteSnapshot':
+    post:
+      operationId: DeleteSnapshot
+      description: Deletes a directory snapshot.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSnapshotResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteSnapshotRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTrust':
+    post:
+      operationId: DeleteTrust
+      description: Deletes an existing trust relationship between your Microsoft AD in the AWS cloud and an external domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTrustResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '484':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTrustRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeregisterEventTopic':
+    post:
+      operationId: DeregisterEventTopic
+      description: Removes the specified directory as a publisher to the specified SNS topic.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeregisterEventTopicResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeregisterEventTopicRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeConditionalForwarders':
+    post:
+      operationId: DescribeConditionalForwarders
+      description: '<p>Obtains information about the conditional forwarders for this account.</p> <p>If no input parameters are provided for RemoteDomainNames, this request describes all conditional forwarders for the specified directory ID.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeConditionalForwardersResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: DirectoryUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryUnavailableException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '484':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '485':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConditionalForwardersRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDirectories':
+    post:
+      operationId: DescribeDirectories
+      description: '<p>Obtains information about the directories that belong to this account.</p> <p>You can retrieve information about specific directories by passing the directory identifiers in the <i>DirectoryIds</i> parameter. Otherwise, all directories that belong to the current account are returned.</p> <p>This operation supports pagination with the use of the <i>NextToken</i> request and response parameters. If more results are available, the <i>DescribeDirectoriesResult.NextToken</i> member contains a token that you pass in the next call to <a>DescribeDirectories</a> to retrieve the next set of items.</p> <p>You can also specify a maximum number of return results with the <i>Limit</i> parameter.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDirectoriesResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '483':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '484':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDirectoriesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDomainControllers':
+    post:
+      operationId: DescribeDomainControllers
+      description: Provides information about any domain controllers in your directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDomainControllersResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '484':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '485':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDomainControllersRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEventTopics':
+    post:
+      operationId: DescribeEventTopics
+      description: '<p>Obtains information about which SNS topics receive status messages from the specified directory.</p> <p>If no input parameters are provided, such as DirectoryId or TopicName, this request describes all of the associations in the account.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEventTopicsResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEventTopicsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSnapshots':
+    post:
+      operationId: DescribeSnapshots
+      description: '<p>Obtains information about the directory snapshots that belong to this account.</p> <p>This operation supports pagination with the use of the <i>NextToken</i> request and response parameters. If more results are available, the <i>DescribeSnapshots.NextToken</i> member contains a token that you pass in the next call to <a>DescribeSnapshots</a> to retrieve the next set of items.</p> <p>You can also specify a maximum number of return results with the <i>Limit</i> parameter.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeSnapshotsResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '483':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '484':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeSnapshotsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTrusts':
+    post:
+      operationId: DescribeTrusts
+      description: '<p>Obtains information about the trust relationships for this account.</p> <p>If no input parameters are provided, such as DirectoryId or TrustIds, this request describes all the trust relationships belonging to the account.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTrustsResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '484':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '485':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTrustsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DisableRadius':
+    post:
+      operationId: DisableRadius
+      description: Disables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisableRadiusResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisableRadiusRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DisableSso':
+    post:
+      operationId: DisableSso
+      description: Disables single-sign on for a directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisableSsoResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InsufficientPermissionsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsufficientPermissionsException'
+        '482':
+          description: AuthenticationFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationFailedException'
+        '483':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '484':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisableSsoRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#EnableRadius':
+    post:
+      operationId: EnableRadius
+      description: Enables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnableRadiusResult'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: EntityAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityAlreadyExistsException'
+        '482':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '483':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '484':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnableRadiusRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#EnableSso':
+    post:
+      operationId: EnableSso
+      description: Enables single sign-on for a directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnableSsoResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InsufficientPermissionsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsufficientPermissionsException'
+        '482':
+          description: AuthenticationFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationFailedException'
+        '483':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '484':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnableSsoRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetDirectoryLimits':
+    post:
+      operationId: GetDirectoryLimits
+      description: Obtains directory limit information for the current region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDirectoryLimitsResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDirectoryLimitsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetSnapshotLimits':
+    post:
+      operationId: GetSnapshotLimits
+      description: Obtains the manual snapshot limits for a directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSnapshotLimitsResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSnapshotLimitsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListIpRoutes':
+    post:
+      operationId: ListIpRoutes
+      description: Lists the address blocks that you have added to a directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListIpRoutesResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '484':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListIpRoutesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListSchemaExtensions':
+    post:
+      operationId: ListSchemaExtensions
+      description: Lists all schema extensions applied to a Microsoft AD Directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSchemaExtensionsResult'
+        '480':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '481':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '482':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListSchemaExtensionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: Lists all tags on a directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '484':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RegisterEventTopic':
+    post:
+      operationId: RegisterEventTopic
+      description: Associates a directory with an SNS topic. This establishes the directory as a publisher to the specified SNS topic. You can then receive email or text (SMS) messages when the status of your directory changes. You get notified if your directory goes from an Active status to an Impaired or Inoperable status. You also receive a notification when the directory returns to an Active status.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterEventTopicResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterEventTopicRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RemoveIpRoutes':
+    post:
+      operationId: RemoveIpRoutes
+      description: Removes IP address blocks from a directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveIpRoutesResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: DirectoryUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryUnavailableException'
+        '483':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '484':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveIpRoutesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RemoveTagsFromResource':
+    post:
+      operationId: RemoveTagsFromResource
+      description: Removes tags from a directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveTagsFromResourceResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveTagsFromResourceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RestoreFromSnapshot':
+    post:
+      operationId: RestoreFromSnapshot
+      description: '<p>Restores a directory using an existing directory snapshot.</p> <p>When you restore a directory from a snapshot, any changes made to the directory after the snapshot date are overwritten.</p> <p>This action returns as soon as the restore operation is initiated. You can monitor the progress of the restore operation by calling the <a>DescribeDirectories</a> operation with the directory identifier. When the <b>DirectoryDescription.Stage</b> value changes to <code>Active</code>, the restore operation is complete.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestoreFromSnapshotResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestoreFromSnapshotRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StartSchemaExtension':
+    post:
+      operationId: StartSchemaExtension
+      description: Applies a schema extension to a Microsoft AD directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartSchemaExtensionResult'
+        '480':
+          description: DirectoryUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryUnavailableException'
+        '481':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: SnapshotLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotLimitExceededException'
+        '484':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '485':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartSchemaExtensionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateConditionalForwarder':
+    post:
+      operationId: UpdateConditionalForwarder
+      description: Updates a conditional forwarder that has been set up for your AWS directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateConditionalForwarderResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: DirectoryUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryUnavailableException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '484':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '485':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConditionalForwarderRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateNumberOfDomainControllers':
+    post:
+      operationId: UpdateNumberOfDomainControllers
+      description: 'Adds or removes domain controllers to or from the directory. Based on the difference between current value and new value (provided through this API call), domain controllers will be added or removed. It may take up to 45 minutes for any new domain controllers to become fully active once the requested number of domain controllers is updated. During this time, you cannot make another update request.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateNumberOfDomainControllersResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: DirectoryUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryUnavailableException'
+        '482':
+          description: DomainControllerLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainControllerLimitExceededException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '485':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '486':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNumberOfDomainControllersRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateRadius':
+    post:
+      operationId: UpdateRadius
+      description: Updates the Remote Authentication Dial In User Service (RADIUS) server information for an AD Connector directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRadiusResult'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '482':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRadiusRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#VerifyTrust':
+    post:
+      operationId: VerifyTrust
+      description: <p>AWS Directory Service for Microsoft Active Directory allows you to configure and verify trust relationships.</p> <p>This action verifies a trust relationship between your Microsoft AD in the AWS cloud and an external domain.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyTrustResult'
+        '480':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '484':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyTrustRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AccessUrl:
+      type: string
+      minLength: 1
+      maxLength: 128
+    AddIpRoutesRequest:
+      type: object
+      required:
+        - DirectoryId
+        - IpRoutes
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        IpRoutes:
+          $ref: '#/components/schemas/IpRoutes'
+        UpdateSecurityGroupForDirectoryControllers:
+          $ref: '#/components/schemas/UpdateSecurityGroupForDirectoryControllers'
+    AddIpRoutesResult:
+      type: object
+      properties: {}
+    AddTagsToResourceRequest:
+      type: object
+      required:
+        - ResourceId
+        - Tags
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/ResourceId'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+    AddTagsToResourceResult:
+      type: object
+      properties: {}
+    AddedDateTime:
+      type: string
+      format: date-time
+    AliasName:
+      type: string
+      pattern: '^(?!d-)([\da-zA-Z]+)([-]*[\da-zA-Z])*'
+      minLength: 1
+      maxLength: 62
+    Attribute:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/AttributeName'
+        Value:
+          $ref: '#/components/schemas/AttributeValue'
+      description: Represents a named directory attribute.
+    AttributeName:
+      type: string
+      minLength: 1
+    AttributeValue:
+      type: string
+    Attributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Attribute'
+    AuthenticationFailedException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ExceptionMessage'
+        RequestId:
+          $ref: '#/components/schemas/RequestId'
+      description: An authentication error occurred.
+    AvailabilityZone:
+      type: string
+    AvailabilityZones:
+      type: array
+      items:
+        $ref: '#/components/schemas/AvailabilityZone'
+    CancelSchemaExtensionRequest:
+      type: object
+      required:
+        - DirectoryId
+        - SchemaExtensionId
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        SchemaExtensionId:
+          $ref: '#/components/schemas/SchemaExtensionId'
+    CancelSchemaExtensionResult:
+      type: object
+      properties: {}
+    CidrIp:
+      type: string
+      pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([1-9]|[1-2][0-9]|3[0-2]))$'
+    CidrIps:
+      type: array
+      items:
+        $ref: '#/components/schemas/CidrIp'
+    ClientException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ExceptionMessage'
+        RequestId:
+          $ref: '#/components/schemas/RequestId'
+      description: A client exception has occurred.
+    CloudOnlyDirectoriesLimitReached:
+      type: boolean
+    Computer:
+      type: object
+      properties:
+        ComputerId:
+          $ref: '#/components/schemas/SID'
+        ComputerName:
+          $ref: '#/components/schemas/ComputerName'
+        ComputerAttributes:
+          $ref: '#/components/schemas/Attributes'
+      description: Contains information about a computer account in a directory.
+    ComputerName:
+      type: string
+      minLength: 1
+      maxLength: 15
+    ComputerPassword:
+      type: string
+      pattern: '[\u0020-\u00FF]+'
+      minLength: 8
+      maxLength: 64
+      format: password
+    ConditionalForwarder:
+      type: object
+      properties:
+        RemoteDomainName:
+          $ref: '#/components/schemas/RemoteDomainName'
+        DnsIpAddrs:
+          $ref: '#/components/schemas/DnsIpAddrs'
+        ReplicationScope:
+          $ref: '#/components/schemas/ReplicationScope'
+      description: Points to a remote domain with which you are setting up a trust relationship. Conditional forwarders are required in order to set up a trust relationship with another domain.
+    ConditionalForwarders:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConditionalForwarder'
+    ConnectDirectoryRequest:
+      type: object
+      required:
+        - Name
+        - Password
+        - Size
+        - ConnectSettings
+      properties:
+        Name:
+          $ref: '#/components/schemas/DirectoryName'
+        ShortName:
+          $ref: '#/components/schemas/DirectoryShortName'
+        Password:
+          $ref: '#/components/schemas/ConnectPassword'
+        Description:
+          $ref: '#/components/schemas/Description'
+        Size:
+          $ref: '#/components/schemas/DirectorySize'
+        ConnectSettings:
+          $ref: '#/components/schemas/DirectoryConnectSettings'
+      description: Contains the inputs for the <a>ConnectDirectory</a> operation.
+    ConnectDirectoryResult:
+      type: object
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+      description: Contains the results of the <a>ConnectDirectory</a> operation.
+    ConnectPassword:
+      type: string
+      minLength: 1
+      maxLength: 128
+      format: password
+    ConnectedDirectoriesLimitReached:
+      type: boolean
+    CreateAliasRequest:
+      type: object
+      required:
+        - DirectoryId
+        - Alias
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        Alias:
+          $ref: '#/components/schemas/AliasName'
+      description: Contains the inputs for the <a>CreateAlias</a> operation.
+    CreateAliasResult:
+      type: object
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        Alias:
+          $ref: '#/components/schemas/AliasName'
+      description: Contains the results of the <a>CreateAlias</a> operation.
+    CreateComputerRequest:
+      type: object
+      required:
+        - DirectoryId
+        - ComputerName
+        - Password
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        ComputerName:
+          $ref: '#/components/schemas/ComputerName'
+        Password:
+          $ref: '#/components/schemas/ComputerPassword'
+        OrganizationalUnitDistinguishedName:
+          $ref: '#/components/schemas/OrganizationalUnitDN'
+        ComputerAttributes:
+          $ref: '#/components/schemas/Attributes'
+      description: Contains the inputs for the <a>CreateComputer</a> operation.
+    CreateComputerResult:
+      type: object
+      properties:
+        Computer:
+          $ref: '#/components/schemas/Computer'
+      description: Contains the results for the <a>CreateComputer</a> operation.
+    CreateConditionalForwarderRequest:
+      type: object
+      required:
+        - DirectoryId
+        - RemoteDomainName
+        - DnsIpAddrs
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        RemoteDomainName:
+          $ref: '#/components/schemas/RemoteDomainName'
+        DnsIpAddrs:
+          $ref: '#/components/schemas/DnsIpAddrs'
+      description: Initiates the creation of a conditional forwarder for your AWS Directory Service for Microsoft Active Directory. Conditional forwarders are required in order to set up a trust relationship with another domain.
+    CreateConditionalForwarderResult:
+      type: object
+      properties: {}
+      description: The result of a CreateConditinalForwarder request.
+    CreateDirectoryRequest:
+      type: object
+      required:
+        - Name
+        - Password
+        - Size
+      properties:
+        Name:
+          $ref: '#/components/schemas/DirectoryName'
+        ShortName:
+          $ref: '#/components/schemas/DirectoryShortName'
+        Password:
+          $ref: '#/components/schemas/Password'
+        Description:
+          $ref: '#/components/schemas/Description'
+        Size:
+          $ref: '#/components/schemas/DirectorySize'
+        VpcSettings:
+          $ref: '#/components/schemas/DirectoryVpcSettings'
+      description: 'Contains the inputs for the <a>CreateDirectory</a> operation. '
+    CreateDirectoryResult:
+      type: object
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+      description: Contains the results of the <a>CreateDirectory</a> operation.
+    CreateMicrosoftADRequest:
+      type: object
+      required:
+        - Name
+        - Password
+        - VpcSettings
+      properties:
+        Name:
+          $ref: '#/components/schemas/DirectoryName'
+        ShortName:
+          $ref: '#/components/schemas/DirectoryShortName'
+        Password:
+          $ref: '#/components/schemas/Password'
+        Description:
+          $ref: '#/components/schemas/Description'
+        VpcSettings:
+          $ref: '#/components/schemas/DirectoryVpcSettings'
+      description: Creates a Microsoft AD in the AWS cloud.
+    CreateMicrosoftADResult:
+      type: object
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+      description: Result of a CreateMicrosoftAD request.
+    CreateSnapshotBeforeSchemaExtension:
+      type: boolean
+    CreateSnapshotRequest:
+      type: object
+      required:
+        - DirectoryId
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        Name:
+          $ref: '#/components/schemas/SnapshotName'
+      description: Contains the inputs for the <a>CreateSnapshot</a> operation.
+    CreateSnapshotResult:
+      type: object
+      properties:
+        SnapshotId:
+          $ref: '#/components/schemas/SnapshotId'
+      description: Contains the results of the <a>CreateSnapshot</a> operation.
+    CreateTrustRequest:
+      type: object
+      required:
+        - DirectoryId
+        - RemoteDomainName
+        - TrustPassword
+        - TrustDirection
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        RemoteDomainName:
+          $ref: '#/components/schemas/RemoteDomainName'
+        TrustPassword:
+          $ref: '#/components/schemas/TrustPassword'
+        TrustDirection:
+          $ref: '#/components/schemas/TrustDirection'
+        TrustType:
+          $ref: '#/components/schemas/TrustType'
+        ConditionalForwarderIpAddrs:
+          $ref: '#/components/schemas/DnsIpAddrs'
+      description: '<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your Microsoft AD in the AWS cloud, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p> <p>This action initiates the creation of the AWS side of a trust relationship between a Microsoft AD in the AWS cloud and an external domain.</p>'
+    CreateTrustResult:
+      type: object
+      properties:
+        TrustId:
+          $ref: '#/components/schemas/TrustId'
+      description: The result of a CreateTrust request.
+    CreatedDateTime:
+      type: string
+      format: date-time
+    DeleteAssociatedConditionalForwarder:
+      type: boolean
+    DeleteConditionalForwarderRequest:
+      type: object
+      required:
+        - DirectoryId
+        - RemoteDomainName
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        RemoteDomainName:
+          $ref: '#/components/schemas/RemoteDomainName'
+      description: Deletes a conditional forwarder.
+    DeleteConditionalForwarderResult:
+      type: object
+      properties: {}
+      description: The result of a DeleteConditionalForwarder request.
+    DeleteDirectoryRequest:
+      type: object
+      required:
+        - DirectoryId
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+      description: Contains the inputs for the <a>DeleteDirectory</a> operation.
+    DeleteDirectoryResult:
+      type: object
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+      description: Contains the results of the <a>DeleteDirectory</a> operation.
+    DeleteSnapshotRequest:
+      type: object
+      required:
+        - SnapshotId
+      properties:
+        SnapshotId:
+          $ref: '#/components/schemas/SnapshotId'
+      description: Contains the inputs for the <a>DeleteSnapshot</a> operation.
+    DeleteSnapshotResult:
+      type: object
+      properties:
+        SnapshotId:
+          $ref: '#/components/schemas/SnapshotId'
+      description: Contains the results of the <a>DeleteSnapshot</a> operation.
+    DeleteTrustRequest:
+      type: object
+      required:
+        - TrustId
+      properties:
+        TrustId:
+          $ref: '#/components/schemas/TrustId'
+        DeleteAssociatedConditionalForwarder:
+          $ref: '#/components/schemas/DeleteAssociatedConditionalForwarder'
+      description: Deletes the local side of an existing trust relationship between the Microsoft AD in the AWS cloud and the external domain.
+    DeleteTrustResult:
+      type: object
+      properties:
+        TrustId:
+          $ref: '#/components/schemas/TrustId'
+      description: The result of a DeleteTrust request.
+    DeregisterEventTopicRequest:
+      type: object
+      required:
+        - DirectoryId
+        - TopicName
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        TopicName:
+          $ref: '#/components/schemas/TopicName'
+      description: Removes the specified directory as a publisher to the specified SNS topic.
+    DeregisterEventTopicResult:
+      type: object
+      properties: {}
+      description: The result of a DeregisterEventTopic request.
+    DescribeConditionalForwardersRequest:
+      type: object
+      required:
+        - DirectoryId
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        RemoteDomainNames:
+          $ref: '#/components/schemas/RemoteDomainNames'
+      description: Describes a conditional forwarder.
+    DescribeConditionalForwardersResult:
+      type: object
+      properties:
+        ConditionalForwarders:
+          $ref: '#/components/schemas/ConditionalForwarders'
+      description: The result of a DescribeConditionalForwarder request.
+    DescribeDirectoriesRequest:
+      type: object
+      properties:
+        DirectoryIds:
+          $ref: '#/components/schemas/DirectoryIds'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+        Limit:
+          $ref: '#/components/schemas/Limit'
+      description: Contains the inputs for the <a>DescribeDirectories</a> operation.
+    DescribeDirectoriesResult:
+      type: object
+      properties:
+        DirectoryDescriptions:
+          $ref: '#/components/schemas/DirectoryDescriptions'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Contains the results of the <a>DescribeDirectories</a> operation.
+    DescribeDomainControllersRequest:
+      type: object
+      required:
+        - DirectoryId
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        DomainControllerIds:
+          $ref: '#/components/schemas/DomainControllerIds'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+        Limit:
+          $ref: '#/components/schemas/Limit'
+    DescribeDomainControllersResult:
+      type: object
+      properties:
+        DomainControllers:
+          $ref: '#/components/schemas/DomainControllers'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    DescribeEventTopicsRequest:
+      type: object
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        TopicNames:
+          $ref: '#/components/schemas/TopicNames'
+      description: Describes event topics.
+    DescribeEventTopicsResult:
+      type: object
+      properties:
+        EventTopics:
+          $ref: '#/components/schemas/EventTopics'
+      description: The result of a DescribeEventTopic request.
+    DescribeSnapshotsRequest:
+      type: object
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        SnapshotIds:
+          $ref: '#/components/schemas/SnapshotIds'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+        Limit:
+          $ref: '#/components/schemas/Limit'
+      description: Contains the inputs for the <a>DescribeSnapshots</a> operation.
+    DescribeSnapshotsResult:
+      type: object
+      properties:
+        Snapshots:
+          $ref: '#/components/schemas/Snapshots'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Contains the results of the <a>DescribeSnapshots</a> operation.
+    DescribeTrustsRequest:
+      type: object
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        TrustIds:
+          $ref: '#/components/schemas/TrustIds'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+        Limit:
+          $ref: '#/components/schemas/Limit'
+      description: 'Describes the trust relationships for a particular Microsoft AD in the AWS cloud. If no input parameters are are provided, such as directory ID or trust ID, this request describes all the trust relationships.'
+    DescribeTrustsResult:
+      type: object
+      properties:
+        Trusts:
+          $ref: '#/components/schemas/Trusts'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The result of a DescribeTrust request.
+    Description:
+      type: string
+      pattern: '^([a-zA-Z0-9_])[\\a-zA-Z0-9_@#%*+=:?./!\s-]*$'
+      minLength: 0
+      maxLength: 128
+    DesiredNumberOfDomainControllers:
+      type: integer
+      minimum: 2
+    DirectoryConnectSettings:
+      type: object
+      required:
+        - VpcId
+        - SubnetIds
+        - CustomerDnsIps
+        - CustomerUserName
+      properties:
+        VpcId:
+          $ref: '#/components/schemas/VpcId'
+        SubnetIds:
+          $ref: '#/components/schemas/SubnetIds'
+        CustomerDnsIps:
+          $ref: '#/components/schemas/DnsIpAddrs'
+        CustomerUserName:
+          $ref: '#/components/schemas/UserName'
+      description: Contains information for the <a>ConnectDirectory</a> operation when an AD Connector directory is being created.
+    DirectoryConnectSettingsDescription:
+      type: object
+      properties:
+        VpcId:
+          $ref: '#/components/schemas/VpcId'
+        SubnetIds:
+          $ref: '#/components/schemas/SubnetIds'
+        CustomerUserName:
+          $ref: '#/components/schemas/UserName'
+        SecurityGroupId:
+          $ref: '#/components/schemas/SecurityGroupId'
+        AvailabilityZones:
+          $ref: '#/components/schemas/AvailabilityZones'
+        ConnectIps:
+          $ref: '#/components/schemas/IpAddrs'
+      description: Contains information about an AD Connector directory.
+    DirectoryDescription:
+      type: object
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        Name:
+          $ref: '#/components/schemas/DirectoryName'
+        ShortName:
+          $ref: '#/components/schemas/DirectoryShortName'
+        Size:
+          $ref: '#/components/schemas/DirectorySize'
+        Alias:
+          $ref: '#/components/schemas/AliasName'
+        AccessUrl:
+          $ref: '#/components/schemas/AccessUrl'
+        Description:
+          $ref: '#/components/schemas/Description'
+        DnsIpAddrs:
+          $ref: '#/components/schemas/DnsIpAddrs'
+        Stage:
+          $ref: '#/components/schemas/DirectoryStage'
+        LaunchTime:
+          $ref: '#/components/schemas/LaunchTime'
+        StageLastUpdatedDateTime:
+          $ref: '#/components/schemas/LastUpdatedDateTime'
+        Type:
+          $ref: '#/components/schemas/DirectoryType'
+        VpcSettings:
+          $ref: '#/components/schemas/DirectoryVpcSettingsDescription'
+        ConnectSettings:
+          $ref: '#/components/schemas/DirectoryConnectSettingsDescription'
+        RadiusSettings:
+          $ref: '#/components/schemas/RadiusSettings'
+        RadiusStatus:
+          $ref: '#/components/schemas/RadiusStatus'
+        StageReason:
+          $ref: '#/components/schemas/StageReason'
+        SsoEnabled:
+          $ref: '#/components/schemas/SsoEnabled'
+        DesiredNumberOfDomainControllers:
+          $ref: '#/components/schemas/DesiredNumberOfDomainControllers'
+      description: Contains information about an AWS Directory Service directory.
+    DirectoryDescriptions:
+      type: array
+      description: A list of directory descriptions.
+      items:
+        $ref: '#/components/schemas/DirectoryDescription'
+    DirectoryId:
+      type: string
+      pattern: '^d-[0-9a-f]{10}$'
+    DirectoryIds:
+      type: array
+      description: A list of directory identifiers.
+      items:
+        $ref: '#/components/schemas/DirectoryId'
+    DirectoryLimitExceededException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ExceptionMessage'
+        RequestId:
+          $ref: '#/components/schemas/RequestId'
+      description: The maximum number of directories in the region has been reached. You can use the <a>GetDirectoryLimits</a> operation to determine your directory limits in the region.
+    DirectoryLimits:
+      type: object
+      properties:
+        CloudOnlyDirectoriesLimit:
+          $ref: '#/components/schemas/Limit'
+        CloudOnlyDirectoriesCurrentCount:
+          $ref: '#/components/schemas/Limit'
+        CloudOnlyDirectoriesLimitReached:
+          $ref: '#/components/schemas/CloudOnlyDirectoriesLimitReached'
+        CloudOnlyMicrosoftADLimit:
+          $ref: '#/components/schemas/Limit'
+        CloudOnlyMicrosoftADCurrentCount:
+          $ref: '#/components/schemas/Limit'
+        CloudOnlyMicrosoftADLimitReached:
+          $ref: '#/components/schemas/CloudOnlyDirectoriesLimitReached'
+        ConnectedDirectoriesLimit:
+          $ref: '#/components/schemas/Limit'
+        ConnectedDirectoriesCurrentCount:
+          $ref: '#/components/schemas/Limit'
+        ConnectedDirectoriesLimitReached:
+          $ref: '#/components/schemas/ConnectedDirectoriesLimitReached'
+      description: Contains directory limit information for a region.
+    DirectoryName:
+      type: string
+      pattern: '^([a-zA-Z0-9]+[\\.-])+([a-zA-Z0-9])+$'
+    DirectoryShortName:
+      type: string
+      pattern: '^[^\\/:*?\"\<\>|.]+[^\\/:*?\"<>|]*$'
+    DirectorySize:
+      type: string
+      enum:
+        - Small
+        - Large
+    DirectoryStage:
+      type: string
+      enum:
+        - Requested
+        - Creating
+        - Created
+        - Active
+        - Inoperable
+        - Impaired
+        - Restoring
+        - RestoreFailed
+        - Deleting
+        - Deleted
+        - Failed
+    DirectoryType:
+      type: string
+      enum:
+        - SimpleAD
+        - ADConnector
+        - MicrosoftAD
+    DirectoryUnavailableException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ExceptionMessage'
+        RequestId:
+          $ref: '#/components/schemas/RequestId'
+      description: The specified directory is unavailable or could not be found.
+    DirectoryVpcSettings:
+      type: object
+      required:
+        - VpcId
+        - SubnetIds
+      properties:
+        VpcId:
+          $ref: '#/components/schemas/VpcId'
+        SubnetIds:
+          $ref: '#/components/schemas/SubnetIds'
+      description: Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.
+    DirectoryVpcSettingsDescription:
+      type: object
+      properties:
+        VpcId:
+          $ref: '#/components/schemas/VpcId'
+        SubnetIds:
+          $ref: '#/components/schemas/SubnetIds'
+        SecurityGroupId:
+          $ref: '#/components/schemas/SecurityGroupId'
+        AvailabilityZones:
+          $ref: '#/components/schemas/AvailabilityZones'
+      description: Contains information about the directory.
+    DisableRadiusRequest:
+      type: object
+      required:
+        - DirectoryId
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+      description: Contains the inputs for the <a>DisableRadius</a> operation.
+    DisableRadiusResult:
+      type: object
+      properties: {}
+      description: Contains the results of the <a>DisableRadius</a> operation.
+    DisableSsoRequest:
+      type: object
+      required:
+        - DirectoryId
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        UserName:
+          $ref: '#/components/schemas/UserName'
+        Password:
+          $ref: '#/components/schemas/ConnectPassword'
+      description: Contains the inputs for the <a>DisableSso</a> operation.
+    DisableSsoResult:
+      type: object
+      properties: {}
+      description: Contains the results of the <a>DisableSso</a> operation.
+    DnsIpAddrs:
+      type: array
+      items:
+        $ref: '#/components/schemas/IpAddr'
+    DomainController:
+      type: object
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        DomainControllerId:
+          $ref: '#/components/schemas/DomainControllerId'
+        DnsIpAddr:
+          $ref: '#/components/schemas/IpAddr'
+        VpcId:
+          $ref: '#/components/schemas/VpcId'
+        SubnetId:
+          $ref: '#/components/schemas/SubnetId'
+        AvailabilityZone:
+          $ref: '#/components/schemas/AvailabilityZone'
+        Status:
+          $ref: '#/components/schemas/DomainControllerStatus'
+        StatusReason:
+          $ref: '#/components/schemas/DomainControllerStatusReason'
+        LaunchTime:
+          $ref: '#/components/schemas/LaunchTime'
+        StatusLastUpdatedDateTime:
+          $ref: '#/components/schemas/LastUpdatedDateTime'
+      description: Contains information about the domain controllers for a specified directory.
+    DomainControllerId:
+      type: string
+      pattern: '^dc-[0-9a-f]{10}$'
+    DomainControllerIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/DomainControllerId'
+    DomainControllerLimitExceededException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ExceptionMessage'
+        RequestId:
+          $ref: '#/components/schemas/RequestId'
+      description: The maximum allowed number of domain controllers per directory was exceeded. The default limit per directory is 20 domain controllers.
+    DomainControllerStatus:
+      type: string
+      enum:
+        - Creating
+        - Active
+        - Impaired
+        - Restoring
+        - Deleting
+        - Deleted
+        - Failed
+    DomainControllerStatusReason:
+      type: string
+    DomainControllers:
+      type: array
+      items:
+        $ref: '#/components/schemas/DomainController'
+    EnableRadiusRequest:
+      type: object
+      required:
+        - DirectoryId
+        - RadiusSettings
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        RadiusSettings:
+          $ref: '#/components/schemas/RadiusSettings'
+      description: Contains the inputs for the <a>EnableRadius</a> operation.
+    EnableRadiusResult:
+      type: object
+      properties: {}
+      description: Contains the results of the <a>EnableRadius</a> operation.
+    EnableSsoRequest:
+      type: object
+      required:
+        - DirectoryId
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        UserName:
+          $ref: '#/components/schemas/UserName'
+        Password:
+          $ref: '#/components/schemas/ConnectPassword'
+      description: Contains the inputs for the <a>EnableSso</a> operation.
+    EnableSsoResult:
+      type: object
+      properties: {}
+      description: Contains the results of the <a>EnableSso</a> operation.
+    EndDateTime:
+      type: string
+      format: date-time
+    EntityAlreadyExistsException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ExceptionMessage'
+        RequestId:
+          $ref: '#/components/schemas/RequestId'
+      description: The specified entity already exists.
+    EntityDoesNotExistException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ExceptionMessage'
+        RequestId:
+          $ref: '#/components/schemas/RequestId'
+      description: The specified entity could not be found.
+    EventTopic:
+      type: object
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        TopicName:
+          $ref: '#/components/schemas/TopicName'
+        TopicArn:
+          $ref: '#/components/schemas/TopicArn'
+        CreatedDateTime:
+          $ref: '#/components/schemas/CreatedDateTime'
+        Status:
+          $ref: '#/components/schemas/TopicStatus'
+      description: Information about SNS topic and AWS Directory Service directory associations.
+    EventTopics:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventTopic'
+    ExceptionMessage:
+      type: string
+      description: The descriptive message for the exception.
+    GetDirectoryLimitsRequest:
+      type: object
+      properties: {}
+      description: Contains the inputs for the <a>GetDirectoryLimits</a> operation.
+    GetDirectoryLimitsResult:
+      type: object
+      properties:
+        DirectoryLimits:
+          $ref: '#/components/schemas/DirectoryLimits'
+      description: Contains the results of the <a>GetDirectoryLimits</a> operation.
+    GetSnapshotLimitsRequest:
+      type: object
+      required:
+        - DirectoryId
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+      description: Contains the inputs for the <a>GetSnapshotLimits</a> operation.
+    GetSnapshotLimitsResult:
+      type: object
+      properties:
+        SnapshotLimits:
+          $ref: '#/components/schemas/SnapshotLimits'
+      description: Contains the results of the <a>GetSnapshotLimits</a> operation.
+    InsufficientPermissionsException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ExceptionMessage'
+        RequestId:
+          $ref: '#/components/schemas/RequestId'
+      description: The account does not have sufficient permission to perform the operation.
+    InvalidNextTokenException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ExceptionMessage'
+        RequestId:
+          $ref: '#/components/schemas/RequestId'
+      description: The <i>NextToken</i> value is not valid.
+    InvalidParameterException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ExceptionMessage'
+        RequestId:
+          $ref: '#/components/schemas/RequestId'
+      description: One or more parameters are not valid.
+    IpAddr:
+      type: string
+      pattern: '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+    IpAddrs:
+      type: array
+      items:
+        $ref: '#/components/schemas/IpAddr'
+    IpRoute:
+      type: object
+      properties:
+        CidrIp:
+          $ref: '#/components/schemas/CidrIp'
+        Description:
+          $ref: '#/components/schemas/Description'
+      description: 'IP address block. This is often the address block of the DNS server used for your on-premises domain. '
+    IpRouteInfo:
+      type: object
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        CidrIp:
+          $ref: '#/components/schemas/CidrIp'
+        IpRouteStatusMsg:
+          $ref: '#/components/schemas/IpRouteStatusMsg'
+        AddedDateTime:
+          $ref: '#/components/schemas/AddedDateTime'
+        IpRouteStatusReason:
+          $ref: '#/components/schemas/IpRouteStatusReason'
+        Description:
+          $ref: '#/components/schemas/Description'
+      description: Information about one or more IP address blocks.
+    IpRouteLimitExceededException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ExceptionMessage'
+        RequestId:
+          $ref: '#/components/schemas/RequestId'
+      description: The maximum allowed number of IP addresses was exceeded. The default limit is 100 IP address blocks.
+    IpRouteStatusMsg:
+      type: string
+      enum:
+        - Adding
+        - Added
+        - Removing
+        - Removed
+        - AddFailed
+        - RemoveFailed
+    IpRouteStatusReason:
+      type: string
+    IpRoutes:
+      type: array
+      items:
+        $ref: '#/components/schemas/IpRoute'
+    IpRoutesInfo:
+      type: array
+      items:
+        $ref: '#/components/schemas/IpRouteInfo'
+    LastUpdatedDateTime:
+      type: string
+      format: date-time
+    LaunchTime:
+      type: string
+      format: date-time
+    LdifContent:
+      type: string
+      minLength: 1
+      maxLength: 500000
+    Limit:
+      type: integer
+      minimum: 0
+    ListIpRoutesRequest:
+      type: object
+      required:
+        - DirectoryId
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+        Limit:
+          $ref: '#/components/schemas/Limit'
+    ListIpRoutesResult:
+      type: object
+      properties:
+        IpRoutesInfo:
+          $ref: '#/components/schemas/IpRoutesInfo'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    ListSchemaExtensionsRequest:
+      type: object
+      required:
+        - DirectoryId
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+        Limit:
+          $ref: '#/components/schemas/Limit'
+    ListSchemaExtensionsResult:
+      type: object
+      properties:
+        SchemaExtensionsInfo:
+          $ref: '#/components/schemas/SchemaExtensionsInfo'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    ListTagsForResourceRequest:
+      type: object
+      required:
+        - ResourceId
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/ResourceId'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+        Limit:
+          $ref: '#/components/schemas/Limit'
+    ListTagsForResourceResult:
+      type: object
+      properties:
+        Tags:
+          $ref: '#/components/schemas/Tags'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    ManualSnapshotsLimitReached:
+      type: boolean
+    NextToken:
+      type: string
+    OrganizationalUnitDN:
+      type: string
+      minLength: 1
+      maxLength: 2000
+    Password:
+      type: string
+      pattern: '(?=^.{8,64}$)((?=.*\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[^A-Za-z0-9\s])(?=.*[a-z])|(?=.*[^A-Za-z0-9\s])(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9\s]))^.*'
+      format: password
+    PortNumber:
+      type: integer
+      minimum: 1025
+      maximum: 65535
+    RadiusAuthenticationProtocol:
+      type: string
+      enum:
+        - PAP
+        - CHAP
+        - MS-CHAPv1
+        - MS-CHAPv2
+    RadiusDisplayLabel:
+      type: string
+      minLength: 1
+      maxLength: 64
+    RadiusRetries:
+      type: integer
+      minimum: 0
+      maximum: 10
+    RadiusSettings:
+      type: object
+      properties:
+        RadiusServers:
+          $ref: '#/components/schemas/Servers'
+        RadiusPort:
+          $ref: '#/components/schemas/PortNumber'
+        RadiusTimeout:
+          $ref: '#/components/schemas/RadiusTimeout'
+        RadiusRetries:
+          $ref: '#/components/schemas/RadiusRetries'
+        SharedSecret:
+          $ref: '#/components/schemas/RadiusSharedSecret'
+        AuthenticationProtocol:
+          $ref: '#/components/schemas/RadiusAuthenticationProtocol'
+        DisplayLabel:
+          $ref: '#/components/schemas/RadiusDisplayLabel'
+        UseSameUsername:
+          $ref: '#/components/schemas/UseSameUsername'
+      description: Contains information about a Remote Authentication Dial In User Service (RADIUS) server.
+    RadiusSharedSecret:
+      type: string
+      minLength: 8
+      maxLength: 512
+      format: password
+    RadiusStatus:
+      type: string
+      enum:
+        - Creating
+        - Completed
+        - Failed
+    RadiusTimeout:
+      type: integer
+      minimum: 1
+      maximum: 20
+    RegisterEventTopicRequest:
+      type: object
+      required:
+        - DirectoryId
+        - TopicName
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        TopicName:
+          $ref: '#/components/schemas/TopicName'
+      description: Registers a new event topic.
+    RegisterEventTopicResult:
+      type: object
+      properties: {}
+      description: The result of a RegisterEventTopic request.
+    RemoteDomainName:
+      type: string
+      pattern: '^([a-zA-Z0-9]+[\\.-])+([a-zA-Z0-9])+[.]?$'
+    RemoteDomainNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/RemoteDomainName'
+    RemoveIpRoutesRequest:
+      type: object
+      required:
+        - DirectoryId
+        - CidrIps
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        CidrIps:
+          $ref: '#/components/schemas/CidrIps'
+    RemoveIpRoutesResult:
+      type: object
+      properties: {}
+    RemoveTagsFromResourceRequest:
+      type: object
+      required:
+        - ResourceId
+        - TagKeys
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/ResourceId'
+        TagKeys:
+          $ref: '#/components/schemas/TagKeys'
+    RemoveTagsFromResourceResult:
+      type: object
+      properties: {}
+    ReplicationScope:
+      type: string
+      enum:
+        - Domain
+    RequestId:
+      type: string
+      pattern: '^([A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12})$'
+      description: The AWS request identifier.
+    ResourceId:
+      type: string
+      pattern: '^[d]-[0-9a-f]{10}$'
+    RestoreFromSnapshotRequest:
+      type: object
+      required:
+        - SnapshotId
+      properties:
+        SnapshotId:
+          $ref: '#/components/schemas/SnapshotId'
+      description: An object representing the inputs for the <a>RestoreFromSnapshot</a> operation.
+    RestoreFromSnapshotResult:
+      type: object
+      properties: {}
+      description: Contains the results of the <a>RestoreFromSnapshot</a> operation.
+    SID:
+      type: string
+      pattern: '[&\w+-.@]+'
+      minLength: 1
+      maxLength: 256
+    SchemaExtensionId:
+      type: string
+      pattern: '^e-[0-9a-f]{10}$'
+    SchemaExtensionInfo:
+      type: object
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        SchemaExtensionId:
+          $ref: '#/components/schemas/SchemaExtensionId'
+        Description:
+          $ref: '#/components/schemas/Description'
+        SchemaExtensionStatus:
+          $ref: '#/components/schemas/SchemaExtensionStatus'
+        SchemaExtensionStatusReason:
+          $ref: '#/components/schemas/SchemaExtensionStatusReason'
+        StartDateTime:
+          $ref: '#/components/schemas/StartDateTime'
+        EndDateTime:
+          $ref: '#/components/schemas/EndDateTime'
+      description: Information about a schema extension.
+    SchemaExtensionStatus:
+      type: string
+      enum:
+        - Initializing
+        - CreatingSnapshot
+        - UpdatingSchema
+        - Replicating
+        - CancelInProgress
+        - RollbackInProgress
+        - Cancelled
+        - Failed
+        - Completed
+    SchemaExtensionStatusReason:
+      type: string
+    SchemaExtensionsInfo:
+      type: array
+      items:
+        $ref: '#/components/schemas/SchemaExtensionInfo'
+    SecurityGroupId:
+      type: string
+      pattern: '^(sg-[0-9a-f]{8})$'
+    Server:
+      type: string
+      minLength: 1
+      maxLength: 256
+    Servers:
+      type: array
+      items:
+        $ref: '#/components/schemas/Server'
+    ServiceException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ExceptionMessage'
+        RequestId:
+          $ref: '#/components/schemas/RequestId'
+      description: An exception has occurred in AWS Directory Service.
+    Snapshot:
+      type: object
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        SnapshotId:
+          $ref: '#/components/schemas/SnapshotId'
+        Type:
+          $ref: '#/components/schemas/SnapshotType'
+        Name:
+          $ref: '#/components/schemas/SnapshotName'
+        Status:
+          $ref: '#/components/schemas/SnapshotStatus'
+        StartTime:
+          $ref: '#/components/schemas/StartTime'
+      description: Describes a directory snapshot.
+    SnapshotId:
+      type: string
+      pattern: '^s-[0-9a-f]{10}$'
+    SnapshotIds:
+      type: array
+      description: A list of directory snapshot identifiers.
+      items:
+        $ref: '#/components/schemas/SnapshotId'
+    SnapshotLimitExceededException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ExceptionMessage'
+        RequestId:
+          $ref: '#/components/schemas/RequestId'
+      description: The maximum number of manual snapshots for the directory has been reached. You can use the <a>GetSnapshotLimits</a> operation to determine the snapshot limits for a directory.
+    SnapshotLimits:
+      type: object
+      properties:
+        ManualSnapshotsLimit:
+          $ref: '#/components/schemas/Limit'
+        ManualSnapshotsCurrentCount:
+          $ref: '#/components/schemas/Limit'
+        ManualSnapshotsLimitReached:
+          $ref: '#/components/schemas/ManualSnapshotsLimitReached'
+      description: Contains manual snapshot limit information for a directory.
+    SnapshotName:
+      type: string
+      pattern: '^([a-zA-Z0-9_])[\\a-zA-Z0-9_@#%*+=:?./!\s-]*$'
+      minLength: 0
+      maxLength: 128
+    SnapshotStatus:
+      type: string
+      enum:
+        - Creating
+        - Completed
+        - Failed
+    SnapshotType:
+      type: string
+      enum:
+        - Auto
+        - Manual
+    Snapshots:
+      type: array
+      description: A list of descriptions of directory snapshots.
+      items:
+        $ref: '#/components/schemas/Snapshot'
+    SsoEnabled:
+      type: boolean
+    StageReason:
+      type: string
+    StartDateTime:
+      type: string
+      format: date-time
+    StartSchemaExtensionRequest:
+      type: object
+      required:
+        - DirectoryId
+        - CreateSnapshotBeforeSchemaExtension
+        - LdifContent
+        - Description
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        CreateSnapshotBeforeSchemaExtension:
+          $ref: '#/components/schemas/CreateSnapshotBeforeSchemaExtension'
+        LdifContent:
+          $ref: '#/components/schemas/LdifContent'
+        Description:
+          $ref: '#/components/schemas/Description'
+    StartSchemaExtensionResult:
+      type: object
+      properties:
+        SchemaExtensionId:
+          $ref: '#/components/schemas/SchemaExtensionId'
+    StartTime:
+      type: string
+      format: date-time
+    StateLastUpdatedDateTime:
+      type: string
+      format: date-time
+    SubnetId:
+      type: string
+      pattern: '^(subnet-[0-9a-f]{8})$'
+    SubnetIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubnetId'
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+        Value:
+          $ref: '#/components/schemas/TagValue'
+      description: Metadata assigned to a directory consisting of a key-value pair.
+    TagKey:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 1
+      maxLength: 128
+    TagKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+    TagLimitExceededException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ExceptionMessage'
+        RequestId:
+          $ref: '#/components/schemas/RequestId'
+      description: The maximum allowed number of tags was exceeded.
+    TagValue:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 0
+      maxLength: 256
+    Tags:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    TopicArn:
+      type: string
+    TopicName:
+      type: string
+      pattern: '[a-zA-Z0-9_-]+'
+      minLength: 1
+      maxLength: 256
+    TopicNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/TopicName'
+    TopicStatus:
+      type: string
+      enum:
+        - Registered
+        - Topic not found
+        - Failed
+        - Deleted
+    Trust:
+      type: object
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        TrustId:
+          $ref: '#/components/schemas/TrustId'
+        RemoteDomainName:
+          $ref: '#/components/schemas/RemoteDomainName'
+        TrustType:
+          $ref: '#/components/schemas/TrustType'
+        TrustDirection:
+          $ref: '#/components/schemas/TrustDirection'
+        TrustState:
+          $ref: '#/components/schemas/TrustState'
+        CreatedDateTime:
+          $ref: '#/components/schemas/CreatedDateTime'
+        LastUpdatedDateTime:
+          $ref: '#/components/schemas/LastUpdatedDateTime'
+        StateLastUpdatedDateTime:
+          $ref: '#/components/schemas/StateLastUpdatedDateTime'
+        TrustStateReason:
+          $ref: '#/components/schemas/TrustStateReason'
+      description: Describes a trust relationship between an Microsoft AD in the AWS cloud and an external domain.
+    TrustDirection:
+      type: string
+      enum:
+        - 'One-Way: Outgoing'
+        - 'One-Way: Incoming'
+        - Two-Way
+    TrustId:
+      type: string
+      pattern: '^t-[0-9a-f]{10}$'
+    TrustIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/TrustId'
+    TrustPassword:
+      type: string
+      minLength: 1
+      maxLength: 128
+      format: password
+    TrustState:
+      type: string
+      enum:
+        - Creating
+        - Created
+        - Verifying
+        - VerifyFailed
+        - Verified
+        - Deleting
+        - Deleted
+        - Failed
+    TrustStateReason:
+      type: string
+    TrustType:
+      type: string
+      enum:
+        - Forest
+    Trusts:
+      type: array
+      items:
+        $ref: '#/components/schemas/Trust'
+    UnsupportedOperationException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ExceptionMessage'
+        RequestId:
+          $ref: '#/components/schemas/RequestId'
+      description: The operation is not supported.
+    UpdateConditionalForwarderRequest:
+      type: object
+      required:
+        - DirectoryId
+        - RemoteDomainName
+        - DnsIpAddrs
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        RemoteDomainName:
+          $ref: '#/components/schemas/RemoteDomainName'
+        DnsIpAddrs:
+          $ref: '#/components/schemas/DnsIpAddrs'
+      description: Updates a conditional forwarder.
+    UpdateConditionalForwarderResult:
+      type: object
+      properties: {}
+      description: The result of an UpdateConditionalForwarder request.
+    UpdateNumberOfDomainControllersRequest:
+      type: object
+      required:
+        - DirectoryId
+        - DesiredNumber
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        DesiredNumber:
+          $ref: '#/components/schemas/DesiredNumberOfDomainControllers'
+    UpdateNumberOfDomainControllersResult:
+      type: object
+      properties: {}
+    UpdateRadiusRequest:
+      type: object
+      required:
+        - DirectoryId
+        - RadiusSettings
+      properties:
+        DirectoryId:
+          $ref: '#/components/schemas/DirectoryId'
+        RadiusSettings:
+          $ref: '#/components/schemas/RadiusSettings'
+      description: Contains the inputs for the <a>UpdateRadius</a> operation.
+    UpdateRadiusResult:
+      type: object
+      properties: {}
+      description: Contains the results of the <a>UpdateRadius</a> operation.
+    UpdateSecurityGroupForDirectoryControllers:
+      type: boolean
+    UseSameUsername:
+      type: boolean
+    UserName:
+      type: string
+      pattern: '[a-zA-Z0-9._-]+'
+      minLength: 1
+    VerifyTrustRequest:
+      type: object
+      required:
+        - TrustId
+      properties:
+        TrustId:
+          $ref: '#/components/schemas/TrustId'
+      description: Initiates the verification of an existing trust relationship between a Microsoft AD in the AWS cloud and an external domain.
+    VerifyTrustResult:
+      type: object
+      properties:
+        TrustId:
+          $ref: '#/components/schemas/TrustId'
+      description: Result of a VerifyTrust request.
+    VpcId:
+      type: string
+      pattern: '^(vpc-[0-9a-f]{8})$'
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

@@ -1,0 +1,4808 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://lightsail.amazonaws.com/'
+info:
+  version: '2016-11-28'
+  x-release: v4
+  title: Amazon Lightsail
+  description: '<p>Amazon Lightsail is the easiest way to get started with AWS for developers who just need virtual private servers. Lightsail includes everything you need to launch your project quickly - a virtual machine, SSD-based storage, data transfer, DNS management, and a static IP - for a low, predictable price. You manage those Lightsail servers through the Lightsail console or by using the API or command-line interface (CLI).</p> <p>For more information about Lightsail concepts and tasks, see the <a href="https://lightsail.aws.amazon.com/ls/docs/all">Lightsail Dev Guide</a>.</p> <p>To use the Lightsail API or the CLI, you will need to use AWS Identity and Access Management (IAM) to generate access keys. For details about how to set this up, see the <a href="http://lightsail.aws.amazon.com/ls/docs/how-to/article/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli">Lightsail Dev Guide</a>.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: lightsail
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/lightsail-2016-11-28.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/lightsail/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AllocateStaticIp
+      description: Allocates a static IP address.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllocateStaticIpResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllocateStaticIpRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AttachStaticIp':
+    post:
+      operationId: AttachStaticIp
+      description: Attaches a static IP address to a specific Amazon Lightsail instance.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttachStaticIpResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachStaticIpRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CloseInstancePublicPorts':
+    post:
+      operationId: CloseInstancePublicPorts
+      description: Closes the public ports on a specific Amazon Lightsail instance.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloseInstancePublicPortsResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloseInstancePublicPortsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateDomain':
+    post:
+      operationId: CreateDomain
+      description: 'Creates a domain resource for the specified domain (e.g., example.com).'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDomainResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDomainRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateDomainEntry':
+    post:
+      operationId: CreateDomainEntry
+      description: 'Creates one of the following entry records associated with the domain: A record, CNAME record, TXT record, or MX record.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDomainEntryResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDomainEntryRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateInstanceSnapshot':
+    post:
+      operationId: CreateInstanceSnapshot
+      description: 'Creates a snapshot of a specific virtual private server, or <i>instance</i>. You can use a snapshot to create a new instance that is based on that snapshot.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateInstanceSnapshotResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInstanceSnapshotRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateInstances':
+    post:
+      operationId: CreateInstances
+      description: 'Creates one or more Amazon Lightsail virtual private servers, or <i>instances</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateInstancesResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInstancesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateInstancesFromSnapshot':
+    post:
+      operationId: CreateInstancesFromSnapshot
+      description: Uses a specific snapshot as a blueprint for creating one or more new instances that are based on that identical configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateInstancesFromSnapshotResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInstancesFromSnapshotRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateKeyPair':
+    post:
+      operationId: CreateKeyPair
+      description: Creates sn SSH key pair.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateKeyPairResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKeyPairRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDomain':
+    post:
+      operationId: DeleteDomain
+      description: Deletes the specified domain recordset and all of its domain records.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDomainResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDomainRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDomainEntry':
+    post:
+      operationId: DeleteDomainEntry
+      description: Deletes a specific domain entry.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDomainEntryResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDomainEntryRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteInstance':
+    post:
+      operationId: DeleteInstance
+      description: 'Deletes a specific Amazon Lightsail virtual private server, or <i>instance</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteInstanceResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteInstanceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteInstanceSnapshot':
+    post:
+      operationId: DeleteInstanceSnapshot
+      description: Deletes a specific snapshot of a virtual private server (or <i>instance</i>).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteInstanceSnapshotResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteInstanceSnapshotRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteKeyPair':
+    post:
+      operationId: DeleteKeyPair
+      description: Deletes a specific SSH key pair.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteKeyPairResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteKeyPairRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DetachStaticIp':
+    post:
+      operationId: DetachStaticIp
+      description: Detaches a static IP from the Amazon Lightsail instance to which it is attached.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetachStaticIpResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetachStaticIpRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DownloadDefaultKeyPair':
+    post:
+      operationId: DownloadDefaultKeyPair
+      description: Downloads the default SSH key pair from the user's account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DownloadDefaultKeyPairResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DownloadDefaultKeyPairRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetActiveNames':
+    post:
+      operationId: GetActiveNames
+      description: Returns the names of all active (not deleted) resources.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetActiveNamesResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetActiveNamesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetBlueprints':
+    post:
+      operationId: GetBlueprints
+      description: 'Returns the list of available instance images, or <i>blueprints</i>. You can use a blueprint to create a new virtual private server already running a specific operating system, as well as a preinstalled app or development stack. The software each instance is running depends on the blueprint image you choose.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBlueprintsResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBlueprintsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetBundles':
+    post:
+      operationId: GetBundles
+      description: Returns the list of bundles that are available for purchase. A bundle describes the specs for your virtual private server (or <i>instance</i>).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBundlesResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBundlesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetDomain':
+    post:
+      operationId: GetDomain
+      description: Returns information about a specific domain recordset.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDomainResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDomainRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetDomains':
+    post:
+      operationId: GetDomains
+      description: Returns a list of all domains in the user's account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDomainsResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDomainsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetInstance':
+    post:
+      operationId: GetInstance
+      description: 'Returns information about a specific Amazon Lightsail instance, which is a virtual private server.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInstanceResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetInstanceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetInstanceAccessDetails':
+    post:
+      operationId: GetInstanceAccessDetails
+      description: 'Returns temporary SSH keys you can use to connect to a specific virtual private server, or <i>instance</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInstanceAccessDetailsResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetInstanceAccessDetailsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetInstanceMetricData':
+    post:
+      operationId: GetInstanceMetricData
+      description: 'Returns the data points for the specified Amazon Lightsail instance metric, given an instance name.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInstanceMetricDataResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetInstanceMetricDataRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetInstancePortStates':
+    post:
+      operationId: GetInstancePortStates
+      description: 'Returns the port states for a specific virtual private server, or <i>instance</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInstancePortStatesResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetInstancePortStatesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetInstanceSnapshot':
+    post:
+      operationId: GetInstanceSnapshot
+      description: Returns information about a specific instance snapshot.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInstanceSnapshotResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetInstanceSnapshotRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetInstanceSnapshots':
+    post:
+      operationId: GetInstanceSnapshots
+      description: Returns all instance snapshots for the user's account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInstanceSnapshotsResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetInstanceSnapshotsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetInstanceState':
+    post:
+      operationId: GetInstanceState
+      description: Returns the state of a specific instance. Works on one instance at a time.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInstanceStateResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetInstanceStateRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetInstances':
+    post:
+      operationId: GetInstances
+      description: 'Returns information about all Amazon Lightsail virtual private servers, or <i>instances</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInstancesResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetInstancesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetKeyPair':
+    post:
+      operationId: GetKeyPair
+      description: Returns information about a specific key pair.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetKeyPairResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetKeyPairRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetKeyPairs':
+    post:
+      operationId: GetKeyPairs
+      description: Returns information about all key pairs in the user's account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetKeyPairsResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetKeyPairsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetOperation':
+    post:
+      operationId: GetOperation
+      description: 'Returns information about a specific operation. Operations include events such as when you create an instance, allocate a static IP, attach a static IP, and so on.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOperationResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetOperationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetOperations':
+    post:
+      operationId: GetOperations
+      description: '<p>Returns information about all operations.</p> <p>Results are returned from oldest to newest, up to a maximum of 200. Results can be paged by making each subsequent call to <code>GetOperations</code> use the maximum (last) <code>statusChangedAt</code> value from the previous request.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOperationsResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetOperationsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetOperationsForResource':
+    post:
+      operationId: GetOperationsForResource
+      description: 'Gets operations for a specific resource (e.g., an instance or a static IP).'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOperationsForResourceResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetOperationsForResourceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetRegions':
+    post:
+      operationId: GetRegions
+      description: Returns a list of all valid regions for Amazon Lightsail. Use the <code>include availability zones</code> parameter to also return the availability zones in a region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRegionsResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRegionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetStaticIp':
+    post:
+      operationId: GetStaticIp
+      description: Returns information about a specific static IP.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetStaticIpResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetStaticIpRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetStaticIps':
+    post:
+      operationId: GetStaticIps
+      description: Returns information about all static IPs in the user's account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetStaticIpsResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetStaticIpsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ImportKeyPair':
+    post:
+      operationId: ImportKeyPair
+      description: Imports a public SSH key from a specific key pair.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportKeyPairResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportKeyPairRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#IsVpcPeered':
+    post:
+      operationId: IsVpcPeered
+      description: Returns a Boolean value indicating whether your Lightsail VPC is peered.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IsVpcPeeredResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IsVpcPeeredRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#OpenInstancePublicPorts':
+    post:
+      operationId: OpenInstancePublicPorts
+      description: Adds public ports to an Amazon Lightsail instance.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenInstancePublicPortsResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenInstancePublicPortsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PeerVpc':
+    post:
+      operationId: PeerVpc
+      description: Tries to peer the Lightsail VPC with the user's default VPC.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PeerVpcResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PeerVpcRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutInstancePublicPorts':
+    post:
+      operationId: PutInstancePublicPorts
+      description: 'Sets the specified open ports for an Amazon Lightsail instance, and closes all ports for every protocol not included in the current request.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutInstancePublicPortsResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutInstancePublicPortsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RebootInstance':
+    post:
+      operationId: RebootInstance
+      description: 'Restarts a specific instance. When your Amazon Lightsail instance is finished rebooting, Lightsail assigns a new public IP address. To use the same IP address after restarting, create a static IP address and attach it to the instance.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RebootInstanceResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RebootInstanceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ReleaseStaticIp':
+    post:
+      operationId: ReleaseStaticIp
+      description: Deletes a specific static IP from your account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReleaseStaticIpResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReleaseStaticIpRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StartInstance':
+    post:
+      operationId: StartInstance
+      description: 'Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the reboot instance operation.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartInstanceResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartInstanceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StopInstance':
+    post:
+      operationId: StopInstance
+      description: Stops a specific Amazon Lightsail instance that is currently running.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopInstanceResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopInstanceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UnpeerVpc':
+    post:
+      operationId: UnpeerVpc
+      description: Attempts to unpeer the Lightsail VPC from the user's default VPC.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnpeerVpcResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnpeerVpcRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateDomainEntry':
+    post:
+      operationId: UpdateDomainEntry
+      description: Updates a domain recordset after it is created.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDomainEntryResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDomainEntryRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AccessDeniedException:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/string'
+        docs:
+          $ref: '#/components/schemas/string'
+        message:
+          $ref: '#/components/schemas/string'
+        tip:
+          $ref: '#/components/schemas/string'
+      description: Lightsail throws this exception when the user cannot be authenticated or uses invalid credentials to access a resource.
+    AccessDirection:
+      type: string
+      enum:
+        - inbound
+        - outbound
+    AccountSetupInProgressException:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/string'
+        docs:
+          $ref: '#/components/schemas/string'
+        message:
+          $ref: '#/components/schemas/string'
+        tip:
+          $ref: '#/components/schemas/string'
+      description: Lightsail throws this exception when an account is still in the setup in progress state.
+    AllocateStaticIpRequest:
+      type: object
+      required:
+        - staticIpName
+      properties:
+        staticIpName:
+          $ref: '#/components/schemas/ResourceName'
+    AllocateStaticIpResult:
+      type: object
+      properties:
+        operations:
+          $ref: '#/components/schemas/OperationList'
+    AttachStaticIpRequest:
+      type: object
+      required:
+        - staticIpName
+        - instanceName
+      properties:
+        staticIpName:
+          $ref: '#/components/schemas/ResourceName'
+        instanceName:
+          $ref: '#/components/schemas/ResourceName'
+    AttachStaticIpResult:
+      type: object
+      properties:
+        operations:
+          $ref: '#/components/schemas/OperationList'
+    AvailabilityZone:
+      type: object
+      properties:
+        zoneName:
+          $ref: '#/components/schemas/NonEmptyString'
+        state:
+          $ref: '#/components/schemas/NonEmptyString'
+      description: Describes an Availability Zone.
+    AvailabilityZoneList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AvailabilityZone'
+    Base64:
+      type: string
+    Blueprint:
+      type: object
+      properties:
+        blueprintId:
+          $ref: '#/components/schemas/NonEmptyString'
+        name:
+          $ref: '#/components/schemas/ResourceName'
+        group:
+          $ref: '#/components/schemas/NonEmptyString'
+        type:
+          $ref: '#/components/schemas/BlueprintType'
+        description:
+          $ref: '#/components/schemas/string'
+        isActive:
+          $ref: '#/components/schemas/boolean'
+        minPower:
+          $ref: '#/components/schemas/integer'
+        version:
+          $ref: '#/components/schemas/string'
+        versionCode:
+          $ref: '#/components/schemas/string'
+        productUrl:
+          $ref: '#/components/schemas/string'
+        licenseUrl:
+          $ref: '#/components/schemas/string'
+      description: Describes a blueprint (a virtual private server image).
+    BlueprintList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Blueprint'
+    BlueprintType:
+      type: string
+      enum:
+        - os
+        - app
+    Bundle:
+      type: object
+      properties:
+        price:
+          $ref: '#/components/schemas/float'
+        cpuCount:
+          $ref: '#/components/schemas/integer'
+        diskSizeInGb:
+          $ref: '#/components/schemas/integer'
+        bundleId:
+          $ref: '#/components/schemas/NonEmptyString'
+        instanceType:
+          $ref: '#/components/schemas/string'
+        isActive:
+          $ref: '#/components/schemas/boolean'
+        name:
+          $ref: '#/components/schemas/string'
+        power:
+          $ref: '#/components/schemas/integer'
+        ramSizeInGb:
+          $ref: '#/components/schemas/float'
+        transferPerMonthInGb:
+          $ref: '#/components/schemas/integer'
+      description: 'Describes a bundle, which is a set of specs describing your virtual private server (or <i>instance</i>).'
+    BundleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Bundle'
+    CloseInstancePublicPortsRequest:
+      type: object
+      required:
+        - portInfo
+        - instanceName
+      properties:
+        portInfo:
+          $ref: '#/components/schemas/PortInfo'
+        instanceName:
+          $ref: '#/components/schemas/ResourceName'
+    CloseInstancePublicPortsResult:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+    CreateDomainEntryRequest:
+      type: object
+      required:
+        - domainName
+        - domainEntry
+      properties:
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+        domainEntry:
+          $ref: '#/components/schemas/DomainEntry'
+    CreateDomainEntryResult:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+    CreateDomainRequest:
+      type: object
+      required:
+        - domainName
+      properties:
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+    CreateDomainResult:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+    CreateInstanceSnapshotRequest:
+      type: object
+      required:
+        - instanceSnapshotName
+        - instanceName
+      properties:
+        instanceSnapshotName:
+          $ref: '#/components/schemas/ResourceName'
+        instanceName:
+          $ref: '#/components/schemas/ResourceName'
+    CreateInstanceSnapshotResult:
+      type: object
+      properties:
+        operations:
+          $ref: '#/components/schemas/OperationList'
+    CreateInstancesFromSnapshotRequest:
+      type: object
+      required:
+        - instanceNames
+        - availabilityZone
+        - instanceSnapshotName
+        - bundleId
+      properties:
+        instanceNames:
+          $ref: '#/components/schemas/StringList'
+        availabilityZone:
+          $ref: '#/components/schemas/string'
+        instanceSnapshotName:
+          $ref: '#/components/schemas/ResourceName'
+        bundleId:
+          $ref: '#/components/schemas/NonEmptyString'
+        userData:
+          $ref: '#/components/schemas/string'
+        keyPairName:
+          $ref: '#/components/schemas/ResourceName'
+    CreateInstancesFromSnapshotResult:
+      type: object
+      properties:
+        operations:
+          $ref: '#/components/schemas/OperationList'
+    CreateInstancesRequest:
+      type: object
+      required:
+        - instanceNames
+        - availabilityZone
+        - blueprintId
+        - bundleId
+      properties:
+        instanceNames:
+          $ref: '#/components/schemas/StringList'
+        availabilityZone:
+          $ref: '#/components/schemas/string'
+        customImageName:
+          $ref: '#/components/schemas/ResourceName'
+        blueprintId:
+          $ref: '#/components/schemas/NonEmptyString'
+        bundleId:
+          $ref: '#/components/schemas/NonEmptyString'
+        userData:
+          $ref: '#/components/schemas/string'
+        keyPairName:
+          $ref: '#/components/schemas/ResourceName'
+    CreateInstancesResult:
+      type: object
+      properties:
+        operations:
+          $ref: '#/components/schemas/OperationList'
+    CreateKeyPairRequest:
+      type: object
+      required:
+        - keyPairName
+      properties:
+        keyPairName:
+          $ref: '#/components/schemas/ResourceName'
+    CreateKeyPairResult:
+      type: object
+      properties:
+        keyPair:
+          $ref: '#/components/schemas/KeyPair'
+        publicKeyBase64:
+          $ref: '#/components/schemas/Base64'
+        privateKeyBase64:
+          $ref: '#/components/schemas/Base64'
+        operation:
+          $ref: '#/components/schemas/Operation'
+    DeleteDomainEntryRequest:
+      type: object
+      required:
+        - domainName
+        - domainEntry
+      properties:
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+        domainEntry:
+          $ref: '#/components/schemas/DomainEntry'
+    DeleteDomainEntryResult:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+    DeleteDomainRequest:
+      type: object
+      required:
+        - domainName
+      properties:
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+    DeleteDomainResult:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+    DeleteInstanceRequest:
+      type: object
+      required:
+        - instanceName
+      properties:
+        instanceName:
+          $ref: '#/components/schemas/ResourceName'
+    DeleteInstanceResult:
+      type: object
+      properties:
+        operations:
+          $ref: '#/components/schemas/OperationList'
+    DeleteInstanceSnapshotRequest:
+      type: object
+      required:
+        - instanceSnapshotName
+      properties:
+        instanceSnapshotName:
+          $ref: '#/components/schemas/ResourceName'
+    DeleteInstanceSnapshotResult:
+      type: object
+      properties:
+        operations:
+          $ref: '#/components/schemas/OperationList'
+    DeleteKeyPairRequest:
+      type: object
+      required:
+        - keyPairName
+      properties:
+        keyPairName:
+          $ref: '#/components/schemas/ResourceName'
+    DeleteKeyPairResult:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+    DetachStaticIpRequest:
+      type: object
+      required:
+        - staticIpName
+      properties:
+        staticIpName:
+          $ref: '#/components/schemas/ResourceName'
+    DetachStaticIpResult:
+      type: object
+      properties:
+        operations:
+          $ref: '#/components/schemas/OperationList'
+    Disk:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/ResourceName'
+        arn:
+          $ref: '#/components/schemas/NonEmptyString'
+        supportCode:
+          $ref: '#/components/schemas/string'
+        createdAt:
+          $ref: '#/components/schemas/IsoDate'
+        location:
+          $ref: '#/components/schemas/ResourceLocation'
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+        sizeInGb:
+          $ref: '#/components/schemas/integer'
+        gbInUse:
+          $ref: '#/components/schemas/integer'
+        isSystemDisk:
+          $ref: '#/components/schemas/boolean'
+        iops:
+          $ref: '#/components/schemas/integer'
+        path:
+          $ref: '#/components/schemas/string'
+        attachedTo:
+          $ref: '#/components/schemas/string'
+        isAttached:
+          $ref: '#/components/schemas/boolean'
+        attachmentState:
+          $ref: '#/components/schemas/string'
+      description: Describes the hard disk (an SSD).
+    DiskList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Disk'
+    Domain:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/ResourceName'
+        arn:
+          $ref: '#/components/schemas/NonEmptyString'
+        supportCode:
+          $ref: '#/components/schemas/string'
+        createdAt:
+          $ref: '#/components/schemas/IsoDate'
+        location:
+          $ref: '#/components/schemas/ResourceLocation'
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+        domainEntries:
+          $ref: '#/components/schemas/DomainEntryList'
+      description: Describes a domain where you are storing recordsets in Lightsail.
+    DomainEntry:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/NonEmptyString'
+        name:
+          $ref: '#/components/schemas/DomainName'
+        target:
+          $ref: '#/components/schemas/string'
+        type:
+          $ref: '#/components/schemas/DomainEntryType'
+        options:
+          $ref: '#/components/schemas/DomainEntryOptions'
+      description: Describes a domain recordset entry.
+    DomainEntryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DomainEntry'
+    DomainEntryOptions:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/DomainEntryOptionsKeys'
+          value:
+            $ref: '#/components/schemas/string'
+    DomainEntryOptionsKeys:
+      type: string
+    DomainEntryType:
+      type: string
+    DomainList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Domain'
+    DomainName:
+      type: string
+    DownloadDefaultKeyPairRequest:
+      type: object
+      properties: {}
+    DownloadDefaultKeyPairResult:
+      type: object
+      properties:
+        publicKeyBase64:
+          $ref: '#/components/schemas/Base64'
+        privateKeyBase64:
+          $ref: '#/components/schemas/Base64'
+    GetActiveNamesRequest:
+      type: object
+      properties:
+        pageToken:
+          $ref: '#/components/schemas/string'
+    GetActiveNamesResult:
+      type: object
+      properties:
+        activeNames:
+          $ref: '#/components/schemas/StringList'
+        nextPageToken:
+          $ref: '#/components/schemas/string'
+    GetBlueprintsRequest:
+      type: object
+      properties:
+        includeInactive:
+          $ref: '#/components/schemas/boolean'
+        pageToken:
+          $ref: '#/components/schemas/string'
+    GetBlueprintsResult:
+      type: object
+      properties:
+        blueprints:
+          $ref: '#/components/schemas/BlueprintList'
+        nextPageToken:
+          $ref: '#/components/schemas/string'
+    GetBundlesRequest:
+      type: object
+      properties:
+        includeInactive:
+          $ref: '#/components/schemas/boolean'
+        pageToken:
+          $ref: '#/components/schemas/string'
+    GetBundlesResult:
+      type: object
+      properties:
+        bundles:
+          $ref: '#/components/schemas/BundleList'
+        nextPageToken:
+          $ref: '#/components/schemas/string'
+    GetDomainRequest:
+      type: object
+      required:
+        - domainName
+      properties:
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+    GetDomainResult:
+      type: object
+      properties:
+        domain:
+          $ref: '#/components/schemas/Domain'
+    GetDomainsRequest:
+      type: object
+      properties:
+        pageToken:
+          $ref: '#/components/schemas/string'
+    GetDomainsResult:
+      type: object
+      properties:
+        domains:
+          $ref: '#/components/schemas/DomainList'
+        nextPageToken:
+          $ref: '#/components/schemas/string'
+    GetInstanceAccessDetailsRequest:
+      type: object
+      required:
+        - instanceName
+      properties:
+        instanceName:
+          $ref: '#/components/schemas/ResourceName'
+        protocol:
+          $ref: '#/components/schemas/InstanceAccessProtocol'
+    GetInstanceAccessDetailsResult:
+      type: object
+      properties:
+        accessDetails:
+          $ref: '#/components/schemas/InstanceAccessDetails'
+    GetInstanceMetricDataRequest:
+      type: object
+      required:
+        - instanceName
+        - metricName
+        - period
+        - startTime
+        - endTime
+        - unit
+        - statistics
+      properties:
+        instanceName:
+          $ref: '#/components/schemas/ResourceName'
+        metricName:
+          $ref: '#/components/schemas/InstanceMetricName'
+        period:
+          $ref: '#/components/schemas/MetricPeriod'
+        startTime:
+          $ref: '#/components/schemas/timestamp'
+        endTime:
+          $ref: '#/components/schemas/timestamp'
+        unit:
+          $ref: '#/components/schemas/MetricUnit'
+        statistics:
+          $ref: '#/components/schemas/MetricStatisticList'
+    GetInstanceMetricDataResult:
+      type: object
+      properties:
+        metricName:
+          $ref: '#/components/schemas/InstanceMetricName'
+        metricData:
+          $ref: '#/components/schemas/MetricDatapointList'
+    GetInstancePortStatesRequest:
+      type: object
+      required:
+        - instanceName
+      properties:
+        instanceName:
+          $ref: '#/components/schemas/ResourceName'
+    GetInstancePortStatesResult:
+      type: object
+      properties:
+        portStates:
+          $ref: '#/components/schemas/InstancePortStateList'
+    GetInstanceRequest:
+      type: object
+      required:
+        - instanceName
+      properties:
+        instanceName:
+          $ref: '#/components/schemas/ResourceName'
+    GetInstanceResult:
+      type: object
+      properties:
+        instance:
+          $ref: '#/components/schemas/Instance'
+    GetInstanceSnapshotRequest:
+      type: object
+      required:
+        - instanceSnapshotName
+      properties:
+        instanceSnapshotName:
+          $ref: '#/components/schemas/ResourceName'
+    GetInstanceSnapshotResult:
+      type: object
+      properties:
+        instanceSnapshot:
+          $ref: '#/components/schemas/InstanceSnapshot'
+    GetInstanceSnapshotsRequest:
+      type: object
+      properties:
+        pageToken:
+          $ref: '#/components/schemas/string'
+    GetInstanceSnapshotsResult:
+      type: object
+      properties:
+        instanceSnapshots:
+          $ref: '#/components/schemas/InstanceSnapshotList'
+        nextPageToken:
+          $ref: '#/components/schemas/string'
+    GetInstanceStateRequest:
+      type: object
+      required:
+        - instanceName
+      properties:
+        instanceName:
+          $ref: '#/components/schemas/ResourceName'
+    GetInstanceStateResult:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/InstanceState'
+    GetInstancesRequest:
+      type: object
+      properties:
+        pageToken:
+          $ref: '#/components/schemas/string'
+    GetInstancesResult:
+      type: object
+      properties:
+        instances:
+          $ref: '#/components/schemas/InstanceList'
+        nextPageToken:
+          $ref: '#/components/schemas/string'
+    GetKeyPairRequest:
+      type: object
+      required:
+        - keyPairName
+      properties:
+        keyPairName:
+          $ref: '#/components/schemas/ResourceName'
+    GetKeyPairResult:
+      type: object
+      properties:
+        keyPair:
+          $ref: '#/components/schemas/KeyPair'
+    GetKeyPairsRequest:
+      type: object
+      properties:
+        pageToken:
+          $ref: '#/components/schemas/string'
+    GetKeyPairsResult:
+      type: object
+      properties:
+        keyPairs:
+          $ref: '#/components/schemas/KeyPairList'
+        nextPageToken:
+          $ref: '#/components/schemas/string'
+    GetOperationRequest:
+      type: object
+      required:
+        - operationId
+      properties:
+        operationId:
+          $ref: '#/components/schemas/NonEmptyString'
+    GetOperationResult:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+    GetOperationsForResourceRequest:
+      type: object
+      required:
+        - resourceName
+      properties:
+        resourceName:
+          $ref: '#/components/schemas/ResourceName'
+        pageToken:
+          $ref: '#/components/schemas/string'
+    GetOperationsForResourceResult:
+      type: object
+      properties:
+        operations:
+          $ref: '#/components/schemas/OperationList'
+        nextPageCount:
+          $ref: '#/components/schemas/string'
+        nextPageToken:
+          $ref: '#/components/schemas/string'
+    GetOperationsRequest:
+      type: object
+      properties:
+        pageToken:
+          $ref: '#/components/schemas/string'
+    GetOperationsResult:
+      type: object
+      properties:
+        operations:
+          $ref: '#/components/schemas/OperationList'
+        nextPageToken:
+          $ref: '#/components/schemas/string'
+    GetRegionsRequest:
+      type: object
+      properties:
+        includeAvailabilityZones:
+          $ref: '#/components/schemas/boolean'
+    GetRegionsResult:
+      type: object
+      properties:
+        regions:
+          $ref: '#/components/schemas/RegionList'
+    GetStaticIpRequest:
+      type: object
+      required:
+        - staticIpName
+      properties:
+        staticIpName:
+          $ref: '#/components/schemas/ResourceName'
+    GetStaticIpResult:
+      type: object
+      properties:
+        staticIp:
+          $ref: '#/components/schemas/StaticIp'
+    GetStaticIpsRequest:
+      type: object
+      properties:
+        pageToken:
+          $ref: '#/components/schemas/string'
+    GetStaticIpsResult:
+      type: object
+      properties:
+        staticIps:
+          $ref: '#/components/schemas/StaticIpList'
+        nextPageToken:
+          $ref: '#/components/schemas/string'
+    ImportKeyPairRequest:
+      type: object
+      required:
+        - keyPairName
+        - publicKeyBase64
+      properties:
+        keyPairName:
+          $ref: '#/components/schemas/ResourceName'
+        publicKeyBase64:
+          $ref: '#/components/schemas/Base64'
+    ImportKeyPairResult:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+    Instance:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/ResourceName'
+        arn:
+          $ref: '#/components/schemas/NonEmptyString'
+        supportCode:
+          $ref: '#/components/schemas/string'
+        createdAt:
+          $ref: '#/components/schemas/IsoDate'
+        location:
+          $ref: '#/components/schemas/ResourceLocation'
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+        blueprintId:
+          $ref: '#/components/schemas/NonEmptyString'
+        blueprintName:
+          $ref: '#/components/schemas/NonEmptyString'
+        bundleId:
+          $ref: '#/components/schemas/NonEmptyString'
+        isStaticIp:
+          $ref: '#/components/schemas/boolean'
+        privateIpAddress:
+          $ref: '#/components/schemas/IpAddress'
+        publicIpAddress:
+          $ref: '#/components/schemas/IpAddress'
+        ipv6Address:
+          $ref: '#/components/schemas/IpV6Address'
+        hardware:
+          $ref: '#/components/schemas/InstanceHardware'
+        networking:
+          $ref: '#/components/schemas/InstanceNetworking'
+        state:
+          $ref: '#/components/schemas/InstanceState'
+        username:
+          $ref: '#/components/schemas/NonEmptyString'
+        sshKeyName:
+          $ref: '#/components/schemas/ResourceName'
+      description: Describes an instance (a virtual private server).
+    InstanceAccessDetails:
+      type: object
+      properties:
+        certKey:
+          $ref: '#/components/schemas/string'
+        expiresAt:
+          $ref: '#/components/schemas/IsoDate'
+        ipAddress:
+          $ref: '#/components/schemas/IpAddress'
+        password:
+          $ref: '#/components/schemas/string'
+        privateKey:
+          $ref: '#/components/schemas/string'
+        protocol:
+          $ref: '#/components/schemas/InstanceAccessProtocol'
+        instanceName:
+          $ref: '#/components/schemas/ResourceName'
+        username:
+          $ref: '#/components/schemas/string'
+      description: The parameters for gaining temporary access to one of your Amazon Lightsail instances.
+    InstanceAccessProtocol:
+      type: string
+      enum:
+        - ssh
+        - rdp
+    InstanceHardware:
+      type: object
+      properties:
+        cpuCount:
+          $ref: '#/components/schemas/integer'
+        disks:
+          $ref: '#/components/schemas/DiskList'
+        ramSizeInGb:
+          $ref: '#/components/schemas/float'
+      description: Describes the hardware for the instance.
+    InstanceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Instance'
+    InstanceMetricName:
+      type: string
+      enum:
+        - CPUUtilization
+        - NetworkIn
+        - NetworkOut
+        - StatusCheckFailed
+        - StatusCheckFailed_Instance
+        - StatusCheckFailed_System
+    InstanceNetworking:
+      type: object
+      properties:
+        monthlyTransfer:
+          $ref: '#/components/schemas/MonthlyTransfer'
+        ports:
+          $ref: '#/components/schemas/InstancePortInfoList'
+      description: Describes monthly data transfer rates and port information for an instance.
+    InstancePortInfo:
+      type: object
+      properties:
+        fromPort:
+          $ref: '#/components/schemas/Port'
+        toPort:
+          $ref: '#/components/schemas/Port'
+        protocol:
+          $ref: '#/components/schemas/NetworkProtocol'
+        accessFrom:
+          $ref: '#/components/schemas/string'
+        accessType:
+          $ref: '#/components/schemas/PortAccessType'
+        commonName:
+          $ref: '#/components/schemas/string'
+        accessDirection:
+          $ref: '#/components/schemas/AccessDirection'
+      description: Describes information about the instance ports.
+    InstancePortInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstancePortInfo'
+    InstancePortState:
+      type: object
+      properties:
+        fromPort:
+          $ref: '#/components/schemas/Port'
+        toPort:
+          $ref: '#/components/schemas/Port'
+        protocol:
+          $ref: '#/components/schemas/NetworkProtocol'
+        state:
+          $ref: '#/components/schemas/PortState'
+      description: Describes the port state.
+    InstancePortStateList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstancePortState'
+    InstanceSnapshot:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/ResourceName'
+        arn:
+          $ref: '#/components/schemas/NonEmptyString'
+        supportCode:
+          $ref: '#/components/schemas/string'
+        createdAt:
+          $ref: '#/components/schemas/IsoDate'
+        location:
+          $ref: '#/components/schemas/ResourceLocation'
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+        state:
+          $ref: '#/components/schemas/InstanceSnapshotState'
+        progress:
+          $ref: '#/components/schemas/string'
+        fromInstanceName:
+          $ref: '#/components/schemas/ResourceName'
+        fromInstanceArn:
+          $ref: '#/components/schemas/NonEmptyString'
+        fromBlueprintId:
+          $ref: '#/components/schemas/string'
+        fromBundleId:
+          $ref: '#/components/schemas/string'
+        sizeInGb:
+          $ref: '#/components/schemas/integer'
+      description: 'Describes the snapshot of the virtual private server, or <i>instance</i>.'
+    InstanceSnapshotList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceSnapshot'
+    InstanceSnapshotState:
+      type: string
+      enum:
+        - pending
+        - error
+        - available
+    InstanceState:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/integer'
+        name:
+          $ref: '#/components/schemas/string'
+      description: Describes the virtual private server (or <i>instance</i>) status.
+    InvalidInputException:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/string'
+        docs:
+          $ref: '#/components/schemas/string'
+        message:
+          $ref: '#/components/schemas/string'
+        tip:
+          $ref: '#/components/schemas/string'
+      description: '<p>Lightsail throws this exception when user input does not conform to the validation rules of an input field.</p> <note> <p>Domain-related APIs are only available in the N. Virginia (us-east-1) Region. Please set your Region configuration to us-east-1 to create, view, or edit these resources.</p> </note>'
+    IpAddress:
+      type: string
+      pattern: '([0-9]{1,3}\.){3}[0-9]{1,3}'
+    IpV6Address:
+      type: string
+      pattern: '([A-F0-9]{1,4}:){7}[A-F0-9]{1,4}'
+    IsVpcPeeredRequest:
+      type: object
+      properties: {}
+    IsVpcPeeredResult:
+      type: object
+      properties:
+        isPeered:
+          $ref: '#/components/schemas/boolean'
+    IsoDate:
+      type: string
+      format: date-time
+    KeyPair:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/ResourceName'
+        arn:
+          $ref: '#/components/schemas/NonEmptyString'
+        supportCode:
+          $ref: '#/components/schemas/string'
+        createdAt:
+          $ref: '#/components/schemas/IsoDate'
+        location:
+          $ref: '#/components/schemas/ResourceLocation'
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+        fingerprint:
+          $ref: '#/components/schemas/Base64'
+      description: Describes the SSH key pair.
+    KeyPairList:
+      type: array
+      items:
+        $ref: '#/components/schemas/KeyPair'
+    MetricDatapoint:
+      type: object
+      properties:
+        average:
+          $ref: '#/components/schemas/double'
+        maximum:
+          $ref: '#/components/schemas/double'
+        minimum:
+          $ref: '#/components/schemas/double'
+        sampleCount:
+          $ref: '#/components/schemas/double'
+        sum:
+          $ref: '#/components/schemas/double'
+        timestamp:
+          $ref: '#/components/schemas/timestamp'
+        unit:
+          $ref: '#/components/schemas/MetricUnit'
+      description: Describes the metric data point.
+    MetricDatapointList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricDatapoint'
+    MetricPeriod:
+      type: integer
+      minimum: 60
+      maximum: 86400
+    MetricStatistic:
+      type: string
+      enum:
+        - Minimum
+        - Maximum
+        - Sum
+        - Average
+        - SampleCount
+    MetricStatisticList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricStatistic'
+    MetricUnit:
+      type: string
+      enum:
+        - Seconds
+        - Microseconds
+        - Milliseconds
+        - Bytes
+        - Kilobytes
+        - Megabytes
+        - Gigabytes
+        - Terabytes
+        - Bits
+        - Kilobits
+        - Megabits
+        - Gigabits
+        - Terabits
+        - Percent
+        - Count
+        - Bytes/Second
+        - Kilobytes/Second
+        - Megabytes/Second
+        - Gigabytes/Second
+        - Terabytes/Second
+        - Bits/Second
+        - Kilobits/Second
+        - Megabits/Second
+        - Gigabits/Second
+        - Terabits/Second
+        - Count/Second
+        - None
+    MonthlyTransfer:
+      type: object
+      properties:
+        gbPerMonthAllocated:
+          $ref: '#/components/schemas/integer'
+      description: Describes the monthly data transfer in and out of your virtual private server (or <i>instance</i>).
+    NetworkProtocol:
+      type: string
+      enum:
+        - tcp
+        - all
+        - udp
+    NonEmptyString:
+      type: string
+      pattern: .*\S.*
+    NotFoundException:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/string'
+        docs:
+          $ref: '#/components/schemas/string'
+        message:
+          $ref: '#/components/schemas/string'
+        tip:
+          $ref: '#/components/schemas/string'
+      description: Lightsail throws this exception when it cannot find a resource.
+    OpenInstancePublicPortsRequest:
+      type: object
+      required:
+        - portInfo
+        - instanceName
+      properties:
+        portInfo:
+          $ref: '#/components/schemas/PortInfo'
+        instanceName:
+          $ref: '#/components/schemas/ResourceName'
+    OpenInstancePublicPortsResult:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+    Operation:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/NonEmptyString'
+        resourceName:
+          $ref: '#/components/schemas/ResourceName'
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+        createdAt:
+          $ref: '#/components/schemas/IsoDate'
+        location:
+          $ref: '#/components/schemas/ResourceLocation'
+        isTerminal:
+          $ref: '#/components/schemas/boolean'
+        operationDetails:
+          $ref: '#/components/schemas/string'
+        operationType:
+          $ref: '#/components/schemas/OperationType'
+        status:
+          $ref: '#/components/schemas/OperationStatus'
+        statusChangedAt:
+          $ref: '#/components/schemas/IsoDate'
+        errorCode:
+          $ref: '#/components/schemas/string'
+        errorDetails:
+          $ref: '#/components/schemas/string'
+      description: Describes the API operation.
+    OperationFailureException:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/string'
+        docs:
+          $ref: '#/components/schemas/string'
+        message:
+          $ref: '#/components/schemas/string'
+        tip:
+          $ref: '#/components/schemas/string'
+      description: Lightsail throws this exception when an operation fails to execute.
+    OperationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Operation'
+    OperationStatus:
+      type: string
+      enum:
+        - NotStarted
+        - Started
+        - Failed
+        - Completed
+    OperationType:
+      type: string
+      enum:
+        - DeleteInstance
+        - CreateInstance
+        - StopInstance
+        - StartInstance
+        - RebootInstance
+        - OpenInstancePublicPorts
+        - PutInstancePublicPorts
+        - CloseInstancePublicPorts
+        - AllocateStaticIp
+        - ReleaseStaticIp
+        - AttachStaticIp
+        - DetachStaticIp
+        - UpdateDomainEntry
+        - DeleteDomainEntry
+        - CreateDomain
+        - DeleteDomain
+        - CreateInstanceSnapshot
+        - DeleteInstanceSnapshot
+        - CreateInstancesFromSnapshot
+    PeerVpcRequest:
+      type: object
+      properties: {}
+    PeerVpcResult:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+    Port:
+      type: integer
+      minimum: 0
+      maximum: 65535
+    PortAccessType:
+      type: string
+      enum:
+        - Public
+        - Private
+    PortInfo:
+      type: object
+      properties:
+        fromPort:
+          $ref: '#/components/schemas/Port'
+        toPort:
+          $ref: '#/components/schemas/Port'
+        protocol:
+          $ref: '#/components/schemas/NetworkProtocol'
+      description: Describes information about the ports on your virtual private server (or <i>instance</i>).
+    PortInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PortInfo'
+    PortState:
+      type: string
+      enum:
+        - open
+        - closed
+    PutInstancePublicPortsRequest:
+      type: object
+      required:
+        - portInfos
+        - instanceName
+      properties:
+        portInfos:
+          $ref: '#/components/schemas/PortInfoList'
+        instanceName:
+          $ref: '#/components/schemas/ResourceName'
+    PutInstancePublicPortsResult:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+    RebootInstanceRequest:
+      type: object
+      required:
+        - instanceName
+      properties:
+        instanceName:
+          $ref: '#/components/schemas/ResourceName'
+    RebootInstanceResult:
+      type: object
+      properties:
+        operations:
+          $ref: '#/components/schemas/OperationList'
+    Region:
+      type: object
+      properties:
+        continentCode:
+          $ref: '#/components/schemas/string'
+        description:
+          $ref: '#/components/schemas/string'
+        displayName:
+          $ref: '#/components/schemas/string'
+        name:
+          $ref: '#/components/schemas/RegionName'
+        availabilityZones:
+          $ref: '#/components/schemas/AvailabilityZoneList'
+      description: Describes the AWS Region.
+    RegionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Region'
+    RegionName:
+      type: string
+      enum:
+        - us-east-1
+        - us-east-2
+        - us-west-1
+        - us-west-2
+        - eu-west-1
+        - eu-central-1
+        - ap-south-1
+        - ap-southeast-1
+        - ap-southeast-2
+        - ap-northeast-1
+        - ap-northeast-2
+    ReleaseStaticIpRequest:
+      type: object
+      required:
+        - staticIpName
+      properties:
+        staticIpName:
+          $ref: '#/components/schemas/ResourceName'
+    ReleaseStaticIpResult:
+      type: object
+      properties:
+        operations:
+          $ref: '#/components/schemas/OperationList'
+    ResourceLocation:
+      type: object
+      properties:
+        availabilityZone:
+          $ref: '#/components/schemas/string'
+        regionName:
+          $ref: '#/components/schemas/RegionName'
+      description: Describes the resource location.
+    ResourceName:
+      type: string
+      pattern: '\w[\w\-]*\w'
+    ResourceType:
+      type: string
+      enum:
+        - Instance
+        - StaticIp
+        - KeyPair
+        - InstanceSnapshot
+        - Domain
+        - PeeredVpc
+    ServiceException:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/string'
+        docs:
+          $ref: '#/components/schemas/string'
+        message:
+          $ref: '#/components/schemas/string'
+        tip:
+          $ref: '#/components/schemas/string'
+      description: A general service exception.
+    StartInstanceRequest:
+      type: object
+      required:
+        - instanceName
+      properties:
+        instanceName:
+          $ref: '#/components/schemas/ResourceName'
+    StartInstanceResult:
+      type: object
+      properties:
+        operations:
+          $ref: '#/components/schemas/OperationList'
+    StaticIp:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/ResourceName'
+        arn:
+          $ref: '#/components/schemas/NonEmptyString'
+        supportCode:
+          $ref: '#/components/schemas/string'
+        createdAt:
+          $ref: '#/components/schemas/IsoDate'
+        location:
+          $ref: '#/components/schemas/ResourceLocation'
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+        ipAddress:
+          $ref: '#/components/schemas/IpAddress'
+        attachedTo:
+          $ref: '#/components/schemas/ResourceName'
+        isAttached:
+          $ref: '#/components/schemas/boolean'
+      description: Describes the static IP.
+    StaticIpList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StaticIp'
+    StopInstanceRequest:
+      type: object
+      required:
+        - instanceName
+      properties:
+        instanceName:
+          $ref: '#/components/schemas/ResourceName'
+    StopInstanceResult:
+      type: object
+      properties:
+        operations:
+          $ref: '#/components/schemas/OperationList'
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string'
+    UnauthenticatedException:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/string'
+        docs:
+          $ref: '#/components/schemas/string'
+        message:
+          $ref: '#/components/schemas/string'
+        tip:
+          $ref: '#/components/schemas/string'
+      description: Lightsail throws this exception when the user has not been authenticated.
+    UnpeerVpcRequest:
+      type: object
+      properties: {}
+    UnpeerVpcResult:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/Operation'
+    UpdateDomainEntryRequest:
+      type: object
+      required:
+        - domainName
+        - domainEntry
+      properties:
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+        domainEntry:
+          $ref: '#/components/schemas/DomainEntry'
+    UpdateDomainEntryResult:
+      type: object
+      properties:
+        operations:
+          $ref: '#/components/schemas/OperationList'
+    boolean:
+      type: boolean
+    double:
+      type: number
+      format: double
+    float:
+      type: number
+      format: float
+    integer:
+      type: integer
+    string:
+      type: string
+    timestamp:
+      type: string
+      format: date-time
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

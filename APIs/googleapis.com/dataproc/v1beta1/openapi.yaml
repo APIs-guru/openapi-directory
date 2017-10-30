@@ -1,0 +1,1626 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://dataproc.googleapis.com/'
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Manages Hadoop-based clusters and jobs on Google Cloud Platform.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: Google Cloud Dataproc
+  version: v1beta1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
+      url: 'https://dataproc.googleapis.com/$discovery/rest?version=v1beta1'
+      version: v1
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: dataproc
+externalDocs:
+  url: 'https://cloud.google.com/dataproc/'
+tags:
+  - name: operations
+  - name: projects
+paths:
+  '/v1beta1/projects/{projectId}/clusters':
+    get:
+      description: Lists all clusters in a project.
+      operationId: dataproc.projects.clusters.list
+      parameters:
+        - description: Required The ID of the Google Cloud Platform project that the cluster belongs to.
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - description: The standard List page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: The standard List page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: 'Optional A filter constraining which clusters to list. Valid filters contain label terms such as: labels.key1 = val1 AND (-labels.k2 = val2 OR labels.k3 = val3)'
+          in: query
+          name: filter
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListClustersResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+    post:
+      description: Creates a cluster in a project.
+      operationId: dataproc.projects.clusters.create
+      parameters:
+        - description: Required The ID of the Google Cloud Platform project that the cluster belongs to.
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+      requestBody:
+        $ref: '#/components/requestBodies/Cluster'
+  '/v1beta1/projects/{projectId}/clusters/{clusterName}':
+    delete:
+      description: Deletes a cluster in a project.
+      operationId: dataproc.projects.clusters.delete
+      parameters:
+        - description: Required The ID of the Google Cloud Platform project that the cluster belongs to.
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - description: Required The cluster name.
+          in: path
+          name: clusterName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    get:
+      description: Gets the resource representation for a cluster in a project.
+      operationId: dataproc.projects.clusters.get
+      parameters:
+        - description: Required The ID of the Google Cloud Platform project that the cluster belongs to.
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - description: Required The cluster name.
+          in: path
+          name: clusterName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Cluster'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+    patch:
+      description: Updates a cluster in a project.
+      operationId: dataproc.projects.clusters.patch
+      parameters:
+        - description: Required The ID of the Google Cloud Platform project the cluster belongs to.
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - description: Required The cluster name.
+          in: path
+          name: clusterName
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Required Specifies the path, relative to <code>Cluster</code>, of the field to update. For example, to change the number of workers in a cluster to 5, the <code>update_mask</code> parameter would be specified as <code>configuration.worker_configuration.num_instances</code>, and the PATCH request body would specify the new value, as follows:
+            {
+              "configuration":{
+                "workerConfiguration":{
+                  "numInstances":"5"
+                }
+              }
+            }
+            Similarly, to change the number of preemptible workers in a cluster to 5, the <code>update_mask</code> parameter would be <code>config.secondary_worker_config.num_instances</code>, and the PATCH request body would be set as follows:
+            {
+              "config":{
+                "secondaryWorkerConfig":{
+                  "numInstances":"5"
+                }
+              }
+            }
+            <strong>Note:</strong> Currently, <code>config.worker_config.num_instances</code> and <code>config.secondary_worker_config.num_instances</code> are the only fields that can be updated.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+      requestBody:
+        $ref: '#/components/requestBodies/Cluster'
+  '/v1beta1/projects/{projectId}/clusters/{clusterName}:diagnose':
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+    post:
+      description: 'Gets cluster diagnostic information. After the operation completes, the Operation.response field contains DiagnoseClusterOutputLocation.'
+      operationId: dataproc.projects.clusters.diagnose
+      parameters:
+        - description: Required The ID of the Google Cloud Platform project that the cluster belongs to.
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - description: Required The cluster name.
+          in: path
+          name: clusterName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiagnoseClusterRequest'
+  '/v1beta1/projects/{projectId}/jobs':
+    get:
+      description: Lists jobs in a project.
+      operationId: dataproc.projects.jobs.list
+      parameters:
+        - description: Required The ID of the Google Cloud Platform project that the job belongs to.
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - description: 'Optional The page token, returned by a previous call, to request the next page of results.'
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Optional The number of results to return in each response.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: 'Optional If set, the returned jobs list includes only jobs that were submitted to the named cluster.'
+          in: query
+          name: clusterName
+          schema:
+            type: string
+        - description: 'Optional A filter constraining which jobs to list. Valid filters contain job state and label terms such as: labels.key1 = val1 AND (labels.k2 = val2 OR labels.k3 = val3)'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional Specifies enumerated categories of jobs to list.
+          in: query
+          name: jobStateMatcher
+          schema:
+            type: string
+            enum:
+              - ALL
+              - ACTIVE
+              - NON_ACTIVE
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListJobsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+  '/v1beta1/projects/{projectId}/jobs/{jobId}':
+    delete:
+      description: 'Deletes the job from the project. If the job is active, the delete fails, and the response returns FAILED_PRECONDITION.'
+      operationId: dataproc.projects.jobs.delete
+      parameters:
+        - description: Required The ID of the Google Cloud Platform project that the job belongs to.
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - description: Required The job ID.
+          in: path
+          name: jobId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    get:
+      description: Gets the resource representation for a job in a project.
+      operationId: dataproc.projects.jobs.get
+      parameters:
+        - description: Required The ID of the Google Cloud Platform project that the job belongs to.
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - description: Required The job ID.
+          in: path
+          name: jobId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Job'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+    patch:
+      description: Updates a job in a project.
+      operationId: dataproc.projects.jobs.patch
+      parameters:
+        - description: Required The ID of the Google Cloud Platform project that the job belongs to.
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - description: Required The job ID.
+          in: path
+          name: jobId
+          required: true
+          schema:
+            type: string
+        - description: 'Required Specifies the path, relative to <code>Job</code>, of the field to update. For example, to update the labels of a Job the <code>update_mask</code> parameter would be specified as <code>labels</code>, and the PATCH request body would specify the new value. <strong>Note:</strong> Currently, <code>labels</code> is the only field that can be updated.'
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Job'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Job'
+  '/v1beta1/projects/{projectId}/jobs/{jobId}:cancel':
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+    post:
+      description: 'Starts a job cancellation request. To access the job resource after cancellation, call jobs.list or jobs.get.'
+      operationId: dataproc.projects.jobs.cancel
+      parameters:
+        - description: Required The ID of the Google Cloud Platform project that the job belongs to.
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - description: Required The job ID.
+          in: path
+          name: jobId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Job'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelJobRequest'
+  '/v1beta1/projects/{projectId}/jobs:submit':
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+    post:
+      description: Submits a job to a cluster.
+      operationId: dataproc.projects.jobs.submit
+      parameters:
+        - description: Required The ID of the Google Cloud Platform project that the job belongs to.
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Job'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitJobRequest'
+  '/v1beta1/{name}':
+    delete:
+      description: 'Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn''t support this method, it returns google.rpc.Code.UNIMPLEMENTED.'
+      operationId: dataproc.operations.delete
+      parameters:
+        - description: The name of the operation resource to be deleted.
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - operations
+    get:
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: dataproc.operations.get
+      parameters:
+        - description: The name of the operation resource.
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - operations
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+  '/v1beta1/{name}:cancel':
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+    post:
+      description: 'Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn''t support this method, it returns google.rpc.Code.UNIMPLEMENTED. Clients can use operations.get or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation.'
+      operationId: dataproc.operations.cancel
+      parameters:
+        - description: The name of the operation resource to be cancelled.
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - operations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelOperationRequest'
+components:
+  schemas:
+    AcceleratorConfiguration:
+      description: Specifies the type and number of accelerator cards attached to the instances of an instance group (see GPUs on Compute Engine).
+      properties:
+        acceleratorCount:
+          description: The number of the accelerator cards of this type exposed to this instance.
+          format: int32
+          type: integer
+        acceleratorTypeUri:
+          description: Full or partial URI of the accelerator type resource to expose to this instance. See Google Compute Engine AcceleratorTypes( /compute/docs/reference/beta/acceleratorTypes)
+          type: string
+      type: object
+    CancelJobRequest:
+      description: A request to cancel a job.
+      properties: {}
+      type: object
+    CancelOperationRequest:
+      description: The request message for Operations.CancelOperation.
+      properties: {}
+      type: object
+    Cluster:
+      description: 'Describes the identifying information, configuration, and status of a cluster of Google Compute Engine instances.'
+      properties:
+        clusterName:
+          description: Required The cluster name. Cluster names within a project must be unique. Names from deleted clusters can be reused.
+          type: string
+        clusterUuid:
+          description: Output-only A cluster UUID (Unique Universal Identifier). Cloud Dataproc generates this value when it creates the cluster.
+          type: string
+        configuration:
+          $ref: '#/components/schemas/ClusterConfiguration'
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Optional The labels to associate with this cluster.Label keys must be between 1 and 63 characters long, and must conform to the following PCRE regular expression: \p{Ll}\p{Lo}{0,62}Label values must be between 1 and 63 characters long, and must conform to the following PCRE regular expression: \p{Ll}\p{Lo}\p{N}_-{0,63}No more than 64 labels can be associated with a given cluster.'
+          type: object
+        metrics:
+          $ref: '#/components/schemas/ClusterMetrics'
+        projectId:
+          description: Required The Google Cloud Platform project ID that the cluster belongs to.
+          type: string
+        status:
+          $ref: '#/components/schemas/ClusterStatus'
+        statusHistory:
+          description: Output-only Previous cluster statuses.
+          items:
+            $ref: '#/components/schemas/ClusterStatus'
+          type: array
+      type: object
+    ClusterConfiguration:
+      description: The cluster configuration.
+      properties:
+        configurationBucket:
+          description: 'Optional A Google Cloud Storage staging bucket used for sharing generated SSH keys and configuration. If you do not specify a staging bucket, Cloud Dataproc will determine an appropriate Cloud Storage location (US, ASIA, or EU) for your cluster''s staging bucket according to the Google Compute Engine zone where your cluster is deployed, and then it will create and manage this project-level, per-location bucket for you.'
+          type: string
+        gceClusterConfiguration:
+          $ref: '#/components/schemas/GceClusterConfiguration'
+        initializationActions:
+          description: |
+            Optional Commands to execute on each node after configuration is completed. By default, executables are run on master and all worker nodes. You can test a node's <code>role</code> metadata to run an executable on a master or worker node, as shown below:
+            ROLE=$(/usr/share/google/get_metadata_value attributes/role)
+            if [[ "${ROLE}" == 'Master' ]]; then
+              ... master specific actions ...
+            else
+              ... worker specific actions ...
+            fi
+          items:
+            $ref: '#/components/schemas/NodeInitializationAction'
+          type: array
+        masterConfiguration:
+          $ref: '#/components/schemas/InstanceGroupConfiguration'
+        secondaryWorkerConfiguration:
+          $ref: '#/components/schemas/InstanceGroupConfiguration'
+        softwareConfiguration:
+          $ref: '#/components/schemas/SoftwareConfiguration'
+        workerConfiguration:
+          $ref: '#/components/schemas/InstanceGroupConfiguration'
+      type: object
+    ClusterMetrics:
+      description: 'Contains cluster daemon metrics, such as HDFS and YARN stats.'
+      properties:
+        hdfsMetrics:
+          additionalProperties:
+            format: int64
+            type: string
+          description: The HDFS metrics.
+          type: object
+        yarnMetrics:
+          additionalProperties:
+            format: int64
+            type: string
+          description: The YARN metrics.
+          type: object
+      type: object
+    ClusterOperationMetadata:
+      description: Metadata describing the operation.
+      properties:
+        clusterName:
+          description: Output-only. Name of the cluster for the operation.
+          type: string
+        clusterUuid:
+          description: Output-only. Cluster UUID for the operation.
+          type: string
+        description:
+          description: Output-only. Short description of operation.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Output-only. Labels associated with the operation
+          type: object
+        operationType:
+          description: Output-only. The operation type.
+          type: string
+        status:
+          $ref: '#/components/schemas/ClusterOperationStatus'
+        statusHistory:
+          description: Output-only. The previous operation status.
+          items:
+            $ref: '#/components/schemas/ClusterOperationStatus'
+          type: array
+        warnings:
+          description: Output-only. Errors encountered during operation execution.
+          items:
+            type: string
+          type: array
+      type: object
+    ClusterOperationStatus:
+      description: The status of the operation.
+      properties:
+        details:
+          description: Output-only.A message containing any operation metadata details.
+          type: string
+        innerState:
+          description: Output-only. A message containing the detailed operation state.
+          type: string
+        state:
+          description: Output-only. A message containing the operation state.
+          enum:
+            - UNKNOWN
+            - PENDING
+            - RUNNING
+            - DONE
+          type: string
+        stateStartTime:
+          description: Output-only. The time this state was entered.
+          format: google-datetime
+          type: string
+      type: object
+    ClusterStatus:
+      description: The status of a cluster and its instances.
+      properties:
+        detail:
+          description: Optional details of cluster's state.
+          type: string
+        state:
+          description: The cluster's state.
+          enum:
+            - UNKNOWN
+            - CREATING
+            - RUNNING
+            - ERROR
+            - DELETING
+            - UPDATING
+          type: string
+        stateStartTime:
+          description: Time when this state was entered.
+          format: google-datetime
+          type: string
+        substate:
+          description: Output-only Additional state information that includes status reported by the agent.
+          enum:
+            - UNSPECIFIED
+            - UNHEALTHY
+            - STALE_STATUS
+          type: string
+      type: object
+    DiagnoseClusterOutputLocation:
+      description: The location of diagnostic output.
+      properties:
+        outputUri:
+          description: Output-only The Google Cloud Storage URI of the diagnostic output. This is a plain text file with a summary of collected diagnostics.
+          type: string
+      type: object
+    DiagnoseClusterRequest:
+      description: A request to collect cluster diagnostic information.
+      properties: {}
+      type: object
+    DiagnoseClusterResults:
+      description: The location of diagnostic output.
+      properties:
+        outputUri:
+          description: Output-only. The Google Cloud Storage URI of the diagnostic output. The output report is a plain text file with a summary of collected diagnostics.
+          type: string
+      type: object
+    DiskConfiguration:
+      description: Specifies the configuration of disk options for a group of VM instances.
+      properties:
+        bootDiskSizeGb:
+          description: Optional Size in GB of the boot disk (default is 500GB).
+          format: int32
+          type: integer
+        numLocalSsds:
+          description: 'Optional Number of attached SSDs, from 0 to 4 (default is 0). If SSDs are not attached, the boot disk is used to store runtime logs and HDFS data. If one or more SSDs are attached, this runtime bulk data is spread across them, and the boot disk contains only basic configuration and installed binaries.'
+          format: int32
+          type: integer
+      type: object
+    Empty:
+      description: |-
+        A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:
+        service Foo {
+          rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+        }
+        The JSON representation for Empty is empty JSON object {}.
+      properties: {}
+      type: object
+    GceClusterConfiguration:
+      description: 'Common configuration settings for resources of Google Compute Engine cluster instances, applicable to all instances in the cluster.'
+      properties:
+        internalIpOnly:
+          description: 'If true, all instances in the cluser will only have internal IP addresses. By default, clusters are not restricted to internal IP addresses, and will have ephemeral external IP addresses assigned to each instance. This restriction can only be enabled for subnetwork enabled networks, and all off-cluster dependencies must be configured to be accessible without external IP addresses.'
+          type: boolean
+        metadata:
+          additionalProperties:
+            type: string
+          description: The Google Compute Engine metadata entries to add to all instances.
+          type: object
+        networkUri:
+          description: 'The Google Compute Engine network to be used for machine communications. Cannot be specified with subnetwork_uri. If neither network_uri nor subnetwork_uri is specified, the "default" network of the project is used, if it exists. Cannot be a "Custom Subnet Network" (see https://cloud.google.com/compute/docs/subnetworks for more information). Example: https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default.'
+          type: string
+        serviceAccount:
+          description: |-
+            Optional The service account of the instances. Defaults to the default Google Compute Engine service account. Custom service accounts need permissions equivalent to the folloing IAM roles:
+            roles/logging.logWriter
+            roles/storage.objectAdmin(see https://cloud.google.com/compute/docs/access/service-accounts#custom_service_accounts for more information). Example: [account_id]@[project_id].iam.gserviceaccount.com
+          type: string
+        serviceAccountScopes:
+          description: 'The URIs of service account scopes to be included in Google Compute Engine instances. The following base set of scopes is always included: - https://www.googleapis.com/auth/cloud.useraccounts.readonly - https://www.googleapis.com/auth/devstorage.read_write - https://www.googleapis.com/auth/logging.write If no scopes are specfied, the following defaults are also provided: - https://www.googleapis.com/auth/bigquery - https://www.googleapis.com/auth/bigtable.admin.table - https://www.googleapis.com/auth/bigtable.data - https://www.googleapis.com/auth/devstorage.full_control'
+          items:
+            type: string
+          type: array
+        subnetworkUri:
+          description: 'The Google Compute Engine subnetwork to be used for machine communications. Cannot be specified with network_uri. Example: https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/sub0.'
+          type: string
+        tags:
+          description: The Google Compute Engine tags to add to all instances.
+          items:
+            type: string
+          type: array
+        zoneUri:
+          description: 'Required The zone where the Google Compute Engine cluster will be located. Example: https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone].'
+          type: string
+      type: object
+    HadoopJob:
+      description: A Cloud Dataproc job for running Hadoop MapReduce jobs on YARN.
+      properties:
+        archiveUris:
+          description: 'Optional HCFS URIs of archives to be extracted in the working directory of Hadoop drivers and tasks. Supported file types: .jar, .tar, .tar.gz, .tgz, or .zip.'
+          items:
+            type: string
+          type: array
+        args:
+          description: 'Optional The arguments to pass to the driver. Do not include arguments, such as -libjars or -Dfoo=bar, that can be set as job properties, since a collision may occur that causes an incorrect job submission.'
+          items:
+            type: string
+          type: array
+        fileUris:
+          description: Optional HCFS URIs of files to be copied to the working directory of Hadoop drivers and distributed tasks. Useful for naively parallel tasks.
+          items:
+            type: string
+          type: array
+        jarFileUris:
+          description: Optional Jar file URIs to add to the CLASSPATHs of the Hadoop driver and tasks.
+          items:
+            type: string
+          type: array
+        loggingConfiguration:
+          $ref: '#/components/schemas/LoggingConfiguration'
+        mainClass:
+          description: The name of the driver's main class. The jar file containing the class must be in the default CLASSPATH or specified in jar_file_uris.
+          type: string
+        mainJarFileUri:
+          description: 'The Hadoop Compatible Filesystem (HCFS) URI of the jar file containing the main class. Examples:  ''gs://foo-bucket/analytics-binaries/extract-useful-metrics-mr.jar''  ''hdfs:/tmp/test-samples/custom-wordcount.jar''  ''file:///home/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar'''
+          type: string
+        properties:
+          additionalProperties:
+            type: string
+          description: 'Optional A mapping of property names to values, used to configure Hadoop. Properties that conflict with values set by the Cloud Dataproc API may be overwritten. Can include properties set in /etc/hadoop/conf/*-site and classes in user code.'
+          type: object
+      type: object
+    HiveJob:
+      description: A Cloud Dataproc job for running Hive queries on YARN.
+      properties:
+        continueOnFailure:
+          description: Optional Whether to continue executing queries if a query fails. The default value is false. Setting to true can be useful when executing independent parallel queries.
+          type: boolean
+        jarFileUris:
+          description: Optional HCFS URIs of jar files to add to the CLASSPATH of the Hive server and Hadoop MapReduce (MR) tasks. Can contain Hive SerDes and UDFs.
+          items:
+            type: string
+          type: array
+        properties:
+          additionalProperties:
+            type: string
+          description: 'Optional A mapping of property names and values, used to configure Hive. Properties that conflict with values set by the Cloud Dataproc API may be overwritten. Can include properties set in /etc/hadoop/conf/*-site.xml, /etc/hive/conf/hive-site.xml, and classes in user code.'
+          type: object
+        queryFileUri:
+          description: The HCFS URI of the script that contains Hive queries.
+          type: string
+        queryList:
+          $ref: '#/components/schemas/QueryList'
+        scriptVariables:
+          additionalProperties:
+            type: string
+          description: 'Optional Mapping of query variable names to values (equivalent to the Hive command: SET name="value";).'
+          type: object
+      type: object
+    InstanceGroupConfiguration:
+      description: 'The configuration settings for Google Compute Engine resources in an instance group, such as a master or worker group.'
+      properties:
+        accelerators:
+          description: Optional The Google Compute Engine accelerator configuration for these instances.
+          items:
+            $ref: '#/components/schemas/AcceleratorConfiguration'
+          type: array
+        diskConfiguration:
+          $ref: '#/components/schemas/DiskConfiguration'
+        imageUri:
+          description: Output-only The Google Compute Engine image resource used for cluster instances. Inferred from SoftwareConfiguration.image_version.
+          type: string
+        instanceNames:
+          description: 'The list of instance names. Dataproc derives the names from cluster_name, num_instances, and the instance group if not set by user (recommended practice is to let Dataproc derive the name).'
+          items:
+            type: string
+          type: array
+        isPreemptible:
+          description: Specifies that this instance group contains Preemptible Instances.
+          type: boolean
+        machineTypeUri:
+          description: 'The Google Compute Engine machine type used for cluster instances. Example: https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2.'
+          type: string
+        managedGroupConfiguration:
+          $ref: '#/components/schemas/ManagedGroupConfiguration'
+        numInstances:
+          description: 'The number of VM instances in the instance group. For master instance groups, must be set to 1.'
+          format: int32
+          type: integer
+      type: object
+    Job:
+      description: A Cloud Dataproc job resource.
+      properties:
+        driverControlFilesUri:
+          description: 'Output-only If present, the location of miscellaneous control files which may be used as part of job setup and handling. If not present, control files may be placed in the same location as driver_output_uri.'
+          type: string
+        driverInputResourceUri:
+          description: 'Output-only A URI pointing to the location of the stdin of the job''s driver program, only set if the job is interactive.'
+          type: string
+        driverOutputResourceUri:
+          description: Output-only A URI pointing to the location of the stdout of the job's driver program.
+          type: string
+        hadoopJob:
+          $ref: '#/components/schemas/HadoopJob'
+        hiveJob:
+          $ref: '#/components/schemas/HiveJob'
+        interactive:
+          description: 'Optional If set to true, the driver''s stdin will be kept open and driver_input_uri will be set to provide a path at which additional input can be sent to the driver.'
+          type: boolean
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Optional The labels to associate with this job.Label keys must be between 1 and 63 characters long, and must conform to the following regular expression: \p{Ll}\p{Lo}{0,62}Label values must be between 1 and 63 characters long, and must conform to the following regular expression: \p{Ll}\p{Lo}\p{N}_-{0,63}No more than 64 labels can be associated with a given job.'
+          type: object
+        pigJob:
+          $ref: '#/components/schemas/PigJob'
+        placement:
+          $ref: '#/components/schemas/JobPlacement'
+        pysparkJob:
+          $ref: '#/components/schemas/PySparkJob'
+        reference:
+          $ref: '#/components/schemas/JobReference'
+        scheduling:
+          $ref: '#/components/schemas/JobScheduling'
+        sparkJob:
+          $ref: '#/components/schemas/SparkJob'
+        sparkSqlJob:
+          $ref: '#/components/schemas/SparkSqlJob'
+        status:
+          $ref: '#/components/schemas/JobStatus'
+        statusHistory:
+          description: Output-only The previous job status.
+          items:
+            $ref: '#/components/schemas/JobStatus'
+          type: array
+        submittedBy:
+          description: 'Output-only The email address of the user submitting the job. For jobs submitted on the cluster, the address is <code>username@hostname</code>.'
+          type: string
+        yarnApplications:
+          description: Output-only The collection of YARN applications spun up by this job.
+          items:
+            $ref: '#/components/schemas/YarnApplication'
+          type: array
+      type: object
+    JobPlacement:
+      description: Cloud Dataproc job configuration.
+      properties:
+        clusterName:
+          description: Required The name of the cluster where the job will be submitted.
+          type: string
+        clusterUuid:
+          description: Output-only A cluster UUID generated by the Dataproc service when the job is submitted.
+          type: string
+      type: object
+    JobReference:
+      description: Encapsulates the full scoping used to reference a job.
+      properties:
+        jobId:
+          description: 'Required The job ID, which must be unique within the project. The job ID is generated by the server upon job submission or provided by the user as a means to perform retries without creating duplicate jobs. The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), or hyphens (-). The maximum length is 100 characters.'
+          type: string
+        projectId:
+          description: Required The ID of the Google Cloud Platform project that the job belongs to.
+          type: string
+      type: object
+    JobScheduling:
+      description: 'Job scheduling options.Beta Feature: These options are available for testing purposes only. They may be changed before final release.'
+      properties:
+        maxFailuresPerHour:
+          description: Optional Maximum number of times per hour a driver may be restarted as a result of driver terminating with non-zero code before job is reported failed.A job may be reported as thrashing if driver exits with non-zero code 4 times within 10 minute window.Maximum value is 10.
+          format: int32
+          type: integer
+      type: object
+    JobStatus:
+      description: Cloud Dataproc job status.
+      properties:
+        details:
+          description: 'Optional Job state details, such as an error description if the state is <code>ERROR</code>.'
+          type: string
+        state:
+          description: Required A state message specifying the overall job state.
+          enum:
+            - STATE_UNSPECIFIED
+            - PENDING
+            - SETUP_DONE
+            - RUNNING
+            - CANCEL_PENDING
+            - CANCEL_STARTED
+            - CANCELLED
+            - DONE
+            - ERROR
+            - ATTEMPT_FAILURE
+          type: string
+        stateStartTime:
+          description: Output-only The time when this state was entered.
+          format: google-datetime
+          type: string
+        substate:
+          description: 'Output-only Additional state information, which includes status reported by the agent.'
+          enum:
+            - UNSPECIFIED
+            - SUBMITTED
+            - QUEUED
+            - STALE_STATUS
+          type: string
+      type: object
+    ListClustersResponse:
+      description: The list of all clusters in a project.
+      properties:
+        clusters:
+          description: Output-only The clusters in the project.
+          items:
+            $ref: '#/components/schemas/Cluster'
+          type: array
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+      type: object
+    ListJobsResponse:
+      description: A list of jobs in a project.
+      properties:
+        jobs:
+          description: Output-only Jobs list.
+          items:
+            $ref: '#/components/schemas/Job'
+          type: array
+        nextPageToken:
+          description: 'Optional This token is included in the response if there are more results to fetch. To fetch additional results, provide this value as the page_token in a subsequent <code>ListJobsRequest</code>.'
+          type: string
+      type: object
+    ListOperationsResponse:
+      description: The response message for Operations.ListOperations.
+      properties:
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+        operations:
+          description: A list of operations that matches the specified filter in the request.
+          items:
+            $ref: '#/components/schemas/Operation'
+          type: array
+      type: object
+    LoggingConfiguration:
+      description: The runtime logging configuration of the job.
+      properties:
+        driverLogLevels:
+          additionalProperties:
+            enum:
+              - LEVEL_UNSPECIFIED
+              - ALL
+              - TRACE
+              - DEBUG
+              - INFO
+              - WARN
+              - ERROR
+              - FATAL
+              - 'OFF'
+            type: string
+          description: 'The per-package log levels for the driver. This may include "root" package name to configure rootLogger. Examples:  ''com.google = FATAL'', ''root = INFO'', ''org.apache = DEBUG'''
+          type: object
+      type: object
+    ManagedGroupConfiguration:
+      description: Specifies the resources used to actively manage an instance group.
+      properties:
+        instanceGroupManagerName:
+          description: Output-only The name of the Instance Group Manager for this group.
+          type: string
+        instanceTemplateName:
+          description: Output-only The name of the Instance Template used for the Managed Instance Group.
+          type: string
+      type: object
+    NodeInitializationAction:
+      description: Specifies an executable to run on a fully configured node and a timeout period for executable completion.
+      properties:
+        executableFile:
+          description: Required Google Cloud Storage URI of executable file.
+          type: string
+        executionTimeout:
+          description: Optional Amount of time executable has to complete. Default is 10 minutes. Cluster creation fails with an explanatory error message (the name of the executable that caused the error and the exceeded timeout period) if the executable is not completed at end of the timeout period.
+          format: google-duration
+          type: string
+      type: object
+    Operation:
+      description: This resource represents a long-running operation that is the result of a network API call.
+      properties:
+        done:
+          description: 'If the value is false, it means the operation is still in progress. If true, the operation is completed, and either error or response is available.'
+          type: boolean
+        error:
+          $ref: '#/components/schemas/Status'
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: 'Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.'
+          type: object
+        name:
+          description: 'The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the name should have the format of operations/some/unique/name.'
+          type: string
+        response:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: 'The normal response of the operation in case of success. If the original method returns no data on success, such as Delete, the response is google.protobuf.Empty. If the original method is standard Get/Create/Update, the response should be the resource. For other methods, the response should have the type XxxResponse, where Xxx is the original method name. For example, if the original method name is TakeSnapshot(), the inferred response type is TakeSnapshotResponse.'
+          type: object
+      type: object
+    OperationMetadata:
+      description: Metadata describing the operation.
+      properties:
+        clusterName:
+          description: Name of the cluster for the operation.
+          type: string
+        clusterUuid:
+          description: Cluster UUId for the operation.
+          type: string
+        description:
+          description: Output-only Short description of operation.
+          type: string
+        operationType:
+          description: Output-only The operation type.
+          type: string
+        status:
+          $ref: '#/components/schemas/OperationStatus'
+        statusHistory:
+          description: Output-only Previous operation status.
+          items:
+            $ref: '#/components/schemas/OperationStatus'
+          type: array
+        warnings:
+          description: Output-only Errors encountered during operation execution.
+          items:
+            type: string
+          type: array
+      type: object
+    OperationStatus:
+      description: The status of the operation.
+      properties:
+        details:
+          description: A message containing any operation metadata details.
+          type: string
+        innerState:
+          description: A message containing the detailed operation state.
+          type: string
+        state:
+          description: A message containing the operation state.
+          enum:
+            - UNKNOWN
+            - PENDING
+            - RUNNING
+            - DONE
+          type: string
+        stateStartTime:
+          description: The time this state was entered.
+          format: google-datetime
+          type: string
+      type: object
+    PigJob:
+      description: A Cloud Dataproc job for running Pig queries on YARN.
+      properties:
+        continueOnFailure:
+          description: Optional Whether to continue executing queries if a query fails. The default value is false. Setting to true can be useful when executing independent parallel queries.
+          type: boolean
+        jarFileUris:
+          description: Optional HCFS URIs of jar files to add to the CLASSPATH of the Pig Client and Hadoop MapReduce (MR) tasks. Can contain Pig UDFs.
+          items:
+            type: string
+          type: array
+        loggingConfiguration:
+          $ref: '#/components/schemas/LoggingConfiguration'
+        properties:
+          additionalProperties:
+            type: string
+          description: 'Optional A mapping of property names to values, used to configure Pig. Properties that conflict with values set by the Cloud Dataproc API may be overwritten. Can include properties set in /etc/hadoop/conf/*-site.xml, /etc/pig/conf/pig.properties, and classes in user code.'
+          type: object
+        queryFileUri:
+          description: The HCFS URI of the script that contains the Pig queries.
+          type: string
+        queryList:
+          $ref: '#/components/schemas/QueryList'
+        scriptVariables:
+          additionalProperties:
+            type: string
+          description: 'Optional Mapping of query variable names to values (equivalent to the Pig command: name=[value]).'
+          type: object
+      type: object
+    PySparkJob:
+      description: A Cloud Dataproc job for running PySpark applications on YARN.
+      properties:
+        archiveUris:
+          description: 'Optional HCFS URIs of archives to be extracted in the working directory of .jar, .tar, .tar.gz, .tgz, and .zip.'
+          items:
+            type: string
+          type: array
+        args:
+          description: 'Optional The arguments to pass to the driver. Do not include arguments, such as --conf, that can be set as job properties, since a collision may occur that causes an incorrect job submission.'
+          items:
+            type: string
+          type: array
+        fileUris:
+          description: Optional HCFS URIs of files to be copied to the working directory of Python drivers and distributed tasks. Useful for naively parallel tasks.
+          items:
+            type: string
+          type: array
+        jarFileUris:
+          description: Optional HCFS URIs of jar files to add to the CLASSPATHs of the Python driver and tasks.
+          items:
+            type: string
+          type: array
+        loggingConfiguration:
+          $ref: '#/components/schemas/LoggingConfiguration'
+        mainPythonFileUri:
+          description: Required The Hadoop Compatible Filesystem (HCFS) URI of the main Python file to use as the driver. Must be a .py file.
+          type: string
+        properties:
+          additionalProperties:
+            type: string
+          description: 'Optional A mapping of property names to values, used to configure PySpark. Properties that conflict with values set by the Cloud Dataproc API may be overwritten. Can include properties set in /etc/spark/conf/spark-defaults.conf and classes in user code.'
+          type: object
+        pythonFileUris:
+          description: 'Optional HCFS file URIs of Python files to pass to the PySpark framework. Supported file types: .py, .egg, and .zip.'
+          items:
+            type: string
+          type: array
+      type: object
+    QueryList:
+      description: A list of queries to run on a cluster.
+      properties:
+        queries:
+          description: |
+            Required The queries to execute. You do not need to terminate a query with a semicolon. Multiple queries can be specified in one string by separating each with a semicolon. Here is an example of an Cloud Dataproc API snippet that uses a QueryList to specify a HiveJob:
+            "hiveJob": {
+              "queryList": {
+                "queries": [
+                  "query1",
+                  "query2",
+                  "query3;query4",
+                ]
+              }
+            }
+          items:
+            type: string
+          type: array
+      type: object
+    SoftwareConfiguration:
+      description: Specifies the selection and configuration of software inside the cluster.
+      properties:
+        imageVersion:
+          description: 'Optional The version of software inside the cluster. It must match the regular expression [0-9]+\.[0-9]+. If unspecified, it defaults to the latest version (see Cloud Dataproc Versioning).'
+          type: string
+        properties:
+          additionalProperties:
+            type: string
+          description: 'Optional The properties to set on daemon configuration files.Property keys are specified in "prefix:property" format, such as "core:fs.defaultFS". The following are supported prefixes and their mappings:  core - core-site.xml  hdfs - hdfs-site.xml  mapred - mapred-site.xml  yarn - yarn-site.xml  hive - hive-site.xml  pig - pig.properties  spark - spark-defaults.conf'
+          type: object
+      type: object
+    SparkJob:
+      description: A Cloud Dataproc job for running Spark applications on YARN.
+      properties:
+        archiveUris:
+          description: 'Optional HCFS URIs of archives to be extracted in the working directory of Spark drivers and tasks. Supported file types: .jar, .tar, .tar.gz, .tgz, and .zip.'
+          items:
+            type: string
+          type: array
+        args:
+          description: 'Optional The arguments to pass to the driver. Do not include arguments, such as --conf, that can be set as job properties, since a collision may occur that causes an incorrect job submission.'
+          items:
+            type: string
+          type: array
+        fileUris:
+          description: Optional HCFS URIs of files to be copied to the working directory of Spark drivers and distributed tasks. Useful for naively parallel tasks.
+          items:
+            type: string
+          type: array
+        jarFileUris:
+          description: Optional HCFS URIs of jar files to add to the CLASSPATHs of the Spark driver and tasks.
+          items:
+            type: string
+          type: array
+        loggingConfiguration:
+          $ref: '#/components/schemas/LoggingConfiguration'
+        mainClass:
+          description: The name of the driver's main class. The jar file that contains the class must be in the default CLASSPATH or specified in jar_file_uris.
+          type: string
+        mainJarFileUri:
+          description: The Hadoop Compatible Filesystem (HCFS) URI of the jar file that contains the main class.
+          type: string
+        properties:
+          additionalProperties:
+            type: string
+          description: 'Optional A mapping of property names to values, used to configure Spark. Properties that conflict with values set by the Cloud Dataproc API may be overwritten. Can include properties set in /etc/spark/conf/spark-defaults.conf and classes in user code.'
+          type: object
+      type: object
+    SparkSqlJob:
+      description: A Cloud Dataproc job for running Spark SQL queries.
+      properties:
+        jarFileUris:
+          description: Optional HCFS URIs of jar files to be added to the Spark CLASSPATH.
+          items:
+            type: string
+          type: array
+        loggingConfiguration:
+          $ref: '#/components/schemas/LoggingConfiguration'
+        properties:
+          additionalProperties:
+            type: string
+          description: 'Optional A mapping of property names to values, used to configure Spark SQL''s SparkConf. Properties that conflict with values set by the Cloud Dataproc API may be overwritten.'
+          type: object
+        queryFileUri:
+          description: The HCFS URI of the script that contains SQL queries.
+          type: string
+        queryList:
+          $ref: '#/components/schemas/QueryList'
+        scriptVariables:
+          additionalProperties:
+            type: string
+          description: 'Optional Mapping of query variable names to values (equivalent to the Spark SQL command: SET name="value";).'
+          type: object
+      type: object
+    Status:
+      description: |-
+        The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). The error model is designed to be:
+        Simple to use and understand for most users
+        Flexible enough to meet unexpected needsOverviewThe Status message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed. The error message should be a developer-facing English message that helps developers understand and resolve the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package google.rpc that can be used for common error conditions.Language mappingThe Status message is the logical representation of the error model, but it is not necessarily the actual wire format. When the Status message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.Other usesThe error model and the Status message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.Example uses of this error model include:
+        Partial errors. If a service needs to return partial errors to the client, it may embed the Status in the normal response to indicate the partial errors.
+        Workflow errors. A typical workflow has multiple steps. Each step may have a Status message for error reporting.
+        Batch operations. If a client uses batch request and batch response, the Status message should be used directly inside batch response, one for each error sub-response.
+        Asynchronous operations. If an API call embeds asynchronous operation results in its response, the status of those operations should be represented directly using the Status message.
+        Logging. If some API errors are stored in logs, the message Status could be used directly after any stripping needed for security/privacy reasons.
+      properties:
+        code:
+          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          format: int32
+          type: integer
+        details:
+          description: A list of messages that carry the error details. There will be a common set of message types for APIs to use.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
+        message:
+          description: 'A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.'
+          type: string
+      type: object
+    SubmitJobRequest:
+      description: A request to submit a job.
+      properties:
+        job:
+          $ref: '#/components/schemas/Job'
+      type: object
+    YarnApplication:
+      description: A YARN application created by a job. Application information is a subset of <code>org.apache.hadoop.yarn.proto.YarnProtos.ApplicationReportProto</code>.
+      properties:
+        name:
+          description: Required The application name.
+          type: string
+        progress:
+          description: 'Required The numerical progress of the application, from 1 to 100.'
+          format: float
+          type: number
+        state:
+          description: Required The application state.
+          enum:
+            - STATE_UNSPECIFIED
+            - NEW
+            - NEW_SAVING
+            - SUBMITTED
+            - ACCEPTED
+            - RUNNING
+            - FINISHED
+            - FAILED
+            - KILLED
+          type: string
+        trackingUrl:
+          description: 'Optional The HTTP URL of the ApplicationMaster, HistoryServer, or TimelineServer that provides application-specific information. The URL uses the internal hostname, and requires a proxy server for resolution and, possibly, access.'
+          type: string
+      type: object
+  parameters:
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        type: string
+        enum:
+          - json
+          - media
+          - proto
+        default: json
+    bearer_token:
+      description: OAuth bearer token.
+      in: query
+      name: bearer_token
+      schema:
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    pp:
+      description: Pretty-print response.
+      in: query
+      name: pp
+      schema:
+        type: boolean
+        default: true
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+        default: true
+    quotaUser:
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        type: string
+        enum:
+          - '1'
+          - '2'
+  requestBodies:
+    Cluster:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Cluster'
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          scopes:
+            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    Oauth2c:
+      description: Oauth 2.0 accessCode authentication
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+          scopes:
+            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services

@@ -1,0 +1,3730 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://connect.squareup.com/'
+info:
+  contact:
+    email: developers@squareup.com
+    name: Square Developer Platform
+    url: 'https://squareup.com/developers'
+  description: Client library for accessing the Square Connect APIs
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  termsOfService: 'https://connect.squareup.com/tos'
+  title: Square Connect
+  version: '2.0'
+  x-apisguru-categories:
+    - payment
+  x-logo:
+    url: 'http://square.github.io/images/logo.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/square/connect-api-specification/master/api.json'
+      version: '2.0'
+  x-providerName: squareup.com
+externalDocs:
+  description: 'Read the official documentation here:'
+  url: 'https://docs.connect.squareup.com/'
+paths:
+  /v2/customers:
+    get:
+      description: Lists a business's customers.
+      operationId: ListCustomers
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: |-
+            A pagination cursor returned by a previous call to this endpoint.
+            Provide this to retrieve the next set of results for your original query.
+
+            See [Paginating results](#paginatingresults) for more information.
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCustomersResponse'
+      summary: ListCustomers
+      tags:
+        - Customer
+      x-oauthpermissions:
+        - CUSTOMERS_READ
+    post:
+      description: |-
+        Creates a new customer for a business, which can have associated cards on file.
+
+        You must provide __at least one__ of the following values in your request to this
+        endpoint:
+
+        - `given_name`
+        - `family_name`
+        - `company_name`
+        - `email_address`
+        - `phone_number`
+
+        This endpoint does not accept an idempotency key. If you accidentally create
+        a duplicate customer, you can delete it with the
+        [DeleteCustomer](#endpoint-deletecustomer) endpoint.
+      operationId: CreateCustomer
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCustomerResponse'
+      summary: CreateCustomer
+      tags:
+        - Customer
+      x-oauthpermissions:
+        - CUSTOMERS_WRITE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomerRequest'
+        description: |-
+          An object containing the fields to POST for the request.
+
+          See the corresponding object definition for field details.
+        required: true
+  '/v2/customers/{customer_id}':
+    delete:
+      description: 'Deletes a customer from a business, along with any linked cards on file.'
+      operationId: DeleteCustomer
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: The ID of the customer to delete.
+          in: path
+          name: customer_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCustomerResponse'
+      summary: DeleteCustomer
+      tags:
+        - Customer
+      x-oauthpermissions:
+        - CUSTOMERS_WRITE
+    get:
+      description: Returns details for a single customer.
+      operationId: RetrieveCustomer
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: The ID of the customer to retrieve.
+          in: path
+          name: customer_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveCustomerResponse'
+      summary: RetrieveCustomer
+      tags:
+        - Customer
+      x-oauthpermissions:
+        - CUSTOMERS_READ
+    put:
+      description: |-
+        Updates the details of an existing customer.
+
+        You cannot edit a customer's cards on file with this endpoint. To make changes
+        to a card on file, you must delete the existing card on file with the
+        [DeleteCustomerCard](#endpoint-deletecustomercard) endpoint, then create a new one with the
+        [CreateCustomerCard](#endpoint-createcustomercard) endpoint.
+      operationId: UpdateCustomer
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: The ID of the customer to update.
+          in: path
+          name: customer_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCustomerResponse'
+      summary: UpdateCustomer
+      tags:
+        - Customer
+      x-oauthpermissions:
+        - CUSTOMERS_WRITE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomerRequest'
+        description: |-
+          An object containing the fields to POST for the request.
+
+          See the corresponding object definition for field details.
+        required: true
+  '/v2/customers/{customer_id}/cards':
+    post:
+      description: Adds a card on file to an existing customer.
+      operationId: CreateCustomerCard
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: The ID of the customer to link the card on file to.
+          in: path
+          name: customer_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCustomerCardResponse'
+      summary: CreateCustomerCard
+      tags:
+        - Customer.Card
+      x-oauthpermissions:
+        - CUSTOMERS_WRITE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomerCardRequest'
+        description: |-
+          An object containing the fields to POST for the request.
+
+          See the corresponding object definition for field details.
+        required: true
+  '/v2/customers/{customer_id}/cards/{card_id}':
+    delete:
+      description: Removes a card on file from a customer.
+      operationId: DeleteCustomerCard
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: The ID of the customer that the card on file belongs to.
+          in: path
+          name: customer_id
+          required: true
+          schema:
+            type: string
+        - description: The ID of the card on file to delete.
+          in: path
+          name: card_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCustomerCardResponse'
+      summary: DeleteCustomerCard
+      tags:
+        - Customer.Card
+      x-oauthpermissions:
+        - CUSTOMERS_WRITE
+  /v2/locations:
+    get:
+      description: |-
+        Provides the details for all of a business's locations.
+
+        Most other Connect API endpoints have a required `location_id` path parameter.
+        The `id` field of the [`Location`](#type-location) objects returned by this
+        endpoint correspond to that `location_id` parameter.
+      operationId: ListLocations
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLocationsResponse'
+      summary: ListLocations
+      tags:
+        - Location
+      x-oauthpermissions:
+        - MERCHANT_PROFILE_READ
+  '/v2/locations/{location_id}/checkouts':
+    post:
+      description: |-
+        Creates a [Checkout](#type-checkout) response that links a
+        `checkoutId` and `checkout_page_url` that customers can be directed to in
+        order to provide their payment information using a payment processing
+        workflow hosted on connect.squareup.com.
+      operationId: CreateCheckout
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: The ID of the business location to associate the checkout with.
+          in: path
+          name: location_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCheckoutResponse'
+      summary: CreateCheckout
+      tags:
+        - Checkout
+      x-oauthpermissions:
+        - ORDERS_V2_WRITE
+        - PAYMENTS_WRITE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCheckoutRequest'
+        description: |-
+          An object containing the fields to POST for the request.
+
+          See the corresponding object definition for field details.
+        required: true
+  '/v2/locations/{location_id}/refunds':
+    get:
+      description: |-
+        Lists refunds for one of a business's locations.
+
+        Refunds with a `status` of `PENDING` are not currently included in this
+        endpoint's response.
+
+        Max results per [page](#paginatingresults): 50
+      operationId: ListRefunds
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: The ID of the location to list refunds for.
+          in: path
+          name: location_id
+          required: true
+          schema:
+            type: string
+        - description: |-
+            The beginning of the requested reporting period, in RFC 3339 format.
+
+            See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.
+
+            Default value: The current time minus one year.
+          in: query
+          name: begin_time
+          required: false
+          schema:
+            type: string
+        - description: |-
+            The end of the requested reporting period, in RFC 3339 format.
+
+            See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.
+
+            Default value: The current time.
+          in: query
+          name: end_time
+          required: false
+          schema:
+            type: string
+        - description: |-
+            The order in which results are listed in the response (`ASC` for
+            oldest first, `DESC` for newest first).
+
+            Default value: `DESC`
+          in: query
+          name: sort_order
+          required: false
+          schema:
+            type: string
+            enum:
+              - DESC
+              - ASC
+        - description: |-
+            A pagination cursor returned by a previous call to this endpoint.
+            Provide this to retrieve the next set of results for your original query.
+
+            See [Paginating results](#paginatingresults) for more information.
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRefundsResponse'
+      summary: ListRefunds
+      tags:
+        - Refund
+      x-oauthpermissions:
+        - PAYMENTS_READ
+  '/v2/locations/{location_id}/transactions':
+    get:
+      description: |-
+        Lists transactions for a particular location.
+
+        Max results per [page](#paginatingresults): 50
+      operationId: ListTransactions
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: The ID of the location to list transactions for.
+          in: path
+          name: location_id
+          required: true
+          schema:
+            type: string
+        - description: |-
+            The beginning of the requested reporting period, in RFC 3339 format.
+
+            See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.
+
+            Default value: The current time minus one year.
+          in: query
+          name: begin_time
+          required: false
+          schema:
+            type: string
+        - description: |-
+            The end of the requested reporting period, in RFC 3339 format.
+
+            See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.
+
+            Default value: The current time.
+          in: query
+          name: end_time
+          required: false
+          schema:
+            type: string
+        - description: |-
+            The order in which results are listed in the response (`ASC` for
+            oldest first, `DESC` for newest first).
+
+            Default value: `DESC`
+          in: query
+          name: sort_order
+          required: false
+          schema:
+            type: string
+            enum:
+              - DESC
+              - ASC
+        - description: |-
+            A pagination cursor returned by a previous call to this endpoint.
+            Provide this to retrieve the next set of results for your original query.
+
+            See [Paginating results](#paginatingresults) for more information.
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTransactionsResponse'
+      summary: ListTransactions
+      tags:
+        - Transaction
+      x-oauthpermissions:
+        - PAYMENTS_READ
+    post:
+      description: |-
+        Charges a card represented by a card nonce or a customer's card on file.
+
+        Your request to this endpoint must include _either_:
+
+        - A value for the `card_nonce` parameter (to charge a card nonce generated
+        with the `SqPaymentForm`)
+        - Values for the `customer_card_id` and `customer_id` parameters (to charge
+        a customer's card on file)
+
+        In order for an e-commerce payment to potentially qualify for
+        [Square chargeback protection](https://squareup.com/help/article/5394), you
+        _must_ provide values for the following parameters in your request:
+
+        - `buyer_email_address`
+        - At least one of `billing_address` or `shipping_address`
+
+        When this response is returned, the amount of Square's processing fee might not yet be
+        calculated. To obtain the processing fee, wait about ten seconds and call
+        [RetrieveTransaction](#endpoint-retrievetransaction). See the `processing_fee_money`
+        field of each [Tender included](#type-tender) in the transaction.
+      operationId: Charge
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: The ID of the location to associate the created transaction with.
+          in: path
+          name: location_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeResponse'
+      summary: Charge
+      tags:
+        - Transaction
+      x-oauthpermissions:
+        - PAYMENTS_WRITE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChargeRequest'
+        description: |-
+          An object containing the fields to POST for the request.
+
+          See the corresponding object definition for field details.
+        required: true
+  '/v2/locations/{location_id}/transactions/{transaction_id}':
+    get:
+      description: Retrieves details for a single transaction.
+      operationId: RetrieveTransaction
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: The ID of the transaction's associated location.
+          in: path
+          name: location_id
+          required: true
+          schema:
+            type: string
+        - description: The ID of the transaction to retrieve.
+          in: path
+          name: transaction_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveTransactionResponse'
+      summary: RetrieveTransaction
+      tags:
+        - Transaction
+      x-oauthpermissions:
+        - PAYMENTS_READ
+  '/v2/locations/{location_id}/transactions/{transaction_id}/capture':
+    post:
+      description: |-
+        Captures a transaction that was created with the [Charge](#endpoint-charge)
+        endpoint with a `delay_capture` value of `true`.
+
+        See [Delayed capture transactions](/articles/delayed-capture-transactions/)
+        for more information.
+      operationId: CaptureTransaction
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: ''
+          in: path
+          name: location_id
+          required: true
+          schema:
+            type: string
+        - description: ''
+          in: path
+          name: transaction_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaptureTransactionResponse'
+      summary: CaptureTransaction
+      tags:
+        - Transaction
+      x-oauthpermissions:
+        - PAYMENTS_WRITE
+  '/v2/locations/{location_id}/transactions/{transaction_id}/refund':
+    post:
+      description: Initiates a refund for a previously charged tender.
+      operationId: CreateRefund
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: The ID of the original transaction's associated location.
+          in: path
+          name: location_id
+          required: true
+          schema:
+            type: string
+        - description: The ID of the original transaction that includes the tender to refund.
+          in: path
+          name: transaction_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRefundResponse'
+      summary: CreateRefund
+      tags:
+        - Refund
+      x-oauthpermissions:
+        - PAYMENTS_WRITE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRefundRequest'
+        description: |-
+          An object containing the fields to POST for the request.
+
+          See the corresponding object definition for field details.
+        required: true
+  '/v2/locations/{location_id}/transactions/{transaction_id}/void':
+    post:
+      description: |-
+        Cancels a transaction that was created with the [Charge](#endpoint-charge)
+        endpoint with a `delay_capture` value of `true`.
+
+        See [Delayed capture transactions](/articles/delayed-capture-transactions/)
+        for more information.
+      operationId: VoidTransaction
+      parameters:
+        - description: |-
+            The value to provide in the Authorization header of
+            your request. This value should follow the format `Bearer YOUR_ACCESS_TOKEN_HERE`.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+        - description: ''
+          in: path
+          name: location_id
+          required: true
+          schema:
+            type: string
+        - description: ''
+          in: path
+          name: transaction_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoidTransactionResponse'
+      summary: VoidTransaction
+      tags:
+        - Transaction
+      x-oauthpermissions:
+        - PAYMENTS_WRITE
+components:
+  schemas:
+    Address:
+      description: Represents a physical address.
+      properties:
+        address_line_1:
+          description: |-
+            The first line of the address.
+
+            Fields that start with `address_line` provide the address's most specific
+            details, like street number, street name, and building name. They do *not*
+            provide less specific details like city, state/province, or country (these
+            details are provided in other fields).
+          type: string
+        address_line_2:
+          description: 'The second line of the address, if any.'
+          type: string
+        address_line_3:
+          description: 'The third line of the address, if any.'
+          type: string
+        administrative_district_level_1:
+          description: |-
+            A civil entity within the address's country. In the US, this
+            is the state.
+          type: string
+        administrative_district_level_2:
+          description: |-
+            A civil entity within the address's `administrative_district_level_1`.
+            In the US, this is the county.
+          type: string
+        administrative_district_level_3:
+          description: |-
+            A civil entity within the address's `administrative_district_level_2`,
+            if any.
+          type: string
+        country:
+          description: 'The address''s country, in ISO 3166-1-alpha-2 format.'
+          enum:
+            - ZZ
+            - AD
+            - AE
+            - AF
+            - AG
+            - AI
+            - AL
+            - AM
+            - AO
+            - AQ
+            - AR
+            - AS
+            - AT
+            - AU
+            - AW
+            - AX
+            - AZ
+            - BA
+            - BB
+            - BD
+            - BE
+            - BF
+            - BG
+            - BH
+            - BI
+            - BJ
+            - BL
+            - BM
+            - BN
+            - BO
+            - BQ
+            - BR
+            - BS
+            - BT
+            - BV
+            - BW
+            - BY
+            - BZ
+            - CA
+            - CC
+            - CD
+            - CF
+            - CG
+            - CH
+            - CI
+            - CK
+            - CL
+            - CM
+            - CN
+            - CO
+            - CR
+            - CU
+            - CV
+            - CW
+            - CX
+            - CY
+            - CZ
+            - DE
+            - DJ
+            - DK
+            - DM
+            - DO
+            - DZ
+            - EC
+            - EE
+            - EG
+            - EH
+            - ER
+            - ES
+            - ET
+            - FI
+            - FJ
+            - FK
+            - FM
+            - FO
+            - FR
+            - GA
+            - GB
+            - GD
+            - GE
+            - GF
+            - GG
+            - GH
+            - GI
+            - GL
+            - GM
+            - GN
+            - GP
+            - GQ
+            - GR
+            - GS
+            - GT
+            - GU
+            - GW
+            - GY
+            - HK
+            - HM
+            - HN
+            - HR
+            - HT
+            - HU
+            - ID
+            - IE
+            - IL
+            - IM
+            - IN
+            - IO
+            - IQ
+            - IR
+            - IS
+            - IT
+            - JE
+            - JM
+            - JO
+            - JP
+            - KE
+            - KG
+            - KH
+            - KI
+            - KM
+            - KN
+            - KP
+            - KR
+            - KW
+            - KY
+            - KZ
+            - LA
+            - LB
+            - LC
+            - LI
+            - LK
+            - LR
+            - LS
+            - LT
+            - LU
+            - LV
+            - LY
+            - MA
+            - MC
+            - MD
+            - ME
+            - MF
+            - MG
+            - MH
+            - MK
+            - ML
+            - MM
+            - MN
+            - MO
+            - MP
+            - MQ
+            - MR
+            - MS
+            - MT
+            - MU
+            - MV
+            - MW
+            - MX
+            - MY
+            - MZ
+            - NA
+            - NC
+            - NE
+            - NF
+            - NG
+            - NI
+            - NL
+            - 'NO'
+            - NP
+            - NR
+            - NU
+            - NZ
+            - OM
+            - PA
+            - PE
+            - PF
+            - PG
+            - PH
+            - PK
+            - PL
+            - PM
+            - PN
+            - PR
+            - PS
+            - PT
+            - PW
+            - PY
+            - QA
+            - RE
+            - RO
+            - RS
+            - RU
+            - RW
+            - SA
+            - SB
+            - SC
+            - SD
+            - SE
+            - SG
+            - SH
+            - SI
+            - SJ
+            - SK
+            - SL
+            - SM
+            - SN
+            - SO
+            - SR
+            - SS
+            - ST
+            - SV
+            - SX
+            - SY
+            - SZ
+            - TC
+            - TD
+            - TF
+            - TG
+            - TH
+            - TJ
+            - TK
+            - TL
+            - TM
+            - TN
+            - TO
+            - TR
+            - TT
+            - TV
+            - TW
+            - TZ
+            - UA
+            - UG
+            - UM
+            - US
+            - UY
+            - UZ
+            - VA
+            - VC
+            - VE
+            - VG
+            - VI
+            - VN
+            - VU
+            - WF
+            - WS
+            - YE
+            - YT
+            - ZA
+            - ZM
+            - ZW
+          type: string
+        first_name:
+          description: Optional first name when it's representing recipient.
+          type: string
+        last_name:
+          description: Optional last name when it's representing recipient.
+          type: string
+        locality:
+          description: The city or town of the address.
+          type: string
+        organization:
+          description: Optional organization name when it's representing recipient.
+          type: string
+        postal_code:
+          description: The address's postal code.
+          type: string
+        sublocality:
+          description: 'A civil region within the address''s `locality`, if any.'
+          type: string
+        sublocality_2:
+          description: 'A civil region within the address''s `sublocality`, if any.'
+          type: string
+        sublocality_3:
+          description: 'A civil region within the address''s `sublocality_2`, if any.'
+          type: string
+      type: object
+    CaptureTransactionRequest:
+      description: ''
+      example:
+        request_url: 'https://connect.squareup.com/v2/locations/LOCATION_ID/transactions/TRANSACTION_ID/capture'
+      properties: {}
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/CaptureTransaction/CaptureTransactionRequest.csharp
+        php: /sdk_samples/CaptureTransaction/CaptureTransactionRequest.php
+        python: /sdk_samples/CaptureTransaction/CaptureTransactionRequest.python
+        ruby: /sdk_samples/CaptureTransaction/CaptureTransactionRequest.ruby
+    CaptureTransactionResponse:
+      description: |-
+        Defines the fields that are included in the response body of
+        a request to the [CaptureTransaction](#endpoint-capturetransaction) endpoint.
+      example: {}
+      properties:
+        errors:
+          description: Any errors that occurred during the request.
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/CaptureTransaction/CaptureTransactionResponse.csharp
+        php: /sdk_samples/CaptureTransaction/CaptureTransactionResponse.php
+        python: /sdk_samples/CaptureTransaction/CaptureTransactionResponse.python
+        ruby: /sdk_samples/CaptureTransaction/CaptureTransactionResponse.ruby
+    Card:
+      description: Represents the non-confidential details of a credit card.
+      properties:
+        billing_address:
+          $ref: '#/components/schemas/Address'
+        card_brand:
+          description: |-
+            The card's brand (such as `VISA`). See [CardBrand](#type-cardbrand)
+            for all possible values.
+          enum:
+            - OTHER_BRAND
+            - VISA
+            - MASTERCARD
+            - AMERICAN_EXPRESS
+            - DISCOVER
+            - DISCOVER_DINERS
+            - JCB
+            - CHINA_UNIONPAY
+            - SQUARE_GIFT_CARD
+          type: string
+        cardholder_name:
+          description: |-
+            The cardholder name. This value is present only if this object
+            represents a customer's card on file.
+          type: string
+        exp_month:
+          description: |-
+            The month of the card's expiration date. This value is always between
+            `1` and `12`, inclusive.
+          format: int64
+          type: integer
+        exp_year:
+          description: The four-digit year of the card's expiration date.
+          format: int64
+          type: integer
+        id:
+          description: 'The card''s unique ID, if any.'
+          type: string
+        last_4:
+          description: The last 4 digits of the card's number.
+          type: string
+      type: object
+    CardBrand:
+      description: 'Indicates a credit card''s brand, such as `VISA`.'
+      enum:
+        - OTHER_BRAND
+        - VISA
+        - MASTERCARD
+        - AMERICAN_EXPRESS
+        - DISCOVER
+        - DISCOVER_DINERS
+        - JCB
+        - CHINA_UNIONPAY
+        - SQUARE_GIFT_CARD
+      type: string
+    ChargeRequest:
+      description: |-
+        Defines the parameters that can be included in the body of
+        a request to the [Charge](#endpoint-charge) endpoint.
+      example:
+        request_body:
+          amount_money:
+            amount: 5000
+            currency: USD
+          billing_address:
+            address_line_1: 500 Electric Ave
+            address_line_2: Suite 600
+            administrative_district_level_1: NY
+            country: US
+            locality: New York
+            postal_code: '10003'
+          card_nonce: card_nonce_from_square_123
+          delay_capture: false
+          idempotency_key: 74ae1696-b1e3-4328-af6d-f1e04d947a13
+          note: some optional note
+          reference_id: some optional reference id
+          shipping_address:
+            address_line_1: 123 Main St
+            administrative_district_level_1: CA
+            country: US
+            locality: San Francisco
+            postal_code: '94114'
+        request_url: /v2/locations/LOCATION_ID/transactions
+      properties:
+        amount_money:
+          $ref: '#/components/schemas/Money'
+        billing_address:
+          $ref: '#/components/schemas/Address'
+        buyer_email_address:
+          description: |-
+            The buyer's email address, if available. This value is optional,
+            but this transaction is ineligible for chargeback protection if it is not
+            provided.
+          type: string
+        card_nonce:
+          description: |-
+            A nonce generated from the `SqPaymentForm` that represents the card
+            to charge.
+
+            The application that provides a nonce to this endpoint must be the
+            _same application_ that generated the nonce with the `SqPaymentForm`.
+            Otherwise, the nonce is invalid.
+
+            Do not provide a value for this field if you provide a value for
+            `customer_card_id`.
+          type: string
+        customer_card_id:
+          description: |-
+            The ID of the customer card on file to charge. Do
+            not provide a value for this field if you provide a value for `card_nonce`.
+
+            If you provide this value, you _must_ also provide a value for
+            `customer_id`.
+          type: string
+        customer_id:
+          description: |-
+            The ID of the customer to associate this transaction with. This field
+            is required if you provide a value for `customer_card_id`, and optional
+            otherwise.
+          type: string
+        delay_capture:
+          description: |-
+            If `true`, the request will only perform an Auth on the provided
+            card. You can then later perform either a Capture (with the
+            [CaptureTransaction](#endpoint-capturetransaction) endpoint) or a Void
+            (with the [VoidTransation](#endpoint-voidtransaction) endpoint).
+
+            Default value: `false`
+          type: boolean
+        idempotency_key:
+          description: |-
+            A value you specify that uniquely identifies this
+            transaction among transactions you've created.
+
+            If you're unsure whether a particular transaction succeeded,
+            you can reattempt it with the same idempotency key without
+            worrying about double-charging the buyer.
+
+            See [Idempotency keys](#idempotencykeys) for more information.
+          type: string
+        note:
+          description: |-
+            An optional note to associate with the transaction.
+
+            This value cannot exceed 60 characters.
+          type: string
+        reference_id:
+          description: |-
+            An optional ID you can associate with the transaction for your own
+            purposes (such as to associate the transaction with an entity ID in your
+            own database).
+
+            This value cannot exceed 40 characters.
+          type: string
+        shipping_address:
+          $ref: '#/components/schemas/Address'
+      required:
+        - idempotency_key
+        - amount_money
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/Charge/ChargeRequest.csharp
+        php: /sdk_samples/Charge/ChargeRequest.php
+        python: /sdk_samples/Charge/ChargeRequest.python
+        ruby: /sdk_samples/Charge/ChargeRequest.ruby
+    ChargeResponse:
+      description: |-
+        Defines the fields that are included in the response body of
+        a request to the [Charge](#endpoint-charge) endpoint.
+
+        One of `errors` or `transaction` is present in a given response (never both).
+      example:
+        transaction:
+          created_at: '2016-03-10T22:57:56Z'
+          id: KnL67ZIwXCPtzOrqj0HrkxMF
+          location_id: 18YC4JDH91E1H
+          product: EXTERNAL_API
+          reference_id: some optional reference id
+          tenders:
+            - amount_money:
+                amount: 5000
+                currency: USD
+              card_details:
+                card:
+                  card_brand: VISA
+                  last_4: '1111'
+                entry_method: KEYED
+                status: CAPTURED
+              created_at: '2016-03-10T22:57:56Z'
+              id: MtZRYYdDrYNQbOvV7nbuBvMF
+              location_id: 18YC4JDH91E1H
+              note: some optional note
+              transaction_id: KnL67ZIwXCPtzOrqj0HrkxMF
+              type: CARD
+      properties:
+        errors:
+          description: Any errors that occurred during the request.
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/Charge/ChargeResponse.csharp
+        php: /sdk_samples/Charge/ChargeResponse.php
+        python: /sdk_samples/Charge/ChargeResponse.python
+        ruby: /sdk_samples/Charge/ChargeResponse.ruby
+    Checkout:
+      description: |-
+        Square Checkout lets merchants accept online payments for supported
+        payment types using a checkout workflow hosted on squareup.com.
+      properties:
+        ask_for_shipping_address:
+          description: |-
+            If `true`, Square Checkout will collect shipping information on your
+            behalf and store that information with the transaction information in your
+            Square Dashboard.
+
+            Default is `false`.
+          type: boolean
+        checkout_page_url:
+          description: |-
+            The URL that the buyer's browser should be redirected to after the
+            checkout is completed.
+          type: string
+        created_at:
+          description: 'The time when the checkout was created, in RFC 3339 format.'
+          type: string
+        id:
+          description: ID generated by Square Checkout when a new checkout is requested.
+          type: string
+        merchant_support_email:
+          description: |-
+            The email address to display on the Square Checkout confirmation page
+            and confirmation email that the buyer can use to contact the merchant.
+
+            If this value is not set, the confirmation page and email will display the
+            primary email address associated with the merchant's Square account.
+
+            Default is unset.
+          type: string
+        order:
+          $ref: '#/components/schemas/Order'
+        pre_populate_buyer_email:
+          description: |-
+            If provided, the buyer's email is pre-populated on the checkout page
+            as an editable text field.
+
+            Default is unset.
+          type: string
+        pre_populate_shipping_address:
+          $ref: '#/components/schemas/Address'
+        redirect_url:
+          description: |-
+            The URL to redirect to after checkout is completed with `checkoutId`,
+            Square's `orderId`, `transactionId`, and `referenceId` appended as URL
+            parameters. For example, if the provided redirect_url is
+            `http://www.example.com/order-complete`, a successful transaction redirects
+            the customer to:
+
+            `http://www.example.com/order-complete?checkoutId=xxxxxx&orderId=xxxxxx&referenceId=xxxxxx&transactionId=xxxxxx`
+
+            If you do not provide a redirect URL, Square Checkout will display an order
+            confirmation page on your behalf; however Square strongly recommends that
+            you provide a redirect URL so you can verify the transaction results and
+            finalize the order through your existing/normal confirmation workflow.
+          type: string
+      type: object
+    Country:
+      description: |-
+        Indicates the country associated with another entity, such as a business.
+        Values are in [ISO 3166-1-alpha-2 format](http://www.iso.org/iso/home/standards/country_codes.htm).
+      enum:
+        - ZZ
+        - AD
+        - AE
+        - AF
+        - AG
+        - AI
+        - AL
+        - AM
+        - AO
+        - AQ
+        - AR
+        - AS
+        - AT
+        - AU
+        - AW
+        - AX
+        - AZ
+        - BA
+        - BB
+        - BD
+        - BE
+        - BF
+        - BG
+        - BH
+        - BI
+        - BJ
+        - BL
+        - BM
+        - BN
+        - BO
+        - BQ
+        - BR
+        - BS
+        - BT
+        - BV
+        - BW
+        - BY
+        - BZ
+        - CA
+        - CC
+        - CD
+        - CF
+        - CG
+        - CH
+        - CI
+        - CK
+        - CL
+        - CM
+        - CN
+        - CO
+        - CR
+        - CU
+        - CV
+        - CW
+        - CX
+        - CY
+        - CZ
+        - DE
+        - DJ
+        - DK
+        - DM
+        - DO
+        - DZ
+        - EC
+        - EE
+        - EG
+        - EH
+        - ER
+        - ES
+        - ET
+        - FI
+        - FJ
+        - FK
+        - FM
+        - FO
+        - FR
+        - GA
+        - GB
+        - GD
+        - GE
+        - GF
+        - GG
+        - GH
+        - GI
+        - GL
+        - GM
+        - GN
+        - GP
+        - GQ
+        - GR
+        - GS
+        - GT
+        - GU
+        - GW
+        - GY
+        - HK
+        - HM
+        - HN
+        - HR
+        - HT
+        - HU
+        - ID
+        - IE
+        - IL
+        - IM
+        - IN
+        - IO
+        - IQ
+        - IR
+        - IS
+        - IT
+        - JE
+        - JM
+        - JO
+        - JP
+        - KE
+        - KG
+        - KH
+        - KI
+        - KM
+        - KN
+        - KP
+        - KR
+        - KW
+        - KY
+        - KZ
+        - LA
+        - LB
+        - LC
+        - LI
+        - LK
+        - LR
+        - LS
+        - LT
+        - LU
+        - LV
+        - LY
+        - MA
+        - MC
+        - MD
+        - ME
+        - MF
+        - MG
+        - MH
+        - MK
+        - ML
+        - MM
+        - MN
+        - MO
+        - MP
+        - MQ
+        - MR
+        - MS
+        - MT
+        - MU
+        - MV
+        - MW
+        - MX
+        - MY
+        - MZ
+        - NA
+        - NC
+        - NE
+        - NF
+        - NG
+        - NI
+        - NL
+        - 'NO'
+        - NP
+        - NR
+        - NU
+        - NZ
+        - OM
+        - PA
+        - PE
+        - PF
+        - PG
+        - PH
+        - PK
+        - PL
+        - PM
+        - PN
+        - PR
+        - PS
+        - PT
+        - PW
+        - PY
+        - QA
+        - RE
+        - RO
+        - RS
+        - RU
+        - RW
+        - SA
+        - SB
+        - SC
+        - SD
+        - SE
+        - SG
+        - SH
+        - SI
+        - SJ
+        - SK
+        - SL
+        - SM
+        - SN
+        - SO
+        - SR
+        - SS
+        - ST
+        - SV
+        - SX
+        - SY
+        - SZ
+        - TC
+        - TD
+        - TF
+        - TG
+        - TH
+        - TJ
+        - TK
+        - TL
+        - TM
+        - TN
+        - TO
+        - TR
+        - TT
+        - TV
+        - TW
+        - TZ
+        - UA
+        - UG
+        - UM
+        - US
+        - UY
+        - UZ
+        - VA
+        - VC
+        - VE
+        - VG
+        - VI
+        - VN
+        - VU
+        - WF
+        - WS
+        - YE
+        - YT
+        - ZA
+        - ZM
+        - ZW
+      type: string
+    CreateCheckoutRequest:
+      description: |-
+        Defines the parameters that can be included in the body of
+        a request to the [CreateCheckout](#endpoint-createcheckout) endpoint.
+      example:
+        request_body:
+          ask_for_shipping_address: true
+          idempotency_key: 74ae1696-b1e3-4328-af6d-f1e04d947a13
+          merchant_support_email: merchant+support@website.com
+          order:
+            line_items:
+              - base_price_money:
+                  amount: 1599
+                  currency: USD
+                name: line-item-1
+                quantity: '1'
+              - base_price_money:
+                  amount: 799
+                  currency: USD
+                name: line-item-2
+                quantity: '2'
+            reference_id: my-order-001
+          pre_populate_buyer_email: buyer@email.com
+          pre_populate_shipping_address:
+            address_line_1: 500 Electric Ave
+            address_line_2: Suite 600
+            administrative_district_level_1: NY
+            first_name: Jane
+            last_name: Doe
+            locality: New York
+            postal_code: '10003'
+          redirect_url: 'https://merchant.website.com/order-confirm'
+        request_url: /v2/locations/LOCATION_ID/checkouts
+      properties:
+        ask_for_shipping_address:
+          description: |-
+            If `true`, Square Checkout will collect shipping information on your
+            behalf and store that information with the transaction information in your
+            Square Dashboard.
+
+            Default is `false`.
+          type: boolean
+        idempotency_key:
+          description: |-
+            A unique string that identifies this checkout among others
+            you've created. It can be any valid string but must be unique for every
+            order sent to Square Checkout for a given location ID.
+
+            The idempotency key is used to avoid processing the same order more than
+            once. If you're unsure whether a particular checkout was created
+            successfully, you can reattempt it with the same idempotency key and all the
+            same other parameters without worrying about creating duplicates.
+
+            We recommend using a random number/string generator native to the language
+            you are working in to generate strings for your idempotency keys.
+
+            See [Idempotency keys](#idempotencykeys) for more information.
+          maxLength: 192
+          minLength: 1
+          type: string
+        merchant_support_email:
+          description: |-
+            The email address to display on the Square Checkout confirmation page
+            and confirmation email that the buyer can use to contact the merchant.
+
+            If this value is not set, the confirmation page and email will display the
+            primary email address associated with the merchant's Square account.
+
+            Default is unset.
+          maxLength: 254
+          type: string
+        order:
+          $ref: '#/components/schemas/CreateOrderRequestOrder'
+        pre_populate_buyer_email:
+          description: |-
+            If provided, the buyer's email is pre-populated on the checkout page
+            as an editable text field.
+
+            Default is unset.
+          maxLength: 254
+          type: string
+        pre_populate_shipping_address:
+          $ref: '#/components/schemas/Address'
+        redirect_url:
+          description: |-
+            The URL to redirect to after checkout is completed with `checkoutId`,
+            Square's `orderId`, `transactionId`, and `referenceId` appended as URL
+            parameters. For example, if the provided redirect_url is
+            `http://www.example.com/order-complete`, a successful transaction redirects
+            the customer to:
+
+            `http://www.example.com/order-complete?checkoutId=xxxxxx&orderId=xxxxxx&referenceId=xxxxxx&transactionId=xxxxxx`
+
+            If you do not provide a redirect URL, Square Checkout will display an order
+            confirmation page on your behalf; however Square strongly recommends that
+            you provide a redirect URL so you can verify the transaction results and
+            finalize the order through your existing/normal confirmation workflow.
+
+            Default is unset.
+          type: string
+      required:
+        - idempotency_key
+        - order
+      type: object
+    CreateCheckoutResponse:
+      description: |-
+        Defines the fields that are included in the response body of
+        a request to the [CreateCheckout](#endpoint-createcheckout) endpoint.
+      example:
+        checkout:
+          ask_for_shipping_address: true
+          checkout_page_url: 'https://connect.squareup.com/v2/checkout?c=CAISEHGimXh-C3RIT4og1a6u1qw&l=CYTKRM7R7JMV8'
+          created_at: '2017-01-18T22:25:54Z'
+          id: CAISEHGimXh-C3RIT4og1a6u1qw
+          merchant_support_email: merchant+support@website.com
+          order:
+            id: CAISEJOSTTqtofh-wiJrEXpkEAg
+            line_items:
+              - base_price_money:
+                  amount: 1599
+                  currency: USD
+                id: 51fa1d80-0720-5b3f-6804-a18f7861d2c7
+                name: line-item-1
+                quantity: '1'
+                total_money:
+                  amount: 1599
+                  currency: USD
+              - base_price_money:
+                  amount: 799
+                  currency: USD
+                id: 0d53440b-b9f4-5271-7555-cb43c7af9575
+                name: line-item-2
+                quantity: '2'
+                total_money:
+                  amount: 1598
+                  currency: USD
+            location_id: CYTKRM7R7JMV8
+            reference_id: my-order-001
+            total_money:
+              amount: 3197
+              currency: USD
+          pre_populate_buyer_email: buyer@email.com
+          pre_populate_shipping_address:
+            address_line_1: 500 Electric Ave
+            address_line_2: Suite 600
+            administrative_district_level_1: NY
+            first_name: Jane
+            last_name: Doe
+            locality: New York
+            postal_code: '10003'
+      properties:
+        checkout:
+          $ref: '#/components/schemas/Checkout'
+        errors:
+          description: Any errors that occurred during the request.
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+      type: object
+    CreateCustomerCardRequest:
+      description: |-
+        Defines the fields that are included in the request body of a request
+        to the [CreateCustomerCard](#endpoint-createcustomercard) endpoint.
+      example:
+        request_body:
+          billing_address:
+            address_line_1: 500 Electric Ave
+            address_line_2: Suite 600
+            administrative_district_level_1: NY
+            country: US
+            locality: New York
+            postal_code: '10003'
+          card_nonce: YOUR_CARD_NONCE
+          cardholder_name: Amelia Earhart
+        request_url: /v2/CUSTOMER_ID
+      properties:
+        billing_address:
+          $ref: '#/components/schemas/Address'
+        card_nonce:
+          description: |-
+            A card nonce representing the credit card to link to the customer.
+
+            Card nonces are generated by the `SqPaymentForm` that buyers enter
+            their card information into. See
+            [Embedding the payment form](/articles/adding-payment-form/) for
+            more information.
+          type: string
+        cardholder_name:
+          description: The cardholder's name.
+          type: string
+      required:
+        - card_nonce
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/CreateCustomerCard/CreateCustomerCardRequest.csharp
+        php: /sdk_samples/CreateCustomerCard/CreateCustomerCardRequest.php
+        python: /sdk_samples/CreateCustomerCard/CreateCustomerCardRequest.python
+        ruby: /sdk_samples/CreateCustomerCard/CreateCustomerCardRequest.ruby
+    CreateCustomerCardResponse:
+      description: |-
+        Defines the fields that are included in the response body of
+        a request to the [CreateCustomerCard](#endpoint-createcustomercard) endpoint.
+
+        One of `errors` or `card` is present in a given response (never both).
+      example:
+        card:
+          billing_address:
+            address_line_1: 500 Electric Ave
+            address_line_2: Suite 600
+            administrative_district_level_1: NY
+            country: US
+            locality: New York
+            postal_code: '10003'
+          card_brand: VISA
+          cardholder_name: Amelia Earhart
+          exp_month: 11
+          exp_year: 2018
+          id: icard-card_id
+          last_4: '1111'
+      properties:
+        card:
+          $ref: '#/components/schemas/Card'
+        errors:
+          description: Any errors that occurred during the request.
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/CreateCustomerCard/CreateCustomerCardResponse.csharp
+        php: /sdk_samples/CreateCustomerCard/CreateCustomerCardResponse.php
+        python: /sdk_samples/CreateCustomerCard/CreateCustomerCardResponse.python
+        ruby: /sdk_samples/CreateCustomerCard/CreateCustomerCardResponse.ruby
+    CreateCustomerRequest:
+      description: |-
+        Defines the body parameters that can be provided in a request to the
+        [CreateCustomer](#endpoint-createcustomer) endpoint.
+      example:
+        request_body:
+          address:
+            address_line_1: 500 Electric Ave
+            address_line_2: Suite 600
+            administrative_district_level_1: NY
+            country: US
+            locality: New York
+            postal_code: '10003'
+          email_address: Amelia.Earhart@example.com
+          family_name: Earhart
+          given_name: Amelia
+          note: a customer
+          phone_number: 1-212-555-4240
+          reference_id: YOUR_REFERENCE_ID
+        request_url: /v2/customers
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        company_name:
+          description: The name of the customer's company.
+          type: string
+        email_address:
+          description: The customer's email address.
+          type: string
+        family_name:
+          description: 'The customer''s family (i.e., last) name.'
+          type: string
+        given_name:
+          description: 'The customer''s given (i.e., first) name.'
+          type: string
+        nickname:
+          description: A nickname for the customer.
+          type: string
+        note:
+          description: An optional note to associate with the customer.
+          type: string
+        phone_number:
+          description: The customer's phone number.
+          type: string
+        reference_id:
+          description: |-
+            An optional second ID you can set to associate the customer with an
+            entity in another system.
+          type: string
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/CreateCustomer/CreateCustomerRequest.csharp
+        php: /sdk_samples/CreateCustomer/CreateCustomerRequest.php
+        python: /sdk_samples/CreateCustomer/CreateCustomerRequest.python
+        ruby: /sdk_samples/CreateCustomer/CreateCustomerRequest.ruby
+    CreateCustomerResponse:
+      description: |-
+        Defines the fields that are included in the response body of
+        a request to the [CreateCustomer](#endpoint-createcustomer) endpoint.
+
+        One of `errors` or `customer` is present in a given response (never both).
+      example:
+        customer:
+          address:
+            address_line_1: 500 Electric Ave
+            address_line_2: Suite 600
+            administrative_district_level_1: NY
+            country: US
+            locality: New York
+            postal_code: '10003'
+          created_at: '2016-03-23T20:21:54.859Z'
+          email_address: Amelia.Earhart@example.com
+          family_name: Earhart
+          given_name: Amelia
+          id: JDKYHBWT1D4F8MFH63DBMEN8Y4
+          note: a customer
+          phone_number: 1-212-555-4240
+          reference_id: YOUR_REFERENCE_ID
+          updated_at: '2016-03-23T20:21:54.859Z'
+      properties:
+        customer:
+          $ref: '#/components/schemas/Customer'
+        errors:
+          description: Any errors that occurred during the request.
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/CreateCustomer/CreateCustomerResponse.csharp
+        php: /sdk_samples/CreateCustomer/CreateCustomerResponse.php
+        python: /sdk_samples/CreateCustomer/CreateCustomerResponse.python
+        ruby: /sdk_samples/CreateCustomer/CreateCustomerResponse.ruby
+    CreateOrderRequest:
+      description: |-
+        Defines the parameters that can be included in the body of
+        a request to the [CreateOrder](#endpoint-createorder) endpoint.
+      example:
+        request_body:
+          idempotency_key: 8193148c-9586-11e6-99f9-28cfe92138cf
+          order:
+            line_items:
+              - base_price_money:
+                  amount: 1599
+                  currency: USD
+                name: Awesome product
+                quantity: '1'
+              - base_price_money:
+                  amount: 2000
+                  currency: USD
+                name: Another awesome product
+                quantity: '3'
+            reference_id: my-order-001
+        request_url: /v2/locations/LOCATION_ID/orders
+      properties:
+        idempotency_key:
+          description: |-
+            A value you specify that uniquely identifies this
+            order among orders you've created.
+
+            If you're unsure whether a particular order was created successfully,
+            you can reattempt it with the same idempotency key without
+            worrying about creating duplicate orders.
+
+            See [Idempotency keys](#idempotencykeys) for more information.
+          maxLength: 192
+          minLength: 1
+          type: string
+        order:
+          $ref: '#/components/schemas/Order'
+      required:
+        - idempotency_key
+        - order
+      type: object
+    CreateOrderRequestLineItem:
+      description: |-
+        Represents a line item to include in an order. Each line item describes
+        a different product to purchase, with its own quantity and price details.
+      properties:
+        base_price_money:
+          $ref: '#/components/schemas/Money'
+        name:
+          description: The name of the line item. This value cannot exceed 500 characters.
+          maxLength: 500
+          minLength: 1
+          type: string
+        quantity:
+          description: |-
+            The quantity to purchase, as a string representation of a number.
+            Currently, only integer values are supported.
+          minLength: 1
+          type: string
+      required:
+        - name
+        - quantity
+        - base_price_money
+      type: object
+    CreateOrderRequestOrder:
+      description: The object describes the order.
+      properties:
+        line_items:
+          description: |-
+            The line items to associate with this order.
+
+            Each line item represents a different product (or a custom monetary amount)
+            to include in a purchase.
+          items:
+            $ref: '#/components/schemas/CreateOrderRequestLineItem'
+          type: array
+        reference_id:
+          description: |-
+            An optional ID you can associate with the order for your own
+            purposes (such as to associate the order with an entity ID in your
+            own database).
+
+            This value cannot exceed 40 characters.
+          maxLength: 40
+          type: string
+      required:
+        - line_items
+      type: object
+    CreateRefundRequest:
+      description: |-
+        Defines the body parameters that can be included in
+        a request to the [CreateRefund](#endpoint-createrefund) endpoint.
+      example:
+        request_body:
+          amount_money:
+            amount: 100
+            currency: USD
+          idempotency_key: YOUR_IDEMPOTENCY_KEY
+          reason: a reason
+          tender_id: TENDER_ID
+        request_url: /v2/locations/LOCATION_ID/transactions/TRANSACTION_ID/refund
+      properties:
+        amount_money:
+          $ref: '#/components/schemas/Money'
+        idempotency_key:
+          description: |-
+            A value you specify that uniquely identifies this
+            refund among refunds you've created for the tender.
+
+            If you're unsure whether a particular refund succeeded,
+            you can reattempt it with the same idempotency key without
+            worrying about duplicating the refund.
+
+            See [Idempotency keys](#idempotencykeys) for more information.
+          type: string
+        reason:
+          description: |-
+            A description of the reason for the refund.
+
+            Default value: `Refund via API`
+          type: string
+        tender_id:
+          description: |-
+            The ID of the tender to refund.
+
+            A [`Transaction`](#type-transaction) has one or more `tenders` (i.e., methods
+            of payment) associated with it, and you refund each tender separately with
+            the Connect API.
+          type: string
+      required:
+        - idempotency_key
+        - tender_id
+        - amount_money
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/CreateRefund/CreateRefundRequest.csharp
+        php: /sdk_samples/CreateRefund/CreateRefundRequest.php
+        python: /sdk_samples/CreateRefund/CreateRefundRequest.python
+        ruby: /sdk_samples/CreateRefund/CreateRefundRequest.ruby
+    CreateRefundResponse:
+      description: |-
+        Defines the fields that are included in the response body of
+        a request to the [CreateRefund](#endpoint-createrefund) endpoint.
+
+        One of `errors` or `refund` is present in a given response (never both).
+      example:
+        refund:
+          amount_money:
+            amount: 100
+            currency: USD
+          created_at: '2016-02-12T00:28:18Z'
+          id: b27436d1-7f8e-5610-45c6-417ef71434b4-SW
+          location_id: 18YC4JDH91E1H
+          reason: some reason
+          status: PENDING
+          tender_id: TENDER_ID
+          transaction_id: TRANSACTION_ID
+      properties:
+        errors:
+          description: Any errors that occurred during the request.
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+        refund:
+          $ref: '#/components/schemas/Refund'
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/CreateRefund/CreateRefundResponse.csharp
+        php: /sdk_samples/CreateRefund/CreateRefundResponse.php
+        python: /sdk_samples/CreateRefund/CreateRefundResponse.python
+        ruby: /sdk_samples/CreateRefund/CreateRefundResponse.ruby
+    Currency:
+      description: |-
+        Indicates the associated currency for an amount of money. Values correspond
+        to [ISO 4217](https://wikipedia.org/wiki/ISO_4217).
+      enum:
+        - AED
+        - AFN
+        - ALL
+        - AMD
+        - ANG
+        - AOA
+        - ARS
+        - AUD
+        - AWG
+        - AZN
+        - BAM
+        - BBD
+        - BDT
+        - BGN
+        - BHD
+        - BIF
+        - BMD
+        - BND
+        - BOB
+        - BOV
+        - BRL
+        - BSD
+        - BTN
+        - BWP
+        - BYR
+        - BZD
+        - CAD
+        - CDF
+        - CHE
+        - CHF
+        - CHW
+        - CLF
+        - CLP
+        - CNY
+        - COP
+        - COU
+        - CRC
+        - CUC
+        - CUP
+        - CVE
+        - CZK
+        - DJF
+        - DKK
+        - DOP
+        - DZD
+        - EGP
+        - ERN
+        - ETB
+        - EUR
+        - FJD
+        - FKP
+        - GBP
+        - GEL
+        - GHS
+        - GIP
+        - GMD
+        - GNF
+        - GTQ
+        - GYD
+        - HKD
+        - HNL
+        - HRK
+        - HTG
+        - HUF
+        - IDR
+        - ILS
+        - INR
+        - IQD
+        - IRR
+        - ISK
+        - JMD
+        - JOD
+        - JPY
+        - KES
+        - KGS
+        - KHR
+        - KMF
+        - KPW
+        - KRW
+        - KWD
+        - KYD
+        - KZT
+        - LAK
+        - LBP
+        - LKR
+        - LRD
+        - LSL
+        - LTL
+        - LVL
+        - LYD
+        - MAD
+        - MDL
+        - MGA
+        - MKD
+        - MMK
+        - MNT
+        - MOP
+        - MRO
+        - MUR
+        - MVR
+        - MWK
+        - MXN
+        - MXV
+        - MYR
+        - MZN
+        - NAD
+        - NGN
+        - NIO
+        - NOK
+        - NPR
+        - NZD
+        - OMR
+        - PAB
+        - PEN
+        - PGK
+        - PHP
+        - PKR
+        - PLN
+        - PYG
+        - QAR
+        - RON
+        - RSD
+        - RUB
+        - RWF
+        - SAR
+        - SBD
+        - SCR
+        - SDG
+        - SEK
+        - SGD
+        - SHP
+        - SLL
+        - SOS
+        - SRD
+        - SSP
+        - STD
+        - SVC
+        - SYP
+        - SZL
+        - THB
+        - TJS
+        - TMT
+        - TND
+        - TOP
+        - TRY
+        - TTD
+        - TWD
+        - TZS
+        - UAH
+        - UGX
+        - USD
+        - USN
+        - USS
+        - UYI
+        - UYU
+        - UZS
+        - VEF
+        - VND
+        - VUV
+        - WST
+        - XAF
+        - XAG
+        - XAU
+        - XBA
+        - XBB
+        - XBC
+        - XBD
+        - XCD
+        - XDR
+        - XOF
+        - XPD
+        - XPF
+        - XPT
+        - XTS
+        - XXX
+        - YER
+        - ZAR
+        - ZMK
+        - ZMW
+        - BTC
+      type: string
+    Customer:
+      description: |-
+        Represents one of a business's customers, which can have one or more
+        cards on file associated with it.
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        cards:
+          description: The non-confidential details of the customer's cards on file.
+          items:
+            $ref: '#/components/schemas/Card'
+          type: array
+        company_name:
+          description: The name of the customer's company.
+          type: string
+        created_at:
+          description: 'The time when the customer was created, in RFC 3339 format.'
+          type: string
+        email_address:
+          description: The customer's email address.
+          type: string
+        family_name:
+          description: 'The customer''s family (i.e., last) name.'
+          type: string
+        given_name:
+          description: 'The customer''s given (i.e., first) name.'
+          type: string
+        groups:
+          description: The groups the customer belongs to.
+          items:
+            $ref: '#/components/schemas/CustomerGroupInfo'
+          type: array
+        id:
+          description: The customer's unique ID.
+          type: string
+        nickname:
+          description: The customer's nickname.
+          type: string
+        note:
+          description: A note to associate with the customer.
+          type: string
+        phone_number:
+          description: The customer's phone number.
+          type: string
+        preferences:
+          $ref: '#/components/schemas/CustomerPreferences'
+        reference_id:
+          description: |-
+            A second ID you can set to associate the customer with an
+            entity in another system.
+          type: string
+        updated_at:
+          description: 'The time when the customer was last updated, in RFC 3339 format.'
+          type: string
+      required:
+        - id
+        - created_at
+        - updated_at
+      type: object
+    CustomerGroupInfo:
+      description: Contains some brief information about a customer group with its identifier included.
+      properties:
+        id:
+          description: The ID of the customer group.
+          type: string
+        name:
+          description: The name of the customer group.
+          type: string
+      required:
+        - id
+        - name
+      type: object
+    CustomerPreferences:
+      description: Represents a particular customer's preferences.
+      properties:
+        email_unsubscribed:
+          description: The customer has unsubscribed from receiving marketing campaign emails.
+          type: boolean
+      type: object
+    DeleteCustomerCardRequest:
+      description: ''
+      example:
+        request_url: 'https://connect.squareup.com/v2/customers/CUSTOMER_ID'
+      properties: {}
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/DeleteCustomerCard/DeleteCustomerCardRequest.csharp
+        php: /sdk_samples/DeleteCustomerCard/DeleteCustomerCardRequest.php
+        python: /sdk_samples/DeleteCustomerCard/DeleteCustomerCardRequest.python
+        ruby: /sdk_samples/DeleteCustomerCard/DeleteCustomerCardRequest.ruby
+    DeleteCustomerCardResponse:
+      description: |-
+        Defines the fields that are included in the response body of
+        a request to the [DeleteCustomerCard](#endpoint-deletecustomercard) endpoint.
+      example: {}
+      properties:
+        errors:
+          description: Any errors that occurred during the request.
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/DeleteCustomerCard/DeleteCustomerCardResponse.csharp
+        php: /sdk_samples/DeleteCustomerCard/DeleteCustomerCardResponse.php
+        python: /sdk_samples/DeleteCustomerCard/DeleteCustomerCardResponse.python
+        ruby: /sdk_samples/DeleteCustomerCard/DeleteCustomerCardResponse.ruby
+    DeleteCustomerRequest:
+      description: ''
+      example:
+        request_url: 'https://connect.squareup.com/v2/customers/CUSTOMER_ID'
+      properties: {}
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/DeleteCustomer/DeleteCustomerRequest.csharp
+        php: /sdk_samples/DeleteCustomer/DeleteCustomerRequest.php
+        python: /sdk_samples/DeleteCustomer/DeleteCustomerRequest.python
+        ruby: /sdk_samples/DeleteCustomer/DeleteCustomerRequest.ruby
+    DeleteCustomerResponse:
+      description: |-
+        Defines the fields that are included in the response body of
+        a request to the [DeleteCustomer](#endpoint-deletecustomer) endpoint.
+      example: {}
+      properties:
+        errors:
+          description: Any errors that occurred during the request.
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/DeleteCustomer/DeleteCustomerResponse.csharp
+        php: /sdk_samples/DeleteCustomer/DeleteCustomerResponse.php
+        python: /sdk_samples/DeleteCustomer/DeleteCustomerResponse.python
+        ruby: /sdk_samples/DeleteCustomer/DeleteCustomerResponse.ruby
+    Error:
+      description: |-
+        Represents an error encountered during a request to the Connect API.
+
+        See [Handling errors](#handlingerrors) for more information.
+      properties:
+        category:
+          description: |-
+            The error's high-level category. See [ErrorCategory](#type-errorcategory)
+            for possible values.
+          enum:
+            - API_ERROR
+            - AUTHENTICATION_ERROR
+            - INVALID_REQUEST_ERROR
+            - RATE_LIMIT_ERROR
+            - PAYMENT_METHOD_ERROR
+            - REFUND_ERROR
+          type: string
+        code:
+          description: |-
+            The error's specific code. See [ErrorCode](#type-errorcode) for possible
+            values
+          enum:
+            - INTERNAL_SERVER_ERROR
+            - UNAUTHORIZED
+            - ACCESS_TOKEN_EXPIRED
+            - ACCESS_TOKEN_REVOKED
+            - FORBIDDEN
+            - INSUFFICIENT_SCOPES
+            - APPLICATION_DISABLED
+            - V1_APPLICATION
+            - V1_ACCESS_TOKEN
+            - CARD_PROCESSING_NOT_ENABLED
+            - BAD_REQUEST
+            - MISSING_REQUIRED_PARAMETER
+            - INCORRECT_TYPE
+            - INVALID_TIME
+            - INVALID_TIME_RANGE
+            - INVALID_VALUE
+            - INVALID_CURSOR
+            - UNKNOWN_QUERY_PARAMETER
+            - CONFLICTING_PARAMETERS
+            - EXPECTED_JSON_BODY
+            - INVALID_SORT_ORDER
+            - VALUE_REGEX_MISMATCH
+            - VALUE_TOO_SHORT
+            - VALUE_TOO_LONG
+            - VALUE_TOO_LOW
+            - VALUE_TOO_HIGH
+            - VALUE_EMPTY
+            - ARRAY_EMPTY
+            - EXPECTED_BOOLEAN
+            - EXPECTED_INTEGER
+            - EXPECTED_FLOAT
+            - EXPECTED_STRING
+            - EXPECTED_OBJECT
+            - EXPECTED_ARRAY
+            - EXPECTED_BASE64_ENCODED_BYTE_ARRAY
+            - INVALID_ARRAY_VALUE
+            - INVALID_ENUM_VALUE
+            - INVALID_CONTENT_TYPE
+            - INVALID_FORM_VALUE
+            - ONE_INSTRUMENT_EXPECTED
+            - NO_FIELDS_SET
+            - CARD_EXPIRED
+            - INVALID_EXPIRATION
+            - INVALID_EXPIRATION_YEAR
+            - INVALID_EXPIRATION_DATE
+            - UNSUPPORTED_CARD_BRAND
+            - INVALID_CARD
+            - DELAYED_TRANSACTION_EXPIRED
+            - DELAYED_TRANSACTION_CANCELED
+            - DELAYED_TRANSACTION_CAPTURED
+            - DELAYED_TRANSACTION_FAILED
+            - CARD_TOKEN_EXPIRED
+            - CARD_TOKEN_USED
+            - AMOUNT_TOO_HIGH
+            - UNSUPPORTED_INSTRUMENT_TYPE
+            - REFUND_AMOUNT_INVALID
+            - REFUND_ALREADY_PENDING
+            - PAYMENT_NOT_REFUNDABLE
+            - INVALID_CARD_DATA
+            - IDEMPOTENCY_KEY_REUSED
+            - UNEXPECTED_VALUE
+            - CARD_DECLINED
+            - VERIFY_CVV_FAILURE
+            - VERIFY_AVS_FAILURE
+            - CARD_DECLINED_CALL_ISSUER
+            - NOT_FOUND
+            - REQUEST_TIMEOUT
+            - CONFLICT
+            - REQUEST_ENTITY_TOO_LARGE
+            - UNSUPPORTED_MEDIA_TYPE
+            - RATE_LIMITED
+            - NOT_IMPLEMENTED
+            - SERVICE_UNAVAILABLE
+          type: string
+        detail:
+          description: A human-readable description of the error for debugging purposes.
+          type: string
+        field:
+          description: |-
+            The name of the field provided in the original request that the error
+            pertains to, if any.
+          type: string
+      required:
+        - category
+        - code
+      type: object
+    ErrorCategory:
+      description: |-
+        Indicates which high-level category of error has occurred during a
+        request to the Connect API.
+      enum:
+        - API_ERROR
+        - AUTHENTICATION_ERROR
+        - INVALID_REQUEST_ERROR
+        - RATE_LIMIT_ERROR
+        - PAYMENT_METHOD_ERROR
+        - REFUND_ERROR
+      type: string
+    ErrorCode:
+      description: |-
+        Indicates specific errors that can occur during a request to the
+        Connect API.
+      enum:
+        - INTERNAL_SERVER_ERROR
+        - UNAUTHORIZED
+        - ACCESS_TOKEN_EXPIRED
+        - ACCESS_TOKEN_REVOKED
+        - FORBIDDEN
+        - INSUFFICIENT_SCOPES
+        - APPLICATION_DISABLED
+        - V1_APPLICATION
+        - V1_ACCESS_TOKEN
+        - CARD_PROCESSING_NOT_ENABLED
+        - BAD_REQUEST
+        - MISSING_REQUIRED_PARAMETER
+        - INCORRECT_TYPE
+        - INVALID_TIME
+        - INVALID_TIME_RANGE
+        - INVALID_VALUE
+        - INVALID_CURSOR
+        - UNKNOWN_QUERY_PARAMETER
+        - CONFLICTING_PARAMETERS
+        - EXPECTED_JSON_BODY
+        - INVALID_SORT_ORDER
+        - VALUE_REGEX_MISMATCH
+        - VALUE_TOO_SHORT
+        - VALUE_TOO_LONG
+        - VALUE_TOO_LOW
+        - VALUE_TOO_HIGH
+        - VALUE_EMPTY
+        - ARRAY_EMPTY
+        - EXPECTED_BOOLEAN
+        - EXPECTED_INTEGER
+        - EXPECTED_FLOAT
+        - EXPECTED_STRING
+        - EXPECTED_OBJECT
+        - EXPECTED_ARRAY
+        - EXPECTED_BASE64_ENCODED_BYTE_ARRAY
+        - INVALID_ARRAY_VALUE
+        - INVALID_ENUM_VALUE
+        - INVALID_CONTENT_TYPE
+        - INVALID_FORM_VALUE
+        - ONE_INSTRUMENT_EXPECTED
+        - NO_FIELDS_SET
+        - CARD_EXPIRED
+        - INVALID_EXPIRATION
+        - INVALID_EXPIRATION_YEAR
+        - INVALID_EXPIRATION_DATE
+        - UNSUPPORTED_CARD_BRAND
+        - INVALID_CARD
+        - DELAYED_TRANSACTION_EXPIRED
+        - DELAYED_TRANSACTION_CANCELED
+        - DELAYED_TRANSACTION_CAPTURED
+        - DELAYED_TRANSACTION_FAILED
+        - CARD_TOKEN_EXPIRED
+        - CARD_TOKEN_USED
+        - AMOUNT_TOO_HIGH
+        - UNSUPPORTED_INSTRUMENT_TYPE
+        - REFUND_AMOUNT_INVALID
+        - REFUND_ALREADY_PENDING
+        - PAYMENT_NOT_REFUNDABLE
+        - INVALID_CARD_DATA
+        - IDEMPOTENCY_KEY_REUSED
+        - UNEXPECTED_VALUE
+        - CARD_DECLINED
+        - VERIFY_CVV_FAILURE
+        - VERIFY_AVS_FAILURE
+        - CARD_DECLINED_CALL_ISSUER
+        - NOT_FOUND
+        - REQUEST_TIMEOUT
+        - CONFLICT
+        - REQUEST_ENTITY_TOO_LARGE
+        - UNSUPPORTED_MEDIA_TYPE
+        - RATE_LIMITED
+        - NOT_IMPLEMENTED
+        - SERVICE_UNAVAILABLE
+      type: string
+    ListCustomersRequest:
+      description: |-
+        Defines the query parameters that can be provided in a request to the
+        [ListCustomers](#endpoint-listcustomers) endpoint.
+      example:
+        request_url: 'https://connect.squareup.com/v2/customers'
+      properties:
+        cursor:
+          description: |-
+            A pagination cursor returned by a previous call to this endpoint.
+            Provide this to retrieve the next set of results for your original query.
+
+            See [Paginating results](#paginatingresults) for more information.
+          type: string
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/ListCustomers/ListCustomersRequest.csharp
+        php: /sdk_samples/ListCustomers/ListCustomersRequest.php
+        python: /sdk_samples/ListCustomers/ListCustomersRequest.python
+        ruby: /sdk_samples/ListCustomers/ListCustomersRequest.ruby
+    ListCustomersResponse:
+      description: |-
+        Defines the fields that are included in the response body of
+        a request to the [ListCustomers](#endpoint-listcustomers) endpoint.
+
+        One of `errors` or `customers` is present in a given response (never both).
+      example:
+        customers:
+          - address:
+              address_line_1: 500 Electric Ave
+              address_line_2: Suite 600
+              administrative_district_level_1: NY
+              country: US
+              locality: New York
+              postal_code: '10003'
+            created_at: '2016-03-23T20:21:54.859Z'
+            email_address: Amelia.Earhart@example.com
+            family_name: Earhart
+            given_name: Amelia
+            groups:
+              - id: 16894e93-96eb-4ced-b24b-f71d42bf084c
+                name: Aviation Enthusiasts
+            id: JDKYHBWT1D4F8MFH63DBMEN8Y4
+            note: a customer
+            phone_number: 1-212-555-4240
+            reference_id: YOUR_REFERENCE_ID
+            updated_at: '2016-03-23T20:21:55Z'
+      properties:
+        cursor:
+          description: |-
+            A pagination cursor to retrieve the next set of results for your
+            original query to the endpoint. This value is present only if the request
+            succeeded and additional results are available.
+
+            See [Paginating results](#paginatingresults) for more information.
+          type: string
+        customers:
+          description: An array of `Customer` objects that match your query.
+          items:
+            $ref: '#/components/schemas/Customer'
+          type: array
+        errors:
+          description: Any errors that occurred during the request.
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/ListCustomers/ListCustomersResponse.csharp
+        php: /sdk_samples/ListCustomers/ListCustomersResponse.php
+        python: /sdk_samples/ListCustomers/ListCustomersResponse.python
+        ruby: /sdk_samples/ListCustomers/ListCustomersResponse.ruby
+    ListLocationsRequest:
+      description: ''
+      example:
+        request_url: 'https://connect.squareup.com/v2/locations'
+      properties: {}
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/ListLocations/ListLocationsRequest.csharp
+        php: /sdk_samples/ListLocations/ListLocationsRequest.php
+        python: /sdk_samples/ListLocations/ListLocationsRequest.python
+        ruby: /sdk_samples/ListLocations/ListLocationsRequest.ruby
+    ListLocationsResponse:
+      description: |-
+        Defines the fields that are included in the response body of
+        a request to the [ListLocations](#endpoint-listlocations) endpoint.
+
+        One of `errors` or `locations` is present in a given response (never both).
+      example:
+        locations:
+          - address:
+              address_line_1: 123 Main St
+              administrative_district_level_1: CA
+              country: US
+              locality: San Francisco
+              postal_code: '94114'
+            capabilities:
+              - CREDIT_CARD_PROCESSING
+            id: 18YC4JDH91E1H
+            name: your location name
+            timezone: America/Los_Angeles
+      properties:
+        errors:
+          description: Any errors that occurred during the request.
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+        locations:
+          description: The business's locations.
+          items:
+            $ref: '#/components/schemas/Location'
+          type: array
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/ListLocations/ListLocationsResponse.csharp
+        php: /sdk_samples/ListLocations/ListLocationsResponse.php
+        python: /sdk_samples/ListLocations/ListLocationsResponse.python
+        ruby: /sdk_samples/ListLocations/ListLocationsResponse.ruby
+    ListRefundsRequest:
+      description: |-
+        Defines the query parameters that can be included in
+        a request to the [ListRefunds](#endpoint-listrefunds) endpoint.
+      example:
+        request_url: 'https://connect.squareup.com/v2/locations/LOCATION_ID/refunds?begin_time=2016-01-15T00:00:00Z&end_time=2016-01-31T00:00:00Z'
+      properties:
+        begin_time:
+          description: |-
+            The beginning of the requested reporting period, in RFC 3339 format.
+
+            See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.
+
+            Default value: The current time minus one year.
+          type: string
+        cursor:
+          description: |-
+            A pagination cursor returned by a previous call to this endpoint.
+            Provide this to retrieve the next set of results for your original query.
+
+            See [Paginating results](#paginatingresults) for more information.
+          type: string
+        end_time:
+          description: |-
+            The end of the requested reporting period, in RFC 3339 format.
+
+            See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.
+
+            Default value: The current time.
+          type: string
+        sort_order:
+          description: |-
+            The order in which results are listed in the response (`ASC` for
+            oldest first, `DESC` for newest first).
+
+            Default value: `DESC`
+          enum:
+            - DESC
+            - ASC
+          type: string
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/ListRefunds/ListRefundsRequest.csharp
+        php: /sdk_samples/ListRefunds/ListRefundsRequest.php
+        python: /sdk_samples/ListRefunds/ListRefundsRequest.python
+        ruby: /sdk_samples/ListRefunds/ListRefundsRequest.ruby
+    ListRefundsResponse:
+      description: |-
+        Defines the fields that are included in the response body of
+        a request to the [ListRefunds](#endpoint-listrefunds) endpoint.
+
+        One of `errors` or `refunds` is present in a given response (never both).
+      example:
+        refunds:
+          - amount_money:
+              amount: 100
+              currency: USD
+            created_at: '2016-02-12T00:28:18Z'
+            id: b27436d1-7f8e-5610-45c6-417ef71434b4-SW
+            location_id: 18YC4JDH91E1H
+            reason: some reason
+            status: APPROVED
+            tender_id: TENDER_ID
+            transaction_id: TRANSACTION_ID
+      properties:
+        cursor:
+          description: |-
+            A pagination cursor for retrieving the next set of results,
+            if any remain. Provide this value as the `cursor` parameter in a subsequent
+            request to this endpoint.
+
+            See [Paginating results](#paginatingresults) for more information.
+          type: string
+        errors:
+          description: Any errors that occurred during the request.
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+        refunds:
+          description: An array of refunds that match your query.
+          items:
+            $ref: '#/components/schemas/Refund'
+          type: array
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/ListRefunds/ListRefundsResponse.csharp
+        php: /sdk_samples/ListRefunds/ListRefundsResponse.php
+        python: /sdk_samples/ListRefunds/ListRefundsResponse.python
+        ruby: /sdk_samples/ListRefunds/ListRefundsResponse.ruby
+    ListTransactionsRequest:
+      description: |-
+        Defines the query parameters that can be included in
+        a request to the [ListTransactions](#endpoint-listtransactions) endpoint.
+      example:
+        request_url: 'https://connect.squareup.com/v2/locations/LOCATION_ID/transactions?begin_time=2016-01-15T00:00:00Z&end_time=2016-01-31T00:00:00Z'
+      properties:
+        begin_time:
+          description: |-
+            The beginning of the requested reporting period, in RFC 3339 format.
+
+            See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.
+
+            Default value: The current time minus one year.
+          type: string
+        cursor:
+          description: |-
+            A pagination cursor returned by a previous call to this endpoint.
+            Provide this to retrieve the next set of results for your original query.
+
+            See [Paginating results](#paginatingresults) for more information.
+          type: string
+        end_time:
+          description: |-
+            The end of the requested reporting period, in RFC 3339 format.
+
+            See [Date ranges](#dateranges) for details on date inclusivity/exclusivity.
+
+            Default value: The current time.
+          type: string
+        sort_order:
+          description: |-
+            The order in which results are listed in the response (`ASC` for
+            oldest first, `DESC` for newest first).
+
+            Default value: `DESC`
+          enum:
+            - DESC
+            - ASC
+          type: string
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/ListTransactions/ListTransactionsRequest.csharp
+        php: /sdk_samples/ListTransactions/ListTransactionsRequest.php
+        python: /sdk_samples/ListTransactions/ListTransactionsRequest.python
+        ruby: /sdk_samples/ListTransactions/ListTransactionsRequest.ruby
+    ListTransactionsResponse:
+      description: |-
+        Defines the fields that are included in the response body of
+        a request to the [ListTransactions](#endpoint-listtransactions) endpoint.
+
+        One of `errors` or `transactions` is present in a given response (never both).
+      example:
+        transactions:
+          - created_at: '2016-03-10T22:57:56Z'
+            id: KnL67ZIwXCPtzOrqj0HrkxMF
+            location_id: 18YC4JDH91E1H
+            product: EXTERNAL_API
+            reference_id: some optional reference id
+            tenders:
+              - amount_money:
+                  amount: 5000
+                  currency: USD
+                card_details:
+                  card:
+                    card_brand: VISA
+                    last_4: '1111'
+                  entry_method: KEYED
+                  status: CAPTURED
+                created_at: '2016-03-10T22:57:56Z'
+                id: MtZRYYdDrYNQbOvV7nbuBvMF
+                location_id: 18YC4JDH91E1H
+                note: some optional note
+                processing_fee_money:
+                  amount: 138
+                  currency: USD
+                transaction_id: KnL67ZIwXCPtzOrqj0HrkxMF
+                type: CARD
+      properties:
+        cursor:
+          description: |-
+            A pagination cursor for retrieving the next set of results,
+            if any remain. Provide this value as the `cursor` parameter in a subsequent
+            request to this endpoint.
+
+            See [Paginating results](#paginatingresults) for more information.
+          type: string
+        errors:
+          description: Any errors that occurred during the request.
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+        transactions:
+          description: An array of transactions that match your query.
+          items:
+            $ref: '#/components/schemas/Transaction'
+          type: array
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/ListTransactions/ListTransactionsResponse.csharp
+        php: /sdk_samples/ListTransactions/ListTransactionsResponse.php
+        python: /sdk_samples/ListTransactions/ListTransactionsResponse.python
+        ruby: /sdk_samples/ListTransactions/ListTransactionsResponse.ruby
+    Location:
+      description: Represents one of a business's locations.
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        capabilities:
+          description: |-
+            Indicates which Square features are enabled for the location.
+
+            See [LocationCapability](#type-locationcapability) for possible values.
+          items:
+            enum:
+              - CREDIT_CARD_PROCESSING
+            type: string
+          type: array
+        id:
+          description: The location's unique ID.
+          type: string
+        name:
+          description: The location's name.
+          type: string
+        timezone:
+          description: |-
+            The [IANA Timezone Database](https://www.iana.org/time-zones)
+            identifier for the location's timezone.
+          type: string
+      type: object
+    LocationCapability:
+      description: |-
+        Indicates account capabilities that a business's location might or
+        might not have enabled.
+      enum:
+        - CREDIT_CARD_PROCESSING
+      type: string
+    Money:
+      description: |-
+        Represents an amount of money.
+
+        __Important:__ Unlike version 1 of the Connect API, __all monetary amounts
+        returned by v2 endpoints are positive.__ (In v1, monetary amounts are negative
+        if they represent money being paid _by_ a merchant, instead of money being
+        paid _to_ a merchant.)
+      properties:
+        amount:
+          description: |-
+            The amount of money, in the smallest denomination of the
+            currency indicated by `currency`. For example, when `currency` is `USD`,
+            `amount` is in cents.
+          format: int64
+          type: integer
+        currency:
+          description: |-
+            The type of currency, in __ISO 4217 format__. For example, the currency
+            code for US dollars is `USD`.
+
+            See [Currency](#type-currency) for possible values.
+          enum:
+            - AED
+            - AFN
+            - ALL
+            - AMD
+            - ANG
+            - AOA
+            - ARS
+            - AUD
+            - AWG
+            - AZN
+            - BAM
+            - BBD
+            - BDT
+            - BGN
+            - BHD
+            - BIF
+            - BMD
+            - BND
+            - BOB
+            - BOV
+            - BRL
+            - BSD
+            - BTN
+            - BWP
+            - BYR
+            - BZD
+            - CAD
+            - CDF
+            - CHE
+            - CHF
+            - CHW
+            - CLF
+            - CLP
+            - CNY
+            - COP
+            - COU
+            - CRC
+            - CUC
+            - CUP
+            - CVE
+            - CZK
+            - DJF
+            - DKK
+            - DOP
+            - DZD
+            - EGP
+            - ERN
+            - ETB
+            - EUR
+            - FJD
+            - FKP
+            - GBP
+            - GEL
+            - GHS
+            - GIP
+            - GMD
+            - GNF
+            - GTQ
+            - GYD
+            - HKD
+            - HNL
+            - HRK
+            - HTG
+            - HUF
+            - IDR
+            - ILS
+            - INR
+            - IQD
+            - IRR
+            - ISK
+            - JMD
+            - JOD
+            - JPY
+            - KES
+            - KGS
+            - KHR
+            - KMF
+            - KPW
+            - KRW
+            - KWD
+            - KYD
+            - KZT
+            - LAK
+            - LBP
+            - LKR
+            - LRD
+            - LSL
+            - LTL
+            - LVL
+            - LYD
+            - MAD
+            - MDL
+            - MGA
+            - MKD
+            - MMK
+            - MNT
+            - MOP
+            - MRO
+            - MUR
+            - MVR
+            - MWK
+            - MXN
+            - MXV
+            - MYR
+            - MZN
+            - NAD
+            - NGN
+            - NIO
+            - NOK
+            - NPR
+            - NZD
+            - OMR
+            - PAB
+            - PEN
+            - PGK
+            - PHP
+            - PKR
+            - PLN
+            - PYG
+            - QAR
+            - RON
+            - RSD
+            - RUB
+            - RWF
+            - SAR
+            - SBD
+            - SCR
+            - SDG
+            - SEK
+            - SGD
+            - SHP
+            - SLL
+            - SOS
+            - SRD
+            - SSP
+            - STD
+            - SVC
+            - SYP
+            - SZL
+            - THB
+            - TJS
+            - TMT
+            - TND
+            - TOP
+            - TRY
+            - TTD
+            - TWD
+            - TZS
+            - UAH
+            - UGX
+            - USD
+            - USN
+            - USS
+            - UYI
+            - UYU
+            - UZS
+            - VEF
+            - VND
+            - VUV
+            - WST
+            - XAF
+            - XAG
+            - XAU
+            - XBA
+            - XBB
+            - XBC
+            - XBD
+            - XCD
+            - XDR
+            - XOF
+            - XPD
+            - XPF
+            - XPT
+            - XTS
+            - XXX
+            - YER
+            - ZAR
+            - ZMK
+            - ZMW
+            - BTC
+          type: string
+      type: object
+    Order:
+      description: |-
+        Contains all information related to a single order to process with Square,
+        including line items that specify the products to purchase
+      properties:
+        id:
+          description: |-
+            The order's unique ID.
+
+            This value is not present if the order was not created with the
+            [CreateOrder](#endpoint-createorder) endpoint.
+          type: string
+        line_items:
+          description: |-
+            The line items included in the order. Every order has at least one
+            line item.
+          items:
+            $ref: '#/components/schemas/OrderLineItem'
+          type: array
+        location_id:
+          description: The ID of the merchant location this order is associated with.
+          type: string
+        reference_id:
+          description: |-
+            A client specified identifier to associate an entity in another system
+            with this order.
+          type: string
+        total_money:
+          $ref: '#/components/schemas/Money'
+      type: object
+    OrderLineItem:
+      description: |-
+        Represents a line item in an order. Each line item describes a different
+        product to purchase, with its own quantity and price details.
+      properties:
+        base_price_money:
+          $ref: '#/components/schemas/Money'
+        id:
+          description: 'The line item''s ID, unique only within this order.'
+          type: string
+        name:
+          description: The name of the line item.
+          type: string
+        quantity:
+          description: |-
+            The quantity of the product to purchase. Currently, this string must
+            have an integer value.
+          type: string
+        total_money:
+          $ref: '#/components/schemas/Money'
+      type: object
+    Refund:
+      description: Represents a refund processed for a Square transaction.
+      properties:
+        amount_money:
+          $ref: '#/components/schemas/Money'
+        created_at:
+          description: 'The time when the refund was created, in RFC 3339 format.'
+          type: string
+        id:
+          description: The refund's unique ID.
+          type: string
+        location_id:
+          description: The ID of the refund's associated location.
+          type: string
+        processing_fee_money:
+          $ref: '#/components/schemas/Money'
+        reason:
+          description: The reason for the refund being issued.
+          type: string
+        status:
+          description: |-
+            The current status of the refund (`PENDING`, `APPROVED`, `REJECTED`,
+            or `FAILED`).
+          enum:
+            - PENDING
+            - APPROVED
+            - REJECTED
+            - FAILED
+          type: string
+        tender_id:
+          description: The ID of the refunded tender.
+          type: string
+        transaction_id:
+          description: The ID of the transaction that the refunded tender is part of.
+          type: string
+      required:
+        - id
+        - location_id
+        - transaction_id
+        - tender_id
+        - reason
+        - amount_money
+        - status
+      type: object
+    RefundStatus:
+      description: Indicates a refund's current status.
+      enum:
+        - PENDING
+        - APPROVED
+        - REJECTED
+        - FAILED
+      type: string
+    RetrieveCustomerRequest:
+      description: ''
+      example:
+        request_url: 'https://connect.squareup.com/v2/customers/CUSTOMER_ID'
+      properties: {}
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/RetrieveCustomer/RetrieveCustomerRequest.csharp
+        php: /sdk_samples/RetrieveCustomer/RetrieveCustomerRequest.php
+        python: /sdk_samples/RetrieveCustomer/RetrieveCustomerRequest.python
+        ruby: /sdk_samples/RetrieveCustomer/RetrieveCustomerRequest.ruby
+    RetrieveCustomerResponse:
+      description: |-
+        Defines the fields that are included in the response body of
+        a request to the [RetrieveCustomer](#endpoint-retrievecustomer) endpoint.
+
+        One of `errors` or `customer` is present in a given response (never both).
+      example:
+        customer:
+          address:
+            address_line_1: 500 Electric Ave
+            address_line_2: Suite 600
+            administrative_district_level_1: NY
+            country: US
+            locality: New York
+            postal_code: '10003'
+          created_at: '2016-03-23T20:21:54.859Z'
+          email_address: Amelia.Earhart@example.com
+          family_name: Earhart
+          given_name: Amelia
+          groups:
+            - id: 16894e93-96eb-4ced-b24b-f71d42bf084c
+              name: Aviation Enthusiasts
+          id: JDKYHBWT1D4F8MFH63DBMEN8Y4
+          note: a customer
+          phone_number: 1-212-555-4240
+          reference_id: YOUR_REFERENCE_ID
+          updated_at: '2016-03-23T20:21:54.859Z'
+      properties:
+        customer:
+          $ref: '#/components/schemas/Customer'
+        errors:
+          description: Any errors that occurred during the request.
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/RetrieveCustomer/RetrieveCustomerResponse.csharp
+        php: /sdk_samples/RetrieveCustomer/RetrieveCustomerResponse.php
+        python: /sdk_samples/RetrieveCustomer/RetrieveCustomerResponse.python
+        ruby: /sdk_samples/RetrieveCustomer/RetrieveCustomerResponse.ruby
+    RetrieveTransactionRequest:
+      description: ''
+      example:
+        request_url: 'https://connect.squareup.com/v2/locations/LOCATION_ID/transactions/TRANSACTION_ID'
+      properties: {}
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/RetrieveTransaction/RetrieveTransactionRequest.csharp
+        php: /sdk_samples/RetrieveTransaction/RetrieveTransactionRequest.php
+        python: /sdk_samples/RetrieveTransaction/RetrieveTransactionRequest.python
+        ruby: /sdk_samples/RetrieveTransaction/RetrieveTransactionRequest.ruby
+    RetrieveTransactionResponse:
+      description: |-
+        Defines the fields that are included in the response body of
+        a request to the [RetrieveTransaction](#endpont-retrievetransaction) endpoint.
+
+        One of `errors` or `transaction` is present in a given response (never both).
+      example:
+        transaction:
+          created_at: '2016-03-10T22:57:56Z'
+          id: KnL67ZIwXCPtzOrqj0HrkxMF
+          location_id: 18YC4JDH91E1H
+          product: EXTERNAL_API
+          reference_id: some optional reference id
+          tenders:
+            - amount_money:
+                amount: 5000
+                currency: USD
+              card_details:
+                card:
+                  card_brand: VISA
+                  last_4: '1111'
+                entry_method: KEYED
+                status: CAPTURED
+              created_at: '2016-03-10T22:57:56Z'
+              id: MtZRYYdDrYNQbOvV7nbuBvMF
+              location_id: 18YC4JDH91E1H
+              note: some optional note
+              processing_fee_money:
+                amount: 138
+                currency: USD
+              transaction_id: KnL67ZIwXCPtzOrqj0HrkxMF
+              type: CARD
+      properties:
+        errors:
+          description: Any errors that occurred during the request.
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/RetrieveTransaction/RetrieveTransactionResponse.csharp
+        php: /sdk_samples/RetrieveTransaction/RetrieveTransactionResponse.php
+        python: /sdk_samples/RetrieveTransaction/RetrieveTransactionResponse.python
+        ruby: /sdk_samples/RetrieveTransaction/RetrieveTransactionResponse.ruby
+    SortOrder:
+      description: 'The order (e.g., chronological or alphabetical) in which results from a request are returned.'
+      enum:
+        - DESC
+        - ASC
+      type: string
+    Tender:
+      description: 'Represents a tender (i.e., a method of payment) used in a Square transaction.'
+      properties:
+        amount_money:
+          $ref: '#/components/schemas/Money'
+        card_details:
+          $ref: '#/components/schemas/TenderCardDetails'
+        cash_details:
+          $ref: '#/components/schemas/TenderCashDetails'
+        created_at:
+          description: 'The time when the tender was created, in RFC 3339 format.'
+          type: string
+        customer_id:
+          description: |-
+            If the tender is associated with a customer or represents a customer's card on file,
+            this is the ID of the associated customer.
+          type: string
+        id:
+          description: The tender's unique ID.
+          type: string
+        location_id:
+          description: The ID of the transaction's associated location.
+          type: string
+        note:
+          description: An optional note associated with the tender at the time of payment.
+          type: string
+        processing_fee_money:
+          $ref: '#/components/schemas/Money'
+        transaction_id:
+          description: The ID of the tender's associated transaction.
+          type: string
+        type:
+          description: 'The type of tender, such as `CARD` or `CASH`.'
+          enum:
+            - CARD
+            - CASH
+            - THIRD_PARTY_CARD
+            - SQUARE_GIFT_CARD
+            - NO_SALE
+            - OTHER
+          type: string
+      required:
+        - type
+      type: object
+    TenderCardDetails:
+      description: Represents additional details of a tender with `type` `CARD` or `SQUARE_GIFT_CARD`
+      properties:
+        card:
+          $ref: '#/components/schemas/Card'
+        entry_method:
+          description: The method used to enter the card's details for the transaction.
+          enum:
+            - SWIPED
+            - KEYED
+            - EMV
+            - ON_FILE
+            - CONTACTLESS
+          type: string
+        status:
+          description: |-
+            The credit card payment's current state (such as `AUTHORIZED` or
+            `CAPTURED`). See [TenderCardDetailsStatus](#type-tendercarddetailsstatus)
+            for possible values.
+          enum:
+            - AUTHORIZED
+            - CAPTURED
+            - VOIDED
+            - FAILED
+          type: string
+      type: object
+    TenderCardDetailsEntryMethod:
+      description: Indicates the method used to enter the card's details.
+      enum:
+        - SWIPED
+        - KEYED
+        - EMV
+        - ON_FILE
+        - CONTACTLESS
+      type: string
+    TenderCardDetailsStatus:
+      description: Indicates the card transaction's current status.
+      enum:
+        - AUTHORIZED
+        - CAPTURED
+        - VOIDED
+        - FAILED
+      type: string
+    TenderCashDetails:
+      description: Represents the details of a tender with `type` `CASH`.
+      properties:
+        buyer_tendered_money:
+          $ref: '#/components/schemas/Money'
+        change_back_money:
+          $ref: '#/components/schemas/Money'
+      type: object
+    TenderType:
+      description: Indicates a tender's type.
+      enum:
+        - CARD
+        - CASH
+        - THIRD_PARTY_CARD
+        - SQUARE_GIFT_CARD
+        - NO_SALE
+        - OTHER
+      type: string
+    Transaction:
+      description: |-
+        Represents a transaction processed with Square, either with the
+        Connect API or with Square Register.
+
+        The `tenders` field of this object lists all methods of payment used to pay in
+        the transaction.
+      properties:
+        client_id:
+          description: |-
+            If the transaction was created in the Square Register app, this value
+            is the ID generated for the transaction by Square Register.
+
+            This ID has no relationship to the transaction's canonical `id`, which is
+            generated by Square's backend servers. This value is generated for bookkeeping
+            purposes, in case the transaction cannot immediately be completed (for example,
+            if the transaction is processed in offline mode).
+
+            It is not currently possible with the Connect API to perform a transaction
+            lookup by this value.
+          type: string
+        created_at:
+          description: 'The time when the transaction was created, in RFC 3339 format.'
+          type: string
+        id:
+          description: 'The transaction''s unique ID, issued by Square payments servers.'
+          type: string
+        location_id:
+          description: The ID of the transaction's associated location.
+          type: string
+        order:
+          $ref: '#/components/schemas/Order'
+        product:
+          description: The Square product that processed the transaction.
+          enum:
+            - REGISTER
+            - EXTERNAL_API
+            - BILLING
+            - APPOINTMENTS
+            - INVOICES
+            - ONLINE_STORE
+            - PAYROLL
+            - OTHER
+          type: string
+        reference_id:
+          description: |-
+            If the transaction was created with the [Charge](#endpoint-charge)
+            endpoint, this value is the same as the value provided for the `reference_id`
+            parameter in the request to that endpoint. Otherwise, it is not set.
+          type: string
+        refunds:
+          description: Refunds that have been applied to any tender in the transaction.
+          items:
+            $ref: '#/components/schemas/Refund'
+          type: array
+        shipping_address:
+          $ref: '#/components/schemas/Address'
+        tenders:
+          description: The tenders used to pay in the transaction.
+          items:
+            $ref: '#/components/schemas/Tender'
+          type: array
+      type: object
+    TransactionProduct:
+      description: Indicates the Square product used to process a transaction.
+      enum:
+        - REGISTER
+        - EXTERNAL_API
+        - BILLING
+        - APPOINTMENTS
+        - INVOICES
+        - ONLINE_STORE
+        - PAYROLL
+        - OTHER
+      type: string
+    UpdateCustomerRequest:
+      description: |-
+        Defines the body parameters that can be provided in a request to the
+        [UpdateCustomer](#endpoint-updatecustomer) endpoint.
+      example:
+        request_body:
+          email_address: New.Amelia.Earhart@example.com
+          note: updated customer note
+          phone_number: ''
+        request_url: /v2/customers/CUSTOMER_ID
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        company_name:
+          description: The name of the customer's company.
+          type: string
+        email_address:
+          description: The customer's email address.
+          type: string
+        family_name:
+          description: 'The customer''s family (i.e., last) name.'
+          type: string
+        given_name:
+          description: 'The customer''s given (i.e., first) name.'
+          type: string
+        nickname:
+          description: A nickname for the customer.
+          type: string
+        note:
+          description: An optional note to associate with the customer.
+          type: string
+        phone_number:
+          description: The customer's phone number.
+          type: string
+        reference_id:
+          description: |-
+            An optional second ID you can set to associate the customer with an
+            entity in another system.
+          type: string
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/UpdateCustomer/UpdateCustomerRequest.csharp
+        php: /sdk_samples/UpdateCustomer/UpdateCustomerRequest.php
+        python: /sdk_samples/UpdateCustomer/UpdateCustomerRequest.python
+        ruby: /sdk_samples/UpdateCustomer/UpdateCustomerRequest.ruby
+    UpdateCustomerResponse:
+      description: |-
+        Defines the fields that are included in the response body of
+        a request to the [UpdateCustomer](#endpoint-updatecustomer) endpoint.
+
+        One of `errors` or `customer` is present in a given response (never both).
+      example:
+        customer:
+          address:
+            address_line_1: 500 Electric Ave
+            address_line_2: Suite 600
+            administrative_district_level_1: NY
+            country: US
+            locality: New York
+            postal_code: '10003'
+          created_at: '2016-03-23T20:21:54.859Z'
+          email_address: New.Amelia.Earhart@example.com
+          family_name: Earhart
+          given_name: Amelia
+          groups:
+            - id: 16894e93-96eb-4ced-b24b-f71d42bf084c
+              name: Aviation Enthusiasts
+          id: JDKYHBWT1D4F8MFH63DBMEN8Y4
+          note: updated customer note
+          reference_id: YOUR_REFERENCE_ID
+          updated_at: '2016-03-25T20:21:55Z'
+      properties:
+        customer:
+          $ref: '#/components/schemas/Customer'
+        errors:
+          description: Any errors that occurred during the request.
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/UpdateCustomer/UpdateCustomerResponse.csharp
+        php: /sdk_samples/UpdateCustomer/UpdateCustomerResponse.php
+        python: /sdk_samples/UpdateCustomer/UpdateCustomerResponse.python
+        ruby: /sdk_samples/UpdateCustomer/UpdateCustomerResponse.ruby
+    VoidTransactionRequest:
+      description: ''
+      example:
+        request_url: 'https://connect.squareup.com/v2/locations/LOCATION_ID/transactions/TRANSACTION_ID/void'
+      properties: {}
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/VoidTransaction/VoidTransactionRequest.csharp
+        php: /sdk_samples/VoidTransaction/VoidTransactionRequest.php
+        python: /sdk_samples/VoidTransaction/VoidTransactionRequest.python
+        ruby: /sdk_samples/VoidTransaction/VoidTransactionRequest.ruby
+    VoidTransactionResponse:
+      description: |-
+        Defines the fields that are included in the response body of
+        a request to the [CaptureTransaction](#endpoint-capturetransaction) endpoint.
+      example: {}
+      properties:
+        errors:
+          description: Any errors that occurred during the request.
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+      type: object
+      x-sq-sdk-sample-code:
+        csharp: /sdk_samples/VoidTransaction/VoidTransactionResponse.csharp
+        php: /sdk_samples/VoidTransaction/VoidTransactionResponse.php
+        python: /sdk_samples/VoidTransaction/VoidTransactionResponse.python
+        ruby: /sdk_samples/VoidTransaction/VoidTransactionResponse.ruby
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://connect.squareup.com/oauth2/authorize'
+          tokenUrl: 'https://connect.squareup.com/oauth2/token'
+          scopes:
+            BANK_ACCOUNTS_READ: GET endpoints related to a merchant's bank accounts
+            CUSTOMERS_READ: ' GET endpoints related to customer management'
+            CUSTOMERS_WRITE: 'POST, PUT, and DELETE endpoints related to customer management'
+            EMPLOYEES_READ: GET endpoints related to employee management
+            EMPLOYEES_WRITE: 'POST, PUT, and DELETE endpoints related to employee management'
+            ITEMS_READ: GET endpoints related to a merchant's item library
+            ITEMS_WRITE: 'POST, PUT, and DELETE endpoints related to a merchant''s item library'
+            MERCHANT_PROFILE_READ: GET endpoints related to a merchant's business and location entities. Almost all Connect API applications need this permission in order to obtain a merchant's location IDs
+            ORDERS_READ: GET endpoints related to a merchant's Square online store.
+            ORDERS_WRITE: 'POST, PUT, and DELETE endpoints related to a merchant''s Square online store'
+            PAYMENTS_READ: GET endpoints related to transactions and refunds
+            PAYMENTS_WRITE: 'POST, PUT, and DELETE endpoints related to transactions and refunds. E-commerce applications must request this permission'
+            SETTLEMENTS_READ: GET endpoints related to settlements (deposits)
+            TIMECARDS_READ: GET endpoints related to employee timecards
+            TIMECARDS_WRITE: 'POST, PUT, and DELETE endpoints related to employee timecards'

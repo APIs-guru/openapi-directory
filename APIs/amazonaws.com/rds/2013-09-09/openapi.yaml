@@ -1,0 +1,4809 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://rds.amazonaws.com/'
+info:
+  version: '2013-09-09'
+  x-release: v4
+  title: Amazon Relational Database Service
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: rds
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/rds-2013-09-09.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: false
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/rds/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AddSourceIdentifierToSubscription
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AddSourceIdentifierToSubscriptionResult'
+        '480':
+          description: SubscriptionNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SubscriptionNotFoundFault'
+        '481':
+          description: SourceNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SourceNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddSourceIdentifierToSubscriptionMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AddTagsToResource':
+    post:
+      operationId: AddTagsToResource
+      description: ''
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: DBInstanceNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+        '481':
+          description: DBSnapshotNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSnapshotNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddTagsToResourceMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AuthorizeDBSecurityGroupIngress':
+    post:
+      operationId: AuthorizeDBSecurityGroupIngress
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthorizeDBSecurityGroupIngressResult'
+        '480':
+          description: DBSecurityGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSecurityGroupNotFoundFault'
+        '481':
+          description: InvalidDBSecurityGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBSecurityGroupStateFault'
+        '482':
+          description: AuthorizationAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthorizationAlreadyExistsFault'
+        '483':
+          description: AuthorizationQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthorizationQuotaExceededFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizeDBSecurityGroupIngressMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CopyDBSnapshot':
+    post:
+      operationId: CopyDBSnapshot
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CopyDBSnapshotResult'
+        '480':
+          description: DBSnapshotAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSnapshotAlreadyExistsFault'
+        '481':
+          description: DBSnapshotNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSnapshotNotFoundFault'
+        '482':
+          description: InvalidDBSnapshotStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBSnapshotStateFault'
+        '483':
+          description: SnapshotQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotQuotaExceededFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CopyDBSnapshotMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateDBInstance':
+    post:
+      operationId: CreateDBInstance
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateDBInstanceResult'
+        '480':
+          description: DBInstanceAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceAlreadyExistsFault'
+        '481':
+          description: InsufficientDBInstanceCapacityFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientDBInstanceCapacityFault'
+        '482':
+          description: DBParameterGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBParameterGroupNotFoundFault'
+        '483':
+          description: DBSecurityGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSecurityGroupNotFoundFault'
+        '484':
+          description: InstanceQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InstanceQuotaExceededFault'
+        '485':
+          description: StorageQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/StorageQuotaExceededFault'
+        '486':
+          description: DBSubnetGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetGroupNotFoundFault'
+        '487':
+          description: DBSubnetGroupDoesNotCoverEnoughAZs
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetGroupDoesNotCoverEnoughAZs'
+        '488':
+          description: InvalidSubnet
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidSubnet'
+        '489':
+          description: InvalidVPCNetworkStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidVPCNetworkStateFault'
+        '490':
+          description: ProvisionedIopsNotAvailableInAZFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisionedIopsNotAvailableInAZFault'
+        '491':
+          description: OptionGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OptionGroupNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDBInstanceMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateDBInstanceReadReplica':
+    post:
+      operationId: CreateDBInstanceReadReplica
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateDBInstanceReadReplicaResult'
+        '480':
+          description: DBInstanceAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceAlreadyExistsFault'
+        '481':
+          description: InsufficientDBInstanceCapacityFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientDBInstanceCapacityFault'
+        '482':
+          description: DBParameterGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBParameterGroupNotFoundFault'
+        '483':
+          description: DBSecurityGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSecurityGroupNotFoundFault'
+        '484':
+          description: InstanceQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InstanceQuotaExceededFault'
+        '485':
+          description: StorageQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/StorageQuotaExceededFault'
+        '486':
+          description: DBInstanceNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+        '487':
+          description: InvalidDBInstanceStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBInstanceStateFault'
+        '488':
+          description: DBSubnetGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetGroupNotFoundFault'
+        '489':
+          description: DBSubnetGroupDoesNotCoverEnoughAZs
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetGroupDoesNotCoverEnoughAZs'
+        '490':
+          description: InvalidSubnet
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidSubnet'
+        '491':
+          description: InvalidVPCNetworkStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidVPCNetworkStateFault'
+        '492':
+          description: ProvisionedIopsNotAvailableInAZFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisionedIopsNotAvailableInAZFault'
+        '493':
+          description: OptionGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OptionGroupNotFoundFault'
+        '494':
+          description: DBSubnetGroupNotAllowedFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetGroupNotAllowedFault'
+        '495':
+          description: InvalidDBSubnetGroupFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBSubnetGroupFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDBInstanceReadReplicaMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateDBParameterGroup':
+    post:
+      operationId: CreateDBParameterGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateDBParameterGroupResult'
+        '480':
+          description: DBParameterGroupQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBParameterGroupQuotaExceededFault'
+        '481':
+          description: DBParameterGroupAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBParameterGroupAlreadyExistsFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDBParameterGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateDBSecurityGroup':
+    post:
+      operationId: CreateDBSecurityGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateDBSecurityGroupResult'
+        '480':
+          description: DBSecurityGroupAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSecurityGroupAlreadyExistsFault'
+        '481':
+          description: DBSecurityGroupQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSecurityGroupQuotaExceededFault'
+        '482':
+          description: DBSecurityGroupNotSupportedFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSecurityGroupNotSupportedFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDBSecurityGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateDBSnapshot':
+    post:
+      operationId: CreateDBSnapshot
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateDBSnapshotResult'
+        '480':
+          description: DBSnapshotAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSnapshotAlreadyExistsFault'
+        '481':
+          description: InvalidDBInstanceStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBInstanceStateFault'
+        '482':
+          description: DBInstanceNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+        '483':
+          description: SnapshotQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotQuotaExceededFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDBSnapshotMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateDBSubnetGroup':
+    post:
+      operationId: CreateDBSubnetGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateDBSubnetGroupResult'
+        '480':
+          description: DBSubnetGroupAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetGroupAlreadyExistsFault'
+        '481':
+          description: DBSubnetGroupQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetGroupQuotaExceededFault'
+        '482':
+          description: DBSubnetQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetQuotaExceededFault'
+        '483':
+          description: DBSubnetGroupDoesNotCoverEnoughAZs
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetGroupDoesNotCoverEnoughAZs'
+        '484':
+          description: InvalidSubnet
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidSubnet'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDBSubnetGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateEventSubscription':
+    post:
+      operationId: CreateEventSubscription
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateEventSubscriptionResult'
+        '480':
+          description: EventSubscriptionQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EventSubscriptionQuotaExceededFault'
+        '481':
+          description: SubscriptionAlreadyExistFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SubscriptionAlreadyExistFault'
+        '482':
+          description: SNSInvalidTopicFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SNSInvalidTopicFault'
+        '483':
+          description: SNSNoAuthorizationFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SNSNoAuthorizationFault'
+        '484':
+          description: SNSTopicArnNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SNSTopicArnNotFoundFault'
+        '485':
+          description: SubscriptionCategoryNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SubscriptionCategoryNotFoundFault'
+        '486':
+          description: SourceNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SourceNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEventSubscriptionMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateOptionGroup':
+    post:
+      operationId: CreateOptionGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateOptionGroupResult'
+        '480':
+          description: OptionGroupAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OptionGroupAlreadyExistsFault'
+        '481':
+          description: OptionGroupQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OptionGroupQuotaExceededFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOptionGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDBInstance':
+    post:
+      operationId: DeleteDBInstance
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteDBInstanceResult'
+        '480':
+          description: DBInstanceNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+        '481':
+          description: InvalidDBInstanceStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBInstanceStateFault'
+        '482':
+          description: DBSnapshotAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSnapshotAlreadyExistsFault'
+        '483':
+          description: SnapshotQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotQuotaExceededFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDBInstanceMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDBParameterGroup':
+    post:
+      operationId: DeleteDBParameterGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidDBParameterGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBParameterGroupStateFault'
+        '481':
+          description: DBParameterGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBParameterGroupNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDBParameterGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDBSecurityGroup':
+    post:
+      operationId: DeleteDBSecurityGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidDBSecurityGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBSecurityGroupStateFault'
+        '481':
+          description: DBSecurityGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSecurityGroupNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDBSecurityGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDBSnapshot':
+    post:
+      operationId: DeleteDBSnapshot
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteDBSnapshotResult'
+        '480':
+          description: InvalidDBSnapshotStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBSnapshotStateFault'
+        '481':
+          description: DBSnapshotNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSnapshotNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDBSnapshotMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDBSubnetGroup':
+    post:
+      operationId: DeleteDBSubnetGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidDBSubnetGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBSubnetGroupStateFault'
+        '481':
+          description: InvalidDBSubnetStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBSubnetStateFault'
+        '482':
+          description: DBSubnetGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetGroupNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDBSubnetGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteEventSubscription':
+    post:
+      operationId: DeleteEventSubscription
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteEventSubscriptionResult'
+        '480':
+          description: SubscriptionNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SubscriptionNotFoundFault'
+        '481':
+          description: InvalidEventSubscriptionStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidEventSubscriptionStateFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteEventSubscriptionMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteOptionGroup':
+    post:
+      operationId: DeleteOptionGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: OptionGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OptionGroupNotFoundFault'
+        '481':
+          description: InvalidOptionGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidOptionGroupStateFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteOptionGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDBEngineVersions':
+    post:
+      operationId: DescribeDBEngineVersions
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBEngineVersionMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDBEngineVersionsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDBInstances':
+    post:
+      operationId: DescribeDBInstances
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceMessage'
+        '480':
+          description: DBInstanceNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      x-waiters:
+        - delay: 30
+          operation: DescribeDBInstances
+          maxAttempts: 60
+          acceptors:
+            - expected: available
+              matcher: pathAll
+              state: success
+              argument: 'DBInstances[].DBInstanceStatus'
+            - expected: deleted
+              matcher: pathAny
+              state: failure
+              argument: 'DBInstances[].DBInstanceStatus'
+            - expected: deleting
+              matcher: pathAny
+              state: failure
+              argument: 'DBInstances[].DBInstanceStatus'
+            - expected: failed
+              matcher: pathAny
+              state: failure
+              argument: 'DBInstances[].DBInstanceStatus'
+            - expected: incompatible-restore
+              matcher: pathAny
+              state: failure
+              argument: 'DBInstances[].DBInstanceStatus'
+            - expected: incompatible-parameters
+              matcher: pathAny
+              state: failure
+              argument: 'DBInstances[].DBInstanceStatus'
+            - expected: incompatible-parameters
+              matcher: pathAny
+              state: failure
+              argument: 'DBInstances[].DBInstanceStatus'
+            - expected: incompatible-restore
+              matcher: pathAny
+              state: failure
+              argument: 'DBInstances[].DBInstanceStatus'
+        - delay: 30
+          operation: DescribeDBInstances
+          maxAttempts: 60
+          acceptors:
+            - expected: deleted
+              matcher: pathAll
+              state: success
+              argument: 'DBInstances[].DBInstanceStatus'
+            - expected: creating
+              matcher: pathAny
+              state: failure
+              argument: 'DBInstances[].DBInstanceStatus'
+            - expected: modifying
+              matcher: pathAny
+              state: failure
+              argument: 'DBInstances[].DBInstanceStatus'
+            - expected: rebooting
+              matcher: pathAny
+              state: failure
+              argument: 'DBInstances[].DBInstanceStatus'
+            - expected: resetting-master-credentials
+              matcher: pathAny
+              state: failure
+              argument: 'DBInstances[].DBInstanceStatus'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDBInstancesMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDBLogFiles':
+    post:
+      operationId: DescribeDBLogFiles
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeDBLogFilesResponse'
+        '480':
+          description: DBInstanceNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDBLogFilesMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDBParameterGroups':
+    post:
+      operationId: DescribeDBParameterGroups
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBParameterGroupsMessage'
+        '480':
+          description: DBParameterGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBParameterGroupNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDBParameterGroupsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDBParameters':
+    post:
+      operationId: DescribeDBParameters
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBParameterGroupDetails'
+        '480':
+          description: DBParameterGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBParameterGroupNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDBParametersMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDBSecurityGroups':
+    post:
+      operationId: DescribeDBSecurityGroups
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSecurityGroupMessage'
+        '480':
+          description: DBSecurityGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSecurityGroupNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDBSecurityGroupsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDBSnapshots':
+    post:
+      operationId: DescribeDBSnapshots
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSnapshotMessage'
+        '480':
+          description: DBSnapshotNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSnapshotNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDBSnapshotsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDBSubnetGroups':
+    post:
+      operationId: DescribeDBSubnetGroups
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetGroupMessage'
+        '480':
+          description: DBSubnetGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetGroupNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDBSubnetGroupsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEngineDefaultParameters':
+    post:
+      operationId: DescribeEngineDefaultParameters
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeEngineDefaultParametersResult'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEngineDefaultParametersMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEventCategories':
+    post:
+      operationId: DescribeEventCategories
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EventCategoriesMessage'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEventCategoriesMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEventSubscriptions':
+    post:
+      operationId: DescribeEventSubscriptions
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EventSubscriptionsMessage'
+        '480':
+          description: SubscriptionNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SubscriptionNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEventSubscriptionsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEvents':
+    post:
+      operationId: DescribeEvents
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EventsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEventsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeOptionGroupOptions':
+    post:
+      operationId: DescribeOptionGroupOptions
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OptionGroupOptionsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeOptionGroupOptionsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeOptionGroups':
+    post:
+      operationId: DescribeOptionGroups
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OptionGroups'
+        '480':
+          description: OptionGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OptionGroupNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeOptionGroupsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeOrderableDBInstanceOptions':
+    post:
+      operationId: DescribeOrderableDBInstanceOptions
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OrderableDBInstanceOptionsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeOrderableDBInstanceOptionsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeReservedDBInstances':
+    post:
+      operationId: DescribeReservedDBInstances
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReservedDBInstanceMessage'
+        '480':
+          description: ReservedDBInstanceNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReservedDBInstanceNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReservedDBInstancesMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeReservedDBInstancesOfferings':
+    post:
+      operationId: DescribeReservedDBInstancesOfferings
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReservedDBInstancesOfferingMessage'
+        '480':
+          description: ReservedDBInstancesOfferingNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReservedDBInstancesOfferingNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReservedDBInstancesOfferingsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DownloadDBLogFilePortion':
+    post:
+      operationId: DownloadDBLogFilePortion
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DownloadDBLogFilePortionDetails'
+        '480':
+          description: DBInstanceNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+        '481':
+          description: DBLogFileNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBLogFileNotFoundFault'
+      parameters:
+        - name: NumberOfLines
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DownloadDBLogFilePortionMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TagListMessage'
+        '480':
+          description: DBInstanceNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+        '481':
+          description: DBSnapshotNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSnapshotNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ModifyDBInstance':
+    post:
+      operationId: ModifyDBInstance
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModifyDBInstanceResult'
+        '480':
+          description: InvalidDBInstanceStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBInstanceStateFault'
+        '481':
+          description: InvalidDBSecurityGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBSecurityGroupStateFault'
+        '482':
+          description: DBInstanceAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceAlreadyExistsFault'
+        '483':
+          description: DBInstanceNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+        '484':
+          description: DBSecurityGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSecurityGroupNotFoundFault'
+        '485':
+          description: DBParameterGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBParameterGroupNotFoundFault'
+        '486':
+          description: InsufficientDBInstanceCapacityFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientDBInstanceCapacityFault'
+        '487':
+          description: StorageQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/StorageQuotaExceededFault'
+        '488':
+          description: InvalidVPCNetworkStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidVPCNetworkStateFault'
+        '489':
+          description: ProvisionedIopsNotAvailableInAZFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisionedIopsNotAvailableInAZFault'
+        '490':
+          description: OptionGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OptionGroupNotFoundFault'
+        '491':
+          description: DBUpgradeDependencyFailureFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBUpgradeDependencyFailureFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyDBInstanceMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ModifyDBParameterGroup':
+    post:
+      operationId: ModifyDBParameterGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBParameterGroupNameMessage'
+        '480':
+          description: DBParameterGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBParameterGroupNotFoundFault'
+        '481':
+          description: InvalidDBParameterGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBParameterGroupStateFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyDBParameterGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ModifyDBSubnetGroup':
+    post:
+      operationId: ModifyDBSubnetGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModifyDBSubnetGroupResult'
+        '480':
+          description: DBSubnetGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetGroupNotFoundFault'
+        '481':
+          description: DBSubnetQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetQuotaExceededFault'
+        '482':
+          description: SubnetAlreadyInUse
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SubnetAlreadyInUse'
+        '483':
+          description: DBSubnetGroupDoesNotCoverEnoughAZs
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetGroupDoesNotCoverEnoughAZs'
+        '484':
+          description: InvalidSubnet
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidSubnet'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyDBSubnetGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ModifyEventSubscription':
+    post:
+      operationId: ModifyEventSubscription
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModifyEventSubscriptionResult'
+        '480':
+          description: EventSubscriptionQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EventSubscriptionQuotaExceededFault'
+        '481':
+          description: SubscriptionNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SubscriptionNotFoundFault'
+        '482':
+          description: SNSInvalidTopicFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SNSInvalidTopicFault'
+        '483':
+          description: SNSNoAuthorizationFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SNSNoAuthorizationFault'
+        '484':
+          description: SNSTopicArnNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SNSTopicArnNotFoundFault'
+        '485':
+          description: SubscriptionCategoryNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SubscriptionCategoryNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyEventSubscriptionMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ModifyOptionGroup':
+    post:
+      operationId: ModifyOptionGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModifyOptionGroupResult'
+        '480':
+          description: InvalidOptionGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidOptionGroupStateFault'
+        '481':
+          description: OptionGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OptionGroupNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyOptionGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PromoteReadReplica':
+    post:
+      operationId: PromoteReadReplica
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PromoteReadReplicaResult'
+        '480':
+          description: InvalidDBInstanceStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBInstanceStateFault'
+        '481':
+          description: DBInstanceNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromoteReadReplicaMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PurchaseReservedDBInstancesOffering':
+    post:
+      operationId: PurchaseReservedDBInstancesOffering
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PurchaseReservedDBInstancesOfferingResult'
+        '480':
+          description: ReservedDBInstancesOfferingNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReservedDBInstancesOfferingNotFoundFault'
+        '481':
+          description: ReservedDBInstanceAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReservedDBInstanceAlreadyExistsFault'
+        '482':
+          description: ReservedDBInstanceQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReservedDBInstanceQuotaExceededFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseReservedDBInstancesOfferingMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RebootDBInstance':
+    post:
+      operationId: RebootDBInstance
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RebootDBInstanceResult'
+        '480':
+          description: InvalidDBInstanceStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBInstanceStateFault'
+        '481':
+          description: DBInstanceNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RebootDBInstanceMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RemoveSourceIdentifierFromSubscription':
+    post:
+      operationId: RemoveSourceIdentifierFromSubscription
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RemoveSourceIdentifierFromSubscriptionResult'
+        '480':
+          description: SubscriptionNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SubscriptionNotFoundFault'
+        '481':
+          description: SourceNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SourceNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveSourceIdentifierFromSubscriptionMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RemoveTagsFromResource':
+    post:
+      operationId: RemoveTagsFromResource
+      description: ''
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: DBInstanceNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+        '481':
+          description: DBSnapshotNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSnapshotNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveTagsFromResourceMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ResetDBParameterGroup':
+    post:
+      operationId: ResetDBParameterGroup
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBParameterGroupNameMessage'
+        '480':
+          description: InvalidDBParameterGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBParameterGroupStateFault'
+        '481':
+          description: DBParameterGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBParameterGroupNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetDBParameterGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RestoreDBInstanceFromDBSnapshot':
+    post:
+      operationId: RestoreDBInstanceFromDBSnapshot
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RestoreDBInstanceFromDBSnapshotResult'
+        '480':
+          description: DBInstanceAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceAlreadyExistsFault'
+        '481':
+          description: DBSnapshotNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSnapshotNotFoundFault'
+        '482':
+          description: InstanceQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InstanceQuotaExceededFault'
+        '483':
+          description: InsufficientDBInstanceCapacityFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientDBInstanceCapacityFault'
+        '484':
+          description: InvalidDBSnapshotStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBSnapshotStateFault'
+        '485':
+          description: StorageQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/StorageQuotaExceededFault'
+        '486':
+          description: InvalidVPCNetworkStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidVPCNetworkStateFault'
+        '487':
+          description: InvalidRestoreFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidRestoreFault'
+        '488':
+          description: DBSubnetGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetGroupNotFoundFault'
+        '489':
+          description: DBSubnetGroupDoesNotCoverEnoughAZs
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetGroupDoesNotCoverEnoughAZs'
+        '490':
+          description: InvalidSubnet
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidSubnet'
+        '491':
+          description: ProvisionedIopsNotAvailableInAZFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisionedIopsNotAvailableInAZFault'
+        '492':
+          description: OptionGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OptionGroupNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestoreDBInstanceFromDBSnapshotMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RestoreDBInstanceToPointInTime':
+    post:
+      operationId: RestoreDBInstanceToPointInTime
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RestoreDBInstanceToPointInTimeResult'
+        '480':
+          description: DBInstanceAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceAlreadyExistsFault'
+        '481':
+          description: DBInstanceNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+        '482':
+          description: InstanceQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InstanceQuotaExceededFault'
+        '483':
+          description: InsufficientDBInstanceCapacityFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientDBInstanceCapacityFault'
+        '484':
+          description: InvalidDBInstanceStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBInstanceStateFault'
+        '485':
+          description: PointInTimeRestoreNotEnabledFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PointInTimeRestoreNotEnabledFault'
+        '486':
+          description: StorageQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/StorageQuotaExceededFault'
+        '487':
+          description: InvalidVPCNetworkStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidVPCNetworkStateFault'
+        '488':
+          description: InvalidRestoreFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidRestoreFault'
+        '489':
+          description: DBSubnetGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetGroupNotFoundFault'
+        '490':
+          description: DBSubnetGroupDoesNotCoverEnoughAZs
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSubnetGroupDoesNotCoverEnoughAZs'
+        '491':
+          description: InvalidSubnet
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidSubnet'
+        '492':
+          description: ProvisionedIopsNotAvailableInAZFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisionedIopsNotAvailableInAZFault'
+        '493':
+          description: OptionGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OptionGroupNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestoreDBInstanceToPointInTimeMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RevokeDBSecurityGroupIngress':
+    post:
+      operationId: RevokeDBSecurityGroupIngress
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RevokeDBSecurityGroupIngressResult'
+        '480':
+          description: DBSecurityGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DBSecurityGroupNotFoundFault'
+        '481':
+          description: AuthorizationNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthorizationNotFoundFault'
+        '482':
+          description: InvalidDBSecurityGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidDBSecurityGroupStateFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevokeDBSecurityGroupIngressMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AddSourceIdentifierToSubscriptionMessage:
+      type: object
+      required:
+        - SubscriptionName
+        - SourceIdentifier
+      properties:
+        SubscriptionName:
+          $ref: '#/components/schemas/String'
+        SourceIdentifier:
+          $ref: '#/components/schemas/String'
+    AddSourceIdentifierToSubscriptionResult:
+      type: object
+      properties:
+        EventSubscription:
+          $ref: '#/components/schemas/EventSubscription'
+    AddTagsToResourceMessage:
+      type: object
+      required:
+        - ResourceName
+        - Tags
+      properties:
+        ResourceName:
+          $ref: '#/components/schemas/String'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    ApplyMethod:
+      type: string
+      enum:
+        - immediate
+        - pending-reboot
+    AuthorizationAlreadyExistsFault:
+      type: object
+      properties: {}
+      description: The specified CIDRIP or EC2 security group is already authorized for the specified DB security group.
+    AuthorizationNotFoundFault:
+      type: object
+      properties: {}
+      description: <p>Specified CIDRIP or EC2 security group is not authorized for the specified DB security group.</p> <p>RDS may not also be authorized via IAM to perform necessary actions on your behalf.</p>
+    AuthorizationQuotaExceededFault:
+      type: object
+      properties: {}
+      description: DB security group authorization quota has been reached.
+    AuthorizeDBSecurityGroupIngressMessage:
+      type: object
+      required:
+        - DBSecurityGroupName
+      properties:
+        DBSecurityGroupName:
+          $ref: '#/components/schemas/String'
+        CIDRIP:
+          $ref: '#/components/schemas/String'
+        EC2SecurityGroupName:
+          $ref: '#/components/schemas/String'
+        EC2SecurityGroupId:
+          $ref: '#/components/schemas/String'
+        EC2SecurityGroupOwnerId:
+          $ref: '#/components/schemas/String'
+    AuthorizeDBSecurityGroupIngressResult:
+      type: object
+      properties:
+        DBSecurityGroup:
+          $ref: '#/components/schemas/DBSecurityGroup'
+    AvailabilityZone:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        ProvisionedIopsCapable:
+          $ref: '#/components/schemas/Boolean'
+    AvailabilityZoneList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AvailabilityZone'
+    Boolean:
+      type: boolean
+    BooleanOptional:
+      type: boolean
+    CharacterSet:
+      type: object
+      properties:
+        CharacterSetName:
+          $ref: '#/components/schemas/String'
+        CharacterSetDescription:
+          $ref: '#/components/schemas/String'
+    CopyDBSnapshotMessage:
+      type: object
+      required:
+        - SourceDBSnapshotIdentifier
+        - TargetDBSnapshotIdentifier
+      properties:
+        SourceDBSnapshotIdentifier:
+          $ref: '#/components/schemas/String'
+        TargetDBSnapshotIdentifier:
+          $ref: '#/components/schemas/String'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    CopyDBSnapshotResult:
+      type: object
+      properties:
+        DBSnapshot:
+          $ref: '#/components/schemas/DBSnapshot'
+    CreateDBInstanceMessage:
+      type: object
+      required:
+        - DBInstanceIdentifier
+        - AllocatedStorage
+        - DBInstanceClass
+        - Engine
+        - MasterUsername
+        - MasterUserPassword
+      properties:
+        DBName:
+          $ref: '#/components/schemas/String'
+        DBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        AllocatedStorage:
+          $ref: '#/components/schemas/IntegerOptional'
+        DBInstanceClass:
+          $ref: '#/components/schemas/String'
+        Engine:
+          $ref: '#/components/schemas/String'
+        MasterUsername:
+          $ref: '#/components/schemas/String'
+        MasterUserPassword:
+          $ref: '#/components/schemas/String'
+        DBSecurityGroups:
+          $ref: '#/components/schemas/DBSecurityGroupNameList'
+        VpcSecurityGroupIds:
+          $ref: '#/components/schemas/VpcSecurityGroupIdList'
+        AvailabilityZone:
+          $ref: '#/components/schemas/String'
+        DBSubnetGroupName:
+          $ref: '#/components/schemas/String'
+        PreferredMaintenanceWindow:
+          $ref: '#/components/schemas/String'
+        DBParameterGroupName:
+          $ref: '#/components/schemas/String'
+        BackupRetentionPeriod:
+          $ref: '#/components/schemas/IntegerOptional'
+        PreferredBackupWindow:
+          $ref: '#/components/schemas/String'
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+        MultiAZ:
+          $ref: '#/components/schemas/BooleanOptional'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/BooleanOptional'
+        LicenseModel:
+          $ref: '#/components/schemas/String'
+        Iops:
+          $ref: '#/components/schemas/IntegerOptional'
+        OptionGroupName:
+          $ref: '#/components/schemas/String'
+        CharacterSetName:
+          $ref: '#/components/schemas/String'
+        PubliclyAccessible:
+          $ref: '#/components/schemas/BooleanOptional'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    CreateDBInstanceReadReplicaMessage:
+      type: object
+      required:
+        - DBInstanceIdentifier
+        - SourceDBInstanceIdentifier
+      properties:
+        DBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        SourceDBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        DBInstanceClass:
+          $ref: '#/components/schemas/String'
+        AvailabilityZone:
+          $ref: '#/components/schemas/String'
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/BooleanOptional'
+        Iops:
+          $ref: '#/components/schemas/IntegerOptional'
+        OptionGroupName:
+          $ref: '#/components/schemas/String'
+        PubliclyAccessible:
+          $ref: '#/components/schemas/BooleanOptional'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+        DBSubnetGroupName:
+          $ref: '#/components/schemas/String'
+    CreateDBInstanceReadReplicaResult:
+      type: object
+      properties:
+        DBInstance:
+          $ref: '#/components/schemas/DBInstance'
+    CreateDBInstanceResult:
+      type: object
+      properties:
+        DBInstance:
+          $ref: '#/components/schemas/DBInstance'
+    CreateDBParameterGroupMessage:
+      type: object
+      required:
+        - DBParameterGroupName
+        - DBParameterGroupFamily
+        - Description
+      properties:
+        DBParameterGroupName:
+          $ref: '#/components/schemas/String'
+        DBParameterGroupFamily:
+          $ref: '#/components/schemas/String'
+        Description:
+          $ref: '#/components/schemas/String'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    CreateDBParameterGroupResult:
+      type: object
+      properties:
+        DBParameterGroup:
+          $ref: '#/components/schemas/DBParameterGroup'
+    CreateDBSecurityGroupMessage:
+      type: object
+      required:
+        - DBSecurityGroupName
+        - DBSecurityGroupDescription
+      properties:
+        DBSecurityGroupName:
+          $ref: '#/components/schemas/String'
+        DBSecurityGroupDescription:
+          $ref: '#/components/schemas/String'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    CreateDBSecurityGroupResult:
+      type: object
+      properties:
+        DBSecurityGroup:
+          $ref: '#/components/schemas/DBSecurityGroup'
+    CreateDBSnapshotMessage:
+      type: object
+      required:
+        - DBSnapshotIdentifier
+        - DBInstanceIdentifier
+      properties:
+        DBSnapshotIdentifier:
+          $ref: '#/components/schemas/String'
+        DBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    CreateDBSnapshotResult:
+      type: object
+      properties:
+        DBSnapshot:
+          $ref: '#/components/schemas/DBSnapshot'
+    CreateDBSubnetGroupMessage:
+      type: object
+      required:
+        - DBSubnetGroupName
+        - DBSubnetGroupDescription
+        - SubnetIds
+      properties:
+        DBSubnetGroupName:
+          $ref: '#/components/schemas/String'
+        DBSubnetGroupDescription:
+          $ref: '#/components/schemas/String'
+        SubnetIds:
+          $ref: '#/components/schemas/SubnetIdentifierList'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    CreateDBSubnetGroupResult:
+      type: object
+      properties:
+        DBSubnetGroup:
+          $ref: '#/components/schemas/DBSubnetGroup'
+    CreateEventSubscriptionMessage:
+      type: object
+      required:
+        - SubscriptionName
+        - SnsTopicArn
+      properties:
+        SubscriptionName:
+          $ref: '#/components/schemas/String'
+        SnsTopicArn:
+          $ref: '#/components/schemas/String'
+        SourceType:
+          $ref: '#/components/schemas/String'
+        EventCategories:
+          $ref: '#/components/schemas/EventCategoriesList'
+        SourceIds:
+          $ref: '#/components/schemas/SourceIdsList'
+        Enabled:
+          $ref: '#/components/schemas/BooleanOptional'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    CreateEventSubscriptionResult:
+      type: object
+      properties:
+        EventSubscription:
+          $ref: '#/components/schemas/EventSubscription'
+    CreateOptionGroupMessage:
+      type: object
+      required:
+        - OptionGroupName
+        - EngineName
+        - MajorEngineVersion
+        - OptionGroupDescription
+      properties:
+        OptionGroupName:
+          $ref: '#/components/schemas/String'
+        EngineName:
+          $ref: '#/components/schemas/String'
+        MajorEngineVersion:
+          $ref: '#/components/schemas/String'
+        OptionGroupDescription:
+          $ref: '#/components/schemas/String'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    CreateOptionGroupResult:
+      type: object
+      properties:
+        OptionGroup:
+          $ref: '#/components/schemas/OptionGroup'
+    DBEngineVersion:
+      type: object
+      properties:
+        Engine:
+          $ref: '#/components/schemas/String'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        DBParameterGroupFamily:
+          $ref: '#/components/schemas/String'
+        DBEngineDescription:
+          $ref: '#/components/schemas/String'
+        DBEngineVersionDescription:
+          $ref: '#/components/schemas/String'
+        DefaultCharacterSet:
+          $ref: '#/components/schemas/CharacterSet'
+        SupportedCharacterSets:
+          $ref: '#/components/schemas/SupportedCharacterSetsList'
+    DBEngineVersionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DBEngineVersion'
+    DBEngineVersionMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        DBEngineVersions:
+          $ref: '#/components/schemas/DBEngineVersionList'
+    DBInstance:
+      type: object
+      properties:
+        DBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        DBInstanceClass:
+          $ref: '#/components/schemas/String'
+        Engine:
+          $ref: '#/components/schemas/String'
+        DBInstanceStatus:
+          $ref: '#/components/schemas/String'
+        MasterUsername:
+          $ref: '#/components/schemas/String'
+        DBName:
+          $ref: '#/components/schemas/String'
+        Endpoint:
+          $ref: '#/components/schemas/Endpoint'
+        AllocatedStorage:
+          $ref: '#/components/schemas/Integer'
+        InstanceCreateTime:
+          $ref: '#/components/schemas/TStamp'
+        PreferredBackupWindow:
+          $ref: '#/components/schemas/String'
+        BackupRetentionPeriod:
+          $ref: '#/components/schemas/Integer'
+        DBSecurityGroups:
+          $ref: '#/components/schemas/DBSecurityGroupMembershipList'
+        VpcSecurityGroups:
+          $ref: '#/components/schemas/VpcSecurityGroupMembershipList'
+        DBParameterGroups:
+          $ref: '#/components/schemas/DBParameterGroupStatusList'
+        AvailabilityZone:
+          $ref: '#/components/schemas/String'
+        DBSubnetGroup:
+          $ref: '#/components/schemas/DBSubnetGroup'
+        PreferredMaintenanceWindow:
+          $ref: '#/components/schemas/String'
+        PendingModifiedValues:
+          $ref: '#/components/schemas/PendingModifiedValues'
+        LatestRestorableTime:
+          $ref: '#/components/schemas/TStamp'
+        MultiAZ:
+          $ref: '#/components/schemas/Boolean'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/Boolean'
+        ReadReplicaSourceDBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        ReadReplicaDBInstanceIdentifiers:
+          $ref: '#/components/schemas/ReadReplicaDBInstanceIdentifierList'
+        LicenseModel:
+          $ref: '#/components/schemas/String'
+        Iops:
+          $ref: '#/components/schemas/IntegerOptional'
+        OptionGroupMemberships:
+          $ref: '#/components/schemas/OptionGroupMembershipList'
+        CharacterSetName:
+          $ref: '#/components/schemas/String'
+        SecondaryAvailabilityZone:
+          $ref: '#/components/schemas/String'
+        PubliclyAccessible:
+          $ref: '#/components/schemas/Boolean'
+        StatusInfos:
+          $ref: '#/components/schemas/DBInstanceStatusInfoList'
+    DBInstanceAlreadyExistsFault:
+      type: object
+      properties: {}
+      description: User already has a DB instance with the given identifier.
+    DBInstanceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DBInstance'
+    DBInstanceMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        DBInstances:
+          $ref: '#/components/schemas/DBInstanceList'
+    DBInstanceNotFoundFault:
+      type: object
+      properties: {}
+      description: ' <i>DBInstanceIdentifier</i> does not refer to an existing DB instance. '
+    DBInstanceStatusInfo:
+      type: object
+      properties:
+        StatusType:
+          $ref: '#/components/schemas/String'
+        Normal:
+          $ref: '#/components/schemas/Boolean'
+        Status:
+          $ref: '#/components/schemas/String'
+        Message:
+          $ref: '#/components/schemas/String'
+    DBInstanceStatusInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DBInstanceStatusInfo'
+    DBLogFileNotFoundFault:
+      type: object
+      properties: {}
+      description: ' <i>LogFileName</i> does not refer to an existing DB log file.'
+    DBParameterGroup:
+      type: object
+      properties:
+        DBParameterGroupName:
+          $ref: '#/components/schemas/String'
+        DBParameterGroupFamily:
+          $ref: '#/components/schemas/String'
+        Description:
+          $ref: '#/components/schemas/String'
+    DBParameterGroupAlreadyExistsFault:
+      type: object
+      properties: {}
+      description: A DB parameter group with the same name exists.
+    DBParameterGroupDetails:
+      type: object
+      properties:
+        Parameters:
+          $ref: '#/components/schemas/ParametersList'
+        Marker:
+          $ref: '#/components/schemas/String'
+    DBParameterGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DBParameterGroup'
+    DBParameterGroupNameMessage:
+      type: object
+      properties:
+        DBParameterGroupName:
+          $ref: '#/components/schemas/String'
+    DBParameterGroupNotFoundFault:
+      type: object
+      properties: {}
+      description: ' <i>DBParameterGroupName</i> does not refer to an existing DB parameter group. '
+    DBParameterGroupQuotaExceededFault:
+      type: object
+      properties: {}
+      description: Request would result in user exceeding the allowed number of DB parameter groups.
+    DBParameterGroupStatus:
+      type: object
+      properties:
+        DBParameterGroupName:
+          $ref: '#/components/schemas/String'
+        ParameterApplyStatus:
+          $ref: '#/components/schemas/String'
+    DBParameterGroupStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DBParameterGroupStatus'
+    DBParameterGroupsMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        DBParameterGroups:
+          $ref: '#/components/schemas/DBParameterGroupList'
+    DBSecurityGroup:
+      type: object
+      properties:
+        OwnerId:
+          $ref: '#/components/schemas/String'
+        DBSecurityGroupName:
+          $ref: '#/components/schemas/String'
+        DBSecurityGroupDescription:
+          $ref: '#/components/schemas/String'
+        VpcId:
+          $ref: '#/components/schemas/String'
+        EC2SecurityGroups:
+          $ref: '#/components/schemas/EC2SecurityGroupList'
+        IPRanges:
+          $ref: '#/components/schemas/IPRangeList'
+    DBSecurityGroupAlreadyExistsFault:
+      type: object
+      properties: {}
+      description: ' A DB security group with the name specified in <i>DBSecurityGroupName</i> already exists. '
+    DBSecurityGroupMembership:
+      type: object
+      properties:
+        DBSecurityGroupName:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/String'
+    DBSecurityGroupMembershipList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DBSecurityGroupMembership'
+    DBSecurityGroupMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        DBSecurityGroups:
+          $ref: '#/components/schemas/DBSecurityGroups'
+    DBSecurityGroupNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    DBSecurityGroupNotFoundFault:
+      type: object
+      properties: {}
+      description: ' <i>DBSecurityGroupName</i> does not refer to an existing DB security group. '
+    DBSecurityGroupNotSupportedFault:
+      type: object
+      properties: {}
+      description: A DB security group is not allowed for this action.
+    DBSecurityGroupQuotaExceededFault:
+      type: object
+      properties: {}
+      description: Request would result in user exceeding the allowed number of DB security groups.
+    DBSecurityGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/DBSecurityGroup'
+    DBSnapshot:
+      type: object
+      properties:
+        DBSnapshotIdentifier:
+          $ref: '#/components/schemas/String'
+        DBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        SnapshotCreateTime:
+          $ref: '#/components/schemas/TStamp'
+        Engine:
+          $ref: '#/components/schemas/String'
+        AllocatedStorage:
+          $ref: '#/components/schemas/Integer'
+        Status:
+          $ref: '#/components/schemas/String'
+        Port:
+          $ref: '#/components/schemas/Integer'
+        AvailabilityZone:
+          $ref: '#/components/schemas/String'
+        VpcId:
+          $ref: '#/components/schemas/String'
+        InstanceCreateTime:
+          $ref: '#/components/schemas/TStamp'
+        MasterUsername:
+          $ref: '#/components/schemas/String'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        LicenseModel:
+          $ref: '#/components/schemas/String'
+        SnapshotType:
+          $ref: '#/components/schemas/String'
+        Iops:
+          $ref: '#/components/schemas/IntegerOptional'
+        OptionGroupName:
+          $ref: '#/components/schemas/String'
+        PercentProgress:
+          $ref: '#/components/schemas/Integer'
+        SourceRegion:
+          $ref: '#/components/schemas/String'
+    DBSnapshotAlreadyExistsFault:
+      type: object
+      properties: {}
+      description: ' <i>DBSnapshotIdentifier</i> is already used by an existing snapshot. '
+    DBSnapshotList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DBSnapshot'
+    DBSnapshotMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        DBSnapshots:
+          $ref: '#/components/schemas/DBSnapshotList'
+    DBSnapshotNotFoundFault:
+      type: object
+      properties: {}
+      description: ' <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot. '
+    DBSubnetGroup:
+      type: object
+      properties:
+        DBSubnetGroupName:
+          $ref: '#/components/schemas/String'
+        DBSubnetGroupDescription:
+          $ref: '#/components/schemas/String'
+        VpcId:
+          $ref: '#/components/schemas/String'
+        SubnetGroupStatus:
+          $ref: '#/components/schemas/String'
+        Subnets:
+          $ref: '#/components/schemas/SubnetList'
+    DBSubnetGroupAlreadyExistsFault:
+      type: object
+      properties: {}
+      description: ' <i>DBSubnetGroupName</i> is already used by an existing DB subnet group. '
+    DBSubnetGroupDoesNotCoverEnoughAZs:
+      type: object
+      properties: {}
+      description: Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone.
+    DBSubnetGroupMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        DBSubnetGroups:
+          $ref: '#/components/schemas/DBSubnetGroups'
+    DBSubnetGroupNotAllowedFault:
+      type: object
+      properties: {}
+      description: Indicates that the DBSubnetGroup should not be specified while creating read replicas that lie in the same region as the source instance.
+    DBSubnetGroupNotFoundFault:
+      type: object
+      properties: {}
+      description: ' <i>DBSubnetGroupName</i> does not refer to an existing DB subnet group. '
+    DBSubnetGroupQuotaExceededFault:
+      type: object
+      properties: {}
+      description: Request would result in user exceeding the allowed number of DB subnet groups.
+    DBSubnetGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/DBSubnetGroup'
+    DBSubnetQuotaExceededFault:
+      type: object
+      properties: {}
+      description: Request would result in user exceeding the allowed number of subnets in a DB subnet groups.
+    DBUpgradeDependencyFailureFault:
+      type: object
+      properties: {}
+      description: The DB upgrade failed because a resource the DB depends on could not be modified.
+    DeleteDBInstanceMessage:
+      type: object
+      required:
+        - DBInstanceIdentifier
+      properties:
+        DBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        SkipFinalSnapshot:
+          $ref: '#/components/schemas/Boolean'
+        FinalDBSnapshotIdentifier:
+          $ref: '#/components/schemas/String'
+    DeleteDBInstanceResult:
+      type: object
+      properties:
+        DBInstance:
+          $ref: '#/components/schemas/DBInstance'
+    DeleteDBParameterGroupMessage:
+      type: object
+      required:
+        - DBParameterGroupName
+      properties:
+        DBParameterGroupName:
+          $ref: '#/components/schemas/String'
+    DeleteDBSecurityGroupMessage:
+      type: object
+      required:
+        - DBSecurityGroupName
+      properties:
+        DBSecurityGroupName:
+          $ref: '#/components/schemas/String'
+    DeleteDBSnapshotMessage:
+      type: object
+      required:
+        - DBSnapshotIdentifier
+      properties:
+        DBSnapshotIdentifier:
+          $ref: '#/components/schemas/String'
+    DeleteDBSnapshotResult:
+      type: object
+      properties:
+        DBSnapshot:
+          $ref: '#/components/schemas/DBSnapshot'
+    DeleteDBSubnetGroupMessage:
+      type: object
+      required:
+        - DBSubnetGroupName
+      properties:
+        DBSubnetGroupName:
+          $ref: '#/components/schemas/String'
+    DeleteEventSubscriptionMessage:
+      type: object
+      required:
+        - SubscriptionName
+      properties:
+        SubscriptionName:
+          $ref: '#/components/schemas/String'
+    DeleteEventSubscriptionResult:
+      type: object
+      properties:
+        EventSubscription:
+          $ref: '#/components/schemas/EventSubscription'
+    DeleteOptionGroupMessage:
+      type: object
+      required:
+        - OptionGroupName
+      properties:
+        OptionGroupName:
+          $ref: '#/components/schemas/String'
+    DescribeDBEngineVersionsMessage:
+      type: object
+      properties:
+        Engine:
+          $ref: '#/components/schemas/String'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        DBParameterGroupFamily:
+          $ref: '#/components/schemas/String'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+        DefaultOnly:
+          $ref: '#/components/schemas/Boolean'
+        ListSupportedCharacterSets:
+          $ref: '#/components/schemas/BooleanOptional'
+    DescribeDBInstancesMessage:
+      type: object
+      properties:
+        DBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+    DescribeDBLogFilesDetails:
+      type: object
+      properties:
+        LogFileName:
+          $ref: '#/components/schemas/String'
+        LastWritten:
+          $ref: '#/components/schemas/Long'
+        Size:
+          $ref: '#/components/schemas/Long'
+    DescribeDBLogFilesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DescribeDBLogFilesDetails'
+    DescribeDBLogFilesMessage:
+      type: object
+      required:
+        - DBInstanceIdentifier
+      properties:
+        DBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        FilenameContains:
+          $ref: '#/components/schemas/String'
+        FileLastWritten:
+          $ref: '#/components/schemas/Long'
+        FileSize:
+          $ref: '#/components/schemas/Long'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+    DescribeDBLogFilesResponse:
+      type: object
+      properties:
+        DescribeDBLogFiles:
+          $ref: '#/components/schemas/DescribeDBLogFilesList'
+        Marker:
+          $ref: '#/components/schemas/String'
+    DescribeDBParameterGroupsMessage:
+      type: object
+      properties:
+        DBParameterGroupName:
+          $ref: '#/components/schemas/String'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+    DescribeDBParametersMessage:
+      type: object
+      required:
+        - DBParameterGroupName
+      properties:
+        DBParameterGroupName:
+          $ref: '#/components/schemas/String'
+        Source:
+          $ref: '#/components/schemas/String'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+    DescribeDBSecurityGroupsMessage:
+      type: object
+      properties:
+        DBSecurityGroupName:
+          $ref: '#/components/schemas/String'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+    DescribeDBSnapshotsMessage:
+      type: object
+      properties:
+        DBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        DBSnapshotIdentifier:
+          $ref: '#/components/schemas/String'
+        SnapshotType:
+          $ref: '#/components/schemas/String'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+    DescribeDBSubnetGroupsMessage:
+      type: object
+      properties:
+        DBSubnetGroupName:
+          $ref: '#/components/schemas/String'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+    DescribeEngineDefaultParametersMessage:
+      type: object
+      required:
+        - DBParameterGroupFamily
+      properties:
+        DBParameterGroupFamily:
+          $ref: '#/components/schemas/String'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+    DescribeEngineDefaultParametersResult:
+      type: object
+      properties:
+        EngineDefaults:
+          $ref: '#/components/schemas/EngineDefaults'
+    DescribeEventCategoriesMessage:
+      type: object
+      properties:
+        SourceType:
+          $ref: '#/components/schemas/String'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+    DescribeEventSubscriptionsMessage:
+      type: object
+      properties:
+        SubscriptionName:
+          $ref: '#/components/schemas/String'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+    DescribeEventsMessage:
+      type: object
+      properties:
+        SourceIdentifier:
+          $ref: '#/components/schemas/String'
+        SourceType:
+          $ref: '#/components/schemas/SourceType'
+        StartTime:
+          $ref: '#/components/schemas/TStamp'
+        EndTime:
+          $ref: '#/components/schemas/TStamp'
+        Duration:
+          $ref: '#/components/schemas/IntegerOptional'
+        EventCategories:
+          $ref: '#/components/schemas/EventCategoriesList'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+    DescribeOptionGroupOptionsMessage:
+      type: object
+      required:
+        - EngineName
+      properties:
+        EngineName:
+          $ref: '#/components/schemas/String'
+        MajorEngineVersion:
+          $ref: '#/components/schemas/String'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+    DescribeOptionGroupsMessage:
+      type: object
+      properties:
+        OptionGroupName:
+          $ref: '#/components/schemas/String'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        Marker:
+          $ref: '#/components/schemas/String'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        EngineName:
+          $ref: '#/components/schemas/String'
+        MajorEngineVersion:
+          $ref: '#/components/schemas/String'
+    DescribeOrderableDBInstanceOptionsMessage:
+      type: object
+      required:
+        - Engine
+      properties:
+        Engine:
+          $ref: '#/components/schemas/String'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        DBInstanceClass:
+          $ref: '#/components/schemas/String'
+        LicenseModel:
+          $ref: '#/components/schemas/String'
+        Vpc:
+          $ref: '#/components/schemas/BooleanOptional'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+    DescribeReservedDBInstancesMessage:
+      type: object
+      properties:
+        ReservedDBInstanceId:
+          $ref: '#/components/schemas/String'
+        ReservedDBInstancesOfferingId:
+          $ref: '#/components/schemas/String'
+        DBInstanceClass:
+          $ref: '#/components/schemas/String'
+        Duration:
+          $ref: '#/components/schemas/String'
+        ProductDescription:
+          $ref: '#/components/schemas/String'
+        OfferingType:
+          $ref: '#/components/schemas/String'
+        MultiAZ:
+          $ref: '#/components/schemas/BooleanOptional'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+    DescribeReservedDBInstancesOfferingsMessage:
+      type: object
+      properties:
+        ReservedDBInstancesOfferingId:
+          $ref: '#/components/schemas/String'
+        DBInstanceClass:
+          $ref: '#/components/schemas/String'
+        Duration:
+          $ref: '#/components/schemas/String'
+        ProductDescription:
+          $ref: '#/components/schemas/String'
+        OfferingType:
+          $ref: '#/components/schemas/String'
+        MultiAZ:
+          $ref: '#/components/schemas/BooleanOptional'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+    Double:
+      type: number
+      format: double
+    DownloadDBLogFilePortionDetails:
+      type: object
+      properties:
+        LogFileData:
+          $ref: '#/components/schemas/String'
+        Marker:
+          $ref: '#/components/schemas/String'
+        AdditionalDataPending:
+          $ref: '#/components/schemas/Boolean'
+    DownloadDBLogFilePortionMessage:
+      type: object
+      required:
+        - DBInstanceIdentifier
+        - LogFileName
+      properties:
+        DBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        LogFileName:
+          $ref: '#/components/schemas/String'
+        Marker:
+          $ref: '#/components/schemas/String'
+        NumberOfLines:
+          $ref: '#/components/schemas/Integer'
+    EC2SecurityGroup:
+      type: object
+      properties:
+        Status:
+          $ref: '#/components/schemas/String'
+        EC2SecurityGroupName:
+          $ref: '#/components/schemas/String'
+        EC2SecurityGroupId:
+          $ref: '#/components/schemas/String'
+        EC2SecurityGroupOwnerId:
+          $ref: '#/components/schemas/String'
+    EC2SecurityGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EC2SecurityGroup'
+    Endpoint:
+      type: object
+      properties:
+        Address:
+          $ref: '#/components/schemas/String'
+        Port:
+          $ref: '#/components/schemas/Integer'
+    EngineDefaults:
+      type: object
+      properties:
+        DBParameterGroupFamily:
+          $ref: '#/components/schemas/String'
+        Marker:
+          $ref: '#/components/schemas/String'
+        Parameters:
+          $ref: '#/components/schemas/ParametersList'
+    Event:
+      type: object
+      properties:
+        SourceIdentifier:
+          $ref: '#/components/schemas/String'
+        SourceType:
+          $ref: '#/components/schemas/SourceType'
+        Message:
+          $ref: '#/components/schemas/String'
+        EventCategories:
+          $ref: '#/components/schemas/EventCategoriesList'
+        Date:
+          $ref: '#/components/schemas/TStamp'
+    EventCategoriesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    EventCategoriesMap:
+      type: object
+      properties:
+        SourceType:
+          $ref: '#/components/schemas/String'
+        EventCategories:
+          $ref: '#/components/schemas/EventCategoriesList'
+    EventCategoriesMapList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventCategoriesMap'
+    EventCategoriesMessage:
+      type: object
+      properties:
+        EventCategoriesMapList:
+          $ref: '#/components/schemas/EventCategoriesMapList'
+    EventList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Event'
+    EventSubscription:
+      type: object
+      properties:
+        CustomerAwsId:
+          $ref: '#/components/schemas/String'
+        CustSubscriptionId:
+          $ref: '#/components/schemas/String'
+        SnsTopicArn:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/String'
+        SubscriptionCreationTime:
+          $ref: '#/components/schemas/String'
+        SourceType:
+          $ref: '#/components/schemas/String'
+        SourceIdsList:
+          $ref: '#/components/schemas/SourceIdsList'
+        EventCategoriesList:
+          $ref: '#/components/schemas/EventCategoriesList'
+        Enabled:
+          $ref: '#/components/schemas/Boolean'
+    EventSubscriptionQuotaExceededFault:
+      type: object
+      properties: {}
+      description: You have reached the maximum number of event subscriptions.
+    EventSubscriptionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventSubscription'
+    EventSubscriptionsMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        EventSubscriptionsList:
+          $ref: '#/components/schemas/EventSubscriptionsList'
+    EventsMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        Events:
+          $ref: '#/components/schemas/EventList'
+    Filter:
+      type: object
+      required:
+        - Name
+        - Values
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        Values:
+          $ref: '#/components/schemas/FilterValueList'
+    FilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Filter'
+    FilterValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    IPRange:
+      type: object
+      properties:
+        Status:
+          $ref: '#/components/schemas/String'
+        CIDRIP:
+          $ref: '#/components/schemas/String'
+    IPRangeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/IPRange'
+    InstanceQuotaExceededFault:
+      type: object
+      properties: {}
+      description: Request would result in user exceeding the allowed number of DB instances.
+    InsufficientDBInstanceCapacityFault:
+      type: object
+      properties: {}
+      description: Specified DB instance class is not available in the specified Availability Zone.
+    Integer:
+      type: integer
+    IntegerOptional:
+      type: integer
+    InvalidDBInstanceStateFault:
+      type: object
+      properties: {}
+      description: ' The specified DB instance is not in the <i>available</i> state. '
+    InvalidDBParameterGroupStateFault:
+      type: object
+      properties: {}
+      description: 'The DB parameter group is in use or is in an invalid state. If you are attempting to delete the parameter group, you cannot delete it when the parameter group is in this state.'
+    InvalidDBSecurityGroupStateFault:
+      type: object
+      properties: {}
+      description: The state of the DB security group does not allow deletion.
+    InvalidDBSnapshotStateFault:
+      type: object
+      properties: {}
+      description: The state of the DB snapshot does not allow deletion.
+    InvalidDBSubnetGroupFault:
+      type: object
+      properties: {}
+      description: Indicates the DBSubnetGroup does not belong to the same VPC as that of an existing cross region read replica of the same source instance.
+    InvalidDBSubnetGroupStateFault:
+      type: object
+      properties: {}
+      description: The DB subnet group cannot be deleted because it is in use.
+    InvalidDBSubnetStateFault:
+      type: object
+      properties: {}
+      description: ' The DB subnet is not in the <i>available</i> state. '
+    InvalidEventSubscriptionStateFault:
+      type: object
+      properties: {}
+      description: This error can occur if someone else is modifying a subscription. You should retry the action.
+    InvalidOptionGroupStateFault:
+      type: object
+      properties: {}
+      description: ' The option group is not in the <i>available</i> state. '
+    InvalidRestoreFault:
+      type: object
+      properties: {}
+      description: Cannot restore from vpc backup to non-vpc DB instance.
+    InvalidSubnet:
+      type: object
+      properties: {}
+      description: 'The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC.'
+    InvalidVPCNetworkStateFault:
+      type: object
+      properties: {}
+      description: DB subnet group does not cover all Availability Zones after it is created because users' change.
+    KeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ListTagsForResourceMessage:
+      type: object
+      required:
+        - ResourceName
+      properties:
+        ResourceName:
+          $ref: '#/components/schemas/String'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+    Long:
+      type: integer
+    ModifyDBInstanceMessage:
+      type: object
+      required:
+        - DBInstanceIdentifier
+      properties:
+        DBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        AllocatedStorage:
+          $ref: '#/components/schemas/IntegerOptional'
+        DBInstanceClass:
+          $ref: '#/components/schemas/String'
+        DBSecurityGroups:
+          $ref: '#/components/schemas/DBSecurityGroupNameList'
+        VpcSecurityGroupIds:
+          $ref: '#/components/schemas/VpcSecurityGroupIdList'
+        ApplyImmediately:
+          $ref: '#/components/schemas/Boolean'
+        MasterUserPassword:
+          $ref: '#/components/schemas/String'
+        DBParameterGroupName:
+          $ref: '#/components/schemas/String'
+        BackupRetentionPeriod:
+          $ref: '#/components/schemas/IntegerOptional'
+        PreferredBackupWindow:
+          $ref: '#/components/schemas/String'
+        PreferredMaintenanceWindow:
+          $ref: '#/components/schemas/String'
+        MultiAZ:
+          $ref: '#/components/schemas/BooleanOptional'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        AllowMajorVersionUpgrade:
+          $ref: '#/components/schemas/Boolean'
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/BooleanOptional'
+        Iops:
+          $ref: '#/components/schemas/IntegerOptional'
+        OptionGroupName:
+          $ref: '#/components/schemas/String'
+        NewDBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+    ModifyDBInstanceResult:
+      type: object
+      properties:
+        DBInstance:
+          $ref: '#/components/schemas/DBInstance'
+    ModifyDBParameterGroupMessage:
+      type: object
+      required:
+        - DBParameterGroupName
+        - Parameters
+      properties:
+        DBParameterGroupName:
+          $ref: '#/components/schemas/String'
+        Parameters:
+          $ref: '#/components/schemas/ParametersList'
+    ModifyDBSubnetGroupMessage:
+      type: object
+      required:
+        - DBSubnetGroupName
+        - SubnetIds
+      properties:
+        DBSubnetGroupName:
+          $ref: '#/components/schemas/String'
+        DBSubnetGroupDescription:
+          $ref: '#/components/schemas/String'
+        SubnetIds:
+          $ref: '#/components/schemas/SubnetIdentifierList'
+    ModifyDBSubnetGroupResult:
+      type: object
+      properties:
+        DBSubnetGroup:
+          $ref: '#/components/schemas/DBSubnetGroup'
+    ModifyEventSubscriptionMessage:
+      type: object
+      required:
+        - SubscriptionName
+      properties:
+        SubscriptionName:
+          $ref: '#/components/schemas/String'
+        SnsTopicArn:
+          $ref: '#/components/schemas/String'
+        SourceType:
+          $ref: '#/components/schemas/String'
+        EventCategories:
+          $ref: '#/components/schemas/EventCategoriesList'
+        Enabled:
+          $ref: '#/components/schemas/BooleanOptional'
+    ModifyEventSubscriptionResult:
+      type: object
+      properties:
+        EventSubscription:
+          $ref: '#/components/schemas/EventSubscription'
+    ModifyOptionGroupMessage:
+      type: object
+      required:
+        - OptionGroupName
+      properties:
+        OptionGroupName:
+          $ref: '#/components/schemas/String'
+        OptionsToInclude:
+          $ref: '#/components/schemas/OptionConfigurationList'
+        OptionsToRemove:
+          $ref: '#/components/schemas/OptionNamesList'
+        ApplyImmediately:
+          $ref: '#/components/schemas/Boolean'
+    ModifyOptionGroupResult:
+      type: object
+      properties:
+        OptionGroup:
+          $ref: '#/components/schemas/OptionGroup'
+    Option:
+      type: object
+      properties:
+        OptionName:
+          $ref: '#/components/schemas/String'
+        OptionDescription:
+          $ref: '#/components/schemas/String'
+        Persistent:
+          $ref: '#/components/schemas/Boolean'
+        Permanent:
+          $ref: '#/components/schemas/Boolean'
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+        OptionSettings:
+          $ref: '#/components/schemas/OptionSettingConfigurationList'
+        DBSecurityGroupMemberships:
+          $ref: '#/components/schemas/DBSecurityGroupMembershipList'
+        VpcSecurityGroupMemberships:
+          $ref: '#/components/schemas/VpcSecurityGroupMembershipList'
+    OptionConfiguration:
+      type: object
+      required:
+        - OptionName
+      properties:
+        OptionName:
+          $ref: '#/components/schemas/String'
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+        DBSecurityGroupMemberships:
+          $ref: '#/components/schemas/DBSecurityGroupNameList'
+        VpcSecurityGroupMemberships:
+          $ref: '#/components/schemas/VpcSecurityGroupIdList'
+        OptionSettings:
+          $ref: '#/components/schemas/OptionSettingsList'
+    OptionConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OptionConfiguration'
+    OptionGroup:
+      type: object
+      properties:
+        OptionGroupName:
+          $ref: '#/components/schemas/String'
+        OptionGroupDescription:
+          $ref: '#/components/schemas/String'
+        EngineName:
+          $ref: '#/components/schemas/String'
+        MajorEngineVersion:
+          $ref: '#/components/schemas/String'
+        Options:
+          $ref: '#/components/schemas/OptionsList'
+        AllowsVpcAndNonVpcInstanceMemberships:
+          $ref: '#/components/schemas/Boolean'
+        VpcId:
+          $ref: '#/components/schemas/String'
+    OptionGroupAlreadyExistsFault:
+      type: object
+      properties: {}
+      description: The option group you are trying to create already exists.
+    OptionGroupMembership:
+      type: object
+      properties:
+        OptionGroupName:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/String'
+    OptionGroupMembershipList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OptionGroupMembership'
+    OptionGroupNotFoundFault:
+      type: object
+      properties: {}
+      description: The specified option group could not be found.
+    OptionGroupOption:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        Description:
+          $ref: '#/components/schemas/String'
+        EngineName:
+          $ref: '#/components/schemas/String'
+        MajorEngineVersion:
+          $ref: '#/components/schemas/String'
+        MinimumRequiredMinorEngineVersion:
+          $ref: '#/components/schemas/String'
+        PortRequired:
+          $ref: '#/components/schemas/Boolean'
+        DefaultPort:
+          $ref: '#/components/schemas/IntegerOptional'
+        OptionsDependedOn:
+          $ref: '#/components/schemas/OptionsDependedOn'
+        Persistent:
+          $ref: '#/components/schemas/Boolean'
+        Permanent:
+          $ref: '#/components/schemas/Boolean'
+        OptionGroupOptionSettings:
+          $ref: '#/components/schemas/OptionGroupOptionSettingsList'
+    OptionGroupOptionSetting:
+      type: object
+      properties:
+        SettingName:
+          $ref: '#/components/schemas/String'
+        SettingDescription:
+          $ref: '#/components/schemas/String'
+        DefaultValue:
+          $ref: '#/components/schemas/String'
+        ApplyType:
+          $ref: '#/components/schemas/String'
+        AllowedValues:
+          $ref: '#/components/schemas/String'
+        IsModifiable:
+          $ref: '#/components/schemas/Boolean'
+    OptionGroupOptionSettingsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OptionGroupOptionSetting'
+    OptionGroupOptionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OptionGroupOption'
+    OptionGroupOptionsMessage:
+      type: object
+      properties:
+        OptionGroupOptions:
+          $ref: '#/components/schemas/OptionGroupOptionsList'
+        Marker:
+          $ref: '#/components/schemas/String'
+    OptionGroupQuotaExceededFault:
+      type: object
+      properties: {}
+      description: The quota of 20 option groups was exceeded for this AWS account.
+    OptionGroups:
+      type: object
+      properties:
+        OptionGroupsList:
+          $ref: '#/components/schemas/OptionGroupsList'
+        Marker:
+          $ref: '#/components/schemas/String'
+    OptionGroupsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OptionGroup'
+    OptionNamesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    OptionSetting:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        Value:
+          $ref: '#/components/schemas/String'
+        DefaultValue:
+          $ref: '#/components/schemas/String'
+        Description:
+          $ref: '#/components/schemas/String'
+        ApplyType:
+          $ref: '#/components/schemas/String'
+        DataType:
+          $ref: '#/components/schemas/String'
+        AllowedValues:
+          $ref: '#/components/schemas/String'
+        IsModifiable:
+          $ref: '#/components/schemas/Boolean'
+        IsCollection:
+          $ref: '#/components/schemas/Boolean'
+    OptionSettingConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OptionSetting'
+    OptionSettingsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OptionSetting'
+    OptionsDependedOn:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    OptionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Option'
+    OrderableDBInstanceOption:
+      type: object
+      properties:
+        Engine:
+          $ref: '#/components/schemas/String'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        DBInstanceClass:
+          $ref: '#/components/schemas/String'
+        LicenseModel:
+          $ref: '#/components/schemas/String'
+        AvailabilityZones:
+          $ref: '#/components/schemas/AvailabilityZoneList'
+        MultiAZCapable:
+          $ref: '#/components/schemas/Boolean'
+        ReadReplicaCapable:
+          $ref: '#/components/schemas/Boolean'
+        Vpc:
+          $ref: '#/components/schemas/Boolean'
+    OrderableDBInstanceOptionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OrderableDBInstanceOption'
+    OrderableDBInstanceOptionsMessage:
+      type: object
+      properties:
+        OrderableDBInstanceOptions:
+          $ref: '#/components/schemas/OrderableDBInstanceOptionsList'
+        Marker:
+          $ref: '#/components/schemas/String'
+    Parameter:
+      type: object
+      properties:
+        ParameterName:
+          $ref: '#/components/schemas/String'
+        ParameterValue:
+          $ref: '#/components/schemas/String'
+        Description:
+          $ref: '#/components/schemas/String'
+        Source:
+          $ref: '#/components/schemas/String'
+        ApplyType:
+          $ref: '#/components/schemas/String'
+        DataType:
+          $ref: '#/components/schemas/String'
+        AllowedValues:
+          $ref: '#/components/schemas/String'
+        IsModifiable:
+          $ref: '#/components/schemas/Boolean'
+        MinimumEngineVersion:
+          $ref: '#/components/schemas/String'
+        ApplyMethod:
+          $ref: '#/components/schemas/ApplyMethod'
+    ParametersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Parameter'
+    PendingModifiedValues:
+      type: object
+      properties:
+        DBInstanceClass:
+          $ref: '#/components/schemas/String'
+        AllocatedStorage:
+          $ref: '#/components/schemas/IntegerOptional'
+        MasterUserPassword:
+          $ref: '#/components/schemas/String'
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+        BackupRetentionPeriod:
+          $ref: '#/components/schemas/IntegerOptional'
+        MultiAZ:
+          $ref: '#/components/schemas/BooleanOptional'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        Iops:
+          $ref: '#/components/schemas/IntegerOptional'
+        DBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+    PointInTimeRestoreNotEnabledFault:
+      type: object
+      properties: {}
+      description: ' <i>SourceDBInstanceIdentifier</i> refers to a DB instance with <i>BackupRetentionPeriod</i> equal to 0. '
+    PromoteReadReplicaMessage:
+      type: object
+      required:
+        - DBInstanceIdentifier
+      properties:
+        DBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        BackupRetentionPeriod:
+          $ref: '#/components/schemas/IntegerOptional'
+        PreferredBackupWindow:
+          $ref: '#/components/schemas/String'
+    PromoteReadReplicaResult:
+      type: object
+      properties:
+        DBInstance:
+          $ref: '#/components/schemas/DBInstance'
+    ProvisionedIopsNotAvailableInAZFault:
+      type: object
+      properties: {}
+      description: Provisioned IOPS not available in the specified Availability Zone.
+    PurchaseReservedDBInstancesOfferingMessage:
+      type: object
+      required:
+        - ReservedDBInstancesOfferingId
+      properties:
+        ReservedDBInstancesOfferingId:
+          $ref: '#/components/schemas/String'
+        ReservedDBInstanceId:
+          $ref: '#/components/schemas/String'
+        DBInstanceCount:
+          $ref: '#/components/schemas/IntegerOptional'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    PurchaseReservedDBInstancesOfferingResult:
+      type: object
+      properties:
+        ReservedDBInstance:
+          $ref: '#/components/schemas/ReservedDBInstance'
+    ReadReplicaDBInstanceIdentifierList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    RebootDBInstanceMessage:
+      type: object
+      required:
+        - DBInstanceIdentifier
+      properties:
+        DBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        ForceFailover:
+          $ref: '#/components/schemas/BooleanOptional'
+    RebootDBInstanceResult:
+      type: object
+      properties:
+        DBInstance:
+          $ref: '#/components/schemas/DBInstance'
+    RecurringCharge:
+      type: object
+      properties:
+        RecurringChargeAmount:
+          $ref: '#/components/schemas/Double'
+        RecurringChargeFrequency:
+          $ref: '#/components/schemas/String'
+    RecurringChargeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecurringCharge'
+    RemoveSourceIdentifierFromSubscriptionMessage:
+      type: object
+      required:
+        - SubscriptionName
+        - SourceIdentifier
+      properties:
+        SubscriptionName:
+          $ref: '#/components/schemas/String'
+        SourceIdentifier:
+          $ref: '#/components/schemas/String'
+    RemoveSourceIdentifierFromSubscriptionResult:
+      type: object
+      properties:
+        EventSubscription:
+          $ref: '#/components/schemas/EventSubscription'
+    RemoveTagsFromResourceMessage:
+      type: object
+      required:
+        - ResourceName
+        - TagKeys
+      properties:
+        ResourceName:
+          $ref: '#/components/schemas/String'
+        TagKeys:
+          $ref: '#/components/schemas/KeyList'
+    ReservedDBInstance:
+      type: object
+      properties:
+        ReservedDBInstanceId:
+          $ref: '#/components/schemas/String'
+        ReservedDBInstancesOfferingId:
+          $ref: '#/components/schemas/String'
+        DBInstanceClass:
+          $ref: '#/components/schemas/String'
+        StartTime:
+          $ref: '#/components/schemas/TStamp'
+        Duration:
+          $ref: '#/components/schemas/Integer'
+        FixedPrice:
+          $ref: '#/components/schemas/Double'
+        UsagePrice:
+          $ref: '#/components/schemas/Double'
+        CurrencyCode:
+          $ref: '#/components/schemas/String'
+        DBInstanceCount:
+          $ref: '#/components/schemas/Integer'
+        ProductDescription:
+          $ref: '#/components/schemas/String'
+        OfferingType:
+          $ref: '#/components/schemas/String'
+        MultiAZ:
+          $ref: '#/components/schemas/Boolean'
+        State:
+          $ref: '#/components/schemas/String'
+        RecurringCharges:
+          $ref: '#/components/schemas/RecurringChargeList'
+    ReservedDBInstanceAlreadyExistsFault:
+      type: object
+      properties: {}
+      description: User already has a reservation with the given identifier.
+    ReservedDBInstanceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReservedDBInstance'
+    ReservedDBInstanceMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        ReservedDBInstances:
+          $ref: '#/components/schemas/ReservedDBInstanceList'
+    ReservedDBInstanceNotFoundFault:
+      type: object
+      properties: {}
+      description: The specified reserved DB Instance not found.
+    ReservedDBInstanceQuotaExceededFault:
+      type: object
+      properties: {}
+      description: Request would exceed the user's DB Instance quota.
+    ReservedDBInstancesOffering:
+      type: object
+      properties:
+        ReservedDBInstancesOfferingId:
+          $ref: '#/components/schemas/String'
+        DBInstanceClass:
+          $ref: '#/components/schemas/String'
+        Duration:
+          $ref: '#/components/schemas/Integer'
+        FixedPrice:
+          $ref: '#/components/schemas/Double'
+        UsagePrice:
+          $ref: '#/components/schemas/Double'
+        CurrencyCode:
+          $ref: '#/components/schemas/String'
+        ProductDescription:
+          $ref: '#/components/schemas/String'
+        OfferingType:
+          $ref: '#/components/schemas/String'
+        MultiAZ:
+          $ref: '#/components/schemas/Boolean'
+        RecurringCharges:
+          $ref: '#/components/schemas/RecurringChargeList'
+    ReservedDBInstancesOfferingList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReservedDBInstancesOffering'
+    ReservedDBInstancesOfferingMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        ReservedDBInstancesOfferings:
+          $ref: '#/components/schemas/ReservedDBInstancesOfferingList'
+    ReservedDBInstancesOfferingNotFoundFault:
+      type: object
+      properties: {}
+      description: Specified offering does not exist.
+    ResetDBParameterGroupMessage:
+      type: object
+      required:
+        - DBParameterGroupName
+      properties:
+        DBParameterGroupName:
+          $ref: '#/components/schemas/String'
+        ResetAllParameters:
+          $ref: '#/components/schemas/Boolean'
+        Parameters:
+          $ref: '#/components/schemas/ParametersList'
+    RestoreDBInstanceFromDBSnapshotMessage:
+      type: object
+      required:
+        - DBInstanceIdentifier
+        - DBSnapshotIdentifier
+      properties:
+        DBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        DBSnapshotIdentifier:
+          $ref: '#/components/schemas/String'
+        DBInstanceClass:
+          $ref: '#/components/schemas/String'
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+        AvailabilityZone:
+          $ref: '#/components/schemas/String'
+        DBSubnetGroupName:
+          $ref: '#/components/schemas/String'
+        MultiAZ:
+          $ref: '#/components/schemas/BooleanOptional'
+        PubliclyAccessible:
+          $ref: '#/components/schemas/BooleanOptional'
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/BooleanOptional'
+        LicenseModel:
+          $ref: '#/components/schemas/String'
+        DBName:
+          $ref: '#/components/schemas/String'
+        Engine:
+          $ref: '#/components/schemas/String'
+        Iops:
+          $ref: '#/components/schemas/IntegerOptional'
+        OptionGroupName:
+          $ref: '#/components/schemas/String'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    RestoreDBInstanceFromDBSnapshotResult:
+      type: object
+      properties:
+        DBInstance:
+          $ref: '#/components/schemas/DBInstance'
+    RestoreDBInstanceToPointInTimeMessage:
+      type: object
+      required:
+        - SourceDBInstanceIdentifier
+        - TargetDBInstanceIdentifier
+      properties:
+        SourceDBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        TargetDBInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        RestoreTime:
+          $ref: '#/components/schemas/TStamp'
+        UseLatestRestorableTime:
+          $ref: '#/components/schemas/Boolean'
+        DBInstanceClass:
+          $ref: '#/components/schemas/String'
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+        AvailabilityZone:
+          $ref: '#/components/schemas/String'
+        DBSubnetGroupName:
+          $ref: '#/components/schemas/String'
+        MultiAZ:
+          $ref: '#/components/schemas/BooleanOptional'
+        PubliclyAccessible:
+          $ref: '#/components/schemas/BooleanOptional'
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/BooleanOptional'
+        LicenseModel:
+          $ref: '#/components/schemas/String'
+        DBName:
+          $ref: '#/components/schemas/String'
+        Engine:
+          $ref: '#/components/schemas/String'
+        Iops:
+          $ref: '#/components/schemas/IntegerOptional'
+        OptionGroupName:
+          $ref: '#/components/schemas/String'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    RestoreDBInstanceToPointInTimeResult:
+      type: object
+      properties:
+        DBInstance:
+          $ref: '#/components/schemas/DBInstance'
+    RevokeDBSecurityGroupIngressMessage:
+      type: object
+      required:
+        - DBSecurityGroupName
+      properties:
+        DBSecurityGroupName:
+          $ref: '#/components/schemas/String'
+        CIDRIP:
+          $ref: '#/components/schemas/String'
+        EC2SecurityGroupName:
+          $ref: '#/components/schemas/String'
+        EC2SecurityGroupId:
+          $ref: '#/components/schemas/String'
+        EC2SecurityGroupOwnerId:
+          $ref: '#/components/schemas/String'
+    RevokeDBSecurityGroupIngressResult:
+      type: object
+      properties:
+        DBSecurityGroup:
+          $ref: '#/components/schemas/DBSecurityGroup'
+    SNSInvalidTopicFault:
+      type: object
+      properties: {}
+      description: SNS has responded that there is a problem with the SND topic specified.
+    SNSNoAuthorizationFault:
+      type: object
+      properties: {}
+      description: You do not have permission to publish to the SNS topic ARN.
+    SNSTopicArnNotFoundFault:
+      type: object
+      properties: {}
+      description: The SNS topic ARN does not exist.
+    SnapshotQuotaExceededFault:
+      type: object
+      properties: {}
+      description: Request would result in user exceeding the allowed number of DB snapshots.
+    SourceIdsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    SourceNotFoundFault:
+      type: object
+      properties: {}
+      description: The requested source could not be found.
+    SourceType:
+      type: string
+      enum:
+        - db-instance
+        - db-parameter-group
+        - db-security-group
+        - db-snapshot
+    StorageQuotaExceededFault:
+      type: object
+      properties: {}
+      description: Request would result in user exceeding the allowed amount of storage available across all DB instances.
+    String:
+      type: string
+    Subnet:
+      type: object
+      properties:
+        SubnetIdentifier:
+          $ref: '#/components/schemas/String'
+        SubnetAvailabilityZone:
+          $ref: '#/components/schemas/AvailabilityZone'
+        SubnetStatus:
+          $ref: '#/components/schemas/String'
+    SubnetAlreadyInUse:
+      type: object
+      properties: {}
+      description: The DB subnet is already in use in the Availability Zone.
+    SubnetIdentifierList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    SubnetList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Subnet'
+    SubscriptionAlreadyExistFault:
+      type: object
+      properties: {}
+      description: The supplied subscription name already exists.
+    SubscriptionCategoryNotFoundFault:
+      type: object
+      properties: {}
+      description: The supplied category does not exist.
+    SubscriptionNotFoundFault:
+      type: object
+      properties: {}
+      description: The subscription name does not exist.
+    SupportedCharacterSetsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CharacterSet'
+    TStamp:
+      type: string
+      format: date-time
+    Tag:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/String'
+        Value:
+          $ref: '#/components/schemas/String'
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    TagListMessage:
+      type: object
+      properties:
+        TagList:
+          $ref: '#/components/schemas/TagList'
+    VpcSecurityGroupIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    VpcSecurityGroupMembership:
+      type: object
+      properties:
+        VpcSecurityGroupId:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/String'
+    VpcSecurityGroupMembershipList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VpcSecurityGroupMembership'
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

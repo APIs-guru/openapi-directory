@@ -1,0 +1,1985 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://elastictranscoder.amazonaws.com/'
+info:
+  version: '2012-09-25'
+  x-release: v4
+  title: Amazon Elastic Transcoder
+  description: <fullname>AWS Elastic Transcoder Service</fullname> <p>The AWS Elastic Transcoder Service.</p>
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: elastictranscoder
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/elastictranscoder-2012-09-25.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/elastictranscoder/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  '/2012-09-25/jobs/{Id}':
+    get:
+      operationId: ReadJob
+      description: The ReadJob operation returns detailed information about a job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadJobResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: IncompatibleVersionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncompatibleVersionException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          schema:
+            type: string
+      x-waiters:
+        - delay: 30
+          operation: ReadJob
+          maxAttempts: 120
+          acceptors:
+            - expected: Complete
+              matcher: path
+              state: success
+              argument: Job.Status
+            - expected: Canceled
+              matcher: path
+              state: failure
+              argument: Job.Status
+            - expected: Error
+              matcher: path
+              state: failure
+              argument: Job.Status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReadJobRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2012-09-25/jobs:
+    post:
+      operationId: CreateJob
+      description: '<p>When you create a job, Elastic Transcoder returns JSON data that includes the values that you specified plus information about the job that is created.</p> <p>If you have specified more than one output for your jobs (for example, one output for the Kindle Fire and another output for the Apple iPhone 4s), you currently must use the Elastic Transcoder API to list the jobs (as opposed to the AWS Console).</p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateJobResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: IncompatibleVersionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncompatibleVersionException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateJobRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2012-09-25/pipelines:
+    get:
+      operationId: ListPipelines
+      description: The ListPipelines operation gets a list of the pipelines associated with the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPipelinesResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: IncompatibleVersionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncompatibleVersionException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: PageToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPipelinesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2012-09-25/presets:
+    get:
+      operationId: ListPresets
+      description: The ListPresets operation gets a list of the default presets included with Elastic Transcoder and the presets that you've added in an AWS region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPresetsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: IncompatibleVersionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncompatibleVersionException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: PageToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPresetsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2012-09-25/pipelines/{Id}':
+    put:
+      operationId: UpdatePipeline
+      description: '<p> Use the <code>UpdatePipeline</code> operation to update settings for a pipeline.</p> <important> <p>When you change pipeline settings, your changes take effect immediately. Jobs that you have already submitted and that Elastic Transcoder has not started to process are affected in addition to jobs that you submit after you change settings. </p> </important>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePipelineResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: IncompatibleVersionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncompatibleVersionException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePipelineRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2012-09-25/presets/{Id}':
+    get:
+      operationId: ReadPreset
+      description: The ReadPreset operation gets detailed information about a preset.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadPresetResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: IncompatibleVersionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncompatibleVersionException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReadPresetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2012-09-25/jobsByPipeline/{PipelineId}':
+    get:
+      operationId: ListJobsByPipeline
+      description: <p>The ListJobsByPipeline operation gets a list of the jobs currently in a pipeline.</p> <p>Elastic Transcoder returns all of the jobs currently in the specified pipeline. The response body contains one element for each job that satisfies the search criteria.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListJobsByPipelineResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: IncompatibleVersionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncompatibleVersionException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: PageToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+        - name: PipelineId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListJobsByPipelineRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2012-09-25/jobsByStatus/{Status}':
+    get:
+      operationId: ListJobsByStatus
+      description: The ListJobsByStatus operation gets a list of jobs that have a specified status. The response body contains one element for each job that satisfies the search criteria.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListJobsByStatusResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: IncompatibleVersionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncompatibleVersionException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: PageToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+        - name: Status
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListJobsByStatusRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2012-09-25/roleTests:
+    post:
+      operationId: TestRole
+      description: '<p>The TestRole operation tests the IAM role used to create the pipeline.</p> <p>The <code>TestRole</code> action lets you determine whether the IAM role you are using has sufficient permissions to let Elastic Transcoder perform tasks associated with the transcoding process. The action attempts to assume the specified IAM role, checks read access to the input and output buckets, and tries to send a test notification to Amazon SNS topics that you specify.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRoleResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: IncompatibleVersionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncompatibleVersionException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestRoleRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2012-09-25/pipelines/{Id}/notifications':
+    post:
+      operationId: UpdatePipelineNotifications
+      description: '<p>With the UpdatePipelineNotifications operation, you can update Amazon Simple Notification Service (Amazon SNS) notifications for a pipeline.</p> <p>When you update notifications for a pipeline, Elastic Transcoder returns the values that you specified in the request.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePipelineNotificationsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: IncompatibleVersionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncompatibleVersionException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePipelineNotificationsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2012-09-25/pipelines/{Id}/status':
+    post:
+      operationId: UpdatePipelineStatus
+      description: '<p>The UpdatePipelineStatus operation pauses or reactivates a pipeline, so that the pipeline stops or restarts the processing of jobs.</p> <p>Changing the pipeline status is useful if you want to cancel one or more jobs. You can''t cancel jobs after Elastic Transcoder has started processing them; if you pause the pipeline to which you submitted the jobs, you have more time to get the job IDs for the jobs that you want to cancel, and to send a <a>CancelJob</a> request. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePipelineStatusResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: IncompatibleVersionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncompatibleVersionException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePipelineStatusRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AccessControl:
+      type: string
+      pattern: (^FullControl$)|(^Read$)|(^ReadAcp$)|(^WriteAcp$)
+    AccessControls:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccessControl'
+      maxItems: 30
+    AccessDeniedException:
+      type: object
+      properties: {}
+      description: General authentication failure. The request was not signed correctly.
+    Artwork:
+      type: object
+      properties:
+        InputKey:
+          $ref: '#/components/schemas/WatermarkKey'
+        MaxWidth:
+          $ref: '#/components/schemas/DigitsOrAuto'
+        MaxHeight:
+          $ref: '#/components/schemas/DigitsOrAuto'
+        SizingPolicy:
+          $ref: '#/components/schemas/SizingPolicy'
+        PaddingPolicy:
+          $ref: '#/components/schemas/PaddingPolicy'
+        AlbumArtFormat:
+          $ref: '#/components/schemas/JpgOrPng'
+        Encryption:
+          $ref: '#/components/schemas/Encryption'
+      description: '<p>The file to be used as album art. There can be multiple artworks associated with an audio file, to a maximum of 20.</p> <p>To remove artwork or leave the artwork empty, you can either set <code>Artwork</code> to null, or set the <code>Merge Policy</code> to "Replace" and use an empty <code>Artwork</code> array.</p> <p>To pass through existing artwork unchanged, set the <code>Merge Policy</code> to "Prepend", "Append", or "Fallback", and use an empty <code>Artwork</code> array.</p>'
+    Artworks:
+      type: array
+      items:
+        $ref: '#/components/schemas/Artwork'
+    Ascending:
+      type: string
+      pattern: (^true$)|(^false$)
+    AspectRatio:
+      type: string
+      pattern: '(^auto$)|(^1:1$)|(^4:3$)|(^3:2$)|(^16:9$)'
+    AudioBitDepth:
+      type: string
+      pattern: (^8$)|(^16$)|(^24$)|(^32$)
+    AudioBitOrder:
+      type: string
+      pattern: (^LittleEndian$)
+    AudioBitRate:
+      type: string
+      pattern: '^\d{1,3}$'
+    AudioChannels:
+      type: string
+      pattern: (^auto$)|(^0$)|(^1$)|(^2$)
+    AudioCodec:
+      type: string
+      pattern: (^AAC$)|(^vorbis$)|(^mp3$)|(^mp2$)|(^pcm$)|(^flac$)
+    AudioCodecOptions:
+      type: object
+      properties:
+        Profile:
+          $ref: '#/components/schemas/AudioCodecProfile'
+        BitDepth:
+          $ref: '#/components/schemas/AudioBitDepth'
+        BitOrder:
+          $ref: '#/components/schemas/AudioBitOrder'
+        Signed:
+          $ref: '#/components/schemas/AudioSigned'
+      description: Options associated with your audio codec.
+    AudioCodecProfile:
+      type: string
+      pattern: (^auto$)|(^AAC-LC$)|(^HE-AAC$)|(^HE-AACv2$)
+    AudioPackingMode:
+      type: string
+      pattern: (^SingleTrack$)|(^OneChannelPerTrack$)|(^OneChannelPerTrackWithMosTo8Tracks$)
+    AudioParameters:
+      type: object
+      properties:
+        Codec:
+          $ref: '#/components/schemas/AudioCodec'
+        SampleRate:
+          $ref: '#/components/schemas/AudioSampleRate'
+        BitRate:
+          $ref: '#/components/schemas/AudioBitRate'
+        Channels:
+          $ref: '#/components/schemas/AudioChannels'
+        AudioPackingMode:
+          $ref: '#/components/schemas/AudioPackingMode'
+        CodecOptions:
+          $ref: '#/components/schemas/AudioCodecOptions'
+      description: Parameters required for transcoding audio.
+    AudioSampleRate:
+      type: string
+      pattern: (^auto$)|(^22050$)|(^32000$)|(^44100$)|(^48000$)|(^96000$)|(^192000$)
+    AudioSigned:
+      type: string
+      pattern: (^Unsigned$)|(^Signed$)
+    Base64EncodedString:
+      type: string
+      pattern: '^$|(^(?:[A-Za-z0-9\+/]{4})*(?:[A-Za-z0-9\+/]{2}==|[A-Za-z0-9\+/]{3}=)?$)'
+    BucketName:
+      type: string
+      pattern: '^(\w|\.|-){1,255}$'
+    CancelJobRequest:
+      type: object
+      properties: {}
+      description: The <code>CancelJobRequest</code> structure.
+    CancelJobResponse:
+      type: object
+      properties: {}
+      description: 'The response body contains a JSON object. If the job is successfully canceled, the value of <code>Success</code> is <code>true</code>.'
+    CaptionFormat:
+      type: object
+      properties:
+        Format:
+          $ref: '#/components/schemas/CaptionFormatFormat'
+        Pattern:
+          $ref: '#/components/schemas/CaptionFormatPattern'
+        Encryption:
+          $ref: '#/components/schemas/Encryption'
+      description: 'The file format of the output captions. If you leave this value blank, Elastic Transcoder returns an error.'
+    CaptionFormatFormat:
+      type: string
+      pattern: (^mov-text$)|(^srt$)|(^scc$)|(^webvtt$)|(^dfxp$)|(^cea-708$)
+    CaptionFormatPattern:
+      type: string
+      pattern: '(^$)|(^.*\{language\}.*$)'
+    CaptionFormats:
+      type: array
+      items:
+        $ref: '#/components/schemas/CaptionFormat'
+      maxItems: 4
+    CaptionMergePolicy:
+      type: string
+      pattern: (^MergeOverride$)|(^MergeRetain$)|(^Override$)
+    CaptionSource:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/LongKey'
+        Language:
+          $ref: '#/components/schemas/Key'
+        TimeOffset:
+          $ref: '#/components/schemas/TimeOffset'
+        Label:
+          $ref: '#/components/schemas/Name'
+        Encryption:
+          $ref: '#/components/schemas/Encryption'
+      description: A source file for the input sidecar captions used during the transcoding process.
+    CaptionSources:
+      type: array
+      items:
+        $ref: '#/components/schemas/CaptionSource'
+      maxItems: 20
+    Captions:
+      type: object
+      properties:
+        MergePolicy:
+          $ref: '#/components/schemas/CaptionMergePolicy'
+        CaptionSources:
+          $ref: '#/components/schemas/CaptionSources'
+        CaptionFormats:
+          $ref: '#/components/schemas/CaptionFormats'
+      description: 'The captions to be created, if any.'
+    Clip:
+      type: object
+      properties:
+        TimeSpan:
+          $ref: '#/components/schemas/TimeSpan'
+      description: Settings for one clip in a composition. All jobs in a playlist must have the same clip settings.
+    CodecOption:
+      type: string
+      minLength: 1
+      maxLength: 255
+    CodecOptions:
+      type: array
+      maxItems: 30
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/CodecOption'
+          value:
+            $ref: '#/components/schemas/CodecOption'
+    Composition:
+      type: array
+      items:
+        $ref: '#/components/schemas/Clip'
+    CreateJobOutput:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/Key'
+        ThumbnailPattern:
+          $ref: '#/components/schemas/ThumbnailPattern'
+        ThumbnailEncryption:
+          $ref: '#/components/schemas/Encryption'
+        Rotate:
+          $ref: '#/components/schemas/Rotate'
+        PresetId:
+          $ref: '#/components/schemas/Id'
+        SegmentDuration:
+          $ref: '#/components/schemas/FloatString'
+        Watermarks:
+          $ref: '#/components/schemas/JobWatermarks'
+        AlbumArt:
+          $ref: '#/components/schemas/JobAlbumArt'
+        Composition:
+          $ref: '#/components/schemas/Composition'
+        Captions:
+          $ref: '#/components/schemas/Captions'
+        Encryption:
+          $ref: '#/components/schemas/Encryption'
+      description: The <code>CreateJobOutput</code> structure.
+    CreateJobOutputs:
+      type: array
+      items:
+        $ref: '#/components/schemas/CreateJobOutput'
+      maxItems: 30
+    CreateJobPlaylist:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/Filename'
+        Format:
+          $ref: '#/components/schemas/PlaylistFormat'
+        OutputKeys:
+          $ref: '#/components/schemas/OutputKeys'
+        HlsContentProtection:
+          $ref: '#/components/schemas/HlsContentProtection'
+        PlayReadyDrm:
+          $ref: '#/components/schemas/PlayReadyDrm'
+      description: Information about the master playlist.
+    CreateJobPlaylists:
+      type: array
+      items:
+        $ref: '#/components/schemas/CreateJobPlaylist'
+      maxItems: 30
+    CreateJobRequest:
+      type: object
+      required:
+        - PipelineId
+      properties:
+        PipelineId:
+          $ref: '#/components/schemas/Id'
+        Input:
+          $ref: '#/components/schemas/JobInput'
+        Inputs:
+          $ref: '#/components/schemas/JobInputs'
+        Output:
+          $ref: '#/components/schemas/CreateJobOutput'
+        Outputs:
+          $ref: '#/components/schemas/CreateJobOutputs'
+        OutputKeyPrefix:
+          $ref: '#/components/schemas/Key'
+        Playlists:
+          $ref: '#/components/schemas/CreateJobPlaylists'
+        UserMetadata:
+          $ref: '#/components/schemas/UserMetadata'
+      description: The <code>CreateJobRequest</code> structure.
+    CreateJobResponse:
+      type: object
+      properties:
+        Job:
+          $ref: '#/components/schemas/Job'
+      description: The CreateJobResponse structure.
+    CreatePipelineRequest:
+      type: object
+      required:
+        - Name
+        - InputBucket
+        - Role
+      properties:
+        Name:
+          $ref: '#/components/schemas/Name'
+        InputBucket:
+          $ref: '#/components/schemas/BucketName'
+        OutputBucket:
+          $ref: '#/components/schemas/BucketName'
+        Role:
+          $ref: '#/components/schemas/Role'
+        AwsKmsKeyArn:
+          $ref: '#/components/schemas/KeyArn'
+        Notifications:
+          $ref: '#/components/schemas/Notifications'
+        ContentConfig:
+          $ref: '#/components/schemas/PipelineOutputConfig'
+        ThumbnailConfig:
+          $ref: '#/components/schemas/PipelineOutputConfig'
+      description: The <code>CreatePipelineRequest</code> structure.
+    CreatePipelineResponse:
+      type: object
+      properties:
+        Pipeline:
+          $ref: '#/components/schemas/Pipeline'
+        Warnings:
+          $ref: '#/components/schemas/Warnings'
+      description: 'When you create a pipeline, Elastic Transcoder returns the values that you specified in the request.'
+    CreatePresetRequest:
+      type: object
+      required:
+        - Name
+        - Container
+      properties:
+        Name:
+          $ref: '#/components/schemas/Name'
+        Description:
+          $ref: '#/components/schemas/Description'
+        Container:
+          $ref: '#/components/schemas/PresetContainer'
+        Video:
+          $ref: '#/components/schemas/VideoParameters'
+        Audio:
+          $ref: '#/components/schemas/AudioParameters'
+        Thumbnails:
+          $ref: '#/components/schemas/Thumbnails'
+      description: The <code>CreatePresetRequest</code> structure.
+    CreatePresetResponse:
+      type: object
+      properties:
+        Preset:
+          $ref: '#/components/schemas/Preset'
+        Warning:
+          $ref: '#/components/schemas/String'
+      description: The <code>CreatePresetResponse</code> structure.
+    DeletePipelineRequest:
+      type: object
+      properties: {}
+      description: The <code>DeletePipelineRequest</code> structure.
+    DeletePipelineResponse:
+      type: object
+      properties: {}
+      description: The <code>DeletePipelineResponse</code> structure.
+    DeletePresetRequest:
+      type: object
+      properties: {}
+      description: The <code>DeletePresetRequest</code> structure.
+    DeletePresetResponse:
+      type: object
+      properties: {}
+      description: The <code>DeletePresetResponse</code> structure.
+    Description:
+      type: string
+      minLength: 0
+      maxLength: 255
+    DetectedProperties:
+      type: object
+      properties:
+        Width:
+          $ref: '#/components/schemas/NullableInteger'
+        Height:
+          $ref: '#/components/schemas/NullableInteger'
+        FrameRate:
+          $ref: '#/components/schemas/FloatString'
+        FileSize:
+          $ref: '#/components/schemas/NullableLong'
+        DurationMillis:
+          $ref: '#/components/schemas/NullableLong'
+      description: The detected properties of the input file. Elastic Transcoder identifies these values from the input file.
+    Digits:
+      type: string
+      pattern: '^\d{1,5}$'
+    DigitsOrAuto:
+      type: string
+      pattern: '(^auto$)|(^\d{2,4}$)'
+    Encryption:
+      type: object
+      properties:
+        Mode:
+          $ref: '#/components/schemas/EncryptionMode'
+        Key:
+          $ref: '#/components/schemas/Base64EncodedString'
+        KeyMd5:
+          $ref: '#/components/schemas/Base64EncodedString'
+        InitializationVector:
+          $ref: '#/components/schemas/ZeroTo255String'
+      description: 'The encryption settings, if any, that are used for decrypting your input files or encrypting your output files. If your input file is encrypted, you must specify the mode that Elastic Transcoder uses to decrypt your file, otherwise you must specify the mode you want Elastic Transcoder to use to encrypt your output files.'
+    EncryptionMode:
+      type: string
+      pattern: (^s3$)|(^s3-aws-kms$)|(^aes-cbc-pkcs7$)|(^aes-ctr$)|(^aes-gcm$)
+    ExceptionMessages:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    Filename:
+      type: string
+      minLength: 1
+      maxLength: 255
+    FixedGOP:
+      type: string
+      pattern: (^true$)|(^false$)
+    FloatString:
+      type: string
+      pattern: '^\d{1,5}(\.\d{0,5})?$'
+    FrameRate:
+      type: string
+      pattern: (^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)
+    Grantee:
+      type: string
+      minLength: 1
+      maxLength: 255
+    GranteeType:
+      type: string
+      pattern: (^Canonical$)|(^Email$)|(^Group$)
+    HlsContentProtection:
+      type: object
+      properties:
+        Method:
+          $ref: '#/components/schemas/HlsContentProtectionMethod'
+        Key:
+          $ref: '#/components/schemas/Base64EncodedString'
+        KeyMd5:
+          $ref: '#/components/schemas/Base64EncodedString'
+        InitializationVector:
+          $ref: '#/components/schemas/ZeroTo255String'
+        LicenseAcquisitionUrl:
+          $ref: '#/components/schemas/ZeroTo512String'
+        KeyStoragePolicy:
+          $ref: '#/components/schemas/KeyStoragePolicy'
+      description: 'The HLS content protection settings, if any, that you want Elastic Transcoder to apply to your output files.'
+    HlsContentProtectionMethod:
+      type: string
+      pattern: (^aes-128$)
+    HorizontalAlign:
+      type: string
+      pattern: (^Left$)|(^Right$)|(^Center$)
+    Id:
+      type: string
+      pattern: '^\d{13}-\w{6}$'
+    IncompatibleVersionException:
+      type: object
+      properties: {}
+    InputCaptions:
+      type: object
+      properties:
+        MergePolicy:
+          $ref: '#/components/schemas/CaptionMergePolicy'
+        CaptionSources:
+          $ref: '#/components/schemas/CaptionSources'
+      description: 'The captions to be created, if any.'
+    Interlaced:
+      type: string
+      pattern: (^auto$)|(^true$)|(^false$)
+    InternalServiceException:
+      type: object
+      properties: {}
+      description: Elastic Transcoder encountered an unexpected exception while trying to fulfill the request.
+    Job:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/Id'
+        Arn:
+          $ref: '#/components/schemas/String'
+        PipelineId:
+          $ref: '#/components/schemas/Id'
+        Input:
+          $ref: '#/components/schemas/JobInput'
+        Inputs:
+          $ref: '#/components/schemas/JobInputs'
+        Output:
+          $ref: '#/components/schemas/JobOutput'
+        Outputs:
+          $ref: '#/components/schemas/JobOutputs'
+        OutputKeyPrefix:
+          $ref: '#/components/schemas/Key'
+        Playlists:
+          $ref: '#/components/schemas/Playlists'
+        Status:
+          $ref: '#/components/schemas/JobStatus'
+        UserMetadata:
+          $ref: '#/components/schemas/UserMetadata'
+        Timing:
+          $ref: '#/components/schemas/Timing'
+      description: A section of the response body that provides information about the job that is created.
+    JobAlbumArt:
+      type: object
+      properties:
+        MergePolicy:
+          $ref: '#/components/schemas/MergePolicy'
+        Artwork:
+          $ref: '#/components/schemas/Artworks'
+      description: The .jpg or .png file associated with an audio file.
+    JobContainer:
+      type: string
+      pattern: (^auto$)|(^3gp$)|(^asf$)|(^avi$)|(^divx$)|(^flv$)|(^mkv$)|(^mov$)|(^mp4$)|(^mpeg$)|(^mpeg-ps$)|(^mpeg-ts$)|(^mxf$)|(^ogg$)|(^ts$)|(^vob$)|(^wav$)|(^webm$)|(^mp3$)|(^m4a$)|(^aac$)
+    JobInput:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/LongKey'
+        FrameRate:
+          $ref: '#/components/schemas/FrameRate'
+        Resolution:
+          $ref: '#/components/schemas/Resolution'
+        AspectRatio:
+          $ref: '#/components/schemas/AspectRatio'
+        Interlaced:
+          $ref: '#/components/schemas/Interlaced'
+        Container:
+          $ref: '#/components/schemas/JobContainer'
+        Encryption:
+          $ref: '#/components/schemas/Encryption'
+        TimeSpan:
+          $ref: '#/components/schemas/TimeSpan'
+        InputCaptions:
+          $ref: '#/components/schemas/InputCaptions'
+        DetectedProperties:
+          $ref: '#/components/schemas/DetectedProperties'
+      description: Information about the file that you're transcoding.
+    JobInputs:
+      type: array
+      items:
+        $ref: '#/components/schemas/JobInput'
+      maxItems: 10000
+    JobOutput:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/String'
+        Key:
+          $ref: '#/components/schemas/Key'
+        ThumbnailPattern:
+          $ref: '#/components/schemas/ThumbnailPattern'
+        ThumbnailEncryption:
+          $ref: '#/components/schemas/Encryption'
+        Rotate:
+          $ref: '#/components/schemas/Rotate'
+        PresetId:
+          $ref: '#/components/schemas/Id'
+        SegmentDuration:
+          $ref: '#/components/schemas/FloatString'
+        Status:
+          $ref: '#/components/schemas/JobStatus'
+        StatusDetail:
+          $ref: '#/components/schemas/Description'
+        Duration:
+          $ref: '#/components/schemas/NullableLong'
+        Width:
+          $ref: '#/components/schemas/NullableInteger'
+        Height:
+          $ref: '#/components/schemas/NullableInteger'
+        FrameRate:
+          $ref: '#/components/schemas/FloatString'
+        FileSize:
+          $ref: '#/components/schemas/NullableLong'
+        DurationMillis:
+          $ref: '#/components/schemas/NullableLong'
+        Watermarks:
+          $ref: '#/components/schemas/JobWatermarks'
+        AlbumArt:
+          $ref: '#/components/schemas/JobAlbumArt'
+        Composition:
+          $ref: '#/components/schemas/Composition'
+        Captions:
+          $ref: '#/components/schemas/Captions'
+        Encryption:
+          $ref: '#/components/schemas/Encryption'
+        AppliedColorSpaceConversion:
+          $ref: '#/components/schemas/String'
+      description: '<important> <p>Outputs recommended instead.</p> </important> <p>If you specified one output for a job, information about that output. If you specified multiple outputs for a job, the <code>Output</code> object lists information about the first output. This duplicates the information that is listed for the first output in the <code>Outputs</code> object.</p>'
+    JobOutputs:
+      type: array
+      items:
+        $ref: '#/components/schemas/JobOutput'
+    JobStatus:
+      type: string
+      pattern: (^Submitted$)|(^Progressing$)|(^Complete$)|(^Canceled$)|(^Error$)
+    JobWatermark:
+      type: object
+      properties:
+        PresetWatermarkId:
+          $ref: '#/components/schemas/PresetWatermarkId'
+        InputKey:
+          $ref: '#/components/schemas/WatermarkKey'
+        Encryption:
+          $ref: '#/components/schemas/Encryption'
+      description: 'Watermarks can be in .png or .jpg format. If you want to display a watermark that is not rectangular, use the .png format, which supports transparency.'
+    JobWatermarks:
+      type: array
+      items:
+        $ref: '#/components/schemas/JobWatermark'
+    Jobs:
+      type: array
+      items:
+        $ref: '#/components/schemas/Job'
+    JpgOrPng:
+      type: string
+      pattern: (^jpg$)|(^png$)
+    Key:
+      type: string
+      minLength: 1
+      maxLength: 255
+    KeyArn:
+      type: string
+      minLength: 0
+      maxLength: 255
+    KeyIdGuid:
+      type: string
+      pattern: '(^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$)|(^[0-9A-Fa-f]{32}$)'
+    KeyStoragePolicy:
+      type: string
+      pattern: (^NoStore$)|(^WithVariantPlaylists$)
+    KeyframesMaxDist:
+      type: string
+      pattern: '^\d{1,6}$'
+    LimitExceededException:
+      type: object
+      properties: {}
+      description: 'Too many operations for a given AWS account. For example, the number of pipelines exceeds the maximum allowed.'
+    ListJobsByPipelineRequest:
+      type: object
+      properties: {}
+      description: The <code>ListJobsByPipelineRequest</code> structure.
+    ListJobsByPipelineResponse:
+      type: object
+      properties:
+        Jobs:
+          $ref: '#/components/schemas/Jobs'
+        NextPageToken:
+          $ref: '#/components/schemas/Id'
+      description: The <code>ListJobsByPipelineResponse</code> structure.
+    ListJobsByStatusRequest:
+      type: object
+      properties: {}
+      description: The <code>ListJobsByStatusRequest</code> structure.
+    ListJobsByStatusResponse:
+      type: object
+      properties:
+        Jobs:
+          $ref: '#/components/schemas/Jobs'
+        NextPageToken:
+          $ref: '#/components/schemas/Id'
+      description: ' The <code>ListJobsByStatusResponse</code> structure. '
+    ListPipelinesRequest:
+      type: object
+      properties: {}
+      description: The <code>ListPipelineRequest</code> structure.
+    ListPipelinesResponse:
+      type: object
+      properties:
+        Pipelines:
+          $ref: '#/components/schemas/Pipelines'
+        NextPageToken:
+          $ref: '#/components/schemas/Id'
+      description: A list of the pipelines associated with the current AWS account.
+    ListPresetsRequest:
+      type: object
+      properties: {}
+      description: The <code>ListPresetsRequest</code> structure.
+    ListPresetsResponse:
+      type: object
+      properties:
+        Presets:
+          $ref: '#/components/schemas/Presets'
+        NextPageToken:
+          $ref: '#/components/schemas/Id'
+      description: The <code>ListPresetsResponse</code> structure.
+    LongKey:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    MaxFrameRate:
+      type: string
+      pattern: (^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)
+    MergePolicy:
+      type: string
+      pattern: (^Replace$)|(^Prepend$)|(^Append$)|(^Fallback$)
+    Name:
+      type: string
+      minLength: 1
+      maxLength: 40
+    NonEmptyBase64EncodedString:
+      type: string
+      pattern: '(^(?:[A-Za-z0-9\+/]{4})*(?:[A-Za-z0-9\+/]{2}==|[A-Za-z0-9\+/]{3}=)?$)'
+    Notifications:
+      type: object
+      properties:
+        Progressing:
+          $ref: '#/components/schemas/SnsTopic'
+        Completed:
+          $ref: '#/components/schemas/SnsTopic'
+        Warning:
+          $ref: '#/components/schemas/SnsTopic'
+        Error:
+          $ref: '#/components/schemas/SnsTopic'
+      description: '<p>The Amazon Simple Notification Service (Amazon SNS) topic or topics to notify in order to report job status.</p> <important> <p>To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.</p> </important>'
+    NullableInteger:
+      type: integer
+    NullableLong:
+      type: integer
+    OneTo512String:
+      type: string
+      minLength: 1
+      maxLength: 512
+    Opacity:
+      type: string
+      pattern: '^\d{1,3}(\.\d{0,20})?$'
+    OutputKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/Key'
+      maxItems: 30
+    PaddingPolicy:
+      type: string
+      pattern: (^Pad$)|(^NoPad$)
+    Permission:
+      type: object
+      properties:
+        GranteeType:
+          $ref: '#/components/schemas/GranteeType'
+        Grantee:
+          $ref: '#/components/schemas/Grantee'
+        Access:
+          $ref: '#/components/schemas/AccessControls'
+      description: The <code>Permission</code> structure.
+    Permissions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Permission'
+      maxItems: 30
+    Pipeline:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/Id'
+        Arn:
+          $ref: '#/components/schemas/String'
+        Name:
+          $ref: '#/components/schemas/Name'
+        Status:
+          $ref: '#/components/schemas/PipelineStatus'
+        InputBucket:
+          $ref: '#/components/schemas/BucketName'
+        OutputBucket:
+          $ref: '#/components/schemas/BucketName'
+        Role:
+          $ref: '#/components/schemas/Role'
+        AwsKmsKeyArn:
+          $ref: '#/components/schemas/KeyArn'
+        Notifications:
+          $ref: '#/components/schemas/Notifications'
+        ContentConfig:
+          $ref: '#/components/schemas/PipelineOutputConfig'
+        ThumbnailConfig:
+          $ref: '#/components/schemas/PipelineOutputConfig'
+      description: The pipeline (queue) that is used to manage jobs.
+    PipelineOutputConfig:
+      type: object
+      properties:
+        Bucket:
+          $ref: '#/components/schemas/BucketName'
+        StorageClass:
+          $ref: '#/components/schemas/StorageClass'
+        Permissions:
+          $ref: '#/components/schemas/Permissions'
+      description: The <code>PipelineOutputConfig</code> structure.
+    PipelineStatus:
+      type: string
+      pattern: (^Active$)|(^Paused$)
+    Pipelines:
+      type: array
+      items:
+        $ref: '#/components/schemas/Pipeline'
+    PixelsOrPercent:
+      type: string
+      pattern: '(^\d{1,3}(\.\d{0,5})?%$)|(^\d{1,4}?px$)'
+    PlayReadyDrm:
+      type: object
+      properties:
+        Format:
+          $ref: '#/components/schemas/PlayReadyDrmFormatString'
+        Key:
+          $ref: '#/components/schemas/NonEmptyBase64EncodedString'
+        KeyMd5:
+          $ref: '#/components/schemas/NonEmptyBase64EncodedString'
+        KeyId:
+          $ref: '#/components/schemas/KeyIdGuid'
+        InitializationVector:
+          $ref: '#/components/schemas/ZeroTo255String'
+        LicenseAcquisitionUrl:
+          $ref: '#/components/schemas/OneTo512String'
+      description: '<p>The PlayReady DRM settings, if any, that you want Elastic Transcoder to apply to the output files associated with this playlist.</p> <p>PlayReady DRM encrypts your media files using <code>AES-CTR</code> encryption.</p> <p>If you use DRM for an <code>HLSv3</code> playlist, your outputs must have a master playlist.</p>'
+    PlayReadyDrmFormatString:
+      type: string
+      pattern: (^microsoft$)|(^discretix-3.0$)
+    Playlist:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/Filename'
+        Format:
+          $ref: '#/components/schemas/PlaylistFormat'
+        OutputKeys:
+          $ref: '#/components/schemas/OutputKeys'
+        HlsContentProtection:
+          $ref: '#/components/schemas/HlsContentProtection'
+        PlayReadyDrm:
+          $ref: '#/components/schemas/PlayReadyDrm'
+        Status:
+          $ref: '#/components/schemas/JobStatus'
+        StatusDetail:
+          $ref: '#/components/schemas/Description'
+      description: ' Use Only for Fragmented MP4 or MPEG-TS Outputs. If you specify a preset for which the value of Container is <code>fmp4</code> (Fragmented MP4) or <code>ts</code> (MPEG-TS), Playlists contains information about the master playlists that you want Elastic Transcoder to create. We recommend that you create only one master playlist per output format. The maximum number of master playlists in a job is 30. '
+    PlaylistFormat:
+      type: string
+      pattern: (^HLSv3$)|(^HLSv4$)|(^Smooth$)|(^MPEG-DASH$)
+    Playlists:
+      type: array
+      items:
+        $ref: '#/components/schemas/Playlist'
+    Preset:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/Id'
+        Arn:
+          $ref: '#/components/schemas/String'
+        Name:
+          $ref: '#/components/schemas/Name'
+        Description:
+          $ref: '#/components/schemas/Description'
+        Container:
+          $ref: '#/components/schemas/PresetContainer'
+        Audio:
+          $ref: '#/components/schemas/AudioParameters'
+        Video:
+          $ref: '#/components/schemas/VideoParameters'
+        Thumbnails:
+          $ref: '#/components/schemas/Thumbnails'
+        Type:
+          $ref: '#/components/schemas/PresetType'
+      description: 'Presets are templates that contain most of the settings for transcoding media files from one format to another. Elastic Transcoder includes some default presets for common formats, for example, several iPod and iPhone versions. You can also create your own presets for formats that aren''t included among the default presets. You specify which preset you want to use when you create a job.'
+    PresetContainer:
+      type: string
+      pattern: (^mp4$)|(^ts$)|(^webm$)|(^mp3$)|(^flac$)|(^oga$)|(^ogg$)|(^fmp4$)|(^mpg$)|(^flv$)|(^gif$)|(^mxf$)|(^wav$)
+    PresetType:
+      type: string
+      pattern: (^System$)|(^Custom$)
+    PresetWatermark:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/PresetWatermarkId'
+        MaxWidth:
+          $ref: '#/components/schemas/PixelsOrPercent'
+        MaxHeight:
+          $ref: '#/components/schemas/PixelsOrPercent'
+        SizingPolicy:
+          $ref: '#/components/schemas/WatermarkSizingPolicy'
+        HorizontalAlign:
+          $ref: '#/components/schemas/HorizontalAlign'
+        HorizontalOffset:
+          $ref: '#/components/schemas/PixelsOrPercent'
+        VerticalAlign:
+          $ref: '#/components/schemas/VerticalAlign'
+        VerticalOffset:
+          $ref: '#/components/schemas/PixelsOrPercent'
+        Opacity:
+          $ref: '#/components/schemas/Opacity'
+        Target:
+          $ref: '#/components/schemas/Target'
+      description: '<p>Settings for the size, location, and opacity of graphics that you want Elastic Transcoder to overlay over videos that are transcoded using this preset. You can specify settings for up to four watermarks. Watermarks appear in the specified size and location, and with the specified opacity for the duration of the transcoded video.</p> <p>Watermarks can be in .png or .jpg format. If you want to display a watermark that is not rectangular, use the .png format, which supports transparency.</p> <p>When you create a job that uses this preset, you specify the .png or .jpg graphics that you want Elastic Transcoder to include in the transcoded videos. You can specify fewer graphics in the job than you specify watermark settings in the preset, which allows you to use the same preset for up to four watermarks that have different dimensions.</p>'
+    PresetWatermarkId:
+      type: string
+      minLength: 1
+      maxLength: 40
+    PresetWatermarks:
+      type: array
+      items:
+        $ref: '#/components/schemas/PresetWatermark'
+    Presets:
+      type: array
+      items:
+        $ref: '#/components/schemas/Preset'
+    ReadJobRequest:
+      type: object
+      properties: {}
+      description: The <code>ReadJobRequest</code> structure.
+    ReadJobResponse:
+      type: object
+      properties:
+        Job:
+          $ref: '#/components/schemas/Job'
+      description: The <code>ReadJobResponse</code> structure.
+    ReadPipelineRequest:
+      type: object
+      properties: {}
+      description: The <code>ReadPipelineRequest</code> structure.
+    ReadPipelineResponse:
+      type: object
+      properties:
+        Pipeline:
+          $ref: '#/components/schemas/Pipeline'
+        Warnings:
+          $ref: '#/components/schemas/Warnings'
+      description: The <code>ReadPipelineResponse</code> structure.
+    ReadPresetRequest:
+      type: object
+      properties: {}
+      description: The <code>ReadPresetRequest</code> structure.
+    ReadPresetResponse:
+      type: object
+      properties:
+        Preset:
+          $ref: '#/components/schemas/Preset'
+      description: The <code>ReadPresetResponse</code> structure.
+    Resolution:
+      type: string
+      pattern: '(^auto$)|(^\d{1,5}x\d{1,5}$)'
+    ResourceInUseException:
+      type: object
+      properties: {}
+      description: 'The resource you are attempting to change is in use. For example, you are attempting to delete a pipeline that is currently in use.'
+    ResourceNotFoundException:
+      type: object
+      properties: {}
+      description: 'The requested resource does not exist or is not available. For example, the pipeline to which you''re trying to add a job doesn''t exist or is still being created.'
+    Role:
+      type: string
+      pattern: '^arn:aws:iam::\w{12}:role/.+$'
+    Rotate:
+      type: string
+      pattern: (^auto$)|(^0$)|(^90$)|(^180$)|(^270$)
+    SizingPolicy:
+      type: string
+      pattern: (^Fit$)|(^Fill$)|(^Stretch$)|(^Keep$)|(^ShrinkToFit$)|(^ShrinkToFill$)
+    SnsTopic:
+      type: string
+      pattern: '(^$)|(^arn:aws:sns:.*:\w{12}:.+$)'
+    SnsTopics:
+      type: array
+      items:
+        $ref: '#/components/schemas/SnsTopic'
+      maxItems: 30
+    StorageClass:
+      type: string
+      pattern: (^ReducedRedundancy$)|(^Standard$)
+    String:
+      type: string
+    Success:
+      type: string
+      pattern: (^true$)|(^false$)
+    Target:
+      type: string
+      pattern: (^Content$)|(^Frame$)
+    TestRoleRequest:
+      type: object
+      required:
+        - Role
+        - InputBucket
+        - OutputBucket
+        - Topics
+      properties:
+        Role:
+          $ref: '#/components/schemas/Role'
+        InputBucket:
+          $ref: '#/components/schemas/BucketName'
+        OutputBucket:
+          $ref: '#/components/schemas/BucketName'
+        Topics:
+          $ref: '#/components/schemas/SnsTopics'
+      description: ' The <code>TestRoleRequest</code> structure. '
+    TestRoleResponse:
+      type: object
+      properties:
+        Success:
+          $ref: '#/components/schemas/Success'
+        Messages:
+          $ref: '#/components/schemas/ExceptionMessages'
+      description: The <code>TestRoleResponse</code> structure.
+    ThumbnailPattern:
+      type: string
+      pattern: '(^$)|(^.*\{count\}.*$)'
+    ThumbnailResolution:
+      type: string
+      pattern: '^\d{1,5}x\d{1,5}$'
+    Thumbnails:
+      type: object
+      properties:
+        Format:
+          $ref: '#/components/schemas/JpgOrPng'
+        Interval:
+          $ref: '#/components/schemas/Digits'
+        Resolution:
+          $ref: '#/components/schemas/ThumbnailResolution'
+        AspectRatio:
+          $ref: '#/components/schemas/AspectRatio'
+        MaxWidth:
+          $ref: '#/components/schemas/DigitsOrAuto'
+        MaxHeight:
+          $ref: '#/components/schemas/DigitsOrAuto'
+        SizingPolicy:
+          $ref: '#/components/schemas/SizingPolicy'
+        PaddingPolicy:
+          $ref: '#/components/schemas/PaddingPolicy'
+      description: Thumbnails for videos.
+    Time:
+      type: string
+      pattern: '(^\d{1,5}(\.\d{0,3})?$)|(^([0-1]?[0-9]:|2[0-3]:)?([0-5]?[0-9]:)?[0-5]?[0-9](\.\d{0,3})?$)'
+    TimeOffset:
+      type: string
+      pattern: '(^[+-]?\d{1,5}(\.\d{0,3})?$)|(^[+-]?([0-1]?[0-9]:|2[0-3]:)?([0-5]?[0-9]:)?[0-5]?[0-9](\.\d{0,3})?$)'
+    TimeSpan:
+      type: object
+      properties:
+        StartTime:
+          $ref: '#/components/schemas/Time'
+        Duration:
+          $ref: '#/components/schemas/Time'
+      description: Settings that determine when a clip begins and how long it lasts.
+    Timing:
+      type: object
+      properties:
+        SubmitTimeMillis:
+          $ref: '#/components/schemas/NullableLong'
+        StartTimeMillis:
+          $ref: '#/components/schemas/NullableLong'
+        FinishTimeMillis:
+          $ref: '#/components/schemas/NullableLong'
+      description: Details about the timing of a job.
+    UpdatePipelineNotificationsRequest:
+      type: object
+      required:
+        - Notifications
+      properties:
+        Notifications:
+          $ref: '#/components/schemas/Notifications'
+      description: The <code>UpdatePipelineNotificationsRequest</code> structure.
+    UpdatePipelineNotificationsResponse:
+      type: object
+      properties:
+        Pipeline:
+          $ref: '#/components/schemas/Pipeline'
+      description: The <code>UpdatePipelineNotificationsResponse</code> structure.
+    UpdatePipelineRequest:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/Name'
+        InputBucket:
+          $ref: '#/components/schemas/BucketName'
+        Role:
+          $ref: '#/components/schemas/Role'
+        AwsKmsKeyArn:
+          $ref: '#/components/schemas/KeyArn'
+        Notifications:
+          $ref: '#/components/schemas/Notifications'
+        ContentConfig:
+          $ref: '#/components/schemas/PipelineOutputConfig'
+        ThumbnailConfig:
+          $ref: '#/components/schemas/PipelineOutputConfig'
+      description: The <code>UpdatePipelineRequest</code> structure.
+    UpdatePipelineResponse:
+      type: object
+      properties:
+        Pipeline:
+          $ref: '#/components/schemas/Pipeline'
+        Warnings:
+          $ref: '#/components/schemas/Warnings'
+      description: 'When you update a pipeline, Elastic Transcoder returns the values that you specified in the request.'
+    UpdatePipelineStatusRequest:
+      type: object
+      required:
+        - Status
+      properties:
+        Status:
+          $ref: '#/components/schemas/PipelineStatus'
+      description: The <code>UpdatePipelineStatusRequest</code> structure.
+    UpdatePipelineStatusResponse:
+      type: object
+      properties:
+        Pipeline:
+          $ref: '#/components/schemas/Pipeline'
+      description: 'When you update status for a pipeline, Elastic Transcoder returns the values that you specified in the request.'
+    UserMetadata:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/String'
+    ValidationException:
+      type: object
+      properties: {}
+      description: One or more required parameter values were not provided in the request.
+    VerticalAlign:
+      type: string
+      pattern: (^Top$)|(^Bottom$)|(^Center$)
+    VideoBitRate:
+      type: string
+      pattern: '(^\d{2,5}$)|(^auto$)'
+    VideoCodec:
+      type: string
+      pattern: (^H\.264$)|(^vp8$)|(^vp9$)|(^mpeg2$)|(^gif$)
+    VideoParameters:
+      type: object
+      properties:
+        Codec:
+          $ref: '#/components/schemas/VideoCodec'
+        CodecOptions:
+          $ref: '#/components/schemas/CodecOptions'
+        KeyframesMaxDist:
+          $ref: '#/components/schemas/KeyframesMaxDist'
+        FixedGOP:
+          $ref: '#/components/schemas/FixedGOP'
+        BitRate:
+          $ref: '#/components/schemas/VideoBitRate'
+        FrameRate:
+          $ref: '#/components/schemas/FrameRate'
+        MaxFrameRate:
+          $ref: '#/components/schemas/MaxFrameRate'
+        Resolution:
+          $ref: '#/components/schemas/Resolution'
+        AspectRatio:
+          $ref: '#/components/schemas/AspectRatio'
+        MaxWidth:
+          $ref: '#/components/schemas/DigitsOrAuto'
+        MaxHeight:
+          $ref: '#/components/schemas/DigitsOrAuto'
+        DisplayAspectRatio:
+          $ref: '#/components/schemas/AspectRatio'
+        SizingPolicy:
+          $ref: '#/components/schemas/SizingPolicy'
+        PaddingPolicy:
+          $ref: '#/components/schemas/PaddingPolicy'
+        Watermarks:
+          $ref: '#/components/schemas/PresetWatermarks'
+      description: The <code>VideoParameters</code> structure.
+    Warning:
+      type: object
+      properties:
+        Code:
+          $ref: '#/components/schemas/String'
+        Message:
+          $ref: '#/components/schemas/String'
+      description: '<p>Elastic Transcoder returns a warning if the resources used by your pipeline are not in the same region as the pipeline.</p> <p>Using resources in the same region, such as your Amazon S3 buckets, Amazon SNS notification topics, and AWS KMS key, reduces processing time and prevents cross-regional charges.</p>'
+    Warnings:
+      type: array
+      items:
+        $ref: '#/components/schemas/Warning'
+    WatermarkKey:
+      type: string
+      pattern: '(^.{1,1020}.jpg$)|(^.{1,1019}.jpeg$)|(^.{1,1020}.png$)'
+      minLength: 1
+      maxLength: 1024
+    WatermarkSizingPolicy:
+      type: string
+      pattern: (^Fit$)|(^Stretch$)|(^ShrinkToFit$)
+    ZeroTo255String:
+      type: string
+      minLength: 0
+      maxLength: 255
+    ZeroTo512String:
+      type: string
+      minLength: 0
+      maxLength: 512
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

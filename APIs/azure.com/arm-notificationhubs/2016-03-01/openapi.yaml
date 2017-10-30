@@ -1,0 +1,1453 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://management.azure.com/'
+info:
+  description: Azure NotificationHub client
+  title: NotificationHubsManagementClient
+  version: '2016-03-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-notificationhubs/2016-03-01/swagger/notificationhubs.json'
+      version: '2.0'
+  x-preferred: true
+  x-providerName: azure.com
+  x-serviceName: arm-notificationhubs
+  x-tags:
+    - Azure
+    - Microsoft
+security:
+  - azure_auth:
+      - user_impersonation
+paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.NotificationHubs/checkNamespaceAvailability':
+    post:
+      description: Checks the availability of the given service namespace across all Azure subscriptions. This is useful because the domain name is created based on the service namespace name.
+      externalDocs:
+        url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj870968.aspx'
+      operationId: Namespaces_CheckAvailability
+      parameters:
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Checks if the Namespace name is a valid availabile name
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckAvailabilityResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CheckAvailabilityResult'
+      tags:
+        - Namespaces
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckAvailabilityParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CheckAvailabilityParameters'
+        description: The namespace name.
+        required: true
+  '/subscriptions/{subscriptionId}/providers/Microsoft.NotificationHubs/namespaces':
+    get:
+      description: Lists all the available namespaces within the subscription irrespective of the resourceGroups.
+      externalDocs:
+        url: 'http://msdn.microsoft.com/en-us/library/azure/hh780759.aspx'
+      operationId: Namespaces_ListAll
+      parameters:
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ' Gets all the Namespaces within the subscription irrespective of the ResourceGroup'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceListResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceListResult'
+      tags:
+        - Namespaces
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces':
+    get:
+      description: Lists the available namespaces within a resourceGroup.
+      externalDocs:
+        url: 'http://msdn.microsoft.com/en-us/library/azure/hh780759.aspx'
+      operationId: Namespaces_List
+      parameters:
+        - description: The name of the resource group. If resourceGroupName value is null the method lists all the namespaces within subscription
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Lists all Namespaces with the ResourceGroup
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceListResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceListResult'
+      tags:
+        - Namespaces
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}':
+    delete:
+      description: Deletes an existing namespace. This operation also removes all associated notificationHubs under the namespace.
+      externalDocs:
+        url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj856296.aspx'
+      operationId: Namespaces_Delete
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace is deleted
+        '202':
+          description: Namespace delete request has been accepted
+        '204':
+          description: Namespace is already Deleted
+      tags:
+        - Namespaces
+      x-ms-long-running-operation: true
+    get:
+      description: Returns the description for the specified namespace.
+      externalDocs:
+        url: 'http://msdn.microsoft.com/library/azure/dn140232.aspx'
+      operationId: Namespaces_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Get Namespace
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceResource'
+      tags:
+        - Namespaces
+    patch:
+      description: Patches the existing namespace
+      operationId: Namespaces_Patch
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace is Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceResource'
+      tags:
+        - Namespaces
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NamespacePatchParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/NamespacePatchParameters'
+        description: Parameters supplied to patch a Namespace Resource.
+        required: true
+    put:
+      description: 'Creates/Updates a service namespace. Once created, this namespace''s resource manifest is immutable. This operation is idempotent.'
+      externalDocs:
+        url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj856303.aspx'
+      operationId: Namespaces_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace is Create/Update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceResource'
+        '201':
+          description: Namespace is Create/Update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceResource'
+      tags:
+        - Namespaces
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NamespaceCreateOrUpdateParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/NamespaceCreateOrUpdateParameters'
+        description: Parameters supplied to create a Namespace Resource.
+        required: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/AuthorizationRules':
+    get:
+      description: Gets the authorization rules for a namespace.
+      operationId: Namespaces_ListAuthorizationRules
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Get the Namespace AuthorizationRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedAccessAuthorizationRuleListResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SharedAccessAuthorizationRuleListResult'
+      tags:
+        - Namespaces
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}':
+    delete:
+      description: Deletes a namespace authorization rule
+      operationId: Namespaces_DeleteAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - description: Authorization Rule Name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace AuthorizationRule is deleted
+        '204':
+          description: Namespace AuthorizationRule is already deleted
+      tags:
+        - Namespaces
+    get:
+      description: Gets an authorization rule for a namespace by name.
+      operationId: Namespaces_GetAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - description: Authorization rule name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Get the Namespace AuthorizationRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedAccessAuthorizationRuleResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SharedAccessAuthorizationRuleResource'
+      tags:
+        - Namespaces
+    put:
+      description: Creates an authorization rule for a namespace
+      operationId: Namespaces_CreateOrUpdateAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - description: Aauthorization Rule Name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace Authorization Rule is Created/Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedAccessAuthorizationRuleResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SharedAccessAuthorizationRuleResource'
+      tags:
+        - Namespaces
+      requestBody:
+        $ref: '#/components/requestBodies/SharedAccessAuthorizationRuleCreateOrUpdateParameters'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/listKeys':
+    post:
+      description: 'Gets the Primary and Secondary ConnectionStrings to the namespace '
+      externalDocs:
+        url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx'
+      operationId: Namespaces_ListKeys
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - description: The connection string of the namespace for the specified authorizationRule.
+          in: path
+          name: authorizationRuleName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Gets the Namespace AuthorizationRule's Primary keys and Secondary keys along with the ConnectionStrings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceListKeys'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResourceListKeys'
+      tags:
+        - Namespaces
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/regenerateKeys':
+    post:
+      description: Regenerates the Primary/Secondary Keys to the Namespace Authorization Rule
+      externalDocs:
+        url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx'
+      operationId: Namespaces_RegenerateKeys
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - description: The connection string of the namespace for the specified authorizationRule.
+          in: path
+          name: authorizationRuleName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Regenerate the Primary/Secondary Key and returns the Keys and the connection string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceListKeys'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResourceListKeys'
+      tags:
+        - Namespaces
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PolicykeyResource'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PolicykeyResource'
+        description: Parameters supplied to regenerate the Namespace Authorization Rule Key.
+        required: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/checkNotificationHubAvailability':
+    post:
+      description: Checks the availability of the given notificationHub in a namespace.
+      externalDocs:
+        url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj870968.aspx'
+      operationId: NotificationHubs_CheckAvailability
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Checks if the NotificationHub name is a valid availabile name
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckAvailabilityResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CheckAvailabilityResult'
+      tags:
+        - NotificationHubs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckAvailabilityParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CheckAvailabilityParameters'
+        description: The notificationHub name.
+        required: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs':
+    get:
+      description: Lists the notification hubs associated with a namespace.
+      operationId: NotificationHubs_List
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Get all NotificationHubs within a Namespace
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationHubListResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/NotificationHubListResult'
+      tags:
+        - NotificationHubs
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}':
+    delete:
+      description: Deletes a notification hub associated with a namespace.
+      operationId: NotificationHubs_Delete
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - description: The notification hub name.
+          in: path
+          name: notificationHubName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace is deleted
+      tags:
+        - NotificationHubs
+    get:
+      description: Lists the notification hubs associated with a namespace.
+      operationId: NotificationHubs_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - description: The notification hub name.
+          in: path
+          name: notificationHubName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Get the NotificationHub
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationHubResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/NotificationHubResource'
+      tags:
+        - NotificationHubs
+    put:
+      description: Creates/Update a NotificationHub in a namespace.
+      externalDocs:
+        url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj856303.aspx'
+      operationId: NotificationHubs_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - description: The notification hub name.
+          in: path
+          name: notificationHubName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: NotificationHub is Created/Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationHubResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/NotificationHubResource'
+        '201':
+          description: NotificationHub is Created/Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationHubResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/NotificationHubResource'
+      tags:
+        - NotificationHubs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationHubCreateOrUpdateParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/NotificationHubCreateOrUpdateParameters'
+        description: Parameters supplied to the create/update a NotificationHub Resource.
+        required: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/AuthorizationRules':
+    get:
+      description: Gets the authorization rules for a NotificationHub.
+      operationId: NotificationHubs_ListAuthorizationRules
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - description: The notification hub name.
+          in: path
+          name: notificationHubName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Get all NotificationHub AuthorizationRules
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedAccessAuthorizationRuleListResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SharedAccessAuthorizationRuleListResult'
+      tags:
+        - NotificationHubs
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/AuthorizationRules/{authorizationRuleName}':
+    delete:
+      description: Deletes a notificationHub authorization rule
+      operationId: NotificationHubs_DeleteAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - description: The notification hub name.
+          in: path
+          name: notificationHubName
+          required: true
+          schema:
+            type: string
+        - description: Authorization Rule Name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: NotificationHub AuthorizationRule is deleted
+        '204':
+          description: NotificationHub AuthorizationRule is already deleted
+      tags:
+        - NotificationHubs
+    get:
+      description: Gets an authorization rule for a NotificationHub by name.
+      operationId: NotificationHubs_GetAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - description: The notification hub name.
+          in: path
+          name: notificationHubName
+          required: true
+          schema:
+            type: string
+        - description: authorization rule name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Get NotificationHub AuthorizationRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedAccessAuthorizationRuleResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SharedAccessAuthorizationRuleResource'
+      tags:
+        - NotificationHubs
+    put:
+      description: Creates/Updates an authorization rule for a NotificationHub
+      operationId: NotificationHubs_CreateOrUpdateAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - description: The notification hub name.
+          in: path
+          name: notificationHubName
+          required: true
+          schema:
+            type: string
+        - description: Authorization Rule Name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: NotificationHub AuthorizationRule is Created/Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedAccessAuthorizationRuleResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SharedAccessAuthorizationRuleResource'
+      tags:
+        - NotificationHubs
+      requestBody:
+        $ref: '#/components/requestBodies/SharedAccessAuthorizationRuleCreateOrUpdateParameters'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/AuthorizationRules/{authorizationRuleName}/listKeys':
+    post:
+      description: 'Gets the Primary and Secondary ConnectionStrings to the NotificationHub '
+      externalDocs:
+        url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx'
+      operationId: NotificationHubs_ListKeys
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - description: The notification hub name.
+          in: path
+          name: notificationHubName
+          required: true
+          schema:
+            type: string
+        - description: The connection string of the NotificationHub for the specified authorizationRule.
+          in: path
+          name: authorizationRuleName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Gets the Namespace AuthorizationRule's Primary keys and Secondary keys along with the ConnectionStrings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceListKeys'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResourceListKeys'
+      tags:
+        - NotificationHubs
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/AuthorizationRules/{authorizationRuleName}/regenerateKeys':
+    post:
+      description: Regenerates the Primary/Secondary Keys to the NotificationHub Authorization Rule
+      externalDocs:
+        url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx'
+      operationId: NotificationHubs_RegenerateKeys
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - description: The notification hub name.
+          in: path
+          name: notificationHubName
+          required: true
+          schema:
+            type: string
+        - description: The connection string of the NotificationHub for the specified authorizationRule.
+          in: path
+          name: authorizationRuleName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Regenerate the Primary/Secondary Key and returns the Keys and the connection string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceListKeys'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResourceListKeys'
+      tags:
+        - NotificationHubs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PolicykeyResource'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PolicykeyResource'
+        description: Parameters supplied to regenerate the NotificationHub Authorization Rule Key.
+        required: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/pnsCredentials':
+    post:
+      description: Lists the PNS Credentials associated with a notification hub .
+      operationId: NotificationHubs_GetPnsCredentials
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          schema:
+            type: string
+        - description: The notification hub name.
+          in: path
+          name: notificationHubName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Gets all the NotificationHub PNS credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PnsCredentialsResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PnsCredentialsResource'
+      tags:
+        - NotificationHubs
+components:
+  schemas:
+    AdmCredential:
+      description: Description of a NotificationHub AdmCredential.
+      properties:
+        properties:
+          $ref: '#/components/schemas/AdmCredentialProperties'
+    AdmCredentialProperties:
+      description: Description of a NotificationHub AdmCredential.
+      properties:
+        authTokenUrl:
+          description: The URL of the authorization token.
+          type: string
+        clientId:
+          description: The client identifier.
+          type: string
+        clientSecret:
+          description: The credential secret access key.
+          type: string
+    ApnsCredential:
+      description: Description of a NotificationHub ApnsCredential.
+      properties:
+        properties:
+          $ref: '#/components/schemas/ApnsCredentialProperties'
+    ApnsCredentialProperties:
+      description: Description of a NotificationHub ApnsCredential.
+      properties:
+        apnsCertificate:
+          description: The APNS certificate.
+          type: string
+        certificateKey:
+          description: The certificate key.
+          type: string
+        endpoint:
+          description: The endpoint of this credential.
+          type: string
+        thumbprint:
+          description: The Apns certificate Thumbprint
+          type: string
+    BaiduCredential:
+      description: Description of a NotificationHub BaiduCredential.
+      properties:
+        properties:
+          $ref: '#/components/schemas/BaiduCredentialProperties'
+    BaiduCredentialProperties:
+      description: Description of a NotificationHub BaiduCredential.
+      properties:
+        baiduApiKey:
+          description: Baidu Api Key.
+          type: string
+        baiduEndPoint:
+          description: Baidu Endpoint.
+          type: string
+        baiduSecretKey:
+          description: Baidu Secret Key
+          type: string
+    CheckAvailabilityParameters:
+      description: Parameters supplied to the Check Name Availability for Namespace and NotificationHubs.
+      properties:
+        id:
+          description: Resource Id
+          readOnly: true
+          type: string
+        isAvailiable:
+          description: True if the name is available and can be used to create new Namespace/NotificationHub. Otherwise false.
+          type: boolean
+        location:
+          description: Resource location
+          type: string
+        name:
+          description: Resource name
+          type: string
+        sku:
+          $ref: '#/components/schemas/Sku'
+        tags:
+          additionalProperties:
+            type: string
+          description: Resource tags
+          type: object
+        type:
+          description: Resource type
+          readOnly: true
+          type: string
+      required:
+        - name
+        - location
+    CheckAvailabilityResult:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+      description: Description of a CheckAvailibility resource.
+      properties:
+        isAvailiable:
+          description: True if the name is available and can be used to create new Namespace/NotificationHub. Otherwise false.
+          type: boolean
+    GcmCredential:
+      description: Description of a NotificationHub GcmCredential.
+      properties:
+        properties:
+          $ref: '#/components/schemas/GcmCredentialProperties'
+    GcmCredentialProperties:
+      description: Description of a NotificationHub GcmCredential.
+      properties:
+        gcmEndpoint:
+          description: The GCM endpoint.
+          type: string
+        googleApiKey:
+          description: The Google API key.
+          type: string
+    MpnsCredential:
+      description: Description of a NotificationHub MpnsCredential.
+      properties:
+        properties:
+          $ref: '#/components/schemas/MpnsCredentialProperties'
+    MpnsCredentialProperties:
+      description: Description of a NotificationHub MpnsCredential.
+      properties:
+        certificateKey:
+          description: The certificate key for this credential.
+          type: string
+        mpnsCertificate:
+          description: The MPNS certificate.
+          type: string
+        thumbprint:
+          description: The Mpns certificate Thumbprint
+          type: string
+    NamespaceCreateOrUpdateParameters:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+      description: Parameters supplied to the CreateOrUpdate Namespace operation.
+      properties:
+        properties:
+          $ref: '#/components/schemas/NamespaceProperties'
+      required:
+        - location
+    NamespaceListResult:
+      description: The response of the List Namespace operation.
+      properties:
+        nextLink:
+          description: Link to the next set of results. Not empty if Value contains incomplete list of Namespaces
+          type: string
+        value:
+          description: Result of the List Namespace operation.
+          items:
+            $ref: '#/components/schemas/NamespaceResource'
+          type: array
+    NamespacePatchParameters:
+      description: Parameters supplied to the Patch Namespace operation.
+      properties:
+        sku:
+          $ref: '#/components/schemas/Sku'
+        tags:
+          additionalProperties:
+            type: string
+          description: Resource tags
+          type: object
+    NamespaceProperties:
+      description: Namespace properties.
+      properties:
+        createdAt:
+          description: The time the namespace was created.
+          format: date-time
+          type: string
+        critical:
+          description: Whether or not the namespace is set as Critical.
+          type: boolean
+        enabled:
+          description: Whether or not the namespace is currently enabled.
+          type: boolean
+        name:
+          description: The name of the namespace.
+          type: string
+        namespaceType:
+          description: The namespace type.
+          enum:
+            - Messaging
+            - NotificationHub
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: NamespaceType
+        provisioningState:
+          description: Provisioning state of the Namespace.
+          type: string
+        region:
+          description: 'Specifies the targeted region in which the namespace should be created. It can be any of the following values: Australia EastAustralia SoutheastCentral USEast USEast US 2West USNorth Central USSouth Central USEast AsiaSoutheast AsiaBrazil SouthJapan EastJapan WestNorth EuropeWest Europe'
+          externalDocs:
+            url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx'
+          type: string
+        scaleUnit:
+          description: ScaleUnit where the namespace gets created
+          type: string
+        serviceBusEndpoint:
+          description: Endpoint you can use to perform NotificationHub operations.
+          externalDocs:
+            url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx'
+          type: string
+        status:
+          description: 'Status of the namespace. It can be any of these values:1 = Created/Active2 = Creating3 = Suspended4 = Deleting'
+          externalDocs:
+            url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx'
+          type: string
+        subscriptionId:
+          description: The Id of the Azure subscription associated with the namespace.
+          type: string
+    NamespaceResource:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+      description: Description of a Namespace resource.
+      properties:
+        properties:
+          $ref: '#/components/schemas/NamespaceProperties'
+    NotificationHubCreateOrUpdateParameters:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+      description: Parameters supplied to the CreateOrUpdate NotificationHub operation.
+      properties:
+        properties:
+          $ref: '#/components/schemas/NotificationHubProperties'
+      required:
+        - location
+        - properties
+    NotificationHubListResult:
+      description: The response of the List NotificationHub operation.
+      properties:
+        nextLink:
+          description: Link to the next set of results. Not empty if Value contains incomplete list of NotificationHub
+          type: string
+        value:
+          description: Result of the List NotificationHub operation.
+          items:
+            $ref: '#/components/schemas/NotificationHubResource'
+          type: array
+    NotificationHubProperties:
+      description: NotificationHub properties.
+      properties:
+        admCredential:
+          $ref: '#/components/schemas/AdmCredential'
+        apnsCredential:
+          $ref: '#/components/schemas/ApnsCredential'
+        authorizationRules:
+          description: The AuthorizationRules of the created NotificationHub
+          items:
+            $ref: '#/components/schemas/SharedAccessAuthorizationRuleProperties'
+          type: array
+        baiduCredential:
+          $ref: '#/components/schemas/BaiduCredential'
+        gcmCredential:
+          $ref: '#/components/schemas/GcmCredential'
+        mpnsCredential:
+          $ref: '#/components/schemas/MpnsCredential'
+        name:
+          description: The NotificationHub name.
+          type: string
+        registrationTtl:
+          description: The RegistrationTtl of the created NotificationHub
+          type: string
+        wnsCredential:
+          $ref: '#/components/schemas/WnsCredential'
+    NotificationHubResource:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+      description: Description of a NotificationHub Resource.
+      properties:
+        properties:
+          $ref: '#/components/schemas/NotificationHubProperties'
+    PnsCredentialsProperties:
+      description: Description of a NotificationHub PNS Credentials.
+      properties:
+        admCredential:
+          $ref: '#/components/schemas/AdmCredential'
+        apnsCredential:
+          $ref: '#/components/schemas/ApnsCredential'
+        baiduCredential:
+          $ref: '#/components/schemas/BaiduCredential'
+        gcmCredential:
+          $ref: '#/components/schemas/GcmCredential'
+        mpnsCredential:
+          $ref: '#/components/schemas/MpnsCredential'
+        wnsCredential:
+          $ref: '#/components/schemas/WnsCredential'
+    PnsCredentialsResource:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+      description: Description of a NotificationHub PNS Credentials.
+      properties:
+        properties:
+          $ref: '#/components/schemas/PnsCredentialsProperties'
+    PolicykeyResource:
+      description: Namespace/NotificationHub Regenerate Keys
+      properties:
+        policyKey:
+          description: Name of the key that has to be regenerated for the Namespace/Notification Hub Authorization Rule. The value can be Primary Key/Secondary Key.
+          type: string
+    Resource:
+      properties:
+        id:
+          description: Resource Id
+          readOnly: true
+          type: string
+        location:
+          description: Resource location
+          type: string
+        name:
+          description: Resource name
+          readOnly: true
+          type: string
+        sku:
+          $ref: '#/components/schemas/Sku'
+        tags:
+          additionalProperties:
+            type: string
+          description: Resource tags
+          type: object
+        type:
+          description: Resource type
+          readOnly: true
+          type: string
+      required:
+        - location
+      x-ms-azure-resource: true
+    ResourceListKeys:
+      description: Namespace/NotificationHub Connection String
+      properties:
+        keyName:
+          description: KeyName of the created AuthorizationRule
+          type: string
+        primaryConnectionString:
+          description: PrimaryConnectionString of the AuthorizationRule.
+          type: string
+        primaryKey:
+          description: PrimaryKey of the created AuthorizationRule.
+          type: string
+        secondaryConnectionString:
+          description: SecondaryConnectionString of the created AuthorizationRule
+          type: string
+        secondaryKey:
+          description: SecondaryKey of the created AuthorizationRule
+          type: string
+    SharedAccessAuthorizationRuleCreateOrUpdateParameters:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+      description: Parameters supplied to the CreateOrUpdate Namespace AuthorizationRules.
+      properties:
+        properties:
+          $ref: '#/components/schemas/SharedAccessAuthorizationRuleProperties'
+      required:
+        - properties
+    SharedAccessAuthorizationRuleListResult:
+      description: The response of the List Namespace operation.
+      properties:
+        nextLink:
+          description: Link to the next set of results. Not empty if Value contains incomplete list of AuthorizationRules
+          type: string
+        value:
+          description: Result of the List AuthorizationRules operation.
+          items:
+            $ref: '#/components/schemas/SharedAccessAuthorizationRuleResource'
+          type: array
+    SharedAccessAuthorizationRuleProperties:
+      description: SharedAccessAuthorizationRule properties.
+      properties:
+        rights:
+          description: The rights associated with the rule.
+          items:
+            enum:
+              - Manage
+              - Send
+              - Listen
+            type: string
+            x-ms-enum:
+              modelAsString: false
+              name: AccessRights
+          type: array
+    SharedAccessAuthorizationRuleResource:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+      description: Description of a Namespace AuthorizationRules.
+      properties:
+        properties:
+          $ref: '#/components/schemas/SharedAccessAuthorizationRuleProperties'
+    Sku:
+      description: The Sku description for a namespace
+      properties:
+        capacity:
+          description: The capacity of the resource
+          type: integer
+        family:
+          description: The Sku Family
+          type: string
+        name:
+          description: Name of the notification hub sku
+          enum:
+            - Free
+            - Basic
+            - Standard
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: SkuName
+        size:
+          description: The Sku size
+          type: string
+        tier:
+          description: The tier of particular sku
+          type: string
+      required:
+        - name
+    SubResource:
+      properties:
+        id:
+          description: Resource Id
+          type: string
+      x-ms-azure-resource: true
+    WnsCredential:
+      description: Description of a NotificationHub WnsCredential.
+      properties:
+        properties:
+          $ref: '#/components/schemas/WnsCredentialProperties'
+    WnsCredentialProperties:
+      description: Description of a NotificationHub WnsCredential.
+      properties:
+        packageSid:
+          description: The package ID for this credential.
+          type: string
+        secretKey:
+          description: The secret key.
+          type: string
+        windowsLiveEndpoint:
+          description: The Windows Live endpoint.
+          type: string
+  parameters:
+    ApiVersionParameter:
+      description: Client Api Version.
+      in: query
+      name: api-version
+      required: true
+      schema:
+        type: string
+    SubscriptionIdParameter:
+      description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+      in: path
+      name: subscriptionId
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    SharedAccessAuthorizationRuleCreateOrUpdateParameters:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SharedAccessAuthorizationRuleCreateOrUpdateParameters'
+        text/json:
+          schema:
+            $ref: '#/components/schemas/SharedAccessAuthorizationRuleCreateOrUpdateParameters'
+      description: The shared access authorization rule.
+      required: true
+  securitySchemes:
+    azure_auth:
+      description: Azure Active Directory OAuth2 Flow
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+          scopes:
+            user_impersonation: impersonate your user account

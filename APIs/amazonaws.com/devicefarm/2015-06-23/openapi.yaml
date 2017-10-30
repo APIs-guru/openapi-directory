@@ -1,0 +1,4963 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://devicefarm.amazonaws.com/'
+info:
+  version: '2015-06-23'
+  x-release: v4
+  title: AWS Device Farm
+  description: 'AWS Device Farm is a service that enables mobile app developers to test Android, iOS, and Fire OS apps on physical phones, tablets, and other devices in the cloud.'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: devicefarm
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/devicefarm-2015-06-23.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/devicefarm/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: CreateDevicePool
+      description: Creates a device pool.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDevicePoolResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDevicePoolRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateNetworkProfile':
+    post:
+      operationId: CreateNetworkProfile
+      description: Creates a network profile.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateNetworkProfileResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNetworkProfileRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateProject':
+    post:
+      operationId: CreateProject
+      description: Creates a new project.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateProjectResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateRemoteAccessSession':
+    post:
+      operationId: CreateRemoteAccessSession
+      description: Specifies and starts a remote access session.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRemoteAccessSessionResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRemoteAccessSessionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateUpload':
+    post:
+      operationId: CreateUpload
+      description: Uploads an app or test scripts.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUploadResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUploadRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDevicePool':
+    post:
+      operationId: DeleteDevicePool
+      description: Deletes a device pool given the pool ARN. Does not allow deletion of curated pools owned by the system.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDevicePoolResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDevicePoolRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteNetworkProfile':
+    post:
+      operationId: DeleteNetworkProfile
+      description: Deletes a network profile.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteNetworkProfileResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteNetworkProfileRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteProject':
+    post:
+      operationId: DeleteProject
+      description: '<p>Deletes an AWS Device Farm project, given the project ARN.</p> <p> <b>Note</b> Deleting this resource does not stop an in-progress run.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteProjectResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteProjectRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteRemoteAccessSession':
+    post:
+      operationId: DeleteRemoteAccessSession
+      description: Deletes a completed remote access session and its results.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRemoteAccessSessionResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRemoteAccessSessionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteRun':
+    post:
+      operationId: DeleteRun
+      description: '<p>Deletes the run, given the run ARN.</p> <p> <b>Note</b> Deleting this resource does not stop an in-progress run.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRunResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRunRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteUpload':
+    post:
+      operationId: DeleteUpload
+      description: Deletes an upload given the upload ARN.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteUploadResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteUploadRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetAccountSettings':
+    post:
+      operationId: GetAccountSettings
+      description: Returns the number of unmetered iOS and/or unmetered Android devices that have been purchased by the account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAccountSettingsResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAccountSettingsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetDevice':
+    post:
+      operationId: GetDevice
+      description: Gets information about a unique device type.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDeviceResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDeviceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetDevicePool':
+    post:
+      operationId: GetDevicePool
+      description: Gets information about a device pool.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDevicePoolResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDevicePoolRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetDevicePoolCompatibility':
+    post:
+      operationId: GetDevicePoolCompatibility
+      description: Gets information about compatibility with a device pool.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDevicePoolCompatibilityResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDevicePoolCompatibilityRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetJob':
+    post:
+      operationId: GetJob
+      description: Gets information about a job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetJobResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetJobRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetNetworkProfile':
+    post:
+      operationId: GetNetworkProfile
+      description: Returns information about a network profile.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetNetworkProfileResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetNetworkProfileRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetOfferingStatus':
+    post:
+      operationId: GetOfferingStatus
+      description: 'Gets the current status and future status of all offerings purchased by an AWS account. The response indicates how many offerings are currently available and the offerings that will be available in the next period. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. Please contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a> if you believe that you should be able to invoke this operation.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOfferingStatusResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: NotEligibleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotEligibleException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetOfferingStatusRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetProject':
+    post:
+      operationId: GetProject
+      description: Gets information about a project.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProjectResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetProjectRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetRemoteAccessSession':
+    post:
+      operationId: GetRemoteAccessSession
+      description: Returns a link to a currently running remote access session.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRemoteAccessSessionResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRemoteAccessSessionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetRun':
+    post:
+      operationId: GetRun
+      description: Gets information about a run.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRunResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRunRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetSuite':
+    post:
+      operationId: GetSuite
+      description: Gets information about a suite.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSuiteResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSuiteRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetTest':
+    post:
+      operationId: GetTest
+      description: Gets information about a test.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTestResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetTestRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetUpload':
+    post:
+      operationId: GetUpload
+      description: Gets information about an upload.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUploadResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetUploadRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#InstallToRemoteAccessSession':
+    post:
+      operationId: InstallToRemoteAccessSession
+      description: 'Installs an application to the device in a remote access session. For Android applications, the file must be in .apk format. For iOS applications, the file must be in .ipa format.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstallToRemoteAccessSessionResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstallToRemoteAccessSessionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListArtifacts':
+    post:
+      operationId: ListArtifacts
+      description: Gets information about artifacts.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListArtifactsResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListArtifactsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListDevicePools':
+    post:
+      operationId: ListDevicePools
+      description: Gets information about device pools.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDevicePoolsResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDevicePoolsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListDevices':
+    post:
+      operationId: ListDevices
+      description: Gets information about unique device types.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDevicesResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDevicesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListJobs':
+    post:
+      operationId: ListJobs
+      description: Gets information about jobs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListJobsResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListJobsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListNetworkProfiles':
+    post:
+      operationId: ListNetworkProfiles
+      description: Returns the list of available network profiles.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListNetworkProfilesResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListNetworkProfilesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListOfferingPromotions':
+    post:
+      operationId: ListOfferingPromotions
+      description: 'Returns a list of offering promotions. Each offering promotion record contains the ID and description of the promotion. The API returns a <code>NotEligible</code> error if the caller is not permitted to invoke the operation. Contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a> if you believe that you should be able to invoke this operation.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOfferingPromotionsResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: NotEligibleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotEligibleException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListOfferingPromotionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListOfferingTransactions':
+    post:
+      operationId: ListOfferingTransactions
+      description: 'Returns a list of all historical purchases, renewals, and system renewal transactions for an AWS account. The list is paginated and ordered by a descending timestamp (most recent transactions are first). The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. Please contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a> if you believe that you should be able to invoke this operation.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOfferingTransactionsResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: NotEligibleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotEligibleException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListOfferingTransactionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListOfferings':
+    post:
+      operationId: ListOfferings
+      description: 'Returns a list of products or offerings that the user can manage through the API. Each offering record indicates the recurring price per unit and the frequency for that offering. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. Please contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a> if you believe that you should be able to invoke this operation.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOfferingsResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: NotEligibleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotEligibleException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListOfferingsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListProjects':
+    post:
+      operationId: ListProjects
+      description: Gets information about projects.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProjectsResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListProjectsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListRemoteAccessSessions':
+    post:
+      operationId: ListRemoteAccessSessions
+      description: Returns a list of all currently running remote access sessions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRemoteAccessSessionsResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListRemoteAccessSessionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListRuns':
+    post:
+      operationId: ListRuns
+      description: 'Gets information about runs, given an AWS Device Farm project ARN.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRunsResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListRunsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListSamples':
+    post:
+      operationId: ListSamples
+      description: 'Gets information about samples, given an AWS Device Farm project ARN'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSamplesResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListSamplesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListSuites':
+    post:
+      operationId: ListSuites
+      description: Gets information about suites.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSuitesResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListSuitesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListTests':
+    post:
+      operationId: ListTests
+      description: Gets information about tests.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTestsResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTestsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListUniqueProblems':
+    post:
+      operationId: ListUniqueProblems
+      description: Gets information about unique problems.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListUniqueProblemsResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListUniqueProblemsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListUploads':
+    post:
+      operationId: ListUploads
+      description: 'Gets information about uploads, given an AWS Device Farm project ARN.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListUploadsResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListUploadsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PurchaseOffering':
+    post:
+      operationId: PurchaseOffering
+      description: 'Immediately purchases offerings for an AWS account. Offerings renew with the latest total purchased quantity for an offering, unless the renewal was overridden. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. Please contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a> if you believe that you should be able to invoke this operation.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOfferingResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: NotEligibleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotEligibleException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseOfferingRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RenewOffering':
+    post:
+      operationId: RenewOffering
+      description: 'Explicitly sets the quantity of devices to renew for an offering, starting from the <code>effectiveDate</code> of the next period. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. Please contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a> if you believe that you should be able to invoke this operation.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RenewOfferingResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: NotEligibleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotEligibleException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RenewOfferingRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ScheduleRun':
+    post:
+      operationId: ScheduleRun
+      description: Schedules a run.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleRunResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: IdempotencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdempotencyException'
+        '484':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleRunRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StopRemoteAccessSession':
+    post:
+      operationId: StopRemoteAccessSession
+      description: Ends a specified remote access session.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopRemoteAccessSessionResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopRemoteAccessSessionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StopRun':
+    post:
+      operationId: StopRun
+      description: 'Initiates a stop request for the current test run. AWS Device Farm will immediately stop the run on devices where tests have not started executing, and you will not be billed for these devices. On devices where tests have started executing, Setup Suite and Teardown Suite tests will run to completion before stopping execution on those devices. You will be billed for Setup, Teardown, and any tests that were in progress or already completed.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopRunResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopRunRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateDevicePool':
+    post:
+      operationId: UpdateDevicePool
+      description: 'Modifies the name, description, and rules in a device pool given the attributes and the pool ARN. Rule updates are all-or-nothing, meaning they can only be updated as a whole (or not at all).'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDevicePoolResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDevicePoolRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateNetworkProfile':
+    post:
+      operationId: UpdateNetworkProfile
+      description: Updates the network profile with specific settings.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateNetworkProfileResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNetworkProfileRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateProject':
+    post:
+      operationId: UpdateProject
+      description: 'Modifies the specified project name, given the project ARN and a new name.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateProjectResult'
+        '480':
+          description: ArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArgumentException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ServiceAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AWSAccountNumber:
+      type: string
+      minLength: 2
+      maxLength: 16
+    AccountSettings:
+      type: object
+      properties:
+        awsAccountNumber:
+          $ref: '#/components/schemas/AWSAccountNumber'
+        unmeteredDevices:
+          $ref: '#/components/schemas/PurchasedDevicesMap'
+        unmeteredRemoteAccessDevices:
+          $ref: '#/components/schemas/PurchasedDevicesMap'
+        maxJobTimeoutMinutes:
+          $ref: '#/components/schemas/JobTimeoutMinutes'
+        trialMinutes:
+          $ref: '#/components/schemas/TrialMinutes'
+        maxSlots:
+          $ref: '#/components/schemas/MaxSlotMap'
+        defaultJobTimeoutMinutes:
+          $ref: '#/components/schemas/JobTimeoutMinutes'
+      description: A container for account-level settings within AWS Device Farm.
+    AccountsCleanup:
+      type: boolean
+    AmazonResourceName:
+      type: string
+      minLength: 32
+    AmazonResourceNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/AmazonResourceName'
+    AppPackagesCleanup:
+      type: boolean
+    ArgumentException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/Message'
+      description: An invalid argument was specified.
+    Artifact:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        type:
+          $ref: '#/components/schemas/ArtifactType'
+        extension:
+          $ref: '#/components/schemas/String'
+        url:
+          $ref: '#/components/schemas/URL'
+      description: Represents the output of a test. Examples of artifacts include logs and screenshots.
+    ArtifactCategory:
+      type: string
+      enum:
+        - SCREENSHOT
+        - FILE
+        - LOG
+    ArtifactType:
+      type: string
+      enum:
+        - UNKNOWN
+        - SCREENSHOT
+        - DEVICE_LOG
+        - MESSAGE_LOG
+        - VIDEO_LOG
+        - RESULT_LOG
+        - SERVICE_LOG
+        - WEBKIT_LOG
+        - INSTRUMENTATION_OUTPUT
+        - EXERCISER_MONKEY_OUTPUT
+        - CALABASH_JSON_OUTPUT
+        - CALABASH_PRETTY_OUTPUT
+        - CALABASH_STANDARD_OUTPUT
+        - CALABASH_JAVA_XML_OUTPUT
+        - AUTOMATION_OUTPUT
+        - APPIUM_SERVER_OUTPUT
+        - APPIUM_JAVA_OUTPUT
+        - APPIUM_JAVA_XML_OUTPUT
+        - APPIUM_PYTHON_OUTPUT
+        - APPIUM_PYTHON_XML_OUTPUT
+        - EXPLORER_EVENT_LOG
+        - EXPLORER_SUMMARY_LOG
+        - APPLICATION_CRASH_REPORT
+        - XCTEST_LOG
+        - VIDEO
+    Artifacts:
+      type: array
+      items:
+        $ref: '#/components/schemas/Artifact'
+    BillingMethod:
+      type: string
+      enum:
+        - METERED
+        - UNMETERED
+    Boolean:
+      type: boolean
+    CPU:
+      type: object
+      properties:
+        frequency:
+          $ref: '#/components/schemas/String'
+        architecture:
+          $ref: '#/components/schemas/String'
+        clock:
+          $ref: '#/components/schemas/Double'
+      description: <p>Represents the amount of CPU that an app is using on a physical device.</p> <p>Note that this does not represent system-wide CPU usage.</p>
+    ContentType:
+      type: string
+      minLength: 0
+      maxLength: 64
+    Counters:
+      type: object
+      properties:
+        total:
+          $ref: '#/components/schemas/Integer'
+        passed:
+          $ref: '#/components/schemas/Integer'
+        failed:
+          $ref: '#/components/schemas/Integer'
+        warned:
+          $ref: '#/components/schemas/Integer'
+        errored:
+          $ref: '#/components/schemas/Integer'
+        stopped:
+          $ref: '#/components/schemas/Integer'
+        skipped:
+          $ref: '#/components/schemas/Integer'
+      description: Represents entity counters.
+    CreateDevicePoolRequest:
+      type: object
+      required:
+        - projectArn
+        - name
+        - rules
+      example:
+        name: MyDevicePool
+        description: My Android devices
+        projectArn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
+        rules: []
+      properties:
+        projectArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        description:
+          $ref: '#/components/schemas/Message'
+        rules:
+          $ref: '#/components/schemas/Rules'
+      description: Represents a request to the create device pool operation.
+    CreateDevicePoolResult:
+      type: object
+      example:
+        devicePool: {}
+      properties:
+        devicePool:
+          $ref: '#/components/schemas/DevicePool'
+      description: Represents the result of a create device pool request.
+    CreateNetworkProfileRequest:
+      type: object
+      required:
+        - projectArn
+        - name
+      properties:
+        projectArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        description:
+          $ref: '#/components/schemas/Message'
+        type:
+          $ref: '#/components/schemas/NetworkProfileType'
+        uplinkBandwidthBits:
+          $ref: '#/components/schemas/Long'
+        downlinkBandwidthBits:
+          $ref: '#/components/schemas/Long'
+        uplinkDelayMs:
+          $ref: '#/components/schemas/Long'
+        downlinkDelayMs:
+          $ref: '#/components/schemas/Long'
+        uplinkJitterMs:
+          $ref: '#/components/schemas/Long'
+        downlinkJitterMs:
+          $ref: '#/components/schemas/Long'
+        uplinkLossPercent:
+          $ref: '#/components/schemas/PercentInteger'
+        downlinkLossPercent:
+          $ref: '#/components/schemas/PercentInteger'
+    CreateNetworkProfileResult:
+      type: object
+      properties:
+        networkProfile:
+          $ref: '#/components/schemas/NetworkProfile'
+    CreateProjectRequest:
+      type: object
+      required:
+        - name
+      example:
+        name: MyProject
+      properties:
+        name:
+          $ref: '#/components/schemas/Name'
+        defaultJobTimeoutMinutes:
+          $ref: '#/components/schemas/JobTimeoutMinutes'
+      description: Represents a request to the create project operation.
+    CreateProjectResult:
+      type: object
+      example:
+        project:
+          name: MyProject
+          arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:5e01a8c7-c861-4c0a-b1d5-12345EXAMPLE'
+          created: '1472660939.152'
+      properties:
+        project:
+          $ref: '#/components/schemas/Project'
+      description: Represents the result of a create project request.
+    CreateRemoteAccessSessionConfiguration:
+      type: object
+      properties:
+        billingMethod:
+          $ref: '#/components/schemas/BillingMethod'
+      description: 'Creates the configuration settings for a remote access session, including the device model and type.'
+    CreateRemoteAccessSessionRequest:
+      type: object
+      required:
+        - projectArn
+        - deviceArn
+      example:
+        name: MySession
+        configuration:
+          billingMethod: METERED
+        deviceArn: 'arn:aws:devicefarm:us-west-2::device:123EXAMPLE'
+        projectArn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
+      properties:
+        projectArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        deviceArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        configuration:
+          $ref: '#/components/schemas/CreateRemoteAccessSessionConfiguration'
+      description: Creates and submits a request to start a remote access session.
+    CreateRemoteAccessSessionResult:
+      type: object
+      example:
+        remoteAccessSession: {}
+      properties:
+        remoteAccessSession:
+          $ref: '#/components/schemas/RemoteAccessSession'
+      description: Represents the server response from a request to create a remote access session.
+    CreateUploadRequest:
+      type: object
+      required:
+        - projectArn
+        - name
+        - type
+      example:
+        name: MyAppiumPythonUpload
+        type: APPIUM_PYTHON_TEST_PACKAGE
+        projectArn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
+      properties:
+        projectArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        type:
+          $ref: '#/components/schemas/UploadType'
+        contentType:
+          $ref: '#/components/schemas/ContentType'
+      description: Represents a request to the create upload operation.
+    CreateUploadResult:
+      type: object
+      example:
+        upload:
+          name: MyAppiumPythonUpload
+          type: APPIUM_PYTHON_TEST_PACKAGE
+          arn: 'arn:aws:devicefarm:us-west-2:123456789101:upload:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/b5340a65-3da7-4da6-a26e-12345EXAMPLE'
+          created: '1472661404.186'
+          status: INITIALIZED
+          url: 'https://prod-us-west-2-uploads.s3-us-west-2.amazonaws.com/arn%3Aaws%3Adevicefarm%3Aus-west-2%3A123456789101%3Aproject%3A5e01a8c7-c861-4c0a-b1d5-12345EXAMPLE/uploads/arn%3Aaws%3Adevicefarm%3Aus-west-2%3A123456789101%3Aupload%3A5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/b5340a65-3da7-4da6-a26e-12345EXAMPLE/MyAppiumPythonUpload?AWSAccessKeyId=1234567891011EXAMPLE&Expires=1472747804&Signature=1234567891011EXAMPLE'
+      properties:
+        upload:
+          $ref: '#/components/schemas/Upload'
+      description: Represents the result of a create upload request.
+    CurrencyCode:
+      type: string
+      enum:
+        - USD
+    DateTime:
+      type: string
+      format: date-time
+    DeleteDevicePoolRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2::devicepool:123-456-EXAMPLE-GUID'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: Represents a request to the delete device pool operation.
+    DeleteDevicePoolResult:
+      type: object
+      example: {}
+      properties: {}
+      description: Represents the result of a delete device pool request.
+    DeleteNetworkProfileRequest:
+      type: object
+      required:
+        - arn
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+    DeleteNetworkProfileResult:
+      type: object
+      properties: {}
+    DeleteProjectRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: Represents a request to the delete project operation.
+    DeleteProjectResult:
+      type: object
+      example: {}
+      properties: {}
+      description: Represents the result of a delete project request.
+    DeleteRemoteAccessSessionRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: Represents the request to delete the specified remote access session.
+    DeleteRemoteAccessSessionResult:
+      type: object
+      example: {}
+      properties: {}
+      description: The response from the server when a request is made to delete the remote access session.
+    DeleteRunRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:run:EXAMPLE-GUID-123-456'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: Represents a request to the delete run operation.
+    DeleteRunResult:
+      type: object
+      example: {}
+      properties: {}
+      description: Represents the result of a delete run request.
+    DeleteUploadRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:upload:EXAMPLE-GUID-123-456'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: Represents a request to the delete upload operation.
+    DeleteUploadResult:
+      type: object
+      example: {}
+      properties: {}
+      description: Represents the result of a delete upload request.
+    Device:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        manufacturer:
+          $ref: '#/components/schemas/String'
+        model:
+          $ref: '#/components/schemas/String'
+        formFactor:
+          $ref: '#/components/schemas/DeviceFormFactor'
+        platform:
+          $ref: '#/components/schemas/DevicePlatform'
+        os:
+          $ref: '#/components/schemas/String'
+        cpu:
+          $ref: '#/components/schemas/CPU'
+        resolution:
+          $ref: '#/components/schemas/Resolution'
+        heapSize:
+          $ref: '#/components/schemas/Long'
+        memory:
+          $ref: '#/components/schemas/Long'
+        image:
+          $ref: '#/components/schemas/String'
+        carrier:
+          $ref: '#/components/schemas/String'
+        radio:
+          $ref: '#/components/schemas/String'
+        remoteAccessEnabled:
+          $ref: '#/components/schemas/Boolean'
+        fleetType:
+          $ref: '#/components/schemas/String'
+        fleetName:
+          $ref: '#/components/schemas/String'
+      description: Represents a device type that an app is tested against.
+    DeviceAttribute:
+      type: string
+      enum:
+        - ARN
+        - PLATFORM
+        - FORM_FACTOR
+        - MANUFACTURER
+        - REMOTE_ACCESS_ENABLED
+        - APPIUM_VERSION
+    DeviceFormFactor:
+      type: string
+      enum:
+        - PHONE
+        - TABLET
+    DeviceMinutes:
+      type: object
+      properties:
+        total:
+          $ref: '#/components/schemas/Double'
+        metered:
+          $ref: '#/components/schemas/Double'
+        unmetered:
+          $ref: '#/components/schemas/Double'
+      description: Represents the total (metered or unmetered) minutes used by the resource to run tests. Contains the sum of minutes consumed by all children.
+    DevicePlatform:
+      type: string
+      enum:
+        - ANDROID
+        - IOS
+    DevicePool:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        description:
+          $ref: '#/components/schemas/Message'
+        type:
+          $ref: '#/components/schemas/DevicePoolType'
+        rules:
+          $ref: '#/components/schemas/Rules'
+      description: Represents a collection of device types.
+    DevicePoolCompatibilityResult:
+      type: object
+      properties:
+        device:
+          $ref: '#/components/schemas/Device'
+        compatible:
+          $ref: '#/components/schemas/Boolean'
+        incompatibilityMessages:
+          $ref: '#/components/schemas/IncompatibilityMessages'
+      description: Represents a device pool compatibility result.
+    DevicePoolCompatibilityResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/DevicePoolCompatibilityResult'
+    DevicePoolType:
+      type: string
+      enum:
+        - CURATED
+        - PRIVATE
+    DevicePools:
+      type: array
+      items:
+        $ref: '#/components/schemas/DevicePool'
+    Devices:
+      type: array
+      items:
+        $ref: '#/components/schemas/Device'
+    Double:
+      type: number
+      format: double
+    ExecutionConfiguration:
+      type: object
+      properties:
+        jobTimeoutMinutes:
+          $ref: '#/components/schemas/JobTimeoutMinutes'
+        accountsCleanup:
+          $ref: '#/components/schemas/AccountsCleanup'
+        appPackagesCleanup:
+          $ref: '#/components/schemas/AppPackagesCleanup'
+      description: 'Represents configuration information about a test run, such as the execution timeout (in minutes).'
+    ExecutionResult:
+      type: string
+      enum:
+        - PENDING
+        - PASSED
+        - WARNED
+        - FAILED
+        - SKIPPED
+        - ERRORED
+        - STOPPED
+    ExecutionStatus:
+      type: string
+      enum:
+        - PENDING
+        - PENDING_CONCURRENCY
+        - PENDING_DEVICE
+        - PROCESSING
+        - SCHEDULING
+        - PREPARING
+        - RUNNING
+        - COMPLETED
+        - STOPPING
+    Filter:
+      type: string
+      minLength: 0
+      maxLength: 8192
+    GetAccountSettingsRequest:
+      type: object
+      example: {}
+      properties: {}
+      description: Represents the request sent to retrieve the account settings.
+    GetAccountSettingsResult:
+      type: object
+      example:
+        accountSettings:
+          awsAccountNumber: '123456789101'
+          unmeteredDevices:
+            ANDROID: 1
+            IOS: 2
+      properties:
+        accountSettings:
+          $ref: '#/components/schemas/AccountSettings'
+      description: Represents the account settings return values from the <code>GetAccountSettings</code> request.
+    GetDevicePoolCompatibilityRequest:
+      type: object
+      required:
+        - devicePoolArn
+      example:
+        appArn: 'arn:aws:devicefarm:us-west-2::app:123-456-EXAMPLE-GUID'
+        devicePoolArn: 'arn:aws:devicefarm:us-west-2::devicepool:123-456-EXAMPLE-GUID'
+        testType: APPIUM_PYTHON
+      properties:
+        devicePoolArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        appArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        testType:
+          $ref: '#/components/schemas/TestType'
+        test:
+          $ref: '#/components/schemas/ScheduleRunTest'
+      description: Represents a request to the get device pool compatibility operation.
+    GetDevicePoolCompatibilityResult:
+      type: object
+      example:
+        compatibleDevices: []
+        incompatibleDevices: []
+      properties:
+        compatibleDevices:
+          $ref: '#/components/schemas/DevicePoolCompatibilityResults'
+        incompatibleDevices:
+          $ref: '#/components/schemas/DevicePoolCompatibilityResults'
+      description: Represents the result of describe device pool compatibility request.
+    GetDevicePoolRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: Represents a request to the get device pool operation.
+    GetDevicePoolResult:
+      type: object
+      example:
+        devicePool: {}
+      properties:
+        devicePool:
+          $ref: '#/components/schemas/DevicePool'
+      description: Represents the result of a get device pool request.
+    GetDeviceRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2::device:123EXAMPLE'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: Represents a request to the get device request.
+    GetDeviceResult:
+      type: object
+      example:
+        device:
+          name: LG G2 (Sprint)
+          arn: 'arn:aws:devicefarm:us-west-2::device:A0E6E6E1059E45918208DF75B2B7EF6C'
+          cpu:
+            architecture: armeabi-v7a
+            clock: 2265.6
+            frequency: MHz
+          formFactor: PHONE
+          heapSize: 256000000
+          image: 75B2B7EF6C12345EXAMPLE
+          manufacturer: LG
+          memory: 16000000000
+          model: G2 (Sprint)
+          os: 4.2.2
+          platform: ANDROID
+          resolution:
+            height: 1920
+            width: 1080
+      properties:
+        device:
+          $ref: '#/components/schemas/Device'
+      description: Represents the result of a get device request.
+    GetJobRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2::job:123-456-EXAMPLE-GUID'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: Represents a request to the get job operation.
+    GetJobResult:
+      type: object
+      example:
+        job: {}
+      properties:
+        job:
+          $ref: '#/components/schemas/Job'
+      description: Represents the result of a get job request.
+    GetNetworkProfileRequest:
+      type: object
+      required:
+        - arn
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+    GetNetworkProfileResult:
+      type: object
+      properties:
+        networkProfile:
+          $ref: '#/components/schemas/NetworkProfile'
+    GetOfferingStatusRequest:
+      type: object
+      example:
+        nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE=
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the request to retrieve the offering status for the specified customer or account.
+    GetOfferingStatusResult:
+      type: object
+      example:
+        current:
+          D68B3C05-1BA6-4360-BC69-12345EXAMPLE:
+            offering:
+              type: RECURRING
+              description: Android Remote Access Unmetered Device Slot
+              id: D68B3C05-1BA6-4360-BC69-12345EXAMPLE
+              platform: ANDROID
+            quantity: 1
+        nextPeriod:
+          D68B3C05-1BA6-4360-BC69-12345EXAMPLE:
+            effectiveOn: '1472688000'
+            offering:
+              type: RECURRING
+              description: Android Remote Access Unmetered Device Slot
+              id: D68B3C05-1BA6-4360-BC69-12345EXAMPLE
+              platform: ANDROID
+            quantity: 1
+      properties:
+        current:
+          $ref: '#/components/schemas/OfferingStatusMap'
+        nextPeriod:
+          $ref: '#/components/schemas/OfferingStatusMap'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Returns the status result for a device offering.
+    GetProjectRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:5e01a8c7-c861-4c0a-b1d5-12345EXAMPLE'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: Represents a request to the get project operation.
+    GetProjectResult:
+      type: object
+      example:
+        project:
+          name: My Project
+          arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:5e01a8c7-c861-4c0a-b1d5-12345EXAMPLE'
+          created: '1472660939.152'
+      properties:
+        project:
+          $ref: '#/components/schemas/Project'
+      description: Represents the result of a get project request.
+    GetRemoteAccessSessionRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: Represents the request to get information about the specified remote access session.
+    GetRemoteAccessSessionResult:
+      type: object
+      example:
+        remoteAccessSession: {}
+      properties:
+        remoteAccessSession:
+          $ref: '#/components/schemas/RemoteAccessSession'
+      description: Represents the response from the server that lists detailed information about the remote access session.
+    GetRunRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:run:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/0fcac17b-6122-44d7-ae5a-12345EXAMPLE'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: Represents a request to the get run operation.
+    GetRunResult:
+      type: object
+      example:
+        run:
+          name: My Test Run
+          type: BUILTIN_EXPLORER
+          arn: 'arn:aws:devicefarm:us-west-2:123456789101:run:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/0fcac17b-6122-44d7-ae5a-12345EXAMPLE'
+          billingMethod: METERED
+          completedJobs: 0
+          counters:
+            errored: 0
+            failed: 0
+            passed: 0
+            skipped: 0
+            stopped: 0
+            total: 0
+            warned: 0
+          created: '1472667509.852'
+          deviceMinutes:
+            metered: 0
+            total: 0
+            unmetered: 0
+          platform: ANDROID
+          result: PENDING
+          status: RUNNING
+          totalJobs: 3
+      properties:
+        run:
+          $ref: '#/components/schemas/Run'
+      description: Represents the result of a get run request.
+    GetSuiteRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:suite:EXAMPLE-GUID-123-456'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: Represents a request to the get suite operation.
+    GetSuiteResult:
+      type: object
+      example:
+        suite: {}
+      properties:
+        suite:
+          $ref: '#/components/schemas/Suite'
+      description: Represents the result of a get suite request.
+    GetTestRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:test:EXAMPLE-GUID-123-456'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: Represents a request to the get test operation.
+    GetTestResult:
+      type: object
+      example:
+        test: {}
+      properties:
+        test:
+          $ref: '#/components/schemas/Test'
+      description: Represents the result of a get test request.
+    GetUploadRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:upload:EXAMPLE-GUID-123-456'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: Represents a request to the get upload operation.
+    GetUploadResult:
+      type: object
+      example:
+        upload: {}
+      properties:
+        upload:
+          $ref: '#/components/schemas/Upload'
+      description: Represents the result of a get upload request.
+    IdempotencyException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/Message'
+      description: An entity with the same name already exists.
+    IncompatibilityMessage:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/Message'
+        type:
+          $ref: '#/components/schemas/DeviceAttribute'
+      description: Represents information about incompatibility.
+    IncompatibilityMessages:
+      type: array
+      items:
+        $ref: '#/components/schemas/IncompatibilityMessage'
+    InstallToRemoteAccessSessionRequest:
+      type: object
+      required:
+        - remoteAccessSessionArn
+        - appArn
+      example:
+        appArn: 'arn:aws:devicefarm:us-west-2:123456789101:app:EXAMPLE-GUID-123-456'
+        remoteAccessSessionArn: 'arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456'
+      properties:
+        remoteAccessSessionArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        appArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: Represents the request to install an Android application (in .apk format) or an iOS application (in .ipa format) as part of a remote access session.
+    InstallToRemoteAccessSessionResult:
+      type: object
+      example:
+        appUpload: {}
+      properties:
+        appUpload:
+          $ref: '#/components/schemas/Upload'
+      description: Represents the response from the server after AWS Device Farm makes a request to install to a remote access session.
+    Integer:
+      type: integer
+    Job:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        type:
+          $ref: '#/components/schemas/TestType'
+        created:
+          $ref: '#/components/schemas/DateTime'
+        status:
+          $ref: '#/components/schemas/ExecutionStatus'
+        result:
+          $ref: '#/components/schemas/ExecutionResult'
+        started:
+          $ref: '#/components/schemas/DateTime'
+        stopped:
+          $ref: '#/components/schemas/DateTime'
+        counters:
+          $ref: '#/components/schemas/Counters'
+        message:
+          $ref: '#/components/schemas/Message'
+        device:
+          $ref: '#/components/schemas/Device'
+        deviceMinutes:
+          $ref: '#/components/schemas/DeviceMinutes'
+      description: Represents a device.
+    JobTimeoutMinutes:
+      type: integer
+    Jobs:
+      type: array
+      items:
+        $ref: '#/components/schemas/Job'
+    LimitExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/Message'
+      description: A limit was exceeded.
+    ListArtifactsRequest:
+      type: object
+      required:
+        - arn
+        - type
+      example:
+        type: SCREENSHOT
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:run:EXAMPLE-GUID-123-456'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        type:
+          $ref: '#/components/schemas/ArtifactCategory'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents a request to the list artifacts operation.
+    ListArtifactsResult:
+      type: object
+      properties:
+        artifacts:
+          $ref: '#/components/schemas/Artifacts'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the result of a list artifacts operation.
+    ListDevicePoolsRequest:
+      type: object
+      required:
+        - arn
+      example:
+        type: PRIVATE
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        type:
+          $ref: '#/components/schemas/DevicePoolType'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the result of a list device pools request.
+    ListDevicePoolsResult:
+      type: object
+      example:
+        devicePools:
+          - name: Top Devices
+            arn: 'arn:aws:devicefarm:us-west-2::devicepool:082d10e5-d7d7-48a5-ba5c-12345EXAMPLE'
+            description: Top devices
+            rules:
+              - value: '["arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE"]'
+                attribute: ARN
+                operator: IN
+          - name: My Android Device Pool
+            arn: 'arn:aws:devicefarm:us-west-2:123456789101:devicepool:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/bf96e75a-28f6-4e61-b6a7-12345EXAMPLE'
+            description: Samsung Galaxy Android devices
+            rules:
+              - value: '["arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE","arn:aws:devicefarm:us-west-2::device:123456789EXAMPLE"]'
+                attribute: ARN
+                operator: IN
+      properties:
+        devicePools:
+          $ref: '#/components/schemas/DevicePools'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the result of a list device pools request.
+    ListDevicesRequest:
+      type: object
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the result of a list devices request.
+    ListDevicesResult:
+      type: object
+      example: {}
+      properties:
+        devices:
+          $ref: '#/components/schemas/Devices'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the result of a list devices operation.
+    ListJobsRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents a request to the list jobs operation.
+    ListJobsResult:
+      type: object
+      properties:
+        jobs:
+          $ref: '#/components/schemas/Jobs'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the result of a list jobs request.
+    ListNetworkProfilesRequest:
+      type: object
+      required:
+        - arn
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        type:
+          $ref: '#/components/schemas/NetworkProfileType'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+    ListNetworkProfilesResult:
+      type: object
+      properties:
+        networkProfiles:
+          $ref: '#/components/schemas/NetworkProfiles'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+    ListOfferingPromotionsRequest:
+      type: object
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+    ListOfferingPromotionsResult:
+      type: object
+      properties:
+        offeringPromotions:
+          $ref: '#/components/schemas/OfferingPromotions'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+    ListOfferingTransactionsRequest:
+      type: object
+      example:
+        nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE=
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the request to list the offering transaction history.
+    ListOfferingTransactionsResult:
+      type: object
+      example:
+        offeringTransactions:
+          - cost:
+              amount: 0
+              currencyCode: USD
+            createdOn: '1470021420'
+            offeringStatus:
+              type: RENEW
+              effectiveOn: '1472688000'
+              offering:
+                type: RECURRING
+                description: Android Remote Access Unmetered Device Slot
+                id: D68B3C05-1BA6-4360-BC69-12345EXAMPLE
+                platform: ANDROID
+              quantity: 0
+            transactionId: 03728003-d1ea-4851-abd6-12345EXAMPLE
+          - cost:
+              amount: 250
+              currencyCode: USD
+            createdOn: '1470021420'
+            offeringStatus:
+              type: PURCHASE
+              effectiveOn: '1470021420'
+              offering:
+                type: RECURRING
+                description: Android Remote Access Unmetered Device Slot
+                id: D68B3C05-1BA6-4360-BC69-12345EXAMPLE
+                platform: ANDROID
+              quantity: 1
+            transactionId: 56820b6e-06bd-473a-8ff8-12345EXAMPLE
+          - cost:
+              amount: 175
+              currencyCode: USD
+            createdOn: '1465538520'
+            offeringStatus:
+              type: PURCHASE
+              effectiveOn: '1465538520'
+              offering:
+                type: RECURRING
+                description: Android Unmetered Device Slot
+                id: 8980F81C-00D7-469D-8EC6-12345EXAMPLE
+                platform: ANDROID
+              quantity: 1
+            transactionId: 953ae2c6-d760-4a04-9597-12345EXAMPLE
+          - cost:
+              amount: 8.07
+              currencyCode: USD
+            createdOn: '1459344300'
+            offeringStatus:
+              type: PURCHASE
+              effectiveOn: '1459344300'
+              offering:
+                type: RECURRING
+                description: iOS Unmetered Device Slot
+                id: A53D4D73-A6F6-4B82-A0B0-12345EXAMPLE
+                platform: IOS
+              quantity: 1
+            transactionId: 2baf9021-ae3e-47f5-ab52-12345EXAMPLE
+      properties:
+        offeringTransactions:
+          $ref: '#/components/schemas/OfferingTransactions'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Returns the transaction log of the specified offerings.
+    ListOfferingsRequest:
+      type: object
+      example:
+        nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE=
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the request to list all offerings.
+    ListOfferingsResult:
+      type: object
+      example:
+        offerings:
+          - type: RECURRING
+            description: iOS Unmetered Device Slot
+            id: A53D4D73-A6F6-4B82-A0B0-12345EXAMPLE
+            platform: IOS
+            recurringCharges:
+              - cost:
+                  amount: 250
+                  currencyCode: USD
+                frequency: MONTHLY
+          - type: RECURRING
+            description: Android Unmetered Device Slot
+            id: 8980F81C-00D7-469D-8EC6-12345EXAMPLE
+            platform: ANDROID
+            recurringCharges:
+              - cost:
+                  amount: 250
+                  currencyCode: USD
+                frequency: MONTHLY
+          - type: RECURRING
+            description: Android Remote Access Unmetered Device Slot
+            id: D68B3C05-1BA6-4360-BC69-12345EXAMPLE
+            platform: ANDROID
+            recurringCharges:
+              - cost:
+                  amount: 250
+                  currencyCode: USD
+                frequency: MONTHLY
+          - type: RECURRING
+            description: iOS Remote Access Unmetered Device Slot
+            id: 552B4DAD-A6C9-45C4-94FB-12345EXAMPLE
+            platform: IOS
+            recurringCharges:
+              - cost:
+                  amount: 250
+                  currencyCode: USD
+                frequency: MONTHLY
+      properties:
+        offerings:
+          $ref: '#/components/schemas/Offerings'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the return values of the list of offerings.
+    ListProjectsRequest:
+      type: object
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:7ad300ed-8183-41a7-bf94-12345EXAMPLE'
+        nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents a request to the list projects operation.
+    ListProjectsResult:
+      type: object
+      example:
+        projects:
+          - name: My Test Project
+            arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:7ad300ed-8183-41a7-bf94-12345EXAMPLE'
+            created: '1453163262.105'
+          - name: Hello World
+            arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:d6b087d9-56db-4e44-b9ec-12345EXAMPLE'
+            created: '1470350112.439'
+      properties:
+        projects:
+          $ref: '#/components/schemas/Projects'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the result of a list projects request.
+    ListRemoteAccessSessionsRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456'
+        nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE=
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the request to return information about the remote access session.
+    ListRemoteAccessSessionsResult:
+      type: object
+      example:
+        remoteAccessSessions: []
+      properties:
+        remoteAccessSessions:
+          $ref: '#/components/schemas/RemoteAccessSessions'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the response from the server after AWS Device Farm makes a request to return information about the remote access session.
+    ListRunsRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:run:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/0fcac17b-6122-44d7-ae5a-12345EXAMPLE'
+        nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents a request to the list runs operation.
+    ListRunsResult:
+      type: object
+      example:
+        runs:
+          - name: My Test Run
+            type: BUILTIN_EXPLORER
+            arn: 'arn:aws:devicefarm:us-west-2:123456789101:run:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/0fcac17b-6122-44d7-ae5a-12345EXAMPLE'
+            billingMethod: METERED
+            completedJobs: 0
+            counters:
+              errored: 0
+              failed: 0
+              passed: 0
+              skipped: 0
+              stopped: 0
+              total: 0
+              warned: 0
+            created: '1472667509.852'
+            deviceMinutes:
+              metered: 0
+              total: 0
+              unmetered: 0
+            platform: ANDROID
+            result: PENDING
+            status: RUNNING
+            totalJobs: 3
+      properties:
+        runs:
+          $ref: '#/components/schemas/Runs'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the result of a list runs request.
+    ListSamplesRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
+        nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents a request to the list samples operation.
+    ListSamplesResult:
+      type: object
+      example:
+        samples: []
+      properties:
+        samples:
+          $ref: '#/components/schemas/Samples'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the result of a list samples request.
+    ListSuitesRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
+        nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents a request to the list suites operation.
+    ListSuitesResult:
+      type: object
+      example:
+        suites: []
+      properties:
+        suites:
+          $ref: '#/components/schemas/Suites'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the result of a list suites request.
+    ListTestsRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
+        nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents a request to the list tests operation.
+    ListTestsResult:
+      type: object
+      example:
+        tests: []
+      properties:
+        tests:
+          $ref: '#/components/schemas/Tests'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the result of a list tests request.
+    ListUniqueProblemsRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
+        nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents a request to the list unique problems operation.
+    ListUniqueProblemsResult:
+      type: object
+      example:
+        uniqueProblems: {}
+      properties:
+        uniqueProblems:
+          $ref: '#/components/schemas/UniqueProblemsByExecutionResultMap'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the result of a list unique problems request.
+    ListUploadsRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
+        nextToken: RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents a request to the list uploads operation.
+    ListUploadsResult:
+      type: object
+      example:
+        uploads: []
+      properties:
+        uploads:
+          $ref: '#/components/schemas/Uploads'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+      description: Represents the result of a list uploads request.
+    Location:
+      type: object
+      required:
+        - latitude
+        - longitude
+      properties:
+        latitude:
+          $ref: '#/components/schemas/Double'
+        longitude:
+          $ref: '#/components/schemas/Double'
+      description: '<p>Represents a latitude and longitude pair, expressed in geographic coordinate system degrees (for example 47.6204, -122.3491).</p> <p>Elevation is currently not supported.</p>'
+    Long:
+      type: integer
+    MaxSlotMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/Integer'
+    Message:
+      type: string
+      minLength: 0
+      maxLength: 16384
+    Metadata:
+      type: string
+      minLength: 0
+      maxLength: 8192
+    MonetaryAmount:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/Double'
+        currencyCode:
+          $ref: '#/components/schemas/CurrencyCode'
+      description: A number representing the monetary amount for an offering or transaction.
+    Name:
+      type: string
+      minLength: 0
+      maxLength: 256
+    NetworkProfile:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        description:
+          $ref: '#/components/schemas/Message'
+        type:
+          $ref: '#/components/schemas/NetworkProfileType'
+        uplinkBandwidthBits:
+          $ref: '#/components/schemas/Long'
+        downlinkBandwidthBits:
+          $ref: '#/components/schemas/Long'
+        uplinkDelayMs:
+          $ref: '#/components/schemas/Long'
+        downlinkDelayMs:
+          $ref: '#/components/schemas/Long'
+        uplinkJitterMs:
+          $ref: '#/components/schemas/Long'
+        downlinkJitterMs:
+          $ref: '#/components/schemas/Long'
+        uplinkLossPercent:
+          $ref: '#/components/schemas/PercentInteger'
+        downlinkLossPercent:
+          $ref: '#/components/schemas/PercentInteger'
+      description: An array of settings that describes characteristics of a network profile.
+    NetworkProfileType:
+      type: string
+      enum:
+        - CURATED
+        - PRIVATE
+    NetworkProfiles:
+      type: array
+      items:
+        $ref: '#/components/schemas/NetworkProfile'
+    NotEligibleException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/Message'
+      description: Exception gets thrown when a user is not eligible to perform the specified transaction.
+    NotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/Message'
+      description: The specified entity was not found.
+    Offering:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/OfferingIdentifier'
+        description:
+          $ref: '#/components/schemas/Message'
+        type:
+          $ref: '#/components/schemas/OfferingType'
+        platform:
+          $ref: '#/components/schemas/DevicePlatform'
+        recurringCharges:
+          $ref: '#/components/schemas/RecurringCharges'
+      description: Represents the metadata of a device offering.
+    OfferingIdentifier:
+      type: string
+      minLength: 32
+    OfferingPromotion:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/OfferingPromotionIdentifier'
+        description:
+          $ref: '#/components/schemas/Message'
+      description: Represents information about an offering promotion.
+    OfferingPromotionIdentifier:
+      type: string
+      minLength: 4
+    OfferingPromotions:
+      type: array
+      items:
+        $ref: '#/components/schemas/OfferingPromotion'
+    OfferingStatus:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/OfferingTransactionType'
+        offering:
+          $ref: '#/components/schemas/Offering'
+        quantity:
+          $ref: '#/components/schemas/Integer'
+        effectiveOn:
+          $ref: '#/components/schemas/DateTime'
+      description: The status of the offering.
+    OfferingStatusMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/OfferingIdentifier'
+          value:
+            $ref: '#/components/schemas/OfferingStatus'
+    OfferingTransaction:
+      type: object
+      properties:
+        offeringStatus:
+          $ref: '#/components/schemas/OfferingStatus'
+        transactionId:
+          $ref: '#/components/schemas/TransactionIdentifier'
+        offeringPromotionId:
+          $ref: '#/components/schemas/OfferingPromotionIdentifier'
+        createdOn:
+          $ref: '#/components/schemas/DateTime'
+        cost:
+          $ref: '#/components/schemas/MonetaryAmount'
+      description: Represents the metadata of an offering transaction.
+    OfferingTransactionType:
+      type: string
+      enum:
+        - PURCHASE
+        - RENEW
+        - SYSTEM
+    OfferingTransactions:
+      type: array
+      items:
+        $ref: '#/components/schemas/OfferingTransaction'
+    OfferingType:
+      type: string
+      enum:
+        - RECURRING
+    Offerings:
+      type: array
+      items:
+        $ref: '#/components/schemas/Offering'
+    PaginationToken:
+      type: string
+      minLength: 4
+      maxLength: 1024
+    PercentInteger:
+      type: integer
+      minimum: 0
+      maximum: 100
+    Problem:
+      type: object
+      properties:
+        run:
+          $ref: '#/components/schemas/ProblemDetail'
+        job:
+          $ref: '#/components/schemas/ProblemDetail'
+        suite:
+          $ref: '#/components/schemas/ProblemDetail'
+        test:
+          $ref: '#/components/schemas/ProblemDetail'
+        device:
+          $ref: '#/components/schemas/Device'
+        result:
+          $ref: '#/components/schemas/ExecutionResult'
+        message:
+          $ref: '#/components/schemas/Message'
+      description: Represents a specific warning or failure.
+    ProblemDetail:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+      description: Information about a problem detail.
+    Problems:
+      type: array
+      items:
+        $ref: '#/components/schemas/Problem'
+    Project:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        defaultJobTimeoutMinutes:
+          $ref: '#/components/schemas/JobTimeoutMinutes'
+        created:
+          $ref: '#/components/schemas/DateTime'
+      description: Represents an operating-system neutral workspace for running and managing tests.
+    Projects:
+      type: array
+      items:
+        $ref: '#/components/schemas/Project'
+    PurchaseOfferingRequest:
+      type: object
+      example:
+        offeringId: D68B3C05-1BA6-4360-BC69-12345EXAMPLE
+        quantity: 1
+      properties:
+        offeringId:
+          $ref: '#/components/schemas/OfferingIdentifier'
+        quantity:
+          $ref: '#/components/schemas/Integer'
+        offeringPromotionId:
+          $ref: '#/components/schemas/OfferingPromotionIdentifier'
+      description: Represents a request for a purchase offering.
+    PurchaseOfferingResult:
+      type: object
+      example:
+        offeringTransaction:
+          cost:
+            amount: 8.07
+            currencyCode: USD
+          createdOn: '1472648340'
+          offeringStatus:
+            type: PURCHASE
+            effectiveOn: '1472648340'
+            offering:
+              type: RECURRING
+              description: Android Remote Access Unmetered Device Slot
+              id: D68B3C05-1BA6-4360-BC69-12345EXAMPLE
+              platform: ANDROID
+            quantity: 1
+          transactionId: d30614ed-1b03-404c-9893-12345EXAMPLE
+      properties:
+        offeringTransaction:
+          $ref: '#/components/schemas/OfferingTransaction'
+      description: 'The result of the purchase offering (e.g., success or failure).'
+    PurchasedDevicesMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/DevicePlatform'
+          value:
+            $ref: '#/components/schemas/Integer'
+    Radios:
+      type: object
+      properties:
+        wifi:
+          $ref: '#/components/schemas/Boolean'
+        bluetooth:
+          $ref: '#/components/schemas/Boolean'
+        nfc:
+          $ref: '#/components/schemas/Boolean'
+        gps:
+          $ref: '#/components/schemas/Boolean'
+      description: 'Represents the set of radios and their states on a device. Examples of radios include Wi-Fi, GPS, Bluetooth, and NFC.'
+    RecurringCharge:
+      type: object
+      properties:
+        cost:
+          $ref: '#/components/schemas/MonetaryAmount'
+        frequency:
+          $ref: '#/components/schemas/RecurringChargeFrequency'
+      description: Specifies whether charges for devices will be recurring.
+    RecurringChargeFrequency:
+      type: string
+      enum:
+        - MONTHLY
+    RecurringCharges:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecurringCharge'
+    RemoteAccessSession:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        created:
+          $ref: '#/components/schemas/DateTime'
+        status:
+          $ref: '#/components/schemas/ExecutionStatus'
+        result:
+          $ref: '#/components/schemas/ExecutionResult'
+        message:
+          $ref: '#/components/schemas/Message'
+        started:
+          $ref: '#/components/schemas/DateTime'
+        stopped:
+          $ref: '#/components/schemas/DateTime'
+        device:
+          $ref: '#/components/schemas/Device'
+        billingMethod:
+          $ref: '#/components/schemas/BillingMethod'
+        deviceMinutes:
+          $ref: '#/components/schemas/DeviceMinutes'
+        endpoint:
+          $ref: '#/components/schemas/String'
+      description: Represents information about the remote access session.
+    RemoteAccessSessions:
+      type: array
+      items:
+        $ref: '#/components/schemas/RemoteAccessSession'
+    RenewOfferingRequest:
+      type: object
+      example:
+        offeringId: D68B3C05-1BA6-4360-BC69-12345EXAMPLE
+        quantity: 1
+      properties:
+        offeringId:
+          $ref: '#/components/schemas/OfferingIdentifier'
+        quantity:
+          $ref: '#/components/schemas/Integer'
+      description: A request representing an offering renewal.
+    RenewOfferingResult:
+      type: object
+      example:
+        offeringTransaction:
+          cost:
+            amount: 250
+            currencyCode: USD
+          createdOn: '1472648880'
+          offeringStatus:
+            type: RENEW
+            effectiveOn: '1472688000'
+            offering:
+              type: RECURRING
+              description: Android Remote Access Unmetered Device Slot
+              id: D68B3C05-1BA6-4360-BC69-12345EXAMPLE
+              platform: ANDROID
+            quantity: 1
+          transactionId: e90f1405-8c35-4561-be43-12345EXAMPLE
+      properties:
+        offeringTransaction:
+          $ref: '#/components/schemas/OfferingTransaction'
+      description: The result of a renewal offering.
+    Resolution:
+      type: object
+      properties:
+        width:
+          $ref: '#/components/schemas/Integer'
+        height:
+          $ref: '#/components/schemas/Integer'
+      description: 'Represents the screen resolution of a device in height and width, expressed in pixels.'
+    Rule:
+      type: object
+      properties:
+        attribute:
+          $ref: '#/components/schemas/DeviceAttribute'
+        operator:
+          $ref: '#/components/schemas/RuleOperator'
+        value:
+          $ref: '#/components/schemas/String'
+      description: Represents a condition for a device pool.
+    RuleOperator:
+      type: string
+      enum:
+        - EQUALS
+        - LESS_THAN
+        - GREATER_THAN
+        - IN
+        - NOT_IN
+        - CONTAINS
+    Rules:
+      type: array
+      items:
+        $ref: '#/components/schemas/Rule'
+    Run:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        type:
+          $ref: '#/components/schemas/TestType'
+        platform:
+          $ref: '#/components/schemas/DevicePlatform'
+        created:
+          $ref: '#/components/schemas/DateTime'
+        status:
+          $ref: '#/components/schemas/ExecutionStatus'
+        result:
+          $ref: '#/components/schemas/ExecutionResult'
+        started:
+          $ref: '#/components/schemas/DateTime'
+        stopped:
+          $ref: '#/components/schemas/DateTime'
+        counters:
+          $ref: '#/components/schemas/Counters'
+        message:
+          $ref: '#/components/schemas/Message'
+        totalJobs:
+          $ref: '#/components/schemas/Integer'
+        completedJobs:
+          $ref: '#/components/schemas/Integer'
+        billingMethod:
+          $ref: '#/components/schemas/BillingMethod'
+        deviceMinutes:
+          $ref: '#/components/schemas/DeviceMinutes'
+        networkProfile:
+          $ref: '#/components/schemas/NetworkProfile'
+      description: Represents an app on a set of devices with a specific test and configuration.
+    Runs:
+      type: array
+      items:
+        $ref: '#/components/schemas/Run'
+    Sample:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        type:
+          $ref: '#/components/schemas/SampleType'
+        url:
+          $ref: '#/components/schemas/URL'
+      description: Represents a sample of performance data.
+    SampleType:
+      type: string
+      enum:
+        - CPU
+        - MEMORY
+        - THREADS
+        - RX_RATE
+        - TX_RATE
+        - RX
+        - TX
+        - NATIVE_FRAMES
+        - NATIVE_FPS
+        - NATIVE_MIN_DRAWTIME
+        - NATIVE_AVG_DRAWTIME
+        - NATIVE_MAX_DRAWTIME
+        - OPENGL_FRAMES
+        - OPENGL_FPS
+        - OPENGL_MIN_DRAWTIME
+        - OPENGL_AVG_DRAWTIME
+        - OPENGL_MAX_DRAWTIME
+    Samples:
+      type: array
+      items:
+        $ref: '#/components/schemas/Sample'
+    ScheduleRunConfiguration:
+      type: object
+      properties:
+        extraDataPackageArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        networkProfileArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        locale:
+          $ref: '#/components/schemas/String'
+        location:
+          $ref: '#/components/schemas/Location'
+        radios:
+          $ref: '#/components/schemas/Radios'
+        auxiliaryApps:
+          $ref: '#/components/schemas/AmazonResourceNames'
+        billingMethod:
+          $ref: '#/components/schemas/BillingMethod'
+      description: 'Represents the settings for a run. Includes things like location, radio states, auxiliary apps, and network profiles.'
+    ScheduleRunRequest:
+      type: object
+      required:
+        - projectArn
+        - devicePoolArn
+        - test
+      example:
+        name: MyRun
+        devicePoolArn: 'arn:aws:devicefarm:us-west-2:123456789101:pool:EXAMPLE-GUID-123-456'
+        projectArn: 'arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456'
+        test:
+          type: APPIUM_JAVA_JUNIT
+          testPackageArn: 'arn:aws:devicefarm:us-west-2:123456789101:test:EXAMPLE-GUID-123-456'
+      properties:
+        projectArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        appArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        devicePoolArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        test:
+          $ref: '#/components/schemas/ScheduleRunTest'
+        configuration:
+          $ref: '#/components/schemas/ScheduleRunConfiguration'
+        executionConfiguration:
+          $ref: '#/components/schemas/ExecutionConfiguration'
+      description: Represents a request to the schedule run operation.
+    ScheduleRunResult:
+      type: object
+      example:
+        run: {}
+      properties:
+        run:
+          $ref: '#/components/schemas/Run'
+      description: Represents the result of a schedule run request.
+    ScheduleRunTest:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/TestType'
+        testPackageArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        filter:
+          $ref: '#/components/schemas/Filter'
+        parameters:
+          $ref: '#/components/schemas/TestParameters'
+      description: Represents additional test settings.
+    ServiceAccountException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/Message'
+      description: There was a problem with the service account.
+    StopRemoteAccessSessionRequest:
+      type: object
+      required:
+        - arn
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: Represents the request to stop the remote access session.
+    StopRemoteAccessSessionResult:
+      type: object
+      properties:
+        remoteAccessSession:
+          $ref: '#/components/schemas/RemoteAccessSession'
+      description: Represents the response from the server that describes the remote access session when AWS Device Farm stops the session.
+    StopRunRequest:
+      type: object
+      required:
+        - arn
+      example:
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:run:EXAMPLE-GUID-123-456'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: Represents the request to stop a specific run.
+    StopRunResult:
+      type: object
+      example:
+        run: {}
+      properties:
+        run:
+          $ref: '#/components/schemas/Run'
+      description: Represents the results of your stop run attempt.
+    String:
+      type: string
+    Suite:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        type:
+          $ref: '#/components/schemas/TestType'
+        created:
+          $ref: '#/components/schemas/DateTime'
+        status:
+          $ref: '#/components/schemas/ExecutionStatus'
+        result:
+          $ref: '#/components/schemas/ExecutionResult'
+        started:
+          $ref: '#/components/schemas/DateTime'
+        stopped:
+          $ref: '#/components/schemas/DateTime'
+        counters:
+          $ref: '#/components/schemas/Counters'
+        message:
+          $ref: '#/components/schemas/Message'
+        deviceMinutes:
+          $ref: '#/components/schemas/DeviceMinutes'
+      description: Represents a collection of one or more tests.
+    Suites:
+      type: array
+      items:
+        $ref: '#/components/schemas/Suite'
+    Test:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        type:
+          $ref: '#/components/schemas/TestType'
+        created:
+          $ref: '#/components/schemas/DateTime'
+        status:
+          $ref: '#/components/schemas/ExecutionStatus'
+        result:
+          $ref: '#/components/schemas/ExecutionResult'
+        started:
+          $ref: '#/components/schemas/DateTime'
+        stopped:
+          $ref: '#/components/schemas/DateTime'
+        counters:
+          $ref: '#/components/schemas/Counters'
+        message:
+          $ref: '#/components/schemas/Message'
+        deviceMinutes:
+          $ref: '#/components/schemas/DeviceMinutes'
+      description: Represents a condition that is evaluated.
+    TestParameters:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/String'
+    TestType:
+      type: string
+      enum:
+        - BUILTIN_FUZZ
+        - BUILTIN_EXPLORER
+        - APPIUM_JAVA_JUNIT
+        - APPIUM_JAVA_TESTNG
+        - APPIUM_PYTHON
+        - APPIUM_WEB_JAVA_JUNIT
+        - APPIUM_WEB_JAVA_TESTNG
+        - APPIUM_WEB_PYTHON
+        - CALABASH
+        - INSTRUMENTATION
+        - UIAUTOMATION
+        - UIAUTOMATOR
+        - XCTEST
+        - XCTEST_UI
+    Tests:
+      type: array
+      items:
+        $ref: '#/components/schemas/Test'
+    TransactionIdentifier:
+      type: string
+      minLength: 32
+    TrialMinutes:
+      type: object
+      properties:
+        total:
+          $ref: '#/components/schemas/Double'
+        remaining:
+          $ref: '#/components/schemas/Double'
+      description: Represents information about free trial device minutes for an AWS account.
+    URL:
+      type: string
+      minLength: 0
+      maxLength: 2048
+    UniqueProblem:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/Message'
+        problems:
+          $ref: '#/components/schemas/Problems'
+      description: 'A collection of one or more problems, grouped by their result.'
+    UniqueProblems:
+      type: array
+      items:
+        $ref: '#/components/schemas/UniqueProblem'
+    UniqueProblemsByExecutionResultMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/ExecutionResult'
+          value:
+            $ref: '#/components/schemas/UniqueProblems'
+    UpdateDevicePoolRequest:
+      type: object
+      required:
+        - arn
+      example:
+        name: NewName
+        arn: 'arn:aws:devicefarm:us-west-2::devicepool:082d10e5-d7d7-48a5-ba5c-12345EXAMPLE'
+        description: NewDescription
+        rules:
+          - value: 'True'
+            attribute: REMOTE_ACCESS_ENABLED
+            operator: EQUALS
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        description:
+          $ref: '#/components/schemas/Message'
+        rules:
+          $ref: '#/components/schemas/Rules'
+      description: Represents a request to the update device pool operation.
+    UpdateDevicePoolResult:
+      type: object
+      example:
+        devicePool: {}
+      properties:
+        devicePool:
+          $ref: '#/components/schemas/DevicePool'
+      description: Represents the result of an update device pool request.
+    UpdateNetworkProfileRequest:
+      type: object
+      required:
+        - arn
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        description:
+          $ref: '#/components/schemas/Message'
+        type:
+          $ref: '#/components/schemas/NetworkProfileType'
+        uplinkBandwidthBits:
+          $ref: '#/components/schemas/Long'
+        downlinkBandwidthBits:
+          $ref: '#/components/schemas/Long'
+        uplinkDelayMs:
+          $ref: '#/components/schemas/Long'
+        downlinkDelayMs:
+          $ref: '#/components/schemas/Long'
+        uplinkJitterMs:
+          $ref: '#/components/schemas/Long'
+        downlinkJitterMs:
+          $ref: '#/components/schemas/Long'
+        uplinkLossPercent:
+          $ref: '#/components/schemas/PercentInteger'
+        downlinkLossPercent:
+          $ref: '#/components/schemas/PercentInteger'
+    UpdateNetworkProfileResult:
+      type: object
+      properties:
+        networkProfile:
+          $ref: '#/components/schemas/NetworkProfile'
+    UpdateProjectRequest:
+      type: object
+      required:
+        - arn
+      example:
+        name: NewName
+        arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:8f75187d-101e-4625-accc-12345EXAMPLE'
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        defaultJobTimeoutMinutes:
+          $ref: '#/components/schemas/JobTimeoutMinutes'
+      description: Represents a request to the update project operation.
+    UpdateProjectResult:
+      type: object
+      example:
+        project:
+          name: NewName
+          arn: 'arn:aws:devicefarm:us-west-2:123456789101:project:8f75187d-101e-4625-accc-12345EXAMPLE'
+          created: '1448400709.927'
+      properties:
+        project:
+          $ref: '#/components/schemas/Project'
+      description: Represents the result of an update project request.
+    Upload:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        name:
+          $ref: '#/components/schemas/Name'
+        created:
+          $ref: '#/components/schemas/DateTime'
+        type:
+          $ref: '#/components/schemas/UploadType'
+        status:
+          $ref: '#/components/schemas/UploadStatus'
+        url:
+          $ref: '#/components/schemas/URL'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        contentType:
+          $ref: '#/components/schemas/ContentType'
+        message:
+          $ref: '#/components/schemas/Message'
+      description: An app or a set of one or more tests to upload or that have been uploaded.
+    UploadStatus:
+      type: string
+      enum:
+        - INITIALIZED
+        - PROCESSING
+        - SUCCEEDED
+        - FAILED
+    UploadType:
+      type: string
+      enum:
+        - ANDROID_APP
+        - IOS_APP
+        - WEB_APP
+        - EXTERNAL_DATA
+        - APPIUM_JAVA_JUNIT_TEST_PACKAGE
+        - APPIUM_JAVA_TESTNG_TEST_PACKAGE
+        - APPIUM_PYTHON_TEST_PACKAGE
+        - APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE
+        - APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE
+        - APPIUM_WEB_PYTHON_TEST_PACKAGE
+        - CALABASH_TEST_PACKAGE
+        - INSTRUMENTATION_TEST_PACKAGE
+        - UIAUTOMATION_TEST_PACKAGE
+        - UIAUTOMATOR_TEST_PACKAGE
+        - XCTEST_TEST_PACKAGE
+        - XCTEST_UI_TEST_PACKAGE
+    Uploads:
+      type: array
+      items:
+        $ref: '#/components/schemas/Upload'
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
