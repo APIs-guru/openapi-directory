@@ -32,10 +32,10 @@ You can contact us at founders@apis.guru.
 What does APIs.guru do?
 --------------------------
 * Filter out private and non-reliable APIs.
-* [Convert](https://github.com/lucybot/api-spec-converter) different formats into OpenAPI(fka Swagger) 2.0
-* Fix mistakes, ~80% of definitions have some
-* Add additional data, like: logo, categories, …
-* Update definitions on at least a weekly basis
+* [Convert](https://github.com/lucybot/api-spec-converter) different formats into OpenAPI(fka Swagger) 2.0.
+* Fix mistakes, ~80% of definitions have some mistakes.
+* Add additional data, like: logo, categories, ….
+* Update definitions on at least a weekly basis.
 
 Update procedure
 --------------------------
