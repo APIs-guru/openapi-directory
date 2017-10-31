@@ -1,4 +1,5 @@
-#!/usr/bin/env node
+//usr/bin/env node
+// open - api - directory
 'use strict';
 
 var fs = require('fs');
@@ -54,7 +55,8 @@ buildApiList(specs)
   })
   .done();
 
-function cacheLogo(url) {
+function cacheLogo(url) 
+{
   assert(url.indexOf('#') === -1);
   return makeRequest('get', url, {encoding: null, retries: 10})
     .spread(function(response, data) {
