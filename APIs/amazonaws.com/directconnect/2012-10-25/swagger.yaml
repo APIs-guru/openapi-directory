@@ -299,7 +299,7 @@ paths:
   '/#AssociateVirtualInterface':
     post:
       operationId: AssociateVirtualInterface
-      description: '<p>Associates a virtual interface with a specified link aggregation group (LAG) or connection. Connectivity to AWS is temporarily interrupted as the virtual interface is being migrated. If the target connection or LAG has an associated virtual interface with a conflicting VLAN number or a conflicting IP address, the operation fails. </p> <p>Virtual interfaces associated with a hosted connection cannot be associated with a LAG; hosted connections must be migrated along with their virtual interfaces using <a>AssociateHostedConnection</a>.</p> <p>Hosted virtual interfaces (an interface for which the owner of the connection is not the owner of physical connection) can only be reassociated by the owner of the physical connection.</p>'
+      description: '<p>Associates a virtual interface with a specified link aggregation group (LAG) or connection. Connectivity to AWS is temporarily interrupted as the virtual interface is being migrated. If the target connection or LAG has an associated virtual interface with a conflicting VLAN number or a conflicting IP address, the operation fails. </p> <p>Virtual interfaces associated with a hosted connection cannot be associated with a LAG; hosted connections must be migrated along with their virtual interfaces using <a>AssociateHostedConnection</a>.</p> <p>In order to reassociate a virtual interface to a new connection or LAG, the requester must own either the virtual interface itself or the connection to which the virtual interface is currently associated. Additionally, the requester must own the connection or LAG to which the virtual interface will be newly associated.</p>'
       responses:
         '200':
           description: Success
@@ -365,7 +365,7 @@ paths:
   '/#ConfirmPrivateVirtualInterface':
     post:
       operationId: ConfirmPrivateVirtualInterface
-      description: '<p>Accept ownership of a private virtual interface created by another customer.</p> <p>After the virtual interface owner calls this function, the virtual interface will be created and attached to the given virtual private gateway, and will be available for handling traffic.</p>'
+      description: '<p>Accept ownership of a private virtual interface created by another customer.</p> <p>After the virtual interface owner calls this function, the virtual interface will be created and attached to the given virtual private gateway or direct connect gateway, and will be available for handling traffic.</p>'
       responses:
         '200':
           description: Success
@@ -464,7 +464,7 @@ paths:
   '/#CreateConnection':
     post:
       operationId: CreateConnection
-      description: '<p>Creates a new connection between the customer network and a specific AWS Direct Connect location.</p> <p>A connection links your internal network to an AWS Direct Connect location over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic cable. One end of the cable is connected to your router, the other to an AWS Direct Connect router. An AWS Direct Connect location provides access to Amazon Web Services in the region it is associated with. You can establish connections with AWS Direct Connect locations in multiple regions, but a connection in one region does not provide connectivity to other regions.</p> <p>You can automatically add the new connection to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new connection is allocated on the same AWS Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no connection will be created.</p>'
+      description: '<p>Creates a new connection between the customer network and a specific AWS Direct Connect location.</p> <p>A connection links your internal network to an AWS Direct Connect location over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic cable. One end of the cable is connected to your router, the other to an AWS Direct Connect router. An AWS Direct Connect location provides access to Amazon Web Services in the region it is associated with. You can establish connections with AWS Direct Connect locations in multiple regions, but a connection in one region does not provide connectivity to other regions.</p> <p>To find the locations for your region, use <a>DescribeLocations</a>.</p> <p>You can automatically add the new connection to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new connection is allocated on the same AWS Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no connection will be created.</p>'
       responses:
         '200':
           description: Success
@@ -484,6 +484,72 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateConnectionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateDirectConnectGateway':
+    post:
+      operationId: CreateDirectConnectGateway
+      description: 'Creates a new direct connect gateway. A direct connect gateway is an intermediate object that enables you to connect a set of virtual interfaces and virtual private gateways. direct connect gateways are global and visible in any AWS region after they are created. The virtual interfaces and virtual private gateways that are connected through a direct connect gateway can be in different regions. This enables you to connect to a VPC in any region, regardless of the region in which the virtual interfaces are located, and pass traffic between them.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDirectConnectGatewayResult'
+        '480':
+          description: DirectConnectServerException
+          schema:
+            $ref: '#/definitions/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          schema:
+            $ref: '#/definitions/DirectConnectClientException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDirectConnectGatewayRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateDirectConnectGatewayAssociation':
+    post:
+      operationId: CreateDirectConnectGatewayAssociation
+      description: Creates an association between a direct connect gateway and a virtual private gateway (VGW). The VGW must be attached to a VPC and must not be associated with another direct connect gateway.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDirectConnectGatewayAssociationResult'
+        '480':
+          description: DirectConnectServerException
+          schema:
+            $ref: '#/definitions/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          schema:
+            $ref: '#/definitions/DirectConnectClientException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDirectConnectGatewayAssociationRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -692,6 +758,72 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDirectConnectGateway':
+    post:
+      operationId: DeleteDirectConnectGateway
+      description: Deletes a direct connect gateway. You must first delete all virtual interfaces that are attached to the direct connect gateway and disassociate all virtual private gateways that are associated with the direct connect gateway.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDirectConnectGatewayResult'
+        '480':
+          description: DirectConnectServerException
+          schema:
+            $ref: '#/definitions/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          schema:
+            $ref: '#/definitions/DirectConnectClientException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDirectConnectGatewayRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDirectConnectGatewayAssociation':
+    post:
+      operationId: DeleteDirectConnectGatewayAssociation
+      description: Deletes the association between a direct connect gateway and a virtual private gateway.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDirectConnectGatewayAssociationResult'
+        '480':
+          description: DirectConnectServerException
+          schema:
+            $ref: '#/definitions/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          schema:
+            $ref: '#/definitions/DirectConnectClientException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDirectConnectGatewayAssociationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteInterconnect':
     post:
       operationId: DeleteInterconnect
@@ -890,6 +1022,105 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDirectConnectGatewayAssociations':
+    post:
+      operationId: DescribeDirectConnectGatewayAssociations
+      description: 'Returns a list of all direct connect gateway and virtual private gateway (VGW) associations. Either a direct connect gateway ID or a VGW ID must be provided in the request. If a direct connect gateway ID is provided, the response returns all VGWs associated with the direct connect gateway. If a VGW ID is provided, the response returns all direct connect gateways associated with the VGW. If both are provided, the response only returns the association that matches both the direct connect gateway and the VGW.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDirectConnectGatewayAssociationsResult'
+        '480':
+          description: DirectConnectServerException
+          schema:
+            $ref: '#/definitions/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          schema:
+            $ref: '#/definitions/DirectConnectClientException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDirectConnectGatewayAssociationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDirectConnectGatewayAttachments':
+    post:
+      operationId: DescribeDirectConnectGatewayAttachments
+      description: 'Returns a list of all direct connect gateway and virtual interface (VIF) attachments. Either a direct connect gateway ID or a VIF ID must be provided in the request. If a direct connect gateway ID is provided, the response returns all VIFs attached to the direct connect gateway. If a VIF ID is provided, the response returns all direct connect gateways attached to the VIF. If both are provided, the response only returns the attachment that matches both the direct connect gateway and the VIF.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDirectConnectGatewayAttachmentsResult'
+        '480':
+          description: DirectConnectServerException
+          schema:
+            $ref: '#/definitions/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          schema:
+            $ref: '#/definitions/DirectConnectClientException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDirectConnectGatewayAttachmentsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDirectConnectGateways':
+    post:
+      operationId: DescribeDirectConnectGateways
+      description: 'Returns a list of direct connect gateways in your account. Deleted direct connect gateways are not returned. You can provide a direct connect gateway ID in the request to return information about the specific direct connect gateway only. Otherwise, if a direct connect gateway ID is not provided, information about all of your direct connect gateways is returned. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDirectConnectGatewaysResult'
+        '480':
+          description: DirectConnectServerException
+          schema:
+            $ref: '#/definitions/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          schema:
+            $ref: '#/definitions/DirectConnectClientException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDirectConnectGatewaysRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeHostedConnections':
     post:
       operationId: DescribeHostedConnections
@@ -1058,7 +1289,7 @@ paths:
   '/#DescribeLocations':
     post:
       operationId: DescribeLocations
-      description: Returns the list of AWS Direct Connect locations in the current AWS region. These are the locations that may be selected when calling CreateConnection or CreateInterconnect.
+      description: Returns the list of AWS Direct Connect locations in the current AWS region. These are the locations that may be selected when calling <a>CreateConnection</a> or <a>CreateInterconnect</a>.
       responses:
         '200':
           description: Success
@@ -1520,13 +1751,15 @@ definitions:
     type: object
     required:
       - virtualInterfaceId
-      - virtualGatewayId
     properties:
       virtualInterfaceId:
         $ref: '#/definitions/VirtualInterfaceId'
       virtualGatewayId:
         $ref: '#/definitions/VirtualGatewayId'
         description: '<p>ID of the virtual private gateway that will be attached to the virtual interface.</p> <p> A virtual private gateway can be managed via the Amazon Virtual Private Cloud (VPC) console or the <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html">EC2 CreateVpnGateway</a> action.</p> <p>Default: None</p>'
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+        description: '<p>ID of the direct connect gateway that will be attached to the virtual interface.</p> <p> A direct connect gateway can be managed via the AWS Direct Connect console or the <a>CreateDirectConnectGateway</a> action.</p> <p>Default: None</p>'
     description: Container for the parameters to the ConfirmPrivateVirtualInterface operation.
   ConfirmPrivateVirtualInterfaceResponse:
     type: object
@@ -1645,6 +1878,45 @@ definitions:
       lagId:
         $ref: '#/definitions/LagId'
     description: Container for the parameters to the CreateConnection operation.
+  CreateDirectConnectGatewayAssociationRequest:
+    type: object
+    required:
+      - directConnectGatewayId
+      - virtualGatewayId
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+        description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p> <p>Default: None</p>'
+      virtualGatewayId:
+        $ref: '#/definitions/VirtualGatewayId'
+        description: '<p>The ID of the virtual private gateway.</p> <p>Example: "vgw-abc123ef"</p> <p>Default: None</p>'
+    description: Container for the parameters to the CreateDirectConnectGatewayAssociation operation.
+  CreateDirectConnectGatewayAssociationResult:
+    type: object
+    properties:
+      directConnectGatewayAssociation:
+        $ref: '#/definitions/DirectConnectGatewayAssociation'
+        description: The direct connect gateway association to be created.
+    description: Container for the response from the CreateDirectConnectGatewayAssociation API call
+  CreateDirectConnectGatewayRequest:
+    type: object
+    required:
+      - directConnectGatewayName
+    properties:
+      directConnectGatewayName:
+        $ref: '#/definitions/DirectConnectGatewayName'
+        description: '<p>The name of the direct connect gateway.</p> <p>Example: "My direct connect gateway"</p> <p>Default: None</p>'
+      amazonSideAsn:
+        $ref: '#/definitions/LongAsn'
+        description: '<p>The autonomous system number (ASN) for Border Gateway Protocol (BGP) to be configured on the Amazon side of the connection. The ASN must be in the private range of 64,512 to 65,534 or 4,200,000,000 to 4,294,967,294 </p> <p>Example: 65200</p> <p>Default: 64512</p>'
+    description: Container for the parameters to the CreateDirectConnectGateway operation.
+  CreateDirectConnectGatewayResult:
+    type: object
+    properties:
+      directConnectGateway:
+        $ref: '#/definitions/DirectConnectGateway'
+        description: The direct connect gateway to be created.
+    description: Container for the response from the CreateDirectConnectGateway API call
   CreateInterconnectRequest:
     type: object
     required:
@@ -1740,6 +2012,42 @@ definitions:
       connectionId:
         $ref: '#/definitions/ConnectionId'
     description: Container for the parameters to the DeleteConnection operation.
+  DeleteDirectConnectGatewayAssociationRequest:
+    type: object
+    required:
+      - directConnectGatewayId
+      - virtualGatewayId
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+        description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p> <p>Default: None</p>'
+      virtualGatewayId:
+        $ref: '#/definitions/VirtualGatewayId'
+        description: '<p>The ID of the virtual private gateway.</p> <p>Example: "vgw-abc123ef"</p> <p>Default: None</p>'
+    description: Container for the parameters to the DeleteDirectConnectGatewayAssociation operation.
+  DeleteDirectConnectGatewayAssociationResult:
+    type: object
+    properties:
+      directConnectGatewayAssociation:
+        $ref: '#/definitions/DirectConnectGatewayAssociation'
+        description: The direct connect gateway association to be deleted.
+    description: Container for the response from the DeleteDirectConnectGatewayAssociation API call
+  DeleteDirectConnectGatewayRequest:
+    type: object
+    required:
+      - directConnectGatewayId
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+        description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p> <p>Default: None</p>'
+    description: Container for the parameters to the DeleteDirectConnectGateway operation.
+  DeleteDirectConnectGatewayResult:
+    type: object
+    properties:
+      directConnectGateway:
+        $ref: '#/definitions/DirectConnectGateway'
+        description: The direct connect gateway to be deleted.
+    description: Container for the response from the DeleteDirectConnectGateway API call
   DeleteInterconnectRequest:
     type: object
     required:
@@ -1811,6 +2119,78 @@ definitions:
       connectionId:
         $ref: '#/definitions/ConnectionId'
     description: Container for the parameters to the DescribeConnections operation.
+  DescribeDirectConnectGatewayAssociationsRequest:
+    type: object
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+        description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p> <p>Default: None</p>'
+      virtualGatewayId:
+        $ref: '#/definitions/VirtualGatewayId'
+        description: '<p>The ID of the virtual private gateway.</p> <p>Example: "vgw-abc123ef"</p> <p>Default: None</p>'
+      maxResults:
+        $ref: '#/definitions/MaxResultSetSize'
+        description: '<p>The maximum number of direct connect gateway associations to return per page.</p> <p>Example: 15</p> <p>Default: None</p>'
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: '<p>The token provided in the previous describe result to retrieve the next page of the result.</p> <p>Default: None</p>'
+    description: Container for the parameters to the DescribeDirectConnectGatewayAssociations operation.
+  DescribeDirectConnectGatewayAssociationsResult:
+    type: object
+    properties:
+      directConnectGatewayAssociations:
+        $ref: '#/definitions/DirectConnectGatewayAssociationList'
+        description: Information about the direct connect gateway associations.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+    description: Container for the response from the DescribeDirectConnectGatewayAssociations API call
+  DescribeDirectConnectGatewayAttachmentsRequest:
+    type: object
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+        description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p> <p>Default: None</p>'
+      virtualInterfaceId:
+        $ref: '#/definitions/VirtualInterfaceId'
+        description: '<p>The ID of the virtual interface.</p> <p>Example: "dxvif-abc123ef"</p> <p>Default: None</p>'
+      maxResults:
+        $ref: '#/definitions/MaxResultSetSize'
+        description: '<p>The maximum number of direct connect gateway attachments to return per page.</p> <p>Example: 15</p> <p>Default: None</p>'
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: '<p>The token provided in the previous describe result to retrieve the next page of the result.</p> <p>Default: None</p>'
+    description: Container for the parameters to the DescribeDirectConnectGatewayAttachments operation.
+  DescribeDirectConnectGatewayAttachmentsResult:
+    type: object
+    properties:
+      directConnectGatewayAttachments:
+        $ref: '#/definitions/DirectConnectGatewayAttachmentList'
+        description: Information about the direct connect gateway attachments.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+    description: Container for the response from the DescribeDirectConnectGatewayAttachments API call
+  DescribeDirectConnectGatewaysRequest:
+    type: object
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+        description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p> <p>Default: None</p>'
+      maxResults:
+        $ref: '#/definitions/MaxResultSetSize'
+        description: '<p>The maximum number of direct connect gateways to return per page.</p> <p>Example: 15</p> <p>Default: None</p>'
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: '<p>The token provided in the previous describe result to retrieve the next page of the result.</p> <p>Default: None</p>'
+    description: Container for the parameters to the DescribeDirectConnectGateways operation.
+  DescribeDirectConnectGatewaysResult:
+    type: object
+    properties:
+      directConnectGateways:
+        $ref: '#/definitions/DirectConnectGatewayList'
+        description: Information about the direct connect gateways.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+    description: Container for the response from the DescribeDirectConnectGateways API call
   DescribeHostedConnectionsRequest:
     type: object
     required:
@@ -1898,6 +2278,103 @@ definitions:
         $ref: '#/definitions/ErrorMessage'
         description: 'This is an exception thrown when there is an issue with the input provided by the API call. For example, the name provided for a connection contains a pound sign (#). This can also occur when a valid value is provided, but is otherwise constrained. For example, the valid VLAN tag range is 1-4096 but each can only be used once per connection.'
     description: The API was called with invalid parameters. The error message will contain additional details about the cause.
+  DirectConnectGateway:
+    type: object
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+      directConnectGatewayName:
+        $ref: '#/definitions/DirectConnectGatewayName'
+      amazonSideAsn:
+        $ref: '#/definitions/LongAsn'
+        description: The autonomous system number (ASN) for the Amazon side of the connection.
+      ownerAccount:
+        $ref: '#/definitions/OwnerAccount'
+        description: The AWS account ID of the owner of the direct connect gateway.
+      directConnectGatewayState:
+        $ref: '#/definitions/DirectConnectGatewayState'
+      stateChangeError:
+        $ref: '#/definitions/StateChangeError'
+    description: A direct connect gateway is an intermediate object that enables you to connect virtual interfaces and virtual private gateways.
+  DirectConnectGatewayAssociation:
+    type: object
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+      virtualGatewayId:
+        $ref: '#/definitions/VirtualGatewayId'
+      virtualGatewayRegion:
+        $ref: '#/definitions/VirtualGatewayRegion'
+      virtualGatewayOwnerAccount:
+        $ref: '#/definitions/OwnerAccount'
+        description: The AWS account ID of the owner of the virtual private gateway.
+      associationState:
+        $ref: '#/definitions/DirectConnectGatewayAssociationState'
+      stateChangeError:
+        $ref: '#/definitions/StateChangeError'
+    description: The association between a direct connect gateway and virtual private gateway.
+  DirectConnectGatewayAssociationList:
+    type: array
+    description: A list of direct connect gateway associations.
+    items:
+      $ref: '#/definitions/DirectConnectGatewayAssociation'
+  DirectConnectGatewayAssociationState:
+    type: string
+    enum:
+      - associating
+      - associated
+      - disassociating
+      - disassociated
+    description: '<p>State of the direct connect gateway association.</p> <ul> <li> <p> <b>Associating</b>: The initial state after calling <a>CreateDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <b>Associated</b>: The direct connect gateway and virtual private gateway are successfully associated and ready to pass traffic.</p> </li> <li> <p> <b>Disassociating</b>: The initial state after calling <a>DeleteDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <b>Disassociated</b>: The virtual private gateway is successfully disassociated from the direct connect gateway. Traffic flow between the direct connect gateway and virtual private gateway stops.</p> </li> </ul>'
+  DirectConnectGatewayAttachment:
+    type: object
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+      virtualInterfaceId:
+        $ref: '#/definitions/VirtualInterfaceId'
+      virtualInterfaceRegion:
+        $ref: '#/definitions/VirtualInterfaceRegion'
+      virtualInterfaceOwnerAccount:
+        $ref: '#/definitions/OwnerAccount'
+        description: The AWS account ID of the owner of the virtual interface.
+      attachmentState:
+        $ref: '#/definitions/DirectConnectGatewayAttachmentState'
+      stateChangeError:
+        $ref: '#/definitions/StateChangeError'
+    description: The association between a direct connect gateway and virtual interface.
+  DirectConnectGatewayAttachmentList:
+    type: array
+    description: A list of direct connect gateway attachments.
+    items:
+      $ref: '#/definitions/DirectConnectGatewayAttachment'
+  DirectConnectGatewayAttachmentState:
+    type: string
+    enum:
+      - attaching
+      - attached
+      - detaching
+      - detached
+    description: '<p>State of the direct connect gateway attachment.</p> <ul> <li> <p> <b>Attaching</b>: The initial state after a virtual interface is created using the direct connect gateway.</p> </li> <li> <p> <b>Attached</b>: The direct connect gateway and virtual interface are successfully attached and ready to pass traffic.</p> </li> <li> <p> <b>Detaching</b>: The initial state after calling <a>DeleteVirtualInterface</a> on a virtual interface that is attached to a direct connect gateway.</p> </li> <li> <p> <b>Detached</b>: The virtual interface is successfully detached from the direct connect gateway. Traffic flow between the direct connect gateway and virtual interface stops.</p> </li> </ul>'
+  DirectConnectGatewayId:
+    type: string
+    description: '<p>The ID of the direct connect gateway.</p> <p>Example: "abcd1234-dcba-5678-be23-cdef9876ab45"</p>'
+  DirectConnectGatewayList:
+    type: array
+    description: A list of direct connect gateways.
+    items:
+      $ref: '#/definitions/DirectConnectGateway'
+  DirectConnectGatewayName:
+    type: string
+    description: '<p>The name of the direct connect gateway.</p> <p>Example: "My direct connect gateway"</p> <p>Default: None</p>'
+  DirectConnectGatewayState:
+    type: string
+    enum:
+      - pending
+      - available
+      - deleting
+      - deleted
+    description: '<p>State of the direct connect gateway.</p> <ul> <li> <p> <b>Pending</b>: The initial state after calling <a>CreateDirectConnectGateway</a>.</p> </li> <li> <p> <b>Available</b>: The direct connect gateway is ready for use.</p> </li> <li> <p> <b>Deleting</b>: The initial state after calling <a>DeleteDirectConnectGateway</a>.</p> </li> <li> <p> <b>Deleted</b>: The direct connect gateway is deleted and cannot pass traffic.</p> </li> </ul>'
   DirectConnectServerException:
     type: object
     properties:
@@ -2081,6 +2558,11 @@ definitions:
         $ref: '#/definitions/LocationList'
         description: A list of colocation hubs where network providers have equipment. Most regions have multiple locations available.
     description: 'A location is a network facility where AWS Direct Connect routers are available to be connected. Generally, these are colocation hubs where many network providers have equipment, and where cross connects can be delivered. Locations include a name and facility code, and must be provided when creating a connection.'
+  LongAsn:
+    type: integer
+  MaxResultSetSize:
+    type: integer
+    description: Maximum number of objects to return per page.
   NewBGPPeer:
     type: object
     properties:
@@ -2101,7 +2583,6 @@ definitions:
       - virtualInterfaceName
       - vlan
       - asn
-      - virtualGatewayId
     properties:
       virtualInterfaceName:
         $ref: '#/definitions/VirtualInterfaceName'
@@ -2119,6 +2600,8 @@ definitions:
         $ref: '#/definitions/AddressFamily'
       virtualGatewayId:
         $ref: '#/definitions/VirtualGatewayId'
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
     description: A structure containing information about a new private virtual interface.
   NewPrivateVirtualInterfaceAllocation:
     type: object
@@ -2192,6 +2675,9 @@ definitions:
     description: A structure containing information about a public virtual interface that will be provisioned on a connection.
   OwnerAccount:
     type: string
+  PaginationToken:
+    type: string
+    description: Token to retrieve the next page of the result.
   PartnerName:
     type: string
   ProviderName:
@@ -2233,6 +2719,9 @@ definitions:
       $ref: '#/definitions/RouteFilterPrefix'
   RouterConfig:
     type: string
+  StateChangeError:
+    type: string
+    description: Error message when the state of an object fails to advance.
   Tag:
     type: object
     required:
@@ -2336,6 +2825,9 @@ definitions:
     description: A list of virtual private gateways.
     items:
       $ref: '#/definitions/VirtualGateway'
+  VirtualGatewayRegion:
+    type: string
+    description: '<p>The region in which the virtual private gateway is located.</p> <p>Example: us-east-1</p>'
   VirtualGatewayState:
     type: string
     description: '<p>State of the virtual private gateway.</p> <ul> <li> <p> <b>Pending</b>: This is the initial state after calling <i>CreateVpnGateway</i>.</p> </li> <li> <p> <b>Available</b>: Ready for use by a private virtual interface.</p> </li> <li> <p> <b>Deleting</b>: This is the initial state after calling <i>DeleteVpnGateway</i>.</p> </li> <li> <p> <b>Deleted</b>: In this state, a private virtual interface is unable to send traffic over this gateway.</p> </li> </ul>'
@@ -2366,6 +2858,9 @@ definitions:
         $ref: '#/definitions/VLAN'
       asn:
         $ref: '#/definitions/ASN'
+      amazonSideAsn:
+        $ref: '#/definitions/LongAsn'
+        description: The autonomous system number (ASN) for the Amazon side of the connection.
       authKey:
         $ref: '#/definitions/BGPAuthKey'
       amazonAddress:
@@ -2381,6 +2876,8 @@ definitions:
         description: Information for generating the customer router configuration.
       virtualGatewayId:
         $ref: '#/definitions/VirtualGatewayId'
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
       routeFilterPrefixes:
         $ref: '#/definitions/RouteFilterPrefixList'
       bgpPeers:
@@ -2397,6 +2894,9 @@ definitions:
   VirtualInterfaceName:
     type: string
     description: '<p>The name of the virtual interface assigned by the customer.</p> <p>Example: "My VPC"</p>'
+  VirtualInterfaceRegion:
+    type: string
+    description: '<p>The region in which the virtual interface is located.</p> <p>Example: us-east-1</p>'
   VirtualInterfaceState:
     type: string
     enum:

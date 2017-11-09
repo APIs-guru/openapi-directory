@@ -100,7 +100,7 @@ paths:
   /v1/canceljob:
     post:
       operationId: CancelJob
-      description: 'Cancels jobs in an AWS Batch job queue. Jobs that are in the <code>SUBMITTED</code>, <code>PENDING</code>, or <code>RUNNABLE</code> state are cancelled. Jobs that have progressed to <code>STARTING</code> or <code>RUNNING</code> are not cancelled (but the API operation still succeeds, even if no jobs are cancelled); these jobs must be terminated with the <a>TerminateJob</a> operation.'
+      description: 'Cancels a job in an AWS Batch job queue. Jobs that are in the <code>SUBMITTED</code>, <code>PENDING</code>, or <code>RUNNABLE</code> state are cancelled. Jobs that have progressed to <code>STARTING</code> or <code>RUNNING</code> are not cancelled (but the API operation still succeeds, even if no job is cancelled); these jobs must be terminated with the <a>TerminateJob</a> operation.'
       responses:
         '200':
           description: Success
@@ -529,7 +529,7 @@ paths:
   /v1/terminatejob:
     post:
       operationId: TerminateJob
-      description: 'Terminates jobs in a job queue. Jobs that are in the <code>STARTING</code> or <code>RUNNING</code> state are terminated, which causes them to transition to <code>FAILED</code>. Jobs that have not progressed to the <code>STARTING</code> state are cancelled.'
+      description: 'Terminates a job in a job queue. Jobs that are in the <code>STARTING</code> or <code>RUNNING</code> state are terminated, which causes them to transition to <code>FAILED</code>. Jobs that have not progressed to the <code>STARTING</code> state are cancelled.'
       responses:
         '200':
           description: Success
@@ -634,7 +634,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the Amazon ECS container instance that hosts the job attempt.
       taskArn:
         $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the job attempt.
+        description: The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the job attempt. Each container attempt receives a task ARN when they reach the <code>STARTING</code> status.
       exitCode:
         $ref: '#/definitions/Integer'
         description: The exit code for the job attempt. A non-zero exit code is considered a failure.
@@ -702,7 +702,7 @@ definitions:
     properties:
       jobId:
         $ref: '#/definitions/String'
-        description: A list of up to 100 job IDs to cancel.
+        description: The AWS Batch job ID of the job to cancel.
       reason:
         $ref: '#/definitions/String'
         description: 'A message to attach to the job that explains the reason for cancelling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs. '
@@ -797,7 +797,7 @@ definitions:
         description: 'The desired number of EC2 vCPUS in the compute environment. '
       instanceTypes:
         $ref: '#/definitions/StringList'
-        description: The instances types that may launched.
+        description: 'The instances types that may be launched. You can specify instance families to launch any instance type within those families (for example, <code>c4</code> or <code>p3</code>), or you can specify specific sizes within a family (such as <code>c4.8xlarge</code>). You can also choose <code>optimal</code> to pick instance types (from the latest C, M, and R instance families) on the fly that match the demand of your job queues.'
       imageId:
         $ref: '#/definitions/String'
         description: The Amazon Machine Image (AMI) ID used for instances launched in the compute environment.
@@ -859,7 +859,7 @@ definitions:
         description: A list of volumes associated with the job.
       environment:
         $ref: '#/definitions/EnvironmentVariables'
-        description: The environment variables to pass to a container.
+        description: <p>The environment variables to pass to a container.</p> <note> <p>Environment variables must not start with <code>AWS_BATCH</code>; this naming convention is reserved for variables that are set by the AWS Batch service.</p> </note>
       mountPoints:
         $ref: '#/definitions/MountPoints'
         description: The mount points for data volumes in your container.
@@ -886,7 +886,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the container instance on which the container is running.
       taskArn:
         $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the container job.
+        description: The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the container job. Each container attempt receives a task ARN when they reach the <code>STARTING</code> status.
       logStreamName:
         $ref: '#/definitions/String'
         description: The name of the CloudWatch Logs log stream associated with the container. The log group for AWS Batch jobs is <code>/aws/batch/job</code>. Each container attempt receives a log stream name when they reach the <code>RUNNING</code> status.
@@ -905,7 +905,7 @@ definitions:
         description: The command to send to the container that overrides the default command from the Docker image or the job definition.
       environment:
         $ref: '#/definitions/EnvironmentVariables'
-        description: 'The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the job definition.'
+        description: '<p>The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the job definition.</p> <note> <p>Environment variables must not start with <code>AWS_BATCH</code>; this naming convention is reserved for variables that are set by the AWS Batch service.</p> </note>'
     description: The overrides that should be sent to a container.
   ContainerProperties:
     type: object
@@ -934,7 +934,7 @@ definitions:
         description: A list of data volumes used in a job.
       environment:
         $ref: '#/definitions/EnvironmentVariables'
-        description: '<p>The environment variables to pass to a container. This parameter maps to <code>Env</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/">Docker Remote API</a> and the <code>--env</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <important> <p>We do not recommend using plain text environment variables for sensitive information, such as credential data.</p> </important>'
+        description: '<p>The environment variables to pass to a container. This parameter maps to <code>Env</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/">Docker Remote API</a> and the <code>--env</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <important> <p>We do not recommend using plain text environment variables for sensitive information, such as credential data.</p> </important> <note> <p>Environment variables must not start with <code>AWS_BATCH</code>; this naming convention is reserved for variables that are set by the AWS Batch service.</p> </note>'
       mountPoints:
         $ref: '#/definitions/MountPoints'
         description: 'The mount points for data volumes in your container. This parameter maps to <code>Volumes</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/">Docker Remote API</a> and the <code>--volume</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.'
@@ -984,7 +984,7 @@ definitions:
     properties:
       computeEnvironmentName:
         $ref: '#/definitions/String'
-        description: 'The name for your compute environment. Up to 128 letters (uppercase and lowercase), numbers, and underscores are allowed.'
+        description: 'The name for your compute environment. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.'
       type:
         $ref: '#/definitions/CEType'
         description: 'The type of the compute environment. '
@@ -1677,7 +1677,7 @@ definitions:
     properties:
       jobId:
         $ref: '#/definitions/String'
-        description: Job IDs to be terminated. Up to 100 jobs can be specified.
+        description: The AWS Batch job ID of the job to terminate.
       reason:
         $ref: '#/definitions/String'
         description: 'A message to attach to the job that explains the reason for cancelling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs. '

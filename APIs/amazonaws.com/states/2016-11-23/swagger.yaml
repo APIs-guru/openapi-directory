@@ -3,7 +3,7 @@ info:
   version: '2016-11-23'
   x-release: v4
   title: AWS Step Functions
-  description: '<fullname>AWS Step Functions</fullname> <p>AWS Step Functions is a web service that enables you to coordinate the components of distributed applications and microservices using visual workflows. You build applications from individual components that each perform a discrete function, or <i>task</i>, allowing you to scale and change applications quickly. Step Functions provides a graphical console to visualize the components of your application as a series of steps. It automatically triggers and tracks each step, and retries when there are errors, so your application executes in order and as expected, every time. Step Functions logs the state of each step, so when things do go wrong, you can diagnose and debug problems quickly.</p> <p>Step Functions manages the operations and underlying infrastructure for you to ensure your application is available at any scale. You can run tasks on the AWS cloud, on your own servers, or an any system that has access to AWS. Step Functions can be accessed and used with the Step Functions console, the AWS SDKs (included with your Beta release invitation email), or an HTTP API (the subject of this document).</p>'
+  description: '<fullname>AWS Step Functions</fullname> <p>AWS Step Functions is a service that lets you coordinate the components of distributed applications and microservices using visual workflows.</p> <p>You can use Step Functions to build applications from individual components, each of which performs a discrete function, or <i>task</i>, allowing you to scale and change applications quickly. Step Functions provides a console that helps visualize the components of your application as a series of steps. Step Functions automatically triggers and tracks each step, and retries steps when there are errors, so your application executes in order and as expected, every time. Step Functions logs the state of each step, so you can diagnose and debug problems quickly.</p> <p>Step Functions manages operations and underlying infrastructure to ensure your application is available at any scale. You can run tasks on AWS, your own servers, or any system that has access to AWS. You can access and use Step Functions using the console, the AWS SDKs, or an HTTP API. For more information about Step Functions, see the <i> <a href="http://docs.aws.amazon.com/step-functions/latest/dg/welcome.html">AWS Step Functions Developer Guide</a> </i>.</p>'
   x-logo:
     url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
     backgroundColor: '#FFFFFF'
@@ -101,7 +101,7 @@ paths:
   /:
     post:
       operationId: CreateActivity
-      description: Creates an activity.
+      description: 'Creates an activity. An Activity is a task which you write, in any language and hosted on any machine which has access to AWS Step Functions. Activities must poll Step Functions using the <code>GetActivityTask</code> and respond using <code>SendTask*</code> API calls. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.'
       responses:
         '200':
           description: Success
@@ -134,7 +134,7 @@ paths:
   '/#CreateStateMachine':
     post:
       operationId: CreateStateMachine
-      description: Creates a state machine.
+      description: 'Creates a state machine. A state machine consists of a collection of states that can do work (<code>Task</code> states), determine which states to transition to next (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states), and so on. State machines are specified using a JSON-based, structured language.'
       responses:
         '200':
           description: Success
@@ -212,7 +212,7 @@ paths:
   '/#DeleteStateMachine':
     post:
       operationId: DeleteStateMachine
-      description: Deletes a state machine. This is an asynchronous operation-- it sets the state machine's status to "DELETING" and begins the delete process.
+      description: 'Deletes a state machine. This is an asynchronous operation-- it sets the state machine''s status to "DELETING" and begins the delete process. Each state machine execution will be deleted the next time it makes a state transition. After all executions have completed or been deleted, the state machine itself will be deleted.'
       responses:
         '200':
           description: Success
@@ -340,7 +340,7 @@ paths:
   '/#GetActivityTask':
     post:
       operationId: GetActivityTask
-      description: '<p>Used by workers to retrieve a task (with the specified activity ARN) scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll will return an empty result, that is, the <code>taskToken</code> returned is an empty string.</p> <important> <p>Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request).</p> </important>'
+      description: '<p>Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll will return a <code>taskToken</code> with a null string.</p> <important> <p>Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request).</p> </important>'
       responses:
         '200':
           description: Success
@@ -763,6 +763,7 @@ definitions:
       cause:
         $ref: '#/definitions/Cause'
         description: A more detailed explanation of the cause of the failure.
+    description: Contains details about an activity which failed during an execution.
   ActivityLimitExceeded:
     type: object
     properties:
@@ -785,10 +786,11 @@ definitions:
         description: The Amazon Resource Name (ARN) that identifies the activity.
       name:
         $ref: '#/definitions/Name'
-        description: The name of the activity.
+        description: '<p>The name of the activity.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       creationDate:
         $ref: '#/definitions/Timestamp'
         description: The date the activity was created.
+    description: Contains details about an activity.
   ActivityScheduleFailedEventDetails:
     type: object
     properties:
@@ -798,6 +800,7 @@ definitions:
       cause:
         $ref: '#/definitions/Cause'
         description: A more detailed explanation of the cause of the failure.
+    description: Contains details about an activity schedule failure which occurred during an execution.
   ActivityScheduledEventDetails:
     type: object
     required:
@@ -815,18 +818,21 @@ definitions:
       heartbeatInSeconds:
         $ref: '#/definitions/TimeoutInSeconds'
         description: The maximum allowed duration between two heartbeats for the activity task.
+    description: Contains details about an activity scheduled during an execution.
   ActivityStartedEventDetails:
     type: object
     properties:
       workerName:
         $ref: '#/definitions/Identity'
         description: The name of the worker that the task was assigned to. These names are provided by the workers when calling <a>GetActivityTask</a>.
+    description: Contains details about the start of an activity during an execution.
   ActivitySucceededEventDetails:
     type: object
     properties:
       output:
         $ref: '#/definitions/Data'
         description: The JSON data output by the activity task.
+    description: Contains details about an activity which successfully terminated during an execution.
   ActivityTimedOutEventDetails:
     type: object
     properties:
@@ -836,6 +842,7 @@ definitions:
       cause:
         $ref: '#/definitions/Cause'
         description: A more detailed explanation of the cause of the timeout.
+    description: Contains details about an activity timeout which occurred during an execution.
   ActivityWorkerLimitExceeded:
     type: object
     properties:
@@ -857,7 +864,7 @@ definitions:
     properties:
       name:
         $ref: '#/definitions/Name'
-        description: The name of the activity to create. This name must be unique for your AWS account and region.
+        description: '<p>The name of the activity to create. This name must be unique for your AWS account and region for 90 days. For more information, see <a href="http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
   CreateActivityOutput:
     type: object
     required:
@@ -879,7 +886,7 @@ definitions:
     properties:
       name:
         $ref: '#/definitions/Name'
-        description: The name of the state machine. This name must be unique for your AWS account and region.
+        description: '<p>The name of the state machine. This name must be unique for your AWS account and region for 90 days. For more information, see <a href="http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       definition:
         $ref: '#/definitions/Definition'
         description: The Amazon States Language definition of the state machine.
@@ -947,7 +954,7 @@ definitions:
         description: The Amazon Resource Name (ARN) that identifies the activity.
       name:
         $ref: '#/definitions/Name'
-        description: The name of the activity.
+        description: '<p>The name of the activity.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       creationDate:
         $ref: '#/definitions/Timestamp'
         description: The date the activity was created.
@@ -976,7 +983,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the executed stated machine.
       name:
         $ref: '#/definitions/Name'
-        description: The name of the execution.
+        description: '<p>The name of the execution.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       status:
         $ref: '#/definitions/ExecutionStatus'
         description: The current status of the execution.
@@ -988,7 +995,7 @@ definitions:
         description: 'If the execution has already ended, the date the execution stopped.'
       input:
         $ref: '#/definitions/Data'
-        description: The JSON input data of the execution.
+        description: The string that contains the JSON input data of the execution.
       output:
         $ref: '#/definitions/Data'
         description: The JSON output data of the execution.
@@ -1014,7 +1021,7 @@ definitions:
         description: The Amazon Resource Name (ARN) that identifies the state machine.
       name:
         $ref: '#/definitions/Name'
-        description: The name of the state machine.
+        description: '<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       status:
         $ref: '#/definitions/StateMachineStatus'
         description: The current status of the state machine.
@@ -1023,7 +1030,7 @@ definitions:
         description: The Amazon States Language definition of the state machine.
       roleArn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the IAM role used for executing this state machine.
+        description: The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. (The IAM role maintains security by granting Step Functions access to AWS resources.)
       creationDate:
         $ref: '#/definitions/Timestamp'
         description: The date the state machine was created.
@@ -1044,12 +1051,13 @@ definitions:
       cause:
         $ref: '#/definitions/Cause'
         description: A more detailed explanation of the cause of the failure.
+    description: Contains details about an abort of an execution.
   ExecutionAlreadyExists:
     type: object
     properties:
       message:
         $ref: '#/definitions/ErrorMessage'
-    description: An execution with the same name already exists.
+    description: <p>The execution has the same <code>name</code> as another execution (but a different <code>input</code>).</p> <note> <p>Executions with the same <code>name</code> and <code>input</code> are considered idempotent.</p> </note>
   ExecutionDoesNotExist:
     type: object
     properties:
@@ -1065,6 +1073,7 @@ definitions:
       cause:
         $ref: '#/definitions/Cause'
         description: A more detailed explanation of the cause of the failure.
+    description: Contains details about an execution failure event.
   ExecutionLimitExceeded:
     type: object
     properties:
@@ -1092,7 +1101,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the executed state machine.
       name:
         $ref: '#/definitions/Name'
-        description: The name of the execution.
+        description: '<p>The name of the execution.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       status:
         $ref: '#/definitions/ExecutionStatus'
         description: The current status of the execution.
@@ -1102,6 +1111,7 @@ definitions:
       stopDate:
         $ref: '#/definitions/Timestamp'
         description: 'If the execution already ended, the date the execution stopped.'
+    description: Contains details about an execution.
   ExecutionStartedEventDetails:
     type: object
     properties:
@@ -1111,6 +1121,7 @@ definitions:
       roleArn:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the IAM role used for executing AWS Lambda tasks.
+    description: Contains details about the start of the execution.
   ExecutionStatus:
     type: string
     enum:
@@ -1125,6 +1136,7 @@ definitions:
       output:
         $ref: '#/definitions/Data'
         description: The JSON data output by the execution.
+    description: Contains details about the successful termination of the execution.
   ExecutionTimedOutEventDetails:
     type: object
     properties:
@@ -1134,6 +1146,7 @@ definitions:
       cause:
         $ref: '#/definitions/Cause'
         description: A more detailed explanation of the cause of the timeout.
+    description: Contains details about the execution timeout which occurred during the execution.
   GetActivityTaskInput:
     type: object
     required:
@@ -1141,10 +1154,10 @@ definitions:
     properties:
       activityArn:
         $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the activity to retrieve tasks from.
+        description: The Amazon Resource Name (ARN) of the activity to retrieve tasks from (assigned when you create the task using <a>CreateActivity</a>.)
       workerName:
         $ref: '#/definitions/Name'
-        description: An arbitrary name may be provided in order to identify the worker that the task is assigned to. This name will be used when it is logged in the execution history.
+        description: You can provide an arbitrary name in order to identify the worker that the task is assigned to. This name will be used when it is logged in the execution history.
   GetActivityTaskOutput:
     type: object
     properties:
@@ -1153,7 +1166,7 @@ definitions:
         description: 'A token that identifies the scheduled task. This token must be copied and included in subsequent calls to <a>SendTaskHeartbeat</a>, <a>SendTaskSuccess</a> or <a>SendTaskFailure</a> in order to report the progress or completion of the task.'
       input:
         $ref: '#/definitions/Data'
-        description: The JSON input data for the task.
+        description: The string that contains the JSON input data for the task.
   GetExecutionHistoryInput:
     type: object
     required:
@@ -1164,7 +1177,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the execution.
       maxResults:
         $ref: '#/definitions/PageSize'
-        description: <p>The maximum number of results that will be returned per call. <code>nextToken</code> can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>
+        description: <p>The maximum number of results that will be returned per call. <code>nextToken</code> can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 means to use the default.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>
       reverseOrder:
         $ref: '#/definitions/ReverseOrder'
         description: Lists events in descending order of their <code>timeStamp</code>.
@@ -1191,7 +1204,7 @@ definitions:
     properties:
       timestamp:
         $ref: '#/definitions/Timestamp'
-        description: The date the event occured.
+        description: The date the event occurred.
       type:
         $ref: '#/definitions/HistoryEventType'
         description: The type of the event.
@@ -1205,6 +1218,7 @@ definitions:
         $ref: '#/definitions/ActivityFailedEventDetails'
       activityScheduleFailedEventDetails:
         $ref: '#/definitions/ActivityScheduleFailedEventDetails'
+        description: Contains details about an activity schedule event which failed during an execution.
       activityScheduledEventDetails:
         $ref: '#/definitions/ActivityScheduledEventDetails'
       activityStartedEventDetails:
@@ -1231,16 +1245,20 @@ definitions:
         $ref: '#/definitions/LambdaFunctionScheduledEventDetails'
       lambdaFunctionStartFailedEventDetails:
         $ref: '#/definitions/LambdaFunctionStartFailedEventDetails'
+        description: Contains details about a lambda function which failed to start during an execution.
       lambdaFunctionSucceededEventDetails:
         $ref: '#/definitions/LambdaFunctionSucceededEventDetails'
+        description: Contains details about a lambda function which terminated successfully during an execution.
       lambdaFunctionTimedOutEventDetails:
         $ref: '#/definitions/LambdaFunctionTimedOutEventDetails'
       stateEnteredEventDetails:
         $ref: '#/definitions/StateEnteredEventDetails'
       stateExitedEventDetails:
         $ref: '#/definitions/StateExitedEventDetails'
+    description: Contains details about the events of an execution.
   HistoryEventList:
     type: array
+    description: Contains details about the events which occurred during an execution.
     items:
       $ref: '#/definitions/HistoryEvent'
   HistoryEventType:
@@ -1269,12 +1287,18 @@ definitions:
       - LambdaFunctionTimedOut
       - SucceedStateEntered
       - SucceedStateExited
+      - TaskStateAborted
       - TaskStateEntered
       - TaskStateExited
       - PassStateEntered
       - PassStateExited
+      - ParallelStateAborted
       - ParallelStateEntered
       - ParallelStateExited
+      - ParallelStateFailed
+      - ParallelStateStarted
+      - ParallelStateSucceeded
+      - WaitStateAborted
       - WaitStateEntered
       - WaitStateExited
   Identity:
@@ -1325,6 +1349,7 @@ definitions:
       cause:
         $ref: '#/definitions/Cause'
         description: A more detailed explanation of the cause of the failure.
+    description: Contains details about a lambda function which failed during an execution.
   LambdaFunctionScheduleFailedEventDetails:
     type: object
     properties:
@@ -1334,6 +1359,7 @@ definitions:
       cause:
         $ref: '#/definitions/Cause'
         description: A more detailed explanation of the cause of the failure.
+    description: Contains details about a failed lambda function schedule event which occurred during an execution.
   LambdaFunctionScheduledEventDetails:
     type: object
     required:
@@ -1348,6 +1374,7 @@ definitions:
       timeoutInSeconds:
         $ref: '#/definitions/TimeoutInSeconds'
         description: The maximum allowed duration of the lambda function.
+    description: Contains details about a lambda function scheduled during an execution.
   LambdaFunctionStartFailedEventDetails:
     type: object
     properties:
@@ -1357,12 +1384,14 @@ definitions:
       cause:
         $ref: '#/definitions/Cause'
         description: A more detailed explanation of the cause of the failure.
+    description: Contains details about a lambda function which failed to start during an execution.
   LambdaFunctionSucceededEventDetails:
     type: object
     properties:
       output:
         $ref: '#/definitions/Data'
         description: The JSON data output by the lambda function.
+    description: Contains details about a lambda function which successfully terminated during an execution.
   LambdaFunctionTimedOutEventDetails:
     type: object
     properties:
@@ -1372,12 +1401,13 @@ definitions:
       cause:
         $ref: '#/definitions/Cause'
         description: A more detailed explanation of the cause of the timeout.
+    description: Contains details about a lambda function timeout which occurred during an execution.
   ListActivitiesInput:
     type: object
     properties:
       maxResults:
         $ref: '#/definitions/PageSize'
-        description: <p>The maximum number of results that will be returned per call. <code>nextToken</code> can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>
+        description: <p>The maximum number of results that will be returned per call. <code>nextToken</code> can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 means to use the default.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>
       nextToken:
         $ref: '#/definitions/PageToken'
         description: '<p>If a <code>nextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
@@ -1405,7 +1435,7 @@ definitions:
         description: 'If specified, only list the executions whose current execution status matches the given filter.'
       maxResults:
         $ref: '#/definitions/PageSize'
-        description: <p>The maximum number of results that will be returned per call. <code>nextToken</code> can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>
+        description: <p>The maximum number of results that will be returned per call. <code>nextToken</code> can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 means to use the default.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>
       nextToken:
         $ref: '#/definitions/PageToken'
         description: '<p>If a <code>nextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
@@ -1425,7 +1455,7 @@ definitions:
     properties:
       maxResults:
         $ref: '#/definitions/PageSize'
-        description: <p>The maximum number of results that will be returned per call. <code>nextToken</code> can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>
+        description: <p>The maximum number of results that will be returned per call. <code>nextToken</code> can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 means to use the default.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>
       nextToken:
         $ref: '#/definitions/PageToken'
         description: '<p>If a <code>nextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>'
@@ -1506,10 +1536,10 @@ definitions:
         description: The Amazon Resource Name (ARN) of the state machine to execute.
       name:
         $ref: '#/definitions/Name'
-        description: The name of the execution. This name must be unique for your AWS account and region.
+        description: '<p>The name of the execution. This name must be unique for your AWS account and region for 90 days. For more information, see <a href="http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       input:
         $ref: '#/definitions/Data'
-        description: The JSON input data for the execution.
+        description: '<p>The string that contains the JSON input data for the execution, for example:</p> <p> <code>"input": "{\"first_name\" : \"test\"}"</code> </p> <note> <p>If you don''t include any JSON input data, you still must include the two braces, for example: <code>"input": "{}"</code> </p> </note>'
   StartExecutionOutput:
     type: object
     required:
@@ -1532,7 +1562,8 @@ definitions:
         description: The name of the state.
       input:
         $ref: '#/definitions/Data'
-        description: The JSON input data to the state.
+        description: The string that contains the JSON input data for the state.
+    description: Contains details about a state entered during an execution.
   StateExitedEventDetails:
     type: object
     required:
@@ -1540,10 +1571,11 @@ definitions:
     properties:
       name:
         $ref: '#/definitions/Name'
-        description: The name of the state.
+        description: '<p>The name of the state.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       output:
         $ref: '#/definitions/Data'
         description: The JSON output data of the state.
+    description: Contains details about an exit from a state during an execution.
   StateMachineAlreadyExists:
     type: object
     properties:
@@ -1584,10 +1616,11 @@ definitions:
         description: The Amazon Resource Name (ARN) that identifies the state machine.
       name:
         $ref: '#/definitions/Name'
-        description: The name of the state machine.
+        description: '<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       creationDate:
         $ref: '#/definitions/Timestamp'
         description: The date the state machine was created.
+    description: Contains details about the state machine.
   StateMachineStatus:
     type: string
     enum:
