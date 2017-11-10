@@ -1872,7 +1872,7 @@ definitions:
       - nodejs4.3-edge
   S3Bucket:
     type: string
-    pattern: '^[0-9A-Za-z\.\-_]*\(\?<!\.\)$'
+    pattern: '^[0-9A-Za-z\.\-_]*$'
     minLength: 3
     maxLength: 63
   S3Key:
