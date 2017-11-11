@@ -6,13 +6,15 @@ basePath: /api/v1
 info:
   title: watchful.li
   version: 1.0.0
+  x-apisguru-categories:
+    - hosting
   x-logo:
     backgroundColor: '#1B4E65'
     url: 'https://d2071nnd6m4201.cloudfront.net/templates/balloon/images/logo.svg'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: swagger
       url: 'https://watchful.li/api/v1/api-docs/'
       version: '1.2'
@@ -28,8 +30,6 @@ tags:
     name: feedbacks
   - description: Operations about logs
     name: logs
-  - description: Operations about packages
-    name: packages
   - description: Create reports in PDF
     name: reports
   - description: Operations about sites
@@ -38,8 +38,6 @@ tags:
     name: ssousers
   - description: Operations about tags
     name: tags
-  - description: Operations about versions
-    name: versions
 paths:
   /audits:
     get:
@@ -79,16 +77,10 @@ paths:
       summary: Get a list of audits
       tags:
         - audits
-    post:
-      description: Create a audit
-      operationId: CreateAudits
-      parameters:
-        - description: JSON object Audit
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Audit'
+  /audits/metadata:
+    get:
+      description: Returns a list of fields
+      operationId: getFieldsAudits
       produces:
         - application/json
         - application/xml
@@ -97,34 +89,10 @@ paths:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/Audit'
-        '201':
-          description: Saved successfully
-        '400':
-          description: Invalid data
-        '403':
-          description: Invalid API Key
-        '404':
-          description: Not saved
-      summary: Create a audit
-      tags:
-        - audits
-  /audits/metadata:
-    get:
-      description: Returns a list of fields
-      operationId: getFieldsAudits
-      produces:
-        - application/json
-        - application/xml
-        - /plain
-      responses:
-        '200':
-          description: No response was specified
-          schema:
             type: string
       summary: Get the list of fields
       tags:
-        - versions
+        - audits
   '/audits/{id}':
     delete:
       description: Delete a specific audit
@@ -365,7 +333,7 @@ paths:
       produces:
         - application/json
         - application/xml
-        - /plain
+        - text/plain
       responses:
         '200':
           description: No response was specified
@@ -389,7 +357,7 @@ paths:
       produces:
         - application/json
         - application/xml
-        - /plain
+        - text/plain
       responses:
         '200':
           description: No response was specified
@@ -413,7 +381,7 @@ paths:
       produces:
         - application/json
         - application/xml
-        - /plain
+        - text/plain
       responses:
         '200':
           description: No response was specified
@@ -637,34 +605,9 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: Upload a ZIP package
-      operationId: uploadZipPackage
-      parameters:
-        - description: ZIP package
-          in: formData
-          name: file
-          required: true
-          type: file
-      produces:
-        - application/json
-        - application/xml
-        - text/plain
       responses:
-        '200':
-          description: No response was specified
-          schema:
-            $ref: '#/definitions/Tag'
-        '201':
-          description: Saved successfully
-        '400':
-          description: Invalid data
-        '403':
-          description: Invalid API Key
-        '404':
-          description: Not saved
-      summary: Upload a ZIP package
-      tags:
-        - packages
+        default:
+          description: No description
   '/reports/sites/{id}':
     get:
       description: Returns a PDF report based on a site ID
@@ -1540,6 +1483,34 @@ paths:
       summary: Scan the site for malware
       tags:
         - sites
+  '/sites/{id}/seo':
+    get:
+      description: SEO analyze for a page
+      operationId: seoAnalyze
+      parameters:
+        - description: ID of the website
+          format: int64
+          in: path
+          minimum: 1
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            type: string
+        '403':
+          description: Invalid API Key
+        '404':
+          description: Invalid ID
+      summary: SEO analyze for a page
+      tags:
+        - sites
   '/sites/{id}/tags':
     get:
       description: Return tags for a specific website
@@ -2201,55 +2172,6 @@ paths:
       summary: Find sites by tag ID
       tags:
         - tags
-  /versions:
-    get:
-      operationId: getVersions
-      parameters:
-        - description: 'Fields to return separate by comas: name,id'
-          in: query
-          name: fields
-          required: false
-          type: string
-      produces:
-        - application/json
-        - application/xml
-        - /plain
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            $ref: '#/definitions/Version'
-      summary: Get list of versions
-      tags:
-        - versions
-  '/versions/{id}':
-    get:
-      operationId: getVersion
-      parameters:
-        - description: ID of version that needs to be fetched
-          format: int64
-          in: path
-          minimum: 1
-          name: id
-          required: true
-          type: integer
-        - description: 'Fields to return separate by commas: name,id'
-          in: query
-          name: fields
-          required: false
-          type: string
-      produces:
-        - application/json
-        - application/xml
-        - /plain
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            $ref: '#/definitions/Version'
-      summary: Find a version by ID
-      tags:
-        - versions
 definitions:
   Audit:
     properties:
