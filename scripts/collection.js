@@ -172,6 +172,7 @@ program
   .option('-f, --fixup', 'try to fix definition')
   .option('-l, --logo <LOGO>', 'specify logo url')
   .option('-s, --service <NAME>', 'supply service name')
+  .option('-t, --twitter <NAME>', 'supply x-twitter account, logo not needed')
   .option('-u, --unofficial','set unofficial flag')
   .arguments('<FORMAT> <URL>')
   .action(addToCollection);
@@ -340,6 +341,11 @@ function addToCollection(format, url, command) {
   }
   if (command.desclang) {
     exPatch.info['x-description-language'] = command.desclang;
+  }
+  if (command.twitter) {
+    exPatch.info.contact = {};
+    exPatch.info.contact["x-twitter"] = command.twitter;
+    exPatch.info["x-logo"] = { url: 'https://twitter.com/'+command.twitter+'/profile_image?size=original' };
   }
 
   writeSpec(url, format, exPatch, command)
