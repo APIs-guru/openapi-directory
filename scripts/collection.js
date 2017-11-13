@@ -1048,7 +1048,8 @@ function parseHost(swagger, altSource) {
   assert(swHost, 'Missing host');
   assert(!/^localhost/.test(swHost), 'Can not add localhost API');
   assert(swHost !== 'raw.githubusercontent.com', 'Missing host + spec hosted on GitHub');
-  assert(swHost !== 'virtserver.swaggerhub.com', 'Missing host + swaggerhub mock server');
+  assert(swHost !== 'virtserver.swaggerhub.com', 'Cannot add swaggerhub mock server API');
+  assert(swHost !== 'example.com', 'Cannot add example.com API');
 
   var p = parseDomain(swHost);
   if (!p) p = parseDomain(altSource);
