@@ -18,7 +18,7 @@ info:
     name: CC0 1.0
     url: 'https://github.com/APIs-guru/openapi-directory#licenses'
   title: APIs.guru
-  version: '2.0'
+  version: 2.0.1
   x-apisguru-categories:
     - open_data
     - developer_tools
@@ -39,15 +39,19 @@ info:
 externalDocs:
   url: 'https://github.com/APIs-guru/openapi-directory/blob/master/API.md'
 produces:
+  - application/json; charset=utf-8
   - application/json
 security: []
+tags:
+  - description: Actions relating to APIs in the collection
+    name: APIs
 paths:
   /list.json:
     get:
       description: |
         List all APIs in the directory.
         Returns links to OpenAPI specification for each API in the directory.
-        If API exist in multiply versions `preferred` one is explicitly marked.
+        If API exist in multiple versions `preferred` one is explicitly marked.
 
         Some basic info from OpenAPI spec is cached inside each object.
         This allows to generate some simple views without need to fetch OpenAPI spec for each API.
@@ -58,6 +62,8 @@ paths:
           schema:
             $ref: '#/definitions/APIs'
       summary: List all APIs
+      tags:
+        - APIs
   /metrics.json:
     get:
       description: |
@@ -70,6 +76,8 @@ paths:
           schema:
             $ref: '#/definitions/Metrics'
       summary: Get basic metrics
+      tags:
+        - APIs
 definitions:
   API:
     additionalProperties: false
@@ -151,6 +159,10 @@ definitions:
         description: Timestamp when the version was added
         format: date-time
         type: string
+      externalDocs:
+        description: Copy of `externalDocs` section from Swagger spec
+        minProperties: 1
+        type: object
       info:
         description: Copy of `info` section from Swagger spec
         minProperties: 1
