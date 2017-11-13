@@ -20,7 +20,7 @@ info:
 externalDocs:
   url: https://github.com/APIs-guru/openapi-directory/blob/master/API.md
 produces:
-  - application/json; charset=utf8
+  - application/json; charset=utf-8
   - application/json
 security: []
 tags:
@@ -28,7 +28,6 @@ tags:
     description: Actions relating to APIs in the collection
 paths:
   /list.json:
-    description: Provides a list of all APIs in the directory.
     get:
      operationId: listAPIs
      tags:
@@ -47,7 +46,6 @@ paths:
         schema:
           $ref: "#/definitions/APIs"
   /metrics.json:
-    description: Provides basic metrics.
     get:
      operationId: getMetrics
      summary: Get basic metrics
@@ -162,6 +160,10 @@ definitions:
         format: url
       info:
         description: Copy of `info` section from Swagger spec
+        type: object
+        minProperties: 1
+      externalDocs:
+        description: Copy of `externalDocs` section from Swagger spec
         type: object
         minProperties: 1
     additionalProperties: false
