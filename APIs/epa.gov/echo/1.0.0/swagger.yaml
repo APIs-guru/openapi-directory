@@ -347,6 +347,11 @@ parameters:
     name: p_impw
     required: false
     type: string
+  p_istatute:
+    in: query
+    name: p_istatute
+    required: false
+    type: string
   p_lat:
     description: Latitude location in decimal degrees.
     in: query
@@ -890,6 +895,7 @@ paths:
         - $ref: '#/parameters/p_huc'
         - $ref: '#/parameters/p_pid'
         - $ref: '#/parameters/p_med'
+        - $ref: '#/parameters/p_istatute'
         - $ref: '#/parameters/p_ysl'
         - $ref: '#/parameters/p_ysly'
         - $ref: '#/parameters/p_ysla'
@@ -995,6 +1001,7 @@ paths:
         - $ref: '#/parameters/p_huc'
         - $ref: '#/parameters/p_pid'
         - $ref: '#/parameters/p_med'
+        - $ref: '#/parameters/p_istatute'
         - $ref: '#/parameters/p_ysl'
         - $ref: '#/parameters/p_ysly'
         - $ref: '#/parameters/p_ysla'
@@ -1101,6 +1108,7 @@ paths:
         - $ref: '#/parameters/p_huc'
         - $ref: '#/parameters/p_pid'
         - $ref: '#/parameters/p_med'
+        - $ref: '#/parameters/p_istatute'
         - $ref: '#/parameters/p_ysl'
         - $ref: '#/parameters/p_ysly'
         - $ref: '#/parameters/p_ysla'
@@ -1203,6 +1211,7 @@ paths:
         - $ref: '#/parameters/p_huc'
         - $ref: '#/parameters/p_pid'
         - $ref: '#/parameters/p_med'
+        - $ref: '#/parameters/p_istatute'
         - $ref: '#/parameters/p_ysl'
         - $ref: '#/parameters/p_ysly'
         - $ref: '#/parameters/p_ysla'
@@ -1763,7 +1772,7 @@ definitions:
         type: string
       CAALastPenaltyDate:
         type: string
-      CAANaics:
+      CAANAICS:
         type: string
       CAAPenalties:
         description: The total dollar amount of assessed (or final) penalties taken against the facility within the last five years under the Clean Air Act.
@@ -1781,7 +1790,7 @@ definitions:
       CAAQtrsInNC:
         example: '0'
         type: string
-      CAASics:
+      CAASICs:
         type: string
       CWA13qtrsComplStatus:
         type: string
@@ -1821,7 +1830,7 @@ definitions:
         type: string
       CWALastPenaltyDate:
         type: string
-      CWANaics:
+      CWANAICS:
         type: string
       CWAPenalties:
         description: The total dollar amount of assessed (or final) penalties taken against the facility within the last five years under the Clean Water Act.
@@ -1836,7 +1845,7 @@ definitions:
         type: string
       CWAQtrsInNC:
         type: string
-      CWASics:
+      CWASICs:
         type: string
       CamdIDs:
         description: Facility identifiers for the Clean Air Markets Division database.
@@ -2033,10 +2042,10 @@ definitions:
         type: string
       FacMyrtkUniverse:
         type: string
-      FacNaaFlag:
-        type: string
-      FacNaicsCodes:
+      FacNAICSCodes:
         title: Facility NAICS Codes
+        type: string
+      FacNaaFlag:
         type: string
       FacName:
         description: Name of facility
@@ -2072,7 +2081,7 @@ definitions:
         type: string
       FacReferencePoint:
         type: string
-      FacSicCodes:
+      FacSICCodes:
         type: string
       FacState:
         description: Facility state
@@ -2240,7 +2249,7 @@ definitions:
         type: string
       RCRALastPenaltyDate:
         type: string
-      RCRANaics:
+      RCRANAICS:
         type: string
       RCRAPenalties:
         example: $987
@@ -2289,12 +2298,12 @@ definitions:
       SDWASystemTypes:
         description: SDWIS System Types
         type: string
+      SDWISFlag:
+        title: SDWIS Flag
+        type: string
       Score:
         example: '1'
         title: Score
-        type: string
-      SdwisFlag:
-        title: SDWIS Flag
         type: string
       SourceID:
         description: Unique Identifier assigned by EPA.
@@ -2401,14 +2410,14 @@ definitions:
       - Fac3yrComplianceStatus
       - AIRFlag
       - NPDESFlag
-      - SdwisFlag
+      - SDWISFlag
       - RCRAFlag
       - TRIFlag
       - GHGFlag
       - AIRIDs
       - CAAPermitTypes
-      - CAANaics
-      - CAASics
+      - CAANAICS
+      - CAASICs
       - CAAEvaluationCount
       - CAADaysLastEvaluation
       - CAAInformalCount
@@ -2424,8 +2433,8 @@ definitions:
       - NPDESIDs
       - CWAPermitTypes
       - CWAComplianceTracking
-      - CWANaics
-      - CWASics
+      - CWANAICS
+      - CWASICs
       - CWAInspectionCount
       - CWADaysLastInspection
       - CWAInformalCount
@@ -2442,7 +2451,7 @@ definitions:
       - CWA3YrQncrCodes
       - RCRAIDs
       - RCRAPermitTypes
-      - RCRANaics
+      - RCRANAICS
       - RCRAInspectionCount
       - RCRADaysLastEvaluation
       - RCRAInformalCount
@@ -2473,8 +2482,8 @@ definitions:
       - GHGIDs
       - GHGCO2Releases
       - DfrUrl
-      - FacSicCodes
-      - FacNaicsCodes
+      - FacSICCodes
+      - FacNAICSCodes
       - FacDateLastInspectionEPA
       - FacDateLastInspectionState
       - FacDateLastFormalActEPA
@@ -2771,7 +2780,7 @@ definitions:
         type: string
       CAALastPenaltyDate:
         type: string
-      CAANaics:
+      CAANAICS:
         type: string
       CAAPenalties:
         description: The total dollar amount of assessed (or final) penalties taken against the facility within the last five years under the Clean Air Act.
@@ -2789,7 +2798,7 @@ definitions:
       CAAQtrsInNC:
         example: '0'
         type: string
-      CAASics:
+      CAASICs:
         type: string
       CWA13qtrsComplStatus:
         type: string
@@ -2829,7 +2838,7 @@ definitions:
         type: string
       CWALastPenaltyDate:
         type: string
-      CWANaics:
+      CWANAICS:
         type: string
       CWAPenalties:
         description: The total dollar amount of assessed (or final) penalties taken against the facility within the last five years under the Clean Water Act.
@@ -2844,7 +2853,7 @@ definitions:
         type: string
       CWAQtrsInNC:
         type: string
-      CWASics:
+      CWASICs:
         type: string
       CamdIDs:
         description: Facility identifiers for the Clean Air Markets Division database.
@@ -3041,10 +3050,10 @@ definitions:
         type: string
       FacMyrtkUniverse:
         type: string
-      FacNaaFlag:
-        type: string
-      FacNaicsCodes:
+      FacNAICSCodes:
         title: Facility NAICS Codes
+        type: string
+      FacNaaFlag:
         type: string
       FacName:
         description: Name of facility
@@ -3080,7 +3089,7 @@ definitions:
         type: string
       FacReferencePoint:
         type: string
-      FacSicCodes:
+      FacSICCodes:
         type: string
       FacState:
         description: Facility state
@@ -3253,7 +3262,7 @@ definitions:
         type: string
       RCRALastPenaltyDate:
         type: string
-      RCRANaics:
+      RCRANAICS:
         type: string
       RCRAPenalties:
         example: $987
@@ -3302,12 +3311,12 @@ definitions:
       SDWASystemTypes:
         description: SDWIS System Types
         type: string
+      SDWISFlag:
+        title: SDWIS Flag
+        type: string
       Score:
         example: '1'
         title: Score
-        type: string
-      SdwisFlag:
-        title: SDWIS Flag
         type: string
       SourceID:
         description: Unique Identifier assigned by EPA.
@@ -3415,14 +3424,14 @@ definitions:
       - Fac3yrComplianceStatus
       - AIRFlag
       - NPDESFlag
-      - SdwisFlag
+      - SDWISFlag
       - RCRAFlag
       - TRIFlag
       - GHGFlag
       - AIRIDs
       - CAAPermitTypes
-      - CAANaics
-      - CAASics
+      - CAANAICS
+      - CAASICs
       - CAAEvaluationCount
       - CAADaysLastEvaluation
       - CAAInformalCount
@@ -3438,8 +3447,8 @@ definitions:
       - NPDESIDs
       - CWAPermitTypes
       - CWAComplianceTracking
-      - CWANaics
-      - CWASics
+      - CWANAICS
+      - CWASICs
       - CWAInspectionCount
       - CWADaysLastInspection
       - CWAInformalCount
@@ -3456,7 +3465,7 @@ definitions:
       - CWA3YrQncrCodes
       - RCRAIDs
       - RCRAPermitTypes
-      - RCRANaics
+      - RCRANAICS
       - RCRAInspectionCount
       - RCRADaysLastEvaluation
       - RCRAInformalCount
@@ -3487,8 +3496,8 @@ definitions:
       - GHGIDs
       - GHGCO2Releases
       - DfrUrl
-      - FacSicCodes
-      - FacNaicsCodes
+      - FacSICCodes
+      - FacNAICSCodes
       - FacDateLastInspectionEPA
       - FacDateLastInspectionState
       - FacDateLastFormalActEPA
@@ -3751,7 +3760,7 @@ definitions:
         type: number
       CAALastPenaltyDate:
         type: string
-      CAANaics:
+      CAANAICS:
         type: string
       CAAPenalties:
         description: The total dollar amount of assessed (or final) penalties taken against the facility within the last five years under the Clean Air Act.
@@ -3769,7 +3778,7 @@ definitions:
       CAAQtrsInNC:
         example: 0
         type: number
-      CAASics:
+      CAASICs:
         type: string
       CWA13qtrsComplStatus:
         type: string
@@ -3809,7 +3818,7 @@ definitions:
         type: string
       CWALastPenaltyDate:
         type: string
-      CWANaics:
+      CWANAICS:
         type: string
       CWAPenalties:
         description: The total dollar amount of assessed (or final) penalties taken against the facility within the last five years under the Clean Water Act.
@@ -3824,7 +3833,7 @@ definitions:
         type: string
       CWAQtrsInNC:
         type: string
-      CWASics:
+      CWASICs:
         type: string
       CamdIDs:
         description: Facility identifiers for the Clean Air Markets Division database.
@@ -4011,10 +4020,10 @@ definitions:
         type: string
       FacMyrtkUniverse:
         type: string
-      FacNaaFlag:
-        type: string
-      FacNaicsCodes:
+      FacNAICSCodes:
         title: Facility NAICS Codes
+        type: string
+      FacNaaFlag:
         type: string
       FacName:
         description: Name of facility
@@ -4050,7 +4059,7 @@ definitions:
         type: number
       FacReferencePoint:
         type: string
-      FacSicCodes:
+      FacSICCodes:
         type: string
       FacState:
         description: Facility state
@@ -4218,7 +4227,7 @@ definitions:
         type: string
       RCRALastPenaltyDate:
         type: string
-      RCRANaics:
+      RCRANAICS:
         type: string
       RCRAPenalties:
         example: $987
@@ -4267,13 +4276,13 @@ definitions:
       SDWASystemTypes:
         description: SDWIS System Types
         type: string
+      SDWISFlag:
+        title: SDWIS Flag
+        type: string
       Score:
         example: 1
         title: Score
         type: number
-      SdwisFlag:
-        title: SDWIS Flag
-        type: string
       SourceID:
         description: Unique Identifier assigned by EPA.
         example: ALR040033
@@ -4377,14 +4386,14 @@ definitions:
       - Fac3yrComplianceStatus
       - AIRFlag
       - NPDESFlag
-      - SdwisFlag
+      - SDWISFlag
       - RCRAFlag
       - TRIFlag
       - GHGFlag
       - AIRIDs
       - CAAPermitTypes
-      - CAANaics
-      - CAASics
+      - CAANAICS
+      - CAASICs
       - CAAEvaluationCount
       - CAADaysLastEvaluation
       - CAAInformalCount
@@ -4400,8 +4409,8 @@ definitions:
       - NPDESIDs
       - CWAPermitTypes
       - CWAComplianceTracking
-      - CWANaics
-      - CWASics
+      - CWANAICS
+      - CWASICs
       - CWAInspectionCount
       - CWADaysLastInspection
       - CWAInformalCount
@@ -4418,7 +4427,7 @@ definitions:
       - CWA3YrQncrCodes
       - RCRAIDs
       - RCRAPermitTypes
-      - RCRANaics
+      - RCRANAICS
       - RCRAInspectionCount
       - RCRADaysLastEvaluation
       - RCRAInformalCount
@@ -4449,8 +4458,8 @@ definitions:
       - GHGIDs
       - GHGCO2Releases
       - DfrUrl
-      - FacSicCodes
-      - FacNaicsCodes
+      - FacSICCodes
+      - FacNAICSCodes
       - FacDateLastInspectionEPA
       - FacDateLastInspectionState
       - FacDateLastFormalActEPA

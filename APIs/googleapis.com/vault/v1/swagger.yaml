@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Archiving and eDiscovery for G Suite.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Vault
   version: v1
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.0.1
       format: google
       url: 'https://vault.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -35,20 +31,11 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/ediscovery': Manage your eDiscovery data
       'https://www.googleapis.com/auth/ediscovery.readonly': View your eDiscovery data
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/ediscovery': Manage your eDiscovery data
-      'https://www.googleapis.com/auth/ediscovery.readonly': View your eDiscovery data
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -171,11 +158,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery.readonly'
       tags:
         - matters
@@ -212,8 +195,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}':
@@ -233,8 +214,6 @@ paths:
             $ref: '#/definitions/Matter'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
@@ -263,11 +242,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery.readonly'
       tags:
         - matters
@@ -310,8 +285,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}/holds':
@@ -346,11 +319,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery.readonly'
       tags:
         - matters
@@ -389,8 +358,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}/holds/{holdId}':
@@ -416,8 +383,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
     get:
@@ -442,11 +407,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery.readonly'
       tags:
         - matters
@@ -493,8 +454,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}/holds/{holdId}/accounts':
@@ -524,11 +483,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery.readonly'
       tags:
         - matters
@@ -575,8 +530,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}/holds/{holdId}/accounts/{accountId}':
@@ -608,8 +561,6 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
@@ -663,8 +614,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}:close':
@@ -702,8 +651,6 @@ paths:
             $ref: '#/definitions/CloseMatterResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
@@ -743,8 +690,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}:reopen':
@@ -783,8 +728,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ediscovery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
   '/v1/matters/{matterId}:undelete':
@@ -822,8 +765,6 @@ paths:
             $ref: '#/definitions/Matter'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ediscovery'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters

@@ -102,6 +102,42 @@ paths:
       summary: Gets all available Actions of a Device
       tags:
         - Actions
+  /api/ChargingUser:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: ChargingUser_Get
+      parameters:
+        - description: The ID of the user
+          format: int64
+          in: query
+          name: userId
+          required: true
+          type: integer
+        - description: The current Date
+          format: int64
+          in: query
+          name: date
+          required: true
+          type: integer
+        - description: The Password token
+          in: query
+          name: passwordToken
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+      summary: Gets the informations for the user.
+      tags:
+        - ChargingUser
   /api/CustomDevice:
     get:
       consumes: []
@@ -396,6 +432,28 @@ paths:
       summary: Gets all Devices by it's Sub Type (e.g. E-Charging Station)
       tags:
         - DevicesBySubType
+  '/api/Folder/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      description: Gets the Values for a folder or a meter
+      operationId: Folder_Get
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/FolderData'
+      summary: Gets the Values for a folder or a meter
+      tags:
+        - Folder
   /api/MBus:
     post:
       consumes:
@@ -701,6 +759,89 @@ paths:
       summary: "Calculates a virtual meter from a formula. \r\n            A meter is coded as ID(\"METERID\")"
       tags:
         - VirtualMeterCalculateFormula
+  /api/VirtualTariff:
+    get:
+      consumes: []
+      deprecated: false
+      description: Gets all Virtual Tariffs of a user
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/VirtualTariffsOfFolder'
+            type: array
+      summary: Gets all Virtual Tariffs of a user
+      tags:
+        - VirtualTariff
+  '/api/VirtualTariff/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      description: Gets all virtual tariffs of a folder
+      parameters:
+        - description: The ID of the Folder
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/VirtualTariffsOfFolder'
+      summary: Gets all virtual tariffs of a folder
+      tags:
+        - VirtualTariff
+  /api/VirtualTariffConsumption:
+    get:
+      consumes: []
+      deprecated: false
+      description: Gets the consumption of a folder with a virtuall tariffs.
+      operationId: VirtualTariffConsumption_Get
+      parameters:
+        - description: The ID of the Folder
+          in: query
+          name: folderId
+          required: true
+          type: string
+        - description: The start date (UTC)
+          format: date-time
+          in: query
+          name: startDate
+          required: true
+          type: string
+        - description: The end date (UTC)
+          format: date-time
+          in: query
+          name: endDate
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/VirtualTariffConsumptionData'
+            type: array
+      summary: Gets the consumption of a folder with a virtuall tariffs.
+      tags:
+        - VirtualTariffConsumption
 definitions:
   AccessTokenToPut:
     description: Container Class for the Put action of an Access Token
@@ -1117,6 +1258,42 @@ definitions:
         format: date-time
         type: string
     type: object
+  FolderData:
+    description: Container class for the folder API
+    properties:
+      ElectricityCounterValue:
+        description: The Counter values for electricity (kWh)
+        format: double
+        type: number
+      ElectricityPower:
+        description: The Power for electricity (kW)
+        format: double
+        type: number
+      GasCounterValue:
+        description: The Counter values for Gas (m3)
+        format: double
+        type: number
+      GasFlowRate:
+        description: The Flow Rate for Gas (m3/h)
+        format: double
+        type: number
+      HeatCounterValue:
+        description: The Counter values for Heat (kWh)
+        format: double
+        type: number
+      HeatPower:
+        description: The Power for Heat (kW)
+        format: double
+        type: number
+      WaterCounterValue:
+        description: The Counter values for Water (m3)
+        format: double
+        type: number
+      WaterFlowRate:
+        description: The Flow Rate for Water (m3/h)
+        format: double
+        type: number
+    type: object
   InputInformation:
     description: Informations about the Inputs of a Meter or Folder
     properties:
@@ -1182,6 +1359,12 @@ definitions:
   OutputInformation:
     description: Informations about the Outputs of a Meter or Folder
     properties:
+      ActionType:
+        description: The type of the Output
+        enum:
+          - OnOffAction
+          - AnalogAction
+        type: string
       Name:
         description: The Name of the Output
         type: string
@@ -1238,4 +1421,76 @@ definitions:
       ID:
         description: The ID of the Virtual meter to deactivate
         type: string
+    type: object
+  VirtualTariff:
+    description: Container class for the virtual tariffs
+    properties:
+      Factor:
+        description: Says how many of the active power is used in this tariff. This is calculated from the last meter values.
+        format: double
+        type: number
+      Id:
+        description: The ID of the virtual tariff
+        type: string
+      Name:
+        description: The name of this tariff
+        type: string
+      Type:
+        description: The Type of the tariff
+        enum:
+          - Battery
+          - Solar
+          - Normal
+        type: string
+      Unit:
+        description: The Unit of this value
+        type: string
+      Value:
+        description: The Counter Value of this tariff
+        format: double
+        type: number
+    type: object
+  VirtualTariffConsumptionData:
+    description: Container class for the virtual tariff consumption
+    properties:
+      Consumption:
+        description: The consumption (e.g. kWh) of this tariff
+        format: double
+        type: number
+      Currency:
+        description: The currency of the price
+        type: string
+      Name:
+        description: The Name of this virtual tariff
+        type: string
+      Price:
+        description: The price of the energy in this timerange
+        format: double
+        type: number
+      TariffType:
+        description: The type of the virtual tariff (e.g. solar)
+        enum:
+          - Battery
+          - Solar
+          - Normal
+        type: string
+    type: object
+  VirtualTariffsOfFolder:
+    description: Container class for a Virtual Tariff
+    properties:
+      Date:
+        description: The DateTime (UTC) of this virtual tarfifs
+        format: date-time
+        type: string
+      FolderId:
+        description: The ID of the Folder
+        type: string
+      Name:
+        description: The name of this folder
+        type: string
+      VirtualTariffs:
+        description: The Name of the Virtual Tariff
+        items:
+          $ref: '#/definitions/VirtualTariff'
+        type: array
     type: object

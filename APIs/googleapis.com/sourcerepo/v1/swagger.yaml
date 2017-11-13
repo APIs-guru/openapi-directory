@@ -9,10 +9,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Access source code repositories hosted by Google.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Source Repositories
   version: v1
   x-apiClientRegistration:
@@ -24,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.0.1
       format: google
       url: 'https://sourcerepo.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -36,24 +32,13 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/source.full_control': Manage your source code repositories
       'https://www.googleapis.com/auth/source.read_only': View the contents of your source code repositories
       'https://www.googleapis.com/auth/source.read_write': Manage the contents of your source code repositories
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/source.full_control': Manage your source code repositories
-      'https://www.googleapis.com/auth/source.read_only': View the contents of your source code repositories
-      'https://www.googleapis.com/auth/source.read_write': Manage the contents of your source code repositories
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -155,19 +140,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
@@ -191,19 +168,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
@@ -257,19 +226,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
@@ -330,19 +291,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
@@ -370,19 +323,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
@@ -441,19 +386,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
@@ -499,19 +436,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects

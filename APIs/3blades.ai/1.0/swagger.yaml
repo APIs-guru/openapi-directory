@@ -4626,6 +4626,12 @@ definitions:
             - read_project
           type: string
         type: array
+      project:
+        description: Collaborator project name.
+        type: string
+      user:
+        description: Collaborator user name.
+        type: string
       username:
         description: |
           Collaborator's user name. This must be a valid user name within the
@@ -4833,6 +4839,9 @@ definitions:
       name:
         description: Docker host name.
         type: string
+      owner:
+        description: UUID of Docker host owner.
+        type: string
       port:
         description: Docker host port.
         type: integer
@@ -4896,12 +4905,18 @@ definitions:
       address:
         description: Email address.
         type: string
+      id:
+        description: Email unique identifier expressed as UUID.
+        type: string
       public:
         description: Boolean to determine if email is public or private.
         type: boolean
       unsubscribed:
         description: Boolean to determine whether user is suscribed or unsubscribed to out going email campaigns.
         type: boolean
+      user:
+        description: User name for email.
+        type: string
     required:
       - address
     type: object
@@ -5147,6 +5162,9 @@ definitions:
       type:
         description: 'Type of the notification, e.g. invoice.created, subscription.created, etc.'
         type: string
+      user:
+        description: User the notification is for.
+        type: string
     required:
       - read
     type: object
@@ -5179,6 +5197,9 @@ definitions:
     type: object
   NotificationSettings:
     properties:
+      email_address:
+        description: Email address to send notifications.
+        type: string
       emails_enabled:
         description: Turn emails on or off.
         type: boolean
@@ -5193,6 +5214,9 @@ definitions:
         type: string
       id:
         description: Notification unique identifier expressed as a UUID
+        type: string
+      user:
+        description: User the notification settings is for.
         type: string
     required:
       - enabled
@@ -5411,6 +5435,9 @@ definitions:
       private:
         description: Value that states whether project is private or public.
         type: boolean
+      team:
+        description: Project team name.
+        type: string
     required:
       - name
     type: object
@@ -5574,6 +5601,9 @@ definitions:
       created_at:
         description: Date and time when server was created.
         type: string
+      created_by:
+        description: User that created server.
+        type: string
       endpoint:
         description: Server endpoint path.
         type: string
@@ -5594,6 +5624,9 @@ definitions:
         type: string
       name:
         description: Server name.
+        type: string
+      project:
+        description: Project name.
         type: string
       server_size:
         description: Server size unique identifier.
@@ -5802,6 +5835,9 @@ definitions:
       id:
         description: Server run statistics object unique identifier in UUID format.
         type: string
+      server:
+        description: Server name.
+        type: string
       size:
         description: Size of server.
         type: integer
@@ -5954,6 +5990,9 @@ definitions:
       id:
         description: Server statistics unique identifier in UUID format.
         type: string
+      server:
+        description: Server name.
+        type: string
       size:
         description: Size of statistics.
         type: integer
@@ -6040,6 +6079,9 @@ definitions:
       remote_port:
         description: Remote port to establish SSH tunnel.
         type: integer
+      server:
+        description: Server name.
+        type: string
       username:
         description: SSH tunnel user name.
         type: string

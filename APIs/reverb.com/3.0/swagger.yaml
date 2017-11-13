@@ -42,6 +42,7 @@ securityDefinitions:
       read_messages: ''
       read_offers: ''
       read_orders: ''
+      read_payouts: ''
       read_profile: ''
       write_feedback: ''
       write_listings: ''
@@ -3517,6 +3518,35 @@ paths:
         - oauth2:
             - read_orders
       summary: Get payment
+      tags:
+        - my
+  /my/payouts:
+    get:
+      description: Get a list of payouts
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_payouts
+      summary: Get a list of payouts
+      tags:
+        - my
+  '/my/payouts/{id}/line_items':
+    get:
+      description: Read the line items of a payout
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_payouts
+      summary: Read the line items of a payout
       tags:
         - my
   /my/refund_requests/selling:

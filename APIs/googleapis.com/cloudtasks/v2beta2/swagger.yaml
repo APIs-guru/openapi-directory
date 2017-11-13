@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Manages the execution of large numbers of distributed requests. Cloud Tasks is in Alpha.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Tasks
   version: v2beta2
   x-apiClientRegistration:
@@ -21,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.0.1
       format: google
       url: 'https://cloudtasks.googleapis.com/$discovery/rest?version=v2beta2'
       version: v1
@@ -33,18 +29,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -153,8 +141,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
@@ -198,8 +184,6 @@ paths:
             $ref: '#/definitions/Task'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -271,8 +255,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2beta2/{name}/locations':
@@ -305,8 +287,6 @@ paths:
             $ref: '#/definitions/ListLocationsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -382,8 +362,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2beta2/{name}:acknowledge':
@@ -439,8 +417,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2beta2/{name}:cancelLease':
@@ -489,8 +465,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2beta2/{name}:pause':
@@ -518,12 +492,6 @@ paths:
         queue is paused. The state of the queue is stored in
         Queue.queue_state; if paused it will be set to
         Queue.QueueState.PAUSED.
-
-        WARNING: This method is only available to whitelisted
-        users. Using this method carries some risk. Read
-        [Overview of Queue Management and queue.yaml](/cloud-tasks/docs/queue-yaml)
-        carefully and then sign up for
-        [whitelist access to this method](https://goo.gl/Fe5mUy).
       operationId: cloudtasks.projects.locations.queues.pause
       parameters:
         - in: body
@@ -547,8 +515,6 @@ paths:
             $ref: '#/definitions/Queue'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -599,8 +565,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2beta2/{name}:renewLease':
@@ -649,8 +613,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2beta2/{name}:resume':
@@ -676,12 +638,6 @@ paths:
         Queue.QueueState.PAUSED or Queue.QueueState.DISABLED. The state of
         a queue is stored in Queue.queue_state; after calling this method it
         will be set to Queue.QueueState.RUNNING.
-
-        WARNING: This method is only available to whitelisted
-        users. Using this method carries some risk. Read
-        [Overview of Queue Management and queue.yaml](/cloud-tasks/docs/queue-yaml)
-        carefully and then sign up for
-        [whitelist access to this method](https://goo.gl/Fe5mUy).
 
         WARNING: Resuming many high-QPS queues at the same time can
         lead to target overloading. If you are resuming high-QPS
@@ -710,8 +666,6 @@ paths:
             $ref: '#/definitions/Queue'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -781,8 +735,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2beta2/{parent}/queues':
@@ -848,8 +800,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -902,8 +852,6 @@ paths:
             $ref: '#/definitions/Queue'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -987,8 +935,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -1046,8 +992,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2beta2/{resource}:getIamPolicy':
@@ -1097,8 +1041,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v2beta2/{resource}:setIamPolicy':
@@ -1120,6 +1062,9 @@ paths:
       description: |
         Sets the access control policy for a Queue. Replaces any existing
         policy.
+
+        Note: The Cloud Console does not check queue-level IAM permissions yet.
+        Project-level permissions are required to use the Cloud Console.
 
         Authorization requires the following [Google IAM](/iam) permission on the
         specified resource parent:
@@ -1146,8 +1091,6 @@ paths:
             $ref: '#/definitions/Policy'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1196,8 +1139,6 @@ paths:
             $ref: '#/definitions/TestIamPermissionsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects

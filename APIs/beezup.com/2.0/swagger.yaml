@@ -59,7 +59,7 @@ info:
     All URLs returned by the BeezUP API are relative to this base URL, and all requests to the REST API must use this base URL template.
 
     You can test our API on https://api-docs.beezup.com/swagger-ui\
-    You can contact us on [gitter, #BeezUP/API](https://gitter.im/beezUP/API)
+    You can contact us on [gitter, #BeezUP/API](https://gitter.im/BeezUP/API)
   license:
     name: BeezUP
     url: 'http://www.beezup.com'
@@ -184,6 +184,14 @@ parameters:
     name: format
     required: true
     type: string
+  groupIdParameter:
+    description: The exclusion filter group identifier
+    format: guid
+    in: path
+    name: groupId
+    required: true
+    type: string
+    x-example: 6d6b04de-406b-4539-8e7e-bf3e8da5dfb0
   ifMatchParameter:
     description: |
       ETag value to identify the last known version of requested resource.\
@@ -421,9 +429,9 @@ tags:
   - description: All column mapping operations
     name: Channel Catalogs - Column Mappings
     x-displayName: Column Mappings
-  - description: All category mapping operations
-    name: Channel Catalogs - Category Mappings
-    x-displayName: Category Mappings
+  - description: All categories operations
+    name: Channel Catalogs - Categories
+    x-displayName: Categories
   - description: All exclusion filters operations
     name: Channel Catalogs - Exclusion Filters
     x-displayName: Exclusion Filters
@@ -3034,7 +3042,7 @@ paths:
       summary: Get the channel catalog information
       tags:
         - Channel Catalogs - Global
-  '/user/channelCatalogs/{channelCatalogId}/categoryMappings':
+  '/user/channelCatalogs/{channelCatalogId}/categories':
     get:
       operationId: GetChannelCatalogCategories
       parameters:
@@ -3043,7 +3051,7 @@ paths:
         '200':
           description: Channel catalog category mappings
           schema:
-            $ref: '#/definitions/channelCatalogCategoryMappingList'
+            $ref: '#/definitions/channelCatalogCategoryConfigurationList'
         '404':
           description: ChannelCatalogId not found or not authorized
           schema:
@@ -3054,8 +3062,36 @@ paths:
         - api_key: []
       summary: Get channel catalog categories
       tags:
-        - Channel Catalogs - Category Mappings
-  '/user/channelCatalogs/{channelCatalogId}/categoryMappings/disable':
+        - Channel Catalogs - Categories
+  '/user/channelCatalogs/{channelCatalogId}/categories/configure':
+    post:
+      operationId: ConfigureChannelCatalogCategory
+      parameters:
+        - $ref: '#/parameters/channelCatalogIdParameter'
+        - in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/configureCategoryRequest'
+      responses:
+        '204':
+          description: Channel catalog category configured
+        '400':
+          description: BadRequest. See Error Response for more details
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        '404':
+          description: ChannelCatalogId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        default:
+          $ref: '#/responses/GeneralError'
+      security:
+        - api_key: []
+      summary: Configure channel catalog category
+      tags:
+        - Channel Catalogs - Categories
+  '/user/channelCatalogs/{channelCatalogId}/categories/disableMapping':
     post:
       operationId: DisableChannelCatalogCategoryMapping
       parameters:
@@ -3073,36 +3109,8 @@ paths:
         - api_key: []
       summary: Disable a channel catalog category mapping
       tags:
-        - Channel Catalogs - Category Mappings
-  '/user/channelCatalogs/{channelCatalogId}/categoryMappings/map':
-    post:
-      operationId: MapChannelCatalogCategory
-      parameters:
-        - $ref: '#/parameters/channelCatalogIdParameter'
-        - in: body
-          name: request
-          required: true
-          schema:
-            $ref: '#/definitions/mapCategoryRequest'
-      responses:
-        '204':
-          description: Channel catalog category mapped
-        '400':
-          description: BadRequest. See Error Response for more details
-          schema:
-            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
-        '404':
-          description: ChannelCatalogId not found or not authorized
-          schema:
-            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
-        default:
-          $ref: '#/responses/GeneralError'
-      security:
-        - api_key: []
-      summary: Map channel catalog category
-      tags:
-        - Channel Catalogs - Category Mappings
-  '/user/channelCatalogs/{channelCatalogId}/categoryMappings/reenable':
+        - Channel Catalogs - Categories
+  '/user/channelCatalogs/{channelCatalogId}/categories/reenableMapping':
     post:
       operationId: ReenableChannelCatalogCategoryMapping
       parameters:
@@ -3120,35 +3128,7 @@ paths:
         - api_key: []
       summary: Reenable a channel catalog category mapping
       tags:
-        - Channel Catalogs - Category Mappings
-  '/user/channelCatalogs/{channelCatalogId}/categoryMappings/unmap':
-    post:
-      operationId: UnmapChannelCatalogCategory
-      parameters:
-        - $ref: '#/parameters/channelCatalogIdParameter'
-        - in: body
-          name: request
-          required: true
-          schema:
-            $ref: '#/definitions/unmapCategoryRequest'
-      responses:
-        '204':
-          description: Channel catalog category unmapped
-        '400':
-          description: BadRequest. See Error Response for more details
-          schema:
-            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
-        '404':
-          description: ChannelCatalogId not found or not authorized
-          schema:
-            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
-        default:
-          $ref: '#/responses/GeneralError'
-      security:
-        - api_key: []
-      summary: Unmap channel catalog category
-      tags:
-        - Channel Catalogs - Category Mappings
+        - Channel Catalogs - Categories
   '/user/channelCatalogs/{channelCatalogId}/columnMappings':
     put:
       operationId: ConfigureChannelCatalogColumnMappings
@@ -3485,6 +3465,45 @@ paths:
       security:
         - api_key: []
       summary: Override channel catalog product values
+      tags:
+        - Channel Catalogs - Products Overrides
+  '/user/channelCatalogs/{channelCatalogId}/products/{productId}/overrides/copy':
+    get:
+      operationId: GetChannelCatalogProductValueOverrideCopy
+      parameters:
+        - $ref: '#/parameters/channelCatalogIdParameter'
+        - $ref: '#/parameters/productIdParameter'
+      responses:
+        '204':
+          description: placeholder. will be completed soon.
+        '404':
+          description: ChannelCatalog or ProductId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        default:
+          $ref: '#/responses/GeneralError'
+      security:
+        - api_key: []
+      summary: Get channel catalog product value override compatibilities status
+      tags:
+        - Channel Catalogs - Products Overrides
+    post:
+      operationId: ConfigureChannelCatalogProductValueOverrideCopy
+      parameters:
+        - $ref: '#/parameters/channelCatalogIdParameter'
+        - $ref: '#/parameters/productIdParameter'
+      responses:
+        '204':
+          description: Channel catalog product value override deleted
+        '404':
+          description: ChannelCatalogId or ProductId not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        default:
+          $ref: '#/responses/GeneralError'
+      security:
+        - api_key: []
+      summary: Copy channel catalog product value override
       tags:
         - Channel Catalogs - Products Overrides
   '/user/channelCatalogs/{channelCatalogId}/products/{productId}/overrides/{channelColumnId}':
@@ -5995,7 +6014,6 @@ definitions:
       - productId
       - productSku
       - productTitle
-      - productImageUrl
       - productExists
     type: object
   BeezUP.Common.ProductFilterOperatorName:
@@ -7116,16 +7134,15 @@ definitions:
           - isMarketplace
           - productCount
         type: object
-  channelCatalogCategoryCostValue:
-    description: 'In case of CPC_ByCategory or CPA_ByCategory cost type, you have to indicate the cost value.'
-    example: 10.21
-    format: decimal
-    type: number
-  channelCatalogCategoryMapping:
+  channelCatalogCategoryConfiguration:
     description: |
       Represent a mapping between a catalog category path and a channel category path. 
       The cost on this mapping can be applied.
     properties:
+      autoMapNewSubCategories:
+        description: 'Great feature! In case of mapping to parent catalog category, you can ask to automatically map new sub catalog category in the next importation to this channel category path.'
+        example: true
+        type: boolean
       catalogCategoryPath:
         $ref: '#/definitions/BeezUP.Common.CatalogCategoryPath'
       channelCategoryPath:
@@ -7133,10 +7150,10 @@ definitions:
       costValue:
         $ref: '#/definitions/channelCatalogCategoryCostValue'
     required:
+      - autoMapNewSubCategories
       - catalogCategoryPath
-      - channelCategoryPath
     type: object
-  channelCatalogCategoryMappingInfo:
+  channelCatalogCategoryConfigurationInfo:
     description: For all catalog categories the current mapping applied
     properties:
       catalogCategoryPath:
@@ -7151,24 +7168,33 @@ definitions:
       - catalogCategoryPath
       - links
     type: object
-  channelCatalogCategoryMappingInfoLinks:
+  channelCatalogCategoryConfigurationList:
     properties:
-      mapCategory:
-        $ref: '#/definitions/links.MapChannelCatalogCategoryLink'
-      unmapCategory:
-        $ref: '#/definitions/links.UnmapChannelCatalogCategoryLink'
-    type: object
-  channelCatalogCategoryMappingList:
-    properties:
-      channelCatalogCategoryMappings:
+      channelCatalogCategoryConfigurations:
         items:
-          $ref: '#/definitions/channelCatalogCategoryMappingInfo'
+          $ref: '#/definitions/channelCatalogCategoryConfigurationInfo'
         type: array
+      costStatus:
+        $ref: '#/definitions/costStatus'
       links:
         $ref: '#/definitions/channelCatalogCategoryMappingsLinks'
+      mappingStatus:
+        $ref: '#/definitions/mappingStatus'
     required:
       - links
-      - channelCatalogCategoryMappings
+      - channelCatalogCategoryConfigurations
+      - mappingStatus
+      - costStatus
+    type: object
+  channelCatalogCategoryCostValue:
+    description: 'In case of CPC_ByCategory or CPA_ByCategory cost type, you have to indicate the cost value.'
+    example: 10.21
+    format: decimal
+    type: number
+  channelCatalogCategoryMappingInfoLinks:
+    properties:
+      configureCategories:
+        $ref: '#/definitions/links.ConfigureChannelCatalogCategoryLink'
     type: object
   channelCatalogCategoryMappingSettings:
     properties:
@@ -8451,6 +8477,21 @@ definitions:
     required:
       - catalogColumn
     type: object
+  configureCategoryRequest:
+    description: The request message to make a mapping between catalog category path and a channel category path
+    properties:
+      channelCatalogCategories:
+        items:
+          $ref: '#/definitions/channelCatalogCategoryConfiguration'
+        type: array
+      overrideSubCategoryMappings:
+        description: 'Great feature! In case of mapping to parent channel category, you can ask to override the mapping of all sub channel category to this catalog category path'
+        example: true
+        type: boolean
+    required:
+      - overrideSubCategoryMappings
+      - channelCatalogCategories
+    type: object
   contractBillingPeriodInfo:
     description: Describe the billing period information related to the offer.
     properties:
@@ -8847,6 +8888,13 @@ definitions:
     required:
       - costType
     type: object
+  costStatus:
+    enum:
+      - required
+      - optional
+      - notConfigurable
+    example: required
+    type: string
   costType:
     description: |
       CPC means cost per click.
@@ -10428,6 +10476,12 @@ definitions:
               in: body
               request: true
               schema: configureAutomaticTransitionRequest
+  links.ConfigureChannelCatalogCategoryLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/category/configure
+          method: POST
   links.ConfigureChannelCatalogColumnMappingsLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -10440,6 +10494,12 @@ definitions:
       - example:
           href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/settings/cost
           method: POST
+  links.ConfigureChannelCatalogExclusionFiltersCopyLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/exclusionFilters/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/copy
+          method: POST
   links.ConfigureChannelCatalogExclusionFiltersLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -10451,6 +10511,12 @@ definitions:
       - $ref: '#/definitions/BeezUP.Common.Link3'
       - example:
           href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/settings/general
+          method: POST
+  links.ConfigureChannelCatalogProductValueOverrideCopyLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/products/578419df-1bbf-41a6-96fa-862e42182b67/overrides/copy
           method: POST
   links.CreateRuleLink:
     allOf:
@@ -10491,7 +10557,7 @@ definitions:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
       - example:
-          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/categoryMappings/disable
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/categories/disableMapping
           method: POST
   links.DisableChannelCatalogLink:
     allOf:
@@ -10558,13 +10624,19 @@ definitions:
       - $ref: '#/definitions/BeezUP.Common.Link3'
       - description: If you did not configure the cost settings this link will not be displayed.
       - example:
-          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/categoryMappings
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/categories
           method: GET
   links.GetChannelCatalogExclusionFilterOperatorsLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
       - example:
           href: /v2/user/channelCatalogs/exclusionFilterOperators
+          method: GET
+  links.GetChannelCatalogExclusionFiltersCopyLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/exclusionFilters/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/copy
           method: GET
   links.GetChannelCatalogExclusionFiltersLink:
     allOf:
@@ -10612,6 +10684,12 @@ definitions:
       - example:
           href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/products
           method: POST
+  links.GetChannelCatalogProductValueOverrideCopyLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/products/578419df-1bbf-41a6-96fa-862e42182b67/overrides/copy
+          method: GET
   links.GetChannelCatalogsLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -11033,12 +11111,6 @@ definitions:
       - example:
           href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/customColumns/5b56bb78-bc0b-485e-abd8-8db7eed995cb/map
           method: POST
-  links.MapChannelCatalogCategoryLink:
-    allOf:
-      - $ref: '#/definitions/BeezUP.Common.Link3'
-      - example:
-          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/categoryMappings/map
-          method: POST
   links.MoveDownRuleLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -11137,7 +11209,7 @@ definitions:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
       - example:
-          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/categoryMappings/reenable
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/categories/reenableMapping
           method: POST
   links.ReenableChannelCatalogProductLink:
     allOf:
@@ -11202,22 +11274,6 @@ definitions:
               required: true
               schema: setMerchantOrderInfoRequest
               type: object
-  links.UnmapChannelCatalogCategoryLink:
-    allOf:
-      - $ref: '#/definitions/BeezUP.Common.Link3'
-      - example:
-          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/categoryMappings/unmap
-          method: POST
-          parameters:
-            - in: body
-              name: request
-              required: true
-              type: object
-              value:
-                catalogCategoryPath:
-                  - VÃªtements
-                  - Femmes
-                  - Chaussures
   links.UpdateRuleLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -11453,24 +11509,13 @@ definitions:
     required:
       - beezUPColumnName
     type: object
-  mapCategoryRequest:
-    description: The request message to make a mapping between catalog category path and a channel category path
-    properties:
-      autoMapNewSubCategories:
-        description: 'Great feature! In case of mapping to parent catalog category, you can ask to automatically map new sub catalog category in the next importation to this channel category path.'
-        example: true
-        type: boolean
-      channelCatalogCategoryMapping:
-        $ref: '#/definitions/channelCatalogCategoryMapping'
-      overrideSubCategoryMappings:
-        description: 'Great feature! In case of mapping to parent channel category, you can ask to override the mapping of all sub channel category to this catalog category path'
-        example: true
-        type: boolean
-    required:
-      - overrideSubCategoryMappings
-      - autoMapNewSubCategories
-      - channelCatalogCategoryMapping
-    type: object
+  mappingStatus:
+    enum:
+      - required
+      - optional
+      - notConfigurable
+    example: required
+    type: string
   marginType:
     default: Tracker
     enum:
@@ -12795,6 +12840,18 @@ definitions:
       8a76f06a-fefc-4c0d-bcfe-b210f1482977: '3563'
       B7B79A0B-A8DE-54DA-964C-E2704DF3738A: SHBELNL56
     type: object
+  productOverridesCopyResponse:
+    additionalProperties:
+      type: string
+    description: Product overrides compatibilites list
+    example:
+      0EA21509-1141-57BD-B679-371BC98B2ADA: 'http://www.blalbla.nl/images/cache/ldldld.jpg'
+      2A77749D-0AAB-5245-89B5-6A1A4E06DACA: 'http://www.blalbla.nl/images/cache/dldldl.jpg'
+      54B3B3CB-5CA5-5471-9DAE-5310C032059A: 'http://www.blalbla.nl/images/cache/dlmdl.jpg'
+      57F70E81-E4F2-5034-BC65-E1D5C48EBEDA: Sony bravia
+      8a76f06a-fefc-4c0d-bcfe-b210f1482977: '3563'
+      B7B79A0B-A8DE-54DA-964C-E2704DF3738A: SHBELNL56
+    type: object
   productOverridesWithCatalogValues:
     additionalProperties:
       $ref: '#/definitions/productOverrideWithCatalogValue'
@@ -13833,7 +13890,7 @@ definitions:
       - ByChannel
       - ByCategory
       - ByProduct
-      - ByDate
+      - ByDay
     example: ByProduct
     type: string
   rule:
@@ -15001,7 +15058,7 @@ x-tagGroups:
       - Channel Catalogs - Global
       - Channel Catalogs - Settings
       - Channel Catalogs - Column Mappings
-      - Channel Catalogs - Category Mappings
+      - Channel Catalogs - Categories
       - Channel Catalogs - Exclusion Filters
       - Channel Catalogs - Products
       - Channel Catalogs - Products Overrides

@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Upload, process, query, and search Genomics data in the cloud.'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Genomics
   version: v1
   x-apiClientRegistration:
@@ -21,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.0.1
       format: google
       url: 'https://genomics.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -33,7 +29,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
@@ -41,18 +37,6 @@ securityDefinitions:
       'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
       'https://www.googleapis.com/auth/genomics': View and manage Genomics data
       'https://www.googleapis.com/auth/genomics.readonly': View Genomics data
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
-      'https://www.googleapis.com/auth/genomics': View and manage Genomics data
-      'https://www.googleapis.com/auth/genomics.readonly': View Genomics data
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -196,11 +180,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - annotations
@@ -242,15 +222,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - annotations
@@ -274,11 +248,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - annotations
@@ -301,15 +271,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - annotations
@@ -360,11 +324,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - annotations
@@ -413,11 +373,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - annotations
@@ -462,11 +418,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - annotationsets
@@ -506,15 +458,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - annotationsets
@@ -538,11 +484,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - annotationsets
@@ -565,15 +507,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - annotationsets
@@ -624,11 +560,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - annotationsets
@@ -668,11 +600,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - callsets
@@ -715,15 +643,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - callsets
@@ -750,11 +672,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - callsets
@@ -780,15 +698,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - callsets
@@ -842,11 +754,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - callsets
@@ -885,15 +793,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - datasets
@@ -932,11 +834,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - datasets
@@ -968,11 +866,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - datasets
@@ -998,15 +892,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - datasets
@@ -1060,11 +948,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - datasets
@@ -1111,11 +995,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - datasets
@@ -1158,15 +1038,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - readgroupsets
@@ -1195,11 +1069,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - readgroupsets
@@ -1225,15 +1095,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - readgroupsets
@@ -1292,11 +1156,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - readgroupsets
@@ -1374,15 +1234,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - readgroupsets
@@ -1448,15 +1302,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - readgroupsets
@@ -1509,15 +1357,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - readgroupsets
@@ -1576,15 +1418,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - reads
@@ -1627,15 +1463,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - references
@@ -1665,15 +1495,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - references
@@ -1741,15 +1565,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - references
@@ -1806,15 +1624,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - referencesets
@@ -1844,15 +1656,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - referencesets
@@ -1906,11 +1712,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - variants
@@ -1953,15 +1755,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - variants
@@ -1988,11 +1784,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - variants
@@ -2018,15 +1810,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - variants
@@ -2081,11 +1867,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - variants
@@ -2138,15 +1920,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - variants
@@ -2272,11 +2048,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - variants
@@ -2320,11 +2092,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - variantsets
@@ -2367,15 +2135,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - variantsets
@@ -2403,11 +2165,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - variantsets
@@ -2433,15 +2191,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/genomics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics.readonly'
       tags:
         - variantsets
@@ -2497,11 +2249,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - variantsets
@@ -2548,74 +2296,35 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - variantsets
   '/v1/{name}':
     get:
-      description: Lists operations that match the specified filter in the request.
-      operationId: genomics.operations.list
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: genomics.operations.get
       parameters:
-        - description: |-
-            A string for filtering Operations.
-            The following filter fields are supported&#58;
-
-            * projectId&#58; Required. Corresponds to
-              OperationMetadata.projectId.
-            * createTime&#58; The time this job was created, in seconds from the
-              [epoch](http://en.wikipedia.org/wiki/Unix_time). Can use `>=` and/or `<=`
-              operators.
-            * status&#58; Can be `RUNNING`, `SUCCESS`, `FAILURE`, or `CANCELED`. Only
-              one status may be specified.
-            * labels.key where key is a label key.
-
-            Examples&#58;
-
-            * `projectId = my-project AND createTime >= 1432140000`
-            * `projectId = my-project AND createTime >= 1432140000 AND createTime <= 1432150000 AND status = RUNNING`
-            * `projectId = my-project AND labels.color = *`
-            * `projectId = my-project AND labels.color = red`
-          in: query
-          name: filter
-          type: string
-        - description: The name of the operation's parent resource.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: |-
-            The maximum number of results to return. If unspecified, defaults to
-            256. The maximum value is 2048.
-          in: query
-          name: pageSize
-          type: integer
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          type: string
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ListOperationsResponse'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - operations
@@ -2670,11 +2379,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - operations
@@ -2726,11 +2431,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - datasets
@@ -2782,11 +2483,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - datasets
@@ -2836,11 +2533,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - datasets

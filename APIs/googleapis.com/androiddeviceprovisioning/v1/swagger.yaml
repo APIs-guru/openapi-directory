@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Automates reseller integration into zero-touch enrollment by assigning devices to customers and creating device reports.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Android Device Provisioning Partner
   version: v1
   x-apiClientRegistration:
@@ -21,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.0.1
       format: google
       url: 'https://androiddeviceprovisioning.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -441,10 +437,13 @@ paths:
         - partners
   '/v1/{name}':
     get:
-      description: Get a device.
-      operationId: androiddeviceprovisioning.partners.devices.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: androiddeviceprovisioning.operations.get
       parameters:
-        - description: 'Resource name in `partners/[PARTNER_ID]/devices/[DEVICE_ID]`.'
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -454,9 +453,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Device'
+            $ref: '#/definitions/Operation'
       tags:
-        - partners
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'

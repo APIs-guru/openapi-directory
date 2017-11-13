@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Manages the deployment of apps to Android for Work users.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Play EMM
   version: v1
   x-apiClientRegistration:
@@ -21,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.0.1
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/androidenterprise/v1/rest'
       version: v1
@@ -33,18 +29,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/androidenterprise': Manage corporate Android devices
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/androidenterprise': Manage corporate Android devices
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -120,8 +108,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
     parameters:
@@ -153,8 +139,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
   /enterprises/acknowledgeNotificationSet:
@@ -179,8 +163,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
@@ -213,8 +195,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
   /enterprises/enroll:
@@ -246,8 +226,6 @@ paths:
             $ref: '#/definitions/Enterprise'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
@@ -288,8 +266,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
   /enterprises/signupUrl:
@@ -319,8 +295,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
   '/enterprises/{enterpriseId}':
@@ -338,8 +312,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
@@ -359,8 +331,6 @@ paths:
             $ref: '#/definitions/Enterprise'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
@@ -402,8 +372,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
   '/enterprises/{enterpriseId}/androidDevicePolicyConfig':
@@ -423,8 +391,6 @@ paths:
             $ref: '#/definitions/AndroidDevicePolicyConfig'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
@@ -456,8 +422,6 @@ paths:
             $ref: '#/definitions/AndroidDevicePolicyConfig'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
@@ -491,8 +455,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
   '/enterprises/{enterpriseId}/groupLicenses':
@@ -512,8 +474,6 @@ paths:
             $ref: '#/definitions/GroupLicensesListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - grouplicenses
@@ -548,8 +508,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - grouplicenses
     parameters:
@@ -582,8 +540,6 @@ paths:
             $ref: '#/definitions/GroupLicenseUsersListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - grouplicenseusers
@@ -633,8 +589,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - products
     parameters:
@@ -672,8 +626,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - products
     parameters:
@@ -710,8 +662,6 @@ paths:
             $ref: '#/definitions/AppRestrictionsSchema'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - products
@@ -759,8 +709,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - products
   '/enterprises/{enterpriseId}/products/{productId}/generateApprovalUrl':
@@ -801,8 +749,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - products
   '/enterprises/{enterpriseId}/products/{productId}/permissions':
@@ -827,8 +773,6 @@ paths:
             $ref: '#/definitions/ProductPermissions'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - products
@@ -869,8 +813,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - products
   '/enterprises/{enterpriseId}/sendTestPushNotification':
@@ -898,8 +840,6 @@ paths:
             $ref: '#/definitions/EnterprisesSendTestPushNotificationResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
@@ -935,8 +875,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
     parameters:
@@ -964,8 +902,6 @@ paths:
             $ref: '#/definitions/ServiceAccountKeysListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - serviceaccountkeys
@@ -1001,8 +937,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - serviceaccountkeys
   '/enterprises/{enterpriseId}/serviceAccountKeys/{keyId}':
@@ -1025,8 +959,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - serviceaccountkeys
@@ -1055,8 +987,6 @@ paths:
             $ref: '#/definitions/StoreLayout'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
@@ -1089,8 +1019,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
   '/enterprises/{enterpriseId}/storeLayout/pages':
@@ -1110,8 +1038,6 @@ paths:
             $ref: '#/definitions/StoreLayoutPagesListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutpages
@@ -1144,8 +1070,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutpages
   '/enterprises/{enterpriseId}/storeLayout/pages/{pageId}':
@@ -1168,8 +1092,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutpages
@@ -1194,8 +1116,6 @@ paths:
             $ref: '#/definitions/StorePage'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutpages
@@ -1233,8 +1153,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutpages
     put:
@@ -1263,8 +1181,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutpages
   '/enterprises/{enterpriseId}/storeLayout/pages/{pageId}/clusters':
@@ -1289,8 +1205,6 @@ paths:
             $ref: '#/definitions/StoreLayoutClustersListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutclusters
@@ -1328,8 +1242,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutclusters
   '/enterprises/{enterpriseId}/storeLayout/pages/{pageId}/clusters/{clusterId}':
@@ -1357,8 +1269,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutclusters
@@ -1388,8 +1298,6 @@ paths:
             $ref: '#/definitions/StoreCluster'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutclusters
@@ -1432,8 +1340,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutclusters
     put:
@@ -1467,8 +1373,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - storelayoutclusters
   '/enterprises/{enterpriseId}/unenroll':
@@ -1495,8 +1399,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
   '/enterprises/{enterpriseId}/users':
@@ -1521,8 +1423,6 @@ paths:
             $ref: '#/definitions/UsersListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
@@ -1559,8 +1459,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
   '/enterprises/{enterpriseId}/users/{userId}':
@@ -1583,8 +1481,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
@@ -1609,8 +1505,6 @@ paths:
             $ref: '#/definitions/User'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
@@ -1651,8 +1545,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
     put:
@@ -1683,8 +1575,6 @@ paths:
             $ref: '#/definitions/User'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
@@ -1722,8 +1612,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
   '/enterprises/{enterpriseId}/users/{userId}/availableProductSet':
@@ -1748,8 +1636,6 @@ paths:
             $ref: '#/definitions/ProductSet'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
@@ -1787,10 +1673,42 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
+      tags:
+        - users
+  '/enterprises/{enterpriseId}/users/{userId}/deviceAccess':
+    delete:
+      description: |-
+        Revokes access to all devices currently provisioned to the user. The user will no longer be able to use the managed Play store on any of their managed devices.
+
+        This call only works with EMM-managed accounts.
+      operationId: androidenterprise.users.revokeDeviceAccess
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/enterprises/{enterpriseId}/users/{userId}/devices':
     get:
       description: Retrieves the IDs of all of a user's devices.
@@ -1813,8 +1731,6 @@ paths:
             $ref: '#/definitions/DevicesListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - devices
@@ -1854,8 +1770,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - devices
     parameters:
@@ -1893,8 +1807,6 @@ paths:
             $ref: '#/definitions/InstallsListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - installs
@@ -1937,8 +1849,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - installs
     get:
@@ -1972,8 +1882,6 @@ paths:
             $ref: '#/definitions/Install'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - installs
@@ -2021,8 +1929,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - installs
     put:
@@ -2061,8 +1967,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - installs
   '/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/managedConfigurationsForDevice':
@@ -2092,8 +1996,6 @@ paths:
             $ref: '#/definitions/ManagedConfigurationsForDeviceListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsfordevice
@@ -2136,8 +2038,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsfordevice
     get:
@@ -2171,8 +2071,6 @@ paths:
             $ref: '#/definitions/ManagedConfiguration'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsfordevice
@@ -2220,8 +2118,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsfordevice
     put:
@@ -2260,8 +2156,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsfordevice
   '/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/state':
@@ -2291,8 +2185,6 @@ paths:
             $ref: '#/definitions/DeviceState'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - devices
@@ -2335,8 +2227,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - devices
   '/enterprises/{enterpriseId}/users/{userId}/entitlements':
@@ -2361,8 +2251,6 @@ paths:
             $ref: '#/definitions/EntitlementsListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - entitlements
@@ -2400,8 +2288,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - entitlements
     get:
@@ -2430,8 +2316,6 @@ paths:
             $ref: '#/definitions/Entitlement'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - entitlements
@@ -2478,8 +2362,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - entitlements
     put:
@@ -2517,8 +2399,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - entitlements
   '/enterprises/{enterpriseId}/users/{userId}/managedConfigurationsForUser':
@@ -2543,8 +2423,6 @@ paths:
             $ref: '#/definitions/ManagedConfigurationsForUserListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsforuser
@@ -2582,8 +2460,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsforuser
     get:
@@ -2612,8 +2488,6 @@ paths:
             $ref: '#/definitions/ManagedConfiguration'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsforuser
@@ -2656,8 +2530,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsforuser
     put:
@@ -2691,8 +2563,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - managedconfigurationsforuser
   '/enterprises/{enterpriseId}/users/{userId}/token':
@@ -2715,8 +2585,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
@@ -2753,8 +2621,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - users
   '/permissions/{permissionId}':
@@ -2778,8 +2644,6 @@ paths:
             $ref: '#/definitions/Permission'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - permissions

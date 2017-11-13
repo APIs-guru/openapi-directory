@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Cloud Video Intelligence API.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Video Intelligence
   version: v1beta1
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.0.1
       format: google
       url: 'https://videointelligence.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
@@ -35,18 +31,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -162,8 +150,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - videos
 definitions:
@@ -191,67 +177,104 @@ definitions:
           $ref: '#/definitions/GoogleCloudVideointelligenceV1_VideoAnnotationResults'
         type: array
     type: object
-  GoogleCloudVideointelligenceV1_LabelAnnotation:
-    description: Label annotation.
+  GoogleCloudVideointelligenceV1_Entity:
+    description: Detected entity from video analysis.
     properties:
       description:
         description: 'Textual description, e.g. `Fixed-gear bicycle`.'
         type: string
+      entityId:
+        description: |-
+          Opaque entity ID. Some IDs may be available in
+          [Google Knowledge Graph Search
+          API](https://developers.google.com/knowledge-graph/).
+        type: string
       languageCode:
         description: Language code for `description` in BCP-47 format.
         type: string
-      locations:
-        description: Where the label was detected and with what confidence.
+    type: object
+  GoogleCloudVideointelligenceV1_ExplicitContentAnnotation:
+    description: |-
+      Explicit content annotation (based on per-frame visual signals only).
+      If no explicit content has been detected in a frame, no annotations are
+      present for that frame.
+    properties:
+      frames:
+        description: All video frames where explicit content was detected.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV1_LabelLocation'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_ExplicitContentFrame'
         type: array
     type: object
-  GoogleCloudVideointelligenceV1_LabelLocation:
-    description: Label location.
+  GoogleCloudVideointelligenceV1_ExplicitContentFrame:
+    description: Video frame level annotation results for explicit content.
     properties:
-      confidence:
-        description: 'Confidence that the label is accurate. Range: [0, 1].'
-        format: float
-        type: number
-      level:
-        description: Label level.
+      pornographyLikelihood:
+        description: Likelihood of the pornography content..
         enum:
-          - LABEL_LEVEL_UNSPECIFIED
-          - VIDEO_LEVEL
-          - SEGMENT_LEVEL
-          - SHOT_LEVEL
-          - FRAME_LEVEL
-        type: string
-      segment:
-        $ref: '#/definitions/GoogleCloudVideointelligenceV1_VideoSegment'
-        description: |-
-          Video segment. Unset for video-level labels.
-          Set to a frame timestamp for frame-level labels.
-          Otherwise, corresponds to one of `AnnotateSpec.segments`
-          (if specified) or to shot boundaries (if requested).
-    type: object
-  GoogleCloudVideointelligenceV1_SafeSearchAnnotation:
-    description: |-
-      Safe search annotation (based on per-frame visual signals only).
-      If no unsafe content has been detected in a frame, no annotations
-      are present for that frame.
-    properties:
-      adult:
-        description: Likelihood of adult content.
-        enum:
-          - UNKNOWN
+          - LIKELIHOOD_UNSPECIFIED
           - VERY_UNLIKELY
           - UNLIKELY
           - POSSIBLE
           - LIKELY
           - VERY_LIKELY
         type: string
-      time:
+      timeOffset:
         description: |-
-          Time-offset, relative to the beginning of the video,
-          corresponding to the video frame for this annotation.
+          Time-offset, relative to the beginning of the video, corresponding to the
+          video frame for this location.
         format: google-duration
         type: string
+    type: object
+  GoogleCloudVideointelligenceV1_LabelAnnotation:
+    description: Label annotation.
+    properties:
+      categoryEntities:
+        description: |-
+          Common categories for the detected entity.
+          E.g. when the label is `Terrier` the category is likely `dog`. And in some
+          cases there might be more than one categories e.g. `Terrier` could also be
+          a `pet`.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_Entity'
+        type: array
+      entity:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1_Entity'
+        description: Detected entity.
+      frames:
+        description: All video frames where a label was detected.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_LabelFrame'
+        type: array
+      segments:
+        description: All video segments where a label was detected.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_LabelSegment'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1_LabelFrame:
+    description: Video frame level annotation results for label detection.
+    properties:
+      confidence:
+        description: 'Confidence that the label is accurate. Range: [0, 1].'
+        format: float
+        type: number
+      timeOffset:
+        description: |-
+          Time-offset, relative to the beginning of the video, corresponding to the
+          video frame for this location.
+        format: google-duration
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1_LabelSegment:
+    description: Video segment level annotation results for label detection.
+    properties:
+      confidence:
+        description: 'Confidence that the label is accurate. Range: [0, 1].'
+        format: float
+        type: number
+      segment:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1_VideoSegment'
+        description: Video segment where a label was detected.
     type: object
   GoogleCloudVideointelligenceV1_VideoAnnotationProgress:
     description: Annotation progress for a single video.
@@ -284,37 +307,51 @@ definitions:
         description: |-
           If set, indicates an error. Note that for a single `AnnotateVideoRequest`
           some videos may succeed and some may fail.
+      explicitAnnotation:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1_ExplicitContentAnnotation'
+        description: Explicit content annotation.
+      frameLabelAnnotations:
+        description: |-
+          Label annotations on frame level.
+          There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_LabelAnnotation'
+        type: array
       inputUri:
         description: |-
           Video file location in
           [Google Cloud Storage](https://cloud.google.com/storage/).
         type: string
-      labelAnnotations:
-        description: Label annotations. There is exactly one element for each unique label.
+      segmentLabelAnnotations:
+        description: |-
+          Label annotations on video level or user specified segment level.
+          There is exactly one element for each unique label.
         items:
           $ref: '#/definitions/GoogleCloudVideointelligenceV1_LabelAnnotation'
-        type: array
-      safeSearchAnnotations:
-        description: Safe search annotations.
-        items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV1_SafeSearchAnnotation'
         type: array
       shotAnnotations:
         description: Shot annotations. Each shot is represented as a video segment.
         items:
           $ref: '#/definitions/GoogleCloudVideointelligenceV1_VideoSegment'
         type: array
+      shotLabelAnnotations:
+        description: |-
+          Label annotations on shot level.
+          There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_LabelAnnotation'
+        type: array
     type: object
   GoogleCloudVideointelligenceV1_VideoSegment:
     description: Video segment.
     properties:
-      endTime:
+      endTimeOffset:
         description: |-
           Time-offset, relative to the beginning of the video,
           corresponding to the end of the segment (inclusive).
         format: google-duration
         type: string
-      startTime:
+      startTimeOffset:
         description: |-
           Time-offset, relative to the beginning of the video,
           corresponding to the start of the segment (inclusive).

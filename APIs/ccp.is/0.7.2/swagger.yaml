@@ -6,7 +6,7 @@ basePath: /latest
 info:
   description: An OpenAPI for EVE Online
   title: EVE Swagger Interface
-  version: 0.7.0
+  version: 0.7.2
   x-apisguru-categories:
     - media
   x-logo:
@@ -24,6 +24,7 @@ securityDefinitions:
     authorizationUrl: 'https://login.eveonline.com/oauth/authorize'
     flow: implicit
     scopes:
+      esi-alliances.read_contacts.v1: EVE SSO scope esi-alliances.read_contacts.v1
       esi-assets.read_assets.v1: EVE SSO scope esi-assets.read_assets.v1
       esi-assets.read_corporation_assets.v1: EVE SSO scope esi-assets.read_corporation_assets.v1
       esi-bookmarks.read_character_bookmarks.v1: EVE SSO scope esi-bookmarks.read_character_bookmarks.v1
@@ -36,11 +37,13 @@ securityDefinitions:
       esi-characters.read_contacts.v1: EVE SSO scope esi-characters.read_contacts.v1
       esi-characters.read_corporation_roles.v1: EVE SSO scope esi-characters.read_corporation_roles.v1
       esi-characters.read_fatigue.v1: EVE SSO scope esi-characters.read_fatigue.v1
+      esi-characters.read_fw_stats.v1: EVE SSO scope esi-characters.read_fw_stats.v1
       esi-characters.read_loyalty.v1: EVE SSO scope esi-characters.read_loyalty.v1
       esi-characters.read_medals.v1: EVE SSO scope esi-characters.read_medals.v1
       esi-characters.read_notifications.v1: EVE SSO scope esi-characters.read_notifications.v1
       esi-characters.read_opportunities.v1: EVE SSO scope esi-characters.read_opportunities.v1
       esi-characters.read_standings.v1: EVE SSO scope esi-characters.read_standings.v1
+      esi-characters.read_titles.v1: EVE SSO scope esi-characters.read_titles.v1
       esi-characters.write_contacts.v1: EVE SSO scope esi-characters.write_contacts.v1
       esi-clones.read_clones.v1: EVE SSO scope esi-clones.read_clones.v1
       esi-clones.read_implants.v1: EVE SSO scope esi-clones.read_implants.v1
@@ -51,7 +54,11 @@ securityDefinitions:
       esi-corporations.read_container_logs.v1: EVE SSO scope esi-corporations.read_container_logs.v1
       esi-corporations.read_corporation_membership.v1: EVE SSO scope esi-corporations.read_corporation_membership.v1
       esi-corporations.read_divisions.v1: EVE SSO scope esi-corporations.read_divisions.v1
+      esi-corporations.read_facilities.v1: EVE SSO scope esi-corporations.read_facilities.v1
+      esi-corporations.read_fw_stats.v1: EVE SSO scope esi-corporations.read_fw_stats.v1
+      esi-corporations.read_medals.v1: EVE SSO scope esi-corporations.read_medals.v1
       esi-corporations.read_standings.v1: EVE SSO scope esi-corporations.read_standings.v1
+      esi-corporations.read_starbases.v1: EVE SSO scope esi-corporations.read_starbases.v1
       esi-corporations.read_structures.v1: EVE SSO scope esi-corporations.read_structures.v1
       esi-corporations.read_titles.v1: EVE SSO scope esi-corporations.read_titles.v1
       esi-corporations.track_members.v1: EVE SSO scope esi-corporations.track_members.v1
@@ -76,6 +83,7 @@ securityDefinitions:
       esi-markets.read_corporation_orders.v1: EVE SSO scope esi-markets.read_corporation_orders.v1
       esi-markets.structure_markets.v1: EVE SSO scope esi-markets.structure_markets.v1
       esi-planets.manage_planets.v1: EVE SSO scope esi-planets.manage_planets.v1
+      esi-planets.read_customs_offices.v1: EVE SSO scope esi-planets.read_customs_offices.v1
       esi-search.search_structures.v1: EVE SSO scope esi-search.search_structures.v1
       esi-skills.read_skillqueue.v1: EVE SSO scope esi-skills.read_skillqueue.v1
       esi-skills.read_skills.v1: EVE SSO scope esi-skills.read_skills.v1
@@ -158,11 +166,11 @@ paths:
         List all active player alliances
 
         ---
-        Alternate route: `/v1/alliances/`
+        Alternate route: `/dev/alliances/`
 
         Alternate route: `/legacy/alliances/`
 
-        Alternate route: `/dev/alliances/`
+        Alternate route: `/v1/alliances/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -221,9 +229,9 @@ paths:
         Resolve a set of alliance IDs to alliance names
 
         ---
-        Alternate route: `/v1/alliances/names/`
-
         Alternate route: `/legacy/alliances/names/`
+
+        Alternate route: `/v1/alliances/names/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -384,17 +392,125 @@ paths:
       x-alternate-versions:
         - v2
       x-cached-seconds: 3600
+  '/alliances/{alliance_id}/contacts/':
+    get:
+      description: |-
+        Return contacts of an alliance
+
+        ---
+        Alternate route: `/dev/alliances/{alliance_id}/contacts/`
+
+        Alternate route: `/legacy/alliances/{alliance_id}/contacts/`
+
+        Alternate route: `/v1/alliances/{alliance_id}/contacts/`
+
+        ---
+        This route is cached for up to 300 seconds
+      operationId: get_alliances_alliance_id_contacts
+      parameters:
+        - $ref: '#/parameters/alliance_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: A list of contacts
+          examples:
+            application/json:
+              - contact_id: 2112625428
+                contact_type: character
+                standing: 10
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                contact_id:
+                  description: contact_id integer
+                  format: int32
+                  title: get_alliances_alliance_id_contacts_contact_id
+                  type: integer
+                contact_type:
+                  description: contact_type string
+                  enum:
+                    - character
+                    - corporation
+                    - alliance
+                    - faction
+                  title: get_alliances_alliance_id_contacts_contact_type
+                  type: string
+                label_id:
+                  description: Custom label of the contact
+                  format: int64
+                  title: get_alliances_alliance_id_contacts_label_id
+                  type: integer
+                standing:
+                  description: Standing of the contact
+                  format: float
+                  title: get_alliances_alliance_id_contacts_standing
+                  type: number
+              required:
+                - standing
+                - contact_type
+                - contact_id
+              title: get_alliances_alliance_id_contacts_200_ok
+              type: object
+            maxItems: 1000
+            title: get_alliances_alliance_id_contacts_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-alliances.read_contacts.v1
+      summary: Get alliance contacts
+      tags:
+        - Contacts
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 300
   '/alliances/{alliance_id}/corporations/':
     get:
       description: |-
         List all current member corporations of an alliance
 
         ---
-        Alternate route: `/v1/alliances/{alliance_id}/corporations/`
+        Alternate route: `/dev/alliances/{alliance_id}/corporations/`
 
         Alternate route: `/legacy/alliances/{alliance_id}/corporations/`
 
-        Alternate route: `/dev/alliances/{alliance_id}/corporations/`
+        Alternate route: `/v1/alliances/{alliance_id}/corporations/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -453,11 +569,11 @@ paths:
         Get the icon urls for a alliance
 
         ---
-        Alternate route: `/v1/alliances/{alliance_id}/icons/`
+        Alternate route: `/dev/alliances/{alliance_id}/icons/`
 
         Alternate route: `/legacy/alliances/{alliance_id}/icons/`
 
-        Alternate route: `/dev/alliances/{alliance_id}/icons/`
+        Alternate route: `/v1/alliances/{alliance_id}/icons/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -532,11 +648,11 @@ paths:
         Bulk lookup of character IDs to corporation, alliance and faction
 
         ---
-        Alternate route: `/v1/characters/affiliation/`
+        Alternate route: `/dev/characters/affiliation/`
 
         Alternate route: `/legacy/characters/affiliation/`
 
-        Alternate route: `/dev/characters/affiliation/`
+        Alternate route: `/v1/characters/affiliation/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -647,11 +763,11 @@ paths:
         Resolve a set of character IDs to character names
 
         ---
-        Alternate route: `/v1/characters/names/`
+        Alternate route: `/dev/characters/names/`
 
         Alternate route: `/legacy/characters/names/`
 
-        Alternate route: `/dev/characters/names/`
+        Alternate route: `/v1/characters/names/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -730,9 +846,9 @@ paths:
         Public information about a character
 
         ---
-        Alternate route: `/v4/characters/{character_id}/`
-
         Alternate route: `/dev/characters/{character_id}/`
+
+        Alternate route: `/v4/characters/{character_id}/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -797,6 +913,11 @@ paths:
                 description: description string
                 title: get_characters_character_id_description
                 type: string
+              faction_id:
+                description: 'ID of the faction the character is fighting for, if the character is enlisted in Factional Warfare'
+                format: int32
+                title: get_characters_character_id_faction_id
+                type: integer
               gender:
                 description: gender string
                 enum:
@@ -863,11 +984,11 @@ paths:
         Return a list of agents research information for a character. The formula for finding the current research points with an agent is: currentPoints = remainderPoints + pointsPerDay * days(currentTime - researchStartDate)
 
         ---
-        Alternate route: `/v1/characters/{character_id}/agents_research/`
+        Alternate route: `/dev/characters/{character_id}/agents_research/`
 
         Alternate route: `/legacy/characters/{character_id}/agents_research/`
 
-        Alternate route: `/dev/characters/{character_id}/agents_research/`
+        Alternate route: `/v1/characters/{character_id}/agents_research/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -970,11 +1091,11 @@ paths:
         Return a list of the characters assets
 
         ---
-        Alternate route: `/v1/characters/{character_id}/assets/`
+        Alternate route: `/dev/characters/{character_id}/assets/`
 
         Alternate route: `/legacy/characters/{character_id}/assets/`
 
-        Alternate route: `/dev/characters/{character_id}/assets/`
+        Alternate route: `/v1/characters/{character_id}/assets/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -1175,11 +1296,11 @@ paths:
         Return locations for a set of item ids, which you can get from character assets endpoint. Coordinates for items in hangars or stations are set to (0,0,0)
 
         ---
-        Alternate route: `/v1/characters/{character_id}/assets/locations/`
+        Alternate route: `/dev/characters/{character_id}/assets/locations/`
 
         Alternate route: `/legacy/characters/{character_id}/assets/locations/`
 
-        Alternate route: `/dev/characters/{character_id}/assets/locations/`
+        Alternate route: `/v1/characters/{character_id}/assets/locations/`
       operationId: post_characters_character_id_assets_locations
       parameters:
         - $ref: '#/parameters/character_id'
@@ -1277,11 +1398,11 @@ paths:
         Return names for a set of item ids, which you can get from character assets endpoint. Typically used for items that can customize names, like containers or ships.
 
         ---
-        Alternate route: `/v1/characters/{character_id}/assets/names/`
+        Alternate route: `/dev/characters/{character_id}/assets/names/`
 
         Alternate route: `/legacy/characters/{character_id}/assets/names/`
 
-        Alternate route: `/dev/characters/{character_id}/assets/names/`
+        Alternate route: `/v1/characters/{character_id}/assets/names/`
       operationId: post_characters_character_id_assets_names
       parameters:
         - $ref: '#/parameters/character_id'
@@ -1364,11 +1485,11 @@ paths:
         Return attributes of a character
 
         ---
-        Alternate route: `/v1/characters/{character_id}/attributes/`
+        Alternate route: `/dev/characters/{character_id}/attributes/`
 
         Alternate route: `/legacy/characters/{character_id}/attributes/`
 
-        Alternate route: `/dev/characters/{character_id}/attributes/`
+        Alternate route: `/v1/characters/{character_id}/attributes/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -1481,9 +1602,9 @@ paths:
         Return a list of blueprints the character owns
 
         ---
-        Alternate route: `/v2/characters/{character_id}/blueprints/`
-
         Alternate route: `/dev/characters/{character_id}/blueprints/`
+
+        Alternate route: `/v2/characters/{character_id}/blueprints/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -1691,12 +1812,12 @@ paths:
   '/characters/{character_id}/bookmarks/':
     get:
       description: |-
-        List your character's personal bookmarks
+        A list of your character's personal bookmarks
 
         ---
-        Alternate route: `/v1/characters/{character_id}/bookmarks/`
+        Alternate route: `/dev/characters/{character_id}/bookmarks/`
 
-        Alternate route: `/legacy/characters/{character_id}/bookmarks/`
+        Alternate route: `/v2/characters/{character_id}/bookmarks/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -1704,6 +1825,7 @@ paths:
       parameters:
         - $ref: '#/parameters/character_id'
         - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
         - $ref: '#/parameters/token'
         - $ref: '#/parameters/user_agent'
         - $ref: '#/parameters/X-User-Agent'
@@ -1712,18 +1834,27 @@ paths:
           description: A list of bookmarks
           examples:
             application/json:
-              - bookmark_id: 32
-                create_date: '2016-08-09T11:57:47Z'
-                creator_id: 90000001
+              - bookmark_id: 4
+                created: '2016-08-09T11:57:47Z'
+                creator_id: 2112625428
                 folder_id: 5
-                memo: aoeu ( Citadel )
-                note: ''
-                owner_id: 90000001
-                target:
-                  item:
-                    item_id: 1000000012668
-                    type_id: 35832
-                  location_id: 30000005
+                item:
+                  item_id: 50006722
+                  type_id: 29633
+                label: Stargate
+                location_id: 30003430
+                notes: This is a stargate
+              - bookmark_id: 5
+                coordinates:
+                  x: -2958928814000
+                  'y': -338367275823
+                  z: 2114538075090
+                created: '2016-08-09T11:57:47Z'
+                creator_id: 2112625428
+                folder_id: 5
+                label: Random location
+                location_id: 30003430
+                notes: This is a random location in space
           headers:
             Cache-Control:
               description: The caching mechanism used
@@ -1734,6 +1865,11 @@ paths:
             Last-Modified:
               description: RFC7231 formatted datetime string
               type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
           schema:
             description: 200 ok array
             items:
@@ -1741,13 +1877,37 @@ paths:
               properties:
                 bookmark_id:
                   description: bookmark_id integer
-                  format: int64
+                  format: int32
                   title: get_characters_character_id_bookmarks_bookmark_id
                   type: integer
-                create_date:
-                  description: create_date string
+                coordinates:
+                  description: Optional object that is returned if a bookmark was made on a planet or a random location in space.
+                  properties:
+                    x:
+                      description: x number
+                      format: double
+                      title: get_characters_character_id_bookmarks_x
+                      type: number
+                    'y':
+                      description: y number
+                      format: double
+                      title: get_characters_character_id_bookmarks_y
+                      type: number
+                    z:
+                      description: z number
+                      format: double
+                      title: get_characters_character_id_bookmarks_z
+                      type: number
+                  required:
+                    - x
+                    - 'y'
+                    - z
+                  title: get_characters_character_id_bookmarks_coordinates
+                  type: object
+                created:
+                  description: created string
                   format: date-time
-                  title: get_characters_character_id_bookmarks_create_date
+                  title: get_characters_character_id_bookmarks_created
                   type: string
                 creator_id:
                   description: creator_id integer
@@ -1759,84 +1919,47 @@ paths:
                   format: int32
                   title: get_characters_character_id_bookmarks_folder_id
                   type: integer
-                memo:
-                  description: memo string
-                  title: get_characters_character_id_bookmarks_memo
-                  type: string
-                note:
-                  description: note string
-                  title: get_characters_character_id_bookmarks_note
-                  type: string
-                owner_id:
-                  description: owner_id integer
-                  format: int32
-                  title: get_characters_character_id_bookmarks_owner_id
-                  type: integer
-                target:
-                  description: target object
+                item:
+                  description: Optional object that is returned if a bookmark was made on a particular item.
                   properties:
-                    coordinates:
-                      description: coordinates object
-                      properties:
-                        x:
-                          description: x number
-                          format: double
-                          title: get_characters_character_id_bookmarks_x
-                          type: number
-                        'y':
-                          description: y number
-                          format: double
-                          title: get_characters_character_id_bookmarks_y
-                          type: number
-                        z:
-                          description: z number
-                          format: double
-                          title: get_characters_character_id_bookmarks_z
-                          type: number
-                      required:
-                        - x
-                        - 'y'
-                        - z
-                      title: get_characters_character_id_bookmarks_coordinates
-                      type: object
-                    item:
-                      description: item object
-                      properties:
-                        item_id:
-                          description: item_id integer
-                          format: int64
-                          title: get_characters_character_id_bookmarks_item_id
-                          type: integer
-                        type_id:
-                          description: type_id integer
-                          format: int32
-                          title: get_characters_character_id_bookmarks_type_id
-                          type: integer
-                      required:
-                        - item_id
-                        - type_id
-                      title: get_characters_character_id_bookmarks_item
-                      type: object
-                    location_id:
-                      description: location_id integer
+                    item_id:
+                      description: item_id integer
                       format: int64
-                      title: get_characters_character_id_bookmarks_location_id
+                      title: get_characters_character_id_bookmarks_item_id
+                      type: integer
+                    type_id:
+                      description: type_id integer
+                      format: int32
+                      title: get_characters_character_id_bookmarks_type_id
                       type: integer
                   required:
-                    - location_id
-                  title: get_characters_character_id_bookmarks_target
+                    - item_id
+                    - type_id
+                  title: get_characters_character_id_bookmarks_item
                   type: object
+                label:
+                  description: label string
+                  title: get_characters_character_id_bookmarks_label
+                  type: string
+                location_id:
+                  description: location_id integer
+                  format: int32
+                  title: get_characters_character_id_bookmarks_location_id
+                  type: integer
+                notes:
+                  description: notes string
+                  title: get_characters_character_id_bookmarks_notes
+                  type: string
               required:
                 - bookmark_id
+                - created
+                - label
+                - notes
+                - location_id
                 - creator_id
-                - owner_id
-                - create_date
-                - memo
-                - note
-                - target
               title: get_characters_character_id_bookmarks_200_ok
               type: object
-            maxItems: 13000
+            maxItems: 1000
             title: get_characters_character_id_bookmarks_ok
             type: array
         '403':
@@ -1860,18 +1983,18 @@ paths:
       tags:
         - Bookmarks
       x-alternate-versions:
-        - legacy
-        - v1
+        - dev
+        - v2
       x-cached-seconds: 3600
   '/characters/{character_id}/bookmarks/folders/':
     get:
       description: |-
-        List your character's personal bookmark folders
+        A list of your character's personal bookmark folders
 
         ---
-        Alternate route: `/v1/characters/{character_id}/bookmarks/folders/`
+        Alternate route: `/dev/characters/{character_id}/bookmarks/folders/`
 
-        Alternate route: `/legacy/characters/{character_id}/bookmarks/folders/`
+        Alternate route: `/v2/characters/{character_id}/bookmarks/folders/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -1879,6 +2002,7 @@ paths:
       parameters:
         - $ref: '#/parameters/character_id'
         - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
         - $ref: '#/parameters/token'
         - $ref: '#/parameters/user_agent'
         - $ref: '#/parameters/X-User-Agent'
@@ -1889,7 +2013,6 @@ paths:
             application/json:
               - folder_id: 5
                 name: Icecream
-                owner_id: 90000001
           headers:
             Cache-Control:
               description: The caching mechanism used
@@ -1900,6 +2023,11 @@ paths:
             Last-Modified:
               description: RFC7231 formatted datetime string
               type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
           schema:
             description: 200 ok array
             items:
@@ -1914,14 +2042,12 @@ paths:
                   description: name string
                   title: get_characters_character_id_bookmarks_folders_name
                   type: string
-                owner_id:
-                  description: owner_id integer
-                  format: int32
-                  title: get_characters_character_id_bookmarks_folders_owner_id
-                  type: integer
+              required:
+                - folder_id
+                - name
               title: get_characters_character_id_bookmarks_folders_200_ok
               type: object
-            maxItems: 10000
+            maxItems: 1000
             title: get_characters_character_id_bookmarks_folders_ok
             type: array
         '403':
@@ -1945,8 +2071,8 @@ paths:
       tags:
         - Bookmarks
       x-alternate-versions:
-        - legacy
-        - v1
+        - dev
+        - v2
       x-cached-seconds: 3600
   '/characters/{character_id}/calendar/':
     get:
@@ -1954,11 +2080,11 @@ paths:
         Get 50 event summaries from the calendar. If no from_event ID is given, the resource will return the next 50 chronological event summaries from now. If a from_event ID is specified, it will return the next 50 chronological event summaries from after that event.
 
         ---
-        Alternate route: `/v1/characters/{character_id}/calendar/`
+        Alternate route: `/dev/characters/{character_id}/calendar/`
 
         Alternate route: `/legacy/characters/{character_id}/calendar/`
 
-        Alternate route: `/dev/characters/{character_id}/calendar/`
+        Alternate route: `/v1/characters/{character_id}/calendar/`
 
         ---
         This route is cached for up to 5 seconds
@@ -2064,9 +2190,9 @@ paths:
         Get all the information for a specific event
 
         ---
-        Alternate route: `/v3/characters/{character_id}/calendar/{event_id}/`
-
         Alternate route: `/dev/characters/{character_id}/calendar/{event_id}/`
+
+        Alternate route: `/v3/characters/{character_id}/calendar/{event_id}/`
 
         ---
         This route is cached for up to 5 seconds
@@ -2204,9 +2330,9 @@ paths:
         Set your response status to an event
 
         ---
-        Alternate route: `/v3/characters/{character_id}/calendar/{event_id}/`
-
         Alternate route: `/dev/characters/{character_id}/calendar/{event_id}/`
+
+        Alternate route: `/v3/characters/{character_id}/calendar/{event_id}/`
       operationId: put_characters_character_id_calendar_event_id
       parameters:
         - $ref: '#/parameters/character_id'
@@ -2270,11 +2396,11 @@ paths:
         Get all invited attendees for a given event
 
         ---
-        Alternate route: `/v1/characters/{character_id}/calendar/{event_id}/attendees/`
-
         Alternate route: `/dev/characters/{character_id}/calendar/{event_id}/attendees/`
 
         Alternate route: `/legacy/characters/{character_id}/calendar/{event_id}/attendees/`
+
+        Alternate route: `/v1/characters/{character_id}/calendar/{event_id}/attendees/`
 
         ---
         This route is cached for up to 600 seconds
@@ -2365,11 +2491,11 @@ paths:
         Return chat channels that a character is the owner or operator of
 
         ---
-        Alternate route: `/v1/characters/{character_id}/chat_channels/`
+        Alternate route: `/dev/characters/{character_id}/chat_channels/`
 
         Alternate route: `/legacy/characters/{character_id}/chat_channels/`
 
-        Alternate route: `/dev/characters/{character_id}/chat_channels/`
+        Alternate route: `/v1/characters/{character_id}/chat_channels/`
 
         ---
         This route is cached for up to 300 seconds
@@ -2605,9 +2731,9 @@ paths:
         A list of the character's clones
 
         ---
-        Alternate route: `/v2/characters/{character_id}/clones/`
-
         Alternate route: `/legacy/characters/{character_id}/clones/`
+
+        Alternate route: `/v2/characters/{character_id}/clones/`
 
         ---
         This route is cached for up to 120 seconds
@@ -2735,9 +2861,9 @@ paths:
         Bulk delete contacts
 
         ---
-        Alternate route: `/v1/characters/{character_id}/contacts/`
-
         Alternate route: `/legacy/characters/{character_id}/contacts/`
+
+        Alternate route: `/v1/characters/{character_id}/contacts/`
       operationId: delete_characters_character_id_contacts
       parameters:
         - $ref: '#/parameters/character_id'
@@ -2791,11 +2917,11 @@ paths:
         Return contacts of a character
 
         ---
-        Alternate route: `/v1/characters/{character_id}/contacts/`
+        Alternate route: `/dev/characters/{character_id}/contacts/`
 
         Alternate route: `/legacy/characters/{character_id}/contacts/`
 
-        Alternate route: `/dev/characters/{character_id}/contacts/`
+        Alternate route: `/v1/characters/{character_id}/contacts/`
 
         ---
         This route is cached for up to 300 seconds
@@ -2908,11 +3034,11 @@ paths:
         Bulk add contacts with same settings
 
         ---
-        Alternate route: `/v1/characters/{character_id}/contacts/`
+        Alternate route: `/dev/characters/{character_id}/contacts/`
 
         Alternate route: `/legacy/characters/{character_id}/contacts/`
 
-        Alternate route: `/dev/characters/{character_id}/contacts/`
+        Alternate route: `/v1/characters/{character_id}/contacts/`
       operationId: post_characters_character_id_contacts
       parameters:
         - $ref: '#/parameters/character_id'
@@ -3002,11 +3128,11 @@ paths:
         Bulk edit contacts with same settings
 
         ---
-        Alternate route: `/v1/characters/{character_id}/contacts/`
+        Alternate route: `/dev/characters/{character_id}/contacts/`
 
         Alternate route: `/legacy/characters/{character_id}/contacts/`
 
-        Alternate route: `/dev/characters/{character_id}/contacts/`
+        Alternate route: `/v1/characters/{character_id}/contacts/`
       operationId: put_characters_character_id_contacts
       parameters:
         - $ref: '#/parameters/character_id'
@@ -3083,11 +3209,11 @@ paths:
         Return custom labels for contacts the character defined
 
         ---
-        Alternate route: `/v1/characters/{character_id}/contacts/labels/`
+        Alternate route: `/dev/characters/{character_id}/contacts/labels/`
 
         Alternate route: `/legacy/characters/{character_id}/contacts/labels/`
 
-        Alternate route: `/dev/characters/{character_id}/contacts/labels/`
+        Alternate route: `/v1/characters/{character_id}/contacts/labels/`
 
         ---
         This route is cached for up to 300 seconds
@@ -3168,11 +3294,11 @@ paths:
         Returns contracts available to a character, only if the character is issuer, acceptor or assignee. Only returns contracts no older than 30 days, or if the status is "in_progress".
 
         ---
-        Alternate route: `/v1/characters/{character_id}/contracts/`
+        Alternate route: `/dev/characters/{character_id}/contracts/`
 
         Alternate route: `/legacy/characters/{character_id}/contracts/`
 
-        Alternate route: `/dev/characters/{character_id}/contracts/`
+        Alternate route: `/v1/characters/{character_id}/contracts/`
 
         ---
         This route is cached for up to 300 seconds
@@ -3398,11 +3524,11 @@ paths:
         Lists bids on a particular auction contract
 
         ---
-        Alternate route: `/v1/characters/{character_id}/contracts/{contract_id}/bids/`
+        Alternate route: `/dev/characters/{character_id}/contracts/{contract_id}/bids/`
 
         Alternate route: `/legacy/characters/{character_id}/contracts/{contract_id}/bids/`
 
-        Alternate route: `/dev/characters/{character_id}/contracts/{contract_id}/bids/`
+        Alternate route: `/v1/characters/{character_id}/contracts/{contract_id}/bids/`
 
         ---
         This route is cached for up to 300 seconds
@@ -3504,11 +3630,11 @@ paths:
         Lists items of a particular contract
 
         ---
-        Alternate route: `/v1/characters/{character_id}/contracts/{contract_id}/items/`
+        Alternate route: `/dev/characters/{character_id}/contracts/{contract_id}/items/`
 
         Alternate route: `/legacy/characters/{character_id}/contracts/{contract_id}/items/`
 
-        Alternate route: `/dev/characters/{character_id}/contracts/{contract_id}/items/`
+        Alternate route: `/v1/characters/{character_id}/contracts/{contract_id}/items/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -3620,11 +3746,11 @@ paths:
         Get a list of all the corporations a character has been a member of
 
         ---
-        Alternate route: `/v1/characters/{character_id}/corporationhistory/`
+        Alternate route: `/dev/characters/{character_id}/corporationhistory/`
 
         Alternate route: `/legacy/characters/{character_id}/corporationhistory/`
 
-        Alternate route: `/dev/characters/{character_id}/corporationhistory/`
+        Alternate route: `/v1/characters/{character_id}/corporationhistory/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -3710,9 +3836,9 @@ paths:
         Takes a source character ID in the url and a set of target character ID's in the body, returns a CSPA charge cost
 
         ---
-        Alternate route: `/v3/characters/{character_id}/cspa/`
-
         Alternate route: `/legacy/characters/{character_id}/cspa/`
+
+        Alternate route: `/v3/characters/{character_id}/cspa/`
       operationId: post_characters_character_id_cspa
       parameters:
         - $ref: '#/parameters/character_id'
@@ -3788,11 +3914,11 @@ paths:
         Return a character's jump activation and fatigue information
 
         ---
-        Alternate route: `/v1/characters/{character_id}/fatigue/`
+        Alternate route: `/dev/characters/{character_id}/fatigue/`
 
         Alternate route: `/legacy/characters/{character_id}/fatigue/`
 
-        Alternate route: `/dev/characters/{character_id}/fatigue/`
+        Alternate route: `/v1/characters/{character_id}/fatigue/`
 
         ---
         This route is cached for up to 300 seconds
@@ -3872,11 +3998,11 @@ paths:
         Return fittings of a character
 
         ---
-        Alternate route: `/v1/characters/{character_id}/fittings/`
+        Alternate route: `/dev/characters/{character_id}/fittings/`
 
         Alternate route: `/legacy/characters/{character_id}/fittings/`
 
-        Alternate route: `/dev/characters/{character_id}/fittings/`
+        Alternate route: `/v1/characters/{character_id}/fittings/`
 
         ---
         This route is cached for up to 300 seconds
@@ -4003,11 +4129,11 @@ paths:
         Save a new fitting for a character
 
         ---
-        Alternate route: `/v1/characters/{character_id}/fittings/`
+        Alternate route: `/dev/characters/{character_id}/fittings/`
 
         Alternate route: `/legacy/characters/{character_id}/fittings/`
 
-        Alternate route: `/dev/characters/{character_id}/fittings/`
+        Alternate route: `/v1/characters/{character_id}/fittings/`
       operationId: post_characters_character_id_fittings
       parameters:
         - $ref: '#/parameters/character_id'
@@ -4123,11 +4249,11 @@ paths:
         Delete a fitting from a character
 
         ---
-        Alternate route: `/v1/characters/{character_id}/fittings/{fitting_id}/`
+        Alternate route: `/dev/characters/{character_id}/fittings/{fitting_id}/`
 
         Alternate route: `/legacy/characters/{character_id}/fittings/{fitting_id}/`
 
-        Alternate route: `/dev/characters/{character_id}/fittings/{fitting_id}/`
+        Alternate route: `/v1/characters/{character_id}/fittings/{fitting_id}/`
       operationId: delete_characters_character_id_fittings_fitting_id
       parameters:
         - $ref: '#/parameters/character_id'
@@ -4174,11 +4300,11 @@ paths:
         Return the fleet ID the character is in, if any.
 
         ---
-        Alternate route: `/v1/characters/{character_id}/fleet/`
+        Alternate route: `/dev/characters/{character_id}/fleet/`
 
         Alternate route: `/legacy/characters/{character_id}/fleet/`
 
-        Alternate route: `/dev/characters/{character_id}/fleet/`
+        Alternate route: `/v1/characters/{character_id}/fleet/`
 
         ---
         This route is cached for up to 60 seconds
@@ -4281,17 +4407,167 @@ paths:
         - legacy
         - v1
       x-cached-seconds: 60
+  '/characters/{character_id}/fw/stats/':
+    get:
+      description: |-
+        Statistical overview of a character involved in faction warfare
+
+        ---
+        Alternate route: `/dev/characters/{character_id}/fw/stats/`
+
+        Alternate route: `/legacy/characters/{character_id}/fw/stats/`
+
+        Alternate route: `/v1/characters/{character_id}/fw/stats/`
+
+        ---
+        This route expires daily at 11:05
+      operationId: get_characters_character_id_fw_stats
+      parameters:
+        - $ref: '#/parameters/character_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: Faction warfare statistics for a given character
+          examples:
+            application/json:
+              enlisted_on: '2017-10-17T00:00:00Z'
+              faction_id: 500001
+              kills:
+                last_week: 893
+                total: 684350
+                yesterday: 136
+              victory_points:
+                last_week: 102640
+                total: 52658260
+                yesterday: 15980
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+          schema:
+            description: 200 ok object
+            properties:
+              current_rank:
+                description: The given character's current faction rank
+                format: int32
+                maximum: 9
+                minimum: 0
+                title: get_characters_character_id_fw_stats_current_rank
+                type: integer
+              enlisted_on:
+                description: The enlistment date of the given character into faction warfare. Will not be included if character is not enlisted in faction warfare
+                format: date-time
+                title: get_characters_character_id_fw_stats_enlisted_on
+                type: string
+              faction_id:
+                description: The faction the given character is enlisted to fight for. Will not be included if character is not enlisted in faction warfare
+                format: int32
+                title: get_characters_character_id_fw_stats_faction_id
+                type: integer
+              highest_rank:
+                description: The given character's highest faction rank achieved
+                format: int32
+                maximum: 9
+                minimum: 0
+                title: get_characters_character_id_fw_stats_highest_rank
+                type: integer
+              kills:
+                description: Summary of kills done by the given character against enemy factions
+                properties:
+                  last_week:
+                    description: Last week's total number of kills by a given character against enemy factions
+                    format: int32
+                    title: get_characters_character_id_fw_stats_last_week
+                    type: integer
+                  total:
+                    description: Total number of kills by a given character against enemy factions since the character enlisted
+                    format: int32
+                    title: get_characters_character_id_fw_stats_total
+                    type: integer
+                  yesterday:
+                    description: Yesterday's total number of kills by a given character against enemy factions
+                    format: int32
+                    title: get_characters_character_id_fw_stats_yesterday
+                    type: integer
+                required:
+                  - yesterday
+                  - last_week
+                  - total
+                title: get_characters_character_id_fw_stats_kills
+                type: object
+              victory_points:
+                description: Summary of victory points gained by the given character for the enlisted faction
+                properties:
+                  last_week:
+                    description: Last week's victory points gained by the given character
+                    format: int32
+                    title: get_characters_character_id_fw_stats_last_week
+                    type: integer
+                  total:
+                    description: Total victory points gained since the given character enlisted
+                    format: int32
+                    title: get_characters_character_id_fw_stats_total
+                    type: integer
+                  yesterday:
+                    description: Yesterday's victory points gained by the given character
+                    format: int32
+                    title: get_characters_character_id_fw_stats_yesterday
+                    type: integer
+                required:
+                  - yesterday
+                  - last_week
+                  - total
+                title: get_characters_character_id_fw_stats_victory_points
+                type: object
+            required:
+              - kills
+              - victory_points
+            title: get_characters_character_id_fw_stats_ok
+            type: object
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-characters.read_fw_stats.v1
+      summary: Overview of a character involved in faction warfare
+      tags:
+        - Faction Warfare
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
   '/characters/{character_id}/implants/':
     get:
       description: |-
         Return implants on the active clone of a character
 
         ---
-        Alternate route: `/v1/characters/{character_id}/implants/`
+        Alternate route: `/dev/characters/{character_id}/implants/`
 
         Alternate route: `/legacy/characters/{character_id}/implants/`
 
-        Alternate route: `/dev/characters/{character_id}/implants/`
+        Alternate route: `/v1/characters/{character_id}/implants/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -4361,11 +4637,11 @@ paths:
         List industry jobs placed by a character
 
         ---
-        Alternate route: `/v1/characters/{character_id}/industry/jobs/`
+        Alternate route: `/dev/characters/{character_id}/industry/jobs/`
 
         Alternate route: `/legacy/characters/{character_id}/industry/jobs/`
 
-        Alternate route: `/dev/characters/{character_id}/industry/jobs/`
+        Alternate route: `/v1/characters/{character_id}/industry/jobs/`
 
         ---
         This route is cached for up to 300 seconds
@@ -4521,10 +4797,10 @@ paths:
                   description: status string
                   enum:
                     - active
+                    - cancelled
+                    - delivered
                     - paused
                     - ready
-                    - delivered
-                    - cancelled
                     - reverted
                   title: get_characters_character_id_industry_jobs_status
                   type: string
@@ -4584,11 +4860,11 @@ paths:
         Return a list of character's recent kills and losses
 
         ---
-        Alternate route: `/v1/characters/{character_id}/killmails/recent/`
+        Alternate route: `/dev/characters/{character_id}/killmails/recent/`
 
         Alternate route: `/legacy/characters/{character_id}/killmails/recent/`
 
-        Alternate route: `/dev/characters/{character_id}/killmails/recent/`
+        Alternate route: `/v1/characters/{character_id}/killmails/recent/`
 
         ---
         This route is cached for up to 120 seconds
@@ -4686,11 +4962,11 @@ paths:
         Information about the characters current location. Returns the current solar system id, and also the current station or structure ID if applicable.
 
         ---
-        Alternate route: `/v1/characters/{character_id}/location/`
+        Alternate route: `/dev/characters/{character_id}/location/`
 
         Alternate route: `/legacy/characters/{character_id}/location/`
 
-        Alternate route: `/dev/characters/{character_id}/location/`
+        Alternate route: `/v1/characters/{character_id}/location/`
 
         ---
         This route is cached for up to 5 seconds
@@ -4771,11 +5047,11 @@ paths:
         Return a list of loyalty points for all corporations the character has worked for
 
         ---
-        Alternate route: `/v1/characters/{character_id}/loyalty/points/`
+        Alternate route: `/dev/characters/{character_id}/loyalty/points/`
 
         Alternate route: `/legacy/characters/{character_id}/loyalty/points/`
 
-        Alternate route: `/dev/characters/{character_id}/loyalty/points/`
+        Alternate route: `/v1/characters/{character_id}/loyalty/points/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -4857,11 +5133,11 @@ paths:
         Return the 50 most recent mail headers belonging to the character that match the query criteria. Queries can be filtered by label, and last_mail_id can be used to paginate backwards.
 
         ---
-        Alternate route: `/v1/characters/{character_id}/mail/`
+        Alternate route: `/dev/characters/{character_id}/mail/`
 
         Alternate route: `/legacy/characters/{character_id}/mail/`
 
-        Alternate route: `/dev/characters/{character_id}/mail/`
+        Alternate route: `/v1/characters/{character_id}/mail/`
 
         ---
         This route is cached for up to 30 seconds
@@ -5018,11 +5294,11 @@ paths:
         Create and send a new mail
 
         ---
-        Alternate route: `/v1/characters/{character_id}/mail/`
+        Alternate route: `/dev/characters/{character_id}/mail/`
 
         Alternate route: `/legacy/characters/{character_id}/mail/`
 
-        Alternate route: `/dev/characters/{character_id}/mail/`
+        Alternate route: `/v1/characters/{character_id}/mail/`
       operationId: post_characters_character_id_mail
       parameters:
         - $ref: '#/parameters/character_id'
@@ -5140,9 +5416,9 @@ paths:
         Return a list of the users mail labels, unread counts for each label and a total unread count.
 
         ---
-        Alternate route: `/v3/characters/{character_id}/mail/labels/`
-
         Alternate route: `/dev/characters/{character_id}/mail/labels/`
+
+        Alternate route: `/v3/characters/{character_id}/mail/labels/`
 
         ---
         This route is cached for up to 30 seconds
@@ -5269,11 +5545,11 @@ paths:
         Create a mail label
 
         ---
-        Alternate route: `/v2/characters/{character_id}/mail/labels/`
+        Alternate route: `/dev/characters/{character_id}/mail/labels/`
 
         Alternate route: `/legacy/characters/{character_id}/mail/labels/`
 
-        Alternate route: `/dev/characters/{character_id}/mail/labels/`
+        Alternate route: `/v2/characters/{character_id}/mail/labels/`
       operationId: post_characters_character_id_mail_labels
       parameters:
         - $ref: '#/parameters/character_id'
@@ -5361,11 +5637,11 @@ paths:
         Delete a mail label
 
         ---
-        Alternate route: `/v1/characters/{character_id}/mail/labels/{label_id}/`
+        Alternate route: `/dev/characters/{character_id}/mail/labels/{label_id}/`
 
         Alternate route: `/legacy/characters/{character_id}/mail/labels/{label_id}/`
 
-        Alternate route: `/dev/characters/{character_id}/mail/labels/{label_id}/`
+        Alternate route: `/v1/characters/{character_id}/mail/labels/{label_id}/`
       operationId: delete_characters_character_id_mail_labels_label_id
       parameters:
         - $ref: '#/parameters/character_id'
@@ -5426,11 +5702,11 @@ paths:
         Return all mailing lists that the character is subscribed to
 
         ---
-        Alternate route: `/v1/characters/{character_id}/mail/lists/`
+        Alternate route: `/dev/characters/{character_id}/mail/lists/`
 
         Alternate route: `/legacy/characters/{character_id}/mail/lists/`
 
-        Alternate route: `/dev/characters/{character_id}/mail/lists/`
+        Alternate route: `/v1/characters/{character_id}/mail/lists/`
 
         ---
         This route is cached for up to 120 seconds
@@ -5511,11 +5787,11 @@ paths:
         Delete a mail
 
         ---
-        Alternate route: `/v1/characters/{character_id}/mail/{mail_id}/`
+        Alternate route: `/dev/characters/{character_id}/mail/{mail_id}/`
 
         Alternate route: `/legacy/characters/{character_id}/mail/{mail_id}/`
 
-        Alternate route: `/dev/characters/{character_id}/mail/{mail_id}/`
+        Alternate route: `/v1/characters/{character_id}/mail/{mail_id}/`
       operationId: delete_characters_character_id_mail_mail_id
       parameters:
         - $ref: '#/parameters/character_id'
@@ -5561,11 +5837,11 @@ paths:
         Return the contents of an EVE mail
 
         ---
-        Alternate route: `/v1/characters/{character_id}/mail/{mail_id}/`
+        Alternate route: `/dev/characters/{character_id}/mail/{mail_id}/`
 
         Alternate route: `/legacy/characters/{character_id}/mail/{mail_id}/`
 
-        Alternate route: `/dev/characters/{character_id}/mail/{mail_id}/`
+        Alternate route: `/v1/characters/{character_id}/mail/{mail_id}/`
 
         ---
         This route is cached for up to 30 seconds
@@ -5717,11 +5993,11 @@ paths:
         Update metadata about a mail
 
         ---
-        Alternate route: `/v1/characters/{character_id}/mail/{mail_id}/`
+        Alternate route: `/dev/characters/{character_id}/mail/{mail_id}/`
 
         Alternate route: `/legacy/characters/{character_id}/mail/{mail_id}/`
 
-        Alternate route: `/dev/characters/{character_id}/mail/{mail_id}/`
+        Alternate route: `/v1/characters/{character_id}/mail/{mail_id}/`
       operationId: put_characters_character_id_mail_mail_id
       parameters:
         - $ref: '#/parameters/character_id'
@@ -5807,11 +6083,11 @@ paths:
         Return a list of medals the character has
 
         ---
-        Alternate route: `/v1/characters/{character_id}/medals/`
+        Alternate route: `/dev/characters/{character_id}/medals/`
 
         Alternate route: `/legacy/characters/{character_id}/medals/`
 
-        Alternate route: `/dev/characters/{character_id}/medals/`
+        Alternate route: `/v1/characters/{character_id}/medals/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -5974,11 +6250,11 @@ paths:
 
 
         ---
-        Alternate route: `/v1/characters/{character_id}/mining/`
+        Alternate route: `/dev/characters/{character_id}/mining/`
 
         Alternate route: `/legacy/characters/{character_id}/mining/`
 
-        Alternate route: `/dev/characters/{character_id}/mining/`
+        Alternate route: `/v1/characters/{character_id}/mining/`
 
         ---
         This route is cached for up to 600 seconds
@@ -6084,11 +6360,11 @@ paths:
         Return character notifications
 
         ---
-        Alternate route: `/v1/characters/{character_id}/notifications/`
+        Alternate route: `/dev/characters/{character_id}/notifications/`
 
         Alternate route: `/legacy/characters/{character_id}/notifications/`
 
-        Alternate route: `/dev/characters/{character_id}/notifications/`
+        Alternate route: `/v1/characters/{character_id}/notifications/`
 
         ---
         This route is cached for up to 600 seconds
@@ -6382,11 +6658,11 @@ paths:
         Return notifications about having been added to someone's contact list
 
         ---
-        Alternate route: `/v1/characters/{character_id}/notifications/contacts/`
+        Alternate route: `/dev/characters/{character_id}/notifications/contacts/`
 
         Alternate route: `/legacy/characters/{character_id}/notifications/contacts/`
 
-        Alternate route: `/dev/characters/{character_id}/notifications/contacts/`
+        Alternate route: `/v1/characters/{character_id}/notifications/contacts/`
 
         ---
         This route is cached for up to 600 seconds
@@ -6488,9 +6764,9 @@ paths:
         Checks if the character is currently online
 
         ---
-        Alternate route: `/v1/characters/{character_id}/online/`
-
         Alternate route: `/legacy/characters/{character_id}/online/`
+
+        Alternate route: `/v1/characters/{character_id}/online/`
 
         ---
         This route is cached for up to 60 seconds
@@ -6550,11 +6826,11 @@ paths:
         Return a list of tasks finished by a character
 
         ---
-        Alternate route: `/v1/characters/{character_id}/opportunities/`
+        Alternate route: `/dev/characters/{character_id}/opportunities/`
 
         Alternate route: `/legacy/characters/{character_id}/opportunities/`
 
-        Alternate route: `/dev/characters/{character_id}/opportunities/`
+        Alternate route: `/v1/characters/{character_id}/opportunities/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -6636,11 +6912,11 @@ paths:
         List market orders placed by a character
 
         ---
-        Alternate route: `/v1/characters/{character_id}/orders/`
+        Alternate route: `/dev/characters/{character_id}/orders/`
 
         Alternate route: `/legacy/characters/{character_id}/orders/`
 
-        Alternate route: `/dev/characters/{character_id}/orders/`
+        Alternate route: `/v1/characters/{character_id}/orders/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -6836,11 +7112,11 @@ paths:
         Returns a list of all planetary colonies owned by a character.
 
         ---
-        Alternate route: `/v1/characters/{character_id}/planets/`
+        Alternate route: `/dev/characters/{character_id}/planets/`
 
         Alternate route: `/legacy/characters/{character_id}/planets/`
 
-        Alternate route: `/dev/characters/{character_id}/planets/`
+        Alternate route: `/v1/characters/{character_id}/planets/`
 
         ---
         This route is cached for up to 600 seconds
@@ -6975,9 +7251,9 @@ paths:
         Returns full details on the layout of a single planetary colony, including links, pins and routes. Note: Planetary information is only recalculated when the colony is viewed through the client. Information will not update until this criteria is met.
 
         ---
-        Alternate route: `/v3/characters/{character_id}/planets/{planet_id}/`
-
         Alternate route: `/dev/characters/{character_id}/planets/{planet_id}/`
+
+        Alternate route: `/v3/characters/{character_id}/planets/{planet_id}/`
 
         ---
         This route is cached for up to 600 seconds
@@ -7313,9 +7589,9 @@ paths:
         Get portrait urls for a character
 
         ---
-        Alternate route: `/v2/characters/{character_id}/portrait/`
-
         Alternate route: `/dev/characters/{character_id}/portrait/`
+
+        Alternate route: `/v2/characters/{character_id}/portrait/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -7399,9 +7675,9 @@ paths:
         Returns a character's corporation roles
 
         ---
-        Alternate route: `/v1/characters/{character_id}/roles/`
-
         Alternate route: `/legacy/characters/{character_id}/roles/`
+
+        Alternate route: `/v1/characters/{character_id}/roles/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -7755,11 +8031,11 @@ paths:
         Get the current ship type, name and id
 
         ---
-        Alternate route: `/v1/characters/{character_id}/ship/`
+        Alternate route: `/dev/characters/{character_id}/ship/`
 
         Alternate route: `/legacy/characters/{character_id}/ship/`
 
-        Alternate route: `/dev/characters/{character_id}/ship/`
+        Alternate route: `/v1/characters/{character_id}/ship/`
 
         ---
         This route is cached for up to 5 seconds
@@ -7842,11 +8118,11 @@ paths:
         List the configured skill queue for the given character
 
         ---
-        Alternate route: `/v2/characters/{character_id}/skillqueue/`
+        Alternate route: `/dev/characters/{character_id}/skillqueue/`
 
         Alternate route: `/legacy/characters/{character_id}/skillqueue/`
 
-        Alternate route: `/dev/characters/{character_id}/skillqueue/`
+        Alternate route: `/v2/characters/{character_id}/skillqueue/`
 
         ---
         This route is cached for up to 120 seconds
@@ -8072,11 +8348,11 @@ paths:
         Return character standings from agents, NPC corporations, and factions
 
         ---
-        Alternate route: `/v1/characters/{character_id}/standings/`
+        Alternate route: `/dev/characters/{character_id}/standings/`
 
         Alternate route: `/legacy/characters/{character_id}/standings/`
 
-        Alternate route: `/dev/characters/{character_id}/standings/`
+        Alternate route: `/v1/characters/{character_id}/standings/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -8170,17 +8446,99 @@ paths:
         - legacy
         - v1
       x-cached-seconds: 3600
+  '/characters/{character_id}/titles/':
+    get:
+      description: |-
+        Returns a character's titles
+
+        ---
+        Alternate route: `/dev/characters/{character_id}/titles/`
+
+        Alternate route: `/legacy/characters/{character_id}/titles/`
+
+        Alternate route: `/v1/characters/{character_id}/titles/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_characters_character_id_titles
+      parameters:
+        - $ref: '#/parameters/character_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: A list of titles
+          examples:
+            application/json:
+              - name: Awesome Title
+                title_id: 1
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                name:
+                  description: name string
+                  title: get_characters_character_id_titles_name
+                  type: string
+                title_id:
+                  description: title_id integer
+                  format: int32
+                  title: get_characters_character_id_titles_title_id
+                  type: integer
+              title: get_characters_character_id_titles_200_ok
+              type: object
+            maxItems: 16
+            title: get_characters_character_id_titles_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-characters.read_titles.v1
+      summary: Get character corporation titles
+      tags:
+        - Character
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
   '/characters/{character_id}/wallet/':
     get:
       description: |-
         Returns a character's wallet balance
 
         ---
-        Alternate route: `/v1/characters/{character_id}/wallet/`
+        Alternate route: `/dev/characters/{character_id}/wallet/`
 
         Alternate route: `/legacy/characters/{character_id}/wallet/`
 
-        Alternate route: `/dev/characters/{character_id}/wallet/`
+        Alternate route: `/v1/characters/{character_id}/wallet/`
 
         ---
         This route is cached for up to 120 seconds
@@ -8243,8 +8601,6 @@ paths:
 
         ---
         Alternate route: `/v2/characters/{character_id}/wallet/journal/`
-
-        Alternate route: `/dev/characters/{character_id}/wallet/journal/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -8557,7 +8913,6 @@ paths:
       tags:
         - Wallet
       x-alternate-versions:
-        - dev
         - v2
       x-cached-seconds: 3600
   '/characters/{character_id}/wallet/transactions/':
@@ -8566,11 +8921,11 @@ paths:
         Get wallet transactions of a character
 
         ---
-        Alternate route: `/v1/characters/{character_id}/wallet/transactions/`
+        Alternate route: `/dev/characters/{character_id}/wallet/transactions/`
 
         Alternate route: `/legacy/characters/{character_id}/wallet/transactions/`
 
-        Alternate route: `/dev/characters/{character_id}/wallet/transactions/`
+        Alternate route: `/v1/characters/{character_id}/wallet/transactions/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -8713,11 +9068,11 @@ paths:
 
 
         ---
-        Alternate route: `/v1/corporation/{corporation_id}/mining/extractions/`
+        Alternate route: `/dev/corporation/{corporation_id}/mining/extractions/`
 
         Alternate route: `/legacy/corporation/{corporation_id}/mining/extractions/`
 
-        Alternate route: `/dev/corporation/{corporation_id}/mining/extractions/`
+        Alternate route: `/v1/corporation/{corporation_id}/mining/extractions/`
 
         ---
         This route is cached for up to 1800 seconds
@@ -8826,11 +9181,11 @@ paths:
 
 
         ---
-        Alternate route: `/v1/corporation/{corporation_id}/mining/observers/`
+        Alternate route: `/dev/corporation/{corporation_id}/mining/observers/`
 
         Alternate route: `/legacy/corporation/{corporation_id}/mining/observers/`
 
-        Alternate route: `/dev/corporation/{corporation_id}/mining/observers/`
+        Alternate route: `/v1/corporation/{corporation_id}/mining/observers/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -8930,11 +9285,11 @@ paths:
 
 
         ---
-        Alternate route: `/v1/corporation/{corporation_id}/mining/observers/{observer_id}/`
+        Alternate route: `/dev/corporation/{corporation_id}/mining/observers/{observer_id}/`
 
         Alternate route: `/legacy/corporation/{corporation_id}/mining/observers/{observer_id}/`
 
-        Alternate route: `/dev/corporation/{corporation_id}/mining/observers/{observer_id}/`
+        Alternate route: `/v1/corporation/{corporation_id}/mining/observers/{observer_id}/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -9053,9 +9408,9 @@ paths:
         Resolve a set of corporation IDs to corporation names
 
         ---
-        Alternate route: `/v1/corporations/names/`
-
         Alternate route: `/legacy/corporations/names/`
+
+        Alternate route: `/v1/corporations/names/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -9133,11 +9488,11 @@ paths:
         Get a list of npc corporations
 
         ---
-        Alternate route: `/v1/corporations/npccorps/`
+        Alternate route: `/dev/corporations/npccorps/`
 
         Alternate route: `/legacy/corporations/npccorps/`
 
-        Alternate route: `/dev/corporations/npccorps/`
+        Alternate route: `/v1/corporations/npccorps/`
 
         ---
         This route expires daily at 11:05
@@ -9333,9 +9688,9 @@ paths:
         Get a list of all the alliances a corporation has been a member of
 
         ---
-        Alternate route: `/v2/corporations/{corporation_id}/alliancehistory/`
-
         Alternate route: `/dev/corporations/{corporation_id}/alliancehistory/`
+
+        Alternate route: `/v2/corporations/{corporation_id}/alliancehistory/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -9418,11 +9773,11 @@ paths:
         Return a list of the corporation assets
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/assets/`
+        Alternate route: `/dev/corporations/{corporation_id}/assets/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/assets/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/assets/`
+        Alternate route: `/v1/corporations/{corporation_id}/assets/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -9662,11 +10017,11 @@ paths:
         Return locations for a set of item ids, which you can get from corporation assets endpoint. Coordinates for items in hangars or stations are set to (0,0,0)
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/assets/locations/`
+        Alternate route: `/dev/corporations/{corporation_id}/assets/locations/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/assets/locations/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/assets/locations/`
+        Alternate route: `/v1/corporations/{corporation_id}/assets/locations/`
       operationId: post_corporations_corporation_id_assets_locations
       parameters:
         - $ref: '#/parameters/corporation_id'
@@ -9766,11 +10121,11 @@ paths:
         Return names for a set of item ids, which you can get from corporation assets endpoint. Only valid for items that can customize names, like containers or ships.
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/assets/names/`
+        Alternate route: `/dev/corporations/{corporation_id}/assets/names/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/assets/names/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/assets/names/`
+        Alternate route: `/v1/corporations/{corporation_id}/assets/names/`
       operationId: post_corporations_corporation_id_assets_names
       parameters:
         - $ref: '#/parameters/corporation_id'
@@ -9855,11 +10210,11 @@ paths:
         Returns a list of blueprints the corporation owns
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/blueprints/`
+        Alternate route: `/dev/corporations/{corporation_id}/blueprints/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/blueprints/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/blueprints/`
+        Alternate route: `/v1/corporations/{corporation_id}/blueprints/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -10112,11 +10467,11 @@ paths:
         A list of your corporation's bookmarks
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/bookmarks/`
+        Alternate route: `/dev/corporations/{corporation_id}/bookmarks/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/bookmarks/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/bookmarks/`
+        Alternate route: `/v1/corporations/{corporation_id}/bookmarks/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -10292,11 +10647,11 @@ paths:
         A list of your corporation's bookmark folders
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/bookmarks/folders/`
+        Alternate route: `/dev/corporations/{corporation_id}/bookmarks/folders/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/bookmarks/folders/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/bookmarks/folders/`
+        Alternate route: `/v1/corporations/{corporation_id}/bookmarks/folders/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -10388,11 +10743,11 @@ paths:
         Return contacts of a corporation
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/contacts/`
+        Alternate route: `/dev/corporations/{corporation_id}/contacts/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/contacts/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/contacts/`
+        Alternate route: `/v1/corporations/{corporation_id}/contacts/`
 
         ---
         This route is cached for up to 300 seconds
@@ -10502,11 +10857,11 @@ paths:
         Returns logs recorded in the past seven days from all audit log secure containers (ALSC) owned by a given corporation
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/containers/logs/`
+        Alternate route: `/dev/corporations/{corporation_id}/containers/logs/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/containers/logs/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/containers/logs/`
+        Alternate route: `/v1/corporations/{corporation_id}/containers/logs/`
 
         ---
         This route is cached for up to 600 seconds
@@ -10802,11 +11157,11 @@ paths:
         Returns contracts available to a coporation, only if the corporation is issuer, acceptor or assignee. Only returns contracts no older than 30 days, or if the status is "in_progress".
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/contracts/`
+        Alternate route: `/dev/corporations/{corporation_id}/contracts/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/contracts/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/contracts/`
+        Alternate route: `/v1/corporations/{corporation_id}/contracts/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -11033,11 +11388,11 @@ paths:
         Lists bids on a particular auction contract
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/contracts/{contract_id}/bids/`
+        Alternate route: `/dev/corporations/{corporation_id}/contracts/{contract_id}/bids/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/contracts/{contract_id}/bids/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/contracts/{contract_id}/bids/`
+        Alternate route: `/v1/corporations/{corporation_id}/contracts/{contract_id}/bids/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -11146,11 +11501,11 @@ paths:
         Lists items of a particular contract
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/contracts/{contract_id}/items/`
+        Alternate route: `/dev/corporations/{corporation_id}/contracts/{contract_id}/items/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/contracts/{contract_id}/items/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/contracts/{contract_id}/items/`
+        Alternate route: `/v1/corporations/{corporation_id}/contracts/{contract_id}/items/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -11257,17 +11612,192 @@ paths:
         - v1
       x-cached-seconds: 3600
       x-required-roles: []
+  '/corporations/{corporation_id}/customs_offices/':
+    get:
+      description: |-
+        List customs offices owned by a corporation
+
+        ---
+        Alternate route: `/dev/corporations/{corporation_id}/customs_offices/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/customs_offices/`
+
+        Alternate route: `/v1/corporations/{corporation_id}/customs_offices/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_customs_offices
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: A list of customs offices and their settings
+          examples:
+            application/json:
+              - alliance_tax_rate: 0.1
+                allow_access_with_standings: true
+                allow_alliance_access: false
+                corporation_tax_rate: 0.02
+                excellent_standing_tax_rate: 0.05
+                good_standing_tax_rate: 0.2
+                neutral_standing_tax_rate: 0.5
+                office_id: 1000000014530
+                reinforce_exit_end: 1
+                reinforce_exit_start: 23
+                standing_level: neutral
+                system_id: 30003657
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                alliance_tax_rate:
+                  description: Only present if alliance access is allowed
+                  format: float
+                  title: get_corporations_corporation_id_customs_offices_alliance_tax_rate
+                  type: number
+                allow_access_with_standings:
+                  description: standing_level and any standing related tax rate only present when this is true
+                  title: get_corporations_corporation_id_customs_offices_allow_access_with_standings
+                  type: boolean
+                allow_alliance_access:
+                  description: allow_alliance_access boolean
+                  title: get_corporations_corporation_id_customs_offices_allow_alliance_access
+                  type: boolean
+                bad_standing_tax_rate:
+                  description: bad_standing_tax_rate number
+                  format: float
+                  title: get_corporations_corporation_id_customs_offices_bad_standing_tax_rate
+                  type: number
+                corporation_tax_rate:
+                  description: corporation_tax_rate number
+                  format: float
+                  title: get_corporations_corporation_id_customs_offices_corporation_tax_rate
+                  type: number
+                excellent_standing_tax_rate:
+                  description: 'Tax rate for entities with excellent level of standing, only present if this level is allowed, same for all other standing related tax rates'
+                  format: float
+                  title: get_corporations_corporation_id_customs_offices_excellent_standing_tax_rate
+                  type: number
+                good_standing_tax_rate:
+                  description: good_standing_tax_rate number
+                  format: float
+                  title: get_corporations_corporation_id_customs_offices_good_standing_tax_rate
+                  type: number
+                neutral_standing_tax_rate:
+                  description: neutral_standing_tax_rate number
+                  format: float
+                  title: get_corporations_corporation_id_customs_offices_neutral_standing_tax_rate
+                  type: number
+                office_id:
+                  description: unique ID of this customs office
+                  format: int64
+                  title: get_corporations_corporation_id_customs_offices_office_id
+                  type: integer
+                reinforce_exit_end:
+                  description: reinforce_exit_end integer
+                  format: int32
+                  maximum: 23
+                  minimum: 0
+                  title: get_corporations_corporation_id_customs_offices_reinforce_exit_end
+                  type: integer
+                reinforce_exit_start:
+                  description: 'Together with reinforce_exit_end, marks a 2-hour period where this customs office could exit reinforcement mode during the day after initial attack'
+                  format: int32
+                  maximum: 23
+                  minimum: 0
+                  title: get_corporations_corporation_id_customs_offices_reinforce_exit_start
+                  type: integer
+                standing_level:
+                  description: Access is allowed only for entities with this level of standing or better
+                  enum:
+                    - bad
+                    - excellent
+                    - good
+                    - neutral
+                    - terrible
+                  title: get_corporations_corporation_id_customs_offices_standing_level
+                  type: string
+                system_id:
+                  description: ID of the solar system this customs office is located in
+                  format: int32
+                  title: get_corporations_corporation_id_customs_offices_system_id
+                  type: integer
+                terrible_standing_tax_rate:
+                  description: terrible_standing_tax_rate number
+                  format: float
+                  title: get_corporations_corporation_id_customs_offices_terrible_standing_tax_rate
+                  type: number
+              required:
+                - office_id
+                - system_id
+                - reinforce_exit_start
+                - reinforce_exit_end
+                - allow_alliance_access
+                - allow_access_with_standings
+              title: get_corporations_corporation_id_customs_offices_200_ok
+              type: object
+            maxItems: 1000
+            title: get_corporations_corporation_id_customs_offices_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-planets.read_customs_offices.v1
+      summary: List corporation customs offices
+      tags:
+        - Planetary Interaction
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles:
+        - Director
   '/corporations/{corporation_id}/divisions/':
     get:
       description: |-
         Return corporation hangar and wallet division names, only show if a division is not using the default name
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/divisions/`
+        Alternate route: `/dev/corporations/{corporation_id}/divisions/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/divisions/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/divisions/`
+        Alternate route: `/v1/corporations/{corporation_id}/divisions/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -11375,17 +11905,255 @@ paths:
       x-cached-seconds: 3600
       x-required-roles:
         - Director
+  '/corporations/{corporation_id}/facilities/':
+    get:
+      description: |-
+        Return a corporation's facilities
+
+        ---
+        Alternate route: `/dev/corporations/{corporation_id}/facilities/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/facilities/`
+
+        Alternate route: `/v1/corporations/{corporation_id}/facilities/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_facilities
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: List of corporation facilities
+          examples:
+            application/json:
+              - facility_id: 123
+                system_id: 45678
+                type_id: 2502
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                facility_id:
+                  description: facility_id integer
+                  format: int64
+                  title: get_corporations_corporation_id_facilities_facility_id
+                  type: integer
+                system_id:
+                  description: system_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_facilities_system_id
+                  type: integer
+                type_id:
+                  description: type_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_facilities_type_id
+                  type: integer
+              required:
+                - facility_id
+                - type_id
+                - system_id
+              title: get_corporations_corporation_id_facilities_200_ok
+              type: object
+            maxItems: 1000
+            title: get_corporations_corporation_id_facilities_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-corporations.read_facilities.v1
+      summary: Get corporation facilities
+      tags:
+        - Corporation
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles:
+        - Factory_Manager
+  '/corporations/{corporation_id}/fw/stats/':
+    get:
+      description: |-
+        Statistics about a corporation involved in faction warfare
+
+        ---
+        Alternate route: `/dev/corporations/{corporation_id}/fw/stats/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/fw/stats/`
+
+        Alternate route: `/v1/corporations/{corporation_id}/fw/stats/`
+
+        ---
+        This route expires daily at 11:05
+      operationId: get_corporations_corporation_id_fw_stats
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: Faction warfare statistics for a given corporation
+          examples:
+            application/json:
+              enlisted_on: '2017-10-17T00:00:00Z'
+              faction_id: 500001
+              kills:
+                last_week: 893
+                total: 684350
+                yesterday: 136
+              pilots: 28863
+              victory_points:
+                last_week: 102640
+                total: 52658260
+                yesterday: 15980
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+          schema:
+            description: 200 ok object
+            properties:
+              enlisted_on:
+                description: The enlistment date of the given corporation into faction warfare. Will not be included if corporation is not enlisted in faction warfare
+                format: date-time
+                title: get_corporations_corporation_id_fw_stats_enlisted_on
+                type: string
+              faction_id:
+                description: The faction the given corporation is enlisted to fight for. Will not be included if corporation is not enlisted in faction warfare
+                format: int32
+                title: get_corporations_corporation_id_fw_stats_faction_id
+                type: integer
+              kills:
+                description: Summary of kills done by the given corporation against enemy factions
+                properties:
+                  last_week:
+                    description: Last week's total number of kills by members of the given corporation against enemy factions
+                    format: int32
+                    title: get_corporations_corporation_id_fw_stats_last_week
+                    type: integer
+                  total:
+                    description: Total number of kills by members of the given corporation against enemy factions since the corporation enlisted
+                    format: int32
+                    title: get_corporations_corporation_id_fw_stats_total
+                    type: integer
+                  yesterday:
+                    description: Yesterday's total number of kills by members of the given corporation against enemy factions
+                    format: int32
+                    title: get_corporations_corporation_id_fw_stats_yesterday
+                    type: integer
+                required:
+                  - yesterday
+                  - last_week
+                  - total
+                title: get_corporations_corporation_id_fw_stats_kills
+                type: object
+              pilots:
+                description: How many pilots the enlisted corporation has. Will not be included if corporation is not enlisted in faction warfare
+                format: int32
+                title: get_corporations_corporation_id_fw_stats_pilots
+                type: integer
+              victory_points:
+                description: Summary of victory points gained by the given corporation for the enlisted faction
+                properties:
+                  last_week:
+                    description: Last week's victory points gained by members of the given corporation
+                    format: int32
+                    title: get_corporations_corporation_id_fw_stats_last_week
+                    type: integer
+                  total:
+                    description: Total victory points gained since the given corporation enlisted
+                    format: int32
+                    title: get_corporations_corporation_id_fw_stats_total
+                    type: integer
+                  yesterday:
+                    description: Yesterday's victory points gained by members of the given corporation
+                    format: int32
+                    title: get_corporations_corporation_id_fw_stats_yesterday
+                    type: integer
+                required:
+                  - yesterday
+                  - last_week
+                  - total
+                title: get_corporations_corporation_id_fw_stats_victory_points
+                type: object
+            required:
+              - kills
+              - victory_points
+            title: get_corporations_corporation_id_fw_stats_ok
+            type: object
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-corporations.read_fw_stats.v1
+      summary: Overview of a corporation involved in faction warfare
+      tags:
+        - Faction Warfare
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-required-roles: []
   '/corporations/{corporation_id}/icons/':
     get:
       description: |-
         Get the icon urls for a corporation
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/icons/`
+        Alternate route: `/dev/corporations/{corporation_id}/icons/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/icons/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/icons/`
+        Alternate route: `/v1/corporations/{corporation_id}/icons/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -11465,11 +12233,11 @@ paths:
         List industry jobs run by a corporation
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/industry/jobs/`
+        Alternate route: `/dev/corporations/{corporation_id}/industry/jobs/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/industry/jobs/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/industry/jobs/`
+        Alternate route: `/v1/corporations/{corporation_id}/industry/jobs/`
 
         ---
         This route is cached for up to 300 seconds
@@ -11632,10 +12400,10 @@ paths:
                   description: status string
                   enum:
                     - active
+                    - cancelled
+                    - delivered
                     - paused
                     - ready
-                    - delivered
-                    - cancelled
                     - reverted
                   title: get_corporations_corporation_id_industry_jobs_status
                   type: string
@@ -11697,11 +12465,11 @@ paths:
         Get a list of corporation's recent kills and losses
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/killmails/recent/`
+        Alternate route: `/dev/corporations/{corporation_id}/killmails/recent/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/killmails/recent/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/killmails/recent/`
+        Alternate route: `/v1/corporations/{corporation_id}/killmails/recent/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -11786,15 +12554,253 @@ paths:
       x-cached-seconds: 3600
       x-required-roles:
         - Director
+  '/corporations/{corporation_id}/medals/':
+    get:
+      description: |-
+        Returns a corporation's medals
+
+        ---
+        Alternate route: `/dev/corporations/{corporation_id}/medals/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/medals/`
+
+        Alternate route: `/v1/corporations/{corporation_id}/medals/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_medals
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: A list of medals
+          examples:
+            application/json:
+              - created_at: '2017-10-10T14:00:00Z'
+                creator_id: 46578
+                description: An Awesome Medal
+                medal_id: 123
+                title: Awesome Medal
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                created_at:
+                  description: created_at string
+                  format: date-time
+                  title: get_corporations_corporation_id_medals_created_at
+                  type: string
+                creator_id:
+                  description: ID of the character who created this medal
+                  format: int32
+                  title: get_corporations_corporation_id_medals_creator_id
+                  type: integer
+                description:
+                  description: description string
+                  maxLength: 1000
+                  title: get_corporations_corporation_id_medals_description
+                  type: string
+                medal_id:
+                  description: medal_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_medals_medal_id
+                  type: integer
+                title:
+                  description: title string
+                  maxLength: 100
+                  title: get_corporations_corporation_id_medals_title
+                  type: string
+              required:
+                - medal_id
+                - title
+                - description
+                - creator_id
+                - created_at
+              title: get_corporations_corporation_id_medals_200_ok
+              type: object
+            maxItems: 1000
+            title: get_corporations_corporation_id_medals_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-corporations.read_medals.v1
+      summary: Get corporation medals
+      tags:
+        - Corporation
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles: []
+  '/corporations/{corporation_id}/medals/issued/':
+    get:
+      description: |-
+        Returns medals issued by a corporation
+
+        ---
+        Alternate route: `/dev/corporations/{corporation_id}/medals/issued/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/medals/issued/`
+
+        Alternate route: `/v1/corporations/{corporation_id}/medals/issued/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_medals_issued
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: A list of issued medals
+          examples:
+            application/json:
+              - character_id: 45678
+                issued_at: '2017-10-10T14:00:00Z'
+                issuer_id: 67890
+                medal_id: 123
+                reason: Awesome Reason
+                status: private
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                character_id:
+                  description: ID of the character who was rewarded this medal
+                  format: int32
+                  title: get_corporations_corporation_id_medals_issued_character_id
+                  type: integer
+                issued_at:
+                  description: issued_at string
+                  format: date-time
+                  title: get_corporations_corporation_id_medals_issued_issued_at
+                  type: string
+                issuer_id:
+                  description: ID of the character who issued the medal
+                  format: int32
+                  title: get_corporations_corporation_id_medals_issued_issuer_id
+                  type: integer
+                medal_id:
+                  description: medal_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_medals_issued_medal_id
+                  type: integer
+                reason:
+                  description: reason string
+                  maxLength: 1000
+                  title: get_corporations_corporation_id_medals_issued_reason
+                  type: string
+                status:
+                  description: status string
+                  enum:
+                    - private
+                    - public
+                  title: get_corporations_corporation_id_medals_issued_status
+                  type: string
+              required:
+                - medal_id
+                - character_id
+                - reason
+                - status
+                - issuer_id
+                - issued_at
+              title: get_corporations_corporation_id_medals_issued_200_ok
+              type: object
+            maxItems: 1000
+            title: get_corporations_corporation_id_medals_issued_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-corporations.read_medals.v1
+      summary: Get corporation issued medals
+      tags:
+        - Corporation
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles:
+        - Director
   '/corporations/{corporation_id}/members/':
     get:
       description: |-
         Read the current list of members if the calling character is a member.
 
         ---
-        Alternate route: `/v2/corporations/{corporation_id}/members/`
-
         Alternate route: `/legacy/corporations/{corporation_id}/members/`
+
+        Alternate route: `/v2/corporations/{corporation_id}/members/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -11869,11 +12875,11 @@ paths:
         Return a corporation's member limit, not including CEO himself
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/members/limit/`
+        Alternate route: `/dev/corporations/{corporation_id}/members/limit/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/members/limit/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/members/limit/`
+        Alternate route: `/v1/corporations/{corporation_id}/members/limit/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -11931,17 +12937,110 @@ paths:
       x-cached-seconds: 3600
       x-required-roles:
         - Director
+  '/corporations/{corporation_id}/members/titles/':
+    get:
+      description: |-
+        Returns a corporation's members' titles
+
+        ---
+        Alternate route: `/dev/corporations/{corporation_id}/members/titles/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/members/titles/`
+
+        Alternate route: `/v1/corporations/{corporation_id}/members/titles/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_members_titles
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: A list of members and theirs titles
+          examples:
+            application/json:
+              - character_id: 12345
+                titles: []
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                character_id:
+                  description: character_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_members_titles_character_id
+                  type: integer
+                titles:
+                  description: A list of title_id
+                  items:
+                    description: title integer
+                    format: int32
+                    title: get_corporations_corporation_id_members_titles_title
+                    type: integer
+                  maxItems: 16
+                  title: get_corporations_corporation_id_members_titles_titles
+                  type: array
+              required:
+                - character_id
+                - titles
+              title: get_corporations_corporation_id_members_titles_200_ok
+              type: object
+            maxItems: 12601
+            title: get_corporations_corporation_id_members_titles_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-corporations.read_titles.v1
+      summary: Get corporation's members' titles
+      tags:
+        - Corporation
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles:
+        - Director
   '/corporations/{corporation_id}/membertracking/':
     get:
       description: |-
         Returns additional information about a corporation's members which helps tracking their activities
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/membertracking/`
+        Alternate route: `/dev/corporations/{corporation_id}/membertracking/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/membertracking/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/membertracking/`
+        Alternate route: `/v1/corporations/{corporation_id}/membertracking/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -12059,11 +13158,11 @@ paths:
         List market orders placed on behalf of a corporation
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/orders/`
+        Alternate route: `/dev/corporations/{corporation_id}/orders/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/orders/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/orders/`
+        Alternate route: `/v1/corporations/{corporation_id}/orders/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -12264,11 +13363,11 @@ paths:
         Return the roles of all members if the character has the personnel manager role or any grantable role.
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/roles/`
+        Alternate route: `/dev/corporations/{corporation_id}/roles/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/roles/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/roles/`
+        Alternate route: `/v1/corporations/{corporation_id}/roles/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -12828,17 +13927,261 @@ paths:
         - legacy
         - v1
       x-cached-seconds: 3600
+  '/corporations/{corporation_id}/roles/history/':
+    get:
+      description: |-
+        Return how roles have changed for a coporation's members, up to a month
+
+        ---
+        Alternate route: `/dev/corporations/{corporation_id}/roles/history/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/roles/history/`
+
+        Alternate route: `/v1/corporations/{corporation_id}/roles/history/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_roles_history
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: List of role changes
+          examples:
+            application/json:
+              - changed_at: '2016-10-25T14:46:00Z'
+                character_id: 12345
+                issuer_id: 45678
+                new_roles:
+                  - Station_Manager
+                old_roles:
+                  - Diplomat
+                role_type: roles
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                changed_at:
+                  description: changed_at string
+                  format: date-time
+                  title: get_corporations_corporation_id_roles_history_changed_at
+                  type: string
+                character_id:
+                  description: The character whose roles are changed
+                  format: int32
+                  title: get_corporations_corporation_id_roles_history_character_id
+                  type: integer
+                issuer_id:
+                  description: ID of the character who issued this change
+                  format: int32
+                  title: get_corporations_corporation_id_roles_history_issuer_id
+                  type: integer
+                new_roles:
+                  description: new_roles array
+                  items:
+                    description: new_role string
+                    enum:
+                      - Account_Take_1
+                      - Account_Take_2
+                      - Account_Take_3
+                      - Account_Take_4
+                      - Account_Take_5
+                      - Account_Take_6
+                      - Account_Take_7
+                      - Accountant
+                      - Auditor
+                      - Communications_Officer
+                      - Config_Equipment
+                      - Config_Starbase_Equipment
+                      - Container_Take_1
+                      - Container_Take_2
+                      - Container_Take_3
+                      - Container_Take_4
+                      - Container_Take_5
+                      - Container_Take_6
+                      - Container_Take_7
+                      - Contract_Manager
+                      - Diplomat
+                      - Director
+                      - Factory_Manager
+                      - Fitting_Manager
+                      - Hangar_Query_1
+                      - Hangar_Query_2
+                      - Hangar_Query_3
+                      - Hangar_Query_4
+                      - Hangar_Query_5
+                      - Hangar_Query_6
+                      - Hangar_Query_7
+                      - Hangar_Take_1
+                      - Hangar_Take_2
+                      - Hangar_Take_3
+                      - Hangar_Take_4
+                      - Hangar_Take_5
+                      - Hangar_Take_6
+                      - Hangar_Take_7
+                      - Junior_Accountant
+                      - Personnel_Manager
+                      - Rent_Factory_Facility
+                      - Rent_Office
+                      - Rent_Research_Facility
+                      - Security_Officer
+                      - Starbase_Defense_Operator
+                      - Starbase_Fuel_Technician
+                      - Station_Manager
+                      - Terrestrial_Combat_Officer
+                      - Terrestrial_Logistics_Officer
+                      - Trader
+                    title: get_corporations_corporation_id_roles_history_new_role
+                    type: string
+                    uniqueItems: true
+                  maxItems: 50
+                  title: get_corporations_corporation_id_roles_history_new_roles
+                  type: array
+                old_roles:
+                  description: old_roles array
+                  items:
+                    description: old_role string
+                    enum:
+                      - Account_Take_1
+                      - Account_Take_2
+                      - Account_Take_3
+                      - Account_Take_4
+                      - Account_Take_5
+                      - Account_Take_6
+                      - Account_Take_7
+                      - Accountant
+                      - Auditor
+                      - Communications_Officer
+                      - Config_Equipment
+                      - Config_Starbase_Equipment
+                      - Container_Take_1
+                      - Container_Take_2
+                      - Container_Take_3
+                      - Container_Take_4
+                      - Container_Take_5
+                      - Container_Take_6
+                      - Container_Take_7
+                      - Contract_Manager
+                      - Diplomat
+                      - Director
+                      - Factory_Manager
+                      - Fitting_Manager
+                      - Hangar_Query_1
+                      - Hangar_Query_2
+                      - Hangar_Query_3
+                      - Hangar_Query_4
+                      - Hangar_Query_5
+                      - Hangar_Query_6
+                      - Hangar_Query_7
+                      - Hangar_Take_1
+                      - Hangar_Take_2
+                      - Hangar_Take_3
+                      - Hangar_Take_4
+                      - Hangar_Take_5
+                      - Hangar_Take_6
+                      - Hangar_Take_7
+                      - Junior_Accountant
+                      - Personnel_Manager
+                      - Rent_Factory_Facility
+                      - Rent_Office
+                      - Rent_Research_Facility
+                      - Security_Officer
+                      - Starbase_Defense_Operator
+                      - Starbase_Fuel_Technician
+                      - Station_Manager
+                      - Terrestrial_Combat_Officer
+                      - Terrestrial_Logistics_Officer
+                      - Trader
+                    title: get_corporations_corporation_id_roles_history_old_role
+                    type: string
+                    uniqueItems: true
+                  maxItems: 50
+                  title: get_corporations_corporation_id_roles_history_old_roles
+                  type: array
+                role_type:
+                  description: role_type string
+                  enum:
+                    - grantable_roles
+                    - grantable_roles_at_base
+                    - grantable_roles_at_hq
+                    - grantable_roles_at_other
+                    - roles
+                    - roles_at_base
+                    - roles_at_hq
+                    - roles_at_other
+                  title: get_corporations_corporation_id_roles_history_role_type
+                  type: string
+              required:
+                - character_id
+                - changed_at
+                - issuer_id
+                - role_type
+                - old_roles
+                - new_roles
+              title: get_corporations_corporation_id_roles_history_200_ok
+              type: object
+            maxItems: 1000
+            title: get_corporations_corporation_id_roles_history_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-corporations.read_corporation_membership.v1
+      summary: Get corporation member roles history
+      tags:
+        - Corporation
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles:
+        - Director
   '/corporations/{corporation_id}/shareholders/':
     get:
       description: |-
         Return the current member list of a corporation, the token's character need to be a member of the corporation.
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/shareholders/`
+        Alternate route: `/dev/corporations/{corporation_id}/shareholders/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/shareholders/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/shareholders/`
+        Alternate route: `/v1/corporations/{corporation_id}/shareholders/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -12944,11 +14287,11 @@ paths:
         Return corporation standings from agents, NPC corporations, and factions
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/standings/`
+        Alternate route: `/dev/corporations/{corporation_id}/standings/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/standings/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/standings/`
+        Alternate route: `/v1/corporations/{corporation_id}/standings/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -13049,17 +14392,364 @@ paths:
         - v1
       x-cached-seconds: 3600
       x-required-roles: []
+  '/corporations/{corporation_id}/starbases/':
+    get:
+      description: |-
+        Returns list of corporation starbases (POSes)
+
+        ---
+        Alternate route: `/dev/corporations/{corporation_id}/starbases/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/starbases/`
+
+        Alternate route: `/v1/corporations/{corporation_id}/starbases/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_starbases
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: List of starbases (POSes)
+          examples:
+            application/json:
+              - starbase_id: 12345
+                system_id: 123456
+                type_id: 456
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                moon_id:
+                  description: 'The moon this starbase (POS) is anchored on, unanchored POSes do not have this information'
+                  format: int32
+                  title: get_corporations_corporation_id_starbases_moon_id
+                  type: integer
+                onlined_since:
+                  description: 'When the POS onlined, for starbases (POSes) in online state'
+                  format: date-time
+                  title: get_corporations_corporation_id_starbases_onlined_since
+                  type: string
+                reinforced_until:
+                  description: 'When the POS will be out of reinforcement, for starbases (POSes) in reinforced state'
+                  format: date-time
+                  title: get_corporations_corporation_id_starbases_reinforced_until
+                  type: string
+                starbase_id:
+                  description: Unique ID for this starbase (POS)
+                  format: int64
+                  title: get_corporations_corporation_id_starbases_starbase_id
+                  type: integer
+                state:
+                  description: state string
+                  enum:
+                    - offline
+                    - online
+                    - onlining
+                    - reinforced
+                    - unanchoring
+                  title: get_corporations_corporation_id_starbases_state
+                  type: string
+                system_id:
+                  description: 'The solar system this starbase (POS) is in, unanchored POSes have this information'
+                  format: int32
+                  title: get_corporations_corporation_id_starbases_system_id
+                  type: integer
+                type_id:
+                  description: Starbase (POS) type
+                  format: int32
+                  title: get_corporations_corporation_id_starbases_type_id
+                  type: integer
+                unanchor_at:
+                  description: 'When the POS started unanchoring, for starbases (POSes) in unanchoring state'
+                  format: date-time
+                  title: get_corporations_corporation_id_starbases_unanchor_at
+                  type: string
+              required:
+                - starbase_id
+                - type_id
+                - system_id
+              title: get_corporations_corporation_id_starbases_200_ok
+              type: object
+            maxItems: 1000
+            title: get_corporations_corporation_id_starbases_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-corporations.read_starbases.v1
+      summary: Get corporation starbases (POSes)
+      tags:
+        - Corporation
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles:
+        - Director
+  '/corporations/{corporation_id}/starbases/{starbase_id}/':
+    get:
+      description: |-
+        Returns various settings and fuels of a starbase (POS)
+
+        ---
+        Alternate route: `/dev/corporations/{corporation_id}/starbases/{starbase_id}/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/starbases/{starbase_id}/`
+
+        Alternate route: `/v1/corporations/{corporation_id}/starbases/{starbase_id}/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_starbases_starbase_id
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - description: An EVE starbase (POS) ID
+          format: int64
+          in: path
+          name: starbase_id
+          required: true
+          type: integer
+        - description: 'The solar system this starbase (POS) is located in,'
+          format: int32
+          in: query
+          name: system_id
+          required: true
+          type: integer
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: List of starbases (POSes)
+          examples:
+            application/json:
+              allow_alliance_members: false
+              allow_corporation_members: true
+              anchor: config_starbase_equipment_role
+              attack_if_at_war: true
+              attack_if_other_security_status_dropping: false
+              fuel_bay_take: config_starbase_equipment_role
+              fuel_bay_view: config_starbase_equipment_role
+              offline: config_starbase_equipment_role
+              online: config_starbase_equipment_role
+              unanchor: config_starbase_equipment_role
+              use_alliance_standings: false
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok object
+            properties:
+              allow_alliance_members:
+                description: allow_alliance_members boolean
+                title: get_corporations_corporation_id_starbases_starbase_id_allow_alliance_members
+                type: boolean
+              allow_corporation_members:
+                description: allow_corporation_members boolean
+                title: get_corporations_corporation_id_starbases_starbase_id_allow_corporation_members
+                type: boolean
+              anchor:
+                description: Who can anchor starbase (POS) and its structures
+                enum:
+                  - alliance_member
+                  - config_starbase_equipment_role
+                  - corporation_member
+                  - starbase_fuel_technician_role
+                title: get_corporations_corporation_id_starbases_starbase_id_anchor
+                type: string
+              attack_if_at_war:
+                description: attack_if_at_war boolean
+                title: get_corporations_corporation_id_starbases_starbase_id_attack_if_at_war
+                type: boolean
+              attack_if_other_security_status_dropping:
+                description: attack_if_other_security_status_dropping boolean
+                title: get_corporations_corporation_id_starbases_starbase_id_attack_if_other_security_status_dropping
+                type: boolean
+              attack_security_status_threshold:
+                description: Starbase (POS) will attack if target's security standing is lower than this value
+                format: float
+                title: get_corporations_corporation_id_starbases_starbase_id_attack_security_status_threshold
+                type: number
+              attack_standing_threshold:
+                description: Starbase (POS) will attack if target's standing is lower than this value
+                format: float
+                title: get_corporations_corporation_id_starbases_starbase_id_attack_standing_threshold
+                type: number
+              fuel_bay_take:
+                description: Who can take fuel blocks out of the starbase (POS)'s fuel bay
+                enum:
+                  - alliance_member
+                  - config_starbase_equipment_role
+                  - corporation_member
+                  - starbase_fuel_technician_role
+                title: get_corporations_corporation_id_starbases_starbase_id_fuel_bay_take
+                type: string
+              fuel_bay_view:
+                description: 'Who can view the starbase (POS)''s fule bay. Characters either need to have required role or belong to the starbase (POS) owner''s corporation or alliance, as described by the enum, all other access settings follows the same scheme'
+                enum:
+                  - alliance_member
+                  - config_starbase_equipment_role
+                  - corporation_member
+                  - starbase_fuel_technician_role
+                title: get_corporations_corporation_id_starbases_starbase_id_fuel_bay_view
+                type: string
+              fuels:
+                description: Fuel blocks and other things that will be consumed when operating a starbase (POS)
+                items:
+                  description: fuel object
+                  properties:
+                    quantity:
+                      description: quantity integer
+                      format: int32
+                      title: get_corporations_corporation_id_starbases_starbase_id_quantity
+                      type: integer
+                    type_id:
+                      description: type_id integer
+                      format: int32
+                      title: get_corporations_corporation_id_starbases_starbase_id_type_id
+                      type: integer
+                  required:
+                    - type_id
+                    - quantity
+                  title: get_corporations_corporation_id_starbases_starbase_id_fuel
+                  type: object
+                maxItems: 20
+                title: get_corporations_corporation_id_starbases_starbase_id_fuels
+                type: array
+              offline:
+                description: Who can offline starbase (POS) and its structures
+                enum:
+                  - alliance_member
+                  - config_starbase_equipment_role
+                  - corporation_member
+                  - starbase_fuel_technician_role
+                title: get_corporations_corporation_id_starbases_starbase_id_offline
+                type: string
+              online:
+                description: Who can online starbase (POS) and its structures
+                enum:
+                  - alliance_member
+                  - config_starbase_equipment_role
+                  - corporation_member
+                  - starbase_fuel_technician_role
+                title: get_corporations_corporation_id_starbases_starbase_id_online
+                type: string
+              unanchor:
+                description: Who can unanchor starbase (POS) and its structures
+                enum:
+                  - alliance_member
+                  - config_starbase_equipment_role
+                  - corporation_member
+                  - starbase_fuel_technician_role
+                title: get_corporations_corporation_id_starbases_starbase_id_unanchor
+                type: string
+              use_alliance_standings:
+                description: 'True if the starbase (POS) is using alliance standings, otherwise using corporation''s'
+                title: get_corporations_corporation_id_starbases_starbase_id_use_alliance_standings
+                type: boolean
+            required:
+              - fuel_bay_view
+              - fuel_bay_take
+              - anchor
+              - unanchor
+              - online
+              - offline
+              - allow_corporation_members
+              - allow_alliance_members
+              - use_alliance_standings
+              - attack_if_other_security_status_dropping
+              - attack_if_at_war
+            title: get_corporations_corporation_id_starbases_starbase_id_ok
+            type: object
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-corporations.read_starbases.v1
+      summary: Get starbase (POS) detail
+      tags:
+        - Corporation
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles:
+        - Director
   '/corporations/{corporation_id}/structures/':
     get:
       description: |-
         Get a list of corporation structures
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/structures/`
+        Alternate route: `/dev/corporations/{corporation_id}/structures/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/structures/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/structures/`
+        Alternate route: `/v1/corporations/{corporation_id}/structures/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -13280,11 +14970,11 @@ paths:
         Update the vulnerability window schedule of a corporation structure
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/structures/{structure_id}/`
+        Alternate route: `/dev/corporations/{corporation_id}/structures/{structure_id}/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/structures/{structure_id}/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/structures/{structure_id}/`
+        Alternate route: `/v1/corporations/{corporation_id}/structures/{structure_id}/`
       operationId: put_corporations_corporation_id_structures_structure_id
       parameters:
         - $ref: '#/parameters/corporation_id'
@@ -13363,11 +15053,11 @@ paths:
         Returns a corporation's titles
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/titles/`
+        Alternate route: `/dev/corporations/{corporation_id}/titles/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/titles/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/titles/`
+        Alternate route: `/v1/corporations/{corporation_id}/titles/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -13938,11 +15628,11 @@ paths:
         Get a corporation's wallets
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/wallets/`
+        Alternate route: `/dev/corporations/{corporation_id}/wallets/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/wallets/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/wallets/`
+        Alternate route: `/v1/corporations/{corporation_id}/wallets/`
 
         ---
         This route is cached for up to 300 seconds
@@ -14041,11 +15731,9 @@ paths:
         Retrieve corporation wallet journal
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/wallets/{division}/journal/`
-
         Alternate route: `/legacy/corporations/{corporation_id}/wallets/{division}/journal/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/wallets/{division}/journal/`
+        Alternate route: `/v1/corporations/{corporation_id}/wallets/{division}/journal/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -14366,7 +16054,6 @@ paths:
       tags:
         - Wallet
       x-alternate-versions:
-        - dev
         - legacy
         - v1
       x-cached-seconds: 3600
@@ -14379,11 +16066,11 @@ paths:
         Get wallet transactions of a corporation
 
         ---
-        Alternate route: `/v1/corporations/{corporation_id}/wallets/{division}/transactions/`
+        Alternate route: `/dev/corporations/{corporation_id}/wallets/{division}/transactions/`
 
         Alternate route: `/legacy/corporations/{corporation_id}/wallets/{division}/transactions/`
 
-        Alternate route: `/dev/corporations/{corporation_id}/wallets/{division}/transactions/`
+        Alternate route: `/v1/corporations/{corporation_id}/wallets/{division}/transactions/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -14530,11 +16217,11 @@ paths:
         Get a list of dogma attribute ids
 
         ---
-        Alternate route: `/v1/dogma/attributes/`
+        Alternate route: `/dev/dogma/attributes/`
 
         Alternate route: `/legacy/dogma/attributes/`
 
-        Alternate route: `/dev/dogma/attributes/`
+        Alternate route: `/v1/dogma/attributes/`
 
         ---
         This route expires daily at 11:05
@@ -14591,11 +16278,11 @@ paths:
         Get information on a dogma attribute
 
         ---
-        Alternate route: `/v1/dogma/attributes/{attribute_id}/`
+        Alternate route: `/dev/dogma/attributes/{attribute_id}/`
 
         Alternate route: `/legacy/dogma/attributes/{attribute_id}/`
 
-        Alternate route: `/dev/dogma/attributes/{attribute_id}/`
+        Alternate route: `/v1/dogma/attributes/{attribute_id}/`
 
         ---
         This route expires daily at 11:05
@@ -14719,11 +16406,11 @@ paths:
         Get a list of dogma effect ids
 
         ---
-        Alternate route: `/v1/dogma/effects/`
+        Alternate route: `/dev/dogma/effects/`
 
         Alternate route: `/legacy/dogma/effects/`
 
-        Alternate route: `/dev/dogma/effects/`
+        Alternate route: `/v1/dogma/effects/`
 
         ---
         This route expires daily at 11:05
@@ -14780,9 +16467,9 @@ paths:
         Get information on a dogma effect
 
         ---
-        Alternate route: `/v2/dogma/effects/{effect_id}/`
-
         Alternate route: `/dev/dogma/effects/{effect_id}/`
+
+        Alternate route: `/v2/dogma/effects/{effect_id}/`
 
         ---
         This route expires daily at 11:05
@@ -14991,11 +16678,11 @@ paths:
         Return details about a fleet
 
         ---
-        Alternate route: `/v1/fleets/{fleet_id}/`
+        Alternate route: `/dev/fleets/{fleet_id}/`
 
         Alternate route: `/legacy/fleets/{fleet_id}/`
 
-        Alternate route: `/dev/fleets/{fleet_id}/`
+        Alternate route: `/v1/fleets/{fleet_id}/`
 
         ---
         This route is cached for up to 5 seconds
@@ -15100,11 +16787,11 @@ paths:
         Update settings about a fleet
 
         ---
-        Alternate route: `/v1/fleets/{fleet_id}/`
+        Alternate route: `/dev/fleets/{fleet_id}/`
 
         Alternate route: `/legacy/fleets/{fleet_id}/`
 
-        Alternate route: `/dev/fleets/{fleet_id}/`
+        Alternate route: `/v1/fleets/{fleet_id}/`
       operationId: put_fleets_fleet_id
       parameters:
         - $ref: '#/parameters/datasource'
@@ -15195,11 +16882,11 @@ paths:
         Return information about fleet members
 
         ---
-        Alternate route: `/v1/fleets/{fleet_id}/members/`
+        Alternate route: `/dev/fleets/{fleet_id}/members/`
 
         Alternate route: `/legacy/fleets/{fleet_id}/members/`
 
-        Alternate route: `/dev/fleets/{fleet_id}/members/`
+        Alternate route: `/v1/fleets/{fleet_id}/members/`
 
         ---
         This route is cached for up to 5 seconds
@@ -15367,11 +17054,11 @@ paths:
         Invite a character into the fleet. If a character has a CSPA charge set it is not possible to invite them to the fleet using ESI
 
         ---
-        Alternate route: `/v1/fleets/{fleet_id}/members/`
+        Alternate route: `/dev/fleets/{fleet_id}/members/`
 
         Alternate route: `/legacy/fleets/{fleet_id}/members/`
 
-        Alternate route: `/dev/fleets/{fleet_id}/members/`
+        Alternate route: `/v1/fleets/{fleet_id}/members/`
       operationId: post_fleets_fleet_id_members
       parameters:
         - $ref: '#/parameters/datasource'
@@ -15483,11 +17170,11 @@ paths:
         Kick a fleet member
 
         ---
-        Alternate route: `/v1/fleets/{fleet_id}/members/{member_id}/`
+        Alternate route: `/dev/fleets/{fleet_id}/members/{member_id}/`
 
         Alternate route: `/legacy/fleets/{fleet_id}/members/{member_id}/`
 
-        Alternate route: `/dev/fleets/{fleet_id}/members/{member_id}/`
+        Alternate route: `/v1/fleets/{fleet_id}/members/{member_id}/`
       operationId: delete_fleets_fleet_id_members_member_id
       parameters:
         - $ref: '#/parameters/datasource'
@@ -15552,11 +17239,11 @@ paths:
         Move a fleet member around
 
         ---
-        Alternate route: `/v1/fleets/{fleet_id}/members/{member_id}/`
+        Alternate route: `/dev/fleets/{fleet_id}/members/{member_id}/`
 
         Alternate route: `/legacy/fleets/{fleet_id}/members/{member_id}/`
 
-        Alternate route: `/dev/fleets/{fleet_id}/members/{member_id}/`
+        Alternate route: `/v1/fleets/{fleet_id}/members/{member_id}/`
       operationId: put_fleets_fleet_id_members_member_id
       parameters:
         - $ref: '#/parameters/datasource'
@@ -15668,11 +17355,11 @@ paths:
         Delete a fleet squad, only empty squads can be deleted
 
         ---
-        Alternate route: `/v1/fleets/{fleet_id}/squads/{squad_id}/`
+        Alternate route: `/dev/fleets/{fleet_id}/squads/{squad_id}/`
 
         Alternate route: `/legacy/fleets/{fleet_id}/squads/{squad_id}/`
 
-        Alternate route: `/dev/fleets/{fleet_id}/squads/{squad_id}/`
+        Alternate route: `/v1/fleets/{fleet_id}/squads/{squad_id}/`
       operationId: delete_fleets_fleet_id_squads_squad_id
       parameters:
         - $ref: '#/parameters/datasource'
@@ -15737,11 +17424,11 @@ paths:
         Rename a fleet squad
 
         ---
-        Alternate route: `/v1/fleets/{fleet_id}/squads/{squad_id}/`
+        Alternate route: `/dev/fleets/{fleet_id}/squads/{squad_id}/`
 
         Alternate route: `/legacy/fleets/{fleet_id}/squads/{squad_id}/`
 
-        Alternate route: `/dev/fleets/{fleet_id}/squads/{squad_id}/`
+        Alternate route: `/v1/fleets/{fleet_id}/squads/{squad_id}/`
       operationId: put_fleets_fleet_id_squads_squad_id
       parameters:
         - $ref: '#/parameters/datasource'
@@ -15823,11 +17510,11 @@ paths:
         Return information about wings in a fleet
 
         ---
-        Alternate route: `/v1/fleets/{fleet_id}/wings/`
+        Alternate route: `/dev/fleets/{fleet_id}/wings/`
 
         Alternate route: `/legacy/fleets/{fleet_id}/wings/`
 
-        Alternate route: `/dev/fleets/{fleet_id}/wings/`
+        Alternate route: `/v1/fleets/{fleet_id}/wings/`
 
         ---
         This route is cached for up to 5 seconds
@@ -15963,11 +17650,11 @@ paths:
         Create a new wing in a fleet
 
         ---
-        Alternate route: `/v1/fleets/{fleet_id}/wings/`
+        Alternate route: `/dev/fleets/{fleet_id}/wings/`
 
         Alternate route: `/legacy/fleets/{fleet_id}/wings/`
 
-        Alternate route: `/dev/fleets/{fleet_id}/wings/`
+        Alternate route: `/v1/fleets/{fleet_id}/wings/`
       operationId: post_fleets_fleet_id_wings
       parameters:
         - $ref: '#/parameters/datasource'
@@ -16042,11 +17729,11 @@ paths:
         Delete a fleet wing, only empty wings can be deleted. The wing may contain squads, but the squads must be empty
 
         ---
-        Alternate route: `/v1/fleets/{fleet_id}/wings/{wing_id}/`
+        Alternate route: `/dev/fleets/{fleet_id}/wings/{wing_id}/`
 
         Alternate route: `/legacy/fleets/{fleet_id}/wings/{wing_id}/`
 
-        Alternate route: `/dev/fleets/{fleet_id}/wings/{wing_id}/`
+        Alternate route: `/v1/fleets/{fleet_id}/wings/{wing_id}/`
       operationId: delete_fleets_fleet_id_wings_wing_id
       parameters:
         - $ref: '#/parameters/datasource'
@@ -16111,11 +17798,11 @@ paths:
         Rename a fleet wing
 
         ---
-        Alternate route: `/v1/fleets/{fleet_id}/wings/{wing_id}/`
+        Alternate route: `/dev/fleets/{fleet_id}/wings/{wing_id}/`
 
         Alternate route: `/legacy/fleets/{fleet_id}/wings/{wing_id}/`
 
-        Alternate route: `/dev/fleets/{fleet_id}/wings/{wing_id}/`
+        Alternate route: `/v1/fleets/{fleet_id}/wings/{wing_id}/`
       operationId: put_fleets_fleet_id_wings_wing_id
       parameters:
         - $ref: '#/parameters/datasource'
@@ -16197,11 +17884,11 @@ paths:
         Create a new squad in a fleet
 
         ---
-        Alternate route: `/v1/fleets/{fleet_id}/wings/{wing_id}/squads/`
+        Alternate route: `/dev/fleets/{fleet_id}/wings/{wing_id}/squads/`
 
         Alternate route: `/legacy/fleets/{fleet_id}/wings/{wing_id}/squads/`
 
-        Alternate route: `/dev/fleets/{fleet_id}/wings/{wing_id}/squads/`
+        Alternate route: `/v1/fleets/{fleet_id}/wings/{wing_id}/squads/`
       operationId: post_fleets_fleet_id_wings_wing_id_squads
       parameters:
         - $ref: '#/parameters/datasource'
@@ -16282,11 +17969,11 @@ paths:
         Top 4 leaderboard of factions for kills and victory points separated by total, last week and yesterday.
 
         ---
-        Alternate route: `/v1/fw/leaderboards/`
+        Alternate route: `/dev/fw/leaderboards/`
 
         Alternate route: `/legacy/fw/leaderboards/`
 
-        Alternate route: `/dev/fw/leaderboards/`
+        Alternate route: `/v1/fw/leaderboards/`
 
         ---
         This route expires daily at 11:05
@@ -16508,11 +18195,11 @@ paths:
         Top 100 leaderboard of pilots for kills and victory points separated by total, last week and yesterday.
 
         ---
-        Alternate route: `/v1/fw/leaderboards/characters/`
+        Alternate route: `/dev/fw/leaderboards/characters/`
 
         Alternate route: `/legacy/fw/leaderboards/characters/`
 
-        Alternate route: `/dev/fw/leaderboards/characters/`
+        Alternate route: `/v1/fw/leaderboards/characters/`
 
         ---
         This route expires daily at 11:05
@@ -16734,11 +18421,11 @@ paths:
         Top 10 leaderboard of corporations for kills and victory points separated by total, last week and yesterday.
 
         ---
-        Alternate route: `/v1/fw/leaderboards/corporations/`
+        Alternate route: `/dev/fw/leaderboards/corporations/`
 
         Alternate route: `/legacy/fw/leaderboards/corporations/`
 
-        Alternate route: `/dev/fw/leaderboards/corporations/`
+        Alternate route: `/v1/fw/leaderboards/corporations/`
 
         ---
         This route expires daily at 11:05
@@ -16960,11 +18647,11 @@ paths:
         Statistical overviews of factions involved in faction warfare
 
         ---
-        Alternate route: `/v1/fw/stats/`
+        Alternate route: `/dev/fw/stats/`
 
         Alternate route: `/legacy/fw/stats/`
 
-        Alternate route: `/dev/fw/stats/`
+        Alternate route: `/v1/fw/stats/`
 
         ---
         This route expires daily at 11:05
@@ -17098,11 +18785,11 @@ paths:
         An overview of the current ownership of faction warfare solar systems
 
         ---
-        Alternate route: `/v1/fw/systems/`
+        Alternate route: `/dev/fw/systems/`
 
         Alternate route: `/legacy/fw/systems/`
 
-        Alternate route: `/dev/fw/systems/`
+        Alternate route: `/v1/fw/systems/`
 
         ---
         This route is cached for up to 1800 seconds
@@ -17199,11 +18886,11 @@ paths:
         Data about which NPC factions are at war
 
         ---
-        Alternate route: `/v1/fw/wars/`
+        Alternate route: `/dev/fw/wars/`
 
         Alternate route: `/legacy/fw/wars/`
 
-        Alternate route: `/dev/fw/wars/`
+        Alternate route: `/v1/fw/wars/`
 
         ---
         This route expires daily at 11:05
@@ -17272,11 +18959,11 @@ paths:
         Return a list of current incursions
 
         ---
-        Alternate route: `/v1/incursions/`
+        Alternate route: `/dev/incursions/`
 
         Alternate route: `/legacy/incursions/`
 
-        Alternate route: `/dev/incursions/`
+        Alternate route: `/v1/incursions/`
 
         ---
         This route is cached for up to 300 seconds
@@ -17401,11 +19088,11 @@ paths:
         Return a list of industry facilities
 
         ---
-        Alternate route: `/v1/industry/facilities/`
+        Alternate route: `/dev/industry/facilities/`
 
         Alternate route: `/legacy/industry/facilities/`
 
-        Alternate route: `/dev/industry/facilities/`
+        Alternate route: `/v1/industry/facilities/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -17502,11 +19189,11 @@ paths:
         Return cost indices for solar systems
 
         ---
-        Alternate route: `/v1/industry/systems/`
+        Alternate route: `/dev/industry/systems/`
 
         Alternate route: `/legacy/industry/systems/`
 
-        Alternate route: `/dev/industry/systems/`
+        Alternate route: `/v1/industry/systems/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -17606,11 +19293,11 @@ paths:
         Return available insurance levels for all ship types
 
         ---
-        Alternate route: `/v1/insurance/prices/`
+        Alternate route: `/dev/insurance/prices/`
 
         Alternate route: `/legacy/insurance/prices/`
 
-        Alternate route: `/dev/insurance/prices/`
+        Alternate route: `/v1/insurance/prices/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -17717,11 +19404,11 @@ paths:
         Return a single killmail from its ID and hash
 
         ---
-        Alternate route: `/v1/killmails/{killmail_id}/{killmail_hash}/`
+        Alternate route: `/dev/killmails/{killmail_id}/{killmail_hash}/`
 
         Alternate route: `/legacy/killmails/{killmail_id}/{killmail_hash}/`
 
-        Alternate route: `/dev/killmails/{killmail_id}/{killmail_hash}/`
+        Alternate route: `/v1/killmails/{killmail_id}/{killmail_hash}/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -18065,11 +19752,11 @@ paths:
         Return a list of offers from a specific corporation's loyalty store
 
         ---
-        Alternate route: `/v1/loyalty/stores/{corporation_id}/offers/`
+        Alternate route: `/dev/loyalty/stores/{corporation_id}/offers/`
 
         Alternate route: `/legacy/loyalty/stores/{corporation_id}/offers/`
 
-        Alternate route: `/dev/loyalty/stores/{corporation_id}/offers/`
+        Alternate route: `/v1/loyalty/stores/{corporation_id}/offers/`
 
         ---
         This route expires daily at 11:05
@@ -18193,11 +19880,11 @@ paths:
         Get a list of item groups
 
         ---
-        Alternate route: `/v1/markets/groups/`
+        Alternate route: `/dev/markets/groups/`
 
         Alternate route: `/legacy/markets/groups/`
 
-        Alternate route: `/dev/markets/groups/`
+        Alternate route: `/v1/markets/groups/`
 
         ---
         This route expires daily at 11:05
@@ -18254,11 +19941,11 @@ paths:
         Get information on an item group
 
         ---
-        Alternate route: `/v1/markets/groups/{market_group_id}/`
+        Alternate route: `/dev/markets/groups/{market_group_id}/`
 
         Alternate route: `/legacy/markets/groups/{market_group_id}/`
 
-        Alternate route: `/dev/markets/groups/{market_group_id}/`
+        Alternate route: `/v1/markets/groups/{market_group_id}/`
 
         ---
         This route expires daily at 11:05
@@ -18378,11 +20065,11 @@ paths:
         Return a list of prices
 
         ---
-        Alternate route: `/v1/markets/prices/`
+        Alternate route: `/dev/markets/prices/`
 
         Alternate route: `/legacy/markets/prices/`
 
-        Alternate route: `/dev/markets/prices/`
+        Alternate route: `/v1/markets/prices/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -18457,11 +20144,11 @@ paths:
         Return all orders in a structure
 
         ---
-        Alternate route: `/v1/markets/structures/{structure_id}/`
+        Alternate route: `/dev/markets/structures/{structure_id}/`
 
         Alternate route: `/legacy/markets/structures/{structure_id}/`
 
-        Alternate route: `/dev/markets/structures/{structure_id}/`
+        Alternate route: `/v1/markets/structures/{structure_id}/`
 
         ---
         This route is cached for up to 300 seconds
@@ -18628,11 +20315,11 @@ paths:
         Return a list of historical market statistics for the specified type in a region
 
         ---
-        Alternate route: `/v1/markets/{region_id}/history/`
+        Alternate route: `/dev/markets/{region_id}/history/`
 
         Alternate route: `/legacy/markets/{region_id}/history/`
 
-        Alternate route: `/dev/markets/{region_id}/history/`
+        Alternate route: `/v1/markets/{region_id}/history/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -18756,11 +20443,11 @@ paths:
         Return a list of orders in a region
 
         ---
-        Alternate route: `/v1/markets/{region_id}/orders/`
+        Alternate route: `/dev/markets/{region_id}/orders/`
 
         Alternate route: `/legacy/markets/{region_id}/orders/`
 
-        Alternate route: `/dev/markets/{region_id}/orders/`
+        Alternate route: `/v1/markets/{region_id}/orders/`
 
         ---
         This route is cached for up to 300 seconds
@@ -18946,11 +20633,11 @@ paths:
         Return a list of type IDs that have active orders in the region, for efficient market indexing.
 
         ---
-        Alternate route: `/v1/markets/{region_id}/types/`
+        Alternate route: `/dev/markets/{region_id}/types/`
 
         Alternate route: `/legacy/markets/{region_id}/types/`
 
-        Alternate route: `/dev/markets/{region_id}/types/`
+        Alternate route: `/v1/markets/{region_id}/types/`
 
         ---
         This route is cached for up to 600 seconds
@@ -19020,11 +20707,11 @@ paths:
         Return a list of opportunities groups
 
         ---
-        Alternate route: `/v1/opportunities/groups/`
+        Alternate route: `/dev/opportunities/groups/`
 
         Alternate route: `/legacy/opportunities/groups/`
 
-        Alternate route: `/dev/opportunities/groups/`
+        Alternate route: `/v1/opportunities/groups/`
 
         ---
         This route expires daily at 11:05
@@ -19082,11 +20769,11 @@ paths:
         Return information of an opportunities group
 
         ---
-        Alternate route: `/v1/opportunities/groups/{group_id}/`
+        Alternate route: `/dev/opportunities/groups/{group_id}/`
 
         Alternate route: `/legacy/opportunities/groups/{group_id}/`
 
-        Alternate route: `/dev/opportunities/groups/{group_id}/`
+        Alternate route: `/v1/opportunities/groups/{group_id}/`
 
         ---
         This route expires daily at 11:05
@@ -19204,11 +20891,11 @@ paths:
         Return a list of opportunities tasks
 
         ---
-        Alternate route: `/v1/opportunities/tasks/`
+        Alternate route: `/dev/opportunities/tasks/`
 
         Alternate route: `/legacy/opportunities/tasks/`
 
-        Alternate route: `/dev/opportunities/tasks/`
+        Alternate route: `/v1/opportunities/tasks/`
 
         ---
         This route expires daily at 11:05
@@ -19266,11 +20953,11 @@ paths:
         Return information of an opportunities task
 
         ---
-        Alternate route: `/v1/opportunities/tasks/{task_id}/`
+        Alternate route: `/dev/opportunities/tasks/{task_id}/`
 
         Alternate route: `/legacy/opportunities/tasks/{task_id}/`
 
-        Alternate route: `/dev/opportunities/tasks/{task_id}/`
+        Alternate route: `/v1/opportunities/tasks/{task_id}/`
 
         ---
         This route expires daily at 11:05
@@ -19351,9 +21038,9 @@ paths:
         Get the systems between origin and destination
 
         ---
-        Alternate route: `/legacy/route/{origin}/{destination}/`
-
         Alternate route: `/dev/route/{origin}/{destination}/`
+
+        Alternate route: `/legacy/route/{origin}/{destination}/`
 
         Alternate route: `/v1/route/{origin}/{destination}/`
 
@@ -19473,9 +21160,9 @@ paths:
         Search for entities that match a given sub-string.
 
         ---
-        Alternate route: `/v1/search/`
-
         Alternate route: `/legacy/search/`
+
+        Alternate route: `/v1/search/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -19688,11 +21375,11 @@ paths:
         Shows sovereignty data for campaigns.
 
         ---
-        Alternate route: `/v1/sovereignty/campaigns/`
+        Alternate route: `/dev/sovereignty/campaigns/`
 
         Alternate route: `/legacy/sovereignty/campaigns/`
 
-        Alternate route: `/dev/sovereignty/campaigns/`
+        Alternate route: `/v1/sovereignty/campaigns/`
 
         ---
         This route is cached for up to 5 seconds
@@ -19844,11 +21531,11 @@ paths:
         Shows sovereignty information for solar systems
 
         ---
-        Alternate route: `/v1/sovereignty/map/`
+        Alternate route: `/dev/sovereignty/map/`
 
         Alternate route: `/legacy/sovereignty/map/`
 
-        Alternate route: `/dev/sovereignty/map/`
+        Alternate route: `/v1/sovereignty/map/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -19927,11 +21614,11 @@ paths:
         Shows sovereignty data for structures.
 
         ---
-        Alternate route: `/v1/sovereignty/structures/`
+        Alternate route: `/dev/sovereignty/structures/`
 
         Alternate route: `/legacy/sovereignty/structures/`
 
-        Alternate route: `/dev/sovereignty/structures/`
+        Alternate route: `/v1/sovereignty/structures/`
 
         ---
         This route is cached for up to 120 seconds
@@ -20039,11 +21726,11 @@ paths:
         EVE Server status
 
         ---
-        Alternate route: `/v1/status/`
+        Alternate route: `/dev/status/`
 
         Alternate route: `/legacy/status/`
 
-        Alternate route: `/dev/status/`
+        Alternate route: `/v1/status/`
 
         ---
         This route is cached for up to 30 seconds
@@ -20117,9 +21804,9 @@ paths:
         Set a solar system as autopilot waypoint
 
         ---
-        Alternate route: `/v2/ui/autopilot/waypoint/`
-
         Alternate route: `/dev/ui/autopilot/waypoint/`
+
+        Alternate route: `/v2/ui/autopilot/waypoint/`
       operationId: post_ui_autopilot_waypoint
       parameters:
         - default: false
@@ -20176,11 +21863,11 @@ paths:
         Open the contract window inside the client
 
         ---
-        Alternate route: `/v1/ui/openwindow/contract/`
+        Alternate route: `/dev/ui/openwindow/contract/`
 
         Alternate route: `/legacy/ui/openwindow/contract/`
 
-        Alternate route: `/dev/ui/openwindow/contract/`
+        Alternate route: `/v1/ui/openwindow/contract/`
       operationId: post_ui_openwindow_contract
       parameters:
         - description: The contract to open
@@ -20226,11 +21913,11 @@ paths:
         Open the information window for a character, corporation or alliance inside the client
 
         ---
-        Alternate route: `/v1/ui/openwindow/information/`
+        Alternate route: `/dev/ui/openwindow/information/`
 
         Alternate route: `/legacy/ui/openwindow/information/`
 
-        Alternate route: `/dev/ui/openwindow/information/`
+        Alternate route: `/v1/ui/openwindow/information/`
       operationId: post_ui_openwindow_information
       parameters:
         - $ref: '#/parameters/datasource'
@@ -20276,11 +21963,11 @@ paths:
         Open the market details window for a specific typeID inside the client
 
         ---
-        Alternate route: `/v1/ui/openwindow/marketdetails/`
+        Alternate route: `/dev/ui/openwindow/marketdetails/`
 
         Alternate route: `/legacy/ui/openwindow/marketdetails/`
 
-        Alternate route: `/dev/ui/openwindow/marketdetails/`
+        Alternate route: `/v1/ui/openwindow/marketdetails/`
       operationId: post_ui_openwindow_marketdetails
       parameters:
         - $ref: '#/parameters/datasource'
@@ -20326,11 +22013,11 @@ paths:
         Open the New Mail window, according to settings from the request if applicable
 
         ---
-        Alternate route: `/v1/ui/openwindow/newmail/`
+        Alternate route: `/dev/ui/openwindow/newmail/`
 
         Alternate route: `/legacy/ui/openwindow/newmail/`
 
-        Alternate route: `/dev/ui/openwindow/newmail/`
+        Alternate route: `/v1/ui/openwindow/newmail/`
       operationId: post_ui_openwindow_newmail
       parameters:
         - $ref: '#/parameters/datasource'
@@ -20428,11 +22115,11 @@ paths:
         Get a list of bloodlines
 
         ---
-        Alternate route: `/v1/universe/bloodlines/`
+        Alternate route: `/dev/universe/bloodlines/`
 
         Alternate route: `/legacy/universe/bloodlines/`
 
-        Alternate route: `/dev/universe/bloodlines/`
+        Alternate route: `/v1/universe/bloodlines/`
 
         ---
         This route expires daily at 11:05
@@ -20573,11 +22260,11 @@ paths:
         Get a list of item categories
 
         ---
-        Alternate route: `/v1/universe/categories/`
+        Alternate route: `/dev/universe/categories/`
 
         Alternate route: `/legacy/universe/categories/`
 
-        Alternate route: `/dev/universe/categories/`
+        Alternate route: `/v1/universe/categories/`
 
         ---
         This route expires daily at 11:05
@@ -20634,11 +22321,11 @@ paths:
         Get information of an item category
 
         ---
-        Alternate route: `/v1/universe/categories/{category_id}/`
+        Alternate route: `/dev/universe/categories/{category_id}/`
 
         Alternate route: `/legacy/universe/categories/{category_id}/`
 
-        Alternate route: `/dev/universe/categories/{category_id}/`
+        Alternate route: `/v1/universe/categories/{category_id}/`
 
         ---
         This route expires daily at 11:05
@@ -20753,11 +22440,11 @@ paths:
         Get a list of constellations
 
         ---
-        Alternate route: `/v1/universe/constellations/`
+        Alternate route: `/dev/universe/constellations/`
 
         Alternate route: `/legacy/universe/constellations/`
 
-        Alternate route: `/dev/universe/constellations/`
+        Alternate route: `/v1/universe/constellations/`
 
         ---
         This route expires daily at 11:05
@@ -20813,11 +22500,11 @@ paths:
         Get information on a constellation
 
         ---
-        Alternate route: `/v1/universe/constellations/{constellation_id}/`
+        Alternate route: `/dev/universe/constellations/{constellation_id}/`
 
         Alternate route: `/legacy/universe/constellations/{constellation_id}/`
 
-        Alternate route: `/dev/universe/constellations/{constellation_id}/`
+        Alternate route: `/v1/universe/constellations/{constellation_id}/`
 
         ---
         This route expires daily at 11:05
@@ -20961,11 +22648,9 @@ paths:
         Get a list of factions
 
         ---
-        Alternate route: `/v1/universe/factions/`
-
-        Alternate route: `/legacy/universe/factions/`
-
         Alternate route: `/dev/universe/factions/`
+
+        Alternate route: `/v2/universe/factions/`
 
         ---
         This route expires daily at 11:05
@@ -21065,8 +22750,6 @@ paths:
                 - faction_id
                 - name
                 - description
-                - solar_system_id
-                - corporation_id
                 - size_factor
                 - station_count
                 - station_system_count
@@ -21088,19 +22771,18 @@ paths:
         - Universe
       x-alternate-versions:
         - dev
-        - legacy
-        - v1
+        - v2
   /universe/graphics/:
     get:
       description: |-
         Get a list of graphics
 
         ---
-        Alternate route: `/v1/universe/graphics/`
+        Alternate route: `/dev/universe/graphics/`
 
         Alternate route: `/legacy/universe/graphics/`
 
-        Alternate route: `/dev/universe/graphics/`
+        Alternate route: `/v1/universe/graphics/`
 
         ---
         This route expires daily at 11:05
@@ -21156,11 +22838,11 @@ paths:
         Get information on a graphic
 
         ---
-        Alternate route: `/v1/universe/graphics/{graphic_id}/`
+        Alternate route: `/dev/universe/graphics/{graphic_id}/`
 
         Alternate route: `/legacy/universe/graphics/{graphic_id}/`
 
-        Alternate route: `/dev/universe/graphics/{graphic_id}/`
+        Alternate route: `/v1/universe/graphics/{graphic_id}/`
 
         ---
         This route expires daily at 11:05
@@ -21266,11 +22948,11 @@ paths:
         Get a list of item groups
 
         ---
-        Alternate route: `/v1/universe/groups/`
+        Alternate route: `/dev/universe/groups/`
 
         Alternate route: `/legacy/universe/groups/`
 
-        Alternate route: `/dev/universe/groups/`
+        Alternate route: `/v1/universe/groups/`
 
         ---
         This route expires daily at 11:05
@@ -21333,11 +23015,11 @@ paths:
         Get information on an item group
 
         ---
-        Alternate route: `/v1/universe/groups/{group_id}/`
+        Alternate route: `/dev/universe/groups/{group_id}/`
 
         Alternate route: `/legacy/universe/groups/{group_id}/`
 
-        Alternate route: `/dev/universe/groups/{group_id}/`
+        Alternate route: `/v1/universe/groups/{group_id}/`
 
         ---
         This route expires daily at 11:05
@@ -21459,11 +23141,11 @@ paths:
         Get information on a moon
 
         ---
-        Alternate route: `/v1/universe/moons/{moon_id}/`
+        Alternate route: `/dev/universe/moons/{moon_id}/`
 
         Alternate route: `/legacy/universe/moons/{moon_id}/`
 
-        Alternate route: `/dev/universe/moons/{moon_id}/`
+        Alternate route: `/v1/universe/moons/{moon_id}/`
 
         ---
         This route expires daily at 11:05
@@ -21582,9 +23264,9 @@ paths:
         Resolve a set of IDs to names and categories. Supported ID's for resolving are: Characters, Corporations, Alliances, Stations, Solar Systems, Constellations, Regions, Types.
 
         ---
-        Alternate route: `/v2/universe/names/`
-
         Alternate route: `/dev/universe/names/`
+
+        Alternate route: `/v2/universe/names/`
       operationId: post_universe_names
       parameters:
         - $ref: '#/parameters/datasource'
@@ -21689,11 +23371,11 @@ paths:
         Get information on a planet
 
         ---
-        Alternate route: `/v1/universe/planets/{planet_id}/`
+        Alternate route: `/dev/universe/planets/{planet_id}/`
 
         Alternate route: `/legacy/universe/planets/{planet_id}/`
 
-        Alternate route: `/dev/universe/planets/{planet_id}/`
+        Alternate route: `/v1/universe/planets/{planet_id}/`
 
         ---
         This route expires daily at 11:05
@@ -21819,11 +23501,11 @@ paths:
         Get a list of character races
 
         ---
-        Alternate route: `/v1/universe/races/`
+        Alternate route: `/dev/universe/races/`
 
         Alternate route: `/legacy/universe/races/`
 
-        Alternate route: `/dev/universe/races/`
+        Alternate route: `/v1/universe/races/`
 
         ---
         This route expires daily at 11:05
@@ -21915,11 +23597,11 @@ paths:
         Get a list of regions
 
         ---
-        Alternate route: `/v1/universe/regions/`
+        Alternate route: `/dev/universe/regions/`
 
         Alternate route: `/legacy/universe/regions/`
 
-        Alternate route: `/dev/universe/regions/`
+        Alternate route: `/v1/universe/regions/`
 
         ---
         This route expires daily at 11:05
@@ -21975,11 +23657,11 @@ paths:
         Get information on a region
 
         ---
-        Alternate route: `/v1/universe/regions/{region_id}/`
+        Alternate route: `/dev/universe/regions/{region_id}/`
 
         Alternate route: `/legacy/universe/regions/{region_id}/`
 
-        Alternate route: `/dev/universe/regions/{region_id}/`
+        Alternate route: `/v1/universe/regions/{region_id}/`
 
         ---
         This route expires daily at 11:05
@@ -22092,11 +23774,11 @@ paths:
         Get information on a planetary factory schematic
 
         ---
-        Alternate route: `/v1/universe/schematics/{schematic_id}/`
+        Alternate route: `/dev/universe/schematics/{schematic_id}/`
 
         Alternate route: `/legacy/universe/schematics/{schematic_id}/`
 
-        Alternate route: `/dev/universe/schematics/{schematic_id}/`
+        Alternate route: `/v1/universe/schematics/{schematic_id}/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -22180,11 +23862,11 @@ paths:
         Get information on a stargate
 
         ---
-        Alternate route: `/v1/universe/stargates/{stargate_id}/`
+        Alternate route: `/dev/universe/stargates/{stargate_id}/`
 
         Alternate route: `/legacy/universe/stargates/{stargate_id}/`
 
-        Alternate route: `/dev/universe/stargates/{stargate_id}/`
+        Alternate route: `/v1/universe/stargates/{stargate_id}/`
 
         ---
         This route expires daily at 11:05
@@ -22332,11 +24014,11 @@ paths:
         Get information on a star
 
         ---
-        Alternate route: `/v1/universe/stars/{star_id}/`
+        Alternate route: `/dev/universe/stars/{star_id}/`
 
         Alternate route: `/legacy/universe/stars/{star_id}/`
 
-        Alternate route: `/dev/universe/stars/{star_id}/`
+        Alternate route: `/v1/universe/stars/{star_id}/`
 
         ---
         This route expires daily at 11:05
@@ -22536,9 +24218,9 @@ paths:
         Get information on a station
 
         ---
-        Alternate route: `/v2/universe/stations/{station_id}/`
-
         Alternate route: `/dev/universe/stations/{station_id}/`
+
+        Alternate route: `/v2/universe/stations/{station_id}/`
 
         ---
         This route is cached for up to 300 seconds
@@ -22755,11 +24437,11 @@ paths:
         List all public structures
 
         ---
-        Alternate route: `/v1/universe/structures/`
+        Alternate route: `/dev/universe/structures/`
 
         Alternate route: `/legacy/universe/structures/`
 
-        Alternate route: `/dev/universe/structures/`
+        Alternate route: `/v1/universe/structures/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -22818,11 +24500,11 @@ paths:
         Returns information on requested structure, if you are on the ACL. Otherwise, returns "Forbidden" for all inputs.
 
         ---
-        Alternate route: `/v1/universe/structures/{structure_id}/`
+        Alternate route: `/dev/universe/structures/{structure_id}/`
 
         Alternate route: `/legacy/universe/structures/{structure_id}/`
 
-        Alternate route: `/dev/universe/structures/{structure_id}/`
+        Alternate route: `/v1/universe/structures/{structure_id}/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -22947,11 +24629,11 @@ paths:
         Get the number of jumps in solar systems within the last hour ending at the timestamp of the Last-Modified header, excluding wormhole space. Only systems with jumps will be listed
 
         ---
-        Alternate route: `/v1/universe/system_jumps/`
+        Alternate route: `/dev/universe/system_jumps/`
 
         Alternate route: `/legacy/universe/system_jumps/`
 
-        Alternate route: `/dev/universe/system_jumps/`
+        Alternate route: `/v1/universe/system_jumps/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -23021,9 +24703,9 @@ paths:
         Get the number of ship, pod and NPC kills per solar system within the last hour ending at the timestamp of the Last-Modified header, excluding wormhole space. Only systems with kills will be listed
 
         ---
-        Alternate route: `/v2/universe/system_kills/`
-
         Alternate route: `/dev/universe/system_kills/`
+
+        Alternate route: `/v2/universe/system_kills/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -23106,11 +24788,11 @@ paths:
         Get a list of solar systems
 
         ---
-        Alternate route: `/v1/universe/systems/`
+        Alternate route: `/dev/universe/systems/`
 
         Alternate route: `/legacy/universe/systems/`
 
-        Alternate route: `/dev/universe/systems/`
+        Alternate route: `/v1/universe/systems/`
 
         ---
         This route expires daily at 11:05
@@ -23166,9 +24848,9 @@ paths:
         Get information on a solar system
 
         ---
-        Alternate route: `/v3/universe/systems/{system_id}/`
-
         Alternate route: `/dev/universe/systems/{system_id}/`
+
+        Alternate route: `/v3/universe/systems/{system_id}/`
 
         ---
         This route expires daily at 11:05
@@ -23371,11 +25053,11 @@ paths:
         Get a list of type ids
 
         ---
-        Alternate route: `/v1/universe/types/`
+        Alternate route: `/dev/universe/types/`
 
         Alternate route: `/legacy/universe/types/`
 
-        Alternate route: `/dev/universe/types/`
+        Alternate route: `/v1/universe/types/`
 
         ---
         This route expires daily at 11:05
@@ -23438,9 +25120,9 @@ paths:
         Get information on a type
 
         ---
-        Alternate route: `/v3/universe/types/{type_id}/`
-
         Alternate route: `/dev/universe/types/{type_id}/`
+
+        Alternate route: `/v3/universe/types/{type_id}/`
 
         ---
         This route expires daily at 11:05
@@ -23642,11 +25324,11 @@ paths:
         Return a list of wars
 
         ---
-        Alternate route: `/v1/wars/`
+        Alternate route: `/dev/wars/`
 
         Alternate route: `/legacy/wars/`
 
-        Alternate route: `/dev/wars/`
+        Alternate route: `/v1/wars/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -23710,11 +25392,11 @@ paths:
         Return details about a war
 
         ---
-        Alternate route: `/v1/wars/{war_id}/`
+        Alternate route: `/dev/wars/{war_id}/`
 
         Alternate route: `/legacy/wars/{war_id}/`
 
-        Alternate route: `/dev/wars/{war_id}/`
+        Alternate route: `/v1/wars/{war_id}/`
 
         ---
         This route is cached for up to 3600 seconds
@@ -23912,11 +25594,11 @@ paths:
         Return a list of kills related to a war
 
         ---
-        Alternate route: `/v1/wars/{war_id}/killmails/`
+        Alternate route: `/dev/wars/{war_id}/killmails/`
 
         Alternate route: `/legacy/wars/{war_id}/killmails/`
 
-        Alternate route: `/dev/wars/{war_id}/killmails/`
+        Alternate route: `/v1/wars/{war_id}/killmails/`
 
         ---
         This route is cached for up to 3600 seconds

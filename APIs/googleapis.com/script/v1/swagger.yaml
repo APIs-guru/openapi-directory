@@ -8,11 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: An API for managing and executing Google Apps Script projects.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
-  title: Google Apps Script Execution
+  title: Google Apps Script
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.0.1
       format: google
       url: 'https://script.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -35,7 +31,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://mail.google.com/': 'Read, send, delete, and manage your email'
@@ -49,24 +45,6 @@ securityDefinitions:
       'https://www.googleapis.com/auth/groups': View and manage your Google Groups
       'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
       'https://www.googleapis.com/auth/userinfo.email': View your email address
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://mail.google.com/': 'Read, send, delete, and manage your email'
-      'https://www.google.com/calendar/feeds': Manage your calendars
-      'https://www.google.com/m8/feeds': Manage your contacts
-      'https://www.googleapis.com/auth/admin.directory.group': View and manage the provisioning of groups on your domain
-      'https://www.googleapis.com/auth/admin.directory.user': View and manage the provisioning of users on your domain
-      'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
-      'https://www.googleapis.com/auth/forms': View and manage your forms in Google Drive
-      'https://www.googleapis.com/auth/forms.currentonly': View and manage forms that this application has been installed in
-      'https://www.googleapis.com/auth/groups': View and manage your Google Groups
-      'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
-      'https://www.googleapis.com/auth/userinfo.email': View your email address
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -165,7 +143,7 @@ paths:
     post:
       description: |-
         Runs a function in an Apps Script project. The project must be deployed
-        for use with the Apps Script Execution API.
+        for use with the Apps Script API.
 
         This method requires authorization with an OAuth 2.0 token that includes at
         least one of the scopes listed in the [Authorization](#authorization)
@@ -194,59 +172,39 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.google.com/calendar/feeds'
-          Oauth2c:
             - 'https://www.google.com/calendar/feeds'
         - Oauth2:
             - 'https://www.google.com/m8/feeds'
-          Oauth2c:
-            - 'https://www.google.com/m8/feeds'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/admin.directory.group'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/admin.directory.user'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/forms'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/forms'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/forms.currentonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/forms.currentonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/groups'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/groups'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/spreadsheets'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - scripts
 definitions:
   ExecutionError:
     description: |-
-      An object that provides information about the nature of an error in the Apps
-      Script Execution API. If an
-      `run` call succeeds but the
-      script function (or Apps Script itself) throws an exception, the response
-      body's `error` field contains a
-      `Status` object. The `Status` object's `details` field
+      An object that provides information about the nature of an error resulting
+      from an attempted execution of a script function using the Apps Script API.
+      If a run or
+      runAsync call
+      succeeds but the script function (or Apps Script itself) throws an exception,
+      the response body's error field
+      contains a
+      Status object. The `Status` object's `details` field
       contains an array with a single one of these `ExecutionError` objects.
     properties:
       errorMessage:
@@ -277,7 +235,7 @@ definitions:
         description: |-
           If `true` and the user is an owner of the script, the script runs at the
           most recently saved version rather than the version deployed for use with
-          the Execution API. Optional; default is `false`.
+          the Apps Script API. Optional; default is `false`.
         type: boolean
       function:
         description: |-
@@ -297,55 +255,64 @@ definitions:
         description: |-
           For Android add-ons only. An ID that represents the user's current session
           in the Android app for Google Docs or Sheets, included as extra data in the
-          [`Intent`](https://developer.android.com/guide/components/intents-filters.html)
+          [Intent](https://developer.android.com/guide/components/intents-filters.html)
           that launches the add-on. When an Android add-on is run with a session
           state, it gains the privileges of a
-          [bound](https://developers.google.com/apps-script/guides/bound) script &mdash;
-          that is, it can access information like the user's current cursor position
-          (in Docs) or selected cell (in Sheets). To retrieve the state, call
+          [bound](https://developers.google.com/apps-script/guides/bound)
+          script&mdash;that is, it can access information like the user's current
+          cursor position (in Docs) or selected cell (in Sheets). To retrieve the
+          state, call
           `Intent.getStringExtra("com.google.android.apps.docs.addons.SessionState")`.
           Optional.
         type: string
     type: object
   ExecutionResponse:
     description: |-
-      An object that provides the return value of a function executed through the
-      Apps Script Execution API. If a
-      `run` call succeeds and the
-      script function returns successfully, the response body's
-      `response` field contains this
+      An object that provides the return value of a function executed using the
+      Apps Script API. If the script function returns successfully, the response
+      body's response field contains this
       `ExecutionResponse` object.
     properties:
       result:
         description: |-
           The return value of the script function. The type matches the object type
-          returned in Apps Script. Functions called through the Execution API cannot
+          returned in Apps Script. Functions called using the Apps Script API cannot
           return Apps Script-specific objects (such as a `Document` or a `Calendar`);
           they can only return primitive types such as a `string`, `number`, `array`,
           `object`, or `boolean`.
     type: object
   Operation:
     description: |-
-      The response will not arrive until the function finishes executing. The maximum runtime is listed in the guide to [limitations in Apps Script](https://developers.google.com/apps-script/guides/services/quotas#current_limitations).
-      <p>If the script function returns successfully, the `response` field will contain an `ExecutionResponse` object with the function's return value in the object's `result` field.</p>
-      <p>If the script function (or Apps Script itself) throws an exception, the `error` field will contain a `Status` object. The `Status` object's `details` field will contain an array with a single `ExecutionError` object that provides information about the nature of the error.</p>
-      <p>If the `run` call itself fails (for example, because of a malformed request or an authorization error), the method will return an HTTP response code in the 4XX range with a different format for the response body. Client libraries will automatically convert a 4XX response into an exception class.</p>
+      A representation of a execution of an Apps Script function that is started using run or runAsync. The execution response does not arrive until the function finishes executing. The maximum execution runtime is listed in the [Apps Script quotas guide](/apps-script/guides/services/quotas#current_limitations). <p>After the execution is started, it can have one of four outcomes:</p> <ul> <li> If the script function returns successfully, the
+        response field contains an
+        ExecutionResponse object
+        with the function's return value in the object's `result` field.</li>
+      <li> If the script function (or Apps Script itself) throws an exception, the
+        error field contains a
+        Status object. The `Status` object's `details`
+        field contains an array with a single
+        ExecutionError object that
+        provides information about the nature of the error.</li>
+      <li> If the execution was asynchronous and has not yet completed,
+        the done field is `false` and
+        the neither the `response` nor `error` fields are present.</li>
+      <li> If the `run` or `runAsync` call itself fails (for example, because of a
+        malformed request or an authorization error), the method returns an HTTP
+        response code in the 4XX range with a different format for the response
+        body. Client libraries automatically convert a 4XX response into an
+        exception class.</li>
+      </ul>
     properties:
       done:
-        description: This field is only used with asynchronous executions and indicates whether or not the script execution has completed. A completed execution has a populated response field containing the `ExecutionResponse` from function that was executed.
+        description: This field is only used with asynchronous executions. It indicates whether the script execution has completed. A completed execution has a populated `response` field containing the ExecutionResponse from function that was executed.
         type: boolean
       error:
         $ref: '#/definitions/Status'
-        description: 'If a `run` call succeeds but the script function (or Apps Script itself) throws an exception, this field will contain a `Status` object. The `Status` object''s `details` field will contain an array with a single `ExecutionError` object that provides information about the nature of the error.'
-      metadata:
-        additionalProperties:
-          description: Properties of the object. Contains field @type with type URL.
-        description: This field is not used.
-        type: object
+        description: 'If a `run` or `runAsync` call succeeds but the script function (or Apps Script itself) throws an exception, this field contains a Status object. The `Status` object''s `details` field contains an array with a single ExecutionError object that provides information about the nature of the error.'
       response:
         additionalProperties:
           description: Properties of the object. Contains field @type with type URL.
-        description: 'If the script function returns successfully, this field will contain an `ExecutionResponse` object with the function''s return value as the object''s `result` field.'
+        description: 'If the script function returns successfully, this field contains an ExecutionResponse object with the function''s return value.'
         type: object
     type: object
   ScriptStackTraceElement:
@@ -360,20 +327,20 @@ definitions:
         type: integer
     type: object
   Status:
-    description: 'If a `run` call succeeds but the script function (or Apps Script itself) throws an exception, the response body''s `error` field will contain this `Status` object.'
+    description: 'If a `run` or `runAsync` call succeeds but the script function (or Apps Script itself) throws an exception, the response body''s error field contains this `Status` object.'
     properties:
       code:
-        description: 'The status code. For this API, this value will always be 3, corresponding to an <code>INVALID_ARGUMENT</code> error.'
+        description: 'The status code. For this API, this value either: <ul> <li> 3, indicating an `INVALID_ARGUMENT` error, or</li> <li> 1, indicating a `CANCELLED` asynchronous execution.</li> </ul>'
         format: int32
         type: integer
       details:
-        description: An array that contains a single `ExecutionError` object that provides information about the nature of the error.
+        description: An array that contains a single ExecutionError object that provides information about the nature of the error.
         items:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
           type: object
         type: array
       message:
-        description: 'A developer-facing error message, which is in English. Any user-facing error message is localized and sent in the [`google.rpc.Status.details`](google.rpc.Status.details) field, or localized by the client.'
+        description: 'A developer-facing error message, which is in English. Any user-facing error message is localized and sent in the [google.rpc.Status.details](google.rpc.Status.details) field, or localized by the client.'
         type: string
     type: object

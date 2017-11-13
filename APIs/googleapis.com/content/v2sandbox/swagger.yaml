@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Manages product items, inventory, and Merchant Center accounts for Google Shopping.'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Content API for Shopping
   version: v2sandbox
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.0.1
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/content/v2sandbox/rest'
       version: v1
@@ -35,18 +31,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/content': Manage your product listings and accounts for Google Shopping
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/content': Manage your product listings and accounts for Google Shopping
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -115,8 +103,6 @@ paths:
             $ref: '#/definitions/OrdersCustomBatchResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -188,8 +174,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
     parameters:
@@ -222,8 +206,6 @@ paths:
             $ref: '#/definitions/Order'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -270,8 +252,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/orders/{orderId}/cancel':
@@ -308,8 +288,6 @@ paths:
             $ref: '#/definitions/OrdersCancelResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -348,8 +326,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/orders/{orderId}/refund':
@@ -386,8 +362,6 @@ paths:
             $ref: '#/definitions/OrdersRefundResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -426,8 +400,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/orders/{orderId}/shipLineItems':
@@ -464,8 +436,6 @@ paths:
             $ref: '#/definitions/OrdersShipLineItemsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -504,8 +474,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/orders/{orderId}/updateShipment':
@@ -543,8 +511,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/ordersbymerchantid/{merchantOrderId}':
@@ -569,8 +535,6 @@ paths:
             $ref: '#/definitions/OrdersGetByMerchantOrderIdResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -612,8 +576,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/testorders/{orderId}/advance':
@@ -647,8 +609,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/testordertemplates/{templateName}':
@@ -678,8 +638,6 @@ paths:
             $ref: '#/definitions/OrdersGetTestOrderTemplateResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -876,9 +834,6 @@ definitions:
         items:
           $ref: '#/definitions/OrderCancellation'
         type: array
-      channelType:
-        description: 'The channel type of the order: "purchaseOnGoogle" or "googleExpress".'
-        type: string
       id:
         description: The id of the line item.
         type: string
@@ -1199,7 +1154,7 @@ definitions:
   OrderShipmentLineItemShipment:
     properties:
       lineItemId:
-        description: The id of the line item that is shipped.
+        description: The id of the line item that is shipped. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity that is shipped.
@@ -1235,7 +1190,7 @@ definitions:
         $ref: '#/definitions/Price'
         description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
       lineItemId:
-        description: The ID of the line item to cancel.
+        description: The ID of the line item to cancel. Either lineItemId or productId is required.
         type: string
       operationId:
         description: The ID of the operation. Unique across all operations for a given order.
@@ -1366,7 +1321,7 @@ definitions:
         $ref: '#/definitions/Price'
         description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
       lineItemId:
-        description: The ID of the line item to cancel.
+        description: The ID of the line item to cancel. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity to cancel.
@@ -1394,7 +1349,7 @@ definitions:
   OrdersCustomBatchRequestEntryReturnLineItem:
     properties:
       lineItemId:
-        description: The ID of the line item to return.
+        description: The ID of the line item to return. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity to return.
@@ -1550,7 +1505,7 @@ definitions:
   OrdersReturnLineItemRequest:
     properties:
       lineItemId:
-        description: The ID of the line item to return.
+        description: The ID of the line item to return. Either lineItemId or productId is required.
         type: string
       operationId:
         description: The ID of the operation. Unique across all operations for a given order.

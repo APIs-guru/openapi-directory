@@ -578,6 +578,30 @@ paths:
       summary: 'Given a query, return recipe titles starting with query. Query must be at least 3 chars in length.'
       tags:
         - Recipe
+  /recipe/autocomplete/mine:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Recipe_AutoCompleteMyRecipes
+      parameters:
+        - in: query
+          name: query
+          required: true
+          type: string
+        - format: int32
+          in: query
+          name: limit
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/BigOven.Model.RecipeInfoTiny'
+            type: array
+      tags:
+        - Recipe
   /recipe/categories:
     get:
       consumes: []
@@ -593,6 +617,18 @@ paths:
       summary: Get a list of recipe categories (the ID field can be used for include_cat in search parameters)
       tags:
         - Recipe
+  /recipe/photos/pending:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Images_GetPendingByUser
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/API2.Controllers.ImagesController.RecipePhotosResponse'
+      tags:
+        - Images
   '/recipe/review/replies/{replyId}':
     delete:
       consumes: []
@@ -1888,6 +1924,8 @@ definitions:
     properties:
       AboutMe:
         type: string
+      BackgroundUrl:
+        type: string
       Counts:
         $ref: '#/definitions/API2.Models.Counts'
       FirstName:
@@ -2745,6 +2783,22 @@ definitions:
         $ref: '#/definitions/BigOven.Model.API2.RecipeInfox'
       Review:
         $ref: '#/definitions/BigOven.Model.API.Review'
+    type: object
+  BigOven.Model.RecipeInfoTiny:
+    properties:
+      ImageURL:
+        type: string
+      QualityScore:
+        format: int32
+        type: integer
+      RecipeID:
+        format: int32
+        type: integer
+      Servings:
+        format: double
+        type: number
+      Title:
+        type: string
     type: object
   BigOven.Model.ShoppingListLine:
     properties:

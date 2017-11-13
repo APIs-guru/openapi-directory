@@ -9,10 +9,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Writes log entries and manages your Stackdriver Logging configuration.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Stackdriver Logging
   version: v2beta1
   x-apiClientRegistration:
@@ -24,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.0.1
       format: google
       url: 'https://logging.googleapis.com/$discovery/rest?version=v2beta1'
       version: v1
@@ -36,7 +32,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
@@ -44,18 +40,6 @@ securityDefinitions:
       'https://www.googleapis.com/auth/logging.admin': Administrate log data for your projects
       'https://www.googleapis.com/auth/logging.read': View log data for your projects
       'https://www.googleapis.com/auth/logging.write': Submit log data for your projects
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/logging.admin': Administrate log data for your projects
-      'https://www.googleapis.com/auth/logging.read': View log data for your projects
-      'https://www.googleapis.com/auth/logging.write': Submit log data for your projects
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -171,19 +155,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
         - entries
@@ -218,15 +194,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.write'
       tags:
         - entries
@@ -251,19 +221,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
         - monitoredResourceDescriptors
@@ -306,11 +268,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.admin'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
         - organizations
@@ -349,15 +307,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.write'
       tags:
         - projects
@@ -381,19 +333,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
         - projects
@@ -436,15 +380,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.write'
       tags:
         - projects
@@ -480,19 +418,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
         - organizations
@@ -539,19 +469,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
         - projects
@@ -594,15 +516,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.write'
       tags:
         - projects
@@ -638,19 +554,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
         - projects
@@ -700,11 +608,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.admin'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
         - projects
@@ -733,11 +637,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.admin'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
         - projects
@@ -765,19 +665,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/logging.admin'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
         - projects
@@ -835,11 +727,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.admin'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
         - projects
@@ -1131,6 +1019,9 @@ definitions:
       sourceLocation:
         $ref: '#/definitions/LogEntrySourceLocation'
         description: 'Optional. Source code location information associated with the log entry, if any.'
+      spanId:
+        description: 'Optional. Id of the span within the trace associated with the log entry. e.g. "0000000000000042" For Stackdriver trace spans, this is the same format that the Stackdriver trace API uses. The ID is a 16-character hexadecimal encoding of an 8-byte array.'
+        type: string
       textPayload:
         description: 'The log entry payload, represented as a Unicode string (UTF-8).'
         type: string

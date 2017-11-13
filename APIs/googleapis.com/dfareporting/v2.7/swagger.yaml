@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.0.1
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.7/rest'
       version: v1
@@ -8230,6 +8230,7 @@ definitions:
           - "47" for BGN
           - "48" for HRK
           - "49" for MXN
+          - "50" for NGN
         format: int64
         type: string
       defaultCreativeSizeId:
@@ -9558,7 +9559,7 @@ definitions:
         description: 'The 6-character HTML color code, beginning with #, for the background of the window area where the Flash file is displayed. Default is white. Applicable to the following creative types: FLASH_INPAGE.'
         type: string
       backupImageClickThroughUrl:
-        description: 'Click-through URL for backup image. Applicable to the following creative types: FLASH_INPAGE and HTML5_BANNER. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
+        description: 'Click-through URL for backup image. Applicable to the following creative types: FLASH_INPAGE, and HTML5_BANNER. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         type: string
       backupImageFeatures:
         description: 'List of feature dependencies that will cause a backup image to be served if the browser that serves the ad does not support them. Feature dependencies are features that a browser must be able to support in order to render your HTML5 creative asset correctly. This field is initially auto-generated to contain all features detected by DCM for all the assets of this creative and can then be modified by the client. To reset this field, copy over all the creativeAssets'' detected features. Applicable to the following creative types: HTML5_BANNER. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
@@ -11116,6 +11117,7 @@ definitions:
           - "47" for BGN
           - "48" for HRK
           - "49" for MXN
+          - "50" for NGN
         format: int64
         type: string
       description:
@@ -11557,7 +11559,7 @@ definitions:
     description: Floodlight Activity GenerateTag Response
     properties:
       floodlightActivityTag:
-        description: Generated tag for this floodlight activity.
+        description: 'Generated tag for this Floodlight activity. For global site tags, this is the event snippet.'
         type: string
       kind:
         default: 'dfareporting#floodlightActivitiesGenerateTagResponse'
@@ -11691,7 +11693,7 @@ definitions:
           - XHTML
         type: string
       tagString:
-        description: 'Value of the cat= paramter in the floodlight tag, which the ad servers use to identify the activity. This is optional: if empty, a new tag string will be generated for you. This string must be 1 to 8 characters long, with valid characters being [a-z][A-Z][0-9][-][ _ ]. This tag string must also be unique among activities of the same activity group. This field is read-only after insertion.'
+        description: 'Value of the cat= parameter in the floodlight tag, which the ad servers use to identify the activity. This is optional: if empty, a new tag string will be generated for you. This string must be 1 to 8 characters long, with valid characters being [a-z][A-Z][0-9][-][ _ ]. This tag string must also be unique among activities of the same activity group. This field is read-only after insertion.'
         type: string
       userDefinedVariableTypes:
         description: |-

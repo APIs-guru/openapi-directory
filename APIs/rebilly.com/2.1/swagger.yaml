@@ -11578,7 +11578,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -11616,7 +11615,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -11723,7 +11721,6 @@ definitions:
           - $ref: '#/definitions/SelfLink'
           - $ref: '#/definitions/FileLink'
           - $ref: '#/definitions/AttachmentResourceLink'
-        maxItems: 3
         minItems: 3
         readOnly: true
         type: array
@@ -11810,7 +11807,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -11871,8 +11867,6 @@ definitions:
         items:
           - $ref: '#/definitions/SelfLink'
           - $ref: '#/definitions/CustomerLink'
-          - $ref: '#/definitions/ContactLink'
-        maxItems: 3
         minItems: 1
         readOnly: true
         type: array
@@ -11954,25 +11948,12 @@ definitions:
           - gatewayConfig
         type: object
     description: Beanstream Gateway config
-  BillingContactLink:
-    allOf:
-      - $ref: '#/definitions/NewLink'
-    properties:
-      rel:
-        description: The link type
-        enum:
-          - billingContact
-        type: string
-    required:
-      - rel
-    type: object
   Blacklist:
     properties:
       _links:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -12160,7 +12141,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -12190,7 +12170,8 @@ definitions:
         description: Checkout page url
         type: string
       uriPath:
-        description: 'Your own custom uri path for this Checkout Page. It will be appended to checkout url https://checkout.rebilly.com/website/<uriPath>'
+        description: 'Your own custom uri path for this Checkout Page. It will be appended to checkout url https://checkout.rebilly.com/checkout/<uriPath>'
+        maxLength: 50
         type: string
       websiteId:
         allOf:
@@ -12278,7 +12259,6 @@ definitions:
         items:
           - $ref: '#/definitions/SelfLink'
           - $ref: '#/definitions/CustomerLink'
-        maxItems: 2
         minItems: 1
         readOnly: true
         type: array
@@ -12361,18 +12341,6 @@ definitions:
         - value
       type: object
     type: array
-  ContactLink:
-    allOf:
-      - $ref: '#/definitions/NewLink'
-    properties:
-      rel:
-        description: The link type
-        enum:
-          - contact
-        type: string
-    required:
-      - rel
-    type: object
   ContactObject:
     properties:
       address:
@@ -12438,7 +12406,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -12507,7 +12474,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -12564,7 +12530,6 @@ definitions:
         items:
           - $ref: '#/definitions/SelfLink'
           - $ref: '#/definitions/CustomerLink'
-        maxItems: 2
         minItems: 1
         readOnly: true
         type: array
@@ -12678,7 +12643,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -12840,18 +12804,6 @@ definitions:
     required:
       - rel
     type: object
-  DeliveryContactLink:
-    allOf:
-      - $ref: '#/definitions/NewLink'
-    properties:
-      rel:
-        description: The link type
-        enum:
-          - deliveryContact
-        type: string
-    required:
-      - rel
-    type: object
   Dengi:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -12894,7 +12846,7 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
+          - $ref: '#/definitions/TransactionLink'
         minItems: 1
         readOnly: true
         type: array
@@ -13239,7 +13191,6 @@ definitions:
         items:
           - $ref: '#/definitions/SelfLink'
           - $ref: '#/definitions/PermalinkLink'
-        maxItems: 2
         minItems: 2
         readOnly: true
         type: array
@@ -13421,7 +13372,6 @@ definitions:
         items:
           - $ref: '#/definitions/SelfLink'
           - $ref: '#/definitions/OnBoardingUrlLink'
-        maxItems: 2
         minItems: 1
         readOnly: true
         type: array
@@ -13686,7 +13636,6 @@ definitions:
         description: Links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -13849,7 +13798,6 @@ definitions:
           - $ref: '#/definitions/WebsiteLink'
           - $ref: '#/definitions/OrganizationLink'
           - $ref: '#/definitions/LeadSourceLink'
-        maxItems: 6
         minItems: 1
         readOnly: true
         type: array
@@ -14004,7 +13952,6 @@ definitions:
         items:
           - $ref: '#/definitions/SelfLink'
           - $ref: '#/definitions/SubscriptionLink'
-        maxItems: 2
         minItems: 1
         readOnly: true
         type: array
@@ -14112,7 +14059,6 @@ definitions:
         items:
           - $ref: '#/definitions/SelfLink'
           - $ref: '#/definitions/ItemsLink'
-        maxItems: 2
         minItems: 2
         readOnly: true
         type: array
@@ -14142,7 +14088,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -14167,7 +14112,6 @@ definitions:
         items:
           - $ref: '#/definitions/SelfLink'
           - $ref: '#/definitions/CustomerLink'
-        maxItems: 2
         minItems: 1
         readOnly: true
         type: array
@@ -14243,7 +14187,6 @@ definitions:
         description: Links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -14293,6 +14236,18 @@ definitions:
       - SMSVoucher
       - UPayCard
       - WeChat Pay
+      - AstroPay Card
+      - bank-transfer
+      - bitcoin
+      - Boleto
+      - cash-deposit
+      - echeck
+      - instant-bank-transfer
+      - invoice
+      - miscellaneous
+      - online-bank-transfer
+      - phone
+      - voucher
     type: string
   Moneris:
     allOf:
@@ -14376,7 +14331,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -14530,7 +14484,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -14666,9 +14619,7 @@ definitions:
         items:
           - $ref: '#/definitions/SelfLink'
           - $ref: '#/definitions/CustomerLink'
-          - $ref: '#/definitions/ContactLink'
           - $ref: '#/definitions/ApprovalUrlLink'
-        maxItems: 4
         minItems: 1
         readOnly: true
         type: array
@@ -14776,7 +14727,6 @@ definitions:
           - $ref: '#/definitions/TransactionLink'
           - $ref: '#/definitions/ApprovalUrlLink'
           - $ref: '#/definitions/LeadSourceLink'
-        maxItems: 4
         minItems: 1
         readOnly: true
         type: array
@@ -14884,8 +14834,6 @@ definitions:
         items:
           - $ref: '#/definitions/SelfLink'
           - $ref: '#/definitions/CustomerLink'
-          - $ref: '#/definitions/BillingContactLink'
-        maxItems: 3
         minItems: 1
         readOnly: true
         type: array
@@ -15075,7 +15023,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -15215,7 +15162,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -15351,7 +15297,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -15408,7 +15353,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -15696,7 +15640,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -15815,6 +15758,10 @@ definitions:
         maxLength: 10
         readOnly: true
         type: string
+      score:
+        description: Risk score computed per all the factors
+        readOnly: true
+        type: integer
       timeZone:
         description: Time zone for specified ipAddress
         example: America/New_York
@@ -15876,7 +15823,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -15899,9 +15845,9 @@ definitions:
         description: The links related to a resource
         items:
           - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/RuleSetHistoryLink'
           - $ref: '#/definitions/RuleSetVersionLink'
-        maxItems: 2
-        minItems: 2
+        minItems: 3
         readOnly: true
         type: array
       createdTime:
@@ -15910,6 +15856,18 @@ definitions:
         type: integer
     readOnly: true
     type: object
+  RuleSetHistoryLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - history
+        type: string
+    required:
+      - rel
+    type: object
   RuleSetVersion:
     description: Version of rules
     properties:
@@ -15917,7 +15875,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -16011,7 +15968,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -16053,7 +16009,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -16179,7 +16134,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -16248,10 +16202,7 @@ definitions:
           - $ref: '#/definitions/CustomerLink'
           - $ref: '#/definitions/PlanLink'
           - $ref: '#/definitions/WebsiteLink'
-          - $ref: '#/definitions/BillingContactLink'
-          - $ref: '#/definitions/DeliveryContactLink'
           - $ref: '#/definitions/LeadSourceLink'
-        maxItems: 6
         minItems: 1
         readOnly: true
         type: array
@@ -16452,7 +16403,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -16489,7 +16439,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -16510,7 +16459,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -16543,7 +16491,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -16680,19 +16627,17 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-          - $ref: '#/definitions/GatewayAccountLink'
-          - $ref: '#/definitions/CustomerLink'
           - $ref: '#/definitions/WebsiteLink'
+          - $ref: '#/definitions/CustomerLink'
+          - $ref: '#/definitions/GatewayAccountLink'
           - $ref: '#/definitions/PaymentCardLink'
           - $ref: '#/definitions/ParentTransactionLink'
           - $ref: '#/definitions/RetriedTransactionLink'
-          - $ref: '#/definitions/BillingContactLink'
           - $ref: '#/definitions/LeadSourceLink'
           - $ref: '#/definitions/ApprovalUrlLink'
           - $ref: '#/definitions/CancelUrlLink'
           - $ref: '#/definitions/RefundUrlLink'
           - $ref: '#/definitions/DisputeLink'
-        maxItems: 13
         minItems: 1
         readOnly: true
         type: array
@@ -16856,6 +16801,10 @@ definitions:
       isRebill:
         readOnly: true
         type: boolean
+      isRetry:
+        description: True if this transaction is retry.
+        readOnly: true
+        type: boolean
       method:
         allOf:
           - $ref: '#/definitions/Method'
@@ -16891,6 +16840,15 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: The retried transaction ID
         readOnly: true
+      retriesResult:
+        description: Retries sequence result
+        enum:
+          - approved
+          - canceled
+          - declined
+          - scheduled
+        readOnly: true
+        type: string
       retryInstruction:
         $ref: '#/definitions/PaymentRetry'
       retryNumber:
@@ -16903,9 +16861,8 @@ definitions:
         description: Risk metadata
       riskScore:
         description: The transactions's risk score
-        format: integer
         readOnly: true
-        type: number
+        type: integer
       scheduledTime:
         description: The time the transaction is scheduled for collection
         format: date-time
@@ -16947,8 +16904,7 @@ definitions:
         description: Transaction updated time
       velocity:
         description: The number of transactions by the same customer in the past 24 hours
-        format: integer
-        type: number
+        type: integer
       websiteId:
         allOf:
           - $ref: '#/definitions/ResourceId'
@@ -16961,7 +16917,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/TransactionLink'
-        maxItems: 1
         minItems: 1
         type: array
       createdTime:
@@ -17073,7 +17028,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -17413,7 +17367,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array
@@ -17475,13 +17428,9 @@ definitions:
         items:
           - $ref: '#/definitions/SelfLink'
           - $ref: '#/definitions/NotesLink'
-        maxItems: 2
         minItems: 1
         readOnly: true
         type: array
-      checkoutPageUri:
-        description: Your own custom URI for this Checkout Page
-        type: string
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -17551,7 +17500,6 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
         minItems: 1
         readOnly: true
         type: array

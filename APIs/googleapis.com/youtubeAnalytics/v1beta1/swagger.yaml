@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Retrieves your YouTube Analytics data.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: YouTube Analytics
   version: v1beta1
   x-apiClientRegistration:
@@ -24,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.0.1
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/youtubeAnalytics/v1beta1/rest'
       version: v1
@@ -36,7 +32,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/youtube': Manage your YouTube account
@@ -44,18 +40,6 @@ securityDefinitions:
       'https://www.googleapis.com/auth/youtubepartner': View and manage your assets and associated content on YouTube
       'https://www.googleapis.com/auth/yt-analytics-monetary.readonly': View monetary and non-monetary YouTube Analytics reports for your YouTube content
       'https://www.googleapis.com/auth/yt-analytics.readonly': View YouTube Analytics reports for your YouTube content
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/youtube': Manage your YouTube account
-      'https://www.googleapis.com/auth/youtube.readonly': View your YouTube account
-      'https://www.googleapis.com/auth/youtubepartner': View and manage your assets and associated content on YouTube
-      'https://www.googleapis.com/auth/yt-analytics-monetary.readonly': View monetary and non-monetary YouTube Analytics reports for your YouTube content
-      'https://www.googleapis.com/auth/yt-analytics.readonly': View YouTube Analytics reports for your YouTube content
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -126,11 +110,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/youtubepartner'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - groupItems
@@ -158,19 +138,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/youtube.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtubepartner'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/youtubepartner'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - groupItems
@@ -205,11 +177,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/youtubepartner'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - groupItems
@@ -236,11 +204,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/youtubepartner'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - groups
@@ -275,19 +239,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/youtube.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtubepartner'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/youtubepartner'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - groups
@@ -322,11 +278,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/youtubepartner'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - groups
@@ -353,11 +305,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/youtubepartner'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - groups
@@ -427,19 +375,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/youtube.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - reports

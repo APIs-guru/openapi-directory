@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Manages identity and access control for Google Cloud Platform resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls.'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Identity and Access Management (IAM)
   version: v1
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.0.1
       format: google
       url: 'https://iam.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -35,18 +31,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -163,8 +151,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - permissions
   /v1/roles:
@@ -206,8 +192,6 @@ paths:
             $ref: '#/definitions/ListRolesResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - roles
@@ -259,8 +243,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - roles
   '/v1/{name}':
@@ -273,7 +255,7 @@ paths:
         Existing Bindings remains, but are inactive. The Role can be undeleted
         within 7 days. After 7 days the Role is deleted and all Bindings associated
         with the role are removed.
-      operationId: iam.organizations.roles.delete
+      operationId: iam.projects.roles.delete
       parameters:
         - description: Used to perform a consistent read-modify-write.
           in: query
@@ -296,13 +278,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     get:
       description: Gets a Role definition.
-      operationId: iam.organizations.roles.get
+      operationId: iam.projects.roles.get
       parameters:
         - description: |-
             The resource name of the role in one of the following formats:
@@ -332,10 +312,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -352,7 +330,7 @@ paths:
       - $ref: '#/parameters/alt'
     patch:
       description: Updates a Role definition.
-      operationId: iam.organizations.roles.patch
+      operationId: iam.projects.roles.patch
       parameters:
         - in: body
           name: body
@@ -380,10 +358,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     put:
       description: |-
         Updates a ServiceAccount.
@@ -419,8 +395,6 @@ paths:
             $ref: '#/definitions/ServiceAccount'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -462,8 +436,6 @@ paths:
             $ref: '#/definitions/ListServiceAccountKeysResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -510,8 +482,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}/serviceAccounts':
@@ -548,8 +518,6 @@ paths:
             $ref: '#/definitions/ListServiceAccountsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -592,8 +560,6 @@ paths:
             $ref: '#/definitions/ServiceAccount'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -638,8 +604,6 @@ paths:
             $ref: '#/definitions/SignBlobResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -690,8 +654,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:undelete':
@@ -711,7 +673,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Undelete a Role, bringing it back in its previous state.'
-      operationId: iam.organizations.roles.undelete
+      operationId: iam.projects.roles.undelete
       parameters:
         - in: body
           name: body
@@ -734,23 +696,21 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v1/{parent}/roles':
     get:
       description: Lists the Roles defined on a resource.
-      operationId: iam.organizations.roles.list
+      operationId: iam.projects.roles.list
       parameters:
         - description: Optional limit on the number of roles to include in the response.
+          enum:
+            - BASIC
+            - FULL
           in: query
           name: pageSize
           type: integer
         - description: Optional pagination token returned in an earlier ListRolesResponse.
-          enum:
-            - BASIC
-            - FULL
           in: query
           name: pageToken
           type: string
@@ -783,10 +743,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -803,7 +761,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new Role.
-      operationId: iam.organizations.roles.create
+      operationId: iam.projects.roles.create
       parameters:
         - in: body
           name: body
@@ -826,10 +784,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:getIamPolicy':
     parameters:
       - $ref: '#/parameters/access_token'
@@ -866,8 +822,6 @@ paths:
             $ref: '#/definitions/Policy'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -912,8 +866,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{resource}:testIamPermissions':
@@ -956,8 +908,6 @@ paths:
             $ref: '#/definitions/TestIamPermissionsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1411,9 +1361,8 @@ definitions:
       `unique_id`.
 
       If the account already exists, the account's resource name is returned
-      in util::Status's ResourceInfo.resource_name in the format of
-      projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}. The caller can
-      use the name in other methods to access the account.
+      in the format of projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}. The caller
+      can use the name in other methods to access the account.
 
       All other methods can identify the service account using the format
       `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
@@ -1447,7 +1396,7 @@ definitions:
         type: string
       oauth2ClientId:
         description: |-
-          @OutputOnly. The OAuth2 client id for the service account.
+          @OutputOnly The OAuth2 client id for the service account.
           This is used in conjunction with the OAuth2 clientconfig API to make
           three legged OAuth2 (3LO) flows to access the data of Google users.
         type: string

@@ -434,9 +434,43 @@ paths:
           $ref: '#/responses/404'
         '500':
           $ref: '#/responses/500'
-      summary: List routing keys with assoicated teams
+      summary: List routing keys with associated teams
       tags:
         - Routing keys
+  '/api-public/v1/policies/{policy}/oncall/user':
+    patch:
+      description: |
+        Replaces a currently on-call user in the escalation policy with another.  In many cases, the policy slug
+        will match the slug of the team that contains it.
+
+        This API may be called a maximum of 6 times per minute.
+      parameters:
+        - $ref: '#/parameters/apiId'
+        - $ref: '#/parameters/apiKey'
+        - $ref: '#/parameters/takeRequestPayload'
+        - description: The VictorOps policy 'slug'
+          in: path
+          name: policy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The result of the take request
+          schema:
+            $ref: '#/definitions/TakeResult'
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '404':
+          description: Team or user(s) not found
+        '500':
+          $ref: '#/responses/500'
+      summary: Create an on-call override (take on-call)
+      tags:
+        - On-call
   /api-public/v1/team:
     get:
       description: |
@@ -745,7 +779,10 @@ paths:
         - On-call
   '/api-public/v1/team/{team}/oncall/user':
     patch:
+      deprecated: true
       description: |
+        __This API call is deprecated. Instead, use /api-public/v1/policies/{policy}/oncall/user__
+
         Replaces a currently on-call user on the team with another.
 
         This API may be called a maximum of 6 times per minute.

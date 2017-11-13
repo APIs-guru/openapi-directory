@@ -1689,6 +1689,56 @@ paths:
       summary: Update project build number
       tags:
         - Project
+  '/projects/{accountName}/{projectSlug}/settings/environment-variables':
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#get-project-environment-variables'
+      operationId: getProjectEnvironmentVariables
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - name: api_key
+                value:
+                  isEncrypted: true
+                  value: very-secret-key-in-clear-text
+              - name: var1
+                value:
+                  isEncrypted: false
+                  value: current-value
+          schema:
+            items:
+              $ref: '#/definitions/StoredNameValue'
+            type: array
+        default:
+          $ref: '#/responses/Error'
+      summary: Get project environment variables
+      tags:
+        - Project
+    parameters:
+      - $ref: '#/parameters/accountName'
+      - $ref: '#/parameters/projectSlug'
+    put:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#update-project-environment-variables'
+      operationId: updateProjectEnvironmentVariables
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            items:
+              $ref: '#/definitions/StoredNameValue'
+            type: array
+      responses:
+        '204':
+          description: Success
+        default:
+          $ref: '#/responses/Error'
+      summary: Update project environment variables
+      tags:
+        - Project
   '/projects/{accountName}/{projectSlug}/settings/yaml':
     get:
       externalDocs:

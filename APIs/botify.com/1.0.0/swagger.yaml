@@ -887,7 +887,7 @@ paths:
         required: true
         type: string
     post:
-      description: Query aggregator. It accepts multiple queries
+      description: Query aggregator. It accepts multiple queries and dispatches them on ES or BQ.
       operationId: getUrlsAggs
       parameters:
         - description: UrlsAggs queries
@@ -948,6 +948,51 @@ paths:
           schema:
             $ref: '#/definitions/DefaultPayload'
       summary: Gets an Analysis datamodel
+      tags:
+        - Analysis
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Project's identifier
+        in: path
+        name: project_slug
+        required: true
+        type: string
+      - description: Analysis' identifier
+        in: path
+        name: analysis_slug
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/urls/datasets':
+    get:
+      description: Gets Analysis Datasets
+      operationId: getUrlsDatasets
+      parameters:
+        - default: current
+          description: Analysis context
+          enum:
+            - current
+            - disappeared
+            - new
+            - search_engines_orphans
+            - gsc_keywords
+          in: query
+          name: area
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Datasets'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Gets Analysis Datasets
       tags:
         - Analysis
     parameters:
@@ -1529,10 +1574,6 @@ definitions:
       friendly_name:
         readOnly: true
         type: string
-      id:
-        format: int64
-        readOnly: true
-        type: integer
       import_keywords_data:
         readOnly: true
         type: string
@@ -1597,10 +1638,6 @@ definitions:
       friendly_name:
         readOnly: true
         type: string
-      id:
-        format: int64
-        readOnly: true
-        type: integer
       import_keywords_data:
         readOnly: true
         type: string
@@ -1908,6 +1945,86 @@ definitions:
     required:
       - id
       - name
+    type: object
+  Dataset:
+    properties:
+      fields:
+        items:
+          $ref: '#/definitions/DatasetField'
+        type: array
+      groups:
+        items:
+          $ref: '#/definitions/DatasetGroup'
+        type: array
+      id:
+        type: string
+      multiple:
+        type: boolean
+      name:
+        type: string
+    required:
+      - id
+      - name
+      - groups
+      - fields
+    type: object
+  DatasetField:
+    properties:
+      aliases:
+        items:
+          type: string
+        type: array
+      group:
+        type: string
+      id:
+        type: string
+      meta:
+        type: object
+      multiple:
+        type: boolean
+      name:
+        type: string
+      optional:
+        type: boolean
+      permissions:
+        items:
+          type: string
+        type: array
+      subtype:
+        type: string
+      type:
+        type: string
+    required:
+      - multiple
+      - name
+      - subtype
+      - type
+      - id
+      - permissions
+      - optional
+    type: object
+  DatasetGroup:
+    properties:
+      id:
+        type: string
+      multiple:
+        type: boolean
+      name:
+        type: string
+      parent:
+        type: string
+    required:
+      - id
+      - name
+    type: object
+  Datasets:
+    properties:
+      datasets:
+        items:
+          $ref: '#/definitions/Dataset'
+        type: array
+    required:
+      - datasets
     type: object
   Default:
     properties: {}
@@ -2249,6 +2366,16 @@ definitions:
       - allowed_domains
       - sitemaps
       - header_settings
+    type: object
+  ProjectsSlugs:
+    description: Projects slugs
+    properties:
+      projects:
+        items:
+          type: string
+        type: array
+    required:
+      - projects
     type: object
   RewritingRule:
     properties:

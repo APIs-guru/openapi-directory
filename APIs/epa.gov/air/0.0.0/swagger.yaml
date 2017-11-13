@@ -2355,7 +2355,7 @@ definitions:
       AIRMnthsInHpv:
         example: '2'
         type: string
-      AIRNaics:
+      AIRNAICS:
         example: '812320'
         type: string
       AIRName:
@@ -2541,7 +2541,7 @@ definitions:
       FacPopulationDensity:
         example: '9611.17'
         type: string
-      FacSicCodes:
+      FacSICCodes:
         type: string
       FacTRIAIRReleases:
         example: '36'
@@ -2710,6 +2710,11 @@ definitions:
         example: '1'
         title: Violation Flag
         type: string
+      WebDocs:
+        description: Contains flags that identify what web accessible documents are available for the facility.
+        example: C6
+        title: Web Documents
+        type: string
     required:
       - SourceID
       - EPASystem
@@ -2734,8 +2739,8 @@ definitions:
       - FacLong
       - FacUsMexBorderFlg
       - AIRUniverse
-      - AIRNaics
-      - FacSicCodes
+      - AIRNAICS
+      - FacSICCodes
       - FacPercentMinority
       - FacPopulationDensity
       - FacFederalAgencyCode
@@ -3045,7 +3050,7 @@ definitions:
       AIRMnthsInHpv:
         example: '2'
         type: string
-      AIRNaics:
+      AIRNAICS:
         example: '812320'
         type: string
       AIRName:
@@ -3231,7 +3236,7 @@ definitions:
       FacPopulationDensity:
         example: '9611.17'
         type: string
-      FacSicCodes:
+      FacSICCodes:
         type: string
       FacTRIAIRReleases:
         example: '36'
@@ -3405,6 +3410,11 @@ definitions:
         example: '1'
         title: Violation Flag
         type: string
+      WebDocs:
+        description: Contains flags that identify what web accessible documents are available for the facility.
+        example: C6
+        title: Web Documents
+        type: string
     required:
       - ObjectId
       - SourceID
@@ -3430,8 +3440,8 @@ definitions:
       - FacLong
       - FacUsMexBorderFlg
       - AIRUniverse
-      - AIRNaics
-      - FacSicCodes
+      - AIRNAICS
+      - FacSICCodes
       - FacPercentMinority
       - FacPopulationDensity
       - FacFederalAgencyCode
@@ -3808,7 +3818,7 @@ definitions:
       AIRMnthsInHpv:
         example: 1
         type: number
-      AIRNaics:
+      AIRNAICS:
         example: '812320'
         type: string
       AIRName:
@@ -3984,7 +3994,7 @@ definitions:
       FacPopulationDensity:
         example: 9611.17
         type: number
-      FacSicCodes:
+      FacSICCodes:
         type: string
       FacTRIAIRReleases:
         example: '36'
@@ -4153,6 +4163,11 @@ definitions:
         example: 1
         title: Violation Flag
         type: number
+      WebDocs:
+        description: Contains flags that identify what web accessible documents are available for the facility.
+        example: C6
+        title: Web Documents
+        type: string
     required:
       - SourceID
       - EPASystem
@@ -4175,8 +4190,8 @@ definitions:
       - FacFIPSCode
       - FacUsMexBorderFlg
       - AIRUniverse
-      - AIRNaics
-      - FacSicCodes
+      - AIRNAICS
+      - FacSICCodes
       - FacPercentMinority
       - FacPopulationDensity
       - FacFederalAgencyCode

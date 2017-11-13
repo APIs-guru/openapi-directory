@@ -62,6 +62,8 @@ info:
 
     You must first [create an OAuth client](https://knowledgecenter.zuora.com/CF_Users_and_Administrators/A_Administrator_Settings/Manage_Users#Create_an_OAuth_Client_for_a_User) in the Zuora UI. To do this, you must be an administrator of your Zuora tenant. This is a one-time operation. You will be provided with a Client ID and a Client Secret. Please note this information down, as it will be required for the next step.
 
+    **Note:** The OAuth client will be owned by a Zuora user account. If you want to perform PUT, POST, or DELETE operations using the OAuth client, the owner of the OAuth client must have a Platform role that includes the "API Write Access" permission.
+
     ### Generate a Token
 
     After creating a client, you must make a call to obtain a bearer token using the [Generate an OAuth token](https://www.zuora.com/developer/api-reference/#operation/createToken) operation. This operation requires the following parameters:
@@ -287,6 +289,7 @@ info:
     | Payment Method Update                         | `UpdaterDetail`                            |
     | Payment Part                                  | `PaymentPart`                              |
     | Payment Part Item                             | `PaymentPartItem`                          |
+    | Payment Run                                   | `PaymentRun`                               |
     | Payment Transaction Log                       | `PaymentTransactionLog`                    |
     | Processed Usage                               | `ProcessedUsage`                           |
     | Product                                       | `Product`                                  |
@@ -332,11 +335,11 @@ info:
     | Updater Batch                                 | `UpdaterBatch`                             |
     | Usage                                         | `Usage`                                    |
   title: Zuora API Reference
-  version: '2017-10-15'
+  version: '2017-11-08'
   x-apisguru-categories:
     - financial
   x-logo:
-    url: 'https://pbs.twimg.com/profile_images/668119405658697728/-9vZg-QM_400x400.jpg'
+    url: 'https://dl.dropboxusercontent.com/u/99612594/zuoralogo.png'
   x-origin:
     - format: swagger
       url: 'https://www.zuora.com/wp-content/themes/zuora/yaml/swagger.yaml?v-7.0'
@@ -13573,25 +13576,40 @@ paths:
         The response contains an XML document that lists the fields of the specified object. Each of the object's fields is represented by a `<field>` element in the XML document.
             
         Each `<field>` element contains the following elements:
-          * `<name>` - API name of the field
-          * `<label>` - Name of the field in the Zuora user interface
-          * `<type>` - Data type of the field. For example, `text`, `decimal`, or `picklist`. If the data type is `picklist`, the `<field>` element contains an `<options>` element that lists the possible values of the field
-          * `<contexts>` - Specifies the availability of the field. If the `<contexts>` element lists the `export` context, the field is available for use in data source exports
 
-        For example:
+        | Element      | Description                                                                                                                                                                                                                                                                                  |
+        |--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+        | `<name>`     | API name of the field.                                                                                                                                                                                                                                                                       |
+        | `<label>`    | Name of the field in the Zuora user interface.                                                                                                                                                                                                                                               |
+        | `<type>`     | Data type of the field. The possible data types are: `boolean`, `date`, `datetime`, `decimal`, `integer`, `picklist`, `text`, `timestamp`, and `ZOQL`. If the data type is `picklist`, the `<field>` element contains an `<options>` element that lists the possible values of the field.    |
+        | `<contexts>` | Specifies the availability of the field. If the `<contexts>` element lists the `export` context, the field is available for use in data source exports.                                                                                                                                                |
+
+        The `<field>` element contains other elements that provide legacy information about the field. This information is not directly related to the REST API.
+
+        Response sample:
         ```xml
-        <field>
-          <name>TaxMode</name>
-          <label>Tax Mode</label>
-          <type>picklist</type>
-          <options>
-            <option>TaxExclusive</option>
-            <option>TaxInclusive</option>
-          </options>
-          <contexts>
-            <context>export</context>
-          </contexts>
-        </field>
+        <?xml version="1.0" encoding="UTF-8"?>
+        <object>
+          <name>ProductRatePlanCharge</name>
+          <label>Product Rate Plan Charge</label>
+          <fields>
+            ...
+            <field>
+              <name>TaxMode</name>
+              <label>Tax Mode</label>
+              <type>picklist</type>
+              <options>
+                <option>TaxExclusive</option>
+                <option>TaxInclusive</option>
+              </options>
+              <contexts>
+                <context>export</context>
+              </contexts>
+              ...
+            </field>
+            ...
+          </fields>
+        </object>
         ```
 
         It is strongly recommended that your integration checks `<contexts>` elements in the response. If your integration does not check `<contexts>` elements, your integration may process fields that are not available for use in data source exports. See [Changes to the Describe API](https://knowledgecenter.zuora.com/DC_Developers/M_Export_ZOQL/Changes_to_the_Describe_API) for more information.
@@ -29300,7 +29318,7 @@ paths:
         specify.
 
         - To generate one or more new invoices for that customer and collect
-        payment on the generated invoice(s), leave the **invoiceId** field empty. 
+        payment on the generated and other unpaid invoice(s), leave the **invoiceId** field empty. 
 
         - To collect payment on an existing invoice, specify the invoice ID. 
 
@@ -42654,7 +42672,7 @@ paths:
         This REST API reference describes how to post or import usage data for one or more accounts in the CSV  format. There are no path or query parameters. The data is uploade using the HTTP multipart/form-data POST method and applied to the user's tenant. 
 
         ## How this REST API Call Works
-        The content of the upload file must follow the format used by the UI import tool. It must be a comma-separated (CSV) file with a corresponding .csv extension. The file size must not exceed 4MB. Click [here](https://knowledgecenter.zuora.com/@api/deki/files/4105/UsageFileFormat.csv) to download the usage file template.
+        The content of the upload file must follow the format used by the UI import tool. It must be a comma-separated (CSV) file with a corresponding .csv extension. The length of the file name must not exceed 50 characters. The file size must not exceed 4MB. Click [here](https://knowledgecenter.zuora.com/@api/deki/files/4105/UsageFileFormat.csv) to download the usage file template.
 
         At the completion of the upload, before actually processing the file contents, theAPI returns a response containing the byte count of the received file and a URL for checking the status of the import process.  Of the five possible results displayed at that URL Pending, Processing, Completed, Canceled, and Failed) only a Completed status indicates that the import was successful.  The operation is atomic; if any record fails, the file is rejected.  In that case, the entire import is rolled back and all stored data is returned to its original state.
 
@@ -45022,6 +45040,11 @@ definitions:
         description: |
           A code identifying the reason for the transaction. The value must be an existing reason code or empty. If you do not specify a value, Zuora uses the default reason code.
         type: string
+      taxAutoCalculation:
+        default: true
+        description: |
+          Whether to automatically calculate taxes in the credit memo.
+        type: boolean
     type: object
   CreditMemoItemBreakdown:
     properties:
@@ -45463,6 +45486,11 @@ definitions:
         description: |
           A code identifying the reason for the transaction. The value must be an existing reason code or empty. If you do not specify a value, Zuora uses the default reason code.
         type: string
+      taxAutoCalculation:
+        default: true
+        description: |
+          Whether to automatically calculate taxes in the debit memo.
+        type: boolean
     type: object
   DebitMemoItemFromInvoiceItemType:
     properties:
@@ -64543,7 +64571,7 @@ definitions:
         type: string
       County:
         description: |2-
-           The country. May optionally be used by Zuora Tax to calculate county tax.
+           The county. May optionally be used by Zuora Tax to calculate county tax.
           **Character limit**: 32 **Values**: a string of 32 characters or fewer 
         type: string
       Description:
@@ -66367,7 +66395,7 @@ definitions:
         type: string
       County:
         description: |2-
-           The country. May optionally be used by Zuora Tax to calculate county tax.
+           The county. May optionally be used by Zuora Tax to calculate county tax.
           **Character limit**: 32 **Values**: a string of 32 characters or fewer 
         type: string
       CreatedById:
@@ -70654,7 +70682,7 @@ definitions:
         type: string
       County:
         description: |2-
-           The country. May optionally be used by Zuora Tax to calculate county tax.
+           The county. May optionally be used by Zuora Tax to calculate county tax.
           **Character limit**: 32 **Values**: a string of 32 characters or fewer 
         type: string
       Description:

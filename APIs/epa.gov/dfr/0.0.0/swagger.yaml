@@ -62,6 +62,18 @@ parameters:
     name: p_id
     required: true
     type: string
+  p_lat:
+    description: Latitude location in decimal degrees.
+    in: query
+    name: p_lat
+    required: false
+    type: number
+  p_long:
+    description: Longitude location in decimal degrees.
+    in: query
+    name: p_long
+    required: false
+    type: number
   p_radius:
     in: query
     name: p_radius
@@ -564,7 +576,8 @@ paths:
       description: Returns a complex object with Demographics from the 2010 Census and 2010 American Community Survey based on a 3 mile radius around the facility spatial coordinates.
       parameters:
         - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
+        - $ref: '#/parameters/p_lat'
+        - $ref: '#/parameters/p_long'
         - $ref: '#/parameters/p_radius'
         - $ref: '#/parameters/callback'
       responses:
@@ -585,7 +598,8 @@ paths:
       description: Returns a complex object with Demographics from the 2010 Census and 2010 American Community Survey based on a 3 mile radius around the facility spatial coordinates.
       parameters:
         - $ref: '#/parameters/output'
-        - $ref: '#/parameters/p_id'
+        - $ref: '#/parameters/p_lat'
+        - $ref: '#/parameters/p_long'
         - $ref: '#/parameters/p_radius'
         - $ref: '#/parameters/callback'
       responses:
@@ -602,6 +616,45 @@ paths:
       summary: Detailed Facility Report Demographics Report Service
       tags:
         - Detailed Facility Report
+  /dfr_rest_services.get_demographics_by_id:
+    get:
+      description: Returns a complex object with Demographics from the 2010 Census and 2010 American Community Survey.
+      parameters:
+        - $ref: '#/parameters/output'
+        - $ref: '#/parameters/p_id'
+        - $ref: '#/parameters/p_radius'
+        - $ref: '#/parameters/callback'
+      responses:
+        '200':
+          description: Returns an object that includes demographics
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/dfrY_Results'
+            required:
+              - Results
+            type: object
+      summary: Detailed Facility Report Demographics Report Service
+    post:
+      description: Returns a complex object with Demographics from the 2010 Census and 2010 American Community Survey.
+      parameters:
+        - $ref: '#/parameters/output'
+        - $ref: '#/parameters/p_id'
+        - $ref: '#/parameters/p_radius'
+        - $ref: '#/parameters/callback'
+      responses:
+        '200':
+          description: Returns an object that includes demographics
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/dfrY_Results'
+            required:
+              - Results
+            type: object
+      summary: Detailed Facility Report Demographics Report Service
   /dfr_rest_services.get_dfr:
     get:
       description: This procedure is the overall service for the Detailed Facility Report. It returns all of the data displayed in the DFR web report by invoking individual procedures that each return a targeted portion of the DFR.
@@ -1622,8 +1675,8 @@ definitions:
       - Qtr6End
       - Qtr7Start
       - Qtr7End
-      - Qtr8Start
       - Qtr8End
+      - Qtr8Start
       - Qtr9Start
       - Qtr9End
       - Qtr10Start
@@ -3334,6 +3387,13 @@ definitions:
   dfrC_Sources.Violation:
     description: CWA SE Compliance Violation Object
     properties:
+      Agency:
+        description: |-
+          Identifies the lead agency (e.g., EPA, State) conducting the inspection. 
+          Values: State abbreviation or "EPA"
+        example: State
+        title: Agency
+        type: string
       NPDESViolationId:
         description: The unique identifier in ICIS-NPDES for the NPDES Violation
         example: '3401214483'
@@ -3457,6 +3517,7 @@ definitions:
       - SourceID
       - ViolationDesc
       - NPDESViolationId
+      - Agency
       - Qtr1Status
       - Qtr1Value
       - Qtr2Status
@@ -3987,6 +4048,8 @@ definitions:
         description: 'For administrative cases, this field indicates the date that the complaint or Administrative Order (AO) was signed by the appropriate authority and issued to the respondent. For judicial cases, this field indicates the date that the complaint was filed with the Clerk of the Court.'
         title: Administratice Case Issue Date
         type: string
+      LatestSettlementEnteredDate:
+        type: string
       LawSectionCode:
         description: The unique identifier for the Section(s) of law violated and cited in the activity.
         example: 112D
@@ -4036,6 +4099,7 @@ definitions:
       - TotalCostRecovery
       - SettlementDate
       - FederalPenalty
+      - LatestSettlementEnteredDate
       - StateLocalPenalty
       - SepCost
       - CompActionCost

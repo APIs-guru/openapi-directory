@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.0.1
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/androidpublisher/v2/rest'
       version: v1
@@ -83,32 +83,6 @@ tags:
   - name: purchases
   - name: reviews
 paths:
-  /inappproducts/batch:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      operationId: androidpublisher.inappproducts.batch
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/InappproductsBatchRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/InappproductsBatchResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
-      tags:
-        - inappproducts
   '/{packageName}/edits':
     parameters:
       - $ref: '#/parameters/alt'
@@ -2554,56 +2528,6 @@ definitions:
       title:
         type: string
     type: object
-  InappproductsBatchRequest:
-    properties:
-      entrys:
-        items:
-          $ref: '#/definitions/InappproductsBatchRequestEntry'
-        type: array
-    type: object
-  InappproductsBatchRequestEntry:
-    properties:
-      batchId:
-        format: uint32
-        type: integer
-      inappproductsinsertrequest:
-        $ref: '#/definitions/InappproductsInsertRequest'
-      inappproductsupdaterequest:
-        $ref: '#/definitions/InappproductsUpdateRequest'
-      methodName:
-        type: string
-    type: object
-  InappproductsBatchResponse:
-    properties:
-      entrys:
-        items:
-          $ref: '#/definitions/InappproductsBatchResponseEntry'
-        type: array
-      kind:
-        default: 'androidpublisher#inappproductsBatchResponse'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "androidpublisher#inappproductsBatchResponse".'
-        type: string
-    type: object
-  InappproductsBatchResponseEntry:
-    properties:
-      batchId:
-        format: uint32
-        type: integer
-      inappproductsinsertresponse:
-        $ref: '#/definitions/InappproductsInsertResponse'
-      inappproductsupdateresponse:
-        $ref: '#/definitions/InappproductsUpdateResponse'
-    type: object
-  InappproductsInsertRequest:
-    properties:
-      inappproduct:
-        $ref: '#/definitions/InAppProduct'
-    type: object
-  InappproductsInsertResponse:
-    properties:
-      inappproduct:
-        $ref: '#/definitions/InAppProduct'
-    type: object
   InappproductsListResponse:
     properties:
       inappproduct:
@@ -2618,16 +2542,6 @@ definitions:
         $ref: '#/definitions/PageInfo'
       tokenPagination:
         $ref: '#/definitions/TokenPagination'
-    type: object
-  InappproductsUpdateRequest:
-    properties:
-      inappproduct:
-        $ref: '#/definitions/InAppProduct'
-    type: object
-  InappproductsUpdateResponse:
-    properties:
-      inappproduct:
-        $ref: '#/definitions/InAppProduct'
     type: object
   Listing:
     properties:

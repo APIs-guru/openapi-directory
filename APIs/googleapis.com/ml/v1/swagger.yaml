@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: An API to enable creating and using machine learning models.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Cloud Machine Learning Engine
   version: v1
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.0.1
       format: google
       url: 'https://ml.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -35,18 +31,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -156,8 +144,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
@@ -178,8 +164,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -198,38 +182,41 @@ paths:
       - $ref: '#/parameters/oauth_token'
     patch:
       description: |-
-        Updates the specified Version resource.
+        Updates a specific job resource.
 
-        Currently the only supported field to update is `description`.
-      operationId: ml.projects.models.versions.patch
+        Currently the only supported fields to update are `labels`.
+      operationId: ml.projects.jobs.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/GoogleCloudMlV1__Version'
-        - description: Required. The name of the model.
+            $ref: '#/definitions/GoogleCloudMlV1__Job'
+        - description: Required. The job name.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
         - description: |-
-            Required. Specifies the path, relative to `Version`, of the field to
-            update. Must be present and non-empty.
+            Required. Specifies the path, relative to `Job`, of the field to update.
+            To adopt etag mechanism, include `etag` field in the mask, and include the
+            `etag` value in your job resource.
 
-            For example, to change the description of a version to "foo", the
-            `update_mask` parameter would be specified as `description`, and the
+            For example, to change the labels of a job, the `update_mask` parameter
+            would be specified as `labels`, `etag`, and the
             `PATCH` request body would specify the new value, as follows:
                 {
-                  "description": "foo"
+                  "labels": {
+                     "owner": "Google",
+                     "color": "Blue"
+                  }
+                  "etag": "33a64df551425fcc55e4d42a148795d9f25f89d4"
                 }
-            In this example, the version is blindly overwritten since no etag is given.
+            If `etag` matches the one on the server, the labels of the job will be
+            replaced with the given ones, and the server end `etag` will be
+            recalculated.
 
-            To adopt etag mechanism, include `etag` field in the mask, and include the
-            `etag` value in your version resource.
-
-            Currently the only supported update masks are `description`, `labels`, and
-            `etag`.
+            Currently the only supported update masks are `labels` and `etag`.
           in: query
           name: updateMask
           type: string
@@ -237,11 +224,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleLongrunning__Operation'
+            $ref: '#/definitions/GoogleCloudMlV1__Job'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -285,8 +270,6 @@ paths:
             $ref: '#/definitions/GoogleLongrunning__ListOperationsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -341,8 +324,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:getConfig':
@@ -367,8 +348,6 @@ paths:
             $ref: '#/definitions/GoogleCloudMlV1__GetConfigResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -429,8 +408,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:setDefault':
@@ -481,8 +458,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{parent}/jobs':
@@ -525,8 +500,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -564,8 +537,6 @@ paths:
             $ref: '#/definitions/GoogleCloudMlV1__Job'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -613,8 +584,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -657,8 +626,6 @@ paths:
             $ref: '#/definitions/GoogleCloudMlV1__Model'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -707,8 +674,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -755,8 +720,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{resource}:getIamPolicy':
@@ -782,8 +745,6 @@ paths:
             $ref: '#/definitions/GoogleIamV1__Policy'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -842,8 +803,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{resource}:testIamPermissions':
@@ -891,8 +850,6 @@ paths:
             $ref: '#/definitions/GoogleIamV1__TestIamPermissionsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1085,10 +1042,7 @@ definitions:
         type: array
     type: object
   GoogleCloudMlV1__Job:
-    description: |-
-      Represents a training or prediction job.
-
-      Next ID: 16
+    description: Represents a training or prediction job.
     properties:
       createTime:
         description: Output only. When the job was created.
@@ -1101,9 +1055,30 @@ definitions:
       errorMessage:
         description: Output only. The details of a failure or a cancellation.
         type: string
+      etag:
+        description: |-
+          `etag` is used for optimistic concurrency control as a way to help
+          prevent simultaneous updates of a job from overwriting each other.
+          It is strongly suggested that systems make use of the `etag` in the
+          read-modify-write cycle to perform job updates in order to avoid race
+          conditions: An `etag` is returned in the response to `GetJob`, and
+          systems are expected to put that etag in the request to `UpdateJob` to
+          ensure that their change will be applied to the same version of the job.
+        format: byte
+        type: string
       jobId:
         description: Required. The user-specified id of the job.
         type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          Optional. One or more labels that you can add, to organize your jobs.
+          Each label is a key-value pair, where both the key and the value are
+          arbitrary strings that you supply.
+          For more information, see the documentation on
+          <a href="/ml-engine/docs/how-tos/resource-labels">using labels</a>.
+        type: object
       predictionInput:
         $ref: '#/definitions/GoogleCloudMlV1__PredictionInput'
         description: Input parameters to create a prediction job.
@@ -1194,8 +1169,6 @@ definitions:
       A model can have multiple versions, each of which is a deployed, trained
       model ready to receive prediction requests. The model itself is just a
       container.
-
-      Next ID: 8
     properties:
       defaultVersion:
         $ref: '#/definitions/GoogleCloudMlV1__Version'
@@ -1208,6 +1181,27 @@ definitions:
       description:
         description: Optional. The description specified for the model when it was created.
         type: string
+      etag:
+        description: |-
+          `etag` is used for optimistic concurrency control as a way to help
+          prevent simultaneous updates of a model from overwriting each other.
+          It is strongly suggested that systems make use of the `etag` in the
+          read-modify-write cycle to perform model updates in order to avoid race
+          conditions: An `etag` is returned in the response to `GetModel`, and
+          systems are expected to put that etag in the request to `UpdateModel` to
+          ensure that their change will be applied to the model as intended.
+        format: byte
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          Optional. One or more labels that you can add, to organize your models.
+          Each label is a key-value pair, where both the key and the value are
+          arbitrary strings that you supply.
+          For more information, see the documentation on
+          <a href="/ml-engine/docs/how-tos/resource-labels">using labels</a>.
+        type: object
       name:
         description: |-
           Required. The name specified for the model when it was created.
@@ -1235,10 +1229,7 @@ definitions:
         type: array
     type: object
   GoogleCloudMlV1__OperationMetadata:
-    description: |-
-      Represents the metadata of the long-running operation.
-
-      Next ID: 9
+    description: Represents the metadata of the long-running operation.
     properties:
       createTime:
         description: The time the operation was submitted.
@@ -1251,6 +1242,13 @@ definitions:
       isCancellationRequested:
         description: Indicates whether a request to cancel this operation has been made.
         type: boolean
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          The user labels, inherited from the model or the model version being
+          operated on.
+        type: object
       modelName:
         description: Contains the name of the model associated with the operation.
         type: string
@@ -1812,7 +1810,6 @@ definitions:
       information about all of the versions of a given model by calling
       [projects.models.versions.list](/ml-engine/reference/rest/v1/projects.models.versions/list).
 
-      Next ID: 19
       LINT.IfChange
     properties:
       autoScaling:
@@ -1847,6 +1844,17 @@ definitions:
       errorMessage:
         description: Output only. The details of a failure or a cancellation.
         type: string
+      etag:
+        description: |-
+          `etag` is used for optimistic concurrency control as a way to help
+          prevent simultaneous updates of a model from overwriting each other.
+          It is strongly suggested that systems make use of the `etag` in the
+          read-modify-write cycle to perform model updates in order to avoid race
+          conditions: An `etag` is returned in the response to `GetVersion`, and
+          systems are expected to put that etag in the request to `UpdateVersion` to
+          ensure that their change will be applied to the model as intended.
+        format: byte
+        type: string
       isDefault:
         description: |-
           Output only. If true, this version will be used to handle prediction
@@ -1855,6 +1863,16 @@ definitions:
           You can change the default version by calling
           [projects.methods.versions.setDefault](/ml-engine/reference/rest/v1/projects.models.versions/setDefault).
         type: boolean
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          Optional. One or more labels that you can add, to organize your model
+          versions. Each label is a key-value pair, where both the key and the value
+          are arbitrary strings that you supply.
+          For more information, see the documentation on
+          <a href="/ml-engine/docs/how-tos/resource-labels">using labels</a>.
+        type: object
       lastUseTime:
         description: Output only. The time the version was last used for prediction.
         format: google-datetime

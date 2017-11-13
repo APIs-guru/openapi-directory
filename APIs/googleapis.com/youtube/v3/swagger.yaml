@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.0
+        version: 2.0.1
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest'
       version: v1
@@ -5360,6 +5360,7 @@ definitions:
           - oflcR18
           - oflcRp13
           - oflcRp16
+          - oflcRp18
           - oflcUnrated
         type: string
       pefilmRating:
@@ -6506,6 +6507,7 @@ definitions:
           - videoBitrateMismatch
           - videoCodec
           - videoCodecMismatch
+          - videoIngestionFasterThanRealtime
           - videoIngestionStarved
           - videoInterlaceMismatch
           - videoProfileMismatch
