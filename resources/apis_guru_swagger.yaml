@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "2.0"
+  version: "2.0.1"
   title: "APIs.guru"
   description: |
     Wikipedia for Web APIs. Repository of API specs in OpenAPI(fka Swagger) 2.0 format.
@@ -20,17 +20,24 @@ info:
 externalDocs:
   url: https://github.com/APIs-guru/openapi-directory/blob/master/API.md
 produces:
+  - application/json; charset=utf8
   - application/json
 security: []
+tags:
+  - name: APIs
+    description: Actions relating to APIs in the collection
 paths:
   /list.json:
+    description: Provides a list of all APIs in the directory.
     get:
      operationId: listAPIs
+     tags:
+       - APIs
      summary: List all APIs
      description: |
        List all APIs in the directory.
        Returns links to OpenAPI specification for each API in the directory.
-       If API exist in multiply versions `preferred` one is explicitly marked.
+       If API exist in multiple versions `preferred` one is explicitly marked.
 
        Some basic info from OpenAPI spec is cached inside each object.
        This allows to generate some simple views without need to fetch OpenAPI spec for each API.
@@ -40,12 +47,15 @@ paths:
         schema:
           $ref: "#/definitions/APIs"
   /metrics.json:
+    description: Provides basic metrics.
     get:
      operationId: getMetrics
      summary: Get basic metrics
      description: |
        Some basic metrics for the entire directory.
        Just stunning numbers to put on a front page and are intended purely for WoW effect :)
+     tags:
+       - APIs
      responses:
       200:
         description: OK
