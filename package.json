@@ -38,5 +38,8 @@
   "scripts": {
     "test": "scripts/collection.js validate -q",
     "deploy": "scripts/deploy.js && ./scripts/deploy_badges.js && gulp publish"
+  },
+  "devDependencies": {
+    "dredd": "^4.7.0"
   }
 }
