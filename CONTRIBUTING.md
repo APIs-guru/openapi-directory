@@ -93,7 +93,9 @@ Issue the command `node ../scripts/collection fixup {path/to/swagger.yaml}`
 
 Edit the `swagger.yaml` file and save.
 
-Issue the command `node ../scripts/collection validate {directory-name}` to ensure the definition is still valid.
+Issue the command `node ../scripts/collection update {directory-name}` to reprocess the definition from source.
+
+As long as there are no errors...
 
 Commit your change with an informative commit message, and push to the new branch on your fork.
 
