@@ -25,7 +25,7 @@ Clone the repo locally, if you haven't already done so, and run the following
 
 * create a new branch for the PR
 * change into the APIs directory
-* run `../scripts/collection add -c {category} -l {logo-path} {format} {url-to-definition}`
+* run `../scripts/collection add -c {category} [-l {logo-url}|-t {twitter handle}] {format} {url-to-definition}`
 
 Where `{category}` is one of the values from [/resources/categories.yaml](/resources/categories.yaml), and `{format}` is one of:
 
