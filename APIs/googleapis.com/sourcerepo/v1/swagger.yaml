@@ -20,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://sourcerepo.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -757,7 +757,9 @@ definitions:
     properties:
       mirrorConfig:
         $ref: '#/definitions/MirrorConfig'
-        description: How this repository mirrors a repository managed by another service.
+        description: |-
+          How this repository mirrors a repository managed by another service.
+          Read-only field.
       name:
         description: |-
           Resource name of the repository, of the form
@@ -766,12 +768,14 @@ definitions:
         type: string
       size:
         description: |-
-          The disk usage of the repo, in bytes.
-          Only returned by GetRepo.
+          The disk usage of the repo, in bytes. Read-only field. Size is only
+          returned by GetRepo.
         format: int64
         type: string
       url:
-        description: URL to clone the repository from Google Cloud Source Repositories.
+        description: |-
+          URL to clone the repository from Google Cloud Source Repositories.
+          Read-only field.
         type: string
     type: object
   SetIamPolicyRequest:

@@ -1091,8 +1091,6 @@ paths:
         Return a list of the characters assets
 
         ---
-        Alternate route: `/dev/characters/{character_id}/assets/`
-
         Alternate route: `/legacy/characters/{character_id}/assets/`
 
         Alternate route: `/v1/characters/{character_id}/assets/`
@@ -1286,7 +1284,6 @@ paths:
       tags:
         - Assets
       x-alternate-versions:
-        - dev
         - legacy
         - v1
       x-cached-seconds: 3600
@@ -8743,120 +8740,125 @@ paths:
                   title: get_characters_character_id_wallet_journal_ref_id
                   type: integer
                 ref_type:
-                  description: 'Transaction type, different type of transaction will populate different fields in `extra_info`'
+                  description: 'Transaction type, different type of transaction will populate different fields in `extra_info` Note: If you have an existing XML API application that is using ref_types, you will need to know which string ESI ref_type maps to which integer. You can use the following gist to see string->int mappings: https://gist.github.com/ccp-zoetrope/c03db66d90c2148724c06171bc52e0ec'
                   enum:
-                    - player_trading
-                    - market_transaction
-                    - gm_cash_transfer
-                    - mission_reward
-                    - clone_activation
-                    - inheritance
-                    - player_donation
-                    - corporation_payment
-                    - docking_fee
-                    - office_rental_fee
-                    - factory_slot_rental_fee
-                    - repair_bill
-                    - bounty
-                    - bounty_prize
-                    - insurance
-                    - mission_expiration
-                    - mission_completion
-                    - shares
-                    - courier_mission_escrow
-                    - mission_cost
-                    - agent_miscellaneous
-                    - lp_store
-                    - agent_location_services
+                    - acceleration_gate_fee
+                    - advertisement_listing_fee
                     - agent_donation
-                    - agent_security_services
+                    - agent_location_services
+                    - agent_miscellaneous
                     - agent_mission_collateral_paid
                     - agent_mission_collateral_refunded
-                    - agents_preward
                     - agent_mission_reward
+                    - agent_mission_reward_corporation_tax
                     - agent_mission_time_bonus_reward
-                    - cspa
-                    - cspaofflinerefund
-                    - corporation_account_withdrawal
-                    - corporation_dividend_payment
-                    - corporation_registration_fee
-                    - corporation_logo_change_cost
-                    - release_of_impounded_property
-                    - market_escrow
+                    - agent_mission_time_bonus_reward_corporation_tax
+                    - agent_security_services
                     - agent_services_rendered
-                    - market_fine_paid
-                    - corporation_liquidation
-                    - brokers_fee
-                    - corporation_bulk_payment
-                    - alliance_registration_fee
-                    - war_fee
+                    - agents_preward
                     - alliance_maintainance_fee
-                    - contraband_fine
+                    - alliance_registration_fee
+                    - asset_safety_recovery_tax
+                    - bounty
+                    - bounty_prize
+                    - bounty_prize_corporation_tax
+                    - bounty_prizes
+                    - bounty_reimbursement
+                    - bounty_surcharge
+                    - brokers_fee
+                    - clone_activation
                     - clone_transfer
-                    - acceleration_gate_fee
-                    - transaction_tax
-                    - jump_clone_installation_fee
-                    - manufacturing
-                    - researching_technology
-                    - researching_time_productivity
-                    - researching_material_productivity
-                    - copying
-                    - reverse_engineering
+                    - contraband_fine
                     - contract_auction_bid
-                    - contract_auction_bid_refund
-                    - contract_collateral
-                    - contract_reward_refund
-                    - contract_auction_sold
-                    - contract_reward
-                    - contract_collateral_refund
-                    - contract_collateral_payout
-                    - contract_price
-                    - contract_brokers_fee
-                    - contract_sales_tax
-                    - contract_deposit
-                    - contract_deposit_sales_tax
                     - contract_auction_bid_corp
-                    - contract_collateral_deposited_corp
-                    - contract_price_payment_corp
+                    - contract_auction_bid_refund
+                    - contract_auction_sold
+                    - contract_brokers_fee
                     - contract_brokers_fee_corp
+                    - contract_collateral
+                    - contract_collateral_deposited_corp
+                    - contract_collateral_payout
+                    - contract_collateral_refund
+                    - contract_deposit
                     - contract_deposit_corp
                     - contract_deposit_refund
+                    - contract_deposit_sales_tax
+                    - contract_price
+                    - contract_price_payment_corp
+                    - contract_reversal
+                    - contract_reward
                     - contract_reward_deposited
                     - contract_reward_deposited_corp
-                    - bounty_prizes
-                    - advertisement_listing_fee
-                    - medal_creation
-                    - medal_issued
-                    - dna_modification_fee
-                    - sovereignity_bill
-                    - bounty_prize_corporation_tax
-                    - agent_mission_reward_corporation_tax
-                    - agent_mission_time_bonus_reward_corporation_tax
-                    - upkeep_adjustment_fee
-                    - planetary_import_tax
-                    - planetary_export_tax
-                    - planetary_construction
+                    - contract_reward_refund
+                    - contract_sales_tax
+                    - copying
                     - corporate_reward_payout
-                    - bounty_surcharge
-                    - contract_reversal
                     - corporate_reward_tax
-                    - store_purchase
-                    - store_purchase_refund
+                    - corporation_account_withdrawal
+                    - corporation_bulk_payment
+                    - corporation_dividend_payment
+                    - corporation_liquidation
+                    - corporation_logo_change_cost
+                    - corporation_payment
+                    - corporation_registration_fee
+                    - courier_mission_escrow
+                    - cspa
+                    - cspaofflinerefund
                     - datacore_fee
-                    - war_fee_surrender
-                    - war_ally_contract
-                    - bounty_reimbursement
-                    - kill_right_fee
-                    - security_processing_fee
+                    - dna_modification_fee
+                    - docking_fee
+                    - duel_wager_escrow
+                    - duel_wager_payment
+                    - duel_wager_refund
+                    - factory_slot_rental_fee
+                    - gm_cash_transfer
                     - industry_job_tax
                     - infrastructure_hub_maintenance
-                    - asset_safety_recovery_tax
+                    - inheritance
+                    - insurance
+                    - jump_clone_activation_fee
+                    - jump_clone_installation_fee
+                    - kill_right_fee
+                    - lp_store
+                    - manufacturing
+                    - market_escrow
+                    - market_fine_paid
+                    - market_transaction
+                    - medal_creation
+                    - medal_issued
+                    - mission_completion
+                    - mission_cost
+                    - mission_expiration
+                    - mission_reward
+                    - office_rental_fee
+                    - operation_bonus
                     - opportunity_reward
+                    - planetary_construction
+                    - planetary_export_tax
+                    - planetary_import_tax
+                    - player_donation
+                    - player_trading
                     - project_discovery_reward
                     - project_discovery_tax
+                    - reaction
+                    - release_of_impounded_property
+                    - repair_bill
                     - reprocessing_tax
-                    - jump_clone_activation_fee
-                    - operation_bonus
+                    - researching_material_productivity
+                    - researching_technology
+                    - researching_time_productivity
+                    - resource_wars_reward
+                    - reverse_engineering
+                    - security_processing_fee
+                    - shares
+                    - sovereignity_bill
+                    - store_purchase
+                    - store_purchase_refund
+                    - transaction_tax
+                    - upkeep_adjustment_fee
+                    - war_ally_contract
+                    - war_fee
+                    - war_fee_surrender
                   title: get_characters_character_id_wallet_journal_ref_type
                   type: string
                 second_party_id:
@@ -10892,7 +10894,7 @@ paths:
                 container_type_id: 17365
                 location_flag: CorpSAG1
                 location_id: 1000000012278
-                logged_at: '2017-10-11T12:04:33'
+                logged_at: '2017-10-11T12:04:33Z'
                 quantity: 30
                 type_id: 1230
               - action: configure
@@ -15884,120 +15886,125 @@ paths:
                   title: get_corporations_corporation_id_wallets_division_journal_ref_id
                   type: integer
                 ref_type:
-                  description: 'Transaction type, different type of transaction will populate different fields in `extra_info`'
+                  description: 'Transaction type, different type of transaction will populate different fields in `extra_info` Note: If you have an existing XML API application that is using ref_types, you will need to know which string ESI ref_type maps to which integer. You can use the following gist to see string->int mappings: https://gist.github.com/ccp-zoetrope/c03db66d90c2148724c06171bc52e0ec'
                   enum:
-                    - player_trading
-                    - market_transaction
-                    - gm_cash_transfer
-                    - mission_reward
-                    - clone_activation
-                    - inheritance
-                    - player_donation
-                    - corporation_payment
-                    - docking_fee
-                    - office_rental_fee
-                    - factory_slot_rental_fee
-                    - repair_bill
-                    - bounty
-                    - bounty_prize
-                    - insurance
-                    - mission_expiration
-                    - mission_completion
-                    - shares
-                    - courier_mission_escrow
-                    - mission_cost
-                    - agent_miscellaneous
-                    - lp_store
-                    - agent_location_services
+                    - acceleration_gate_fee
+                    - advertisement_listing_fee
                     - agent_donation
-                    - agent_security_services
+                    - agent_location_services
+                    - agent_miscellaneous
                     - agent_mission_collateral_paid
                     - agent_mission_collateral_refunded
-                    - agents_preward
                     - agent_mission_reward
+                    - agent_mission_reward_corporation_tax
                     - agent_mission_time_bonus_reward
-                    - cspa
-                    - cspaofflinerefund
-                    - corporation_account_withdrawal
-                    - corporation_dividend_payment
-                    - corporation_registration_fee
-                    - corporation_logo_change_cost
-                    - release_of_impounded_property
-                    - market_escrow
+                    - agent_mission_time_bonus_reward_corporation_tax
+                    - agent_security_services
                     - agent_services_rendered
-                    - market_fine_paid
-                    - corporation_liquidation
-                    - brokers_fee
-                    - corporation_bulk_payment
-                    - alliance_registration_fee
-                    - war_fee
+                    - agents_preward
                     - alliance_maintainance_fee
-                    - contraband_fine
+                    - alliance_registration_fee
+                    - asset_safety_recovery_tax
+                    - bounty
+                    - bounty_prize
+                    - bounty_prize_corporation_tax
+                    - bounty_prizes
+                    - bounty_reimbursement
+                    - bounty_surcharge
+                    - brokers_fee
+                    - clone_activation
                     - clone_transfer
-                    - acceleration_gate_fee
-                    - transaction_tax
-                    - jump_clone_installation_fee
-                    - manufacturing
-                    - researching_technology
-                    - researching_time_productivity
-                    - researching_material_productivity
-                    - copying
-                    - reverse_engineering
+                    - contraband_fine
                     - contract_auction_bid
-                    - contract_auction_bid_refund
-                    - contract_collateral
-                    - contract_reward_refund
-                    - contract_auction_sold
-                    - contract_reward
-                    - contract_collateral_refund
-                    - contract_collateral_payout
-                    - contract_price
-                    - contract_brokers_fee
-                    - contract_sales_tax
-                    - contract_deposit
-                    - contract_deposit_sales_tax
                     - contract_auction_bid_corp
-                    - contract_collateral_deposited_corp
-                    - contract_price_payment_corp
+                    - contract_auction_bid_refund
+                    - contract_auction_sold
+                    - contract_brokers_fee
                     - contract_brokers_fee_corp
+                    - contract_collateral
+                    - contract_collateral_deposited_corp
+                    - contract_collateral_payout
+                    - contract_collateral_refund
+                    - contract_deposit
                     - contract_deposit_corp
                     - contract_deposit_refund
+                    - contract_deposit_sales_tax
+                    - contract_price
+                    - contract_price_payment_corp
+                    - contract_reversal
+                    - contract_reward
                     - contract_reward_deposited
                     - contract_reward_deposited_corp
-                    - bounty_prizes
-                    - advertisement_listing_fee
-                    - medal_creation
-                    - medal_issued
-                    - dna_modification_fee
-                    - sovereignity_bill
-                    - bounty_prize_corporation_tax
-                    - agent_mission_reward_corporation_tax
-                    - agent_mission_time_bonus_reward_corporation_tax
-                    - upkeep_adjustment_fee
-                    - planetary_import_tax
-                    - planetary_export_tax
-                    - planetary_construction
+                    - contract_reward_refund
+                    - contract_sales_tax
+                    - copying
                     - corporate_reward_payout
-                    - bounty_surcharge
-                    - contract_reversal
                     - corporate_reward_tax
-                    - store_purchase
-                    - store_purchase_refund
+                    - corporation_account_withdrawal
+                    - corporation_bulk_payment
+                    - corporation_dividend_payment
+                    - corporation_liquidation
+                    - corporation_logo_change_cost
+                    - corporation_payment
+                    - corporation_registration_fee
+                    - courier_mission_escrow
+                    - cspa
+                    - cspaofflinerefund
                     - datacore_fee
-                    - war_fee_surrender
-                    - war_ally_contract
-                    - bounty_reimbursement
-                    - kill_right_fee
-                    - security_processing_fee
+                    - dna_modification_fee
+                    - docking_fee
+                    - duel_wager_escrow
+                    - duel_wager_payment
+                    - duel_wager_refund
+                    - factory_slot_rental_fee
+                    - gm_cash_transfer
                     - industry_job_tax
                     - infrastructure_hub_maintenance
-                    - asset_safety_recovery_tax
+                    - inheritance
+                    - insurance
+                    - jump_clone_activation_fee
+                    - jump_clone_installation_fee
+                    - kill_right_fee
+                    - lp_store
+                    - manufacturing
+                    - market_escrow
+                    - market_fine_paid
+                    - market_transaction
+                    - medal_creation
+                    - medal_issued
+                    - mission_completion
+                    - mission_cost
+                    - mission_expiration
+                    - mission_reward
+                    - office_rental_fee
+                    - operation_bonus
                     - opportunity_reward
+                    - planetary_construction
+                    - planetary_export_tax
+                    - planetary_import_tax
+                    - player_donation
+                    - player_trading
                     - project_discovery_reward
                     - project_discovery_tax
+                    - reaction
+                    - release_of_impounded_property
+                    - repair_bill
                     - reprocessing_tax
-                    - jump_clone_activation_fee
-                    - operation_bonus
+                    - researching_material_productivity
+                    - researching_technology
+                    - researching_time_productivity
+                    - resource_wars_reward
+                    - reverse_engineering
+                    - security_processing_fee
+                    - shares
+                    - sovereignity_bill
+                    - store_purchase
+                    - store_purchase_refund
+                    - transaction_tax
+                    - upkeep_adjustment_fee
+                    - war_ally_contract
+                    - war_fee
+                    - war_fee_surrender
                   title: get_corporations_corporation_id_wallets_division_journal_ref_type
                   type: string
                 second_party_id:

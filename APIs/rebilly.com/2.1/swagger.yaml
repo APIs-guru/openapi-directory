@@ -4243,6 +4243,37 @@ paths:
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
+  '/disputes/{id}/matched-rules':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: Get matched rules for the dispute
+      responses:
+        '200':
+          description: List of matched rules was retrieved successfully.
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/MatchedRule'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Get matched rules for the dispute
+      tags:
+        - Rules
   /events:
     get:
       responses:
@@ -5725,6 +5756,37 @@ paths:
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
+  '/invoices/{id}/matched-rules':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: Get matched rules for the invoice
+      responses:
+        '200':
+          description: List of matched rules was retrieved successfully.
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/MatchedRule'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Get matched rules for the invoice
+      tags:
+        - Rules
   '/invoices/{id}/void':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -7261,6 +7323,37 @@ paths:
         - lang: PHP
           source: |
             $client->paymentCards()->deactivate('paymentCardId');
+  '/payment-cards/{id}/matched-rules':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: Get matched rules for the payment card
+      responses:
+        '200':
+          description: List of matched rules was retrieved successfully.
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/MatchedRule'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Get matched rules for the payment card
+      tags:
+        - Rules
   /payments:
     get:
       description: |
@@ -9607,6 +9700,37 @@ paths:
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
+  '/subscriptions/{id}/matched-rules':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: Get matched rules for the subscription
+      responses:
+        '200':
+          description: List of matched rules was retrieved successfully.
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/MatchedRule'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Get matched rules for the subscription
+      tags:
+        - Rules
   '/subscriptions/{id}/switch':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -10517,6 +10641,37 @@ paths:
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
+  '/transactions/{id}/matched-rules':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: Get matched rules for the transaction
+      responses:
+        '200':
+          description: List of matched rules was retrieved successfully.
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/MatchedRule'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Get matched rules for the transaction
+      tags:
+        - Rules
   '/transactions/{id}/refund':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -12298,10 +12453,6 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: The contact identifier string
         readOnly: true
-      isOutdated:
-        description: Is contact outdated
-        readOnly: true
-        type: boolean
       lastName:
         description: The contact last name
         type: string
@@ -14219,6 +14370,47 @@ definitions:
     required:
       - name
       - values
+    type: object
+  MatchedRule:
+    properties:
+      context:
+        additionalProperties:
+          type: string
+        description: Event's context
+        type: object
+      description:
+        description: Rule's description
+        type: string
+      event:
+        $ref: '#/definitions/EventType'
+      id:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: Event tracking id
+        readOnly: true
+      occurredTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Time when event occurred.
+      processedRules:
+        description: Processed rules
+        properties:
+          actions:
+            description: Rule actions applied
+            items:
+              type: string
+            type: array
+          name:
+            description: Rule name
+            type: string
+          result:
+            description: Rule result
+            type: string
+        type: object
+      rulesVersion:
+        description: Rule version
+        type: integer
+    readOnly: true
     type: object
   Method:
     description: The payment method

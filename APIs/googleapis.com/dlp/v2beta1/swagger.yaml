@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://dlp.googleapis.com/$discovery/rest?version=v2beta1'
       version: v1
@@ -375,7 +375,7 @@ paths:
   '/v2beta1/{name}':
     delete:
       description: This method is not supported and the server returns `UNIMPLEMENTED`.
-      operationId: dlp.inspect.operations.delete
+      operationId: dlp.riskAnalysis.operations.delete
       parameters:
         - description: The name of the operation resource to be deleted.
           in: path
@@ -392,13 +392,13 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - inspect
+        - riskAnalysis
     get:
       description: |-
         Gets the latest state of a long-running operation.  Clients can use this
         method to poll the operation result at intervals as recommended by the API
         service.
-      operationId: dlp.inspect.operations.get
+      operationId: dlp.riskAnalysis.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
@@ -415,7 +415,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - inspect
+        - riskAnalysis
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -511,7 +511,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Cancels an operation. Use the `inspect.operations.get` to check whether the cancellation succeeded or the operation completed despite cancellation.
-      operationId: dlp.inspect.operations.cancel
+      operationId: dlp.riskAnalysis.operations.cancel
       parameters:
         - in: body
           name: body
@@ -532,7 +532,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - inspect
+        - riskAnalysis
 definitions:
   GoogleLongrunningCancelOperationRequest:
     description: The request message for Operations.CancelOperation.

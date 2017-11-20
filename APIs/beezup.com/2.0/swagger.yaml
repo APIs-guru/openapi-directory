@@ -7498,8 +7498,8 @@ definitions:
       propertyGroups:
         description: The groups settings with constraints
         example:
-          - displayGroupCode: AccountInformations
-            displayGroupPosition: 1
+          - name: AccountInformations
+            position: 1
             properties:
               - name: EbayToken
                 position: 1
@@ -7710,12 +7710,12 @@ definitions:
     type: string
   channelCatalogMarketplacePropertyGroup:
     properties:
-      displayGroupCode:
+      name:
         description: Indicate the code identifier of the group
         example: AccountInformations
         type: string
-        x-lov: MarketplacePropertiesDisplayGroup
-      displayGroupPosition:
+        x-lov: MarketplaceStorePropertyGroup
+      position:
         description: Indicate the position of the group
         example: 1
         minimum: 1
@@ -7736,8 +7736,8 @@ definitions:
           $ref: '#/definitions/channelCatalogMarketplaceProperty'
         type: array
     required:
-      - displayGroupCode
-      - displayGroupPosition
+      - name
+      - position
       - properties
   channelCatalogMarketplacePropertyName:
     description: Channel catalog marketplace property name
@@ -11626,6 +11626,8 @@ definitions:
         $ref: '#/definitions/BeezUP.Common.LOVLink3'
       carrierCodeLOV:
         $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      marketplaceStorePropertyGroupLOV:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
       marketplaceStorePropertyLOV:
         $ref: '#/definitions/BeezUP.Common.LOVLink3'
       refundReasonCodeLOV:
@@ -13300,7 +13302,7 @@ definitions:
         description: The total sales related to this category
         example: 234.42
         type: number
-      turnOver:
+      turnover:
         description: The Turnover for this category
         example: 25.33
         type: number
@@ -13311,7 +13313,7 @@ definitions:
       - clickCount
       - cost
       - orderCount
-      - turnOver
+      - turnover
       - margin
       - performanceIndicator
       - totalSales
@@ -13387,7 +13389,7 @@ definitions:
         description: The total sales related to this channel
         example: 234.42
         type: number
-      turnOver:
+      turnover:
         description: The Turnover for this channel
         example: 42.42
         type: number
@@ -13398,7 +13400,7 @@ definitions:
       - clickCount
       - cost
       - orderCount
-      - turnOver
+      - turnover
       - margin
       - performanceIndicator
       - totalSales
@@ -13491,7 +13493,7 @@ definitions:
         description: The total sales related to this day and all channels
         example: 234.42
         type: number
-      turnOver:
+      turnover:
         description: The Turnover for this day and all channels
         example: 23.11
         type: number
@@ -13499,7 +13501,7 @@ definitions:
       - clickCount
       - cost
       - orderCount
-      - turnOver
+      - turnover
       - margin
       - performanceIndicator
       - totalSales
@@ -13537,7 +13539,7 @@ definitions:
         description: The total sales related to this day and this channel
         example: 234.42
         type: number
-      turnOver:
+      turnover:
         description: The Turnover for this day and this channel
         example: 23.11
         type: number
@@ -13546,7 +13548,7 @@ definitions:
       - clickCount
       - cost
       - orderCount
-      - turnOver
+      - turnover
       - margin
       - performanceIndicator
       - totalSales
@@ -13640,7 +13642,7 @@ definitions:
         description: The total sales related to this product
         example: 234.42
         type: number
-      turnOver:
+      turnover:
         description: The Turnover for this product
         example: 42.01
         type: number
@@ -13651,7 +13653,7 @@ definitions:
       - clickCount
       - cost
       - orderCount
-      - turnOver
+      - turnover
       - margin
       - performanceIndicator
       - totalSales

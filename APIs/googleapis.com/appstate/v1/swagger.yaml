@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: The Google App State API.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google App State
   version: v1
   x-apiClientRegistration:
@@ -33,18 +29,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/appstate': View and manage your data for this application
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/appstate': View and manage your data for this application
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -107,8 +95,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/appstate'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/appstate'
       tags:
         - states
     parameters:
@@ -137,8 +123,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/appstate'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/appstate'
       tags:
         - states
     get:
@@ -159,8 +143,6 @@ paths:
             $ref: '#/definitions/GetResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appstate'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/appstate'
       tags:
         - states
@@ -199,8 +181,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/appstate'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/appstate'
       tags:
         - states
   '/states/{stateKey}/clear':
@@ -234,8 +214,6 @@ paths:
             $ref: '#/definitions/WriteResult'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/appstate'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/appstate'
       tags:
         - states

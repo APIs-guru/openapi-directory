@@ -206,6 +206,7 @@ tags:
   - name: Alerts
   - name: Reporting
   - name: Users
+  - name: Escalation Policies
 paths:
   '/api-public/v1/alerts/{uuid}':
     get:
@@ -439,6 +440,32 @@ paths:
       summary: List routing keys with associated teams
       tags:
         - Routing keys
+  /api-public/v1/policies:
+    get:
+      description: |-
+        Retrieves a list of escalation policy information.
+        This API may be called a maximum of once a minute
+      parameters:
+        - $ref: '#/parameters/apiId'
+        - $ref: '#/parameters/apiKey'
+      responses:
+        '200':
+          description: The list of escalation policies
+          schema:
+            $ref: '#/definitions/EscalationPolicyInfoList'
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '404':
+          $ref: '#/responses/404'
+        '500':
+          $ref: '#/responses/500'
+      summary: Get escalation policy info
+      tags:
+        - Escalation Policies
   '/api-public/v1/policies/{policy}/oncall/user':
     patch:
       description: |
@@ -746,8 +773,9 @@ paths:
         - Teams
   '/api-public/v1/team/{team}/oncall/schedule':
     get:
+      deprecated: true
       description: |
-        Get the on-call schedule for a user for all teams, including on-call overrides.
+        Get the on-call schedule for a team, including on-call overrides.
 
         This API may be called a maximum of 15 times per minute.
       parameters:
@@ -815,6 +843,42 @@ paths:
       summary: Create an on-call override (take on-call)
       tags:
         - On-call
+  '/api-public/v1/team/{team}/policies':
+    get:
+      description: |
+        Get the escalation policies for the specified team.
+
+        This API may be called a maximum of 15 times per minute.
+      parameters:
+        - $ref: '#/parameters/apiId'
+        - $ref: '#/parameters/apiKey'
+        - description: The VictorOps team to fetch
+          in: path
+          name: team
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The escalation policy list. This does not include details about the actual notification steps of the policy.
+          schema:
+            $ref: '#/definitions/EscalationPolicyList'
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '404':
+          $ref: '#/responses/team-not-found'
+        '422':
+          description: |
+            Team name or email is unavailable, or you have reached your team limit.
+        '500':
+          $ref: '#/responses/500'
+      summary: Retrieve a list of escalation policies for a team
+      tags:
+        - Escalation Policies
+        - Teams
   /api-public/v1/user:
     get:
       description: |
@@ -1302,43 +1366,6 @@ paths:
       summary: Get the indicate contact email for a user
       tags:
         - User Contact Methods
-    put:
-      description: |
-        Update the indicated contact email for a user
-
-        This API may be called a maximum of 15 times per minute.
-      parameters:
-        - $ref: '#/parameters/apiId'
-        - $ref: '#/parameters/apiKey'
-        - description: The VictorOps user ID
-          in: path
-          name: user
-          required: true
-          type: string
-        - description: The unique contact identifier
-          in: path
-          name: contactId
-          required: true
-          type: string
-        - $ref: '#/parameters/contactEmailAdd'
-      responses:
-        '200':
-          description: The updated contact email for the user
-          schema:
-            $ref: '#/definitions/UserContact'
-        '400':
-          $ref: '#/responses/400'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '404':
-          $ref: '#/responses/user-not-found'
-        '500':
-          $ref: '#/responses/500'
-      summary: Update a contact email for a user
-      tags:
-        - User Contact Methods
   '/api-public/v1/user/{user}/contact-methods/phones':
     get:
       description: |
@@ -1476,45 +1503,9 @@ paths:
       summary: Get the indicate contact phone for a user
       tags:
         - User Contact Methods
-    put:
-      description: |
-        Update the indicated contact phone for a user
-
-        This API may be called a maximum of 15 times per minute.
-      parameters:
-        - $ref: '#/parameters/apiId'
-        - $ref: '#/parameters/apiKey'
-        - description: The VictorOps user ID
-          in: path
-          name: user
-          required: true
-          type: string
-        - description: The unique contact identifier
-          in: path
-          name: contactId
-          required: true
-          type: string
-        - $ref: '#/parameters/contactPhoneAdd'
-      responses:
-        '200':
-          description: The updated contact phone for the user
-          schema:
-            $ref: '#/definitions/UserContact'
-        '400':
-          $ref: '#/responses/400'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '404':
-          $ref: '#/responses/user-not-found'
-        '500':
-          $ref: '#/responses/500'
-      summary: Update a contact phone for a user
-      tags:
-        - User Contact Methods
   '/api-public/v1/user/{user}/oncall/schedule':
     get:
+      deprecated: true
       description: |
         Get the on-call schedule for a user for all teams, including on-call overrides.
 
@@ -1582,6 +1573,76 @@ paths:
       summary: Get a list of paging policies for a user
       tags:
         - User Paging Policies
+  '/api-public/v2/team/{team}/oncall/schedule':
+    get:
+      description: |
+        Get the on-call schedule for a team, including on-call overrides.
+
+        This API may be called a maximum of 15 times per minute.
+      parameters:
+        - $ref: '#/parameters/apiId'
+        - $ref: '#/parameters/apiKey'
+        - description: The VictorOps team 'slug'
+          in: path
+          name: team
+          required: true
+          type: string
+        - $ref: '#/parameters/daysFwd'
+        - $ref: '#/parameters/daysSkip'
+        - $ref: '#/parameters/step'
+      responses:
+        '200':
+          description: The on-call schedule for the team
+          schema:
+            $ref: '#/definitions/TeamSchedule'
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '404':
+          $ref: '#/responses/team-not-found'
+        '500':
+          $ref: '#/responses/500'
+      summary: Get a team's on-call schedule
+      tags:
+        - On-call
+  '/api-public/v2/user/{user}/oncall/schedule':
+    get:
+      description: |
+        Get the on-call schedule for a user for all teams the user is on, including on-call overrides.
+
+        This API may be called a maximum of 15 times per minute.
+      parameters:
+        - $ref: '#/parameters/apiId'
+        - $ref: '#/parameters/apiKey'
+        - description: The VictorOps user ID
+          in: path
+          name: user
+          required: true
+          type: string
+        - $ref: '#/parameters/daysFwd'
+        - $ref: '#/parameters/daysSkip'
+        - $ref: '#/parameters/step'
+      responses:
+        '200':
+          description: The on-call schedule for the user
+          schema:
+            $ref: '#/definitions/UserSchedule'
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '404':
+          $ref: '#/responses/user-not-found'
+        '500':
+          $ref: '#/responses/500'
+      summary: Get a user's on-call schedule
+      tags:
+        - On-call
   /api-reporting/v1/incidents:
     get:
       description: |
@@ -1864,6 +1925,11 @@ definitions:
       lastAlertTime:
         description: The time of the last alert received for the incident
         type: string
+      pagedPolicies:
+        description: The escalation policies that were triggered for the incident
+        items:
+          $ref: '#/definitions/EscalationPolicyInfo'
+        type: array
       pagedTeams:
         description: The teams that were paged for the incident
         items:
@@ -1912,23 +1978,7 @@ definitions:
       - name
     type: object
   AddTeamResponse:
-    description: Some info about the team
-    properties:
-      _membersUrl:
-        type: string
-      _selfUrl:
-        type: string
-      isDefaultTeam:
-        type: boolean
-      memberCount:
-        type: number
-      name:
-        type: string
-      slug:
-        type: string
-      version:
-        type: number
-    type: object
+    $ref: '#/definitions/TeamDetail'
   AddUserPayload:
     description: The user information
     properties:
@@ -2093,6 +2143,38 @@ definitions:
         type: string
     required:
       - replacement
+    type: object
+  EscalationPolicy:
+    properties:
+      name:
+        type: string
+      slug:
+        type: string
+    type: object
+  EscalationPolicyInfo:
+    properties:
+      policy:
+        $ref: '#/definitions/EscalationPolicy'
+      team:
+        $ref: '#/definitions/Team'
+    required:
+      - policy
+    type: object
+  EscalationPolicyInfoList:
+    properties:
+      policies:
+        items:
+          $ref: '#/definitions/EscalationPolicyInfo'
+        type: array
+    required:
+      - policies
+    type: object
+  EscalationPolicyList:
+    properties:
+      policies:
+        items:
+          $ref: '#/definitions/EscalationPolicy'
+        type: array
     type: object
   GetAlertResponse:
     description: Alert details. All fields should be considered optional.
@@ -2263,24 +2345,8 @@ definitions:
         type: array
     type: object
   ListTeamResponse:
-    description: Some info about teams in the org
     items:
-      properties:
-        _membersUrl:
-          type: string
-        _selfUrl:
-          type: string
-        isDefaultTeam:
-          type: boolean
-        memberCount:
-          type: number
-        name:
-          type: string
-        slug:
-          type: string
-        version:
-          type: number
-      type: object
+      $ref: '#/definitions/TeamDetail'
     type: array
   ListUserResponse:
     description: Some info about the user
@@ -2305,6 +2371,29 @@ definitions:
       team:
         type: string
     type: object
+  OnCallEntry:
+    properties:
+      onCallType:
+        $ref: '#/definitions/OnCallType'
+      onCallUser:
+        $ref: '#/definitions/User'
+      overrideOnCallUser:
+        $ref: '#/definitions/User'
+      rolls:
+        items:
+          $ref: '#/definitions/OnCallRoll'
+        type: array
+      rotationName:
+        type: string
+      shiftName:
+        type: string
+      shiftRoll:
+        description: The shift roll time (ISO 8601)
+        type: string
+    required:
+      - onCallType
+      - rolls
+    type: object
   OnCallEscalationPolicyResource:
     properties:
       id:
@@ -2326,6 +2415,8 @@ definitions:
           minutes:
             type: number
         type: object
+      escalationPolicy:
+        $ref: '#/definitions/EscalationPolicy'
       'off':
         type: string
       'on':
@@ -2346,6 +2437,48 @@ definitions:
           $ref: '#/definitions/UserLog'
         type: array
     type: object
+  OnCallOverride:
+    properties:
+      end:
+        description: The override end time (ISO 8601)
+        type: string
+      origOnCallUser:
+        $ref: '#/definitions/User'
+      overrideOnCallUser:
+        $ref: '#/definitions/User'
+      start:
+        description: The override start time (ISO 8601)
+        type: string
+    type: object
+  OnCallRoll:
+    properties:
+      end:
+        description: The on-call period end time (ISO 8601)
+        type: string
+      isRoll:
+        type: boolean
+      onCallUser:
+        $ref: '#/definitions/User'
+      start:
+        description: The on-call period start time (ISO 8601)
+        type: string
+    required:
+      - start
+      - end
+      - isRoll
+    type: object
+  OnCallType:
+    enum:
+      - user
+      - rotation_group
+      - rotation_group_next
+      - rotation_group_previous
+      - team
+      - team_routing
+      - webhook
+      - email
+      - policy_routing
+    type: string
   PagingPolicy:
     description: Paging policy fields
     properties:
@@ -2369,6 +2502,19 @@ definitions:
         type: integer
       username:
         type: string
+    type: object
+  PolicySchedule:
+    properties:
+      overrides:
+        items:
+          $ref: '#/definitions/OnCallOverride'
+        type: array
+      policy:
+        $ref: '#/definitions/EscalationPolicy'
+      schedule:
+        items:
+          $ref: '#/definitions/OnCallEntry'
+        type: array
     type: object
   RelLink:
     properties:
@@ -2422,6 +2568,33 @@ definitions:
       result:
         type: string
     type: object
+  Team:
+    properties:
+      name:
+        type: string
+      slug:
+        type: string
+    type: object
+  TeamDetail:
+    description: Some info about the team
+    properties:
+      _membersUrl:
+        type: string
+      _policiesUrl:
+        type: string
+      _selfUrl:
+        type: string
+      isDefaultTeam:
+        type: boolean
+      memberCount:
+        type: number
+      name:
+        type: string
+      slug:
+        type: string
+      version:
+        type: number
+    type: object
   TeamMember:
     description: Some info about the user
     properties:
@@ -2436,6 +2609,15 @@ definitions:
         type: string
       version:
         type: number
+    type: object
+  TeamSchedule:
+    properties:
+      schedules:
+        items:
+          $ref: '#/definitions/PolicySchedule'
+        type: array
+      team:
+        $ref: '#/definitions/Team'
     type: object
   TeamScheduleOverlayResource:
     properties:
@@ -2494,6 +2676,11 @@ definitions:
       - until
       - isRoll
     type: object
+  User:
+    properties:
+      username:
+        type: string
+    type: object
   UserContact:
     properties:
       _selfUrl:
@@ -2527,6 +2714,13 @@ definitions:
         type: object
       userId:
         type: string
+    type: object
+  UserSchedule:
+    properties:
+      teamSchedules:
+        items:
+          $ref: '#/definitions/TeamSchedule'
+        type: array
     type: object
   V1User:
     description: Some info about the user

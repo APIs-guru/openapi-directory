@@ -109,7 +109,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: apiBlueprint
       url: 'https://raw.githubusercontent.com/RiteKit/api-docs/master/apiary.apib'
       version: 1A
@@ -166,7 +166,7 @@ paths:
       tags: []
   /v1/images/logo:
     get:
-      description: Returns a company logo based on website domain.
+      description: 'Returns a company logo based on website domain. If the logo is not in our database yet, it will be extracted from the site on the fly. White logo background is automatically removed to make the logo look better on color backgrounds.'
       parameters:
         - description: URL of the company
           in: query

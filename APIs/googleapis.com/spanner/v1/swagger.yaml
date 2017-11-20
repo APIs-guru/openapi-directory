@@ -20,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://spanner.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -361,13 +361,12 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Gets a session. Returns `NOT_FOUND` if the session does not exist.
-        This is mainly useful for determining whether a session is still
-        alive.
-      operationId: spanner.projects.instances.databases.sessions.get
+      description: Gets information about a particular instance configuration.
+      operationId: spanner.projects.instanceConfigs.get
       parameters:
-        - description: Required. The name of the session to retrieve.
+        - description: |-
+            Required. The name of the requested instance configuration. Values are of
+            the form `projects/<project>/instanceConfigs/<config>`.
           in: path
           name: name
           required: true
@@ -377,12 +376,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Session'
+            $ref: '#/definitions/InstanceConfig'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spanner.data'
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
     parameters:

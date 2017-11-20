@@ -182,7 +182,7 @@ paths:
           in: query
           name: orderBy
           type: string
-        - description: Full path of the organization unit or its Id
+        - description: Full path of the organizational unit or its ID
           in: query
           name: orgUnitPath
           type: string
@@ -238,7 +238,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Move or insert multiple Chrome OS Devices to Organization Unit
+      description: Move or insert multiple Chrome OS Devices to organizational unit
       operationId: directory.chromeosdevices.moveDevicesToOu
       parameters:
         - in: body
@@ -250,7 +250,7 @@ paths:
           name: customerId
           required: true
           type: string
-        - description: Full path of the target organization unit or its Id
+        - description: Full path of the target organizational unit or its ID
           in: query
           name: orgUnitPath
           required: true
@@ -587,7 +587,7 @@ paths:
         - mobiledevices
   '/customer/{customerId}/orgunits':
     get:
-      description: Retrieve all Organization Units
+      description: Retrieve all organizational units
       operationId: directory.orgunits.list
       parameters:
         - description: Immutable ID of the G Suite account
@@ -596,7 +596,7 @@ paths:
           required: true
           type: string
         - default: ''
-          description: the URL-encoded organization unit's path or its Id
+          description: the URL-encoded organizational unit's path or its ID
           in: query
           name: orgUnitPath
           type: string
@@ -628,7 +628,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Add Organization Unit
+      description: Add organizational unit
       operationId: directory.orgunits.insert
       parameters:
         - in: body
@@ -829,7 +829,7 @@ paths:
           name: customerId
           required: true
           type: string
-        - description: Name or immutable Id of the schema
+        - description: Name or immutable ID of the schema
           in: path
           name: schemaKey
           required: true
@@ -851,7 +851,7 @@ paths:
           name: customerId
           required: true
           type: string
-        - description: Name or immutable Id of the schema
+        - description: Name or immutable ID of the schema
           in: path
           name: schemaKey
           required: true
@@ -889,7 +889,7 @@ paths:
           name: customerId
           required: true
           type: string
-        - description: Name or immutable Id of the schema.
+        - description: Name or immutable ID of the schema.
           in: path
           name: schemaKey
           required: true
@@ -917,7 +917,7 @@ paths:
           name: customerId
           required: true
           type: string
-        - description: Name or immutable Id of the schema.
+        - description: Name or immutable ID of the schema.
           in: path
           name: schemaKey
           required: true
@@ -1921,7 +1921,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: 'Email or immutable Id of the user if only those groups are to be listed, the given user is a member of. If Id, it should match with id of user object'
+        - description: 'Email or immutable ID of the user if only those groups are to be listed, the given user is a member of. If ID, it should match with id of user object'
           in: query
           name: userKey
           type: string
@@ -1968,7 +1968,7 @@ paths:
       description: Delete Group
       operationId: directory.groups.delete
       parameters:
-        - description: Email or immutable Id of the group
+        - description: Email or immutable ID of the group
           in: path
           name: groupKey
           required: true
@@ -1985,7 +1985,7 @@ paths:
       description: Retrieve Group
       operationId: directory.groups.get
       parameters:
-        - description: Email or immutable Id of the group
+        - description: Email or immutable ID of the group
           in: path
           name: groupKey
           required: true
@@ -2014,15 +2014,15 @@ paths:
       description: Update Group. This method supports patch semantics.
       operationId: directory.groups.patch
       parameters:
-        - description: 'Email or immutable Id of the group. If Id, it should match with id of group object'
-          in: path
-          name: groupKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Group'
+        - description: 'Email or immutable ID of the group. If ID, it should match with id of group object'
+          in: path
+          name: groupKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2037,15 +2037,15 @@ paths:
       description: Update Group
       operationId: directory.groups.update
       parameters:
-        - description: 'Email or immutable Id of the group. If Id, it should match with id of group object'
-          in: path
-          name: groupKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Group'
+        - description: 'Email or immutable ID of the group. If ID, it should match with id of group object'
+          in: path
+          name: groupKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2061,7 +2061,7 @@ paths:
       description: List all aliases for a group
       operationId: directory.groups.aliases.list
       parameters:
-        - description: Email or immutable Id of the group
+        - description: Email or immutable ID of the group
           in: path
           name: groupKey
           required: true
@@ -2090,15 +2090,15 @@ paths:
       description: Add a alias for the group
       operationId: directory.groups.aliases.insert
       parameters:
-        - description: Email or immutable Id of the group
-          in: path
-          name: groupKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Alias'
+        - description: Email or immutable ID of the group
+          in: path
+          name: groupKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2114,14 +2114,14 @@ paths:
       description: Remove a alias for the group
       operationId: directory.groups.aliases.delete
       parameters:
-        - description: Email or immutable Id of the group
-          in: path
-          name: groupKey
-          required: true
-          type: string
         - description: The alias to be removed
           in: path
           name: alias
+          required: true
+          type: string
+        - description: Email or immutable ID of the group
+          in: path
+          name: groupKey
           required: true
           type: string
       responses:
@@ -2140,12 +2140,51 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/groups/{groupKey}/hasMember/{memberKey}':
+    get:
+      description: Checks Membership of an user within a Group
+      operationId: directory.members.hasMember
+      parameters:
+        - description: Email or immutable Id of the group
+          in: path
+          name: groupKey
+          required: true
+          type: string
+        - description: Email or immutable Id of the member
+          in: path
+          name: memberKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/MembersHasMember'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
+      tags:
+        - members
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/groups/{groupKey}/members':
     get:
       description: Retrieve all members in a group (paginated)
       operationId: directory.members.list
       parameters:
-        - description: Email or immutable Id of the group
+        - description: Email or immutable ID of the group
           in: path
           name: groupKey
           required: true
@@ -2191,15 +2230,15 @@ paths:
       description: Add user to the specified group.
       operationId: directory.members.insert
       parameters:
-        - description: Email or immutable Id of the group
-          in: path
-          name: groupKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Member'
+        - description: Email or immutable ID of the group
+          in: path
+          name: groupKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2217,12 +2256,12 @@ paths:
       description: Remove membership.
       operationId: directory.members.delete
       parameters:
-        - description: Email or immutable Id of the group
+        - description: Email or immutable ID of the group
           in: path
           name: groupKey
           required: true
           type: string
-        - description: Email or immutable Id of the member
+        - description: Email or immutable ID of the member
           in: path
           name: memberKey
           required: true
@@ -2241,12 +2280,12 @@ paths:
       description: Retrieve Group Member
       operationId: directory.members.get
       parameters:
-        - description: Email or immutable Id of the group
+        - description: Email or immutable ID of the group
           in: path
           name: groupKey
           required: true
           type: string
-        - description: Email or immutable Id of the member
+        - description: Email or immutable ID of the member
           in: path
           name: memberKey
           required: true
@@ -2279,20 +2318,20 @@ paths:
       description: Update membership of a user in the specified group. This method supports patch semantics.
       operationId: directory.members.patch
       parameters:
-        - description: 'Email or immutable Id of the group. If Id, it should match with id of group object'
-          in: path
-          name: groupKey
-          required: true
-          type: string
-        - description: 'Email or immutable Id of the user. If Id, it should match with id of member object'
-          in: path
-          name: memberKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Member'
+        - description: 'Email or immutable ID of the group. If ID, it should match with id of group object'
+          in: path
+          name: groupKey
+          required: true
+          type: string
+        - description: 'Email or immutable ID of the user. If ID, it should match with id of member object'
+          in: path
+          name: memberKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2309,20 +2348,20 @@ paths:
       description: Update membership of a user in the specified group.
       operationId: directory.members.update
       parameters:
-        - description: 'Email or immutable Id of the group. If Id, it should match with id of group object'
-          in: path
-          name: groupKey
-          required: true
-          type: string
-        - description: 'Email or immutable Id of the user. If Id, it should match with id of member object'
-          in: path
-          name: memberKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Member'
+        - description: 'Email or immutable ID of the group. If ID, it should match with id of group object'
+          in: path
+          name: groupKey
+          required: true
+          type: string
+        - description: 'Email or immutable ID of the user. If ID, it should match with id of member object'
+          in: path
+          name: memberKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2594,7 +2633,7 @@ paths:
       description: Delete user
       operationId: directory.users.delete
       parameters:
-        - description: Email or immutable Id of the user
+        - description: Email or immutable ID of the user
           in: path
           name: userKey
           required: true
@@ -2611,11 +2650,6 @@ paths:
       description: retrieve user
       operationId: directory.users.get
       parameters:
-        - description: Email or immutable Id of the user
-          in: path
-          name: userKey
-          required: true
-          type: string
         - description: Comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when projection=custom.
           in: query
           name: customFieldMask
@@ -2628,6 +2662,11 @@ paths:
             - full
           in: query
           name: projection
+          type: string
+        - description: Email or immutable ID of the user
+          in: path
+          name: userKey
+          required: true
           type: string
         - default: admin_view
           description: Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
@@ -2661,15 +2700,15 @@ paths:
       description: update user. This method supports patch semantics.
       operationId: directory.users.patch
       parameters:
-        - description: 'Email or immutable Id of the user. If Id, it should match with id of user object'
-          in: path
-          name: userKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/User'
+        - description: 'Email or immutable ID of the user. If ID, it should match with id of user object'
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2684,15 +2723,15 @@ paths:
       description: update user
       operationId: directory.users.update
       parameters:
-        - description: 'Email or immutable Id of the user. If Id, it should match with id of user object'
-          in: path
-          name: userKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/User'
+        - description: 'Email or immutable ID of the user. If ID, it should match with id of user object'
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2708,17 +2747,17 @@ paths:
       description: List all aliases for a user
       operationId: directory.users.aliases.list
       parameters:
-        - description: Email or immutable Id of the user
-          in: path
-          name: userKey
-          required: true
-          type: string
         - description: Event on which subscription is intended (if subscribing)
           enum:
             - add
             - delete
           in: query
           name: event
+          type: string
+        - description: Email or immutable ID of the user
+          in: path
+          name: userKey
+          required: true
           type: string
       responses:
         '200':
@@ -2748,15 +2787,15 @@ paths:
       description: Add a alias for the user
       operationId: directory.users.aliases.insert
       parameters:
-        - description: Email or immutable Id of the user
-          in: path
-          name: userKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Alias'
+        - description: Email or immutable ID of the user
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2782,11 +2821,6 @@ paths:
       description: Watch for changes in user aliases list
       operationId: directory.users.aliases.watch
       parameters:
-        - description: Email or immutable Id of the user
-          in: path
-          name: userKey
-          required: true
-          type: string
         - description: Event on which subscription is intended (if subscribing)
           enum:
             - add
@@ -2798,6 +2832,11 @@ paths:
           name: resource
           schema:
             $ref: '#/definitions/Channel'
+        - description: Email or immutable ID of the user
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2819,14 +2858,14 @@ paths:
       description: Remove a alias for the user
       operationId: directory.users.aliases.delete
       parameters:
-        - description: Email or immutable Id of the user
-          in: path
-          name: userKey
-          required: true
-          type: string
         - description: The alias to be removed
           in: path
           name: alias
+          required: true
+          type: string
+        - description: Email or immutable ID of the user
+          in: path
+          name: userKey
           required: true
           type: string
       responses:
@@ -2943,15 +2982,15 @@ paths:
       description: change admin status of a user
       operationId: directory.users.makeAdmin
       parameters:
-        - description: Email or immutable Id of the user as admin
-          in: path
-          name: userKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/UserMakeAdmin'
+        - description: Email or immutable ID of the user as admin
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2965,7 +3004,7 @@ paths:
       description: Remove photos for the user
       operationId: directory.users.photos.delete
       parameters:
-        - description: Email or immutable Id of the user
+        - description: Email or immutable ID of the user
           in: path
           name: userKey
           required: true
@@ -2982,7 +3021,7 @@ paths:
       description: Retrieve photo of a user
       operationId: directory.users.photos.get
       parameters:
-        - description: Email or immutable Id of the user
+        - description: Email or immutable ID of the user
           in: path
           name: userKey
           required: true
@@ -3011,15 +3050,15 @@ paths:
       description: Add a photo for the user. This method supports patch semantics.
       operationId: directory.users.photos.patch
       parameters:
-        - description: Email or immutable Id of the user
-          in: path
-          name: userKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/UserPhoto'
+        - description: Email or immutable ID of the user
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3034,15 +3073,15 @@ paths:
       description: Add a photo for the user
       operationId: directory.users.photos.update
       parameters:
-        - description: Email or immutable Id of the user
-          in: path
-          name: userKey
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/UserPhoto'
+        - description: Email or immutable ID of the user
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3207,7 +3246,7 @@ paths:
       description: Generate new backup verification codes for the user.
       operationId: directory.verificationCodes.generate
       parameters:
-        - description: Email or immutable Id of the user
+        - description: Email or immutable ID of the user
           in: path
           name: userKey
           required: true
@@ -3233,7 +3272,7 @@ paths:
       description: Invalidate the current backup verification codes for the user.
       operationId: directory.verificationCodes.invalidate
       parameters:
-        - description: Email or immutable Id of the user
+        - description: Email or immutable ID of the user
           in: path
           name: userKey
           required: true
@@ -3837,6 +3876,14 @@ definitions:
       nextPageToken:
         description: Token used to access next page of this result.
         type: string
+    type: object
+  MembersHasMember:
+    description: JSON template for Has Member response in Directory API.
+    properties:
+      isMember:
+        description: Identifies whether given user is a member or not.
+        readOnly: true
+        type: boolean
     type: object
   MobileDevice:
     description: JSON template for Mobile Device resource in Directory API.
@@ -4843,6 +4890,10 @@ definitions:
   UserPosixAccount:
     description: 'JSON template for a POSIX account entry. Description of the field family: go/fbs-posix.'
     properties:
+      accountId:
+        description: A POSIX account field identifier. (Read-only)
+        readOnly: true
+        type: string
       gecos:
         description: The GECOS (user information) for this account.
         type: string

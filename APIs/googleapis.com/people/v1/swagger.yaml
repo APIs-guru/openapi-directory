@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://people.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -418,37 +418,11 @@ paths:
           name: maxMembers
           type: integer
         - description: |-
-            **Required.** A field mask to restrict which fields on the person are
-            returned. Valid values are:
-
-            * addresses
-            * ageRanges
-            * biographies
-            * birthdays
-            * braggingRights
-            * coverPhotos
-            * emailAddresses
-            * events
-            * genders
-            * imClients
-            * locales
-            * memberships
-            * metadata
-            * names
-            * nicknames
-            * occupations
-            * organizations
-            * phoneNumbers
-            * photos
-            * relations
-            * relationshipInterests
-            * relationshipStatuses
-            * residences
-            * skills
-            * taglines
-            * urls
+            **Required.** Comma-separated list of person fields to be included in the
+            response. Each path should start with `person.`: for example,
+            `person.names` or `person.photos`.
           in: query
-          name: personFields
+          name: requestMask.includeField
           type: string
         - description: The resource name of the contact group to get.
           in: path

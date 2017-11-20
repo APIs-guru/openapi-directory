@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/compute/v1/rest'
       version: v1
@@ -3599,7 +3599,7 @@ paths:
         - httpsHealthChecks
   '/{project}/global/images':
     get:
-      description: 'Retrieves the list of private images available to the specified project. Private images are images you create that belong to your project. This method does not get any images that belong to other projects, including publicly-available images, like Debian 8. If you want to get a list of publicly-available images, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.'
+      description: 'Retrieves the list of custom images available to the specified project. Custom images are images you create that belong to your project. This method does not get any images that belong to other projects, including publicly-available images, like Debian 8. If you want to get a list of publicly-available images, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.'
       operationId: compute.images.list
       parameters:
         - description: |-
@@ -14913,7 +14913,7 @@ definitions:
         description: The static IP address represented by this resource.
         type: string
       addressType:
-        description: 'The type of address to reserve. If unspecified, defaults to EXTERNAL.'
+        description: 'The type of address to reserve, either INTERNAL or EXTERNAL. If unspecified, defaults to EXTERNAL.'
         enum:
           - EXTERNAL
           - INTERNAL
@@ -15283,13 +15283,13 @@ definitions:
 
           projects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD 
 
-          To create a disk with a private image that you created, specify the image name in the following format:
+          To create a disk with a custom image that you created, specify the image name in the following format:
 
-          global/images/my-private-image 
+          global/images/my-custom-image 
 
-          You can also specify a private image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name:
+          You can also specify a custom image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name:
 
-          global/images/family/my-private-family 
+          global/images/family/my-image-family 
 
           If the source image is deleted later, this field will not be set.
         type: string
@@ -16580,13 +16580,13 @@ definitions:
 
           projects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD 
 
-          To create a disk with a private image that you created, specify the image name in the following format:
+          To create a disk with a custom image that you created, specify the image name in the following format:
 
-          global/images/my-private-image 
+          global/images/my-custom-image 
 
-          You can also specify a private image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name:
+          You can also specify a custom image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name:
 
-          global/images/family/my-private-family
+          global/images/family/my-image-family
         type: string
       sourceImageEncryptionKey:
         $ref: '#/definitions/CustomerEncryptionKey'
@@ -19522,10 +19522,10 @@ definitions:
         type: array
     type: object
   Interconnect:
-    description: 'Protocol definitions for Mixer API to support Interconnect. Next available tag: 25'
+    description: 'Represents an Interconnects resource. The Interconnects resource is a dedicated connection between Google''s network and your on-premises network. For more information, see the  Dedicated overview page.'
     properties:
       adminEnabled:
-        description: 'Administrative status of the interconnect. When this is set to ?true?, the Interconnect is functional and may carry traffic (assuming there are functional InterconnectAttachments and other requirements are satisfied). When set to ?false?, no packets will be carried over this Interconnect and no BGP routes will be exchanged over it. By default, it is set to ?true?.'
+        description: 'Administrative status of the interconnect. When this is set to true, the Interconnect is functional and can carry traffic. When set to false, no packets can be carried over the interconnect and no BGP routes are exchanged over it. By default, the status is set to true.'
         type: boolean
       circuitInfos:
         description: '[Output Only] List of CircuitInfo objects, that describe the individual circuits in this LAG.'
@@ -19562,6 +19562,7 @@ definitions:
           type: string
         type: array
       interconnectType:
+        description: Type of interconnect. Note that "IT_PRIVATE" has been deprecated in favor of "DEDICATED"
         enum:
           - DEDICATED
           - IT_PRIVATE
@@ -19571,6 +19572,7 @@ definitions:
         description: '[Output Only] Type of the resource. Always compute#interconnect for interconnects.'
         type: string
       linkType:
+        description: 'Type of link requested. This field indicates speed of each of the links in the bundle, not the entire bundle. Only 10G per link is allowed for a dedicated interconnect. Options: Ethernet_10G_LR'
         enum:
           - LINK_TYPE_ETHERNET_10G_LR
         type: string
@@ -19587,10 +19589,8 @@ definitions:
       operationalStatus:
         description: '[Output Only] The current status of whether or not this Interconnect is functional.'
         enum:
-          - ACTIVE
           - OS_ACTIVE
           - OS_UNPROVISIONED
-          - UNPROVISIONED
         type: string
       peerIpAddress:
         description: '[Output Only] IP address configured on the customer side of the Interconnect link. The customer should configure this IP address during turnup when prompted by Google NOC. This can be used only for ping tests.'
@@ -19608,7 +19608,7 @@ definitions:
         type: string
     type: object
   InterconnectAttachment:
-    description: 'Protocol definitions for Mixer API to support InterconnectAttachment. Next available tag: 23'
+    description: 'Represents an InterconnectAttachment (VLAN attachment) resource. For more information, see  Creating VLAN Attachments.'
     properties:
       cloudRouterIpAddress:
         description: '[Output Only] IPv4 address + prefix length to be configured on Cloud Router Interface for this interconnect attachment.'
@@ -19620,7 +19620,7 @@ definitions:
         description: '[Output Only] IPv4 address + prefix length to be configured on the customer router subinterface for this interconnect attachment.'
         type: string
       description:
-        description: An optional description of this resource. Provide this property when you create the resource.
+        description: An optional description of this resource.
         type: string
       googleReferenceId:
         description: '[Output Only] Google reference ID, to be used when raising support tickets with Google or otherwise to debug backend connectivity issues.'
@@ -19643,14 +19643,12 @@ definitions:
       operationalStatus:
         description: '[Output Only] The current status of whether or not this interconnect attachment is functional.'
         enum:
-          - ACTIVE
           - OS_ACTIVE
           - OS_UNPROVISIONED
-          - UNPROVISIONED
         type: string
       privateInterconnectInfo:
         $ref: '#/definitions/InterconnectAttachmentPrivateInfo'
-        description: '[Output Only] Information specific to a Private InterconnectAttachment. Only populated if the interconnect that this is attached is of type IT_PRIVATE.'
+        description: '[Output Only] Information specific to an InterconnectAttachment. This property is populated if the interconnect that this is attached to is of type DEDICATED.'
       region:
         description: '[Output Only] URL of the region where the regional interconnect attachment resides.'
         type: string
@@ -19802,7 +19800,7 @@ definitions:
         type: object
     type: object
   InterconnectAttachmentPrivateInfo:
-    description: Private information for an interconnect attachment when this belongs to an interconnect of type IT_PRIVATE.
+    description: Information for an interconnect attachment when this belongs to an interconnect of type DEDICATED.
     properties:
       tag8021q:
         description: '[Output Only] 802.1q encapsulation tag to be used for traffic between Google and the customer, going to and from this network and region.'
@@ -19869,7 +19867,7 @@ definitions:
     description: 'Describes a single physical circuit between the Customer and Google. CircuitInfo objects are created by Google, so all fields are output only. Next id: 4'
     properties:
       customerDemarcId:
-        description: Customer-side demarc ID for this circuit. This will only be set if it was provided by the Customer to Google during circuit turn-up.
+        description: Customer-side demarc ID for this circuit.
         type: string
       googleCircuitId:
         description: Google-assigned unique ID for this circuit. Assigned at circuit turn-up.
@@ -19949,19 +19947,19 @@ definitions:
         type: object
     type: object
   InterconnectLocation:
-    description: Protocol definitions for Mixer API to support InterconnectLocation.
+    description: 'Represents an InterconnectLocations resource. The InterconnectLocations resource describes the locations where you can connect to Google''s networks. For more information, see  Colocation Facilities.'
     properties:
       address:
         description: '[Output Only] The postal address of the Point of Presence, each line in the address is separated by a newline character.'
         type: string
       availabilityZone:
-        description: 'Availability zone for this location. Within a city, maintenance will not be simultaneously scheduled in more than one availability zone. Example: "zone1" or "zone2".'
+        description: '[Output Only] Availability zone for this location. Within a metropolitan area (metro), maintenance will not be simultaneously scheduled in more than one availability zone. Example: "zone1" or "zone2".'
         type: string
       city:
-        description: 'City designator used by the Interconnect UI to locate this InterconnectLocation within the Continent. For example: "Chicago, IL", "Amsterdam, Netherlands".'
+        description: '[Output Only] Metropolitan area designator that indicates which city an interconnect is located. For example: "Chicago, IL", "Amsterdam, Netherlands".'
         type: string
       continent:
-        description: Continent for this location. Used by the location picker in the Interconnect UI.
+        description: '[Output Only] Continent for this location.'
         enum:
           - AFRICA
           - ASIA_PAC
@@ -20107,12 +20105,14 @@ definitions:
           type: string
         type: array
       description:
-        description: Short user-visible description of the purpose of the outage.
+        description: A description about the purpose of the outage.
         type: string
       endTime:
+        description: Scheduled end time for the outage (milliseconds since Unix epoch).
         format: int64
         type: string
       issueType:
+        description: Form this outage is expected to take. Note that the "IT_" versions of this enum have been deprecated in favor of the unprefixed values.
         enum:
           - IT_OUTAGE
           - IT_PARTIAL_OUTAGE
@@ -20123,15 +20123,17 @@ definitions:
         description: Unique identifier for this outage notification.
         type: string
       source:
+        description: The party that generated this notification. Note that "NSRC_GOOGLE" has been deprecated in favor of "GOOGLE"
         enum:
           - GOOGLE
           - NSRC_GOOGLE
         type: string
       startTime:
-        description: Scheduled start and end times for the outage (milliseconds since Unix epoch).
+        description: Scheduled start time for the outage (milliseconds since Unix epoch).
         format: int64
         type: string
       state:
+        description: State of this notification. Note that the "NS_" versions of this enum have been deprecated in favor of the unprefixed values.
         enum:
           - ACTIVE
           - CANCELLED
@@ -21217,6 +21219,7 @@ definitions:
           - INSTANCE_GROUP_MANAGERS
           - INSTANCE_TEMPLATES
           - INTERCONNECTS
+          - INTERNAL_ADDRESSES
           - IN_USE_ADDRESSES
           - LOCAL_SSD_TOTAL_GB
           - NETWORKS
@@ -21224,6 +21227,8 @@ definitions:
           - NVIDIA_P100_GPUS
           - PREEMPTIBLE_CPUS
           - PREEMPTIBLE_LOCAL_SSD_GB
+          - PREEMPTIBLE_NVIDIA_K80_GPUS
+          - PREEMPTIBLE_NVIDIA_P100_GPUS
           - REGIONAL_AUTOSCALERS
           - REGIONAL_INSTANCE_GROUP_MANAGERS
           - ROUTERS

@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://cloudtasks.googleapis.com/$discovery/rest?version=v2beta2'
       version: v1
@@ -208,11 +208,11 @@ paths:
         This method creates the queue if it does not exist and updates
         the queue if it does exist.
 
-        WARNING: This method is only available to whitelisted
-        users. Using this method carries some risk. Read
+        WARNING: Using this method may have unintended side effects if you are
+        using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
+        Read
         [Overview of Queue Management and queue.yaml](/cloud-tasks/docs/queue-yaml)
-        carefully and then sign up for
-        [whitelist access to this method](https://goo.gl/Fe5mUy).
+        carefully before using this method.
       operationId: cloudtasks.projects.locations.queues.patch
       parameters:
         - in: body
@@ -225,13 +225,10 @@ paths:
             The queue name must have the following format:
             `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
 
-            * `PROJECT_ID` can contain uppercase and lowercase letters,
-              numbers, hyphens, colons, and periods; that is, it must match
-              the regular expression: `[a-zA-Z\\d-:\\.]+`.
-            * `QUEUE_ID` can contain uppercase and lowercase letters,
-              numbers, and hyphens; that is, it must match the regular
-              expression: `[a-zA-Z\\d-]+`. The maximum length is 100
-              characters.
+            * `PROJECT_ID` can contain letters ([A-Za-z]), numbers ([0-9]),
+               hyphens (-), colons (:), or periods (.).
+            * `QUEUE_ID` can contain letters ([A-Za-z]), numbers ([0-9]), or
+              hyphens (-). The maximum length is 100 characters.
 
             Caller-specified and required in CreateQueueRequest, after which
             it becomes output only.
@@ -393,6 +390,11 @@ paths:
         PullTasksResponse. After the task is acknowledged, it will
         not be returned by a later CloudTasks.PullTasks,
         CloudTasks.GetTask, or CloudTasks.ListTasks.
+
+        To acknowledge multiple tasks at the same time, use
+        [HTTP batching](/storage/docs/json_api/v1/how-tos/batch)
+        or the batching documentation for your client library, for example
+        https://developers.google.com/api-client-library/python/guide/batch.
       operationId: cloudtasks.projects.locations.queues.tasks.acknowledge
       parameters:
         - in: body
@@ -820,11 +822,11 @@ paths:
       description: |-
         Creates a queue.
 
-        WARNING: This method is only available to whitelisted
-        users. Using this method carries some risk. Read
+        WARNING: Using this method may have unintended side effects if you are
+        using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
+        Read
         [Overview of Queue Management and queue.yaml](/cloud-tasks/docs/queue-yaml)
-        carefully and then sign up for
-        [whitelist access to this method](https://goo.gl/Fe5mUy).
+        carefully before using this method.
       operationId: cloudtasks.projects.locations.queues.create
       parameters:
         - in: body
@@ -1010,7 +1012,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: |
+      description: |-
         Gets the access control policy for a Queue.
         Returns an empty policy if the resource exists and does not have a policy
         set.
@@ -1059,7 +1061,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: |
+      description: |-
         Sets the access control policy for a Queue. Replaces any existing
         policy.
 
@@ -1110,7 +1112,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: |
+      description: |-
         Returns permissions that a caller has on a Queue.
         If the resource does not exist, this will return an empty set of
         permissions, not a google.rpc.Code.NOT_FOUND error.
@@ -1259,8 +1261,6 @@ definitions:
           The app's request handler for the task's target URL must be able to handle
           HTTP requests with this http_method, otherwise the task attempt will fail
           with error code 405 (Method Not Allowed). See
-          the Request-Line is not allowed for the resource identified by the
-          Request-URI". See
           [Writing a push task request handler](/appengine/docs/java/taskqueue/push/creating-handlers#writing_a_push_task_request_handler)
           and the documentation for the request handlers in the language your app is
           written in e.g.
@@ -1338,9 +1338,9 @@ definitions:
     properties:
       host:
         description: |-
-          Output only.
+          Output only. The host that the task is sent to.
 
-          The host that the task is sent to. For more information, see
+          For more information, see
           [How Requests are Routed](/appengine/docs/standard/python/how-requests-are-routed).
 
           The host is constructed as:
@@ -1477,9 +1477,7 @@ definitions:
     properties:
       dispatchTime:
         description: |-
-          Output only.
-
-          The time that this attempt was dispatched.
+          Output only. The time that this attempt was dispatched.
 
           `dispatch_time` will be truncated to the nearest microsecond.
         format: google-datetime
@@ -1487,26 +1485,20 @@ definitions:
       responseStatus:
         $ref: '#/definitions/Status'
         description: |-
-          Output only.
-
-          The response from the target for this attempt.
+          Output only. The response from the target for this attempt.
 
           If the task has not been attempted or the task is currently running
           then the response status is google.rpc.Code.UNKNOWN.
       responseTime:
         description: |-
-          Output only.
-
-          The time that this attempt response was received.
+          Output only. The time that this attempt response was received.
 
           `response_time` will be truncated to the nearest microsecond.
         format: google-datetime
         type: string
       scheduleTime:
         description: |-
-          Output only.
-
-          The time that this attempt was scheduled.
+          Output only. The time that this attempt was scheduled.
 
           `schedule_time` will be truncated to the nearest microsecond.
         format: google-datetime
@@ -1820,10 +1812,16 @@ definitions:
         type: string
       tag:
         description: |-
-          A meta-data tag for this task.
+          The task's tag.
 
-          This value is used by CloudTasks.PullTasks calls when
-          PullTasksRequest.filter is `tag=<tag>`.
+          Tags allow similar tasks to be processed in a batch. If you label
+          tasks with a tag, your task worker can pull tasks
+          with the same tag using PullTasksRequest.filter. For example,
+          if you want to aggregate the events associated with a specific
+          user once a day, you could tag tasks with the user ID.
+
+          The task's tag can only be set when the
+          task is created.
 
           The tag must be less than 500 bytes.
         format: byte
@@ -1959,13 +1957,10 @@ definitions:
           The queue name must have the following format:
           `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
 
-          * `PROJECT_ID` can contain uppercase and lowercase letters,
-            numbers, hyphens, colons, and periods; that is, it must match
-            the regular expression: `[a-zA-Z\\d-:\\.]+`.
-          * `QUEUE_ID` can contain uppercase and lowercase letters,
-            numbers, and hyphens; that is, it must match the regular
-            expression: `[a-zA-Z\\d-]+`. The maximum length is 100
-            characters.
+          * `PROJECT_ID` can contain letters ([A-Za-z]), numbers ([0-9]),
+             hyphens (-), colons (:), or periods (.).
+          * `QUEUE_ID` can contain letters ([A-Za-z]), numbers ([0-9]), or
+            hyphens (-). The maximum length is 100 characters.
 
           Caller-specified and required in CreateQueueRequest, after which
           it becomes output only.
@@ -1981,10 +1976,10 @@ definitions:
           A pull queue is a queue that has a PullTarget.
       purgeTime:
         description: |-
-          Output only.
+          Output only. The last time this queue was purged.
 
-          The last time this queue was purged. All tasks that were
-          created before this time were purged.
+          All tasks that were created before this time
+          were purged.
 
           A queue can be purged using CloudTasks.PurgeQueue, the
           [App Engine Task Queue SDK, or the Cloud Console](/appengine/docs/standard/python/taskqueue/push/deleting-tasks-and-queues#purging_all_tasks_from_a_queue).
@@ -1995,9 +1990,7 @@ definitions:
         type: string
       queueState:
         description: |-
-          Output only.
-
-          The state of the queue.
+          Output only. The state of the queue.
 
           `queue_state` can only be changed by called
           CloudTasks.PauseQueue, CloudTasks.ResumeQueue, or uploading
@@ -2046,13 +2039,13 @@ definitions:
     properties:
       maxBurstSize:
         description: |-
-          Output only.
+          Output only. The max burst size.
 
-          The max burst size limits how fast the queue is processed when
-          many tasks are in the queue and the rate is high. This field
-          allows the queue to have a high rate so processing starts shortly
-          after a task is enqueued, but still limits resource usage when
-          many tasks are enqueued in a short period of time.
+          Max burst size limits how fast the queue is processed when many
+          tasks are in the queue and the rate is high. This field allows
+          the queue to have a high rate so processing starts shortly after
+          a task is enqueued, but still limits resource usage when many
+          tasks are enqueued in a short period of time.
 
           * For App Engine queues, if
             RateLimits.max_tasks_dispatched_per_second is 1, this
@@ -2104,7 +2097,7 @@ definitions:
   RenewLeaseRequest:
     description: Request message for renewing a lease using CloudTasks.RenewLease.
     properties:
-      newLeaseDuration:
+      leaseDuration:
         description: |-
           Required.
 
@@ -2112,7 +2105,7 @@ definitions:
 
 
           The maximum lease duration is 1 week.
-          `new_lease_duration` will be truncated to the nearest second.
+          `lease_duration` will be truncated to the nearest second.
         format: google-duration
         type: string
       responseView:
@@ -2182,11 +2175,21 @@ definitions:
         type: string
       maxDoublings:
         description: |-
-          The time between retries increases exponentially `max_doublings` times.
-          `max_doublings` is maximum number of times that the interval between failed
-          task retries will be doubled before the interval increases linearly.
-          After max_doublings intervals, the retry interval will be
-          2^(max_doublings - 1) * RetryConfig.min_backoff.
+          The time between retries will double `max_doublings` times.
+
+          A task's retry interval starts at RetryConfig.min_backoff,
+          then doubles `max_doublings` times, then increases linearly, and
+          finally retries retries at intervals of
+          RetryConfig.max_backoff up to max_attempts times.
+
+          For example, if RetryConfig.min_backoff is 10s,
+          RetryConfig.max_backoff is 300s, and `max_doublings` is 3,
+          then the a task will first be retried in 10s. The retry interval
+          will double three times, and then increase linearly by 2^3 * 10s.
+          Finally, the task will retry at intervals of
+          RetryConfig.max_backoff until the task has been attempted
+          `max_attempts` times. Thus, the requests will retry at 10s, 20s,
+          40s, 80s, 160s, 240s, 300s, 300s, ....
 
           * For [App Engine queues](google.cloud.tasks.v2beta2.AppEngineHttpTarget),
             this field is 16 by default.
@@ -2364,9 +2367,7 @@ definitions:
         description: Deprecated. Use Task.app_engine_http_request.
       createTime:
         description: |-
-          Output only.
-
-          The time that the task was created.
+          Output only. The time that the task was created.
 
           `create_time` will be truncated to the nearest second.
         format: google-datetime
@@ -2378,17 +2379,12 @@ definitions:
           The task name must have the following format:
           `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
 
-          * `PROJECT_ID` can contain uppercase and lowercase letters,
-            numbers, hyphens, colons, and periods; that is, it must match
-            the regular expression: `[a-zA-Z\\d-:\\.]+`.
-          * `QUEUE_ID` can contain uppercase and lowercase letters,
-            numbers, and hyphens; that is, it must match the regular
-            expression: `[a-zA-Z\\d-]+`. The maximum length is 100
-            characters.
-          * `TASK_ID` contain uppercase and lowercase letters, numbers,
-            underscores, and hyphens; that is, it must match the regular
-            expression: `[a-zA-Z\\d_-]+`. The maximum length is 500
-            characters.
+          * `PROJECT_ID` can contain letters ([A-Za-z]), numbers ([0-9]),
+             hyphens (-), colons (:), or periods (.).
+          * `QUEUE_ID` can contain letters ([A-Za-z]), numbers ([0-9]), or
+            hyphens (-). The maximum length is 100 characters.
+          * `TASK_ID` can contain only letters ([A-Za-z]), numbers ([0-9]),
+            hyphens (-), or underscores (_). The maximum length is 500 characters.
 
           Optionally caller-specified in CreateTaskRequest.
         type: string
@@ -2419,16 +2415,11 @@ definitions:
         type: string
       taskStatus:
         $ref: '#/definitions/TaskStatus'
-        description: |-
-          Output only.
-
-          Task status.
+        description: Output only. The task status.
       view:
         description: |-
-          Output only.
-
-          The view specifies which subset of the Task has been
-          returned.
+          Output only. The view specifies which subset of the Task has
+          been returned.
         enum:
           - VIEW_UNSPECIFIED
           - BASIC
@@ -2440,17 +2431,15 @@ definitions:
     properties:
       attemptDispatchCount:
         description: |-
-          Output only.
+          Output only. The number of attempts dispatched.
 
-          The number of attempts dispatched. This count includes tasks which have
-          been dispatched but haven't received a response.
+          This count includes tasks which have been dispatched but haven't
+          received a response.
         format: int64
         type: string
       attemptResponseCount:
         description: |-
-          Output only.
-
-          The number of attempts which have received a response.
+          Output only. The number of attempts which have received a response.
 
           This field is not calculated for
           [pull tasks](google.cloud.tasks.v2beta2.PullTaskTarget).
@@ -2459,9 +2448,7 @@ definitions:
       firstAttemptStatus:
         $ref: '#/definitions/AttemptStatus'
         description: |-
-          Output only.
-
-          The status of the task's first attempt.
+          Output only. The status of the task's first attempt.
 
           Only AttemptStatus.dispatch_time will be set.
           The other AttemptStatus information is not retained by Cloud Tasks.
@@ -2471,9 +2458,7 @@ definitions:
       lastAttemptStatus:
         $ref: '#/definitions/AttemptStatus'
         description: |-
-          Output only.
-
-          The status of the task's last attempt.
+          Output only. The status of the task's last attempt.
 
           This field is not calculated for
           [pull tasks](google.cloud.tasks.v2beta2.PullTaskTarget).

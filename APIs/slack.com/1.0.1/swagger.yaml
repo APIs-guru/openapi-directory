@@ -6,7 +6,7 @@ basePath: /api
 info:
   description: 'One way to interact with the Slack platform is its HTTP RPC-based Web API, a collection of methods requiring OAuth 2.0-based user, bot, or workspace tokens blessed with related OAuth scopes.'
   title: Slack
-  version: 1.0.0
+  version: 1.0.1
   x-apisguru-categories:
     - collaboration
     - messaging
@@ -65,6 +65,7 @@ securityDefinitions:
       'stars:read': 'stars:read'
       'stars:write': 'stars:write'
       'team:read': 'team:read'
+      tokens.basic: tokens.basic
       'usergroups:read': 'usergroups:read'
       'usergroups:write': 'usergroups:write'
       'users.profile:read': 'users.profile:read'
@@ -6172,7 +6173,7 @@ paths:
         url: 'https://api.slack.com/methods/groups.list'
       operationId: groups_list
       parameters:
-        - description: Exlude the `members` from each `group`
+        - description: Exclude the `members` from each `group`
           in: query
           name: exclude_members
           type: boolean
@@ -6915,6 +6916,8 @@ paths:
                   is_user_deleted: false
                   user: U6KR7BVFW
               ok: true
+              response_metadata:
+                next_cursor: aW1faWQ6RDBCSDk1RExI=
           schema:
             additionalProperties: true
             description: Schema for successful response im.list method
@@ -7226,6 +7229,75 @@ paths:
             - 'im:history'
       tags:
         - im
+  /migration.exchange:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: 'For teams migrated to enterprise, map user ids before and after migration.'
+      externalDocs:
+        description: API method documentation
+        url: 'https://api.slack.com/methods/migration.exchange'
+      operationId: migration_exchange
+      parameters:
+        - description: 'Authentication token. Requires scope: `tokens.basic`'
+          in: query
+          name: token
+          type: string
+        - description: Specify `true` to convert `W` global user IDs to workspace-specific `U` IDs. Defaults to `false`.
+          in: query
+          name: to_old
+          type: boolean
+        - description: 'A comma-separated list of user ids, up to 400 per request'
+          in: query
+          name: users
+          type: string
+      responses:
+        '200':
+          description: Typical success response when mappings exist for the specified user IDs
+          examples:
+            application/json:
+              enterprise_id: E1KQTNXE1
+              invalid_user_ids:
+                - U21ABZZXX
+              ok: true
+              team_id: T1KR7PE1W
+              user_id_map:
+                U06UBSUN5: W06M56XJM
+                U06UBSVB3: W06PUUDLY
+                U06UBSVDX: W06PUUDMW
+                U06UEB62U: W06PTT6GH
+                W06UAZ65Q: W06UAZ65Q
+          schema:
+            additionalProperties: true
+            description: Verbose schema not yet ready for this method.
+            properties:
+              ok:
+                $ref: '#/definitions/defs_ok_true'
+            required:
+              - ok
+            title: Default success template
+            type: object
+        default:
+          description: Typical error response when there are no mappings to provide
+          examples:
+            application/json:
+              error: user_mapping_not_exist
+              ok: false
+          schema:
+            additionalProperties: true
+            description: Verbose schema not yet ready for this method.
+            properties:
+              ok:
+                $ref: '#/definitions/defs_ok_true'
+            required:
+              - ok
+            title: Default error template
+            type: object
+      security:
+        - slackAuth:
+            - tokens.basic
+      tags:
+        - migration
   /mpim.close:
     post:
       consumes:
@@ -11177,6 +11249,10 @@ definitions:
     pattern: '^[UW][A-Z0-9]{8}$'
     title: User ID
     type: string
+  defs_user_id:
+    pattern: '^[UW][A-Z0-9]{8}$'
+    title: User ID
+    type: string
   objs_channel:
     additionalProperties: true
     properties:
@@ -11388,7 +11464,7 @@ definitions:
             type: array
             uniqueItems: true
           pin_count:
-            type: string
+            type: integer
           previous_names:
             items:
               $ref: '#/definitions/defs_channel_name'

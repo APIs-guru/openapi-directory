@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://cloudkms.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -1011,7 +1011,9 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: Labels with user defined metadata.
+        description: |-
+          Labels with user-defined metadata. For more information, see
+          [Labeling CryptoKeys](/kms/docs/labeling-keys).
         type: object
       name:
         description: |-

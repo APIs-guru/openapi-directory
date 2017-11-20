@@ -20,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://logging.googleapis.com/$discovery/rest?version=v2beta1'
       version: v1
@@ -1020,7 +1020,7 @@ definitions:
         $ref: '#/definitions/LogEntrySourceLocation'
         description: 'Optional. Source code location information associated with the log entry, if any.'
       spanId:
-        description: 'Optional. Id of the span within the trace associated with the log entry. e.g. "0000000000000042" For Stackdriver trace spans, this is the same format that the Stackdriver trace API uses. The ID is a 16-character hexadecimal encoding of an 8-byte array.'
+        description: 'Optional. The span ID within the trace associated with the log entry. For Stackdriver Trace spans, this is the same format that the Stackdriver Trace API v2 uses: a 16-character hexadecimal encoding of an 8-byte array, such as <code>"000000000000004a"</code>.'
         type: string
       textPayload:
         description: 'The log entry payload, represented as a Unicode string (UTF-8).'

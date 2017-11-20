@@ -296,6 +296,230 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  /v1/siterestrict:
+    get:
+      description: '(Closed Beta API) Returns metadata about the search performed, metadata about the custom search engine used for the search, and the search results only for site-restrict cses.'
+      operationId: search.cse.siterestrict.list
+      parameters:
+        - description: Turns off the translation between zh-CN and zh-TW.
+          in: query
+          name: c2coff
+          type: string
+        - description: Country restrict(s).
+          in: query
+          name: cr
+          type: string
+        - description: The custom search engine ID to scope this search query
+          in: query
+          name: cx
+          type: string
+        - description: Specifies all search results are from a time period
+          in: query
+          name: dateRestrict
+          type: string
+        - description: Identifies a phrase that all documents in the search results must contain
+          in: query
+          name: exactTerms
+          type: string
+        - description: Identifies a word or phrase that should not appear in any documents in the search results
+          in: query
+          name: excludeTerms
+          type: string
+        - description: 'Returns images of a specified type. Some of the allowed values are: bmp, gif, png, jpg, svg, pdf, ...'
+          in: query
+          name: fileType
+          type: string
+        - description: Controls turning on or off the duplicate content filter.
+          enum:
+            - '0'
+            - '1'
+          in: query
+          name: filter
+          type: string
+        - description: Geolocation of end user.
+          in: query
+          name: gl
+          type: string
+        - description: The local Google domain to use to perform the search.
+          in: query
+          name: googlehost
+          type: string
+        - description: Creates a range in form as_nlo value..as_nhi value and attempts to append it to query
+          in: query
+          name: highRange
+          type: string
+        - description: Sets the user interface language.
+          in: query
+          name: hl
+          type: string
+        - description: Appends the extra query terms to the query.
+          in: query
+          name: hq
+          type: string
+        - description: 'Returns black and white, grayscale, or color images: mono, gray, and color.'
+          enum:
+            - color
+            - gray
+            - mono
+          in: query
+          name: imgColorType
+          type: string
+        - description: 'Returns images of a specific dominant color: yellow, green, teal, blue, purple, pink, white, gray, black and brown.'
+          enum:
+            - black
+            - blue
+            - brown
+            - gray
+            - green
+            - pink
+            - purple
+            - teal
+            - white
+            - yellow
+          in: query
+          name: imgDominantColor
+          type: string
+        - description: 'Returns images of a specified size, where size can be one of: icon, small, medium, large, xlarge, xxlarge, and huge.'
+          enum:
+            - huge
+            - icon
+            - large
+            - medium
+            - small
+            - xlarge
+            - xxlarge
+          in: query
+          name: imgSize
+          type: string
+        - description: 'Returns images of a type, which can be one of: clipart, face, lineart, news, and photo.'
+          enum:
+            - clipart
+            - face
+            - lineart
+            - news
+            - photo
+          in: query
+          name: imgType
+          type: string
+        - description: Specifies that all search results should contain a link to a particular URL
+          in: query
+          name: linkSite
+          type: string
+        - description: Creates a range in form as_nlo value..as_nhi value and attempts to append it to query
+          in: query
+          name: lowRange
+          type: string
+        - description: The language restriction for the search results
+          enum:
+            - lang_ar
+            - lang_bg
+            - lang_ca
+            - lang_cs
+            - lang_da
+            - lang_de
+            - lang_el
+            - lang_en
+            - lang_es
+            - lang_et
+            - lang_fi
+            - lang_fr
+            - lang_hr
+            - lang_hu
+            - lang_id
+            - lang_is
+            - lang_it
+            - lang_iw
+            - lang_ja
+            - lang_ko
+            - lang_lt
+            - lang_lv
+            - lang_nl
+            - lang_no
+            - lang_pl
+            - lang_pt
+            - lang_ro
+            - lang_ru
+            - lang_sk
+            - lang_sl
+            - lang_sr
+            - lang_sv
+            - lang_tr
+            - lang_zh-CN
+            - lang_zh-TW
+          in: query
+          name: lr
+          type: string
+        - default: 10
+          description: Number of search results to return
+          in: query
+          name: num
+          type: integer
+        - description: 'Provides additional search terms to check for in a document, where each document in the search results must contain at least one of the additional search terms'
+          in: query
+          name: orTerms
+          type: string
+        - description: Query
+          in: query
+          name: q
+          required: true
+          type: string
+        - description: Specifies that all search results should be pages that are related to the specified URL
+          in: query
+          name: relatedSite
+          type: string
+        - description: 'Filters based on licensing. Supported values include: cc_publicdomain, cc_attribute, cc_sharealike, cc_noncommercial, cc_nonderived and combinations of these.'
+          in: query
+          name: rights
+          type: string
+        - default: 'off'
+          description: Search safety level
+          enum:
+            - high
+            - medium
+            - 'off'
+          in: query
+          name: safe
+          type: string
+        - description: 'Specifies the search type: image.'
+          enum:
+            - image
+          in: query
+          name: searchType
+          type: string
+        - description: Specifies all search results should be pages from a given site
+          in: query
+          name: siteSearch
+          type: string
+        - description: Controls whether to include or exclude results from the site named in the as_sitesearch parameter
+          enum:
+            - e
+            - i
+          in: query
+          name: siteSearchFilter
+          type: string
+        - description: The sort expression to apply to the results
+          in: query
+          name: sort
+          type: string
+        - description: The index of the first result to return
+          in: query
+          name: start
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Search'
+      tags:
+        - cse
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
 definitions:
   Context:
     properties:

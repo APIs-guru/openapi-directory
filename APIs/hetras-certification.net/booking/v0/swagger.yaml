@@ -1151,7 +1151,9 @@ paths:
         - Bookings
   '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/check_in':
     post:
-      consumes: []
+      consumes:
+        - application/json
+        - text/json
       deprecated: false
       description: "With this call you can set a reservation to the status inhouse. It allows only single room reservations to be checked in.\r\n            The reservation must have assigned a vacant and clean room.<br />\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
       operationId: Bookings_CheckIn
@@ -1179,6 +1181,12 @@ paths:
           name: reservationNumber
           required: true
           type: integer
+        - description: 'Specifies checkIn details, for example Client Identity.'
+          in: body
+          name: checkInDetails
+          required: true
+          schema:
+            $ref: '#/definitions/CheckInDetails'
       responses:
         '200':
           description: The check in was successful
@@ -1197,6 +1205,56 @@ paths:
         '503':
           description: The server is currently unavailable. Please try later.
       summary: Performs a check in operation for a reservation.
+      tags:
+        - Bookings
+  '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/check_out':
+    post:
+      consumes: []
+      deprecated: false
+      description: "With this call you can set a reservation to the checkout status. It allows only single room reservations to be checked out.\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
+      operationId: Bookings_CheckOut
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: The confirmation id for the booking the reservation was made.
+          in: path
+          name: confirmationId
+          required: true
+          type: string
+        - description: Specifies the reservation number for the reservation to be checked out.
+          format: int32
+          in: path
+          name: reservationNumber
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: The check out was successful
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: 'The request failed to validate. The reason could be wrong reservation status, such as it was already checked out.'
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
+      summary: Performs a check out operation for a reservation.
       tags:
         - Bookings
   /api/booking/v0/daily_rates:
@@ -1599,6 +1657,49 @@ definitions:
       room_number:
         description: The room number assigned
         type: string
+    type: object
+  AuthorizationDetails:
+    properties:
+      amount:
+        description: AuthorizedAmount
+        format: double
+        type: number
+      expiry_date:
+        description: Authorization ExpiryDate
+        format: date-time
+        type: string
+      merchant_reference:
+        description: Merchant Reference
+        maxLength: 50
+        minLength: 0
+        type: string
+      reference:
+        description: Authorization Reference
+        maxLength: 255
+        minLength: 0
+        type: string
+      shopper_reference:
+        description: Shopper Reference
+        maxLength: 50
+        minLength: 0
+        type: string
+    required:
+      - reference
+      - merchant_reference
+      - shopper_reference
+    type: object
+  AuthorizationRequest:
+    properties:
+      authorization:
+        $ref: '#/definitions/AuthorizationDetails'
+        description: Authorization Details
+      payment_token:
+        description: The token you get from the payment service provider
+        maxLength: 255
+        minLength: 0
+        type: string
+    required:
+      - payment_token
     type: object
   AvailabilityDetail:
     properties:
@@ -2196,6 +2297,12 @@ definitions:
   Card:
     properties:
       id:
+        type: string
+    type: object
+  CheckInDetails:
+    properties:
+      client_identity:
+        description: Client identity
         type: string
     type: object
   CompaniesInfo:
@@ -3242,7 +3349,7 @@ definitions:
         description: "The number of rooms this reservation is for. After a multi-room booking is done there will be \r\n            one reservation in hetras for all rooms. The hotel staff then will split this reservation into\r\n            one reservation per room to be able to check in the guests"
         format: int32
         type: integer
-      travelAgent:
+      travel_agent:
         $ref: '#/definitions/Company'
         description: The travel agency that will be linked to this reservation
     required:
@@ -3340,7 +3447,7 @@ definitions:
         description: "The number of rooms this reservation is for. After a multi-room booking is done there will be \r\n            one reservation in hetras for all rooms. The hotel staff then will split this reservation into\r\n            one reservation per room to be able to check in the guests"
         format: int32
         type: integer
-      travelAgent:
+      travel_agent:
         $ref: '#/definitions/Company'
         description: The travel agency that will be linked to this reservation
     required:

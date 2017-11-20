@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://bigquerydatatransfer.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -189,7 +189,7 @@ paths:
         - description: |-
             Optional OAuth2 authorization code to use with this transfer configuration.
             If it is provided, the transfer configuration will be associated with the
-            gaia id of the authorizing user.
+            authorizing user.
             In order to obtain authorization_code, please make a
             request to
             https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?client_id=<datatransferapiclientid>&scope=<data_source_scopes>&redirect_uri=<redirect_uri>
@@ -436,7 +436,6 @@ paths:
           items:
             enum:
               - TRANSFER_STATE_UNSPECIFIED
-              - INACTIVE
               - PENDING
               - RUNNING
               - SUCCEEDED
@@ -485,11 +484,8 @@ paths:
             type: string
           name: dataSourceIds
           type: array
-        - collectionFormat: multi
-          description: Page size. The default page size is the maximum value of 1000 results.
+        - description: Page size. The default page size is the maximum value of 1000 results.
           in: query
-          items:
-            type: string
           name: pageSize
           type: integer
         - description: |-
@@ -674,7 +670,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Creates transfer runs for a time range [range_start_time, range_end_time].
+        Creates transfer runs for a time range [start_time, end_time].
         For each date - or whatever granularity the data source supports - in the
         range, one transfer run is created.
         Note that runs are created per UTC time in the time range.
@@ -1192,7 +1188,6 @@ definitions:
         description: Output only. State of the most recently updated transfer run.
         enum:
           - TRANSFER_STATE_UNSPECIFIED
-          - INACTIVE
           - PENDING
           - RUNNING
           - SUCCEEDED
@@ -1290,7 +1285,6 @@ definitions:
         description: Data transfer run state. Ignored for input requests.
         enum:
           - TRANSFER_STATE_UNSPECIFIED
-          - INACTIVE
           - PENDING
           - RUNNING
           - SUCCEEDED

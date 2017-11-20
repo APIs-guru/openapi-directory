@@ -18,7 +18,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://cloudiot.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -1059,7 +1059,11 @@ definitions:
           The configuration for notification of telemetry events received from the
           device. All telemetry events that were successfully published by the
           device and acknowledged by Cloud IoT Core are guaranteed to be
-          delivered to Cloud Pub/Sub. Only the first configuration is used.
+          delivered to Cloud Pub/Sub. Only the first configuration is used. If you
+          try to publish a device telemetry event using MQTT without specifying a
+          Cloud Pub/Sub topic for the device's registry, the connection closes
+          automatically. If you try to do so using an HTTP connection, an error
+          is returned.
         items:
           $ref: '#/definitions/EventNotificationConfig'
         type: array

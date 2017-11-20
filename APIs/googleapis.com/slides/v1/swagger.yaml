@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://slides.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -2786,6 +2786,19 @@ definitions:
       Determining the rendered value of the property depends on the corresponding
       property_state field value.
     properties:
+      contentAlignment:
+        description: |-
+          The alignment of the content in the shape. If unspecified,
+          the alignment is inherited from a parent placeholder if it exists. If the
+          shape has no parent, the default alignment matches the alignment for new
+          shapes created in the Slides editor.
+        enum:
+          - CONTENT_ALIGNMENT_UNSPECIFIED
+          - CONTENT_ALIGNMENT_UNSUPPORTED
+          - TOP
+          - MIDDLE
+          - BOTTOM
+        type: string
       link:
         $ref: '#/definitions/Link'
         description: |-
@@ -3101,6 +3114,17 @@ definitions:
   TableCellProperties:
     description: The properties of the TableCell.
     properties:
+      contentAlignment:
+        description: |-
+          The alignment of the content in the table cell. The default alignment
+          matches the alignment for newly created table cells in the Slides editor.
+        enum:
+          - CONTENT_ALIGNMENT_UNSPECIFIED
+          - CONTENT_ALIGNMENT_UNSUPPORTED
+          - TOP
+          - MIDDLE
+          - BOTTOM
+        type: string
       tableCellBackgroundFill:
         $ref: '#/definitions/TableCellBackgroundFill'
         description: |-

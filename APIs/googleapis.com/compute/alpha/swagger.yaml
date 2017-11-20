@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/compute/alpha/rest'
       version: v1
@@ -109,6 +109,7 @@ tags:
   - name: licenseCodes
   - name: licenses
   - name: machineTypes
+  - name: maintenancePolicies
   - name: networkEndpointGroups
   - name: networks
   - name: projects
@@ -1124,6 +1125,70 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - machineTypes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/aggregated/maintenancePolicies':
+    get:
+      description: Retrieves an aggregated list of maintenance policies.
+      operationId: compute.maintenancePolicies.aggregatedList
+      parameters:
+        - description: |-
+            Sets a filter {expression} for filtering listed resources. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/MaintenancePolicyAggregatedList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - maintenancePolicies
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -4668,7 +4733,7 @@ paths:
         - httpsHealthChecks
   '/{project}/global/images':
     get:
-      description: 'Retrieves the list of private images available to the specified project. Private images are images you create that belong to your project. This method does not get any images that belong to other projects, including publicly-available images, like Debian 8. If you want to get a list of publicly-available images, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.'
+      description: 'Retrieves the list of custom images available to the specified project. Custom images are images you create that belong to your project. This method does not get any images that belong to other projects, including publicly-available images, like Debian 8. If you want to get a list of publicly-available images, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.'
       operationId: compute.images.list
       parameters:
         - description: |-
@@ -13767,6 +13832,328 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - interconnectAttachments
+  '/{project}/regions/{region}/maintenancePolicies':
+    get:
+      description: List all the maintenance policies that have been configured for the specified project in specified region.
+      operationId: compute.maintenancePolicies.list
+      parameters:
+        - description: |-
+            Sets a filter {expression} for filtering listed resources. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/MaintenancePoliciesList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - maintenancePolicies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a new maintenance policy.
+      operationId: compute.maintenancePolicies.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/MaintenancePolicy'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - maintenancePolicies
+  '/{project}/regions/{region}/maintenancePolicies/{maintenancePolicy}':
+    delete:
+      description: Deletes the specified maintenance policy.
+      operationId: compute.maintenancePolicies.delete
+      parameters:
+        - description: Name of the maintenance policy to delete.
+          in: path
+          name: maintenancePolicy
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - maintenancePolicies
+    get:
+      description: Retrieves all information of the specified maintenance policy.
+      operationId: compute.maintenancePolicies.get
+      parameters:
+        - description: Name of the maintenance policy to retrieve.
+          in: path
+          name: maintenancePolicy
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/MaintenancePolicy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - maintenancePolicies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/maintenancePolicies/{resource}/getIamPolicy':
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.maintenancePolicies.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - maintenancePolicies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/maintenancePolicies/{resource}/setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.maintenancePolicies.setIamPolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Policy'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - maintenancePolicies
+  '/{project}/regions/{region}/maintenancePolicies/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.maintenancePolicies.testIamPermissions
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - maintenancePolicies
   '/{project}/regions/{region}/operations':
     get:
       description: Retrieves a list of Operation resources contained within the specified region.
@@ -19588,6 +19975,59 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - instances
+  '/{project}/zones/{zone}/instances/{instance}/addMaintenancePolicies':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Adds existing maintenance policies to an instance. You can only add one policy right now which will be applied to this instance for scheduling live migrations.
+      operationId: compute.instances.addMaintenancePolicies
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstancesAddMaintenancePoliciesRequest'
+        - description: The instance name for this request.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instances
   '/{project}/zones/{zone}/instances/{instance}/attachDisk':
     parameters:
       - $ref: '#/parameters/alt'
@@ -19878,6 +20318,59 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/zones/{zone}/instances/{instance}/removeMaintenancePolicies':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Removes maintenance policies from an instance.
+      operationId: compute.instances.removeMaintenancePolicies
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstancesRemoveMaintenancePoliciesRequest'
+        - description: The instance name for this request.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instances
   '/{project}/zones/{zone}/instances/{instance}/reset':
     parameters:
       - $ref: '#/parameters/alt'
@@ -20794,6 +21287,59 @@ paths:
         - description: The name of the network interface to update.
           in: query
           name: networkInterface
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instances
+  '/{project}/zones/{zone}/instances/{instance}/updateShieldedVmConfig':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates the Shielded VM config for an instance. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+      operationId: compute.instances.updateShieldedVmConfig
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ShieldedVmConfig'
+        - description: Name of the instance scoping this request.
+          in: path
+          name: instance
           required: true
           type: string
         - description: Project ID for this request.
@@ -22214,7 +22760,7 @@ definitions:
         description: The static IP address represented by this resource.
         type: string
       addressType:
-        description: 'The type of address to reserve. If unspecified, defaults to EXTERNAL.'
+        description: 'The type of address to reserve, either INTERNAL or EXTERNAL. If unspecified, defaults to EXTERNAL.'
         enum:
           - DNS_FORWARDING
           - EXTERNAL
@@ -22617,13 +23163,13 @@ definitions:
 
           projects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD 
 
-          To create a disk with a private image that you created, specify the image name in the following format:
+          To create a disk with a custom image that you created, specify the image name in the following format:
 
-          global/images/my-private-image 
+          global/images/my-custom-image 
 
-          You can also specify a private image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name:
+          You can also specify a custom image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name:
 
-          global/images/family/my-private-family 
+          global/images/family/my-image-family 
 
           If the source image is deleted later, this field will not be set.
         type: string
@@ -24134,6 +24680,20 @@ definitions:
         description: Specifies a valid partial or full URL to an existing Persistent Disk resource. This field is only applicable for persistent disks.
         type: string
     type: object
+  DailyMaintenanceWindow:
+    description: Time window specified for daily maintenance operations.
+    properties:
+      daysInCycle:
+        description: Allows to define schedule that runs every nth day of the month.
+        format: int32
+        type: integer
+      duration:
+        description: '[Output only] Duration of the time window, automatically chosen to be smallest possible in the given scenario.'
+        type: string
+      startTime:
+        description: 'Time within the maintenance window to start the maintenance operations. It must be in format "HH:MM?, where HH : [00-23] and MM : [00-59] GMT.'
+        type: string
+    type: object
   DeprecationStatus:
     description: Deprecation status for a public resource.
     properties:
@@ -24262,13 +24822,13 @@ definitions:
 
           projects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD 
 
-          To create a disk with a private image that you created, specify the image name in the following format:
+          To create a disk with a custom image that you created, specify the image name in the following format:
 
-          global/images/my-private-image 
+          global/images/my-custom-image 
 
-          You can also specify a private image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name:
+          You can also specify a custom image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name:
 
-          global/images/family/my-private-family
+          global/images/family/my-image-family
         type: string
       sourceImageEncryptionKey:
         $ref: '#/definitions/CustomerEncryptionKey'
@@ -26284,6 +26844,20 @@ definitions:
             type: string
         type: object
     type: object
+  HourlyMaintenanceWindow:
+    description: Time window specified for hourly maintenance operations.
+    properties:
+      duration:
+        description: '[Output only] Duration of the time window, automatically chosen to be smallest possible in the given scenario.'
+        type: string
+      hoursInCycle:
+        description: Allows to define schedule that runs every nth hour.
+        format: int32
+        type: integer
+      startTime:
+        description: 'Time within the maintenance window to start the maintenance operations. It must be in format "HH:MM?, where HH : [00-23] and MM : [00-59] GMT.'
+        type: string
+    type: object
   HttpHealthCheck:
     description: 'An HttpHealthCheck resource. This resource defines a template for how individual instances should be checked for health, via HTTP.'
     properties:
@@ -26647,6 +27221,20 @@ definitions:
       sourceImageId:
         description: '[Output Only] The ID value of the image used to create this image. This value may be used to determine whether the image was taken from the current or a previous instance of a given image name.'
         type: string
+      sourceSnapshot:
+        description: |-
+          URL of the source snapshot used to create this image. This can be a full or valid partial URL. You must provide exactly one of:  
+          - this property, or  
+          - the sourceImage property, or  
+          - the rawDisk.source property, or  
+          - the sourceDisk property   in order to create an image.
+        type: string
+      sourceSnapshotEncryptionKey:
+        $ref: '#/definitions/CustomerEncryptionKey'
+        description: The customer-supplied encryption key of the source snapshot. Required if the source snapshot is protected by a customer-supplied encryption key.
+      sourceSnapshotId:
+        description: '[Output Only] The ID value of the snapshot used to create this image. This value may be used to determine whether the snapshot was taken from the current or a previous instance of a given snapshot name.'
+        type: string
       sourceType:
         default: RAW
         description: The type of the image used to create this disk. The default and only value is RAW
@@ -26847,6 +27435,8 @@ definitions:
         items:
           $ref: '#/definitions/ServiceAccount'
         type: array
+      shieldedVmConfig:
+        $ref: '#/definitions/ShieldedVmConfig'
       startRestricted:
         description: '[Output Only] Whether a VM has been restricted for start because Compute Engine has detected suspicious activity.'
         type: boolean
@@ -27396,6 +27986,12 @@ definitions:
       maxUnavailable:
         $ref: '#/definitions/FixedOrPercent'
         description: 'Maximum number of instances that can be unavailable when autohealing. The instance is considered available if all of the following conditions are satisfied: 1. Instance''s status is RUNNING. 2. Instance''s liveness health check result was observed to be HEALTHY at least once. By default, a percent value of 100% is used.'
+      mode:
+        description: Defines operating mode for this policy.
+        enum:
+          - 'OFF'
+          - 'ON'
+        type: string
     type: object
   InstanceGroupManagerList:
     description: '[Output Only] A list of managed instance groups.'
@@ -28279,6 +28875,22 @@ definitions:
           - TERMINATED
         type: string
     type: object
+  InstancesAddMaintenancePoliciesRequest:
+    properties:
+      maintenancePolicies:
+        description: Maintenance policies to be added to this instance.
+        items:
+          type: string
+        type: array
+    type: object
+  InstancesRemoveMaintenancePoliciesRequest:
+    properties:
+      maintenancePolicies:
+        description: Maintenance policies to be removed from this instance.
+        items:
+          type: string
+        type: array
+    type: object
   InstancesScopedList:
     properties:
       instances:
@@ -28397,10 +29009,10 @@ definitions:
           If the instance you are starting is protected with a customer-supplied encryption key, the correct key must be provided otherwise the instance start will not succeed.
     type: object
   Interconnect:
-    description: 'Protocol definitions for Mixer API to support Interconnect. Next available tag: 25'
+    description: 'Represents an Interconnects resource. The Interconnects resource is a dedicated connection between Google''s network and your on-premises network. For more information, see the  Dedicated overview page.'
     properties:
       adminEnabled:
-        description: 'Administrative status of the interconnect. When this is set to ?true?, the Interconnect is functional and may carry traffic (assuming there are functional InterconnectAttachments and other requirements are satisfied). When set to ?false?, no packets will be carried over this Interconnect and no BGP routes will be exchanged over it. By default, it is set to ?true?.'
+        description: 'Administrative status of the interconnect. When this is set to true, the Interconnect is functional and can carry traffic. When set to false, no packets can be carried over the interconnect and no BGP routes are exchanged over it. By default, the status is set to true.'
         type: boolean
       circuitInfos:
         description: '[Output Only] List of CircuitInfo objects, that describe the individual circuits in this LAG.'
@@ -28437,6 +29049,7 @@ definitions:
           type: string
         type: array
       interconnectType:
+        description: Type of interconnect. Note that "IT_PRIVATE" has been deprecated in favor of "DEDICATED"
         enum:
           - DEDICATED
           - IT_PRIVATE
@@ -28447,6 +29060,7 @@ definitions:
         description: '[Output Only] Type of the resource. Always compute#interconnect for interconnects.'
         type: string
       linkType:
+        description: 'Type of link requested. This field indicates speed of each of the links in the bundle, not the entire bundle. Only 10G per link is allowed for a dedicated interconnect. Options: Ethernet_10G_LR'
         enum:
           - LINK_TYPE_ETHERNET_10G_LR
         type: string
@@ -28463,10 +29077,8 @@ definitions:
       operationalStatus:
         description: '[Output Only] The current status of whether or not this Interconnect is functional.'
         enum:
-          - ACTIVE
           - OS_ACTIVE
           - OS_UNPROVISIONED
-          - UNPROVISIONED
         type: string
       peerIpAddress:
         description: '[Output Only] IP address configured on the customer side of the Interconnect link. The customer should configure this IP address during turnup when prompted by Google NOC. This can be used only for ping tests.'
@@ -28484,8 +29096,35 @@ definitions:
         type: string
     type: object
   InterconnectAttachment:
-    description: 'Protocol definitions for Mixer API to support InterconnectAttachment. Next available tag: 23'
+    description: 'Represents an InterconnectAttachment (VLAN attachment) resource. For more information, see  Creating VLAN Attachments.'
     properties:
+      adminEnabled:
+        description: Determines whether this Attachment will carry packets. Not present for PARTNER_PROVIDER.
+        type: boolean
+      availabilityZone:
+        enum:
+          - ZONE_1
+          - ZONE_2
+          - ZONE_ANY
+        type: string
+      bandwidth:
+        enum:
+          - BPS_100M
+          - BPS_10G
+          - BPS_1G
+          - BPS_200M
+          - BPS_2G
+          - BPS_300M
+          - BPS_400M
+          - BPS_500M
+          - BPS_50M
+          - BPS_5G
+        type: string
+      candidateSubnets:
+        description: 'Up to 16 candidate prefixes that can be used to restrict the allocation of cloudRouterIpAddress and customerRouterIpAddress for this attachment. All prefixes must be within link-local address space (169.254.0.0/16) and must be /29 or shorter (/28, /27, etc). Google will attempt to select an unused /29 from the supplied candidate prefix(es). The request will fail if all possible /29s are in use on Google?s edge. If not supplied, Google will randomly select an unused /29 from all of link-local space.'
+        items:
+          type: string
+        type: array
       cloudRouterIpAddress:
         description: '[Output Only] IPv4 address + prefix length to be configured on Cloud Router Interface for this interconnect attachment.'
         type: string
@@ -28496,7 +29135,7 @@ definitions:
         description: '[Output Only] IPv4 address + prefix length to be configured on the customer router subinterface for this interconnect attachment.'
         type: string
       description:
-        description: An optional description of this resource. Provide this property when you create the resource.
+        description: An optional description of this resource.
         type: string
       googleReferenceId:
         description: '[Output Only] Google reference ID, to be used when raising support tickets with Google or otherwise to debug backend connectivity issues.'
@@ -28519,14 +29158,15 @@ definitions:
       operationalStatus:
         description: '[Output Only] The current status of whether or not this interconnect attachment is functional.'
         enum:
-          - ACTIVE
           - OS_ACTIVE
           - OS_UNPROVISIONED
-          - UNPROVISIONED
+        type: string
+      pairingKey:
+        description: '[Output only for type PARTNER. Input only for PARTNER_PROVIDER. Not present for DEDICATED]. Opaque string identifying an PARTNER attachment. Of the form ?cloud-region/XXXXXX?.'
         type: string
       privateInterconnectInfo:
         $ref: '#/definitions/InterconnectAttachmentPrivateInfo'
-        description: '[Output Only] Information specific to a Private InterconnectAttachment. Only populated if the interconnect that this is attached is of type IT_PRIVATE.'
+        description: '[Output Only] Information specific to an InterconnectAttachment. This property is populated if the interconnect that this is attached to is of type DEDICATED.'
       region:
         description: '[Output Only] URL of the region where the regional interconnect attachment resides.'
         type: string
@@ -28536,6 +29176,23 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
+      state:
+        description: '[Output Only] The current state of whether or not this interconnect attachment is functional.'
+        enum:
+          - ACTIVE
+          - STATE_UNSPECIFIED
+          - UNPROVISIONED
+        type: string
+      type:
+        enum:
+          - DEDICATED
+          - PARTNER
+          - PARTNER_PROVIDER
+        type: string
+      vlanTag8021q:
+        description: 'Available only for DEDICATED and PARTNER_PROVIDER New field: VLAN. Only specified at creation time. This field is mapped to ieee_802_1q_tag in the resource proto.'
+        format: int32
+        type: integer
     type: object
   InterconnectAttachmentAggregatedList:
     properties:
@@ -28678,7 +29335,7 @@ definitions:
         type: object
     type: object
   InterconnectAttachmentPrivateInfo:
-    description: Private information for an interconnect attachment when this belongs to an interconnect of type IT_PRIVATE.
+    description: Information for an interconnect attachment when this belongs to an interconnect of type DEDICATED.
     properties:
       tag8021q:
         description: '[Output Only] 802.1q encapsulation tag to be used for traffic between Google and the customer, going to and from this network and region.'
@@ -28745,7 +29402,7 @@ definitions:
     description: 'Describes a single physical circuit between the Customer and Google. CircuitInfo objects are created by Google, so all fields are output only. Next id: 4'
     properties:
       customerDemarcId:
-        description: Customer-side demarc ID for this circuit. This will only be set if it was provided by the Customer to Google during circuit turn-up.
+        description: Customer-side demarc ID for this circuit.
         type: string
       googleCircuitId:
         description: Google-assigned unique ID for this circuit. Assigned at circuit turn-up.
@@ -28825,19 +29482,19 @@ definitions:
         type: object
     type: object
   InterconnectLocation:
-    description: Protocol definitions for Mixer API to support InterconnectLocation.
+    description: 'Represents an InterconnectLocations resource. The InterconnectLocations resource describes the locations where you can connect to Google''s networks. For more information, see  Colocation Facilities.'
     properties:
       address:
         description: '[Output Only] The postal address of the Point of Presence, each line in the address is separated by a newline character.'
         type: string
       availabilityZone:
-        description: 'Availability zone for this location. Within a city, maintenance will not be simultaneously scheduled in more than one availability zone. Example: "zone1" or "zone2".'
+        description: '[Output Only] Availability zone for this location. Within a metropolitan area (metro), maintenance will not be simultaneously scheduled in more than one availability zone. Example: "zone1" or "zone2".'
         type: string
       city:
-        description: 'City designator used by the Interconnect UI to locate this InterconnectLocation within the Continent. For example: "Chicago, IL", "Amsterdam, Netherlands".'
+        description: '[Output Only] Metropolitan area designator that indicates which city an interconnect is located. For example: "Chicago, IL", "Amsterdam, Netherlands".'
         type: string
       continent:
-        description: Continent for this location. Used by the location picker in the Interconnect UI.
+        description: '[Output Only] Continent for this location.'
         enum:
           - AFRICA
           - ASIA_PAC
@@ -28983,12 +29640,14 @@ definitions:
           type: string
         type: array
       description:
-        description: Short user-visible description of the purpose of the outage.
+        description: A description about the purpose of the outage.
         type: string
       endTime:
+        description: Scheduled end time for the outage (milliseconds since Unix epoch).
         format: int64
         type: string
       issueType:
+        description: Form this outage is expected to take. Note that the "IT_" versions of this enum have been deprecated in favor of the unprefixed values.
         enum:
           - IT_OUTAGE
           - IT_PARTIAL_OUTAGE
@@ -28999,15 +29658,17 @@ definitions:
         description: Unique identifier for this outage notification.
         type: string
       source:
+        description: The party that generated this notification. Note that "NSRC_GOOGLE" has been deprecated in favor of "GOOGLE"
         enum:
           - GOOGLE
           - NSRC_GOOGLE
         type: string
       startTime:
-        description: Scheduled start and end times for the outage (milliseconds since Unix epoch).
+        description: Scheduled start time for the outage (milliseconds since Unix epoch).
         format: int64
         type: string
       state:
+        description: State of this notification. Note that the "NS_" versions of this enum have been deprecated in favor of the unprefixed values.
         enum:
           - ACTIVE
           - CANCELLED
@@ -29565,6 +30226,239 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  MaintenancePoliciesList:
+    properties:
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        type: string
+      items:
+        description: '[Output Only] A list of MaintenancePolicy resources.'
+        items:
+          $ref: '#/definitions/MaintenancePolicy'
+        type: array
+      kind:
+        default: 'compute#maintenancePoliciesList'
+        description: '[Output Only] Type of resource.Always compute#maintenancePoliciesList for listsof maintenancePolicies'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  MaintenancePoliciesScopedList:
+    properties:
+      maintenancePolicies:
+        description: List of maintenancePolicies contained in this scope.
+        items:
+          $ref: '#/definitions/MaintenancePolicy'
+        type: array
+      warning:
+        description: Informational warning which replaces the list of maintenancePolicies when the list is empty.
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  MaintenancePolicy:
+    description: A maintenance policy for an instance. This specifies what kind of maintenance operations our infrastructure may perform on this instance and when.
+    properties:
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#maintenancePolicy'
+        description: '[Output Only] Type of the resource. Always compute#maintenance_policies for maintenance policies.'
+        type: string
+      name:
+        description: 'The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      region:
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined fully-qualified URL for this resource.'
+        type: string
+      vmMaintenancePolicy:
+        $ref: '#/definitions/VmMaintenancePolicy'
+        description: Maintenance policy applicable to VMs for infrastructure maintenance.
+    type: object
+  MaintenancePolicyAggregatedList:
+    description: Contains a list of maintenancePolicies.
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        additionalProperties:
+          $ref: '#/definitions/MaintenancePoliciesScopedList'
+          description: Name of the scope containing this set of maintenancePolicies.
+        description: A list of MaintenancePolicy resources.
+        type: object
+      kind:
+        default: 'compute#maintenancePolicyAggregatedList'
+        description: Type of resource.
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  MaintenanceWindow:
+    description: 'A maintenance window for VMs and disks. When set, we restrict our maintenance operations to this window.'
+    properties:
+      dailyMaintenanceWindow:
+        $ref: '#/definitions/DailyMaintenanceWindow'
+      hourlyMaintenanceWindow:
+        $ref: '#/definitions/HourlyMaintenanceWindow'
     type: object
   ManagedInstance:
     properties:
@@ -30887,6 +31781,7 @@ definitions:
           - INSTANCE_GROUP_MANAGERS
           - INSTANCE_TEMPLATES
           - INTERCONNECTS
+          - INTERNAL_ADDRESSES
           - IN_USE_ADDRESSES
           - LOCAL_SSD_TOTAL_GB
           - NETWORKS
@@ -30894,6 +31789,8 @@ definitions:
           - NVIDIA_P100_GPUS
           - PREEMPTIBLE_CPUS
           - PREEMPTIBLE_LOCAL_SSD_GB
+          - PREEMPTIBLE_NVIDIA_K80_GPUS
+          - PREEMPTIBLE_NVIDIA_P100_GPUS
           - REGIONAL_AUTOSCALERS
           - REGIONAL_INSTANCE_GROUP_MANAGERS
           - ROUTERS
@@ -32643,6 +33540,16 @@ definitions:
           type: string
         type: array
     type: object
+  ShieldedVmConfig:
+    description: A set of Shielded VM options.
+    properties:
+      enableSecureBoot:
+        description: Defines whether the instance should have secure boot enabled.
+        type: boolean
+      enableVtpm:
+        description: Defines whether the instance should have the TPM enabled.
+        type: boolean
+    type: object
   SignedUrlKey:
     description: Represents a customer-supplied Signing Key used by Cloud CDN Signed URLs
     properties:
@@ -33115,11 +34022,6 @@ definitions:
     type: object
   StatefulPolicy:
     properties:
-      preservedDisks:
-        description: 'Disks created on the instances that will be preserved on instance delete, resize down, etc. DEPRECATED in favor of preservedResources.disks field.'
-        items:
-          $ref: '#/definitions/StatefulPolicyPreservedDisk'
-        type: array
       preservedResources:
         $ref: '#/definitions/StatefulPolicyPreservedResources'
     type: object
@@ -35081,6 +35983,13 @@ definitions:
       reportNamePrefix:
         description: 'An optional prefix for the name of the usage report object stored in bucketName. If not supplied, defaults to usage. The report is stored as a CSV file named report_name_prefix_gce_YYYYMMDD.csv where YYYYMMDD is the day of the usage according to Pacific Time. If you supply a prefix, it should conform to Cloud Storage object naming conventions.'
         type: string
+    type: object
+  VmMaintenancePolicy:
+    description: A Vm Maintenance Policy specifies what kind of infrastructure maintenance we are allowed to perform on this VM and when.
+    properties:
+      maintenanceWindow:
+        $ref: '#/definitions/MaintenanceWindow'
+        description: Maintenance windows that are applied to VMs covered by this policy.
     type: object
   VpnTunnel:
     properties:

@@ -5097,14 +5097,15 @@ definitions:
         type: string
     type: object
   CallList:
+    allOf:
+      - $ref: '#/definitions/ItemList'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/Call'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/Call'
-        type: array
-    type: object
   CallPage:
     description: '~'
     properties:
@@ -6671,14 +6672,15 @@ definitions:
         type: integer
     type: object
   TextList:
+    allOf:
+      - $ref: '#/definitions/ItemList'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/Text'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/Text'
-        type: array
-    type: object
   TextPage:
     description: '~'
     properties:

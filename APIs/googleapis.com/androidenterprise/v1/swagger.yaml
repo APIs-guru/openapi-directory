@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/androidenterprise/v1/rest'
       version: v1
@@ -83,6 +83,7 @@ tags:
   - name: installs
   - name: managedconfigurationsfordevice
   - name: managedconfigurationsforuser
+  - name: managedconfigurationssettings
   - name: permissions
   - name: products
   - name: serviceaccountkeys
@@ -751,6 +752,39 @@ paths:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - products
+  '/enterprises/{enterpriseId}/products/{productId}/managedConfigurationsSettings':
+    get:
+      description: Lists all the managed configurations settings for the specified app. Only the ID and the name is set.
+      operationId: androidenterprise.managedconfigurationssettings.list
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the product for which the managed configurations settings applies to.
+          in: path
+          name: productId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ManagedConfigurationsSettingsListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - managedconfigurationssettings
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/enterprises/{enterpriseId}/products/{productId}/permissions':
     get:
       description: Retrieves the Android app permissions required by this app.
@@ -2500,7 +2534,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Adds or updates a per-user managed configuration for an app for the specified user. This method supports patch semantics.
+      description: 'Adds or updates the managed configuration settings for an app for the specified user. If you support the Managed configurations iframe, you can apply managed configurations to a user by specifying an mcmId and its associated configuration variables (if any) in the request. Alternatively, all EMMs can apply managed configurations by passing a list of managed properties. This method supports patch semantics.'
       operationId: androidenterprise.managedconfigurationsforuser.patch
       parameters:
         - description: The ID of the enterprise.
@@ -2533,7 +2567,7 @@ paths:
       tags:
         - managedconfigurationsforuser
     put:
-      description: Adds or updates a per-user managed configuration for an app for the specified user.
+      description: 'Adds or updates the managed configuration settings for an app for the specified user. If you support the Managed configurations iframe, you can apply managed configurations to a user by specifying an mcmId and its associated configuration variables (if any) in the request. Alternatively, all EMMs can apply managed configurations by passing a list of managed properties.'
       operationId: androidenterprise.managedconfigurationsforuser.update
       parameters:
         - description: The ID of the enterprise.
@@ -2820,6 +2854,22 @@ definitions:
         description: The authentication token to be passed to the device policy client on the device where it can be used to provision the account for which this token was generated.
         type: string
     type: object
+  ConfigurationVariables:
+    description: 'A configuration variables resource contains the managed configuration settings ID to be applied to a single user, as well as the variable set that is attributed to the user. The variable set will be used to replace placeholders in the managed configuration settings.'
+    properties:
+      kind:
+        default: 'androidenterprise#configurationVariables'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#configurationVariables".'
+        type: string
+      mcmId:
+        description: The ID of the managed configurations settings.
+        type: string
+      variableSet:
+        description: The variable set that is attributed to the user.
+        items:
+          $ref: '#/definitions/VariableSet'
+        type: array
+    type: object
   Device:
     description: |-
       A Devices resource represents a mobile device managed by the EMM and belonging to a specific enterprise user.
@@ -3086,8 +3136,11 @@ definitions:
         type: string
     type: object
   ManagedConfiguration:
-    description: A managed configuration resource contains the set of managed properties that have been configured for an Android app. The app's developer would have defined configurable properties in the managed configurations schema.
+    description: 'A managed configuration resource contains the set of managed properties defined by the app developer in the app''s managed configurations schema, as well as any configuration variables defined for the user.'
     properties:
+      configurationVariables:
+        $ref: '#/definitions/ConfigurationVariables'
+        description: Contains the ID of the managed configuration profile and the set of configuration variables (if any) defined for the user.
       kind:
         default: 'androidenterprise#managedConfiguration'
         description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#managedConfiguration".'
@@ -3125,6 +3178,38 @@ definitions:
         description: A managed configuration for an app for a specific user.
         items:
           $ref: '#/definitions/ManagedConfiguration'
+        type: array
+    type: object
+  ManagedConfigurationsSettings:
+    description: A managed configurations settings resource contains the set of managed properties that have been configured for an Android app to be applied to a set of users. The app's developer would have defined configurable properties in the managed configurations schema.
+    properties:
+      kind:
+        default: 'androidenterprise#managedConfigurationsSettings'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#managedConfigurationsSettings".'
+        type: string
+      managedProperty:
+        description: The set of managed properties for this configuration.
+        items:
+          $ref: '#/definitions/ManagedProperty'
+        type: array
+      mcmId:
+        description: The ID of the managed configurations settings.
+        type: string
+      name:
+        description: The name of the managed configurations settings.
+        type: string
+    type: object
+  ManagedConfigurationsSettingsListResponse:
+    description: The managed configurations settings for a product.
+    properties:
+      kind:
+        default: 'androidenterprise#managedConfigurationsSettingsListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#managedConfigurationsSettingsListResponse".'
+        type: string
+      managedConfigurationsSettings:
+        description: A managed configurations settings for an app that may be assigned to a group of users in an enterprise.
+        items:
+          $ref: '#/definitions/ManagedConfigurationsSettings'
         type: array
     type: object
   ManagedProperty:
@@ -3678,4 +3763,18 @@ definitions:
         items:
           $ref: '#/definitions/User'
         type: array
+    type: object
+  VariableSet:
+    description: 'A variable set is a key-value pair of EMM-provided placeholders and its corresponding value, which is attributed to a user. For example, $FIRSTNAME could be a placeholder, and its value could be Alice. Placeholders should start with a ''$'' sign and should be alphanumeric only.'
+    properties:
+      kind:
+        default: 'androidenterprise#variableSet'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#variableSet".'
+        type: string
+      placeholder:
+        description: The placeholder string; defined by EMM.
+        type: string
+      userValue:
+        description: 'The value of the placeholder, specific to the user.'
+        type: string
     type: object
