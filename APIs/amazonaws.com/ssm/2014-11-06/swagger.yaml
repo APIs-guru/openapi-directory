@@ -473,7 +473,7 @@ paths:
   '/#CreateResourceDataSync':
     post:
       operationId: CreateResourceDataSync
-      description: '<p>Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the <a href="API_ListResourceDataSync.html">ListResourceDataSync</a> operation.</p> <p>By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-configuring.html#sysman-inventory-datasync">Configuring Resource Data Sync for Inventory</a>.</p>'
+      description: '<p>Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the <a>ListResourceDataSync</a>.</p> <p>By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-configuring.html#sysman-inventory-datasync">Configuring Resource Data Sync for Inventory</a>.</p>'
       responses:
         '200':
           description: Success
@@ -981,7 +981,7 @@ paths:
   '/#DescribeAssociation':
     post:
       operationId: DescribeAssociation
-      description: Describes the associations for the specified Systems Manager document or instance.
+      description: 'Describes the association for the specified target or instance. If you created the association by using the <code>Targets</code> parameter, then you must retrieve the association by using the association ID. If you created the association by specifying an instance ID and a Systems Manager document, then you retrieve the association by specifying the document name and the instance ID. '
       responses:
         '200':
           description: Success
@@ -4049,6 +4049,8 @@ definitions:
   AgentErrorCode:
     type: string
     maxLength: 10
+  AggregatorSchemaOnly:
+    type: boolean
   AllowedPattern:
     type: string
     minLength: 0
@@ -5159,7 +5161,7 @@ definitions:
     properties:
       OperatingSystem:
         $ref: '#/definitions/OperatingSystem'
-        description: 'Defines the operating system the patch baseline applies to. Supported operating systems include WINDOWS, AMAZON_LINUX, UBUNTU and REDHAT_ENTERPRISE_LINUX. The Default value is WINDOWS.'
+        description: Defines the operating system the patch baseline applies to. The Default value is WINDOWS.
       Name:
         $ref: '#/definitions/BaselineName'
         description: The name of the patch baseline.
@@ -6466,6 +6468,9 @@ definitions:
       Filters:
         $ref: '#/definitions/InventoryFilterList'
         description: One or more filters. Use a filter to return a more specific list of results.
+      Aggregators:
+        $ref: '#/definitions/InventoryAggregatorList'
+        description: 'Returns counts of inventory types based on one or more expressions. For example, if you aggregate by using an expression that uses the <code>AWS:InstanceInformation.PlatformType</code> type, you can see a count of how many Windows and Linux instances exist in your inventoried fleet.'
       ResultAttributes:
         $ref: '#/definitions/ResultAttributeList'
         description: The list of inventory item types to return.
@@ -6500,6 +6505,9 @@ definitions:
       MaxResults:
         $ref: '#/definitions/GetInventorySchemaMaxResults'
         description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+      Aggregator:
+        $ref: '#/definitions/AggregatorSchemaOnly'
+        description: 'Returns inventory schemas that support aggregation. For example, this call returns the <code>AWS:InstanceInformation</code> type, because it supports aggregation based on the <code>PlatformName</code>, <code>PlatformType</code>, and <code>PlatformVersion</code> attributes.'
       SubType:
         $ref: '#/definitions/IsSubTypeSchema'
         description: Returns the sub-type schema for a specified inventory type.
@@ -6802,7 +6810,7 @@ definitions:
     properties:
       Path:
         $ref: '#/definitions/PSParameterName'
-        description: '<p>The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A hierarchy can have a maximum of five levels. Examples: /Environment/Test/DBString003</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p>'
+        description: 'The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A hierarchy can have a maximum of five levels. For example: <code>/Finance/Prod/IAD/WinServ2016/license15</code> '
       Recursive:
         $ref: '#/definitions/Boolean'
         description: Retrieve all parameters within a hierarchy.
@@ -7505,6 +7513,26 @@ definitions:
       Message:
         $ref: '#/definitions/String'
     description: The update is not valid.
+  InventoryAggregator:
+    type: object
+    properties:
+      Expression:
+        $ref: '#/definitions/InventoryAggregatorExpression'
+        description: The inventory type and attribute name for aggregation.
+      Aggregators:
+        $ref: '#/definitions/InventoryAggregatorList'
+        description: Nested aggregators to further refine aggregation for an inventory type.
+    description: Specifies the inventory type and attribute for the aggregation execution.
+  InventoryAggregatorExpression:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  InventoryAggregatorList:
+    type: array
+    items:
+      $ref: '#/definitions/InventoryAggregator'
+    minItems: 1
+    maxItems: 10
   InventoryAttributeDataType:
     type: string
     enum:
@@ -7646,6 +7674,9 @@ definitions:
       Attributes:
         $ref: '#/definitions/InventoryItemAttributeList'
         description: The schema attributes for inventory. This contains data type and attribute name.
+      DisplayName:
+        $ref: '#/definitions/InventoryTypeDisplayName'
+        description: The alias name of the inventory type. The alias name is used for display purposes.
     description: The inventory item schema definition. Users can use this to compose inventory query filters.
   InventoryItemSchemaResultList:
     type: array
@@ -7721,6 +7752,8 @@ definitions:
           $ref: '#/definitions/InventoryResultItemKey'
         value:
           $ref: '#/definitions/InventoryResultItem'
+  InventoryTypeDisplayName:
+    type: string
   InvocationDoesNotExist:
     type: object
     properties: {}
@@ -8954,7 +8987,7 @@ definitions:
         description: The name of the patch baseline.
       OperatingSystem:
         $ref: '#/definitions/OperatingSystem'
-        description: 'Defines the operating system the patch baseline applies to. Supported operating systems include WINDOWS, AMAZON_LINUX, UBUNTU and REDHAT_ENTERPRISE_LINUX. The Default value is WINDOWS. '
+        description: 'Defines the operating system the patch baseline applies to. The Default value is WINDOWS. '
       BaselineDescription:
         $ref: '#/definitions/BaselineDescription'
         description: The description of the patch baseline.
@@ -9298,10 +9331,10 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/PSParameterName'
-        description: The name of the parameter that you want to add to the system.
+        description: '<p>The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: <code>/Dev/DBServer/MySQL/db-string13</code> </p> <note> <p>The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters. </p> </note>'
       Description:
         $ref: '#/definitions/ParameterDescription'
-        description: Information about the parameter that you want to add to the system
+        description: Information about the parameter that you want to add to the system.
       Value:
         $ref: '#/definitions/PSParameterValue'
         description: The parameter value that you want to add to the system.

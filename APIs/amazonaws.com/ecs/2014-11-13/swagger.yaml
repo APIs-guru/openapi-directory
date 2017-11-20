@@ -101,7 +101,7 @@ paths:
   /:
     post:
       operationId: CreateCluster
-      description: 'Creates a new Amazon ECS cluster. By default, your account receives a <code>default</code> cluster when you launch your first container instance. However, you can create your own cluster with a unique name with the <code>CreateCluster</code> action.'
+      description: '<p>Creates a new Amazon ECS cluster. By default, your account receives a <code>default</code> cluster when you launch your first container instance. However, you can create your own cluster with a unique name with the <code>CreateCluster</code> action.</p> <note> <p>When you call the <a>CreateCluster</a> API operation, Amazon ECS attempts to create the service-linked role for your account so that required resources in other AWS services can be managed on your behalf. However, if the IAM user that makes the call does not have permissions to create the service-linked role, it is not created. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguideusing-service-linked-roles.html">Using Service-Linked Roles for Amazon ECS</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1401,7 +1401,7 @@ paths:
   '/#UpdateService':
     post:
       operationId: UpdateService
-      description: '<p>Modifies the desired count, deployment configuration, or task definition used in a service.</p> <p>You can add to or subtract from the number of instantiations of a task definition in a service by specifying the cluster that the service is running in and a new <code>desiredCount</code> parameter.</p> <p>You can use <a>UpdateService</a> to modify your task definition and deploy a new version of your service.</p> <p>You can also update the deployment configuration of a service. When a deployment is triggered by updating the task definition of a service, the service scheduler uses the deployment configuration parameters, <code>minimumHealthyPercent</code> and <code>maximumPercent</code>, to determine the deployment strategy.</p> <ul> <li> <p>If <code>minimumHealthyPercent</code> is below 100%, the scheduler can ignore <code>desiredCount</code> temporarily during a deployment. For example, if <code>desiredCount</code> is four tasks, a minimum of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that do not use a load balancer are considered healthy if they are in the <code>RUNNING</code> state. Tasks for services that use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and the container instance they are hosted on is reported as healthy by the load balancer.</p> </li> <li> <p>The <code>maximumPercent</code> parameter represents an upper limit on the number of running tasks during a deployment, which enables you to define the deployment batch size. For example, if <code>desiredCount</code> is four tasks, a maximum of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available).</p> </li> </ul> <p>When <a>UpdateService</a> stops a task during a deployment, the equivalent of <code>docker stop</code> is issued to the containers running in the task. This results in a <code>SIGTERM</code> and a 30-second timeout, after which <code>SIGKILL</code> is sent and the containers are forcibly stopped. If the container handles the <code>SIGTERM</code> gracefully and exits within 30 seconds from receiving it, no <code>SIGKILL</code> is sent.</p> <p>When the service scheduler launches new tasks, it determines task placement in your cluster with the following logic:</p> <ul> <li> <p>Determine which of the container instances in your cluster can support your service''s task definition (for example, they have the required CPU, memory, ports, and container instance attributes).</p> </li> <li> <p>By default, the service scheduler attempts to balance tasks across Availability Zones in this manner (although you can choose a different placement strategy):</p> <ul> <li> <p>Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.</p> </li> <li> <p>Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.</p> </li> </ul> </li> </ul> <p>When the service scheduler stops running tasks, it attempts to maintain balance across the Availability Zones in your cluster using the following logic: </p> <ul> <li> <p>Sort the container instances by the largest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have two, container instances in either zone B or C are considered optimal for termination.</p> </li> <li> <p>Stop the task on a container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the largest number of running tasks for this service.</p> </li> </ul>'
+      description: '<p>Modifies the desired count, deployment configuration, network configuration, or task definition used in a service.</p> <p>You can add to or subtract from the number of instantiations of a task definition in a service by specifying the cluster that the service is running in and a new <code>desiredCount</code> parameter.</p> <p>You can use <a>UpdateService</a> to modify your task definition and deploy a new version of your service.</p> <p>You can also update the deployment configuration of a service. When a deployment is triggered by updating the task definition of a service, the service scheduler uses the deployment configuration parameters, <code>minimumHealthyPercent</code> and <code>maximumPercent</code>, to determine the deployment strategy.</p> <ul> <li> <p>If <code>minimumHealthyPercent</code> is below 100%, the scheduler can ignore <code>desiredCount</code> temporarily during a deployment. For example, if <code>desiredCount</code> is four tasks, a minimum of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that do not use a load balancer are considered healthy if they are in the <code>RUNNING</code> state. Tasks for services that use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and the container instance they are hosted on is reported as healthy by the load balancer.</p> </li> <li> <p>The <code>maximumPercent</code> parameter represents an upper limit on the number of running tasks during a deployment, which enables you to define the deployment batch size. For example, if <code>desiredCount</code> is four tasks, a maximum of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available).</p> </li> </ul> <p>When <a>UpdateService</a> stops a task during a deployment, the equivalent of <code>docker stop</code> is issued to the containers running in the task. This results in a <code>SIGTERM</code> and a 30-second timeout, after which <code>SIGKILL</code> is sent and the containers are forcibly stopped. If the container handles the <code>SIGTERM</code> gracefully and exits within 30 seconds from receiving it, no <code>SIGKILL</code> is sent.</p> <p>When the service scheduler launches new tasks, it determines task placement in your cluster with the following logic:</p> <ul> <li> <p>Determine which of the container instances in your cluster can support your service''s task definition (for example, they have the required CPU, memory, ports, and container instance attributes).</p> </li> <li> <p>By default, the service scheduler attempts to balance tasks across Availability Zones in this manner (although you can choose a different placement strategy):</p> <ul> <li> <p>Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.</p> </li> <li> <p>Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.</p> </li> </ul> </li> </ul> <p>When the service scheduler stops running tasks, it attempts to maintain balance across the Availability Zones in your cluster using the following logic: </p> <ul> <li> <p>Sort the container instances by the largest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have two, container instances in either zone B or C are considered optimal for termination.</p> </li> <li> <p>Stop the task on a container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the largest number of running tasks for this service.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1457,6 +1457,47 @@ definitions:
       - UPDATING
       - UPDATED
       - FAILED
+  Attachment:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/String'
+        description: The unique identifier for the attachment.
+      type:
+        $ref: '#/definitions/String'
+        description: 'The type of the attachment, such as an <code>ElasticNetworkInterface</code>.'
+      status:
+        $ref: '#/definitions/String'
+        description: ' The status of the attachment. Valid values are <code>PRECREATED</code>, <code>CREATED</code>, <code>ATTACHING</code>, <code>ATTACHED</code>, <code>DETACHING</code>, <code>DETACHED</code>, and <code>DELETED</code>.'
+      details:
+        $ref: '#/definitions/AttachmentDetails'
+        description: 'Details of the attachment. For Elastic Network Interfaces, this includes the network interface ID, the MAC address, the subnet ID, and the private IPv4 address.'
+    description: An object representing a container instance or task attachment.
+  AttachmentDetails:
+    type: array
+    items:
+      $ref: '#/definitions/KeyValuePair'
+  AttachmentStateChange:
+    type: object
+    required:
+      - attachmentArn
+      - status
+    properties:
+      attachmentArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the attachment.
+      status:
+        $ref: '#/definitions/String'
+        description: The status of the attachment.
+    description: An object representing a change in state for a task attachment.
+  AttachmentStateChanges:
+    type: array
+    items:
+      $ref: '#/definitions/AttachmentStateChange'
+  Attachments:
+    type: array
+    items:
+      $ref: '#/definitions/Attachment'
   Attribute:
     type: object
     required:
@@ -1483,6 +1524,18 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Attribute'
+  AwsVpcConfiguration:
+    type: object
+    required:
+      - subnets
+    properties:
+      subnets:
+        $ref: '#/definitions/StringList'
+        description: The subnets associated with the task or service.
+      securityGroups:
+        $ref: '#/definitions/StringList'
+        description: 'The security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.'
+    description: An object representing the subnets and security groups for a task or service.
   Boolean:
     type: boolean
   BoxedBoolean:
@@ -1560,6 +1613,9 @@ definitions:
       networkBindings:
         $ref: '#/definitions/NetworkBindings'
         description: The network bindings associated with the container.
+      networkInterfaces:
+        $ref: '#/definitions/NetworkInterfaces'
+        description: The network interfaces associated with the container.
     description: A Docker container that is part of a task.
   ContainerDefinition:
     type: object
@@ -1692,6 +1748,9 @@ definitions:
       registeredAt:
         $ref: '#/definitions/Timestamp'
         description: The Unix timestamp for when the container instance was registered.
+      attachments:
+        $ref: '#/definitions/Attachments'
+        description: The Elastic Network Interfaces associated with the container instance.
     description: An EC2 instance that is running the Amazon ECS agent and has been registered with a cluster.
   ContainerInstanceStatus:
     type: string
@@ -1728,6 +1787,29 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ContainerOverride'
+  ContainerStateChange:
+    type: object
+    properties:
+      containerName:
+        $ref: '#/definitions/String'
+        description: The name of the container.
+      exitCode:
+        $ref: '#/definitions/BoxedInteger'
+        description: 'The exit code for the container, if the state change is a result of the container exiting.'
+      networkBindings:
+        $ref: '#/definitions/NetworkBindings'
+        description: Any network bindings associated with the container.
+      reason:
+        $ref: '#/definitions/String'
+        description: The reason for the state change.
+      status:
+        $ref: '#/definitions/String'
+        description: The status of the container.
+    description: An object representing a change in state for a container.
+  ContainerStateChanges:
+    type: array
+    items:
+      $ref: '#/definitions/ContainerStateChange'
   Containers:
     type: array
     items:
@@ -1791,7 +1873,7 @@ definitions:
         description: 'Unique, case-sensitive identifier you provide to ensure the idempotency of the request. Up to 32 ASCII characters are allowed.'
       role:
         $ref: '#/definitions/String'
-        description: '<p>The name or full Amazon Resource Name (ARN) of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is required if you are using a load balancer with your service. If you specify the <code>role</code> parameter, you must also specify a load balancer object with the <code>loadBalancers</code> parameter.</p> <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path. For example, if a role with the name <code>bar</code> has a path of <code>/foo/</code> then you would specify <code>/foo/bar</code> as the role name. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names">Friendly Names and Paths</a> in the <i>IAM User Guide</i>.</p>'
+        description: '<p>The name or full Amazon Resource Name (ARN) of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is only permitted if you are using a load balancer with your service and your task definition does not use the <code>awsvpc</code> network mode. If you specify the <code>role</code> parameter, you must also specify a load balancer object with the <code>loadBalancers</code> parameter.</p> <important> <p>If your account has already created the Amazon ECS service-linked role, that role is used by default for your service unless you specify a role here. The service-linked role is required if your task definition uses the <code>awsvpc</code> network mode, in which case you should not specify a role here. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguideusing-service-linked-roles.html">Using Service-Linked Roles for Amazon ECS</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> </important> <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path. For example, if a role with the name <code>bar</code> has a path of <code>/foo/</code> then you would specify <code>/foo/bar</code> as the role name. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names">Friendly Names and Paths</a> in the <i>IAM User Guide</i>.</p>'
       deploymentConfiguration:
         $ref: '#/definitions/DeploymentConfiguration'
         description: Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.
@@ -1801,6 +1883,9 @@ definitions:
       placementStrategy:
         $ref: '#/definitions/PlacementStrategies'
         description: The placement strategy objects to use for tasks in your service. You can specify a maximum of 5 strategy rules per service.
+      networkConfiguration:
+        $ref: '#/definitions/NetworkConfiguration'
+        description: 'The network configuration for the service. This parameter is required for task definitions that use the <code>awsvpc</code> network mode to receive their own Elastic Network Interface, and it is not supported for other network modes. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html">Task Networking</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.'
   CreateServiceResponse:
     type: object
     example:
@@ -1925,6 +2010,9 @@ definitions:
       updatedAt:
         $ref: '#/definitions/Timestamp'
         description: The Unix timestamp for when the service was last updated.
+      networkConfiguration:
+        $ref: '#/definitions/NetworkConfiguration'
+        description: The VPC subnet and security group configuration for tasks that receive their own Elastic Network Interface by using the <code>awsvpc</code> networking mode.
     description: The details of an Amazon ECS service deployment.
   DeploymentConfiguration:
     type: object
@@ -2683,11 +2771,36 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/NetworkBinding'
+  NetworkConfiguration:
+    type: object
+    properties:
+      awsvpcConfiguration:
+        $ref: '#/definitions/AwsVpcConfiguration'
+        description: The VPC subnets and security groups associated with a task.
+    description: An object representing the network configuration for a task or service.
+  NetworkInterface:
+    type: object
+    properties:
+      attachmentId:
+        $ref: '#/definitions/String'
+        description: The attachment ID for the network interface.
+      privateIpv4Address:
+        $ref: '#/definitions/String'
+        description: The private IPv4 address for the network interface.
+      ipv6Address:
+        $ref: '#/definitions/String'
+        description: The private IPv6 address for the network interface.
+    description: An object representing the Elastic Network Interface for tasks that use the <code>awsvpc</code> network mode.
+  NetworkInterfaces:
+    type: array
+    items:
+      $ref: '#/definitions/NetworkInterface'
   NetworkMode:
     type: string
     enum:
       - bridge
       - host
+      - awsvpc
       - none
   NoUpdateAvailableException:
     type: object
@@ -2823,7 +2936,7 @@ definitions:
         description: 'The short name or full Amazon Resource Name (ARN) of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html">IAM Roles for Tasks</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.'
       networkMode:
         $ref: '#/definitions/NetworkMode'
-        description: '<p>The Docker networking mode to use for the containers in the task. The valid values are <code>none</code>, <code>bridge</code>, and <code>host</code>. </p> <p>The default Docker network mode is <code>bridge</code>. If the network mode is set to <code>none</code>, you cannot specify port mappings in your container definitions, and the task''s containers do not have external connectivity. The <code>host</code> network mode offers the highest networking performance for containers because they use the host network stack instead of the virtualized network stack provided by the <code>bridge</code> mode; however, exposed container ports are mapped directly to the corresponding host port, so you cannot take advantage of dynamic host port mappings or run multiple instantiations of the same task on a single container instance if port mappings are used.</p> <p>For more information, see <a href="https://docs.docker.com/engine/reference/run/#network-settings">Network settings</a> in the <i>Docker run reference</i>.</p>'
+        description: '<p>The Docker networking mode to use for the containers in the task. The valid values are <code>none</code>, <code>bridge</code>, <code>awsvpc</code>, and <code>host</code>. The default Docker network mode is <code>bridge</code>. If the network mode is set to <code>none</code>, you cannot specify port mappings in your container definitions, and the task''s containers do not have external connectivity. The <code>host</code> and <code>awsvpc</code> network modes offer the highest networking performance for containers because they use the EC2 network stack instead of the virtualized network stack provided by the <code>bridge</code> mode.</p> <p>With the <code>host</code> and <code>awsvpc</code> network modes, exposed container ports are mapped directly to the corresponding host port (for the <code>host</code> network mode) or the attached ENI port (for the <code>awsvpc</code> network mode), so you cannot take advantage of dynamic host port mappings. </p> <p>If the network mode is <code>awsvpc</code>, the task is allocated an Elastic Network Interface, and you must specify a <a>NetworkConfiguration</a> when you create a service or run a task with the task definition. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html">Task Networking</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> <p>If the network mode is <code>host</code>, you can not run multiple instantiations of the same task on a single container instance when port mappings are used.</p> <p>For more information, see <a href="https://docs.docker.com/engine/reference/run/#network-settings">Network settings</a> in the <i>Docker run reference</i>.</p>'
       containerDefinitions:
         $ref: '#/definitions/ContainerDefinitions'
         description: A list of container definitions in JSON format that describe the different containers that make up your task.
@@ -2920,6 +3033,9 @@ definitions:
       placementStrategy:
         $ref: '#/definitions/PlacementStrategies'
         description: The placement strategy objects to use for the task. You can specify a maximum of 5 strategy rules per task.
+      networkConfiguration:
+        $ref: '#/definitions/NetworkConfiguration'
+        description: 'The network configuration for the task. This parameter is required for task definitions that use the <code>awsvpc</code> network mode to receive their own Elastic Network Interface, and it is not supported for other network modes. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html">Task Networking</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.'
   RunTaskResponse:
     type: object
     example:
@@ -3001,6 +3117,9 @@ definitions:
       placementStrategy:
         $ref: '#/definitions/PlacementStrategies'
         description: The placement strategy that determines how tasks for the service are placed.
+      networkConfiguration:
+        $ref: '#/definitions/NetworkConfiguration'
+        description: The VPC subnet and security group configuration for tasks that receive their own Elastic Network Interface by using the <code>awsvpc</code> networking mode.
     description: Details on a service within a cluster
   ServiceEvent:
     type: object
@@ -3060,6 +3179,9 @@ definitions:
       group:
         $ref: '#/definitions/String'
         description: 'The name of the task group to associate with the task. The default value is the family name of the task definition (for example, family:my-family-name).'
+      networkConfiguration:
+        $ref: '#/definitions/NetworkConfiguration'
+        description: The VPC subnet and security group configuration for tasks that receive their own Elastic Network Interface by using the <code>awsvpc</code> networking mode.
   StartTaskResponse:
     type: object
     properties:
@@ -3140,6 +3262,12 @@ definitions:
       reason:
         $ref: '#/definitions/String'
         description: The reason for the state change request.
+      containers:
+        $ref: '#/definitions/ContainerStateChanges'
+        description: Any containers associated with the state change request.
+      attachments:
+        $ref: '#/definitions/AttachmentStateChanges'
+        description: Any attachments associated with the state change request.
   SubmitTaskStateChangeResponse:
     type: object
     properties:
@@ -3202,6 +3330,9 @@ definitions:
       group:
         $ref: '#/definitions/String'
         description: The name of the task group associated with the task.
+      attachments:
+        $ref: '#/definitions/Attachments'
+        description: The Elastic Network Adapter associated with the task if the task uses the <code>awsvpc</code> network mode.
     description: Details on a task in a cluster.
   TaskDefinition:
     type: object
@@ -3220,7 +3351,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.
       networkMode:
         $ref: '#/definitions/NetworkMode'
-        description: '<p>The Docker networking mode to use for the containers in the task. The valid values are <code>none</code>, <code>bridge</code>, and <code>host</code>. </p> <p>If the network mode is <code>none</code>, the containers do not have external connectivity. The default Docker network mode is <code>bridge</code>. The <code>host</code> network mode offers the highest networking performance for containers because it uses the host network stack instead of the virtualized network stack provided by the <code>bridge</code> mode.</p> <p>For more information, see <a href="https://docs.docker.com/engine/reference/run/#network-settings">Network settings</a> in the <i>Docker run reference</i>.</p>'
+        description: '<p>The Docker networking mode to use for the containers in the task. The valid values are <code>none</code>, <code>bridge</code>, <code>awsvpc</code>, and <code>host</code>. </p> <p>If the network mode is <code>none</code>, the containers do not have external connectivity. The default Docker network mode is <code>bridge</code>. If the network mode is <code>awsvpc</code>, the task is allocated an Elastic Network Interface. The <code>host</code> and <code>awsvpc</code> network modes offer the highest networking performance for containers because they use the EC2 network stack instead of the virtualized network stack provided by the <code>bridge</code> mode.</p> <p>For more information, see <a href="https://docs.docker.com/engine/reference/run/#network-settings">Network settings</a> in the <i>Docker run reference</i>.</p>'
       revision:
         $ref: '#/definitions/Integer'
         description: 'The revision of the task in a particular family. The revision is a version number of a task definition in a family. When you register a task definition for the first time, the revision is <code>1</code>; each time you register a new revision of a task definition in the same family, the revision value always increases by one (even if you have deregistered previous revisions in this family).'
@@ -3395,6 +3526,9 @@ definitions:
       deploymentConfiguration:
         $ref: '#/definitions/DeploymentConfiguration'
         description: Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.
+      networkConfiguration:
+        $ref: '#/definitions/NetworkConfiguration'
+        description: '<p>The network configuration for the service. This parameter is required for task definitions that use the <code>awsvpc</code> network mode to receive their own Elastic Network Interface, and it is not supported for other network modes. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html">Task Networking</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> <note> <p>Updating a service to add a subnet to a list of existing subnets does not trigger a service deployment. For example, if your network configuration change is to keep the existing subnets and simply add another subnet to the network configuration, this does not trigger a new service deployment.</p> </note>'
   UpdateServiceResponse:
     type: object
     example: {}

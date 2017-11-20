@@ -343,7 +343,7 @@ paths:
   '/#CreateClassifier':
     post:
       operationId: CreateClassifier
-      description: Creates a <code>Classifier</code> in the user's account.
+      description: 'Creates a classifier in the user''s account. This may be either a <code>GrokClassifier</code> or an <code>XMLClassifier</code>. '
       responses:
         '200':
           description: Success
@@ -417,7 +417,7 @@ paths:
   '/#CreateCrawler':
     post:
       operationId: CreateCrawler
-      description: 'Creates a new <code>Crawler</code> with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in either the <i>s3Targets</i> or the <i>jdbcTargets</i> field.'
+      description: 'Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in either the <i>s3Targets</i> or the <i>jdbcTargets</i> field.'
       responses:
         '200':
           description: Success
@@ -834,7 +834,7 @@ paths:
   '/#DeleteClassifier':
     post:
       operationId: DeleteClassifier
-      description: Removes a <code>Classifier</code> from the metadata store.
+      description: Removes a classifier from the Data Catalog.
       responses:
         '200':
           description: Success
@@ -900,7 +900,7 @@ paths:
   '/#DeleteCrawler':
     post:
       operationId: DeleteCrawler
-      description: 'Removes a specified <code>Crawler</code> from the metadata store, unless the <code>Crawler</code> state is <code>RUNNING</code>.'
+      description: 'Removes a specified crawler from the Data Catalog, unless the crawler state is <code>RUNNING</code>.'
       responses:
         '200':
           description: Success
@@ -1253,7 +1253,7 @@ paths:
   '/#GetClassifier':
     post:
       operationId: GetClassifier
-      description: Retrieve a <code>Classifier</code> by name.
+      description: Retrieve a classifier by name.
       responses:
         '200':
           description: Success
@@ -1286,7 +1286,7 @@ paths:
   '/#GetClassifiers':
     post:
       operationId: GetClassifiers
-      description: Lists all Classifier objects in the metadata store.
+      description: Lists all classifier objects in the Data Catalog.
       responses:
         '200':
           description: Success
@@ -1401,7 +1401,7 @@ paths:
   '/#GetCrawler':
     post:
       operationId: GetCrawler
-      description: Retrieves metadata for a specified <code>Crawler</code>.
+      description: Retrieves metadata for a specified crawler.
       responses:
         '200':
           description: Success
@@ -1473,7 +1473,7 @@ paths:
   '/#GetCrawlers':
     post:
       operationId: GetCrawlers
-      description: Retrieves metadata for all <code>Crawlers</code> defined in the customer account.
+      description: Retrieves metadata for all crawlers defined in the customer account.
       responses:
         '200':
           description: Success
@@ -1931,6 +1931,10 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '483':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
       parameters:
         - name: body
           in: body
@@ -2480,7 +2484,7 @@ paths:
   '/#StartCrawler':
     post:
       operationId: StartCrawler
-      description: 'Starts a crawl using the specified <code>Crawler</code>, regardless of what is scheduled. If the <code>Crawler</code> is already running, does nothing.'
+      description: 'Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, does nothing.'
       responses:
         '200':
           description: Success
@@ -2660,7 +2664,7 @@ paths:
   '/#StopCrawler':
     post:
       operationId: StopCrawler
-      description: 'If the specified <code>Crawler</code> is running, stops the crawl.'
+      description: 'If the specified crawler is running, stops the crawl.'
       responses:
         '200':
           description: Success
@@ -2783,7 +2787,7 @@ paths:
   '/#UpdateClassifier':
     post:
       operationId: UpdateClassifier
-      description: Modifies an existing <code>Classifier</code>.
+      description: Modifies an existing classifier (either a <code>GrokClassifier</code> or an <code>XMLClassifier</code>).
       responses:
         '200':
           description: Success
@@ -2861,7 +2865,7 @@ paths:
   '/#UpdateCrawler':
     post:
       operationId: UpdateCrawler
-      description: 'Updates a <code>Crawler</code>. If a <code>Crawler</code> is running, you must stop it using <code>StopCrawler</code> before updating it.'
+      description: 'Updates a crawler. If a crawler is running, you must stop it using <code>StopCrawler</code> before updating it.'
       responses:
         '200':
           description: Success
@@ -2906,7 +2910,7 @@ paths:
   '/#UpdateCrawlerSchedule':
     post:
       operationId: UpdateCrawlerSchedule
-      description: 'Updates the schedule of a crawler using a Cron expression. '
+      description: 'Updates the schedule of a crawler using a <code>cron</code> expression. '
       responses:
         '200':
           description: Success
@@ -3521,8 +3525,11 @@ definitions:
     properties:
       GrokClassifier:
         $ref: '#/definitions/GrokClassifier'
-        description: A GrokClassifier object.
-    description: 'Classifiers are written in Python and triggered during a Crawl Task. You can write your own Classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A Classifier first checks whether a given file is in a format it can handle, and then, if so, creates a schema in the form of a <code>StructType</code> object that matches that data format.'
+        description: A <code>GrokClassifier</code> object.
+      XMLClassifier:
+        $ref: '#/definitions/XMLClassifier'
+        description: An <code>XMLClassifier</code> object.
+    description: '<p>Classifiers are written in Python and triggered during a crawl task. You can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier checks whether a given file is in a format it can handle, and if it is, the classifier creates a schema in the form of a <code>StructType</code> object that matches that data format.</p> <p>A classifier can be either a <code>grok</code> classifier or an XML classifier, specified in one or the other field of the <code>Classifier</code> object.</p>'
   ClassifierList:
     type: array
     items:
@@ -3767,50 +3774,55 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: The <code>Crawler</code> name.
+        description: The crawler name.
       Role:
-        $ref: '#/definitions/RoleArn'
-        description: The IAM role (or ARN of an IAM role) used to access customer resources such as data in S3.
+        $ref: '#/definitions/Role'
+        description: 'The IAM role (or ARN of an IAM role) used to access customer resources, such as data in Amazon S3.'
       Targets:
         $ref: '#/definitions/CrawlerTargets'
         description: A collection of targets to crawl.
       DatabaseName:
         $ref: '#/definitions/DatabaseName'
-        description: The <code>Database</code> where this Crawler's output should be stored.
+        description: The database where metadata is written by this crawler.
       Description:
         $ref: '#/definitions/DescriptionString'
-        description: A description of this Crawler and where it should be used.
+        description: A description of the crawler.
       Classifiers:
         $ref: '#/definitions/ClassifierNameList'
-        description: A list of custom <code>Classifier</code>s associated with this Crawler.
+        description: A list of custom classifiers associated with the crawler.
       SchemaChangePolicy:
         $ref: '#/definitions/SchemaChangePolicy'
-        description: Sets policy for the crawler's update and delete behavior.
+        description: Sets the behavior when the crawler finds a changed or deleted object.
       State:
         $ref: '#/definitions/CrawlerState'
-        description: 'Indicates whether this Crawler is running, or whether a run is pending.'
+        description: 'Indicates whether the crawler is running, or whether a run is pending.'
       TablePrefix:
         $ref: '#/definitions/TablePrefix'
-        description: The table prefix used for catalog tables created.
+        description: The prefix added to the names of tables that are created.
       Schedule:
         $ref: '#/definitions/Schedule'
-        description: A <code>Schedule</code> object that specifies the schedule on which this Crawler is to be run.
+        description: 'For scheduled crawlers, the schedule when the crawler runs.'
       CrawlElapsedTime:
         $ref: '#/definitions/MillisecondsCount'
-        description: 'If this Crawler is running, contains the total time elapsed since the last crawl began.'
+        description: 'If the crawler is running, contains the total time elapsed since the last crawl began.'
       CreationTime:
         $ref: '#/definitions/Timestamp'
-        description: The time when the Crawler was created.
+        description: The time when the crawler was created.
       LastUpdated:
         $ref: '#/definitions/Timestamp'
-        description: The time the Crawler was last updated.
+        description: The time the crawler was last updated.
       LastCrawl:
         $ref: '#/definitions/LastCrawlInfo'
         description: 'The status of the last crawl, and potentially error information if an error occurred.'
       Version:
         $ref: '#/definitions/VersionId'
-        description: The version of the Crawler.
-    description: 'Specifies a crawler program that examines a data source and uses classifiers to try to determine its schema. If successful, the crawler records metatdata concerning the data source in the Data Catalog.'
+        description: The version of the crawler.
+      Configuration:
+        $ref: '#/definitions/CrawlerConfiguration'
+        description: '<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler''s behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p>'
+    description: 'Specifies a crawler program that examines a data source and uses classifiers to try to determine its schema. If successful, the crawler records metadata concerning the data source in the AWS Glue Data Catalog.'
+  CrawlerConfiguration:
+    type: string
   CrawlerList:
     type: array
     items:
@@ -3826,7 +3838,7 @@ definitions:
         description: The estimated time left to complete a running crawl.
       StillEstimating:
         $ref: '#/definitions/Boolean'
-        description: 'True if the crawler is estimating its '
+        description: True if the crawler is still estimating how long it will take to complete this run.
       LastRuntimeSeconds:
         $ref: '#/definitions/NonNegativeDouble'
         description: 'The duration of the crawler''s most recent run, in seconds.'
@@ -3835,13 +3847,13 @@ definitions:
         description: 'The median duration of this crawler''s runs, in seconds.'
       TablesCreated:
         $ref: '#/definitions/NonNegativeInteger'
-        description: A list of the tables created by this crawler.
+        description: The number of tables created by this crawler.
       TablesUpdated:
         $ref: '#/definitions/NonNegativeInteger'
-        description: A list of the tables created by this crawler.
+        description: The number of tables updated by this crawler.
       TablesDeleted:
         $ref: '#/definitions/NonNegativeInteger'
-        description: A list of the tables deleted by this crawler.
+        description: The number of tables deleted by this crawler.
     description: Metrics for a specified crawler.
   CrawlerMetricsList:
     type: array
@@ -3885,17 +3897,20 @@ definitions:
     properties:
       S3Targets:
         $ref: '#/definitions/S3TargetList'
-        description: Specifies targets in AWS S3.
+        description: Specifies Amazon S3 targets.
       JdbcTargets:
         $ref: '#/definitions/JdbcTargetList'
         description: Specifies JDBC targets.
-    description: Specifies crawler targets.
+    description: Specifies data stores to crawl.
   CreateClassifierRequest:
     type: object
     properties:
       GrokClassifier:
         $ref: '#/definitions/CreateGrokClassifierRequest'
-        description: A grok classifier to create.
+        description: A <code>GrokClassifier</code> object specifying the classifier to create.
+      XMLClassifier:
+        $ref: '#/definitions/CreateXMLClassifierRequest'
+        description: An <code>XMLClassifier</code> object specifying the classifier to create.
   CreateClassifierResponse:
     type: object
     properties: {}
@@ -3923,16 +3938,16 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: Name of the new <code>Crawler</code>.
+        description: Name of the new crawler.
       Role:
-        $ref: '#/definitions/RoleArn'
-        description: The IAM role (or ARN of an IAM role) used by the new <code>Crawler</code> to access customer resources.
+        $ref: '#/definitions/Role'
+        description: The IAM role (or ARN of an IAM role) used by the new crawler to access customer resources.
       DatabaseName:
         $ref: '#/definitions/DatabaseName'
-        description: 'The Glue <code>Database</code> where results will be stored, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.'
+        description: 'The AWS Glue database where results are written, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.'
       Description:
         $ref: '#/definitions/DescriptionString'
-        description: A description of the new <code>Crawler</code>.
+        description: A description of the new crawler.
       Targets:
         $ref: '#/definitions/CrawlerTargets'
         description: A list of collection of targets to crawl.
@@ -3941,13 +3956,16 @@ definitions:
         description: 'A <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
       Classifiers:
         $ref: '#/definitions/ClassifierNameList'
-        description: 'A list of custom <code>Classifier</code> names that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.'
+        description: 'A list of custom classifiers that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.'
       TablePrefix:
         $ref: '#/definitions/TablePrefix'
-        description: The table prefix used for catalog tables created.
+        description: The table prefix used for catalog tables that are created.
       SchemaChangePolicy:
         $ref: '#/definitions/SchemaChangePolicy'
         description: Policy for the crawler's update and deletion behavior.
+      Configuration:
+        $ref: '#/definitions/CrawlerConfiguration'
+        description: '<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler''s behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition.</p>'
   CreateCrawlerResponse:
     type: object
     properties: {}
@@ -4050,17 +4068,17 @@ definitions:
     properties:
       Classification:
         $ref: '#/definitions/Classification'
-        description: 'The type of result that the classifier matches, such as Twitter Json, Omniture logs, Cloudwatch logs, and so forth.'
+        description: 'An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, Amazon CloudWatch Logs, and so on.'
       Name:
         $ref: '#/definitions/NameString'
-        description: The name of the new Classifier.
+        description: The name of the new classifier.
       GrokPattern:
         $ref: '#/definitions/GrokPattern'
         description: The grok pattern used by this classifier.
       CustomPatterns:
         $ref: '#/definitions/CustomPatterns'
-        description: Custom grok patterns used by this classifier.
-    description: Specifies a Grok classifier for CreateClassifier to create.
+        description: Optional custom grok patterns used by this classifier.
+    description: Specifies a <code>grok</code> classifier for <code>CreateClassifier</code> to create.
   CreateJobRequest:
     type: object
     required:
@@ -4208,6 +4226,22 @@ definitions:
   CreateUserDefinedFunctionResponse:
     type: object
     properties: {}
+  CreateXMLClassifierRequest:
+    type: object
+    required:
+      - Classification
+      - Name
+    properties:
+      Classification:
+        $ref: '#/definitions/Classification'
+        description: An identifier of the data format that the classifier matches.
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the classifier.
+      RowTag:
+        $ref: '#/definitions/RowTag'
+        description: The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot be an empty element. It must contain child elements representing fields in the record.
+    description: Specifies an XML classifier for <code>CreateClassifier</code> to create.
   CronExpression:
     type: string
   CustomPatterns:
@@ -4281,7 +4315,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: Name of the <code>Classifier</code> to remove.
+        description: Name of the classifier to remove.
   DeleteClassifierResponse:
     type: object
     properties: {}
@@ -4312,7 +4346,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: Name of the <code>Crawler</code> to remove.
+        description: Name of the crawler to remove.
   DeleteCrawlerResponse:
     type: object
     properties: {}
@@ -4585,13 +4619,13 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: Name of the <code>Classifier</code> to retrieve.
+        description: Name of the classifier to retrieve.
   GetClassifierResponse:
     type: object
     properties:
       Classifier:
         $ref: '#/definitions/Classifier'
-        description: The requested <code>Classifier</code>.
+        description: The requested classifier.
   GetClassifiersRequest:
     type: object
     properties:
@@ -4606,7 +4640,7 @@ definitions:
     properties:
       Classifiers:
         $ref: '#/definitions/ClassifierList'
-        description: The requested list of <code>Classifier</code> objects.
+        description: The requested list of classifier objects.
       NextToken:
         $ref: '#/definitions/Token'
         description: A continuation token.
@@ -4689,19 +4723,19 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: Name of the <code>Crawler</code> to retrieve metadata for.
+        description: Name of the crawler to retrieve metadata for.
   GetCrawlerResponse:
     type: object
     properties:
       Crawler:
         $ref: '#/definitions/Crawler'
-        description: The metadata for the specified <code>Crawler</code>.
+        description: The metadata for the specified crawler.
   GetCrawlersRequest:
     type: object
     properties:
       MaxResults:
         $ref: '#/definitions/PageSize'
-        description: The number of Crawlers to return on each call.
+        description: The number of crawlers to return on each call.
       NextToken:
         $ref: '#/definitions/Token'
         description: 'A continuation token, if this is a continuation request.'
@@ -4710,7 +4744,7 @@ definitions:
     properties:
       Crawlers:
         $ref: '#/definitions/CrawlerList'
-        description: A list of <code>Crawler</code> metadata.
+        description: A list of crawler metadata.
       NextToken:
         $ref: '#/definitions/Token'
         description: 'A continuation token, if the returned list has not reached the end of those defined in this customer account.'
@@ -4983,7 +5017,7 @@ definitions:
     properties:
       PythonScript:
         $ref: '#/definitions/PythonScript'
-        description: A python script to perform the mapping.
+        description: A Python script to perform the mapping.
   GetTableRequest:
     type: object
     required:
@@ -5166,7 +5200,7 @@ definitions:
         description: The name of the classifier.
       Classification:
         $ref: '#/definitions/Classification'
-        description: 'The data form that the classifier matches, such as Twitter, JSON, Omniture Logs, and so forth.'
+        description: 'An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, and so on.'
       CreationTime:
         $ref: '#/definitions/Timestamp'
         description: The time this classifier was registered.
@@ -5178,11 +5212,11 @@ definitions:
         description: The version of this classifier.
       GrokPattern:
         $ref: '#/definitions/GrokPattern'
-        description: The grok pattern used by this classifier.
+        description: 'The grok pattern applied to a data store by this classifier. For more information, see built-in patterns in <a href="http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html">Writing Custom Classifers</a>.'
       CustomPatterns:
         $ref: '#/definitions/CustomPatterns'
-        description: Custom grok patterns used by this classifier.
-    description: A classifier that uses <code>grok</code>.
+        description: 'Optional custom grok patterns defined by this classifier. For more information, see custom patterns in <a href="http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html">Writing Custom Classifers</a>.'
+    description: A classifier that uses <code>grok</code> patterns.
   GrokPattern:
     type: string
     minLength: 1
@@ -5236,14 +5270,14 @@ definitions:
     properties:
       ConnectionName:
         $ref: '#/definitions/ConnectionName'
-        description: The name of the connection to use for the JDBC target.
+        description: The name of the connection to use to connect to the JDBC target.
       Path:
         $ref: '#/definitions/Path'
         description: The path of the JDBC target.
       Exclusions:
         $ref: '#/definitions/PathList'
-        description: A list of items to exclude from the crawl.
-    description: Specifies a JDBC target for a crawl.
+        description: 'A list of glob patterns used to exclude from the crawl. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html">Catalog Tables with a Crawler</a>.'
+    description: Specifies a JDBC data store to crawl.
   JdbcTargetList:
     type: array
     items:
@@ -5425,7 +5459,7 @@ definitions:
         description: Status of the last crawl.
       ErrorMessage:
         $ref: '#/definitions/DescriptionString'
-        description: 'Error information about the last crawl, if an error occurred.'
+        description: 'If an error occurred, the error information about the last crawl.'
       LogGroup:
         $ref: '#/definitions/LogGroup'
         description: The log group for the last crawl.
@@ -5453,7 +5487,7 @@ definitions:
         description: A JDBC location.
       S3:
         $ref: '#/definitions/CodeGenNodeArgs'
-        description: An AWS S3 location.
+        description: An Amazon S3 location.
     description: The location of resources.
   LocationMap:
     type: array
@@ -5773,21 +5807,25 @@ definitions:
       $ref: '#/definitions/ResourceUri'
     minItems: 0
     maxItems: 1000
+  Role:
+    type: string
   RoleArn:
     type: string
     pattern: 'arn:aws:iam::\d{12}:role/.*'
   RoleString:
+    type: string
+  RowTag:
     type: string
   S3Target:
     type: object
     properties:
       Path:
         $ref: '#/definitions/Path'
-        description: The path to the S3 target.
+        description: The path to the Amazon S3 target.
       Exclusions:
         $ref: '#/definitions/PathList'
-        description: A list of S3 objects to exclude from the crawl.
-    description: Specifies a crawler target in AWS S3.
+        description: 'A list of glob patterns used to exclude from the crawl. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html">Catalog Tables with a Crawler</a>.'
+    description: Specifies a data store in Amazon S3.
   S3TargetList:
     type: array
     items:
@@ -5834,10 +5872,10 @@ definitions:
     properties:
       UpdateBehavior:
         $ref: '#/definitions/UpdateBehavior'
-        description: The update behavior.
+        description: The update behavior when the crawler finds a changed schema.
       DeleteBehavior:
         $ref: '#/definitions/DeleteBehavior'
-        description: The deletion behavior.
+        description: The deletion behavior when the crawler finds a deleted object.
     description: Crawler policy for update and deletion behavior.
   SchemaPathString:
     type: string
@@ -5895,7 +5933,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: Name of the <code>Crawler</code> to start.
+        description: Name of the crawler to start.
   StartCrawlerResponse:
     type: object
     properties: {}
@@ -5954,7 +5992,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: Name of the <code>Crawler</code> to stop.
+        description: Name of the crawler to stop.
   StopCrawlerResponse:
     type: object
     properties: {}
@@ -6256,6 +6294,9 @@ definitions:
       GrokClassifier:
         $ref: '#/definitions/UpdateGrokClassifierRequest'
         description: A <code>GrokClassifier</code> object with updated fields.
+      XMLClassifier:
+        $ref: '#/definitions/UpdateXMLClassifierRequest'
+        description: An <code>XMLClassifier</code> object with updated fields.
   UpdateClassifierResponse:
     type: object
     properties: {}
@@ -6284,31 +6325,34 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: Name of the new <code>Crawler</code>.
+        description: Name of the new crawler.
       Role:
-        $ref: '#/definitions/RoleArn'
-        description: The IAM role (or ARN of an IAM role) used by the new <code>Crawler</code> to access customer resources.
+        $ref: '#/definitions/Role'
+        description: The IAM role (or ARN of an IAM role) used by the new crawler to access customer resources.
       DatabaseName:
         $ref: '#/definitions/DatabaseName'
-        description: 'The Glue <code>Database</code> where results will be stored, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.'
+        description: 'The AWS Glue database where results are stored, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.'
       Description:
         $ref: '#/definitions/DescriptionStringRemovable'
-        description: A description of the new <code>Crawler</code>.
+        description: A description of the new crawler.
       Targets:
         $ref: '#/definitions/CrawlerTargets'
-        description: A list of collection of targets to crawl.
+        description: A list of targets to crawl.
       Schedule:
         $ref: '#/definitions/CronExpression'
         description: 'A <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
       Classifiers:
         $ref: '#/definitions/ClassifierNameList'
-        description: 'A list of custom <code>Classifier</code> names that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.'
+        description: 'A list of custom classifiers that the user has registered. By default, all classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.'
       TablePrefix:
         $ref: '#/definitions/TablePrefix'
-        description: The table prefix used for catalog tables created.
+        description: The table prefix used for catalog tables that are created.
       SchemaChangePolicy:
         $ref: '#/definitions/SchemaChangePolicy'
         description: Policy for the crawler's update and deletion behavior.
+      Configuration:
+        $ref: '#/definitions/CrawlerConfiguration'
+        description: '<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler''s behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p>'
   UpdateCrawlerResponse:
     type: object
     properties: {}
@@ -6374,14 +6418,14 @@ definitions:
         description: The name of the <code>GrokClassifier</code>.
       Classification:
         $ref: '#/definitions/Classification'
-        description: 'The type of result that the classifier matches, such as Twitter Json, Omniture logs, Cloudwatch logs, and so forth.'
+        description: 'An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, Amazon CloudWatch Logs, and so on.'
       GrokPattern:
         $ref: '#/definitions/GrokPattern'
         description: The grok pattern used by this classifier.
       CustomPatterns:
         $ref: '#/definitions/CustomPatterns'
-        description: Custom grok patterns used by this classifier.
-    description: Specifies a Grok classifier to update when passed to UpdateClassifier.
+        description: Optional custom grok patterns used by this classifier.
+    description: Specifies a grok classifier to update when passed to <code>UpdateClassifier</code>.
   UpdateJobRequest:
     type: object
     required:
@@ -6484,6 +6528,21 @@ definitions:
   UpdateUserDefinedFunctionResponse:
     type: object
     properties: {}
+  UpdateXMLClassifierRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the classifier.
+      Classification:
+        $ref: '#/definitions/Classification'
+        description: An identifier of the data format that the classifier matches.
+      RowTag:
+        $ref: '#/definitions/RowTag'
+        description: The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot be an empty element. It must contain child elements representing fields in the record.
+    description: Specifies an XML classifier to be updated.
   UriString:
     type: string
   UserDefinedFunction:
@@ -6562,3 +6621,28 @@ definitions:
   ViewTextString:
     type: string
     maxLength: 2048
+  XMLClassifier:
+    type: object
+    required:
+      - Name
+      - Classification
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the classifier.
+      Classification:
+        $ref: '#/definitions/Classification'
+        description: An identifier of the data format that the classifier matches.
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time this classifier was registered.
+      LastUpdated:
+        $ref: '#/definitions/Timestamp'
+        description: The time this classifier was last updated.
+      Version:
+        $ref: '#/definitions/VersionId'
+        description: The version of this classifier.
+      RowTag:
+        $ref: '#/definitions/RowTag'
+        description: The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot be an empty element. It must contain child elements representing fields in the record.
+    description: A classifier for <code>XML</code> content.

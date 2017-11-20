@@ -151,6 +151,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AttachDisk':
+    post:
+      operationId: AttachDisk
+      description: Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AttachDiskResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AttachDiskRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#AttachStaticIp':
     post:
       operationId: AttachStaticIp
@@ -247,6 +300,165 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CloseInstancePublicPortsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateDisk':
+    post:
+      operationId: CreateDisk
+      description: 'Creates a block storage disk that can be attached to a Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail">Regions and Availability Zones in Lightsail</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDiskResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDiskRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateDiskFromSnapshot':
+    post:
+      operationId: CreateDiskFromSnapshot
+      description: 'Creates a block storage disk from a disk snapshot that can be attached to a Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail">Regions and Availability Zones in Lightsail</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDiskFromSnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDiskFromSnapshotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateDiskSnapshot':
+    post:
+      operationId: CreateDiskSnapshot
+      description: '<p>Creates a snapshot of a block storage disk. You can use snapshots for backups, to make copies of disks, and to save data before shutting down a Lightsail instance.</p> <p>You can take a snapshot of an attached disk that is in use; however, snapshots only capture data that has been written to your disk at the time the snapshot command is issued. This may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the disk long enough to take a snapshot, your snapshot should be complete. Nevertheless, if you cannot pause all file writes to the disk, you should unmount the disk from within the Lightsail instance, issue the create disk snapshot command, and then remount the disk to ensure a consistent and complete snapshot. You may remount and use your disk while the snapshot status is pending.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDiskSnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDiskSnapshotRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -575,6 +787,112 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDisk':
+    post:
+      operationId: DeleteDisk
+      description: <p>Deletes the specified block storage disk. The disk must be in the <code>available</code> state (not attached to a Lightsail instance).</p> <note> <p>The disk may remain in the <code>deleting</code> state for several minutes.</p> </note>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDiskResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDiskRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDiskSnapshot':
+    post:
+      operationId: DeleteDiskSnapshot
+      description: '<p>Deletes the specified disk snapshot.</p> <p>When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDiskSnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDiskSnapshotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteDomain':
     post:
       operationId: DeleteDomain
@@ -840,6 +1158,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DetachDisk':
+    post:
+      operationId: DetachDisk
+      description: Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DetachDiskResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DetachDiskRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DetachStaticIp':
     post:
       operationId: DetachStaticIp
@@ -1095,6 +1466,218 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBundlesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetDisk':
+    post:
+      operationId: GetDisk
+      description: Returns information about a specific block storage disk.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDiskResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDiskRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetDiskSnapshot':
+    post:
+      operationId: GetDiskSnapshot
+      description: Returns information about a specific block storage disk snapshot.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDiskSnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDiskSnapshotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetDiskSnapshots':
+    post:
+      operationId: GetDiskSnapshots
+      description: '<p>Returns information about all block storage disk snapshots in your AWS account and region.</p> <p>If you are describing a long list of disk snapshots, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDiskSnapshotsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDiskSnapshotsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetDisks':
+    post:
+      operationId: GetDisks
+      description: '<p>Returns information about all block storage disks in your AWS account and region.</p> <p>If you are describing a long list of disks, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDisksResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDisksRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2686,6 +3269,28 @@ definitions:
       operations:
         $ref: '#/definitions/OperationList'
         description: An array of key-value pairs containing information about the static IP address you allocated.
+  AttachDiskRequest:
+    type: object
+    required:
+      - diskName
+      - instanceName
+      - diskPath
+    properties:
+      diskName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The unique Lightsail disk name (e.g., <code>my-disk</code>).'
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the Lightsail instance where you want to utilize the storage disk.
+      diskPath:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The disk path to expose to the instance (e.g., <code>/dev/xvdf</code>).'
+  AttachDiskResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operation.
   AttachStaticIpRequest:
     type: object
     required:
@@ -2704,12 +3309,21 @@ definitions:
       operations:
         $ref: '#/definitions/OperationList'
         description: An array of key-value pairs containing information about your API operations.
+  AttachedDiskMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ResourceName'
+        value:
+          $ref: '#/definitions/DiskMapList'
   AvailabilityZone:
     type: object
     properties:
       zoneName:
         $ref: '#/definitions/NonEmptyString'
-        description: The name of the Availability Zone. The format is <code>us-east-1a</code> (case-sensitive).
+        description: The name of the Availability Zone. The format is <code>us-east-2a</code> (case-sensitive).
       state:
         $ref: '#/definitions/NonEmptyString'
         description: The state of the Availability Zone.
@@ -2828,6 +3442,72 @@ definitions:
       operation:
         $ref: '#/definitions/Operation'
         description: An array of key-value pairs that contains information about the operation.
+  CreateDiskFromSnapshotRequest:
+    type: object
+    required:
+      - diskName
+      - diskSnapshotName
+      - availabilityZone
+      - sizeInGb
+    properties:
+      diskName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The unique Lightsail disk name (e.g., <code>my-disk</code>).'
+      diskSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the disk snapshot (e.g., <code>my-snapshot</code>) from which to create the new storage disk.'
+      availabilityZone:
+        $ref: '#/definitions/NonEmptyString'
+        description: '<p>The Availability Zone where you want to create the disk (e.g., <code>us-east-2a</code>). Choose the same Availability Zone as the Lightsail instance where you want to create the disk.</p> <p>Use the GetRegions operation to list the Availability Zones where Lightsail is currently available.</p>'
+      sizeInGb:
+        $ref: '#/definitions/integer'
+        description: 'The size of the disk in GB (e.g., <code>32</code>).'
+  CreateDiskFromSnapshotResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
+  CreateDiskRequest:
+    type: object
+    required:
+      - diskName
+      - availabilityZone
+      - sizeInGb
+    properties:
+      diskName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The unique Lightsail disk name (e.g., <code>my-disk</code>).'
+      availabilityZone:
+        $ref: '#/definitions/NonEmptyString'
+        description: '<p>The Availability Zone where you want to create the disk (e.g., <code>us-east-2a</code>). Choose the same Availability Zone as the Lightsail instance where you want to create the disk.</p> <p>Use the GetRegions operation to list the Availability Zones where Lightsail is currently available.</p>'
+      sizeInGb:
+        $ref: '#/definitions/integer'
+        description: 'The size of the disk in GB (e.g., <code>32</code>).'
+  CreateDiskResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
+  CreateDiskSnapshotRequest:
+    type: object
+    required:
+      - diskName
+      - diskSnapshotName
+    properties:
+      diskName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The unique name of the source disk (e.g., <code>my-source-disk</code>).'
+      diskSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the destination disk snapshot (e.g., <code>my-disk-snapshot</code>) based on the source disk.'
+  CreateDiskSnapshotResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
   CreateDomainEntryRequest:
     type: object
     required:
@@ -2889,9 +3569,12 @@ definitions:
       instanceNames:
         $ref: '#/definitions/StringList'
         description: The names for your new instances.
+      attachedDiskMapping:
+        $ref: '#/definitions/AttachedDiskMap'
+        description: An object containing information about one or more disk mappings.
       availabilityZone:
         $ref: '#/definitions/string'
-        description: 'The Availability Zone where you want to create your instances. Use the following formatting: <code>us-east-1a</code> (case sensitive). You can get a list of availability zones by using the <a href="http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html">get regions</a> operation. Be sure to add the <code>include availability zones</code> parameter to your request.'
+        description: 'The Availability Zone where you want to create your instances. Use the following formatting: <code>us-east-2a</code> (case sensitive). You can get a list of availability zones by using the <a href="http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html">get regions</a> operation. Be sure to add the <code>include availability zones</code> parameter to your request.'
       instanceSnapshotName:
         $ref: '#/definitions/ResourceName'
         description: The name of the instance snapshot on which you are basing your new instances. Use the get instance snapshots operation to return information about your existing snapshots.
@@ -2923,7 +3606,7 @@ definitions:
         description: 'The names to use for your new Lightsail instances. Separate multiple values using quotation marks and commas, for example: <code>["MyFirstInstance","MySecondInstance"]</code> '
       availabilityZone:
         $ref: '#/definitions/string'
-        description: 'The Availability Zone in which to create your instance. Use the following format: <code>us-east-1a</code> (case sensitive). You can get a list of availability zones by using the <a href="http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html">get regions</a> operation. Be sure to add the <code>include availability zones</code> parameter to your request.'
+        description: 'The Availability Zone in which to create your instance. Use the following format: <code>us-east-2a</code> (case sensitive). You can get a list of availability zones by using the <a href="http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html">get regions</a> operation. Be sure to add the <code>include availability zones</code> parameter to your request.'
       customImageName:
         $ref: '#/definitions/ResourceName'
         description: '<p>(Deprecated) The name for your custom image.</p> <note> <p>In releases prior to June 12, 2017, this parameter was ignored by the API. It is now deprecated.</p> </note>'
@@ -2968,6 +3651,34 @@ definitions:
       operation:
         $ref: '#/definitions/Operation'
         description: An array of key-value pairs containing information about the results of your create key pair request.
+  DeleteDiskRequest:
+    type: object
+    required:
+      - diskName
+    properties:
+      diskName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The unique name of the disk you want to delete (e.g., <code>my-disk</code>).'
+  DeleteDiskResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
+  DeleteDiskSnapshotRequest:
+    type: object
+    required:
+      - diskSnapshotName
+    properties:
+      diskSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the disk snapshot you want to delete (e.g., <code>my-disk-snapshot</code>).'
+  DeleteDiskSnapshotResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
   DeleteDomainEntryRequest:
     type: object
     required:
@@ -3042,6 +3753,20 @@ definitions:
       operation:
         $ref: '#/definitions/Operation'
         description: An array of key-value pairs containing information about the results of your delete key pair request.
+  DetachDiskRequest:
+    type: object
+    required:
+      - diskName
+    properties:
+      diskName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The unique name of the disk you want to detach from your instance (e.g., <code>my-disk</code>).'
+  DetachDiskResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
   DetachStaticIpRequest:
     type: object
     required:
@@ -3061,7 +3786,7 @@ definitions:
     properties:
       name:
         $ref: '#/definitions/ResourceName'
-        description: The name of the disk.
+        description: The unique name of the disk.
       arn:
         $ref: '#/definitions/NonEmptyString'
         description: The Amazon Resource Name (ARN) of the disk.
@@ -3073,16 +3798,13 @@ definitions:
         description: The date when the disk was created.
       location:
         $ref: '#/definitions/ResourceLocation'
-        description: The region and Availability Zone where the disk is located.
+        description: The AWS Region and Availability Zone where the disk is located.
       resourceType:
         $ref: '#/definitions/ResourceType'
-        description: 'The resource type of the disk. '
+        description: 'The Lightsail resource type (e.g., <code>Disk</code>).'
       sizeInGb:
         $ref: '#/definitions/integer'
         description: The size of the disk in GB.
-      gbInUse:
-        $ref: '#/definitions/integer'
-        description: The number of GB in use by the disk.
       isSystemDisk:
         $ref: '#/definitions/boolean'
         description: A Boolean value indicating whether this disk is a system disk (has an operating system loaded on it).
@@ -3092,20 +3814,96 @@ definitions:
       path:
         $ref: '#/definitions/string'
         description: The disk path.
+      state:
+        $ref: '#/definitions/DiskState'
+        description: Describes the status of the disk.
       attachedTo:
-        $ref: '#/definitions/string'
+        $ref: '#/definitions/ResourceName'
         description: The resources to which the disk is attached.
       isAttached:
         $ref: '#/definitions/boolean'
         description: A Boolean value indicating whether the disk is attached.
       attachmentState:
         $ref: '#/definitions/string'
-        description: The attachment state of the disk.
-    description: Describes the hard disk (an SSD).
+        description: '<p>(Deprecated) The attachment state of the disk.</p> <note> <p>In releases prior to November 9, 2017, this parameter returned <code>attached</code> for system disks in the API response. It is now deprecated, but still included in the response. Use <code>isAttached</code> instead.</p> </note>'
+      gbInUse:
+        $ref: '#/definitions/integer'
+        description: '<p>(Deprecated) The number of GB in use by the disk.</p> <note> <p>In releases prior to November 9, 2017, this parameter was not included in the API response. It is now deprecated.</p> </note>'
+    description: Describes a system disk or an block storage disk.
   DiskList:
     type: array
     items:
       $ref: '#/definitions/Disk'
+  DiskMap:
+    type: object
+    properties:
+      originalDiskPath:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The original disk path exposed to the instance (for example, <code>/dev/sdh</code>).'
+      newDiskName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The new disk name (e.g., <code>my-new-disk</code>).'
+    description: Describes a block storage disk mapping.
+  DiskMapList:
+    type: array
+    items:
+      $ref: '#/definitions/DiskMap'
+  DiskSnapshot:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the disk snapshot (e.g., <code>my-disk-snapshot</code>).'
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the disk snapshot.
+      supportCode:
+        $ref: '#/definitions/string'
+        description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The date when the disk snapshot was created.
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The AWS Region and Availability Zone where the disk snapshot was created.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The Lightsail resource type (e.g., <code>DiskSnapshot</code>).'
+      sizeInGb:
+        $ref: '#/definitions/integer'
+        description: The size of the disk in GB.
+      state:
+        $ref: '#/definitions/DiskSnapshotState'
+        description: The status of the disk snapshot operation.
+      progress:
+        $ref: '#/definitions/string'
+        description: The progress of the disk snapshot operation.
+      fromDiskName:
+        $ref: '#/definitions/ResourceName'
+        description: The unique name of the source disk from which you are creating the disk snapshot.
+      fromDiskArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the source disk from which you are creating the disk snapshot.
+    description: Describes a block storage disk snapshot.
+  DiskSnapshotList:
+    type: array
+    items:
+      $ref: '#/definitions/DiskSnapshot'
+  DiskSnapshotState:
+    type: string
+    enum:
+      - pending
+      - completed
+      - error
+      - unknown
+  DiskState:
+    type: string
+    enum:
+      - pending
+      - error
+      - available
+      - in-use
+      - unknown
   Domain:
     type: object
     properties:
@@ -3236,6 +4034,64 @@ definitions:
       nextPageToken:
         $ref: '#/definitions/string'
         description: A token used for advancing to the next page of results from your get active names request.
+  GetDiskRequest:
+    type: object
+    required:
+      - diskName
+    properties:
+      diskName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the disk (e.g., <code>my-disk</code>).'
+  GetDiskResult:
+    type: object
+    properties:
+      disk:
+        $ref: '#/definitions/Disk'
+        description: An object containing information about the disk.
+  GetDiskSnapshotRequest:
+    type: object
+    required:
+      - diskSnapshotName
+    properties:
+      diskSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the disk snapshot (e.g., <code>my-disk-snapshot</code>).'
+  GetDiskSnapshotResult:
+    type: object
+    properties:
+      diskSnapshot:
+        $ref: '#/definitions/DiskSnapshot'
+        description: An object containing information about the disk snapshot.
+  GetDiskSnapshotsRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your GetDiskSnapshots request.
+  GetDiskSnapshotsResult:
+    type: object
+    properties:
+      diskSnapshots:
+        $ref: '#/definitions/DiskSnapshotList'
+        description: An array of objects containing information about all block storage disk snapshots.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your GetDiskSnapshots request.
+  GetDisksRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your GetDisks request.
+  GetDisksResult:
+    type: object
+    properties:
+      disks:
+        $ref: '#/definitions/DiskList'
+        description: An array of objects containing information about all block storage disks.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your GetDisks request.
   GetDomainRequest:
     type: object
     required:
@@ -3495,7 +4351,7 @@ definitions:
     properties:
       includeAvailabilityZones:
         $ref: '#/definitions/boolean'
-        description: 'A Boolean value indicating whether to also include Availability Zones in your get regions request. Availability Zones are indicated with a letter: e.g., <code>us-east-1a</code>.'
+        description: 'A Boolean value indicating whether to also include Availability Zones in your get regions request. Availability Zones are indicated with a letter: e.g., <code>us-east-2a</code>.'
   GetRegionsResult:
     type: object
     properties:
@@ -3554,10 +4410,10 @@ definitions:
     properties:
       name:
         $ref: '#/definitions/ResourceName'
-        description: 'The name the user gave the instance (e.g., <code>Amazon_Linux-1GB-Virginia-1</code>).'
+        description: 'The name the user gave the instance (e.g., <code>Amazon_Linux-1GB-Ohio-1</code>).'
       arn:
         $ref: '#/definitions/NonEmptyString'
-        description: 'The Amazon Resource Name (ARN) of the instance (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE</code>).'
+        description: 'The Amazon Resource Name (ARN) of the instance (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE</code>).'
       supportCode:
         $ref: '#/definitions/string'
         description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
@@ -3745,7 +4601,7 @@ definitions:
         description: The name of the snapshot.
       arn:
         $ref: '#/definitions/NonEmptyString'
-        description: 'The Amazon Resource Name (ARN) of the snapshot (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE</code>).'
+        description: 'The Amazon Resource Name (ARN) of the snapshot (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE</code>).'
       supportCode:
         $ref: '#/definitions/string'
         description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
@@ -3764,12 +4620,15 @@ definitions:
       progress:
         $ref: '#/definitions/string'
         description: The progress of the snapshot.
+      fromAttachedDisks:
+        $ref: '#/definitions/DiskList'
+        description: An array of disk objects containing information about all block storage disks.
       fromInstanceName:
         $ref: '#/definitions/ResourceName'
         description: The instance from which the snapshot was created.
       fromInstanceArn:
         $ref: '#/definitions/NonEmptyString'
-        description: 'The Amazon Resource Name (ARN) of the instance from which the snapshot was created (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE</code>).'
+        description: 'The Amazon Resource Name (ARN) of the instance from which the snapshot was created (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE</code>).'
       fromBlueprintId:
         $ref: '#/definitions/string'
         description: 'The blueprint ID from which you created the snapshot (e.g., <code>os_debian_8_3</code>). A blueprint is a virtual private server (or <i>instance</i>) image used to create instances quickly.'
@@ -3838,7 +4697,7 @@ definitions:
         description: The friendly name of the SSH key pair.
       arn:
         $ref: '#/definitions/NonEmptyString'
-        description: 'The Amazon Resource Name (ARN) of the key pair (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE</code>).'
+        description: 'The Amazon Resource Name (ARN) of the key pair (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE</code>).'
       supportCode:
         $ref: '#/definitions/string'
         description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
@@ -4003,7 +4862,7 @@ definitions:
         description: A Boolean value indicating whether the operation is terminal.
       operationDetails:
         $ref: '#/definitions/string'
-        description: 'Details about the operation (e.g., <code>Debian-1GB-Virginia-1</code>).'
+        description: 'Details about the operation (e.g., <code>Debian-1GB-Ohio-1</code>).'
       operationType:
         $ref: '#/definitions/OperationType'
         description: 'The type of operation. '
@@ -4065,6 +4924,13 @@ definitions:
       - CreateInstanceSnapshot
       - DeleteInstanceSnapshot
       - CreateInstancesFromSnapshot
+      - CreateDisk
+      - DeleteDisk
+      - AttachDisk
+      - DetachDisk
+      - CreateDiskSnapshot
+      - DeleteDiskSnapshot
+      - CreateDiskFromSnapshot
   PasswordData:
     type: object
     properties:
@@ -4158,13 +5024,13 @@ definitions:
         description: 'The description of the AWS Region (e.g., <code>This region is recommended to serve users in the eastern United States and eastern Canada</code>).'
       displayName:
         $ref: '#/definitions/string'
-        description: 'The display name (e.g., <code>Virginia</code>).'
+        description: 'The display name (e.g., <code>Ohio</code>).'
       name:
         $ref: '#/definitions/RegionName'
-        description: 'The region name (e.g., <code>us-east-1</code>).'
+        description: 'The region name (e.g., <code>us-east-2</code>).'
       availabilityZones:
         $ref: '#/definitions/AvailabilityZoneList'
-        description: The Availability Zones. Follows the format <code>us-east-1a</code> (case-sensitive).
+        description: The Availability Zones. Follows the format <code>us-east-2a</code> (case-sensitive).
     description: Describes the AWS Region.
   RegionList:
     type: array
@@ -4203,7 +5069,7 @@ definitions:
     properties:
       availabilityZone:
         $ref: '#/definitions/string'
-        description: The Availability Zone. Follows the format <code>us-east-1a</code> (case-sensitive).
+        description: The Availability Zone. Follows the format <code>us-east-2a</code> (case-sensitive).
       regionName:
         $ref: '#/definitions/RegionName'
         description: The AWS Region name.
@@ -4220,6 +5086,8 @@ definitions:
       - InstanceSnapshot
       - Domain
       - PeeredVpc
+      - Disk
+      - DiskSnapshot
   ServiceException:
     type: object
     properties:
@@ -4251,10 +5119,10 @@ definitions:
     properties:
       name:
         $ref: '#/definitions/ResourceName'
-        description: 'The name of the static IP (e.g., <code>StaticIP-Virginia-EXAMPLE</code>).'
+        description: 'The name of the static IP (e.g., <code>StaticIP-Ohio-EXAMPLE</code>).'
       arn:
         $ref: '#/definitions/NonEmptyString'
-        description: 'The Amazon Resource Name (ARN) of the static IP (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE</code>).'
+        description: 'The Amazon Resource Name (ARN) of the static IP (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE</code>).'
       supportCode:
         $ref: '#/definitions/string'
         description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
@@ -4272,7 +5140,7 @@ definitions:
         description: The static IP address.
       attachedTo:
         $ref: '#/definitions/ResourceName'
-        description: 'The instance where the static IP is attached (e.g., <code>Amazon_Linux-1GB-Virginia-1</code>).'
+        description: 'The instance where the static IP is attached (e.g., <code>Amazon_Linux-1GB-Ohio-1</code>).'
       isAttached:
         $ref: '#/definitions/boolean'
         description: A Boolean value indicating whether the static IP is attached.
@@ -4289,6 +5157,9 @@ definitions:
       instanceName:
         $ref: '#/definitions/ResourceName'
         description: The name of the instance (a virtual private server) to stop.
+      force:
+        $ref: '#/definitions/boolean'
+        description: '<p>When set to <code>True</code>, forces a Lightsail instance that is stuck in a <code>stopping</code> state to stop.</p> <important> <p>Only use the <code>force</code> parameter if your instance is stuck in the <code>stopping</code> state. In any other state, your instance should stop normally without adding this parameter to your API request.</p> </important>'
   StopInstanceResult:
     type: object
     properties:

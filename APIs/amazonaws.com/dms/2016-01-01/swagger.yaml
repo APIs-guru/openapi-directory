@@ -1004,6 +1004,45 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeReplicationTaskAssessmentResults':
+    post:
+      operationId: DescribeReplicationTaskAssessmentResults
+      description: Returns the task assessment results from Amazon S3. This action always returns the latest results.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeReplicationTaskAssessmentResultsResponse'
+        '480':
+          description: ResourceNotFoundFault
+          schema:
+            $ref: '#/definitions/ResourceNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeReplicationTaskAssessmentResultsMessage'
+        - name: MaxRecords
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: Marker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeReplicationTasks':
     post:
       operationId: DescribeReplicationTasks
@@ -1552,6 +1591,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StartReplicationTaskAssessment':
+    post:
+      operationId: StartReplicationTaskAssessment
+      description: ' Starts the replication task assessment for unsupported data types in the source database. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartReplicationTaskAssessmentResponse'
+        '480':
+          description: InvalidResourceStateFault
+          schema:
+            $ref: '#/definitions/InvalidResourceStateFault'
+        '481':
+          description: ResourceNotFoundFault
+          schema:
+            $ref: '#/definitions/ResourceNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartReplicationTaskAssessmentMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#StopReplicationTask':
     post:
       operationId: StopReplicationTask
@@ -1825,7 +1897,7 @@ definitions:
         description: Tags to be added to the endpoint.
       CertificateArn:
         $ref: '#/definitions/String'
-        description: The Amazon Resource Number (ARN) for the certificate.
+        description: The Amazon Resource Name (ARN) for the certificate.
       SslMode:
         $ref: '#/definitions/DmsSslModeValue'
         description: '<p>The SSL mode to use for the SSL connection.</p> <p>SSL mode can be one of four values: none, require, verify-ca, verify-full. </p> <p>The default value is none.</p>'
@@ -2624,6 +2696,32 @@ definitions:
       ReplicationSubnetGroups:
         $ref: '#/definitions/ReplicationSubnetGroups'
         description: A description of the replication subnet groups.
+    description: <p/>
+  DescribeReplicationTaskAssessmentResultsMessage:
+    type: object
+    properties:
+      ReplicationTaskArn:
+        $ref: '#/definitions/String'
+        description: '- The Amazon Resource Name (ARN) string that uniquely identifies the task. When this input parameter is specified the API will return only one result and ignore the values of the max-records and marker parameters. '
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+      Marker:
+        $ref: '#/definitions/String'
+        description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+    description: <p/>
+  DescribeReplicationTaskAssessmentResultsResponse:
+    type: object
+    properties:
+      Marker:
+        $ref: '#/definitions/String'
+        description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+      BucketName:
+        $ref: '#/definitions/String'
+        description: '- The Amazon S3 bucket where the task assessment report is located. '
+      ReplicationTaskAssessmentResults:
+        $ref: '#/definitions/ReplicationTaskAssessmentResultList'
+        description: ' The task assessment report. '
     description: <p/>
   DescribeReplicationTasksMessage:
     type: object
@@ -3592,6 +3690,35 @@ definitions:
         $ref: '#/definitions/ReplicationTaskStats'
         description: 'The statistics for the task, including elapsed time, tables loaded, and table errors.'
     description: <p/>
+  ReplicationTaskAssessmentResult:
+    type: object
+    properties:
+      ReplicationTaskIdentifier:
+        $ref: '#/definitions/String'
+        description: ' The replication task identifier of the task on which the task assessment was run. '
+      ReplicationTaskArn:
+        $ref: '#/definitions/String'
+        description: 'The Amazon Resource Name (ARN) of the replication task. '
+      ReplicationTaskLastAssessmentDate:
+        $ref: '#/definitions/TStamp'
+        description: 'The date the task assessment was completed. '
+      AssessmentStatus:
+        $ref: '#/definitions/String'
+        description: ' The status of the task assessment. '
+      AssessmentResultsFile:
+        $ref: '#/definitions/String'
+        description: ' The file containing the results of the task assessment. '
+      AssessmentResults:
+        $ref: '#/definitions/String'
+        description: ' The task assessment results in JSON format. '
+      S3ObjectUrl:
+        $ref: '#/definitions/String'
+        description: ' The URL of the S3 object containing the task assessment results. '
+    description: ' The task assessment report in JSON format. '
+  ReplicationTaskAssessmentResultList:
+    type: array
+    items:
+      $ref: '#/definitions/ReplicationTaskAssessmentResult'
   ReplicationTaskList:
     type: array
     items:
@@ -3693,6 +3820,22 @@ definitions:
     type: string
     enum:
       - replication-instance
+  StartReplicationTaskAssessmentMessage:
+    type: object
+    required:
+      - ReplicationTaskArn
+    properties:
+      ReplicationTaskArn:
+        $ref: '#/definitions/String'
+        description: ' The Amazon Resource Name (ARN) of the replication task. '
+    description: <p/>
+  StartReplicationTaskAssessmentResponse:
+    type: object
+    properties:
+      ReplicationTask:
+        $ref: '#/definitions/ReplicationTask'
+        description: ' The assessed replication task. '
+    description: <p/>
   StartReplicationTaskMessage:
     type: object
     required:
@@ -3705,7 +3848,7 @@ definitions:
     properties:
       ReplicationTaskArn:
         $ref: '#/definitions/String'
-        description: The Amazon Resource Number (ARN) of the replication task to be started.
+        description: The Amazon Resource Name (ARN) of the replication task to be started.
       StartReplicationTaskType:
         $ref: '#/definitions/StartReplicationTaskTypeValue'
         description: The type of replication task.
@@ -3747,7 +3890,7 @@ definitions:
     properties:
       ReplicationTaskArn:
         $ref: '#/definitions/String'
-        description: The Amazon Resource Number(ARN) of the replication task to be stopped.
+        description: The Amazon Resource Name(ARN) of the replication task to be stopped.
     description: <p/>
   StopReplicationTaskResponse:
     type: object
@@ -3865,6 +4008,18 @@ definitions:
       TableState:
         $ref: '#/definitions/String'
         description: '<p>The state of the tables described.</p> <p>Valid states: Table does not exist | Before load | Full load | Table completed | Table cancelled | Table error | Table all | Table updates | Table is being reloaded</p>'
+      ValidationPendingRecords:
+        $ref: '#/definitions/Long'
+        description: The number of records that have yet to be validated.
+      ValidationFailedRecords:
+        $ref: '#/definitions/Long'
+        description: The number of records that failed validation.
+      ValidationSuspendedRecords:
+        $ref: '#/definitions/Long'
+        description: The number of records that could not be validated.
+      ValidationState:
+        $ref: '#/definitions/String'
+        description: '<p>The validation state of the table.</p> <p>The parameter can have the following values</p> <ul> <li> <p>Not enabled—Validation is not enabled for the table in the migration task.</p> </li> <li> <p>Pending records—Some records in the table are waiting for validation.</p> </li> <li> <p>Mismatched records—Some records in the table do not match between the source and target.</p> </li> <li> <p>Suspended records—Some records in the table could not be validated.</p> </li> <li> <p>No primary key—The table could not be validated because it had no primary key.</p> </li> <li> <p>Table error—The table was not validated because it was in an error state and some data was not migrated.</p> </li> <li> <p>Validated—All rows in the table were validated. If the table is updated, the status can change from Validated.</p> </li> <li> <p>Error—The table could not be validated because of an unexpected error.</p> </li> </ul>'
     description: <p/>
   TableStatisticsList:
     type: array

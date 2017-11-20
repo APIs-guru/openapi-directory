@@ -804,6 +804,25 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetAccountSendingEnabled':
+    post:
+      operationId: GetAccountSendingEnabled
+      description: <p>Returns the email sending status of the Amazon SES account.</p> <p>You can execute this operation no more than once per second.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAccountSendingEnabledResponse'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#GetIdentityDkimAttributes':
     post:
       operationId: GetIdentityDkimAttributes
@@ -1300,6 +1319,14 @@ paths:
           description: TemplateDoesNotExistException
           schema:
             $ref: '#/definitions/TemplateDoesNotExistException'
+        '484':
+          description: ConfigurationSetSendingPausedException
+          schema:
+            $ref: '#/definitions/ConfigurationSetSendingPausedException'
+        '485':
+          description: AccountSendingPausedException
+          schema:
+            $ref: '#/definitions/AccountSendingPausedException'
       parameters:
         - name: body
           in: body
@@ -1337,6 +1364,14 @@ paths:
           description: ConfigurationSetDoesNotExistException
           schema:
             $ref: '#/definitions/ConfigurationSetDoesNotExistException'
+        '483':
+          description: ConfigurationSetSendingPausedException
+          schema:
+            $ref: '#/definitions/ConfigurationSetSendingPausedException'
+        '484':
+          description: AccountSendingPausedException
+          schema:
+            $ref: '#/definitions/AccountSendingPausedException'
       parameters:
         - name: body
           in: body
@@ -1374,6 +1409,14 @@ paths:
           description: ConfigurationSetDoesNotExistException
           schema:
             $ref: '#/definitions/ConfigurationSetDoesNotExistException'
+        '483':
+          description: ConfigurationSetSendingPausedException
+          schema:
+            $ref: '#/definitions/ConfigurationSetSendingPausedException'
+        '484':
+          description: AccountSendingPausedException
+          schema:
+            $ref: '#/definitions/AccountSendingPausedException'
       parameters:
         - name: body
           in: body
@@ -1415,6 +1458,14 @@ paths:
           description: TemplateDoesNotExistException
           schema:
             $ref: '#/definitions/TemplateDoesNotExistException'
+        '484':
+          description: ConfigurationSetSendingPausedException
+          schema:
+            $ref: '#/definitions/ConfigurationSetSendingPausedException'
+        '485':
+          description: AccountSendingPausedException
+          schema:
+            $ref: '#/definitions/AccountSendingPausedException'
       parameters:
         - name: body
           in: body
@@ -1655,6 +1706,29 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateAccountSendingEnabled':
+    post:
+      operationId: UpdateAccountSendingEnabled
+      description: <p>Enables or disables email sending across your entire Amazon SES account. You can use this operation in conjunction with Amazon CloudWatch alarms to temporarily pause email sending across your Amazon SES account when reputation metrics (such as your bounce on complaint rate) reach certain thresholds.</p> <p>You can execute this operation no more than once per second.</p>
+      responses:
+        '200':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateAccountSendingEnabledRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#UpdateConfigurationSetEventDestination':
     post:
       operationId: UpdateConfigurationSetEventDestination
@@ -1690,6 +1764,60 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateConfigurationSetEventDestinationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateConfigurationSetReputationMetricsEnabled':
+    post:
+      operationId: UpdateConfigurationSetReputationMetricsEnabled
+      description: '<p>Enables or disables the publishing of reputation metrics for emails sent using a specific configuration set. Reputation metrics include bounce and complaint rates. These metrics are published to Amazon CloudWatch. By using Amazon CloudWatch, you can create alarms when bounce or complaint rates exceed a certain threshold.</p> <p>You can execute this operation no more than once per second.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ConfigurationSetDoesNotExistException
+          schema:
+            $ref: '#/definitions/ConfigurationSetDoesNotExistException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateConfigurationSetReputationMetricsEnabledRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateConfigurationSetSendingEnabled':
+    post:
+      operationId: UpdateConfigurationSetSendingEnabled
+      description: <p>Enables or disables email sending for messages sent using a specific configuration set. You can use this operation in conjunction with Amazon CloudWatch alarms to temporarily pause email sending for a configuration set when the reputation metrics for that configuration set (such as your bounce on complaint rate) reach certain thresholds.</p> <p>You can execute this operation no more than once per second.</p>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ConfigurationSetDoesNotExistException
+          schema:
+            $ref: '#/definitions/ConfigurationSetDoesNotExistException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateConfigurationSetSendingEnabledRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1918,6 +2046,10 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  AccountSendingPausedException:
+    type: object
+    properties: {}
+    description: <p>Indicates that email sending is disabled for your entire Amazon SES account.</p> <p>You can enable or disable email sending for your Amazon SES account using <a>UpdateAccountSendingEnabled</a>.</p>
   AddHeaderAction:
     type: object
     required:
@@ -2047,7 +2179,7 @@ definitions:
     properties:
       Status:
         $ref: '#/definitions/BulkEmailStatus'
-        description: '<p>The status of a message sent using the <code>SendBulkTemplatedEmail</code> operation.</p> <p>Possible values for this parameter include:</p> <ul> <li> <p> <code>Success</code>: Amazon SES accepted the message, and will attempt to deliver it to the recipients.</p> </li> <li> <p> <code>MessageRejected</code>: The message was rejected because it contained a virus.</p> </li> <li> <p> <code>MailFromDomainNotVerified</code>: The sender''s email address or domain was not verified.</p> </li> <li> <p> <code>ConfigurationSetDoesNotExist</code>: The configuration set you specified does not exist.</p> </li> <li> <p> <code>TemplateDoesNotExist</code>: The template you specified does not exist.</p> </li> <li> <p> <code>AccountSuspended</code>: Your account has been shut down because of issues related to your email sending practices.</p> </li> <li> <p> <code>AccountThrottled</code>: The number of emails you can send has been reduced because your account has exceeded its allocated sending limit.</p> </li> <li> <p> <code>AccountDailyQuotaExceeded</code>: You have reached or exceeded the maximum number of emails you can send from your account in a 24-hour period.</p> </li> <li> <p> <code>InvalidSendingPoolName</code>: The configuration set you specified refers to an IP pool that does not exist.</p> </li> <li> <p> <code>InvalidParameterValue</code>: One or more of the parameters you specified when calling this operation was invalid. See the error message for additional information.</p> </li> <li> <p> <code>TransientFailure</code>: Amazon SES was unable to process your request because of a temporary issue.</p> </li> <li> <p> <code>Failed</code>: Amazon SES was unable to process your request. See the error message for additional information.</p> </li> </ul>'
+        description: '<p>The status of a message sent using the <code>SendBulkTemplatedEmail</code> operation.</p> <p>Possible values for this parameter include:</p> <ul> <li> <p> <code>Success</code>: Amazon SES accepted the message, and will attempt to deliver it to the recipients.</p> </li> <li> <p> <code>MessageRejected</code>: The message was rejected because it contained a virus.</p> </li> <li> <p> <code>MailFromDomainNotVerified</code>: The sender''s email address or domain was not verified.</p> </li> <li> <p> <code>ConfigurationSetDoesNotExist</code>: The configuration set you specified does not exist.</p> </li> <li> <p> <code>TemplateDoesNotExist</code>: The template you specified does not exist.</p> </li> <li> <p> <code>AccountSuspended</code>: Your account has been shut down because of issues related to your email sending practices.</p> </li> <li> <p> <code>AccountThrottled</code>: The number of emails you can send has been reduced because your account has exceeded its allocated sending limit.</p> </li> <li> <p> <code>AccountDailyQuotaExceeded</code>: You have reached or exceeded the maximum number of emails you can send from your account in a 24-hour period.</p> </li> <li> <p> <code>InvalidSendingPoolName</code>: The configuration set you specified refers to an IP pool that does not exist.</p> </li> <li> <p> <code>AccountSendingPaused</code>: Email sending for the Amazon SES account was disabled using the <a>UpdateAccountSendingEnabled</a> operation.</p> </li> <li> <p> <code>ConfigurationSetSendingPaused</code>: Email sending for this configuration set was disabled using the <a>UpdateConfigurationSetSendingEnabled</a> operation.</p> </li> <li> <p> <code>InvalidParameterValue</code>: One or more of the parameters you specified when calling this operation was invalid. See the error message for additional information.</p> </li> <li> <p> <code>TransientFailure</code>: Amazon SES was unable to process your request because of a temporary issue.</p> </li> <li> <p> <code>Failed</code>: Amazon SES was unable to process your request. See the error message for additional information.</p> </li> </ul>'
       Error:
         $ref: '#/definitions/Error'
         description: A description of an error that prevented a message being sent using the <code>SendBulkTemplatedEmail</code> operation.
@@ -2071,6 +2203,8 @@ definitions:
       - AccountThrottled
       - AccountDailyQuotaExceeded
       - InvalidSendingPoolName
+      - AccountSendingPaused
+      - ConfigurationSetSendingPaused
       - InvalidParameterValue
       - TransientFailure
       - Failed
@@ -2156,6 +2290,7 @@ definitions:
     enum:
       - eventDestinations
       - trackingOptions
+      - reputationOptions
   ConfigurationSetAttributeList:
     type: array
     items:
@@ -2169,6 +2304,13 @@ definitions:
     description: Indicates that the configuration set does not exist.
   ConfigurationSetName:
     type: string
+  ConfigurationSetSendingPausedException:
+    type: object
+    properties:
+      ConfigurationSetName:
+        $ref: '#/definitions/ConfigurationSetName'
+        description: The name of the configuration set for which email sending is disabled.
+    description: <p>Indicates that email sending is disabled for the configuration set.</p> <p>You can enable or disable email sending for a configuration set using <a>UpdateConfigurationSetSendingEnabled</a>.</p>
   ConfigurationSets:
     type: array
     items:
@@ -2525,6 +2667,9 @@ definitions:
       TrackingOptions:
         $ref: '#/definitions/TrackingOptions'
         description: The name of the custom open and click tracking domain associated with the configuration set.
+      ReputationOptions:
+        $ref: '#/definitions/ReputationOptions'
+        description: 'An object that represents the reputation settings for the configuration set. '
     description: 'Represents the details of a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.'
   DescribeReceiptRuleRequest:
     type: object
@@ -2730,6 +2875,15 @@ definitions:
     type: string
   ExtensionFieldValue:
     type: string
+  GetAccountSendingEnabledResponse:
+    type: object
+    example:
+      Enabled: true
+    properties:
+      Enabled:
+        $ref: '#/definitions/Enabled'
+        description: Describes whether email sending is enabled or disabled for your Amazon SES account.
+    description: Represents a request to return the email sending status for your Amazon SES account.
   GetIdentityDkimAttributesRequest:
     type: object
     required:
@@ -3132,6 +3286,9 @@ definitions:
         description: '<p>The invocation type of the AWS Lambda function. An invocation type of <code>RequestResponse</code> means that the execution of the function will immediately result in a response, and a value of <code>Event</code> means that the function will be invoked asynchronously. The default value is <code>Event</code>. For information about AWS Lambda invocation types, see the <a href="http://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html">AWS Lambda Developer Guide</a>.</p> <important> <p>There is a 30-second timeout on <code>RequestResponse</code> invocations. You should use <code>Event</code> invocation in most cases. Use <code>RequestResponse</code> only when you want to make a mail flow decision, such as whether to stop the receipt rule or the receipt rule set.</p> </important>'
     description: '<p>When included in a receipt rule, this action calls an AWS Lambda function and, optionally, publishes a notification to Amazon Simple Notification Service (Amazon SNS).</p> <p>To enable Amazon SES to call your AWS Lambda function or to publish to an Amazon SNS topic of another account, Amazon SES must have permission to access those resources. For information about giving permissions, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html">Amazon SES Developer Guide</a>.</p> <p>For information about using AWS Lambda actions in receipt rules, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-lambda.html">Amazon SES Developer Guide</a>.</p>'
   LastAttemptDate:
+    type: string
+    format: date-time
+  LastFreshStart:
     type: string
     format: date-time
   LimitExceededException:
@@ -3623,6 +3780,19 @@ definitions:
     description: An empty element returned on a successful request.
   ReportingMta:
     type: string
+  ReputationOptions:
+    type: object
+    properties:
+      SendingEnabled:
+        $ref: '#/definitions/Enabled'
+        description: 'Describes whether email sending is enabled or disabled for the configuration set. If the value is <code>true</code>, then Amazon SES will send emails that use the configuration set. If the value is <code>false</code>, Amazon SES will not send emails that use the configuration set. The default value is <code>true</code>. You can change this setting using <a>UpdateConfigurationSetSendingEnabled</a>.'
+      ReputationMetricsEnabled:
+        $ref: '#/definitions/Enabled'
+        description: '<p>Describes whether or not Amazon SES publishes reputation metrics for the configuration set, such as bounce and complaint rates, to Amazon CloudWatch.</p> <p>If the value is <code>true</code>, reputation metrics are published. If the value is <code>false</code>, reputation metrics are not published. The default value is <code>false</code>.</p>'
+      LastFreshStart:
+        $ref: '#/definitions/LastFreshStart'
+        description: '<p>The date and time at which the reputation metrics for the configuration set were last reset. Resetting these metrics is known as a <i>fresh start</i>.</p> <p>When you disable email sending for a configuration set using <a>UpdateConfigurationSetSendingEnabled</a> and later re-enable it, the reputation metrics for the configuration set (but not for the entire Amazon SES account) are reset.</p> <p>If email sending for the configuration set has never been disabled and later re-enabled, the value of this attribute is <code>null</code>.</p>'
+    description: Contains information about the reputation settings for a configuration set.
   RuleDoesNotExistException:
     type: object
     properties:
@@ -4223,6 +4393,15 @@ definitions:
         $ref: '#/definitions/ConfigurationSetName'
         description: Indicates that a TrackingOptions object does not exist in the specified configuration set.
     description: Indicates that the TrackingOptions object you specified does not exist.
+  UpdateAccountSendingEnabledRequest:
+    type: object
+    example:
+      Enabled: true
+    properties:
+      Enabled:
+        $ref: '#/definitions/Enabled'
+        description: Describes whether email sending is enabled or disabled for your Amazon SES account.
+    description: Represents a request to enable or disable the email sending capabilities for your entire Amazon SES account.
   UpdateConfigurationSetEventDestinationRequest:
     type: object
     required:
@@ -4240,6 +4419,38 @@ definitions:
     type: object
     properties: {}
     description: An empty element returned on a successful request.
+  UpdateConfigurationSetReputationMetricsEnabledRequest:
+    type: object
+    required:
+      - ConfigurationSetName
+      - Enabled
+    example:
+      ConfigurationSetName: foo
+      Enabled: true
+    properties:
+      ConfigurationSetName:
+        $ref: '#/definitions/ConfigurationSetName'
+        description: The name of the configuration set that you want to update.
+      Enabled:
+        $ref: '#/definitions/Enabled'
+        description: 'Describes whether or not Amazon SES will publish reputation metrics for the configuration set, such as bounce and complaint rates, to Amazon CloudWatch.'
+    description: Represents a request to modify the reputation metric publishing settings for a configuration set.
+  UpdateConfigurationSetSendingEnabledRequest:
+    type: object
+    required:
+      - ConfigurationSetName
+      - Enabled
+    example:
+      ConfigurationSetName: foo
+      Enabled: true
+    properties:
+      ConfigurationSetName:
+        $ref: '#/definitions/ConfigurationSetName'
+        description: The name of the configuration set that you want to update.
+      Enabled:
+        $ref: '#/definitions/Enabled'
+        description: 'Describes whether email sending is enabled or disabled for the configuration set. '
+    description: Represents a request to enable or disable the email sending capabilities for a specific configuration set.
   UpdateConfigurationSetTrackingOptionsRequest:
     type: object
     required:
