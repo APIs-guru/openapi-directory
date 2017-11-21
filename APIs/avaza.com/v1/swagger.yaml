@@ -1,0 +1,2580 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.avaza.com
+info:
+  contact:
+    email: support@avaza.com
+    name: Avaza Team
+    url: 'http://support.avaza.com'
+    x-twitter: AvazaHq
+  description: 'For testing and experimenting with Avaza''s API features. <p></p><h3>API Security</h3><p>Authentication options include OAuth2 Implicit and Authorization flows.<br/>To use the Api from your own app you will need us to issue you an App Client ID and Secret. You can get in touch to request one.</p> <p>OAuth2 Authorization endpoint: https://any.avaza.com/oauth2/authorize.  <br/>OAuth2 Token endpoint: https://any.avaza.com/oauth2/token<br/>Api Request Base URL: https://api.avaza.com/ </p><br/>Blogpost about authenticating with Avaza''s API:  https://www.avaza.com/avaza-api-oauth2-authentication/ </p><p></p>Blogpost on using Avaza''s webhooks: https://www.avaza.com/avaza-api-webhook-notifications/</p><p>We currently issue Access Tokens that last 1 hour, and Refresh tokens that last 60 days</p>'
+  title: Avaza
+  version: v1
+  x-apisguru-categories:
+    - collaboration
+  x-logo:
+    url: 'https://twitter.com/AvazaHq/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://api.avaza.com/swagger/docs/v1'
+      version: '2.0'
+  x-providerName: avaza.com
+produces:
+  - application/json
+  - text/json
+  - application/xml
+  - text/xml
+securityDefinitions:
+  oauth2:
+    authorizationUrl: 'https://any.avaza.com/oauth2/authorize'
+    description: OAuth2 Implicit Grant
+    flow: implicit
+    scopes:
+      read: Read access to protected resources
+      write: Write access to protected resources
+    type: oauth2
+paths:
+  /api/Account:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Account_Get
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AccountDetails'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Account Details
+      tags:
+        - Account
+  /api/Company:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Company_Get
+      parameters:
+        - format: date-time
+          in: query
+          name: UpdatedAfter
+          required: false
+          type: string
+        - description: Number of results per page
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: 1 based page number to retrieve
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+        - in: query
+          name: Sort
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CompanyList'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets list of Companies
+      tags:
+        - Company
+  '/api/Company/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Company_GetByID
+      parameters:
+        - description: Company ID Number
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Company'
+        '400':
+          description: Not Found
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets Company by Company ID
+      tags:
+        - Company
+  /api/Contact:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Contact_Get
+      parameters:
+        - format: date-time
+          in: query
+          name: UpdatedAfter
+          required: false
+          type: string
+        - description: Number of items per page
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Page to display. Starts from 1.
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+        - in: query
+          name: Sort
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ContactList'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets list of Contacts
+      tags:
+        - Contact
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: Contact_Post
+      parameters:
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/NewCompanyContact'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CompanyContact'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - write
+      summary: Create a Contact
+      tags:
+        - Contact
+  '/api/Contact/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Contact_GetByID
+      parameters:
+        - description: Contact ID number
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CompanyContact'
+        '400':
+          description: Not Found
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets Contact by Contact ID
+      tags:
+        - Contact
+  /api/CreditNote:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: CreditNote_Get
+      parameters:
+        - format: date-time
+          in: query
+          name: UpdatedAfter
+          required: false
+          type: string
+        - description: Number of items per page
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Page to display. Starts from 1.
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreditNoteList'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets list of CreditNotes
+      tags:
+        - CreditNote
+  '/api/CreditNote/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: CreditNote_GetByID
+      parameters:
+        - description: Credit Note ID Number
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreditNote'
+        '400':
+          description: Not Found
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets Invoice by CreditNote ID
+      tags:
+        - CreditNote
+  /api/Currency:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Currency_Get
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CurrencyList'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets list of Currencies
+      tags:
+        - Currency
+  /api/Expense:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Expense_Get
+      parameters:
+        - format: date-time
+          in: query
+          name: UpdatedAfter
+          required: false
+          type: string
+        - format: date-time
+          in: query
+          name: ExpenseDateFrom
+          required: false
+          type: string
+        - format: date-time
+          in: query
+          name: ExpenseDateTo
+          required: false
+          type: string
+        - in: query
+          name: UserEmail
+          required: false
+          type: string
+        - in: query
+          name: CategoryName
+          required: false
+          type: string
+        - format: int32
+          in: query
+          name: CustomerID
+          required: false
+          type: integer
+        - format: int32
+          in: query
+          name: ProjectID
+          required: false
+          type: integer
+        - in: query
+          name: isChargeable
+          required: false
+          type: boolean
+        - in: query
+          name: isInvoiced
+          required: false
+          type: boolean
+        - description: Number of items per page
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Page to display. Starts from 1.
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+        - in: query
+          name: Sort
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ExpenseList'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets list of Expenses
+      tags:
+        - Expense
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: Create an Expense
+      operationId: Expense_Post
+      parameters:
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/NewExpense'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ExpenseDetails'
+      security:
+        - oauth2:
+            - write
+      summary: Create an Expense
+      tags:
+        - Expense
+  '/api/Expense/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Expense_GetByID
+      parameters:
+        - description: Expense ID number
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ExpenseDetails'
+        '400':
+          description: Not Found
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets an Expense Entry by Expense ID
+      tags:
+        - Expense
+  /api/Inventory:
+    get:
+      consumes: []
+      deprecated: false
+      description: ''
+      operationId: Inventory_Get
+      parameters:
+        - format: date-time
+          in: query
+          name: UpdatedAfter
+          required: false
+          type: string
+        - description: Number of items per page
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Page to display. Starts from 1.
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/InventoryList'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets list of Inventory
+      tags:
+        - Inventory
+  '/api/Inventory/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Inventory_GetByID
+      parameters:
+        - description: InventoryItem ID number
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '400':
+          description: Not Found
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets InventoryItem by InventoryItem ID
+      tags:
+        - Inventory
+  /api/Invoice:
+    get:
+      consumes: []
+      deprecated: false
+      description: 'TransactionStatusCode values are: "Draft", "Sent", "Late", "Paid", "Partial", "Void"'
+      operationId: Invoice_Get
+      parameters:
+        - format: date-time
+          in: query
+          name: UpdatedAfter
+          required: false
+          type: string
+        - description: Number of items per page
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Page to display. Starts from 1.
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+        - in: query
+          name: Sort
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/InvoiceList'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets list of Invoices
+      tags:
+        - Invoice
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: Invoice_Post
+      parameters:
+        - description: ''
+          in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/NewInvoice'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Invoice'
+      security:
+        - oauth2:
+            - write
+      summary: Create a new draft invoice
+      tags:
+        - Invoice
+  '/api/Invoice/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Invoice_GetByID
+      parameters:
+        - description: Invoice Transaction ID number
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '400':
+          description: Not Found
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets Invoice by Invoice ID
+      tags:
+        - Invoice
+  /api/Payment:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Payment_Get
+      parameters:
+        - format: date-time
+          in: query
+          name: UpdatedAfter
+          required: false
+          type: string
+        - description: Number of items per page
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Page to display. Starts from 1.
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PaymentList'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets list of Payments
+      tags:
+        - Payment
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: Payment_Post
+      parameters:
+        - description: ''
+          in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/NewPayment'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Payment'
+      security:
+        - oauth2:
+            - write
+      summary: Create new Payment and optionally assign payment allocations to Invoices
+      tags:
+        - Payment
+  '/api/Payment/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Payment_GetByID
+      parameters:
+        - description: Invoice Transaction ID Number
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Payment'
+        '400':
+          description: Not Found
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets Payment by Payment Transaction ID
+      tags:
+        - Payment
+  /api/Project:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Project_Get
+      parameters:
+        - format: date-time
+          in: query
+          name: UpdatedAfter
+          required: false
+          type: string
+        - description: Number of items per page
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Page to display. Starts from 1.
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+        - in: query
+          name: Sort
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ProjectList'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets list of Projects
+      tags:
+        - Project
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: Project_Post
+      parameters:
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/NewProjectModel'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ProjectDetails'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - write
+      summary: Create a Project
+      tags:
+        - Project
+  '/api/Project/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Project_GetByID
+      parameters:
+        - description: Project ID number
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ProjectDetails'
+        '400':
+          description: Not Found
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets Project by Project ID
+      tags:
+        - Project
+  /api/ProjectTimesheetCategory:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: ProjectTimesheetCategory_Get
+      parameters:
+        - description: Get categories filtered by ProjectID
+          format: int32
+          in: query
+          name: ProjectID
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ProjectTimesheetCategoryList'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets list of Project Timesheet Categories
+      tags:
+        - ProjectTimesheetCategory
+  /api/Section:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Section_Get
+      parameters:
+        - description: Get sections for Project with ProjectID
+          format: int32
+          in: query
+          name: ProjectID
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SectionList'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets list of Sections
+      tags:
+        - Section
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: Section_Post
+      parameters:
+        - description: ''
+          in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/NewSection'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SectionDetails'
+      security:
+        - oauth2:
+            - write
+      summary: Create a Section
+      tags:
+        - Section
+  /api/Task:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Task_Get
+      parameters:
+        - format: date-time
+          in: query
+          name: UpdatedAfter
+          required: false
+          type: string
+        - description: Number of items per page
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Page to display. Starts from 1.
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+        - in: query
+          name: Sort
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TaskList'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets list of Tasks
+      tags:
+        - Task
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: Task_Post
+      parameters:
+        - description: ''
+          in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/NewTask'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TaskDetails'
+      security:
+        - oauth2:
+            - write
+      summary: Create a Task
+      tags:
+        - Task
+  '/api/Task/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Task_GetByID
+      parameters:
+        - description: Task ID number
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TaskDetails'
+        '400':
+          description: Not Found
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets Task by Task ID
+      tags:
+        - Task
+  /api/Tax:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Tax_Get
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TaxList'
+      security:
+        - oauth2:
+            - read
+      tags:
+        - Tax
+  /api/Timesheet:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Timesheet_Get
+      parameters:
+        - format: date-time
+          in: query
+          name: UpdatedAfter
+          required: false
+          type: string
+        - format: date-time
+          in: query
+          name: EntryDateFrom
+          required: false
+          type: string
+        - format: date-time
+          in: query
+          name: EntryDateTo
+          required: false
+          type: string
+        - in: query
+          name: UserEmail
+          required: false
+          type: string
+        - in: query
+          name: CategoryName
+          required: false
+          type: string
+        - format: int32
+          in: query
+          name: ProjectID
+          required: false
+          type: integer
+        - in: query
+          name: isBillable
+          required: false
+          type: boolean
+        - in: query
+          name: isInvoiced
+          required: false
+          type: boolean
+        - description: Number of items per page
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Page to display. Starts from 1.
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+        - in: query
+          name: Sort
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TimesheetList'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets list of Timsheets
+      tags:
+        - Timesheet
+  '/api/Timesheet/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Timesheet_GetByID
+      parameters:
+        - description: Timesheet ID number
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TimesheetDetails'
+        '400':
+          description: Not Found
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Gets a Timesheet Entry by Timesheet ID
+      tags:
+        - Timesheet
+    put:
+      consumes: []
+      deprecated: false
+      description: You can Mark a Timesheet as Invoiced/Uninvoiced. Useful if invoicing in an external system to lock timesheets. Note if the timesheet has been invoiced by Avaza you cannot mark it uninvoiced
+      operationId: Timesheet_Put
+      parameters:
+        - description: TimesheetEntryID number
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Mark Timesheet as Invoiced (true/false)
+          in: query
+          name: isInvoiced
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TimesheetDetails'
+      security:
+        - oauth2:
+            - write
+      summary: Update a Timesheet
+      tags:
+        - Timesheet
+  /api/UserProfile:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: UserProfile_Get
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/UserList'
+      security:
+        - oauth2:
+            - read
+      tags:
+        - UserProfile
+  /api/Webhook:
+    delete:
+      consumes: []
+      deprecated: false
+      operationId: Webhook_DeleteByUrl
+      parameters:
+        - description: Target URL that should be used to delete subscriptions
+          in: query
+          name: target_url
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Subscription Deleted OK
+          schema:
+            type: object
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Delete webhook subscription by URL
+      tags:
+        - Webhook
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Webhook_Get
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WebhookList'
+      security:
+        - oauth2:
+            - read
+      summary: Get list of Webhook Subscriptions
+      tags:
+        - Webhook
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: 'When you receive a webhook, you should respond with Http 200 OK Status Code, otherwise we will retry. Event values are: "company_created", "company_deleted", "company_updated", "contact_created", "contact_deleted", "contact_updated", "invoice_created", "invoice_sent", "project_created", "project_deleted", "project_updated", "task_created", "timesheet_created", "timesheet_deleted", "timesheet_updated"'
+      operationId: Webhook_Post
+      parameters:
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSubscription'
+      responses:
+        '201':
+          description: Subscription created
+          schema:
+            $ref: '#/definitions/SubscribeResult'
+        '401':
+          description: Unauthorized
+        '409':
+          description: Duplicate subscription already exists
+      security:
+        - oauth2:
+            - read
+      summary: 'Subscribe to Webhook. On success, returns ID of webhook subscription.'
+      tags:
+        - Webhook
+  '/api/Webhook/{id}':
+    delete:
+      consumes: []
+      deprecated: false
+      operationId: Webhook_Delete
+      parameters:
+        - description: Subscription id to be deleted
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Subscription deleted ok
+          schema:
+            type: object
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read
+      summary: Delete Webhook Subscription by ID
+      tags:
+        - Webhook
+definitions:
+  AccountDetails:
+    properties:
+      CompanyName:
+        type: string
+    type: object
+  Company:
+    properties:
+      BillingAddress:
+        type: string
+      BillingAddressCity:
+        type: string
+      BillingAddressLine:
+        type: string
+      BillingAddressPostCode:
+        type: string
+      BillingAddressState:
+        type: string
+      BillingCountryCode:
+        type: string
+      Comments:
+        type: string
+      CompanyID:
+        format: int32
+        type: integer
+      CompanyName:
+        type: string
+      Contacts:
+        items:
+          $ref: '#/definitions/CompanyContact'
+        type: array
+      CurrencyCode:
+        type: string
+      DateCreated:
+        format: date-time
+        type: string
+      DateUpdated:
+        format: date-time
+        type: string
+      DefaultTradingTermIDFK:
+        format: int32
+        type: integer
+      Fax:
+        type: string
+      Phone:
+        type: string
+      TaxNumber:
+        type: string
+      website:
+        type: string
+    type: object
+  CompanyContact:
+    properties:
+      CompanyIDFK:
+        format: int32
+        type: integer
+      CompanyName:
+        type: string
+      ContactID:
+        format: int32
+        type: integer
+      DateCreated:
+        format: date-time
+        type: string
+      DateUpdated:
+        format: date-time
+        type: string
+      Email:
+        type: string
+      Firstname:
+        type: string
+      Lastname:
+        type: string
+      Mobile:
+        type: string
+      Phone:
+        type: string
+      PositionTitle:
+        type: string
+      TimeZone:
+        type: string
+    type: object
+  CompanyList:
+    properties:
+      Companies:
+        items:
+          $ref: '#/definitions/Company'
+        type: array
+      PageNumber:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  ContactList:
+    properties:
+      Contacts:
+        items:
+          $ref: '#/definitions/CompanyContact'
+        type: array
+      PageNumber:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  CreateSubscription:
+    description: New Subscription to be Created
+    properties:
+      event:
+        description: 'The event code to be notified about. Possible values: company_created, contact_created, invoice_created, invoice_sent, project_created, task_created'
+        type: string
+      target_url:
+        description: The URL that should be notified of the event.
+        type: string
+    required:
+      - target_url
+      - event
+    type: object
+  CreditNote:
+    properties:
+      Balance:
+        format: double
+        type: number
+      CreditNoteAllocations:
+        items:
+          $ref: '#/definitions/CreditNoteAllocation'
+        type: array
+      CreditNoteLineItems:
+        items:
+          $ref: '#/definitions/CreditNoteLineItem'
+        type: array
+      CreditNoteNumber:
+        type: string
+      CurrencyCode:
+        type: string
+      CustomerIDFK:
+        format: int32
+        type: integer
+      DateCreated:
+        format: date-time
+        type: string
+      DateIssued:
+        format: date-time
+        type: string
+      DateUpdated:
+        format: date-time
+        type: string
+      Notes:
+        type: string
+      TotalAmount:
+        format: double
+        type: number
+      TransactionID:
+        format: int64
+        type: integer
+      TransactionPrefix:
+        type: string
+      TransactionStatusCode:
+        type: string
+    type: object
+  CreditNoteAllocation:
+    properties:
+      AllocationAmount:
+        format: double
+        type: number
+      AllocationDate:
+        format: date-time
+        type: string
+      CreditNoteTransactionIDFK:
+        format: int64
+        type: integer
+      InvoiceTransactionIDFK:
+        format: int64
+        type: integer
+      TransactionAllocationID:
+        format: int64
+        type: integer
+    type: object
+  CreditNoteLineItem:
+    properties:
+      Amount:
+        format: double
+        type: number
+      Description:
+        type: string
+      Discount:
+        format: double
+        type: number
+      Quantity:
+        format: double
+        type: number
+      TaxAmount:
+        format: double
+        type: number
+      TaxIDFK:
+        format: int32
+        type: integer
+      TransactionLineItemID:
+        format: int64
+        type: integer
+      UnitPrice:
+        format: double
+        type: number
+    type: object
+  CreditNoteList:
+    properties:
+      CreditNotes:
+        items:
+          $ref: '#/definitions/CreditNote'
+        type: array
+      PageNumber:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  Currency:
+    properties:
+      CurrencyCode:
+        type: string
+      DecimalPlaces:
+        format: int32
+        type: integer
+    type: object
+  CurrencyList:
+    properties:
+      Currencies:
+        items:
+          $ref: '#/definitions/Currency'
+        type: array
+    type: object
+  ExpenseDetails:
+    properties:
+      Amount:
+        format: double
+        type: number
+      AttachmentURL:
+        type: string
+      ChargeableStatusCode:
+        type: string
+      CurrencyCode:
+        type: string
+      CustomerIDFK:
+        format: int32
+        type: integer
+      CustomerName:
+        type: string
+      DateCreated:
+        format: date-time
+        type: string
+      DateUpdated:
+        format: date-time
+        type: string
+      Email:
+        type: string
+      ExchangeRate:
+        format: double
+        type: number
+      ExpenseApprovalStatusCode:
+        type: string
+      ExpenseCategoryHasUnitPrice:
+        type: boolean
+      ExpenseCategoryIDFK:
+        format: int32
+        type: integer
+      ExpenseCategoryName:
+        type: string
+      ExpenseCategoryUnitName:
+        type: string
+      ExpenseCategoryUnitPrice:
+        format: double
+        type: number
+      ExpenseDate:
+        format: date-time
+        type: string
+      ExpenseID:
+        format: int64
+        type: integer
+      ExpenseReportIDFK:
+        format: int64
+        type: integer
+      ExpenseReportName:
+        type: string
+      Firstname:
+        type: string
+      Lastname:
+        type: string
+      Merchant:
+        type: string
+      MerchantTaxNumber:
+        type: string
+      Notes:
+        type: string
+      ProjectIDFK:
+        format: int32
+        type: integer
+      ProjectTitle:
+        type: string
+      Quantity:
+        format: double
+        type: number
+      TaxAmount:
+        format: double
+        type: number
+      TaxIDFK:
+        format: int32
+        type: integer
+      TransactionTaxConfigCode:
+        type: string
+      UserIDFK:
+        format: int32
+        type: integer
+      isChargeable:
+        type: boolean
+    type: object
+  ExpenseList:
+    properties:
+      Expenses:
+        items:
+          $ref: '#/definitions/ExpenseDetails'
+        type: array
+      PageNumber:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  InventoryItem:
+    properties:
+      CostPrice:
+        format: double
+        type: number
+      DateCreated:
+        format: date-time
+        type: string
+      DateUpdated:
+        format: date-time
+        type: string
+      Description:
+        type: string
+      InventoryItemID:
+        format: int64
+        type: integer
+      Name:
+        type: string
+      SKU:
+        type: string
+      SalePrice:
+        format: double
+        type: number
+      SaleTaxIDFK:
+        format: int32
+        type: integer
+      isHidden:
+        type: boolean
+    type: object
+  InventoryList:
+    properties:
+      Inventory:
+        items:
+          $ref: '#/definitions/InventoryItem'
+        type: array
+      PageNumber:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  Invoice:
+    properties:
+      AccountIDFK:
+        format: int32
+        type: integer
+      Balance:
+        format: double
+        type: number
+      CompanyIDFK:
+        format: int32
+        type: integer
+      CompanyName:
+        type: string
+      CurrencyCode:
+        type: string
+      CustomerPONumber:
+        type: string
+      DateCreated:
+        format: date-time
+        type: string
+      DateIssued:
+        format: date-time
+        type: string
+      DateSent:
+        format: date-time
+        type: string
+      DateUpdated:
+        format: date-time
+        type: string
+      DueDate:
+        format: date-time
+        type: string
+      ExchangeRate:
+        format: double
+        type: number
+      InvoiceNumber:
+        type: string
+      Issuer:
+        $ref: '#/definitions/IssuerDetails'
+      LineItems:
+        items:
+          $ref: '#/definitions/InvoiceLineItem'
+        type: array
+      Links:
+        $ref: '#/definitions/InvoiceLinks'
+      Notes:
+        type: string
+      Recipient:
+        $ref: '#/definitions/RecipientDetails'
+      Subject:
+        type: string
+      TaxAmount:
+        format: double
+        type: number
+      TotalAmount:
+        format: double
+        type: number
+      TransactionID:
+        format: int64
+        type: integer
+      TransactionPrefix:
+        type: string
+      TransactionStatusCode:
+        type: string
+      TransactionTaxConfigCode:
+        type: string
+    type: object
+  InvoiceLineItem:
+    properties:
+      Amount:
+        format: double
+        type: number
+      Description:
+        type: string
+      Discount:
+        format: double
+        type: number
+      InventoryItemIDFK:
+        format: int64
+        type: integer
+      InventoryItemName:
+        type: string
+      InventoryItemSKU:
+        type: string
+      ProjectIDFK:
+        format: int32
+        type: integer
+      ProjectTitle:
+        type: string
+      Quantity:
+        format: double
+        type: number
+      TaxAmount:
+        format: double
+        type: number
+      TaxCode:
+        type: string
+      TaxIDFK:
+        format: int32
+        type: integer
+      TaxName:
+        type: string
+      TransactionLineItemID:
+        format: int64
+        type: integer
+      UnitPrice:
+        format: double
+        type: number
+    type: object
+  InvoiceLinks:
+    properties:
+      ClientView:
+        type: string
+      Edit:
+        type: string
+      View:
+        type: string
+    type: object
+  InvoiceList:
+    properties:
+      Invoices:
+        items:
+          $ref: '#/definitions/Invoice'
+        type: array
+      PageNumber:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  IssuerDetails:
+    properties:
+      BillingAddress:
+        type: string
+      BillingAddressCity:
+        type: string
+      BillingAddressLine:
+        type: string
+      BillingAddressPostCode:
+        type: string
+      BillingAddressState:
+        type: string
+      BillingCountryCode:
+        type: string
+      TaxNumber:
+        type: string
+    type: object
+  NewCompanyContact:
+    properties:
+      CompanyBillingAddress:
+        type: string
+      CompanyBillingAddressCity:
+        type: string
+      CompanyBillingAddressCountryCode:
+        type: string
+      CompanyBillingAddressLine:
+        type: string
+      CompanyBillingAddressPostCode:
+        type: string
+      CompanyBillingAddressState:
+        type: string
+      CompanyIDFK:
+        format: int32
+        type: integer
+      CompanyName:
+        type: string
+      ContactEmail:
+        type: string
+      CurrencyCode:
+        type: string
+      Firstname:
+        type: string
+      Lastname:
+        type: string
+      Mobile:
+        type: string
+      Phone:
+        type: string
+      PositionTitle:
+        type: string
+      UpdateExisting:
+        type: boolean
+    required:
+      - ContactEmail
+      - Firstname
+      - Lastname
+    type: object
+  NewExpense:
+    properties:
+      Amount:
+        description: Expense Amount (Required). Must be &gt;= 0
+        format: double
+        type: number
+      CurrencyCode:
+        description: 'A 3-letter ISO CurrencyCode for the expense currency. (e.g. USD). If not provided, defaults to the Account base currency.'
+        type: string
+      CustomerIDFK:
+        description: The Avaza Customer ID to associate the Expense with. Either this field or CustomerName can be provided.
+        format: int32
+        type: integer
+      CustomerName:
+        description: The name of an existing customer in Avaza. Must be an exact (case insensitive) match.
+        type: string
+      ExchangeRate:
+        description: 'Optional (Only relevant if the expense currency is different to your account currency. If not provided we will look up the market exchange rate for you based on the expense date.) Exchange Rate = Expense Currency Amount / Base Currency Amount (e.g. if Expense currency is in AUD, and Base Currency is in USD, Exchange Rate = AUD $140 / USD $100 = 1.4)'
+        format: double
+        type: number
+      ExpenseCategoryIDFK:
+        description: 'The expense category to link the Expense to. If not provided, ExpenseCategoryName must be provided'
+        format: int32
+        type: integer
+      ExpenseCategoryName:
+        description: Must match an existing expense category name otherwise a new category will be created. If left blank Expense Category ID must be provided.
+        type: string
+      ExpenseDate:
+        description: The date of the expense entry (Required)
+        format: date-time
+        type: string
+      GroupTripName:
+        description: 'Links the expense to a Grouping/Trip report. If no matching name found, creates a new Group/Trip Report name.'
+        type: string
+      Merchant:
+        description: The name of the merchant.
+        type: string
+      MerchantTaxNumer:
+        description: A Tax number identifier for the merchant.
+        type: string
+      Notes:
+        description: Expense Notes
+        type: string
+      ProjectIDFK:
+        description: The Avaza project ID to associate the Expense with.
+        format: int32
+        type: integer
+      ProjectName:
+        description: 'Can work for matching an expense to a project, but only if it''s an exact match for a single project under the customer.'
+        type: string
+      TaxIDFK:
+        description: Avaza Tax ID the expense belongs to. If left blank then Tax Name must be provided.
+        format: int32
+        type: integer
+      TaxName:
+        description: Must exactly match an existing Tax Name that you have configured in Avaza Tax settings. If left blank then Tax ID must be provided.
+        type: string
+      TransactionTaxConfigCode:
+        description: Optional - Enter "INC" if the tax amount is included in the expense amount otherwise enter "EX" when the amount exlcudes the tax. Defaults to "Ex". The tax amount on the expense will be autocalculated.
+        type: string
+      UserEmail:
+        description: 'The email address of a Timesheet/Expense user in Avaza. If not provided, UserIDFK field must be provided.'
+        type: string
+      UserIDFK:
+        description: 'UserID for a Timesheet/Expense user in Avaza. If not provided, UserEmail field must be provided'
+        format: int32
+        type: integer
+      isChargeable:
+        description: 'aka Billable. Defaults to false if not provided. If set to true, a CustomerIDFK or CustomerName must be provided.'
+        type: boolean
+    type: object
+  NewInvoice:
+    description: New invoice to be created
+    properties:
+      CompanyIDFK:
+        description: If left blank then you must specify Company Name.
+        format: int32
+        type: integer
+      CompanyName:
+        type: string
+      CurrencyCode:
+        description: Expects ISO Standard 3 character currency code. If left blank the currency will default to account's currency in general setting. For existing companies this field will be ignored and the invoice will use the currency of the customer. For new customers if the currency is not specified then account currency will be used otherwise the specified currency will be used.
+        type: string
+      DateIssued:
+        description: If not specified it will use today's date. The date should be specified as local date.
+        format: date-time
+        type: string
+      DueDate:
+        description: It will be auto calculated based on the payment term and issue date. Due Date must be greater than or equal to Issue Date. If the Due Date is specified then Payment Terms will be set to -1 (Custom)
+        format: date-time
+        type: string
+      Email:
+        type: string
+      ExchangeRate:
+        description: Exchange rate is only valid for invoices in currency other than default account currency. If not specified it will get the market rate based on the Date Issued.
+        format: double
+        type: number
+      Firstname:
+        description: Specified value will be used to create a new customer contact only if a new customer is being created.
+        type: string
+      InvoiceNumber:
+        description: Pass any string. If left blank it will use the next number in the auto incrementing sequence. If an integer is passed then the largest integer will be use as the seed to auto generate the next invoice number in the sequence.
+        type: string
+      InvoiceTemplateIDFK:
+        description: If left blank the account default invoice template will be used.
+        format: int32
+        type: integer
+      Lastname:
+        description: Specified value will be used to create a new customer contact only if a new customer is being created.
+        type: string
+      LineItems:
+        items:
+          $ref: '#/definitions/NewInvoiceLineItem'
+        type: array
+      Notes:
+        description: Plain UTF8 text. (no HTML). Max 2000 characters
+        type: string
+      PaymentTerms:
+        description: " \"If left blank we will set it to customer default. If specified then it must match one of your existing pre configured payment term periods. Your account starts with:\r\n(-1 --- Custom, 0 --- Upon Receipt, 7 --- 7 Days, 15 --- 15 Days, 30 --- 30 Days, 45 --- 45 Days, 60 --- 60 Days)"
+        format: int32
+        type: integer
+      Subject:
+        description: Plain UTF8 text. (no HTML). 255 characters max
+        type: string
+      TransactionPrefix:
+        description: A prefix for the Invoice number. e.g. 'INV'. If left blank it will be set to the account default. Max length 20 characters.
+        type: string
+      TransactionTaxConfigCode:
+        description: 'Possible values are (EX --- Tax Exclusive, INC --- Tax Inclusive). If left empty it will use the account default.'
+        type: string
+    type: object
+  NewInvoiceLineItem:
+    description: Line item to be added to new invoice
+    properties:
+      Description:
+        description: Plain UTF8 text. (no HTML)
+        type: string
+      Discount:
+        description: Enter 10.5 to give a 10.5% discount
+        format: double
+        type: number
+      InventoryItemIDFK:
+        description: If not specified then Inventory Item Name must be specified.
+        format: int32
+        type: integer
+      InventoryItemName:
+        description: If not specified then Inventory item ID must be specified. If specified and not matched to any existing inventory items then a new inventory item will be created. Max 200 characters.
+        type: string
+      Quantity:
+        description: The quantity for the line item
+        format: double
+        type: number
+      TaxIDFK:
+        format: int32
+        type: integer
+      TaxName:
+        description: Must be specified if the Tax ID is blank. If the Tax Name is specified it will be matched to an existing Tax Name or else a new Tax will be created.
+        type: string
+      TaxPercent:
+        description: The Tax Percent will only be used if a new tax is being created.
+        format: double
+        type: number
+      UnitPrice:
+        description: The unit price for the lineitem.
+        format: double
+        type: number
+    required:
+      - Quantity
+      - UnitPrice
+    type: object
+  NewPayment:
+    properties:
+      Amount:
+        format: double
+        type: number
+      CustomerIDFK:
+        description: Only required if no invoice allocations specified.
+        format: int32
+        type: integer
+      DateIssued:
+        description: 'Date of Payment. If not specified, assumes today.'
+        format: date-time
+        type: string
+      ExchangeRate:
+        description: Optional. Only used when the Customer's currecy is different from the Avaza account's base currency. Specifies the exchange rate that should apply between the customer currency and base currency. If not provided we will obtain an up to date exchange rate for the Payment Issue Date.
+        format: double
+        type: number
+      Notes:
+        type: string
+      PaymentAllocations:
+        description: List of amounts within this payment that are allocated to invoices. The sum of these be less than or equal to the payment amount.
+        items:
+          $ref: '#/definitions/NewPaymentAllocation'
+        type: array
+      PaymentNumber:
+        description: Optional. If not specified will be automatically generated
+        type: string
+      TransactionPrefix:
+        description: Optional to override the default prefix added to Payment Numbers
+        type: string
+      TransactionReference:
+        description: 'Optional for storing the reference # of the payment method.'
+        type: string
+    type: object
+  NewPaymentAllocation:
+    properties:
+      AllocationAmount:
+        description: The Amount being allocated to the invoice. Expects same currency as invoice currency
+        format: double
+        type: number
+      AllocationDate:
+        description: Optional. Defaults to the current time in the Avaza account's timezone. The date the allocation is applied to the invoice. Can be difference from the Payment Date when doing prepayments etc.
+        format: date-time
+        type: string
+      InvoiceTransactionIDFK:
+        description: The Avaza Invoice TransactionID that is having a payment amount allocated to it.
+        format: int64
+        type: integer
+    type: object
+  NewProjectModel:
+    properties:
+      CompanyIDFK:
+        description: 'An ID of a company in Avaza to create the Project under. You must provide either a CompanyID, or a CompanyName'
+        format: int32
+        type: integer
+      CompanyName:
+        description: The name for a Company to create the project under. Will create company unless it matches an existing company name
+        type: string
+      CurrencyCode:
+        description: 'The ISO 3 letter currency code to use when creating a new Company. If not provided, the account''s default currency will be used.'
+        type: string
+      PopulateDefaultProjectMembers:
+        type: boolean
+      ProjectNotes:
+        description: Any descriptive notes about the project. (2000 characters max)
+        type: string
+      ProjectTitle:
+        description: The title of the new project. (255 characters max)
+        type: string
+      TimesheetApprovalRequiredbyDefault:
+        type: boolean
+      isTaskRequiredOnTimesheet:
+        type: boolean
+    required:
+      - ProjectTitle
+    type: object
+  NewSection:
+    properties:
+      EndDateUTC:
+        format: date-time
+        type: string
+      ProjectIDFK:
+        format: int32
+        type: integer
+      StartDateUTC:
+        format: date-time
+        type: string
+      Title:
+        type: string
+    type: object
+  NewTask:
+    properties:
+      AssignedToUserIDFK:
+        format: int32
+        type: integer
+      DateDue:
+        format: date-time
+        type: string
+      DateDueUTC:
+        format: date-time
+        type: string
+      Description:
+        type: string
+      EstimatedEffort:
+        description: Decimal hours
+        format: double
+        type: number
+      ProjectIDFK:
+        format: int32
+        type: integer
+      SectionIDFK:
+        format: int32
+        type: integer
+      Title:
+        type: string
+    type: object
+  Payment:
+    properties:
+      AccountIDFK:
+        format: int32
+        type: integer
+      Balance:
+        format: double
+        type: number
+      CurrencyCode:
+        type: string
+      CustomerIDFK:
+        format: int32
+        type: integer
+      DateCreated:
+        format: date-time
+        type: string
+      DateIssued:
+        format: date-time
+        type: string
+      DateUpdated:
+        format: date-time
+        type: string
+      ExchangeRate:
+        format: double
+        type: number
+      Notes:
+        type: string
+      PaymentAllocations:
+        items:
+          $ref: '#/definitions/PaymentAllocation'
+        type: array
+      PaymentNumber:
+        type: string
+      PaymentProviderCode:
+        type: string
+      TotalAmount:
+        format: double
+        type: number
+      TransactionID:
+        format: int64
+        type: integer
+      TransactionPrefix:
+        type: string
+      TransactionReference:
+        type: string
+      TransactionStatusCode:
+        type: string
+    type: object
+  PaymentAllocation:
+    properties:
+      AllocationAmount:
+        format: double
+        type: number
+      AllocationDate:
+        format: date-time
+        type: string
+      InvoiceTransactionIDFK:
+        format: int64
+        type: integer
+      PaymentTransactionIDFK:
+        format: int64
+        type: integer
+      TransactionAllocationID:
+        format: int64
+        type: integer
+    type: object
+  PaymentList:
+    properties:
+      PageNumber:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      Payments:
+        items:
+          $ref: '#/definitions/Payment'
+        type: array
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  ProjectDetails:
+    properties:
+      CompanyIDFK:
+        format: int32
+        type: integer
+      CompanyName:
+        type: string
+      DateCreated:
+        format: date-time
+        type: string
+      DateUpdated:
+        format: date-time
+        type: string
+      Members:
+        items:
+          $ref: '#/definitions/ProjectMemberDetails'
+        type: array
+      Notes:
+        type: string
+      ProjectID:
+        format: int32
+        type: integer
+      Sections:
+        items:
+          $ref: '#/definitions/ProjectSectionDetails'
+        type: array
+      Title:
+        type: string
+    type: object
+  ProjectList:
+    properties:
+      PageNumber:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      Projects:
+        items:
+          $ref: '#/definitions/ProjectListDetails'
+        type: array
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  ProjectListDetails:
+    properties:
+      CompanyIDFK:
+        format: int32
+        type: integer
+      CompanyName:
+        type: string
+      DateCreated:
+        format: date-time
+        type: string
+      DateUpdated:
+        format: date-time
+        type: string
+      Notes:
+        type: string
+      ProjectID:
+        format: int32
+        type: integer
+      Title:
+        type: string
+    type: object
+  ProjectMemberDetails:
+    properties:
+      Email:
+        type: string
+      Firstname:
+        type: string
+      Fullname:
+        type: string
+      Lastname:
+        type: string
+      UserIDFK:
+        format: int32
+        type: integer
+    type: object
+  ProjectSectionDetails:
+    properties:
+      DisplayOrder:
+        format: int32
+        type: integer
+      EndDate:
+        format: date-time
+        type: string
+      SectionID:
+        format: int32
+        type: integer
+      StartDate:
+        format: date-time
+        type: string
+      Title:
+        type: string
+    type: object
+  ProjectTimesheetCategoryDetails:
+    properties:
+      AccountIDFK:
+        format: int32
+        type: integer
+      BudgetHours:
+        format: double
+        type: number
+      CostAmount:
+        format: double
+        type: number
+      Name:
+        type: string
+      ProjectIDFK:
+        format: int32
+        type: integer
+      RateAmount:
+        format: double
+        type: number
+      TimeSheetCategoryIDFK:
+        format: int32
+        type: integer
+      isBillable:
+        type: boolean
+    type: object
+  ProjectTimesheetCategoryList:
+    properties:
+      Categories:
+        items:
+          $ref: '#/definitions/ProjectTimesheetCategoryDetails'
+        type: array
+    type: object
+  RecipientDetails:
+    properties:
+      CompanyIDFK:
+        format: int32
+        type: integer
+      CompanyName:
+        type: string
+      RecipientBillingAddressCity:
+        type: string
+      RecipientBillingAddressCountryCode:
+        type: string
+      RecipientBillingAddressLine:
+        type: string
+      RecipientBillingAddressPostCode:
+        type: string
+      RecipientBillingAddressState:
+        type: string
+      RecipientFormattedBillingAddress:
+        type: string
+    type: object
+  RoleDetails:
+    properties:
+      RoleCode:
+        type: string
+      RoleName:
+        type: string
+    type: object
+  SectionDetails:
+    properties:
+      DisplayOrder:
+        format: int32
+        type: integer
+      EndDate:
+        format: date-time
+        type: string
+      EndDateUTC:
+        format: date-time
+        type: string
+      ProjectIDFK:
+        format: int32
+        type: integer
+      SectionID:
+        format: int32
+        type: integer
+      StartDate:
+        format: date-time
+        type: string
+      StartDateUTC:
+        format: date-time
+        type: string
+      Title:
+        type: string
+    type: object
+  SectionList:
+    properties:
+      Sections:
+        items:
+          $ref: '#/definitions/SectionDetails'
+        type: array
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  SubscribeResult:
+    properties:
+      ID:
+        format: int32
+        type: integer
+    type: object
+  TaskDetails:
+    properties:
+      ActualTime:
+        format: double
+        type: number
+      AssignedToEmail:
+        type: string
+      AssignedToFirstname:
+        type: string
+      AssignedToLastname:
+        type: string
+      AssignedToUserIDFK:
+        type: string
+      DateCreated:
+        format: date-time
+        type: string
+      DateDue:
+        format: date-time
+        type: string
+      DateDueUTC:
+        format: date-time
+        type: string
+      DateUpdated:
+        format: date-time
+        type: string
+      Description:
+        type: string
+      DescriptionNoHTML:
+        type: string
+      EstimatedEffort:
+        format: double
+        type: number
+      PercentComplete:
+        format: double
+        type: number
+      ProjectIDFK:
+        format: int32
+        type: integer
+      ProjectTitle:
+        type: string
+      SectionIDFK:
+        format: int32
+        type: integer
+      SectionTitle:
+        type: string
+      TaskID:
+        format: int32
+        type: integer
+      TaskStatusCode:
+        type: string
+      Title:
+        type: string
+    type: object
+  TaskList:
+    properties:
+      PageNumber:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      Tasks:
+        items:
+          $ref: '#/definitions/TaskDetails'
+        type: array
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  TaxComponent:
+    properties:
+      ComponentTaxCode:
+        type: string
+      Name:
+        type: string
+      Percentage:
+        format: double
+        type: number
+      TaxComponentID:
+        format: int32
+        type: integer
+      TaxIDFK:
+        format: int32
+        type: integer
+      isCompound:
+        type: boolean
+    type: object
+  TaxItem:
+    properties:
+      CalculatedPercent:
+        format: double
+        type: number
+      Name:
+        type: string
+      TaxCode:
+        type: string
+      TaxComponents:
+        items:
+          $ref: '#/definitions/TaxComponent'
+        type: array
+      TaxID:
+        format: int32
+        type: integer
+    type: object
+  TaxList:
+    properties:
+      Taxes:
+        items:
+          $ref: '#/definitions/TaxItem'
+        type: array
+    type: object
+  TimesheetDetails:
+    properties:
+      CategoryName:
+        type: string
+      CustomerIDFK:
+        format: int32
+        type: integer
+      CustomerName:
+        type: string
+      DateCreated:
+        format: date-time
+        type: string
+      DateUpdated:
+        format: date-time
+        type: string
+      Duration:
+        format: double
+        type: number
+      Email:
+        type: string
+      EndTimeLocal:
+        format: date-time
+        type: string
+      EndTimeUTC:
+        format: date-time
+        type: string
+      EntryDate:
+        format: date-time
+        type: string
+      Firstname:
+        type: string
+      Lastname:
+        type: string
+      Notes:
+        type: string
+      ProjectIDFK:
+        format: int32
+        type: integer
+      ProjectTitle:
+        type: string
+      StartTimeLocal:
+        format: date-time
+        type: string
+      StartTimeUTC:
+        format: date-time
+        type: string
+      TaskIDFK:
+        format: int32
+        type: integer
+      TaskTitle:
+        type: string
+      TimesheetCategoryIDFK:
+        format: int32
+        type: integer
+      TimesheetEntryApprovalStatusCode:
+        type: string
+      TimesheetEntryID:
+        format: int64
+        type: integer
+      TimesheetUserTimeZone:
+        type: string
+      UserIDFK:
+        format: int32
+        type: integer
+      isBillable:
+        type: boolean
+      isInvoiced:
+        type: boolean
+    type: object
+  TimesheetList:
+    properties:
+      PageNumber:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      Timesheets:
+        items:
+          $ref: '#/definitions/TimesheetDetails'
+        type: array
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  UserDetails:
+    properties:
+      AccountIDFK:
+        format: int32
+        type: integer
+      CompanyIDFK:
+        format: int32
+        type: integer
+      CompanyName:
+        type: string
+      Email:
+        type: string
+      Firstname:
+        type: string
+      Lastname:
+        type: string
+      Roles:
+        items:
+          $ref: '#/definitions/RoleDetails'
+        type: array
+      TimeZone:
+        type: string
+      UserID:
+        format: int32
+        type: integer
+      isTeamMember:
+        type: boolean
+    type: object
+  UserList:
+    properties:
+      Users:
+        items:
+          $ref: '#/definitions/UserDetails'
+        type: array
+    type: object
+  WebhookDetails:
+    properties:
+      EventCode:
+        type: string
+      NotificationURL:
+        type: string
+      SubscriptionID:
+        format: int32
+        type: integer
+    type: object
+  WebhookList:
+    properties:
+      Webhooks:
+        items:
+          $ref: '#/definitions/WebhookDetails'
+        type: array
+    type: object
