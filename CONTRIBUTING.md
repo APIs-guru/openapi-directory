@@ -69,7 +69,7 @@ Please issue a Pull Request, it is not necessary to raise an Issue as well.
 
 First please see if you can make your fix upstream with the owner of the API definition, this benefits everyone and is less work than maintaining patches.
 
-Check the `info.contact` section of the API definition or the `x-origin` to see if there is an email contact, or a GitHub repository you can contribute to.
+Check the `info.contact` section of the API definition or the `x-origin` to see if there is an email or Twitter contact, or a GitHub repository you can contribute to.
 
 #### Do not amend swagger.yaml files directly
 
