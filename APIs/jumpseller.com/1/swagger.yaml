@@ -1,0 +1,3515 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.jumpseller.com
+basePath: /v1
+info:
+  contact:
+    x-twitter: jumpseller
+  description: Explore all our endpoints with your own set of of access tokens. All changes affect your production Jumpseller store.
+  title: Jumpseller API
+  version: '1'
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    url: 'https://twitter.com/jumpseller/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://api.jumpseller.com/swagger.json'
+      version: '2.0'
+  x-providerName: jumpseller.com
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  AuthtokenParam:
+    description: API OAuth token.
+    format: string
+    in: query
+    name: authtoken
+    required: true
+    type: string
+  LimitParam:
+    default: 50
+    description: List restriction
+    format: integer
+    in: query
+    maximum: 200
+    name: limit
+    required: false
+    type: integer
+  LoginParam:
+    description: API OAuth login.
+    format: string
+    in: query
+    name: login
+    required: true
+    type: string
+  PageParam:
+    default: 1
+    description: List page
+    format: integer
+    in: query
+    name: page
+    required: false
+    type: integer
+  ProductIDParam:
+    description: Id of the Product
+    format: int32
+    in: path
+    name: id
+    required: true
+    type: integer
+paths:
+  /apps.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/App'
+      summary: Retrieve all Jumpseller Apps.
+      tags:
+        - Apps
+  /categories.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Category'
+      summary: Retrieve all Categories.
+      tags:
+        - Categories
+    post:
+      description: Category's permalink is automatically generated from the given category's name.
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Category parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Category'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CategoryEdit'
+      summary: Create a new Category.
+      tags:
+        - Categories
+  '/categories/{id}.json':
+    delete:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Category
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '404':
+          description: Category Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Delete an existing Category.
+      tags:
+        - Categories
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Category
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: The selected Category.
+          schema:
+            $ref: '#/definitions/Category'
+        '404':
+          description: Category Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve a single Category.
+      tags:
+        - Categories
+    put:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Category
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Category parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CategoryEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Category'
+        '404':
+          description: Category Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Modify an existing Category.
+      tags:
+        - Categories
+  /checkout_custom_fields.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/LimitParam'
+        - $ref: '#/parameters/PageParam'
+      responses:
+        '200':
+          description: An array of Checkout Custom Fields
+          schema:
+            items:
+              $ref: '#/definitions/CheckoutCustomField'
+            type: array
+      summary: Retrieve all Checkout Custom Fields.
+      tags:
+        - Checkout Custom Fields
+    post:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: CheckoutCustomField parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CheckoutCustomFieldEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/CheckoutCustomField'
+            type: array
+        '404':
+          description: CheckoutCustomField Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Create a new CheckoutCustomField.
+      tags:
+        - Checkout Custom Fields
+  '/checkout_custom_fields/{id}.json':
+    delete:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the CheckoutCustomField
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '404':
+          description: CheckoutCustomField Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Delete an existing CheckoutCustomField.
+      tags:
+        - Checkout Custom Fields
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the CheckoutCustomField
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CheckoutCustomField'
+        '404':
+          description: CheckoutCustomField Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve a single CheckoutCustomField.
+      tags:
+        - Checkout Custom Fields
+    put:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the CheckoutCustomField
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: CheckoutCustomField parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CheckoutCustomFieldEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/CheckoutCustomField'
+            type: array
+        '404':
+          description: CheckoutCustomField Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Update a CheckoutCustomField.
+      tags:
+        - Checkout Custom Fields
+  /countries.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+      responses:
+        '200':
+          description: An array of Countries
+          schema:
+            items:
+              $ref: '#/definitions/Country'
+            type: array
+      summary: Retrieve all Countries.
+      tags:
+        - Countries
+  '/countries/{country_code}.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: ISO3166 Country Code
+          format: string
+          in: path
+          name: country_code
+          required: true
+          type: string
+      responses:
+        '200':
+          description: A Country information object
+          schema:
+            $ref: '#/definitions/Country'
+        '404':
+          description: Country Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve a single Country information.
+      tags:
+        - Countries
+  '/countries/{country_code}/regions.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: ISO3166 Country Code
+          format: string
+          in: path
+          name: country_code
+          required: true
+          type: string
+      responses:
+        '200':
+          description: An array of Regions from a single Country
+          schema:
+            items:
+              $ref: '#/definitions/Region'
+            type: array
+        '404':
+          description: Country Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve all Regions from a single Country.
+      tags:
+        - Countries
+        - Regions
+  '/countries/{country_code}/regions/{region_code}.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: ISO3166 Country Code
+          format: string
+          in: path
+          name: country_code
+          required: true
+          type: string
+        - description: Region Code
+          format: string
+          in: path
+          name: region_code
+          required: true
+          type: string
+      responses:
+        '200':
+          description: A Region information object
+          schema:
+            $ref: '#/definitions/Region'
+        '404':
+          description: Country or Region not found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve a single Region information object.
+      tags:
+        - Countries
+        - Regions
+  /customer_categories.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/LimitParam'
+        - $ref: '#/parameters/PageParam'
+      responses:
+        '200':
+          description: An array of Customer Categories
+          schema:
+            items:
+              $ref: '#/definitions/CustomerCategory'
+            type: array
+      summary: Retrieve all Customer Categories.
+      tags:
+        - Customer Categories
+    post:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: CustomerCategory parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CustomerCategoryEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/CustomerCategory'
+            type: array
+        '404':
+          description: CustomerCategory Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Create a new CustomerCategory.
+      tags:
+        - Customer Categories
+  '/customer_categories/{id}.json':
+    delete:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the CustomerCategory
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '404':
+          description: CustomerCategory Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Delete an existing CustomerCategory.
+      tags:
+        - Customer Categories
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the CustomerCategory
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CustomerCategory'
+        '404':
+          description: CustomerCategory Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve a single CustomerCategory.
+      tags:
+        - Customer Categories
+    put:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the CustomerCategory
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: CustomerCategory parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CustomerCategoryEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/CustomerCategory'
+            type: array
+        '404':
+          description: CustomerCategory Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Update a CustomerCategory.
+      tags:
+        - Customer Categories
+  '/customer_categories/{id}/customers.json':
+    delete:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the CustomerCategory
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '404':
+          description: CustomerCategory Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Delete Customers from an existing CustomerCategory.
+      tags:
+        - Customer Categories
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the CustomerCategory
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Customer'
+            type: array
+        '404':
+          description: CustomerCategory Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieves the customers in a CustomerCategory.
+      tags:
+        - Customer Categories
+    post:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the CustomerCategory
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Customer parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Customer'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Customer'
+            type: array
+        '404':
+          description: CustomerCategory Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Adds Customers to a CustomerCategory.
+      tags:
+        - Customer Categories
+  /customers.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/LimitParam'
+        - $ref: '#/parameters/PageParam'
+      responses:
+        '200':
+          description: An array of Orders
+          schema:
+            items:
+              $ref: '#/definitions/Customer'
+            type: array
+      summary: Retrieve all Customers.
+      tags:
+        - Customers
+    post:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Customer parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CustomerWithPasswordNoID'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Customer'
+            type: array
+        '404':
+          description: Customer Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Create a new Customer.
+      tags:
+        - Customers
+  '/customers/{id}.json':
+    delete:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Customer
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '404':
+          description: Customer Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Delete an existing Category.
+      tags:
+        - Customers
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Customer
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Customer'
+        '404':
+          description: Customer Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve a single Customer.
+      tags:
+        - Customers
+    put:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Customer
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Customer parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CustomerWithPassword'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Customer'
+            type: array
+        '404':
+          description: Customer Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Update a new Customer.
+      tags:
+        - Customers
+  /fields.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+      responses:
+        '200':
+          description: An array of Custom Fields
+          schema:
+            items:
+              $ref: '#/definitions/Field'
+            type: array
+      summary: Retrieve all Store's Custom Fields.
+      tags:
+        - Custom Fields
+    post:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Custom Field parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Field'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Field'
+            type: array
+      summary: Create a new Custom Field.
+      tags:
+        - Custom Fields
+  /hooks.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/LimitParam'
+        - $ref: '#/parameters/PageParam'
+      responses:
+        '200':
+          description: An array of Hooks
+          schema:
+            items:
+              $ref: '#/definitions/Hook'
+            type: array
+      summary: Retrieve all Hooks.
+      tags:
+        - Hooks
+    post:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Hook parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/HookEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Hook'
+        '404':
+          description: Hook Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Create a new Hook.
+      tags:
+        - Hooks
+  '/hooks/{id}.json':
+    delete:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Hook
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '404':
+          description: Hook Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Delete an existing Hook.
+      tags:
+        - Hooks
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Hook
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Hook'
+        '404':
+          description: Hook Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve a single Hook.
+      tags:
+        - Hooks
+    put:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Hook
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Hook parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/HookEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Hook'
+            type: array
+        '404':
+          description: Hook Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Update a Hook.
+      tags:
+        - Hooks
+  /jsapps.json:
+    post:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: JSApp parameters to create
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/JSApp'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/JSApp'
+            type: array
+      summary: Create a Store Settings
+      tags:
+        - Apps
+  '/jsapps/{code}.json':
+    delete:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Code of the App
+          in: path
+          name: code
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '404':
+          description: App Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Delete an existing JSApp.
+      tags:
+        - Apps
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Code of the App
+          in: path
+          name: code
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/JSApp'
+      summary: Retrieve a JSApp
+      tags:
+        - Apps
+  /orders.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+      responses:
+        '200':
+          description: An array of Orders
+          schema:
+            items:
+              $ref: '#/definitions/Order'
+            type: array
+      summary: Retrieve all Orders.
+      tags:
+        - Orders
+    post:
+      description: 'Use the JSON format:<br/>''{ "order": {"status": "Paid", "shipping_method_id": 123, "products": [{ "id": 123, "qty": 1}], "customer": {"id": 123}}}''<br/>or in CURL:<br/>curl -X POST -d ''{ "order": {"status": "Paid", "shipping_method_id": 123, "products": [{ "id": 123, "qty": 1}], "customer": {"id": 123}}}'' "https://api.jumpseller.com/v1/orders.json?login=storecode&authtoken=XXXXX" -H "Content-Type:application/json" '
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Order parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/OrderEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Order'
+            type: array
+      summary: Create a new Order.
+      tags:
+        - Orders
+  '/orders/status/{status}.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Status of the Order used as filter
+          enum:
+            - Abandoned
+            - Canceled
+            - Pending Payment
+            - Paid
+            - Shipped
+          in: path
+          name: status
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Order'
+            type: array
+        '404':
+          description: Status Invalid.
+          schema:
+            $ref: '#/definitions/StatusInvalid'
+      summary: Retrieve orders filter by status.
+      tags:
+        - Orders
+  '/orders/{id}.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Order
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Order'
+        '404':
+          description: Order Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve a single Order.
+      tags:
+        - Orders
+    put:
+      description: 'Only ''status'', ''tracking_number'', ''tracking_company'', ''additional_information'' and ''additional_fields'' are available for update.<br/>Use the JSON format:<br/>''{ "order": {"status": "Shipped", "tracking_company": "other", "tracking_number": "123456789", "additional_information": "My custom message.", "additional_fields": [{"label": "Gift Name", "value": "Duarte"}, {"label": "Gift Wrapping Color", "value": "Green"}]} }}''<br/>or in CURL:<br/>curl -X PUT -d ''{ "order": {"status": "Paid", "additional_information": "My custom message."}}'' "https://api.jumpseller.com/v1/orders/{id}.json?login=storecode&authtoken=XXXXX" -H "Content-Type:application/json" '
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Order
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Order parameters to change
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/OrderEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Order'
+            type: array
+        '404':
+          description: Order Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Modify an existing Order.
+      tags:
+        - Orders
+  '/orders/{id}/history.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Order
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: An array with Order History
+          schema:
+            items:
+              $ref: '#/definitions/OrderHistory'
+            type: array
+      summary: Retrieve all Order History.
+      tags:
+        - Orders
+    post:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the OrderHistory
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Order History parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/OrderHistoryEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/OrderHistory'
+            type: array
+      summary: Create a new Order History Entry.
+      tags:
+        - Orders
+  /payment_methods.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+      responses:
+        '200':
+          description: An array of Payment Methods
+          schema:
+            items:
+              $ref: '#/definitions/PaymentMethod'
+            type: array
+      summary: Retrieve all Store's Payment Methods.
+      tags:
+        - Payment Methods
+  '/payment_methods/{id}.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Payment Method
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PaymentMethod'
+        '404':
+          description: PaymentMethod Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve a single Payment Method.
+      tags:
+        - Payment Methods
+  /products.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/LimitParam'
+        - $ref: '#/parameters/PageParam'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Product'
+            type: array
+      summary: Retrieve all Products.
+      tags:
+        - Products
+    post:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Product parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProductEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Product'
+            type: array
+      summary: Create a new Product.
+      tags:
+        - Products
+  '/products/after/{id}.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Product'
+            type: array
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieves Products after the given id.
+      tags:
+        - Products
+  '/products/category/{category_id}.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Category ID of the Product used as filter
+          format: int32
+          in: path
+          name: category_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Product'
+            type: array
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve Products filtered by category.
+      tags:
+        - Products
+  '/products/category/{category_id}/count.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Category ID of the Product used as filter
+          format: int32
+          in: path
+          name: category_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Count'
+        '404':
+          description: Category Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Count Products filtered by category.
+      tags:
+        - Products
+  /products/count.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Count'
+      summary: Count all Products.
+      tags:
+        - Products
+  /products/search.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Query for the Product
+          format: string
+          in: query
+          name: query
+          required: true
+          type: string
+      responses:
+        '200':
+          description: An array of products
+          schema:
+            items:
+              $ref: '#/definitions/Product'
+            type: array
+        '404':
+          description: Invalid query.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve a Product List from a query.
+      tags:
+        - Products
+  '/products/sku/{sku}.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: SKU of the Product
+          in: path
+          name: sku
+          required: true
+          type: string
+      responses:
+        '200':
+          description: An array of products
+          schema:
+            items:
+              $ref: '#/definitions/Product'
+            type: array
+      summary: Retrieve a single Product by SKU.
+      tags:
+        - Products
+  '/products/status/{status}.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Status of the Product used as filter
+          enum:
+            - available
+            - not-available
+            - disabled
+          in: path
+          name: status
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Product'
+            type: array
+        '404':
+          description: Status Invalid.
+          schema:
+            $ref: '#/definitions/StatusInvalid'
+      summary: Retrieve Products filtered by status.
+      tags:
+        - Products
+  '/products/status/{status}/count.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Status of the Product used as filter
+          enum:
+            - available
+            - not-available
+            - disabled
+          in: path
+          name: status
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Count'
+        '404':
+          description: Status Invalid.
+          schema:
+            $ref: '#/definitions/StatusInvalid'
+      summary: Count Products filtered by status.
+      tags:
+        - Products
+  '/products/{id}.json':
+    delete:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Delete an existing Product.
+      tags:
+        - Products
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: ID of the Product
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Product'
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve a single Product.
+      tags:
+        - Products
+    put:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+        - description: Product parameters to change
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProductEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Product'
+            type: array
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Modify an existing Product.
+      tags:
+        - Products
+  '/products/{id}/fields.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Field'
+            type: array
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve all Product Custom Fields
+      tags:
+        - Product Custom Fields
+    post:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+        - description: Product Custom Field parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProductCustomField'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Product'
+            type: array
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Create a new Product Custom Field.
+      tags:
+        - Product Custom Fields
+  '/products/{id}/fields/count.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: ID of the Product
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Count'
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Count all Product Custom Fields.
+      tags:
+        - Product Custom Fields
+  '/products/{id}/images.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: ID of the Product
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Image'
+            type: array
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve all Product Images.
+      tags:
+        - Product Images
+    post:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+        - description: Product Image parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ImageEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Image'
+            type: array
+      summary: Create a new Product Image.
+      tags:
+        - Product Images
+  '/products/{id}/images/count.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: ID of the Product
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Count'
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Count all Product Images.
+      tags:
+        - Product Images
+  '/products/{id}/images/{image_id}.json':
+    delete:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+        - description: Id of the Product Image
+          format: int32
+          in: path
+          name: image_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Delete a Product Image.
+      tags:
+        - Product Images
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+        - description: Id of the Product Image
+          format: int32
+          in: path
+          name: image_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Image'
+            type: array
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Create a new Product Image.
+      tags:
+        - Product Images
+  '/products/{id}/options.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: ID of the Product
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ProductOption'
+            type: array
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve all Product Options.
+      tags:
+        - Product Options
+    post:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+        - description: Product Option parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProductOptionEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ProductOption'
+            type: array
+      summary: Create a new Product Option.
+      tags:
+        - Product Options
+  '/products/{id}/options/count.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: ID of the Product
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Count'
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Count all Product Options.
+      tags:
+        - Product Options
+  '/products/{id}/options/{option_id}.json':
+    delete:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+        - description: Id of the Product Option
+          format: int32
+          in: path
+          name: option_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Delete a Product Option.
+      tags:
+        - Product Options
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+        - description: Id of the Product Option
+          format: int32
+          in: path
+          name: option_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ProductOption'
+            type: array
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Create a new Product Option.
+      tags:
+        - Product Options
+    put:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+        - description: Id of the Product Option
+          format: int32
+          in: path
+          name: option_id
+          required: true
+          type: integer
+        - description: Product option parameters to change
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProductOptionEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ProductOption'
+            type: array
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Modify an existing Product Option.
+      tags:
+        - Product Options
+  '/products/{id}/options/{option_id}/values.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: ID of the Product
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: ID of the Product Option
+          format: int32
+          in: path
+          name: option_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ProductOptionValue'
+            type: array
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve all Product Option Values.
+      tags:
+        - Product Option Values
+    post:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+        - description: Id of the Product Option
+          format: int32
+          in: path
+          name: option_id
+          required: true
+          type: integer
+        - description: Product Option Value parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProductOptionValueEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ProductOptionValue'
+            type: array
+      summary: Create a new Product Option Value.
+      tags:
+        - Product Option Values
+  '/products/{id}/options/{option_id}/values/count.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: ID of the Product
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: ID of the Product Option
+          format: int32
+          in: path
+          name: option_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Count'
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Count all Product Option Values.
+      tags:
+        - Product Option Values
+  '/products/{id}/options/{option_id}/values/{value_id}.json':
+    delete:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+        - description: Id of the Product Option
+          format: int32
+          in: path
+          name: option_id
+          required: true
+          type: integer
+        - description: ID of the Product Option Value
+          format: int32
+          in: path
+          name: value_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Delete a Product Option Value.
+      tags:
+        - Product Option Values
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+        - description: Id of the Product Option
+          format: int32
+          in: path
+          name: option_id
+          required: true
+          type: integer
+        - description: ID of the Product Option Value
+          format: int32
+          in: path
+          name: value_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ProductOptionValue'
+            type: array
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Create a new Product Option Value.
+      tags:
+        - Product Option Values
+    put:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+        - description: Id of the Product Option
+          format: int32
+          in: path
+          name: option_id
+          required: true
+          type: integer
+        - description: Id of the Product Option Value
+          format: int32
+          in: path
+          name: value_id
+          required: true
+          type: integer
+        - description: Product option value parameters to change
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProductOptionValueEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ProductOptionValue'
+            type: array
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Modify an existing Product Option Value.
+      tags:
+        - Product Option Values
+  '/products/{id}/variants.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: ID of the Product
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Variant'
+            type: array
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve all Product Variants.
+      tags:
+        - Product Variants
+    post:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+        - description: Product Variant parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/VariantEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Variant'
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Create a new Product Variant.
+      tags:
+        - Product Variants
+  '/products/{id}/variants/count.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: ID of the Product
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Count'
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Count all Product Variants.
+      tags:
+        - Product Variants
+  '/products/{id}/variants/{variant_id}.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+        - description: Id of the Product Variant
+          format: int32
+          in: path
+          name: variant_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Variant'
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve a single Product Variant.
+      tags:
+        - Product Variants
+    put:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+        - description: Id of the Product Variant
+          format: int32
+          in: path
+          name: variant_id
+          required: true
+          type: integer
+        - description: Product Variant parameters to change
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/VariantEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Variant'
+        '404':
+          description: Product Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Modify an existing Product Variant.
+      tags:
+        - Product Variants
+  /promotions.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: 'Promotions'' list restriction (default: 50 | max: 200).'
+          format: integer
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - description: 'Promotions'' list page (default: 1).'
+          format: integer
+          in: query
+          name: page
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: An array of Promotions
+          schema:
+            items:
+              $ref: '#/definitions/Promotion'
+            type: array
+      summary: Retrieve all Promotions.
+      tags:
+        - Promotions
+    post:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Promotion parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PromotionEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Promotion'
+            type: array
+        '404':
+          description: Promotion Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Create a new Promotion.
+      tags:
+        - Promotions
+  '/promotions/{id}.json':
+    delete:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Promotion
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '404':
+          description: Promotion Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Delete an existing Promotion.
+      tags:
+        - Promotions
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Promotion
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Promotion'
+        '404':
+          description: Promotion Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve a single Promotion.
+      tags:
+        - Promotions
+    put:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Promotion
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Promotion parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PromotionEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Promotion'
+            type: array
+        '404':
+          description: Promotion Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Update a Promotion.
+      tags:
+        - Promotions
+  /settings.json:
+    post:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Store Setting parameters to create
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/SettingEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Setting'
+      summary: Create a Store Settings
+      tags:
+        - Settings
+  '/settings/{name}.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Name of the Store Setting
+          in: path
+          name: name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Setting'
+      summary: Retrieve Store Information
+      tags:
+        - Settings
+    put:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Name of the Store Setting
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Store Setting parameters to change
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/SettingEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Setting'
+            type: array
+        '404':
+          description: Store Setting Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Modify an existing Store Setting.
+      tags:
+        - Settings
+  /store/info.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Store'
+      summary: Retrieve Store Information
+      tags:
+        - Stores
+  /store/languages.json:
+    get:
+      description: ''
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Language'
+            type: array
+      summary: Retrieve Store Languages
+      tags:
+        - Stores
+definitions:
+  App:
+    properties:
+      apps:
+        items:
+          $ref: '#/definitions/AppFields'
+        type: array
+    type: object
+  AppFields:
+    properties:
+      author:
+        description: Author of the app
+        type: string
+      code:
+        description: Code of the app
+        type: string
+      description:
+        description: Description of the app
+        type: string
+      js:
+        default: false
+        description: True if the app is a jsapp
+        type: boolean
+      name:
+        description: Name of the app
+        type: string
+      page:
+        description: Page of the app
+        type: string
+    type: object
+  BillingAddress:
+    properties:
+      address:
+        description: Address of the Customer's Billing Address
+        type: string
+      city:
+        description: City of the Customer's Billing Address
+        type: string
+      country:
+        description: Country of the Customer's Billing Address
+        type: string
+      municipality:
+        description: Municipality of the Customer's Billing Address
+        type: string
+      name:
+        description: Name of the Customer's Billing Address
+        type: string
+      postal:
+        description: Postal code of the Customer's Billing Address
+        type: string
+      region:
+        description: Region of the Customer's Billing Address
+        type: string
+      surname:
+        description: Surname of the Customer's Billing Address
+        type: string
+      taxid:
+        description: Tax id of the Customer's Billing Address
+        type: string
+  Category:
+    properties:
+      category:
+        $ref: '#/definitions/CategoryFields'
+    type: object
+  CategoryEdit:
+    properties:
+      category:
+        $ref: '#/definitions/CategoryEditFields'
+    type: object
+  CategoryEditFields:
+    properties:
+      name:
+        description: Name of the Category
+        type: string
+      parent_id:
+        description: Unique identifier of the Parent Category
+        format: int32
+        type: integer
+    type: object
+  CategoryFields:
+    properties:
+      id:
+        description: Unique identifier of the Category
+        format: int32
+        type: integer
+      name:
+        description: Name of the Category
+        type: string
+      parent_id:
+        description: Unique identifier of the Parent Category
+        format: int32
+        type: integer
+      permalink:
+        description: Category unique URL path
+        type: string
+    type: object
+  CheckoutCustomField:
+    properties:
+      checkout_custom_field:
+        $ref: '#/definitions/CheckoutCustomFieldFields'
+    type: object
+  CheckoutCustomFieldEdit:
+    properties:
+      checkout_custom_field:
+        $ref: '#/definitions/CheckoutCustomFieldEditFields'
+    type: object
+  CheckoutCustomFieldEditFields:
+    properties:
+      area:
+        description: Area of the CheckoutCustomField
+        enum:
+          - contact
+          - billing_shipping
+          - other
+        type: string
+      deletable:
+        default: false
+        description: True if the CheckoutCustomField can be removed from the store
+        type: boolean
+      label:
+        description: Label given to the CheckoutCustomField
+        type: string
+      position:
+        description: Position of the CheckoutCustomField
+        format: int32
+        type: integer
+      required:
+        default: false
+        description: True if the CheckoutCustomField is mandatory
+        type: boolean
+      type:
+        description: Type of the CheckoutCustomField
+        enum:
+          - text
+          - select
+          - input
+          - checkbox
+        type: string
+    type: object
+  CheckoutCustomFieldFields:
+    properties:
+      area:
+        description: Area of the CheckoutCustomField
+        enum:
+          - contact
+          - billing_shipping
+          - other
+        type: string
+      deletable:
+        default: false
+        description: True if the CheckoutCustomField can be removed from the store
+        type: boolean
+      id:
+        description: Unique identifier of the CheckoutCustomField
+        format: int32
+        type: integer
+      label:
+        description: Label given to the CheckoutCustomField
+        type: string
+      position:
+        description: Position of the CheckoutCustomField
+        format: int32
+        type: integer
+      required:
+        default: false
+        description: True if the CheckoutCustomField is mandatory
+        type: boolean
+      type:
+        description: Type of the CheckoutCustomField
+        enum:
+          - text
+          - select
+          - input
+          - checkbox
+        type: string
+    type: object
+  Count:
+    properties:
+      count:
+        format: int32
+        type: integer
+  Country:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+  Customer:
+    properties:
+      customer:
+        $ref: '#/definitions/CustomerFields'
+    type: object
+  CustomerCategory:
+    properties:
+      category:
+        $ref: '#/definitions/CustomerCategoryFields'
+    type: object
+  CustomerCategoryEdit:
+    properties:
+      category:
+        $ref: '#/definitions/CustomerCategoryEditFields'
+    type: object
+  CustomerCategoryEditFields:
+    properties:
+      name:
+        description: Name of the CustomerCategory
+        type: string
+    type: object
+  CustomerCategoryFields:
+    properties:
+      code:
+        description: Code of the CustomerCategory
+        type: string
+      id:
+        description: Unique identifier of the CustomerCategory
+        format: int32
+        type: integer
+      name:
+        description: Name of the CustomerCategory
+        type: string
+    type: object
+  CustomerFields:
+    properties:
+      billing_address:
+        $ref: '#/definitions/BillingAddress'
+      email:
+        description: Email of the Customer
+        type: string
+      id:
+        description: Unique identifier of the Customer
+        format: int32
+        type: integer
+      phone:
+        description: Phone of the Customer
+        type: string
+      shipping_address:
+        $ref: '#/definitions/ShippingAddress'
+      status:
+        description: Status of the Customer
+        enum:
+          - approved
+          - pending
+          - disabled
+        type: string
+    type: object
+  CustomerFieldsWithPassword:
+    properties:
+      billing_address:
+        $ref: '#/definitions/BillingAddress'
+      email:
+        description: Email of the Customer
+        type: string
+      id:
+        description: Unique identifier of the Customer
+        format: int32
+        type: integer
+      password:
+        description: Password
+        type: string
+      password_confirmation:
+        description: Password Confirmation
+        type: string
+      phone:
+        description: Phone of the Customer
+        type: string
+      shipping_address:
+        $ref: '#/definitions/ShippingAddress'
+      status:
+        description: Status of the Customer
+        enum:
+          - approved
+          - pending
+          - disabled
+        type: string
+    type: object
+  CustomerFieldsWithPasswordNoID:
+    properties:
+      billing_address:
+        $ref: '#/definitions/BillingAddress'
+      email:
+        description: Email of the Customer
+        type: string
+      password:
+        description: Password
+        type: string
+      password_confirmation:
+        description: Password Confirmation
+        type: string
+      phone:
+        description: Phone of the Customer
+        type: string
+      shipping_address:
+        $ref: '#/definitions/ShippingAddress'
+      status:
+        description: Status of the Customer
+        enum:
+          - approved
+          - pending
+          - disabled
+        type: string
+    type: object
+  CustomerWithPassword:
+    properties:
+      customer:
+        $ref: '#/definitions/CustomerFieldsWithPassword'
+    type: object
+  CustomerWithPasswordNoID:
+    properties:
+      customer:
+        $ref: '#/definitions/CustomerFieldsWithPasswordNoID'
+    type: object
+  Field:
+    properties:
+      field:
+        $ref: '#/definitions/FieldFields'
+    type: object
+  FieldFields:
+    properties:
+      id:
+        description: Unique identifier of the Field
+        format: int32
+        type: integer
+      label:
+        description: Label given to the Field
+        type: string
+      type:
+        description: Type of the Field
+        enum:
+          - text
+          - selection
+          - input
+        type: string
+      values:
+        description: All the possible Values of the Field (for type 'selection')
+        items:
+          type: string
+        type: array
+    type: object
+  Hook:
+    properties:
+      hook:
+        $ref: '#/definitions/HookFields'
+    type: object
+  HookEdit:
+    properties:
+      hook:
+        $ref: '#/definitions/HookEditFields'
+    type: object
+  HookEditFields:
+    properties:
+      event:
+        description: Event associated with Hook
+        enum:
+          - order_updated
+          - order_pending_payment
+          - order_paid
+          - order_shipped
+          - order_canceled
+          - order_abandoned
+          - product_created
+          - product_updated
+          - product_deleted
+          - customer_created
+          - customer_updated
+          - customer_deleted
+        type: string
+      url:
+        description: Hook URL to be notified
+        type: string
+    required:
+      - event
+      - url
+    type: object
+  HookFields:
+    properties:
+      created_at:
+        description: Hook creation date
+        type: string
+      event:
+        description: Event associated with Hook
+        type: string
+      id:
+        description: Unique identifier of the Hook
+        format: int32
+        type: integer
+      url:
+        description: Hook URL to be notified
+        type: string
+    type: object
+  Id:
+    properties:
+      id:
+        format: int32
+        type: integer
+  Image:
+    properties:
+      image:
+        $ref: '#/definitions/ImageFields'
+    type: object
+  ImageEdit:
+    properties:
+      image:
+        $ref: '#/definitions/ImageEditFields'
+    type: object
+  ImageEditFields:
+    properties:
+      url:
+        description: Complete URL of the image
+        type: string
+    type: object
+  ImageFields:
+    properties:
+      id:
+        description: Unique identifier of the image
+        format: int32
+        type: integer
+      position:
+        description: Position of the image
+        format: int32
+        type: integer
+      url:
+        description: Complete URL of the image
+        type: string
+    type: object
+  JSApp:
+    properties:
+      element:
+        description: Element of Template to inject HTML
+        type: string
+      template:
+        description: Template of Store Theme to inject HTML
+        type: string
+      url:
+        description: Url of the HTML to inject
+        type: string
+    type: object
+  Language:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+  NotFound:
+    properties:
+      message:
+        type: string
+  Order:
+    properties:
+      order:
+        $ref: '#/definitions/OrderFields'
+    type: object
+  OrderEdit:
+    properties:
+      order:
+        $ref: '#/definitions/OrderEditFields'
+    type: object
+  OrderEditFields:
+    properties:
+      additional_information:
+        description: Additional information for the given Order
+        type: string
+      customer:
+        properties:
+          email:
+            description: Email of the customer for the given Order
+            type: string
+        type: object
+      products:
+        items:
+          $ref: '#/definitions/OrderProduct'
+        type: array
+      shipping_method_id:
+        description: Shipping method e.g. Royal Mail
+        format: int32
+        type: integer
+      status:
+        description: Status of the Order
+        enum:
+          - Abandoned
+          - Canceled
+          - Pending Payment
+          - Paid
+          - Shipped
+        type: string
+      tracking_company:
+        description: Shipping Company used for the given Order
+        type: string
+      tracking_number:
+        description: Shipping Tracking Number used for the given Order
+        type: string
+  OrderFields:
+    properties:
+      additional_information:
+        description: Additional information for the given Order
+        type: string
+      billing_address:
+        $ref: '#/definitions/BillingAddress'
+      created_at:
+        description: Order date
+        type: string
+      currency:
+        description: Currency of the Order
+        type: string
+      customer:
+        $ref: '#/definitions/Customer'
+      discount:
+        description: Discount value for the given Order
+        format: float
+        type: number
+      id:
+        description: Unique identifier of the Order
+        format: int32
+        type: integer
+      payment_information:
+        description: Payment information for the given Order
+        type: string
+      payment_method_name:
+        description: Payment Method name used e.g. PayPal
+        type: string
+      products:
+        items:
+          $ref: '#/definitions/OrderProduct'
+        type: array
+      shipping:
+        description: Shipping value for the given Order
+        format: float
+        type: number
+      shipping_address:
+        $ref: '#/definitions/ShippingAddress'
+      shipping_method_id:
+        description: Shipping method e.g. Royal Mail
+        format: int32
+        type: integer
+      shipping_method_name:
+        description: Shipping method e.g. Royal Mail
+        type: string
+      status:
+        description: Status of the Order
+        enum:
+          - Abandoned
+          - Canceled
+          - Pending Payment
+          - Paid
+          - Shipped
+        type: string
+      subtotal:
+        description: 'Subtotal value for the given Order. Excluding taxes, shipping and discounts'
+        format: float
+        type: number
+      tax:
+        description: Tax value for the given order
+        format: float
+        type: number
+      total:
+        description: 'Total value for the given Order. Including taxes, shipping and discounts'
+        format: float
+        type: number
+      tracking_company:
+        description: Company Used for the Shipment.
+        type: string
+      tracking_number:
+        description: Tracking Number for the Shipment.
+        type: string
+      tracking_url:
+        description: URL to track the Shipment.
+        type: string
+  OrderHistory:
+    properties:
+      order_history:
+        $ref: '#/definitions/OrderHistoryFields'
+    type: object
+  OrderHistoryEdit:
+    properties:
+      order_history:
+        $ref: '#/definitions/OrderHistoryEditFields'
+    type: object
+  OrderHistoryEditFields:
+    properties:
+      message:
+        description: Message of the Order History
+        type: string
+    type: object
+  OrderHistoryFields:
+    properties:
+      created_at:
+        description: Creation date of the order history
+        type: string
+      id:
+        description: Unique identifier of the Order History
+        format: int32
+        type: integer
+      message:
+        description: Message of the Order History
+        type: string
+    type: object
+  OrderProduct:
+    properties:
+      discount:
+        description: Discount of the Order Product
+        format: float
+        type: number
+      id:
+        description: Unique identifier of the original Product
+        format: int32
+        type: integer
+      image:
+        description: Image URL of the Order Product
+        type: string
+      name:
+        description: Name of the Order Product
+        type: string
+      price:
+        description: Price of the Order Product
+        format: float
+        type: number
+      qty:
+        description: Price of the Order Product
+        format: int32
+        type: integer
+      sku:
+        description: Stock Keeping Unit of the Order Product
+        type: string
+      variant_id:
+        description: Unique identifier of the original Product Variant
+        format: int32
+        type: integer
+      weight:
+        default: 1
+        description: Weight of the Order Product
+        format: float
+        type: number
+    type: object
+  PaymentMethod:
+    properties:
+      payment_method:
+        $ref: '#/definitions/PaymentMethodFields'
+    type: object
+  PaymentMethodFields:
+    properties:
+      id:
+        description: Unique identifier of the Payment Method
+        format: int32
+        type: integer
+      name:
+        description: Name of the Payment Method
+        type: string
+      type:
+        description: Type of the Payment Method
+        enum:
+          - dineromail
+          - manual
+          - paypal
+          - pagseguro
+          - interpagos
+          - moneybookers
+          - webpay
+          - webpay_cl
+          - easypay
+          - easypaycc
+          - easypayboleto
+          - ideal_basic
+          - hipay
+          - khipu
+          - mercado_pago
+          - ifthenpay
+          - eupago
+          - stripe
+          - payu
+          - servipag
+        type: string
+    type: object
+  Product:
+    properties:
+      product:
+        $ref: '#/definitions/ProductFields'
+    type: object
+  ProductCustomField:
+    properties:
+      field:
+        $ref: '#/definitions/ProductCustomFieldFields'
+    type: object
+  ProductCustomFieldFields:
+    properties:
+      id:
+        description: Unique identifier of the ProductCustomField
+        format: int32
+        type: integer
+      value:
+        description: The value for the ProductCustomField
+        items:
+          type: string
+        type: array
+    type: object
+  ProductEdit:
+    properties:
+      product:
+        $ref: '#/definitions/ProductEditFields'
+    type: object
+  ProductEditFields:
+    properties:
+      categories:
+        items:
+          $ref: '#/definitions/CategoryFields'
+        type: array
+      description:
+        description: Description of the product
+        type: string
+      diameter:
+        description: Diameter of the product
+        format: float
+        type: number
+      featured:
+        default: false
+        description: True if the product is featured
+        type: boolean
+      height:
+        description: Height of the product
+        format: float
+        type: number
+      length:
+        description: Length of the product
+        format: float
+        type: number
+      meta_description:
+        description: SEO meta description of the product
+        type: string
+      name:
+        description: Name of the product
+        type: string
+      package_format:
+        default: box
+        description: Format the product package
+        enum:
+          - box
+          - cylinder
+        type: string
+      page_title:
+        description: SEO title of the product
+        type: string
+      permalink:
+        description: Product unique URL path
+        type: string
+      price:
+        description: Price of the product
+        format: float
+        type: number
+      sku:
+        description: Stock Keeping Unit of the product
+        type: string
+      status:
+        default: available
+        description: Status of the product
+        enum:
+          - available
+          - not-available
+          - disabled
+        type: string
+      stock:
+        default: 100
+        description: Quantity in stock for the product
+        format: int32
+        type: integer
+      stock_unlimited:
+        description: True if the Product has unlimited stock
+        type: boolean
+      weight:
+        default: 1
+        description: Weight of the product
+        format: float
+        type: number
+      width:
+        description: Width of the product
+        format: float
+        type: number
+    type: object
+  ProductFields:
+    properties:
+      categories:
+        items:
+          $ref: '#/definitions/CategoryFields'
+        type: array
+      created_at:
+        description: Date of product creation
+        type: string
+      description:
+        description: Description of the product
+        type: string
+      diameter:
+        description: Diameter of the product
+        format: float
+        type: number
+      featured:
+        default: false
+        description: True if the product is featured
+        type: boolean
+      height:
+        description: Height of the product
+        format: float
+        type: number
+      id:
+        description: Unique identifier of the product
+        format: int32
+        type: integer
+      images:
+        items:
+          $ref: '#/definitions/ImageFields'
+        type: array
+      length:
+        description: Length of the product
+        format: float
+        type: number
+      name:
+        description: Name of the product
+        type: string
+      package_format:
+        default: box
+        description: Format the product package
+        enum:
+          - box
+          - cylinder
+        type: string
+      permalink:
+        description: Product unique URL path
+        type: string
+      price:
+        description: Price of the product
+        format: float
+        type: number
+      sku:
+        description: Stock Keeping Unit of the product
+        type: string
+      status:
+        default: available
+        description: Status of the product
+        enum:
+          - available
+          - not-available
+          - disabled
+        type: string
+      stock:
+        default: 100
+        description: Quantity in stock for the product
+        format: int32
+        type: integer
+      stock_unlimited:
+        description: True if the Product has unlimited stock
+        type: boolean
+      variants:
+        items:
+          $ref: '#/definitions/VariantFields'
+        type: array
+      weight:
+        default: 1
+        description: Weight of the product
+        format: float
+        type: number
+      width:
+        description: Width of the product
+        format: float
+        type: number
+    type: object
+  ProductOption:
+    properties:
+      option:
+        $ref: '#/definitions/ProductOptionFields'
+    type: object
+  ProductOptionEdit:
+    properties:
+      option:
+        $ref: '#/definitions/ProductOptionEditFields'
+    type: object
+  ProductOptionEditFields:
+    properties:
+      name:
+        description: Name of the product option
+        type: string
+      option_type:
+        description: Type of the product option
+        enum:
+          - option
+          - input
+          - text
+          - file
+        type: string
+      position:
+        description: Position of the product option
+        format: int32
+        type: integer
+    type: object
+  ProductOptionFields:
+    properties:
+      id:
+        description: Unique identifier of the product option
+        format: int32
+        type: integer
+      name:
+        description: Name of the product option
+        type: string
+      option_type:
+        description: Type of the product option
+        enum:
+          - option
+          - input
+          - text
+          - file
+        type: string
+      position:
+        description: Position of the product option
+        format: int32
+        type: integer
+      values:
+        items:
+          $ref: '#/definitions/ProductOptionValueFields'
+        type: array
+    type: object
+  ProductOptionValue:
+    properties:
+      value:
+        $ref: '#/definitions/ProductOptionValueFields'
+    type: object
+  ProductOptionValueEdit:
+    properties:
+      value:
+        $ref: '#/definitions/ProductOptionValueEditFields'
+    type: object
+  ProductOptionValueEditFields:
+    properties:
+      name:
+        description: Name of the product option value
+        type: string
+      position:
+        description: Position of the product option value
+        format: int32
+        type: integer
+    type: object
+  ProductOptionValueFields:
+    properties:
+      id:
+        description: Unique identifier of the product option value
+        format: int32
+        type: integer
+      name:
+        description: Name of the product option value
+        type: string
+      position:
+        description: Position of the product option value
+        format: int32
+        type: integer
+      product_option:
+        $ref: '#/definitions/ProductOption'
+    type: object
+  Promotion:
+    properties:
+      promotion:
+        $ref: '#/definitions/PromotionFields'
+    type: object
+  PromotionEdit:
+    properties:
+      promotion:
+        $ref: '#/definitions/PromotionEditFields'
+    type: object
+  PromotionEditFields:
+    properties:
+      begins_at:
+        description: Creation date of the promotion (requires 'lasts' param - 'date')
+        type: string
+      buys_at_least:
+        description: 'Controls the promotion''s condition (''none'', ''price'', ''qty'')'
+        type: string
+      categories:
+        description: Products Categories where the promotion will be applied (requires 'discount_target' param - 'categories')
+        items:
+          $ref: '#/definitions/Id'
+        type: array
+      code:
+        description: Code of the promotion
+        type: string
+      condition_price:
+        description: Minimum order amount to validate the promotion (requires 'buys_at_least' param - 'price')
+        format: float
+        type: number
+      condition_qty:
+        description: Minimum quantity of ordered itens to validate the promotion (requires 'buys_at_least' param - 'qty')
+        format: int32
+        type: integer
+      cumulative:
+        default: false
+        description: True if the promotion can be acumulated with others
+        type: boolean
+      customer_categories:
+        description: Customer Categories to whom the promotion will be applied (requires 'customers' param - 'categories')
+        items:
+          $ref: '#/definitions/Id'
+        type: array
+      customers:
+        description: 'Controls to which customers the promotion will be applied (''all'', ''loggedin'', ''categories'')'
+        type: string
+      discount_amount_fix:
+        description: Fixed discount amount of the promotion (requires 'type' param - 'fix')
+        format: float
+        type: number
+      discount_amount_percent:
+        description: Percentual discount amount of the promotion (requires 'type' param - 'percentage')
+        format: float
+        type: number
+      discount_target:
+        description: 'Where the promotion will be applied (''order'', ''shipping'', ''categories'')'
+        type: string
+      expires_at:
+        description: Expiration date of the promotion (requires 'lasts' param - 'date')
+        type: string
+      lasts:
+        description: 'Controls when the promotion will expire (''none'', ''date'', ''max_times_used'')'
+        type: string
+      max_times_used:
+        description: Maximum amount a promotion can be used (requires 'lasts' param - 'max_times_used')
+        format: int32
+        type: integer
+      name:
+        description: Name of the product
+        type: string
+      products:
+        description: Products where the promotion will be applied (requires 'discount_target' param - 'categories')
+        items:
+          $ref: '#/definitions/Id'
+        type: array
+      type:
+        description: 'Controls if the discount will be a fixed value (''fix'', ''percentage'')'
+        type: string
+    type: object
+  PromotionFields:
+    properties:
+      begins_at:
+        description: Creation date of the promotion
+        type: string
+      categories:
+        items:
+          $ref: '#/definitions/Id'
+        type: array
+      code:
+        description: Code of the promotion
+        type: string
+      condition_price:
+        description: Minimum order amount to validate the promotion
+        format: float
+        type: number
+      condition_qty:
+        description: Minimum quantity of ordered itens to validate the promotion
+        format: int32
+        type: integer
+      cumulative:
+        default: false
+        description: True if the promotion can be acumulated with others
+        type: boolean
+      customer_categories:
+        items:
+          $ref: '#/definitions/Id'
+        type: array
+      discount_amount_fix:
+        description: Fixed discount amount of the promotion
+        format: float
+        type: number
+      discount_amount_percent:
+        description: Percentual discount amount of the promotion
+        format: float
+        type: number
+      discount_target:
+        description: 'Where the promotion will be applied (''order'', ''shipping'', ''categories'')'
+        type: string
+      expires_at:
+        description: Expiration date of the promotion
+        type: string
+      id:
+        description: Unique identifier of the product
+        format: int32
+        type: integer
+      max_times_used:
+        description: Maximum amount a promotion can be used
+        format: int32
+        type: integer
+      name:
+        description: Name of the product
+        type: string
+      products:
+        items:
+          $ref: '#/definitions/Id'
+        type: array
+      status:
+        description: 'Status of the promotion (''active'', ''expired'')'
+        type: string
+      times_used:
+        description: Amount of times the promotion was used
+        format: int32
+        type: integer
+    type: object
+  Region:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+  Setting:
+    properties:
+      setting:
+        $ref: '#/definitions/SettingFields'
+    type: object
+  SettingEdit:
+    properties:
+      setting:
+        $ref: '#/definitions/SettingEditFields'
+    type: object
+  SettingEditFields:
+    example:
+      name: limit_test
+      value: 100
+    properties:
+      name:
+        description: Store Setting Name
+        type: string
+      value:
+        description: Store Setting Value
+        type: string
+    required:
+      - name
+    type: object
+  SettingFields:
+    properties:
+      id:
+        description: Unique identifier of the Store Setting
+        format: int32
+        type: integer
+      name:
+        description: Store Setting Name
+        type: string
+      value:
+        description: Store Setting Value
+        type: string
+    type: object
+  ShippingAddress:
+    properties:
+      address:
+        description: Address of the Customer's Shipping Address
+        type: string
+      city:
+        description: City of the Customer's Shipping Address
+        type: string
+      country:
+        description: Country of the Customer's Shipping Address
+        type: string
+      municipality:
+        description: Municipality of the Customer's Shipping Address
+        type: string
+      name:
+        description: Name of the Customer's Shipping Address
+        type: string
+      postal:
+        description: Postal code of the Customer's Shipping Address
+        type: string
+      region:
+        description: Region of the Customer's Shipping Address
+        type: string
+      surname:
+        description: Surname of the Customer's Shipping Address
+        type: string
+  StatusInvalid:
+    properties:
+      message:
+        type: string
+  Store:
+    properties:
+      code:
+        description: Store Code
+        type: string
+      country:
+        description: Store Country
+        type: string
+      currency:
+        description: Store Currency
+        type: string
+      email:
+        description: Store Admin Email
+        type: string
+      hooks_token:
+        description: Store Hooks Auth token
+        type: string
+      logo:
+        description: Store Logo URL
+        type: string
+      name:
+        description: Store Name
+        type: string
+      url:
+        description: Store URL
+        type: string
+    type: object
+  Variant:
+    properties:
+      variant:
+        $ref: '#/definitions/VariantFields'
+    type: object
+  VariantEdit:
+    properties:
+      variant:
+        $ref: '#/definitions/VariantEditFields'
+    type: object
+  VariantEditFields:
+    properties:
+      id:
+        description: Unique identifier of the product
+        format: int32
+        type: integer
+      image_id:
+        description: Unique identifier of the product image to associate with this variant
+        format: int32
+        type: integer
+      price:
+        description: Price of the product
+        format: float
+        type: number
+      sku:
+        description: Stock Keeping Unit of the Product's Variant
+        type: string
+      stock:
+        default: 100
+        description: Quantity in stock for the Product's Variant
+        format: int32
+        type: integer
+      stock_unlimited:
+        description: True if the Product's Variant has unlimited stock
+        type: boolean
+    type: object
+  VariantFields:
+    properties:
+      id:
+        description: Unique identifier of the product
+        format: int32
+        type: integer
+      price:
+        description: Price of the product
+        format: float
+        type: number
+      sku:
+        description: Stock Keeping Unit of the Product's Variant
+        type: string
+      stock:
+        default: 100
+        description: Quantity in stock for the Product's Variant
+        format: int32
+        type: integer
+      stock_unlimited:
+        description: True if the Product's Variant has unlimited stock
+        type: boolean
+    type: object
