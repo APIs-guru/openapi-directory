@@ -172,6 +172,7 @@ program
   .option('-d, --desclang <LANG>', 'specify description language')
   .option('-c, --categories <CATEGORIES>', 'csv list of categories')
   .option('-f, --fixup', 'try to fix definition')
+  .option('-i, --ignore','ignore validation errors')
   .option('-l, --logo <LOGO>', 'specify logo url')
   .option('-s, --service <NAME>', 'supply service name')
   .option('-t, --twitter <NAME>', 'supply x-twitter account, logo not needed')
@@ -470,7 +471,7 @@ function writeSpec(source, format, exPatch, command) {
     .then(validation => {
       context.validation = validation;
 
-      if (validation.errors)
+      if (validation.errors && !command.ignore)
         throw Error('Validation errors!!!');
 
       if (command && command.quiet) {
@@ -512,13 +513,12 @@ function writeSpec(source, format, exPatch, command) {
       if (!fromLeads) {
         if (e.message.indexOf('Can not')>=0)
           e.message = 'Warning: '+e.message;
-        if (fromLeads) {
-          e.message = 'Warning: '+e.message;
-          newBlackList.push(resolverContext.source);
-        }
         if (resolverContext.anyDiff || (!e.message.startsWith('Warning')))
           throw new SpecError(e, context);
         console.log(e.message);
+      }
+      else {
+        newBlackList.push(resolverContext.source);
       }
     });
 }
