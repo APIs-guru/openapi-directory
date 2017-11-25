@@ -329,6 +329,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#InvalidateProjectCache':
+    post:
+      operationId: InvalidateProjectCache
+      description: Resets the cache for a project.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/InvalidateProjectCacheOutput'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/InvalidateProjectCacheInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListBuilds':
     post:
       operationId: ListBuilds
@@ -827,6 +860,9 @@ definitions:
       artifacts:
         $ref: '#/definitions/BuildArtifacts'
         description: Information about the output artifacts for the build.
+      cache:
+        $ref: '#/definitions/ProjectCache'
+        description: Information about the cache for the build.
       environment:
         $ref: '#/definitions/ProjectEnvironment'
         description: Information about the build environment for this build.
@@ -842,6 +878,12 @@ definitions:
       initiator:
         $ref: '#/definitions/String'
         description: '<p>The entity that started the build. Valid values include:</p> <ul> <li> <p>If AWS CodePipeline started the build, the pipeline''s name (for example, <code>codepipeline/my-demo-pipeline</code>).</p> </li> <li> <p>If an AWS Identity and Access Management (IAM) user started the build, the user''s name (for example <code>MyUserName</code>).</p> </li> <li> <p>If the Jenkins plugin for AWS CodeBuild started the build, the string <code>CodeBuild-Jenkins-Plugin</code>.</p> </li> </ul>'
+      vpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'If your AWS CodeBuild project accesses resources in an Amazon VPC, you provide this parameter that identifies the VPC ID and the list of security group IDs and subnet IDs. The security groups and subnets must belong to the same VPC. You must provide at least one security group and one subnet ID.'
+      networkInterface:
+        $ref: '#/definitions/NetworkInterface'
+        description: Describes a network interface.
     description: Information about a build.
   BuildArtifacts:
     type: object
@@ -919,6 +961,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BuildNotDeleted'
+  CacheType:
+    type: string
+    enum:
+      - NO_CACHE
+      - S3
   ComputeType:
     type: string
     enum:
@@ -945,6 +992,9 @@ definitions:
       artifacts:
         $ref: '#/definitions/ProjectArtifacts'
         description: Information about the build output artifacts for the build project.
+      cache:
+        $ref: '#/definitions/ProjectCache'
+        description: Stores recently used information so that it can be quickly accessed at a later time.
       environment:
         $ref: '#/definitions/ProjectEnvironment'
         description: Information about the build environment for the build project.
@@ -960,6 +1010,12 @@ definitions:
       tags:
         $ref: '#/definitions/TagList'
         description: <p>A set of tags for this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>
+      vpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
+      badgeEnabled:
+        $ref: '#/definitions/WrapperBoolean'
+        description: Set this to true to generate a publicly-accessible URL for your project's build badge.
   CreateProjectOutput:
     type: object
     properties:
@@ -1077,6 +1133,17 @@ definitions:
     type: object
     properties: {}
     description: The input value that was provided is not valid.
+  InvalidateProjectCacheInput:
+    type: object
+    required:
+      - projectName
+    properties:
+      projectName:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of the build project that the cache will be reset for.
+  InvalidateProjectCacheOutput:
+    type: object
+    properties: {}
   KeyInput:
     type: string
     pattern: '^([\\p{L}\\p{Z}\\p{N}_.:/=@+\\-]*)$'
@@ -1178,6 +1245,16 @@ definitions:
         $ref: '#/definitions/String'
         description: The URL to an individual build log in Amazon CloudWatch Logs.
     description: Information about build logs in Amazon CloudWatch Logs.
+  NetworkInterface:
+    type: object
+    properties:
+      subnetId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ID of the subnet.
+      networkInterfaceId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ID of the network interface.
+    description: Describes a network interface.
   NonEmptyString:
     type: string
     minLength: 1
@@ -1223,6 +1300,9 @@ definitions:
       artifacts:
         $ref: '#/definitions/ProjectArtifacts'
         description: Information about the build output artifacts for the build project.
+      cache:
+        $ref: '#/definitions/ProjectCache'
+        description: Information about the cache for the build project.
       environment:
         $ref: '#/definitions/ProjectEnvironment'
         description: Information about the build environment for this build project.
@@ -1247,6 +1327,12 @@ definitions:
       webhook:
         $ref: '#/definitions/Webhook'
         description: Information about a webhook in GitHub that connects repository events to a build project in AWS CodeBuild.
+      vpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: 'If your AWS CodeBuild project accesses resources in an Amazon VPC, you provide this parameter that identifies the VPC ID and the list of security group IDs and subnet IDs. The security groups and subnets must belong to the same VPC. You must provide at least one security group and one subnet ID.'
+      badge:
+        $ref: '#/definitions/ProjectBadge'
+        description: Information about the build badge for the build project.
     description: Information about a build project.
   ProjectArtifacts:
     type: object
@@ -1272,6 +1358,28 @@ definitions:
         $ref: '#/definitions/ArtifactPackaging'
         description: '<p>The type of build output artifact to create, as follows:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, then AWS CodePipeline will ignore this value if specified. This is because AWS CodePipeline manages its build output artifacts instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, then this value will be ignored if specified, because no build output will be produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, valid values include:</p> <ul> <li> <p> <code>NONE</code>: AWS CodeBuild will create in the output bucket a folder containing the build output. This is the default if <code>packaging</code> is not specified.</p> </li> <li> <p> <code>ZIP</code>: AWS CodeBuild will create in the output bucket a ZIP file containing the build output.</p> </li> </ul> </li> </ul>'
     description: Information about the build output artifacts for the build project.
+  ProjectBadge:
+    type: object
+    properties:
+      badgeEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Set this to true to generate a publicly-accessible URL for your project's build badge.
+      badgeRequestUrl:
+        $ref: '#/definitions/String'
+        description: 'The publicly-accessible URL through which you can access the build badge for your project. '
+    description: Information about the build badge for the build project.
+  ProjectCache:
+    type: object
+    required:
+      - type
+    properties:
+      type:
+        $ref: '#/definitions/CacheType'
+        description: '<p>The type of cache used by the build project. Valid values include:</p> <ul> <li> <p> <code>NO_CACHE</code>: The build project will not use any cache.</p> </li> <li> <p> <code>S3</code>: The build project will read and write from/to S3.</p> </li> </ul>'
+      location:
+        $ref: '#/definitions/String'
+        description: '<p>Information about the cache location, as follows: </p> <ul> <li> <p> <code>NO_CACHE</code>: This value will be ignored.</p> </li> <li> <p> <code>S3</code>: This is the S3 bucket name/prefix.</p> </li> </ul>'
+    description: Information about the cache for the build project.
   ProjectDescription:
     type: string
     minLength: 0
@@ -1346,6 +1454,11 @@ definitions:
     type: object
     properties: {}
     description: The specified AWS resource cannot be found.
+  SecurityGroupIds:
+    type: array
+    items:
+      $ref: '#/definitions/NonEmptyString'
+    maxItems: 5
   SortOrderType:
     type: string
     enum:
@@ -1429,6 +1542,11 @@ definitions:
         description: Information about the build.
   String:
     type: string
+  Subnets:
+    type: array
+    items:
+      $ref: '#/definitions/NonEmptyString'
+    maxItems: 16
   Tag:
     type: object
     properties:
@@ -1469,6 +1587,9 @@ definitions:
       artifacts:
         $ref: '#/definitions/ProjectArtifacts'
         description: Information to be changed about the build output artifacts for the build project.
+      cache:
+        $ref: '#/definitions/ProjectCache'
+        description: Stores recently used information so that it can be quickly accessed at a later time.
       environment:
         $ref: '#/definitions/ProjectEnvironment'
         description: Information to be changed about the build environment for the build project.
@@ -1484,6 +1605,12 @@ definitions:
       tags:
         $ref: '#/definitions/TagList'
         description: <p>The replacement set of tags for this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>
+      vpcConfig:
+        $ref: '#/definitions/VpcConfig'
+        description: VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
+      badgeEnabled:
+        $ref: '#/definitions/WrapperBoolean'
+        description: Set this to true to generate a publicly-accessible URL for your project's build badge.
   UpdateProjectOutput:
     type: object
     properties:
@@ -1495,6 +1622,19 @@ definitions:
     pattern: '^([\\p{L}\\p{Z}\\p{N}_.:/=@+\\-]*)$'
     minLength: 1
     maxLength: 255
+  VpcConfig:
+    type: object
+    properties:
+      vpcId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ID of the Amazon VPC.
+      subnets:
+        $ref: '#/definitions/Subnets'
+        description: A list of one or more subnet IDs in your Amazon VPC.
+      securityGroupIds:
+        $ref: '#/definitions/SecurityGroupIds'
+        description: A list of one or more security groups IDs in your Amazon VPC.
+    description: 'If your AWS CodeBuild project accesses resources in an Amazon VPC, you provide this parameter that identifies the VPC ID and the list of security group IDs and subnet IDs. The security groups and subnets must belong to the same VPC. You must provide at least one security group and one subnet ID.'
   Webhook:
     type: object
     properties:

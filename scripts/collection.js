@@ -399,7 +399,7 @@ function saveFixup(fixupPath, spec, editedSpec) {
   var diff = jsondiffpatch.diff(spec, editedSpec);
   if (!_.isEmpty(diff))
     util.saveYaml(fixupPath, diff);
-  var jpdiff = jiff.diff(spec, editedSpec);
+  var jpdiff = jiff.diff(spec, editedSpec, {invertible:true});
   if (!_.isEmpty(jpdiff))
     util.saveYaml(fixupPath.replace('fixup','jpdiff'), jpdiff);
 }

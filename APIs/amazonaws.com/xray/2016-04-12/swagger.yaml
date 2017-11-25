@@ -120,6 +120,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchGetTracesRequest'
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -153,6 +158,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetServiceGraphRequest'
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -186,6 +196,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetTraceGraphRequest'
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -219,6 +234,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetTraceSummariesRequest'
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -389,6 +409,9 @@ definitions:
   Double:
     type: number
     format: double
+  EC2InstanceId:
+    type: string
+    maxLength: 20
   Edge:
     type: object
     properties:
@@ -434,6 +457,8 @@ definitions:
         $ref: '#/definitions/NullableDouble'
         description: The aggregate response time of completed requests.
     description: Response statistics for an edge.
+  ErrorMessage:
+    type: string
   ErrorStatistics:
     type: object
     properties:
@@ -459,7 +484,7 @@ definitions:
     description: Information about requests that failed with a 5xx Server Error status code.
   FilterExpression:
     type: string
-    minLength: 0
+    minLength: 1
     maxLength: 2000
   GetServiceGraphRequest:
     type: object
@@ -561,6 +586,9 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The prevalence of the entry.
     description: 'An entry in a histogram for a statistic. A histogram maps the range of observed values on the X axis, and the prevalence of each value on the Y axis.'
+  Hostname:
+    type: string
+    maxLength: 255
   Http:
     type: object
     properties:
@@ -584,7 +612,9 @@ definitions:
     type: integer
   InvalidRequestException:
     type: object
-    properties: {}
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
     description: The request is missing required parameters or has invalid parameters.
   NullableBoolean:
     type: boolean
@@ -604,13 +634,13 @@ definitions:
         $ref: '#/definitions/TelemetryRecordList'
         description: <p/>
       EC2InstanceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/EC2InstanceId'
         description: <p/>
       Hostname:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/Hostname'
         description: <p/>
       ResourceARN:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ResourceARN'
         description: <p/>
   PutTelemetryRecordsResult:
     type: object
@@ -629,6 +659,9 @@ definitions:
       UnprocessedTraceSegments:
         $ref: '#/definitions/UnprocessedTraceSegmentList'
         description: Segments that failed processing.
+  ResourceARN:
+    type: string
+    maxLength: 500
   Segment:
     type: object
     properties:
@@ -644,8 +677,6 @@ definitions:
     minLength: 1
   SegmentId:
     type: string
-    minLength: 16
-    maxLength: 16
   SegmentList:
     type: array
     items:
@@ -744,6 +775,8 @@ definitions:
     type: string
   TelemetryRecord:
     type: object
+    required:
+      - Timestamp
     properties:
       Timestamp:
         $ref: '#/definitions/Timestamp'
@@ -770,7 +803,9 @@ definitions:
       $ref: '#/definitions/TelemetryRecord'
   ThrottledException:
     type: object
-    properties: {}
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
     description: The request exceeds the maximum number of requests per second.
   Timestamp:
     type: string
@@ -790,7 +825,7 @@ definitions:
     description: A collection of segment documents with matching trace IDs.
   TraceId:
     type: string
-    minLength: 35
+    minLength: 1
     maxLength: 35
   TraceIdList:
     type: array

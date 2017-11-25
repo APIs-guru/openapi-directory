@@ -2568,6 +2568,16 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  AccessLogSettings:
+    type: object
+    properties:
+      format:
+        $ref: '#/definitions/String'
+        description: 'A single line format of the access logs of data, as specified by selected <a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference">$context variables</a>. The format must include at least <code>$context.requestId</code>.'
+      destinationArn:
+        $ref: '#/definitions/String'
+        description: The ARN of the CloudWatch Logs log group to receive access logs.
+    description: 'Access log settings, including the access log format and access log destination ARN.'
   Account:
     type: object
     properties:
@@ -3493,7 +3503,7 @@ definitions:
   GetIntegrationRequest:
     type: object
     properties: {}
-    description: Represents a get integration request.
+    description: Represents a request to get the integration configuration.
   GetIntegrationResponseRequest:
     type: object
     properties: {}
@@ -3638,6 +3648,9 @@ definitions:
       contentHandling:
         $ref: '#/definitions/ContentHandlingStrategy'
         description: '<p>Specifies how to handle request payload content type conversions. Supported values are <code>CONVERT_TO_BINARY</code> and <code>CONVERT_TO_TEXT</code>, with the following behaviors:</p> <ul> <li><p><code>CONVERT_TO_BINARY</code>: Converts a request payload from a Base64-encoded string to the corresponding binary blob.</p></li> <li><p><code>CONVERT_TO_TEXT</code>: Converts a request payload from a binary blob to a Base64-encoded string.</p></li> </ul> <p>If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the <code>passthroughBehaviors</code> is configured to support payload pass-through.</p>'
+      timeoutInMillis:
+        $ref: '#/definitions/Integer'
+        description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.'
       cacheNamespace:
         $ref: '#/definitions/String'
         description: Specifies the integration's cache namespace.
@@ -4097,6 +4110,9 @@ definitions:
       contentHandling:
         $ref: '#/definitions/ContentHandlingStrategy'
         description: '<p>Specifies how to handle request payload content type conversions. Supported values are <code>CONVERT_TO_BINARY</code> and <code>CONVERT_TO_TEXT</code>, with the following behaviors:</p> <ul> <li><p><code>CONVERT_TO_BINARY</code>: Converts a request payload from a Base64-encoded string to the corresponding binary blob.</p></li> <li><p><code>CONVERT_TO_TEXT</code>: Converts a request payload from a binary blob to a Base64-encoded string.</p></li> </ul> <p>If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the <code>passthroughBehaviors</code> is configured to support payload pass-through.</p>'
+      timeoutInMillis:
+        $ref: '#/definitions/NullableInteger'
+        description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.'
     description: Sets up a method's integration.
   PutIntegrationResponseRequest:
     type: object
@@ -4364,6 +4380,9 @@ definitions:
       documentationVersion:
         $ref: '#/definitions/String'
         description: The version of the associated API documentation.
+      accessLogSettings:
+        $ref: '#/definitions/AccessLogSettings'
+        description: The access log settings in this stage.
       createdDate:
         $ref: '#/definitions/Timestamp'
         description: The timestamp when the stage was created.

@@ -3,7 +3,7 @@ info:
   version: '2016-05-01'
   x-release: v4
   title: Amazon WorkDocs
-  description: '<p>The WorkDocs API is designed for the following use cases:</p> <ul> <li> <p>File Migration: File migration applications are supported for users who want to migrate their files from an on-premise or off-premise file system or service. Users can insert files into a user directory structure, as well as allow for basic metadata changes, such as modifications to the permissions of files.</p> </li> <li> <p>Security: Support security applications are supported for users who have additional security needs, such as anti-virus or data loss prevention. The APIs, in conjunction with Amazon CloudTrail, allow these applications to detect when changes occur in Amazon WorkDocs, so the application can take the necessary actions and replace the target file. The application can also choose to email the user if the target file violates the policy.</p> </li> <li> <p>eDiscovery/Analytics: General administrative applications are supported, such as eDiscovery and analytics. These applications can choose to mimic and/or record the actions in an Amazon WorkDocs site, in conjunction with Amazon CloudTrails, to replicate data for eDiscovery, backup, or analytical applications.</p> </li> </ul> <p>All Amazon WorkDocs APIs are Amazon authenticated, certificate-signed APIs. They not only require the use of the AWS SDK, but also allow for the exclusive use of IAM users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the Amazon WorkDocs site, the IAM user gains full administrative visibility into the entire Amazon WorkDocs site (or as set in the IAM policy). This includes, but is not limited to, the ability to modify file permissions and upload any file to any user. This allows developers to perform the three use cases above, as well as give users the ability to grant access on a selective basis using the IAM model.</p>'
+  description: '<p>The WorkDocs API is designed for the following use cases:</p> <ul> <li> <p>File Migration: File migration applications are supported for users who want to migrate their files from an on-premises or off-premises file system or service. Users can insert files into a user directory structure, as well as allow for basic metadata changes, such as modifications to the permissions of files.</p> </li> <li> <p>Security: Support security applications are supported for users who have additional security needs, such as antivirus or data loss prevention. The API actions, along with AWS CloudTrail, allow these applications to detect when changes occur in Amazon WorkDocs. Then, the application can take the necessary actions and replace the target file. If the target file violates the policy, the application can also choose to email the user.</p> </li> <li> <p>eDiscovery/Analytics: General administrative applications are supported, such as eDiscovery and analytics. These applications can choose to mimic or record the actions in an Amazon WorkDocs site, along with AWS CloudTrail, to replicate data for eDiscovery, backup, or analytical applications.</p> </li> </ul> <p>All Amazon WorkDocs API actions are Amazon authenticated and certificate-signed. They not only require the use of the AWS SDK, but also allow for the exclusive use of IAM users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the Amazon WorkDocs site, the IAM user gains full administrative visibility into the entire Amazon WorkDocs site (or as set in the IAM policy). This includes, but is not limited to, the ability to modify file permissions and upload any file to any user. This allows developers to perform the three use cases above, as well as give users the ability to grant access on a selective basis using the IAM model.</p>'
   x-logo:
     url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
     backgroundColor: '#FFFFFF'
@@ -903,6 +903,10 @@ paths:
           description: DeactivatingLastSystemUserException
           schema:
             $ref: '#/definitions/DeactivatingLastSystemUserException'
+        '487':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
       parameters:
         - name: body
           in: body
@@ -1092,10 +1096,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /api/v1/groups:
+    get:
+      operationId: DescribeGroups
+      description: Describes the groups specified by query.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeGroupsResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '482':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeGroupsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /api/v1/me/root:
     get:
       operationId: DescribeRootFolders
-      description: Describes the current user's special folders; the <code>RootFolder</code> and the <code>RecyleBin</code>. <code>RootFolder</code> is the root of user's files and folders and <code>RecyleBin</code> is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients.
+      description: Describes the current user's special folders; the <code>RootFolder</code> and the <code>RecycleBin</code>. <code>RootFolder</code> is the root of user's files and folders and <code>RecycleBin</code> is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients.
       responses:
         '200':
           description: Success
@@ -1479,6 +1524,9 @@ definitions:
       Principals:
         $ref: '#/definitions/SharePrincipalList'
         description: 'The users, groups, or organization being granted permission.'
+      NotificationOptions:
+        $ref: '#/definitions/NotificationOptions'
+        description: The notification options.
   AddResourcePermissionsResponse:
     type: object
     properties:
@@ -1490,6 +1538,11 @@ definitions:
     minLength: 1
     maxLength: 8199
     format: password
+  BooleanEnumType:
+    type: string
+    enum:
+      - 'TRUE'
+      - 'FALSE'
   BooleanType:
     type: boolean
   Comment:
@@ -1545,8 +1598,10 @@ definitions:
         description: The user who made the comment.
       CreatedTimestamp:
         $ref: '#/definitions/TimestampType'
+        description: The timestamp that the comment was created.
       CommentStatus:
         $ref: '#/definitions/CommentStatusType'
+        description: The status of the comment.
       RecipientId:
         $ref: '#/definitions/IdType'
         description: The ID of the user being replied to.
@@ -1633,7 +1688,7 @@ definitions:
       - Labels
     properties:
       Labels:
-        $ref: '#/definitions/Labels'
+        $ref: '#/definitions/SharedLabels'
         description: List of labels to add to the resource.
   CreateLabelsResponse:
     type: object
@@ -1650,7 +1705,7 @@ definitions:
         description: 'The endpoint to receive the notifications. If the protocol is HTTPS, the endpoint is a URL that begins with "https://".'
       Protocol:
         $ref: '#/definitions/SubscriptionProtocolType'
-        description: 'The protocol to use. The supported value is https, which delivers JSON-encoded messasges using HTTPS POST.'
+        description: 'The protocol to use. The supported value is https, which delivers JSON-encoded messages using HTTPS POST.'
       SubscriptionType:
         $ref: '#/definitions/SubscriptionType'
         description: The notification type.
@@ -1818,6 +1873,18 @@ definitions:
       Marker:
         $ref: '#/definitions/PageMarkerType'
         description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+  DescribeGroupsRequest:
+    type: object
+    properties: {}
+  DescribeGroupsResponse:
+    type: object
+    properties:
+      Groups:
+        $ref: '#/definitions/GroupMetadataList'
+        description: The list of groups.
+      Marker:
+        $ref: '#/definitions/MarkerType'
+        description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
   DescribeNotificationSubscriptionsRequest:
     type: object
     properties: {}
@@ -1904,7 +1971,7 @@ definitions:
         $ref: '#/definitions/ResourceStateType'
         description: The resource state.
       Labels:
-        $ref: '#/definitions/Labels'
+        $ref: '#/definitions/SharedLabels'
         description: List of labels on the document.
     description: Describes the document.
   DocumentMetadataList:
@@ -1973,16 +2040,16 @@ definitions:
         description: The status of the document.
       CreatedTimestamp:
         $ref: '#/definitions/TimestampType'
-        description: The time stamp when the document was first uploaded.
+        description: The timestamp when the document was first uploaded.
       ModifiedTimestamp:
         $ref: '#/definitions/TimestampType'
-        description: The time stamp when the document was last uploaded.
+        description: The timestamp when the document was last uploaded.
       ContentCreatedTimestamp:
         $ref: '#/definitions/TimestampType'
-        description: The time stamp when the content of the document was originally created.
+        description: The timestamp when the content of the document was originally created.
       ContentModifiedTimestamp:
         $ref: '#/definitions/TimestampType'
-        description: The time stamp when the content of the document was modified.
+        description: The timestamp when the content of the document was modified.
       CreatorId:
         $ref: '#/definitions/IdType'
         description: The ID of the creator.
@@ -2037,7 +2104,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/ErrorMessageType'
-    description: 'The AWS Directory Service cannot reach an on-premises instance. Or a dependency under the control of the organization is failing, such as a connected active directory.'
+    description: 'The AWS Directory Service cannot reach an on-premises instance. Or a dependency under the control of the organization is failing, such as a connected Active Directory.'
   FieldNamesType:
     type: string
     pattern: '[\w,]+'
@@ -2077,7 +2144,7 @@ definitions:
         $ref: '#/definitions/HashType'
         description: The unique identifier created from the subfolders and documents of the folder.
       Labels:
-        $ref: '#/definitions/Labels'
+        $ref: '#/definitions/SharedLabels'
         description: List of labels on the folder.
       Size:
         $ref: '#/definitions/SizeType'
@@ -2207,10 +2274,10 @@ definitions:
         description: The name of the document.
       ContentCreatedTimestamp:
         $ref: '#/definitions/TimestampType'
-        description: The time stamp when the content of the document was originally created.
+        description: The timestamp when the content of the document was originally created.
       ContentModifiedTimestamp:
         $ref: '#/definitions/TimestampType'
-        description: The time stamp when the content of the document was modified.
+        description: The timestamp when the content of the document was modified.
       ContentType:
         $ref: '#/definitions/DocumentContentType'
         description: The content type of the document.
@@ -2234,23 +2301,19 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/ErrorMessageType'
-    description: The pagination marker and/or limit fields are not valid.
+    description: The pagination marker or limit fields are not valid.
   InvalidOperationException:
     type: object
     properties:
       Message:
         $ref: '#/definitions/ErrorMessageType'
     description: The operation is invalid.
-  Label:
-    type: string
-    pattern: '[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*'
-    minLength: 1
-    maxLength: 32
-  Labels:
-    type: array
-    items:
-      $ref: '#/definitions/Label'
-    maxItems: 20
+  InvalidPasswordException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessageType'
+    description: The password is invalid.
   LimitExceededException:
     type: object
     properties:
@@ -2285,6 +2348,16 @@ definitions:
     minLength: 0
     maxLength: 2048
     format: password
+  NotificationOptions:
+    type: object
+    properties:
+      SendEmail:
+        $ref: '#/definitions/BooleanType'
+        description: Boolean value to indicate an email notification should be sent to the receipients.
+      EmailMessage:
+        $ref: '#/definitions/MessageType'
+        description: Text value to be included in the email body.
+    description: Set of options which defines notification preferences of given action.
   OrderType:
     type: string
     enum:
@@ -2307,7 +2380,7 @@ definitions:
       Groups:
         $ref: '#/definitions/GroupMetadataList'
         description: The list of user groups.
-    description: Describes the users and/or user groups.
+    description: Describes the users or user groups.
   PasswordType:
     type: string
     pattern: '[\u0020-\u00FF]+'
@@ -2328,6 +2401,9 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PermissionInfo'
+  PositiveIntegerType:
+    type: integer
+    minimum: 1
   PositiveSizeType:
     type: integer
     minimum: 0
@@ -2390,7 +2466,7 @@ definitions:
         description: The name of the resource.
       OriginalName:
         $ref: '#/definitions/ResourceNameType'
-        description: The original name of the resource prior to a rename operation.
+        description: The original name of the resource before a rename operation.
       Id:
         $ref: '#/definitions/ResourceIdType'
         description: The ID of the resource.
@@ -2520,6 +2596,16 @@ definitions:
     enum:
       - SUCCESS
       - FAILURE
+  SharedLabel:
+    type: string
+    pattern: '[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*'
+    minLength: 1
+    maxLength: 32
+  SharedLabels:
+    type: array
+    items:
+      $ref: '#/definitions/SharedLabel'
+    maxItems: 20
   SignedHeaderMap:
     type: array
     items:
@@ -2628,7 +2714,7 @@ definitions:
         description: The ID of the parent folder.
       ResourceState:
         $ref: '#/definitions/ResourceStateType'
-        description: The resource state of the document. Note that only ACTIVE and RECYCLED are supported.
+        description: The resource state of the document. Only ACTIVE and RECYCLED are supported.
   UpdateDocumentVersionRequest:
     type: object
     properties:
@@ -2646,7 +2732,7 @@ definitions:
         description: The ID of the parent folder.
       ResourceState:
         $ref: '#/definitions/ResourceStateType'
-        description: The resource state of the folder. Note that only ACTIVE and RECYCLED are accepted values from the API.
+        description: The resource state of the folder. Only ACTIVE and RECYCLED are accepted values from the API.
   UpdateUserRequest:
     type: object
     properties:
@@ -2668,6 +2754,9 @@ definitions:
       Locale:
         $ref: '#/definitions/LocaleType'
         description: The locale of the user.
+      GrantPoweruserPrivileges:
+        $ref: '#/definitions/BooleanEnumType'
+        description: Boolean value to determine whether the user is granted Poweruser privileges.
   UpdateUserResponse:
     type: object
     properties:
@@ -2764,7 +2853,7 @@ definitions:
         description: The ID of the user.
       Username:
         $ref: '#/definitions/UsernameType'
-        description: The username of the user.
+        description: The name of the user.
       GivenName:
         $ref: '#/definitions/UserAttributeValueType'
         description: The given name of the user before a rename operation.
@@ -2798,7 +2887,7 @@ definitions:
     properties:
       StorageUtilizedInBytes:
         $ref: '#/definitions/SizeType'
-        description: 'The amount of storage utilized, in bytes.'
+        description: 'The amount of storage used, in bytes.'
       StorageRule:
         $ref: '#/definitions/StorageRuleType'
         description: The storage for a user.
@@ -2808,6 +2897,9 @@ definitions:
     enum:
       - USER
       - ADMIN
+      - POWERUSER
+      - MINIMALUSER
+      - WORKSPACESUSER
   UsernameType:
     type: string
     pattern: '[\w\-+.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z]+)?'
