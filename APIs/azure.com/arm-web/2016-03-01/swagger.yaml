@@ -1,0 +1,725 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  title: ' API Client'
+  version: '2016-03-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-web/2016-03-01/swagger/ResourceProvider.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: arm-web
+  x-preferred: false
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  apiVersionParameter:
+    description: API Version
+    in: query
+    name: api-version
+    required: true
+    type: string
+  resourceGroupNameParameter:
+    description: Name of the resource group to which the resource belongs.
+    in: path
+    maxLength: 90
+    minLength: 1
+    name: resourceGroupName
+    pattern: '^[-\w\._\(\)]+[^\.]$'
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  subscriptionIdParameter:
+    description: Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  /providers/Microsoft.Web/publishingUsers/web:
+    get:
+      description: Gets publishing user
+      operationId: GetPublishingUser
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+      summary: Gets publishing user
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/x-www-form-urlencoded
+      description: Updates publishing user
+      operationId: UpdatePublishingUser
+      parameters:
+        - description: Details of publishing user
+          in: body
+          name: userDetails
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+      summary: Updates publishing user
+  /providers/Microsoft.Web/sourcecontrols:
+    get:
+      description: Gets the source controls available for Azure websites.
+      operationId: ListSourceControls
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SourceControlCollection'
+      summary: Gets the source controls available for Azure websites.
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/providers/Microsoft.Web/sourcecontrols/{sourceControlType}':
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/x-www-form-urlencoded
+      description: Updates source control token
+      operationId: UpdateSourceControl
+      parameters:
+        - description: Type of source control
+          in: path
+          name: sourceControlType
+          required: true
+          type: string
+        - description: Source control token information
+          in: body
+          name: requestMessage
+          required: true
+          schema:
+            $ref: '#/definitions/SourceControl'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SourceControl'
+      summary: Updates source control token
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Web/checknameavailability':
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      description: Check if a resource name is available.
+      operationId: CheckNameAvailability
+      parameters:
+        - description: Name availability request.
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/ResourceNameAvailabilityRequest'
+          x-ms-client-flatten: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ResourceNameAvailability'
+      summary: Check if a resource name is available.
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Web/geoRegions':
+    get:
+      description: Get a list of available geographical regions.
+      operationId: ListGeoRegions
+      parameters:
+        - description: Name of SKU used to filter the regions.
+          enum:
+            - Free
+            - Shared
+            - Basic
+            - Standard
+            - Premium
+            - Dynamic
+            - Isolated
+          in: query
+          name: sku
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: SkuName
+        - description: Specify <code>true</code> if you want to filter to only regions that support Linux workers.
+          in: query
+          name: linuxWorkersEnabled
+          type: boolean
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GeoRegionCollection'
+      summary: Get a list of available geographical regions.
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Web/premieraddonoffers':
+    get:
+      description: List all premier add-on offers.
+      operationId: ListPremierAddOnOffers
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PremierAddOnOfferCollection'
+      summary: List all premier add-on offers.
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Web/skus':
+    get:
+      description: List all SKUs.
+      operationId: ListSkus
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SkuInfos'
+      summary: List all SKUs.
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources':
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      description: Move resources between resource groups.
+      operationId: Move
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Object that represents the resource to move.
+          in: body
+          name: moveResourceEnvelope
+          required: true
+          schema:
+            $ref: '#/definitions/CsmMoveResourceEnvelope'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '204':
+          description: No Content
+      summary: Move resources between resource groups.
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/validate':
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      description: Validate if a resource can be created.
+      operationId: Validate
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Request with the resources to validate.
+          in: body
+          name: validateRequest
+          required: true
+          schema:
+            $ref: '#/definitions/ValidateRequest'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ValidateResponse'
+      summary: Validate if a resource can be created.
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources':
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      description: Validate whether a resource can be moved.
+      operationId: ValidateMove
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Object that represents the resource to move.
+          in: body
+          name: moveResourceEnvelope
+          required: true
+          schema:
+            $ref: '#/definitions/CsmMoveResourceEnvelope'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '204':
+          description: No Content
+      summary: Validate whether a resource can be moved.
+definitions:
+  Capability:
+    description: Describes the capabilities/features allowed for a specific SKU.
+    properties:
+      name:
+        description: Name of the SKU capability.
+        type: string
+      reason:
+        description: Reason of the SKU capability.
+        type: string
+      value:
+        description: Value of the SKU capability.
+        type: string
+    type: object
+  CsmMoveResourceEnvelope:
+    description: Object with a list of the resources that need to be moved and the resource group they should be moved to.
+    properties:
+      resources:
+        items:
+          type: string
+        type: array
+      targetResourceGroup:
+        maxLength: 90
+        minLength: 1
+        pattern: ' ^[-\w\._\(\)]+[^\.]$'
+        type: string
+    type: object
+  GeoRegion:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Geographical region.
+    properties:
+      properties:
+        description: GeoRegion resource specific properties
+        properties:
+          description:
+            description: Region description.
+            readOnly: true
+            type: string
+          displayName:
+            description: Display name for region.
+            readOnly: true
+            type: string
+          name:
+            description: Region name.
+            readOnly: true
+            type: string
+        x-ms-client-flatten: true
+    type: object
+  GeoRegionCollection:
+    description: Collection of geographical regions.
+    properties:
+      nextLink:
+        description: Link to next page of resources.
+        type: string
+      value:
+        description: Collection of resources.
+        items:
+          $ref: '#/definitions/GeoRegion'
+        type: array
+    required:
+      - value
+    type: object
+  GlobalCsmSkuDescription:
+    description: A Global SKU Description.
+    properties:
+      capabilities:
+        description: 'Capabilities of the SKU, e.g., is traffic manager enabled?'
+        items:
+          $ref: '#/definitions/Capability'
+        type: array
+      capacity:
+        $ref: '#/definitions/SkuCapacity'
+        description: 'Min, max, and default scale values of the SKU.'
+      locations:
+        description: Locations of the SKU.
+        items:
+          type: string
+        type: array
+      name:
+        description: Name of the resource SKU.
+        type: string
+      tier:
+        description: Service Tier of the resource SKU.
+        type: string
+    type: object
+  PremierAddOnOffer:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Premier add-on offer.
+    properties:
+      properties:
+        description: PremierAddOnOffer resource specific properties
+        properties:
+          legalTermsUrl:
+            description: Legal terms URL.
+            type: string
+          marketplaceOffer:
+            description: Marketplace offer.
+            type: string
+          marketplacePublisher:
+            description: Marketplace publisher.
+            type: string
+          name:
+            description: Name.
+            type: string
+          privacyPolicyUrl:
+            description: Privacy policy URL.
+            type: string
+          product:
+            description: Product.
+            type: string
+          promoCodeRequired:
+            description: '<code>true</code> if promotion code is required; otherwise, <code>false</code>.'
+            type: boolean
+          quota:
+            description: Quota.
+            format: int32
+            type: integer
+          sku:
+            description: SKU.
+            type: string
+          vendor:
+            description: Vendor.
+            type: string
+          webHostingPlanRestrictions:
+            description: App Service plans this offer is restricted to.
+            enum:
+              - None
+              - Free
+              - Shared
+              - Basic
+              - Standard
+              - Premium
+            type: string
+            x-ms-enum:
+              modelAsString: false
+              name: AppServicePlanRestrictions
+        x-ms-client-flatten: true
+    type: object
+  PremierAddOnOfferCollection:
+    description: Collection of premier add-on offers.
+    properties:
+      nextLink:
+        description: Link to next page of resources.
+        type: string
+      value:
+        description: Collection of resources.
+        items:
+          $ref: '#/definitions/PremierAddOnOffer'
+        type: array
+    required:
+      - value
+    type: object
+  Resource:
+    description: Azure resource.
+    properties:
+      id:
+        description: Resource Id.
+        readOnly: true
+        type: string
+      kind:
+        description: Kind of resource.
+        type: string
+      location:
+        description: Resource Location.
+        type: string
+      name:
+        description: Resource Name.
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags.
+        type: object
+      type:
+        description: Resource type.
+        type: string
+    required:
+      - location
+    x-ms-azure-resource: true
+  ResourceNameAvailability:
+    description: Information regarding availbility of a resource name.
+    properties:
+      message:
+        description: 'If reason == invalid, provide the user with the reason why the given name is invalid, and provide the resource naming requirements so that the user can select a valid name. If reason == AlreadyExists, explain that resource name is already in use, and direct them to select a different name.'
+        type: string
+      nameAvailable:
+        description: '<code>true</code> indicates name is valid and available. <code>false</code> indicates the name is invalid, unavailable, or both.'
+        type: boolean
+      reason:
+        description: <code>Invalid</code> indicates the name provided does not match Azure App Service naming requirements. <code>AlreadyExists</code> indicates that the name is already in use and is therefore unavailable.
+        enum:
+          - Invalid
+          - AlreadyExists
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: InAvailabilityReasonType
+    type: object
+  ResourceNameAvailabilityRequest:
+    description: Resource name availability request content.
+    properties:
+      isFqdn:
+        description: Is fully qualified domain name.
+        type: boolean
+      name:
+        description: Resource name to verify.
+        type: string
+      type:
+        description: Resource type used for verification.
+        enum:
+          - Site
+          - Slot
+          - HostingEnvironment
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: CheckNameResourceTypes
+    required:
+      - name
+      - type
+    type: object
+  SkuCapacity:
+    description: Description of the App Service plan scale options.
+    properties:
+      default:
+        description: Default number of workers for this App Service plan SKU.
+        format: int32
+        type: integer
+      maximum:
+        description: Maximum number of workers for this App Service plan SKU.
+        format: int32
+        type: integer
+      minimum:
+        description: Minimum number of workers for this App Service plan SKU.
+        format: int32
+        type: integer
+      scaleType:
+        description: Available scale configurations for an App Service plan.
+        type: string
+    type: object
+  SkuInfos:
+    description: Collection of SKU information.
+    properties:
+      resourceType:
+        description: Resource type that this SKU applies to.
+        type: string
+      skus:
+        description: List of SKUs the subscription is able to use.
+        items:
+          $ref: '#/definitions/GlobalCsmSkuDescription'
+        type: array
+    type: object
+  SourceControl:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The source control OAuth token.
+    properties:
+      properties:
+        description: SourceControl resource specific properties
+        properties:
+          expirationTime:
+            description: OAuth token expiration.
+            format: date-time
+            type: string
+          name:
+            description: Name or source control type.
+            type: string
+          refreshToken:
+            description: OAuth refresh token.
+            type: string
+          token:
+            description: OAuth access token.
+            type: string
+          tokenSecret:
+            description: OAuth access token secret.
+            type: string
+        x-ms-client-flatten: true
+    type: object
+  SourceControlCollection:
+    description: Collection of source controls.
+    properties:
+      nextLink:
+        description: Link to next page of resources.
+        type: string
+      value:
+        description: Collection of resources.
+        items:
+          $ref: '#/definitions/SourceControl'
+        type: array
+    required:
+      - value
+    type: object
+  User:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: User crendentials used for publishing activity.
+    properties:
+      properties:
+        description: User resource specific properties
+        properties:
+          name:
+            description: Username
+            type: string
+            x-ms-client-name: UserName
+          publishingPassword:
+            description: Password used for publishing.
+            format: password
+            type: string
+          publishingPasswordHash:
+            description: Password hash used for publishing.
+            format: password
+            type: string
+          publishingPasswordHashSalt:
+            description: Password hash salt used for publishing.
+            format: password
+            type: string
+          publishingUserName:
+            description: Username used for publishing.
+            type: string
+        required:
+          - publishingUserName
+        x-ms-client-flatten: true
+    type: object
+  ValidateProperties:
+    description: App properties used for validation.
+    properties:
+      capacity:
+        description: Target capacity of the App Service plan (number of VM's).
+        format: int32
+        minimum: 1
+        type: integer
+      hostingEnvironment:
+        description: Name of App Service Environment where app or App Service plan should be created.
+        type: string
+      needLinuxWorkers:
+        description: '<code>true</code> if App Service plan is for Linux workers; otherwise, <code>false</code>.'
+        type: boolean
+      serverFarmId:
+        description: ARM resource ID of an App Service plan that would host the app.
+        type: string
+      skuName:
+        description: Name of the target SKU for the App Service plan.
+        type: string
+    type: object
+  ValidateRequest:
+    description: Resource validation request content.
+    properties:
+      location:
+        description: Expected location of the resource.
+        type: string
+      name:
+        description: Resource name to verify.
+        type: string
+      properties:
+        $ref: '#/definitions/ValidateProperties'
+        description: Properties of the resource to validate.
+        x-ms-client-flatten: true
+      type:
+        description: Resource type used for verification.
+        enum:
+          - ServerFarm
+          - Site
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ValidateResourceTypes
+    required:
+      - name
+      - type
+      - location
+      - properties
+    type: object
+  ValidateResponse:
+    description: Describes the result of resource validation.
+    properties:
+      error:
+        $ref: '#/definitions/ValidateResponseError'
+        description: Error details for the case when validation fails.
+      status:
+        description: Result of validation.
+        type: string
+    type: object
+  ValidateResponseError:
+    description: Error details for when validation fails.
+    properties:
+      code:
+        description: Validation error code.
+        type: string
+      message:
+        description: Validation error message.
+        type: string
+    type: object
