@@ -2,14 +2,14 @@ swagger: '2.0'
 schemes:
   - https
 host: www.googleapis.com
-basePath: /dfareporting/v2.7
+basePath: /dfareporting/v2.8
 info:
   contact:
     name: Google
     url: 'https://google.com'
   description: Manages your DoubleClick Campaign Manager ad campaigns and reports.
   title: DCM/DFA Reporting And Trafficking
-  version: v2.7
+  version: v2.8
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
   x-logo:
@@ -19,7 +19,7 @@ info:
         url: 'https://github.com/lucybot/api-spec-converter'
         version: 2.6.0
       format: google
-      url: 'https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.7/rest'
+      url: 'https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.8/rest'
       version: v1
   x-preferred: false
   x-providerName: googleapis.com
@@ -143,14 +143,14 @@ paths:
       description: Retrieves a report file by its report ID and file ID. This method supports media download.
       operationId: dfareporting.files.get
       parameters:
-        - description: The ID of the report.
-          in: path
-          name: reportId
-          required: true
-          type: string
         - description: The ID of the report file.
           in: path
           name: fileId
+          required: true
+          type: string
+        - description: The ID of the report.
+          in: path
+          name: reportId
           required: true
           type: string
       responses:
@@ -291,14 +291,14 @@ paths:
       description: Gets one account permission group by ID.
       operationId: dfareporting.accountPermissionGroups.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Account permission group ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -352,14 +352,14 @@ paths:
       description: Gets one account permission by ID.
       operationId: dfareporting.accountPermissions.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Account permission ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -462,20 +462,20 @@ paths:
       description: Updates an existing account user profile. This method supports patch semantics.
       operationId: dfareporting.accountUserProfiles.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AccountUserProfile'
         - description: User profile ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AccountUserProfile'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -490,15 +490,15 @@ paths:
       description: Inserts a new account user profile.
       operationId: dfareporting.accountUserProfiles.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AccountUserProfile'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AccountUserProfile'
       responses:
         '200':
           description: Successful response
@@ -513,15 +513,15 @@ paths:
       description: Updates an existing account user profile.
       operationId: dfareporting.accountUserProfiles.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AccountUserProfile'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AccountUserProfile'
       responses:
         '200':
           description: Successful response
@@ -537,14 +537,14 @@ paths:
       description: Gets one account user profile by ID.
       operationId: dfareporting.accountUserProfiles.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: User profile ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -639,20 +639,20 @@ paths:
       description: Updates an existing account. This method supports patch semantics.
       operationId: dfareporting.accounts.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Account'
         - description: Account ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Account'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -667,15 +667,15 @@ paths:
       description: Updates an existing account.
       operationId: dfareporting.accounts.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Account'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Account'
       responses:
         '200':
           description: Successful response
@@ -691,14 +691,14 @@ paths:
       description: Gets one account by ID.
       operationId: dfareporting.accounts.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Account ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -895,20 +895,20 @@ paths:
       description: Updates an existing ad. This method supports patch semantics.
       operationId: dfareporting.ads.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Ad'
         - description: Ad ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Ad'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -923,15 +923,15 @@ paths:
       description: Inserts a new ad.
       operationId: dfareporting.ads.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Ad'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Ad'
       responses:
         '200':
           description: Successful response
@@ -946,15 +946,15 @@ paths:
       description: Updates an existing ad.
       operationId: dfareporting.ads.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Ad'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Ad'
       responses:
         '200':
           description: Successful response
@@ -970,14 +970,14 @@ paths:
       description: Gets one ad by ID.
       operationId: dfareporting.ads.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Ad ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -1068,20 +1068,20 @@ paths:
       description: Updates an existing advertiser group. This method supports patch semantics.
       operationId: dfareporting.advertiserGroups.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AdvertiserGroup'
         - description: Advertiser group ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AdvertiserGroup'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1096,15 +1096,15 @@ paths:
       description: Inserts a new advertiser group.
       operationId: dfareporting.advertiserGroups.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AdvertiserGroup'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AdvertiserGroup'
       responses:
         '200':
           description: Successful response
@@ -1119,15 +1119,15 @@ paths:
       description: Updates an existing advertiser group.
       operationId: dfareporting.advertiserGroups.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AdvertiserGroup'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AdvertiserGroup'
       responses:
         '200':
           description: Successful response
@@ -1143,14 +1143,14 @@ paths:
       description: Deletes an existing advertiser group.
       operationId: dfareporting.advertiserGroups.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Advertiser group ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -1165,14 +1165,14 @@ paths:
       description: Gets one advertiser group by ID.
       operationId: dfareporting.advertiserGroups.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Advertiser group ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -1296,20 +1296,20 @@ paths:
       description: Updates an existing advertiser. This method supports patch semantics.
       operationId: dfareporting.advertisers.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Advertiser'
         - description: Advertiser ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Advertiser'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1324,15 +1324,15 @@ paths:
       description: Inserts a new advertiser.
       operationId: dfareporting.advertisers.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Advertiser'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Advertiser'
       responses:
         '200':
           description: Successful response
@@ -1347,15 +1347,15 @@ paths:
       description: Updates an existing advertiser.
       operationId: dfareporting.advertisers.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Advertiser'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Advertiser'
       responses:
         '200':
           description: Successful response
@@ -1371,14 +1371,14 @@ paths:
       description: Gets one advertiser by ID.
       operationId: dfareporting.advertisers.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Advertiser ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -1534,20 +1534,20 @@ paths:
       description: Updates an existing campaign. This method supports patch semantics.
       operationId: dfareporting.campaigns.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Campaign'
         - description: Campaign ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Campaign'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1562,11 +1562,10 @@ paths:
       description: Inserts a new campaign.
       operationId: dfareporting.campaigns.insert
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Campaign'
         - description: Default landing page name for this new campaign. Must be less than 256 characters long.
           in: query
           name: defaultLandingPageName
@@ -1577,10 +1576,11 @@ paths:
           name: defaultLandingPageUrl
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Campaign'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1595,15 +1595,15 @@ paths:
       description: Updates an existing campaign.
       operationId: dfareporting.campaigns.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Campaign'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Campaign'
       responses:
         '200':
           description: Successful response
@@ -1670,20 +1670,20 @@ paths:
       description: Associates a creative with the specified campaign. This method creates a default ad with dimensions matching the creative in the campaign if such a default ad does not exist already.
       operationId: dfareporting.campaignCreativeAssociations.insert
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CampaignCreativeAssociation'
         - description: Campaign ID in this association.
           in: path
           name: campaignId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CampaignCreativeAssociation'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1699,14 +1699,14 @@ paths:
       description: Retrieves the list of landing pages for the specified campaign.
       operationId: dfareporting.landingPages.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Landing page campaign ID.
           in: path
           name: campaignId
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -1731,11 +1731,10 @@ paths:
       description: Updates an existing campaign landing page. This method supports patch semantics.
       operationId: dfareporting.landingPages.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LandingPage'
         - description: Landing page campaign ID.
           in: path
           name: campaignId
@@ -1746,10 +1745,11 @@ paths:
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LandingPage'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1764,20 +1764,20 @@ paths:
       description: Inserts a new landing page for the specified campaign.
       operationId: dfareporting.landingPages.insert
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LandingPage'
         - description: Landing page campaign ID.
           in: path
           name: campaignId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LandingPage'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1792,20 +1792,20 @@ paths:
       description: Updates an existing campaign landing page.
       operationId: dfareporting.landingPages.update
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LandingPage'
         - description: Landing page campaign ID.
           in: path
           name: campaignId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LandingPage'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1821,11 +1821,6 @@ paths:
       description: Deletes an existing campaign landing page.
       operationId: dfareporting.landingPages.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Landing page campaign ID.
           in: path
           name: campaignId
@@ -1834,6 +1829,11 @@ paths:
         - description: Landing page ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -1848,11 +1848,6 @@ paths:
       description: Gets one campaign landing page by ID.
       operationId: dfareporting.landingPages.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Landing page campaign ID.
           in: path
           name: campaignId
@@ -1861,6 +1856,11 @@ paths:
         - description: Landing page ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -1886,14 +1886,14 @@ paths:
       description: Gets one campaign by ID.
       operationId: dfareporting.campaigns.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Campaign ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -2057,14 +2057,14 @@ paths:
       description: Gets one change log by ID.
       operationId: dfareporting.changeLogs.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Change log ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -2090,11 +2090,6 @@ paths:
       description: 'Retrieves a list of cities, possibly filtered.'
       operationId: dfareporting.cities.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Select only cities from these countries.
           in: query
@@ -2112,6 +2107,11 @@ paths:
         - description: Select only cities with names starting with this prefix.
           in: query
           name: namePrefix
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
           type: string
         - collectionFormat: multi
           description: Select only cities from these regions.
@@ -2171,14 +2171,14 @@ paths:
       description: Gets one connection type by ID.
       operationId: dfareporting.connectionTypes.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Connection type ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -2269,20 +2269,20 @@ paths:
       description: Updates an existing content category. This method supports patch semantics.
       operationId: dfareporting.contentCategories.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ContentCategory'
         - description: Content category ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ContentCategory'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2297,15 +2297,15 @@ paths:
       description: Inserts a new content category.
       operationId: dfareporting.contentCategories.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ContentCategory'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ContentCategory'
       responses:
         '200':
           description: Successful response
@@ -2320,15 +2320,15 @@ paths:
       description: Updates an existing content category.
       operationId: dfareporting.contentCategories.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ContentCategory'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ContentCategory'
       responses:
         '200':
           description: Successful response
@@ -2344,14 +2344,14 @@ paths:
       description: Deletes an existing content category.
       operationId: dfareporting.contentCategories.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Content category ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -2366,14 +2366,14 @@ paths:
       description: Gets one content category by ID.
       operationId: dfareporting.contentCategories.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Content category ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -2407,20 +2407,52 @@ paths:
       description: Inserts conversions.
       operationId: dfareporting.conversions.batchinsert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ConversionsBatchInsertRequest'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ConversionsBatchInsertRequest'
       responses:
         '200':
           description: Successful response
           schema:
             $ref: '#/definitions/ConversionsBatchInsertResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ddmconversions'
+      tags:
+        - conversions
+  '/userprofiles/{profileId}/conversions/batchupdate':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Updates existing conversions.
+      operationId: dfareporting.conversions.batchupdate
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ConversionsBatchUpdateRequest'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ConversionsBatchUpdateResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/ddmconversions'
@@ -2459,14 +2491,14 @@ paths:
       description: Gets one country by ID.
       operationId: dfareporting.countries.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Country DART ID.
           in: path
           name: dartId
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -2502,11 +2534,6 @@ paths:
       description: Inserts a new creative asset.
       operationId: dfareporting.creativeAssets.insert
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Advertiser ID of this creative. This is a required field.
           in: path
           name: advertiserId
@@ -2516,6 +2543,11 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/CreativeAssetMetadata'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2603,20 +2635,20 @@ paths:
       description: Updates an existing creative field. This method supports patch semantics.
       operationId: dfareporting.creativeFields.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreativeField'
         - description: Creative Field ID
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreativeField'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2631,15 +2663,15 @@ paths:
       description: Inserts a new creative field.
       operationId: dfareporting.creativeFields.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreativeField'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreativeField'
       responses:
         '200':
           description: Successful response
@@ -2654,15 +2686,15 @@ paths:
       description: Updates an existing creative field.
       operationId: dfareporting.creativeFields.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreativeField'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreativeField'
       responses:
         '200':
           description: Successful response
@@ -2748,11 +2780,10 @@ paths:
       description: Updates an existing creative field value. This method supports patch semantics.
       operationId: dfareporting.creativeFieldValues.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreativeFieldValue'
         - description: Creative field ID for this creative field value.
           in: path
           name: creativeFieldId
@@ -2763,10 +2794,11 @@ paths:
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreativeFieldValue'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2781,20 +2813,20 @@ paths:
       description: Inserts a new creative field value.
       operationId: dfareporting.creativeFieldValues.insert
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreativeFieldValue'
         - description: Creative field ID for this creative field value.
           in: path
           name: creativeFieldId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreativeFieldValue'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2809,20 +2841,20 @@ paths:
       description: Updates an existing creative field value.
       operationId: dfareporting.creativeFieldValues.update
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreativeFieldValue'
         - description: Creative field ID for this creative field value.
           in: path
           name: creativeFieldId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreativeFieldValue'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2838,11 +2870,6 @@ paths:
       description: Deletes an existing creative field value.
       operationId: dfareporting.creativeFieldValues.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Creative field ID for this creative field value.
           in: path
           name: creativeFieldId
@@ -2851,6 +2878,11 @@ paths:
         - description: Creative Field Value ID
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -2865,11 +2897,6 @@ paths:
       description: Gets one creative field value by ID.
       operationId: dfareporting.creativeFieldValues.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Creative field ID for this creative field value.
           in: path
           name: creativeFieldId
@@ -2878,6 +2905,11 @@ paths:
         - description: Creative Field Value ID
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -2903,14 +2935,14 @@ paths:
       description: Deletes an existing creative field.
       operationId: dfareporting.creativeFields.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Creative Field ID
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -2925,14 +2957,14 @@ paths:
       description: Gets one creative field by ID.
       operationId: dfareporting.creativeFields.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Creative Field ID
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -3036,20 +3068,20 @@ paths:
       description: Updates an existing creative group. This method supports patch semantics.
       operationId: dfareporting.creativeGroups.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreativeGroup'
         - description: Creative group ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreativeGroup'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3064,15 +3096,15 @@ paths:
       description: Inserts a new creative group.
       operationId: dfareporting.creativeGroups.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreativeGroup'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreativeGroup'
       responses:
         '200':
           description: Successful response
@@ -3087,15 +3119,15 @@ paths:
       description: Updates an existing creative group.
       operationId: dfareporting.creativeGroups.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreativeGroup'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreativeGroup'
       responses:
         '200':
           description: Successful response
@@ -3111,14 +3143,14 @@ paths:
       description: Gets one creative group by ID.
       operationId: dfareporting.creativeGroups.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Creative group ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -3289,20 +3321,20 @@ paths:
       description: Updates an existing creative. This method supports patch semantics.
       operationId: dfareporting.creatives.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Creative'
         - description: Creative ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Creative'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3317,15 +3349,15 @@ paths:
       description: Inserts a new creative.
       operationId: dfareporting.creatives.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Creative'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Creative'
       responses:
         '200':
           description: Successful response
@@ -3340,15 +3372,15 @@ paths:
       description: Updates an existing creative.
       operationId: dfareporting.creatives.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Creative'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Creative'
       responses:
         '200':
           description: Successful response
@@ -3364,14 +3396,14 @@ paths:
       description: Gets one creative by ID.
       operationId: dfareporting.creatives.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Creative ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -3513,14 +3545,14 @@ paths:
       description: Gets one directory site contact by ID.
       operationId: dfareporting.directorySiteContacts.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Directory site contact ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -3568,7 +3600,7 @@ paths:
           type: string
         - description: Select only directory sites with this DFP network code.
           in: query
-          name: dfp_network_code
+          name: dfpNetworkCode
           type: string
         - collectionFormat: multi
           description: Select only directory sites with these IDs.
@@ -3639,15 +3671,15 @@ paths:
       description: Inserts a new directory site.
       operationId: dfareporting.directorySites.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DirectorySite'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DirectorySite'
       responses:
         '200':
           description: Successful response
@@ -3663,14 +3695,14 @@ paths:
       description: Gets one directory site by ID.
       operationId: dfareporting.directorySites.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Directory site ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -3696,11 +3728,6 @@ paths:
       description: Retrieves a list of dynamic targeting keys.
       operationId: dfareporting.dynamicTargetingKeys.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Select only dynamic targeting keys whose object has this advertiser ID.
           in: query
           name: advertiserId
@@ -3725,6 +3752,11 @@ paths:
           in: query
           name: objectType
           type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3747,15 +3779,15 @@ paths:
       description: 'Inserts a new dynamic targeting key. Keys must be created at the advertiser level before being assigned to the advertiser''s ads, creatives, or placements. There is a maximum of 1000 keys per advertiser, out of which a maximum of 20 keys can be assigned per ad, creative, or placement.'
       operationId: dfareporting.dynamicTargetingKeys.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DynamicTargetingKey'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DynamicTargetingKey'
       responses:
         '200':
           description: Successful response
@@ -3771,19 +3803,14 @@ paths:
       description: Deletes an existing dynamic targeting key.
       operationId: dfareporting.dynamicTargetingKeys.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
+        - description: Name of this dynamic targeting key. This is a required field. Must be less than 256 characters long and cannot contain commas. All characters are converted to lowercase.
+          in: query
+          name: name
           required: true
           type: string
         - description: ID of the object of this dynamic targeting key. This is a required field.
           in: path
           name: objectId
-          required: true
-          type: string
-        - description: Name of this dynamic targeting key. This is a required field. Must be less than 256 characters long and cannot contain commas. All characters are converted to lowercase.
-          in: query
-          name: name
           required: true
           type: string
         - description: Type of the object of this dynamic targeting key. This is a required field.
@@ -3794,6 +3821,11 @@ paths:
             - OBJECT_PLACEMENT
           in: query
           name: objectType
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -3902,20 +3934,20 @@ paths:
       description: Updates an existing event tag. This method supports patch semantics.
       operationId: dfareporting.eventTags.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EventTag'
         - description: Event tag ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EventTag'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3930,15 +3962,15 @@ paths:
       description: Inserts a new event tag.
       operationId: dfareporting.eventTags.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EventTag'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EventTag'
       responses:
         '200':
           description: Successful response
@@ -3953,15 +3985,15 @@ paths:
       description: Updates an existing event tag.
       operationId: dfareporting.eventTags.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EventTag'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EventTag'
       responses:
         '200':
           description: Successful response
@@ -3977,14 +4009,14 @@ paths:
       description: Deletes an existing event tag.
       operationId: dfareporting.eventTags.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Event tag ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -3999,14 +4031,14 @@ paths:
       description: Gets one event tag by ID.
       operationId: dfareporting.eventTags.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Event tag ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -4195,20 +4227,20 @@ paths:
       description: Updates an existing floodlight activity. This method supports patch semantics.
       operationId: dfareporting.floodlightActivities.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FloodlightActivity'
         - description: Floodlight activity ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/FloodlightActivity'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -4223,15 +4255,15 @@ paths:
       description: Inserts a new floodlight activity.
       operationId: dfareporting.floodlightActivities.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FloodlightActivity'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/FloodlightActivity'
       responses:
         '200':
           description: Successful response
@@ -4246,15 +4278,15 @@ paths:
       description: Updates an existing floodlight activity.
       operationId: dfareporting.floodlightActivities.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FloodlightActivity'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/FloodlightActivity'
       responses:
         '200':
           description: Successful response
@@ -4278,14 +4310,14 @@ paths:
       description: Generates a tag for a floodlight activity.
       operationId: dfareporting.floodlightActivities.generatetag
       parameters:
+        - description: Floodlight activity ID for which we want to generate a tag.
+          in: query
+          name: floodlightActivityId
+          type: string
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
-          type: string
-        - description: Floodlight activity ID for which we want to generate a tag.
-          in: query
-          name: floodlightActivityId
           type: string
       responses:
         '200':
@@ -4302,14 +4334,14 @@ paths:
       description: Deletes an existing floodlight activity.
       operationId: dfareporting.floodlightActivities.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Floodlight activity ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -4324,14 +4356,14 @@ paths:
       description: Gets one floodlight activity by ID.
       operationId: dfareporting.floodlightActivities.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Floodlight activity ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -4437,20 +4469,20 @@ paths:
       description: Updates an existing floodlight activity group. This method supports patch semantics.
       operationId: dfareporting.floodlightActivityGroups.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FloodlightActivityGroup'
         - description: Floodlight activity Group ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/FloodlightActivityGroup'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -4465,15 +4497,15 @@ paths:
       description: Inserts a new floodlight activity group.
       operationId: dfareporting.floodlightActivityGroups.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FloodlightActivityGroup'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/FloodlightActivityGroup'
       responses:
         '200':
           description: Successful response
@@ -4488,15 +4520,15 @@ paths:
       description: Updates an existing floodlight activity group.
       operationId: dfareporting.floodlightActivityGroups.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FloodlightActivityGroup'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/FloodlightActivityGroup'
       responses:
         '200':
           description: Successful response
@@ -4512,14 +4544,14 @@ paths:
       description: Gets one floodlight activity group by ID.
       operationId: dfareporting.floodlightActivityGroups.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Floodlight activity Group ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -4545,11 +4577,6 @@ paths:
       description: 'Retrieves a list of floodlight configurations, possibly filtered.'
       operationId: dfareporting.floodlightConfigurations.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Set of IDs of floodlight configurations to retrieve. Required field; otherwise an empty list will be returned.
           in: query
@@ -4557,6 +4584,11 @@ paths:
             type: string
           name: ids
           type: array
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -4579,20 +4611,20 @@ paths:
       description: Updates an existing floodlight configuration. This method supports patch semantics.
       operationId: dfareporting.floodlightConfigurations.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FloodlightConfiguration'
         - description: Floodlight configuration ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/FloodlightConfiguration'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -4607,15 +4639,15 @@ paths:
       description: Updates an existing floodlight configuration.
       operationId: dfareporting.floodlightConfigurations.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FloodlightConfiguration'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/FloodlightConfiguration'
       responses:
         '200':
           description: Successful response
@@ -4631,14 +4663,14 @@ paths:
       description: Gets one floodlight configuration by ID.
       operationId: dfareporting.floodlightConfigurations.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Floodlight configuration ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -4748,14 +4780,14 @@ paths:
       description: Gets one mobile carrier by ID.
       operationId: dfareporting.mobileCarriers.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Mobile carrier ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -4809,14 +4841,14 @@ paths:
       description: Gets one operating system version by ID.
       operationId: dfareporting.operatingSystemVersions.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Operating system version ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -4870,14 +4902,14 @@ paths:
       description: Gets one operating system by DART ID.
       operationId: dfareporting.operatingSystems.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Operating system DART ID.
           in: path
           name: dartId
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -5051,20 +5083,20 @@ paths:
       description: Updates an existing placement group. This method supports patch semantics.
       operationId: dfareporting.placementGroups.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PlacementGroup'
         - description: Placement group ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PlacementGroup'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -5079,15 +5111,15 @@ paths:
       description: Inserts a new placement group.
       operationId: dfareporting.placementGroups.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PlacementGroup'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PlacementGroup'
       responses:
         '200':
           description: Successful response
@@ -5102,15 +5134,15 @@ paths:
       description: Updates an existing placement group.
       operationId: dfareporting.placementGroups.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PlacementGroup'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PlacementGroup'
       responses:
         '200':
           description: Successful response
@@ -5126,14 +5158,14 @@ paths:
       description: Gets one placement group by ID.
       operationId: dfareporting.placementGroups.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Placement group ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -5224,20 +5256,20 @@ paths:
       description: Updates an existing placement strategy. This method supports patch semantics.
       operationId: dfareporting.placementStrategies.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PlacementStrategy'
         - description: Placement strategy ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PlacementStrategy'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -5252,15 +5284,15 @@ paths:
       description: Inserts a new placement strategy.
       operationId: dfareporting.placementStrategies.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PlacementStrategy'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PlacementStrategy'
       responses:
         '200':
           description: Successful response
@@ -5275,15 +5307,15 @@ paths:
       description: Updates an existing placement strategy.
       operationId: dfareporting.placementStrategies.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PlacementStrategy'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PlacementStrategy'
       responses:
         '200':
           description: Successful response
@@ -5299,14 +5331,14 @@ paths:
       description: Deletes an existing placement strategy.
       operationId: dfareporting.placementStrategies.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Placement strategy ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -5321,14 +5353,14 @@ paths:
       description: Gets one placement strategy by ID.
       operationId: dfareporting.placementStrategies.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Placement strategy ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -5529,20 +5561,20 @@ paths:
       description: Updates an existing placement. This method supports patch semantics.
       operationId: dfareporting.placements.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Placement'
         - description: Placement ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Placement'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -5557,15 +5589,15 @@ paths:
       description: Inserts a new placement.
       operationId: dfareporting.placements.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Placement'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Placement'
       responses:
         '200':
           description: Successful response
@@ -5580,15 +5612,15 @@ paths:
       description: Updates an existing placement.
       operationId: dfareporting.placements.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Placement'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Placement'
       responses:
         '200':
           description: Successful response
@@ -5673,14 +5705,14 @@ paths:
       description: Gets one placement by ID.
       operationId: dfareporting.placements.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Placement ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -5734,14 +5766,14 @@ paths:
       description: Gets one platform type by ID.
       operationId: dfareporting.platformTypes.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Platform type ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -5795,14 +5827,14 @@ paths:
       description: Gets one postal code by ID.
       operationId: dfareporting.postalCodes.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Postal code ID.
           in: path
           name: code
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -5901,14 +5933,14 @@ paths:
       description: Gets one project by ID.
       operationId: dfareporting.projects.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Project ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -6026,6 +6058,11 @@ paths:
       description: Gets one inventory item by ID.
       operationId: dfareporting.inventoryItems.get
       parameters:
+        - description: Inventory item ID.
+          in: path
+          name: id
+          required: true
+          type: string
         - description: User profile ID associated with this request.
           in: path
           name: profileId
@@ -6034,11 +6071,6 @@ paths:
         - description: Project ID for order documents.
           in: path
           name: projectId
-          required: true
-          type: string
-        - description: Inventory item ID.
-          in: path
-          name: id
           required: true
           type: string
       responses:
@@ -6153,6 +6185,11 @@ paths:
       description: Gets one order document by ID.
       operationId: dfareporting.orderDocuments.get
       parameters:
+        - description: Order document ID.
+          in: path
+          name: id
+          required: true
+          type: string
         - description: User profile ID associated with this request.
           in: path
           name: profileId
@@ -6161,11 +6198,6 @@ paths:
         - description: Project ID for order documents.
           in: path
           name: projectId
-          required: true
-          type: string
-        - description: Order document ID.
-          in: path
-          name: id
           required: true
           type: string
       responses:
@@ -6269,6 +6301,11 @@ paths:
       description: Gets one order by ID.
       operationId: dfareporting.orders.get
       parameters:
+        - description: Order ID.
+          in: path
+          name: id
+          required: true
+          type: string
         - description: User profile ID associated with this request.
           in: path
           name: profileId
@@ -6277,11 +6314,6 @@ paths:
         - description: Project ID for orders.
           in: path
           name: projectId
-          required: true
-          type: string
-        - description: Order ID.
-          in: path
-          name: id
           required: true
           type: string
       responses:
@@ -6343,6 +6375,10 @@ paths:
       description: Updates an existing remarketing list share. This method supports patch semantics.
       operationId: dfareporting.remarketingListShares.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingListShare'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
@@ -6353,10 +6389,6 @@ paths:
           name: remarketingListId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RemarketingListShare'
       responses:
         '200':
           description: Successful response
@@ -6371,15 +6403,15 @@ paths:
       description: Updates an existing remarketing list share.
       operationId: dfareporting.remarketingListShares.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingListShare'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RemarketingListShare'
       responses:
         '200':
           description: Successful response
@@ -6499,20 +6531,20 @@ paths:
       description: Updates an existing remarketing list. This method supports patch semantics.
       operationId: dfareporting.remarketingLists.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingList'
         - description: Remarketing list ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RemarketingList'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -6527,15 +6559,15 @@ paths:
       description: Inserts a new remarketing list.
       operationId: dfareporting.remarketingLists.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingList'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RemarketingList'
       responses:
         '200':
           description: Successful response
@@ -6550,15 +6582,15 @@ paths:
       description: Updates an existing remarketing list.
       operationId: dfareporting.remarketingLists.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingList'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RemarketingList'
       responses:
         '200':
           description: Successful response
@@ -6574,14 +6606,14 @@ paths:
       description: Gets one remarketing list by ID.
       operationId: dfareporting.remarketingLists.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Remarketing list ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -6670,15 +6702,15 @@ paths:
       description: Creates a report.
       operationId: dfareporting.reports.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Report'
         - description: The DFA user profile ID.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Report'
       responses:
         '200':
           description: Successful response
@@ -6702,15 +6734,15 @@ paths:
       description: 'Returns the fields that are compatible to be selected in the respective sections of a report criteria, given the fields already selected in the input report and user permissions.'
       operationId: dfareporting.reports.compatibleFields.query
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Report'
         - description: The DFA user profile ID.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Report'
       responses:
         '200':
           description: Successful response
@@ -6780,6 +6812,10 @@ paths:
       description: Updates a report. This method supports patch semantics.
       operationId: dfareporting.reports.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Report'
         - description: The DFA user profile ID.
           in: path
           name: profileId
@@ -6790,10 +6826,6 @@ paths:
           name: reportId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Report'
       responses:
         '200':
           description: Successful response
@@ -6808,6 +6840,10 @@ paths:
       description: Updates a report.
       operationId: dfareporting.reports.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Report'
         - description: The DFA user profile ID.
           in: path
           name: profileId
@@ -6818,10 +6854,6 @@ paths:
           name: reportId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Report'
       responses:
         '200':
           description: Successful response
@@ -6897,6 +6929,11 @@ paths:
       description: Retrieves a report file. This method supports media download.
       operationId: dfareporting.reports.files.get
       parameters:
+        - description: The ID of the report file.
+          in: path
+          name: fileId
+          required: true
+          type: string
         - description: The DFA profile ID.
           in: path
           name: profileId
@@ -6905,11 +6942,6 @@ paths:
         - description: The ID of the report.
           in: path
           name: reportId
-          required: true
-          type: string
-        - description: The ID of the report file.
-          in: path
-          name: fileId
           required: true
           type: string
       responses:
@@ -7080,20 +7112,20 @@ paths:
       description: Updates an existing site. This method supports patch semantics.
       operationId: dfareporting.sites.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Site'
         - description: Site ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Site'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -7108,15 +7140,15 @@ paths:
       description: Inserts a new site.
       operationId: dfareporting.sites.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Site'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Site'
       responses:
         '200':
           description: Successful response
@@ -7131,15 +7163,15 @@ paths:
       description: Updates an existing site.
       operationId: dfareporting.sites.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Site'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Site'
       responses:
         '200':
           description: Successful response
@@ -7155,14 +7187,14 @@ paths:
       description: Gets one site by ID.
       operationId: dfareporting.sites.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Site ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -7238,15 +7270,15 @@ paths:
       description: Inserts a new size.
       operationId: dfareporting.sizes.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Size'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Size'
       responses:
         '200':
           description: Successful response
@@ -7262,14 +7294,14 @@ paths:
       description: Gets one size by ID.
       operationId: dfareporting.sizes.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Size ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -7360,20 +7392,20 @@ paths:
       description: Updates an existing subaccount. This method supports patch semantics.
       operationId: dfareporting.subaccounts.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Subaccount'
         - description: Subaccount ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Subaccount'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -7388,15 +7420,15 @@ paths:
       description: Inserts a new subaccount.
       operationId: dfareporting.subaccounts.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Subaccount'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Subaccount'
       responses:
         '200':
           description: Successful response
@@ -7411,15 +7443,15 @@ paths:
       description: Updates an existing subaccount.
       operationId: dfareporting.subaccounts.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Subaccount'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Subaccount'
       responses:
         '200':
           description: Successful response
@@ -7435,14 +7467,14 @@ paths:
       description: Gets one subaccount by ID.
       operationId: dfareporting.subaccounts.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Subaccount ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -7536,14 +7568,14 @@ paths:
       description: Gets one remarketing list by ID.
       operationId: dfareporting.targetableRemarketingLists.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Remarketing list ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -7638,20 +7670,20 @@ paths:
       description: Updates an existing targeting template. This method supports patch semantics.
       operationId: dfareporting.targetingTemplates.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TargetingTemplate'
         - description: Targeting template ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TargetingTemplate'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -7666,15 +7698,15 @@ paths:
       description: Inserts a new targeting template.
       operationId: dfareporting.targetingTemplates.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TargetingTemplate'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TargetingTemplate'
       responses:
         '200':
           description: Successful response
@@ -7689,15 +7721,15 @@ paths:
       description: Updates an existing targeting template.
       operationId: dfareporting.targetingTemplates.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TargetingTemplate'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TargetingTemplate'
       responses:
         '200':
           description: Successful response
@@ -7713,14 +7745,14 @@ paths:
       description: Gets one targeting template by ID.
       operationId: dfareporting.targetingTemplates.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Targeting template ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -7774,14 +7806,14 @@ paths:
       description: Gets one user role permission group by ID.
       operationId: dfareporting.userRolePermissionGroups.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: User role permission group ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -7807,11 +7839,6 @@ paths:
       description: 'Gets a list of user role permissions, possibly filtered.'
       operationId: dfareporting.userRolePermissions.list
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - collectionFormat: multi
           description: Select only user role permissions with these IDs.
           in: query
@@ -7819,6 +7846,11 @@ paths:
             type: string
           name: ids
           type: array
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -7842,14 +7874,14 @@ paths:
       description: Gets one user role permission by ID.
       operationId: dfareporting.userRolePermissions.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: User role permission ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -7948,20 +7980,20 @@ paths:
       description: Updates an existing user role. This method supports patch semantics.
       operationId: dfareporting.userRoles.patch
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UserRole'
         - description: User role ID.
           in: query
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UserRole'
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -7976,15 +8008,15 @@ paths:
       description: Inserts a new user role.
       operationId: dfareporting.userRoles.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UserRole'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UserRole'
       responses:
         '200':
           description: Successful response
@@ -7999,15 +8031,15 @@ paths:
       description: Updates an existing user role.
       operationId: dfareporting.userRoles.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UserRole'
         - description: User profile ID associated with this request.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UserRole'
       responses:
         '200':
           description: Successful response
@@ -8023,14 +8055,14 @@ paths:
       description: Deletes an existing user role.
       operationId: dfareporting.userRoles.delete
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: User role ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -8045,14 +8077,14 @@ paths:
       description: Gets one user role by ID.
       operationId: dfareporting.userRoles.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: User role ID.
           in: path
           name: id
+          required: true
+          type: string
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
           required: true
           type: string
       responses:
@@ -8106,16 +8138,16 @@ paths:
       description: Gets one video format by ID.
       operationId: dfareporting.videoFormats.get
       parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
         - description: Video format ID.
           in: path
           name: id
           required: true
           type: integer
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -8181,55 +8213,55 @@ definitions:
       currencyId:
         description: |-
           ID of currency associated with this account. This is a required field.
-          Acceptable values are:
-          - "1" for USD
-          - "2" for GBP
-          - "3" for ESP
-          - "4" for SEK
-          - "5" for CAD
-          - "6" for JPY
-          - "7" for DEM
-          - "8" for AUD
-          - "9" for FRF
-          - "10" for ITL
-          - "11" for DKK
-          - "12" for NOK
-          - "13" for FIM
-          - "14" for ZAR
-          - "15" for IEP
-          - "16" for NLG
-          - "17" for EUR
-          - "18" for KRW
-          - "19" for TWD
-          - "20" for SGD
-          - "21" for CNY
-          - "22" for HKD
-          - "23" for NZD
-          - "24" for MYR
-          - "25" for BRL
-          - "26" for PTE
-          - "27" for MXP
-          - "28" for CLP
-          - "29" for TRY
-          - "30" for ARS
-          - "31" for PEN
-          - "32" for ILS
-          - "33" for CHF
-          - "34" for VEF
-          - "35" for COP
-          - "36" for GTQ
-          - "37" for PLN
-          - "39" for INR
-          - "40" for THB
-          - "41" for IDR
-          - "42" for CZK
-          - "43" for RON
-          - "44" for HUF
-          - "45" for RUB
-          - "46" for AED
-          - "47" for BGN
-          - "48" for HRK
-          - "49" for MXN
+          Acceptable values are: 
+          - "1" for USD 
+          - "2" for GBP 
+          - "3" for ESP 
+          - "4" for SEK 
+          - "5" for CAD 
+          - "6" for JPY 
+          - "7" for DEM 
+          - "8" for AUD 
+          - "9" for FRF 
+          - "10" for ITL 
+          - "11" for DKK 
+          - "12" for NOK 
+          - "13" for FIM 
+          - "14" for ZAR 
+          - "15" for IEP 
+          - "16" for NLG 
+          - "17" for EUR 
+          - "18" for KRW 
+          - "19" for TWD 
+          - "20" for SGD 
+          - "21" for CNY 
+          - "22" for HKD 
+          - "23" for NZD 
+          - "24" for MYR 
+          - "25" for BRL 
+          - "26" for PTE 
+          - "27" for MXP 
+          - "28" for CLP 
+          - "29" for TRY 
+          - "30" for ARS 
+          - "31" for PEN 
+          - "32" for ILS 
+          - "33" for CHF 
+          - "34" for VEF 
+          - "35" for COP 
+          - "36" for GTQ 
+          - "37" for PLN 
+          - "39" for INR 
+          - "40" for THB 
+          - "41" for IDR 
+          - "42" for CZK 
+          - "43" for RON 
+          - "44" for HUF 
+          - "45" for RUB 
+          - "46" for AED 
+          - "47" for BGN 
+          - "48" for HRK 
+          - "49" for MXN 
           - "50" for NGN
         format: int64
         type: string
@@ -8251,22 +8283,22 @@ definitions:
       locale:
         description: |-
           Locale of this account.
-          Acceptable values are:
-          - "cs" (Czech)
-          - "de" (German)
-          - "en" (English)
-          - "en-GB" (English United Kingdom)
-          - "es" (Spanish)
-          - "fr" (French)
-          - "it" (Italian)
-          - "ja" (Japanese)
-          - "ko" (Korean)
-          - "pl" (Polish)
-          - "pt-BR" (Portuguese Brazil)
-          - "ru" (Russian)
-          - "sv" (Swedish)
-          - "tr" (Turkish)
-          - "zh-CN" (Chinese Simplified)
+          Acceptable values are: 
+          - "cs" (Czech) 
+          - "de" (German) 
+          - "en" (English) 
+          - "en-GB" (English United Kingdom) 
+          - "es" (Spanish) 
+          - "fr" (French) 
+          - "it" (Italian) 
+          - "ja" (Japanese) 
+          - "ko" (Korean) 
+          - "pl" (Polish) 
+          - "pt-BR" (Portuguese Brazil) 
+          - "ru" (Russian) 
+          - "sv" (Swedish) 
+          - "tr" (Turkish) 
+          - "zh-CN" (Chinese Simplified) 
           - "zh-TW" (Chinese Traditional)
         type: string
       maximumImageSize:
@@ -8434,22 +8466,22 @@ definitions:
       locale:
         description: |-
           Locale of the user profile. This is a required field.
-          Acceptable values are:
-          - "cs" (Czech)
-          - "de" (German)
-          - "en" (English)
-          - "en-GB" (English United Kingdom)
-          - "es" (Spanish)
-          - "fr" (French)
-          - "it" (Italian)
-          - "ja" (Japanese)
-          - "ko" (Korean)
-          - "pl" (Polish)
+          Acceptable values are:  
+          - "cs" (Czech) 
+          - "de" (German) 
+          - "en" (English) 
+          - "en-GB" (English United Kingdom) 
+          - "es" (Spanish) 
+          - "fr" (French) 
+          - "it" (Italian) 
+          - "ja" (Japanese) 
+          - "ko" (Korean) 
+          - "pl" (Polish) 
           - "pt-BR" (Portuguese Brazil)
-          - "ru" (Russian)
-          - "sv" (Swedish)
-          - "tr" (Turkish)
-          - "zh-CN" (Chinese Simplified)
+          - "ru" (Russian) 
+          - "sv" (Swedish) 
+          - "tr" (Turkish) 
+          - "zh-CN" (Chinese Simplified) 
           - "zh-TW" (Chinese Traditional)
         type: string
       name:
@@ -8683,6 +8715,23 @@ definitions:
           - AD_SERVING_TRACKING
         type: string
     type: object
+  AdBlockingConfiguration:
+    description: Campaign ad blocking settings.
+    properties:
+      clickThroughUrl:
+        description: Click-through URL used by brand-neutral ads. This is a required field when overrideClickThroughUrl is set to true.
+        type: string
+      creativeBundleId:
+        description: 'ID of a creative bundle to use for this campaign. If set, brand-neutral ads will select creatives from this bundle. Otherwise, a default transparent pixel will be used.'
+        format: int64
+        type: string
+      enabled:
+        description: 'Whether this campaign has enabled ad blocking. When true, ad blocking is enabled for placements in the campaign, but this may be overridden by site and placement settings. When false, ad blocking is disabled for all placements under the campaign, regardless of site and placement settings.'
+        type: boolean
+      overrideClickThroughUrl:
+        description: Whether the brand-neutral ad's click-through URL comes from the campaign's creative bundle or the override URL. Must be set to true if ad blocking is enabled and no creative bundle is configured.
+        type: boolean
+    type: object
   AdSlot:
     description: Ad Slot
     properties:
@@ -8762,8 +8811,8 @@ definitions:
         type: string
       floodlightConfigurationId:
         description: |-
-          Floodlight configuration ID of this advertiser. The floodlight configuration ID will be created automatically, so on insert this field should be left blank. This field can be set to another advertiser's floodlight configuration ID in order to share that advertiser's floodlight configuration with this advertiser, so long as:
-          - This advertiser's original floodlight configuration is not already associated with floodlight activities or floodlight activity groups.
+          Floodlight configuration ID of this advertiser. The floodlight configuration ID will be created automatically, so on insert this field should be left blank. This field can be set to another advertiser's floodlight configuration ID in order to share that advertiser's floodlight configuration with this advertiser, so long as: 
+          - This advertiser's original floodlight configuration is not already associated with floodlight activities or floodlight activity groups. 
           - This advertiser's original floodlight configuration is not already shared with another advertiser.
         format: int64
         type: string
@@ -8929,6 +8978,9 @@ definitions:
         description: Account ID of this campaign. This is a read-only field that can be left blank.
         format: int64
         type: string
+      adBlockingConfiguration:
+        $ref: '#/definitions/AdBlockingConfiguration'
+        description: Ad blocking settings for this campaign.
       additionalCreativeOptimizationConfigurations:
         description: Additional creative optimization configurations for the campaign.
         items:
@@ -9207,7 +9259,7 @@ definitions:
     properties:
       computedClickThroughUrl:
         description: |-
-          Read-only convenience field representing the actual URL that will be used for this click-through. The URL is computed as follows:
+          Read-only convenience field representing the actual URL that will be used for this click-through. The URL is computed as follows: 
           - If defaultLandingPage is enabled then the campaign's default landing page URL is assigned to this field.
           - If defaultLandingPage is not enabled and a landingPageId is specified then that landing page's URL is assigned to this field.
           - If neither of the above cases apply, then the customClickThroughUrl is assigned to this field.
@@ -9361,10 +9413,10 @@ definitions:
           $ref: '#/definitions/CustomFloodlightVariable'
         type: array
       encryptedUserId:
-        description: 'The alphanumeric encrypted user ID. When set, encryptionInfo should also be specified. This field is mutually exclusive with encryptedUserIdCandidates[] and mobileDeviceId. This or encryptedUserIdCandidates[] or mobileDeviceId is a required field.'
+        description: 'The alphanumeric encrypted user ID. When set, encryptionInfo should also be specified. This field is mutually exclusive with encryptedUserIdCandidates[], mobileDeviceId and gclid. This or encryptedUserIdCandidates[] or mobileDeviceId or gclid is a required field.'
         type: string
       encryptedUserIdCandidates:
-        description: 'A list of the alphanumeric encrypted user IDs. Any user ID with exposure prior to the conversion timestamp will be used in the inserted conversion. If no such user ID is found then the conversion will be rejected with NO_COOKIE_MATCH_FOUND error. When set, encryptionInfo should also be specified. This field should only be used when calling conversions.batchinsert. This field is mutually exclusive with encryptedUserId and mobileDeviceId. This or encryptedUserId or mobileDeviceId is a required field.'
+        description: 'A list of the alphanumeric encrypted user IDs. Any user ID with exposure prior to the conversion timestamp will be used in the inserted conversion. If no such user ID is found then the conversion will be rejected with NO_COOKIE_MATCH_FOUND error. When set, encryptionInfo should also be specified. This field may only be used when calling batchinsert; it is not supported by batchupdate. This field is mutually exclusive with encryptedUserId, mobileDeviceId and gclid. This or encryptedUserId or mobileDeviceId or gclid is a required field.'
         items:
           type: string
         type: array
@@ -9376,6 +9428,9 @@ definitions:
         description: Floodlight Configuration ID of this conversion. This is a required field.
         format: int64
         type: string
+      gclid:
+        description: 'The Google click ID. This field is mutually exclusive with encryptedUserId, encryptedUserIdCandidates[] and mobileDeviceId. This or encryptedUserId or encryptedUserIdCandidates[] or mobileDeviceId is a required field.'
+        type: string
       kind:
         default: 'dfareporting#conversion'
         description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversion".'
@@ -9384,7 +9439,7 @@ definitions:
         description: 'Whether Limit Ad Tracking is enabled. When set to true, the conversion will be used for reporting but not targeting. This will prevent remarketing.'
         type: boolean
       mobileDeviceId:
-        description: 'The mobile device ID. This field is mutually exclusive with encryptedUserId and encryptedUserIdCandidates[]. This or encryptedUserId or encryptedUserIdCandidates[] is a required field.'
+        description: 'The mobile device ID. This field is mutually exclusive with encryptedUserId, encryptedUserIdCandidates[] and gclid. This or encryptedUserId or encryptedUserIdCandidates[] or gclid is a required field.'
         type: string
       ordinal:
         description: The ordinal of the conversion. Use this field to control how conversions of the same user and day are de-duplicated. This is a required field.
@@ -9465,6 +9520,38 @@ definitions:
         type: string
       status:
         description: The insert status of each conversion. Statuses are returned in the same order that conversions are inserted.
+        items:
+          $ref: '#/definitions/ConversionStatus'
+        type: array
+    type: object
+  ConversionsBatchUpdateRequest:
+    description: Update Conversions Request.
+    properties:
+      conversions:
+        description: The set of conversions to update.
+        items:
+          $ref: '#/definitions/Conversion'
+        type: array
+      encryptionInfo:
+        $ref: '#/definitions/EncryptionInfo'
+        description: Describes how encryptedUserId is encrypted. This is a required field if encryptedUserId is used.
+      kind:
+        default: 'dfareporting#conversionsBatchUpdateRequest'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversionsBatchUpdateRequest".'
+        type: string
+    type: object
+  ConversionsBatchUpdateResponse:
+    description: Update Conversions Response.
+    properties:
+      hasFailures:
+        description: Indicates that some or all conversions failed to update.
+        type: boolean
+      kind:
+        default: 'dfareporting#conversionsBatchUpdateResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversionsBatchUpdateResponse".'
+        type: string
+      status:
+        description: The update status of each conversion. Statuses are returned in the same order that conversions are updated.
         items:
           $ref: '#/definitions/ConversionStatus'
         type: array
@@ -9552,7 +9639,7 @@ definitions:
           - NINJA
           - SWIFFY
         type: string
-      auto_advance_images:
+      autoAdvanceImages:
         description: 'Whether images are automatically advanced for image gallery creatives. Applicable to the following creative types: DISPLAY_IMAGE_GALLERY.'
         type: boolean
       backgroundColor:
@@ -9645,7 +9732,7 @@ definitions:
           $ref: '#/definitions/ClickTag'
         type: array
       commercialId:
-        description: 'Industry standard ID assigned to creative for reach and frequency. Applicable to the following creative types: all INSTREAM_VIDEO and all VPAID.'
+        description: Industry standard ID assigned to creative for reach and frequency. Applicable to INSTREAM_VIDEO_REDIRECT creatives.
         type: string
       companionCreatives:
         description: 'List of companion creatives assigned to an in-Stream videocreative. Acceptable values include IDs of existing flash and image creatives. Applicable to the following creative types: all VPAID and all INSTREAM_VIDEO with dynamicAssetSelection set to false.'
@@ -9841,6 +9928,9 @@ definitions:
           - VPAID_LINEAR_VIDEO
           - VPAID_NON_LINEAR_VIDEO
         type: string
+      universalAdId:
+        $ref: '#/definitions/UniversalAdId'
+        description: 'A Universal Ad ID as per the VAST 4.0 spec. Applicable to the following creative types: INSTREAM_VIDEO and VPAID.'
       version:
         description: 'The version number helps you keep track of multiple versions of your creative in your reports. The version number will always be auto-generated during insert operations to start at 1. For tracking creatives the version cannot be incremented and will always remain at 1. For all other creative types the version can be incremented only by 1 during update operations. In addition, the version will be automatically incremented by 1 when undergoing Rich Media creative merging. Applicable to all creative types.'
         format: int32
@@ -10350,7 +10440,7 @@ definitions:
       richMediaExitOverrides:
         description: |-
           Rich media exit overrides for this creative assignment.
-          Applicable when the creative type is any of the following:
+          Applicable when the creative type is any of the following: 
           - DISPLAY
           - RICH_MEDIA_INPAGE
           - RICH_MEDIA_INPAGE_FLOATING
@@ -10938,10 +11028,10 @@ definitions:
   DfpSettings:
     description: DFP Settings
     properties:
-      dfp_network_code:
+      dfpNetworkCode:
         description: DFP network code for this directory site.
         type: string
-      dfp_network_name:
+      dfpNetworkName:
         description: DFP network name for this directory site.
         type: string
       programmaticPlacementAccepted:
@@ -11068,55 +11158,55 @@ definitions:
       currencyId:
         description: |-
           Currency ID of this directory site. This is a read-only field.
-          Possible values are:
-          - "1" for USD
-          - "2" for GBP
-          - "3" for ESP
-          - "4" for SEK
-          - "5" for CAD
-          - "6" for JPY
-          - "7" for DEM
-          - "8" for AUD
-          - "9" for FRF
-          - "10" for ITL
-          - "11" for DKK
-          - "12" for NOK
-          - "13" for FIM
-          - "14" for ZAR
-          - "15" for IEP
-          - "16" for NLG
-          - "17" for EUR
-          - "18" for KRW
-          - "19" for TWD
-          - "20" for SGD
-          - "21" for CNY
-          - "22" for HKD
-          - "23" for NZD
-          - "24" for MYR
-          - "25" for BRL
-          - "26" for PTE
-          - "27" for MXP
-          - "28" for CLP
-          - "29" for TRY
-          - "30" for ARS
-          - "31" for PEN
-          - "32" for ILS
-          - "33" for CHF
-          - "34" for VEF
-          - "35" for COP
-          - "36" for GTQ
-          - "37" for PLN
-          - "39" for INR
-          - "40" for THB
-          - "41" for IDR
-          - "42" for CZK
-          - "43" for RON
-          - "44" for HUF
-          - "45" for RUB
-          - "46" for AED
-          - "47" for BGN
-          - "48" for HRK
-          - "49" for MXN
+          Possible values are: 
+          - "1" for USD 
+          - "2" for GBP 
+          - "3" for ESP 
+          - "4" for SEK 
+          - "5" for CAD 
+          - "6" for JPY 
+          - "7" for DEM 
+          - "8" for AUD 
+          - "9" for FRF 
+          - "10" for ITL 
+          - "11" for DKK 
+          - "12" for NOK 
+          - "13" for FIM 
+          - "14" for ZAR 
+          - "15" for IEP 
+          - "16" for NLG 
+          - "17" for EUR 
+          - "18" for KRW 
+          - "19" for TWD 
+          - "20" for SGD 
+          - "21" for CNY 
+          - "22" for HKD 
+          - "23" for NZD 
+          - "24" for MYR 
+          - "25" for BRL 
+          - "26" for PTE 
+          - "27" for MXP 
+          - "28" for CLP 
+          - "29" for TRY 
+          - "30" for ARS 
+          - "31" for PEN 
+          - "32" for ILS 
+          - "33" for CHF 
+          - "34" for VEF 
+          - "35" for COP 
+          - "36" for GTQ 
+          - "37" for PLN 
+          - "39" for INR 
+          - "40" for THB 
+          - "41" for IDR 
+          - "42" for CZK 
+          - "43" for RON 
+          - "44" for HUF 
+          - "45" for RUB 
+          - "46" for AED 
+          - "47" for BGN 
+          - "48" for HRK 
+          - "49" for MXN 
           - "50" for NGN
         format: int64
         type: string
@@ -11261,10 +11351,10 @@ definitions:
       activeViewOptOut:
         description: Whether this directory site has disabled active view creatives.
         type: boolean
-      dfp_settings:
+      dfpSettings:
         $ref: '#/definitions/DfpSettings'
         description: Directory site DFP settings.
-      instream_video_placement_accepted:
+      instreamVideoPlacementAccepted:
         description: Whether this site accepts in-stream video ads.
         type: boolean
       interstitialPlacementAccepted:
@@ -11960,21 +12050,6 @@ definitions:
       omnitureSettings:
         $ref: '#/definitions/OmnitureSettings'
         description: Settings for DCM Omniture integration.
-      standardVariableTypes:
-        description: |-
-          List of standard variables enabled for this configuration.
-
-          Acceptable values are:
-          - "ORD"
-          - "NUM"
-        items:
-          enum:
-            - NUM
-            - ORD
-            - TRAN
-            - U
-          type: string
-        type: array
       subaccountId:
         description: Subaccount ID of this floodlight configuration. This is a read-only field that can be left blank.
         format: int64
@@ -12834,6 +12909,9 @@ definitions:
         description: Account ID of this placement. This field can be left blank.
         format: int64
         type: string
+      adBlockingOptOut:
+        description: 'Whether this placement opts out of ad blocking. When true, ad blocking is disabled for this placement. When false, the campaign and site settings take effect.'
+        type: boolean
       advertiserId:
         description: Advertiser ID of this placement. This field can be left blank.
         format: int64
@@ -14015,7 +14093,7 @@ definitions:
               $ref: '#/definitions/SortedDimension'
             type: array
           enableAllDimensionCombinations:
-            description: 'Whether to enable all reach dimension combinations in the report. Defaults to false. If enabled, the date range of the report should be within the last three months.'
+            description: 'Whether to enable all reach dimension combinations in the report. Defaults to false. If enabled, the date range of the report should be within the last 42 days.'
             type: boolean
           metricNames:
             description: The list of names of metrics the report should include.
@@ -14044,9 +14122,9 @@ definitions:
             type: string
           repeats:
             description: |-
-              The interval for which the report is repeated. Note:
-              - "DAILY" also requires field "every" to be set.
-              - "WEEKLY" also requires fields "every" and "repeatsOnWeekDays" to be set.
+              The interval for which the report is repeated. Note:  
+              - "DAILY" also requires field "every" to be set. 
+              - "WEEKLY" also requires fields "every" and "repeatsOnWeekDays" to be set. 
               - "MONTHLY" also requires fields "every" and "runsOnDayOfMonth" to be set.
             type: string
           repeatsOnWeekDays:
@@ -14150,18 +14228,18 @@ definitions:
           Report generation time zone ID of this account. This is a required field that can only be changed by a superuser.
           Acceptable values are:
 
-          - "1" for "America/New_York"
-          - "2" for "Europe/London"
-          - "3" for "Europe/Paris"
-          - "4" for "Africa/Johannesburg"
-          - "5" for "Asia/Jerusalem"
-          - "6" for "Asia/Shanghai"
-          - "7" for "Asia/Hong_Kong"
-          - "8" for "Asia/Tokyo"
-          - "9" for "Australia/Sydney"
-          - "10" for "Asia/Dubai"
-          - "11" for "America/Los_Angeles"
-          - "12" for "Pacific/Auckland"
+          - "1" for "America/New_York" 
+          - "2" for "Europe/London" 
+          - "3" for "Europe/Paris" 
+          - "4" for "Africa/Johannesburg" 
+          - "5" for "Asia/Jerusalem" 
+          - "6" for "Asia/Shanghai" 
+          - "7" for "Asia/Hong_Kong" 
+          - "8" for "Asia/Tokyo" 
+          - "9" for "Australia/Sydney" 
+          - "10" for "Asia/Dubai" 
+          - "11" for "America/Los_Angeles" 
+          - "12" for "Pacific/Auckland" 
           - "13" for "America/Sao_Paulo"
         format: int64
         type: string
@@ -14280,12 +14358,12 @@ definitions:
       activeViewOptOut:
         description: Whether active view creatives are disabled for this site.
         type: boolean
+      adBlockingOptOut:
+        description: 'Whether this site opts out of ad blocking. When true, ad blocking is disabled for all placements under the site, regardless of the individual placement settings. When false, the campaign and placement settings take effect.'
+        type: boolean
       creativeSettings:
         $ref: '#/definitions/CreativeSettings'
         description: Site-wide creative settings.
-      disableBrandSafeAds:
-        description: Whether brand safe ads are disabled for this site.
-        type: boolean
       disableNewCookie:
         description: Whether new cookies are disabled for this site.
         type: boolean
@@ -14747,6 +14825,21 @@ definitions:
       kind:
         default: 'dfareporting#transcodeSetting'
         description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#transcodeSetting".'
+        type: string
+    type: object
+  UniversalAdId:
+    description: 'A Universal Ad ID as per the VAST 4.0 spec. Applicable to the following creative types: INSTREAM_VIDEO and VPAID.'
+    properties:
+      registry:
+        description: Registry used for the Ad ID value.
+        enum:
+          - AD_ID.ORG
+          - CLEARCAST
+          - DCM
+          - OTHER
+        type: string
+      value:
+        description: 'ID value for this creative. Only alphanumeric characters and the following symbols are valid: "_/\-". Maximum length is 64 characters. Read only when registry is DCM.'
         type: string
     type: object
   UserDefinedVariableConfiguration:
