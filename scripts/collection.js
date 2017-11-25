@@ -192,7 +192,8 @@ function urlsCollection() {
 function refreshCollection(dir) {
   _.each(util.getSpecs(dir), function (swagger, filename) {
     console.log(filename);
-    assert(util.getSwaggerPath(swagger) === filename);
+    if (filename.indexOf('amazonaws.com')<0)
+      assert(util.getSwaggerPath(swagger) === filename);
     util.saveSwagger(swagger);
 
     var fixupPath = util.getSwaggerPath(swagger, 'fixup.yaml')
