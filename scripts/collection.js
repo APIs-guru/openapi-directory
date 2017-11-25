@@ -1,25 +1,26 @@
 #!/usr/bin/env node
 'use strict';
 
-var assert = require('assert');
-var fs = require('fs');
-var pathLib = require('path');
-var utilLib = require('util');
+const assert = require('assert');
+const fs = require('fs');
+const pathLib = require('path');
+const utilLib = require('util');
 
-var _ = require('lodash');
-var jp = require('json-pointer');
-var jsonPath = require('jsonpath');
-var converter = require('api-spec-converter');
-var converterVersion = require('api-spec-converter/package.json').version;
-var parseDomain = require('parse-domain');
-var jsonPatch = require('json-merge-patch');
-var YAML = require('js-yaml');
-var Promise = require('bluebird');
+const _ = require('lodash');
+const jp = require('json-pointer');
+const jsonPath = require('jsonpath');
+const converter = require('api-spec-converter');
+const converterVersion = require('api-spec-converter/package.json').version;
+const parseDomain = require('parse-domain');
+const jsonPatch = require('json-merge-patch');
+const jiff = require('jiff');
+const YAML = require('js-yaml');
+const Promise = require('bluebird');
 
-var makeRequest = require('makeRequest');
-var util = require('./util');
-var specSources = require('./spec_sources');
-var sp = require('./sortParameters.js');
+const makeRequest = require('makeRequest');
+const util = require('./util');
+const specSources = require('./spec_sources');
+const sp = require('./sortParameters.js');
 var httpCache;
 try {
   httpCache = YAML.safeLoad(fs.readFileSync(pathLib.join(__dirname,'../metadata/httpCache.yaml'),'utf8'));
@@ -397,6 +398,9 @@ function saveFixup(fixupPath, spec, editedSpec) {
   var diff = jsondiffpatch.diff(spec, editedSpec);
   if (!_.isEmpty(diff))
     util.saveYaml(fixupPath, diff);
+  var jpdiff = jiff.diff(spec, editedSpec);
+  if (!_.isEmpty(jpdiff))
+    util.saveYaml(fixupPath.replace('fixup','jpdiff'), jpdiff);
 }
 
 function appendFixup(fixupPath, spec, editedSpec) {
