@@ -32,6 +32,8 @@ var resolverContext = {
   anyDiff: false,
   called: false
 }
+var fromLeads = false;
+var newBlackList = [];
 
 var warnings = [];
 
@@ -246,6 +248,9 @@ function updateCollection(dir, command) {
     .done(function(){
       console.log('Finishing successfully');
       fs.writeFileSync(pathLib.join(__dirname,'../metadata/httpCache.yaml'),YAML.safeDump(httpCache, {lineWidth:-1}),'utf8');
+      if (newBlackList.length) {
+        console.warn(util.inspect(newBlackList));
+      }
     });
 }
 
@@ -403,6 +408,7 @@ function appendFixup(fixupPath, spec, editedSpec) {
 }
 
 function updateCatalogLeads() {
+  fromLeads = true;
   var knownUrls = _.map(util.getSpecs(), util.getOriginUrl);
 
   specSources.getCatalogsLeads()
@@ -503,11 +509,17 @@ function writeSpec(source, format, exPatch, command) {
       return context.swagger;
     })
     .catch(e => {
-      if (e.message.indexOf('Can not')>=0)
-      e.message = 'Warning: '+e.message;
-      if (resolverContext.anyDiff || (!e.message.startsWith('Warning')))
-        throw new SpecError(e, context);
-      console.log(e.message);
+      if (!fromLeads) {
+        if (e.message.indexOf('Can not')>=0)
+          e.message = 'Warning: '+e.message;
+        if (fromLeads) {
+          e.message = 'Warning: '+e.message;
+          newBlackList.push(resolverContext.source);
+        }
+        if (resolverContext.anyDiff || (!e.message.startsWith('Warning')))
+          throw new SpecError(e, context);
+        console.log(e.message);
+      }
     });
 }
 
