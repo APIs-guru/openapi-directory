@@ -1,19 +1,20 @@
 swagger: '2.0'
 schemes:
   - https
-host: geocoder.api.gov.bc.ca
-basePath: /
+  - http
+host: apps.gov.bc.ca
+basePath: /pub/geocoder
 info:
   contact:
     email: DataBCBA@gov.bc.ca
     name: DataBC
     url: 'https://forms.gov.bc.ca/databc-contact-us/'
-  description: 'This gated API computes the physical locations (i.e., latitude and longitude) and correct, standardized forms of civic and non-civic addresses in British Columbia.  CORS is enabled for any domain. To request an apikey, please contact the <a href=https://forms.gov.bc.ca/databc-contact-us/  target="_blank">DataBC Help Desk</a><br>Please read our <a href=https://github.com/bcgov/api-specs/blob/master/COLLECTION_NOTICE.md#collection-notice target="_blank">data collection notice</a>'
+  description: 'This API represents address cleaning, correction, completion, geocoding, reverse geocoding, and proximity resources for intersection addresses, physical addresses and their occupants in British Columbia. CORS is enabled for gov.bc.ca only. Please read our <a href=https://github.com/bcgov/api-specs/blob/master/COLLECTION_NOTICE.md#collection-notice target="_blank">data collection notice</a>'
   license:
     name: Open Government License - British Columbia
     url: 'http://www2.gov.bc.ca/gov/content/governments/about-the-bc-government/databc/open-data/open-government-license-bc'
   termsOfService: 'http://www2.gov.bc.ca/gov/content/governments/about-the-bc-government/databc/open-data/api-terms-of-use-for-ogl-information'
-  title: Gated Geocoder
+  title: Geocoder
   version: 2.0.0
   x-apisguru-categories:
     - open_data
@@ -21,7 +22,7 @@ info:
     url: 'https://avatars1.githubusercontent.com/u/916280?v=3&s=200'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/bcgov/api-specs/master/geocoder/gated-geocoder.json'
+      url: 'https://raw.githubusercontent.com/bcgov/api-specs/master/geocoder/geocoder.json'
       version: '2.0'
   x-providerName: gov.bc.ca
   x-serviceName: geocoder
@@ -36,13 +37,6 @@ produces:
   - application/gml+xml
   - text/csv
   - application/zip
-securityDefinitions:
-  apikey:
-    in: header
-    name: apikey
-    type: apiKey
-security:
-  - apikey: []
 tags:
   - name: sites
   - name: intersections
