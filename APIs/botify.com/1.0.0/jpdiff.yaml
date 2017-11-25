@@ -1,0 +1,26 @@
+- op: add
+  path: '/paths/~1projects~1{username}~1{project_slug}~1urls~1aggs/post/parameters/3'
+  value:
+    default: 20
+    description: Max number of analysis to return
+    format: int32
+    in: query
+    maximum: 20
+    minimum: 1
+    name: nb_analyses
+    required: false
+    type: integer
+- op: test
+  path: '/paths/~1projects~1{username}~1{project_slug}~1urls~1aggs/post/parameters/4'
+  value:
+    default: 20
+    description: Max number of analysis to return
+    format: int32
+    in: query
+    maximum: '20'
+    minimum: '1'
+    name: nb_analyses
+    required: false
+    type: integer
+- op: remove
+  path: '/paths/~1projects~1{username}~1{project_slug}~1urls~1aggs/post/parameters/4'

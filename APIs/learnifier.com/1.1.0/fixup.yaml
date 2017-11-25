@@ -2,7 +2,7 @@ paths:
   '/orgunits/{orgid}/usergroups':
     get:
       parameters:
-        '_1':
+        _1:
           - description: ID of group
             format: int64
             in: path
@@ -14,7 +14,7 @@ paths:
         _t: a
     post:
       parameters:
-        '_2':
+        _2:
           - description: ID of group
             format: int64
             in: path
@@ -41,7 +41,7 @@ paths:
             name: offset
             required: false
             type: integer
-        '_1':
+        _1:
           - default: 0
             description: The offset to start listing users from
             format: integer

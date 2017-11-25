@@ -1,0 +1,11 @@
+- op: test
+  path: '/paths/~1v1.0~1compareStation~1{stationName}~1/get/parameters/1'
+  value:
+    default: es
+    description: Option en es ca
+    in: path
+    name: Language
+    required: true
+    type: string
+- op: remove
+  path: '/paths/~1v1.0~1compareStation~1{stationName}~1/get/parameters/1'

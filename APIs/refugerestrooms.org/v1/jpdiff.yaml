@@ -1,0 +1,162 @@
+- op: add
+  path: /paths/~1v1~1restrooms~1search.json/get/parameters/3
+  value:
+    description: Only return restrooms that are ADA accessible.
+    in: query
+    name: ada
+    required: false
+    type: boolean
+- op: add
+  path: /paths/~1v1~1restrooms~1search.json/get/parameters/4
+  value:
+    description: Only return restrooms that are unisex.
+    in: query
+    name: unisex
+    required: false
+    type: boolean
+- op: test
+  path: /paths/~1v1~1restrooms~1search.json/get/parameters/5
+  value:
+    description: Only return restrooms that are ADA accessible.
+    in: query
+    name: ada
+    required: false
+    type: 'Virtus::Attribute::Boolean'
+- op: remove
+  path: /paths/~1v1~1restrooms~1search.json/get/parameters/5
+- op: test
+  path: /paths/~1v1~1restrooms~1search.json/get/parameters/5
+  value:
+    description: Only return restrooms that are unisex.
+    in: query
+    name: unisex
+    required: false
+    type: 'Virtus::Attribute::Boolean'
+- op: remove
+  path: /paths/~1v1~1restrooms~1search.json/get/parameters/5
+- op: add
+  path: /paths/~1v1~1restrooms~1by_location.json/get/parameters/3
+  value:
+    description: Only return restrooms that are ADA accessible.
+    in: query
+    name: ada
+    required: false
+    type: boolean
+- op: add
+  path: /paths/~1v1~1restrooms~1by_location.json/get/parameters/4
+  value:
+    description: Only return restrooms that are unisex.
+    in: query
+    name: unisex
+    required: false
+    type: boolean
+- op: test
+  path: /paths/~1v1~1restrooms~1by_location.json/get/parameters/5
+  value:
+    description: Only return restrooms that are ADA accessible.
+    in: query
+    name: ada
+    required: false
+    type: 'Virtus::Attribute::Boolean'
+- op: remove
+  path: /paths/~1v1~1restrooms~1by_location.json/get/parameters/5
+- op: test
+  path: /paths/~1v1~1restrooms~1by_location.json/get/parameters/5
+  value:
+    description: Only return restrooms that are unisex.
+    in: query
+    name: unisex
+    required: false
+    type: 'Virtus::Attribute::Boolean'
+- op: remove
+  path: /paths/~1v1~1restrooms~1by_location.json/get/parameters/5
+- op: add
+  path: /paths/~1v1~1restrooms~1by_date.json/get/parameters/3
+  value:
+    description: Only return restrooms that are ADA accessible.
+    in: query
+    name: ada
+    required: false
+    type: boolean
+- op: add
+  path: /paths/~1v1~1restrooms~1by_date.json/get/parameters/4
+  value:
+    description: Only return restrooms that are unisex.
+    in: query
+    name: unisex
+    required: false
+    type: boolean
+- op: add
+  path: /paths/~1v1~1restrooms~1by_date.json/get/parameters/5
+  value:
+    description: Return restroom records updated (rather than created) since given date
+    in: query
+    name: updated
+    required: false
+    type: boolean
+- op: test
+  path: /paths/~1v1~1restrooms~1by_date.json/get/parameters/6
+  value:
+    description: Only return restrooms that are ADA accessible.
+    in: query
+    name: ada
+    required: false
+    type: 'Virtus::Attribute::Boolean'
+- op: remove
+  path: /paths/~1v1~1restrooms~1by_date.json/get/parameters/6
+- op: test
+  path: /paths/~1v1~1restrooms~1by_date.json/get/parameters/6
+  value:
+    description: Only return restrooms that are unisex.
+    in: query
+    name: unisex
+    required: false
+    type: 'Virtus::Attribute::Boolean'
+- op: remove
+  path: /paths/~1v1~1restrooms~1by_date.json/get/parameters/6
+- op: test
+  path: /paths/~1v1~1restrooms~1by_date.json/get/parameters/6
+  value:
+    description: Return restroom records updated (rather than created) since given date
+    in: query
+    name: updated
+    required: false
+    type: 'Virtus::Attribute::Boolean'
+- op: remove
+  path: /paths/~1v1~1restrooms~1by_date.json/get/parameters/6
+- op: add
+  path: /paths/~1v1~1restrooms.json/get/parameters/3
+  value:
+    description: Only return restrooms that are ADA accessible.
+    in: query
+    name: ada
+    required: false
+    type: boolean
+- op: add
+  path: /paths/~1v1~1restrooms.json/get/parameters/4
+  value:
+    description: Only return restrooms that are unisex.
+    in: query
+    name: unisex
+    required: false
+    type: boolean
+- op: test
+  path: /paths/~1v1~1restrooms.json/get/parameters/5
+  value:
+    description: Only return restrooms that are ADA accessible.
+    in: query
+    name: ada
+    required: false
+    type: 'Virtus::Attribute::Boolean'
+- op: remove
+  path: /paths/~1v1~1restrooms.json/get/parameters/5
+- op: test
+  path: /paths/~1v1~1restrooms.json/get/parameters/5
+  value:
+    description: Only return restrooms that are unisex.
+    in: query
+    name: unisex
+    required: false
+    type: 'Virtus::Attribute::Boolean'
+- op: remove
+  path: /paths/~1v1~1restrooms.json/get/parameters/5

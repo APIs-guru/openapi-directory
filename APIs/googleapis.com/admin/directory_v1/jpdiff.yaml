@@ -1,0 +1,262 @@
+- op: add
+  path: '/paths/~1customer~1{customerId}~1orgunits~1{orgUnitPath}'
+  value:
+    delete:
+      description: Remove Organization Unit
+      operationId: directory.orgunits.delete
+      parameters:
+        - description: Immutable id of the Google Apps account
+          in: path
+          name: customerId
+          required: true
+          type: string
+        - description: Full path of the organization unit or its Id
+          in: path
+          name: orgUnitPath
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
+      tags:
+        - orgunits
+    get:
+      description: Retrieve Organization Unit
+      operationId: directory.orgunits.get
+      parameters:
+        - description: Immutable id of the Google Apps account
+          in: path
+          name: customerId
+          required: true
+          type: string
+        - description: Full path of the organization unit or its Id
+          in: path
+          name: orgUnitPath
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrgUnit'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit.readonly'
+      tags:
+        - orgunits
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Update Organization Unit. This method supports patch semantics.
+      operationId: directory.orgunits.patch
+      parameters:
+        - description: Immutable id of the Google Apps account
+          in: path
+          name: customerId
+          required: true
+          type: string
+        - description: Full path of the organization unit or its Id
+          in: path
+          name: orgUnitPath
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrgUnit'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrgUnit'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
+      tags:
+        - orgunits
+    put:
+      description: Update Organization Unit
+      operationId: directory.orgunits.update
+      parameters:
+        - description: Immutable id of the Google Apps account
+          in: path
+          name: customerId
+          required: true
+          type: string
+        - description: Full path of the organization unit or its Id
+          in: path
+          name: orgUnitPath
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrgUnit'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrgUnit'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
+      tags:
+        - orgunits
+- op: test
+  path: '/paths/~1customer~1{customerId}~1orgunits{~1orgUnitPath*}'
+  value:
+    delete:
+      description: Remove Organization Unit
+      operationId: directory.orgunits.delete
+      parameters:
+        - description: Immutable id of the Google Apps account
+          in: path
+          name: customerId
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: Full path of the organization unit or its Id
+          in: path
+          items:
+            type: string
+          name: orgUnitPath
+          required: true
+          type: array
+        - in: path
+          name: /orgUnitPath*
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
+      tags:
+        - orgunits
+    get:
+      description: Retrieve Organization Unit
+      operationId: directory.orgunits.get
+      parameters:
+        - description: Immutable id of the Google Apps account
+          in: path
+          name: customerId
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: Full path of the organization unit or its Id
+          in: path
+          items:
+            type: string
+          name: orgUnitPath
+          required: true
+          type: array
+        - in: path
+          name: /orgUnitPath*
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrgUnit'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit.readonly'
+      tags:
+        - orgunits
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Update Organization Unit. This method supports patch semantics.
+      operationId: directory.orgunits.patch
+      parameters:
+        - description: Immutable id of the Google Apps account
+          in: path
+          name: customerId
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: Full path of the organization unit or its Id
+          in: path
+          items:
+            type: string
+          name: orgUnitPath
+          required: true
+          type: array
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrgUnit'
+        - in: path
+          name: /orgUnitPath*
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrgUnit'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
+      tags:
+        - orgunits
+    put:
+      description: Update Organization Unit
+      operationId: directory.orgunits.update
+      parameters:
+        - description: Immutable id of the Google Apps account
+          in: path
+          name: customerId
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: Full path of the organization unit or its Id
+          in: path
+          items:
+            type: string
+          name: orgUnitPath
+          required: true
+          type: array
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrgUnit'
+        - in: path
+          name: /orgUnitPath*
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrgUnit'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
+      tags:
+        - orgunits
+- op: remove
+  path: '/paths/~1customer~1{customerId}~1orgunits{~1orgUnitPath*}'

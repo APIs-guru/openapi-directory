@@ -1,0 +1,10 @@
+- op: test
+  path: '/paths/~1repositories~1{username}~1{repo_slug}~1commit~1{node}~1statuses~1build/post/parameters/1'
+  value:
+    description: The commit status' unique key
+    in: path
+    name: key
+    required: true
+    type: string
+- op: remove
+  path: '/paths/~1repositories~1{username}~1{repo_slug}~1commit~1{node}~1statuses~1build/post/parameters/1'

@@ -20,7 +20,7 @@ info:
       url: 'https://raw.githubusercontent.com/NYTimes/public_api_specs/master/archive_api/archive_api.json'
       version: '2.0'
   x-providerName: nytimes.com
-  x-service: archive
+  x-serviceName: archive
 externalDocs:
   url: 'http://developer.nytimes.com/'
 produces:
@@ -91,9 +91,9 @@ definitions:
       abstract:
         type: string
       blog:
-        type: array
         items:
           type: string
+        type: array
       byline:
         properties:
           organization:
@@ -101,9 +101,9 @@ definitions:
           original:
             type: string
           person:
-            type: array
             items:
               type: string
+            type: array
         type: object
       document_type:
         type: string

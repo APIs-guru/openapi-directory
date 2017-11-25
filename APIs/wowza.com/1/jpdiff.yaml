@@ -108,24 +108,24 @@
   value: []
 - op: remove
   path: /definitions/stream_target_property/required
+- op: test
+  path: /definitions/stream_target_metrics/properties/average_total_connections/type
+  value: float
+- op: replace
+  path: /definitions/stream_target_metrics/properties/average_total_connections/type
+  value: number
 - op: add
   path: /definitions/stream_target_metrics/properties/average_total_connections/format
   value: float
 - op: test
-  path: /definitions/stream_target_metrics/properties/average_total_connections/type
+  path: /definitions/stream_target_metrics/properties/average_bytes_in/type
   value: float
 - op: replace
-  path: /definitions/stream_target_metrics/properties/average_total_connections/type
+  path: /definitions/stream_target_metrics/properties/average_bytes_in/type
   value: number
 - op: add
   path: /definitions/stream_target_metrics/properties/average_bytes_in/format
   value: float
-- op: test
-  path: /definitions/stream_target_metrics/properties/average_bytes_in/type
-  value: float
-- op: replace
-  path: /definitions/stream_target_metrics/properties/average_bytes_in/type
-  value: number
 - op: test
   path: /definitions/stream_target_metrics/required
   value: []
