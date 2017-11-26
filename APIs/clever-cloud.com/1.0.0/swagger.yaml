@@ -1,0 +1,6456 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.clever-cloud.com
+basePath: /v2
+info:
+  contact:
+    x-twitter: clever_cloud
+  description: Public API for managing Clever-Cloud data and products
+  title: Clever-Cloud
+  version: 1.0.0
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://twitter.com/clever_cloud/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://www.clever-cloud.com/doc/api/swagger.json'
+      version: '2.0'
+  x-providerName: clever-cloud.com
+tags:
+  - description: Default section
+    name: Default
+paths:
+  '/application/{appId}/environment':
+    get:
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: query
+          name: token
+          required: false
+          type: string
+      responses:
+        default:
+          description: getEnv
+      tags:
+        - all
+    put:
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: query
+          name: token
+          required: false
+          type: string
+      responses:
+        default:
+          description: updateEnv
+      tags:
+        - all
+  /authorize:
+    post:
+      description: Handled by our API.
+      operationId: postAuthorize
+      parameters: []
+      responses:
+        '200':
+          description: authorize
+      tags:
+        - all
+  /events/event-socket:
+    get:
+      description: 'Retrieve events as they come through a websocket connection. To have authorization, you have to send a `{ "message_type": "oauth", "authorization": "oauth authorization string" }` message'
+      responses:
+        default:
+          description: <No description>
+      tags:
+        - all
+        - events
+  /github:
+    get:
+      operationId: getGithub
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: startGithub
+          schema:
+            $ref: '#/definitions/Transaction_Id'
+      tags:
+        - all
+        - github
+  /github/applications:
+    get:
+      operationId: getGithubApplications
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getGithubApplications
+          schema:
+            items:
+              $ref: '#/definitions/Application'
+            type: array
+      tags:
+        - all
+        - applications
+        - github
+  /github/callback:
+    get:
+      operationId: getGithubCallback
+      parameters:
+        - in: query
+          name: code
+          required: false
+          type: string
+        - in: query
+          name: state
+          required: false
+          type: string
+        - in: query
+          name: error
+          required: false
+          type: string
+        - in: query
+          name: error_description
+          required: false
+          type: string
+        - in: query
+          name: error_uri
+          required: false
+          type: string
+        - in: header
+          name: Cookie
+          required: false
+          type: string
+      responses:
+        '200':
+          description: githubCallback
+      tags:
+        - all
+        - github
+  /github/emails:
+    get:
+      operationId: getGithubEmails
+      parameters: []
+      responses:
+        '200':
+          description: getGithubEmails
+          schema:
+            items:
+              type: string
+            type: array
+      tags:
+        - all
+        - github
+  /github/keys:
+    get:
+      operationId: getGithubKeys
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getGithubKeys
+          schema:
+            items:
+              $ref: '#/definitions/Key'
+            type: array
+      tags:
+        - all
+        - github
+  /github/link:
+    delete:
+      operationId: deleteGithubLink
+      parameters: []
+      responses:
+        '200':
+          description: unlinkGithub
+      tags:
+        - all
+        - github
+    get:
+      operationId: getGithubLink
+      parameters:
+        - description: From GET /github
+          in: query
+          name: transactionId
+          required: false
+          type: string
+        - in: query
+          name: redirectUrl
+          required: false
+          type: string
+      responses:
+        '200':
+          description: linkGithub
+      tags:
+        - all
+        - github
+  /github/login:
+    get:
+      operationId: getGithubLogin
+      parameters:
+        - in: query
+          name: redirectUrl
+          required: false
+          type: string
+        - in: query
+          name: fromAuthorize
+          required: false
+          type: string
+      responses:
+        '200':
+          description: githubLogin
+      tags:
+        - all
+        - github
+  /github/redeploy:
+    post:
+      operationId: postGithubRedeploy
+      parameters:
+        - in: header
+          name: User-Agent
+          required: false
+          type: string
+        - in: header
+          name: X-Github-Event
+          required: false
+          type: string
+        - in: header
+          name: X-Hub-Signature
+          required: false
+          type: string
+      responses:
+        '200':
+          description: redeployApp
+      tags:
+        - all
+        - github
+  /github/signup:
+    get:
+      operationId: getGithubSignup
+      parameters:
+        - in: query
+          name: redirectUrl
+          required: false
+          type: string
+        - in: query
+          name: fromAuthorize
+          required: false
+          type: string
+      responses:
+        '200':
+          description: githubSignup
+      tags:
+        - all
+        - github
+    post:
+      operationId: postGithubSignup
+      parameters:
+        - in: query
+          name: transactionId
+          required: false
+          type: string
+        - in: query
+          name: name
+          required: false
+          type: string
+        - in: query
+          name: otherId
+          required: false
+          type: string
+        - in: query
+          name: otherEmail
+          required: false
+          type: string
+        - in: query
+          name: password
+          required: false
+          type: string
+        - in: query
+          name: autoLink
+          required: false
+          type: string
+        - in: query
+          name: terms
+          required: false
+          type: string
+      responses:
+        '200':
+          description: finsihGithubSignup
+      tags:
+        - all
+        - github
+  /github/username:
+    get:
+      operationId: getGithubUsername
+      parameters: []
+      responses:
+        '200':
+          description: getGithubUsername
+          schema:
+            type: string
+      tags:
+        - all
+        - github
+  '/logs/logs-chunked/{appId}':
+    get:
+      description: 'Retrieve logs as they come through a chunked, never-ending response'
+      parameters:
+        - description: Application Id
+          in: path
+          name: appId
+          required: true
+          type: string
+        - description: Tell the user-agent to download the body as a file
+          in: query
+          name: download
+          required: false
+          type: boolean
+      responses:
+        default:
+          description: <No description>
+      tags:
+        - all
+        - logs
+  '/logs/logs-socket/{appId}':
+    get:
+      description: 'Retrieve logs as they come through a websocket connection. To have authorization, you have to send a `{ "message_type": "oauth", "authorization": "oauth authorization string" }` message'
+      parameters:
+        - description: Application Id
+          in: path
+          name: appId
+          required: true
+          type: string
+        - description: Only fetch logs newer than this (ISO-8601 formatted) date
+          format: date-time
+          in: query
+          name: since
+          required: false
+          type: string
+        - description: A pattern to filter with
+          in: query
+          name: filter
+          required: false
+          type: string
+        - description: Only fetch logs emitted by this deployment
+          in: query
+          name: deployment_id
+          required: false
+          type: string
+      responses:
+        default:
+          description: <No description>
+      tags:
+        - all
+        - logs
+  '/logs/{appId}':
+    get:
+      description: Fetch the logs for a given application
+      parameters:
+        - description: Application Id
+          in: path
+          name: appId
+          required: true
+          type: string
+        - description: Number of lines to return
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: desc
+          description: Logs order
+          enum:
+            - asc
+            - desc
+          in: query
+          name: order
+          required: false
+          type: string
+        - description: 'Lowest bound for logs date, ISO 8601'
+          format: date-time
+          in: query
+          name: after
+          required: false
+          type: string
+        - description: 'Highest bounds for logs date, ISO 8601'
+          format: date-time
+          in: query
+          name: before
+          required: false
+          type: string
+        - description: A pattern to filter with
+          in: query
+          name: filter
+          required: false
+          type: string
+        - description: Only fetch logs emitted by this deployment
+          in: query
+          name: deployment_id
+          required: false
+          type: string
+      responses:
+        default:
+          description: <No description>
+      tags:
+        - all
+        - logs
+  /newsfeeds/blog:
+    get:
+      operationId: getNewsfeedsBlog
+      parameters: []
+      responses:
+        '200':
+          description: getBlogFeed
+      tags:
+        - all
+  /newsfeeds/engineering:
+    get:
+      operationId: getNewsfeedEngineering
+      parameters: []
+      responses:
+        '200':
+          description: getEngineeringFeed
+      tags:
+        - all
+  '/notifications/emailhooks/{ownerId}':
+    get:
+      description: list created e-mail hooks
+      parameters:
+        - in: path
+          name: ownerId
+          required: true
+          type: string
+      responses:
+        default:
+          description: <No description>
+      tags:
+        - all
+    post:
+      description: create a hook for e-mail notifications
+      parameters:
+        - in: path
+          name: ownerId
+          required: true
+          type: string
+      responses:
+        default:
+          description: <No description>
+      tags:
+        - all
+  '/notifications/emailhooks/{ownerId}/:id':
+    delete:
+      description: delete an e-mail hook
+      parameters:
+        - in: path
+          name: ownerId
+          required: true
+          type: string
+      responses:
+        default:
+          description: <No description>
+      tags:
+        - all
+    put:
+      description: edit an e-mail hook
+      parameters:
+        - in: path
+          name: ownerId
+          required: true
+          type: string
+      responses:
+        default:
+          description: <No description>
+      tags:
+        - all
+  /notifications/info/events:
+    get:
+      description: list available events
+      responses:
+        default:
+          description: <No description>
+      tags:
+        - all
+        - events
+  /notifications/info/webhookformats:
+    get:
+      description: list available webhook formats
+      responses:
+        default:
+          description: <No description>
+      tags:
+        - all
+  '/notifications/webhooks/{ownerId}':
+    get:
+      description: list created hooks
+      parameters:
+        - in: path
+          name: ownerId
+          required: true
+          type: string
+      responses:
+        default:
+          description: <No description>
+      tags:
+        - all
+    post:
+      description: create a hook for notifications
+      parameters:
+        - in: path
+          name: ownerId
+          required: true
+          type: string
+      responses:
+        default:
+          description: <No description>
+      tags:
+        - all
+  '/notifications/webhooks/{ownerId}/:id':
+    delete:
+      description: delete a hook
+      parameters:
+        - in: path
+          name: ownerId
+          required: true
+          type: string
+      responses:
+        default:
+          description: <No description>
+      tags:
+        - all
+    put:
+      description: edit a hook
+      parameters:
+        - in: path
+          name: ownerId
+          required: true
+          type: string
+      responses:
+        default:
+          description: <No description>
+      tags:
+        - all
+  /oauth/access_token:
+    post:
+      operationId: postOauthAccessToken
+      parameters:
+        - in: query
+          name: oauth_consumer_key
+          required: false
+          type: string
+        - in: query
+          name: oauth_token
+          required: false
+          type: string
+        - in: query
+          name: oauth_signature_method
+          required: false
+          type: string
+        - in: query
+          name: oauth_signature
+          required: false
+          type: string
+        - in: query
+          name: oauth_timestamp
+          required: false
+          type: string
+        - in: query
+          name: oauth_nonce
+          required: false
+          type: string
+        - in: query
+          name: oauth_version
+          required: false
+          type: string
+        - in: query
+          name: oauth_verifier
+          required: false
+          type: string
+        - in: query
+          name: oauth_callback
+          required: false
+          type: string
+        - in: query
+          name: oauth_token_secret
+          required: false
+          type: string
+        - in: query
+          name: oauth_callback_confirmed
+          required: false
+          type: string
+      responses:
+        '200':
+          description: postAccessTokenRequest
+      tags:
+        - all
+        - oauth
+  /oauth/access_token_query:
+    post:
+      parameters:
+        - in: query
+          name: oauth_consumer_key
+          required: false
+          type: string
+        - in: query
+          name: oauth_token
+          required: false
+          type: string
+        - in: query
+          name: oauth_signature_method
+          required: false
+          type: string
+        - in: query
+          name: oauth_signature
+          required: false
+          type: string
+        - in: query
+          name: oauth_timestamp
+          required: false
+          type: string
+        - in: query
+          name: oauth_nonce
+          required: false
+          type: string
+        - in: query
+          name: oauth_version
+          required: false
+          type: string
+        - in: query
+          name: oauth_verifier
+          required: false
+          type: string
+        - in: query
+          name: oauth_callback
+          required: false
+          type: string
+        - in: query
+          name: oauth_token_secret
+          required: false
+          type: string
+        - in: query
+          name: oauth_callback_confirmed
+          required: false
+          type: string
+      responses:
+        default:
+          description: postAccessTokenRequestQuery
+      tags:
+        - all
+        - oauth
+  /oauth/authorize:
+    get:
+      operationId: getOauthAuthorize
+      parameters:
+        - in: query
+          name: oauth_token
+          required: false
+          type: string
+        - in: header
+          name: Cookie
+          required: false
+          type: string
+      responses:
+        '200':
+          description: authorizeForm
+      tags:
+        - all
+        - oauth
+    post:
+      operationId: postOauthAuthorize
+      parameters:
+        - in: query
+          name: almighty
+          required: false
+          type: string
+        - in: query
+          name: access_organisations
+          required: false
+          type: string
+        - in: query
+          name: manage_organisations
+          required: false
+          type: string
+        - in: query
+          name: manage_organisations_services
+          required: false
+          type: string
+        - in: query
+          name: manage_organisations_applications
+          required: false
+          type: string
+        - in: query
+          name: manage_organisations_members
+          required: false
+          type: string
+        - in: query
+          name: access_organisations_bills
+          required: false
+          type: string
+        - in: query
+          name: access_organisations_credit_count
+          required: false
+          type: string
+        - in: query
+          name: access_organisations_consumption_statistics
+          required: false
+          type: string
+        - in: query
+          name: access_personal_information
+          required: false
+          type: string
+        - in: query
+          name: manage_personal_information
+          required: false
+          type: string
+        - in: query
+          name: manage_ssh_keys
+          required: false
+          type: string
+        - in: query
+          name: manage_services
+          required: false
+          type: string
+        - in: query
+          name: manage_applications
+          required: false
+          type: string
+        - in: query
+          name: access_bills
+          required: false
+          type: string
+        - in: query
+          name: access_credit_count
+          required: false
+          type: string
+        - in: query
+          name: access_consumption_statistics
+          required: false
+          type: string
+        - in: header
+          name: Cookie
+          required: false
+          type: string
+      responses:
+        '200':
+          description: authorizeToken
+      tags:
+        - all
+        - oauth
+  /oauth/request_token:
+    post:
+      operationId: postOauthRequestToken
+      parameters:
+        - in: query
+          name: oauth_consumer_key
+          required: false
+          type: string
+        - in: query
+          name: oauth_token
+          required: false
+          type: string
+        - in: query
+          name: oauth_signature_method
+          required: false
+          type: string
+        - in: query
+          name: oauth_signature
+          required: false
+          type: string
+        - in: query
+          name: oauth_timestamp
+          required: false
+          type: string
+        - in: query
+          name: oauth_nonce
+          required: false
+          type: string
+        - in: query
+          name: oauth_version
+          required: false
+          type: string
+        - in: query
+          name: oauth_verifier
+          required: false
+          type: string
+        - in: query
+          name: oauth_callback
+          required: false
+          type: string
+        - in: query
+          name: oauth_token_secret
+          required: false
+          type: string
+        - in: query
+          name: oauth_callback_confirmed
+          required: false
+          type: string
+      responses:
+        '200':
+          description: postReqTokenRequest
+      tags:
+        - all
+        - oauth
+  /oauth/request_token_query:
+    post:
+      parameters:
+        - in: query
+          name: oauth_consumer_key
+          required: false
+          type: string
+        - in: query
+          name: oauth_token
+          required: false
+          type: string
+        - in: query
+          name: oauth_signature_method
+          required: false
+          type: string
+        - in: query
+          name: oauth_signature
+          required: false
+          type: string
+        - in: query
+          name: oauth_timestamp
+          required: false
+          type: string
+        - in: query
+          name: oauth_nonce
+          required: false
+          type: string
+        - in: query
+          name: oauth_version
+          required: false
+          type: string
+        - in: query
+          name: oauth_verifier
+          required: false
+          type: string
+        - in: query
+          name: oauth_callback
+          required: false
+          type: string
+        - in: query
+          name: oauth_token_secret
+          required: false
+          type: string
+        - in: query
+          name: oauth_callback_confirmed
+          required: false
+          type: string
+      responses:
+        default:
+          description: postReqTokenRequestQueryString
+      tags:
+        - all
+        - oauth
+  /oauth/rights:
+    get:
+      operationId: getOauthRights
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getAvailableRights
+          schema:
+            $ref: '#/definitions/Rights'
+      tags:
+        - all
+        - oauth
+  /organisations:
+    get:
+      operationId: getOrganisations
+      parameters:
+        - in: query
+          name: user
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getUserOrganisations
+          schema:
+            items:
+              $ref: '#/definitions/Organisation'
+            type: array
+      tags:
+        - all
+        - organisations
+    post:
+      consumes:
+        - application/json
+      operationId: postOrganisations
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeOrganisation'
+      responses:
+        '200':
+          description: createOrganisation
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}':
+    delete:
+      operationId: deleteOrganisationsId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deleteOrganisation
+      tags:
+        - all
+        - organisations
+    get:
+      operationId: getOrganisationsId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getOrganisation
+          schema:
+            $ref: '#/definitions/Organisation'
+      tags:
+        - all
+        - organisations
+    put:
+      consumes:
+        - application/json
+      operationId: putOrganisationsId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeOrganisation'
+      responses:
+        '200':
+          description: editOrganisation
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/addonproviders':
+    get:
+      operationId: getOrganisationsIdAddonproviders
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Get all informations about all providers.
+          schema:
+            items:
+              $ref: '#/definitions/Provider'
+            type: array
+      tags:
+        - all
+        - organisations
+    post:
+      consumes:
+        - application/json
+      operationId: postOrganisationsIdAddonproviders
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeAddonProvider'
+      responses:
+        '200':
+          description: createProvider
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/addonproviders/{providerId}':
+    get:
+      operationId: getOrganisationsIdAddonprovidersProviderId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: providerId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Get all informations about given provider.
+          schema:
+            $ref: '#/definitions/Provider'
+      tags:
+        - all
+        - organisations
+    put:
+      consumes:
+        - application/json
+      operationId: putOrganisationsIdAddonprovidersProviderId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: providerId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeAddonProvider'
+      responses:
+        '200':
+          description: updateProviderInfos
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/addonproviders/{providerId}/features':
+    get:
+      operationId: getOrganisationsIdAddonprovidersProviderIdFeatures
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: providerId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getProviderFeatures
+          schema:
+            items:
+              $ref: '#/definitions/Feature'
+            type: array
+      tags:
+        - all
+        - organisations
+    post:
+      consumes:
+        - application/json
+      operationId: postOrganisationsIdAddonprovidersProviderIdFeatures
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: providerId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeFeature'
+      responses:
+        '200':
+          description: addProviderFeature
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/addonproviders/{providerId}/features/{featureId}':
+    delete:
+      operationId: deleteOrganisationsIdAddonprovidersProviderIdFeaturesFeatureId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: featureId
+          required: true
+          type: string
+        - in: path
+          name: providerId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deleteProviderFeature
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/addonproviders/{providerId}/plans':
+    get:
+      operationId: getOrganisationsIdAddonprovidersProviderIdPlans
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: providerId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getProviderPlans
+          schema:
+            items:
+              $ref: '#/definitions/Plan'
+            type: array
+      tags:
+        - all
+        - organisations
+    post:
+      consumes:
+        - application/json
+      operationId: postOrganisationsIdAddonprovidersProviderIdPlans
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: providerId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabePlan'
+      responses:
+        '200':
+          description: addProviderPlan
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/addonproviders/{providerId}/plans/{planId}':
+    delete:
+      operationId: deleteOrganisationsIdAddonprovidersProviderIdPlansPlanId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: providerId
+          required: true
+          type: string
+        - in: path
+          name: planId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deleteProviderPlan
+      tags:
+        - all
+        - organisations
+    get:
+      operationId: getOrganisationsIdAddonprovidersProviderIdPlansPlanId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: providerId
+          required: true
+          type: string
+        - in: path
+          name: planId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getProviderPlan
+          schema:
+            $ref: '#/definitions/Plan'
+      tags:
+        - all
+        - organisations
+    put:
+      consumes:
+        - application/json
+      operationId: putOrganisationsIdAddonprovidersProviderIdPlansPlanId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: providerId
+          required: true
+          type: string
+        - in: path
+          name: planId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabePlan'
+      responses:
+        '200':
+          description: editProviderPlan
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/addonproviders/{providerId}/plans/{planId}/features/{featureName}':
+    delete:
+      operationId: deleteOrganisationsIdAddonprovidersProviderIdPlansPlanIdFeaturesFeatureName
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: featureName
+          required: true
+          type: string
+        - in: path
+          name: providerId
+          required: true
+          type: string
+        - in: path
+          name: planId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deleteProviderPlanFeature
+      tags:
+        - all
+        - organisations
+    put:
+      consumes:
+        - application/json
+      operationId: putOrganisationsIdAddonprovidersProviderIdPlansPlanIdFeaturesFeatureName
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: featureName
+          required: true
+          type: string
+        - in: path
+          name: providerId
+          required: true
+          type: string
+        - in: path
+          name: planId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabePlanFeature'
+      responses:
+        '200':
+          description: editProviderPlanFeature
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/addonproviders/{providerId}/sso':
+    get:
+      parameters:
+        - in: path
+          name: providerId
+          required: true
+          type: string
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getSSOData
+          schema:
+            $ref: '#/definitions/AddonProviderSso'
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/addonproviders/{providerId}/tags':
+    get:
+      operationId: getOrganisationsIdAddonprovidersProviderIdTags
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: providerId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: getProviderTags
+          schema:
+            items:
+              type: string
+            type: array
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/addonproviders/{providerId}/testers':
+    post:
+      operationId: postOrganisationsIdAddonprovidersProviderIdTesters
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: providerId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: addBetaTester
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/addons':
+    get:
+      operationId: getOrganisationsIdAddons
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getAddons
+          schema:
+            items:
+              $ref: '#/definitions/Addon'
+            type: array
+      tags:
+        - all
+        - addons
+        - organisations
+    post:
+      consumes:
+        - application/json
+      operationId: postOrganisationsIdAddons
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeAddon'
+      responses:
+        '200':
+          description: provisionAddon
+      tags:
+        - all
+        - addons
+        - organisations
+  '/organisations/{id}/addons/preorders':
+    post:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/WannabeAddon'
+      responses:
+        default:
+          description: preorderAddon
+      tags:
+        - all
+        - addons
+        - organisations
+  '/organisations/{id}/addons/{addonId}':
+    delete:
+      operationId: deleteOrganisationsIdAddonsAddonId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: addonId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deprovisionAddon
+      tags:
+        - all
+        - addons
+        - organisations
+    get:
+      operationId: getOrganisationsIdAddonsAddonId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: addonId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getAddon
+          schema:
+            $ref: '#/definitions/Addon'
+      tags:
+        - all
+        - addons
+        - organisations
+    put:
+      consumes:
+        - application/json
+      operationId: putOrganisationsIdAddonsAddonId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: addonId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeAddon'
+      responses:
+        '200':
+          description: Update addon information
+      tags:
+        - all
+        - addons
+        - organisations
+  '/organisations/{id}/addons/{addonId}/applications':
+    get:
+      operationId: getOrganisationsIdAddonsAddonIdApplications
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: addonId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getApplicationsLinkedToAddon
+          schema:
+            items:
+              $ref: '#/definitions/Application'
+            type: array
+      tags:
+        - all
+        - addons
+        - applications
+        - organisations
+  '/organisations/{id}/addons/{addonId}/env':
+    get:
+      operationId: getOrganisationsIdAddonsAddonIdEnv
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: addonId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getAddonEnv
+          schema:
+            items:
+              $ref: '#/definitions/ListEnv'
+            type: array
+      tags:
+        - all
+        - addons
+        - organisations
+  '/organisations/{id}/addons/{addonId}/plan':
+    put:
+      consumes:
+        - application/json
+      operationId: putOrganisationsIdAddonsAddonIdPlan
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: addonId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabePlan'
+      responses:
+        '200':
+          description: Update plan of an add-on.
+      tags:
+        - all
+        - addons
+        - organisations
+  '/organisations/{id}/addons/{addonId}/sso':
+    get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: addonId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getSSOData
+          schema:
+            $ref: '#/definitions/Sso'
+      tags:
+        - all
+        - addons
+        - organisations
+  '/organisations/{id}/addons/{addonId}/tags':
+    get:
+      operationId: getOrganisationsIdAddonsAddonIdTags
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: addonId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: getAddonTags
+          schema:
+            items:
+              type: string
+            type: array
+      tags:
+        - all
+        - addons
+        - organisations
+  '/organisations/{id}/addons/{addonId}/tags/{tag}':
+    delete:
+      operationId: deleteOrganisationsIdAddonsAddonIdTagsTag
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: tag
+          required: true
+          type: string
+        - in: path
+          name: addonId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deleteAddonTag
+      tags:
+        - all
+        - addons
+        - organisations
+    put:
+      operationId: putOrganisationsIdAddonsAddonIdTagsTag
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: tag
+          required: true
+          type: string
+        - in: path
+          name: addonId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Body'
+      responses:
+        '200':
+          description: addAddonTag
+      tags:
+        - all
+        - addons
+        - organisations
+  '/organisations/{id}/applications':
+    get:
+      operationId: getOrganisationsIdApplications
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getAllApplications
+          schema:
+            items:
+              $ref: '#/definitions/Application'
+            type: array
+      tags:
+        - all
+        - applications
+        - organisations
+    post:
+      consumes:
+        - application/json
+      description: 'Creates an application. If you want to create a Github app, you need to replace the oauthApp field with what you will find here: https://github.com/CleverCloud/doc.clever-cloud.com/issues/179'
+      operationId: postOrganisationsIdApplications
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeApplication'
+      responses:
+        '200':
+          description: addApplication
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}':
+    delete:
+      operationId: deleteOrganisationsIdApplicationsAppId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deleteApplication
+      tags:
+        - all
+        - applications
+        - organisations
+    get:
+      operationId: getOrganisationsIdApplicationsAppId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getApplication
+          schema:
+            $ref: '#/definitions/Application'
+      tags:
+        - all
+        - applications
+        - organisations
+    put:
+      consumes:
+        - application/json
+      operationId: putOrganisationsIdApplicationsAppId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeApplication'
+      responses:
+        '200':
+          description: editApplication
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/addons':
+    get:
+      operationId: getOrganisationsIdApplicationsAppIdAddons
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getAddonsLinkedToApplication
+          schema:
+            items:
+              $ref: '#/definitions/Addon'
+            type: array
+      tags:
+        - all
+        - addons
+        - applications
+        - organisations
+    post:
+      operationId: postOrganisationsIdApplicationsAppIdAddons
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Body'
+      responses:
+        '200':
+          description: linkAddonToApplication
+      tags:
+        - all
+        - addons
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/addons/env':
+    get:
+      operationId: getOrganisationsIdApplicationsAppIdAddonsEnv
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getEnvOfAddonsLinkedToApplication
+          schema:
+            items:
+              $ref: '#/definitions/Env'
+            type: array
+      tags:
+        - all
+        - addons
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/addons/{addonId}':
+    delete:
+      operationId: deleteOrganisationsIdApplicationsAppIdAddonsAddonId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: addonId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: unlinkAddonFromApplication
+      tags:
+        - all
+        - addons
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/branch':
+    put:
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: setApplicationBranch
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/branches':
+    get:
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: getApplicationBranches
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/dependencies':
+    get:
+      operationId: getOrganisationsIdApplicationsAppIdDependencies
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getApplicationDependencies
+          schema:
+            items:
+              $ref: '#/definitions/Application'
+            type: array
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/dependencies/{dependencyId}':
+    delete:
+      operationId: deleteOrganisationsIdApplicationsAppIdDependenciesDependencyId
+      parameters:
+        - in: path
+          name: dependencyId
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deleteApplicationDependency
+      tags:
+        - all
+        - applications
+        - organisations
+    put:
+      operationId: putOrganisationsIdApplicationsAppIdDependenciesDependencyId
+      parameters:
+        - in: path
+          name: dependencyId
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Body'
+      responses:
+        '200':
+          description: addApplicationDependency
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/dependents':
+    get:
+      operationId: getOrganisationsIdApplicationsAppIdDependents
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getApplicationDependents
+          schema:
+            items:
+              $ref: '#/definitions/Application'
+            type: array
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/deployments':
+    get:
+      operationId: getOrganisationsIdApplicationsAppIdDeployments
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: query
+          name: limit
+          required: false
+          type: string
+        - in: query
+          name: offset
+          required: false
+          type: string
+        - in: query
+          name: action
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getApplicationDeploymentsForOrga
+          schema:
+            items:
+              $ref: '#/definitions/Deployment'
+            type: array
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/deployments/{deploymentId}/instances':
+    delete:
+      operationId: deleteOrganisationsIdApplicationsAppIdDeploymentsDeploymentIdInstances
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: deploymentId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: getApplicationDeploymentsForOrga
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/env':
+    get:
+      operationId: getOrganisationsIdApplicationsAppIdEnv
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getApplicationEnv
+          schema:
+            items:
+              $ref: '#/definitions/ListEnv'
+            type: array
+      tags:
+        - all
+        - applications
+        - organisations
+    put:
+      consumes:
+        - application/json
+      operationId: putOrganisationsIdApplicationsAppIdEnv
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeEnv'
+      responses:
+        '200':
+          description: editApplicationEnvironment
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/env/{envName}':
+    delete:
+      operationId: deleteOrganisationsIdApplicationsAppIdEnvEnvName
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: envName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: removeApplicationEnv
+      tags:
+        - all
+        - applications
+        - organisations
+    put:
+      consumes:
+        - application/json
+      operationId: putOrganisationsIdApplicationsAppIdEnvEnvName
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: envName
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeEnv'
+      responses:
+        '200':
+          description: editApplicationEnv
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/exposed_env':
+    get:
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: getExposedEnv
+      tags:
+        - all
+        - applications
+        - organisations
+    put:
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: updateExposedEnv
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/instances':
+    delete:
+      operationId: deleteOrganisationsIdApplicationsAppIdInstances
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: undeployApplication
+      tags:
+        - all
+        - applications
+        - organisations
+    get:
+      operationId: getOrganisationsIdApplicationsAppIdInstances
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getApplicationInstances
+          schema:
+            items:
+              $ref: '#/definitions/AppInstance'
+            type: array
+      tags:
+        - all
+        - applications
+        - organisations
+    post:
+      operationId: postOrganisationsIdApplicationsAppIdInstances
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: query
+          name: commit
+          required: false
+          type: string
+      responses:
+        '200':
+          description: redeployApplication
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/instances/{instanceId}':
+    get:
+      parameters:
+        - in: path
+          name: instanceId
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: getApplicationInstance
+          schema:
+            $ref: '#/definitions/AppInstance'
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/tags':
+    get:
+      operationId: getOrganisationsIdApplicationsAppIdTags
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: getApplicationTags
+          schema:
+            items:
+              type: string
+            type: array
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/tags/{tag}':
+    delete:
+      operationId: deleteOrganisationsIdApplicationsAppIdTagsTag
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: tag
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deleteApplicationTag
+      tags:
+        - all
+        - applications
+        - organisations
+    put:
+      operationId: putOrganisationsIdApplicationsAppIdTagsTag
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: tag
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Body'
+      responses:
+        '200':
+          description: addApplicationTag
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/vhosts':
+    get:
+      operationId: getOrganisationsIdApplicationsAppIdVhosts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getVhosts
+          schema:
+            items:
+              $ref: '#/definitions/Vhost'
+            type: array
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/vhosts/favourite':
+    delete:
+      operationId: deleteOrganisationsIdApplicationsAppIdVhostsFavourite
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: unmarkFavouriteVhost
+      tags:
+        - all
+        - applications
+        - organisations
+    get:
+      operationId: getOrganisationsIdApplicationsAppIdVhostsFavourite
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getFavouriteVhost
+          schema:
+            $ref: '#/definitions/Vhost'
+      tags:
+        - all
+        - applications
+        - organisations
+    put:
+      consumes:
+        - application/json
+      operationId: putOrganisationsIdApplicationsAppIdVhostsFavourite
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Vhost'
+      responses:
+        '200':
+          description: markFavouriteVhost
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/vhosts/{domain}':
+    delete:
+      operationId: deleteOrganisationsIdApplicationsAppIdVhostsDomain
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: domain
+          required: true
+          type: string
+      responses:
+        '200':
+          description: removeVhost
+      tags:
+        - all
+        - applications
+        - organisations
+    put:
+      consumes:
+        - application/json
+      operationId: putOrganisationsIdApplicationsAppIdVhostsDomain
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: domain
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Vhost'
+      responses:
+        '200':
+          description: addVhost
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/avatar':
+    put:
+      description: 'If you want to upload an image from your computer, send the image in the body of the request without anything else.'
+      operationId: putOrganisationsIdAvatar
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: |-
+            setOrgaAvatar
+            setOrgaAvatarFromSource
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/consumers':
+    get:
+      operationId: getOrganisationsIdConsumers
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getConsumers
+          schema:
+            items:
+              $ref: '#/definitions/Consumer'
+            type: array
+      tags:
+        - all
+        - organisations
+    post:
+      consumes:
+        - application/json
+      operationId: postOrganisationsIdConsumers
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeConsumer'
+      responses:
+        '200':
+          description: createConsumer
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/consumers/{key}':
+    delete:
+      operationId: deleteOrganisationsIdConsumersKey
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deleteConsumer
+      tags:
+        - all
+        - organisations
+    get:
+      operationId: getOrganisationsIdConsumersKey
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: key
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getConsumer
+          schema:
+            $ref: '#/definitions/Consumer'
+      tags:
+        - all
+        - organisations
+    put:
+      consumes:
+        - application/json
+      operationId: putOrganisationsIdConsumersKey
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: key
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeConsumer'
+      responses:
+        '200':
+          description: PUT the same data as in POST.
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/consumers/{key}/secret':
+    get:
+      operationId: getOrganisationsIdConsumersKeySecret
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: key
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getConsumerSecret
+          schema:
+            $ref: '#/definitions/Secret'
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/consumptions':
+    get:
+      operationId: getOrganisationsIdConsumptions
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: query
+          name: appId
+          required: false
+          type: string
+        - in: query
+          name: from
+          required: false
+          type: string
+        - in: query
+          name: to
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getAmount
+          schema:
+            $ref: '#/definitions/Conso'
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/credits':
+    get:
+      operationId: getOrganisationsIdCredits
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getAmount
+          schema:
+            $ref: '#/definitions/Credits'
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/instances':
+    get:
+      operationId: getOrganisationsIdInstances
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getInstancesForAllApps
+          schema:
+            additionalProperties:
+              items:
+                $ref: '#/definitions/AppInstance'
+              type: array
+            type: object
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/members':
+    get:
+      operationId: getOrganisationsIdMembers
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getOrganisationMembers
+          schema:
+            items:
+              $ref: '#/definitions/Member'
+            type: array
+      tags:
+        - all
+        - organisations
+    post:
+      consumes:
+        - application/json
+      operationId: postOrganisationsIdMembers
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: query
+          name: invitationKey
+          required: false
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeMember'
+      responses:
+        '200':
+          description: addOrganisationMember
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/members/{userId}':
+    delete:
+      operationId: deleteOrganisationsIdMembersUserId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: removeOrganisationMember
+      tags:
+        - all
+        - organisations
+    put:
+      consumes:
+        - application/json
+      operationId: putOrganisationsIdMembersUserId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: userId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeMember'
+      responses:
+        '200':
+          description: editOrganisationMember
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/payment-info':
+    get:
+      operationId: getOrganisationsIdPaymentInfo
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: getPaymentInfo
+      tags:
+        - all
+        - organisations
+  '/organisations/{id}/payments/billings':
+    get:
+      operationId: getOrganisationsIdPaymentsBillings
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: getInvoices
+      tags:
+        - all
+        - organisations
+        - payments
+    post:
+      operationId: postOrganisationsIdPaymentsBillings
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: buyDrops
+      tags:
+        - all
+        - organisations
+        - payments
+  '/organisations/{id}/payments/billings/{bid}':
+    delete:
+      operationId: deleteOrganisationsIdPaymentsBillingsBid
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: bid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deletePurchaseOrder
+      tags:
+        - all
+        - organisations
+        - payments
+    get:
+      operationId: getOrganisationsIdPaymentsBillingsBid
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: bid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: getInvoice
+      tags:
+        - all
+        - organisations
+        - payments
+    put:
+      operationId: putOrganisationsIdPaymentsBillingsBid
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: bid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: choosePaymentProvider
+      tags:
+        - all
+        - organisations
+        - payments
+  '/organisations/{id}/payments/billings/{bid}.pdf':
+    get:
+      operationId: getOrganisationsIdPaymentsBillingsBidPdf
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: bid
+          required: true
+          type: string
+        - in: query
+          name: token
+          required: false
+          type: string
+      responses:
+        '200':
+          description: getPdfInvoice
+      tags:
+        - all
+        - organisations
+        - payments
+  '/organisations/{id}/payments/fullprice/{price}':
+    get:
+      operationId: getOrganisationsIdPaymentsFullPricePrice
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: price
+          required: true
+          type: string
+      responses:
+        '200':
+          description: priceWithTax
+      tags:
+        - all
+        - organisations
+        - payments
+  '/organisations/{id}/payments/methods':
+    get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: 'Get the payments methods for the {id} organisation.'
+      tags:
+        - all
+        - organisations
+        - payments
+    post:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema: {}
+      responses:
+        default:
+          description: 'Add a payment method to {id} organisation.'
+      tags:
+        - all
+        - organisations
+        - payments
+  '/organisations/{id}/payments/methods/default':
+    get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: 'Get the default payment method for {id} organisation.'
+      tags:
+        - all
+        - organisations
+        - payments
+    put:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PaymentData'
+      responses:
+        default:
+          description: 'Set the default payment method for {id} organisation.'
+      tags:
+        - all
+        - organisations
+        - payments
+  '/organisations/{id}/payments/methods/{mId}':
+    delete:
+      parameters:
+        - in: path
+          name: mId
+          required: true
+          type: string
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: deletePaymentMethod
+      tags:
+        - all
+        - organisations
+        - payments
+  '/organisations/{id}/payments/recurring':
+    delete:
+      operationId: deleteOrganisationsIdPaymentsRecurring
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deleteRecurrentPayment
+      tags:
+        - all
+        - organisations
+        - payments
+    get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: getRecurrentPayment
+      tags:
+        - all
+        - organisations
+        - payments
+  '/organisations/{id}/payments/tokens/bt':
+    get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: getBraintreeToken
+      tags:
+        - all
+        - organisations
+        - payments
+  /password_forgotten:
+    get:
+      operationId: getPasswordForgotten
+      parameters: []
+      responses:
+        '200':
+          description: getPasswordForgottenForm
+      tags:
+        - all
+        - password_forgotten
+    post:
+      operationId: postPasswordForgotten
+      parameters:
+        - in: query
+          name: login
+          required: false
+          type: string
+        - in: query
+          name: drop_tokens
+          required: false
+          type: string
+        - in: header
+          name: TesterPass
+          required: false
+          type: string
+      responses:
+        '200':
+          description: askForPasswordResetViaForm
+      tags:
+        - all
+        - password_forgotten
+  '/password_forgotten/{key}':
+    get:
+      operationId: getPasswordForgottenKey
+      parameters:
+        - in: path
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: confirmPasswordResetRequest
+      tags:
+        - all
+        - password_forgotten
+    post:
+      operationId: postPasswordForgottenKey
+      parameters:
+        - in: path
+          name: key
+          required: true
+          type: string
+        - in: query
+          name: pass
+          required: false
+          type: string
+        - in: query
+          name: pass2
+          required: false
+          type: string
+      responses:
+        '200':
+          description: resetPasswordForgotten
+      tags:
+        - all
+        - password_forgotten
+  '/payments/coupons/{name}':
+    get:
+      operationId: getPaymentsCouponsName
+      parameters:
+        - in: path
+          name: name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: getCoupon
+      tags:
+        - all
+        - payments
+  /payments/providers:
+    get:
+      operationId: getPaymentsProviders
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getAvailablePaymentProviders
+          schema:
+            items:
+              $ref: '#/definitions/Payment_Provider'
+            type: array
+      tags:
+        - all
+        - payments
+  /payments/tokens/bt:
+    get:
+      operationId: getPaymentsTokensBt
+      parameters: []
+      responses:
+        '200':
+          description: getBraintreeToken
+      tags:
+        - all
+        - payments
+  /payments/webhooks/bt:
+    get:
+      operationId: getPaymentsWebhooksBt
+      parameters:
+        - in: query
+          name: bt_challenge
+          required: false
+          type: string
+      responses:
+        '200':
+          description: subscriptionEventPing
+      tags:
+        - all
+        - payments
+  '/payments/{bid}/end/bt':
+    post:
+      operationId: postPaymentsBidEndBt
+      parameters:
+        - in: path
+          name: bid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: endPaymentWithBraintree
+      tags:
+        - all
+        - payments
+  /products/addonproviders:
+    get:
+      operationId: getProductsAddonProviders
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getAddonProviders
+          schema:
+            items:
+              $ref: '#/definitions/Provider'
+            type: array
+      tags:
+        - all
+        - products
+  '/products/addonproviders/{provider_id}':
+    get:
+      operationId: getProductsAddonProvidersProviderId
+      parameters:
+        - in: path
+          name: provider_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getAddonProvider
+          schema:
+            $ref: '#/definitions/Provider'
+      tags:
+        - all
+        - products
+  /products/countries:
+    get:
+      operationId: getProductsCountries
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getCountries
+          schema:
+            $ref: '#/definitions/Country'
+      tags:
+        - all
+        - products
+  /products/countrycodes:
+    get:
+      operationId: getProductsCountrycodes
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getCountryCodes
+          schema:
+            $ref: '#/definitions/Country'
+      tags:
+        - all
+        - products
+  /products/instances:
+    get:
+      operationId: getProductsInstances
+      parameters:
+        - in: query
+          name: for
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getAvailableInstances
+          schema:
+            items:
+              $ref: '#/definitions/Instance'
+            type: array
+      tags:
+        - all
+        - products
+  '/products/instances/{type: [^-]+}-{version}':
+    get:
+      operationId: getProductsInstancesTypeVersion
+      parameters:
+        - in: path
+          name: version
+          required: true
+          type: string
+        - in: query
+          name: for
+          required: false
+          type: string
+        - in: query
+          name: app
+          required: false
+          type: string
+        - in: path
+          name: 'type: [^-]+'
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getAvailableInstance
+          schema:
+            $ref: '#/definitions/Instance'
+      tags:
+        - all
+        - products
+  /products/mfa_kinds:
+    get:
+      responses:
+        default:
+          description: getMFAKinds
+      tags:
+        - all
+        - products
+  /products/packages:
+    get:
+      operationId: getProductsPackages
+      parameters:
+        - in: query
+          name: coupon
+          required: false
+          type: string
+        - in: query
+          name: orgaId
+          required: false
+          type: string
+        - in: query
+          name: currency
+          required: false
+          type: string
+      responses:
+        '200':
+          description: getAvailablePackages
+      tags:
+        - all
+        - products
+  /products/prices:
+    get:
+      operationId: getProductsPrices
+      parameters: []
+      responses:
+        '200':
+          description: getExchangeRates
+      tags:
+        - all
+        - products
+  /products/zones:
+    get:
+      operationId: getProductsZones
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getZones
+          schema:
+            items:
+              $ref: '#/definitions/Zone'
+            type: array
+      tags:
+        - all
+        - products
+  /self:
+    delete:
+      operationId: deleteSelf
+      parameters: []
+      responses:
+        '200':
+          description: deleteUser
+      tags:
+        - all
+        - self
+    get:
+      description: Get information about yourself
+      operationId: getSelf
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getUser
+          schema:
+            $ref: '#/definitions/User'
+      summary: ''
+      tags:
+        - all
+        - self
+    put:
+      consumes:
+        - application/json
+      operationId: putSelf
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeUser'
+      responses:
+        '200':
+          description: editUser
+      tags:
+        - all
+        - self
+  /self/addons:
+    get:
+      description: Get all the addons
+      operationId: getSelfAddons
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getAddons
+          schema:
+            items:
+              $ref: '#/definitions/Addon'
+            type: array
+      summary: Addon
+      tags:
+        - all
+        - addons
+        - self
+    post:
+      consumes:
+        - application/json
+      operationId: postSelfAddons
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeAddon'
+      responses:
+        '200':
+          description: provisionAddon
+      tags:
+        - all
+        - addons
+        - self
+  /self/addons/preorders:
+    post:
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/WannabeAddon'
+      responses:
+        default:
+          description: preorderAddon
+      tags:
+        - all
+        - addons
+        - self
+  '/self/addons/{addonId}':
+    delete:
+      operationId: deleteSelfAddonsAddonId
+      parameters:
+        - in: path
+          name: addonId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deprovisionAddon
+      tags:
+        - all
+        - addons
+        - self
+    get:
+      description: Get a specific addon
+      operationId: getSelfAddonsAddonId
+      parameters:
+        - in: path
+          name: addonId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getAddon
+          schema:
+            $ref: '#/definitions/Addon'
+      summary: Specific addon
+      tags:
+        - all
+        - addons
+        - self
+    put:
+      consumes:
+        - application/json
+      operationId: putSelfAddonsAddonId
+      parameters:
+        - in: path
+          name: addonId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeAddon'
+      responses:
+        '200':
+          description: Update addon informations
+      tags:
+        - all
+        - addons
+        - self
+  '/self/addons/{addonId}/applications':
+    get:
+      operationId: getSelfAddonsAddonIdApplications
+      parameters:
+        - in: path
+          name: addonId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getApplicationsLinkedToAddon
+          schema:
+            items:
+              $ref: '#/definitions/Application'
+            type: array
+      tags:
+        - all
+        - addons
+        - applications
+        - self
+  '/self/addons/{addonId}/env':
+    get:
+      operationId: getSelfAddonsAddonIdEnv
+      parameters:
+        - in: path
+          name: addonId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getAddonEnv
+          schema:
+            items:
+              $ref: '#/definitions/ListEnv'
+            type: array
+      tags:
+        - all
+        - addons
+        - self
+  '/self/addons/{addonId}/plan':
+    put:
+      consumes:
+        - application/json
+      operationId: putSelfAddonsAddonIdPlan
+      parameters:
+        - in: path
+          name: addonId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabePlan'
+      responses:
+        '200':
+          description: Update plan of an add-on.
+      tags:
+        - all
+        - addons
+        - self
+  '/self/addons/{addonId}/sso':
+    get:
+      operationId: getSelfAddonsAddonIdSso
+      parameters:
+        - in: path
+          name: addonId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getSSOData
+          schema:
+            $ref: '#/definitions/Sso'
+      tags:
+        - all
+        - addons
+        - self
+  '/self/addons/{addonId}/tags':
+    get:
+      operationId: getSelfAddonsAddonIdTags
+      parameters:
+        - in: path
+          name: addonId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: getAddonTags
+          schema:
+            items:
+              type: string
+            type: array
+      tags:
+        - all
+        - addons
+        - self
+  '/self/addons/{addonId}/tags/{tag}':
+    delete:
+      operationId: deleteSelfAddonsAddonIdTagsTag
+      parameters:
+        - in: path
+          name: tag
+          required: true
+          type: string
+        - in: path
+          name: addonId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deleteAddonTag
+      tags:
+        - all
+        - addons
+        - self
+    put:
+      operationId: putSelfAddonsAddonIdTagsTag
+      parameters:
+        - in: path
+          name: tag
+          required: true
+          type: string
+        - in: path
+          name: addonId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Body'
+      responses:
+        '200':
+          description: addAddonTag
+      tags:
+        - all
+        - addons
+        - self
+  /self/applications:
+    get:
+      operationId: getSelfApplications
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getApplications
+          schema:
+            items:
+              $ref: '#/definitions/Application'
+            type: array
+      tags:
+        - all
+        - applications
+        - self
+    post:
+      consumes:
+        - application/json
+      description: 'Creates an application. If you want to create a Github app, you need to replace the oauthApp field with what you will find here: https://github.com/CleverCloud/doc.clever-cloud.com/issues/179'
+      operationId: postSelfApplications
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeApplication'
+      responses:
+        '200':
+          description: addApplication
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}':
+    delete:
+      operationId: deleteSelfApplicationsAppId
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deleteApplication
+      tags:
+        - all
+        - applications
+        - self
+    get:
+      operationId: getSelfApplicationsAppId
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getApplication
+          schema:
+            $ref: '#/definitions/Application'
+      tags:
+        - all
+        - applications
+        - self
+    put:
+      consumes:
+        - application/json
+      operationId: putSelfApplicationsAppId
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeApplication'
+      responses:
+        '200':
+          description: editApplication
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}/addons':
+    get:
+      operationId: getSelfApplicationsAppIdAddons
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getAddonsLinkedToApplication
+          schema:
+            items:
+              $ref: '#/definitions/Addon'
+            type: array
+      tags:
+        - all
+        - addons
+        - applications
+        - self
+    post:
+      operationId: postSelfApplicationsAppIdAddons
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Body'
+      responses:
+        '200':
+          description: linkAddonToApplication
+      tags:
+        - all
+        - addons
+        - applications
+        - self
+  '/self/applications/{appId}/addons/env':
+    get:
+      operationId: getSelfApplicationsAppIdAddonsEnv
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getEnvOfAddonsLinkedToApplication
+          schema:
+            items:
+              $ref: '#/definitions/Env'
+            type: array
+      tags:
+        - all
+        - addons
+        - applications
+        - self
+  '/self/applications/{appId}/addons/{addonId}':
+    delete:
+      operationId: deleteSelfApplicationsAppIdAddonsAddonId
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: addonId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: unlinkAddonFromApplication
+      tags:
+        - all
+        - addons
+        - applications
+        - self
+  '/self/applications/{appId}/branch':
+    put:
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        default:
+          description: setApplicationBranch
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}/branches':
+    get:
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        default:
+          description: getApplicationBranches
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}/dependencies':
+    get:
+      operationId: getSelfApplicationsAppIdDependencies
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getApplicationDependencies
+          schema:
+            items:
+              $ref: '#/definitions/Application'
+            type: array
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}/dependencies/{dependencyId}':
+    delete:
+      operationId: deleteSelfApplicationsAppIdDependenciesDependencyId
+      parameters:
+        - in: path
+          name: dependencyId
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deleteApplicationDependency
+      tags:
+        - all
+        - applications
+        - self
+    put:
+      consumes:
+        - application/json
+      operationId: getSelfApplicationsAppIdDependenciesDependencyId
+      parameters:
+        - in: path
+          name: dependencyId
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeApplication'
+      responses:
+        '200':
+          description: addApplicationDependency
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}/dependents':
+    get:
+      operationId: getSelfApplicationsAppIdDependents
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getApplicationDependents
+          schema:
+            items:
+              $ref: '#/definitions/Application'
+            type: array
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}/deployments':
+    get:
+      operationId: getSelfApplicationsAppIdDeployments
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: query
+          name: limit
+          required: false
+          type: string
+        - in: query
+          name: offset
+          required: false
+          type: string
+        - in: query
+          name: action
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getApplicationDeployments
+          schema:
+            items:
+              $ref: '#/definitions/Deployment'
+            type: array
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}/deployments/{deploymentId}/instances':
+    delete:
+      operationId: deleteSelfApplicationsAppIdDeploymentsDeploymentIdInstances
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: deploymentId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: cancelDeploy
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}/env':
+    get:
+      operationId: getSelfApplicationsAppIdEnv
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: editApplicationEnv
+          schema:
+            items:
+              $ref: '#/definitions/ListEnv'
+            type: array
+      tags:
+        - all
+        - applications
+        - self
+    put:
+      consumes:
+        - application/json
+      operationId: putSelfApplicationsAppIdEnv
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeEnv'
+      responses:
+        '200':
+          description: editApplicationEnvironment
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}/env/{envName}':
+    delete:
+      operationId: deleteSelfApplicationsAppIdEnvEnvName
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: envName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: removeApplicationEnv
+      tags:
+        - all
+        - applications
+        - self
+    put:
+      consumes:
+        - application/json
+      operationId: putSelfApplicationsAppIdEnvEnvName
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: envName
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeEnv'
+      responses:
+        '200':
+          description: editApplicationEnv
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}/exposed_env':
+    get:
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        default:
+          description: getExposedEnv
+      tags:
+        - all
+        - applications
+        - self
+    put:
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        default:
+          description: updateExposedEnv
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}/instances':
+    delete:
+      operationId: deleteSelfApplicationsAppIdInstances
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: undeployApplication
+      tags:
+        - all
+        - applications
+        - self
+    get:
+      operationId: getSelfApplicationsAppIdInstances
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getApplicationInstances
+          schema:
+            items:
+              $ref: '#/definitions/Instance'
+            type: array
+      tags:
+        - all
+        - applications
+        - self
+    post:
+      operationId: postSelfApplicationsAppIdInstances
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: query
+          name: commit
+          required: false
+          type: string
+      responses:
+        '200':
+          description: redeployApplication
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}/instances/{instanceId}':
+    get:
+      parameters:
+        - in: path
+          name: instanceId
+          required: true
+          type: string
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        default:
+          description: getApplicationInstance
+          schema:
+            $ref: '#/definitions/AppInstance'
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}/tags':
+    get:
+      operationId: getSelfApplicationsAppIdTags
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: getApplicationTags
+          schema:
+            items:
+              type: string
+            type: array
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}/tags/{tag}':
+    delete:
+      operationId: deleteSelfApplicationsAppIdTagsTag
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: tag
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deleteApplicationTag
+      tags:
+        - all
+        - applications
+        - self
+    put:
+      operationId: putSelfApplicationsAppIdTagsTag
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: tag
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Body'
+      responses:
+        '200':
+          description: addApplicationTag
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}/vhosts':
+    get:
+      operationId: getSelfApplicationsAppIdVhosts
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getVhosts
+          schema:
+            items:
+              $ref: '#/definitions/Vhost'
+            type: array
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}/vhosts/favourite':
+    delete:
+      operationId: deleteSelfApplicationsAppIdVhostsFavourite
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: unmarkFavouriteVhost
+      tags:
+        - all
+        - applications
+        - self
+    get:
+      operationId: getSelfApplicationsAppIdVhostsFavourite
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getFavouriteVhost
+          schema:
+            $ref: '#/definitions/Vhost'
+      tags:
+        - all
+        - applications
+        - self
+    put:
+      consumes:
+        - application/json
+      operationId: putSelfApplicationsAppIdVhostsFavourite
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Vhost'
+      responses:
+        '200':
+          description: markFavouriteVhost
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}/vhosts/{domain}':
+    delete:
+      operationId: deleteSelfApplicationsAppIdVhostsDomain
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: domain
+          required: true
+          type: string
+      responses:
+        '200':
+          description: removeVhost
+      tags:
+        - all
+        - applications
+        - self
+    put:
+      consumes:
+        - application/json
+      operationId: putSelfApplicationsAppIdVhostsDomain
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: domain
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Vhost'
+      responses:
+        '200':
+          description: addVhost
+      tags:
+        - all
+        - applications
+        - self
+  /self/avatar:
+    put:
+      consumes:
+        - application/json
+      operationId: putSelfAvatar
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Avatar'
+      responses:
+        '200':
+          description: |-
+            setUserAvatar
+            setUserAvatarFromSource
+      tags:
+        - all
+        - self
+  /self/change_password:
+    put:
+      operationId: putSelfChangePassword
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: changeUserPassword
+          schema:
+            $ref: '#/definitions/Change_Password'
+      tags:
+        - all
+        - self
+  /self/confirmation_email:
+    get:
+      operationId: getSelfConfirmationEmail
+      parameters: []
+      responses:
+        '200':
+          description: getConfirmationEmail
+      tags:
+        - all
+        - self
+  /self/consumers:
+    get:
+      operationId: getSelfConsumers
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getConsumers
+          schema:
+            items:
+              $ref: '#/definitions/Consumer'
+            type: array
+      tags:
+        - all
+        - self
+    post:
+      consumes:
+        - application/json
+      operationId: postSelfConsumers
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeConsumer'
+      responses:
+        '200':
+          description: createConsumer
+      tags:
+        - all
+        - self
+  '/self/consumers/{key}':
+    delete:
+      operationId: deleteSelfConsumersKey
+      parameters:
+        - in: path
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deleteConsumer
+      tags:
+        - all
+        - self
+    get:
+      operationId: getSelfConsumersKey
+      parameters:
+        - in: path
+          name: key
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getConsumer
+          schema:
+            $ref: '#/definitions/Consumer'
+      tags:
+        - all
+        - self
+    put:
+      consumes:
+        - application/json
+      operationId: putSelfConsumersKey
+      parameters:
+        - in: path
+          name: key
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeConsumer'
+      responses:
+        '200':
+          description: PUT same consumer data as in POST.
+      tags:
+        - all
+        - self
+  '/self/consumers/{key}/secret':
+    get:
+      operationId: getSelfConsumersKeySecret
+      parameters:
+        - in: path
+          name: key
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getConsumerSecret
+          schema:
+            $ref: '#/definitions/Secret'
+      tags:
+        - all
+        - self
+  /self/consumptions:
+    get:
+      operationId: getSelfConsumptions
+      parameters:
+        - in: query
+          name: appId
+          required: false
+          type: string
+        - in: query
+          name: from
+          required: false
+          type: string
+        - in: query
+          name: to
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getConsumptions
+          schema:
+            $ref: '#/definitions/Conso'
+      tags:
+        - all
+        - self
+  /self/credits:
+    get:
+      operationId: getSelfCredits
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getAmount
+          schema:
+            $ref: '#/definitions/Credits'
+      tags:
+        - all
+        - self
+  /self/emails:
+    get:
+      operationId: getSelfEmails
+      parameters: []
+      responses:
+        '200':
+          description: getEmailAddresses
+          schema:
+            items:
+              type: string
+            type: array
+      tags:
+        - all
+        - self
+  '/self/emails/{email}':
+    delete:
+      operationId: deleteSelfEmailsEmail
+      parameters:
+        - in: path
+          name: email
+          required: true
+          type: string
+      responses:
+        '200':
+          description: removeEmailAddress
+      tags:
+        - all
+        - self
+    put:
+      operationId: putSelfEmailsEmail
+      parameters:
+        - in: path
+          name: email
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Body'
+      responses:
+        '200':
+          description: addEmailAddress
+      tags:
+        - all
+        - self
+  /self/id:
+    get:
+      operationId: getSelfId
+      parameters: []
+      responses:
+        '200':
+          description: getId
+          schema:
+            type: string
+      tags:
+        - all
+        - self
+  /self/instances:
+    get:
+      operationId: getSelfInstances
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getInstancesForAllApps
+          schema:
+            items:
+              $ref: '#/definitions/Instance'
+            type: array
+      tags:
+        - all
+        - self
+  /self/keys:
+    get:
+      operationId: getSelfKeys
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getSshKeys
+          schema:
+            items:
+              $ref: '#/definitions/Key'
+            type: array
+      tags:
+        - all
+        - self
+  '/self/keys/{key}':
+    delete:
+      operationId: deleteSelfKeysKey
+      parameters:
+        - in: path
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: removeSshKey
+      tags:
+        - all
+        - self
+    put:
+      operationId: putSelfKeysKey
+      parameters:
+        - in: path
+          name: key
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Body'
+      responses:
+        '200':
+          description: addSshKey
+      tags:
+        - all
+        - self
+  '/self/mfa/{kind}':
+    delete:
+      parameters:
+        - in: path
+          name: kind
+          required: true
+          type: string
+      responses:
+        default:
+          description: deleteMFA
+      tags:
+        - all
+        - self
+    post:
+      parameters:
+        - in: path
+          name: kind
+          required: true
+          type: string
+      responses:
+        default:
+          description: createMFA
+      tags:
+        - all
+        - self
+    put:
+      parameters:
+        - in: path
+          name: kind
+          required: true
+          type: string
+      responses:
+        default:
+          description: favMFA
+      tags:
+        - all
+        - self
+  '/self/mfa/{kind}/backupcodes':
+    get:
+      parameters:
+        - in: path
+          name: kind
+          required: true
+          type: string
+      responses:
+        default:
+          description: getBackupCodes
+      tags:
+        - all
+        - self
+  '/self/mfa/{kind}/confirmation':
+    post:
+      parameters:
+        - in: path
+          name: kind
+          required: true
+          type: string
+      responses:
+        default:
+          description: validateMFA
+      tags:
+        - all
+        - self
+  /self/payment-info:
+    get:
+      operationId: getSelfPaymentInfo
+      parameters: []
+      responses:
+        '200':
+          description: getPaymentInfo
+      tags:
+        - all
+        - self
+  /self/payments/billings:
+    get:
+      operationId: getSelfPaymentsBillings
+      parameters: []
+      responses:
+        '200':
+          description: getInvoices
+      tags:
+        - all
+        - payments
+        - self
+    post:
+      operationId: postSelfPaymentsBillings
+      parameters: []
+      responses:
+        '200':
+          description: buyDrops
+      tags:
+        - all
+        - payments
+        - self
+  '/self/payments/billings/{bid}':
+    delete:
+      operationId: deleteSelfPaymentsBillingsBid
+      parameters:
+        - in: path
+          name: bid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deletePurchaseOrder
+      tags:
+        - all
+        - payments
+        - self
+    get:
+      operationId: getSelfPaymentsBillingsBid
+      parameters:
+        - in: path
+          name: bid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: getInvoice
+      tags:
+        - all
+        - payments
+        - self
+    put:
+      operationId: putSelfPaymentsBillingsBid
+      parameters:
+        - in: path
+          name: bid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: choosePaymentProvider
+      tags:
+        - all
+        - payments
+        - self
+  '/self/payments/billings/{bid}.pdf':
+    get:
+      operationId: getSelfPaymentsBillingsBidPdf
+      parameters:
+        - in: path
+          name: bid
+          required: true
+          type: string
+        - in: query
+          name: token
+          required: false
+          type: string
+      responses:
+        '200':
+          description: getPdfInvoice
+      tags:
+        - all
+        - payments
+        - self
+  '/self/payments/fullprice/{price}':
+    get:
+      operationId: getSelfPaymentsFullpricePrice
+      parameters:
+        - in: path
+          name: price
+          required: true
+          type: string
+      responses:
+        '200':
+          description: priceWithTax
+      tags:
+        - all
+        - payments
+        - self
+  /self/payments/methods:
+    get:
+      operationId: getSelfPaymentsMethods
+      parameters: []
+      responses:
+        '200':
+          description: getUserPaymentMethods
+      tags:
+        - all
+        - payments
+        - self
+    post:
+      operationId: postSelfPaymentsMethods
+      parameters: []
+      responses:
+        '200':
+          description: addUserMethod
+      tags:
+        - all
+        - payments
+        - self
+  /self/payments/methods/default:
+    get:
+      responses:
+        default:
+          description: getDefaultMethod
+      tags:
+        - all
+        - payments
+        - self
+    put:
+      responses:
+        default:
+          description: setDefaultMethod
+      tags:
+        - all
+        - payments
+        - self
+  '/self/payments/methods/{mId}':
+    delete:
+      operationId: deleteSelfPaymentsMethodsMId
+      parameters:
+        - in: path
+          name: mId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deleteUserCard
+      tags:
+        - all
+        - payments
+        - self
+  /self/payments/recurring:
+    delete:
+      operationId: deleteSelfPaymentsRecurring
+      parameters: []
+      responses:
+        '200':
+          description: deleteRecurrentPayment
+      tags:
+        - all
+        - payments
+        - self
+    get:
+      responses:
+        default:
+          description: getRecurrentPayment
+      tags:
+        - all
+        - payments
+        - self
+  /self/payments/tokens/bt:
+    get:
+      responses:
+        default:
+          description: getBraintreeToken
+      tags:
+        - all
+        - payments
+        - self
+  /self/tokens:
+    delete:
+      operationId: deleteSelfTokens
+      parameters: []
+      responses:
+        '200':
+          description: revokeAllTokens
+      tags:
+        - all
+        - self
+    get:
+      operationId: getSelfTokens
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getSelfTokens
+          schema:
+            items:
+              $ref: '#/definitions/Token'
+            type: array
+      tags:
+        - all
+        - self
+  '/self/tokens/{token}':
+    delete:
+      operationId: deleteSelfTokensToken
+      parameters:
+        - in: path
+          name: token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: revokeToken
+      tags:
+        - all
+        - self
+  /self/validate_email:
+    get:
+      operationId: getSelfValidateEmail
+      parameters:
+        - in: query
+          name: validationKey
+          required: false
+          type: string
+      responses:
+        '200':
+          description: validateEmail
+      tags:
+        - all
+        - self
+  /summary:
+    get:
+      operationId: getSummary
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getSummary
+          schema:
+            $ref: '#/definitions/Summary'
+      tags:
+        - all
+  /users:
+    post:
+      consumes:
+        - application/json
+      operationId: postUsers
+      parameters:
+        - in: query
+          name: invitationKey
+          required: false
+          type: string
+        - in: query
+          name: addonBetaInvitationKey
+          required: false
+          type: string
+        - in: query
+          name: email
+          required: false
+          type: string
+        - in: query
+          name: pass
+          required: false
+          type: string
+        - in: query
+          name: url_next
+          required: false
+          type: string
+        - in: query
+          name: terms
+          required: false
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WannabeUser'
+      responses:
+        '200':
+          description: |-
+            createUser
+            createUserFromForm
+      tags:
+        - all
+        - users
+  '/users/{id}':
+    get:
+      operationId: getUsersId
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getUser
+          schema:
+            $ref: '#/definitions/User'
+      tags:
+        - all
+        - users
+  '/users/{id}/applications':
+    get:
+      operationId: getUsersIdApplications
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: getApplications
+          schema:
+            items:
+              $ref: '#/definitions/Application'
+            type: array
+      tags:
+        - all
+        - applications
+        - users
+  '/users/{userId}/git-info':
+    get:
+      operationId: getUsersUserIdGitInfo
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: getGitInfo
+      tags:
+        - all
+        - users
+  /vendor/apps:
+    get:
+      operationId: getVendorApps
+      parameters:
+        - format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: listApps
+          schema:
+            items:
+              $ref: '#/definitions/Application'
+            type: array
+      tags:
+        - all
+        - vendor
+  '/vendor/apps/{addonId}':
+    get:
+      operationId: getVendorAppsAddonId
+      parameters:
+        - in: path
+          name: addonId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: getApplicationInfo
+      tags:
+        - all
+        - vendor
+    put:
+      operationId: putVendorAppsAddonId
+      parameters:
+        - in: path
+          name: addonId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: editApplicationConfiguration
+      tags:
+        - all
+        - vendor
+  '/vendor/apps/{addonId}/consumptions':
+    post:
+      operationId: postVendorBillingOwnerId
+      parameters:
+        - in: path
+          name: addonId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/WannabeAddonBilling'
+      responses:
+        default:
+          description: noContent
+      tags:
+        - all
+        - vendor
+definitions:
+  Addon:
+    description: An addon
+    properties:
+      configKeys:
+        description: Environments variables link to the addon.
+        items:
+          type: string
+        type: array
+      creationDate:
+        description: The creation timestamp of the addon
+        format: date
+        type: string
+      id:
+        description: '`addon_${uuid}`'
+        type: string
+      name:
+        type: string
+      plan:
+        $ref: '#/definitions/Plan'
+      provider:
+        $ref: '#/definitions/Provider'
+      realId:
+        description: '`${provider}_${uuid2}`'
+        type: string
+      region:
+        type: string
+    required:
+      - configKeys
+      - creationDate
+      - id
+      - name
+      - plan
+      - provider
+      - realId
+      - region
+    type: object
+  AddonProviderSso:
+    properties:
+      macaroon:
+        type: string
+      url:
+        type: string
+    required:
+      - macaroon
+      - url
+    type: object
+  AppInstance:
+    properties:
+      appId:
+        type: string
+      appPort:
+        format: int32
+        type: integer
+      commit:
+        type: string
+      deployNumber:
+        format: int32
+        type: integer
+      flavor:
+        $ref: '#/definitions/Flavor'
+      id:
+        type: string
+      ip:
+        type: string
+      state:
+        type: string
+    type: object
+  Application:
+    properties:
+      archived:
+        default: false
+        type: boolean
+      branch:
+        type: string
+      buildFlavor:
+        $ref: '#/definitions/Flavor'
+      cancelOnPush:
+        default: false
+        type: boolean
+      commitId:
+        type: string
+      creationDate:
+        format: date
+        type: string
+      deployUrl:
+        type: string
+      deployment:
+        $ref: '#/definitions/Deployment'
+      description:
+        type: string
+      favourite:
+        default: false
+        type: boolean
+      homogeneous:
+        default: false
+        type: boolean
+      id:
+        type: string
+      instance:
+        $ref: '#/definitions/Instance'
+      last_deploy:
+        format: int32
+        type: integer
+      name:
+        type: string
+      ownerId:
+        type: string
+      separateBuild:
+        default: false
+        type: boolean
+      state:
+        type: string
+      stickySessions:
+        default: false
+        type: boolean
+      vhosts:
+        items:
+          $ref: '#/definitions/Vhost'
+        type: array
+      webhookSecret:
+        type: string
+      webhookUrl:
+        type: string
+      zone:
+        description: '`par` ou `mtl`'
+        type: string
+    required:
+      - archived
+      - branch
+      - buildFlavor
+      - cancelOnPush
+      - commitId
+      - creationDate
+      - deployUrl
+      - deployment
+      - description
+      - favourite
+      - homogeneous
+      - id
+      - instance
+      - last_deploy
+      - name
+      - ownerId
+      - separateBuild
+      - state
+      - stickySessions
+      - vhosts
+      - webhookSecret
+      - webhookUrl
+      - zone
+    type: object
+  Avatar:
+    description: 'If you want to upload an image from your computer, send the image in the body of the request without anything else.'
+    properties:
+      source:
+        description: ''
+        properties:
+          source:
+            description: github or gravatar
+            type: string
+          value:
+            $ref: '#/definitions/URL'
+        required:
+          - source
+          - value
+        type: object
+    required:
+      - source
+    type: object
+  Body:
+    properties:
+      body:
+        type: string
+    required:
+      - body
+    type: object
+  Change_Password:
+    properties:
+      newPassword:
+        type: string
+      oldPassword:
+        type: string
+    required:
+      - newPassword
+      - oldPassword
+    type: object
+  Conso:
+    properties:
+      appId:
+        type: string
+      conso:
+        properties:
+          conso:
+            description: One day consumption
+            type: string
+          date:
+            type: string
+        required:
+          - conso
+          - date
+        type: object
+    required:
+      - appId
+      - conso
+    type: object
+  Consumer:
+    properties:
+      baseUrl:
+        type: string
+      description:
+        type: string
+      key:
+        type: string
+      name:
+        type: string
+      picture:
+        type: string
+      rights:
+        $ref: '#/definitions/ConsumerRights'
+      url:
+        type: string
+    required:
+      - baseUrl
+      - description
+      - name
+      - rights
+      - url
+    type: object
+  ConsumerRights:
+    properties:
+      access_bills:
+        default: false
+        type: boolean
+      access_consumption_statistics:
+        default: false
+        type: boolean
+      access_credit_count:
+        default: false
+        type: boolean
+      access_organisations:
+        default: false
+        type: boolean
+      access_organisations_bills:
+        default: false
+        type: boolean
+      access_organisations_consumption_statistics:
+        default: false
+        type: boolean
+      access_organisations_credit_count:
+        default: false
+        type: boolean
+      access_personal_information:
+        default: false
+        type: boolean
+      almighty:
+        default: false
+        type: boolean
+      manage_applications:
+        default: false
+        type: boolean
+      manage_organisations:
+        default: false
+        type: boolean
+      manage_organisations_applications:
+        default: false
+        type: boolean
+      manage_organisations_members:
+        default: false
+        type: boolean
+      manage_organisations_services:
+        default: false
+        type: boolean
+      manage_personal_information:
+        default: false
+        type: boolean
+      manage_services:
+        default: false
+        type: boolean
+      manage_ssh_keys:
+        default: false
+        type: boolean
+    type: object
+  Country:
+    properties:
+      code:
+        description: Code ISO 3166
+        type: string
+      name:
+        type: string
+    required:
+      - code
+      - name
+    type: object
+  Credits:
+    properties:
+      count:
+        format: float
+        type: number
+      dropPrice:
+        properties:
+          currency:
+            type: string
+          value:
+            format: float
+            type: number
+        required:
+          - currency
+          - value
+        type: object
+      ownerId:
+        type: string
+    required:
+      - count
+      - dropPrice
+      - ownerId
+    type: object
+  Deployment:
+    properties:
+      httpUrl:
+        type: string
+      repoState:
+        type: string
+      shutdownable:
+        default: false
+        type: boolean
+      type:
+        type: string
+      url:
+        type: string
+    required:
+      - repoState
+      - shutdownable
+      - type
+      - url
+    type: object
+  Env:
+    properties:
+      addon_id:
+        type: string
+      addon_name:
+        type: string
+      env:
+        items:
+          $ref: '#/definitions/WannabeEnv'
+        type: array
+      provider_id:
+        type: string
+    required:
+      - addon_id
+      - addon_name
+      - env
+      - provider_id
+    type: object
+  Feature:
+    properties:
+      name:
+        description: The name of the properties
+        type: string
+      type:
+        description: The type of the feature
+        type: string
+      value:
+        description: The value of the feature
+        type: string
+    required:
+      - name
+      - type
+      - value
+    type: object
+  Flavor:
+    properties:
+      available:
+        default: false
+        type: boolean
+      cpus:
+        format: int32
+        type: integer
+      disk:
+        format: int32
+        type: integer
+      mem:
+        format: int32
+        type: integer
+      microservice:
+        default: false
+        type: boolean
+      name:
+        type: string
+      nice:
+        format: double
+        type: number
+      price:
+        format: double
+        type: number
+    required:
+      - cpus
+      - mem
+      - name
+      - price
+    type: object
+  Instance:
+    properties:
+      buildFlavor:
+        $ref: '#/definitions/Flavor'
+      comingSoon:
+        default: false
+        type: boolean
+      defaultEnv:
+        $ref: '#/definitions/Map'
+      defaultFlavor:
+        $ref: '#/definitions/Flavor'
+      deployments:
+        items:
+          type: string
+        type: array
+      description:
+        type: string
+      enabled:
+        default: false
+        type: boolean
+      flavors:
+        items:
+          $ref: '#/definitions/Flavor'
+        type: array
+      instanceAndVersion:
+        type: string
+      maxAllowedInstances:
+        format: int32
+        type: integer
+      maxFlavor:
+        $ref: '#/definitions/Flavor'
+      maxInstances:
+        format: int32
+        type: integer
+      minFlavor:
+        $ref: '#/definitions/Flavor'
+      minInstances:
+        format: int32
+        type: integer
+      name:
+        type: string
+      tags:
+        items:
+          type: string
+        type: array
+      type:
+        type: string
+      variant:
+        $ref: '#/definitions/Variant'
+      version:
+        format: int32
+        type: integer
+    required:
+      - defaultEnv
+      - flavors
+      - instanceAndVersion
+      - maxAllowedInstances
+      - maxFlavor
+      - maxInstances
+      - minFlavor
+      - minInstances
+      - type
+      - variant
+      - version
+    type: object
+  Key:
+    properties:
+      fingerprint:
+        type: string
+      key:
+        type: string
+      name:
+        description: ''
+        type: string
+    required:
+      - fingerprint
+      - key
+      - name
+    type: object
+  ListEnv:
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+    type: object
+  Map:
+    type: object
+  Member:
+    properties:
+      job:
+        type: string
+      member:
+        properties:
+          avatar:
+            type: string
+          email:
+            type: string
+          id:
+            type: string
+          name:
+            type: string
+        required:
+          - email
+          - id
+        type: object
+      role:
+        type: string
+    required:
+      - job
+      - member
+      - role
+    type: object
+  Organisation:
+    properties:
+      VAT:
+        type: string
+      address:
+        type: string
+      avatar:
+        type: string
+      city:
+        type: string
+      company:
+        type: string
+      country:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      vatState:
+        type: string
+      zipcode:
+        type: string
+    required:
+      - VAT
+      - address
+      - avatar
+      - city
+      - company
+      - country
+      - description
+      - id
+      - name
+      - vatState
+      - zipcode
+    type: object
+  PaymentData:
+    properties:
+      token:
+        type: string
+      type:
+        type: string
+    required:
+      - token
+      - type
+    type: object
+  Payment_Provider:
+    properties:
+      comingSoon:
+        default: false
+        type: boolean
+      imgUrl:
+        type: string
+      name:
+        type: string
+      title:
+        type: string
+    required:
+      - comingSoon
+      - imgUrl
+      - name
+      - title
+    type: object
+  Plan:
+    properties:
+      features:
+        description: The list of the feature in the addon
+        items:
+          $ref: '#/definitions/Feature'
+        type: array
+      id:
+        description: '`plan_${uuid}`'
+        type: string
+      name:
+        description: Name of the pan
+        type: string
+      price:
+        format: int32
+        type: integer
+      slug:
+        type: string
+    required:
+      - features
+      - id
+      - name
+      - price
+      - slug
+    type: object
+  Provider:
+    description: A provider
+    properties:
+      analyticsId:
+        description: The id of the analytics page link to this addon
+        type: string
+      canUpgrade:
+        default: false
+        description: Can the addon be upgraded
+        type: boolean
+      features:
+        items:
+          $ref: '#/definitions/Feature'
+        type: array
+      googlePlusName:
+        description: The name of the google + page link to this addon (could be empty)
+        type: string
+      id:
+        description: The id of the provider
+        type: string
+      logoUrl:
+        description: The url of the addon's logo
+        type: string
+      longDesc:
+        description: A less concise description of the addon
+        type: string
+      name:
+        type: string
+      openInNewTab:
+        default: false
+        description: Does the addon panel need to be open in a new tab
+        type: boolean
+      plans:
+        items:
+          $ref: '#/definitions/Plan'
+        type: array
+      regions:
+        description: The differents regions where the addon is available
+        items:
+          type: string
+        type: array
+      shortDesc:
+        description: A short description of the addon
+        type: string
+      status:
+        description: 'The status of this addon (RELEASE, BETA, ...)'
+        type: string
+      supportEmail:
+        description: The mail to contact in case of issue with this addon
+        type: string
+      twitterName:
+        description: The name of the user to contact on twitter for this addon (could be empty)
+        type: string
+      website:
+        description: 'The website of the provider. If the addon is developped by clever-cloud, the site is "http://www.clever-cloud.com/"'
+        type: string
+    required:
+      - analyticsId
+      - canUpgrade
+      - googlePlusName
+      - id
+      - logoUrl
+      - longDesc
+      - name
+      - openInNewTab
+      - regions
+      - shortDesc
+      - status
+      - supportEmail
+      - twitterName
+      - website
+    type: object
+  Rights:
+    properties:
+      description:
+        type: string
+      name:
+        type: string
+    required:
+      - description
+      - name
+    type: object
+  Secret:
+    properties:
+      secret:
+        type: string
+      value:
+        type: string
+    required:
+      - secret
+      - value
+    type: object
+  Sso:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      nav-data:
+        type: string
+      timestamp:
+        format: date
+        type: string
+      token:
+        type: string
+      url:
+        type: string
+    required:
+      - email
+      - id
+      - nav-data
+      - timestamp
+      - token
+      - url
+    type: object
+  Summary:
+    properties:
+      organisations:
+        items:
+          properties:
+            addons:
+              items:
+                properties:
+                  id:
+                    type: string
+                  logoUrl:
+                    type: string
+                  name:
+                    type: string
+                  providerId:
+                    type: string
+                type: object
+              type: array
+            applications:
+              items:
+                properties:
+                  archived:
+                    default: false
+                    type: boolean
+                  commit:
+                    type: string
+                  id:
+                    type: string
+                  instanceType:
+                    type: string
+                  instanceVariant:
+                    type: string
+                  name:
+                    type: string
+                  state:
+                    type: string
+                  variantSlug:
+                    type: string
+                type: object
+              type: array
+            avatar:
+              type: string
+            consumers:
+              items:
+                properties:
+                  key:
+                    type: string
+                  name:
+                    type: string
+                  picture:
+                    type: string
+                type: object
+              type: array
+            id:
+              type: string
+            name:
+              type: string
+            providers:
+              items:
+                type: string
+              type: array
+            role:
+              type: string
+          type: object
+        type: array
+      user:
+        properties:
+          addons:
+            items:
+              properties:
+                id:
+                  type: string
+                logoUrl:
+                  type: string
+                name:
+                  type: string
+                providerId:
+                  type: string
+              type: object
+            type: array
+          admin:
+            default: false
+            type: boolean
+          applications:
+            items:
+              properties:
+                archived:
+                  default: false
+                  type: boolean
+                commit:
+                  type: string
+                id:
+                  type: string
+                instanceType:
+                  type: string
+                instanceVariant:
+                  type: string
+                name:
+                  type: string
+                state:
+                  type: string
+                variantSlug:
+                  type: string
+              type: object
+            type: array
+          avatar:
+            type: string
+          consumers:
+            items:
+              properties:
+                key:
+                  type: string
+                name:
+                  type: string
+                picture:
+                  type: string
+              type: object
+            type: array
+          id:
+            type: string
+          lang:
+            type: string
+          name:
+            type: string
+        required:
+          - addons
+          - admin
+          - applications
+          - avatar
+          - id
+          - lang
+          - name
+        type: object
+    required:
+      - organisations
+      - user
+    type: object
+  Token:
+    properties:
+      consumer:
+        $ref: '#/definitions/Consumer'
+      creationDate:
+        format: int32
+        type: integer
+      lastUtilisation:
+        type: string
+      rights:
+        $ref: '#/definitions/Rights'
+      token:
+        type: string
+    required:
+      - consumer
+      - creationDate
+      - lastUtilisation
+      - rights
+      - token
+    type: object
+  Transaction_Id:
+    description: A simple transaction id
+    properties:
+      transactionId:
+        description: The transaction Id
+        type: string
+    required:
+      - transactionId
+    type: object
+  URL:
+    description: Must be a valid HTTP URL
+    properties:
+      url:
+        type: string
+    required:
+      - url
+    type: object
+  User:
+    description: A user representation
+    properties:
+      address:
+        description: The address of the user
+        type: string
+      admin:
+        default: false
+        description: Is the user an administrator ?
+        type: boolean
+      avatar:
+        description: The location of the user's avatar
+        type: string
+      canPay:
+        default: false
+        description: Does the user can pay ?
+        type: boolean
+      city:
+        description: The city of the user
+        type: string
+      country:
+        description: The country of the user
+        type: string
+      creationDate:
+        description: The creation timestamp of the user
+        format: int64
+        type: integer
+      email:
+        description: The email of the user
+        type: string
+      emailValidated:
+        default: false
+        description: Does the user email is validate
+        type: boolean
+      hasPassword:
+        default: false
+        type: boolean
+      id:
+        description: 'The id of the user : `user_${uuid}`'
+        type: string
+      lang:
+        description: The lang of the user
+        type: string
+      name:
+        description: The name of the user
+        type: string
+      oauthApps:
+        description: The list of token oauth
+        items:
+          type: string
+        type: array
+      phone:
+        description: The phone of the user
+        type: string
+      preferredMFA:
+        type: string
+      zipcode:
+        description: The zipcode of the user
+        type: string
+    required:
+      - address
+      - admin
+      - avatar
+      - canPay
+      - city
+      - country
+      - creationDate
+      - email
+      - emailValidated
+      - id
+      - lang
+      - name
+      - oauthApps
+      - phone
+      - zipcode
+    type: object
+  Variant:
+    properties:
+      deployType:
+        type: string
+      id:
+        type: string
+      logo:
+        type: string
+      name:
+        type: string
+      slug:
+        type: string
+    required:
+      - deployType
+      - id
+      - logo
+      - name
+      - slug
+    type: object
+  Vhost:
+    properties:
+      fqdn:
+        type: string
+    required:
+      - fqdn
+    type: object
+  WannabeAddon:
+    properties:
+      name:
+        type: string
+      payment:
+        $ref: '#/definitions/PaymentData'
+      plan:
+        type: string
+      providerId:
+        description: ''
+        type: string
+      region:
+        type: string
+    required:
+      - name
+      - payment
+      - plan
+      - providerId
+      - region
+    type: object
+  WannabeAddonBilling:
+    properties:
+      cost:
+        format: double
+        type: number
+    required:
+      - cost
+    type: object
+  WannabeAddonProvider:
+    properties:
+      api:
+        $ref: '#/definitions/WannabeAddonProviderAPI'
+      id:
+        type: string
+      name:
+        type: string
+    required:
+      - api
+      - id
+      - name
+    type: object
+  WannabeAddonProviderAPI:
+    properties:
+      config_vars:
+        items:
+          type: string
+        type: array
+      password:
+        type: string
+      production:
+        $ref: '#/definitions/WannabeAddonProviderAPIUrl'
+      regions:
+        items:
+          type: string
+        type: array
+      sso_salt:
+        type: string
+      test:
+        $ref: '#/definitions/WannabeAddonProviderAPIUrl'
+    required:
+      - config_vars
+      - password
+      - sso_salt
+    type: object
+  WannabeAddonProviderAPIUrl:
+    properties:
+      base_url:
+        type: string
+      sso_url:
+        type: string
+    required:
+      - base_url
+      - sso_url
+    type: object
+  WannabeApplication:
+    properties:
+      archived:
+        default: false
+        type: boolean
+      cancelOnPush:
+        default: false
+        type: boolean
+      deploy:
+        type: string
+      description:
+        type: string
+      enabled:
+        default: false
+        type: boolean
+      favourite:
+        default: false
+        type: boolean
+      homogeneous:
+        default: false
+        type: boolean
+      instance:
+        $ref: '#/definitions/Instance'
+      maxFlavor:
+        $ref: '#/definitions/Flavor'
+      maxInstances:
+        format: int32
+        type: integer
+      minFlavor:
+        $ref: '#/definitions/Flavor'
+      minInstances:
+        format: int32
+        type: integer
+      name:
+        type: string
+      oauthApp:
+        $ref: '#/definitions/WannabeOauthApp'
+      oauthAppId:
+        type: string
+      oauthService:
+        type: string
+      separateBuild:
+        default: false
+        type: boolean
+      shutdownable:
+        default: false
+        type: boolean
+      stickySessions:
+        default: false
+        type: boolean
+      tags:
+        items:
+          type: string
+        type: array
+      zone:
+        type: string
+    required:
+      - deploy
+      - enabled
+      - instance
+      - maxInstances
+      - minInstances
+      - name
+      - zone
+    type: object
+  WannabeConsumer:
+    properties:
+      baseUrl:
+        $ref: '#/definitions/URL'
+      description:
+        type: string
+      name:
+        type: string
+      picture:
+        description: ''
+        type: string
+      rights:
+        properties:
+          activated:
+            default: false
+            type: boolean
+          right:
+            type: string
+        required:
+          - activated
+          - right
+        type: object
+      url:
+        $ref: '#/definitions/URL'
+    required:
+      - baseUrl
+      - name
+      - rights
+      - url
+    type: object
+  WannabeEnv:
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+    required:
+      - name
+      - value
+    type: object
+  WannabeFeature:
+    properties:
+      name:
+        type: string
+      type:
+        description: 'BOOLEAN, INTERVAL, FILESIZE, NUMBER, PERCENTAGE'
+        type: string
+    required:
+      - name
+      - type
+    type: object
+  WannabeMember:
+    properties:
+      email:
+        type: string
+      job:
+        type: string
+      role:
+        type: string
+    required:
+      - email
+      - role
+    type: object
+  WannabeOauthApp:
+    properties:
+      name:
+        type: string
+      owner:
+        type: string
+    type: object
+  WannabeOrganisation:
+    properties:
+      VAT:
+        type: string
+      address:
+        description: The address of the organisation.
+        type: string
+      city:
+        description: The city of the organisation.
+        type: string
+      company:
+        description: The company's name of the organisation.
+        type: string
+      country:
+        description: The country of the organisation.
+        type: string
+      description:
+        description: The description of the organisation.
+        type: string
+      name:
+        description: The name of the organisation.
+        type: string
+      zipcode:
+        description: The zipcode of the city's organisation.
+        type: string
+    required:
+      - description
+      - name
+    type: object
+  WannabePlan:
+    properties:
+      features:
+        items:
+          $ref: '#/definitions/WannabePlanFeature'
+        type: array
+      name:
+        type: string
+      price:
+        format: int64
+        type: integer
+      slug:
+        type: string
+    required:
+      - features
+      - name
+      - price
+      - slug
+    type: object
+  WannabePlanFeature:
+    properties:
+      name:
+        type: string
+      type:
+        type: string
+      value:
+        type: string
+    required:
+      - name
+      - type
+      - value
+    type: object
+  WannabeUser:
+    description: ''
+    properties:
+      address:
+        type: string
+      city:
+        type: string
+      country:
+        type: string
+      email:
+        description: ''
+        type: string
+      lang:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      terms:
+        default: false
+        type: boolean
+      zipcode:
+        type: string
+    required:
+      - email
+      - password
+      - terms
+    type: object
+  Zone:
+    properties:
+      correspondingRegion:
+        type: string
+      internal:
+        default: false
+        type: boolean
+      name:
+        type: string
+    required:
+      - correspondingRegion
+      - internal
+      - name
+    type: object
