@@ -1,0 +1,581 @@
+swagger: '2.0'
+schemes:
+  - https
+host: formapi.io
+basePath: /api/v1
+info:
+  contact:
+    x-twitter: form_api
+  title: API V1
+  version: v1
+  x-apisguru-categories:
+    - text
+  x-logo:
+    url: 'https://twitter.com/form_api/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://app.formapi.io/api-docs/v1/swagger.json'
+      version: '2.0'
+  x-providerName: formapi.io
+produces:
+  - application/json
+securityDefinitions:
+  basic:
+    type: basic
+paths:
+  /authentication:
+    get:
+      operationId: testAuthentication
+      responses:
+        '200':
+          description: authentication succeeded
+          schema:
+            properties:
+              status:
+                enum:
+                  - success
+                type: string
+            required:
+              - status
+            type: object
+        '401':
+          description: authentication failed
+          schema:
+            properties:
+              error:
+                type: string
+            required:
+              - error
+            type: object
+      security:
+        - basic: []
+      summary: Test Authentication
+      tags:
+        - PDF
+  /combined_submissions:
+    post:
+      consumes:
+        - application/json
+      operationId: combineSubmissions
+      parameters:
+        - in: body
+          name: data
+          schema:
+            properties:
+              expires_in:
+                type: number
+              metadata:
+                type: object
+              submission_ids:
+                items:
+                  type: string
+                type: array
+              test:
+                type: boolean
+            required:
+              - submission_ids
+            type: object
+      responses:
+        '201':
+          description: combined submission created
+          schema:
+            properties:
+              combined_submission:
+                properties:
+                  download_url:
+                    type: string
+                    x-nullable: true
+                  expired:
+                    type: boolean
+                  expires_at:
+                    type: string
+                    x-nullable: true
+                  id:
+                    type: string
+                  metadata:
+                    type: object
+                  state:
+                    enum:
+                      - pending
+                      - processed
+                      - error
+                    type: string
+                  submission_ids:
+                    items:
+                      type: string
+                    type: array
+                required:
+                  - id
+                  - state
+                  - expired
+                  - submission_ids
+                type: object
+              status:
+                enum:
+                  - success
+                  - error
+                type: string
+            required:
+              - status
+              - combined_submission
+            type: object
+        '400':
+          description: invalid JSON
+          schema:
+            properties:
+              error:
+                type: string
+              status:
+                enum:
+                  - error
+                type: string
+            required:
+              - status
+              - error
+            type: object
+        '401':
+          description: authentication failed
+          schema:
+            properties:
+              error:
+                type: string
+            required:
+              - error
+            type: object
+        '422':
+          description: invalid request
+          schema:
+            properties:
+              errors:
+                items:
+                  type: string
+                type: array
+              status:
+                enum:
+                  - error
+                type: string
+            required:
+              - status
+              - errors
+            type: object
+      security:
+        - basic: []
+      summary: Merge generated PDFs together
+      tags:
+        - PDF
+  '/combined_submissions/{combined_submission_id}':
+    delete:
+      operationId: expireCombinedSubmission
+      parameters:
+        - in: path
+          name: combined_submission_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: submission was expired
+          schema:
+            properties:
+              download_url:
+                type: string
+                x-nullable: true
+              expired:
+                type: boolean
+              expires_at:
+                type: string
+                x-nullable: true
+              id:
+                type: string
+              metadata:
+                type: object
+              state:
+                enum:
+                  - pending
+                  - processed
+                  - error
+                type: string
+              submission_ids:
+                items:
+                  type: string
+                type: array
+            required:
+              - id
+              - state
+              - expired
+              - submission_ids
+            type: object
+        '401':
+          description: authentication failed
+          schema:
+            properties:
+              error:
+                type: string
+            required:
+              - error
+            type: object
+        '403':
+          description: test API token used
+          schema:
+            properties:
+              error:
+                type: string
+              status:
+                enum:
+                  - error
+                type: string
+            required:
+              - status
+              - error
+            type: object
+        '404':
+          description: combined submission not found
+          schema:
+            properties:
+              error:
+                type: string
+              status:
+                enum:
+                  - error
+                type: string
+            required:
+              - status
+              - error
+            type: object
+      security:
+        - basic: []
+      summary: Expire a combined submission
+      tags:
+        - PDF
+    get:
+      operationId: getCombinedSubmission
+      parameters:
+        - in: path
+          name: combined_submission_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: processed combined submission found
+          schema:
+            properties:
+              download_url:
+                type: string
+                x-nullable: true
+              expired:
+                type: boolean
+              expires_at:
+                type: string
+                x-nullable: true
+              id:
+                type: string
+              metadata:
+                type: object
+              state:
+                enum:
+                  - pending
+                  - processed
+                  - error
+                type: string
+              submission_ids:
+                items:
+                  type: string
+                type: array
+            required:
+              - id
+              - state
+              - expired
+              - submission_ids
+            type: object
+        '401':
+          description: authentication failed
+          schema:
+            properties:
+              error:
+                type: string
+            required:
+              - error
+            type: object
+        '404':
+          description: combined submission not found
+          schema:
+            properties:
+              error:
+                type: string
+              status:
+                enum:
+                  - error
+                type: string
+            required:
+              - status
+              - error
+            type: object
+      security:
+        - basic: []
+      summary: Check the status of a combined submission (merged PDFs)
+      tags:
+        - PDF
+  '/submissions/{submission_id}':
+    delete:
+      operationId: expireSubmission
+      parameters:
+        - in: path
+          name: submission_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: submission was expired
+          schema:
+            properties:
+              download_url:
+                type: string
+                x-nullable: true
+              expired:
+                type: boolean
+              expires_at:
+                type: string
+                x-nullable: true
+              id:
+                type: string
+              metadata:
+                type: object
+              state:
+                enum:
+                  - pending
+                  - processed
+                  - invalid_data
+                  - error
+                  - image_download_failed
+                  - image_processing_failed
+                type: string
+              test:
+                type: boolean
+            required:
+              - id
+              - state
+              - test
+              - expired
+            type: object
+        '401':
+          description: authentication failed
+          schema:
+            properties:
+              error:
+                type: string
+            required:
+              - error
+            type: object
+        '403':
+          description: test API token used
+          schema:
+            properties:
+              error:
+                type: string
+              status:
+                enum:
+                  - error
+                type: string
+            required:
+              - status
+              - error
+            type: object
+        '404':
+          description: submission not found
+          schema:
+            properties:
+              error:
+                type: string
+              status:
+                enum:
+                  - error
+                type: string
+            required:
+              - status
+              - error
+            type: object
+      security:
+        - basic: []
+      summary: Expire a PDF submission
+      tags:
+        - PDF
+    get:
+      operationId: getSubmission
+      parameters:
+        - in: path
+          name: submission_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: processed submission found
+          schema:
+            properties:
+              download_url:
+                type: string
+                x-nullable: true
+              expired:
+                type: boolean
+              expires_at:
+                type: string
+                x-nullable: true
+              id:
+                type: string
+              metadata:
+                type: object
+              state:
+                enum:
+                  - pending
+                  - processed
+                  - invalid_data
+                  - error
+                  - image_download_failed
+                  - image_processing_failed
+                type: string
+              test:
+                type: boolean
+            required:
+              - id
+              - state
+              - test
+              - expired
+            type: object
+        '401':
+          description: authentication failed
+          schema:
+            properties:
+              error:
+                type: string
+            required:
+              - error
+            type: object
+        '404':
+          description: submission not found
+          schema:
+            properties:
+              error:
+                type: string
+              status:
+                enum:
+                  - error
+                type: string
+            required:
+              - status
+              - error
+            type: object
+      security:
+        - basic: []
+      summary: Check the status of a PDF
+      tags:
+        - PDF
+  '/templates/{template_id}/submissions':
+    post:
+      consumes:
+        - application/json
+      operationId: generatePDF
+      parameters:
+        - in: path
+          name: template_id
+          required: true
+          type: string
+        - in: body
+          name: data
+          schema:
+            properties:
+              data:
+                type: object
+              metadata:
+                type: object
+              test:
+                type: boolean
+            required:
+              - data
+            type: object
+      responses:
+        '201':
+          description: submission created
+          schema:
+            properties:
+              status:
+                enum:
+                  - success
+                  - error
+                type: string
+              submission:
+                properties:
+                  download_url:
+                    type: string
+                    x-nullable: true
+                  expired:
+                    type: boolean
+                  expires_at:
+                    type: string
+                    x-nullable: true
+                  id:
+                    type: string
+                  metadata:
+                    type: object
+                  state:
+                    enum:
+                      - pending
+                      - processed
+                      - invalid_data
+                      - error
+                      - image_download_failed
+                      - image_processing_failed
+                    type: string
+                  test:
+                    type: boolean
+                required:
+                  - id
+                  - state
+                  - test
+                  - expired
+                type: object
+            required:
+              - status
+              - submission
+            type: object
+        '400':
+          description: invalid JSON
+          schema:
+            properties:
+              error:
+                type: string
+              status:
+                enum:
+                  - error
+                type: string
+            required:
+              - status
+              - error
+            type: object
+        '401':
+          description: authentication failed
+          schema:
+            properties:
+              error:
+                type: string
+            required:
+              - error
+            type: object
+        '422':
+          description: invalid request
+          schema:
+            properties:
+              errors:
+                items:
+                  type: string
+                type: array
+              status:
+                enum:
+                  - error
+                type: string
+            required:
+              - status
+              - errors
+            type: object
+      security:
+        - basic: []
+      summary: Generates a new PDF
+      tags:
+        - PDF
