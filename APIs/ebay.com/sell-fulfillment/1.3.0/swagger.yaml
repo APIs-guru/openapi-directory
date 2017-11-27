@@ -1,0 +1,780 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.ebay.com
+basePath: /sell/fulfillment/v1
+info:
+  contact:
+    name: eBay Inc.
+    x-twitter: ebay
+  description: 'Use the Fulfillment API to complete the process of packaging, addressing, handling, and shipping each order on behalf of the seller, in accordance with the payment method and timing specified at checkout.'
+  license:
+    name: eBay API License Agreement
+    url: 'https://go.developer.ebay.com/api-license-agreement'
+  title: Fulfillment
+  version: 1.3.0
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://twitter.com/ebay/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://developer.ebay.com/api-docs/master/sell/fulfillment/openapi/2/sell_fulfillment_v1.json'
+      version: '2.0'
+  x-providerName: ebay.com
+  x-serviceName: sell-fulfillment
+produces:
+  - application/json
+securityDefinitions:
+  Authorization Code:
+    authorizationUrl: 'https://signin.ebay.com/authorize'
+    description: The security definitions for this API. Please check individual operations for applicable scopes.
+    flow: accessCode
+    scopes:
+      'https://api.ebay.com/oauth/api_scope/sell.fulfillment': View and manage your order fulfillments
+      'https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly': View your order fulfillments
+    tokenUrl: 'https://api.ebay.com/identity/v1/oauth2/token'
+    type: oauth2
+paths:
+  /order:
+    get:
+      description: 'Use this call to search for and retrieve one or more orders based on their creation date, last modification date, or fulfillment status using the filter parameter. You can alternatively specify a list of orders using the orderIds parameter. The returned Order objects contain information you can use to create and process fulfillments, including: Information about the buyer and seller Information about the order''s line items The plans for packaging, addressing and shipping the order The status of payment, packaging, addressing, and shipping the order A summary of monetary amounts specific to the order such as pricing, payments, and shipping costs Important: In this call, the cancelStatus.cancelRequests array is returned but is always empty. Use the getOrder call instead, which returns this array fully populated with information about any cancellation requests.'
+      operationId: getOrders
+      parameters:
+        - description: 'One or more comma-separated criteria for narrowing down the collection of orders returned by this call. These criteria correspond to specific fields in the response payload. Multiple filter criteria combine to further restrict the results. Note: Currently, filter returns data from only the last 90 days. If the orderIds parameter is included in the request, the filter parameter will be ignored.The available criteria are as follows: creationdate The time period during which qualifying orders were created (the orders.creationDate field). In the URI, this is expressed as a starting timestamp, with or without an ending timestamp (in brackets). The timestamps are in ISO 8601 format, which uses the 24-hour Universal Coordinated Time (UTC) clock.For example: creationdate:[2016-02-21T08:25:43.511Z..] identifies orders created on or after the given timestamp. creationdate:[2016-02-21T08:25:43.511Z..2016-04-21T08:25:43.511Z] identifies orders created between the given timestamps, inclusive. lastmodifieddate The time period during which qualifying orders were last modified (the orders.modifiedDate field). In the URI, this is expressed as a starting timestamp, with or without an ending timestamp (in brackets). The timestamps are in ISO 8601 format, which uses the 24-hour Universal Coordinated Time (UTC) clock.For example: lastmodifieddate:[2016-05-15T08:25:43.511Z..] identifies orders modified on or after the given timestamp. lastmodifieddate:[2016-05-15T08:25:43.511Z..2016-05-31T08:25:43.511Z] identifies orders modified between the given timestamps, inclusive.Note: If creationdate and lastmodifieddate are both included, only creationdate is used. orderfulfillmentstatus The degree to which qualifying orders have been shipped (the orders.orderFulfillmentStatus field). In the URI, this is expressed as one of the following value combinations: orderfulfillmentstatus:{NOT_STARTED|IN_PROGRESS} specifies orders for which no shipping fulfillments have been started, plus orders for which at least one shipping fulfillment has been started but not completed. orderfulfillmentstatus:{FULFILLED|IN_PROGRESS} specifies orders for which all shipping fulfillments have been completed, plus orders for which at least one shipping fulfillment has been started but not completed.Note: The values NOT_STARTED, IN_PROGRESS, and FULFILLED can be used in various combinations, but only the combinations shown here are currently supported.Here is an example of a getOrders call using all of these filters: GET https://api.ebay.com/sell/v1/order? filter=creationdate:%5B2016-03-21T08:25:43.511Z..2016-04-21T08:25:43.511Z%5D, lastmodifieddate:%5B2016-05-15T08:25:43.511Z..%5D, orderfulfillmentstatus:%7BNOT_STARTED%7CIN_PROGRESS%7D Note: This call requires that certain special characters in the URI query string be percent-encoded: &nbsp;&nbsp;&nbsp;&nbsp;[ = %5B &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;] = %5D &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ = %7B &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| = %7C &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} = %7D This query filter example uses these codes. For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/fulfillment/types/FilterField.html'
+          in: query
+          name: filter
+          required: false
+          type: string
+        - description: 'The number of orders to return in the current result set. Use this parameter in conjunction with the offset parameter to control the pagination of the output. For example, if offset is set to 10 and limit is set to 10, the call retrieves orders 11 thru 20 from the resulting collection of orders. Note: This feature employs a zero-based list, where the first item in the list has an offset of 0. If the orderIds parameter is included in the request, this parameter will be ignored. Maximum: 1000 Default: 50'
+          in: query
+          name: limit
+          required: false
+          type: string
+        - description: 'The first order to return based on its position in the collection of orders. Use this parameter in conjunction with the limit parameter to control the pagination of the output. For example, if offset is set to 10 and limit is set to 10, the call retrieves orders 11 thru 20 from the resulting collection of orders. Note: This feature employs a zero-based list, where the first item in the list has an offset of 0. If the orderIds parameter is included in the request, this parameter will be ignored. Default: 0 (zero)'
+          in: query
+          name: offset
+          required: false
+          type: string
+        - description: 'A comma-separated list of the unique identifiers of the orders to retrieve (maximum 50). These values were originally generated by eBay as a result of the buyer''s checkout process; for example, 170009092860-9849164007!140000000544476. These values are also returned in the orders.orderId field by invoking this call with filter parameters. Note: If the orderIds parameter is included in the request, all other query parameters will be ignored.'
+          in: query
+          name: orderIds
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/OrderSearchPagedCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      security:
+        - Authorization Code:
+            - 'https://api.ebay.com/oauth/api_scope/sell.fulfillment'
+            - 'https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly'
+      summary: Get Orders
+      tags:
+        - order
+  '/order/{orderId}':
+    get:
+      description: 'Use this call to retrieve the contents of an order based on its unique identifier, orderId. This value was returned in the getOrders call''s orders.orderId field when you searched for orders by creation date, modification date, or fulfillment status. The returned Order object contains information you can use to create and process fulfillments, including: Information about the buyer and seller Information about the order''s line items The plans for packaging, addressing and shipping the order The status of payment, packaging, addressing, and shipping the order A summary of monetary amounts specific to the order such as pricing, payments, and shipping costs'
+      operationId: getOrder
+      parameters:
+        - description: 'The unique identifier of the order. This value was returned by the getOrders call in the orders.orderId field; for example, 170009092860-9849164007!140000000544476.'
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Order'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      security:
+        - Authorization Code:
+            - 'https://api.ebay.com/oauth/api_scope/sell.fulfillment'
+            - 'https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly'
+      summary: Get an Order
+      tags:
+        - order
+  '/order/{orderId}/shipping_fulfillment':
+    get:
+      description: 'Use this call to retrieve the contents of all fulfillments currently defined for a specified order based on the order''s unique identifier, orderId. This value is returned in the getOrders call''s members.orderId field when you search for orders by creation date or shipment status.'
+      operationId: getShippingFulfillments
+      parameters:
+        - description: 'The unique identifier of the order. This value was returned by the getOrders call in the orders.orderId field; for example, 170009092860-9849164007!140000000544476.'
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ShippingFulfillmentPagedCollection'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      security:
+        - Authorization Code:
+            - 'https://api.ebay.com/oauth/api_scope/sell.fulfillment'
+            - 'https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly'
+      summary: Get Shipping Fulfillments
+      tags:
+        - shipping_fulfillment
+    post:
+      consumes:
+        - application/json
+      description: 'When you group an order''s line items into one or more packages, each package requires a corresponding plan for handling, addressing, and shipping; this is a shipping fulfillment. For each package, execute this call once to generate a shipping fulfillment associated with that package. Note: A single line item in an order can consist of multiple units of a purchased item, and one unit can consist of multiple parts or components. Although these components might be provided by the manufacturer in separate packaging, the seller must include all components of a given line item in the same package.Before using this call for a given package, you must determine which line items are in the package. If the package has been shipped, you should provide the date of shipment in the request. If not provided, it will default to the current date and time.'
+      operationId: createShippingFulfillment
+      parameters:
+        - description: 'The unique identifier of the order. This value was returned by the getOrders call in the orders.orderId field; for example, 170009092860-9849164007!140000000544476.'
+          in: path
+          name: orderId
+          required: true
+          type: string
+        - description: fulfillment payload
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ShippingFulfillmentDetails'
+      responses:
+        '201':
+          description: 'Created. The call also returns the following location code: <br /><br /><code>{ENV}/sell/fulfillment/v1/order/{ORDERID}/fulfillment/{FULFILLMENTID}</code> <br /><br />The <code>ENV</code> string is the HTTP path to the same eBay supported environment in which this call was issued. The <code>ORDERID</code> parameter is the unique identifier of the order addressed by this call; for example, <code>170009092860-9849164007!140000000544476</code>. The <code>FULFILLMENTID</code> parameter identifies the newly created fulfillment; for example, <code>9405509699937003457459</code>. Use this Get Fulfillment URI to retrieve the contents of the new fulfillment.'
+          schema:
+            type: object
+        '400':
+          description: Bad Request
+        '500':
+          description: 'Internal Server Error. <br /><br /><span class="tablenote"><strong>Note:</strong> In some cases, this call may succeed if you issue it once more after receiving this error.</span>'
+      security:
+        - Authorization Code:
+            - 'https://api.ebay.com/oauth/api_scope/sell.fulfillment'
+      summary: Create a Shipping Fulfillment
+      tags:
+        - shipping_fulfillment
+  '/order/{orderId}/shipping_fulfillment/{fulfillmentId}':
+    get:
+      description: 'Use this call to retrieve the contents of a fulfillment based on its unique identifier, fulfillmentId (combined with the associated order''s orderId). The fulfillmentId value was originally generated by the createShippingFulfillment call, and is returned by the getShippingFulfillments call in the members.fulfillmentId field.'
+      operationId: getShippingFulfillment
+      parameters:
+        - description: 'The unique identifier of the fulfillment. This eBay-generated value was created by the Create Shipping Fulfillment call, and returned by the getShippingFulfillments call in the fulfillments.fulfillmentId field; for example, 9405509699937003457459.'
+          in: path
+          name: fulfillmentId
+          required: true
+          type: string
+        - description: 'The unique identifier of the order. This value was returned by the getOrders call in the orders.orderId field; for example, 170009092860-9849164007!140000000544476.'
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ShippingFulfillment'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      security:
+        - Authorization Code:
+            - 'https://api.ebay.com/oauth/api_scope/sell.fulfillment'
+            - 'https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly'
+      summary: Get a Shipping Fulfillment
+      tags:
+        - shipping_fulfillment
+definitions:
+  Address:
+    description: This type contains the details of a geographical address.
+    properties:
+      addressLine1:
+        description: The first line of the street address.
+        type: string
+      addressLine2:
+        description: 'The second line of the street address. This field can be used for additional address information, such as a suite or apartment number.'
+        type: string
+      city:
+        description: The city of the address.
+        type: string
+      countryCode:
+        description: 'The country of the address, represented as two-letter ISO 3166-1 alpha-2 country code. For example, US represents the United States, and DE represents Germany. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/fulfillment/types/CountryCodeEnum.html''>eBay API documentation</a>'
+        type: string
+      county:
+        description: 'The county (not the country) in which the address is located. Counties typically, but not always, contain multiple cities or towns.'
+        type: string
+      postalCode:
+        description: The postal code (if any) of the address.
+        type: string
+      stateOrProvince:
+        description: The state or province within the country in which the address resides.
+        type: string
+    type: object
+  Amount:
+    description: 'This type defines the monetary value of an amount. It can provide the amount in both the currency used on the eBay site where an item is being offered and the conversion of that value into another currency, if applicable.'
+    properties:
+      convertedFromCurrency:
+        description: 'A three-letter ISO 4217 code that indicates the currency of the amount in the convertedFromValue field. This value is required or returned only if currency conversion/localization is required, and represents the pre-conversion currency. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/fulfillment/types/CurrencyCodeEnum.html''>eBay API documentation</a>'
+        type: string
+      convertedFromValue:
+        description: 'The monetary amount before any conversion is performed, in the currency specified by the convertedFromCurrency field. This value is required or returned only if currency conversion/localization is required. The value field contains the converted amount of this value, in the currency specified by the currency field.'
+        type: string
+      currency:
+        description: 'A three-letter ISO 4217 code that indicates the currency of the amount in the value field. If currency conversion/localization is required, this is the post-conversion currency of the amount in the value field. Default: The currency of the authenticated user''s country. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/fulfillment/types/CurrencyCodeEnum.html''>eBay API documentation</a>'
+        type: string
+      value:
+        description: 'The monetary amount, in the currency specified by the currency field. If currency conversion/localization is required, this value is the converted amount, and the convertedFromValue field contains the amount in the original currency.'
+        type: string
+    type: object
+  AppliedPromotion:
+    description: This type contains information about a sales promotion or discount that is applied to a line item.
+    properties:
+      description:
+        description: A description of the applied promotion.
+        type: string
+      discountAmount:
+        $ref: '#/definitions/Amount'
+      promotionId:
+        description: An eBay-generated identifier for the promotion. This is the value generated by the Marketing API's Create Item Promotion call and returned as the resource identifier of the location code that accompanies the HTTP 201 status code. It is also returned by the Trading API's SetPromotionalSale call and in the PromotionalSaleID field.
+        type: string
+    type: object
+  Buyer:
+    description: This type contains information about the buyer of an order.
+    properties:
+      username:
+        description: The buyer's eBay user name.
+        type: string
+    type: object
+  CancelRequest:
+    description: This type contains information about a buyer request to cancel an order.
+    properties:
+      cancelCompletedDate:
+        description: 'The date and time that the order cancellation was completed, if applicable. This timestamp is in ISO 8601 format, which uses the 24-hour Universal Coordinated Time (UTC) clock. Format: YYYY-MM-DDTHH:MM:SS.SSSZ Example: 2015-08-04T19:09:02.768Z'
+        type: string
+      cancelInitiator:
+        description: The party who made the initial cancellation request.
+        type: string
+      cancelReason:
+        description: The reason why the cancelInitiator initiated the cancellation request.
+        type: string
+      cancelRequestId:
+        description: The unique identifier of the order cancellation request.
+        type: string
+      cancelRequestState:
+        description: 'The current stage or condition of the cancellation request. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/fulfillment/types/CancelRequestStateEnum.html''>eBay API documentation</a>'
+        type: string
+      cancelRequestedDate:
+        description: 'The date and time that the order cancellation was requested. This timestamp is in ISO 8601 format, which uses the 24-hour Universal Coordinated Time (UTC) clock. Format: YYYY-MM-DDTHH:MM:SS.SSSZ Example: 2015-08-04T19:09:02.768Z'
+        type: string
+    type: object
+  CancelStatus:
+    description: This type contains information about any requests that have been made to cancel an order.
+    properties:
+      cancelRequests:
+        description: 'Contains the details of one or more buyer requests to cancel the order. For the getOrders call: This array is returned but is always empty. For the getOrder call: This array is returned fully populated with information about any cancellation requests.'
+        items:
+          $ref: '#/definitions/CancelRequest'
+        type: array
+      cancelState:
+        description: 'The state of the order with regard to cancellation. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/fulfillment/types/CancelStateEnum.html''>eBay API documentation</a>'
+        type: string
+      cancelledDate:
+        description: 'The date and time the order was cancelled, if applicable. This timestamp is in ISO 8601 format, which uses the 24-hour Universal Coordinated Time (UTC) clock. Format: YYYY-MM-DDTHH:MM:SS.SSSZ Example: 2015-08-04T19:09:02.768Z'
+        type: string
+    type: object
+  Contact:
+    description: This type contains contact information for an individual who represents (or is) a buyer or seller.
+    properties:
+      companyName:
+        description: The contact's company name.
+        type: string
+      contactAddress:
+        $ref: '#/definitions/Address'
+      fullName:
+        description: The contact's full name.
+        type: string
+      primaryPhone:
+        $ref: '#/definitions/PhoneNumber'
+    type: object
+  DeliveryCost:
+    description: This type contains a breakdown of all costs associated with the fulfillment of a line item.
+    properties:
+      importCharges:
+        $ref: '#/definitions/Amount'
+      shippingCost:
+        $ref: '#/definitions/Amount'
+      shippingIntermediationFee:
+        $ref: '#/definitions/Amount'
+    type: object
+  Error:
+    description: 'This type contains a error or warning related to a call request. '
+    properties:
+      category:
+        description: The context or source of this error or warning.
+        type: string
+      domain:
+        description: 'The name of the domain containing the service or application. For example, sell is a domain.'
+        type: string
+      errorId:
+        description: A positive integer that uniquely identifies the specific error condition that occurred. Your application can use these values as error code identifiers in your customized error-handling algorithms.
+        type: integer
+      inputRefIds:
+        description: 'A list of one or more specific request elements (if any) associated with the error or warning. The format of these strings depends on the request payload format. For JSON, use JSONPath notation.'
+        items:
+          type: string
+        type: array
+      longMessage:
+        description: 'An expanded version of the message field. Maximum length: 200 characters'
+        type: string
+      message:
+        description: 'A message about the error or warning which is device agnostic and readable by end users and application developers. It explains what the error or warning is, and how to fix it (in a general sense). If applicable, the value is localized to the end user''s requested locale. Maximum length: 50 characters'
+        type: string
+      outputRefIds:
+        description: 'A list of one or more specific response elements (if any) associated with the error or warning. The format of these strings depends on the request payload format. For JSON, use JSONPath notation.'
+        items:
+          type: string
+        type: array
+      parameters:
+        description: Contains a list of name/value pairs that provide additional information concerning this error or warning. Each item in the list is an input parameter that contributed to the error or warning condition.
+        items:
+          $ref: '#/definitions/ErrorParameter'
+        type: array
+      subdomain:
+        description: 'The name of the domain''s subsystem or subdivision. For example, fulfillment is a subdomain in the sell domain.'
+        type: string
+    type: object
+  ErrorParameter:
+    description: This type contains the name and value of an input parameter that contributed toa specific error or warning condition.
+    properties:
+      name:
+        description: The name of the parameter.
+        type: string
+      value:
+        description: The value of the parameter.
+        type: string
+    type: object
+  FulfillmentStartInstruction:
+    description: 'This type contains a set of specifications for processing a fulfillment of an order, including the type of fulfillment, shipping carrier and service, addressing details, and estimated delivery window. These instructions are derived from the buyer''s and seller''s eBay account preferences, the listing parameters, and the buyer''s checkout selections. The seller can use them as a starting point for packaging, addressing, and shipping the order.'
+    properties:
+      ebaySupportedFulfillment:
+        description: 'Returned only if true, whcih indicates that the fulfillment will be shipped via eBay''s Global Shipping Program. For more information, see Managing Shipping.'
+        type: boolean
+      finalDestinationAddress:
+        $ref: '#/definitions/Address'
+      fulfillmentInstructionsType:
+        description: 'The method of fulfillment that will be used to deliver this set of line items (this package) to the buyer. This field will have a value of SHIP_TO if the ebaySupportedFulfillment field is returned with a value of true. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/fulfillment/types/FulfillmentInstructionsType.html''>eBay API documentation</a>'
+        type: string
+      maxEstimatedDeliveryDate:
+        description: 'NOT returned if the value of the fulfillmentInstructionsType field is DIGITAL or PREPARE_FOR_PICKUP, or if the order has promotional free shipping. This is the estimated latest date that the fulfillment will be completed. This timestamp is in ISO 8601 format, which uses the 24-hour Universal Coordinated Time (UTC) clock. Format: YYYY-MM-DDTHH:MM:SS.SSSZ Example: 2015-08-04T19:09:02.768Z'
+        type: string
+      minEstimatedDeliveryDate:
+        description: 'NOT returned if the value of the fulfillmentInstructionsType field is DIGITAL or PREPARE_FOR_PICKUP, or if the order has promotional free shipping. This is the estimated earliest date that the fulfillment will be completed. This timestamp is in ISO 8601 format, which uses the 24-hour Universal Coordinated Time (UTC) clock. Format: YYYY-MM-DDTHH:MM:SS.SSSZ Example: 2015-08-04T19:09:02.768Z'
+        type: string
+      shippingStep:
+        $ref: '#/definitions/ShippingStep'
+    type: object
+  GiftDetails:
+    description: This type contains information about a line item that was purchased as a gift.
+    properties:
+      message:
+        description: A gift message from the buyer to the gift recipient.
+        type: string
+      recipientEmail:
+        description: The email address of the gift recipient.
+        type: string
+      senderName:
+        description: The name of the buyer to provide to the gift recipient.
+        type: string
+    type: object
+  LineItem:
+    description: This type contains the details of a line item in an order. A line item consists of one or more units of a specific variation and version of a listed item that has been purchased.
+    properties:
+      appliedPromotions:
+        description: Contains information about one or more sales promotions or discounts applied to the line item.
+        items:
+          $ref: '#/definitions/AppliedPromotion'
+        type: array
+      deliveryCost:
+        $ref: '#/definitions/DeliveryCost'
+      discountedLineItemCost:
+        $ref: '#/definitions/Amount'
+      giftDetails:
+        $ref: '#/definitions/GiftDetails'
+      legacyItemId:
+        description: 'The eBay-generated legacy listing item ID of the line item. This partially identifies the line item, but does not include the variation, version, or unit quantity.'
+        type: string
+      legacyVariationId:
+        description: An eBay-generated string that uniquely identifies the combination of item variations that apply to this line item.
+        type: string
+      lineItemCost:
+        $ref: '#/definitions/Amount'
+      lineItemFulfillmentInstructions:
+        $ref: '#/definitions/LineItemFulfillmentInstructions'
+      lineItemFulfillmentStatus:
+        description: 'The degree to which fulfillment of the line item is complete. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/fulfillment/types/LineItemFulfillmentStatusEnum.html''>eBay API documentation</a>'
+        type: string
+      lineItemId:
+        description: 'The globally unique eBay-generated identifier of the line item. Note: A single line item can consist of multiple units of a purchased item, and one unit can consist of multiple parts or components. Although these components might be provided by the manufacturer in separate packaging, the seller cannot distribute them among multiple shipping packages. Thus, each line item ID will appear in exactly one fulfillment.'
+        type: string
+      listingMarketplaceId:
+        description: 'The eBay marketplace where the line item was listed. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/fulfillment/types/MarketplaceIdEnum.html''>eBay API documentation</a>'
+        type: string
+      properties:
+        $ref: '#/definitions/LineItemProperties'
+      purchaseMarketplaceId:
+        description: 'The eBay marketplace where the line item was purchased. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/fulfillment/types/MarketplaceIdEnum.html''>eBay API documentation</a>'
+        type: string
+      quantity:
+        description: The number of units of the line item in the order. These are represented as a group by a single lineItemId.
+        type: integer
+      refunds:
+        description: This field is reserved for internal or future use.
+        items:
+          $ref: '#/definitions/LineItemRefund'
+        type: array
+      sku:
+        description: 'Stock Keeping Unit. This is the seller''s inventory reference identifier, which typically applies to a specific variation and version of the item.'
+        type: string
+      soldFormat:
+        description: 'The eBay listing type of the line item. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/fulfillment/types/SoldFormatEnum.html''>eBay API documentation</a>'
+        type: string
+      taxes:
+        description: 'Contains a list of taxes applied to the line item, if any.'
+        items:
+          $ref: '#/definitions/Tax'
+        type: array
+      title:
+        description: The seller's listing title for the line item.
+        type: string
+      total:
+        $ref: '#/definitions/Amount'
+    type: object
+  LineItemFulfillmentInstructions:
+    description: 'This type contains the specifications for processing the fulfillment of a line item, including the handling window and the delivery window. These fields provide guidance for <i>eBay Guaranteed Delivery</i> as well as for non-guaranteed delivery.'
+    properties:
+      guaranteedDelivery:
+        description: 'A value of true indicates that the seller offered this line item with eBay Guaranteed Delivery, and the buyer purchased the line item with the Guaranteed Delivery option. Guaranteed Delivery is presented to the buyer for a given item listing based on the following criteria: The item is of a type, size, weight, and location defined by the seller as eligible for eBay Guaranteed Delivery in a shipping rate table. The seller is offering the item with eBay Guaranteed Delivery. The buyer is located in a destination region that can be shipped to within the delivery window of at least one shipping service category (e.g. One-day, Expedited, Standard, or Economy) for which eBay Guaranteed Delivery is offered by the seller for the item.Sellers who opt into handling time Guaranteed Delivery must complete handling for the line item before the time indicated by the shipByDate field. Sellers who opt into door-to-door Guaranteed Delivery must also ensure that the line item is delivered before the time specified by the maxEstimatedDeliveryDate field.'
+        type: boolean
+      maxEstimatedDeliveryDate:
+        description: 'The estimated latest date and time that the buyer can expect to receive the line item. If the value of guaranteedDelivery is true, failure to deliver by this time will be counted in eBay Top Rated Seller calculations for sellers who opted into door-to-door Guaranteed Delivery. Note: This timestamp is in ISO 8601 format, which uses the 24-hour Universal Coordinated Time (UTC) clock. Format: YYYY-MM-DDTHH:MM:SS.SSSZ Example: 2015-08-04T19:09:02.768Z'
+        type: string
+      minEstimatedDeliveryDate:
+        description: 'The estimated earliest date and time that the buyer can expect to receive the line item. Note: This timestamp is in ISO 8601 format, which uses the 24-hour Universal Coordinated Time (UTC) clock. Format: YYYY-MM-DDTHH:MM:SS.SSSZ Example: 2015-08-04T19:09:02.768Z'
+        type: string
+      shipByDate:
+        description: 'The latest date and time by which this line item must be shipped. If the value of guaranteedDelivery is true, failure to ship by this time will be counted in eBay Top Rated Seller calculations for sellers who opted into handling time Guaranteed Delivery. Note: This timestamp is in ISO 8601 format, which uses the 24-hour Universal Coordinated Time (UTC) clock. Format: YYYY-MM-DDTHH:MM:SS.SSSZ Example: 2015-08-04T19:09:02.768Z'
+        type: string
+    type: object
+  LineItemProperties:
+    description: This type contains information about the eBay programs under which a line item was listed.
+    properties:
+      buyerProtection:
+        description: A value of true indicates that the line item is covered by eBay's Buyer Protection program.
+        type: boolean
+      fromBestOffer:
+        description: 'Note: This field is always returned, but its value is not currently reliable (always false). It will become significant in a future release.'
+        type: boolean
+    type: object
+  LineItemReference:
+    description: This type identifies a line item in an order.
+    properties:
+      lineItemId:
+        description: 'The globally unique eBay-generated identifier of the line item. Note: A single line item can consist of multiple units of a purchased item, and one unit can consist of multiple parts or components. Although these components might be provided by the manufacturer in separate packaging, the seller cannot distribute them among multiple shipping packages. Thus, each line item ID will appear in exactly one fulfillment.'
+        type: string
+      quantity:
+        description: This field is reserved for internal or future use.
+        type: integer
+    type: object
+  LineItemRefund:
+    description: This type is reserved for internal or future use.
+    properties:
+      amount:
+        $ref: '#/definitions/Amount'
+      refundDate:
+        description: This field is reserved for internal or future use.
+        type: string
+      refundReferenceId:
+        description: This field is reserved for internal or future use.
+        type: string
+    type: object
+  Order:
+    description: 'This type contains the details of an order, including information about the buyer, order history, shipping fulfillments, line items, costs, payments, and order fulfillment status.'
+    properties:
+      buyer:
+        $ref: '#/definitions/Buyer'
+      buyerCheckoutNotes:
+        description: Comments about the order (if any) provided by the buyer at checkout.
+        type: string
+      cancelStatus:
+        $ref: '#/definitions/CancelStatus'
+      creationDate:
+        description: 'The date and time that the order was created. This timestamp is in ISO 8601 format, which uses the 24-hour Universal Coordinated Time (UTC) clock. Format: YYYY-MM-DDTHH:MM:SS.SSSZ Example: 2015-08-04T19:09:02.768Z'
+        type: string
+      fulfillmentHrefs:
+        description: 'Contains a list of one or more hypertext references in the form of URLs. Each URL can be used to invoke the Get Shipping Fulfillment call to retrieve the details of each fulfillment, if any, that is associated with this order.'
+        items:
+          type: string
+        type: array
+      fulfillmentStartInstructions:
+        description: 'Contains a list of one or more sets of specifications for fulfilling the order. Each set specifies the type of fulfillment, shipping carrier and service, addressing details, and estimated delivery window. These instructions are derived from the buyer''s and seller''s eBay account preferences, the listing parameters, and the buyer''s checkout selections. The seller can use them as a starting point for packaging, addressing, and shipping the order.'
+        items:
+          $ref: '#/definitions/FulfillmentStartInstruction'
+        type: array
+      lastModifiedDate:
+        description: 'The date and time that the order was last modified.This timestamp is in ISO 8601 format, which uses the 24-hour Universal Coordinated Time (UTC) clock. Format: YYYY-MM-DDTHH:MM:SS.SSSZ Example: 2015-08-04T19:09:02.768Z'
+        type: string
+      lineItems:
+        description: Contains the details of one or more line items that comprise the order. A line item consists of one or more units of a specific variation and version of a listed item that has been purchased.
+        items:
+          $ref: '#/definitions/LineItem'
+        type: array
+      orderFulfillmentStatus:
+        description: 'The degree to which fulfillment of the order is complete. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/fulfillment/types/OrderFulfillmentStatus.html''>eBay API documentation</a>'
+        type: string
+      orderId:
+        description: 'The unique identifier of the order. This value was originally generated by eBay as a result of the buyer''s checkout process; for example, 170009092860-9849164007!140000000544476. Note: The value of this field is not formatted the same way as the value of the Trading API''s OrderId field. Do not attempt to use this field''s value in the Trading API.'
+        type: string
+      orderPaymentStatus:
+        description: 'The current status of all monetary exchanges (payment by buyer and refund to buyer) for the order. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/fulfillment/types/OrderPaymentStatusEnum.html''>eBay API documentation</a>'
+        type: string
+      paymentSummary:
+        $ref: '#/definitions/PaymentSummary'
+      pricingSummary:
+        $ref: '#/definitions/PricingSummary'
+      sellerId:
+        description: The eBay ID of the seller who sold the order.
+        type: string
+    type: object
+  OrderRefund:
+    description: This type contains information about a refund issued for an order. This does not include line item level refunds.
+    properties:
+      amount:
+        $ref: '#/definitions/Amount'
+      refundDate:
+        description: 'The date and time that the refund was issued. This timestamp is in ISO 8601 format, which uses the 24-hour Universal Coordinated Time (UTC) clock. Format: YYYY-MM-DDTHH:MM:SS.SSSZ Example: 2015-08-04T19:09:02.768Z'
+        type: string
+      refundReferenceId:
+        description: The eBay-generated identifier for the refund
+        type: string
+      refundStatus:
+        description: 'The degree of completion of a refund being made to the buyer. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/fulfillment/types/RefundStatusEnum.html''>eBay API documentation</a>'
+        type: string
+    type: object
+  OrderSearchPagedCollection:
+    description: 'This type contains the specifications for the collection of orders that match the search or filter criteria of a <b>getOrders</b> call. The collection is grouped into <i>result sets</i> (pages) of manageable size, and each execution of the call returns one result set. The <b>OrderSearchPagedCollection</b> fields provide the information necessary to navigate through all of these result sets, as well as the contents of the currently specified result set.'
+    properties:
+      href:
+        description: The URI of the getOrders call request that produced this result set.
+        type: string
+      limit:
+        description: 'The maximum number of orders returned in the current result set. Note: If this is the last or only result set in the collection, it may contain fewer orders. To determine the number of result sets in the collection, divide this into the value of total and round up to the next integer.Default: 50'
+        type: integer
+      next:
+        description: 'The getOrders call URI for the next result set. For example, the following URI returns records 41 thru 50 from the collection of orders: path/order?limit=10&amp;offset=40'
+        type: string
+      offset:
+        description: 'The distance (number of records) from the first order in the collection to the first order in this result set. In the request, you can use the offset parameter in conjunction with the limit parameter to control the pagination of the output. For example, if offset is set to 30 and limit is set to 10, the call retrieves orders 31 thru 40 from the resulting collection of orders. Note: This feature employs a zero-based list, where the first item in the list has an offset of 0.Default: 0 (zero)'
+        type: integer
+      orders:
+        description: 'Contains the array of orders in the current result set. The details of each order include information about the buyer, order history, shipping fulfillments, line items, costs, payments, and order fulfillment status. The orders are sorted by orders.orderId.'
+        items:
+          $ref: '#/definitions/Order'
+        type: array
+      prev:
+        description: 'The getOrders call URI for the previous result set. For example, the following URI returns orders 21 thru 30 from the collection of orders: path/order?limit=10&amp;offset=20 Note: This feature employs a zero-based list, where the first order in the list has an offset of 0.'
+        type: string
+      total:
+        description: 'The total number of orders in the collection. Note: If no orders are found, this field is returned with a value of 0.'
+        type: integer
+      warnings:
+        description: Contains warnings related to this call request. This is usually empty.
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+    type: object
+  Payment:
+    description: Contains information about a payment made for an order.
+    properties:
+      amount:
+        $ref: '#/definitions/Amount'
+      paymentDate:
+        description: 'The date and time that the payment was received by the seller. This timestamp is in ISO 8601 format, which uses the 24-hour Universal Coordinated Time (UTC) clock. Format: YYYY-MM-DDTHH:MM:SS.SSSZ Example: 2015-08-04T19:09:02.768Z'
+        type: string
+      paymentHolds:
+        description: 'Contains information about a hold (if any) placed on some or all of the payment, including the reason why the payment for the order is being held, the expected release date of the funds into the seller''s account, the current state of the hold, and if the payment has been released, the actual release date. This container is returned only if a hold exists.'
+        items:
+          $ref: '#/definitions/PaymentHold'
+        type: array
+      paymentMethod:
+        description: 'The method by which the payment was made. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/fulfillment/types/PaymentMethodTypeEnum.html''>eBay API documentation</a>'
+        type: string
+      paymentReferenceId:
+        description: Returned only if the value of paymentMethod is PAYPAL. This field contains the PayPal-generated transaction identifier.
+        type: string
+      paymentStatus:
+        description: 'The degree of completion of the payment. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/fulfillment/types/PaymentStatusEnum.html''>eBay API documentation</a>'
+        type: string
+    type: object
+  PaymentHold:
+    description: 'This type contains information about a hold placed on a payment to a seller for an order, including the reason why the buyer''s payment for the order is being held, the expected release date of the funds into the seller''s account, the current state of the hold, and the actual release date if the payment has been released, and possible actions the seller can take to expedite the payout of funds into their account.'
+    properties:
+      expectedReleaseDate:
+        description: 'The date and time that the payment being held is expected to be released to the seller. This timestamp is in ISO 8601 format, which uses the 24-hour Universal Coordinated Time (UTC) clock. Format: YYYY-MM-DDTHH:MM:SS.SSSZ Example: 2015-08-04T19:09:02.768Z'
+        type: string
+      holdAmount:
+        $ref: '#/definitions/Amount'
+      holdReason:
+        description: The reason that the payment is being held.
+        type: string
+      holdState:
+        description: 'The current stage or condition of the hold. Applicable values: HELD HELD_PENDING NOT_HELD RELEASE_CONFIRMED RELEASE_FAILED RELEASE_PENDING RELEASED'
+        type: string
+      releaseDate:
+        description: 'The date and time that the payment being held was actually released to the seller. This timestamp is in ISO 8601 format, which uses the 24-hour Universal Coordinated Time (UTC) clock. Format: YYYY-MM-DDTHH:MM:SS.SSSZ Example: 2015-08-04T19:09:02.768Z'
+        type: string
+      sellerActionsToRelease:
+        description: A list of actions the seller can take to release the hold on the payment.
+        items:
+          $ref: '#/definitions/SellerActionsToRelease'
+        type: array
+    type: object
+  PaymentSummary:
+    description: This type contains information about the various monetary exchanges that apply to the net balance due for the order.
+    properties:
+      payments:
+        description: 'Contains a list of payments made for the order, if any.'
+        items:
+          $ref: '#/definitions/Payment'
+        type: array
+      refunds:
+        description: 'Contains a list of refunds issued for the order, if any. This does not include line item level refunds.'
+        items:
+          $ref: '#/definitions/OrderRefund'
+        type: array
+      totalDueSeller:
+        $ref: '#/definitions/Amount'
+    type: object
+  PhoneNumber:
+    description: This type contains a string field representing a telephone number.
+    properties:
+      phoneNumber:
+        description: The telephone number.
+        type: string
+    type: object
+  PricingSummary:
+    description: 'This type contains a summary of costs and charges for an order, including price, adjustments, taxes, and delivery costs.'
+    properties:
+      adjustment:
+        $ref: '#/definitions/Amount'
+      deliveryCost:
+        $ref: '#/definitions/Amount'
+      deliveryDiscount:
+        $ref: '#/definitions/Amount'
+      fee:
+        $ref: '#/definitions/Amount'
+      priceDiscountSubtotal:
+        $ref: '#/definitions/Amount'
+      priceSubtotal:
+        $ref: '#/definitions/Amount'
+      tax:
+        $ref: '#/definitions/Amount'
+      total:
+        $ref: '#/definitions/Amount'
+    type: object
+  SellerActionsToRelease:
+    description: A possible action that a seller can take to release a hold placed on a payment intended for the seller.
+    properties:
+      sellerActionToRelease:
+        description: An action the seller can take to release the hold.
+        type: string
+    type: object
+  ShippingFulfillment:
+    description: This type contains the complete details of an existing fulfillment for an order.
+    properties:
+      fulfillmentId:
+        description: 'The unique identifier of the fulfillment; for example, 9405509699937003457459. This eBay-generated value was created by the Create Shipping Fulfillment call.'
+        type: string
+      lineItems:
+        description: Contains a list of the line items to which the fulfillment applies.
+        items:
+          $ref: '#/definitions/LineItemReference'
+        type: array
+      shipmentTrackingNumber:
+        description: The tracking number provided by the shipping carrier for this fulfillment.
+        type: string
+      shippedDate:
+        description: 'The date and time that the fulfillment package was shipped. This timestamp is in ISO 8601 format, which uses the 24-hour Universal Coordinated Time (UTC) clock. Format: YYYY-MM-DDTHH:MM:SS.SSSZ Example: 2015-08-04T19:09:02.768Z'
+        type: string
+      shippingCarrierCode:
+        description: 'The eBay code identifying the shipping carrier for this fulfillment. Note: The Trading API''s ShippingCarrierCodeType enumeration contains the most current list of eBay shipping carrier codes and the countries served by each carrier. See ShippingCarrierCodeType.'
+        type: string
+    type: object
+  ShippingFulfillmentDetails:
+    description: This type contains the details for creating a fulfillment for an order.
+    properties:
+      lineItems:
+        description: Contains a list of the line items (or their components) to which the fulfillment applies.
+        items:
+          $ref: '#/definitions/LineItemReference'
+        type: array
+      shippedDate:
+        description: 'The date and time that the fulfillment package was shipped. Default: The current date and time.'
+        type: string
+      shippingCarrierCode:
+        description: 'The code identifying the shipping carrier for this fulfillment. This field and the trackingNumber field are mutually dependent. If you include one, you must also include the other. Note: The Trading API''s ShippingCarrierCodeType enumeration contains the most current list of eBay shipping carrier codes and the countries served by each carrier. See ShippingCarrierCodeType.'
+        type: string
+      trackingNumber:
+        description: 'The tracking number provided by the shipping carrier for this fulfillment. This field and the shippingCarrierCode field are mutually dependent. If you include one, you must also include the other. Note: If you include trackingNumber (and shippingCarrierCode) in the request, the resulting fulfillment''s ID (returned in the HTTP location code) is the tracking number. If you do not include the tracking number, the resulting fulfillment ID will default to an arbitrary number such as 999.'
+        type: string
+    type: object
+  ShippingFulfillmentPagedCollection:
+    description: This type contains the specifications for the entire collection of shipping fulfillments that are associated with the order specified by a <b>getShippingFulfillments</b> call. The <b>fulfillments</b> container returns an array of all the fulfillments in the collection.
+    properties:
+      fulfillments:
+        description: Contains an array of all the fulfillments returned by this call. The fulfillments are sorted by fulfillments.fulfillmentId.
+        items:
+          $ref: '#/definitions/ShippingFulfillment'
+        type: array
+      total:
+        description: 'The total number of fulfillments in the collection. Note: If no fulfillments are found for the order, this field is returned with a value of 0.'
+        type: integer
+      warnings:
+        description: Contains warnings related to this call request. This is usually empty.
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+    type: object
+  ShippingStep:
+    description: 'This type contains shipping information for a fulfillment, including the carrier, the service, the shipment destination, and the Global Shipping Program reference ID. '
+    properties:
+      shipTo:
+        $ref: '#/definitions/Contact'
+      shipToReferenceId:
+        description: 'Returned only if the value of fulfillmentStartInstructions.ebaySupportedFulfillment is true, this field identifies this shipment for use with the Global Shipping Program. The international shipping provider uses the shipToReferenceId value as the primary reference to retrieve the relevant details about the buyer, the order, and the fulfillment, so the shipment can be completed. Sellers must include this value on the shipping label immediately above the street address of the international shipping provider. Example: &quot;Reference #1234567890123456&quot; Note: This value is the same as the ShipToAddress.ReferenceID value returned by the Trading API''s GetOrders call.'
+        type: string
+      shippingCarrierCode:
+        description: 'The code identifying the shipping carrier for this fulfillment. Note: The Trading API''s ShippingCarrierCodeType enumeration contains the most current list of eBay shipping carrier codes and the countries served by each carrier. See ShippingCarrierCodeType.'
+        type: string
+      shippingServiceCode:
+        description: 'The eBay code identifying the shipping service used for this fulfillment. Note: To get a complete list of available shipping services, applications should call the Trading API''s GeteBayDetails call with a DetailName value of ShippingServiceDetails. To check for the shipping services available for a specific site, specify the site ID in the header. See also ShippingServiceCodeType.'
+        type: string
+    type: object
+  Tax:
+    description: This type contains information about any tax applied to a line item.
+    properties:
+      amount:
+        $ref: '#/definitions/Amount'
+    type: object
