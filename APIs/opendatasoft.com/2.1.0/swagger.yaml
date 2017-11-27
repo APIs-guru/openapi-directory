@@ -668,7 +668,7 @@ paths:
         - $ref: '#/parameters/start'
         - $ref: '#/parameters/timezone'
       produces:
-        - xls
+        - application/vnd.ms-excel
       responses:
         '200':
           description: Return an XLS file
@@ -1024,7 +1024,7 @@ paths:
         - $ref: '#/parameters/timezone'
         - $ref: '#/parameters/include_app_metas'
       produces:
-        - xls
+        - application/vnd.ms-excel
       responses:
         '200':
           description: Return an XLS file
