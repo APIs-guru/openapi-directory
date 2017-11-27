@@ -6,6 +6,7 @@ basePath: /buy/marketing/v1_beta
 info:
   contact:
     name: 'eBay Inc,'
+    x-twitter: ebay
   description: 'The Marketing API retrieves eBay products based on a metric, such as Best Selling, as well as products that were also bought and also viewed.'
   license:
     name: eBay API License Agreement
@@ -16,10 +17,10 @@ info:
     - ecommerce
   x-logo:
     backgroundColor: '#FFFFFF'
-    url: 'https://pbs.twimg.com/profile_images/854751952239853568/BdT5xkFG_400x400.jpg'
+    url: 'https://twitter.com/wso2/profile_image?size=original'
   x-origin:
     - format: swagger
-      url: 'https://developer.ebay.com/api-docs/master/buy/marketing/openapi/2/buy_marketing_v1_beta.json'
+      url: 'https://developer.ebay.com/api-docs/master/buy/marketing/openapi/2/buy_marketing_v1_beta_oas2.json'
       version: '2.0'
   x-providerName: ebay.com
   x-serviceName: buy-marketing
@@ -47,7 +48,7 @@ paths:
           name: category_id
           required: true
           type: string
-        - description: 'This value specifies the maximum number of products in a result set. Note: Maximum value means the call will return up to that many products per set, but it can be less than this value. If the number of products found is less than this value, the call will return all of the products matching the criteria. Default: 8 Maximum: 100'
+        - description: 'This value specifies the maximum number of products to return in a result set. Note: Maximum value means the call will return up to that many products per set, but it can be less than this value. If the number of products found is less than this value, the call will return all of the products matching the criteria. Default: 8 Maximum: 100'
           in: query
           name: limit
           required: false
@@ -73,7 +74,7 @@ paths:
         - merchandised_product
   /merchandised_product/get_also_bought_products:
     get:
-      description: 'This call returns products that were also bought when shoppers bought the product specified in the request. Showing ''also bought'' products inspires up-selling and cross-selling. You specify the product by one of the following. epid (eBay Product Id) gtin (Global Trade Item Number) brand (brand name such as Nike) plus mpn (Manufacturer''s Part Number) Restrictions For a list of supported sites and other restrictions, see API Restrictions. Maximum: A maximum of 12 products are returned.'
+      description: 'This call returns products that were also bought when shoppers bought the product specified in the request. Showing ''also bought'' products inspires up-selling and cross-selling. You specify the product by one of the following. epid (eBay Product Id) gtin (Global Trade Item Number) brand (brand name such as Nike) plus mpn (Manufacturer''s Part Number) Restrictions For a list of supported sites and other restrictions, see API Restrictions. Maximum: A maximum of 12 products are returned. The call will return up to 12 products, but it can be less than 12. If the number of products found is less than 12, the call will return all of the products matching the criteria.'
       operationId: getAlsoBoughtByProduct
       parameters:
         - description: 'The brand of the product. Restriction: This must be used along with mpn. Required: You must specify one epid, or one gtin, or one brand plus mpn pair.'
@@ -118,7 +119,7 @@ paths:
         - merchandised_product
   /merchandised_product/get_also_viewed_products:
     get:
-      description: 'This call returns products that were also viewed when shoppers viewed the product specified in the request. Showing ''also viewed'' products encourages up-selling and cross-selling. You specify the product by one one of the following. epid (eBay Product Id) gtin (Global Trade Item Number) brand (brand name such as Nike) plus mpn (Manufacturer''s Part Number) Restrictions For a list of supported sites and other restrictions, see API Restrictions. Maximum: A maximum of 12 products are returned.'
+      description: 'This call returns products that were also viewed when shoppers viewed the product specified in the request. Showing ''also viewed'' products encourages up-selling and cross-selling. You specify the product by one of the following. epid (eBay Product Id) gtin (Global Trade Item Number) brand (brand name such as Nike) plus mpn (Manufacturer''s Part Number) Restrictions For a list of supported sites and other restrictions, see API Restrictions. Maximum: A maximum of 12 products are returned. The call will return up to 12 products, but it can be less than 12. If the number of products found is less than 12, the call will return all of the products matching the criteria.'
       operationId: getAlsoViewedByProduct
       parameters:
         - description: 'The brand of the product. Restriction: This must be used along with mpn. Required: You must specify one epid, or one gtin, or one brand plus mpn pair.'
