@@ -1,0 +1,4204 @@
+swagger: '2.0'
+info:
+  version: '2017-10-14'
+  x-release: v4
+  title: AWS Elemental MediaLive
+  description: API for AWS Elemental MediaLive
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: medialive
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/medialive-2017-10-14.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/medialive/'
+host: medialive.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /prod/channels:
+    get:
+      operationId: ListChannels
+      description: Produces list of channels that have been created
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListChannelsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListChannelsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /prod/inputs:
+    get:
+      operationId: ListInputs
+      description: Produces list of inputs that have been created
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListInputsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListInputsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /prod/inputSecurityGroups:
+    get:
+      operationId: ListInputSecurityGroups
+      description: Produces a list of Input Security Groups for an account
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListInputSecurityGroupsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListInputSecurityGroupsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/prod/channels/{channelId}':
+    get:
+      operationId: DescribeChannel
+      description: Gets details about a channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeChannelRequest'
+        - name: channelId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/prod/inputs/{inputId}':
+    get:
+      operationId: DescribeInput
+      description: Produces details about an input
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeInputResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeInputRequest'
+        - name: inputId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/prod/inputSecurityGroups/{inputSecurityGroupId}':
+    get:
+      operationId: DescribeInputSecurityGroup
+      description: Produces a summary of an Input Security Group
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeInputSecurityGroupResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeInputSecurityGroupRequest'
+        - name: inputSecurityGroupId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/prod/channels/{channelId}/start':
+    post:
+      operationId: StartChannel
+      description: Starts an existing channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '487':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartChannelRequest'
+        - name: channelId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/prod/channels/{channelId}/stop':
+    post:
+      operationId: StopChannel
+      description: Stops a running channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '487':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopChannelRequest'
+        - name: channelId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AacCodingMode:
+    type: string
+    enum:
+      - AD_RECEIVER_MIX
+      - CODING_MODE_1_0
+      - CODING_MODE_1_1
+      - CODING_MODE_2_0
+      - CODING_MODE_5_1
+    description: Placeholder documentation for AacCodingMode
+  AacInputType:
+    type: string
+    enum:
+      - BROADCASTER_MIXED_AD
+      - NORMAL
+    description: Placeholder documentation for AacInputType
+  AacProfile:
+    type: string
+    enum:
+      - HEV1
+      - HEV2
+      - LC
+    description: Placeholder documentation for AacProfile
+  AacRateControlMode:
+    type: string
+    enum:
+      - CBR
+      - VBR
+    description: Placeholder documentation for AacRateControlMode
+  AacRawFormat:
+    type: string
+    enum:
+      - LATM_LOAS
+      - NONE
+    description: Placeholder documentation for AacRawFormat
+  AacSettings:
+    type: object
+    properties:
+      Bitrate:
+        $ref: '#/definitions/__double'
+        description: Average bitrate in bits/second. Valid values depend on rate control mode and profile.
+      CodingMode:
+        $ref: '#/definitions/AacCodingMode'
+        description: 'Mono, Stereo, or 5.1 channel layout. Valid values depend on rate control mode and profile. The adReceiverMix setting receives a stereo description plus control track and emits a mono AAC encode of the description track, with control data emitted in the PES header as per ETSI TS 101 154 Annex E.'
+      InputType:
+        $ref: '#/definitions/AacInputType'
+        description: |-
+          Set to "broadcasterMixedAd" when input contains pre-mixed main audio + AD (narration) as a stereo pair.  The Audio Type field (audioType) will be set to 3, which signals to downstream systems that this stream contains "broadcaster mixed AD". Note that the input received by the encoder must contain pre-mixed audio; the encoder does not perform the mixing. The values in audioTypeControl and audioType (in AudioDescription) are ignored when set to broadcasterMixedAd.
+
+          Leave set to "normal" when input does not contain pre-mixed audio + AD.
+      Profile:
+        $ref: '#/definitions/AacProfile'
+        description: AAC Profile.
+      RateControlMode:
+        $ref: '#/definitions/AacRateControlMode'
+        description: Rate Control Mode.
+      RawFormat:
+        $ref: '#/definitions/AacRawFormat'
+        description: Sets LATM / LOAS AAC output for raw containers.
+      SampleRate:
+        $ref: '#/definitions/__double'
+        description: Sample rate in Hz. Valid values depend on rate control mode and profile.
+      Spec:
+        $ref: '#/definitions/AacSpec'
+        description: Use MPEG-2 AAC audio instead of MPEG-4 AAC audio for raw or MPEG-2 Transport Stream containers.
+      VbrQuality:
+        $ref: '#/definitions/AacVbrQuality'
+        description: VBR Quality Level - Only used if rateControlMode is VBR.
+    description: Placeholder documentation for AacSettings
+  AacSpec:
+    type: string
+    enum:
+      - MPEG2
+      - MPEG4
+    description: Placeholder documentation for AacSpec
+  AacVbrQuality:
+    type: string
+    enum:
+      - HIGH
+      - LOW
+      - MEDIUM_HIGH
+      - MEDIUM_LOW
+    description: Placeholder documentation for AacVbrQuality
+  Ac3BitstreamMode:
+    type: string
+    enum:
+      - COMMENTARY
+      - COMPLETE_MAIN
+      - DIALOGUE
+      - EMERGENCY
+      - HEARING_IMPAIRED
+      - MUSIC_AND_EFFECTS
+      - VISUALLY_IMPAIRED
+      - VOICE_OVER
+    description: Placeholder documentation for Ac3BitstreamMode
+  Ac3CodingMode:
+    type: string
+    enum:
+      - CODING_MODE_1_0
+      - CODING_MODE_1_1
+      - CODING_MODE_2_0
+      - CODING_MODE_3_2_LFE
+    description: Placeholder documentation for Ac3CodingMode
+  Ac3DrcProfile:
+    type: string
+    enum:
+      - FILM_STANDARD
+      - NONE
+    description: Placeholder documentation for Ac3DrcProfile
+  Ac3LfeFilter:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Placeholder documentation for Ac3LfeFilter
+  Ac3MetadataControl:
+    type: string
+    enum:
+      - FOLLOW_INPUT
+      - USE_CONFIGURED
+    description: Placeholder documentation for Ac3MetadataControl
+  Ac3Settings:
+    type: object
+    properties:
+      Bitrate:
+        $ref: '#/definitions/__double'
+        description: Average bitrate in bits/second. Valid bitrates depend on the coding mode.
+      BitstreamMode:
+        $ref: '#/definitions/Ac3BitstreamMode'
+        description: Specifies the bitstream mode (bsmod) for the emitted AC-3 stream. See ATSC A/52-2012 for background on these values.
+      CodingMode:
+        $ref: '#/definitions/Ac3CodingMode'
+        description: Dolby Digital coding mode. Determines number of channels.
+      Dialnorm:
+        $ref: '#/definitions/__integer'
+        description: 'Sets the dialnorm for the output. If excluded and input audio is Dolby Digital, dialnorm will be passed through.'
+      DrcProfile:
+        $ref: '#/definitions/Ac3DrcProfile'
+        description: 'If set to filmStandard, adds dynamic range compression signaling to the output bitstream as defined in the Dolby Digital specification.'
+      LfeFilter:
+        $ref: '#/definitions/Ac3LfeFilter'
+        description: 'When set to enabled, applies a 120Hz lowpass filter to the LFE channel prior to encoding. Only valid in codingMode32Lfe mode.'
+      MetadataControl:
+        $ref: '#/definitions/Ac3MetadataControl'
+        description: 'When set to "followInput", encoder metadata will be sourced from the DD, DD+, or DolbyE decoder that supplied this audio data. If audio was not supplied from one of these streams, then the static metadata settings will be used.'
+    description: Placeholder documentation for Ac3Settings
+  AccessDenied:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for AccessDenied
+  AfdSignaling:
+    type: string
+    enum:
+      - AUTO
+      - FIXED
+      - NONE
+    description: Placeholder documentation for AfdSignaling
+  ArchiveContainerSettings:
+    type: object
+    properties:
+      M2tsSettings:
+        $ref: '#/definitions/M2tsSettings'
+    description: Placeholder documentation for ArchiveContainerSettings
+  ArchiveGroupSettings:
+    type: object
+    properties:
+      Destination:
+        $ref: '#/definitions/OutputLocationRef'
+        description: 'A directory and base filename where archive files should be written.  If the base filename portion of the URI is left blank, the base filename of the first input will be automatically inserted.'
+      RolloverInterval:
+        $ref: '#/definitions/__integer'
+        description: Number of seconds to write to archive file before closing and starting a new one.
+    description: Placeholder documentation for ArchiveGroupSettings
+  ArchiveOutputSettings:
+    type: object
+    properties:
+      ContainerSettings:
+        $ref: '#/definitions/ArchiveContainerSettings'
+        description: Settings specific to the container type of the file.
+      Extension:
+        $ref: '#/definitions/__string'
+        description: 'Output file extension. If excluded, this will be auto-selected from the container type.'
+      NameModifier:
+        $ref: '#/definitions/__string'
+        description: String concatenated to the end of the destination filename.  Required for multiple outputs of the same type.
+    description: Placeholder documentation for ArchiveOutputSettings
+  AribDestinationSettings:
+    type: object
+    properties: {}
+    description: Placeholder documentation for AribDestinationSettings
+  AribSourceSettings:
+    type: object
+    properties: {}
+    description: Placeholder documentation for AribSourceSettings
+  AudioChannelMapping:
+    type: object
+    properties:
+      InputChannelLevels:
+        $ref: '#/definitions/ListOfInputChannelLevel'
+        description: Indices and gain values for each input channel that should be remixed into this output channel.
+      OutputChannel:
+        $ref: '#/definitions/__integer'
+        description: The index of the output channel being produced.
+    description: Placeholder documentation for AudioChannelMapping
+  AudioCodecSettings:
+    type: object
+    properties:
+      AacSettings:
+        $ref: '#/definitions/AacSettings'
+      Ac3Settings:
+        $ref: '#/definitions/Ac3Settings'
+      Eac3Settings:
+        $ref: '#/definitions/Eac3Settings'
+      Mp2Settings:
+        $ref: '#/definitions/Mp2Settings'
+      PassThroughSettings:
+        $ref: '#/definitions/PassThroughSettings'
+    description: Placeholder documentation for AudioCodecSettings
+  AudioDescription:
+    type: object
+    properties:
+      AudioNormalizationSettings:
+        $ref: '#/definitions/AudioNormalizationSettings'
+        description: Advanced audio normalization settings.
+      AudioSelectorName:
+        $ref: '#/definitions/__string'
+        description: The name of the AudioSelector used as the source for this AudioDescription.
+      AudioType:
+        $ref: '#/definitions/AudioType'
+        description: Applies only if audioTypeControl is useConfigured. The values for audioType are defined in ISO-IEC 13818-1.
+      AudioTypeControl:
+        $ref: '#/definitions/AudioDescriptionAudioTypeControl'
+        description: |-
+          Determines how audio type is determined.
+            followInput: If the input contains an ISO 639 audioType, then that value is passed through to the output. If the input contains no ISO 639 audioType, the value in Audio Type is included in the output.
+            useConfigured: The value in Audio Type is included in the output.
+          Note that this field and audioType are both ignored if inputType is broadcasterMixedAd.
+      CodecSettings:
+        $ref: '#/definitions/AudioCodecSettings'
+        description: Audio codec settings.
+      LanguageCode:
+        $ref: '#/definitions/__string'
+        description: 'Indicates the language of the audio output track. Only used if languageControlMode is useConfigured, or there is no ISO 639 language code specified in the input.'
+      LanguageCodeControl:
+        $ref: '#/definitions/AudioDescriptionLanguageCodeControl'
+        description: 'Choosing followInput will cause the ISO 639 language code of the output to follow the ISO 639 language code of the input. The languageCode will be used when useConfigured is set, or when followInput is selected but there is no ISO 639 language code specified by the input.'
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of this AudioDescription. Outputs will use this name to uniquely identify this AudioDescription.  Description names should be unique within this Live Event.
+      RemixSettings:
+        $ref: '#/definitions/RemixSettings'
+        description: Settings that control how input audio channels are remixed into the output audio channels.
+      StreamName:
+        $ref: '#/definitions/__string'
+        description: 'Used for MS Smooth and Apple HLS outputs. Indicates the name displayed by the player (eg. English, or Director Commentary).'
+    description: Placeholder documentation for AudioDescription
+  AudioDescriptionAudioTypeControl:
+    type: string
+    enum:
+      - FOLLOW_INPUT
+      - USE_CONFIGURED
+    description: Placeholder documentation for AudioDescriptionAudioTypeControl
+  AudioDescriptionLanguageCodeControl:
+    type: string
+    enum:
+      - FOLLOW_INPUT
+      - USE_CONFIGURED
+    description: Placeholder documentation for AudioDescriptionLanguageCodeControl
+  AudioLanguageSelection:
+    type: object
+    properties:
+      LanguageCode:
+        $ref: '#/definitions/__string'
+        description: Selects a specific three-letter language code from within an audio source.
+      LanguageSelectionPolicy:
+        $ref: '#/definitions/AudioLanguageSelectionPolicy'
+        description: 'When set to "strict", the transport stream demux strictly identifies audio streams by their language descriptor. If a PMT update occurs such that an audio stream matching the initially selected language is no longer present then mute will be encoded until the language returns. If "loose", then on a PMT update the demux will choose another audio stream in the program with the same stream type if it can''t find one with the same language.'
+    description: Placeholder documentation for AudioLanguageSelection
+  AudioLanguageSelectionPolicy:
+    type: string
+    enum:
+      - LOOSE
+      - STRICT
+    description: Placeholder documentation for AudioLanguageSelectionPolicy
+  AudioNormalizationAlgorithm:
+    type: string
+    enum:
+      - ITU_1770_1
+      - ITU_1770_2
+    description: Placeholder documentation for AudioNormalizationAlgorithm
+  AudioNormalizationAlgorithmControl:
+    type: string
+    enum:
+      - CORRECT_AUDIO
+    description: Placeholder documentation for AudioNormalizationAlgorithmControl
+  AudioNormalizationSettings:
+    type: object
+    properties:
+      Algorithm:
+        $ref: '#/definitions/AudioNormalizationAlgorithm'
+        description: 'Audio normalization algorithm to use. itu17701 conforms to the CALM Act specification, itu17702 conforms to the EBU R-128 specification.'
+      AlgorithmControl:
+        $ref: '#/definitions/AudioNormalizationAlgorithmControl'
+        description: 'When set to correctAudio the output audio is corrected using the chosen algorithm. If set to measureOnly, the audio will be measured but not adjusted.'
+      TargetLkfs:
+        $ref: '#/definitions/__double'
+        description: 'Target LKFS(loudness) to adjust volume to. If no value is entered, a default value will be used according to the chosen algorithm.  The CALM Act (1770-1) recommends a target of -24 LKFS. The EBU R-128 specification (1770-2) recommends a target of -23 LKFS.'
+    description: Placeholder documentation for AudioNormalizationSettings
+  AudioOnlyHlsSettings:
+    type: object
+    properties:
+      AudioGroupId:
+        $ref: '#/definitions/__string'
+        description: Specifies the group to which the audio Rendition belongs.
+      AudioOnlyImage:
+        $ref: '#/definitions/InputLocation'
+        description: 'For use with an audio only Stream. Must be a .jpg or .png file. If given, this image will be used as the cover-art for the audio only output. Ideally, it should be formatted for an iPhone screen for two reasons. The iPhone does not resize the image, it crops a centered image on the top/bottom and left/right. Additionally, this image file gets saved bit-for-bit into every 10-second segment file, so will increase bandwidth by {image file size} * {segment count} * {user count.}.'
+      AudioTrackType:
+        $ref: '#/definitions/AudioOnlyHlsTrackType'
+        description: |-
+          Four types of audio-only tracks are supported:
+
+          Audio-Only Variant Stream
+          The client can play back this audio-only stream instead of video in low-bandwidth scenarios. Represented as an EXT-X-STREAM-INF in the HLS manifest.
+
+          Alternate Audio, Auto Select, Default
+          Alternate rendition that the client should try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=YES, AUTOSELECT=YES
+
+          Alternate Audio, Auto Select, Not Default
+          Alternate rendition that the client may try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=YES
+
+          Alternate Audio, not Auto Select
+          Alternate rendition that the client will not try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=NO
+    description: Placeholder documentation for AudioOnlyHlsSettings
+  AudioOnlyHlsTrackType:
+    type: string
+    enum:
+      - ALTERNATE_AUDIO_AUTO_SELECT
+      - ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT
+      - ALTERNATE_AUDIO_NOT_AUTO_SELECT
+      - AUDIO_ONLY_VARIANT_STREAM
+    description: Placeholder documentation for AudioOnlyHlsTrackType
+  AudioPidSelection:
+    type: object
+    properties:
+      Pid:
+        $ref: '#/definitions/__integer'
+        description: Selects a specific PID from within a source.
+    description: Placeholder documentation for AudioPidSelection
+  AudioSelector:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of this AudioSelector. AudioDescriptions will use this name to uniquely identify this Selector.  Selector names should be unique per input.
+      SelectorSettings:
+        $ref: '#/definitions/AudioSelectorSettings'
+        description: The audio selector settings.
+    description: Placeholder documentation for AudioSelector
+  AudioSelectorSettings:
+    type: object
+    properties:
+      AudioLanguageSelection:
+        $ref: '#/definitions/AudioLanguageSelection'
+      AudioPidSelection:
+        $ref: '#/definitions/AudioPidSelection'
+    description: Placeholder documentation for AudioSelectorSettings
+  AudioType:
+    type: string
+    enum:
+      - CLEAN_EFFECTS
+      - HEARING_IMPAIRED
+      - UNDEFINED
+      - VISUAL_IMPAIRED_COMMENTARY
+    description: Placeholder documentation for AudioType
+  AvailBlanking:
+    type: object
+    properties:
+      AvailBlankingImage:
+        $ref: '#/definitions/InputLocation'
+        description: Blanking image to be used. Leave empty for solid black. Only bmp and png images are supported.
+      State:
+        $ref: '#/definitions/AvailBlankingState'
+        description: 'When set to enabled, causes video, audio and captions to be blanked when insertion metadata is added.'
+    description: Placeholder documentation for AvailBlanking
+  AvailBlankingState:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Placeholder documentation for AvailBlankingState
+  AvailConfiguration:
+    type: object
+    properties:
+      AvailSettings:
+        $ref: '#/definitions/AvailSettings'
+        description: Ad avail settings.
+    description: Placeholder documentation for AvailConfiguration
+  AvailSettings:
+    type: object
+    properties:
+      Scte35SpliceInsert:
+        $ref: '#/definitions/Scte35SpliceInsert'
+      Scte35TimeSignalApos:
+        $ref: '#/definitions/Scte35TimeSignalApos'
+    description: Placeholder documentation for AvailSettings
+  BadGatewayException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for BadGatewayException
+  BadRequestException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for BadRequestException
+  BlackoutSlate:
+    type: object
+    properties:
+      BlackoutSlateImage:
+        $ref: '#/definitions/InputLocation'
+        description: Blackout slate image to be used. Leave empty for solid black. Only bmp and png images are supported.
+      NetworkEndBlackout:
+        $ref: '#/definitions/BlackoutSlateNetworkEndBlackout'
+        description: 'Setting to enabled causes the encoder to blackout the video, audio, and captions, and raise the "Network Blackout Image" slate when an SCTE104/35 Network End Segmentation Descriptor is encountered. The blackout will be lifted when the Network Start Segmentation Descriptor is encountered. The Network End and Network Start descriptors must contain a network ID that matches the value entered in "Network ID".'
+      NetworkEndBlackoutImage:
+        $ref: '#/definitions/InputLocation'
+        description: Path to local file to use as Network End Blackout image. Image will be scaled to fill the entire output raster.
+      NetworkId:
+        $ref: '#/definitions/__string'
+        description: 'Provides Network ID that matches EIDR ID format (e.g., "10.XXXX/XXXX-XXXX-XXXX-XXXX-XXXX-C").'
+      State:
+        $ref: '#/definitions/BlackoutSlateState'
+        description: 'When set to enabled, causes video, audio and captions to be blanked when indicated by program metadata.'
+    description: Placeholder documentation for BlackoutSlate
+  BlackoutSlateNetworkEndBlackout:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Placeholder documentation for BlackoutSlateNetworkEndBlackout
+  BlackoutSlateState:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Placeholder documentation for BlackoutSlateState
+  BurnInAlignment:
+    type: string
+    enum:
+      - CENTERED
+      - LEFT
+      - SMART
+    description: Placeholder documentation for BurnInAlignment
+  BurnInBackgroundColor:
+    type: string
+    enum:
+      - BLACK
+      - NONE
+      - WHITE
+    description: Placeholder documentation for BurnInBackgroundColor
+  BurnInDestinationSettings:
+    type: object
+    properties:
+      Alignment:
+        $ref: '#/definitions/BurnInAlignment'
+        description: 'If no explicit xPosition or yPosition is provided, setting alignment to centered will place the captions at the bottom center of the output. Similarly, setting a left alignment will align captions to the bottom left of the output. If x and y positions are given in conjunction with the alignment parameter, the font will be justified (either left or centered) relative to those coordinates. Selecting "smart" justification will left-justify live subtitles and center-justify pre-recorded subtitles.  All burn-in and DVB-Sub font settings must match.'
+      BackgroundColor:
+        $ref: '#/definitions/BurnInBackgroundColor'
+        description: Specifies the color of the rectangle behind the captions.  All burn-in and DVB-Sub font settings must match.
+      BackgroundOpacity:
+        $ref: '#/definitions/__integer'
+        description: Specifies the opacity of the background rectangle. 255 is opaque; 0 is transparent. Leaving this parameter out is equivalent to setting it to 0 (transparent).  All burn-in and DVB-Sub font settings must match.
+      Font:
+        $ref: '#/definitions/InputLocation'
+        description: 'External font file used for caption burn-in. File extension must be ''ttf'' or ''tte''.  Although the user can select output fonts for many different types of input captions,  embedded, STL and teletext sources use a strict grid system. Using external fonts with these caption sources could cause unexpected display of proportional fonts.  All burn-in and DVB-Sub font settings must match.'
+      FontColor:
+        $ref: '#/definitions/BurnInFontColor'
+        description: 'Specifies the color of the burned-in captions.  This option is not valid for source captions that are STL, 608/embedded or teletext.  These source settings are already pre-defined by the caption stream.  All burn-in and DVB-Sub font settings must match.'
+      FontOpacity:
+        $ref: '#/definitions/__integer'
+        description: Specifies the opacity of the burned-in captions. 255 is opaque; 0 is transparent.  All burn-in and DVB-Sub font settings must match.
+      FontResolution:
+        $ref: '#/definitions/__integer'
+        description: Font resolution in DPI (dots per inch); default is 96 dpi.  All burn-in and DVB-Sub font settings must match.
+      FontSize:
+        $ref: '#/definitions/__string'
+        description: When set to 'auto' fontSize will scale depending on the size of the output.  Giving a positive integer will specify the exact font size in points.  All burn-in and DVB-Sub font settings must match.
+      OutlineColor:
+        $ref: '#/definitions/BurnInOutlineColor'
+        description: Specifies font outline color. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+      OutlineSize:
+        $ref: '#/definitions/__integer'
+        description: Specifies font outline size in pixels. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+      ShadowColor:
+        $ref: '#/definitions/BurnInShadowColor'
+        description: Specifies the color of the shadow cast by the captions.  All burn-in and DVB-Sub font settings must match.
+      ShadowOpacity:
+        $ref: '#/definitions/__integer'
+        description: Specifies the opacity of the shadow. 255 is opaque; 0 is transparent. Leaving this parameter out is equivalent to setting it to 0 (transparent).  All burn-in and DVB-Sub font settings must match.
+      ShadowXOffset:
+        $ref: '#/definitions/__integer'
+        description: Specifies the horizontal offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels to the left.  All burn-in and DVB-Sub font settings must match.
+      ShadowYOffset:
+        $ref: '#/definitions/__integer'
+        description: Specifies the vertical offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels above the text.  All burn-in and DVB-Sub font settings must match.
+      TeletextGridControl:
+        $ref: '#/definitions/BurnInTeletextGridControl'
+        description: Controls whether a fixed grid size will be used to generate the output subtitles bitmap. Only applicable for Teletext inputs and DVB-Sub/Burn-in outputs.
+      XPosition:
+        $ref: '#/definitions/__integer'
+        description: 'Specifies the horizontal position of the caption relative to the left side of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the left of the output. If no explicit xPosition is provided, the horizontal caption position will be determined by the alignment parameter.  All burn-in and DVB-Sub font settings must match.'
+      YPosition:
+        $ref: '#/definitions/__integer'
+        description: 'Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit yPosition is provided, the caption will be positioned towards the bottom of the output.  All burn-in and DVB-Sub font settings must match.'
+    description: Placeholder documentation for BurnInDestinationSettings
+  BurnInFontColor:
+    type: string
+    enum:
+      - BLACK
+      - BLUE
+      - GREEN
+      - RED
+      - WHITE
+      - YELLOW
+    description: Placeholder documentation for BurnInFontColor
+  BurnInOutlineColor:
+    type: string
+    enum:
+      - BLACK
+      - BLUE
+      - GREEN
+      - RED
+      - WHITE
+      - YELLOW
+    description: Placeholder documentation for BurnInOutlineColor
+  BurnInShadowColor:
+    type: string
+    enum:
+      - BLACK
+      - NONE
+      - WHITE
+    description: Placeholder documentation for BurnInShadowColor
+  BurnInTeletextGridControl:
+    type: string
+    enum:
+      - FIXED
+      - SCALED
+    description: Placeholder documentation for BurnInTeletextGridControl
+  CaptionDescription:
+    type: object
+    properties:
+      CaptionSelectorName:
+        $ref: '#/definitions/__string'
+        description: Specifies which input caption selector to use as a caption source when generating output captions. This field should match a captionSelector name.
+      DestinationSettings:
+        $ref: '#/definitions/CaptionDestinationSettings'
+        description: Additional settings for captions destination that depend on the destination type.
+      LanguageCode:
+        $ref: '#/definitions/__string'
+        description: 'ISO 639-2 three-digit code: http://www.loc.gov/standards/iso639-2/'
+      LanguageDescription:
+        $ref: '#/definitions/__string'
+        description: 'Human readable information to indicate captions available for players (eg. English, or Spanish).'
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name of the caption description.  Used to associate a caption description with an output.  Names must be unique within an event.
+    description: Output groups for this Live Event. Output groups contain information about where streams should be distributed.
+  CaptionDestinationSettings:
+    type: object
+    properties:
+      AribDestinationSettings:
+        $ref: '#/definitions/AribDestinationSettings'
+      BurnInDestinationSettings:
+        $ref: '#/definitions/BurnInDestinationSettings'
+      DvbSubDestinationSettings:
+        $ref: '#/definitions/DvbSubDestinationSettings'
+      EmbeddedDestinationSettings:
+        $ref: '#/definitions/EmbeddedDestinationSettings'
+      EmbeddedPlusScte20DestinationSettings:
+        $ref: '#/definitions/EmbeddedPlusScte20DestinationSettings'
+      Scte20PlusEmbeddedDestinationSettings:
+        $ref: '#/definitions/Scte20PlusEmbeddedDestinationSettings'
+      Scte27DestinationSettings:
+        $ref: '#/definitions/Scte27DestinationSettings'
+      SmpteTtDestinationSettings:
+        $ref: '#/definitions/SmpteTtDestinationSettings'
+      TeletextDestinationSettings:
+        $ref: '#/definitions/TeletextDestinationSettings'
+      TtmlDestinationSettings:
+        $ref: '#/definitions/TtmlDestinationSettings'
+      WebvttDestinationSettings:
+        $ref: '#/definitions/WebvttDestinationSettings'
+    description: Placeholder documentation for CaptionDestinationSettings
+  CaptionLanguageMapping:
+    type: object
+    properties:
+      CaptionChannel:
+        $ref: '#/definitions/__integer'
+        description: Channel to insert closed captions.  Each channel mapping must have a unique channel number (maximum of 4)
+      LanguageCode:
+        $ref: '#/definitions/__string'
+        description: 'Three character ISO 639-2 language code (see http://www.loc.gov/standards/iso639-2)'
+      LanguageDescription:
+        $ref: '#/definitions/__string'
+        description: Textual description of language
+    description: 'Maps a caption channel to an ISO 693-2 language code (http://www.loc.gov/standards/iso639-2), with an optional description.'
+  CaptionSelector:
+    type: object
+    properties:
+      LanguageCode:
+        $ref: '#/definitions/__string'
+        description: When specified this field indicates the three letter language code of the caption track to extract from the source.
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name identifier for a caption selector.  This name is used to associate this caption selector with one or more caption descriptions.  Names must be unique within an event.
+      SelectorSettings:
+        $ref: '#/definitions/CaptionSelectorSettings'
+        description: Caption selector settings.
+    description: Output groups for this Live Event. Output groups contain information about where streams should be distributed.
+  CaptionSelectorSettings:
+    type: object
+    properties:
+      AribSourceSettings:
+        $ref: '#/definitions/AribSourceSettings'
+      DvbSubSourceSettings:
+        $ref: '#/definitions/DvbSubSourceSettings'
+      EmbeddedSourceSettings:
+        $ref: '#/definitions/EmbeddedSourceSettings'
+      Scte20SourceSettings:
+        $ref: '#/definitions/Scte20SourceSettings'
+      Scte27SourceSettings:
+        $ref: '#/definitions/Scte27SourceSettings'
+      TeletextSourceSettings:
+        $ref: '#/definitions/TeletextSourceSettings'
+    description: Placeholder documentation for CaptionSelectorSettings
+  Channel:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The unique arn of the channel.
+      Destinations:
+        $ref: '#/definitions/ListOfOutputDestination'
+        description: |
+          A list of destinations of the channel. For UDP outputs, there is one
+          destination per output. For other types (HLS, for example), there is
+          one destination per packager.
+      EgressEndpoints:
+        $ref: '#/definitions/ListOfChannelEgressEndpoint'
+        description: The endpoints where outgoing connections initiate from
+      EncoderSettings:
+        $ref: '#/definitions/EncoderSettings'
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique id of the channel.
+      InputAttachments:
+        $ref: '#/definitions/ListOfInputAttachment'
+        description: List of input attachments for channel.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the channel. (user-mutable)
+      PipelinesRunningCount:
+        $ref: '#/definitions/__integer'
+        description: The number of currently healthy pipelines.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of the role assumed when running the Channel.
+      State:
+        $ref: '#/definitions/ChannelState'
+    description: Placeholder documentation for Channel
+  ChannelConfigurationValidationError:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+      ValidationErrors:
+        $ref: '#/definitions/ListOfValidationError'
+        description: A collection of validation error responses from attempting to create a channel with a bouquet of settings.
+    description: Placeholder documentation for ChannelConfigurationValidationError
+  ChannelEgressEndpoint:
+    type: object
+    properties:
+      SourceIp:
+        $ref: '#/definitions/__string'
+        description: Public IP of where a channel's output comes from
+    description: Placeholder documentation for ChannelEgressEndpoint
+  ChannelState:
+    type: string
+    enum:
+      - CREATING
+      - CREATE_FAILED
+      - IDLE
+      - STARTING
+      - RUNNING
+      - RECOVERING
+      - STOPPING
+      - DELETING
+      - DELETED
+    description: Placeholder documentation for ChannelState
+  ChannelSummary:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The unique arn of the channel.
+      Destinations:
+        $ref: '#/definitions/ListOfOutputDestination'
+        description: |
+          A list of destinations of the channel. For UDP outputs, there is one
+          destination per output. For other types (HLS, for example), there is
+          one destination per packager.
+      EgressEndpoints:
+        $ref: '#/definitions/ListOfChannelEgressEndpoint'
+        description: The endpoints where outgoing connections initiate from
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique id of the channel.
+      InputAttachments:
+        $ref: '#/definitions/ListOfInputAttachment'
+        description: List of input attachments for channel.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the channel. (user-mutable)
+      PipelinesRunningCount:
+        $ref: '#/definitions/__integer'
+        description: The number of currently healthy pipelines.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of the role assumed when running the Channel.
+      State:
+        $ref: '#/definitions/ChannelState'
+    description: Placeholder documentation for ChannelSummary
+  ConflictException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for ConflictException
+  CreateChannel:
+    type: object
+    properties:
+      Destinations:
+        $ref: '#/definitions/ListOfOutputDestination'
+      EncoderSettings:
+        $ref: '#/definitions/EncoderSettings'
+      InputAttachments:
+        $ref: '#/definitions/ListOfInputAttachment'
+        description: List of input attachments for channel.
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name of channel.
+      RequestId:
+        $ref: '#/definitions/__string'
+        description: |
+          Unique request ID to be specified. This is needed to prevent retries from
+          creating multiple resources.
+      Reserved:
+        $ref: '#/definitions/__string'
+        description: Reserved for future use.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: An optional Amazon Resource Name (ARN) of the role to assume when running the Channel.
+    description: Placeholder documentation for CreateChannel
+  CreateChannelRequest:
+    type: object
+    properties:
+      Destinations:
+        $ref: '#/definitions/ListOfOutputDestination'
+      EncoderSettings:
+        $ref: '#/definitions/EncoderSettings'
+      InputAttachments:
+        $ref: '#/definitions/ListOfInputAttachment'
+        description: List of input attachments for channel.
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name of channel.
+      RequestId:
+        $ref: '#/definitions/__string'
+        description: |
+          Unique request ID to be specified. This is needed to prevent retries from
+          creating multiple resources.
+      Reserved:
+        $ref: '#/definitions/__string'
+        description: Reserved for future use.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: An optional Amazon Resource Name (ARN) of the role to assume when running the Channel.
+    description: A request to create a channel
+  CreateChannelResponse:
+    type: object
+    properties:
+      Channel:
+        $ref: '#/definitions/Channel'
+    description: Placeholder documentation for CreateChannelResponse
+  CreateChannelResultModel:
+    type: object
+    properties:
+      Channel:
+        $ref: '#/definitions/Channel'
+    description: Placeholder documentation for CreateChannelResultModel
+  CreateInput:
+    type: object
+    properties:
+      Destinations:
+        $ref: '#/definitions/ListOfInputDestinationRequest'
+        description: |
+          settings required for PUSH-type inputs; one per redundancy group.
+          Only one of sources and destinations can be specified.
+          Note: there are currently no settings required for PUSH-type inputs
+      InputSecurityGroups:
+        $ref: '#/definitions/ListOf__string'
+        description: A list of security groups referenced by IDs to attach to the input.
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name of the input.
+      RequestId:
+        $ref: '#/definitions/__string'
+        description: |
+          Unique identifier of the request to ensure the request is handled
+          exactly once in case of retries
+      Sources:
+        $ref: '#/definitions/ListOfInputSourceRequest'
+        description: |
+          settings required for PULL-type inputs; one per redundancy group
+          Only one of sources and destinations can be specified
+      Type:
+        $ref: '#/definitions/InputType'
+    description: Placeholder documentation for CreateInput
+  CreateInputRequest:
+    type: object
+    properties:
+      Destinations:
+        $ref: '#/definitions/ListOfInputDestinationRequest'
+        description: |
+          settings required for PUSH-type inputs; one per redundancy group.
+          Only one of sources and destinations can be specified.
+          Note: there are currently no settings required for PUSH-type inputs
+      InputSecurityGroups:
+        $ref: '#/definitions/ListOf__string'
+        description: A list of security groups referenced by IDs to attach to the input.
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name of the input.
+      RequestId:
+        $ref: '#/definitions/__string'
+        description: |
+          Unique identifier of the request to ensure the request is handled
+          exactly once in case of retries
+      Sources:
+        $ref: '#/definitions/ListOfInputSourceRequest'
+        description: |
+          settings required for PULL-type inputs; one per redundancy group
+          Only one of sources and destinations can be specified
+      Type:
+        $ref: '#/definitions/InputType'
+    description: The name of the input
+  CreateInputResponse:
+    type: object
+    properties:
+      Input:
+        $ref: '#/definitions/Input'
+    description: Placeholder documentation for CreateInputResponse
+  CreateInputResultModel:
+    type: object
+    properties:
+      Input:
+        $ref: '#/definitions/Input'
+    description: Placeholder documentation for CreateInputResultModel
+  CreateInputSecurityGroupRequest:
+    type: object
+    properties:
+      WhitelistRules:
+        $ref: '#/definitions/ListOfInputWhitelistRuleCidr'
+        description: List of IPv4 CIDR addresses to whitelist
+    description: The IPv4 CIDRs to whitelist for this Input Security Group
+  CreateInputSecurityGroupResponse:
+    type: object
+    properties:
+      SecurityGroup:
+        $ref: '#/definitions/InputSecurityGroup'
+    description: Placeholder documentation for CreateInputSecurityGroupResponse
+  CreateInputSecurityGroupResultModel:
+    type: object
+    properties:
+      SecurityGroup:
+        $ref: '#/definitions/InputSecurityGroup'
+    description: Placeholder documentation for CreateInputSecurityGroupResultModel
+  DeleteChannelRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DeleteChannelRequest
+  DeleteChannelResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The unique arn of the channel.
+      Destinations:
+        $ref: '#/definitions/ListOfOutputDestination'
+        description: |
+          A list of destinations of the channel. For UDP outputs, there is one
+          destination per output. For other types (HLS, for example), there is
+          one destination per packager.
+      EgressEndpoints:
+        $ref: '#/definitions/ListOfChannelEgressEndpoint'
+        description: The endpoints where outgoing connections initiate from
+      EncoderSettings:
+        $ref: '#/definitions/EncoderSettings'
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique id of the channel.
+      InputAttachments:
+        $ref: '#/definitions/ListOfInputAttachment'
+        description: List of input attachments for channel.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the channel. (user-mutable)
+      PipelinesRunningCount:
+        $ref: '#/definitions/__integer'
+        description: The number of currently healthy pipelines.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of the role assumed when running the Channel.
+      State:
+        $ref: '#/definitions/ChannelState'
+    description: Placeholder documentation for DeleteChannelResponse
+  DeleteInputRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DeleteInputRequest
+  DeleteInputResponse:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DeleteInputResponse
+  DeleteInputSecurityGroupRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DeleteInputSecurityGroupRequest
+  DeleteInputSecurityGroupResponse:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DeleteInputSecurityGroupResponse
+  DescribeChannelRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DescribeChannelRequest
+  DescribeChannelResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The unique arn of the channel.
+      Destinations:
+        $ref: '#/definitions/ListOfOutputDestination'
+        description: |
+          A list of destinations of the channel. For UDP outputs, there is one
+          destination per output. For other types (HLS, for example), there is
+          one destination per packager.
+      EgressEndpoints:
+        $ref: '#/definitions/ListOfChannelEgressEndpoint'
+        description: The endpoints where outgoing connections initiate from
+      EncoderSettings:
+        $ref: '#/definitions/EncoderSettings'
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique id of the channel.
+      InputAttachments:
+        $ref: '#/definitions/ListOfInputAttachment'
+        description: List of input attachments for channel.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the channel. (user-mutable)
+      PipelinesRunningCount:
+        $ref: '#/definitions/__integer'
+        description: The number of currently healthy pipelines.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of the role assumed when running the Channel.
+      State:
+        $ref: '#/definitions/ChannelState'
+    description: Placeholder documentation for DescribeChannelResponse
+  DescribeInputRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DescribeInputRequest
+  DescribeInputResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: 'Unique ARN of input (generated, immutable)'
+      AttachedChannels:
+        $ref: '#/definitions/ListOf__string'
+        description: List of channel IDs that that input is attached to (currently an input can only be attached to one channel)
+      Destinations:
+        $ref: '#/definitions/ListOfInputDestination'
+        description: List of destinations of input (PULL-type)
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'generated ID of input (unique for user account, immutable)'
+      Name:
+        $ref: '#/definitions/__string'
+        description: user-assigned name (mutable)
+      SecurityGroups:
+        $ref: '#/definitions/ListOf__string'
+        description: List of IDs for all the security groups attached to the input.
+      Sources:
+        $ref: '#/definitions/ListOfInputSource'
+        description: List of sources of input (PULL-type)
+      State:
+        $ref: '#/definitions/InputState'
+      Type:
+        $ref: '#/definitions/InputType'
+    description: Placeholder documentation for DescribeInputResponse
+  DescribeInputSecurityGroupRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DescribeInputSecurityGroupRequest
+  DescribeInputSecurityGroupResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: Unique ARN of Input Security Group
+      Id:
+        $ref: '#/definitions/__string'
+        description: The Id of the Input Security Group
+      WhitelistRules:
+        $ref: '#/definitions/ListOfInputWhitelistRule'
+        description: Whitelist rules and their sync status
+    description: Placeholder documentation for DescribeInputSecurityGroupResponse
+  DvbNitSettings:
+    type: object
+    properties:
+      NetworkId:
+        $ref: '#/definitions/__integer'
+        description: The numeric value placed in the Network Information Table (NIT).
+      NetworkName:
+        $ref: '#/definitions/__string'
+        description: The network name text placed in the networkNameDescriptor inside the Network Information Table. Maximum length is 256 characters.
+      RepInterval:
+        $ref: '#/definitions/__integer'
+        description: The number of milliseconds between instances of this table in the output transport stream.
+    description: DVB Network Information Table (NIT)
+  DvbSdtOutputSdt:
+    type: string
+    enum:
+      - SDT_FOLLOW
+      - SDT_FOLLOW_IF_PRESENT
+      - SDT_MANUAL
+      - SDT_NONE
+    description: Placeholder documentation for DvbSdtOutputSdt
+  DvbSdtSettings:
+    type: object
+    properties:
+      OutputSdt:
+        $ref: '#/definitions/DvbSdtOutputSdt'
+        description: 'Selects method of inserting SDT information into output stream. The sdtFollow setting copies SDT information from input stream to output stream. The sdtFollowIfPresent setting copies SDT information from input stream to output stream if SDT information is present in the input, otherwise it will fall back on the user-defined values. The sdtManual setting means user will enter the SDT information. The sdtNone setting means output stream will not contain SDT information.'
+      RepInterval:
+        $ref: '#/definitions/__integer'
+        description: The number of milliseconds between instances of this table in the output transport stream.
+      ServiceName:
+        $ref: '#/definitions/__string'
+        description: The service name placed in the serviceDescriptor in the Service Description Table. Maximum length is 256 characters.
+      ServiceProviderName:
+        $ref: '#/definitions/__string'
+        description: The service provider name placed in the serviceDescriptor in the Service Description Table. Maximum length is 256 characters.
+    description: DVB Service Description Table (SDT)
+  DvbSubDestinationAlignment:
+    type: string
+    enum:
+      - CENTERED
+      - LEFT
+      - SMART
+    description: Placeholder documentation for DvbSubDestinationAlignment
+  DvbSubDestinationBackgroundColor:
+    type: string
+    enum:
+      - BLACK
+      - NONE
+      - WHITE
+    description: Placeholder documentation for DvbSubDestinationBackgroundColor
+  DvbSubDestinationFontColor:
+    type: string
+    enum:
+      - BLACK
+      - BLUE
+      - GREEN
+      - RED
+      - WHITE
+      - YELLOW
+    description: Placeholder documentation for DvbSubDestinationFontColor
+  DvbSubDestinationOutlineColor:
+    type: string
+    enum:
+      - BLACK
+      - BLUE
+      - GREEN
+      - RED
+      - WHITE
+      - YELLOW
+    description: Placeholder documentation for DvbSubDestinationOutlineColor
+  DvbSubDestinationSettings:
+    type: object
+    properties:
+      Alignment:
+        $ref: '#/definitions/DvbSubDestinationAlignment'
+        description: 'If no explicit xPosition or yPosition is provided, setting alignment to centered will place the captions at the bottom center of the output. Similarly, setting a left alignment will align captions to the bottom left of the output. If x and y positions are given in conjunction with the alignment parameter, the font will be justified (either left or centered) relative to those coordinates. Selecting "smart" justification will left-justify live subtitles and center-justify pre-recorded subtitles.  This option is not valid for source captions that are STL or 608/embedded.  These source settings are already pre-defined by the caption stream.  All burn-in and DVB-Sub font settings must match.'
+      BackgroundColor:
+        $ref: '#/definitions/DvbSubDestinationBackgroundColor'
+        description: Specifies the color of the rectangle behind the captions.  All burn-in and DVB-Sub font settings must match.
+      BackgroundOpacity:
+        $ref: '#/definitions/__integer'
+        description: Specifies the opacity of the background rectangle. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent).  All burn-in and DVB-Sub font settings must match.
+      Font:
+        $ref: '#/definitions/InputLocation'
+        description: 'External font file used for caption burn-in. File extension must be ''ttf'' or ''tte''.  Although the user can select output fonts for many different types of input captions, embedded, STL and teletext sources use a strict grid system. Using external fonts with these caption sources could cause unexpected display of proportional fonts.  All burn-in and DVB-Sub font settings must match.'
+      FontColor:
+        $ref: '#/definitions/DvbSubDestinationFontColor'
+        description: 'Specifies the color of the burned-in captions.  This option is not valid for source captions that are STL, 608/embedded or teletext.  These source settings are already pre-defined by the caption stream.  All burn-in and DVB-Sub font settings must match.'
+      FontOpacity:
+        $ref: '#/definitions/__integer'
+        description: Specifies the opacity of the burned-in captions. 255 is opaque; 0 is transparent.  All burn-in and DVB-Sub font settings must match.
+      FontResolution:
+        $ref: '#/definitions/__integer'
+        description: Font resolution in DPI (dots per inch); default is 96 dpi.  All burn-in and DVB-Sub font settings must match.
+      FontSize:
+        $ref: '#/definitions/__string'
+        description: When set to auto fontSize will scale depending on the size of the output.  Giving a positive integer will specify the exact font size in points.  All burn-in and DVB-Sub font settings must match.
+      OutlineColor:
+        $ref: '#/definitions/DvbSubDestinationOutlineColor'
+        description: Specifies font outline color. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+      OutlineSize:
+        $ref: '#/definitions/__integer'
+        description: Specifies font outline size in pixels. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+      ShadowColor:
+        $ref: '#/definitions/DvbSubDestinationShadowColor'
+        description: Specifies the color of the shadow cast by the captions.  All burn-in and DVB-Sub font settings must match.
+      ShadowOpacity:
+        $ref: '#/definitions/__integer'
+        description: Specifies the opacity of the shadow. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent).  All burn-in and DVB-Sub font settings must match.
+      ShadowXOffset:
+        $ref: '#/definitions/__integer'
+        description: Specifies the horizontal offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels to the left.  All burn-in and DVB-Sub font settings must match.
+      ShadowYOffset:
+        $ref: '#/definitions/__integer'
+        description: Specifies the vertical offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels above the text.  All burn-in and DVB-Sub font settings must match.
+      TeletextGridControl:
+        $ref: '#/definitions/DvbSubDestinationTeletextGridControl'
+        description: Controls whether a fixed grid size will be used to generate the output subtitles bitmap. Only applicable for Teletext inputs and DVB-Sub/Burn-in outputs.
+      XPosition:
+        $ref: '#/definitions/__integer'
+        description: 'Specifies the horizontal position of the caption relative to the left side of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the left of the output. If no explicit xPosition is provided, the horizontal caption position will be determined by the alignment parameter.  This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream.  All burn-in and DVB-Sub font settings must match.'
+      YPosition:
+        $ref: '#/definitions/__integer'
+        description: 'Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit yPosition is provided, the caption will be positioned towards the bottom of the output.  This option is not valid for source captions that are STL, 608/embedded or teletext.  These source settings are already pre-defined by the caption stream.  All burn-in and DVB-Sub font settings must match.'
+    description: Placeholder documentation for DvbSubDestinationSettings
+  DvbSubDestinationShadowColor:
+    type: string
+    enum:
+      - BLACK
+      - NONE
+      - WHITE
+    description: Placeholder documentation for DvbSubDestinationShadowColor
+  DvbSubDestinationTeletextGridControl:
+    type: string
+    enum:
+      - FIXED
+      - SCALED
+    description: Placeholder documentation for DvbSubDestinationTeletextGridControl
+  DvbSubSourceSettings:
+    type: object
+    properties:
+      Pid:
+        $ref: '#/definitions/__integer'
+        description: 'When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the source content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through, regardless of selectors.'
+    description: Placeholder documentation for DvbSubSourceSettings
+  DvbTdtSettings:
+    type: object
+    properties:
+      RepInterval:
+        $ref: '#/definitions/__integer'
+        description: The number of milliseconds between instances of this table in the output transport stream.
+    description: DVB Time and Date Table (SDT)
+  Eac3AttenuationControl:
+    type: string
+    enum:
+      - ATTENUATE_3_DB
+      - NONE
+    description: Placeholder documentation for Eac3AttenuationControl
+  Eac3BitstreamMode:
+    type: string
+    enum:
+      - COMMENTARY
+      - COMPLETE_MAIN
+      - EMERGENCY
+      - HEARING_IMPAIRED
+      - VISUALLY_IMPAIRED
+    description: Placeholder documentation for Eac3BitstreamMode
+  Eac3CodingMode:
+    type: string
+    enum:
+      - CODING_MODE_1_0
+      - CODING_MODE_2_0
+      - CODING_MODE_3_2
+    description: Placeholder documentation for Eac3CodingMode
+  Eac3DcFilter:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Placeholder documentation for Eac3DcFilter
+  Eac3DrcLine:
+    type: string
+    enum:
+      - FILM_LIGHT
+      - FILM_STANDARD
+      - MUSIC_LIGHT
+      - MUSIC_STANDARD
+      - NONE
+      - SPEECH
+    description: Placeholder documentation for Eac3DrcLine
+  Eac3DrcRf:
+    type: string
+    enum:
+      - FILM_LIGHT
+      - FILM_STANDARD
+      - MUSIC_LIGHT
+      - MUSIC_STANDARD
+      - NONE
+      - SPEECH
+    description: Placeholder documentation for Eac3DrcRf
+  Eac3LfeControl:
+    type: string
+    enum:
+      - LFE
+      - NO_LFE
+    description: Placeholder documentation for Eac3LfeControl
+  Eac3LfeFilter:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Placeholder documentation for Eac3LfeFilter
+  Eac3MetadataControl:
+    type: string
+    enum:
+      - FOLLOW_INPUT
+      - USE_CONFIGURED
+    description: Placeholder documentation for Eac3MetadataControl
+  Eac3PassthroughControl:
+    type: string
+    enum:
+      - NO_PASSTHROUGH
+      - WHEN_POSSIBLE
+    description: Placeholder documentation for Eac3PassthroughControl
+  Eac3PhaseControl:
+    type: string
+    enum:
+      - NO_SHIFT
+      - SHIFT_90_DEGREES
+    description: Placeholder documentation for Eac3PhaseControl
+  Eac3Settings:
+    type: object
+    properties:
+      AttenuationControl:
+        $ref: '#/definitions/Eac3AttenuationControl'
+        description: 'When set to attenuate3Db, applies a 3 dB attenuation to the surround channels. Only used for 3/2 coding mode.'
+      Bitrate:
+        $ref: '#/definitions/__double'
+        description: Average bitrate in bits/second. Valid bitrates depend on the coding mode.
+      BitstreamMode:
+        $ref: '#/definitions/Eac3BitstreamMode'
+        description: Specifies the bitstream mode (bsmod) for the emitted E-AC-3 stream. See ATSC A/52-2012 (Annex E) for background on these values.
+      CodingMode:
+        $ref: '#/definitions/Eac3CodingMode'
+        description: Dolby Digital Plus coding mode. Determines number of channels.
+      DcFilter:
+        $ref: '#/definitions/Eac3DcFilter'
+        description: 'When set to enabled, activates a DC highpass filter for all input channels.'
+      Dialnorm:
+        $ref: '#/definitions/__integer'
+        description: 'Sets the dialnorm for the output. If blank and input audio is Dolby Digital Plus, dialnorm will be passed through.'
+      DrcLine:
+        $ref: '#/definitions/Eac3DrcLine'
+        description: Sets the Dolby dynamic range compression profile.
+      DrcRf:
+        $ref: '#/definitions/Eac3DrcRf'
+        description: 'Sets the profile for heavy Dolby dynamic range compression, ensures that the instantaneous signal peaks do not exceed specified levels.'
+      LfeControl:
+        $ref: '#/definitions/Eac3LfeControl'
+        description: 'When encoding 3/2 audio, setting to lfe enables the LFE channel'
+      LfeFilter:
+        $ref: '#/definitions/Eac3LfeFilter'
+        description: 'When set to enabled, applies a 120Hz lowpass filter to the LFE channel prior to encoding. Only valid with codingMode32 coding mode.'
+      LoRoCenterMixLevel:
+        $ref: '#/definitions/__double'
+        description: Left only/Right only center mix level. Only used for 3/2 coding mode.
+      LoRoSurroundMixLevel:
+        $ref: '#/definitions/__double'
+        description: Left only/Right only surround mix level. Only used for 3/2 coding mode.
+      LtRtCenterMixLevel:
+        $ref: '#/definitions/__double'
+        description: Left total/Right total center mix level. Only used for 3/2 coding mode.
+      LtRtSurroundMixLevel:
+        $ref: '#/definitions/__double'
+        description: Left total/Right total surround mix level. Only used for 3/2 coding mode.
+      MetadataControl:
+        $ref: '#/definitions/Eac3MetadataControl'
+        description: 'When set to followInput, encoder metadata will be sourced from the DD, DD+, or DolbyE decoder that supplied this audio data. If audio was not supplied from one of these streams, then the static metadata settings will be used.'
+      PassthroughControl:
+        $ref: '#/definitions/Eac3PassthroughControl'
+        description: 'When set to whenPossible, input DD+ audio will be passed through if it is present on the input. This detection is dynamic over the life of the transcode. Inputs that alternate between DD+ and non-DD+ content will have a consistent DD+ output as the system alternates between passthrough and encoding.'
+      PhaseControl:
+        $ref: '#/definitions/Eac3PhaseControl'
+        description: 'When set to shift90Degrees, applies a 90-degree phase shift to the surround channels. Only used for 3/2 coding mode.'
+      StereoDownmix:
+        $ref: '#/definitions/Eac3StereoDownmix'
+        description: Stereo downmix preference. Only used for 3/2 coding mode.
+      SurroundExMode:
+        $ref: '#/definitions/Eac3SurroundExMode'
+        description: 'When encoding 3/2 audio, sets whether an extra center back surround channel is matrix encoded into the left and right surround channels.'
+      SurroundMode:
+        $ref: '#/definitions/Eac3SurroundMode'
+        description: 'When encoding 2/0 audio, sets whether Dolby Surround is matrix encoded into the two channels.'
+    description: Placeholder documentation for Eac3Settings
+  Eac3StereoDownmix:
+    type: string
+    enum:
+      - DPL2
+      - LO_RO
+      - LT_RT
+      - NOT_INDICATED
+    description: Placeholder documentation for Eac3StereoDownmix
+  Eac3SurroundExMode:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+      - NOT_INDICATED
+    description: Placeholder documentation for Eac3SurroundExMode
+  Eac3SurroundMode:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+      - NOT_INDICATED
+    description: Placeholder documentation for Eac3SurroundMode
+  EmbeddedConvert608To708:
+    type: string
+    enum:
+      - DISABLED
+      - UPCONVERT
+    description: Placeholder documentation for EmbeddedConvert608To708
+  EmbeddedDestinationSettings:
+    type: object
+    properties: {}
+    description: Placeholder documentation for EmbeddedDestinationSettings
+  EmbeddedPlusScte20DestinationSettings:
+    type: object
+    properties: {}
+    description: Placeholder documentation for EmbeddedPlusScte20DestinationSettings
+  EmbeddedScte20Detection:
+    type: string
+    enum:
+      - AUTO
+      - 'OFF'
+    description: Placeholder documentation for EmbeddedScte20Detection
+  EmbeddedSourceSettings:
+    type: object
+    properties:
+      Convert608To708:
+        $ref: '#/definitions/EmbeddedConvert608To708'
+        description: 'If upconvert, 608 data is both passed through via the "608 compatibility bytes" fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.'
+      Scte20Detection:
+        $ref: '#/definitions/EmbeddedScte20Detection'
+        description: Set to "auto" to handle streams with intermittent and/or non-aligned SCTE-20 and Embedded captions.
+      Source608ChannelNumber:
+        $ref: '#/definitions/__integer'
+        description: Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
+      Source608TrackNumber:
+        $ref: '#/definitions/__integer'
+        description: This field is unused and deprecated.
+    description: Placeholder documentation for EmbeddedSourceSettings
+  Empty:
+    type: object
+    properties: {}
+    description: Placeholder documentation for Empty
+  EncoderSettings:
+    type: object
+    properties:
+      AudioDescriptions:
+        $ref: '#/definitions/ListOfAudioDescription'
+      AvailBlanking:
+        $ref: '#/definitions/AvailBlanking'
+        description: Settings for ad avail blanking.
+      AvailConfiguration:
+        $ref: '#/definitions/AvailConfiguration'
+        description: Event-wide configuration settings for ad avail insertion.
+      BlackoutSlate:
+        $ref: '#/definitions/BlackoutSlate'
+        description: Settings for blackout slate.
+      CaptionDescriptions:
+        $ref: '#/definitions/ListOfCaptionDescription'
+        description: Settings for caption decriptions
+      GlobalConfiguration:
+        $ref: '#/definitions/GlobalConfiguration'
+        description: Configuration settings that apply to the event as a whole.
+      OutputGroups:
+        $ref: '#/definitions/ListOfOutputGroup'
+      TimecodeConfig:
+        $ref: '#/definitions/TimecodeConfig'
+        description: Contains settings used to acquire and adjust timecode information from inputs.
+      VideoDescriptions:
+        $ref: '#/definitions/ListOfVideoDescription'
+    description: Placeholder documentation for EncoderSettings
+  FecOutputIncludeFec:
+    type: string
+    enum:
+      - COLUMN
+      - COLUMN_AND_ROW
+    description: Placeholder documentation for FecOutputIncludeFec
+  FecOutputSettings:
+    type: object
+    properties:
+      ColumnDepth:
+        $ref: '#/definitions/__integer'
+        description: 'Parameter D from SMPTE 2022-1. The height of the FEC protection matrix.  The number of transport stream packets per column error correction packet. Must be between 4 and 20, inclusive.'
+      IncludeFec:
+        $ref: '#/definitions/FecOutputIncludeFec'
+        description: Enables column only or column and row based FEC
+      RowLength:
+        $ref: '#/definitions/__integer'
+        description: 'Parameter L from SMPTE 2022-1. The width of the FEC protection matrix.  Must be between 1 and 20, inclusive. If only Column FEC is used, then larger values increase robustness.  If Row FEC is used, then this is the number of transport stream packets per row error correction packet, and the value must be between 4 and 20, inclusive, if includeFec is columnAndRow. If includeFec is column, this value must be 1 to 20, inclusive.'
+    description: Placeholder documentation for FecOutputSettings
+  FixedAfd:
+    type: string
+    enum:
+      - AFD_0000
+      - AFD_0010
+      - AFD_0011
+      - AFD_0100
+      - AFD_1000
+      - AFD_1001
+      - AFD_1010
+      - AFD_1011
+      - AFD_1101
+      - AFD_1110
+      - AFD_1111
+    description: Placeholder documentation for FixedAfd
+  ForbiddenException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for ForbiddenException
+  GatewayTimeoutException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for GatewayTimeoutException
+  GlobalConfiguration:
+    type: object
+    properties:
+      InitialAudioGain:
+        $ref: '#/definitions/__integer'
+        description: Value to set the initial audio gain for the Live Event.
+      InputEndAction:
+        $ref: '#/definitions/GlobalConfigurationInputEndAction'
+        description: 'Indicates the action to take when an input completes (e.g. end-of-file.) Options include immediately switching to the next sequential input (via "switchInput"), switching to the next input and looping back to the first input when last input ends (via "switchAndLoopInputs") or not switching inputs and instead transcoding black / color / slate images per the "Input Loss Behavior" configuration until an activateInput REST command is received (via "none").'
+      InputLossBehavior:
+        $ref: '#/definitions/InputLossBehavior'
+        description: Settings for system actions when input is lost.
+      OutputTimingSource:
+        $ref: '#/definitions/GlobalConfigurationOutputTimingSource'
+        description: Indicates whether the rate of frames emitted by the Live encoder should be paced by its system clock (which optionally may be locked to another source via NTP) or should be locked to the clock of the source that is providing the input stream.
+      SupportLowFramerateInputs:
+        $ref: '#/definitions/GlobalConfigurationLowFramerateInputs'
+        description: Adjusts video input buffer for streams with very low video framerates. This is commonly set to enabled for music channels with less than one video frame per second.
+    description: Placeholder documentation for GlobalConfiguration
+  GlobalConfigurationInputEndAction:
+    type: string
+    enum:
+      - NONE
+      - SWITCH_AND_LOOP_INPUTS
+    description: Placeholder documentation for GlobalConfigurationInputEndAction
+  GlobalConfigurationLowFramerateInputs:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Placeholder documentation for GlobalConfigurationLowFramerateInputs
+  GlobalConfigurationOutputTimingSource:
+    type: string
+    enum:
+      - INPUT_CLOCK
+      - SYSTEM_CLOCK
+    description: Placeholder documentation for GlobalConfigurationOutputTimingSource
+  H264AdaptiveQuantization:
+    type: string
+    enum:
+      - HIGH
+      - HIGHER
+      - LOW
+      - MAX
+      - MEDIUM
+      - 'OFF'
+    description: Placeholder documentation for H264AdaptiveQuantization
+  H264ColorMetadata:
+    type: string
+    enum:
+      - IGNORE
+      - INSERT
+    description: Placeholder documentation for H264ColorMetadata
+  H264EntropyEncoding:
+    type: string
+    enum:
+      - CABAC
+      - CAVLC
+    description: Placeholder documentation for H264EntropyEncoding
+  H264FlickerAq:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Placeholder documentation for H264FlickerAq
+  H264FramerateControl:
+    type: string
+    enum:
+      - INITIALIZE_FROM_SOURCE
+      - SPECIFIED
+    description: Placeholder documentation for H264FramerateControl
+  H264GopBReference:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Placeholder documentation for H264GopBReference
+  H264GopSizeUnits:
+    type: string
+    enum:
+      - FRAMES
+      - SECONDS
+    description: Placeholder documentation for H264GopSizeUnits
+  H264Level:
+    type: string
+    enum:
+      - H264_LEVEL_1
+      - H264_LEVEL_1_1
+      - H264_LEVEL_1_2
+      - H264_LEVEL_1_3
+      - H264_LEVEL_2
+      - H264_LEVEL_2_1
+      - H264_LEVEL_2_2
+      - H264_LEVEL_3
+      - H264_LEVEL_3_1
+      - H264_LEVEL_3_2
+      - H264_LEVEL_4
+      - H264_LEVEL_4_1
+      - H264_LEVEL_4_2
+      - H264_LEVEL_5
+      - H264_LEVEL_5_1
+      - H264_LEVEL_5_2
+      - H264_LEVEL_AUTO
+    description: Placeholder documentation for H264Level
+  H264LookAheadRateControl:
+    type: string
+    enum:
+      - HIGH
+      - LOW
+      - MEDIUM
+    description: Placeholder documentation for H264LookAheadRateControl
+  H264ParControl:
+    type: string
+    enum:
+      - INITIALIZE_FROM_SOURCE
+      - SPECIFIED
+    description: Placeholder documentation for H264ParControl
+  H264Profile:
+    type: string
+    enum:
+      - BASELINE
+      - HIGH
+      - HIGH_10BIT
+      - HIGH_422
+      - HIGH_422_10BIT
+      - MAIN
+    description: Placeholder documentation for H264Profile
+  H264RateControlMode:
+    type: string
+    enum:
+      - CBR
+      - VBR
+    description: Placeholder documentation for H264RateControlMode
+  H264ScanType:
+    type: string
+    enum:
+      - INTERLACED
+      - PROGRESSIVE
+    description: Placeholder documentation for H264ScanType
+  H264SceneChangeDetect:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Placeholder documentation for H264SceneChangeDetect
+  H264Settings:
+    type: object
+    properties:
+      AdaptiveQuantization:
+        $ref: '#/definitions/H264AdaptiveQuantization'
+        description: Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
+      AfdSignaling:
+        $ref: '#/definitions/AfdSignaling'
+        description: 'Indicates that AFD values will be written into the output stream.  If afdSignaling is "auto", the system will try to preserve the input AFD value (in cases where multiple AFD values are valid). If set to "fixed", the AFD value will be the value configured in the fixedAfd parameter.'
+      Bitrate:
+        $ref: '#/definitions/__integer'
+        description: 'Average bitrate in bits/second. Required for VBR, CBR, and ABR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000.'
+      BufFillPct:
+        $ref: '#/definitions/__integer'
+        description: Percentage of the buffer that should initially be filled (HRD buffer model).
+      BufSize:
+        $ref: '#/definitions/__integer'
+        description: Size of buffer (HRD buffer model) in bits/second.
+      ColorMetadata:
+        $ref: '#/definitions/H264ColorMetadata'
+        description: Includes colorspace metadata in the output.
+      EntropyEncoding:
+        $ref: '#/definitions/H264EntropyEncoding'
+        description: Entropy encoding mode.  Use cabac (must be in Main or High profile) or cavlc.
+      FixedAfd:
+        $ref: '#/definitions/FixedAfd'
+        description: Four bit AFD value to write on all frames of video in the output stream. Only valid when afdSignaling is set to 'Fixed'.
+      FlickerAq:
+        $ref: '#/definitions/H264FlickerAq'
+        description: 'If set to enabled, adjust quantization within each frame to reduce flicker or ''pop'' on I-frames.'
+      FramerateControl:
+        $ref: '#/definitions/H264FramerateControl'
+        description: 'This field indicates how the output video frame rate is specified.  If "specified" is selected then the output video frame rate is determined by framerateNumerator and framerateDenominator, else if "initializeFromSource" is selected then the output video frame rate will be set equal to the input video frame rate of the first input.'
+      FramerateDenominator:
+        $ref: '#/definitions/__integer'
+        description: Framerate denominator.
+      FramerateNumerator:
+        $ref: '#/definitions/__integer'
+        description: 'Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.'
+      GopBReference:
+        $ref: '#/definitions/H264GopBReference'
+        description: Documentation update needed
+      GopClosedCadence:
+        $ref: '#/definitions/__integer'
+        description: 'Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting.'
+      GopNumBFrames:
+        $ref: '#/definitions/__integer'
+        description: Number of B-frames between reference frames.
+      GopSize:
+        $ref: '#/definitions/__double'
+        description: GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits. Must be greater than zero.
+      GopSizeUnits:
+        $ref: '#/definitions/H264GopSizeUnits'
+        description: Indicates if the gopSize is specified in frames or seconds. If seconds the system will convert the gopSize into a frame count at run time.
+      Level:
+        $ref: '#/definitions/H264Level'
+        description: H.264 Level.
+      LookAheadRateControl:
+        $ref: '#/definitions/H264LookAheadRateControl'
+        description: 'Amount of lookahead. A value of low can decrease latency and memory usage, while high can produce better quality for certain content.'
+      MaxBitrate:
+        $ref: '#/definitions/__integer'
+        description: Maximum bitrate in bits/second (for VBR mode only).
+      MinIInterval:
+        $ref: '#/definitions/__integer'
+        description: 'Only meaningful if sceneChangeDetect is set to enabled.  Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1'
+      NumRefFrames:
+        $ref: '#/definitions/__integer'
+        description: Number of reference frames to use. The encoder may use more than requested if using B-frames and/or interlaced encoding.
+      ParControl:
+        $ref: '#/definitions/H264ParControl'
+        description: 'This field indicates how the output pixel aspect ratio is specified.  If "specified" is selected then the output video pixel aspect ratio is determined by parNumerator and parDenominator, else if "initializeFromSource" is selected then the output pixsel aspect ratio will be set equal to the input video pixel aspect ratio of the first input.'
+      ParDenominator:
+        $ref: '#/definitions/__integer'
+        description: Pixel Aspect Ratio denominator.
+      ParNumerator:
+        $ref: '#/definitions/__integer'
+        description: Pixel Aspect Ratio numerator.
+      Profile:
+        $ref: '#/definitions/H264Profile'
+        description: H.264 Profile.
+      RateControlMode:
+        $ref: '#/definitions/H264RateControlMode'
+        description: Rate control mode.
+      ScanType:
+        $ref: '#/definitions/H264ScanType'
+        description: Sets the scan type of the output to progressive or top-field-first interlaced.
+      SceneChangeDetect:
+        $ref: '#/definitions/H264SceneChangeDetect'
+        description: Scene change detection.  Inserts I-frames on scene changes when enabled.
+      Slices:
+        $ref: '#/definitions/__integer'
+        description: |-
+          Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures.
+          This field is optional; when no value is specified the encoder will choose the number of slices based on encode resolution.
+      Softness:
+        $ref: '#/definitions/__integer'
+        description: 'Softness. Selects quantizer matrix, larger values reduce high-frequency content in the encoded image.'
+      SpatialAq:
+        $ref: '#/definitions/H264SpatialAq'
+        description: 'If set to enabled, adjust quantization within each frame based on spatial variation of content complexity.'
+      Syntax:
+        $ref: '#/definitions/H264Syntax'
+        description: Produces a bitstream compliant with SMPTE RP-2027.
+      TemporalAq:
+        $ref: '#/definitions/H264TemporalAq'
+        description: 'If set to enabled, adjust quantization within each frame based on temporal variation of content complexity.'
+      TimecodeInsertion:
+        $ref: '#/definitions/H264TimecodeInsertionBehavior'
+        description: |-
+          Determines how timecodes should be inserted into the video elementary stream.
+          - 'disabled': Do not include timecodes
+          - 'picTimingSei': Pass through picture timing SEI messages from the source specified in Timecode Config
+    description: Placeholder documentation for H264Settings
+  H264SpatialAq:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Placeholder documentation for H264SpatialAq
+  H264Syntax:
+    type: string
+    enum:
+      - DEFAULT
+      - RP2027
+    description: Placeholder documentation for H264Syntax
+  H264TemporalAq:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Placeholder documentation for H264TemporalAq
+  H264TimecodeInsertionBehavior:
+    type: string
+    enum:
+      - DISABLED
+      - PIC_TIMING_SEI
+    description: Placeholder documentation for H264TimecodeInsertionBehavior
+  HlsAdMarkers:
+    type: string
+    enum:
+      - ADOBE
+      - ELEMENTAL
+      - ELEMENTAL_SCTE35
+    description: Placeholder documentation for HlsAdMarkers
+  HlsAkamaiHttpTransferMode:
+    type: string
+    enum:
+      - CHUNKED
+      - NON_CHUNKED
+    description: Placeholder documentation for HlsAkamaiHttpTransferMode
+  HlsAkamaiSettings:
+    type: object
+    properties:
+      ConnectionRetryInterval:
+        $ref: '#/definitions/__integer'
+        description: Number of seconds to wait before retrying connection to the CDN if the connection is lost.
+      FilecacheDuration:
+        $ref: '#/definitions/__integer'
+        description: Size in seconds of file cache for streaming outputs.
+      HttpTransferMode:
+        $ref: '#/definitions/HlsAkamaiHttpTransferMode'
+        description: Specify whether or not to use chunked transfer encoding to Akamai. User should contact Akamai to enable this feature.
+      NumRetries:
+        $ref: '#/definitions/__integer'
+        description: Number of retry attempts that will be made before the Live Event is put into an error state.
+      RestartDelay:
+        $ref: '#/definitions/__integer'
+        description: 'If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.'
+      Salt:
+        $ref: '#/definitions/__string'
+        description: Salt for authenticated Akamai.
+      Token:
+        $ref: '#/definitions/__string'
+        description: 'Token parameter for authenticated akamai. If not specified, _gda_ is used.'
+    description: Placeholder documentation for HlsAkamaiSettings
+  HlsBasicPutSettings:
+    type: object
+    properties:
+      ConnectionRetryInterval:
+        $ref: '#/definitions/__integer'
+        description: Number of seconds to wait before retrying connection to the CDN if the connection is lost.
+      FilecacheDuration:
+        $ref: '#/definitions/__integer'
+        description: Size in seconds of file cache for streaming outputs.
+      NumRetries:
+        $ref: '#/definitions/__integer'
+        description: Number of retry attempts that will be made before the Live Event is put into an error state.
+      RestartDelay:
+        $ref: '#/definitions/__integer'
+        description: 'If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.'
+    description: Placeholder documentation for HlsBasicPutSettings
+  HlsCaptionLanguageSetting:
+    type: string
+    enum:
+      - INSERT
+      - NONE
+      - OMIT
+    description: Placeholder documentation for HlsCaptionLanguageSetting
+  HlsCdnSettings:
+    type: object
+    properties:
+      HlsAkamaiSettings:
+        $ref: '#/definitions/HlsAkamaiSettings'
+      HlsBasicPutSettings:
+        $ref: '#/definitions/HlsBasicPutSettings'
+      HlsMediaStoreSettings:
+        $ref: '#/definitions/HlsMediaStoreSettings'
+      HlsWebdavSettings:
+        $ref: '#/definitions/HlsWebdavSettings'
+    description: Placeholder documentation for HlsCdnSettings
+  HlsClientCache:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Placeholder documentation for HlsClientCache
+  HlsCodecSpecification:
+    type: string
+    enum:
+      - RFC_4281
+      - RFC_6381
+    description: Placeholder documentation for HlsCodecSpecification
+  HlsDirectoryStructure:
+    type: string
+    enum:
+      - SINGLE_DIRECTORY
+      - SUBDIRECTORY_PER_STREAM
+    description: Placeholder documentation for HlsDirectoryStructure
+  HlsEncryptionType:
+    type: string
+    enum:
+      - AES128
+      - SAMPLE_AES
+    description: Placeholder documentation for HlsEncryptionType
+  HlsGroupSettings:
+    type: object
+    properties:
+      AdMarkers:
+        $ref: '#/definitions/ListOfHlsAdMarkers'
+        description: Choose one or more ad marker types to pass SCTE35 signals through to this group of Apple HLS outputs.
+      BaseUrlContent:
+        $ref: '#/definitions/__string'
+        description: A partial URI prefix that will be prepended to each output in the media .m3u8 file. Can be used if base manifest is delivered from a different URL than the main .m3u8 file.
+      BaseUrlManifest:
+        $ref: '#/definitions/__string'
+        description: A partial URI prefix that will be prepended to each output in the media .m3u8 file. Can be used if base manifest is delivered from a different URL than the main .m3u8 file.
+      CaptionLanguageMappings:
+        $ref: '#/definitions/ListOfCaptionLanguageMapping'
+        description: Mapping of up to 4 caption channels to caption languages.  Is only meaningful if captionLanguageSetting is set to "insert".
+      CaptionLanguageSetting:
+        $ref: '#/definitions/HlsCaptionLanguageSetting'
+        description: |-
+          Applies only to 608 Embedded output captions.
+          insert: Include CLOSED-CAPTIONS lines in the manifest. Specify at least one language in the CC1 Language Code field. One CLOSED-CAPTION line is added for each Language Code you specify. Make sure to specify the languages in the order in which they appear in the original source (if the source is embedded format) or the order of the caption selectors (if the source is other than embedded). Otherwise, languages in the manifest will not match up properly with the output captions.
+          none: Include CLOSED-CAPTIONS=NONE line in the manifest.
+          omit: Omit any CLOSED-CAPTIONS line from the manifest.
+      ClientCache:
+        $ref: '#/definitions/HlsClientCache'
+        description: 'When set to "disabled", sets the #EXT-X-ALLOW-CACHE:no tag in the manifest, which prevents clients from saving media segments for later replay.'
+      CodecSpecification:
+        $ref: '#/definitions/HlsCodecSpecification'
+        description: Specification to use (RFC-6381 or the default RFC-4281) during m3u8 playlist generation.
+      ConstantIv:
+        $ref: '#/definitions/__string'
+        description: 'For use with encryptionType. This is a 128-bit, 16-byte hex value represented by a 32-character text string. If ivSource is set to "explicit" then this parameter is required and is used as the IV for encryption.'
+      Destination:
+        $ref: '#/definitions/OutputLocationRef'
+        description: 'A directory or HTTP destination for the HLS segments, manifest files, and encryption keys (if enabled).'
+      DirectoryStructure:
+        $ref: '#/definitions/HlsDirectoryStructure'
+        description: Place segments in subdirectories.
+      EncryptionType:
+        $ref: '#/definitions/HlsEncryptionType'
+        description: Encrypts the segments with the given encryption scheme.  Exclude this parameter if no encryption is desired.
+      HlsCdnSettings:
+        $ref: '#/definitions/HlsCdnSettings'
+        description: Parameters that control interactions with the CDN.
+      IndexNSegments:
+        $ref: '#/definitions/__integer'
+        description: 'Number of segments to keep in the playlist (.m3u8) file. mode must be "vod" for this setting to have an effect, and this number should be less than or equal to keepSegments.'
+      InputLossAction:
+        $ref: '#/definitions/InputLossActionForHlsOut'
+        description: Parameter that control output group behavior on input loss.
+      IvInManifest:
+        $ref: '#/definitions/HlsIvInManifest'
+        description: 'For use with encryptionType. The IV (Initialization Vector) is a 128-bit number used in conjunction with the key for encrypting blocks. If set to "include", IV is listed in the manifest, otherwise the IV is not in the manifest.'
+      IvSource:
+        $ref: '#/definitions/HlsIvSource'
+        description: 'For use with encryptionType. The IV (Initialization Vector) is a 128-bit number used in conjunction with the key for encrypting blocks. If this setting is "followsSegmentNumber", it will cause the IV to change every segment (to match the segment number). If this is set to "explicit", you must enter a constantIv value.'
+      KeepSegments:
+        $ref: '#/definitions/__integer'
+        description: Number of segments to retain in the destination directory. mode must be "live" for this setting to have an effect.
+      KeyFormat:
+        $ref: '#/definitions/__string'
+        description: 'The value specifies how the key is represented in the resource identified by the URI.  If parameter is absent, an implicit value of "identity" is used.  A reverse DNS string can also be given.'
+      KeyFormatVersions:
+        $ref: '#/definitions/__string'
+        description: Either a single positive integer version value or a slash delimited list of version values (1/2/3).
+      KeyProviderSettings:
+        $ref: '#/definitions/KeyProviderSettings'
+        description: The key provider settings.
+      ManifestCompression:
+        $ref: '#/definitions/HlsManifestCompression'
+        description: 'When set to gzip, compresses HLS playlist.'
+      ManifestDurationFormat:
+        $ref: '#/definitions/HlsManifestDurationFormat'
+        description: Indicates whether the output manifest should use floating point or integer values for segment duration.
+      MinSegmentLength:
+        $ref: '#/definitions/__integer'
+        description: 'When set, minimumSegmentLength is enforced by looking ahead and back within the specified range for a nearby avail and extending the segment size if needed.'
+      Mode:
+        $ref: '#/definitions/HlsMode'
+        description: 'If set to "vod", keeps and indexes all segments starting with the first segment.  If set to "live" segments will age out and only the last keepSegments number of segments will be retained.'
+      OutputSelection:
+        $ref: '#/definitions/HlsOutputSelection'
+        description: Generates the .m3u8 playlist file for this HLS output group. The segmentsOnly option will output segments without the .m3u8 file.
+      ProgramDateTime:
+        $ref: '#/definitions/HlsProgramDateTime'
+        description: 'Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The value is calculated as follows: either the program date and time are initialized using the input timecode source, or the time is initialized using the input timecode source and the date is initialized using the timestampOffset.'
+      ProgramDateTimePeriod:
+        $ref: '#/definitions/__integer'
+        description: 'Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.'
+      SegmentLength:
+        $ref: '#/definitions/__integer'
+        description: 'Length of MPEG-2 Transport Stream segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer.'
+      SegmentationMode:
+        $ref: '#/definitions/HlsSegmentationMode'
+        description: 'When set to useInputSegmentation, the output segment or fragment points are set by the RAI markers from the input streams.'
+      SegmentsPerSubdirectory:
+        $ref: '#/definitions/__integer'
+        description: Number of segments to write to a subdirectory before starting a new one. directoryStructure must be subdirectoryPerStream for this setting to have an effect.
+      StreamInfResolution:
+        $ref: '#/definitions/HlsStreamInfResolution'
+        description: Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of variant manifest.
+      TimedMetadataId3Frame:
+        $ref: '#/definitions/HlsTimedMetadataId3Frame'
+        description: Indicates ID3 frame that has the timecode.
+      TimedMetadataId3Period:
+        $ref: '#/definitions/__integer'
+        description: Timed Metadata interval in seconds.
+      TimestampDeltaMilliseconds:
+        $ref: '#/definitions/__integer'
+        description: Provides an extra millisecond delta offset to fine tune the timestamps.
+      TsFileMode:
+        $ref: '#/definitions/HlsTsFileMode'
+        description: 'When set to "singleFile", emits the program as a single media resource (.ts) file, and uses #EXT-X-BYTERANGE tags to index segment for playback. Playback of VOD mode content during event is not guaranteed due to HTTP server caching.'
+    description: Placeholder documentation for HlsGroupSettings
+  HlsInputSettings:
+    type: object
+    properties:
+      Bandwidth:
+        $ref: '#/definitions/__integer'
+        description: 'When specified the HLS stream with the m3u8 BANDWIDTH that most closely matches this value will be chosen, otherwise the highest bandwidth stream in the m3u8 will be chosen.  The bitrate is specified in bits per second, as in an HLS manifest.'
+      BufferSegments:
+        $ref: '#/definitions/__integer'
+        description: 'When specified, reading of the HLS input will begin this many buffer segments from the end (most recently written segment).  When not specified, the HLS input will begin with the first segment specified in the m3u8.'
+      Retries:
+        $ref: '#/definitions/__integer'
+        description: The number of consecutive times that attempts to read a manifest or segment must fail before the input is considered unavailable.
+      RetryInterval:
+        $ref: '#/definitions/__integer'
+        description: The number of seconds between retries when an attempt to read a manifest or segment fails.
+    description: Placeholder documentation for HlsInputSettings
+  HlsIvInManifest:
+    type: string
+    enum:
+      - EXCLUDE
+      - INCLUDE
+    description: Placeholder documentation for HlsIvInManifest
+  HlsIvSource:
+    type: string
+    enum:
+      - EXPLICIT
+      - FOLLOWS_SEGMENT_NUMBER
+    description: Placeholder documentation for HlsIvSource
+  HlsManifestCompression:
+    type: string
+    enum:
+      - GZIP
+      - NONE
+    description: Placeholder documentation for HlsManifestCompression
+  HlsManifestDurationFormat:
+    type: string
+    enum:
+      - FLOATING_POINT
+      - INTEGER
+    description: Placeholder documentation for HlsManifestDurationFormat
+  HlsMediaStoreSettings:
+    type: object
+    properties:
+      ConnectionRetryInterval:
+        $ref: '#/definitions/__integer'
+        description: Number of seconds to wait before retrying connection to the CDN if the connection is lost.
+      FilecacheDuration:
+        $ref: '#/definitions/__integer'
+        description: Size in seconds of file cache for streaming outputs.
+      MediaStoreStorageClass:
+        $ref: '#/definitions/HlsMediaStoreStorageClass'
+        description: 'When set to temporal, output files are stored in non-persistent memory for faster reading and writing.'
+      NumRetries:
+        $ref: '#/definitions/__integer'
+        description: Number of retry attempts that will be made before the Live Event is put into an error state.
+      RestartDelay:
+        $ref: '#/definitions/__integer'
+        description: 'If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.'
+    description: Placeholder documentation for HlsMediaStoreSettings
+  HlsMediaStoreStorageClass:
+    type: string
+    enum:
+      - TEMPORAL
+    description: Placeholder documentation for HlsMediaStoreStorageClass
+  HlsMode:
+    type: string
+    enum:
+      - LIVE
+      - VOD
+    description: Placeholder documentation for HlsMode
+  HlsOutputSelection:
+    type: string
+    enum:
+      - MANIFESTS_AND_SEGMENTS
+      - SEGMENTS_ONLY
+    description: Placeholder documentation for HlsOutputSelection
+  HlsOutputSettings:
+    type: object
+    properties:
+      HlsSettings:
+        $ref: '#/definitions/HlsSettings'
+        description: Settings regarding the underlying stream. These settings are different for audio-only outputs.
+      NameModifier:
+        $ref: '#/definitions/__string'
+        description: 'String concatenated to the end of the destination filename. Accepts \"Format Identifiers\":#formatIdentifierParameters.'
+      SegmentModifier:
+        $ref: '#/definitions/__string'
+        description: String concatenated to end of segment filenames.
+    description: Placeholder documentation for HlsOutputSettings
+  HlsProgramDateTime:
+    type: string
+    enum:
+      - EXCLUDE
+      - INCLUDE
+    description: Placeholder documentation for HlsProgramDateTime
+  HlsSegmentationMode:
+    type: string
+    enum:
+      - USE_INPUT_SEGMENTATION
+      - USE_SEGMENT_DURATION
+    description: Placeholder documentation for HlsSegmentationMode
+  HlsSettings:
+    type: object
+    properties:
+      AudioOnlyHlsSettings:
+        $ref: '#/definitions/AudioOnlyHlsSettings'
+      StandardHlsSettings:
+        $ref: '#/definitions/StandardHlsSettings'
+    description: Placeholder documentation for HlsSettings
+  HlsStreamInfResolution:
+    type: string
+    enum:
+      - EXCLUDE
+      - INCLUDE
+    description: Placeholder documentation for HlsStreamInfResolution
+  HlsTimedMetadataId3Frame:
+    type: string
+    enum:
+      - NONE
+      - PRIV
+      - TDRL
+    description: Placeholder documentation for HlsTimedMetadataId3Frame
+  HlsTsFileMode:
+    type: string
+    enum:
+      - SEGMENTED_FILES
+      - SINGLE_FILE
+    description: Placeholder documentation for HlsTsFileMode
+  HlsWebdavHttpTransferMode:
+    type: string
+    enum:
+      - CHUNKED
+      - NON_CHUNKED
+    description: Placeholder documentation for HlsWebdavHttpTransferMode
+  HlsWebdavSettings:
+    type: object
+    properties:
+      ConnectionRetryInterval:
+        $ref: '#/definitions/__integer'
+        description: Number of seconds to wait before retrying connection to the CDN if the connection is lost.
+      FilecacheDuration:
+        $ref: '#/definitions/__integer'
+        description: Size in seconds of file cache for streaming outputs.
+      HttpTransferMode:
+        $ref: '#/definitions/HlsWebdavHttpTransferMode'
+        description: Specify whether or not to use chunked transfer encoding to WebDAV.
+      NumRetries:
+        $ref: '#/definitions/__integer'
+        description: Number of retry attempts that will be made before the Live Event is put into an error state.
+      RestartDelay:
+        $ref: '#/definitions/__integer'
+        description: 'If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.'
+    description: Placeholder documentation for HlsWebdavSettings
+  Input:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: 'Unique ARN of input (generated, immutable)'
+      AttachedChannels:
+        $ref: '#/definitions/ListOf__string'
+        description: List of channel IDs that that input is attached to (currently an input can only be attached to one channel)
+      Destinations:
+        $ref: '#/definitions/ListOfInputDestination'
+        description: List of destinations of input (PULL-type)
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'generated ID of input (unique for user account, immutable)'
+      Name:
+        $ref: '#/definitions/__string'
+        description: user-assigned name (mutable)
+      SecurityGroups:
+        $ref: '#/definitions/ListOf__string'
+        description: List of IDs for all the security groups attached to the input.
+      Sources:
+        $ref: '#/definitions/ListOfInputSource'
+        description: List of sources of input (PULL-type)
+      State:
+        $ref: '#/definitions/InputState'
+      Type:
+        $ref: '#/definitions/InputType'
+    description: Placeholder documentation for Input
+  InputAttachment:
+    type: object
+    properties:
+      InputId:
+        $ref: '#/definitions/__string'
+        description: The ID of the input
+      InputSettings:
+        $ref: '#/definitions/InputSettings'
+        description: 'Settings of an input (caption selector, etc.)'
+    description: Placeholder documentation for InputAttachment
+  InputChannelLevel:
+    type: object
+    properties:
+      Gain:
+        $ref: '#/definitions/__integer'
+        description: Remixing value. Units are in dB and acceptable values are within the range from -60 (mute) and 6 dB.
+      InputChannel:
+        $ref: '#/definitions/__integer'
+        description: The index of the input channel used as a source.
+    description: Placeholder documentation for InputChannelLevel
+  InputDeblockFilter:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Placeholder documentation for InputDeblockFilter
+  InputDenoiseFilter:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Placeholder documentation for InputDenoiseFilter
+  InputDestination:
+    type: object
+    properties:
+      Ip:
+        $ref: '#/definitions/__string'
+        description: |
+          system-generated static IP address of endpoint.
+          Remains fixed for the lifetime of the input
+      Port:
+        $ref: '#/definitions/__string'
+        description: port for input
+      Url:
+        $ref: '#/definitions/__string'
+        description: |
+          This represents the endpoint that the customer stream will be
+          pushed to.
+    description: Settings for a PUSH type input
+  InputDestinationRequest:
+    type: object
+    properties:
+      StreamName:
+        $ref: '#/definitions/__string'
+        description: |
+          A unique name for the location the RTMP stream is being pushed
+          to.
+    description: Endpoint settings for a PUSH type input
+  InputFilter:
+    type: string
+    enum:
+      - AUTO
+      - DISABLED
+      - FORCED
+    description: Placeholder documentation for InputFilter
+  InputLocation:
+    type: object
+    properties:
+      PasswordParam:
+        $ref: '#/definitions/__string'
+        description: key used to extract the password from EC2 Parameter store
+      Uri:
+        $ref: '#/definitions/__string'
+        description: 'Uniform Resource Identifier - This should be a path to a file accessible to the Live system (eg. a http:// URI) depending on the output type. For example, a rtmpEndpoint should have a uri simliar to: "rtmp://fmsserver/live".'
+      Username:
+        $ref: '#/definitions/__string'
+        description: Documentation update needed
+    description: Placeholder documentation for InputLocation
+  InputLossActionForHlsOut:
+    type: string
+    enum:
+      - EMIT_OUTPUT
+      - PAUSE_OUTPUT
+    description: Placeholder documentation for InputLossActionForHlsOut
+  InputLossActionForMsSmoothOut:
+    type: string
+    enum:
+      - EMIT_OUTPUT
+      - PAUSE_OUTPUT
+    description: Placeholder documentation for InputLossActionForMsSmoothOut
+  InputLossActionForUdpOut:
+    type: string
+    enum:
+      - DROP_PROGRAM
+      - DROP_TS
+      - EMIT_PROGRAM
+    description: Placeholder documentation for InputLossActionForUdpOut
+  InputLossBehavior:
+    type: object
+    properties:
+      BlackFrameMsec:
+        $ref: '#/definitions/__integer'
+        description: Documentation update needed
+      InputLossImageColor:
+        $ref: '#/definitions/__string'
+        description: 'When input loss image type is "color" this field specifies the color to use. Value: 6 hex characters representing the values of RGB.'
+      InputLossImageSlate:
+        $ref: '#/definitions/InputLocation'
+        description: When input loss image type is "slate" these fields specify the parameters for accessing the slate.
+      InputLossImageType:
+        $ref: '#/definitions/InputLossImageType'
+        description: Indicates whether to substitute a solid color or a slate into the output after input loss exceeds blackFrameMsec.
+      RepeatFrameMsec:
+        $ref: '#/definitions/__integer'
+        description: Documentation update needed
+    description: Placeholder documentation for InputLossBehavior
+  InputLossImageType:
+    type: string
+    enum:
+      - COLOR
+      - SLATE
+    description: Placeholder documentation for InputLossImageType
+  InputSecurityGroup:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: Unique ARN of Input Security Group
+      Id:
+        $ref: '#/definitions/__string'
+        description: The Id of the Input Security Group
+      WhitelistRules:
+        $ref: '#/definitions/ListOfInputWhitelistRule'
+        description: Whitelist rules and their sync status
+    description: An Input Security Group
+  InputSecurityGroupWhitelistRequest:
+    type: object
+    properties:
+      WhitelistRules:
+        $ref: '#/definitions/ListOfInputWhitelistRuleCidr'
+        description: List of IPv4 CIDR addresses to whitelist
+    description: Request of IPv4 CIDR addresses to whitelist in a security group.
+  InputSettings:
+    type: object
+    properties:
+      AudioSelectors:
+        $ref: '#/definitions/ListOfAudioSelector'
+        description: Used to select the audio stream to decode for inputs that have multiple available.
+      CaptionSelectors:
+        $ref: '#/definitions/ListOfCaptionSelector'
+        description: Used to select the caption input to use for inputs that have multiple available.
+      DeblockFilter:
+        $ref: '#/definitions/InputDeblockFilter'
+        description: Enable or disable the deblock filter when filtering.
+      DenoiseFilter:
+        $ref: '#/definitions/InputDenoiseFilter'
+        description: Enable or disable the denoise filter when filtering.
+      FilterStrength:
+        $ref: '#/definitions/__integer'
+        description: Adjusts the magnitude of filtering from 1 (minimal) to 5 (strongest).
+      InputFilter:
+        $ref: '#/definitions/InputFilter'
+        description: |-
+          Turns on the filter for this input. MPEG-2 inputs have the deblocking filter enabled by default.
+          1) auto - filtering will be applied depending on input type/quality
+          2) disabled - no filtering will be applied to the input
+          3) forced - filtering will be applied regardless of input type
+      NetworkInputSettings:
+        $ref: '#/definitions/NetworkInputSettings'
+        description: Input settings.
+      SourceEndBehavior:
+        $ref: '#/definitions/InputSourceEndBehavior'
+        description: Loop input if it is a file. This allows a file input to be streamed indefinitely.
+      VideoSelector:
+        $ref: '#/definitions/VideoSelector'
+        description: Informs which video elementary stream to decode for input types that have multiple available.
+    description: Live Event input parameters. There can be multiple inputs in a single Live Event.
+  InputSource:
+    type: object
+    properties:
+      PasswordParam:
+        $ref: '#/definitions/__string'
+        description: key used to extract the password from EC2 Parameter store
+      Url:
+        $ref: '#/definitions/__string'
+        description: |
+          This represents the customer's source URL where stream is
+          pulled from.
+      Username:
+        $ref: '#/definitions/__string'
+        description: username for input source
+    description: Settings for a PULL type input
+  InputSourceEndBehavior:
+    type: string
+    enum:
+      - CONTINUE
+      - LOOP
+    description: Placeholder documentation for InputSourceEndBehavior
+  InputSourceRequest:
+    type: object
+    properties:
+      PasswordParam:
+        $ref: '#/definitions/__string'
+        description: key used to extract the password from EC2 Parameter store
+      Url:
+        $ref: '#/definitions/__string'
+        description: |
+          This represents the customer's source URL where stream is
+          pulled from.
+      Username:
+        $ref: '#/definitions/__string'
+        description: username for input source
+    description: Settings for for a PULL type input
+  InputState:
+    type: string
+    enum:
+      - CREATING
+      - DETACHED
+      - ATTACHED
+      - DELETING
+      - DELETED
+    description: Placeholder documentation for InputState
+  InputType:
+    type: string
+    enum:
+      - UDP_PUSH
+      - RTP_PUSH
+      - RTMP_PUSH
+      - RTMP_PULL
+      - URL_PULL
+    description: Placeholder documentation for InputType
+  InputWhitelistRule:
+    type: object
+    properties:
+      Cidr:
+        $ref: '#/definitions/__string'
+        description: The IPv4 CIDR that's whitelisted.
+    description: Whitelist rule
+  InputWhitelistRuleCidr:
+    type: object
+    properties:
+      Cidr:
+        $ref: '#/definitions/__string'
+        description: The IPv4 CIDR to whitelist
+    description: An IPv4 CIDR to whitelist.
+  InternalServerErrorException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for InternalServerErrorException
+  InternalServiceError:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for InternalServiceError
+  InvalidRequest:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for InvalidRequest
+  KeyProviderSettings:
+    type: object
+    properties:
+      StaticKeySettings:
+        $ref: '#/definitions/StaticKeySettings'
+    description: Placeholder documentation for KeyProviderSettings
+  LimitExceeded:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for LimitExceeded
+  ListChannelsRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for ListChannelsRequest
+  ListChannelsResponse:
+    type: object
+    properties:
+      Channels:
+        $ref: '#/definitions/ListOfChannelSummary'
+      NextToken:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for ListChannelsResponse
+  ListChannelsResultModel:
+    type: object
+    properties:
+      Channels:
+        $ref: '#/definitions/ListOfChannelSummary'
+      NextToken:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for ListChannelsResultModel
+  ListInputSecurityGroupsRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for ListInputSecurityGroupsRequest
+  ListInputSecurityGroupsResponse:
+    type: object
+    properties:
+      InputSecurityGroups:
+        $ref: '#/definitions/ListOfInputSecurityGroup'
+        description: List of input security groups
+      NextToken:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for ListInputSecurityGroupsResponse
+  ListInputSecurityGroupsResultModel:
+    type: object
+    properties:
+      InputSecurityGroups:
+        $ref: '#/definitions/ListOfInputSecurityGroup'
+        description: List of input security groups
+      NextToken:
+        $ref: '#/definitions/__string'
+    description: Result of input security group list request
+  ListInputsRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for ListInputsRequest
+  ListInputsResponse:
+    type: object
+    properties:
+      Inputs:
+        $ref: '#/definitions/ListOfInput'
+      NextToken:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for ListInputsResponse
+  ListInputsResultModel:
+    type: object
+    properties:
+      Inputs:
+        $ref: '#/definitions/ListOfInput'
+      NextToken:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for ListInputsResultModel
+  ListOfAudioChannelMapping:
+    type: array
+    description: Placeholder documentation for ListOfAudioChannelMapping
+    items:
+      $ref: '#/definitions/AudioChannelMapping'
+  ListOfAudioDescription:
+    type: array
+    description: Placeholder documentation for ListOfAudioDescription
+    items:
+      $ref: '#/definitions/AudioDescription'
+  ListOfAudioSelector:
+    type: array
+    description: Placeholder documentation for ListOfAudioSelector
+    items:
+      $ref: '#/definitions/AudioSelector'
+  ListOfCaptionDescription:
+    type: array
+    description: Placeholder documentation for ListOfCaptionDescription
+    items:
+      $ref: '#/definitions/CaptionDescription'
+  ListOfCaptionLanguageMapping:
+    type: array
+    description: Placeholder documentation for ListOfCaptionLanguageMapping
+    items:
+      $ref: '#/definitions/CaptionLanguageMapping'
+  ListOfCaptionSelector:
+    type: array
+    description: Placeholder documentation for ListOfCaptionSelector
+    items:
+      $ref: '#/definitions/CaptionSelector'
+  ListOfChannelEgressEndpoint:
+    type: array
+    description: Placeholder documentation for ListOfChannelEgressEndpoint
+    items:
+      $ref: '#/definitions/ChannelEgressEndpoint'
+  ListOfChannelSummary:
+    type: array
+    description: Placeholder documentation for ListOfChannelSummary
+    items:
+      $ref: '#/definitions/ChannelSummary'
+  ListOfHlsAdMarkers:
+    type: array
+    description: Placeholder documentation for ListOfHlsAdMarkers
+    items:
+      $ref: '#/definitions/HlsAdMarkers'
+  ListOfInput:
+    type: array
+    description: Placeholder documentation for ListOfInput
+    items:
+      $ref: '#/definitions/Input'
+  ListOfInputAttachment:
+    type: array
+    description: Placeholder documentation for ListOfInputAttachment
+    items:
+      $ref: '#/definitions/InputAttachment'
+  ListOfInputChannelLevel:
+    type: array
+    description: Placeholder documentation for ListOfInputChannelLevel
+    items:
+      $ref: '#/definitions/InputChannelLevel'
+  ListOfInputDestination:
+    type: array
+    description: Placeholder documentation for ListOfInputDestination
+    items:
+      $ref: '#/definitions/InputDestination'
+  ListOfInputDestinationRequest:
+    type: array
+    description: Placeholder documentation for ListOfInputDestinationRequest
+    items:
+      $ref: '#/definitions/InputDestinationRequest'
+  ListOfInputSecurityGroup:
+    type: array
+    description: Placeholder documentation for ListOfInputSecurityGroup
+    items:
+      $ref: '#/definitions/InputSecurityGroup'
+  ListOfInputSource:
+    type: array
+    description: Placeholder documentation for ListOfInputSource
+    items:
+      $ref: '#/definitions/InputSource'
+  ListOfInputSourceRequest:
+    type: array
+    description: Placeholder documentation for ListOfInputSourceRequest
+    items:
+      $ref: '#/definitions/InputSourceRequest'
+  ListOfInputWhitelistRule:
+    type: array
+    description: Placeholder documentation for ListOfInputWhitelistRule
+    items:
+      $ref: '#/definitions/InputWhitelistRule'
+  ListOfInputWhitelistRuleCidr:
+    type: array
+    description: Placeholder documentation for ListOfInputWhitelistRuleCidr
+    items:
+      $ref: '#/definitions/InputWhitelistRuleCidr'
+  ListOfOutput:
+    type: array
+    description: Placeholder documentation for ListOfOutput
+    items:
+      $ref: '#/definitions/Output'
+  ListOfOutputDestination:
+    type: array
+    description: Placeholder documentation for ListOfOutputDestination
+    items:
+      $ref: '#/definitions/OutputDestination'
+  ListOfOutputDestinationSettings:
+    type: array
+    description: Placeholder documentation for ListOfOutputDestinationSettings
+    items:
+      $ref: '#/definitions/OutputDestinationSettings'
+  ListOfOutputGroup:
+    type: array
+    description: Placeholder documentation for ListOfOutputGroup
+    items:
+      $ref: '#/definitions/OutputGroup'
+  ListOfValidationError:
+    type: array
+    description: Placeholder documentation for ListOfValidationError
+    items:
+      $ref: '#/definitions/ValidationError'
+  ListOfVideoDescription:
+    type: array
+    description: Placeholder documentation for ListOfVideoDescription
+    items:
+      $ref: '#/definitions/VideoDescription'
+  ListOf__string:
+    type: array
+    description: Placeholder documentation for ListOf__string
+    items:
+      $ref: '#/definitions/__string'
+  M2tsAbsentInputAudioBehavior:
+    type: string
+    enum:
+      - DROP
+      - ENCODE_SILENCE
+    description: Placeholder documentation for M2tsAbsentInputAudioBehavior
+  M2tsArib:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Placeholder documentation for M2tsArib
+  M2tsAribCaptionsPidControl:
+    type: string
+    enum:
+      - AUTO
+      - USE_CONFIGURED
+    description: Placeholder documentation for M2tsAribCaptionsPidControl
+  M2tsAudioBufferModel:
+    type: string
+    enum:
+      - ATSC
+      - DVB
+    description: Placeholder documentation for M2tsAudioBufferModel
+  M2tsAudioInterval:
+    type: string
+    enum:
+      - VIDEO_AND_FIXED_INTERVALS
+      - VIDEO_INTERVAL
+    description: Placeholder documentation for M2tsAudioInterval
+  M2tsAudioStreamType:
+    type: string
+    enum:
+      - ATSC
+      - DVB
+    description: Placeholder documentation for M2tsAudioStreamType
+  M2tsBufferModel:
+    type: string
+    enum:
+      - MULTIPLEX
+      - NONE
+    description: Placeholder documentation for M2tsBufferModel
+  M2tsCcDescriptor:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Placeholder documentation for M2tsCcDescriptor
+  M2tsEbifControl:
+    type: string
+    enum:
+      - NONE
+      - PASSTHROUGH
+    description: Placeholder documentation for M2tsEbifControl
+  M2tsEbpPlacement:
+    type: string
+    enum:
+      - VIDEO_AND_AUDIO_PIDS
+      - VIDEO_PID
+    description: Placeholder documentation for M2tsEbpPlacement
+  M2tsEsRateInPes:
+    type: string
+    enum:
+      - EXCLUDE
+      - INCLUDE
+    description: Placeholder documentation for M2tsEsRateInPes
+  M2tsKlv:
+    type: string
+    enum:
+      - NONE
+      - PASSTHROUGH
+    description: Placeholder documentation for M2tsKlv
+  M2tsPcrControl:
+    type: string
+    enum:
+      - CONFIGURED_PCR_PERIOD
+      - PCR_EVERY_PES_PACKET
+    description: Placeholder documentation for M2tsPcrControl
+  M2tsRateMode:
+    type: string
+    enum:
+      - CBR
+      - VBR
+    description: Placeholder documentation for M2tsRateMode
+  M2tsScte35Control:
+    type: string
+    enum:
+      - NONE
+      - PASSTHROUGH
+    description: Placeholder documentation for M2tsScte35Control
+  M2tsSegmentationMarkers:
+    type: string
+    enum:
+      - EBP
+      - EBP_LEGACY
+      - NONE
+      - PSI_SEGSTART
+      - RAI_ADAPT
+      - RAI_SEGSTART
+    description: Placeholder documentation for M2tsSegmentationMarkers
+  M2tsSegmentationStyle:
+    type: string
+    enum:
+      - MAINTAIN_CADENCE
+      - RESET_CADENCE
+    description: Placeholder documentation for M2tsSegmentationStyle
+  M2tsSettings:
+    type: object
+    properties:
+      AbsentInputAudioBehavior:
+        $ref: '#/definitions/M2tsAbsentInputAudioBehavior'
+        description: 'When set to drop, output audio streams will be removed from the program if the selected input audio stream is removed from the input. This allows the output audio configuration to dynamically change based on input configuration. If this is set to encodeSilence, all output audio streams will output encoded silence when not connected to an active input stream.'
+      Arib:
+        $ref: '#/definitions/M2tsArib'
+        description: 'When set to enabled, uses ARIB-compliant field muxing and removes video descriptor.'
+      AribCaptionsPid:
+        $ref: '#/definitions/__string'
+        description: Packet Identifier (PID) for ARIB Captions in the transport stream. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
+      AribCaptionsPidControl:
+        $ref: '#/definitions/M2tsAribCaptionsPidControl'
+        description: 'If set to auto, pid number used for ARIB Captions will be auto-selected from unused pids.  If set to useConfigured, ARIB Captions will be on the configured pid number.'
+      AudioBufferModel:
+        $ref: '#/definitions/M2tsAudioBufferModel'
+        description: 'When set to dvb, uses DVB buffer model for Dolby Digital audio.  When set to atsc, the ATSC model is used.'
+      AudioFramesPerPes:
+        $ref: '#/definitions/__integer'
+        description: The number of audio frames to insert for each PES packet.
+      AudioPids:
+        $ref: '#/definitions/__string'
+        description: 'Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values. Each PID specified must be in the range of 32 (or 0x20)..8182 (or 0x1ff6).'
+      AudioStreamType:
+        $ref: '#/definitions/M2tsAudioStreamType'
+        description: 'When set to atsc, uses stream type = 0x81 for AC3 and stream type = 0x87 for EAC3. When set to dvb, uses stream type = 0x06.'
+      Bitrate:
+        $ref: '#/definitions/__integer'
+        description: The output bitrate of the transport stream in bits per second. Setting to 0 lets the muxer automatically determine the appropriate bitrate.
+      BufferModel:
+        $ref: '#/definitions/M2tsBufferModel'
+        description: 'If set to multiplex, use multiplex buffer model for accurate interleaving.  Setting to bufferModel to none can lead to lower latency, but low-memory devices may not be able to play back the stream without interruptions.'
+      CcDescriptor:
+        $ref: '#/definitions/M2tsCcDescriptor'
+        description: 'When set to enabled, generates captionServiceDescriptor in PMT.'
+      DvbNitSettings:
+        $ref: '#/definitions/DvbNitSettings'
+        description: Inserts DVB Network Information Table (NIT) at the specified table repetition interval.
+      DvbSdtSettings:
+        $ref: '#/definitions/DvbSdtSettings'
+        description: Inserts DVB Service Description Table (SDT) at the specified table repetition interval.
+      DvbSubPids:
+        $ref: '#/definitions/__string'
+        description: 'Packet Identifier (PID) for input source DVB Subtitle data to this output. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values.  Each PID specified must be in the range of 32 (or 0x20)..8182 (or 0x1ff6).'
+      DvbTdtSettings:
+        $ref: '#/definitions/DvbTdtSettings'
+        description: Inserts DVB Time and Date Table (TDT) at the specified table repetition interval.
+      DvbTeletextPid:
+        $ref: '#/definitions/__string'
+        description: Packet Identifier (PID) for input source DVB Teletext data to this output. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
+      Ebif:
+        $ref: '#/definitions/M2tsEbifControl'
+        description: 'If set to passthrough, passes any EBIF data from the input source to this output.'
+      EbpAudioInterval:
+        $ref: '#/definitions/M2tsAudioInterval'
+        description: 'When videoAndFixedIntervals is selected, audio EBP markers will be added to partitions 3 and 4. The interval between these additional markers will be fixed, and will be slightly shorter than the video EBP marker interval. Only available when EBP Cablelabs segmentation markers are selected.  Partitions 1 and 2 will always follow the video interval.'
+      EbpLookaheadMs:
+        $ref: '#/definitions/__integer'
+        description: 'When set, enforces that Encoder Boundary Points do not come within the specified time interval of each other by looking ahead at input video. If another EBP is going to come in within the specified time interval, the current EBP is not emitted, and the segment is "stretched" to the next marker.  The lookahead value does not add latency to the system. The Live Event must be configured elsewhere to create sufficient latency to make the lookahead accurate.'
+      EbpPlacement:
+        $ref: '#/definitions/M2tsEbpPlacement'
+        description: 'Controls placement of EBP on Audio PIDs. If set to videoAndAudioPids, EBP markers will be placed on the video PID and all audio PIDs.  If set to videoPid, EBP markers will be placed on only the video PID.'
+      EcmPid:
+        $ref: '#/definitions/__string'
+        description: Packet Identifier (PID) for ECM in the transport stream. Only enabled when Simulcrypt is enabled. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
+      EsRateInPes:
+        $ref: '#/definitions/M2tsEsRateInPes'
+        description: Include or exclude the ES Rate field in the PES header.
+      EtvPlatformPid:
+        $ref: '#/definitions/__string'
+        description: Packet Identifier (PID) for input source ETV Platform data to this output. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
+      EtvSignalPid:
+        $ref: '#/definitions/__string'
+        description: Packet Identifier (PID) for input source ETV Signal data to this output. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
+      FragmentTime:
+        $ref: '#/definitions/__double'
+        description: The length in seconds of each fragment. Only used with EBP markers.
+      Klv:
+        $ref: '#/definitions/M2tsKlv'
+        description: 'If set to passthrough, passes any KLV data from the input source to this output.'
+      KlvDataPids:
+        $ref: '#/definitions/__string'
+        description: 'Packet Identifier (PID) for input source KLV data to this output. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values.  Each PID specified must be in the range of 32 (or 0x20)..8182 (or 0x1ff6).'
+      NullPacketBitrate:
+        $ref: '#/definitions/__double'
+        description: Value in bits per second of extra null packets to insert into the transport stream. This can be used if a downstream encryption system requires periodic null packets.
+      PatInterval:
+        $ref: '#/definitions/__integer'
+        description: 'The number of milliseconds between instances of this table in the output transport stream.  Valid values are 0, 10..1000.'
+      PcrControl:
+        $ref: '#/definitions/M2tsPcrControl'
+        description: 'When set to pcrEveryPesPacket, a Program Clock Reference value is inserted for every Packetized Elementary Stream (PES) header. This parameter is effective only when the PCR PID is the same as the video or audio elementary stream.'
+      PcrPeriod:
+        $ref: '#/definitions/__integer'
+        description: Maximum time in milliseconds between Program Clock Reference (PCRs) inserted into the transport stream.
+      PcrPid:
+        $ref: '#/definitions/__string'
+        description: 'Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport stream. When no value is given, the encoder will assign the same value as the Video PID. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).'
+      PmtInterval:
+        $ref: '#/definitions/__integer'
+        description: 'The number of milliseconds between instances of this table in the output transport stream. Valid values are 0, 10..1000.'
+      PmtPid:
+        $ref: '#/definitions/__string'
+        description: Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream. Can be entered as a decimal or hexadecimal value. Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
+      ProgramNum:
+        $ref: '#/definitions/__integer'
+        description: The value of the program number field in the Program Map Table.
+      RateMode:
+        $ref: '#/definitions/M2tsRateMode'
+        description: 'When vbr, does not insert null packets into transport stream to fill specified bitrate. The bitrate setting acts as the maximum bitrate when vbr is set.'
+      Scte27Pids:
+        $ref: '#/definitions/__string'
+        description: 'Packet Identifier (PID) for input source SCTE-27 data to this output. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values.  Each PID specified must be in the range of 32 (or 0x20)..8182 (or 0x1ff6).'
+      Scte35Control:
+        $ref: '#/definitions/M2tsScte35Control'
+        description: Optionally pass SCTE-35 signals from the input source to this output.
+      Scte35Pid:
+        $ref: '#/definitions/__string'
+        description: Packet Identifier (PID) of the SCTE-35 stream in the transport stream. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
+      SegmentationMarkers:
+        $ref: '#/definitions/M2tsSegmentationMarkers'
+        description: Inserts segmentation markers at each segmentationTime period. raiSegstart sets the Random Access Indicator bit in the adaptation field. raiAdapt sets the RAI bit and adds the current timecode in the private data bytes. psiSegstart inserts PAT and PMT tables at the start of segments. ebp adds Encoder Boundary Point information to the adaptation field as per OpenCable specification OC-SP-EBP-I01-130118. ebpLegacy adds Encoder Boundary Point information to the adaptation field using a legacy proprietary format.
+      SegmentationStyle:
+        $ref: '#/definitions/M2tsSegmentationStyle'
+        description: |-
+          The segmentation style parameter controls how segmentation markers are inserted into the transport stream. With avails, it is possible that segments may be truncated, which can influence where future segmentation markers are inserted.
+
+          When a segmentation style of "resetCadence" is selected and a segment is truncated due to an avail, we will reset the segmentation cadence. This means the subsequent segment will have a duration of $segmentationTime seconds.
+
+          When a segmentation style of "maintainCadence" is selected and a segment is truncated due to an avail, we will not reset the segmentation cadence. This means the subsequent segment will likely be truncated as well. However, all segments after that will have a duration of $segmentationTime seconds. Note that EBP lookahead is a slight exception to this rule.
+      SegmentationTime:
+        $ref: '#/definitions/__double'
+        description: The length in seconds of each segment. Required unless markers is set to None_.
+      TimedMetadataBehavior:
+        $ref: '#/definitions/M2tsTimedMetadataBehavior'
+        description: 'When set to passthrough, timed metadata will be passed through from input to output.'
+      TimedMetadataPid:
+        $ref: '#/definitions/__string'
+        description: Packet Identifier (PID) of the timed metadata stream in the transport stream. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
+      TransportStreamId:
+        $ref: '#/definitions/__integer'
+        description: The value of the transport stream ID field in the Program Map Table.
+      VideoPid:
+        $ref: '#/definitions/__string'
+        description: Packet Identifier (PID) of the elementary video stream in the transport stream. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
+    description: Placeholder documentation for M2tsSettings
+  M2tsTimedMetadataBehavior:
+    type: string
+    enum:
+      - NO_PASSTHROUGH
+      - PASSTHROUGH
+    description: Placeholder documentation for M2tsTimedMetadataBehavior
+  M3u8PcrControl:
+    type: string
+    enum:
+      - CONFIGURED_PCR_PERIOD
+      - PCR_EVERY_PES_PACKET
+    description: Placeholder documentation for M3u8PcrControl
+  M3u8Scte35Behavior:
+    type: string
+    enum:
+      - NO_PASSTHROUGH
+      - PASSTHROUGH
+    description: Placeholder documentation for M3u8Scte35Behavior
+  M3u8Settings:
+    type: object
+    properties:
+      AudioFramesPerPes:
+        $ref: '#/definitions/__integer'
+        description: The number of audio frames to insert for each PES packet.
+      AudioPids:
+        $ref: '#/definitions/__string'
+        description: 'Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values.'
+      EcmPid:
+        $ref: '#/definitions/__string'
+        description: 'ThePlatform-protected transport streams using ''microsoft'' as Target Client include an ECM stream. This ECM stream contains the size, IV, and PTS of every sample in the transport stream.  This stream PID is specified here. This PID has no effect on non ThePlatform-protected streams.'
+      PatInterval:
+        $ref: '#/definitions/__integer'
+        description: The number of milliseconds between instances of this table in the output transport stream. A value of \"0\" writes out the PMT once per segment file.
+      PcrControl:
+        $ref: '#/definitions/M3u8PcrControl'
+        description: 'When set to pcrEveryPesPacket, a Program Clock Reference value is inserted for every Packetized Elementary Stream (PES) header. This parameter is effective only when the PCR PID is the same as the video or audio elementary stream.'
+      PcrPeriod:
+        $ref: '#/definitions/__integer'
+        description: Maximum time in milliseconds between Program Clock References (PCRs) inserted into the transport stream.
+      PcrPid:
+        $ref: '#/definitions/__string'
+        description: 'Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport stream. When no value is given, the encoder will assign the same value as the Video PID. Can be entered as a decimal or hexadecimal value.'
+      PmtInterval:
+        $ref: '#/definitions/__integer'
+        description: The number of milliseconds between instances of this table in the output transport stream. A value of \"0\" writes out the PMT once per segment file.
+      PmtPid:
+        $ref: '#/definitions/__string'
+        description: Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream. Can be entered as a decimal or hexadecimal value.
+      ProgramNum:
+        $ref: '#/definitions/__integer'
+        description: The value of the program number field in the Program Map Table.
+      Scte35Behavior:
+        $ref: '#/definitions/M3u8Scte35Behavior'
+        description: 'If set to passthrough, passes any SCTE-35 signals from the input source to this output.'
+      Scte35Pid:
+        $ref: '#/definitions/__string'
+        description: Packet Identifier (PID) of the SCTE-35 stream in the transport stream. Can be entered as a decimal or hexadecimal value.
+      TimedMetadataBehavior:
+        $ref: '#/definitions/M3u8TimedMetadataBehavior'
+        description: 'When set to passthrough, timed metadata is passed through from input to output.'
+      TransportStreamId:
+        $ref: '#/definitions/__integer'
+        description: The value of the transport stream ID field in the Program Map Table.
+      VideoPid:
+        $ref: '#/definitions/__string'
+        description: Packet Identifier (PID) of the elementary video stream in the transport stream. Can be entered as a decimal or hexadecimal value.
+    description: Settings information for the .m3u8 container
+  M3u8TimedMetadataBehavior:
+    type: string
+    enum:
+      - NO_PASSTHROUGH
+      - PASSTHROUGH
+    description: Placeholder documentation for M3u8TimedMetadataBehavior
+  MaxResults:
+    type: integer
+    description: Placeholder documentation for MaxResults
+    minimum: 1
+    maximum: 1000
+  Mp2CodingMode:
+    type: string
+    enum:
+      - CODING_MODE_1_0
+      - CODING_MODE_2_0
+    description: Placeholder documentation for Mp2CodingMode
+  Mp2Settings:
+    type: object
+    properties:
+      Bitrate:
+        $ref: '#/definitions/__double'
+        description: Average bitrate in bits/second.
+      CodingMode:
+        $ref: '#/definitions/Mp2CodingMode'
+        description: The MPEG2 Audio coding mode.  Valid values are codingMode10 (for mono) or codingMode20 (for stereo).
+      SampleRate:
+        $ref: '#/definitions/__double'
+        description: Sample rate in Hz.
+    description: Placeholder documentation for Mp2Settings
+  MsSmoothGroupSettings:
+    type: object
+    properties:
+      AcquisitionPointId:
+        $ref: '#/definitions/__string'
+        description: The value of the "Acquisition Point Identity" element used in each message placed in the sparse track.  Only enabled if sparseTrackType is not "none".
+      AudioOnlyTimecodeControl:
+        $ref: '#/definitions/SmoothGroupAudioOnlyTimecodeControl'
+        description: 'If set to passthrough for an audio-only MS Smooth output, the fragment absolute time will be set to the current timecode. This option does not write timecodes to the audio elementary stream.'
+      CertificateMode:
+        $ref: '#/definitions/SmoothGroupCertificateMode'
+        description: 'If set to verifyAuthenticity, verify the https certificate chain to a trusted Certificate Authority (CA).  This will cause https outputs to self-signed certificates to fail unless those certificates are manually added to the OS trusted keystore.'
+      ConnectionRetryInterval:
+        $ref: '#/definitions/__integer'
+        description: Number of seconds to wait before retrying connection to the IIS server if the connection is lost. Content will be cached during this time and the cache will be be delivered to the IIS server once the connection is re-established.
+      Destination:
+        $ref: '#/definitions/OutputLocationRef'
+        description: Smooth Streaming publish point on an IIS server. Elemental Live acts as a "Push" encoder to IIS.
+      EventId:
+        $ref: '#/definitions/__string'
+        description: |-
+          MS Smooth event ID to be sent to the IIS server.
+
+          Should only be specified if eventIdMode is set to useConfigured.
+      EventIdMode:
+        $ref: '#/definitions/SmoothGroupEventIdMode'
+        description: |-
+          Specifies whether or not to send an event ID to the IIS server. If no event ID is sent and the same Live Event is used without changing the publishing point, clients might see cached video from the previous run.
+
+          Options:
+          - "useConfigured" - use the value provided in eventId
+          - "useTimestamp" - generate and send an event ID based on the current timestamp
+          - "noEventId" - do not send an event ID to the IIS server.
+      EventStopBehavior:
+        $ref: '#/definitions/SmoothGroupEventStopBehavior'
+        description: 'When set to sendEos, send EOS signal to IIS server when stopping the event'
+      FilecacheDuration:
+        $ref: '#/definitions/__integer'
+        description: Size in seconds of file cache for streaming outputs.
+      FragmentLength:
+        $ref: '#/definitions/__integer'
+        description: Length of mp4 fragments to generate (in seconds). Fragment length must be compatible with GOP size and framerate.
+      InputLossAction:
+        $ref: '#/definitions/InputLossActionForMsSmoothOut'
+        description: Parameter that control output group behavior on input loss.
+      NumRetries:
+        $ref: '#/definitions/__integer'
+        description: Number of retry attempts.
+      RestartDelay:
+        $ref: '#/definitions/__integer'
+        description: 'Number of seconds before initiating a restart due to output failure, due to exhausting the numRetries on one segment, or exceeding filecacheDuration.'
+      SegmentationMode:
+        $ref: '#/definitions/SmoothGroupSegmentationMode'
+        description: 'When set to useInputSegmentation, the output segment or fragment points are set by the RAI markers from the input streams.'
+      SendDelayMs:
+        $ref: '#/definitions/__integer'
+        description: 'Outputs that are "output locked" can use this delay. Assign a delay to the output that is "secondary".  Do not assign a delay to the "primary" output. The delay means that the primary output will always reach the downstream system before the secondary, which helps ensure that the downstream system always uses the primary output. (If there were no delay, the downstream system might flip-flop between whichever output happens to arrive first.) If the primary fails, the downstream system will switch to the secondary output. When the primary is restarted, the downstream system will switch back to the primary (because once again it is always arriving first)'
+      SparseTrackType:
+        $ref: '#/definitions/SmoothGroupSparseTrackType'
+        description: 'If set to scte35, use incoming SCTE-35 messages to generate a sparse track in this group of MS-Smooth outputs.'
+      StreamManifestBehavior:
+        $ref: '#/definitions/SmoothGroupStreamManifestBehavior'
+        description: 'When set to send, send stream manifest so publishing point doesn''t start until all streams start.'
+      TimestampOffset:
+        $ref: '#/definitions/__string'
+        description: Timestamp offset for the event.  Only used if timestampOffsetMode is set to useConfiguredOffset.
+      TimestampOffsetMode:
+        $ref: '#/definitions/SmoothGroupTimestampOffsetMode'
+        description: |-
+          Type of timestamp date offset to use.
+          - useEventStartDate: Use the date the event was started as the offset
+          - useConfiguredOffset: Use an explicitly configured date as the offset
+    description: Placeholder documentation for MsSmoothGroupSettings
+  MsSmoothOutputSettings:
+    type: object
+    properties:
+      NameModifier:
+        $ref: '#/definitions/__string'
+        description: String concatenated to the end of the destination filename.  Required for multiple outputs of the same type.
+    description: Placeholder documentation for MsSmoothOutputSettings
+  NetworkInputServerValidation:
+    type: string
+    enum:
+      - CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME
+      - CHECK_CRYPTOGRAPHY_ONLY
+    description: Placeholder documentation for NetworkInputServerValidation
+  NetworkInputSettings:
+    type: object
+    properties:
+      HlsInputSettings:
+        $ref: '#/definitions/HlsInputSettings'
+        description: Specifies HLS input settings when the uri is for a HLS manifest.
+      ServerValidation:
+        $ref: '#/definitions/NetworkInputServerValidation'
+        description: 'Check HTTPS server certificates. When set to checkCryptographyOnly, cryptography in the certificate will be checked, but not the server''s name. Certain subdomains (notably S3 buckets that use dots in the bucket name) do not strictly match the corresponding certificate''s wildcard pattern and would otherwise cause the event to error. This setting is ignored for protocols that do not use https.'
+    description: Network source to transcode. Must be accessible to the Elemental Live node that is running the live event through a network connection.
+  NotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for NotFoundException
+  Output:
+    type: object
+    properties:
+      AudioDescriptionNames:
+        $ref: '#/definitions/ListOf__string'
+        description: The names of the AudioDescriptions used as audio sources for this output.
+      CaptionDescriptionNames:
+        $ref: '#/definitions/ListOf__string'
+        description: The names of the CaptionDescriptions used as caption sources for this output.
+      OutputName:
+        $ref: '#/definitions/__string'
+        description: The name used to identify an output.
+      OutputSettings:
+        $ref: '#/definitions/OutputSettings'
+        description: Output type-specific settings.
+      VideoDescriptionName:
+        $ref: '#/definitions/__string'
+        description: The name of the VideoDescription used as the source for this output.
+    description: Output settings. There can be multiple outputs within a group.
+  OutputDestination:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/__string'
+        description: User-specified id. This is used in an output group or an output.
+      Settings:
+        $ref: '#/definitions/ListOfOutputDestinationSettings'
+        description: Destination settings for output; one for each redundant encoder.
+    description: Placeholder documentation for OutputDestination
+  OutputDestinationSettings:
+    type: object
+    properties:
+      PasswordParam:
+        $ref: '#/definitions/__string'
+        description: key used to extract the password from EC2 Parameter store
+      Url:
+        $ref: '#/definitions/__string'
+        description: A URL specifying a destination
+      Username:
+        $ref: '#/definitions/__string'
+        description: username for destination
+    description: Placeholder documentation for OutputDestinationSettings
+  OutputGroup:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: 'Custom output group name optionally defined by the user.  Only letters, numbers, and the underscore character allowed; only 32 characters allowed.'
+      OutputGroupSettings:
+        $ref: '#/definitions/OutputGroupSettings'
+        description: Settings associated with the output group.
+      Outputs:
+        $ref: '#/definitions/ListOfOutput'
+    description: Output groups for this Live Event. Output groups contain information about where streams should be distributed.
+  OutputGroupSettings:
+    type: object
+    properties:
+      ArchiveGroupSettings:
+        $ref: '#/definitions/ArchiveGroupSettings'
+      HlsGroupSettings:
+        $ref: '#/definitions/HlsGroupSettings'
+      MsSmoothGroupSettings:
+        $ref: '#/definitions/MsSmoothGroupSettings'
+      UdpGroupSettings:
+        $ref: '#/definitions/UdpGroupSettings'
+    description: Placeholder documentation for OutputGroupSettings
+  OutputLocationRef:
+    type: object
+    properties:
+      DestinationRefId:
+        $ref: '#/definitions/__string'
+    description: Reference to an OutputDestination ID defined in the channel
+  OutputSettings:
+    type: object
+    properties:
+      ArchiveOutputSettings:
+        $ref: '#/definitions/ArchiveOutputSettings'
+      HlsOutputSettings:
+        $ref: '#/definitions/HlsOutputSettings'
+      MsSmoothOutputSettings:
+        $ref: '#/definitions/MsSmoothOutputSettings'
+      UdpOutputSettings:
+        $ref: '#/definitions/UdpOutputSettings'
+    description: Placeholder documentation for OutputSettings
+  PassThroughSettings:
+    type: object
+    properties: {}
+    description: Placeholder documentation for PassThroughSettings
+  RemixSettings:
+    type: object
+    properties:
+      ChannelMappings:
+        $ref: '#/definitions/ListOfAudioChannelMapping'
+        description: 'Mapping of input channels to output channels, with appropriate gain adjustments.'
+      ChannelsIn:
+        $ref: '#/definitions/__integer'
+        description: Number of input channels to be used.
+      ChannelsOut:
+        $ref: '#/definitions/__integer'
+        description: |-
+          Number of output channels to be produced.
+          Valid values: 1, 2, 4, 6, 8
+    description: Placeholder documentation for RemixSettings
+  ResourceConflict:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for ResourceConflict
+  ResourceNotFound:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for ResourceNotFound
+  Scte20Convert608To708:
+    type: string
+    enum:
+      - DISABLED
+      - UPCONVERT
+    description: Placeholder documentation for Scte20Convert608To708
+  Scte20PlusEmbeddedDestinationSettings:
+    type: object
+    properties: {}
+    description: Placeholder documentation for Scte20PlusEmbeddedDestinationSettings
+  Scte20SourceSettings:
+    type: object
+    properties:
+      Convert608To708:
+        $ref: '#/definitions/Scte20Convert608To708'
+        description: 'If upconvert, 608 data is both passed through via the "608 compatibility bytes" fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.'
+      Source608ChannelNumber:
+        $ref: '#/definitions/__integer'
+        description: Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
+    description: Placeholder documentation for Scte20SourceSettings
+  Scte27DestinationSettings:
+    type: object
+    properties: {}
+    description: Placeholder documentation for Scte27DestinationSettings
+  Scte27SourceSettings:
+    type: object
+    properties:
+      Pid:
+        $ref: '#/definitions/__integer'
+        description: |-
+          The pid field is used in conjunction with the caption selector languageCode field as follows:
+            - Specify PID and Language: Extracts captions from that PID; the language is "informational".
+            - Specify PID and omit Language: Extracts the specified PID.
+            - Omit PID and specify Language: Extracts the specified language, whichever PID that happens to be.
+            - Omit PID and omit Language: Valid only if source is DVB-Sub that is being passed through; all languages will be passed through.
+    description: Placeholder documentation for Scte27SourceSettings
+  Scte35AposNoRegionalBlackoutBehavior:
+    type: string
+    enum:
+      - FOLLOW
+      - IGNORE
+    description: Placeholder documentation for Scte35AposNoRegionalBlackoutBehavior
+  Scte35AposWebDeliveryAllowedBehavior:
+    type: string
+    enum:
+      - FOLLOW
+      - IGNORE
+    description: Placeholder documentation for Scte35AposWebDeliveryAllowedBehavior
+  Scte35SpliceInsert:
+    type: object
+    properties:
+      AdAvailOffset:
+        $ref: '#/definitions/__integer'
+        description: 'When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time. This only applies to embedded SCTE 104/35 messages and does not apply to OOB messages.'
+      NoRegionalBlackoutFlag:
+        $ref: '#/definitions/Scte35SpliceInsertNoRegionalBlackoutBehavior'
+        description: 'When set to ignore, Segment Descriptors with noRegionalBlackoutFlag set to 0 will no longer trigger blackouts or Ad Avail slates'
+      WebDeliveryAllowedFlag:
+        $ref: '#/definitions/Scte35SpliceInsertWebDeliveryAllowedBehavior'
+        description: 'When set to ignore, Segment Descriptors with webDeliveryAllowedFlag set to 0 will no longer trigger blackouts or Ad Avail slates'
+    description: Placeholder documentation for Scte35SpliceInsert
+  Scte35SpliceInsertNoRegionalBlackoutBehavior:
+    type: string
+    enum:
+      - FOLLOW
+      - IGNORE
+    description: Placeholder documentation for Scte35SpliceInsertNoRegionalBlackoutBehavior
+  Scte35SpliceInsertWebDeliveryAllowedBehavior:
+    type: string
+    enum:
+      - FOLLOW
+      - IGNORE
+    description: Placeholder documentation for Scte35SpliceInsertWebDeliveryAllowedBehavior
+  Scte35TimeSignalApos:
+    type: object
+    properties:
+      AdAvailOffset:
+        $ref: '#/definitions/__integer'
+        description: 'When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time. This only applies to embedded SCTE 104/35 messages and does not apply to OOB messages.'
+      NoRegionalBlackoutFlag:
+        $ref: '#/definitions/Scte35AposNoRegionalBlackoutBehavior'
+        description: 'When set to ignore, Segment Descriptors with noRegionalBlackoutFlag set to 0 will no longer trigger blackouts or Ad Avail slates'
+      WebDeliveryAllowedFlag:
+        $ref: '#/definitions/Scte35AposWebDeliveryAllowedBehavior'
+        description: 'When set to ignore, Segment Descriptors with webDeliveryAllowedFlag set to 0 will no longer trigger blackouts or Ad Avail slates'
+    description: Placeholder documentation for Scte35TimeSignalApos
+  SmoothGroupAudioOnlyTimecodeControl:
+    type: string
+    enum:
+      - PASSTHROUGH
+      - USE_CONFIGURED_CLOCK
+    description: Placeholder documentation for SmoothGroupAudioOnlyTimecodeControl
+  SmoothGroupCertificateMode:
+    type: string
+    enum:
+      - SELF_SIGNED
+      - VERIFY_AUTHENTICITY
+    description: Placeholder documentation for SmoothGroupCertificateMode
+  SmoothGroupEventIdMode:
+    type: string
+    enum:
+      - NO_EVENT_ID
+      - USE_CONFIGURED
+      - USE_TIMESTAMP
+    description: Placeholder documentation for SmoothGroupEventIdMode
+  SmoothGroupEventStopBehavior:
+    type: string
+    enum:
+      - NONE
+      - SEND_EOS
+    description: Placeholder documentation for SmoothGroupEventStopBehavior
+  SmoothGroupSegmentationMode:
+    type: string
+    enum:
+      - USE_INPUT_SEGMENTATION
+      - USE_SEGMENT_DURATION
+    description: Placeholder documentation for SmoothGroupSegmentationMode
+  SmoothGroupSparseTrackType:
+    type: string
+    enum:
+      - NONE
+      - SCTE_35
+    description: Placeholder documentation for SmoothGroupSparseTrackType
+  SmoothGroupStreamManifestBehavior:
+    type: string
+    enum:
+      - DO_NOT_SEND
+      - SEND
+    description: Placeholder documentation for SmoothGroupStreamManifestBehavior
+  SmoothGroupTimestampOffsetMode:
+    type: string
+    enum:
+      - USE_CONFIGURED_OFFSET
+      - USE_EVENT_START_DATE
+    description: Placeholder documentation for SmoothGroupTimestampOffsetMode
+  SmpteTtDestinationSettings:
+    type: object
+    properties: {}
+    description: Placeholder documentation for SmpteTtDestinationSettings
+  StandardHlsSettings:
+    type: object
+    properties:
+      AudioRenditionSets:
+        $ref: '#/definitions/__string'
+        description: 'List all the audio groups that are used with the video output stream. Input all the audio GROUP-IDs that are associated to the video, separate by '',''.'
+      M3u8Settings:
+        $ref: '#/definitions/M3u8Settings'
+    description: Placeholder documentation for StandardHlsSettings
+  StartChannelRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for StartChannelRequest
+  StartChannelResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The unique arn of the channel.
+      Destinations:
+        $ref: '#/definitions/ListOfOutputDestination'
+        description: |
+          A list of destinations of the channel. For UDP outputs, there is one
+          destination per output. For other types (HLS, for example), there is
+          one destination per packager.
+      EgressEndpoints:
+        $ref: '#/definitions/ListOfChannelEgressEndpoint'
+        description: The endpoints where outgoing connections initiate from
+      EncoderSettings:
+        $ref: '#/definitions/EncoderSettings'
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique id of the channel.
+      InputAttachments:
+        $ref: '#/definitions/ListOfInputAttachment'
+        description: List of input attachments for channel.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the channel. (user-mutable)
+      PipelinesRunningCount:
+        $ref: '#/definitions/__integer'
+        description: The number of currently healthy pipelines.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of the role assumed when running the Channel.
+      State:
+        $ref: '#/definitions/ChannelState'
+    description: Placeholder documentation for StartChannelResponse
+  StaticKeySettings:
+    type: object
+    properties:
+      KeyProviderServer:
+        $ref: '#/definitions/InputLocation'
+        description: The URL of the license server used for protecting content.
+      StaticKeyValue:
+        $ref: '#/definitions/__string'
+        description: Static key value as a 32 character hexadecimal string.
+    description: Placeholder documentation for StaticKeySettings
+  StopChannelRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for StopChannelRequest
+  StopChannelResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The unique arn of the channel.
+      Destinations:
+        $ref: '#/definitions/ListOfOutputDestination'
+        description: |
+          A list of destinations of the channel. For UDP outputs, there is one
+          destination per output. For other types (HLS, for example), there is
+          one destination per packager.
+      EgressEndpoints:
+        $ref: '#/definitions/ListOfChannelEgressEndpoint'
+        description: The endpoints where outgoing connections initiate from
+      EncoderSettings:
+        $ref: '#/definitions/EncoderSettings'
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique id of the channel.
+      InputAttachments:
+        $ref: '#/definitions/ListOfInputAttachment'
+        description: List of input attachments for channel.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the channel. (user-mutable)
+      PipelinesRunningCount:
+        $ref: '#/definitions/__integer'
+        description: The number of currently healthy pipelines.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of the role assumed when running the Channel.
+      State:
+        $ref: '#/definitions/ChannelState'
+    description: Placeholder documentation for StopChannelResponse
+  TeletextDestinationSettings:
+    type: object
+    properties: {}
+    description: Placeholder documentation for TeletextDestinationSettings
+  TeletextSourceSettings:
+    type: object
+    properties:
+      PageNumber:
+        $ref: '#/definitions/__string'
+        description: Specifies the teletext page number within the data stream from which to extract captions. Range of 0x100 (256) to 0x8FF (2303). Unused for passthrough. Should be specified as a hexadecimal string with no "0x" prefix.
+    description: Placeholder documentation for TeletextSourceSettings
+  TimecodeConfig:
+    type: object
+    properties:
+      Source:
+        $ref: '#/definitions/TimecodeConfigSource'
+        description: |-
+          Identifies the source for the timecode that will be associated with the events outputs.
+          -Embedded (embedded): Initialize the output timecode with timecode from the the source.  If no embedded timecode is detected in the source, the system falls back to using "Start at 0" (zerobased).
+          -System Clock (systemclock): Use the UTC time.
+          -Start at 0 (zerobased): The time of the first frame of the event will be 00:00:00:00.
+      SyncThreshold:
+        $ref: '#/definitions/__integer'
+        description: Threshold in frames beyond which output timecode is resynchronized to the input timecode. Discrepancies below this threshold are permitted to avoid unnecessary discontinuities in the output timecode. No timecode sync when this is not specified.
+    description: Placeholder documentation for TimecodeConfig
+  TimecodeConfigSource:
+    type: string
+    enum:
+      - EMBEDDED
+      - SYSTEMCLOCK
+      - ZEROBASED
+    description: Placeholder documentation for TimecodeConfigSource
+  TooManyRequestsException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for TooManyRequestsException
+  TtmlDestinationSettings:
+    type: object
+    properties:
+      StyleControl:
+        $ref: '#/definitions/TtmlDestinationStyleControl'
+        description: 'When set to passthrough, passes through style and position information from a TTML-like input source (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML output.'
+    description: Placeholder documentation for TtmlDestinationSettings
+  TtmlDestinationStyleControl:
+    type: string
+    enum:
+      - PASSTHROUGH
+      - USE_CONFIGURED
+    description: Placeholder documentation for TtmlDestinationStyleControl
+  UdpContainerSettings:
+    type: object
+    properties:
+      M2tsSettings:
+        $ref: '#/definitions/M2tsSettings'
+    description: Placeholder documentation for UdpContainerSettings
+  UdpGroupSettings:
+    type: object
+    properties:
+      InputLossAction:
+        $ref: '#/definitions/InputLossActionForUdpOut'
+        description: 'Specifies behavior of last resort when input video is lost, and no more backup inputs are available. When dropTs is selected the entire transport stream will stop being emitted.  When dropProgram is selected the program can be dropped from the transport stream (and replaced with null packets to meet the TS bitrate requirement).  Or, when emitProgram is chosen the transport stream will continue to be produced normally with repeat frames, black frames, or slate frames substituted for the absent input video.'
+      TimedMetadataId3Frame:
+        $ref: '#/definitions/UdpTimedMetadataId3Frame'
+        description: Indicates ID3 frame that has the timecode.
+      TimedMetadataId3Period:
+        $ref: '#/definitions/__integer'
+        description: Timed Metadata interval in seconds.
+    description: Placeholder documentation for UdpGroupSettings
+  UdpOutputSettings:
+    type: object
+    properties:
+      BufferMsec:
+        $ref: '#/definitions/__integer'
+        description: 'UDP output buffering in milliseconds. Larger values increase latency through the transcoder but simultaneously assist the transcoder in maintaining a constant, low-jitter UDP/RTP output while accommodating clock recovery, input switching, input disruptions, picture reordering, etc.'
+      ContainerSettings:
+        $ref: '#/definitions/UdpContainerSettings'
+      Destination:
+        $ref: '#/definitions/OutputLocationRef'
+        description: 'Destination address and port number for RTP or UDP packets. Can be unicast or multicast RTP or UDP (eg. rtp://239.10.10.10:5001 or udp://10.100.100.100:5002).'
+      FecOutputSettings:
+        $ref: '#/definitions/FecOutputSettings'
+        description: Settings for enabling and adjusting Forward Error Correction on UDP outputs.
+    description: Placeholder documentation for UdpOutputSettings
+  UdpTimedMetadataId3Frame:
+    type: string
+    enum:
+      - NONE
+      - PRIV
+      - TDRL
+    description: Placeholder documentation for UdpTimedMetadataId3Frame
+  UnprocessableEntityException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/__string'
+      ValidationErrors:
+        $ref: '#/definitions/ListOfValidationError'
+        description: A collection of validation error responses from attempting to create a channel with a bouquet of settings.
+    description: Placeholder documentation for UnprocessableEntityException
+  ValidationError:
+    type: object
+    properties:
+      ElementPath:
+        $ref: '#/definitions/__string'
+      ErrorMessage:
+        $ref: '#/definitions/__string'
+    description: Placeholder documentation for ValidationError
+  VideoCodecSettings:
+    type: object
+    properties:
+      H264Settings:
+        $ref: '#/definitions/H264Settings'
+    description: Placeholder documentation for VideoCodecSettings
+  VideoDescription:
+    type: object
+    properties:
+      CodecSettings:
+        $ref: '#/definitions/VideoCodecSettings'
+        description: Video codec settings.
+      Height:
+        $ref: '#/definitions/__integer'
+        description: 'Output video height (in pixels). Leave blank to use source video height. If left blank, width must also be unspecified.'
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of this VideoDescription. Outputs will use this name to uniquely identify this Description.  Description names should be unique within this Live Event.
+      RespondToAfd:
+        $ref: '#/definitions/VideoDescriptionRespondToAfd'
+        description: 'Indicates how to respond to the AFD values in the input stream. Setting to "respond" causes input video to be clipped, depending on AFD value, input display aspect ratio and output display aspect ratio.'
+      ScalingBehavior:
+        $ref: '#/definitions/VideoDescriptionScalingBehavior'
+        description: 'When set to "stretchToOutput", automatically configures the output position to stretch the video to the specified output resolution. This option will override any position value.'
+      Sharpness:
+        $ref: '#/definitions/__integer'
+        description: 'Changes the width of the anti-alias filter kernel used for scaling. Only applies if scaling is being performed and antiAlias is set to true. 0 is the softest setting, 100 the sharpest, and 50 recommended for most content.'
+      Width:
+        $ref: '#/definitions/__integer'
+        description: 'Output video width (in pixels). Leave out to use source video width.  If left out, height must also be left out. Display aspect ratio is always preserved by letterboxing or pillarboxing when necessary.'
+    description: Video settings for this stream.
+  VideoDescriptionRespondToAfd:
+    type: string
+    enum:
+      - NONE
+      - PASSTHROUGH
+      - RESPOND
+    description: Placeholder documentation for VideoDescriptionRespondToAfd
+  VideoDescriptionScalingBehavior:
+    type: string
+    enum:
+      - DEFAULT
+      - STRETCH_TO_OUTPUT
+    description: Placeholder documentation for VideoDescriptionScalingBehavior
+  VideoSelector:
+    type: object
+    properties:
+      ColorSpace:
+        $ref: '#/definitions/VideoSelectorColorSpace'
+        description: Specifies the colorspace of an input. This setting works in tandem with colorSpaceConversion to determine if any conversion will be performed.
+      ColorSpaceUsage:
+        $ref: '#/definitions/VideoSelectorColorSpaceUsage'
+        description: 'Applies only if colorSpace is a value other than follow. This field controls how the value in the colorSpace field will be used. fallback means that when the input does include color space data, that data will be used, but when the input has no color space data, the value in colorSpace will be used. Choose fallback if your input is sometimes missing color space data, but when it does have color space data, that data is correct. force means to always use the value in colorSpace. Choose force if your input usually has no color space data or might have unreliable color space data.'
+      SelectorSettings:
+        $ref: '#/definitions/VideoSelectorSettings'
+        description: The video selector settings.
+    description: Specifies a particular video stream within an input source. An input may have only a single video selector.
+  VideoSelectorColorSpace:
+    type: string
+    enum:
+      - FOLLOW
+      - REC_601
+      - REC_709
+    description: Placeholder documentation for VideoSelectorColorSpace
+  VideoSelectorColorSpaceUsage:
+    type: string
+    enum:
+      - FALLBACK
+      - FORCE
+    description: Placeholder documentation for VideoSelectorColorSpaceUsage
+  VideoSelectorPid:
+    type: object
+    properties:
+      Pid:
+        $ref: '#/definitions/__integer'
+        description: Selects a specific PID from within a video source.
+    description: Placeholder documentation for VideoSelectorPid
+  VideoSelectorProgramId:
+    type: object
+    properties:
+      ProgramId:
+        $ref: '#/definitions/__integer'
+        description: 'Selects a specific program from within a multi-program transport stream. If the program doesn''t exist, the first program within the transport stream will be selected by default.'
+    description: Placeholder documentation for VideoSelectorProgramId
+  VideoSelectorSettings:
+    type: object
+    properties:
+      VideoSelectorPid:
+        $ref: '#/definitions/VideoSelectorPid'
+      VideoSelectorProgramId:
+        $ref: '#/definitions/VideoSelectorProgramId'
+    description: Placeholder documentation for VideoSelectorSettings
+  WebvttDestinationSettings:
+    type: object
+    properties: {}
+    description: Placeholder documentation for WebvttDestinationSettings
+  __boolean:
+    type: boolean
+    description: Placeholder documentation for __boolean
+  __double:
+    type: number
+    description: Placeholder documentation for __double
+    format: double
+  __integer:
+    type: integer
+    description: Placeholder documentation for __integer
+  __string:
+    type: string
+    description: Placeholder documentation for __string
+  __timestamp:
+    type: string
+    description: Placeholder documentation for __timestamp
+    format: date-time

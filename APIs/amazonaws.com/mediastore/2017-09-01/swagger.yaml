@@ -1,0 +1,555 @@
+swagger: '2.0'
+info:
+  version: '2017-09-01'
+  x-release: v4
+  title: AWS Elemental MediaStore
+  description: 'An AWS Elemental MediaStore container is a namespace that holds folders and objects. You use a container endpoint to create, read, and delete objects. '
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: mediastore
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/mediastore-2017-09-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/mediastore/'
+host: mediastore.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: CreateContainer
+      description: Creates a storage container to hold objects. A container is similar to a bucket in the Amazon S3 service.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateContainerOutput'
+        '480':
+          description: ContainerInUseException
+          schema:
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateContainerInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteContainer':
+    post:
+      operationId: DeleteContainer
+      description: 'Deletes the specified container. Before you make a <code>DeleteContainer</code> request, delete any objects in the container or in any folders in the container. You can delete only empty containers. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteContainerOutput'
+        '480':
+          description: ContainerInUseException
+          schema:
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
+          description: ContainerNotFoundException
+          schema:
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteContainerInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteContainerPolicy':
+    post:
+      operationId: DeleteContainerPolicy
+      description: Deletes the access policy that is associated with the specified container.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteContainerPolicyOutput'
+        '480':
+          description: ContainerInUseException
+          schema:
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
+          description: ContainerNotFoundException
+          schema:
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
+          description: PolicyNotFoundException
+          schema:
+            $ref: '#/definitions/PolicyNotFoundException'
+        '483':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteContainerPolicyInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeContainer':
+    post:
+      operationId: DescribeContainer
+      description: 'Retrieves the properties of the requested container. This returns a single <code>Container</code> object based on <code>ContainerName</code>. To return all <code>Container</code> objects that are associated with a specified AWS account, use <a>ListContainers</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeContainerOutput'
+        '480':
+          description: ContainerNotFoundException
+          schema:
+            $ref: '#/definitions/ContainerNotFoundException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeContainerInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetContainerPolicy':
+    post:
+      operationId: GetContainerPolicy
+      description: 'Retrieves the access policy for the specified container. For information about the data that is included in an access policy, see the <a href="https://aws.amazon.com/documentation/iam/">AWS Identity and Access Management User Guide</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetContainerPolicyOutput'
+        '480':
+          description: ContainerInUseException
+          schema:
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
+          description: ContainerNotFoundException
+          schema:
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
+          description: PolicyNotFoundException
+          schema:
+            $ref: '#/definitions/PolicyNotFoundException'
+        '483':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetContainerPolicyInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListContainers':
+    post:
+      operationId: ListContainers
+      description: '<p>Lists the properties of all containers in AWS Elemental MediaStore. </p> <p>You can query to receive all the containers in one response. Or you can include the <code>MaxResults</code> parameter to receive a limited number of containers in each response. In this case, the response includes a token. To get the next set of containers, send the command again, this time with the <code>NextToken</code> parameter (with the returned token as its value). The next set of responses appears, with a token if there are still more containers to receive. </p> <p>See also <a>DescribeContainer</a>, which gets the properties of one container. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListContainersOutput'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListContainersInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutContainerPolicy':
+    post:
+      operationId: PutContainerPolicy
+      description: '<p>Creates an access policy for the specified container to restrict the users and clients that can access it. For information about the data that is included in an access policy, see the <a href="https://aws.amazon.com/documentation/iam/">AWS Identity and Access Management User Guide</a>.</p> <p>For this release of the REST API, you can create only one policy for a container. If you enter <code>PutContainerPolicy</code> twice, the second command modifies the existing policy. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutContainerPolicyOutput'
+        '480':
+          description: ContainerNotFoundException
+          schema:
+            $ref: '#/definitions/ContainerNotFoundException'
+        '481':
+          description: ContainerInUseException
+          schema:
+            $ref: '#/definitions/ContainerInUseException'
+        '482':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutContainerPolicyInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  Container:
+    type: object
+    properties:
+      Endpoint:
+        $ref: '#/definitions/Endpoint'
+        description: 'The DNS endpoint of the container. Use from 1 to 255 characters. Use this endpoint to identify this container when sending requests to the data plane. '
+      CreationTime:
+        $ref: '#/definitions/TimeStamp'
+        description: Unix timestamp.
+      ARN:
+        $ref: '#/definitions/ContainerARN'
+        description: '<p>The Amazon Resource Name (ARN) of the container. The ARN has the following format:</p> <p>arn:aws:&lt;region&gt;:&lt;account that owns this container&gt;:container/&lt;name of container&gt; </p> <p>For example: arn:aws:mediastore:us-west-2:111122223333:container/movies </p>'
+      Name:
+        $ref: '#/definitions/ContainerName'
+        description: The name of the container.
+      Status:
+        $ref: '#/definitions/ContainerStatus'
+        description: 'The status of container creation or deletion. The status is one of the following: <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the service is creating the container, the status is <code>CREATING</code>. When the endpoint is available, the status changes to <code>ACTIVE</code>.'
+    description: This section describes operations that you can perform on an AWS Elemental MediaStore container.
+  ContainerARN:
+    type: string
+    pattern: 'arn:aws:mediastore:[a-z]+-[a-z]+-\d:\d{12}:container/\w{1,255}'
+    minLength: 1
+    maxLength: 1024
+  ContainerInUseException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Resource already exists or is being updated.
+  ContainerList:
+    type: array
+    items:
+      $ref: '#/definitions/Container'
+  ContainerListLimit:
+    type: integer
+    minimum: 1
+    maximum: 100
+  ContainerName:
+    type: string
+    pattern: \w+
+    minLength: 1
+    maxLength: 255
+  ContainerNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Could not perform an operation on a container that does not exist.
+  ContainerPolicy:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 8192
+  ContainerStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - CREATING
+      - DELETING
+    minLength: 1
+    maxLength: 16
+  CreateContainerInput:
+    type: object
+    required:
+      - ContainerName
+    properties:
+      ContainerName:
+        $ref: '#/definitions/ContainerName'
+        description: 'The name for the container. The name must be from 1 to 255 characters. Container names must be unique to your AWS account within a specific region. As an example, you could create a container named <code>movies</code> in every region, as long as you don’t have an existing container with that name.'
+  CreateContainerOutput:
+    type: object
+    required:
+      - Container
+    properties:
+      Container:
+        $ref: '#/definitions/Container'
+        description: '<p>ContainerARN: The Amazon Resource Name (ARN) of the newly created container. The ARN has the following format: arn:aws:&lt;region&gt;:&lt;account that owns this container&gt;:container/&lt;name of container&gt;. For example: arn:aws:mediastore:us-west-2:111122223333:container/movies </p> <p>ContainerName: The container name as specified in the request.</p> <p>CreationTime: Unix timestamp.</p> <p>Status: The status of container creation or deletion. The status is one of the following: <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the service is creating the container, the status is <code>CREATING</code>. When an endpoint is available, the status changes to <code>ACTIVE</code>.</p> <p>The return value does not include the container''s endpoint. To make downstream requests, you must obtain this value by using <a>DescribeContainer</a> or <a>ListContainers</a>.</p>'
+  DeleteContainerInput:
+    type: object
+    required:
+      - ContainerName
+    properties:
+      ContainerName:
+        $ref: '#/definitions/ContainerName'
+        description: 'The name of the container to delete. '
+  DeleteContainerOutput:
+    type: object
+    properties: {}
+  DeleteContainerPolicyInput:
+    type: object
+    required:
+      - ContainerName
+    properties:
+      ContainerName:
+        $ref: '#/definitions/ContainerName'
+        description: The name of the container that holds the policy.
+  DeleteContainerPolicyOutput:
+    type: object
+    properties: {}
+  DescribeContainerInput:
+    type: object
+    properties:
+      ContainerName:
+        $ref: '#/definitions/ContainerName'
+        description: The name of the container to query.
+  DescribeContainerOutput:
+    type: object
+    properties:
+      Container:
+        $ref: '#/definitions/Container'
+        description: The name of the queried container.
+  Endpoint:
+    type: string
+    minLength: 1
+    maxLength: 255
+  ErrorMessage:
+    type: string
+    pattern: '[ \w:\.\?-]+'
+    minLength: 1
+    maxLength: 255
+  GetContainerPolicyInput:
+    type: object
+    required:
+      - ContainerName
+    properties:
+      ContainerName:
+        $ref: '#/definitions/ContainerName'
+        description: 'The name of the container. '
+  GetContainerPolicyOutput:
+    type: object
+    required:
+      - Policy
+    properties:
+      Policy:
+        $ref: '#/definitions/ContainerPolicy'
+        description: The contents of the access policy.
+  InternalServerError:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The service is temporarily unavailable.
+  LimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: A service limit has been exceeded.
+  ListContainersInput:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'Only if you used <code>MaxResults</code> in the first command, enter the token (which was included in the previous response) to obtain the next set of containers. This token is included in a response only if there actually are more containers to list.'
+      MaxResults:
+        $ref: '#/definitions/ContainerListLimit'
+        description: 'Enter the maximum number of containers in the response. Use from 1 to 255 characters. '
+  ListContainersOutput:
+    type: object
+    required:
+      - Containers
+    properties:
+      Containers:
+        $ref: '#/definitions/ContainerList'
+        description: The names of the containers.
+      NextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: ' <code>NextToken</code> is the token to use in the next call to <code>ListContainers</code>. This token is returned only if you included the <code>MaxResults</code> tag in the original command, and only if there are still containers to return. '
+  PaginationToken:
+    type: string
+    pattern: '[0-9A-Za-z=/+]+'
+    minLength: 1
+    maxLength: 255
+  PolicyNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Could not perform an operation on a policy that does not exist.
+  PutContainerPolicyInput:
+    type: object
+    required:
+      - ContainerName
+      - Policy
+    properties:
+      ContainerName:
+        $ref: '#/definitions/ContainerName'
+        description: The name of the container.
+      Policy:
+        $ref: '#/definitions/ContainerPolicy'
+        description: '<p>The contents of the policy, which includes the following: </p> <ul> <li> <p>One <code>Version</code> tag</p> </li> <li> <p>One <code>Statement</code> tag that contains the standard tags for the policy.</p> </li> </ul>'
+  PutContainerPolicyOutput:
+    type: object
+    properties: {}
+  TimeStamp:
+    type: string
+    format: date-time
