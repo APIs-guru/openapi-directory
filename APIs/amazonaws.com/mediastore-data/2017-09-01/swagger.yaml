@@ -215,8 +215,6 @@ definitions:
     properties: {}
   GetObjectResponse:
     type: object
-    required:
-      - StatusCode
     properties:
       Body:
         $ref: '#/definitions/PayloadBlob'
