@@ -1887,6 +1887,47 @@ definitions:
       $ref: '#/definitions/CORSRule'
     xml:
       wrapped: false
+  CSVInput:
+    type: object
+    properties:
+      FileHeaderInfo:
+        $ref: '#/definitions/FileHeaderInfo'
+        description: 'Describes the first line of input. Valid values: None, Ignore, Use.'
+      Comments:
+        $ref: '#/definitions/Comments'
+        description: Single character used to indicate a row should be ignored when present at the start of a row.
+      QuoteEscapeCharacter:
+        $ref: '#/definitions/QuoteEscapeCharacter'
+        description: Single character used for escaping the quote character inside an already escaped value.
+      RecordDelimiter:
+        $ref: '#/definitions/RecordDelimiter'
+        description: Value used to separate individual records.
+      FieldDelimiter:
+        $ref: '#/definitions/FieldDelimiter'
+        description: Value used to separate individual fields in a record.
+      QuoteCharacter:
+        $ref: '#/definitions/QuoteCharacter'
+        description: Value used for escaping where the field delimiter is part of the value.
+    description: Describes how a CSV-formatted input object is formatted.
+  CSVOutput:
+    type: object
+    properties:
+      QuoteFields:
+        $ref: '#/definitions/QuoteFields'
+        description: Indicates whether or not all output fields should be quoted.
+      QuoteEscapeCharacter:
+        $ref: '#/definitions/QuoteEscapeCharacter'
+        description: Single character used for escaping the quote character inside an already escaped value.
+      RecordDelimiter:
+        $ref: '#/definitions/RecordDelimiter'
+        description: Value used to separate individual records.
+      FieldDelimiter:
+        $ref: '#/definitions/FieldDelimiter'
+        description: Value used to separate individual fields in a record.
+      QuoteCharacter:
+        $ref: '#/definitions/QuoteCharacter'
+        description: Value used for escaping where the field delimiter is part of the value.
+    description: Describes how CSV-formatted results are formatted.
   CacheControl:
     type: string
   CloudFunction:
@@ -1907,6 +1948,8 @@ definitions:
   CloudFunctionInvocationRole:
     type: string
   Code:
+    type: string
+  Comments:
     type: string
   CommonPrefix:
     type: object
@@ -2261,6 +2304,8 @@ definitions:
       wrapped: false
   Delimiter:
     type: string
+  Description:
+    type: string
   Destination:
     type: object
     required:
@@ -2293,6 +2338,21 @@ definitions:
     enum:
       - url
     description: 'Requests Amazon S3 to encode the object keys in the response and specifies the encoding method to use. An object key may contain any Unicode character; however, XML 1.0 parser cannot parse some characters, such as characters with an ASCII value from 0 to 10. For characters that are not supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response.'
+  Encryption:
+    type: object
+    required:
+      - EncryptionType
+    properties:
+      EncryptionType:
+        $ref: '#/definitions/ServerSideEncryption'
+        description: 'The server-side encryption algorithm used when storing job results in Amazon S3 (e.g., AES256, aws:kms).'
+      KMSKeyId:
+        $ref: '#/definitions/SSEKMSKeyId'
+        description: 'If the encryption type is aws:kms, this optional value specifies the AWS KMS key ID to use for encryption of job results.'
+      KMSContext:
+        $ref: '#/definitions/KMSContext'
+        description: 'If the encryption type is aws:kms, this optional value can be used to specify the encryption context for the restore results.'
+    description: Describes the server-side encryption that will be applied to the restore results.
   EncryptionConfiguration:
     type: object
     properties:
@@ -2364,8 +2424,22 @@ definitions:
       $ref: '#/definitions/ExposeHeader'
     xml:
       wrapped: false
+  Expression:
+    type: string
+  ExpressionType:
+    type: string
+    enum:
+      - SQL
   FetchOwner:
     type: boolean
+  FieldDelimiter:
+    type: string
+  FileHeaderInfo:
+    type: string
+    enum:
+      - USE
+      - IGNORE
+      - NONE
   FilterRule:
     type: object
     properties:
@@ -2829,6 +2903,13 @@ definitions:
       DisplayName:
         $ref: '#/definitions/DisplayName'
         description: Name of the Principal.
+  InputSerialization:
+    type: object
+    properties:
+      CSV:
+        $ref: '#/definitions/CSVInput'
+        description: Describes the serialization of a CSV-encoded object.
+    description: Describes the serialization format of the object.
   InventoryConfiguration:
     type: object
     required:
@@ -2957,6 +3038,8 @@ definitions:
     type: boolean
   IsTruncated:
     type: boolean
+  KMSContext:
+    type: string
   KeyCount:
     type: integer
   KeyMarker:
@@ -3445,6 +3528,8 @@ definitions:
     properties: {}
   Location:
     type: string
+  LocationPrefix:
+    type: string
   LoggingEnabled:
     type: object
     properties:
@@ -3494,6 +3579,14 @@ definitions:
     enum:
       - COPY
       - REPLACE
+  MetadataEntry:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/MetadataKey'
+      Value:
+        $ref: '#/definitions/MetadataValue'
+    description: A metadata key-value pair to store with an object.
   MetadataKey:
     type: string
   MetadataValue:
@@ -3761,6 +3854,20 @@ definitions:
     type: string
     enum:
       - STANDARD
+  OutputLocation:
+    type: object
+    properties:
+      S3:
+        $ref: '#/definitions/S3Location'
+        description: Describes an S3 location that will receive the results of the restore request.
+    description: Describes the location where the restore job's output is stored.
+  OutputSerialization:
+    type: object
+    properties:
+      CSV:
+        $ref: '#/definitions/CSVOutput'
+        description: Describes the serialization of CSV-encoded Select results.
+    description: Describes how results of the Select job are serialized.
   Owner:
     type: object
     properties:
@@ -4172,7 +4279,18 @@ definitions:
       wrapped: false
   Quiet:
     type: boolean
+  QuoteCharacter:
+    type: string
+  QuoteEscapeCharacter:
+    type: string
+  QuoteFields:
+    type: string
+    enum:
+      - ALWAYS
+      - ASNEEDED
   Range:
+    type: string
+  RecordDelimiter:
     type: string
   Redirect:
     type: object
@@ -4314,17 +4432,37 @@ definitions:
         $ref: '#/definitions/RestoreRequest'
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  RestoreOutputPath:
+    type: string
   RestoreRequest:
     type: object
-    required:
-      - Days
     properties:
       Days:
         $ref: '#/definitions/Days'
-        description: Lifetime of the active copy in days
+        description: Lifetime of the active copy in days. Do not use with restores that specify OutputLocation.
       GlacierJobParameters:
         $ref: '#/definitions/GlacierJobParameters'
-        description: Glacier related prameters pertaining to this job.
+        description: Glacier related parameters pertaining to this job. Do not use with restores that specify OutputLocation.
+      Type:
+        $ref: '#/definitions/RestoreRequestType'
+        description: Type of restore request.
+      Tier:
+        $ref: '#/definitions/Tier'
+        description: Glacier retrieval tier at which the restore will be processed.
+      Description:
+        $ref: '#/definitions/Description'
+        description: The optional description for the job.
+      SelectParameters:
+        $ref: '#/definitions/SelectParameters'
+        description: Describes the parameters for Select job types.
+      OutputLocation:
+        $ref: '#/definitions/OutputLocation'
+        description: Describes the location where the restore job's output is stored.
+    description: Container for restore job parameters.
+  RestoreRequestType:
+    type: string
+    enum:
+      - SELECT
   Role:
     type: string
   RoutingRule:
@@ -4379,6 +4517,36 @@ definitions:
       FilterRules:
         $ref: '#/definitions/FilterRuleList'
     description: Container for object key name prefix and suffix filtering rules.
+  S3Location:
+    type: object
+    required:
+      - BucketName
+      - Prefix
+    properties:
+      BucketName:
+        $ref: '#/definitions/BucketName'
+        description: The name of the bucket where the restore results will be placed.
+      Prefix:
+        $ref: '#/definitions/LocationPrefix'
+        description: The prefix that is prepended to the restore results for this request.
+      Encryption:
+        $ref: '#/definitions/Encryption'
+      CannedACL:
+        $ref: '#/definitions/ObjectCannedACL'
+        description: The canned ACL to apply to the restore results.
+      AccessControlList:
+        $ref: '#/definitions/Grants'
+        description: A list of grants that control access to the staged results.
+      Tagging:
+        $ref: '#/definitions/Tagging'
+        description: The tag-set that is applied to the restore results.
+      UserMetadata:
+        $ref: '#/definitions/UserMetadata'
+        description: A list of metadata to store with the restore results in S3.
+      StorageClass:
+        $ref: '#/definitions/StorageClass'
+        description: The class of storage used to store the restore results.
+    description: Describes an S3 location that will receive the results of the restore request.
   SSECustomerAlgorithm:
     type: string
   SSECustomerKey:
@@ -4402,6 +4570,27 @@ definitions:
     type: object
     properties: {}
     description: Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
+  SelectParameters:
+    type: object
+    required:
+      - InputSerialization
+      - ExpressionType
+      - Expression
+      - OutputSerialization
+    properties:
+      InputSerialization:
+        $ref: '#/definitions/InputSerialization'
+        description: Describes the serialization format of the object.
+      ExpressionType:
+        $ref: '#/definitions/ExpressionType'
+        description: 'The type of the provided expression (e.g., SQL).'
+      Expression:
+        $ref: '#/definitions/Expression'
+        description: The expression that is used to query the object.
+      OutputSerialization:
+        $ref: '#/definitions/OutputSerialization'
+        description: Describes how the results of the Select job are serialized.
+    description: Describes the parameters for Select job types.
   ServerSideEncryption:
     type: string
     enum:
@@ -4657,6 +4846,10 @@ definitions:
       Body:
         $ref: '#/definitions/Body'
         description: Object data.
+  UserMetadata:
+    type: array
+    items:
+      $ref: '#/definitions/MetadataEntry'
   Value:
     type: string
   VersionIdMarker:

@@ -182,6 +182,96 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateBackup':
+    post:
+      operationId: CreateBackup
+      description: '<p>Creates a backup for an existing table.</p> <p> Each time you create an On-Demand Backup, the entire table data is backed up. There is no limit to the number of on-demand backups that can be taken. </p> <p>You can call <code>CreateBackup</code> at a maximum rate of 50 times per second.</p> <p>All backups in DynamoDB work without consuming any provisioned throughput on the table. This results in a fast, low-cost, and scalable backup process. In general, the larger the table, the more time it takes to back up. The backup is stored in an S3 data store that is maintained and managed by DynamoDB.</p> <p>Backups incorporate all writes (delete, put, update) that were completed within the last minute before the backup request was initiated. Backups might include some writes (delete, put, update) that were completed before the backup request was finished.</p> <p> For example, if you submit the backup request on 2018-12-14 at 14:25:00, the backup is guaranteed to contain all data committed to the table up to 14:24:00, and data committed after 14:26:00 will not be. The backup may or may not contain data modifications made between 14:24:00 and 14:26:00. On-Demand Backup does not support causal consistency. </p> <p> Along with data, the following are also included on the backups: </p> <ul> <li> <p>Global secondary indexes (GSIs)</p> </li> <li> <p>Local secondary indexes (LSIs)</p> </li> <li> <p>Streams</p> </li> <li> <p>Provisioned read and write capacity</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateBackupOutput'
+        '480':
+          description: TableNotFoundException
+          schema:
+            $ref: '#/definitions/TableNotFoundException'
+        '481':
+          description: TableInUseException
+          schema:
+            $ref: '#/definitions/TableInUseException'
+        '482':
+          description: ContinuousBackupsUnavailableException
+          schema:
+            $ref: '#/definitions/ContinuousBackupsUnavailableException'
+        '483':
+          description: BackupInUseException
+          schema:
+            $ref: '#/definitions/BackupInUseException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateBackupInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateGlobalTable':
+    post:
+      operationId: CreateGlobalTable
+      description: '<p>Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided regions. </p> <p> Tables can only be added as the replicas of a global table group under the following conditions: </p> <ul> <li> <p> The tables must have the same name. </p> </li> <li> <p> The tables must contain no items. </p> </li> <li> <p> The tables must have the same hash key and sort key (if present). </p> </li> <li> <p> The tables must have DynamoDB Streams enabled (NEW_AND_OLD_IMAGES). </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateGlobalTableOutput'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: GlobalTableAlreadyExistsException
+          schema:
+            $ref: '#/definitions/GlobalTableAlreadyExistsException'
+        '483':
+          description: TableNotFoundException
+          schema:
+            $ref: '#/definitions/TableNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateGlobalTableInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateTable':
     post:
       operationId: CreateTable
@@ -209,6 +299,47 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateTableInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteBackup':
+    post:
+      operationId: DeleteBackup
+      description: <p>Deletes an existing backup of a table.</p> <p>You can call <code>DeleteBackup</code> at a maximum rate of 10 times per second.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteBackupOutput'
+        '480':
+          description: BackupNotFoundException
+          schema:
+            $ref: '#/definitions/BackupNotFoundException'
+        '481':
+          description: BackupInUseException
+          schema:
+            $ref: '#/definitions/BackupInUseException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteBackupInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -295,6 +426,105 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteTableInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeBackup':
+    post:
+      operationId: DescribeBackup
+      description: <p>Describes an existing backup of a table.</p> <p>You can call <code>DescribeBackup</code> at a maximum rate of 10 times per second.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeBackupOutput'
+        '480':
+          description: BackupNotFoundException
+          schema:
+            $ref: '#/definitions/BackupNotFoundException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeBackupInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeContinuousBackups':
+    post:
+      operationId: DescribeContinuousBackups
+      description: '<p>Checks the status of the backup restore settings on the specified table. If backups are enabled, <code>ContinuousBackupsStatus</code> will bet set to ENABLED.</p> <p>You can call <code>DescribeContinuousBackups</code> at a maximum rate of 10 times per second.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeContinuousBackupsOutput'
+        '480':
+          description: TableNotFoundException
+          schema:
+            $ref: '#/definitions/TableNotFoundException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeContinuousBackupsInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeGlobalTable':
+    post:
+      operationId: DescribeGlobalTable
+      description: Returns information about the global table.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeGlobalTableOutput'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: GlobalTableNotFoundException
+          schema:
+            $ref: '#/definitions/GlobalTableNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeGlobalTableInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -446,6 +676,64 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetItemInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListBackups':
+    post:
+      operationId: ListBackups
+      description: '<p>List backups associated with an AWS account. To list backups for a given table, specify <code>TableName</code>. <code>ListBackups</code> returns a paginated list of results with at most 1MB worth of items in a page. You can also specify a limit for the maximum number of entries to be returned in a page. </p> <p>In the request, start time is inclusive but end time is exclusive. Note that these limits are for the time at which the original backup was requested.</p> <p>You can call <code>ListBackups</code> a maximum of 5 times per second.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListBackupsOutput'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListBackupsInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListGlobalTables':
+    post:
+      operationId: ListGlobalTables
+      description: Lists all the global tables. Only those global tables that have replicas in the region specified as input are returned.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListGlobalTablesOutput'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListGlobalTablesInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -620,6 +908,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RestoreTableFromBackup':
+    post:
+      operationId: RestoreTableFromBackup
+      description: '<p>Creates a new table from an existing backup. Any number of users can execute up to 10 concurrent restores in a given account. </p> <p>You can call <code>RestoreTableFromBackup</code> at a maximum rate of 10 times per second.</p> <p>You must manually set up the following on the restored table:</p> <ul> <li> <p>Auto scaling policies</p> </li> <li> <p>IAM policies</p> </li> <li> <p>Cloudwatch metrics and alarms</p> </li> <li> <p>Tags</p> </li> <li> <p>Time to Live (TTL) settings</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RestoreTableFromBackupOutput'
+        '480':
+          description: TableAlreadyExistsException
+          schema:
+            $ref: '#/definitions/TableAlreadyExistsException'
+        '481':
+          description: TableInUseException
+          schema:
+            $ref: '#/definitions/TableInUseException'
+        '482':
+          description: BackupNotFoundException
+          schema:
+            $ref: '#/definitions/BackupNotFoundException'
+        '483':
+          description: BackupInUseException
+          schema:
+            $ref: '#/definitions/BackupInUseException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RestoreTableFromBackupInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#Scan':
     post:
       operationId: Scan
@@ -735,6 +1072,51 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UntagResourceInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateGlobalTable':
+    post:
+      operationId: UpdateGlobalTable
+      description: 'Adds or removes replicas to the specified global table. The global table should already exist to be able to use this operation. Currently, the replica to be added should be empty. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateGlobalTableOutput'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: GlobalTableNotFoundException
+          schema:
+            $ref: '#/definitions/GlobalTableNotFoundException'
+        '482':
+          description: ReplicaAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ReplicaAlreadyExistsException'
+        '483':
+          description: ReplicaNotFoundException
+          schema:
+            $ref: '#/definitions/ReplicaNotFoundException'
+        '484':
+          description: TableNotFoundException
+          schema:
+            $ref: '#/definitions/TableNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateGlobalTableInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -972,6 +1354,111 @@ definitions:
     description: '<p>For the <code>UpdateItem</code> operation, represents the attributes to be modified, the action to perform on each, and the new value for each.</p> <note> <p>You cannot use <code>UpdateItem</code> to update any primary key attributes. Instead, you will need to delete the item, and then use <code>PutItem</code> to create a new item with new attributes.</p> </note> <p>Attribute values cannot be null; string and binary type attributes must have lengths greater than zero; and set type attributes must not be empty. Requests with empty values will be rejected with a <code>ValidationException</code> exception.</p>'
   Backfilling:
     type: boolean
+  BackupArn:
+    type: string
+    minLength: 37
+    maxLength: 1024
+  BackupCreationDateTime:
+    type: string
+    format: date-time
+  BackupDescription:
+    type: object
+    properties:
+      BackupDetails:
+        $ref: '#/definitions/BackupDetails'
+        description: 'Contains the details of the backup created for the table. '
+      SourceTableDetails:
+        $ref: '#/definitions/SourceTableDetails'
+        description: 'Contains the details of the table when the backup was created. '
+      SourceTableFeatureDetails:
+        $ref: '#/definitions/SourceTableFeatureDetails'
+        description: 'Contains the details of the features enabled on the table when the backup was created. For example, LSIs, GSIs, streams, TTL.'
+    description: Contains the description of the backup created for the table.
+  BackupDetails:
+    type: object
+    required:
+      - BackupArn
+      - BackupName
+      - BackupStatus
+      - BackupCreationDateTime
+    properties:
+      BackupArn:
+        $ref: '#/definitions/BackupArn'
+        description: ARN associated with the backup.
+      BackupName:
+        $ref: '#/definitions/BackupName'
+        description: Name of the requested backup.
+      BackupSizeBytes:
+        $ref: '#/definitions/BackupSizeBytes'
+        description: Size of the backup in bytes.
+      BackupStatus:
+        $ref: '#/definitions/BackupStatus'
+        description: 'Backup can be in one of the following states: CREATING, ACTIVE, DELETED. '
+      BackupCreationDateTime:
+        $ref: '#/definitions/BackupCreationDateTime'
+        description: 'Time at which the backup was created. This is the request time of the backup. '
+    description: Contains the details of the backup created for the table.
+  BackupInUseException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'There is another ongoing conflicting backup control plane operation on the table. The backups is either being created, deleted or restored to a table.'
+  BackupName:
+    type: string
+    minLength: 3
+    maxLength: 255
+  BackupNotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Backup not found for the given BackupARN. '
+  BackupSizeBytes:
+    type: integer
+    minimum: 0
+  BackupStatus:
+    type: string
+    enum:
+      - CREATING
+      - DELETED
+      - AVAILABLE
+  BackupSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/BackupSummary'
+  BackupSummary:
+    type: object
+    properties:
+      TableName:
+        $ref: '#/definitions/TableName'
+        description: Name of the table.
+      TableId:
+        $ref: '#/definitions/TableId'
+        description: Unique identifier for the table.
+      TableArn:
+        $ref: '#/definitions/TableArn'
+        description: ARN associated with the table.
+      BackupArn:
+        $ref: '#/definitions/BackupArn'
+        description: ARN associated with the backup.
+      BackupName:
+        $ref: '#/definitions/BackupName'
+        description: Name of the specified backup.
+      BackupCreationDateTime:
+        $ref: '#/definitions/BackupCreationDateTime'
+        description: Time at which the backup was created.
+      BackupStatus:
+        $ref: '#/definitions/BackupStatus'
+        description: 'Backup can be in one of the following states: CREATING, ACTIVE, DELETED.'
+      BackupSizeBytes:
+        $ref: '#/definitions/BackupSizeBytes'
+        description: Size of the backup in bytes.
+    description: Contains details for the backup.
+  BackupsInputLimit:
+    type: integer
+    minimum: 1
+    maximum: 100
   BatchGetItemInput:
     type: object
     required:
@@ -1092,7 +1579,7 @@ definitions:
         description: '<p>A map of tables and requests against those tables that were not processed. The <code>UnprocessedItems</code> value is in the same form as <code>RequestItems</code>, so you can provide this value directly to a subsequent <code>BatchGetItem</code> operation. For more information, see <code>RequestItems</code> in the Request Parameters section.</p> <p>Each <code>UnprocessedItems</code> entry consists of a table name and, for that table, a list of operations to perform (<code>DeleteRequest</code> or <code>PutRequest</code>).</p> <ul> <li> <p> <code>DeleteRequest</code> - Perform a <code>DeleteItem</code> operation on the specified item. The item to be deleted is identified by a <code>Key</code> subelement:</p> <ul> <li> <p> <code>Key</code> - A map of primary key attribute values that uniquely identify the item. Each entry in this map consists of an attribute name and an attribute value.</p> </li> </ul> </li> <li> <p> <code>PutRequest</code> - Perform a <code>PutItem</code> operation on the specified item. The item to be put is identified by an <code>Item</code> subelement:</p> <ul> <li> <p> <code>Item</code> - A map of attributes and their values. Each entry in this map consists of an attribute name and an attribute value. Attribute values must not be null; string and binary type attributes must have lengths greater than zero; and set type attributes must not be empty. Requests that contain empty values will be rejected with a <code>ValidationException</code> exception.</p> <p>If you specify any attributes that are part of an index key, then the data types for those attributes must match those of the schema in the table''s attribute definition.</p> </li> </ul> </li> </ul> <p>If there are no unprocessed items remaining, the response contains an empty <code>UnprocessedItems</code> map.</p>'
       ItemCollectionMetrics:
         $ref: '#/definitions/ItemCollectionMetricsPerTable'
-        description: '<p>A list of tables that were processed by <code>BatchWriteItem</code> and, for each table, information about any item collections that were affected by individual <code>DeleteItem</code> or <code>PutItem</code> operations.</p> <p>Each entry consists of the following subelements:</p> <ul> <li> <p> <code>ItemCollectionKey</code> - The partition key value of the item collection. This is the same as the partition key value of the item.</p> </li> <li> <p> <code>SizeEstimateRange</code> - An estimate of item collection size, expressed in GB. This is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on the table. Use this estimate to measure whether a local secondary index is approaching its size limit.</p> <p>The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.</p> </li> </ul>'
+        description: '<p>A list of tables that were processed by <code>BatchWriteItem</code> and, for each table, information about any item collections that were affected by individual <code>DeleteItem</code> or <code>PutItem</code> operations.</p> <p>Each entry consists of the following subelements:</p> <ul> <li> <p> <code>ItemCollectionKey</code> - The partition key value of the item collection. This is the same as the partition key value of the item.</p> </li> <li> <p> <code>SizeEstimateRangeGB</code> - An estimate of item collection size, expressed in GB. This is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on the table. Use this estimate to measure whether a local secondary index is approaching its size limit.</p> <p>The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.</p> </li> </ul>'
       ConsumedCapacity:
         $ref: '#/definitions/ConsumedCapacityMultiple'
         description: '<p>The capacity units consumed by the entire <code>BatchWriteItem</code> operation.</p> <p>Each element consists of:</p> <ul> <li> <p> <code>TableName</code> - The table that consumed the provisioned throughput.</p> </li> <li> <p> <code>CapacityUnits</code> - The total number of capacity units consumed.</p> </li> </ul>'
@@ -1195,6 +1682,44 @@ definitions:
   ConsumedCapacityUnits:
     type: number
     format: double
+  ContinuousBackupsDescription:
+    type: object
+    required:
+      - ContinuousBackupsStatus
+    properties:
+      ContinuousBackupsStatus:
+        $ref: '#/definitions/ContinuousBackupsStatus'
+        description: 'ContinuousBackupsStatus can be one of the following states : ENABLED, DISABLED'
+    description: Represents the backup and restore settings on the table when the backup was created.
+  ContinuousBackupsStatus:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+  ContinuousBackupsUnavailableException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Backups have not yet been enabled for this table.
+  CreateBackupInput:
+    type: object
+    required:
+      - TableName
+      - BackupName
+    properties:
+      TableName:
+        $ref: '#/definitions/TableName'
+        description: The name of the table.
+      BackupName:
+        $ref: '#/definitions/BackupName'
+        description: Specified name for the backup.
+  CreateBackupOutput:
+    type: object
+    properties:
+      BackupDetails:
+        $ref: '#/definitions/BackupDetails'
+        description: Contains the details of the backup created for the table.
   CreateGlobalSecondaryIndexAction:
     type: object
     required:
@@ -1216,6 +1741,33 @@ definitions:
         $ref: '#/definitions/ProvisionedThroughput'
         description: '<p>Represents the provisioned throughput settings for the specified global secondary index.</p> <p>For current minimum and maximum provisioned throughput values, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html">Limits</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>'
     description: Represents a new global secondary index to be added to an existing table.
+  CreateGlobalTableInput:
+    type: object
+    required:
+      - GlobalTableName
+      - ReplicationGroup
+    properties:
+      GlobalTableName:
+        $ref: '#/definitions/TableName'
+        description: The global table name.
+      ReplicationGroup:
+        $ref: '#/definitions/ReplicaList'
+        description: The regions where the global table needs to be created.
+  CreateGlobalTableOutput:
+    type: object
+    properties:
+      GlobalTableDescription:
+        $ref: '#/definitions/GlobalTableDescription'
+        description: Contains the details of the global table.
+  CreateReplicaAction:
+    type: object
+    required:
+      - RegionName
+    properties:
+      RegionName:
+        $ref: '#/definitions/RegionName'
+        description: The region of the replica to be added.
+    description: Represents a replica to be added.
   CreateTableInput:
     type: object
     required:
@@ -1291,6 +1843,20 @@ definitions:
   Date:
     type: string
     format: date-time
+  DeleteBackupInput:
+    type: object
+    required:
+      - BackupArn
+    properties:
+      BackupArn:
+        $ref: '#/definitions/BackupArn'
+        description: The ARN associated with the backup.
+  DeleteBackupOutput:
+    type: object
+    properties:
+      BackupDescription:
+        $ref: '#/definitions/BackupDescription'
+        description: Contains the description of the backup created for the table.
   DeleteGlobalSecondaryIndexAction:
     type: object
     required:
@@ -1358,8 +1924,17 @@ definitions:
         description: 'The capacity units consumed by the <code>DeleteItem</code> operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. <code>ConsumedCapacity</code> is only returned if the <code>ReturnConsumedCapacity</code> parameter was specified. For more information, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html">Provisioned Throughput</a> in the <i>Amazon DynamoDB Developer Guide</i>.'
       ItemCollectionMetrics:
         $ref: '#/definitions/ItemCollectionMetrics'
-        description: '<p>Information about item collections, if any, that were affected by the <code>DeleteItem</code> operation. <code>ItemCollectionMetrics</code> is only returned if the <code>ReturnItemCollectionMetrics</code> parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response.</p> <p>Each <code>ItemCollectionMetrics</code> element consists of:</p> <ul> <li> <p> <code>ItemCollectionKey</code> - The partition key value of the item collection. This is the same as the partition key value of the item itself.</p> </li> <li> <p> <code>SizeEstimateRange</code> - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit.</p> <p>The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.</p> </li> </ul>'
+        description: '<p>Information about item collections, if any, that were affected by the <code>DeleteItem</code> operation. <code>ItemCollectionMetrics</code> is only returned if the <code>ReturnItemCollectionMetrics</code> parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response.</p> <p>Each <code>ItemCollectionMetrics</code> element consists of:</p> <ul> <li> <p> <code>ItemCollectionKey</code> - The partition key value of the item collection. This is the same as the partition key value of the item itself.</p> </li> <li> <p> <code>SizeEstimateRangeGB</code> - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit.</p> <p>The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.</p> </li> </ul>'
     description: Represents the output of a <code>DeleteItem</code> operation.
+  DeleteReplicaAction:
+    type: object
+    required:
+      - RegionName
+    properties:
+      RegionName:
+        $ref: '#/definitions/RegionName'
+        description: The region of the replica to be removed.
+    description: Represents a replica to be removed.
   DeleteRequest:
     type: object
     required:
@@ -1397,6 +1972,48 @@ definitions:
         $ref: '#/definitions/TableDescription'
         description: Represents the properties of a table.
     description: Represents the output of a <code>DeleteTable</code> operation.
+  DescribeBackupInput:
+    type: object
+    required:
+      - BackupArn
+    properties:
+      BackupArn:
+        $ref: '#/definitions/BackupArn'
+        description: The ARN associated with the backup.
+  DescribeBackupOutput:
+    type: object
+    properties:
+      BackupDescription:
+        $ref: '#/definitions/BackupDescription'
+        description: Contains the description of the backup created for the table.
+  DescribeContinuousBackupsInput:
+    type: object
+    required:
+      - TableName
+    properties:
+      TableName:
+        $ref: '#/definitions/TableName'
+        description: Name of the table for which the customer wants to check the backup and restore settings.
+  DescribeContinuousBackupsOutput:
+    type: object
+    properties:
+      ContinuousBackupsDescription:
+        $ref: '#/definitions/ContinuousBackupsDescription'
+        description: ' <code>ContinuousBackupsDescription</code> can be one of the following : ENABLED, DISABLED. '
+  DescribeGlobalTableInput:
+    type: object
+    required:
+      - GlobalTableName
+    properties:
+      GlobalTableName:
+        $ref: '#/definitions/TableName'
+        description: The name of the global table.
+  DescribeGlobalTableOutput:
+    type: object
+    properties:
+      GlobalTableDescription:
+        $ref: '#/definitions/GlobalTableDescription'
+        description: Contains the details of the global table.
   DescribeLimitsInput:
     type: object
     example: {}
@@ -1642,6 +2259,22 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/GlobalSecondaryIndexDescription'
+  GlobalSecondaryIndexInfo:
+    type: object
+    properties:
+      IndexName:
+        $ref: '#/definitions/IndexName'
+        description: The name of the global secondary index.
+      KeySchema:
+        $ref: '#/definitions/KeySchema'
+        description: '<p>The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:</p> <ul> <li> <p> <code>HASH</code> - partition key</p> </li> <li> <p> <code>RANGE</code> - sort key</p> </li> </ul> <note> <p>The partition key of an item is also known as its <i>hash attribute</i>. The term "hash attribute" derives from DynamoDB'' usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.</p> <p>The sort key of an item is also known as its <i>range attribute</i>. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.</p> </note>'
+      Projection:
+        $ref: '#/definitions/Projection'
+        description: 'Represents attributes that are copied (projected) from the table into the global secondary index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. '
+      ProvisionedThroughput:
+        $ref: '#/definitions/ProvisionedThroughput'
+        description: 'Represents the provisioned throughput settings for the specified global secondary index. '
+    description: Represents the properties of a global secondary index for the table when the backup was created.
   GlobalSecondaryIndexList:
     type: array
     items:
@@ -1663,6 +2296,64 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/GlobalSecondaryIndexUpdate'
+  GlobalSecondaryIndexes:
+    type: array
+    items:
+      $ref: '#/definitions/GlobalSecondaryIndexInfo'
+  GlobalTable:
+    type: object
+    properties:
+      GlobalTableName:
+        $ref: '#/definitions/TableName'
+        description: The global table name.
+      ReplicationGroup:
+        $ref: '#/definitions/ReplicaList'
+        description: The regions where the global table has replicas.
+    description: Represents the properties of a global table.
+  GlobalTableAlreadyExistsException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The specified global table already exists.
+  GlobalTableArnString:
+    type: string
+  GlobalTableDescription:
+    type: object
+    properties:
+      ReplicationGroup:
+        $ref: '#/definitions/ReplicaDescriptionList'
+        description: The regions where the global table has replicas.
+      GlobalTableArn:
+        $ref: '#/definitions/GlobalTableArnString'
+        description: The unique identifier of the global table.
+      CreationDateTime:
+        $ref: '#/definitions/Date'
+        description: The creation time of the global table.
+      GlobalTableStatus:
+        $ref: '#/definitions/GlobalTableStatus'
+        description: '<p>The current state of the global table:</p> <ul> <li> <p> <code>CREATING</code> - The global table is being created.</p> </li> <li> <p> <code>UPDATING</code> - The global table is being updated.</p> </li> <li> <p> <code>DELETING</code> - The global table is being deleted.</p> </li> <li> <p> <code>ACTIVE</code> - The global table is ready for use.</p> </li> </ul>'
+      GlobalTableName:
+        $ref: '#/definitions/TableName'
+        description: The global table name.
+    description: Contains details about the global table.
+  GlobalTableList:
+    type: array
+    items:
+      $ref: '#/definitions/GlobalTable'
+  GlobalTableNotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The specified global table does not exist.
+  GlobalTableStatus:
+    type: string
+    enum:
+      - CREATING
+      - ACTIVE
+      - DELETING
+      - UPDATING
   IndexName:
     type: string
     pattern: '[a-zA-Z0-9_.-]+'
@@ -1730,6 +2421,9 @@ definitions:
         $ref: '#/definitions/ErrorMessage'
         description: The total size of an item collection has exceeded the maximum limit of 10 gigabytes.
     description: An item collection is too large. This exception is only returned for tables that have one or more local secondary indexes.
+  ItemCount:
+    type: integer
+    minimum: 0
   ItemList:
     type: array
     items:
@@ -1820,6 +2514,54 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AttributeValue'
+  ListBackupsInput:
+    type: object
+    properties:
+      TableName:
+        $ref: '#/definitions/TableName'
+        description: 'The backups from the table specified by TableName are listed. '
+      Limit:
+        $ref: '#/definitions/BackupsInputLimit'
+        description: Maximum number of backups to return at once.
+      TimeRangeLowerBound:
+        $ref: '#/definitions/TimeRangeLowerBound'
+        description: Only backups created after this time are listed. <code>TimeRangeLowerBound</code> is inclusive.
+      TimeRangeUpperBound:
+        $ref: '#/definitions/TimeRangeUpperBound'
+        description: 'Only backups created before this time are listed. <code>TimeRangeUpperBound</code> is exclusive. '
+      ExclusiveStartBackupArn:
+        $ref: '#/definitions/BackupArn'
+        description: ' <code>LastEvaluatedBackupARN</code> returned by the previous ListBackups call. '
+  ListBackupsOutput:
+    type: object
+    properties:
+      BackupSummaries:
+        $ref: '#/definitions/BackupSummaries'
+        description: List of <code>BackupSummary</code> objects.
+      LastEvaluatedBackupArn:
+        $ref: '#/definitions/BackupArn'
+        description: Last evaluated BackupARN.
+  ListGlobalTablesInput:
+    type: object
+    properties:
+      ExclusiveStartGlobalTableName:
+        $ref: '#/definitions/TableName'
+        description: The first global table name that this operation will evaluate.
+      Limit:
+        $ref: '#/definitions/PositiveIntegerObject'
+        description: The maximum number of table names to return.
+      RegionName:
+        $ref: '#/definitions/RegionName'
+        description: Lists the global tables in a specific region.
+  ListGlobalTablesOutput:
+    type: object
+    properties:
+      GlobalTables:
+        $ref: '#/definitions/GlobalTableList'
+        description: List of global table names.
+      LastEvaluatedGlobalTableName:
+        $ref: '#/definitions/TableName'
+        description: Last evaluated global table name.
   ListTablesInput:
     type: object
     example: {}
@@ -1914,10 +2656,27 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/LocalSecondaryIndexDescription'
+  LocalSecondaryIndexInfo:
+    type: object
+    properties:
+      IndexName:
+        $ref: '#/definitions/IndexName'
+        description: Represents the name of the local secondary index.
+      KeySchema:
+        $ref: '#/definitions/KeySchema'
+        description: '<p>The complete key schema for a local secondary index, which consists of one or more pairs of attribute names and key types:</p> <ul> <li> <p> <code>HASH</code> - partition key</p> </li> <li> <p> <code>RANGE</code> - sort key</p> </li> </ul> <note> <p>The partition key of an item is also known as its <i>hash attribute</i>. The term "hash attribute" derives from DynamoDB'' usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.</p> <p>The sort key of an item is also known as its <i>range attribute</i>. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.</p> </note>'
+      Projection:
+        $ref: '#/definitions/Projection'
+        description: 'Represents attributes that are copied (projected) from the table into the global secondary index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. '
+    description: Represents the properties of a local secondary index for the table when the backup was created.
   LocalSecondaryIndexList:
     type: array
     items:
       $ref: '#/definitions/LocalSecondaryIndex'
+  LocalSecondaryIndexes:
+    type: array
+    items:
+      $ref: '#/definitions/LocalSecondaryIndexInfo'
   Long:
     type: integer
   MapAttributeValue:
@@ -2082,7 +2841,7 @@ definitions:
         description: 'The capacity units consumed by the <code>PutItem</code> operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. <code>ConsumedCapacity</code> is only returned if the <code>ReturnConsumedCapacity</code> parameter was specified. For more information, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html">Provisioned Throughput</a> in the <i>Amazon DynamoDB Developer Guide</i>.'
       ItemCollectionMetrics:
         $ref: '#/definitions/ItemCollectionMetrics'
-        description: '<p>Information about item collections, if any, that were affected by the <code>PutItem</code> operation. <code>ItemCollectionMetrics</code> is only returned if the <code>ReturnItemCollectionMetrics</code> parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response.</p> <p>Each <code>ItemCollectionMetrics</code> element consists of:</p> <ul> <li> <p> <code>ItemCollectionKey</code> - The partition key value of the item collection. This is the same as the partition key value of the item itself.</p> </li> <li> <p> <code>SizeEstimateRange</code> - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit.</p> <p>The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.</p> </li> </ul>'
+        description: '<p>Information about item collections, if any, that were affected by the <code>PutItem</code> operation. <code>ItemCollectionMetrics</code> is only returned if the <code>ReturnItemCollectionMetrics</code> parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response.</p> <p>Each <code>ItemCollectionMetrics</code> element consists of:</p> <ul> <li> <p> <code>ItemCollectionKey</code> - The partition key value of the item collection. This is the same as the partition key value of the item itself.</p> </li> <li> <p> <code>SizeEstimateRangeGB</code> - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit.</p> <p>The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.</p> </li> </ul>'
     description: Represents the output of a <code>PutItem</code> operation.
   PutRequest:
     type: object
@@ -2182,6 +2941,56 @@ definitions:
         $ref: '#/definitions/ConsumedCapacity'
         description: 'The capacity units consumed by the <code>Query</code> operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. <code>ConsumedCapacity</code> is only returned if the <code>ReturnConsumedCapacity</code> parameter was specified For more information, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html">Provisioned Throughput</a> in the <i>Amazon DynamoDB Developer Guide</i>.'
     description: Represents the output of a <code>Query</code> operation.
+  RegionName:
+    type: string
+  Replica:
+    type: object
+    properties:
+      RegionName:
+        $ref: '#/definitions/RegionName'
+        description: The region where the replica needs to be created.
+    description: Represents the properties of a replica.
+  ReplicaAlreadyExistsException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The specified replica is already part of the global table.
+  ReplicaDescription:
+    type: object
+    properties:
+      RegionName:
+        $ref: '#/definitions/RegionName'
+        description: The name of the region.
+    description: Contains the details of the replica.
+  ReplicaDescriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/ReplicaDescription'
+  ReplicaList:
+    type: array
+    items:
+      $ref: '#/definitions/Replica'
+  ReplicaNotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: The specified replica is no longer part of the global table.
+  ReplicaUpdate:
+    type: object
+    properties:
+      Create:
+        $ref: '#/definitions/CreateReplicaAction'
+        description: The parameters required for creating a replica on an existing global table.
+      Delete:
+        $ref: '#/definitions/DeleteReplicaAction'
+        description: The name of the existing replica to be removed.
+    description: '<p>Represents one of the following:</p> <ul> <li> <p>A new replica to be added to an existing global table.</p> </li> <li> <p>New parameters for an existing replica.</p> </li> <li> <p>An existing replica to be removed from an existing global table.</p> </li> </ul>'
+  ReplicaUpdateList:
+    type: array
+    items:
+      $ref: '#/definitions/ReplicaUpdate'
   ResourceArnString:
     type: string
     minLength: 1
@@ -2200,6 +3009,48 @@ definitions:
         $ref: '#/definitions/ErrorMessage'
         description: The resource which is being requested does not exist.
     description: 'The operation tried to access a nonexistent table or index. The resource might not be specified correctly, or its status might not be <code>ACTIVE</code>.'
+  RestoreDateTime:
+    type: string
+    format: date-time
+  RestoreInProgress:
+    type: boolean
+  RestoreSummary:
+    type: object
+    required:
+      - RestoreDateTime
+      - RestoreInProgress
+    properties:
+      SourceBackupArn:
+        $ref: '#/definitions/BackupArn'
+        description: ARN of the backup from which the table was restored.
+      SourceTableArn:
+        $ref: '#/definitions/TableArn'
+        description: ARN of the source table of the backup that is being restored.
+      RestoreDateTime:
+        $ref: '#/definitions/RestoreDateTime'
+        description: Point in time or source backup time.
+      RestoreInProgress:
+        $ref: '#/definitions/RestoreInProgress'
+        description: Indicates if a restore is in progress or not.
+    description: Contains details for the restore.
+  RestoreTableFromBackupInput:
+    type: object
+    required:
+      - TargetTableName
+      - BackupArn
+    properties:
+      TargetTableName:
+        $ref: '#/definitions/TableName'
+        description: The name of the new table to which the backup must be restored.
+      BackupArn:
+        $ref: '#/definitions/BackupArn'
+        description: The ARN associated with the backup.
+  RestoreTableFromBackupOutput:
+    type: object
+    properties:
+      TableDescription:
+        $ref: '#/definitions/TableDescription'
+        description: The description of the table created from an existing backup.
   ReturnConsumedCapacity:
     type: string
     enum:
@@ -2345,6 +3196,56 @@ definitions:
       - ALL_PROJECTED_ATTRIBUTES
       - SPECIFIC_ATTRIBUTES
       - COUNT
+  SourceTableDetails:
+    type: object
+    required:
+      - TableName
+      - TableId
+      - KeySchema
+      - TableCreationDateTime
+      - ProvisionedThroughput
+    properties:
+      TableName:
+        $ref: '#/definitions/TableName'
+        description: 'The name of the table for which the backup was created. '
+      TableId:
+        $ref: '#/definitions/TableId'
+        description: 'Unique identifier for the table for which the backup was created. '
+      TableArn:
+        $ref: '#/definitions/TableArn'
+        description: 'ARN of the table for which backup was created. '
+      TableSizeBytes:
+        $ref: '#/definitions/Long'
+        description: Size of the table in bytes. Please note this is an approximate value.
+      KeySchema:
+        $ref: '#/definitions/KeySchema'
+        description: 'Schema of the table. '
+      TableCreationDateTime:
+        $ref: '#/definitions/TableCreationDateTime'
+        description: 'Time when the source table was created. '
+      ProvisionedThroughput:
+        $ref: '#/definitions/ProvisionedThroughput'
+        description: Read IOPs and Write IOPS on the table when the backup was created.
+      ItemCount:
+        $ref: '#/definitions/ItemCount'
+        description: 'Number of items in the table. Please note this is an approximate value. '
+    description: 'Contains the details of the table when the backup was created. '
+  SourceTableFeatureDetails:
+    type: object
+    properties:
+      LocalSecondaryIndexes:
+        $ref: '#/definitions/LocalSecondaryIndexes'
+        description: 'Represents the LSI properties for the table when the backup was created. It includes the IndexName, KeySchema and Projection for the LSIs on the table at the time of backup. '
+      GlobalSecondaryIndexes:
+        $ref: '#/definitions/GlobalSecondaryIndexes'
+        description: 'Represents the GSI properties for the table when the backup was created. It includes the IndexName, KeySchema, Projection and ProvisionedThroughput for the GSIs on the table at the time of backup. '
+      StreamDescription:
+        $ref: '#/definitions/StreamSpecification'
+        description: Stream settings on the table when the backup was created.
+      TimeToLiveDescription:
+        $ref: '#/definitions/TimeToLiveDescription'
+        description: Time to Live settings on the table when the backup was created.
+    description: 'Contains the details of the features enabled on the table when the backup was created. For example, LSIs, GSIs, streams, TTL. '
   StreamArn:
     type: string
     minLength: 37
@@ -2376,6 +3277,17 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/StringAttributeValue'
+  TableAlreadyExistsException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'A table with the name already exists. '
+  TableArn:
+    type: string
+  TableCreationDateTime:
+    type: string
+    format: date-time
   TableDescription:
     type: object
     properties:
@@ -2406,6 +3318,9 @@ definitions:
       TableArn:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) that uniquely identifies the table.
+      TableId:
+        $ref: '#/definitions/TableId'
+        description: 'Unique identifier for the table for which the backup was created. '
       LocalSecondaryIndexes:
         $ref: '#/definitions/LocalSecondaryIndexDescriptionList'
         description: '<p>Represents one or more local secondary indexes on the table. Each index is scoped to a given partition key value. Tables with one or more local secondary indexes are subject to an item collection size limit, where the amount of data within a given item collection cannot exceed 10 GB. Each element is composed of:</p> <ul> <li> <p> <code>IndexName</code> - The name of the local secondary index.</p> </li> <li> <p> <code>KeySchema</code> - Specifies the complete index key schema. The attribute names in the key schema must be between 1 and 255 characters (inclusive). The key schema must begin with the same partition key as the table.</p> </li> <li> <p> <code>Projection</code> - Specifies attributes that are copied (projected) from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Each attribute specification is composed of:</p> <ul> <li> <p> <code>ProjectionType</code> - One of the following:</p> <ul> <li> <p> <code>KEYS_ONLY</code> - Only the index and primary keys are projected into the index.</p> </li> <li> <p> <code>INCLUDE</code> - Only the specified table attributes are projected into the index. The list of projected attributes are in <code>NonKeyAttributes</code>.</p> </li> <li> <p> <code>ALL</code> - All of the table attributes are projected into the index.</p> </li> </ul> </li> <li> <p> <code>NonKeyAttributes</code> - A list of one or more non-key attribute names that are projected into the secondary index. The total count of attributes provided in <code>NonKeyAttributes</code>, summed across all of the secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.</p> </li> </ul> </li> <li> <p> <code>IndexSizeBytes</code> - Represents the total size of the index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.</p> </li> <li> <p> <code>ItemCount</code> - Represents the number of items in the index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.</p> </li> </ul> <p>If the table is in the <code>DELETING</code> state, no information about indexes will be returned.</p>'
@@ -2421,7 +3336,19 @@ definitions:
       LatestStreamArn:
         $ref: '#/definitions/StreamArn'
         description: The Amazon Resource Name (ARN) that uniquely identifies the latest stream for this table.
+      RestoreSummary:
+        $ref: '#/definitions/RestoreSummary'
+        description: Contains details for the restore.
     description: Represents the properties of a table.
+  TableId:
+    type: string
+    pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+  TableInUseException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'A table by that name is either being created or deleted. '
   TableName:
     type: string
     pattern: '[a-zA-Z0-9_.-]+'
@@ -2431,6 +3358,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TableName'
+  TableNotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: A table with the name <code>TableName</code> does not currently exist within the subscriber's account.
   TableStatus:
     type: string
     enum:
@@ -2479,6 +3412,12 @@ definitions:
     type: string
     minLength: 0
     maxLength: 256
+  TimeRangeLowerBound:
+    type: string
+    format: date-time
+  TimeRangeUpperBound:
+    type: string
+    format: date-time
   TimeToLiveAttributeName:
     type: string
     minLength: 1
@@ -2542,6 +3481,24 @@ definitions:
         $ref: '#/definitions/ProvisionedThroughput'
         description: '<p>Represents the provisioned throughput settings for the specified global secondary index.</p> <p>For current minimum and maximum provisioned throughput values, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html">Limits</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>'
     description: Represents the new provisioned throughput settings to be applied to a global secondary index.
+  UpdateGlobalTableInput:
+    type: object
+    required:
+      - GlobalTableName
+      - ReplicaUpdates
+    properties:
+      GlobalTableName:
+        $ref: '#/definitions/TableName'
+        description: The global table name.
+      ReplicaUpdates:
+        $ref: '#/definitions/ReplicaUpdateList'
+        description: A list of regions that should be added or removed from the global table.
+  UpdateGlobalTableOutput:
+    type: object
+    properties:
+      GlobalTableDescription:
+        $ref: '#/definitions/GlobalTableDescription'
+        description: Contains the details of the global table.
   UpdateItemInput:
     type: object
     required:
@@ -2622,7 +3579,7 @@ definitions:
         description: 'The capacity units consumed by the <code>UpdateItem</code> operation. The data returned includes the total provisioned throughput consumed, along with statistics for the table and any indexes involved in the operation. <code>ConsumedCapacity</code> is only returned if the <code>ReturnConsumedCapacity</code> parameter was specified. For more information, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html">Provisioned Throughput</a> in the <i>Amazon DynamoDB Developer Guide</i>.'
       ItemCollectionMetrics:
         $ref: '#/definitions/ItemCollectionMetrics'
-        description: '<p>Information about item collections, if any, that were affected by the <code>UpdateItem</code> operation. <code>ItemCollectionMetrics</code> is only returned if the <code>ReturnItemCollectionMetrics</code> parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response.</p> <p>Each <code>ItemCollectionMetrics</code> element consists of:</p> <ul> <li> <p> <code>ItemCollectionKey</code> - The partition key value of the item collection. This is the same as the partition key value of the item itself.</p> </li> <li> <p> <code>SizeEstimateRange</code> - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit.</p> <p>The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.</p> </li> </ul>'
+        description: '<p>Information about item collections, if any, that were affected by the <code>UpdateItem</code> operation. <code>ItemCollectionMetrics</code> is only returned if the <code>ReturnItemCollectionMetrics</code> parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response.</p> <p>Each <code>ItemCollectionMetrics</code> element consists of:</p> <ul> <li> <p> <code>ItemCollectionKey</code> - The partition key value of the item collection. This is the same as the partition key value of the item itself.</p> </li> <li> <p> <code>SizeEstimateRangeGB</code> - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit.</p> <p>The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.</p> </li> </ul>'
     description: Represents the output of an <code>UpdateItem</code> operation.
   UpdateTableInput:
     type: object

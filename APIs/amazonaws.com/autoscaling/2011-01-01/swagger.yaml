@@ -1857,7 +1857,7 @@ definitions:
         description: One or more instance IDs.
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the group.
+        description: The name of the Auto Scaling group.
   AttachLoadBalancerTargetGroupsResultType:
     type: object
     properties: {}
@@ -1892,7 +1892,7 @@ definitions:
     properties:
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the group.
+        description: The name of the Auto Scaling group.
       LoadBalancerNames:
         $ref: '#/definitions/LoadBalancerNames'
         description: One or more load balancer names.
@@ -1910,13 +1910,16 @@ definitions:
     properties:
       AutoScalingGroupName:
         $ref: '#/definitions/XmlStringMaxLen255'
-        description: The name of the group.
+        description: The name of the Auto Scaling group.
       AutoScalingGroupARN:
         $ref: '#/definitions/ResourceName'
-        description: The Amazon Resource Name (ARN) of the group.
+        description: The Amazon Resource Name (ARN) of the Auto Scaling group.
       LaunchConfigurationName:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: The name of the associated launch configuration.
+      LaunchTemplate:
+        $ref: '#/definitions/LaunchTemplateSpecification'
+        description: The launch template for the group.
       MinSize:
         $ref: '#/definitions/AutoScalingGroupMinSize'
         description: The minimum size of the group.
@@ -1993,7 +1996,7 @@ definitions:
     properties:
       AutoScalingGroupNames:
         $ref: '#/definitions/AutoScalingGroupNames'
-        description: 'The group names. If you omit this parameter, all Auto Scaling groups are described.'
+        description: 'The names of the Auto Scaling groups. If you omit this parameter, all Auto Scaling groups are described.'
       NextToken:
         $ref: '#/definitions/XmlString'
         description: The token for the next set of items to return. (You received this token from a previous call.)
@@ -2052,7 +2055,6 @@ definitions:
       - AvailabilityZone
       - LifecycleState
       - HealthStatus
-      - LaunchConfigurationName
       - ProtectedFromScaleIn
     properties:
       InstanceId:
@@ -2060,7 +2062,7 @@ definitions:
         description: The ID of the instance.
       AutoScalingGroupName:
         $ref: '#/definitions/XmlStringMaxLen255'
-        description: The name of the Auto Scaling group associated with the instance.
+        description: The name of the Auto Scaling group for the instance.
       AvailabilityZone:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: The Availability Zone for the instance.
@@ -2073,6 +2075,9 @@ definitions:
       LaunchConfigurationName:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: The launch configuration used to launch the instance. This value is not available if you attached the instance to the Auto Scaling group.
+      LaunchTemplate:
+        $ref: '#/definitions/LaunchTemplateSpecification'
+        description: The launch template for the instance.
       ProtectedFromScaleIn:
         $ref: '#/definitions/InstanceProtected'
         description: Indicates whether the instance is protected from termination by Auto Scaling when scaling in.
@@ -2170,7 +2175,7 @@ definitions:
         description: The name of the lifecycle hook.
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the group for the lifecycle hook.
+        description: The name of the Auto Scaling group.
       LifecycleActionToken:
         $ref: '#/definitions/LifecycleActionToken'
         description: A universally unique identifier (UUID) that identifies a specific lifecycle action associated with an instance. Auto Scaling sends this token to the notification target you specified when you created the lifecycle hook.
@@ -2201,13 +2206,16 @@ definitions:
     properties:
       AutoScalingGroupName:
         $ref: '#/definitions/XmlStringMaxLen255'
-        description: The name of the group. This name must be unique within the scope of your AWS account.
+        description: The name of the Auto Scaling group. This name must be unique within the scope of your AWS account.
       LaunchConfigurationName:
         $ref: '#/definitions/ResourceName'
-        description: 'The name of the launch configuration. Alternatively, specify an EC2 instance instead of a launch configuration.'
+        description: 'The name of the launch configuration. You must specify one of the following: a launch configuration, a launch template, or an EC2 instance.'
+      LaunchTemplate:
+        $ref: '#/definitions/LaunchTemplateSpecification'
+        description: 'The launch template to use to launch instances. You must specify one of the following: a launch template, a launch configuration, or an EC2 instance.'
       InstanceId:
         $ref: '#/definitions/XmlStringMaxLen19'
-        description: '<p>The ID of the instance used to create a launch configuration for the group. Alternatively, specify a launch configuration instead of an EC2 instance.</p> <p>When you specify an ID of an instance, Auto Scaling creates a new launch configuration and associates it with the group. This launch configuration derives its attributes from the specified instance, with the exception of the block device mapping.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html">Create an Auto Scaling Group Using an EC2 Instance</a> in the <i>Auto Scaling User Guide</i>.</p>'
+        description: '<p>The ID of the instance used to create a launch configuration for the group. You must specify one of the following: an EC2 instance, a launch configuration, or a launch template.</p> <p>When you specify an ID of an instance, Auto Scaling creates a new launch configuration and associates it with the group. This launch configuration derives its attributes from the specified instance, with the exception of the block device mapping.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html">Create an Auto Scaling Group Using an EC2 Instance</a> in the <i>Auto Scaling User Guide</i>.</p>'
       MinSize:
         $ref: '#/definitions/AutoScalingGroupMinSize'
         description: The minimum size of the group.
@@ -2372,7 +2380,7 @@ definitions:
     properties:
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the group to delete.
+        description: The name of the Auto Scaling group.
       ForceDelete:
         $ref: '#/definitions/ForceDelete'
         description: 'Specifies that the group will be deleted along with all instances associated with the group, without waiting for all instances to be terminated. This parameter also deletes any lifecycle actions associated with the group.'
@@ -2393,7 +2401,7 @@ definitions:
         description: The name of the lifecycle hook.
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the Auto Scaling group for the lifecycle hook.
+        description: The name of the Auto Scaling group.
   DeleteNotificationConfigurationType:
     type: object
     required:
@@ -2546,7 +2554,7 @@ definitions:
     properties:
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the group.
+        description: The name of the Auto Scaling group.
       LifecycleHookNames:
         $ref: '#/definitions/LifecycleHookNames'
         description: 'The names of one or more lifecycle hooks. If you omit this parameter, all lifecycle hooks are described.'
@@ -2588,7 +2596,7 @@ definitions:
     properties:
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the group.
+        description: The name of the Auto Scaling group.
       NextToken:
         $ref: '#/definitions/XmlString'
         description: The token for the next set of items to return. (You received this token from a previous call.)
@@ -2656,7 +2664,7 @@ definitions:
     properties:
       AutoScalingGroupNames:
         $ref: '#/definitions/AutoScalingGroupNames'
-        description: The name of the group.
+        description: The name of the Auto Scaling group.
       NextToken:
         $ref: '#/definitions/XmlString'
         description: The token for the next set of items to return. (You received this token from a previous call.)
@@ -2670,10 +2678,10 @@ definitions:
     properties:
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the group.
+        description: The name of the Auto Scaling group.
       PolicyNames:
         $ref: '#/definitions/PolicyNames'
-        description: 'One or more policy names or policy ARNs to be described. If you omit this parameter, all policy names are described. If an group name is provided, the results are limited to that group. This list is limited to 50 items. If you specify an unknown policy name, it is ignored with no error.'
+        description: 'The names of one or more policies. If you omit this parameter, all policies are described. If an group name is provided, the results are limited to that group. This list is limited to 50 items. If you specify an unknown policy name, it is ignored with no error.'
       PolicyTypes:
         $ref: '#/definitions/PolicyTypes'
         description: One or more policy types. Valid values are <code>SimpleScaling</code> and <code>StepScaling</code>.
@@ -2693,7 +2701,7 @@ definitions:
         description: 'The activity IDs of the desired scaling activities. If you omit this parameter, all activities for the past six weeks are described. If you specify an Auto Scaling group, the results are limited to that group. The list of requested activities cannot contain more than 50 items. If unknown activities are requested, they are ignored with no error.'
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the group.
+        description: The name of the Auto Scaling group.
       MaxRecords:
         $ref: '#/definitions/MaxRecords'
         description: The maximum number of items to return with this call. The default value is 100.
@@ -2707,7 +2715,7 @@ definitions:
     properties:
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the group.
+        description: The name of the Auto Scaling group.
       ScheduledActionNames:
         $ref: '#/definitions/ScheduledActionNames'
         description: '<p>Describes one or more scheduled actions. If you omit this parameter, all scheduled actions are described. If you specify an unknown scheduled action, it is ignored with no error.</p> <p>You can describe up to a maximum of 50 instances with a single call. If there are more items to return, the call returns a token. To get the next set of items, repeat the call with the returned token.</p>'
@@ -2785,7 +2793,7 @@ definitions:
         description: One or more instance IDs.
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the group.
+        description: The name of the Auto Scaling group.
       ShouldDecrementDesiredCapacity:
         $ref: '#/definitions/ShouldDecrementDesiredCapacity'
         description: 'If <code>True</code>, the Auto Scaling group decrements the desired capacity value by the number of instances detached.'
@@ -2838,7 +2846,7 @@ definitions:
     properties:
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name or Amazon Resource Name (ARN) of the group.
+        description: The name of the Auto Scaling group.
       Metrics:
         $ref: '#/definitions/Metrics'
         description: '<p>One or more of the following metrics. If you omit this parameter, all metrics are disabled.</p> <ul> <li> <p> <code>GroupMinSize</code> </p> </li> <li> <p> <code>GroupMaxSize</code> </p> </li> <li> <p> <code>GroupDesiredCapacity</code> </p> </li> <li> <p> <code>GroupInServiceInstances</code> </p> </li> <li> <p> <code>GroupPendingInstances</code> </p> </li> <li> <p> <code>GroupStandbyInstances</code> </p> </li> <li> <p> <code>GroupTerminatingInstances</code> </p> </li> <li> <p> <code>GroupTotalInstances</code> </p> </li> </ul>'
@@ -2879,7 +2887,7 @@ definitions:
     properties:
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name or ARN of the Auto Scaling group.
+        description: The name of the Auto Scaling group.
       Metrics:
         $ref: '#/definitions/Metrics'
         description: '<p>One or more of the following metrics. If you omit this parameter, all metrics are enabled.</p> <ul> <li> <p> <code>GroupMinSize</code> </p> </li> <li> <p> <code>GroupMaxSize</code> </p> </li> <li> <p> <code>GroupDesiredCapacity</code> </p> </li> <li> <p> <code>GroupInServiceInstances</code> </p> </li> <li> <p> <code>GroupPendingInstances</code> </p> </li> <li> <p> <code>GroupStandbyInstances</code> </p> </li> <li> <p> <code>GroupTerminatingInstances</code> </p> </li> <li> <p> <code>GroupTotalInstances</code> </p> </li> </ul>'
@@ -2949,7 +2957,7 @@ definitions:
     properties:
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name or Amazon Resource Name (ARN) of the Auto Scaling group.
+        description: The name of the Auto Scaling group.
       PolicyName:
         $ref: '#/definitions/ResourceName'
         description: The name or ARN of the policy.
@@ -3024,7 +3032,6 @@ definitions:
       - AvailabilityZone
       - LifecycleState
       - HealthStatus
-      - LaunchConfigurationName
       - ProtectedFromScaleIn
     properties:
       InstanceId:
@@ -3042,6 +3049,9 @@ definitions:
       LaunchConfigurationName:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: The launch configuration associated with the instance.
+      LaunchTemplate:
+        $ref: '#/definitions/LaunchTemplateSpecification'
+        description: The launch template for the instance.
       ProtectedFromScaleIn:
         $ref: '#/definitions/InstanceProtected'
         description: Indicates whether the instance is protected from termination by Auto Scaling when scaling in.
@@ -3194,6 +3204,24 @@ definitions:
       NextToken:
         $ref: '#/definitions/XmlString'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
+  LaunchTemplateName:
+    type: string
+    pattern: '[a-zA-Z0-9\(\)\.-/_]+'
+    minLength: 3
+    maxLength: 128
+  LaunchTemplateSpecification:
+    type: object
+    properties:
+      LaunchTemplateId:
+        $ref: '#/definitions/XmlStringMaxLen255'
+        description: The ID of the launch template. You must specify either a template ID or a template name.
+      LaunchTemplateName:
+        $ref: '#/definitions/LaunchTemplateName'
+        description: The name of the launch template. You must specify either a template name or a template ID.
+      Version:
+        $ref: '#/definitions/XmlStringMaxLen255'
+        description: 'The version number. By default, the default version of the launch template is used.'
+    description: Describes a launch template.
   LifecycleActionResult:
     type: string
   LifecycleActionToken:
@@ -3240,6 +3268,7 @@ definitions:
     type: object
     required:
       - LifecycleHookName
+      - LifecycleTransition
     properties:
       LifecycleHookName:
         $ref: '#/definitions/AsciiStringMaxLen255'
@@ -3255,7 +3284,7 @@ definitions:
         description: 'The maximum time, in seconds, that can elapse before the lifecycle hook times out. If the lifecycle hook times out, Auto Scaling performs the default action. You can prevent the lifecycle hook from timing out by calling <a>RecordLifecycleActionHeartbeat</a>.'
       DefaultResult:
         $ref: '#/definitions/LifecycleActionResult'
-        description: Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. The valid values are <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.
+        description: Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. The valid values are <code>CONTINUE</code> and <code>ABANDON</code>.
       NotificationTargetARN:
         $ref: '#/definitions/NotificationTargetResourceName'
         description: The ARN of the target that Auto Scaling sends notifications to when an instance is in the transition state for the lifecycle hook. The notification target can be either an SQS queue or an SNS topic.
@@ -3418,7 +3447,7 @@ definitions:
     properties:
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the group.
+        description: The name of the Auto Scaling group.
       TopicARN:
         $ref: '#/definitions/ResourceName'
         description: The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic.
@@ -3496,7 +3525,7 @@ definitions:
         description: The metric type.
       ResourceLabel:
         $ref: '#/definitions/XmlStringMaxLen1023'
-        description: '<p>Identifies the resource associated with the metric type. The following predefined metrics are available:</p> <ul> <li> <p> <code>ASGAverageCPUUtilization</code> - average CPU utilization of the Auto Scaling group</p> </li> <li> <p> <code>ASGAverageNetworkIn</code> - average number of bytes received on all network interfaces by the Auto Scaling group</p> </li> <li> <p> <code>ASGAverageNetworkOut</code> - average number of bytes sent out on all network interfaces by the Auto Scaling group</p> </li> <li> <p> <code>ALBRequestCountPerTarget</code> - number of requests completed per target in an Application Load Balancer target group</p> </li> </ul> <p>For predefined metric types <code>ASGAverageCPUUtilization</code>, <code>ASGAverageNetworkIn</code> and <code>ASGAverageNetworkOut</code>, the parameter must not be specified as the resource associated with the metric type is the Auto Scaling group. For predefined metric type <code>ALBRequestCountPerTarget</code>, the parameter must be specified in the format: <code>app/<i>load-balancer-name</i>/<i>load-balancer-id</i>/targetgroup/<i>target-group-name</i>/<i>target-group-id</i> </code>, where <code>app/<i>load-balancer-name</i>/<i>load-balancer-id</i> </code> is the final portion of the load balancer ARN, and <code>targetgroup/<i>target-group-name</i>/<i>target-group-id</i> </code> is the final portion of the target group ARN. The target group must be attached to the Auto Scaling group.</p>'
+        description: '<p>Identifies the resource associated with the metric type. The following predefined metrics are available:</p> <ul> <li> <p> <code>ASGAverageCPUUtilization</code> - average CPU utilization of the Auto Scaling group</p> </li> <li> <p> <code>ASGAverageNetworkIn</code> - average number of bytes received on all network interfaces by the Auto Scaling group</p> </li> <li> <p> <code>ASGAverageNetworkOut</code> - average number of bytes sent out on all network interfaces by the Auto Scaling group</p> </li> <li> <p> <code>ALBRequestCountPerTarget</code> - number of requests completed per target in an Application Load Balancer target group</p> </li> </ul> <p>For predefined metric types <code>ASGAverageCPUUtilization</code>, <code>ASGAverageNetworkIn</code>, and <code>ASGAverageNetworkOut</code>, the parameter must not be specified as the resource associated with the metric type is the Auto Scaling group. For predefined metric type <code>ALBRequestCountPerTarget</code>, the parameter must be specified in the format: <code>app/<i>load-balancer-name</i>/<i>load-balancer-id</i>/targetgroup/<i>target-group-name</i>/<i>target-group-id</i> </code>, where <code>app/<i>load-balancer-name</i>/<i>load-balancer-id</i> </code> is the final portion of the load balancer ARN, and <code>targetgroup/<i>target-group-name</i>/<i>target-group-id</i> </code> is the final portion of the target group ARN. The target group must be attached to the Auto Scaling group.</p>'
     description: Configures a predefined metric for a target tracking policy.
   ProcessNames:
     type: array
@@ -3557,7 +3586,7 @@ definitions:
         description: The name of the lifecycle hook.
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the Auto Scaling group to which you want to assign the lifecycle hook.
+        description: The name of the Auto Scaling group.
       LifecycleTransition:
         $ref: '#/definitions/LifecycleTransition'
         description: '<p>The instance state to which you want to attach the lifecycle hook. For a list of lifecycle hook types, see <a>DescribeLifecycleHookTypes</a>.</p> <p>This parameter is required for new lifecycle hooks, but optional when updating existing hooks.</p>'
@@ -3610,7 +3639,7 @@ definitions:
     properties:
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name or ARN of the group.
+        description: The name of the Auto Scaling group.
       PolicyName:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: The name of the policy.
@@ -3660,7 +3689,7 @@ definitions:
     properties:
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name or Amazon Resource Name (ARN) of the Auto Scaling group.
+        description: The name of the Auto Scaling group.
       ScheduledActionName:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: The name of this scaling action.
@@ -3703,7 +3732,7 @@ definitions:
         description: The name of the lifecycle hook.
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the Auto Scaling group for the hook.
+        description: The name of the Auto Scaling group.
       LifecycleActionToken:
         $ref: '#/definitions/LifecycleActionToken'
         description: A token that uniquely identifies a specific lifecycle action associated with an instance. Auto Scaling sends this token to the notification target you specified when you created the lifecycle hook.
@@ -3760,7 +3789,7 @@ definitions:
     properties:
       AutoScalingGroupName:
         $ref: '#/definitions/XmlStringMaxLen255'
-        description: The name of the Auto Scaling group associated with this scaling policy.
+        description: The name of the Auto Scaling group.
       PolicyName:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: The name of the scaling policy.
@@ -3812,7 +3841,7 @@ definitions:
     properties:
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name or Amazon Resource Name (ARN) of the Auto Scaling group.
+        description: The name of the Auto Scaling group.
       ScalingProcesses:
         $ref: '#/definitions/ProcessNames'
         description: '<p>One or more of the following processes. If you omit this parameter, all processes are specified.</p> <ul> <li> <p> <code>Launch</code> </p> </li> <li> <p> <code>Terminate</code> </p> </li> <li> <p> <code>HealthCheck</code> </p> </li> <li> <p> <code>ReplaceUnhealthy</code> </p> </li> <li> <p> <code>AZRebalance</code> </p> </li> <li> <p> <code>AlarmNotification</code> </p> </li> <li> <p> <code>ScheduledActions</code> </p> </li> <li> <p> <code>AddToLoadBalancer</code> </p> </li> </ul>'
@@ -3845,7 +3874,7 @@ definitions:
     properties:
       AutoScalingGroupName:
         $ref: '#/definitions/XmlStringMaxLen255'
-        description: The name of the group.
+        description: The name of the Auto Scaling group.
       ScheduledActionName:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: The name of the scheduled action.
@@ -3939,7 +3968,7 @@ definitions:
         description: One or more instance IDs.
       AutoScalingGroupName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the group.
+        description: The name of the Auto Scaling group.
       ProtectedFromScaleIn:
         $ref: '#/definitions/ProtectedFromScaleIn'
         description: Indicates whether the instance is protected from termination by Auto Scaling when scaling in.
@@ -4120,7 +4149,10 @@ definitions:
         description: The name of the Auto Scaling group.
       LaunchConfigurationName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the launch configuration.
+        description: The name of the launch configuration. You must specify either a launch configuration or a launch template.
+      LaunchTemplate:
+        $ref: '#/definitions/LaunchTemplateSpecification'
+        description: The launch template to use to specify the updates. You must specify a launch configuration or a launch template.
       MinSize:
         $ref: '#/definitions/AutoScalingGroupMinSize'
         description: The minimum size of the Auto Scaling group.

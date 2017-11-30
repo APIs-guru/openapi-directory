@@ -1,0 +1,229 @@
+swagger: '2.0'
+info:
+  version: '2017-07-01'
+  x-release: v4
+  title: Amazon Translate
+  description: 'Provides translation between English and one of six languages, or between one of the six languages and English.'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: translate
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/translate-2017-07-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/translate/'
+host: translate.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: TranslateText
+      description: '<p>Translates input text from the source language to the target language. You can translate between English (en) and one of the following languages, or between one of the following languages and English.</p> <ul> <li> <p>Arabic (ar)</p> </li> <li> <p>Chinese (Simplified) (zh)</p> </li> <li> <p>French (fr)</p> </li> <li> <p>German (de)</p> </li> <li> <p>Portuguese (pt)</p> </li> <li> <p>Spanish (es)</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TranslateTextResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: TextSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/TextSizeLimitExceededException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: UnsupportedLanguagePairException
+          schema:
+            $ref: '#/definitions/UnsupportedLanguagePairException'
+        '484':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TranslateTextRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  BoundedLengthString:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  InternalServerException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: An internal server error occurred. Retry your request.
+  InvalidRequestException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: The request is invalid.
+  LanguageCodeString:
+    type: string
+    minLength: 2
+    maxLength: 5
+  ServiceUnavailableException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: Amazon Translate is unavailable. Retry your request later.
+  String:
+    type: string
+    minLength: 1
+  TextSizeLimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: 'The size of the input text exceeds the length constraint for the <code>Text</code> field. Try again with a shorter text. '
+  TooManyRequestsException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: The number of requests exceeds the limit. Resubmit your request later.
+  TranslateTextRequest:
+    type: object
+    required:
+      - Text
+      - SourceLanguageCode
+      - TargetLanguageCode
+    properties:
+      Text:
+        $ref: '#/definitions/BoundedLengthString'
+        description: The text to translate.
+      SourceLanguageCode:
+        $ref: '#/definitions/LanguageCodeString'
+        description: 'One of the supported language codes for the source text. If the <code>TargetLanguageCode</code> is not "en", the <code>SourceLanguageCode</code> must be "en".'
+      TargetLanguageCode:
+        $ref: '#/definitions/LanguageCodeString'
+        description: 'One of the supported language codes for the target text. If the <code>SourceLanguageCode</code> is not "en", the <code>TargetLanguageCode</code> must be "en".'
+  TranslateTextResponse:
+    type: object
+    required:
+      - TranslatedText
+      - SourceLanguageCode
+      - TargetLanguageCode
+    properties:
+      TranslatedText:
+        $ref: '#/definitions/String'
+        description: The text translated into the target language.
+      SourceLanguageCode:
+        $ref: '#/definitions/LanguageCodeString'
+        description: 'The language code for the language of the input text. '
+      TargetLanguageCode:
+        $ref: '#/definitions/LanguageCodeString'
+        description: 'The language code for the language of the translated text. '
+  UnsupportedLanguagePairException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: 'Amazon Translate cannot translate input text in the source language into this target language. For more information, see <a>how-to-error-msg</a>. '

@@ -525,6 +525,97 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /greengrass/definition/resources:
+    get:
+      operationId: ListResourceDefinitions
+      description: Retrieves a list of resource definitions.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListResourceDefinitionsResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListResourceDefinitionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/greengrass/definition/resources/{ResourceDefinitionId}/versions':
+    get:
+      operationId: ListResourceDefinitionVersions
+      description: Lists the versions of a resource definition.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListResourceDefinitionVersionsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListResourceDefinitionVersionsRequest'
+        - name: ResourceDefinitionId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /greengrass/updates:
+    post:
+      operationId: CreateSoftwareUpdateJob
+      description: Creates an Iot Job that will trigger your Greengrass Cores to update the software they are running.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSoftwareUpdateJobResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSoftwareUpdateJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /greengrass/definition/subscriptions:
     get:
       operationId: ListSubscriptionDefinitions
@@ -735,6 +826,39 @@ paths:
           schema:
             $ref: '#/definitions/UpdateLoggerDefinitionRequest'
         - name: LoggerDefinitionId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/greengrass/definition/resources/{ResourceDefinitionId}':
+    put:
+      operationId: UpdateResourceDefinition
+      description: Updates a resource definition.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateResourceDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateResourceDefinitionRequest'
+        - name: ResourceDefinitionId
           in: path
           type: string
           required: true
@@ -1105,6 +1229,43 @@ paths:
           type: string
           required: true
         - name: LoggerDefinitionVersionId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/greengrass/definition/resources/{ResourceDefinitionId}/versions/{ResourceDefinitionVersionId}':
+    get:
+      operationId: GetResourceDefinitionVersion
+      description: 'Retrieves information about a resource definition version, such as which resources are included in the version.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetResourceDefinitionVersionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetResourceDefinitionVersionRequest'
+        - name: ResourceDefinitionId
+          in: path
+          type: string
+          required: true
+        - name: ResourceDefinitionVersionId
           in: path
           type: string
           required: true
@@ -1503,7 +1664,10 @@ definitions:
         description: Function definition version arn for this group.
       LoggerDefinitionVersionArn:
         $ref: '#/definitions/__string'
-        description: Logger definitionv ersion arn for this group.
+        description: Logger definition version arn for this group.
+      ResourceDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: Resource definition version arn for this group.
       SubscriptionDefinitionVersionArn:
         $ref: '#/definitions/__string'
         description: Subscription definition version arn for this group.
@@ -1576,6 +1740,84 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: Unique Id of a version.
+  CreateResourceDefinitionRequest:
+    type: object
+    properties:
+      InitialVersion:
+        $ref: '#/definitions/ResourceDefinitionVersion'
+        description: Information on the initial version
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name of the resource definition
+  CreateResourceDefinitionResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: Arn of the definition.
+      CreationTimestamp:
+        $ref: '#/definitions/__string'
+        description: Timestamp of when the definition was created.
+      Id:
+        $ref: '#/definitions/__string'
+        description: Id of the definition.
+      LastUpdatedTimestamp:
+        $ref: '#/definitions/__string'
+        description: Last updated timestamp of the definition.
+      LatestVersion:
+        $ref: '#/definitions/__string'
+        description: Last version of the definition.
+      LatestVersionArn:
+        $ref: '#/definitions/__string'
+        description: Latest version arn of the definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name of the definition.
+  CreateResourceDefinitionVersionRequest:
+    type: object
+    properties:
+      Resources:
+        $ref: '#/definitions/ListOfResource'
+        description: List of resources.
+  CreateResourceDefinitionVersionResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: Arn of the version.
+      CreationTimestamp:
+        $ref: '#/definitions/__string'
+        description: Timestamp of when the version was created.
+      Id:
+        $ref: '#/definitions/__string'
+        description: Id of the resource container.
+      Version:
+        $ref: '#/definitions/__string'
+        description: Unique Id of a version.
+  CreateSoftwareUpdateJobRequest:
+    type: object
+    properties:
+      S3UrlSignerRole:
+        $ref: '#/definitions/S3UrlSignerRole'
+      SoftwareToUpdate:
+        $ref: '#/definitions/SoftwareToUpdate'
+      UpdateAgentLogLevel:
+        $ref: '#/definitions/UpdateAgentLogLevel'
+      UpdateTargets:
+        $ref: '#/definitions/UpdateTargets'
+      UpdateTargetsArchitecture:
+        $ref: '#/definitions/UpdateTargetsArchitecture'
+      UpdateTargetsOperatingSystem:
+        $ref: '#/definitions/UpdateTargetsOperatingSystem'
+  CreateSoftwareUpdateJobResponse:
+    type: object
+    properties:
+      IotJobArn:
+        $ref: '#/definitions/__string'
+        description: The Iot Job Arn corresponding to this update.
+      IotJobId:
+        $ref: '#/definitions/__string'
+        description: The Iot Job Id corresponding to this update.
   CreateSubscriptionDefinitionRequest:
     type: object
     properties:
@@ -1683,6 +1925,12 @@ definitions:
     type: object
     properties: {}
   DeleteLoggerDefinitionResponse:
+    type: object
+    properties: {}
+  DeleteResourceDefinitionRequest:
+    type: object
+    properties: {}
+  DeleteResourceDefinitionResponse:
     type: object
     properties: {}
   DeleteSubscriptionDefinitionRequest:
@@ -1819,6 +2067,12 @@ definitions:
   FunctionConfigurationEnvironment:
     type: object
     properties:
+      AccessSysfs:
+        $ref: '#/definitions/__boolean'
+        description: Flag to allow lambda access sys filesystem.
+      ResourceAccessPolicies:
+        $ref: '#/definitions/ListOfResourceAccessPolicy'
+        description: Policies for the function to access resources.
       Variables:
         $ref: '#/definitions/MapOf__string'
         description: Environment variables for the lambda function.
@@ -2022,7 +2276,7 @@ definitions:
         description: Timestamp when the funtion definition version was created.
       Definition:
         $ref: '#/definitions/FunctionDefinitionVersion'
-        description: Information on the definition.
+        description: Information on the definition
       Id:
         $ref: '#/definitions/__string'
         description: Id of the function definition the version belongs to.
@@ -2155,6 +2409,54 @@ definitions:
       Version:
         $ref: '#/definitions/__string'
         description: Version of the logger definition version.
+  GetResourceDefinitionRequest:
+    type: object
+    properties: {}
+  GetResourceDefinitionResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: Arn of the definition.
+      CreationTimestamp:
+        $ref: '#/definitions/__string'
+        description: Timestamp of when the definition was created.
+      Id:
+        $ref: '#/definitions/__string'
+        description: Id of the definition.
+      LastUpdatedTimestamp:
+        $ref: '#/definitions/__string'
+        description: Last updated timestamp of the definition.
+      LatestVersion:
+        $ref: '#/definitions/__string'
+        description: Last version of the definition.
+      LatestVersionArn:
+        $ref: '#/definitions/__string'
+        description: Latest version arn of the definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: Name of the definition.
+  GetResourceDefinitionVersionRequest:
+    type: object
+    properties: {}
+  GetResourceDefinitionVersionResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: Arn of the resource definition version.
+      CreationTimestamp:
+        $ref: '#/definitions/__string'
+        description: Timestamp of when the resource definition version was created.
+      Definition:
+        $ref: '#/definitions/ResourceDefinitionVersion'
+        description: Information on definition.
+      Id:
+        $ref: '#/definitions/__string'
+        description: Id of the resource definition the version belongs to.
+      Version:
+        $ref: '#/definitions/__string'
+        description: Version of the resource definition version.
   GetServiceRoleForAccountRequest:
     type: object
     properties: {}
@@ -2263,6 +2565,16 @@ definitions:
         $ref: '#/definitions/__string'
         description: Name of a group.
     description: Information on the group
+  GroupOwnerSetting:
+    type: object
+    properties:
+      AutoAddGroupOwner:
+        $ref: '#/definitions/__boolean'
+        description: Eanble the auto added group owner.
+      GroupOwner:
+        $ref: '#/definitions/__string'
+        description: Name of the group owner.
+    description: Group owner related settings for local resources.
   GroupVersion:
     type: object
     properties:
@@ -2277,7 +2589,10 @@ definitions:
         description: Function definition version arn for this group.
       LoggerDefinitionVersionArn:
         $ref: '#/definitions/__string'
-        description: Logger definitionv ersion arn for this group.
+        description: Logger definition version arn for this group.
+      ResourceDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: Resource definition version arn for this group.
       SubscriptionDefinitionVersionArn:
         $ref: '#/definitions/__string'
         description: Subscription definition version arn for this group.
@@ -2475,6 +2790,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Logger'
+  ListOfResource:
+    type: array
+    items:
+      $ref: '#/definitions/Resource'
+  ListOfResourceAccessPolicy:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceAccessPolicy'
   ListOfSubscription:
     type: array
     items:
@@ -2483,6 +2806,30 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/VersionInformation'
+  ListResourceDefinitionVersionsRequest:
+    type: object
+    properties: {}
+  ListResourceDefinitionVersionsResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+      Versions:
+        $ref: '#/definitions/ListOfVersionInformation'
+        description: Versions
+  ListResourceDefinitionsRequest:
+    type: object
+    properties: {}
+  ListResourceDefinitionsResponse:
+    type: object
+    properties:
+      Definitions:
+        $ref: '#/definitions/ListOfDefinitionInformation'
+        description: Definitions
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
   ListSubscriptionDefinitionVersionsRequest:
     type: object
     properties: {}
@@ -2517,6 +2864,29 @@ definitions:
         $ref: '#/definitions/ListOfVersionInformation'
         description: Versions
     description: List of versions response
+  LocalDeviceResourceData:
+    type: object
+    properties:
+      GroupOwnerSetting:
+        $ref: '#/definitions/GroupOwnerSetting'
+        description: Group owner related settings for local resources.
+      SourcePath:
+        $ref: '#/definitions/__string'
+        description: Local source path of the resource.
+    description: Attributes that define the Local Device Resource.
+  LocalVolumeResourceData:
+    type: object
+    properties:
+      DestinationPath:
+        $ref: '#/definitions/__string'
+        description: Local destination path of the resource.
+      GroupOwnerSetting:
+        $ref: '#/definitions/GroupOwnerSetting'
+        description: Group owner related settings for local resources.
+      SourcePath:
+        $ref: '#/definitions/__string'
+        description: Local source path of the resource.
+    description: Attributes that define the Local Volume Resource.
   Logger:
     type: object
     properties:
@@ -2570,6 +2940,12 @@ definitions:
           $ref: '#/definitions/__string'
         value:
           $ref: '#/definitions/__string'
+  Permission:
+    type: string
+    enum:
+      - ro
+      - rw
+    description: Type of permissions a function could have to access a resource.
   ResetDeploymentsRequest:
     type: object
     properties:
@@ -2586,6 +2962,55 @@ definitions:
       DeploymentId:
         $ref: '#/definitions/__string'
         description: The id of the reset deployment.
+  Resource:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/__string'
+        description: Resource Id.
+      Name:
+        $ref: '#/definitions/__string'
+        description: A descriptive resource name.
+      ResourceDataContainer:
+        $ref: '#/definitions/ResourceDataContainer'
+        description: A container of data for all resource types.
+    description: Information on the resource.
+  ResourceAccessPolicy:
+    type: object
+    properties:
+      Permission:
+        $ref: '#/definitions/Permission'
+        description: The function's access permission to the resource.
+      ResourceId:
+        $ref: '#/definitions/__string'
+        description: Id of the resource. A reference to the resource definiton.
+    description: Policy for the function to access a resource.
+  ResourceDataContainer:
+    type: object
+    properties:
+      LocalDeviceResourceData:
+        $ref: '#/definitions/LocalDeviceResourceData'
+        description: Attributes that define the Local Device Resource.
+      LocalVolumeResourceData:
+        $ref: '#/definitions/LocalVolumeResourceData'
+        description: Attributes that define the Local Volume Resource.
+    description: A container of data for all resource types.
+  ResourceDefinitionVersion:
+    type: object
+    properties:
+      Resources:
+        $ref: '#/definitions/ListOfResource'
+        description: List of resources.
+    description: Information on resource definition version
+  S3UrlSignerRole:
+    type: string
+    description: The IAM Role that Greengrass will use to create pre-signed URLs pointing towards the update artifact.
+  SoftwareToUpdate:
+    type: string
+    enum:
+      - core
+      - ota_agent
+    description: The piece of software on the Greengrass Core that will be updated.
   Subscription:
     type: object
     properties:
@@ -2609,6 +3034,18 @@ definitions:
         $ref: '#/definitions/ListOfSubscription'
         description: Subscriptions in the version.
     description: Information on subscription definition version
+  UpdateAgentLogLevel:
+    type: string
+    enum:
+      - NONE
+      - TRACE
+      - DEBUG
+      - VERBOSE
+      - INFO
+      - WARN
+      - ERROR
+      - FATAL
+    description: The minimum level of log statements that should be logged by the OTA Agent during an update.
   UpdateConnectivityInfoRequest:
     type: object
     properties:
@@ -2688,6 +3125,15 @@ definitions:
   UpdateLoggerDefinitionResponse:
     type: object
     properties: {}
+  UpdateResourceDefinitionRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: name of the definition
+  UpdateResourceDefinitionResponse:
+    type: object
+    properties: {}
   UpdateSubscriptionDefinitionRequest:
     type: object
     properties:
@@ -2697,6 +3143,25 @@ definitions:
   UpdateSubscriptionDefinitionResponse:
     type: object
     properties: {}
+  UpdateTargets:
+    type: array
+    description: The target arns that this update will be applied to.
+    items:
+      $ref: '#/definitions/__string'
+  UpdateTargetsArchitecture:
+    type: string
+    enum:
+      - armv7l
+      - x86_64
+      - aarch64
+    description: The architecture of the Cores in the targets of an update
+  UpdateTargetsOperatingSystem:
+    type: string
+    enum:
+      - ubuntu
+      - raspbian
+      - amazon_linux
+    description: The operating system of the Cores in the targets of an update
   VersionInformation:
     type: object
     properties:

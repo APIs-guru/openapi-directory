@@ -205,6 +205,112 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AttachInstancesToLoadBalancer':
+    post:
+      operationId: AttachInstancesToLoadBalancer
+      description: Attaches one or more Lightsail instances to a load balancer.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AttachInstancesToLoadBalancerResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AttachInstancesToLoadBalancerRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AttachLoadBalancerTlsCertificate':
+    post:
+      operationId: AttachLoadBalancerTlsCertificate
+      description: '<p>Attaches a Transport Layer Security (TLS) certificate to your load balancer.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AttachLoadBalancerTlsCertificateResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AttachLoadBalancerTlsCertificateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#AttachStaticIp':
     post:
       operationId: AttachStaticIp
@@ -788,6 +894,112 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateLoadBalancer':
+    post:
+      operationId: CreateLoadBalancer
+      description: '<p>Creates a Lightsail load balancer.</p> <p>When you create a load balancer, you can specify certificates and port settings. You can create up to 5 load balancers per AWS Region in your account.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateLoadBalancerResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLoadBalancerRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateLoadBalancerTlsCertificate':
+    post:
+      operationId: CreateLoadBalancerTlsCertificate
+      description: '<p>Creates a Lightsail load balancer TLS certificate.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateLoadBalancerTlsCertificateResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLoadBalancerTlsCertificateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteDisk':
     post:
       operationId: DeleteDisk
@@ -1159,6 +1371,112 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteLoadBalancer':
+    post:
+      operationId: DeleteLoadBalancer
+      description: Deletes a Lightsail load balancer.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteLoadBalancerResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLoadBalancerRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteLoadBalancerTlsCertificate':
+    post:
+      operationId: DeleteLoadBalancerTlsCertificate
+      description: Deletes a TLS/SSL certificate associated with a Lightsail load balancer.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteLoadBalancerTlsCertificateResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLoadBalancerTlsCertificateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DetachDisk':
     post:
       operationId: DetachDisk
@@ -1202,6 +1520,59 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DetachDiskRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DetachInstancesFromLoadBalancer':
+    post:
+      operationId: DetachInstancesFromLoadBalancer
+      description: Detaches the specified instances from a Lightsail load balancer.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DetachInstancesFromLoadBalancerResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DetachInstancesFromLoadBalancerRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2325,6 +2696,218 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetLoadBalancer':
+    post:
+      operationId: GetLoadBalancer
+      description: Returns information about the specified Lightsail load balancer.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLoadBalancerResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLoadBalancerRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetLoadBalancerMetricData':
+    post:
+      operationId: GetLoadBalancerMetricData
+      description: Returns information about health metrics for your Lightsail load balancer.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLoadBalancerMetricDataResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLoadBalancerMetricDataRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetLoadBalancerTlsCertificates':
+    post:
+      operationId: GetLoadBalancerTlsCertificates
+      description: '<p>Returns information about the TLS certificates that are associated with the specified Lightsail load balancer.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLoadBalancerTlsCertificatesResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLoadBalancerTlsCertificatesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetLoadBalancers':
+    post:
+      operationId: GetLoadBalancers
+      description: '<p>Returns information about all load balancers in an account.</p> <p>If you are describing a long list of load balancers, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLoadBalancersResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLoadBalancersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#GetOperation':
     post:
       operationId: GetOperation
@@ -3226,6 +3809,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateLoadBalancerAttribute':
+    post:
+      operationId: UpdateLoadBalancerAttribute
+      description: Updates the specified attribute for a load balancer.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateLoadBalancerAttributeResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateLoadBalancerAttributeRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   AccessDeniedException:
     type: object
@@ -3291,7 +3927,43 @@ definitions:
     properties:
       operations:
         $ref: '#/definitions/OperationList'
-        description: An object describing the API operation.
+        description: An object describing the API operations.
+  AttachInstancesToLoadBalancerRequest:
+    type: object
+    required:
+      - loadBalancerName
+      - instanceNames
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the load balancer.
+      instanceNames:
+        $ref: '#/definitions/ResourceNameList'
+        description: An array of strings representing the instance name(s) you want to attach to your load balancer.
+  AttachInstancesToLoadBalancerResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object representing the API operations.
+  AttachLoadBalancerTlsCertificateRequest:
+    type: object
+    required:
+      - loadBalancerName
+      - certificateName
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the load balancer to which you want to associate the TLS/SSL certificate.
+      certificateName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of your TLS/SSL certificate.
+  AttachLoadBalancerTlsCertificateResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object representing the API operations.
   AttachStaticIpRequest:
     type: object
     required:
@@ -3584,7 +4256,7 @@ definitions:
         description: 'The bundle of specification information for your virtual private server (or <i>instance</i>), including the pricing plan (e.g., <code>micro_1_0</code>).'
       userData:
         $ref: '#/definitions/string'
-        description: '<p>You can create a launch script that configures a server with additional user data. For example, <code>apt-get –y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href="http://lightsail.aws.amazon.com/ls/docs/getting-started/articles/pre-installed-apps">Dev Guide</a>.</p> </note>'
+        description: '<p>You can create a launch script that configures a server with additional user data. For example, <code>apt-get -y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href="http://lightsail.aws.amazon.com/ls/docs/getting-started/articles/pre-installed-apps">Dev Guide</a>.</p> </note>'
       keyPairName:
         $ref: '#/definitions/ResourceName'
         description: The name for your key pair.
@@ -3619,7 +4291,7 @@ definitions:
         description: 'The bundle of specification information for your virtual private server (or <i>instance</i>), including the pricing plan (e.g., <code>micro_1_0</code>).'
       userData:
         $ref: '#/definitions/string'
-        description: '<p>A launch script you can create that configures a server with additional user data. For example, you might want to run <code>apt-get –y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href="https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image">Dev Guide</a>.</p> </note>'
+        description: '<p>A launch script you can create that configures a server with additional user data. For example, you might want to run <code>apt-get -y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href="https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image">Dev Guide</a>.</p> </note>'
       keyPairName:
         $ref: '#/definitions/ResourceName'
         description: The name of your key pair.
@@ -3652,6 +4324,61 @@ definitions:
       operation:
         $ref: '#/definitions/Operation'
         description: An array of key-value pairs containing information about the results of your create key pair request.
+  CreateLoadBalancerRequest:
+    type: object
+    required:
+      - loadBalancerName
+      - instancePort
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of your load balancer.
+      instancePort:
+        $ref: '#/definitions/Port'
+        description: The instance port where you're creating your load balancer.
+      healthCheckPath:
+        $ref: '#/definitions/string'
+        description: 'The path you provided to perform the load balancer health check. If you didn''t specify a health check path, Lightsail uses the root path of your website (e.g., <code>"/"</code>).'
+      certificateName:
+        $ref: '#/definitions/ResourceName'
+        description: '<p>The name of the TLS/SSL certificate.</p> <p>If you specify <code>certificateName</code>, then <code>certificateDomainName</code> is required (and vice-versa).</p>'
+      certificateDomainName:
+        $ref: '#/definitions/DomainName'
+        description: '<p>The domain name with which your certificate is associated (e.g., <code>example.com</code>).</p> <p>If you specify <code>certificateDomainName</code>, then <code>certificateName</code> is required (and vice-versa).</p>'
+      certificateAlternativeNames:
+        $ref: '#/definitions/DomainNameList'
+        description: 'The alternative domain names to use with your TLS/SSL certificate (e.g., <code>www.example.com</code>, <code>www.ejemplo.com</code>, <code>ejemplo.com</code>).'
+  CreateLoadBalancerResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object containing information about the API operations.
+  CreateLoadBalancerTlsCertificateRequest:
+    type: object
+    required:
+      - loadBalancerName
+      - certificateName
+      - certificateDomainName
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The load balancer name where you want to create the TLS/SSL certificate.
+      certificateName:
+        $ref: '#/definitions/ResourceName'
+        description: The TLS/SSL certificate name.
+      certificateDomainName:
+        $ref: '#/definitions/DomainName'
+        description: 'The domain name (e.g., <code>example.com</code>) for your TLS/SSL certificate.'
+      certificateAlternativeNames:
+        $ref: '#/definitions/DomainNameList'
+        description: An array of strings listing alternative domain names for your TLS/SSL certificate.
+  CreateLoadBalancerTlsCertificateResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object containing information about the API operations.
   DeleteDiskRequest:
     type: object
     required:
@@ -3754,6 +4481,41 @@ definitions:
       operation:
         $ref: '#/definitions/Operation'
         description: An array of key-value pairs containing information about the results of your delete key pair request.
+  DeleteLoadBalancerRequest:
+    type: object
+    required:
+      - loadBalancerName
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the load balancer you want to delete.
+  DeleteLoadBalancerResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
+  DeleteLoadBalancerTlsCertificateRequest:
+    type: object
+    required:
+      - loadBalancerName
+      - certificateName
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The load balancer name.
+      certificateName:
+        $ref: '#/definitions/ResourceName'
+        description: The TLS/SSL certificate name.
+      force:
+        $ref: '#/definitions/boolean'
+        description: 'When <code>true</code>, forces the deletion of a TLS/SSL certificate.'
+  DeleteLoadBalancerTlsCertificateResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
   DetachDiskRequest:
     type: object
     required:
@@ -3763,6 +4525,24 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: 'The unique name of the disk you want to detach from your instance (e.g., <code>my-disk</code>).'
   DetachDiskResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
+  DetachInstancesFromLoadBalancerRequest:
+    type: object
+    required:
+      - loadBalancerName
+      - instanceNames
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the Lightsail load balancer.
+      instanceNames:
+        $ref: '#/definitions/ResourceNameList'
+        description: An array of strings containing the names of the instances you want to detach from the load balancer.
+  DetachInstancesFromLoadBalancerResult:
     type: object
     properties:
       operations:
@@ -3826,10 +4606,10 @@ definitions:
         description: A Boolean value indicating whether the disk is attached.
       attachmentState:
         $ref: '#/definitions/string'
-        description: '<p>(Deprecated) The attachment state of the disk.</p> <note> <p>In releases prior to November 9, 2017, this parameter returned <code>attached</code> for system disks in the API response. It is now deprecated, but still included in the response. Use <code>isAttached</code> instead.</p> </note>'
+        description: '<p>(Deprecated) The attachment state of the disk.</p> <note> <p>In releases prior to November 14, 2017, this parameter returned <code>attached</code> for system disks in the API response. It is now deprecated, but still included in the response. Use <code>isAttached</code> instead.</p> </note>'
       gbInUse:
         $ref: '#/definitions/integer'
-        description: '<p>(Deprecated) The number of GB in use by the disk.</p> <note> <p>In releases prior to November 9, 2017, this parameter was not included in the API response. It is now deprecated.</p> </note>'
+        description: '<p>(Deprecated) The number of GB in use by the disk.</p> <note> <p>In releases prior to November 14, 2017, this parameter was not included in the API response. It is now deprecated.</p> </note>'
     description: Describes a system disk or an block storage disk.
   DiskList:
     type: array
@@ -3942,12 +4722,15 @@ definitions:
       target:
         $ref: '#/definitions/string'
         description: 'The target AWS name server (e.g., <code>ns-111.awsdns-22.com.</code>).'
+      isAlias:
+        $ref: '#/definitions/boolean'
+        description: 'When <code>true</code>, specifies whether the domain entry is an alias used by the Lightsail load balancer.'
       type:
         $ref: '#/definitions/DomainEntryType'
         description: 'The type of domain entry (e.g., <code>SOA</code> or <code>NS</code>).'
       options:
         $ref: '#/definitions/DomainEntryOptions'
-        description: The options for the domain entry.
+        description: '<p>(Deprecated) The options for the domain entry.</p> <note> <p>In releases prior to November 29, 2017, this parameter was not included in the API response. It is now deprecated.</p> </note>'
     description: Describes a domain recordset entry.
   DomainEntryList:
     type: array
@@ -3972,6 +4755,10 @@ definitions:
       $ref: '#/definitions/Domain'
   DomainName:
     type: string
+  DomainNameList:
+    type: array
+    items:
+      $ref: '#/definitions/DomainName'
   DownloadDefaultKeyPairRequest:
     type: object
     properties: {}
@@ -4176,7 +4963,7 @@ definitions:
     properties:
       metricName:
         $ref: '#/definitions/InstanceMetricName'
-        description: 'The metric name to return data for. '
+        description: The metric name to return data for.
       metricData:
         $ref: '#/definitions/MetricDatapointList'
         description: An array of key-value pairs containing information about the results of your get instance metric data request.
@@ -4295,6 +5082,90 @@ definitions:
       nextPageToken:
         $ref: '#/definitions/string'
         description: A token used for advancing to the next page of results from your get key pairs request.
+  GetLoadBalancerMetricDataRequest:
+    type: object
+    required:
+      - loadBalancerName
+      - metricName
+      - period
+      - startTime
+      - endTime
+      - unit
+      - statistics
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the load balancer.
+      metricName:
+        $ref: '#/definitions/LoadBalancerMetricName'
+        description: '<p>The metric about which you want to return information. Valid values are listed below, along with the most useful <code>statistics</code> to include in your request.</p> <ul> <li> <p> <b> <code>ClientTLSNegotiationErrorCount</code> </b> - The number of TLS connections initiated by the client that did not establish a session with the load balancer. Possible causes include a mismatch of ciphers or protocols.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> </li> <li> <p> <b> <code>HealthyHostCount</code> </b> - The number of target instances that are considered healthy.</p> <p> <code>Statistics</code>: The most useful statistic are <code>Average</code>, <code>Minimum</code>, and <code>Maximum</code>.</p> </li> <li> <p> <b> <code>UnhealthyHostCount</code> </b> - The number of target instances that are considered unhealthy.</p> <p> <code>Statistics</code>: The most useful statistic are <code>Average</code>, <code>Minimum</code>, and <code>Maximum</code>.</p> </li> <li> <p> <b> <code>HTTPCode_LB_4XX_Count</code> </b> - The number of HTTP 4XX client error codes that originate from the load balancer. Client errors are generated when requests are malformed or incomplete. These requests have not been received by the target instance. This count does not include any response codes generated by the target instances.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_LB_5XX_Count</code> </b> - The number of HTTP 5XX server error codes that originate from the load balancer. This count does not include any response codes generated by the target instances.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_2XX_Count</code> </b> - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_3XX_Count</code> </b> - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer. </p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_4XX_Count</code> </b> - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_5XX_Count</code> </b> - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>InstanceResponseTime</code> </b> - The time elapsed, in seconds, after the request leaves the load balancer until a response from the target instance is received.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> </li> <li> <p> <b> <code>RejectedConnectionCount</code> </b> - The number of connections that were rejected because the load balancer had reached its maximum number of connections.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> </li> <li> <p> <b> <code>RequestCount</code> </b> - The number of requests processed over IPv4. This count includes only the requests with a response generated by a target instance of the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> </ul>'
+      period:
+        $ref: '#/definitions/MetricPeriod'
+        description: The time period duration for your health data request.
+      startTime:
+        $ref: '#/definitions/timestamp'
+        description: The start time of the period.
+      endTime:
+        $ref: '#/definitions/timestamp'
+        description: The end time of the period.
+      unit:
+        $ref: '#/definitions/MetricUnit'
+        description: The unit for the time period request. Valid values are listed below.
+      statistics:
+        $ref: '#/definitions/MetricStatisticList'
+        description: An array of statistics that you want to request metrics for. Valid values are listed below.
+  GetLoadBalancerMetricDataResult:
+    type: object
+    properties:
+      metricName:
+        $ref: '#/definitions/LoadBalancerMetricName'
+        description: The metric about which you are receiving information. Valid values are listed below.
+      metricData:
+        $ref: '#/definitions/MetricDatapointList'
+        description: An array of metric datapoint objects.
+  GetLoadBalancerRequest:
+    type: object
+    required:
+      - loadBalancerName
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the load balancer.
+  GetLoadBalancerResult:
+    type: object
+    properties:
+      loadBalancer:
+        $ref: '#/definitions/LoadBalancer'
+        description: An object containing information about your load balancer.
+  GetLoadBalancerTlsCertificatesRequest:
+    type: object
+    required:
+      - loadBalancerName
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the load balancer where you stored your TLS/SSL certificate.
+  GetLoadBalancerTlsCertificatesResult:
+    type: object
+    properties:
+      tlsCertificates:
+        $ref: '#/definitions/LoadBalancerTlsCertificateList'
+        description: An array of LoadBalancerTlsCertificate objects describing your TLS/SSL certificates.
+  GetLoadBalancersRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for paginating the results from your GetLoadBalancers request.
+  GetLoadBalancersResult:
+    type: object
+    properties:
+      loadBalancers:
+        $ref: '#/definitions/LoadBalancerList'
+        description: An array of LoadBalancer objects describing your load balancers.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results from your GetLoadBalancers request.
   GetOperationRequest:
     type: object
     required:
@@ -4513,6 +5384,46 @@ definitions:
         $ref: '#/definitions/float'
         description: 'The amount of RAM in GB on the instance (e.g., <code>1.0</code>).'
     description: Describes the hardware for the instance.
+  InstanceHealthReason:
+    type: string
+    enum:
+      - Lb.RegistrationInProgress
+      - Lb.InitialHealthChecking
+      - Lb.InternalError
+      - Instance.ResponseCodeMismatch
+      - Instance.Timeout
+      - Instance.FailedHealthChecks
+      - Instance.NotRegistered
+      - Instance.NotInUse
+      - Instance.DeregistrationInProgress
+      - Instance.InvalidState
+      - Instance.IpUnusable
+  InstanceHealthState:
+    type: string
+    enum:
+      - initial
+      - healthy
+      - unhealthy
+      - unused
+      - draining
+      - unavailable
+  InstanceHealthSummary:
+    type: object
+    properties:
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the Lightsail instance for which you are requesting health check data.
+      instanceHealth:
+        $ref: '#/definitions/InstanceHealthState'
+        description: Describes the overall instance health. Valid values are below.
+      instanceHealthReason:
+        $ref: '#/definitions/InstanceHealthReason'
+        description: More information about the instance health. Valid values are below.
+    description: Describes information about the health of the instance.
+  InstanceHealthSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceHealthSummary'
   InstanceList:
     type: array
     items:
@@ -4719,6 +5630,288 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/KeyPair'
+  LoadBalancer:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the load balancer (e.g., <code>my-load-balancer</code>).'
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the load balancer.
+      supportCode:
+        $ref: '#/definitions/string'
+        description: The support code. Include this code in your email to support when you have questions about your Lightsail load balancer. This code enables our support team to look up your Lightsail information more easily.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The date when your load balancer was created.
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: 'The AWS Region and Availability Zone where your load balancer was created (e.g., <code>us-east-2a</code>).'
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The resource type (e.g., <code>LoadBalancer</code>.'
+      dnsName:
+        $ref: '#/definitions/NonEmptyString'
+        description: The DNS name of your Lightsail load balancer.
+      state:
+        $ref: '#/definitions/LoadBalancerState'
+        description: The status of your load balancer. Valid values are below.
+      protocol:
+        $ref: '#/definitions/LoadBalancerProtocol'
+        description: The protocol you have enabled for your load balancer. Valid values are below.
+      publicPorts:
+        $ref: '#/definitions/PortList'
+        description: An array of public port settings for your load balancer.
+      healthCheckPath:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The path you specified to perform your health checks. If no path is specified, the load balancer tries to make a request to the default (root) page.'
+      instancePort:
+        $ref: '#/definitions/integer'
+        description: The instance port where the load balancer is listening.
+      instanceHealthSummary:
+        $ref: '#/definitions/InstanceHealthSummaryList'
+        description: An array of InstanceHealthSummary objects describing the health of the load balancer.
+      tlsCertificateSummaries:
+        $ref: '#/definitions/LoadBalancerTlsCertificateSummaryList'
+        description: An array of LoadBalancerTlsCertificateSummary objects that provide additional information about the TLS/SSL certificates.
+      configurationOptions:
+        $ref: '#/definitions/LoadBalancerConfigurationOptions'
+        description: A string to string map of the configuration options for your load balancer. Valid values are listed below.
+    description: Describes the Lightsail load balancer.
+  LoadBalancerAttributeName:
+    type: string
+    enum:
+      - HealthCheckPath
+      - SessionStickinessEnabled
+      - SessionStickiness_LB_CookieDurationSeconds
+  LoadBalancerConfigurationOptions:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/LoadBalancerAttributeName'
+        value:
+          $ref: '#/definitions/string'
+  LoadBalancerList:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancer'
+  LoadBalancerMetricName:
+    type: string
+    enum:
+      - ClientTLSNegotiationErrorCount
+      - HealthyHostCount
+      - UnhealthyHostCount
+      - HTTPCode_LB_4XX_Count
+      - HTTPCode_LB_5XX_Count
+      - HTTPCode_Instance_2XX_Count
+      - HTTPCode_Instance_3XX_Count
+      - HTTPCode_Instance_4XX_Count
+      - HTTPCode_Instance_5XX_Count
+      - InstanceResponseTime
+      - RejectedConnectionCount
+      - RequestCount
+  LoadBalancerProtocol:
+    type: string
+    enum:
+      - HTTP_HTTPS
+      - HTTP
+  LoadBalancerState:
+    type: string
+    enum:
+      - active
+      - provisioning
+      - active_impaired
+      - failed
+      - unknown
+  LoadBalancerTlsCertificate:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the TLS/SSL certificate (e.g., <code>my-certificate</code>).'
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the TLS/SSL certificate.
+      supportCode:
+        $ref: '#/definitions/string'
+        description: The support code. Include this code in your email to support when you have questions about your Lightsail load balancer or TLS/SSL certificate. This code enables our support team to look up your Lightsail information more easily.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The time when you created your TLS/SSL certificate.
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The AWS Region and Availability Zone where you created your certificate.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The resource type (e.g., <code>LoadBalancerTlsCertificate</code>.'
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The load balancer name where your TLS/SSL certificate is attached.
+      isAttached:
+        $ref: '#/definitions/boolean'
+        description: 'When <code>true</code>, the TLS/SSL certificate is attached to the Lightsail load balancer.'
+      status:
+        $ref: '#/definitions/LoadBalancerTlsCertificateStatus'
+        description: The status of the TLS/SSL certificate. Valid values are below.
+      domainName:
+        $ref: '#/definitions/DomainName'
+        description: The domain name for your TLS/SSL certificate.
+      domainValidationRecords:
+        $ref: '#/definitions/LoadBalancerTlsCertificateDomainValidationRecordList'
+        description: An array of LoadBalancerTlsCertificateDomainValidationRecord objects describing the records.
+      failureReason:
+        $ref: '#/definitions/LoadBalancerTlsCertificateFailureReason'
+        description: The reason for the TLS/SSL certificate validation failure.
+      issuedAt:
+        $ref: '#/definitions/IsoDate'
+        description: The time when the TLS/SSL certificate was issued.
+      issuer:
+        $ref: '#/definitions/NonEmptyString'
+        description: The issuer of the certificate.
+      keyAlgorithm:
+        $ref: '#/definitions/NonEmptyString'
+        description: The algorithm that was used to generate the key pair (the public and private key).
+      notAfter:
+        $ref: '#/definitions/IsoDate'
+        description: The timestamp when the TLS/SSL certificate expires.
+      notBefore:
+        $ref: '#/definitions/IsoDate'
+        description: The timestamp when the TLS/SSL certificate is first valid.
+      renewalSummary:
+        $ref: '#/definitions/LoadBalancerTlsCertificateRenewalSummary'
+        description: An object containing information about the status of Lightsail's managed renewal for the certificate.
+      revocationReason:
+        $ref: '#/definitions/LoadBalancerTlsCertificateRevocationReason'
+        description: The reason the certificate was revoked. Valid values are below.
+      revokedAt:
+        $ref: '#/definitions/IsoDate'
+        description: The timestamp when the TLS/SSL certificate was revoked.
+      serial:
+        $ref: '#/definitions/NonEmptyString'
+        description: The serial number of the certificate.
+      signatureAlgorithm:
+        $ref: '#/definitions/NonEmptyString'
+        description: The algorithm that was used to sign the certificate.
+      subject:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of the entity that is associated with the public key contained in the certificate.
+      subjectAlternativeNames:
+        $ref: '#/definitions/StringList'
+        description: One or more domain names (subject alternative names) included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate. The subject alternative names include the canonical domain name (CN) of the certificate and additional domain names that can be used to connect to the website.
+    description: '<p>Describes a load balancer TLS/SSL certificate.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>'
+  LoadBalancerTlsCertificateDomainStatus:
+    type: string
+    enum:
+      - PENDING_VALIDATION
+      - FAILED
+      - SUCCESS
+  LoadBalancerTlsCertificateDomainValidationOption:
+    type: object
+    properties:
+      domainName:
+        $ref: '#/definitions/DomainName'
+        description: A fully qualified domain name in the certificate request.
+      validationStatus:
+        $ref: '#/definitions/LoadBalancerTlsCertificateDomainStatus'
+        description: The status of the domain validation. Valid values are listed below.
+    description: Contains information about the domain names on a TLS/SSL certificate that you will use to validate domain ownership.
+  LoadBalancerTlsCertificateDomainValidationOptionList:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerTlsCertificateDomainValidationOption'
+  LoadBalancerTlsCertificateDomainValidationRecord:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'A fully qualified domain name in the certificate. For example, <code>example.com</code>.'
+      type:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The type of validation record. For example, <code>CNAME</code> for domain validation.'
+      value:
+        $ref: '#/definitions/NonEmptyString'
+        description: The value for that type.
+      validationStatus:
+        $ref: '#/definitions/LoadBalancerTlsCertificateDomainStatus'
+        description: The validation status. Valid values are listed below.
+      domainName:
+        $ref: '#/definitions/DomainName'
+        description: The domain name against which your TLS/SSL certificate was validated.
+    description: Describes the validation record of each domain name in the TLS/SSL certificate.
+  LoadBalancerTlsCertificateDomainValidationRecordList:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerTlsCertificateDomainValidationRecord'
+  LoadBalancerTlsCertificateFailureReason:
+    type: string
+    enum:
+      - NO_AVAILABLE_CONTACTS
+      - ADDITIONAL_VERIFICATION_REQUIRED
+      - DOMAIN_NOT_ALLOWED
+      - INVALID_PUBLIC_DOMAIN
+      - OTHER
+  LoadBalancerTlsCertificateList:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerTlsCertificate'
+  LoadBalancerTlsCertificateRenewalStatus:
+    type: string
+    enum:
+      - PENDING_AUTO_RENEWAL
+      - PENDING_VALIDATION
+      - SUCCESS
+      - FAILED
+  LoadBalancerTlsCertificateRenewalSummary:
+    type: object
+    properties:
+      renewalStatus:
+        $ref: '#/definitions/LoadBalancerTlsCertificateRenewalStatus'
+        description: The status of Lightsail's managed renewal of the certificate. Valid values are listed below.
+      domainValidationOptions:
+        $ref: '#/definitions/LoadBalancerTlsCertificateDomainValidationOptionList'
+        description: 'Contains information about the validation of each domain name in the certificate, as it pertains to Lightsail''s managed renewal. This is different from the initial validation that occurs as a result of the RequestCertificate request.'
+    description: Contains information about the status of Lightsail's managed renewal for the certificate.
+  LoadBalancerTlsCertificateRevocationReason:
+    type: string
+    enum:
+      - UNSPECIFIED
+      - KEY_COMPROMISE
+      - CA_COMPROMISE
+      - AFFILIATION_CHANGED
+      - SUPERCEDED
+      - CESSATION_OF_OPERATION
+      - CERTIFICATE_HOLD
+      - REMOVE_FROM_CRL
+      - PRIVILEGE_WITHDRAWN
+      - A_A_COMPROMISE
+  LoadBalancerTlsCertificateStatus:
+    type: string
+    enum:
+      - PENDING_VALIDATION
+      - ISSUED
+      - INACTIVE
+      - EXPIRED
+      - VALIDATION_TIMED_OUT
+      - REVOKED
+      - FAILED
+      - UNKNOWN
+  LoadBalancerTlsCertificateSummary:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the TLS/SSL certificate.
+      isAttached:
+        $ref: '#/definitions/boolean'
+        description: 'When <code>true</code>, the TLS/SSL certificate is attached to the Lightsail load balancer.'
+    description: Provides a summary of TLS/SSL certificate metadata.
+  LoadBalancerTlsCertificateSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerTlsCertificateSummary'
   MetricDatapoint:
     type: object
     properties:
@@ -4925,6 +6118,14 @@ definitions:
       - CreateInstanceSnapshot
       - DeleteInstanceSnapshot
       - CreateInstancesFromSnapshot
+      - CreateLoadBalancer
+      - DeleteLoadBalancer
+      - AttachInstancesToLoadBalancer
+      - DetachInstancesFromLoadBalancer
+      - UpdateLoadBalancerAttribute
+      - CreateLoadBalancerTlsCertificate
+      - DeleteLoadBalancerTlsCertificate
+      - AttachLoadBalancerTlsCertificate
       - CreateDisk
       - DeleteDisk
       - AttachDisk
@@ -4977,6 +6178,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PortInfo'
+  PortList:
+    type: array
+    items:
+      $ref: '#/definitions/Port'
   PortState:
     type: string
     enum:
@@ -5078,6 +6283,10 @@ definitions:
   ResourceName:
     type: string
     pattern: '\w[\w\-]*\w'
+  ResourceNameList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceName'
   ResourceType:
     type: string
     enum:
@@ -5087,6 +6296,8 @@ definitions:
       - InstanceSnapshot
       - Domain
       - PeeredVpc
+      - LoadBalancer
+      - LoadBalancerTlsCertificate
       - Disk
       - DiskSnapshot
   ServiceException:
@@ -5171,6 +6382,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/string'
+  StringMax256:
+    type: string
+    minLength: 1
+    maxLength: 256
   UnauthenticatedException:
     type: object
     properties:
@@ -5210,6 +6425,28 @@ definitions:
       operations:
         $ref: '#/definitions/OperationList'
         description: An array of key-value pairs containing information about the request operation.
+  UpdateLoadBalancerAttributeRequest:
+    type: object
+    required:
+      - loadBalancerName
+      - attributeName
+      - attributeValue
+    properties:
+      loadBalancerName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the load balancer that you want to modify.
+      attributeName:
+        $ref: '#/definitions/LoadBalancerAttributeName'
+        description: The name of the attribute you want to update. Valid values are below.
+      attributeValue:
+        $ref: '#/definitions/StringMax256'
+        description: The value that you want to specify for the attribute name.
+  UpdateLoadBalancerAttributeResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: An object describing the API operations.
   boolean:
     type: boolean
   double:

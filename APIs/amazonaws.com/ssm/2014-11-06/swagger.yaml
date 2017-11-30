@@ -3,7 +3,7 @@ info:
   version: '2014-11-06'
   x-release: v4
   title: Amazon Simple Systems Manager (SSM)
-  description: '<fullname>Amazon EC2 Systems Manager</fullname> <p>Amazon EC2 Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon EC2 instance or on-premises machine in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/">Amazon EC2 Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html">Systems Manager Prerequisites</a>.</p> <p>For information about other API actions you can perform on Amazon EC2 instances, see the <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/">Amazon EC2 API Reference</a>. For information about how to use a Query API, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html">Making API Requests</a>. </p>'
+  description: '<fullname>AWS Systems Manager</fullname> <p>AWS Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon EC2 instance or on-premises machine in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/">AWS Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html">Systems Manager Prerequisites</a>.</p> <p>For information about other API actions you can perform on Amazon EC2 instances, see the <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/">Amazon EC2 API Reference</a>. For information about how to use a Query API, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html">Making API Requests</a>. </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -1034,10 +1034,18 @@ paths:
           schema:
             $ref: '#/definitions/DescribeAutomationExecutionsResult'
         '480':
+          description: InvalidFilterKey
+          schema:
+            $ref: '#/definitions/InvalidFilterKey'
+        '481':
+          description: InvalidFilterValue
+          schema:
+            $ref: '#/definitions/InvalidFilterValue'
+        '482':
           description: InvalidNextToken
           schema:
             $ref: '#/definitions/InvalidNextToken'
-        '481':
+        '483':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -1047,6 +1055,51 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeAutomationExecutionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAutomationStepExecutions':
+    post:
+      operationId: DescribeAutomationStepExecutions
+      description: Information about all active and terminated step executions in an Automation workflow.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAutomationStepExecutionsResult'
+        '480':
+          description: AutomationExecutionNotFoundException
+          schema:
+            $ref: '#/definitions/AutomationExecutionNotFoundException'
+        '481':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+        '482':
+          description: InvalidFilterKey
+          schema:
+            $ref: '#/definitions/InvalidFilterKey'
+        '483':
+          description: InvalidFilterValue
+          schema:
+            $ref: '#/definitions/InvalidFilterValue'
+        '484':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeAutomationStepExecutionsRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3418,10 +3471,14 @@ paths:
           schema:
             $ref: '#/definitions/AutomationExecutionNotFoundException'
         '481':
+          description: AutomationStepNotFoundException
+          schema:
+            $ref: '#/definitions/AutomationStepNotFoundException'
+        '482':
           description: InvalidAutomationSignalException
           schema:
             $ref: '#/definitions/InvalidAutomationSignalException'
-        '482':
+        '483':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -3536,6 +3593,10 @@ paths:
           schema:
             $ref: '#/definitions/IdempotentParameterMismatch'
         '485':
+          description: InvalidTarget
+          schema:
+            $ref: '#/definitions/InvalidTarget'
+        '486':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -3569,6 +3630,10 @@ paths:
           schema:
             $ref: '#/definitions/AutomationExecutionNotFoundException'
         '481':
+          description: InvalidAutomationStatusUpdateException
+          schema:
+            $ref: '#/definitions/InvalidAutomationStatusUpdateException'
+        '482':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -4358,6 +4423,9 @@ definitions:
       StepExecutions:
         $ref: '#/definitions/StepExecutionList'
         description: A list of details about the current state of all steps that comprise an execution. An Automation document contains a list of steps that are executed in order.
+      StepExecutionsTruncated:
+        $ref: '#/definitions/Boolean'
+        description: 'A boolean value that indicates if the response contains the full list of the Automation step executions. If true, use the DescribeAutomationStepExecutions API action to get the full list of step executions.'
       Parameters:
         $ref: '#/definitions/AutomationParameterMap'
         description: 'The key-value map of execution parameters, which were supplied when calling StartAutomationExecution.'
@@ -4367,6 +4435,39 @@ definitions:
       FailureMessage:
         $ref: '#/definitions/String'
         description: 'A message describing why an execution has failed, if the status is set to Failed.'
+      Mode:
+        $ref: '#/definitions/ExecutionMode'
+        description: The automation execution mode.
+      ParentAutomationExecutionId:
+        $ref: '#/definitions/AutomationExecutionId'
+        description: The AutomationExecutionId of the parent automation.
+      ExecutedBy:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the user who executed the automation.
+      CurrentStepName:
+        $ref: '#/definitions/String'
+        description: The name of the currently executing step.
+      CurrentAction:
+        $ref: '#/definitions/String'
+        description: The action of the currently executing step.
+      TargetParameterName:
+        $ref: '#/definitions/AutomationParameterKey'
+        description: The parameter name.
+      Targets:
+        $ref: '#/definitions/Targets'
+        description: The specified targets.
+      ResolvedTargets:
+        $ref: '#/definitions/ResolvedTargets'
+        description: A list of resolved targets in the rate control execution.
+      MaxConcurrency:
+        $ref: '#/definitions/MaxConcurrency'
+        description: The MaxConcurrency value specified by the user when the execution started.
+      MaxErrors:
+        $ref: '#/definitions/MaxErrors'
+        description: The MaxErrors value specified by the user when the execution started.
+      Target:
+        $ref: '#/definitions/String'
+        description: The target of the execution.
     description: Detailed information about the current state of an individual Automation execution.
   AutomationExecutionFilter:
     type: object
@@ -4376,7 +4477,7 @@ definitions:
     properties:
       Key:
         $ref: '#/definitions/AutomationExecutionFilterKey'
-        description: The aspect of the Automation execution information that should be limited.
+        description: 'One or more keys to limit the results. Valid filter keys include the following: DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter.'
       Values:
         $ref: '#/definitions/AutomationExecutionFilterValueList'
         description: The values used to limit the execution information associated with the filter's key.
@@ -4386,6 +4487,11 @@ definitions:
     enum:
       - DocumentNamePrefix
       - ExecutionStatus
+      - ExecutionId
+      - ParentExecutionId
+      - CurrentAction
+      - StartTimeBefore
+      - StartTimeAfter
   AutomationExecutionFilterList:
     type: array
     items:
@@ -4442,13 +4548,44 @@ definitions:
       Outputs:
         $ref: '#/definitions/AutomationParameterMap'
         description: The list of execution outputs as defined in the Automation document.
+      Mode:
+        $ref: '#/definitions/ExecutionMode'
+        description: The Automation execution mode.
+      ParentAutomationExecutionId:
+        $ref: '#/definitions/AutomationExecutionId'
+        description: The ExecutionId of the parent Automation.
+      CurrentStepName:
+        $ref: '#/definitions/String'
+        description: The name of the currently executing step.
+      CurrentAction:
+        $ref: '#/definitions/String'
+        description: The action of the currently executing step.
+      FailureMessage:
+        $ref: '#/definitions/String'
+        description: The list of execution outputs as defined in the Automation document.
+      TargetParameterName:
+        $ref: '#/definitions/AutomationParameterKey'
+        description: The list of execution outputs as defined in the Automation document.
+      Targets:
+        $ref: '#/definitions/Targets'
+        description: The targets defined by the user when starting the Automation.
+      ResolvedTargets:
+        $ref: '#/definitions/ResolvedTargets'
+        description: A list of targets that resolved during the execution.
+      MaxConcurrency:
+        $ref: '#/definitions/MaxConcurrency'
+        description: The MaxConcurrency value specified by the user when starting the Automation.
+      MaxErrors:
+        $ref: '#/definitions/MaxErrors'
+        description: The MaxErrors value specified by the user when starting the Automation.
+      Target:
+        $ref: '#/definitions/String'
+        description: The list of execution outputs as defined in the Automation document.
     description: Details about a specific Automation execution.
   AutomationExecutionMetadataList:
     type: array
     items:
       $ref: '#/definitions/AutomationExecutionMetadata'
-    minItems: 0
-    maxItems: 50
   AutomationExecutionNotFoundException:
     type: object
     properties:
@@ -4463,6 +4600,7 @@ definitions:
       - Waiting
       - Success
       - TimedOut
+      - Cancelling
       - Cancelled
       - Failed
   AutomationParameterKey:
@@ -4490,6 +4628,12 @@ definitions:
       $ref: '#/definitions/AutomationParameterValue'
     minItems: 0
     maxItems: 10
+  AutomationStepNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: The specified step name and execution ID don't exist. Verify the information and try again.
   BaselineDescription:
     type: string
     minLength: 1
@@ -5106,13 +5250,19 @@ definitions:
     properties:
       Content:
         $ref: '#/definitions/DocumentContent'
-        description: A valid JSON string.
+        description: A valid JSON or YAML string.
       Name:
         $ref: '#/definitions/DocumentName'
         description: A name for the Systems Manager document.
       DocumentType:
         $ref: '#/definitions/DocumentType'
         description: 'The type of document to create. Valid document types include: Policy, Automation, and Command.'
+      DocumentFormat:
+        $ref: '#/definitions/DocumentFormat'
+        description: Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.
+      TargetType:
+        $ref: '#/definitions/TargetType'
+        description: 'Specify a target type to define the kinds of resources the document can run on. For example, to run a document on EC2 instances, specify the following value: /AWS::EC2::Instance. If you specify a value of ''/'' the document can run on all types of resources. If you don''t specify a value, the document can''t run on any resources. For a list of valid resource types, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a> in the <i>AWS CloudFormation User Guide</i>. '
   CreateDocumentResult:
     type: object
     properties:
@@ -5488,6 +5638,35 @@ definitions:
       AutomationExecutionMetadataList:
         $ref: '#/definitions/AutomationExecutionMetadataList'
         description: 'The list of details about each automation execution which has occurred which matches the filter specification, if any.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
+  DescribeAutomationStepExecutionsRequest:
+    type: object
+    required:
+      - AutomationExecutionId
+    properties:
+      AutomationExecutionId:
+        $ref: '#/definitions/AutomationExecutionId'
+        description: The Automation execution ID for which you want step execution descriptions.
+      Filters:
+        $ref: '#/definitions/StepExecutionFilterList'
+        description: One or more filters to limit the number of step executions returned by the request.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. (You received this token from a previous call.)
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+      ReverseOrder:
+        $ref: '#/definitions/Boolean'
+        description: A boolean that indicates whether to list step executions in reverse order by start time. The default value is false.
+  DescribeAutomationStepExecutionsResult:
+    type: object
+    properties:
+      StepExecutions:
+        $ref: '#/definitions/StepExecutionList'
+        description: A list of details about the current state of all steps that make up an execution.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
@@ -6037,6 +6216,12 @@ definitions:
       DefaultVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The default version.
+      DocumentFormat:
+        $ref: '#/definitions/DocumentFormat'
+        description: 'The document format, either JSON or YAML.'
+      TargetType:
+        $ref: '#/definitions/TargetType'
+        description: 'The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a> in the <i>AWS CloudFormation User Guide</i>. '
       Tags:
         $ref: '#/definitions/TagList'
         description: 'The tags, or metadata, that have been applied to the document.'
@@ -6069,6 +6254,11 @@ definitions:
   DocumentFilterValue:
     type: string
     minLength: 1
+  DocumentFormat:
+    type: string
+    enum:
+      - YAML
+      - JSON
   DocumentHash:
     type: string
     maxLength: 256
@@ -6098,6 +6288,12 @@ definitions:
       SchemaVersion:
         $ref: '#/definitions/DocumentSchemaVersion'
         description: The schema version.
+      DocumentFormat:
+        $ref: '#/definitions/DocumentFormat'
+        description: 'The document format, either JSON or YAML.'
+      TargetType:
+        $ref: '#/definitions/TargetType'
+        description: 'The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a> in the <i>AWS CloudFormation User Guide</i>. '
       Tags:
         $ref: '#/definitions/TagList'
         description: 'The tags, or metadata, that have been applied to the document.'
@@ -6125,7 +6321,7 @@ definitions:
     items:
       $ref: '#/definitions/DocumentKeyValuesFilter'
     minItems: 0
-    maxItems: 5
+    maxItems: 6
   DocumentKeyValuesFilterValue:
     type: string
     minLength: 1
@@ -6222,6 +6418,9 @@ definitions:
       IsDefaultVersion:
         $ref: '#/definitions/Boolean'
         description: An identifier for the default version of the document.
+      DocumentFormat:
+        $ref: '#/definitions/DocumentFormat'
+        description: 'The document format, either JSON or YAML.'
     description: Version information about the document.
   DocumentVersionLimitExceeded:
     type: object
@@ -6273,6 +6472,11 @@ definitions:
       $ref: '#/definitions/EffectivePatch'
   ErrorCount:
     type: integer
+  ExecutionMode:
+    type: string
+    enum:
+      - Auto
+      - Interactive
   ExpirationDate:
     type: string
     format: date-time
@@ -6448,6 +6652,9 @@ definitions:
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The document version for which you want information.
+      DocumentFormat:
+        $ref: '#/definitions/DocumentFormat'
+        description: Returns the document in the specified format. The document format can be either JSON or YAML. JSON is the default format.
   GetDocumentResult:
     type: object
     properties:
@@ -6463,6 +6670,9 @@ definitions:
       DocumentType:
         $ref: '#/definitions/DocumentType'
         description: The document type.
+      DocumentFormat:
+        $ref: '#/definitions/DocumentFormat'
+        description: 'The document format, either JSON or YAML.'
   GetInventoryRequest:
     type: object
     properties:
@@ -7344,6 +7554,12 @@ definitions:
       Message:
         $ref: '#/definitions/String'
     description: The signal is not valid for the current Automation execution.
+  InvalidAutomationStatusUpdateException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: The specified update status operation is not valid.
   InvalidCommandId:
     type: object
     properties: {}
@@ -7489,7 +7705,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/String'
-    description: 'The role name can''t contain invalid characters. Also verify that you specified an IAM role for notifications that includes the required trust policy. For information about configuring the IAM role for Run Command notifications, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html">Configuring Amazon SNS Notifications for Run Command</a> in the <i>Amazon EC2 Systems Manager User Guide</i>.'
+    description: 'The role name can''t contain invalid characters. Also verify that you specified an IAM role for notifications that includes the required trust policy. For information about configuring the IAM role for Run Command notifications, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html">Configuring Amazon SNS Notifications for Run Command</a> in the <i>AWS Systems Manager User Guide</i>.'
   InvalidSchedule:
     type: object
     properties:
@@ -7711,7 +7927,7 @@ definitions:
         description: 'ID of the inventory result entity. For example, for managed instance inventory the result will be the managed instance ID. For EC2 instance inventory, the result will be the instance ID. '
       Data:
         $ref: '#/definitions/InventoryResultItemMap'
-        description: The data section in the inventory result entity json.
+        description: The data section in the inventory result entity JSON.
     description: Inventory query results.
   InventoryResultEntityId:
     type: string
@@ -8107,6 +8323,8 @@ definitions:
         $ref: '#/definitions/S3Region'
         description: The region where the Amazon S3 bucket is located.
     description: Information about an Amazon S3 bucket to write instance-level logs to.
+  Long:
+    type: integer
   MaintenanceWindowAllowUnassociatedTargets:
     type: boolean
   MaintenanceWindowAutomationParameters:
@@ -8656,7 +8874,7 @@ definitions:
         description: An Amazon Resource Name (ARN) for a Simple Notification Service (SNS) topic. Run Command pushes notifications about command status changes to this topic.
       NotificationEvents:
         $ref: '#/definitions/NotificationEventList'
-        description: 'The different events for which you can receive notifications. These events include the following: All (events), InProgress, Success, TimedOut, Cancelled, Failed. To learn more about these events, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html">Setting Up Events and Notifications</a> in the <i>Amazon EC2 Systems Manager User Guide</i>.'
+        description: 'The different events for which you can receive notifications. These events include the following: All (events), InProgress, Success, TimedOut, Cancelled, Failed. To learn more about these events, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html">Setting Up Events and Notifications</a> in the <i>AWS Systems Manager User Guide</i>.'
       NotificationType:
         $ref: '#/definitions/NotificationType'
         description: 'Command: Receive notification when the status of a command changes. Invocation: For commands sent to multiple instances, receive notification on a per-instance basis when the status of a command changes. '
@@ -9512,6 +9730,16 @@ definitions:
   RemoveTagsFromResourceResult:
     type: object
     properties: {}
+  ResolvedTargets:
+    type: object
+    properties:
+      ParameterValues:
+        $ref: '#/definitions/TargetParameterList'
+        description: A list of parameter values sent to targets that resolved during the Automation execution.
+      Truncated:
+        $ref: '#/definitions/Boolean'
+        description: A boolean value indicating whether the resolved target list is truncated.
+    description: Information about targets that resolved during the Automation execution.
   ResourceComplianceSummaryItem:
     type: object
     properties:
@@ -9828,6 +10056,9 @@ definitions:
     enum:
       - Approve
       - Reject
+      - StartStep
+      - StopStep
+      - Resume
   SnapshotDownloadUrl:
     type: string
   SnapshotId:
@@ -9858,6 +10089,21 @@ definitions:
       ClientToken:
         $ref: '#/definitions/IdempotencyToken'
         description: 'User-provided idempotency token. The token must be unique, is case insensitive, enforces the UUID format, and can''t be reused.'
+      Mode:
+        $ref: '#/definitions/ExecutionMode'
+        description: 'The execution mode of the automation. Valid modes include the following: Auto and Interactive. The default mode is Auto.'
+      TargetParameterName:
+        $ref: '#/definitions/AutomationParameterKey'
+        description: The name of the parameter used as the target resource for the rate-controlled execution. Required if you specify Targets.
+      Targets:
+        $ref: '#/definitions/Targets'
+        description: A key-value mapping to target resources. Required if you specify TargetParameterName.
+      MaxConcurrency:
+        $ref: '#/definitions/MaxConcurrency'
+        description: 'The maximum number of targets allowed to run this task in parallel. You can specify a number, such as 10, or a percentage, such as 10%. The default value is 10.'
+      MaxErrors:
+        $ref: '#/definitions/MaxErrors'
+        description: '<p>The number of errors that are allowed before the system stops running the automation on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops running the automation when the fourth error is received. If you specify 0, then the system stops running the automation on additional targets after the first error result is returned. If you run an automation on 50 resources and set max-errors to 10%, then the system stops running the automation on additional targets when the sixth error is received.</p> <p>Executions that are already running an automation when max-errors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won''t be more than max-errors failed executions, set max-concurrency to 1 so the executions proceed one at a time.</p>'
   StartAutomationExecutionResult:
     type: object
     properties:
@@ -9890,6 +10136,15 @@ definitions:
       Action:
         $ref: '#/definitions/AutomationActionName'
         description: The action this step performs. The action determines the behavior of the step.
+      TimeoutSeconds:
+        $ref: '#/definitions/Long'
+        description: The timeout seconds of the step.
+      OnFailure:
+        $ref: '#/definitions/String'
+        description: The action to take if the step fails. The default value is Abort.
+      MaxAttempts:
+        $ref: '#/definitions/Integer'
+        description: The maximum number of tries to run the action of the step. The default value is 1.
       ExecutionStartTime:
         $ref: '#/definitions/DateTime'
         description: 'If a step has begun execution, this contains the time the step started. If the step is in Pending status, this field is not populated.'
@@ -9917,13 +10172,55 @@ definitions:
       FailureDetails:
         $ref: '#/definitions/FailureDetails'
         description: Information about the Automation failure.
+      StepExecutionId:
+        $ref: '#/definitions/String'
+        description: The unique ID of a step execution.
+      OverriddenParameters:
+        $ref: '#/definitions/AutomationParameterMap'
+        description: A user-specified list of parameters to override when executing a step.
     description: Detailed information about an the execution state of an Automation step.
+  StepExecutionFilter:
+    type: object
+    required:
+      - Key
+      - Values
+    properties:
+      Key:
+        $ref: '#/definitions/StepExecutionFilterKey'
+        description: 'One or more keys to limit the results. Valid filter keys include the following: StepName, Action, StepExecutionId, StepExecutionStatus, StartTimeBefore, StartTimeAfter.'
+      Values:
+        $ref: '#/definitions/StepExecutionFilterValueList'
+        description: The values of the filter key.
+    description: A filter to limit the amount of step execution information returned by the call.
+  StepExecutionFilterKey:
+    type: string
+    enum:
+      - StartTimeBefore
+      - StartTimeAfter
+      - StepExecutionStatus
+      - StepExecutionId
+      - StepName
+      - Action
+  StepExecutionFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/StepExecutionFilter'
+    minItems: 1
+    maxItems: 6
+  StepExecutionFilterValue:
+    type: string
+    minLength: 1
+    maxLength: 150
+  StepExecutionFilterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/StepExecutionFilterValue'
+    minItems: 1
+    maxItems: 10
   StepExecutionList:
     type: array
     items:
       $ref: '#/definitions/StepExecution'
-    minItems: 0
-    maxItems: 100
   StopAutomationExecutionRequest:
     type: object
     required:
@@ -9932,9 +10229,17 @@ definitions:
       AutomationExecutionId:
         $ref: '#/definitions/AutomationExecutionId'
         description: The execution ID of the Automation to stop.
+      Type:
+        $ref: '#/definitions/StopType'
+        description: 'The stop request type. Valid types include the following: Cancel and Complete. The default type is Cancel.'
   StopAutomationExecutionResult:
     type: object
     properties: {}
+  StopType:
+    type: string
+    enum:
+      - Complete
+      - Cancel
   String:
     type: string
   StringDateTime:
@@ -10000,6 +10305,14 @@ definitions:
     pattern: '^[\p{L}\p{Z}\p{N}_.:/=\-@]*$'
     minLength: 1
     maxLength: 128
+  TargetParameterList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterValue'
+  TargetType:
+    type: string
+    pattern: '^\/[\w\.\-\:\/]*$'
+    maxLength: 200
   TargetValue:
     type: string
   TargetValues:
@@ -10159,6 +10472,12 @@ definitions:
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The version of the document that you want to update.
+      DocumentFormat:
+        $ref: '#/definitions/DocumentFormat'
+        description: Specify the document format for the new document version. Systems Manager supports JSON and YAML documents. JSON is the default format.
+      TargetType:
+        $ref: '#/definitions/TargetType'
+        description: Specify a new target type for the document.
   UpdateDocumentResult:
     type: object
     properties:

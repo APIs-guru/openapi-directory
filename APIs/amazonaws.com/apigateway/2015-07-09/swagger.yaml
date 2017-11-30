@@ -2765,6 +2765,22 @@ definitions:
       - NOT_AVAILABLE
       - FLUSH_IN_PROGRESS
     description: Returns the status of the <b>CacheCluster</b>.
+  CanarySettings:
+    type: object
+    properties:
+      percentTraffic:
+        $ref: '#/definitions/Double'
+        description: The percent (0-100) of traffic diverted to a canary deployment.
+      deploymentId:
+        $ref: '#/definitions/String'
+        description: The ID of the canary deployment.
+      stageVariableOverrides:
+        $ref: '#/definitions/MapOfStringToString'
+        description: 'Stage variables overridden for a canary release deployment, including new stage variables introduced in the canary. These stage variables are represented as a string-to-string map between stage variable names and their values.'
+      useStageCache:
+        $ref: '#/definitions/Boolean'
+        description: A Boolean flag to indicate whether the canary deployment uses the stage cache or not.
+    description: Configuration settings of a canary deployment.
   ClientCertificate:
     type: object
     properties:
@@ -2899,6 +2915,9 @@ definitions:
       variables:
         $ref: '#/definitions/MapOfStringToString'
         description: 'A map that defines the stage variables for the <a>Stage</a> resource that is associated with the new deployment. Variable names can have alphanumeric and underscore characters, and the values must match <code>[A-Za-z0-9-._~:/?#&amp;=,]+</code>.'
+      canarySettings:
+        $ref: '#/definitions/DeploymentCanarySettings'
+        description: 'The input configuration for the canary deployment when the deployment is a canary release deployment. '
     description: Requests Amazon API Gateway to create a <a>Deployment</a> resource.
   CreateDocumentationPartRequest:
     type: object
@@ -3034,10 +3053,10 @@ definitions:
     properties:
       stageName:
         $ref: '#/definitions/String'
-        description: The name for the <a>Stage</a> resource.
+        description: '{Required] The name for the <a>Stage</a> resource.'
       deploymentId:
         $ref: '#/definitions/String'
-        description: The identifier of the <a>Deployment</a> resource for the <a>Stage</a> resource.
+        description: '[Required] The identifier of the <a>Deployment</a> resource for the <a>Stage</a> resource.'
       description:
         $ref: '#/definitions/String'
         description: The description of the <a>Stage</a> resource.
@@ -3053,6 +3072,9 @@ definitions:
       documentationVersion:
         $ref: '#/definitions/String'
         description: The version of the associated API documentation.
+      canarySettings:
+        $ref: '#/definitions/CanarySettings'
+        description: The canary deployment settings of this stage.
     description: Requests Amazon API Gateway to create a <a>Stage</a> resource.
   CreateUsagePlanKeyRequest:
     type: object
@@ -3184,6 +3206,19 @@ definitions:
         $ref: '#/definitions/PathToMapOfMethodSnapshot'
         description: A summary of the <a>RestApi</a> at the date and time that the deployment resource was created.
     description: '<p>An immutable representation of a <a>RestApi</a> resource that can be called by users using <a>Stages</a>. A deployment must be associated with a <a>Stage</a> for it to be callable over the Internet.</p> <div class="remarks">To create a deployment, call <code>POST</code> on the <a>Deployments</a> resource of a <a>RestApi</a>. To view, update, or delete a deployment, call <code>GET</code>, <code>PATCH</code>, or <code>DELETE</code> on the specified deployment resource (<code>/restapis/{restapi_id}/deployments/{deployment_id}</code>).</div> <div class="seeAlso"><a>RestApi</a>, <a>Deployments</a>, <a>Stage</a>, <a href="http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html">AWS CLI</a>, <a href="https://aws.amazon.com/tools/">AWS SDKs</a> </div>'
+  DeploymentCanarySettings:
+    type: object
+    properties:
+      percentTraffic:
+        $ref: '#/definitions/Double'
+        description: The percentage (0.0-100.0) of traffic routed to the canary deployment.
+      stageVariableOverrides:
+        $ref: '#/definitions/MapOfStringToString'
+        description: A stage variable overrides used for the canary release deployment. They can override existing stage variables or add new stage variables for the canary release deployment. These stage variables are represented as a string-to-string map between stage variable names and their values.
+      useStageCache:
+        $ref: '#/definitions/Boolean'
+        description: A Boolean flag to indicate whether the canary release deployment uses the stage cache or not.
+    description: The input configuration for a canary deployment.
   Deployments:
     type: object
     properties:
@@ -4041,16 +4076,16 @@ definitions:
     properties:
       op:
         $ref: '#/definitions/Op'
-        description: 'An update operation to be performed with this PATCH request. The valid value can be "add", "remove", or "replace". Not all valid operations are supported for a given resource. Support of the operations depends on specific operational contexts. Attempts to apply an unsupported operation on a resource will return an error message.'
+        description: ' An update operation to be performed with this PATCH request. The valid value can be <code>add</code>, <code>remove</code>, <code>replace</code> or <code>copy</code>. Not all valid operations are supported for a given resource. Support of the operations depends on specific operational contexts. Attempts to apply an unsupported operation on a resource will return an error message.'
       path:
         $ref: '#/definitions/String'
         description: 'The <code>op</code> operation''s target, as identified by a <a href="https://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-08">JSON Pointer</a> value that references a location within the targeted resource. For example, if the target resource has an updateable property of <code>{"name":"value"}</code>, the path for this property is <code>/name</code>. If the <code>name</code> property value is a JSON object (e.g., <code>{"name": {"child/name": "child-value"}}</code>), the path for the <code>child/name</code> property will be <code>/name/child~1name</code>. Any slash ("/") character appearing in path names must be escaped with "~1", as shown in the example above. Each <code>op</code> operation can have only one <code>path</code> associated with it.'
       value:
         $ref: '#/definitions/String'
-        description: 'The new target value of the update operation. When using AWS CLI to update a property of a JSON value, enclose the JSON object with a pair of single quotes in a Linux shell, e.g., ''{"a": ...}''. In a Windows shell, see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json">Using JSON for Parameters</a>.'
+        description: 'The new target value of the update operation. It is applicable for the <code>add</code> or <code>replace</code> operation. When using AWS CLI to update a property of a JSON value, enclose the JSON object with a pair of single quotes in a Linux shell, e.g., ''{"a": ...}''. In a Windows shell, see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json">Using JSON for Parameters</a>.'
       from:
         $ref: '#/definitions/String'
-        description: ' Not supported.'
+        description: 'The <code>copy</code> update operation''s source as identified by a <code>JSON-Pointer</code> value referencing the location within the targeted resource to copy the value from. For example, to promote a canary deployment, you copy the canary deployment ID to the affiliated deployment ID by calling a PATCH request on a <a>Stage</a> resource with <code>"op":"copy"</code>, <code>"from":"/canarySettings/deploymentId"</code> and <code>"path":"/deploymentId"</code>.'
     description: 'A single patch operation to apply to the specified resource. Please refer to http://tools.ietf.org/html/rfc6902#section-4 for an explanation of how each operation is used.'
   PathToMapOfMethodSnapshot:
     type: array
@@ -4383,7 +4418,10 @@ definitions:
         description: The version of the associated API documentation.
       accessLogSettings:
         $ref: '#/definitions/AccessLogSettings'
-        description: The access log settings in this stage.
+        description: Settings for logging access in this stage.
+      canarySettings:
+        $ref: '#/definitions/CanarySettings'
+        description: Settings for the canary deployment in this stage.
       createdDate:
         $ref: '#/definitions/Timestamp'
         description: The timestamp when the stage was created.

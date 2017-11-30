@@ -948,7 +948,7 @@ definitions:
         description: 'Size, in bytes, of a single zipped code/dependencies package you can upload for your Lambda function(.zip/.jar file). Try using Amazon S3 for uploading larger files. Default limit is 50 MB.'
       ConcurrentExecutions:
         $ref: '#/definitions/Integer'
-        description: 'Number of simultaneous executions of your function per region. For more information or to request a limit increase for concurrent executions, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Lambda Function Concurrent Executions</a>. The default limit is 100.'
+        description: 'Number of simultaneous executions of your function per region. For more information or to request a limit increase for concurrent executions, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Lambda Function Concurrent Executions</a>. The default limit is 1000.'
     description: Provides limits of code size and concurrency associated with the current account and region.
   AccountUsage:
     type: object
@@ -1005,6 +1005,20 @@ definitions:
         $ref: '#/definitions/String'
         description: The permission statement you specified in the request. The response returns the same as a string using a backslash ("\") as an escape character in the JSON.
     description: <p/>
+  AdditionalVersion:
+    type: string
+    pattern: '[0-9]+'
+    minLength: 1
+    maxLength: 1024
+  AdditionalVersionWeights:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AdditionalVersion'
+        value:
+          $ref: '#/definitions/Weight'
   Alias:
     type: string
     pattern: '(?!^[0-9]+$)([a-zA-Z0-9-_]+)'
@@ -1030,11 +1044,21 @@ definitions:
       Description:
         $ref: '#/definitions/Description'
         description: Alias description.
+      RoutingConfig:
+        $ref: '#/definitions/AliasRoutingConfiguration'
+        description: 'Specifies an additional function versions the alias points to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see <a>lambda-traffic-shifting-using-aliases</a>.'
     description: Provides configuration information about a Lambda function version alias.
   AliasList:
     type: array
     items:
       $ref: '#/definitions/AliasConfiguration'
+  AliasRoutingConfiguration:
+    type: object
+    properties:
+      AdditionalVersionWeights:
+        $ref: '#/definitions/AdditionalVersionWeights'
+        description: 'Set this property value to dictate what percentage of traffic will invoke the updated function version. If set to an empty string, 100 percent of traffic will invoke <code>function-version</code>.'
+    description: 'The parent object that implements what percentage of traffic will invoke each function version. For more information, see <a>lambda-traffic-shifting-using-aliases</a>.'
   Arn:
     type: string
     pattern: 'arn:aws:([a-zA-Z0-9\-])+:([a-z]{2}-[a-z]+-\d{1})?:(\d{12})?:(.*)'
@@ -1073,6 +1097,9 @@ definitions:
       Description:
         $ref: '#/definitions/Description'
         description: Description of the alias.
+      RoutingConfig:
+        $ref: '#/definitions/AliasRoutingConfiguration'
+        description: 'Specifies an additional version your alias can point to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see <a>lambda-traffic-shifting-using-aliases</a>.'
   CreateEventSourceMappingRequest:
     type: object
     required:
@@ -1547,7 +1574,7 @@ definitions:
       message:
         $ref: '#/definitions/String'
         description: <p/>
-    description: 'One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. You will also get this exception if you have selected a deprecated runtime, such as Node v0.10.42. '
+    description: 'One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. You will also get this exception if you have selected a deprecated runtime, such as Node v0.10.42 or if you point to an additional version when the version specified is <code>$LATEST</code>.'
   InvalidRequestContentException:
     type: object
     properties:
@@ -1810,7 +1837,7 @@ definitions:
     properties:
       CodeSha256:
         $ref: '#/definitions/String'
-        description: The SHA256 hash of the deployment package you want to publish. This provides validation on the code you are publishing. If you provide this parameter value must match the SHA256 of the $LATEST version for the publication to succeed.
+        description: 'The SHA256 hash of the deployment package you want to publish. This provides validation on the code you are publishing. If you provide this parameter, the value must match the SHA256 of the $LATEST version for the publication to succeed. You can use the <b>DryRun</b> parameter of <a>UpdateFunctionCode</a> to verify the hash value that will be returned before publishing your new version.'
       Description:
         $ref: '#/definitions/Description'
         description: 'The description for the version you are publishing. If not provided, AWS Lambda copies the description from the $LATEST version.'
@@ -2017,6 +2044,9 @@ definitions:
       Description:
         $ref: '#/definitions/Description'
         description: You can change the description of the alias using this parameter.
+      RoutingConfig:
+        $ref: '#/definitions/AliasRoutingConfiguration'
+        description: 'Specifies an additional version your alias can point to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see <a>lambda-traffic-shifting-using-aliases</a>.'
   UpdateEventSourceMappingRequest:
     type: object
     example:
@@ -2062,7 +2092,7 @@ definitions:
         description: This boolean parameter can be used to request AWS Lambda to update the Lambda function and publish a version as an atomic operation.
       DryRun:
         $ref: '#/definitions/Boolean'
-        description: 'This boolean parameter can be used to test your request to AWS Lambda to update the Lambda function and publish a version as an atomic operation. It will do all necessary computation and validation of your code but will not upload it or a publish a version. Each time this operation is invoked, the <code>CodeSha256</code> hash value the provided code will also be computed and returned in the response.'
+        description: 'This boolean parameter can be used to test your request to AWS Lambda to update the Lambda function and publish a version as an atomic operation. It will do all necessary computation and validation of your code but will not upload it or a publish a version. Each time this operation is invoked, the <code>CodeSha256</code> hash value of the provided code will also be computed and returned in the response.'
     description: <p/>
   UpdateFunctionConfigurationRequest:
     type: object
@@ -2139,3 +2169,8 @@ definitions:
     description: VPC configuration associated with your Lambda function.
   VpcId:
     type: string
+  Weight:
+    type: number
+    format: double
+    minimum: 0
+    maximum: 1
