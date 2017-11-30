@@ -57,6 +57,7 @@ securityDefinitions:
       esi-corporations.read_facilities.v1: EVE SSO scope esi-corporations.read_facilities.v1
       esi-corporations.read_fw_stats.v1: EVE SSO scope esi-corporations.read_fw_stats.v1
       esi-corporations.read_medals.v1: EVE SSO scope esi-corporations.read_medals.v1
+      esi-corporations.read_outposts.v1: EVE SSO scope esi-corporations.read_outposts.v1
       esi-corporations.read_standings.v1: EVE SSO scope esi-corporations.read_standings.v1
       esi-corporations.read_starbases.v1: EVE SSO scope esi-corporations.read_starbases.v1
       esi-corporations.read_structures.v1: EVE SSO scope esi-corporations.read_structures.v1
@@ -8728,6 +8729,7 @@ paths:
                     - corporation
                     - alliance
                     - faction
+                    - system
                   title: get_characters_character_id_wallet_journal_first_party_type
                   type: string
                 reason:
@@ -8873,6 +8875,7 @@ paths:
                     - corporation
                     - alliance
                     - faction
+                    - system
                   title: get_characters_character_id_wallet_journal_second_party_type
                   type: string
                 tax:
@@ -12474,7 +12477,7 @@ paths:
         Alternate route: `/v1/corporations/{corporation_id}/killmails/recent/`
 
         ---
-        This route is cached for up to 3600 seconds
+        This route is cached for up to 300 seconds
       operationId: get_corporations_corporation_id_killmails_recent
       parameters:
         - $ref: '#/parameters/corporation_id'
@@ -12553,7 +12556,7 @@ paths:
         - dev
         - legacy
         - v1
-      x-cached-seconds: 3600
+      x-cached-seconds: 300
       x-required-roles:
         - Director
   '/corporations/{corporation_id}/medals/':
@@ -13359,6 +13362,318 @@ paths:
       x-required-roles:
         - Accountant
         - Trader
+  '/corporations/{corporation_id}/outposts/':
+    get:
+      description: |-
+        Get a list of corporation outpost IDs Note: This endpoint will be removed once outposts are migrated to Citadels as talked about in this blog: https://community.eveonline.com/news/dev-blogs/the-next-steps-in-structure-transition/
+
+        ---
+        Alternate route: `/dev/corporations/{corporation_id}/outposts/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/outposts/`
+
+        Alternate route: `/v1/corporations/{corporation_id}/outposts/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_outposts
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: List of corporation outpost IDs
+          examples:
+            application/json:
+              - 61001146
+              - 61001147
+              - 61001148
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok integer
+              format: int32
+              title: get_corporations_corporation_id_outposts_200_ok
+              type: integer
+            maxItems: 1000
+            title: get_corporations_corporation_id_outposts_ok
+            type: array
+            uniqueItems: true
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-corporations.read_outposts.v1
+      summary: Get corporation outposts
+      tags:
+        - Corporation
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles:
+        - Director
+  '/corporations/{corporation_id}/outposts/{outpost_id}/':
+    get:
+      description: |-
+        Get details about a given outpost. Note: This endpoint will be removed once outposts are migrated to Citadels as talked about in this blog: https://community.eveonline.com/news/dev-blogs/the-next-steps-in-structure-transition/
+
+        ---
+        Alternate route: `/dev/corporations/{corporation_id}/outposts/{outpost_id}/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/outposts/{outpost_id}/`
+
+        Alternate route: `/v1/corporations/{corporation_id}/outposts/{outpost_id}/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_outposts_outpost_id
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - description: A station (outpost) ID
+          format: int32
+          in: path
+          name: outpost_id
+          required: true
+          type: integer
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: Details about the given outpost
+          examples:
+            application/json:
+              coordinates:
+                x: -102478848000
+                'y': -18310963200
+                z: -9660456960
+              docking_cost_per_ship_volume: 0
+              office_rental_cost: 100
+              owner_id: 98000002
+              reprocessing_efficiency: 0.5
+              reprocessing_station_take: 0.01
+              services:
+                - discount_per_good_standing: 10
+                  minimum_standing: 0
+                  owner_id: 98000002
+                  service_name: Reprocessing Plant
+                  surcharge_per_bad_standing: 0
+              standing_owner_id: 99003581
+              system_id: 30000657
+              type_id: 21644
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+          schema:
+            description: 200 ok object
+            properties:
+              coordinates:
+                description: coordinates object
+                properties:
+                  x:
+                    description: x number
+                    format: double
+                    title: get_corporations_corporation_id_outposts_outpost_id_x
+                    type: number
+                  'y':
+                    description: y number
+                    format: double
+                    title: get_corporations_corporation_id_outposts_outpost_id_y
+                    type: number
+                  z:
+                    description: z number
+                    format: double
+                    title: get_corporations_corporation_id_outposts_outpost_id_z
+                    type: number
+                required:
+                  - x
+                  - 'y'
+                  - z
+                title: get_corporations_corporation_id_outposts_outpost_id_coordinates
+                type: object
+              docking_cost_per_ship_volume:
+                description: docking_cost_per_ship_volume number
+                format: float
+                title: get_corporations_corporation_id_outposts_outpost_id_docking_cost_per_ship_volume
+                type: number
+              office_rental_cost:
+                description: office_rental_cost integer
+                format: int64
+                title: get_corporations_corporation_id_outposts_outpost_id_office_rental_cost
+                type: integer
+              owner_id:
+                description: The entity that owns the station (e.g. the entity whose logo is on the station services bar)
+                format: int32
+                title: get_corporations_corporation_id_outposts_outpost_id_owner_id
+                type: integer
+              reprocessing_efficiency:
+                description: reprocessing_efficiency number
+                format: float
+                title: get_corporations_corporation_id_outposts_outpost_id_reprocessing_efficiency
+                type: number
+              reprocessing_station_take:
+                description: reprocessing_station_take number
+                format: float
+                title: get_corporations_corporation_id_outposts_outpost_id_reprocessing_station_take
+                type: number
+              services:
+                description: A list of services the given outpost provides
+                items:
+                  description: service object
+                  properties:
+                    discount_per_good_standing:
+                      description: discount_per_good_standing number
+                      format: double
+                      title: get_corporations_corporation_id_outposts_outpost_id_discount_per_good_standing
+                      type: number
+                    minimum_standing:
+                      description: minimum_standing number
+                      format: double
+                      title: get_corporations_corporation_id_outposts_outpost_id_minimum_standing
+                      type: number
+                    service_name:
+                      description: service_name string
+                      enum:
+                        - Bounty Missions
+                        - Assassination Missions
+                        - Courier Missions
+                        - Interbus
+                        - Reprocessing Plant
+                        - Refinery
+                        - Market
+                        - Black Market
+                        - Stock Exchange
+                        - Cloning
+                        - Surgery
+                        - DNA Therapy
+                        - Repair Facilities
+                        - Factory
+                        - Laboratory
+                        - Gambling
+                        - Fitting
+                        - Paintshop
+                        - News
+                        - Storage
+                        - Insurance
+                        - Docking
+                        - Office Rental
+                        - Jump Clone Facility
+                        - Loyalty Point Store
+                        - Navy Offices
+                        - Security Office
+                      title: get_corporations_corporation_id_outposts_outpost_id_service_name
+                      type: string
+                    surcharge_per_bad_standing:
+                      description: surcharge_per_bad_standing number
+                      format: double
+                      title: get_corporations_corporation_id_outposts_outpost_id_surcharge_per_bad_standing
+                      type: number
+                  required:
+                    - service_name
+                    - minimum_standing
+                    - surcharge_per_bad_standing
+                    - discount_per_good_standing
+                  title: get_corporations_corporation_id_outposts_outpost_id_service
+                  type: object
+                maxItems: 27
+                title: get_corporations_corporation_id_outposts_outpost_id_services
+                type: array
+              standing_owner_id:
+                description: The owner ID that sets the ability for someone to dock based on standings.
+                format: int32
+                title: get_corporations_corporation_id_outposts_outpost_id_standing_owner_id
+                type: integer
+              system_id:
+                description: The ID of the solar system the outpost rests in
+                format: int32
+                title: get_corporations_corporation_id_outposts_outpost_id_system_id
+                type: integer
+              type_id:
+                description: The type ID of the given outpost
+                format: int32
+                title: get_corporations_corporation_id_outposts_outpost_id_type_id
+                type: integer
+            required:
+              - owner_id
+              - system_id
+              - docking_cost_per_ship_volume
+              - office_rental_cost
+              - type_id
+              - reprocessing_efficiency
+              - reprocessing_station_take
+              - standing_owner_id
+              - coordinates
+              - services
+            title: get_corporations_corporation_id_outposts_outpost_id_ok
+            type: object
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-corporations.read_outposts.v1
+      summary: Get corporation outpost details
+      tags:
+        - Corporation
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles:
+        - Director
   '/corporations/{corporation_id}/roles/':
     get:
       description: |-
@@ -15874,6 +16189,7 @@ paths:
                     - corporation
                     - alliance
                     - faction
+                    - system
                   title: get_corporations_corporation_id_wallets_division_journal_first_party_type
                   type: string
                 reason:
@@ -16019,6 +16335,7 @@ paths:
                     - corporation
                     - alliance
                     - faction
+                    - system
                   title: get_corporations_corporation_id_wallets_division_journal_second_party_type
                   type: string
                 tax:

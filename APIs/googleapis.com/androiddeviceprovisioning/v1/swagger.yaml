@@ -498,7 +498,7 @@ paths:
           schema:
             $ref: '#/definitions/CreateCustomerRequest'
         - description: |-
-            Required. The parent resource ID in format `partners/[PARTNER_ID]` that
+            Required. The parent resource ID in the format `partners/[PARTNER_ID]` that
             identifies the reseller.
           in: path
           name: parent
@@ -598,72 +598,93 @@ definitions:
           with a Google Account. The values for `companyId` and `name` must be empty.
     type: object
   Device:
-    description: An Android device.
+    description: An Android device registered for zero-touch enrollment.
     properties:
       claims:
-        description: Claims.
+        description: |-
+          Output only. The provisioning claims for a device. Devices claimed for
+          zero-touch enrollment have a claim with the type `SECTION_TYPE_ZERO_TOUCH`.
+          Call
+          `partners.devices.unclaim`
+          or
+          `partners.devices.unclaimAsync`
+          to remove the device from zero-touch enrollment.
         items:
           $ref: '#/definitions/DeviceClaim'
         type: array
       configuration:
-        description: |-
-          The resource name of the configuration.
-          Only set for customers.
+        description: Not available to resellers.
         type: string
       deviceId:
-        description: Device ID.
+        description: Output only. The ID of the device. Assigned by the server.
         format: int64
         type: string
       deviceIdentifier:
         $ref: '#/definitions/DeviceIdentifier'
-        description: Device identifier.
+        description: |-
+          The hardware IDs that identify a manufactured device. To learn more, read
+          [Identifiers](/zero-touch/guides/identifiers).
       deviceMetadata:
         $ref: '#/definitions/DeviceMetadata'
-        description: Device metadata.
+        description: |-
+          The metadata attached to the device. Structured as key-value pairs. To
+          learn more, read [Device metadata](/zero-touch/guides/metadata).
       name:
-        description: 'Resource name in `partners/[PARTNER_ID]/devices/[DEVICE_ID]`.'
+        description: |-
+          Output only. The API resource name in the format
+          `partners/[PARTNER_ID]/devices/[DEVICE_ID]`. Assigned by the server.
         type: string
     type: object
   DeviceClaim:
-    description: Information about a device claimed for a partner.
+    description: |-
+      A record of a device claimed by a reseller for a customer. Devices claimed
+      for zero-touch enrollment have a claim with the type
+      `SECTION_TYPE_ZERO_TOUCH`. To learn more, read
+      [Claim devices for customers](/zero-touch/guides/how-it-works#claim).
     properties:
       ownerCompanyId:
-        description: Owner ID.
+        description: The ID of the Customer that purchased the device.
         format: int64
         type: string
       sectionType:
-        description: Section type of the device claim.
+        description: Output only. The type of claim made on the device.
         enum:
           - SECTION_TYPE_UNSPECIFIED
           - SECTION_TYPE_ZERO_TOUCH
         type: string
     type: object
   DeviceIdentifier:
-    description: Identifies a unique device.
+    description: |-
+      Encapsulates hardware and product IDs to identify a manufactured device. To
+      learn more, read [Identifiers](/zero-touch/guides/identifiers).
     properties:
       imei:
-        description: IMEI number.
+        description: The device’s IMEI number. Validated on input.
         type: string
       manufacturer:
         description: |-
-          Manufacturer name to match `android.os.Build.MANUFACTURER` (required).
-          Allowed values listed in
-          [manufacturer names](/zero-touch/resources/manufacturer-names).
+          Required. The device manufacturer’s name. Matches the device's built-in
+          value returned from `android.os.Build.MANUFACTURER`. Allowed values are
+          listed in [manufacturer names](/zero-touch/resources/manufacturer-names).
         type: string
       meid:
-        description: MEID number.
+        description: The device’s MEID number.
         type: string
       serialNumber:
-        description: Serial number (optional).
+        description: |-
+          The manufacturer's serial number for the device. This value might not be
+          unique.
         type: string
     type: object
   DeviceMetadata:
-    description: A key-value pair of the device metadata.
+    description: |-
+      Metadata entries that can be attached to a `Device`. To learn more, read
+      [Device metadata](/zero-touch/guides/metadata).
     properties:
       entries:
         additionalProperties:
           type: string
-        description: Metadata entries
+        description: Metadata entries recorded as key-value pairs.
         type: object
     type: object
   DevicesLongRunningOperationMetadata:

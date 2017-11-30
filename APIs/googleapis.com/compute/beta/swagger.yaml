@@ -1644,11 +1644,6 @@ paths:
       description: Get service resources (a.k.a service project) associated with this host project.
       operationId: compute.projects.getXpnResources
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - in: query
           name: filter
           type: string
@@ -1662,6 +1657,11 @@ paths:
           type: string
         - in: query
           name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -1821,14 +1821,14 @@ paths:
       description: Returns the specified address resource. Get a list of available addresses by making a list() request.
       operationId: compute.globalAddresses.get
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the address resource to return.
           in: path
           name: address
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -1905,6 +1905,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.globalAddresses.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -1915,10 +1919,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -2071,14 +2071,14 @@ paths:
       description: Returns the specified BackendBucket resource. Get a list of available backend buckets by making a list() request.
       operationId: compute.backendBuckets.get
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the BackendBucket resource to return.
           in: path
           name: backendBucket
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -2319,14 +2319,14 @@ paths:
       description: Returns the specified BackendService resource. Get a list of available backend services by making a list() request.
       operationId: compute.backendServices.get
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the BackendService resource to return.
           in: path
           name: backendService
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -2442,10 +2442,6 @@ paths:
       description: Gets the most recent health check results for this BackendService.
       operationId: compute.backendServices.getHealth
       parameters:
-        - in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the BackendService resource to which the queried instance belongs.
           in: path
           name: backendService
@@ -2455,6 +2451,10 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/ResourceGroupReference'
+        - in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2530,6 +2530,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.backendServices.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -2540,10 +2544,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -2696,14 +2696,14 @@ paths:
       description: Returns the specified firewall.
       operationId: compute.firewalls.get
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the firewall rule to return.
           in: path
           name: firewall
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -2819,6 +2819,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.firewalls.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -2829,10 +2833,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -2985,14 +2985,14 @@ paths:
       description: Returns the specified GlobalForwardingRule resource. Get a list of available forwarding rules by making a list() request.
       operationId: compute.globalForwardingRules.get
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the ForwardingRule resource to return.
           in: path
           name: forwardingRule
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -3117,6 +3117,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.globalForwardingRules.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -3127,10 +3131,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -3283,14 +3283,14 @@ paths:
       description: Returns the specified HealthCheck resource. Get a list of available health checks by making a list() request.
       operationId: compute.healthChecks.get
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the HealthCheck resource to return.
           in: path
           name: healthCheck
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -3406,6 +3406,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.healthChecks.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -3416,10 +3420,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -3572,14 +3572,14 @@ paths:
       description: Returns the specified HttpHealthCheck resource. Get a list of available HTTP health checks by making a list() request.
       operationId: compute.httpHealthChecks.get
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the HttpHealthCheck resource to return.
           in: path
           name: httpHealthCheck
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -3695,6 +3695,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.httpHealthChecks.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -3705,10 +3709,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -3861,14 +3861,14 @@ paths:
       description: Returns the specified HttpsHealthCheck resource. Get a list of available HTTPS health checks by making a list() request.
       operationId: compute.httpsHealthChecks.get
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the HttpsHealthCheck resource to return.
           in: path
           name: httpsHealthCheck
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -3984,6 +3984,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.httpsHealthChecks.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -3994,10 +3998,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -4125,14 +4125,14 @@ paths:
       description: Returns the latest image that is part of an image family and is not deprecated.
       operationId: compute.images.getFromFamily
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the image family to search for.
           in: path
           name: family
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -4197,14 +4197,14 @@ paths:
       description: Returns the specified image. Get a list of available images by making a list() request.
       operationId: compute.images.get
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the image resource to return.
           in: path
           name: image
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -4293,6 +4293,10 @@ paths:
       description: 'Sets the labels on an image. To learn more about labels, read the Labeling Resources documentation.'
       operationId: compute.images.setLabels
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GlobalSetLabelsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -4303,10 +4307,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GlobalSetLabelsRequest'
       responses:
         '200':
           description: Successful response
@@ -4332,6 +4332,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.images.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -4342,10 +4346,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -4498,14 +4498,14 @@ paths:
       description: Returns the specified instance template. Get a list of available instance templates by making a list() request.
       operationId: compute.instanceTemplates.get
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: The name of the instance template.
           in: path
           name: instanceTemplate
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -4543,6 +4543,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.instanceTemplates.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -4553,10 +4557,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -5103,14 +5103,14 @@ paths:
       description: Returns the specified License resource.
       operationId: compute.licenses.get
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the License resource to return.
           in: path
           name: license
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -5273,14 +5273,14 @@ paths:
       description: Returns the specified network. Get a list of available networks by making a list() request.
       operationId: compute.networks.get
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the network to return.
           in: path
           name: network
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -5497,6 +5497,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.networks.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -5507,10 +5511,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -5594,14 +5594,14 @@ paths:
       description: Deletes the specified Operations resource.
       operationId: compute.globalOperations.delete
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the Operations resource to delete.
           in: path
           name: operation
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -5618,14 +5618,14 @@ paths:
       description: Retrieves the specified Operations resource. Get a list of operations by making a list() request.
       operationId: compute.globalOperations.get
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the Operations resource to return.
           in: path
           name: operation
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -5761,6 +5761,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.routes.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -5771,10 +5775,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -6188,6 +6188,10 @@ paths:
       description: 'Sets the labels on a snapshot. To learn more about labels, read the Labeling Resources documentation.'
       operationId: compute.snapshots.setLabels
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GlobalSetLabelsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -6198,10 +6202,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GlobalSetLabelsRequest'
       responses:
         '200':
           description: Successful response
@@ -6227,6 +6227,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.snapshots.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -6237,10 +6241,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -6441,6 +6441,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.sslCertificates.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -6451,10 +6455,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -6652,6 +6652,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.targetHttpProxies.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -6662,10 +6666,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -6863,6 +6863,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.targetHttpsProxies.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -6873,10 +6877,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -7074,6 +7074,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.targetSslProxies.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -7084,10 +7088,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -7695,6 +7695,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.urlMaps.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -7705,10 +7709,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -7934,6 +7934,10 @@ paths:
       description: 'Runs static validation for the UrlMap. In particular, the tests of the provided UrlMap will be run. Calling this method does NOT create the UrlMap.'
       operationId: compute.urlMaps.validate
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UrlMapsValidateRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -7944,10 +7948,6 @@ paths:
           name: urlMap
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UrlMapsValidateRequest'
       responses:
         '200':
           description: Successful response
@@ -7973,11 +7973,10 @@ paths:
       description: List all shared VPC host projects visible to the user in an organization.
       operationId: compute.projects.listXpnHosts
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ProjectsListXpnHostsRequest'
         - in: query
           name: filter
           type: string
@@ -7992,10 +7991,11 @@ paths:
         - in: query
           name: pageToken
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ProjectsListXpnHostsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -8348,6 +8348,11 @@ paths:
       description: Returns the specified address resource.
       operationId: compute.addresses.get
       parameters:
+        - description: Name of the address resource to return.
+          in: path
+          name: address
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -8356,11 +8361,6 @@ paths:
         - description: Name of the region for this request.
           in: path
           name: region
-          required: true
-          type: string
-        - description: Name of the address resource to return.
-          in: path
-          name: address
           required: true
           type: string
       responses:
@@ -8451,6 +8451,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.addresses.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -8466,10 +8470,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -8723,6 +8723,11 @@ paths:
       description: Returns the specified autoscaler.
       operationId: compute.regionAutoscalers.get
       parameters:
+        - description: Name of the autoscaler to return.
+          in: path
+          name: autoscaler
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -8731,11 +8736,6 @@ paths:
         - description: Name of the region scoping this request.
           in: path
           name: region
-          required: true
-          type: string
-        - description: Name of the autoscaler to return.
-          in: path
-          name: autoscaler
           required: true
           type: string
       responses:
@@ -8773,6 +8773,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.regionAutoscalers.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -8788,10 +8792,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -8959,6 +8959,11 @@ paths:
       description: Returns the specified regional BackendService resource.
       operationId: compute.regionBackendServices.get
       parameters:
+        - description: Name of the BackendService resource to return.
+          in: path
+          name: backendService
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -8967,11 +8972,6 @@ paths:
         - description: Name of the region scoping this request.
           in: path
           name: region
-          required: true
-          type: string
-        - description: Name of the BackendService resource to return.
-          in: path
-          name: backendService
           required: true
           type: string
       responses:
@@ -9097,15 +9097,6 @@ paths:
       description: Gets the most recent health check results for this regional BackendService.
       operationId: compute.regionBackendServices.getHealth
       parameters:
-        - in: path
-          name: project
-          required: true
-          type: string
-        - description: Name of the region scoping this request.
-          in: path
-          name: region
-          required: true
-          type: string
         - description: Name of the BackendService resource to which the queried instance belongs.
           in: path
           name: backendService
@@ -9115,6 +9106,15 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/ResourceGroupReference'
+        - in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -9142,6 +9142,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.regionBackendServices.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -9157,10 +9161,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -9288,6 +9288,11 @@ paths:
       description: Returns the specified commitment resource. Get a list of available commitments by making a list() request.
       operationId: compute.regionCommitments.get
       parameters:
+        - description: Name of the commitment to return.
+          in: path
+          name: commitment
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -9296,11 +9301,6 @@ paths:
         - description: Name of the region for this request.
           in: path
           name: region
-          required: true
-          type: string
-        - description: Name of the commitment to return.
-          in: path
-          name: commitment
           required: true
           type: string
       responses:
@@ -9478,6 +9478,11 @@ paths:
       description: Returns the specified ForwardingRule resource.
       operationId: compute.forwardingRules.get
       parameters:
+        - description: Name of the ForwardingRule resource to return.
+          in: path
+          name: forwardingRule
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -9486,11 +9491,6 @@ paths:
         - description: Name of the region scoping this request.
           in: path
           name: region
-          required: true
-          type: string
-        - description: Name of the ForwardingRule resource to return.
-          in: path
-          name: forwardingRule
           required: true
           type: string
       responses:
@@ -9634,6 +9634,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.forwardingRules.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -9649,10 +9653,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -9823,6 +9823,11 @@ paths:
       description: Returns all of the details about the specified managed instance group.
       operationId: compute.regionInstanceGroupManagers.get
       parameters:
+        - description: Name of the managed instance group to return.
+          in: path
+          name: instanceGroupManager
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -9831,11 +9836,6 @@ paths:
         - description: Name of the region scoping this request.
           in: path
           name: region
-          required: true
-          type: string
-        - description: Name of the managed instance group to return.
-          in: path
-          name: instanceGroupManager
           required: true
           type: string
       responses:
@@ -10077,23 +10077,13 @@ paths:
       description: Lists the instances in the managed instance group and instances that are scheduled to be created. The list includes any current actions that the group has scheduled for its instances.
       operationId: compute.regionInstanceGroupManagers.listManagedInstances
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Name of the region scoping this request.
-          in: path
-          name: region
-          required: true
+        - in: query
+          name: filter
           type: string
         - description: The name of the managed instance group.
           in: path
           name: instanceGroupManager
           required: true
-          type: string
-        - in: query
-          name: filter
           type: string
         - default: 500
           in: query
@@ -10105,6 +10095,16 @@ paths:
           type: string
         - in: query
           name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
           type: string
       responses:
         '200':
@@ -10408,6 +10408,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.regionInstanceGroupManagers.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -10423,10 +10427,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -10515,6 +10515,11 @@ paths:
       description: Returns the specified instance group resource.
       operationId: compute.regionInstanceGroups.get
       parameters:
+        - description: Name of the instance group resource to return.
+          in: path
+          name: instanceGroup
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -10523,11 +10528,6 @@ paths:
         - description: Name of the region scoping this request.
           in: path
           name: region
-          required: true
-          type: string
-        - description: Name of the instance group resource to return.
-          in: path
-          name: instanceGroup
           required: true
           type: string
       responses:
@@ -10696,6 +10696,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.regionInstanceGroups.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -10711,10 +10715,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -11039,6 +11039,11 @@ paths:
       description: Deletes the specified region-specific Operations resource.
       operationId: compute.regionOperations.delete
       parameters:
+        - description: Name of the Operations resource to delete.
+          in: path
+          name: operation
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -11047,11 +11052,6 @@ paths:
         - description: Name of the region for this request.
           in: path
           name: region
-          required: true
-          type: string
-        - description: Name of the Operations resource to delete.
-          in: path
-          name: operation
           required: true
           type: string
       responses:
@@ -11068,6 +11068,11 @@ paths:
       description: Retrieves the specified region-specific Operations resource.
       operationId: compute.regionOperations.get
       parameters:
+        - description: Name of the Operations resource to return.
+          in: path
+          name: operation
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -11076,11 +11081,6 @@ paths:
         - description: Name of the region for this request.
           in: path
           name: region
-          required: true
-          type: string
-        - description: Name of the Operations resource to return.
-          in: path
-          name: operation
           required: true
           type: string
       responses:
@@ -11226,6 +11226,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.routers.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -11241,10 +11245,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -11484,6 +11484,10 @@ paths:
       description: Preview fields auto-generated during router create and update operations. Calling this method does NOT create or update the router.
       operationId: compute.routers.preview
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Router'
         - description: Project ID for this request.
           in: path
           name: project
@@ -11499,10 +11503,6 @@ paths:
           name: router
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Router'
       responses:
         '200':
           description: Successful response
@@ -11680,6 +11680,10 @@ paths:
       description: Sets the access control policy on the specified resource. Replaces any existing policy.
       operationId: compute.subnetworks.setIamPolicy
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Policy'
         - description: Project ID for this request.
           in: path
           name: project
@@ -11695,10 +11699,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Policy'
       responses:
         '200':
           description: Successful response
@@ -11724,6 +11724,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.subnetworks.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -11739,10 +11743,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -12110,6 +12110,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.targetPools.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -12125,10 +12129,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -12344,6 +12344,10 @@ paths:
       description: Gets the most recent health check results for each IP for the instance that is referenced by the given target pool.
       operationId: compute.targetPools.getHealth
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstanceReference'
         - description: Project ID for this request.
           in: path
           name: project
@@ -12359,10 +12363,6 @@ paths:
           name: targetPool
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/InstanceReference'
       responses:
         '200':
           description: Successful response
@@ -12661,6 +12661,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.targetVpnGateways.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -12676,10 +12680,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -12897,6 +12897,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.vpnTunnels.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -12912,10 +12916,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -13423,6 +13423,11 @@ paths:
       description: Returns the specified accelerator type. Get a list of available accelerator types by making a list() request.
       operationId: compute.acceleratorTypes.get
       parameters:
+        - description: Name of the accelerator type to return.
+          in: path
+          name: acceleratorType
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -13431,11 +13436,6 @@ paths:
         - description: The name of the zone for this request.
           in: path
           name: zone
-          required: true
-          type: string
-        - description: Name of the accelerator type to return.
-          in: path
-          name: acceleratorType
           required: true
           type: string
       responses:
@@ -13699,6 +13699,11 @@ paths:
       description: Returns the specified autoscaler resource. Get a list of available autoscalers by making a list() request.
       operationId: compute.autoscalers.get
       parameters:
+        - description: Name of the autoscaler to return.
+          in: path
+          name: autoscaler
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -13707,11 +13712,6 @@ paths:
         - description: Name of the zone for this request.
           in: path
           name: zone
-          required: true
-          type: string
-        - description: Name of the autoscaler to return.
-          in: path
-          name: autoscaler
           required: true
           type: string
       responses:
@@ -13749,14 +13749,13 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.autoscalers.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
-          required: true
-          type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
           required: true
           type: string
         - description: Name of the resource for this request.
@@ -13764,10 +13763,11 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -13856,6 +13856,11 @@ paths:
       description: Returns the specified disk type. Get a list of available disk types by making a list() request.
       operationId: compute.diskTypes.get
       parameters:
+        - description: Name of the disk type to return.
+          in: path
+          name: diskType
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -13864,11 +13869,6 @@ paths:
         - description: The name of the zone for this request.
           in: path
           name: zone
-          required: true
-          type: string
-        - description: Name of the disk type to return.
-          in: path
-          name: diskType
           required: true
           type: string
       responses:
@@ -14050,6 +14050,11 @@ paths:
       description: Returns a specified persistent disk. Get a list of available persistent disks by making a list() request.
       operationId: compute.disks.get
       parameters:
+        - description: Name of the persistent disk to return.
+          in: path
+          name: disk
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -14058,11 +14063,6 @@ paths:
         - description: The name of the zone for this request.
           in: path
           name: zone
-          required: true
-          type: string
-        - description: Name of the persistent disk to return.
-          in: path
-          name: disk
           required: true
           type: string
       responses:
@@ -14262,14 +14262,13 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.disks.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
-          required: true
-          type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
           required: true
           type: string
         - description: Name of the resource for this request.
@@ -14277,10 +14276,11 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -14451,6 +14451,11 @@ paths:
       description: Returns all of the details about the specified managed instance group. Get a list of available managed instance groups by making a list() request.
       operationId: compute.instanceGroupManagers.get
       parameters:
+        - description: The name of the managed instance group.
+          in: path
+          name: instanceGroupManager
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -14459,11 +14464,6 @@ paths:
         - description: The name of the zone where the managed instance group is located.
           in: path
           name: zone
-          required: true
-          type: string
-        - description: The name of the managed instance group.
-          in: path
-          name: instanceGroupManager
           required: true
           type: string
       responses:
@@ -14705,23 +14705,13 @@ paths:
       description: 'Lists all of the instances in the managed instance group. Each instance in the list has a currentAction, which indicates the action that the managed instance group is performing on the instance. For example, if the group is still creating an instance, the currentAction is CREATING. If a previous action failed, the list displays the errors for that failed action.'
       operationId: compute.instanceGroupManagers.listManagedInstances
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The name of the zone where the managed instance group is located.
-          in: path
-          name: zone
-          required: true
+        - in: query
+          name: filter
           type: string
         - description: The name of the managed instance group.
           in: path
           name: instanceGroupManager
           required: true
-          type: string
-        - in: query
-          name: filter
           type: string
         - default: 500
           in: query
@@ -14733,6 +14723,16 @@ paths:
           type: string
         - in: query
           name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone where the managed instance group is located.
+          in: path
+          name: zone
+          required: true
           type: string
       responses:
         '200':
@@ -15093,14 +15093,13 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.instanceGroupManagers.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
-          required: true
-          type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
           required: true
           type: string
         - description: Name of the resource for this request.
@@ -15108,10 +15107,11 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -15279,6 +15279,11 @@ paths:
       description: Returns the specified instance group. Get a list of available instance groups by making a list() request.
       operationId: compute.instanceGroups.get
       parameters:
+        - description: The name of the instance group.
+          in: path
+          name: instanceGroup
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -15287,11 +15292,6 @@ paths:
         - description: The name of the zone where the instance group is located.
           in: path
           name: zone
-          required: true
-          type: string
-        - description: The name of the instance group.
-          in: path
-          name: instanceGroup
           required: true
           type: string
       responses:
@@ -15569,14 +15569,13 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.instanceGroups.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
-          required: true
-          type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
           required: true
           type: string
         - description: Name of the resource for this request.
@@ -15584,10 +15583,11 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -15765,6 +15765,11 @@ paths:
       description: Returns the specified Instance resource. Get a list of available instances by making a list() request.
       operationId: compute.instances.get
       parameters:
+        - description: Name of the instance resource to return.
+          in: path
+          name: instance
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -15773,11 +15778,6 @@ paths:
         - description: The name of the zone for this request.
           in: path
           name: zone
-          required: true
-          type: string
-        - description: Name of the instance resource to return.
-          in: path
-          name: instance
           required: true
           type: string
       responses:
@@ -16154,16 +16154,6 @@ paths:
       description: Returns the specified instance's serial port output.
       operationId: compute.instances.getSerialPortOutput
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: Name of the instance scoping this request.
           in: path
           name: instance
@@ -16176,9 +16166,19 @@ paths:
           minimum: 1
           name: port
           type: integer
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
         - description: 'Returns output starting from a specific byte position. Use this to page through output when the output is too large to return in a single request. For the initial request, leave this field unspecified. For subsequent calls, this field should be set to the next value returned in the previous call.'
           in: query
           name: start
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
           type: string
       responses:
         '200':
@@ -17019,14 +17019,13 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.instances.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
-          required: true
-          type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
           required: true
           type: string
         - description: Name of the resource for this request.
@@ -17034,10 +17033,11 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -17126,6 +17126,11 @@ paths:
       description: Returns the specified machine type. Get a list of available machine types by making a list() request.
       operationId: compute.machineTypes.get
       parameters:
+        - description: Name of the machine type to return.
+          in: path
+          name: machineType
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -17134,11 +17139,6 @@ paths:
         - description: The name of the zone for this request.
           in: path
           name: zone
-          required: true
-          type: string
-        - description: Name of the machine type to return.
-          in: path
-          name: machineType
           required: true
           type: string
       responses:
@@ -17237,6 +17237,11 @@ paths:
       description: Deletes the specified zone-specific Operations resource.
       operationId: compute.zoneOperations.delete
       parameters:
+        - description: Name of the Operations resource to delete.
+          in: path
+          name: operation
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -17245,11 +17250,6 @@ paths:
         - description: Name of the zone for this request.
           in: path
           name: zone
-          required: true
-          type: string
-        - description: Name of the Operations resource to delete.
-          in: path
-          name: operation
           required: true
           type: string
       responses:
@@ -17266,6 +17266,11 @@ paths:
       description: Retrieves the specified zone-specific Operations resource.
       operationId: compute.zoneOperations.get
       parameters:
+        - description: Name of the Operations resource to return.
+          in: path
+          name: operation
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -17274,11 +17279,6 @@ paths:
         - description: Name of the zone for this request.
           in: path
           name: zone
-          required: true
-          type: string
-        - description: Name of the Operations resource to return.
-          in: path
-          name: operation
           required: true
           type: string
       responses:
@@ -17424,14 +17424,13 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: compute.targetInstances.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
-          required: true
-          type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
           required: true
           type: string
         - description: Name of the resource for this request.
@@ -17439,10 +17438,11 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -17507,14 +17507,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the zone scoping this request.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: Name of the TargetInstance resource to return.
           in: path
           name: targetInstance
+          required: true
+          type: string
+        - description: Name of the zone scoping this request.
+          in: path
+          name: zone
           required: true
           type: string
       responses:

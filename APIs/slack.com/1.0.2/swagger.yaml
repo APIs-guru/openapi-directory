@@ -6,7 +6,7 @@ basePath: /api
 info:
   description: 'One way to interact with the Slack platform is its HTTP RPC-based Web API, a collection of methods requiring OAuth 2.0-based user, bot, or workspace tokens blessed with related OAuth scopes.'
   title: Slack
-  version: 1.0.1
+  version: 1.0.2
   x-apisguru-categories:
     - collaboration
     - messaging
@@ -449,7 +449,7 @@ paths:
           type: string
       responses:
         '200':
-          description: 'When successful, returns bot info by ID.'
+          description: 'When successful, returns bot info by bot ID.'
           examples:
             application/json:
               bot:
@@ -1949,6 +1949,64 @@ paths:
             - 'chat:write'
       tags:
         - chat
+  /chat.getPermalink:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Retrieve a permalink URL for a specific extant message
+      externalDocs:
+        description: API method documentation
+        url: 'https://api.slack.com/methods/chat.getPermalink'
+      operationId: chat_getPermalink
+      parameters:
+        - description: 'Authentication token. Requires scope: `tokens.basic`'
+          in: query
+          name: token
+          type: string
+        - description: 'A message''s `ts` value, uniquely identifying it within a channel'
+          in: query
+          name: message_ts
+          type: number
+        - description: The ID of the conversation or channel containing the message
+          in: query
+          name: channel
+          type: string
+      responses:
+        '200':
+          description: Standard success response
+          examples:
+            application/json:
+              channel: C1H9RESGL
+              ok: true
+              permalink: 'https://ghostbusters.slack.com/archives/C1H9RESGL/p135854651500000'
+          schema:
+            additionalProperties: true
+            description: Schema for successful response chat.getPermalink
+            properties:
+              channel:
+                $ref: '#/definitions/defs_channel'
+              ok:
+                $ref: '#/definitions/defs_ok_true'
+              permalink:
+                type: string
+            required:
+              - ok
+              - channel
+              - permalink
+            title: chat.getPermalink success schema
+            type: object
+        default:
+          description: Error response when channel cannot be found
+          examples:
+            application/json:
+              error: channel_not_found
+              ok: false
+          schema: {}
+      security:
+        - slackAuth:
+            - tokens.basic
+      tags:
+        - chat
   /chat.meMessage:
     post:
       consumes:
@@ -3432,6 +3490,7 @@ paths:
               error:
                 enum:
                   - method_not_supported_for_channel_type
+                  - last_member
                   - missing_scope
                   - channel_not_found
                   - is_archived
@@ -7233,7 +7292,7 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: 'For teams migrated to enterprise, map user ids before and after migration.'
+      description: 'For Enterprise Grid workspaces, map local user IDs to global user IDs'
       externalDocs:
         description: API method documentation
         url: 'https://api.slack.com/methods/migration.exchange'
@@ -7281,7 +7340,7 @@ paths:
           description: Typical error response when there are no mappings to provide
           examples:
             application/json:
-              error: user_mapping_not_exist
+              error: not_enterprise_team
               ok: false
           schema:
             additionalProperties: true
@@ -9133,7 +9192,8 @@ paths:
           in: query
           name: sort
           type: string
-        - in: query
+        - description: Pass the number of results you want per "page". Maximum of `100`.
+          in: query
           name: count
           type: string
         - description: 'Authentication token. Requires scope: `search:read`'

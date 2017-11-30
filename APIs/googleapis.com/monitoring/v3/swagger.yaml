@@ -210,19 +210,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     patch:
       description: Updates an uptime check configuration. You can either replace the entire configuration with a new one or replace only certain fields in the current configuration by specifying the fields to be updated via "updateMask". Returns the updated configuration.
       operationId: monitoring.projects.uptimeCheckConfigs.patch
@@ -257,6 +257,10 @@ paths:
       description: Updates an existing group. You can change any group attributes except name.
       operationId: monitoring.projects.groups.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Group'
         - description: 'Output only. The name of this group. The format is "projects/{project_id_or_number}/groups/{group_id}". When creating a group, this field is ignored and a new name is created consisting of the project specified in the call to CreateGroup and a unique {group_id} that is generated automatically.'
           in: path
           name: name
@@ -267,10 +271,6 @@ paths:
           in: query
           name: validateOnly
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Group'
       responses:
         '200':
           description: Successful response
@@ -285,33 +285,33 @@ paths:
         - projects
   '/v3/{name}/collectdTimeSeries':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Stackdriver Monitoring Agent only: Creates a new time series.<aside class="caution">This method is only for use by the Stackdriver Monitoring Agent. Use projects.timeSeries.create instead.</aside>'
       operationId: monitoring.projects.collectdTimeSeries.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateCollectdTimeSeriesRequest'
         - description: The project in which to create the time series. The format is "projects/PROJECT_ID_OR_NUMBER".
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreateCollectdTimeSeriesRequest'
       responses:
         '200':
           description: Successful response
@@ -331,12 +331,10 @@ paths:
       description: Lists the existing groups.
       operationId: monitoring.projects.groups.list
       parameters:
-        - description: 'The project whose groups are to be listed. The format is "projects/{project_id_or_number}".'
-          in: path
-          name: name
-          required: true
+        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns groups that are ancestors of the specified group. The groups are returned in order, starting with the immediate parent and ending with the most distant ancestor. If the specified group has no immediate parent, the results are empty.'
+          in: query
+          name: ancestorsOfGroup
           type: string
-          x-reservedExpansion: true
         - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns groups whose parentName field contains the group name. If no groups have this parent, the results are empty.'
           in: query
           name: childrenOfGroup
@@ -345,17 +343,19 @@ paths:
           in: query
           name: descendantsOfGroup
           type: string
-        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
-          in: query
-          name: pageToken
+        - description: 'The project whose groups are to be listed. The format is "projects/{project_id_or_number}".'
+          in: path
+          name: name
+          required: true
           type: string
+          x-reservedExpansion: true
         - description: A positive number that is the maximum number of results to return.
           in: query
           name: pageSize
           type: integer
-        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns groups that are ancestors of the specified group. The groups are returned in order, starting with the immediate parent and ending with the most distant ancestor. If the specified group has no immediate parent, the results are empty.'
+        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
           in: query
-          name: ancestorsOfGroup
+          name: pageToken
           type: string
       responses:
         '200':
@@ -372,23 +372,27 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new group.
       operationId: monitoring.projects.groups.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Group'
         - description: 'The project in which to create the group. The format is "projects/{project_id_or_number}".'
           in: path
           name: name
@@ -399,10 +403,6 @@ paths:
           in: query
           name: validateOnly
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Group'
       responses:
         '200':
           description: Successful response
@@ -420,33 +420,33 @@ paths:
       description: Lists the monitored resources that are members of a group.
       operationId: monitoring.projects.groups.members.list
       parameters:
+        - description: |
+            An optional list filter describing the members to be returned. The filter may reference the type, labels, and metadata of monitored resources that comprise the group. For example, to return only resources representing Compute Engine VM instances, use this filter:
+            resource.type = "gce_instance"
+          in: query
+          name: filter
+          type: string
+        - description: Required. The end of the time interval.
+          in: query
+          name: interval.endTime
+          type: string
+        - description: Optional. The beginning of the time interval. The default value for the start time is the end time. The start time must not be later than the end time.
+          in: query
+          name: interval.startTime
+          type: string
         - description: 'The group whose members are listed. The format is "projects/{project_id_or_number}/groups/{group_id}".'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
-          in: query
-          name: pageToken
-          type: string
-        - description: Optional. The beginning of the time interval. The default value for the start time is the end time. The start time must not be later than the end time.
-          in: query
-          name: interval.startTime
-          type: string
         - description: A positive number that is the maximum number of results to return.
           in: query
           name: pageSize
           type: integer
-        - description: Required. The end of the time interval.
+        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
           in: query
-          name: interval.endTime
-          type: string
-        - description: |
-            An optional list filter describing the members to be returned. The filter may reference the type, labels, and metadata of monitored resources that comprise the group. For example, to return only resources representing Compute Engine VM instances, use this filter:
-            resource.type = "gce_instance"
-          in: query
-          name: filter
+          name: pageToken
           type: string
       responses:
         '200':
@@ -463,43 +463,43 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v3/{name}/metricDescriptors':
     get:
       description: Lists metric descriptors that match a filter. This method does not require a Stackdriver account.
       operationId: monitoring.projects.metricDescriptors.list
       parameters:
+        - description: |
+            If this field is empty, all custom and system-defined metric descriptors are returned. Otherwise, the filter specifies which metric descriptors are to be returned. For example, the following filter matches all custom metrics:
+            metric.type = starts_with("custom.googleapis.com/")
+          in: query
+          name: filter
+          type: string
         - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
-          in: query
-          name: pageToken
-          type: string
         - description: A positive number that is the maximum number of results to return.
           in: query
           name: pageSize
           type: integer
-        - description: |
-            If this field is empty, all custom and system-defined metric descriptors are returned. Otherwise, the filter specifies which metric descriptors are to be returned. For example, the following filter matches all custom metrics:
-            metric.type = starts_with("custom.googleapis.com/")
+        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
           in: query
-          name: filter
+          name: pageToken
           type: string
       responses:
         '200':
@@ -518,33 +518,33 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new metric descriptor. User-created metric descriptors define custom metrics.
       operationId: monitoring.projects.metricDescriptors.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/MetricDescriptor'
         - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/MetricDescriptor'
       responses:
         '200':
           description: Successful response
@@ -564,25 +564,25 @@ paths:
       description: Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.
       operationId: monitoring.projects.monitoredResourceDescriptors.list
       parameters:
+        - description: |
+            An optional filter describing the descriptors to be returned. The filter can reference the descriptor's type and labels. For example, the following filter returns only Google Compute Engine descriptors that have an id label:
+            resource.type = starts_with("gce_") AND resource.label:id
+          in: query
+          name: filter
+          type: string
         - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
-          in: query
-          name: pageToken
-          type: string
         - description: A positive number that is the maximum number of results to return.
           in: query
           name: pageSize
           type: integer
-        - description: |
-            An optional filter describing the descriptors to be returned. The filter can reference the descriptor's type and labels. For example, the following filter returns only Google Compute Engine descriptors that have an id label:
-            resource.type = starts_with("gce_") AND resource.label:id
+        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
           in: query
-          name: filter
+          name: pageToken
           type: string
       responses:
         '200':
@@ -601,19 +601,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v3/{name}/timeSeries':
     get:
       description: Lists time series that match a filter. This method does not require a Stackdriver account.
@@ -725,33 +725,33 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response.'
       operationId: monitoring.projects.timeSeries.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateTimeSeriesRequest'
         - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreateTimeSeriesRequest'
       responses:
         '200':
           description: Successful response

@@ -128,16 +128,16 @@ paths:
         "servicemanagement.services.bind" permission for.
       operationId: serviceuser.services.search
       parameters:
+        - description: Requested size of the next page of data.
+          in: query
+          name: pageSize
+          type: integer
         - description: |-
             Token identifying which result to start with; returned by a previous list
             call.
           in: query
           name: pageToken
           type: string
-        - description: Requested size of the next page of data.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -151,34 +151,34 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{name}:disable':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Disable a service so it can no longer be used with a
@@ -188,6 +188,10 @@ paths:
         Operation<response: google.protobuf.Empty>
       operationId: serviceuser.projects.services.disable
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DisableServiceRequest'
         - description: |-
             Name of the consumer and the service to disable for that consumer.
 
@@ -201,10 +205,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DisableServiceRequest'
       responses:
         '200':
           description: Successful response
@@ -219,19 +219,19 @@ paths:
         - projects
   '/v1/{name}:enable':
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Enable a service so it can be used with a project.
@@ -241,6 +241,10 @@ paths:
         Operation<response: google.protobuf.Empty>
       operationId: serviceuser.projects.services.enable
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EnableServiceRequest'
         - description: |-
             Name of the consumer and the service to enable for that consumer.
 
@@ -251,10 +255,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EnableServiceRequest'
       responses:
         '200':
           description: Successful response
@@ -272,6 +272,16 @@ paths:
       description: List enabled services for the specified consumer.
       operationId: serviceuser.projects.services.list
       parameters:
+        - description: Requested size of the next page of data.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            Token identifying which result to start with; returned by a previous list
+            call.
+          in: query
+          name: pageToken
+          type: string
         - description: |-
             List enabled services for the specified parent.
 
@@ -282,16 +292,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: |-
-            Token identifying which result to start with; returned by a previous list
-            call.
-          in: query
-          name: pageToken
-          type: string
-        - description: Requested size of the next page of data.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -305,19 +305,19 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
 definitions:
   Api:
     description: |-

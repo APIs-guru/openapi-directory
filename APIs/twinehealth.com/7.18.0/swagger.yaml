@@ -54,34 +54,36 @@ tags:
     name: coach
   - description: A reward program provides the details for a rewards program for a group. Different rewards programs can be created for different periods of time specified by the start_at and end_at dates. A reward program can activated for a patient any time between these dates. An activated reward program for a patient is called a reward program activation.
     name: reward program
-  - description: A patient is the core user of Twine.
-    name: patient
-  - description: A plan is the set of actions and associated goals for a patient.
-    name: plan
   - description: An action is an actionable item in a patient's plan.
     name: action
   - description: A bundle is a collection of actions (an action plan) in a patient's plan summary.
     name: bundle
+  - description: A calendar event represents an event involving or relevant to a patient which will or has occurred on a specific date or during a specific period of time.
+    name: calendar event
+  - description: Email history represents a single email that was sent using twine.
+    name: email history
+  - description: A health profile contains a set of health questions and answers for a patient.
+    name: health profile
+  - description: A health profile answer is the answer to a question for a patient.
+    name: health profile answer
+  - description: A health profile question contains a health question and the corresponding answer for a patient.
+    name: health profile question
+  - description: A health question definition specifies a health question and the corresponding answer choices.
+    name: health question definition
   - description: 'A metric is a quantitative result for a patient. For example, vital signs, lab results, etc. are all metrics.'
     name: metric
-  - description: A reward program activation is the activation of a reward program for a specific patient.
-    name: reward program activation
+  - description: A patient is the core user of Twine.
+    name: patient
+  - description: A plan is the set of actions and associated goals for a patient.
+    name: plan
   - description: A reward allocates a portion of the budget from the reward program activation for achieving a particular goal and sets a target date.
     name: reward
   - description: A reward earning specifies the portion of a reward that was earned and at what date.
     name: reward earning
   - description: A reward earning fulfillment specifies the portion of a reward earning that was fulfilled and at what date.
     name: reward earning fulfillment
-  - description: Email history represents a single email that was sent using twine.
-    name: email history
-  - description: A health profile contains a set of health questions and answers for a patient.
-    name: health profile
-  - description: A health profile question contains a health question and the corresponding answer for a patient.
-    name: health profile question
-  - description: A health profile answer is the answer to a question for a patient.
-    name: health profile answer
-  - description: A health question definition specifies a health question and the corresponding answer choices.
-    name: health question definition
+  - description: A reward program activation is the activation of a reward program for a specific patient.
+    name: reward program activation
 paths:
   /action:
     post:
@@ -94,7 +96,7 @@ paths:
           schema:
             $ref: '#/definitions/CreateActionRequest'
       responses:
-        '200':
+        '201':
           description: OK
           schema:
             $ref: '#/definitions/CreateActionResponse'
@@ -263,6 +265,131 @@ paths:
       summary: Update a bundle
       tags:
         - bundle
+  /calendar_event:
+    get:
+      description: Get a list of calendar events
+      operationId: fetchCalendarEvents
+      parameters:
+        - description: |
+            Patient id to fetch calendar event. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, `filter[organization]`, or `filter[attendees]`.
+          in: query
+          name: 'filter[patient]'
+          type: string
+        - description: |
+            Comma-separated list of group ids. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, `filter[organization]`, or `filter[attendees]`.
+          in: query
+          name: 'filter[groups]'
+          type: string
+        - description: |
+            Twine organization id. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, `filter[organization]`, or `filter[attendees]`.
+          in: query
+          name: 'filter[organization]'
+          type: string
+        - description: |
+            Comma-separated list of coach or patient ids. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, `filter[organization]`, or `filter[attendees]`.
+          in: query
+          name: 'filter[attendees]'
+          type: string
+        - description: Calendar event type
+          enum:
+            - plan-check-in
+            - reminder
+            - telephone-call
+            - office-visit
+            - video-call
+          in: query
+          name: 'filter[type]'
+          type: string
+        - description: 'If not specified, return all calendar events. If set to `true` return only events marked as completed, if set to `false`, return only events not marked as completed yet.'
+          in: query
+          name: 'filter[completed]'
+          type: boolean
+        - description: |
+            The start (inclusive) and end (exclusive) dates are ISO date and time strings separated by `..`. Example for events starting in November 2017 (America/New_York): `filter[start_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
+          in: query
+          name: 'filter[start_at]'
+          type: string
+        - description: |
+            The start (inclusive) and end (exclusive) dates are ISO date and time strings separated by `..`. Example for events ending in November 2017 (America/New_York): `filter[end_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
+          in: query
+          name: 'filter[end_at]'
+          type: string
+        - description: |
+            The start (inclusive) and end (exclusive) dates are ISO date and time strings separated by `..`. Example for events completed in November 2017 (America/New_York): `filter[completed_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
+          in: query
+          name: 'filter[completed_at]'
+          type: string
+        - description: |
+            The start (inclusive) and end (exclusive) dates are ISO date and time strings separated by `..`. Example for events created in November 2017 (America/New_York): `filter[created_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
+          in: query
+          name: 'filter[created_at]'
+          type: string
+        - default: 1
+          description: Page number
+          in: query
+          name: 'page[number]'
+          required: false
+          type: integer
+        - default: 10
+          description: Page size
+          in: query
+          maximum: 50
+          name: 'page[size]'
+          required: false
+          type: integer
+        - description: List of related resources to include in the response
+          enum:
+            - owner
+          in: query
+          name: include
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/FetchCalendarEventsResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+        '409':
+          description: Invalid Request
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+      summary: List calendar events
+      tags:
+        - calendar event
+  '/calendar_event/{id}':
+    get:
+      description: Get a calendar event by id
+      operationId: fetchCalendarEvent
+      parameters:
+        - description: Calendar event identifier
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/FetchCalendarEventResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+      summary: Get a calendar event
+      tags:
+        - calendar event
   '/coach/{id}':
     get:
       description: Get a coach record by id.
@@ -453,15 +580,18 @@ paths:
       description: Get a list of health profiles
       operationId: fetchHealthProfiles
       parameters:
-        - description: 'Patient id to fetch healt profile (either a patient, group or organization filter is required)'
+        - description: |
+            Patient id to fetch health profile. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, or `filter[organization]`.
           in: query
           name: 'filter[patient]'
           type: string
-        - description: 'Comma-separated list of Twine group ids (either a patient, group or organization filter is required)'
+        - description: |
+            Comma-separated list of group ids. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, or `filter[organization]`.
           in: query
           name: 'filter[groups]'
           type: string
-        - description: 'Twine organization id (either a patient, group or organization filter is required)'
+        - description: |
+            Twine organization id. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, or `filter[organization]`.
           in: query
           name: 'filter[organization]'
           type: string
@@ -545,15 +675,18 @@ paths:
       description: Get a list of health profile answers
       operationId: fetchHealthProfileAnswers
       parameters:
-        - description: 'Patient id to fetch healt profile answers (either a patient, group or organization filter is required)'
+        - description: |
+            Patient id to fetch healt profile answers. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, or `filter[organization]`.
           in: query
           name: 'filter[patient]'
           type: string
-        - description: 'Comma-separated list of Twine group ids (either a patient, group or organization filter is required)'
+        - description: |
+            Comma-separated list of group ids. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, or `filter[organization]`.
           in: query
           name: 'filter[groups]'
           type: string
-        - description: 'Twine organization id (either a patient, group or organization filter is required)'
+        - description: |
+            Twine organization id. Note that one of the following filters must be specified: `filter[patient]`, `filter[group]`, or `filter[organization]`.
           in: query
           name: 'filter[organization]'
           type: string
@@ -859,11 +992,11 @@ paths:
       description: Get a list of patients.
       operationId: fetchPatients
       parameters:
-        - description: Comma-separated list of Twine group ids (either a group or organization filter is required)
+        - description: 'Comma-separated list of group ids. Note that either `filter[group]` or `filter[organization]` must be specified.'
           in: query
           name: 'filter[groups]'
           type: string
-        - description: Twine organization id (either a group or organization filter is required)
+        - description: 'Twine organization id. Note that either `filter[group]` or `filter[organization]` must be specified.'
           in: query
           name: 'filter[organization]'
           type: string
@@ -2017,6 +2150,136 @@ definitions:
       - type
       - id
     type: object
+  CalendarEventResource:
+    example:
+      attributes:
+        all_day: true
+        attendees:
+          - response_status: accepted
+            user: 5a0c8e27a9d454cc150997c9
+        completed_at: '2017-11-03T06:17:34.652Z'
+        completed_by: 5a0c8e27a9d454cc150997c9
+        created_at: '2017-10-20T10:59:40.000Z'
+        created_by: 5a0c8e27a9d454cc150997c9
+        end_at: '2017-11-03T08:00:00.000Z'
+        start_at: '2017-11-03T04:00:00.000Z'
+        time_zone: America/New_York
+        title: Plan Check-In
+        type: plan-check-in
+        updated_at: '2017-10-20T10:59:40.000Z'
+        updated_by: 5a0c8e27a9d454cc150997c9
+      id: 5a0c8e2aa9d454cc1509a142
+      links:
+        self: /pub/calendar_event/5a0c8e2aa9d454cc1509a142
+      relationships:
+        owner:
+          data:
+            id: 5a0c8e27a9d454cc150997f7
+            type: patient
+          links:
+            related: /pub/calendar_event/5a0c8e2aa9d454cc1509a142/owner
+      type: calendar_event
+    properties:
+      attributes:
+        properties:
+          all_day:
+            description: 'true if the calendar event is an all day event, false otherwise'
+            type: boolean
+          attendees:
+            description: List of attendees for the calendar event
+            items:
+              properties:
+                response_status:
+                  description: Status of responses from attendees
+                  enum:
+                    - needsAction
+                    - declined
+                    - tentative
+                    - accepted
+                  type: string
+                user:
+                  type: object
+              type: object
+            type: array
+          completed_at:
+            description: The date and time when the calendar event is marked as completed
+            example: '2017-11-03T06:17:34.652Z'
+            format: ISODate
+            type: string
+          completed_by:
+            description: The coach who marked the calendar event as completed
+            type: object
+          description:
+            type: string
+          end_at:
+            description: The date and time when the calendar event ends
+            example: '2017-11-03T08:00:00.000Z'
+            format: ISODate
+            type: string
+          location:
+            type: string
+          start_at:
+            description: The date and time when the calendar event starts
+            example: '2017-11-03T04:00:00.000Z'
+            format: ISODate
+            type: string
+          time_zone:
+            description: The time zone in which the dates for the calendar event are specified
+            example: America/New_York
+            type: string
+          title:
+            description: The title of the calendar event
+            type: string
+          type:
+            description: The type of calendar event
+            enum:
+              - plan-check-in
+              - reminder
+              - telephone-call
+              - office-visit
+              - video-call
+            type: string
+        type: object
+      id:
+        type: string
+      links:
+        properties:
+          self:
+            example: /calendar_event/5a0c8e2aa9d454cc1509a142
+            pattern: '/calendar_event/[0-9a-z]+'
+            type: string
+        readOnly: true
+        required:
+          - self
+        type: object
+      relationships:
+        properties:
+          owner:
+            description: The owner is the patient for whom the calendar event is created specificially for
+            properties:
+              data:
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+                type: object
+              links:
+                properties:
+                  related:
+                    example: /pub/calendar_event/5a0c8e2aa9d454cc1509a142/owner
+                    pattern: '/pub/calendar_event/[0-9a-z]+'
+                    type: string
+                readOnly: true
+                type: object
+            readOnly: true
+            type: object
+        type: object
+      type:
+        type: string
+    required:
+      - type
+    type: object
   CoachResource:
     properties:
       attributes:
@@ -2722,6 +2985,44 @@ definitions:
     properties:
       data:
         $ref: '#/definitions/BundleResource'
+      meta:
+        $ref: '#/definitions/FetchMetaResponse'
+    required:
+      - data
+    type: object
+  FetchCalendarEventResponse:
+    properties:
+      data:
+        $ref: '#/definitions/CalendarEventResource'
+      included:
+        description: |
+          Related resources which are included in the response based on the `include` param.
+          Attributes of each resource will vary depending on the type.
+          See [patient](#operation/fetchPatient)
+        items:
+          $ref: '#/definitions/Resource'
+        type: array
+      meta:
+        $ref: '#/definitions/FetchMetaResponse'
+    required:
+      - data
+    type: object
+  FetchCalendarEventsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/CalendarEventResource'
+        type: array
+      included:
+        description: |
+          Related resources which are included in the response based on the `include` param.
+          Attributes of each resource will vary depending on the type.
+          See [patient](#operation/fetchPatient)
+        items:
+          $ref: '#/definitions/Resource'
+        type: array
+      links:
+        $ref: '#/definitions/CollectionResponseLinks'
       meta:
         $ref: '#/definitions/FetchMetaResponse'
     required:
@@ -3764,7 +4065,6 @@ definitions:
         type: string
     required:
       - type
-      - id
     type: object
   HealthQuestionDefinitionResource:
     example:
@@ -5055,19 +5355,20 @@ x-tagGroups:
       - group
       - coach
       - reward program
-  - name: Patient Health Data
+  - name: Patient Data
     tags:
-      - patient
-      - plan
       - action
       - bundle
+      - calendar event
+      - email history
+      - health profile
+      - health profile answer
+      - health profile question
+      - health question definition
       - metric
-      - reward program activation
+      - patient
+      - plan
       - reward
       - reward earning
       - reward earning fulfillment
-      - email history
-      - health profile
-      - health profile question
-      - health profile answer
-      - health question definition
+      - reward program activation

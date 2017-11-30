@@ -129,11 +129,6 @@ paths:
       description: Lists all datasets in the specified project to which you have been granted the READER dataset role.
       operationId: bigquery.datasets.list
       parameters:
-        - description: Project ID of the datasets to be listed
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: 'Whether to list all datasets, including hidden ones'
           in: query
           name: all
@@ -149,6 +144,11 @@ paths:
         - description: 'Page token, returned by a previous call, to request the next page of results'
           in: query
           name: pageToken
+          type: string
+        - description: Project ID of the datasets to be listed
+          in: path
+          name: projectId
+          required: true
           type: string
       responses:
         '200':
@@ -176,15 +176,15 @@ paths:
       description: Creates a new empty dataset.
       operationId: bigquery.datasets.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Dataset'
         - description: Project ID of the new dataset
           in: path
           name: projectId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Dataset'
       responses:
         '200':
           description: Successful response
@@ -202,11 +202,6 @@ paths:
       description: 'Deletes the dataset specified by the datasetId value. Before you can delete a dataset, you must delete all its tables, either manually or by specifying deleteContents. Immediately after deletion, you can create another dataset with the same name.'
       operationId: bigquery.datasets.delete
       parameters:
-        - description: Project ID of the dataset being deleted
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: Dataset ID of dataset being deleted
           in: path
           name: datasetId
@@ -216,6 +211,11 @@ paths:
           in: query
           name: deleteContents
           type: boolean
+        - description: Project ID of the dataset being deleted
+          in: path
+          name: projectId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -230,14 +230,14 @@ paths:
       description: Returns the dataset specified by datasetID.
       operationId: bigquery.datasets.get
       parameters:
-        - description: Project ID of the requested dataset
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: Dataset ID of the requested dataset
           in: path
           name: datasetId
+          required: true
+          type: string
+        - description: Project ID of the requested dataset
+          in: path
+          name: projectId
           required: true
           type: string
       responses:
@@ -266,20 +266,20 @@ paths:
       description: 'Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource. This method supports patch semantics.'
       operationId: bigquery.datasets.patch
       parameters:
-        - description: Project ID of the dataset being updated
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Dataset'
         - description: Dataset ID of the dataset being updated
           in: path
           name: datasetId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Dataset'
+        - description: Project ID of the dataset being updated
+          in: path
+          name: projectId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -296,20 +296,20 @@ paths:
       description: 'Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource.'
       operationId: bigquery.datasets.update
       parameters:
-        - description: Project ID of the dataset being updated
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Dataset'
         - description: Dataset ID of the dataset being updated
           in: path
           name: datasetId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Dataset'
+        - description: Project ID of the dataset being updated
+          in: path
+          name: projectId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -327,11 +327,6 @@ paths:
       description: Lists all tables in the specified dataset. Requires the READER dataset role.
       operationId: bigquery.tables.list
       parameters:
-        - description: Project ID of the tables to list
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: Dataset ID of the tables to list
           in: path
           name: datasetId
@@ -344,6 +339,11 @@ paths:
         - description: 'Page token, returned by a previous call, to request the next page of results'
           in: query
           name: pageToken
+          type: string
+        - description: Project ID of the tables to list
+          in: path
+          name: projectId
+          required: true
           type: string
       responses:
         '200':
@@ -371,20 +371,20 @@ paths:
       description: 'Creates a new, empty table in the dataset.'
       operationId: bigquery.tables.insert
       parameters:
-        - description: Project ID of the new table
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Table'
         - description: Dataset ID of the new table
           in: path
           name: datasetId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Table'
+        - description: Project ID of the new table
+          in: path
+          name: projectId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -402,14 +402,14 @@ paths:
       description: 'Deletes the table specified by tableId from the dataset. If the table contains data, all the data will be deleted.'
       operationId: bigquery.tables.delete
       parameters:
-        - description: Project ID of the table to delete
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: Dataset ID of the table to delete
           in: path
           name: datasetId
+          required: true
+          type: string
+        - description: Project ID of the table to delete
+          in: path
+          name: projectId
           required: true
           type: string
         - description: Table ID of the table to delete
@@ -431,24 +431,24 @@ paths:
       description: 'Gets the specified table resource by table ID. This method does not return the data in the table, it only returns the table resource, which describes the structure of this table.'
       operationId: bigquery.tables.get
       parameters:
-        - description: Project ID of the requested table
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: Dataset ID of the requested table
           in: path
           name: datasetId
           required: true
           type: string
-        - description: Table ID of the requested table
+        - description: Project ID of the requested table
           in: path
-          name: tableId
+          name: projectId
           required: true
           type: string
         - description: 'List of fields to return (comma-separated). If unspecified, all fields are returned'
           in: query
           name: selectedFields
+          type: string
+        - description: Table ID of the requested table
+          in: path
+          name: tableId
+          required: true
           type: string
       responses:
         '200':
@@ -476,14 +476,18 @@ paths:
       description: 'Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource. This method supports patch semantics.'
       operationId: bigquery.tables.patch
       parameters:
-        - description: Project ID of the table to update
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Table'
         - description: Dataset ID of the table to update
           in: path
           name: datasetId
+          required: true
+          type: string
+        - description: Project ID of the table to update
+          in: path
+          name: projectId
           required: true
           type: string
         - description: Table ID of the table to update
@@ -491,10 +495,6 @@ paths:
           name: tableId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Table'
       responses:
         '200':
           description: Successful response
@@ -511,14 +511,18 @@ paths:
       description: 'Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource.'
       operationId: bigquery.tables.update
       parameters:
-        - description: Project ID of the table to update
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Table'
         - description: Dataset ID of the table to update
           in: path
           name: datasetId
+          required: true
+          type: string
+        - description: Project ID of the table to update
+          in: path
+          name: projectId
           required: true
           type: string
         - description: Table ID of the table to update
@@ -526,10 +530,6 @@ paths:
           name: tableId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Table'
       responses:
         '200':
           description: Successful response
@@ -547,19 +547,9 @@ paths:
       description: Retrieves table data from a specified set of rows. Requires the READER dataset role.
       operationId: bigquery.tabledata.list
       parameters:
-        - description: Project ID of the table to read
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: Dataset ID of the table to read
           in: path
           name: datasetId
-          required: true
-          type: string
-        - description: Table ID of the table to read
-          in: path
-          name: tableId
           required: true
           type: string
         - description: Maximum number of results to return
@@ -570,6 +560,11 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: Project ID of the table to read
+          in: path
+          name: projectId
+          required: true
+          type: string
         - description: 'List of fields to return (comma-separated). If unspecified, all fields are returned'
           in: query
           name: selectedFields
@@ -577,6 +572,11 @@ paths:
         - description: Zero-based index of the starting row to read
           in: query
           name: startIndex
+          type: string
+        - description: Table ID of the table to read
+          in: path
+          name: tableId
+          required: true
           type: string
       responses:
         '200':
@@ -613,14 +613,18 @@ paths:
       description: Streams data into BigQuery one record at a time without needing to run a load job. Requires the WRITER dataset role.
       operationId: bigquery.tabledata.insertAll
       parameters:
-        - description: Project ID of the destination table.
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TableDataInsertAllRequest'
         - description: Dataset ID of the destination table.
           in: path
           name: datasetId
+          required: true
+          type: string
+        - description: Project ID of the destination table.
+          in: path
+          name: projectId
           required: true
           type: string
         - description: Table ID of the destination table.
@@ -628,10 +632,6 @@ paths:
           name: tableId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TableDataInsertAllRequest'
       responses:
         '200':
           description: Successful response
@@ -651,11 +651,6 @@ paths:
       description: 'Lists all jobs that you started in the specified project. Job information is available for a six month period after creation. The job list is sorted in reverse chronological order, by job creation time. Requires the Can View project role, or the Is Owner project role if you set the allUsers property.'
       operationId: bigquery.jobs.list
       parameters:
-        - description: Project ID of the jobs to list
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: Whether to display jobs owned by all users in the project. Default false
           in: query
           name: allUsers
@@ -667,6 +662,11 @@ paths:
         - description: 'Page token, returned by a previous call, to request the next page of results'
           in: query
           name: pageToken
+          type: string
+        - description: Project ID of the jobs to list
+          in: path
+          name: projectId
+          required: true
           type: string
         - description: Restrict information returned to a set of selected fields
           enum:
@@ -714,15 +714,15 @@ paths:
       description: Starts a new asynchronous job. Requires the Can View project role.
       operationId: bigquery.jobs.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Job'
         - description: Project ID of the project that will be billed for the job
           in: path
           name: projectId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Job'
       responses:
         '200':
           description: Successful response
@@ -746,14 +746,14 @@ paths:
       description: 'Returns information about a specific job. Job information is available for a six month period after creation. Requires that you''re the person who ran the job, or have the Is Owner project role.'
       operationId: bigquery.jobs.get
       parameters:
-        - description: '[Required] Project ID of the requested job'
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: '[Required] Job ID of the requested job'
           in: path
           name: jobId
+          required: true
+          type: string
+        - description: '[Required] Project ID of the requested job'
+          in: path
+          name: projectId
           required: true
           type: string
       responses:
@@ -791,14 +791,14 @@ paths:
       description: 'Requests that a job be cancelled. This call will return immediately, and the client will need to poll for the job status to see if the cancel completed successfully. Cancelled jobs may still incur costs.'
       operationId: bigquery.jobs.cancel
       parameters:
-        - description: '[Required] Project ID of the job to cancel'
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: '[Required] Job ID of the job to cancel'
           in: path
           name: jobId
+          required: true
+          type: string
+        - description: '[Required] Project ID of the job to cancel'
+          in: path
+          name: projectId
           required: true
           type: string
       responses:
@@ -826,15 +826,15 @@ paths:
       description: Runs a BigQuery SQL query synchronously and returns query results if the query completes within a specified timeout.
       operationId: bigquery.jobs.query
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/QueryRequest'
         - description: Project ID of the project billed for the query
           in: path
           name: projectId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/QueryRequest'
       responses:
         '200':
           description: Successful response
@@ -854,11 +854,6 @@ paths:
       description: Retrieves the results of a query job.
       operationId: bigquery.jobs.getQueryResults
       parameters:
-        - description: '[Required] Project ID of the query job'
-          in: path
-          name: projectId
-          required: true
-          type: string
         - description: '[Required] Job ID of the query job'
           in: path
           name: jobId
@@ -871,6 +866,11 @@ paths:
         - description: 'Page token, returned by a previous call, to request the next page of results'
           in: query
           name: pageToken
+          type: string
+        - description: '[Required] Project ID of the query job'
+          in: path
+          name: projectId
+          required: true
           type: string
         - description: Zero-based index of the starting row
           in: query

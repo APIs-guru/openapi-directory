@@ -5097,15 +5097,14 @@ definitions:
         type: string
     type: object
   CallList:
-    allOf:
-      - $ref: '#/definitions/ItemList'
-      - properties:
-          items:
-            items:
-              $ref: '#/definitions/Call'
-            type: array
-        type: object
     description: '~'
+    properties:
+      items:
+        description: '~'
+        items:
+          $ref: '#/definitions/Call'
+        type: array
+    type: object
   CallPage:
     description: '~'
     properties:
@@ -5315,15 +5314,14 @@ definitions:
         type: string
     type: object
   CallRecordingList:
-    allOf:
-      - $ref: '#/definitions/ItemList'
-      - properties:
-          items:
-            items:
-              $ref: '#/definitions/CallRecording'
-            type: array
-        type: object
     description: '~'
+    properties:
+      items:
+        description: '~'
+        items:
+          $ref: '#/definitions/CallRecording'
+        type: array
+    type: object
   CallTrackingConfig:
     description: 'Call tracking configuration allows you track incoming calls, analyze, respond to customers using sms or voice replies. For more information see [call tracking page](https://www.callfire.com/products/call-tracking)'
     properties:
@@ -5850,15 +5848,14 @@ definitions:
         type: integer
     type: object
   KeywordList:
-    allOf:
-      - $ref: '#/definitions/ItemList'
-      - properties:
-          items:
-            items:
-              $ref: '#/definitions/Keyword'
-            type: array
-        type: object
     description: '~'
+    properties:
+      items:
+        description: '~'
+        items:
+          $ref: '#/definitions/Keyword'
+        type: array
+    type: object
   KeywordPurchaseRequest:
     description: Request object is used to purchase keywords
     properties:

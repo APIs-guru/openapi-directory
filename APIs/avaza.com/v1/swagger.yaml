@@ -6,7 +6,7 @@ info:
   contact:
     email: support@avaza.com
     name: Avaza Team
-    url: 'http://support.avaza.com'
+    url: 'https://support.avaza.com'
     x-twitter: AvazaHq
   description: 'For testing and experimenting with Avaza''s API features. <p></p><h3>API Security</h3><p>Authentication options include OAuth2 Implicit and Authorization flows.<br/>To use the Api from your own app you will need us to issue you an App Client ID and Secret. You can get in touch to request one.</p> <p>OAuth2 Authorization endpoint: https://any.avaza.com/oauth2/authorize.  <br/>OAuth2 Token endpoint: https://any.avaza.com/oauth2/token<br/>Api Request Base URL: https://api.avaza.com/ </p><br/>Blogpost about authenticating with Avaza''s API:  https://www.avaza.com/avaza-api-oauth2-authentication/ </p><p></p>Blogpost on using Avaza''s webhooks: https://www.avaza.com/avaza-api-webhook-notifications/</p><p>We currently issue Access Tokens that last 1 hour, and Refresh tokens that last 60 days</p>'
   title: Avaza
@@ -38,7 +38,6 @@ paths:
   /api/Account:
     get:
       consumes: []
-      deprecated: false
       operationId: Account_Get
       responses:
         '200':
@@ -56,7 +55,6 @@ paths:
   /api/Company:
     get:
       consumes: []
-      deprecated: false
       operationId: Company_Get
       parameters:
         - format: date-time
@@ -96,7 +94,6 @@ paths:
   '/api/Company/{id}':
     get:
       consumes: []
-      deprecated: false
       operationId: Company_GetByID
       parameters:
         - description: Company ID Number
@@ -123,7 +120,6 @@ paths:
   /api/Contact:
     get:
       consumes: []
-      deprecated: false
       operationId: Contact_Get
       parameters:
         - format: date-time
@@ -167,7 +163,6 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      deprecated: false
       operationId: Contact_Post
       parameters:
         - in: body
@@ -191,7 +186,6 @@ paths:
   '/api/Contact/{id}':
     get:
       consumes: []
-      deprecated: false
       operationId: Contact_GetByID
       parameters:
         - description: Contact ID number
@@ -218,7 +212,6 @@ paths:
   /api/CreditNote:
     get:
       consumes: []
-      deprecated: false
       operationId: CreditNote_Get
       parameters:
         - format: date-time
@@ -254,7 +247,6 @@ paths:
   '/api/CreditNote/{id}':
     get:
       consumes: []
-      deprecated: false
       operationId: CreditNote_GetByID
       parameters:
         - description: Credit Note ID Number
@@ -281,7 +273,6 @@ paths:
   /api/Currency:
     get:
       consumes: []
-      deprecated: false
       operationId: Currency_Get
       responses:
         '200':
@@ -299,7 +290,6 @@ paths:
   /api/Expense:
     get:
       consumes: []
-      deprecated: false
       operationId: Expense_Get
       parameters:
         - format: date-time
@@ -379,7 +369,6 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      deprecated: false
       description: Create an Expense
       operationId: Expense_Post
       parameters:
@@ -402,7 +391,6 @@ paths:
   '/api/Expense/{id}':
     get:
       consumes: []
-      deprecated: false
       operationId: Expense_GetByID
       parameters:
         - description: Expense ID number
@@ -429,7 +417,6 @@ paths:
   /api/Inventory:
     get:
       consumes: []
-      deprecated: false
       description: ''
       operationId: Inventory_Get
       parameters:
@@ -466,7 +453,6 @@ paths:
   '/api/Inventory/{id}':
     get:
       consumes: []
-      deprecated: false
       operationId: Inventory_GetByID
       parameters:
         - description: InventoryItem ID number
@@ -489,7 +475,6 @@ paths:
   /api/Invoice:
     get:
       consumes: []
-      deprecated: false
       description: 'TransactionStatusCode values are: "Draft", "Sent", "Late", "Paid", "Partial", "Void"'
       operationId: Invoice_Get
       parameters:
@@ -534,7 +519,6 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      deprecated: false
       operationId: Invoice_Post
       parameters:
         - description: ''
@@ -557,7 +541,6 @@ paths:
   '/api/Invoice/{id}':
     get:
       consumes: []
-      deprecated: false
       operationId: Invoice_GetByID
       parameters:
         - description: Invoice Transaction ID number
@@ -580,7 +563,6 @@ paths:
   /api/Payment:
     get:
       consumes: []
-      deprecated: false
       operationId: Payment_Get
       parameters:
         - format: date-time
@@ -620,7 +602,6 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      deprecated: false
       operationId: Payment_Post
       parameters:
         - description: ''
@@ -643,7 +624,6 @@ paths:
   '/api/Payment/{id}':
     get:
       consumes: []
-      deprecated: false
       operationId: Payment_GetByID
       parameters:
         - description: Invoice Transaction ID Number
@@ -670,7 +650,6 @@ paths:
   /api/Project:
     get:
       consumes: []
-      deprecated: false
       operationId: Project_Get
       parameters:
         - format: date-time
@@ -678,14 +657,12 @@ paths:
           name: UpdatedAfter
           required: false
           type: string
-        - description: Number of items per page
-          format: int32
+        - format: int32
           in: query
           name: pageSize
           required: false
           type: integer
-        - description: Page to display. Starts from 1.
-          format: int32
+        - format: int32
           in: query
           name: pageNumber
           required: false
@@ -694,17 +671,19 @@ paths:
           name: Sort
           required: false
           type: string
+        - format: int32
+          in: query
+          name: TimesheetUserID
+          required: false
+          type: integer
       responses:
         '200':
-          description: Success
+          description: OK
           schema:
             $ref: '#/definitions/ProjectList'
-        '401':
-          description: Unauthorized
       security:
         - oauth2:
             - read
-      summary: Gets list of Projects
       tags:
         - Project
     post:
@@ -714,7 +693,6 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      deprecated: false
       operationId: Project_Post
       parameters:
         - in: body
@@ -738,7 +716,6 @@ paths:
   '/api/Project/{id}':
     get:
       consumes: []
-      deprecated: false
       operationId: Project_GetByID
       parameters:
         - description: Project ID number
@@ -765,7 +742,6 @@ paths:
   /api/ProjectTimesheetCategory:
     get:
       consumes: []
-      deprecated: false
       operationId: ProjectTimesheetCategory_Get
       parameters:
         - description: Get categories filtered by ProjectID
@@ -790,7 +766,6 @@ paths:
   /api/Section:
     get:
       consumes: []
-      deprecated: false
       operationId: Section_Get
       parameters:
         - description: Get sections for Project with ProjectID
@@ -819,7 +794,6 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      deprecated: false
       operationId: Section_Post
       parameters:
         - description: ''
@@ -842,7 +816,6 @@ paths:
   /api/Task:
     get:
       consumes: []
-      deprecated: false
       operationId: Task_Get
       parameters:
         - format: date-time
@@ -866,6 +839,11 @@ paths:
           name: Sort
           required: false
           type: string
+        - format: int32
+          in: query
+          name: ProjectID
+          required: false
+          type: integer
       responses:
         '200':
           description: Success
@@ -886,7 +864,6 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      deprecated: false
       operationId: Task_Post
       parameters:
         - description: ''
@@ -909,7 +886,6 @@ paths:
   '/api/Task/{id}':
     get:
       consumes: []
-      deprecated: false
       operationId: Task_GetByID
       parameters:
         - description: Task ID number
@@ -936,7 +912,6 @@ paths:
   /api/Tax:
     get:
       consumes: []
-      deprecated: false
       operationId: Tax_Get
       responses:
         '200':
@@ -951,7 +926,6 @@ paths:
   /api/Timesheet:
     get:
       consumes: []
-      deprecated: false
       operationId: Timesheet_Get
       parameters:
         - format: date-time
@@ -1019,10 +993,56 @@ paths:
       summary: Gets list of Timsheets
       tags:
         - Timesheet
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: Timesheet_Post
+      parameters:
+        - description: ''
+          in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/NewTimesheet'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TimesheetDetails'
+      security:
+        - oauth2:
+            - write
+      summary: Create a new Timesheet Entry
+      tags:
+        - Timesheet
   '/api/Timesheet/{id}':
+    delete:
+      consumes: []
+      operationId: Timesheet_Delete
+      parameters:
+        - description: The TimesheetEntryID of the Timesheet Entry
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+      security:
+        - oauth2:
+            - write
+      summary: Delete a Timesheet Entry
+      tags:
+        - Timesheet
     get:
       consumes: []
-      deprecated: false
       operationId: Timesheet_GetByID
       parameters:
         - description: Timesheet ID number
@@ -1048,7 +1068,6 @@ paths:
         - Timesheet
     put:
       consumes: []
-      deprecated: false
       description: You can Mark a Timesheet as Invoiced/Uninvoiced. Useful if invoicing in an external system to lock timesheets. Note if the timesheet has been invoiced by Avaza you cannot mark it uninvoiced
       operationId: Timesheet_Put
       parameters:
@@ -1058,9 +1077,47 @@ paths:
           name: id
           required: true
           type: integer
+        - format: int32
+          in: query
+          name: TaskIDFK
+          required: false
+          type: integer
+        - format: int32
+          in: query
+          name: UserIDFK
+          required: false
+          type: integer
+        - format: int32
+          in: query
+          name: ProjectIDFK
+          required: false
+          type: integer
+        - format: int32
+          in: query
+          name: TimeSheetCategoryIDFK
+          required: false
+          type: integer
+        - format: double
+          in: query
+          name: Duration
+          required: false
+          type: number
+        - format: date-time
+          in: query
+          name: EntryDate
+          required: false
+          type: string
+        - in: query
+          name: Notes
+          required: false
+          type: string
         - description: Mark Timesheet as Invoiced (true/false)
           in: query
           name: isInvoiced
+          required: false
+          type: boolean
+        - in: query
+          name: hasStartEndTime
           required: false
           type: boolean
       responses:
@@ -1077,8 +1134,13 @@ paths:
   /api/UserProfile:
     get:
       consumes: []
-      deprecated: false
       operationId: UserProfile_Get
+      parameters:
+        - description: 'Optional list of comma sepaprated roele codes to filter users by (e.g. "TimesheetUser,Admin")'
+          in: query
+          name: Roles
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -1087,12 +1149,12 @@ paths:
       security:
         - oauth2:
             - read
+      summary: ''
       tags:
         - UserProfile
   /api/Webhook:
     delete:
       consumes: []
-      deprecated: false
       operationId: Webhook_DeleteByUrl
       parameters:
         - description: Target URL that should be used to delete subscriptions
@@ -1115,7 +1177,6 @@ paths:
         - Webhook
     get:
       consumes: []
-      deprecated: false
       operationId: Webhook_Get
       responses:
         '200':
@@ -1135,7 +1196,6 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      deprecated: false
       description: 'When you receive a webhook, you should respond with Http 200 OK Status Code, otherwise we will retry. Event values are: "company_created", "company_deleted", "company_updated", "contact_created", "contact_deleted", "contact_updated", "invoice_created", "invoice_sent", "project_created", "project_deleted", "project_updated", "task_created", "timesheet_created", "timesheet_deleted", "timesheet_updated"'
       operationId: Webhook_Post
       parameters:
@@ -1162,7 +1222,6 @@ paths:
   '/api/Webhook/{id}':
     delete:
       consumes: []
-      deprecated: false
       operationId: Webhook_Delete
       parameters:
         - description: Subscription id to be deleted
@@ -1189,6 +1248,19 @@ definitions:
     properties:
       CompanyName:
         type: string
+      LockApprovedTimesheets:
+        type: boolean
+      TimesheetDayOfWeek:
+        format: int32
+        type: integer
+      TimesheetDisplayFormatCode:
+        type: string
+      WeeklyTimesheetReminder:
+        type: boolean
+      has24HourTimesheetFormat:
+        type: boolean
+      hasStartEndTimesheets:
+        type: boolean
     type: object
   Company:
     properties:
@@ -2049,6 +2121,46 @@ definitions:
         type: integer
       Title:
         type: string
+    required:
+      - ProjectIDFK
+      - SectionIDFK
+      - Title
+    type: object
+  NewTimesheet:
+    properties:
+      Duration:
+        description: 'The duration of the timesheet, in decimal hours.'
+        format: double
+        type: number
+      EntryDate:
+        description: 'The date of the timesheet entry, with an optional start time component.'
+        format: date-time
+        type: string
+      Notes:
+        description: Timesheet Notes
+        type: string
+      ProjectIDFK:
+        description: The project to associate the timesheet with
+        format: int32
+        type: integer
+      TaskIDFK:
+        description: Optional. Link the timesheet to a specific task
+        format: int32
+        type: integer
+      TimesheetCategoryIDFK:
+        description: The Project timesheet category to link the timesheet to
+        format: int32
+        type: integer
+      UserIDFK:
+        description: UserID for a Timesheet user in Avaza
+        format: int32
+        type: integer
+      hasStartEndTime:
+        description: 'If true, the start time will be take from the time component of the Entry Date field, and the end time will be calculated by adding the Duration to the StartDate'
+        type: boolean
+      isInvoiced:
+        description: Optional. False by default. Allows you to mark the timesheet as invoiced in an external system.
+        type: boolean
     type: object
   Payment:
     properties:

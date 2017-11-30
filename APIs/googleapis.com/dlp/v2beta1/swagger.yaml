@@ -588,6 +588,31 @@ definitions:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1BigQueryTable'
         description: Input dataset to compute metrics over.
     type: object
+  GooglePrivacyDlpV2beta1AuxiliaryTable:
+    description: |-
+      An auxiliary table contains statistical information on the relative
+      frequency of different quasi-identifiers values. It has one or several
+      quasi-identifiers columns, and one column that indicates the relative
+      frequency of each quasi-identifier tuple.
+      If a tuple is present in the data but not in the auxiliary table, the
+      corresponding relative frequency is assumed to be zero (and thus, the
+      tuple is highly reidentifiable).
+    properties:
+      quasiIds:
+        description: 'Quasi-identifier columns. [required]'
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1QuasiIdField'
+        type: array
+      relativeFrequency:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
+        description: |-
+          The relative frequency column must contain a floating-point number
+          between 0 and 1 (inclusive). Null values are assumed to be zero.
+          [required]
+      table:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1BigQueryTable'
+        description: 'Auxiliary table location. [required]'
+    type: object
   GooglePrivacyDlpV2beta1BigQueryOptions:
     description: Options defining BigQuery table and row identifiers.
     properties:
@@ -1502,19 +1527,17 @@ definitions:
       entityId:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1EntityId'
         description: |-
-          Optional message indicating that each distinct `EntityId` should not
+          Optional message indicating that each distinct entity_id should not
           contribute to the k-anonymity count more than once per equivalence class.
           If an entity_id appears on several rows with different quasi-identifier
-          tuples, it will contribute to each count exactly once. This can lead to
-          unexpected results, consider for example the following table:
-            entity_id | quasi_id
-            --------------------
-                    1 |    "foo"
-                    2 |    "bar"
-                    3 |    "foo"
-                    3 |    "bar"
-          The anonymity value associated to entity_id 3 will be 2, even if it is
-          the only entity_id to be associated to both values "foo" and "bar".
+          tuples, it will contribute to each count exactly once.
+
+          This can lead to unexpected results. Consider a table where ID 1 is
+          associated to quasi-identifier "foo", ID 2 to "bar", and ID 3 to *both*
+          quasi-identifiers "foo" and "bar" (on separate rows), and where this ID
+          is used as entity_id. Then, the anonymity value associated to ID 3 will
+          be 2, even if it is the only ID to be associated to both values "foo" and
+          "bar".
       quasiIds:
         description: |-
           Set of fields to compute k-anonymity over. When multiple fields are
@@ -1574,6 +1597,100 @@ definitions:
         description: Histogram of k-anonymity equivalence classes.
         items:
           $ref: '#/definitions/GooglePrivacyDlpV2beta1KAnonymityHistogramBucket'
+        type: array
+    type: object
+  GooglePrivacyDlpV2beta1KMapEstimationConfig:
+    description: |-
+      Reidentifiability metric. This corresponds to a risk model similar to what
+      is called "journalist risk" in the literature, except the attack dataset is
+      statistically modeled instead of being perfectly known. This can be done
+      using publicly available data (like the US Census), or using a custom
+      statistical model (indicated as one or several BigQuery tables), or by
+      extrapolating from the distribution of values in the input dataset.
+    properties:
+      auxiliaryTables:
+        description: |-
+          Several auxiliary tables can be used in the analysis. Each custom_tag
+          used to tag a quasi-identifiers column must appear in exactly one column
+          of one auxiliary table.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1AuxiliaryTable'
+        type: array
+      quasiIds:
+        description: |-
+          Fields considered to be quasi-identifiers. No two columns can have the
+          same tag. [required]
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1TaggedField'
+        type: array
+      regionCode:
+        description: |-
+          ISO 3166-1 alpha-2 region code to use in the statistical modeling.
+          Required if no column is tagged with a region-specific InfoType (like
+          US_ZIP_5) or a region code.
+        type: string
+    type: object
+  GooglePrivacyDlpV2beta1KMapEstimationHistogramBucket:
+    description: |-
+      A KMapEstimationHistogramBucket message with the following values:
+        min_anonymity: 3
+        max_anonymity: 5
+        frequency: 42
+      means that there are 42 records whose quasi-identifier values correspond
+      to 3, 4 or 5 people in the overlying population. An important particular
+      case is when min_anonymity = max_anonymity = 1: the frequency field then
+      corresponds to the number of uniquely identifiable records.
+    properties:
+      bucketSize:
+        description: Number of records within these anonymity bounds.
+        format: int64
+        type: string
+      bucketValues:
+        description: |-
+          Sample of quasi-identifier tuple values in this bucket. The total
+          number of classes returned per bucket is capped at 20.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1KMapEstimationQuasiIdValues'
+        type: array
+      maxAnonymity:
+        description: Always greater than or equal to min_anonymity.
+        format: int64
+        type: string
+      minAnonymity:
+        description: Always positive.
+        format: int64
+        type: string
+    type: object
+  GooglePrivacyDlpV2beta1KMapEstimationQuasiIdValues:
+    description: A tuple of values for the quasi-identifier columns.
+    properties:
+      estimatedAnonymity:
+        description: The estimated anonymity for these quasi-identifier values.
+        format: int64
+        type: string
+      quasiIdsValues:
+        description: The quasi-identifier values.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1Value'
+        type: array
+    type: object
+  GooglePrivacyDlpV2beta1KMapEstimationResult:
+    description: |-
+      Result of the reidentifiability analysis. Note that these results are an
+      estimation, not exact values.
+    properties:
+      kMapEstimationHistogram:
+        description: |-
+          The intervals [min_anonymity, max_anonymity] do not overlap. If a value
+          doesn't correspond to any such interval, the associated frequency is
+          zero. For example, the following records:
+            {min_anonymity: 1, max_anonymity: 1, frequency: 17}
+            {min_anonymity: 2, max_anonymity: 3, frequency: 42}
+            {min_anonymity: 5, max_anonymity: 10, frequency: 99}
+          mean that there are no record with an estimated anonymity of 4, 5, or
+          larger than 10.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1KMapEstimationHistogramBucket'
         type: array
     type: object
   GooglePrivacyDlpV2beta1Key:
@@ -1915,6 +2032,8 @@ definitions:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1CategoricalStatsConfig'
       kAnonymityConfig:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1KAnonymityConfig'
+      kMapEstimationConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1KMapEstimationConfig'
       lDiversityConfig:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1LDiversityConfig'
       numericalStatsConfig:
@@ -1935,6 +2054,16 @@ definitions:
           The name of the property.
           If name includes "."s, it may be interpreted as a property name path.
         type: string
+    type: object
+  GooglePrivacyDlpV2beta1QuasiIdField:
+    description: |-
+      A quasi-identifier column has a custom_tag, used to know which column
+      in the data corresponds to which column in the statistical model.
+    properties:
+      customTag:
+        type: string
+      field:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
     type: object
   GooglePrivacyDlpV2beta1Range:
     description: 'Generic half-open interval [start, end)'
@@ -2083,6 +2212,8 @@ definitions:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1CategoricalStatsResult'
       kAnonymityResult:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1KAnonymityResult'
+      kMapEstimationResult:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1KMapEstimationResult'
       lDiversityResult:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1LDiversityResult'
       numericalStatsResult:
@@ -2147,6 +2278,30 @@ definitions:
         description: The zero-based index of the row where the finding is located.
         format: int64
         type: string
+    type: object
+  GooglePrivacyDlpV2beta1TaggedField:
+    description: A column with a semantic tag attached.
+    properties:
+      customTag:
+        description: |-
+          A column can be tagged with a custom tag. In this case, the user must
+          indicate an auxiliary table that contains statistical information on
+          the possible values of this column (below).
+        type: string
+      field:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
+        description: 'Identifies the column. [required]'
+      inferred:
+        $ref: '#/definitions/GoogleProtobufEmpty'
+        description: |-
+          If no semantic tag is indicated, we infer the statistical model from
+          the distribution of values in the input data
+      infoType:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoType'
+        description: |-
+          A column can be tagged with a InfoType to use the relevant public
+          dataset as a statistical model of population, if available. We
+          currently support US ZIP codes, region codes, ages and genders.
     type: object
   GooglePrivacyDlpV2beta1TimePartConfig:
     description: |-

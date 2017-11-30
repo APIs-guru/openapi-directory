@@ -70,6 +70,24 @@ parameters:
     name: accountName
     required: true
     type: string
+  all:
+    default: false
+    description: |-
+      Include not only `successful`, but also jobs with `failed`, and
+      `cancelled` status.
+    in: query
+    name: all
+    type: boolean
+  artifactFileName:
+    description: |-
+      File name (or path) of a build artifact file.
+      Corresponds to the `fileName` property of `ArtifactModel`.
+      URL-encoding of slashes in parameter values is optional.
+    in: path
+    minLength: 1
+    name: artifactFileName
+    required: true
+    type: string
   badgeRepoProvider:
     description: Repository provider supported for badges
     enum:
@@ -118,6 +136,11 @@ parameters:
     minLength: 1
     name: failingText
     type: string
+  job:
+    description: Name of the build job.
+    in: query
+    name: job
+    type: string
   jobId:
     description: Build ID (`jobId` property of `BuildJob`)
     in: path
@@ -136,6 +159,15 @@ parameters:
     minLength: 1
     name: pendingText
     type: string
+  pr:
+    description: |
+      Include PR builds in the search results?
+      `true` - take artifact from PR builds only;
+      `false` - do not look for artifact in PR builds;
+      default/unspecified - look for artifact in both PR an non-PR builds.
+    in: query
+    name: pr
+    type: boolean
   projectSlug:
     description: Project Slug
     in: path
@@ -195,6 +227,12 @@ parameters:
     in: query
     name: svg
     type: boolean
+  tag:
+    description: A git (or other VCS) tag
+    in: query
+    minLength: 1
+    name: tag
+    type: string
   userId:
     description: User ID
     in: path
@@ -253,6 +291,57 @@ paths:
       summary: Encrypt a value for use in StoredValue.
       tags:
         - Project
+  '/buildjobs/{jobId}/artifacts':
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/samples/download-artifacts-advanced-ps/'
+      operationId: getBuildArtifacts
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - fileName: README.md
+                name: README.md
+                size: 3600
+                type: File
+              - fileName: out/example.Release.x64.zip
+                name: out\example.zip
+                size: 15600
+                type: Zip
+          schema:
+            items:
+              $ref: '#/definitions/ArtifactModel'
+            type: array
+        default:
+          $ref: '#/responses/Error'
+      security: []
+      summary: Get build artifacts
+      tags:
+        - Build
+    parameters:
+      - $ref: '#/parameters/jobId'
+  '/buildjobs/{jobId}/artifacts/{artifactFileName}':
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/samples/download-artifacts-advanced-ps/'
+      operationId: getBuildArtifact
+      produces:
+        - application/octet-stream
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: file
+        default:
+          $ref: '#/responses/Error'
+      security: []
+      summary: Download build artifact
+      tags:
+        - Build
+    parameters:
+      - $ref: '#/parameters/jobId'
+      - $ref: '#/parameters/artifactFileName'
   '/buildjobs/{jobId}/log':
     get:
       externalDocs:
@@ -1159,6 +1248,34 @@ paths:
     parameters:
       - $ref: '#/parameters/accountName'
       - $ref: '#/parameters/projectSlug'
+  '/projects/{accountName}/{projectSlug}/artifacts/{artifactFileName}':
+    get:
+      description: The `job` parameter is mandatory if the build contains multiple jobs.
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/packaging-artifacts/#permalink-to-the-last-successful-build-artifact'
+      operationId: getProjectArtifact
+      produces:
+        - application/octet-stream
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: file
+        default:
+          $ref: '#/responses/Error'
+      security: []
+      summary: Get last successful build artifact
+      tags:
+        - Project
+    parameters:
+      - $ref: '#/parameters/accountName'
+      - $ref: '#/parameters/projectSlug'
+      - $ref: '#/parameters/artifactFileName'
+      - $ref: '#/parameters/branch'
+      - $ref: '#/parameters/tag'
+      - $ref: '#/parameters/job'
+      - $ref: '#/parameters/all'
+      - $ref: '#/parameters/pr'
   '/projects/{accountName}/{projectSlug}/branch/{buildBranch}':
     get:
       externalDocs:
@@ -2121,16 +2238,54 @@ definitions:
         title: Deployment name
         type: string
       path:
+        description: |
+          Path glob of artifact files.
+          Note that updateProject does not require path, but omitting path
+          results in post-build error "Collecting artifacts... Value cannot
+          be null.  Parameter name: input"
         type: string
       type:
         $ref: '#/definitions/ArtifactType'
     required:
       - path
-      - name
+    type: object
+  ArtifactModel:
+    properties:
+      fileName:
+        type: string
+      name:
+        title: Deployment name
+        type: string
+      size:
+        minimum: 0
+        type: integer
+      type:
+        $ref: '#/definitions/ArtifactType'
+      url:
+        description: |
+          This property has not been observed in JSON responses, but is
+          present and nil in XML responses.
+        type: string
     type: object
   ArtifactType:
+    description: |-
+      Possible values from `Push-AppveyorArtifact` cmdlet `-Type` parameter.
+
+      The web UI only allows selection of `Auto`, `WebDeployPackage`, and
+      unspecified (which it sends as the empty string but functions like
+      omitting the property) for `updateProject`.
+
+      Any string can be sent and will be saved/returned, but only these
+      values have a function (as far as I am aware).
     enum:
+      - Auto
+      - AzureCloudService
+      - AzureCloudServiceConfig
+      - File
+      - NuGetPackage
+      - SsdtPackage
       - WebDeployPackage
+      - Zip
     type: string
   Build:
     allOf:
@@ -2404,6 +2559,14 @@ definitions:
             type: integer
           securityDescriptor:
             $ref: '#/definitions/SecurityDescriptor'
+          tags:
+            description: |-
+              Comma-separated list of environment tags for dynamic grouping.
+              Appears that any input is accepted.  The returned value only
+              contains case-preserving but insensitive unique values where
+              spaces around "," are removed but otherwise preserved.  Empty
+              values and items are allowed.
+            type: string
         type: object
   DeploymentEnvironmentAddition:
     example:
@@ -2892,6 +3055,8 @@ definitions:
             type: integer
           id:
             type: string
+          isPrivateProject:
+            type: boolean
           name:
             type: string
           projectId:
@@ -3036,6 +3201,12 @@ definitions:
           skipBranchesWithoutAppveyorYml:
             type: boolean
           tags:
+            description: |-
+              Comma-separated list of project tags for dynamic grouping.
+              Appears that any input is accepted.  The returned value only
+              contains case-preserving but insensitive unique values where
+              spaces around "," are removed but otherwise preserved.  Empty
+              values and items are allowed.
             type: string
         required:
           - repositoryName

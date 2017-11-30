@@ -4244,9 +4244,7 @@ paths:
                 echo $e->getMessage();
             }
   '/disputes/{id}/matched-rules':
-    parameters:
-      - $ref: '#/parameters/resourceId'
-    post:
+    get:
       description: Get matched rules for the dispute
       responses:
         '200':
@@ -4274,6 +4272,8 @@ paths:
       summary: Get matched rules for the dispute
       tags:
         - Rules
+    parameters:
+      - $ref: '#/parameters/resourceId'
   /events:
     get:
       responses:
@@ -5757,9 +5757,7 @@ paths:
                 echo $e->getMessage();
             }
   '/invoices/{id}/matched-rules':
-    parameters:
-      - $ref: '#/parameters/resourceId'
-    post:
+    get:
       description: Get matched rules for the invoice
       responses:
         '200':
@@ -5787,6 +5785,8 @@ paths:
       summary: Get matched rules for the invoice
       tags:
         - Rules
+    parameters:
+      - $ref: '#/parameters/resourceId'
   '/invoices/{id}/void':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -6264,6 +6264,31 @@ paths:
         name: version
         required: true
         type: integer
+  /logout:
+    post:
+      description: |
+        Destroys the user's current session. Endpoint must be accessed with valid JWT Authorization header.
+      responses:
+        '204':
+          description: Session was deleted
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Destroys the user's current session
+      tags:
+        - Users
+        - Sessions
   /notes:
     get:
       description: |
@@ -7324,9 +7349,7 @@ paths:
           source: |
             $client->paymentCards()->deactivate('paymentCardId');
   '/payment-cards/{id}/matched-rules':
-    parameters:
-      - $ref: '#/parameters/resourceId'
-    post:
+    get:
       description: Get matched rules for the payment card
       responses:
         '200':
@@ -7354,6 +7377,8 @@ paths:
       summary: Get matched rules for the payment card
       tags:
         - Rules
+    parameters:
+      - $ref: '#/parameters/resourceId'
   /payments:
     get:
       description: |
@@ -7598,6 +7623,12 @@ paths:
       summary: Retrieve a list of PayPal accounts
       tags:
         - PayPal Accounts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $payPalAccounts = $client->payPalAccounts()->search([
+                'filter' => 'status:active',
+            ]);
     post:
       description: |
         Create a PayPal Account
@@ -7622,6 +7653,50 @@ paths:
       summary: Create a PayPal Account
       tags:
         - PayPal Accounts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $payPalForm = new Rebilly\Entities\PayPalAccount();
+            $payPalForm->setCustomerId('customerId');
+            $payPalForm->setBillingAddress([
+                'firstName' => 'John',
+                'lastName' => 'Doe',
+                'organization' => 'Test LTD',
+                'address' => 'Test street 5',
+                'address2' => 'Test house 5',
+                'city' => 'New York',
+                'region' => 'Long Island',
+                'country' => 'US',
+                'postalCode' => '123456',
+                'emails' => [
+                    [
+                        'label' => 'main',
+                        'value' => 'johndoe@testemail.com',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'secondary',
+                        'value' => 'otheremail@testemail.com',
+                    ],
+                ],
+                'phoneNumbers' => [
+                    [
+                        'label' => 'work',
+                        'value' => '+123456789',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'home',
+                        'value' => '+9874654321',
+                    ],
+                ],
+            ]);
+
+            try {
+                $payPalAccount = $client->payPalAccounts()->create($payPalForm);
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/paypal-accounts/{id}':
     get:
       description: |
@@ -7650,6 +7725,10 @@ paths:
       summary: Retrieve a PayPal Account
       tags:
         - PayPal Accounts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $payPalAccount = $client->payPalAccounts()->load('payPalAccountId');
     parameters:
       - $ref: '#/parameters/resourceId'
     put:
@@ -7688,6 +7767,50 @@ paths:
       summary: Create a PayPal account with predefined ID
       tags:
         - PayPal Accounts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $payPalForm = new Rebilly\Entities\PayPalAccount();
+            $payPalForm->setCustomerId('customerId');
+            $payPalForm->setBillingAddress([
+                'firstName' => 'John',
+                'lastName' => 'Doe',
+                'organization' => 'Test LTD',
+                'address' => 'Test street 5',
+                'address2' => 'Test house 5',
+                'city' => 'New York',
+                'region' => 'Long Island',
+                'country' => 'US',
+                'postalCode' => '123456',
+                'emails' => [
+                    [
+                        'label' => 'main',
+                        'value' => 'johndoe@testemail.com',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'secondary',
+                        'value' => 'otheremail@testemail.com',
+                    ],
+                ],
+                'phoneNumbers' => [
+                    [
+                        'label' => 'work',
+                        'value' => '+123456789',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'home',
+                        'value' => '+9874654321',
+                    ],
+                ],
+            ]);
+
+            try {
+                $payPalAccount = $client->payPalAccounts()->create($payPalForm, 'payPalAccountId');
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/paypal-accounts/{id}/activation':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -7748,6 +7871,19 @@ paths:
       summary: Activate a PayPal Account
       tags:
         - PayPal Accounts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $activationData = [
+                'websiteId' => 'testWebsiteId',
+                'currency' => 'USD',
+            ];
+
+            try {
+                $client->payPalAccounts()->activate($activationData, 'payPalAccountId');
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/paypal-accounts/{id}/deactivation':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -7780,6 +7916,10 @@ paths:
       summary: Deactivate a PayPal Account
       tags:
         - PayPal Accounts
+      x-code-samples:
+        - lang: PHP
+          source: |
+            $client->payPalAccounts()->deactivate('payPalAccountId');
   /plans:
     get:
       description: |
@@ -8661,51 +8801,6 @@ paths:
       tags:
         - Payments
   /sessions:
-    get:
-      description: |
-        Retrieve a list of sessions
-      parameters:
-        - $ref: '#/parameters/collectionLimit'
-        - $ref: '#/parameters/collectionOffset'
-      responses:
-        '200':
-          description: A list of Sessions was retrieved successfully
-          headers:
-            Pagination-Limit:
-              description: Items per page limit
-              type: integer
-            Pagination-Offset:
-              description: Pagination offset
-              type: integer
-            Pagination-Total:
-              description: Total items count
-              type: integer
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            items:
-              $ref: '#/definitions/Session'
-            type: array
-        '401':
-          $ref: '#/responses/AccessForbidden'
-      summary: Retrieve a list of sessions
-      tags:
-        - Sessions
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $sessions = $client->sessions()->search([
-                'filter' => 'userId:testUserId',
-            ]);
     post:
       description: |
         Create a session
@@ -9701,9 +9796,7 @@ paths:
                 echo $e->getMessage();
             }
   '/subscriptions/{id}/matched-rules':
-    parameters:
-      - $ref: '#/parameters/resourceId'
-    post:
+    get:
       description: Get matched rules for the subscription
       responses:
         '200':
@@ -9731,6 +9824,8 @@ paths:
       summary: Get matched rules for the subscription
       tags:
         - Rules
+    parameters:
+      - $ref: '#/parameters/resourceId'
   '/subscriptions/{id}/switch':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -10642,9 +10737,7 @@ paths:
                 echo $e->getMessage();
             }
   '/transactions/{id}/matched-rules':
-    parameters:
-      - $ref: '#/parameters/resourceId'
-    post:
+    get:
       description: Get matched rules for the transaction
       responses:
         '200':
@@ -10672,6 +10765,8 @@ paths:
       summary: Get matched rules for the transaction
       tags:
         - Rules
+    parameters:
+      - $ref: '#/parameters/resourceId'
   '/transactions/{id}/refund':
     parameters:
       - $ref: '#/parameters/resourceId'
@@ -12302,6 +12397,10 @@ definitions:
       allowCustomCustomerId:
         description: If to enable your own customer ID in requests
         type: boolean
+      createdTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Checkout page created time
       id:
         allOf:
           - $ref: '#/definitions/ResourceId'
@@ -12324,6 +12423,10 @@ definitions:
       redirectUrl:
         description: Checkout page url
         type: string
+      updatedTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Checkout page updated time
       uriPath:
         description: 'Your own custom uri path for this Checkout Page. It will be appended to checkout url https://checkout.rebilly.com/checkout/<uriPath>'
         maxLength: 50
@@ -13705,6 +13808,7 @@ definitions:
       - RPN
       - Sagepay
       - SMSVoucher
+      - StaticGateway
       - Stripe
       - UPayCard
       - USAePay
@@ -15377,6 +15481,7 @@ definitions:
         type: string
       currencySign:
         description: Currency sign
+        readOnly: true
         type: string
       description:
         description: The plan description
@@ -15424,7 +15529,7 @@ definitions:
         description: The plan rich description - supports HTML
         type: string
       setupAmount:
-        description: The amount of a trial - 0 is a valid value (for free)
+        description: The amount of a setup - 0 is a valid value (for free)
         format: double
         type: number
       trialAmount:
@@ -16355,6 +16460,11 @@ definitions:
     required:
       - host
     type: object
+  StaticGateway:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - type: object
+    description: StaticGateway Gateway config
   Status:
     properties:
       status:

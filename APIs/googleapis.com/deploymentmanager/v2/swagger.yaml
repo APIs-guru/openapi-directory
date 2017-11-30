@@ -154,19 +154,19 @@ paths:
       description: Creates a deployment and all of the resources described by the deployment manifest.
       operationId: deploymentmanager.deployments.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Deployment'
+        - description: 'If set to true, creates a deployment and creates "shell" resources but does not actually instantiate these resources. This allows you to preview what your deployment looks like. After previewing a deployment, you can deploy your resources by making a request with the update() method or you can use the cancelPreview() method to cancel the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.'
+          in: query
+          name: preview
+          type: boolean
         - description: The project ID for this request.
           in: path
           name: project
           required: true
           type: string
-        - description: 'If set to true, creates a deployment and creates "shell" resources but does not actually instantiate these resources. This allows you to preview what your deployment looks like. After previewing a deployment, you can deploy your resources by making a request with the update() method or you can use the cancelPreview() method to cancel the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.'
-          in: query
-          name: preview
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Deployment'
       responses:
         '200':
           description: Successful response
@@ -184,16 +184,6 @@ paths:
       description: Deletes a deployment and all of the resources in the deployment.
       operationId: deploymentmanager.deployments.delete
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The name of the deployment for this request.
-          in: path
-          name: deployment
-          required: true
-          type: string
         - default: DELETE
           description: Sets the policy to use for deleting resources.
           enum:
@@ -201,6 +191,16 @@ paths:
             - DELETE
           in: query
           name: deletePolicy
+          type: string
+        - description: The name of the deployment for this request.
+          in: path
+          name: deployment
+          required: true
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -218,14 +218,14 @@ paths:
       description: Gets information about a specific deployment.
       operationId: deploymentmanager.deployments.get
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: The name of the deployment for this request.
           in: path
           name: deployment
+          required: true
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -256,16 +256,10 @@ paths:
       description: Updates a deployment and all of the resources described by the deployment manifest. This method supports patch semantics.
       operationId: deploymentmanager.deployments.patch
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The name of the deployment for this request.
-          in: path
-          name: deployment
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Deployment'
         - default: CREATE_OR_ACQUIRE
           description: Sets the policy to use for creating new resources.
           enum:
@@ -282,15 +276,21 @@ paths:
           in: query
           name: deletePolicy
           type: string
+        - description: The name of the deployment for this request.
+          in: path
+          name: deployment
+          required: true
+          type: string
         - default: false
           description: 'If set to true, updates the deployment and creates and updates the "shell" resources but does not actually alter or instantiate these resources. This allows you to preview what your deployment will look like. You can use this intent to preview how an update would affect your deployment. You must provide a target.config with a configuration if this is set to true. After previewing a deployment, you can deploy your resources by making a request with the update() or you can cancelPreview() to remove the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.'
           in: query
           name: preview
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Deployment'
+        - description: The project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -307,16 +307,10 @@ paths:
       description: Updates a deployment and all of the resources described by the deployment manifest.
       operationId: deploymentmanager.deployments.update
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The name of the deployment for this request.
-          in: path
-          name: deployment
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Deployment'
         - default: CREATE_OR_ACQUIRE
           description: Sets the policy to use for creating new resources.
           enum:
@@ -333,15 +327,21 @@ paths:
           in: query
           name: deletePolicy
           type: string
+        - description: The name of the deployment for this request.
+          in: path
+          name: deployment
+          required: true
+          type: string
         - default: false
           description: 'If set to true, updates the deployment and creates and updates the "shell" resources but does not actually alter or instantiate these resources. This allows you to preview what your deployment will look like. You can use this intent to preview how an update would affect your deployment. You must provide a target.config with a configuration if this is set to true. After previewing a deployment, you can deploy your resources by making a request with the update() or you can cancelPreview() to remove the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.'
           in: query
           name: preview
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Deployment'
+        - description: The project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -367,20 +367,20 @@ paths:
       description: Cancels and removes the preview currently associated with the deployment.
       operationId: deploymentmanager.deployments.cancelPreview
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DeploymentsCancelPreviewRequest'
         - description: The name of the deployment for this request.
           in: path
           name: deployment
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DeploymentsCancelPreviewRequest'
+        - description: The project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -469,11 +469,6 @@ paths:
       description: Gets information about a specific manifest.
       operationId: deploymentmanager.manifests.get
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: The name of the deployment for this request.
           in: path
           name: deployment
@@ -482,6 +477,11 @@ paths:
         - description: The name of the manifest for this request.
           in: path
           name: manifest
+          required: true
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -584,14 +584,14 @@ paths:
       description: Gets information about a single resource.
       operationId: deploymentmanager.resources.get
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: The name of the deployment for this request.
           in: path
           name: deployment
+          required: true
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
         - description: The name of the resource for this request.
@@ -636,20 +636,20 @@ paths:
       description: 'Stops an ongoing operation. This does not roll back any work that has already been completed, but prevents any new work from being started.'
       operationId: deploymentmanager.deployments.stop
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DeploymentsStopRequest'
         - description: The name of the deployment for this request.
           in: path
           name: deployment
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DeploymentsStopRequest'
+        - description: The project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -710,6 +710,10 @@ paths:
       description: Sets the access control policy on the specified resource. Replaces any existing policy.
       operationId: deploymentmanager.deployments.setIamPolicy
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Policy'
         - description: Project ID for this request.
           in: path
           name: project
@@ -720,10 +724,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Policy'
       responses:
         '200':
           description: Successful response
@@ -749,6 +749,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: deploymentmanager.deployments.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -759,10 +763,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -846,14 +846,14 @@ paths:
       description: Gets information about a specific operation.
       operationId: deploymentmanager.operations.get
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: The name of the operation for this request.
           in: path
           name: operation
+          required: true
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:

@@ -4690,6 +4690,7 @@ paths:
           name: redirectionPageUrl
           required: true
           type: string
+        - $ref: '#/parameters/acceptLanguageParameter'
       responses:
         '200':
           description: Successfully fetched channel catalog properties
@@ -6467,13 +6468,6 @@ definitions:
           $ref: '#/definitions/apiCredential'
         type: array
     type: object
-  apiSettingStatus:
-    enum:
-      - warning
-      - success
-      - failed
-    example: success
-    type: string
   autoImportConfiguration:
     properties:
       duplicateProductConfiguration:
@@ -6899,19 +6893,22 @@ definitions:
   category:
     description: The catalog category
     properties:
-      categoryId:
-        $ref: '#/definitions/BeezUP.Common.CatalogCategoryId'
       categoryPath:
         $ref: '#/definitions/BeezUP.Common.CatalogCategoryPath'
-      productCount:
+      selfProductCount:
         description: The product count related to this category
         example: 101
         format: int32
         type: integer
+      totalProductCount:
+        description: The total product count related to this category and his sub categories
+        example: 101
+        format: int32
+        type: integer
     required:
-      - categoryId
       - categoryPath
-      - productCount
+      - totalProductCount
+      - selfProductCount
   categoryList:
     description: The object which contains the category list
     properties:
@@ -7361,6 +7358,8 @@ definitions:
     properties:
       categoryMappings:
         $ref: '#/definitions/links.GetChannelCatalogCategoriesLink'
+      channelInfo:
+        $ref: '#/definitions/externalLinks.GetChannelInfoLink'
       configureColumnMappings:
         $ref: '#/definitions/links.ConfigureChannelCatalogColumnMappingsLink'
       configureCostSettings:
@@ -8020,8 +8019,8 @@ definitions:
   channelCatalogState:
     description: Channel Catalog State
     properties:
-      apiSettingStatus:
-        $ref: '#/definitions/apiSettingStatus'
+      apiSettingsStatus:
+        $ref: '#/definitions/BeezUP.Common.ApiSettingsStatus'
       categoryMappingState:
         $ref: '#/definitions/categoryMappingState'
       columnMappingStatus:
@@ -8034,7 +8033,6 @@ definitions:
       - exportedProductCount
       - columnMappingStatus
       - categoryMappingState
-      - apiSettingStatus
     type: object
   channelCategory:
     description: The channel category
@@ -8209,33 +8207,27 @@ definitions:
         $ref: '#/definitions/BeezUP.Common.HttpUrl'
       channelName:
         $ref: '#/definitions/BeezUP.Common.ChannelName'
-      descriptionAvailable:
-        default: false
-        description: Indicates if we have more detailed information about this channel
-        example: true
-        type: boolean
-      isMarketplace:
-        default: false
-        description: Indicates if the channel is a marketplace
-        example: true
-        type: boolean
       links:
         $ref: '#/definitions/channelHeaderLinks'
+      types:
+        description: The type list related to a channel
+        example:
+          - Marketplace
+        items:
+          type: string
+        type: array
     required:
       - channelId
       - channelName
       - channelLogoUrl
-      - descriptionAvailable
       - links
-      - isMarketplace
+      - types
     type: object
   channelHeaderLinks:
     description: The links related to an available channel
     properties:
       self:
-        $ref: '#/definitions/BeezUP.Common.Link3'
-    required:
-      - self
+        $ref: '#/definitions/links.GetChannelInfoLink'
     type: object
   channelInfo:
     properties:
@@ -9481,6 +9473,12 @@ definitions:
       - example:
           href: /v2/user/marketplaces/channelcatatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/settings
           method: GET
+  externalLinks.GetChannelInfoLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channels/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0
+          method: GET
   externalLinks.GetExternalConfigurationPageLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -10695,6 +10693,12 @@ definitions:
       - $ref: '#/definitions/BeezUP.Common.Link3'
       - example:
           href: /v2/user/channelCatalogs
+          method: GET
+  links.GetChannelInfoLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channels/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0
           method: GET
   links.GetChannelsIndexLink:
     allOf:

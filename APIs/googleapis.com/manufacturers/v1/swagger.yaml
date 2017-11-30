@@ -121,6 +121,16 @@ paths:
       operationId: manufacturers.accounts.products.list
       parameters:
         - description: |-
+            Maximum number of product statuses to return in the response, used for
+            paging.
+          in: query
+          name: pageSize
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
             Parent ID in the format `accounts/{account_id}`.
 
             `account_id` - The ID of the Manufacturer Center account.
@@ -129,16 +139,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
-            Maximum number of product statuses to return in the response, used for
-            paging.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -150,19 +150,19 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{parent}/products/{name}':
     delete:
       description: Deletes the product from a Manufacturer Center account.
@@ -215,15 +215,6 @@ paths:
       operationId: manufacturers.accounts.products.get
       parameters:
         - description: |-
-            Parent ID in the format `accounts/{account_id}`.
-
-            `account_id` - The ID of the Manufacturer Center account.
-          in: path
-          name: parent
-          required: true
-          type: string
-          x-reservedExpansion: true
-        - description: |-
             Name in the format `{target_country}:{content_language}:{product_id}`.
 
             `target_country`   - The target country of the product as a CLDR territory
@@ -239,6 +230,15 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: |-
+            Parent ID in the format `accounts/{account_id}`.
+
+            `account_id` - The ID of the Manufacturer Center account.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
       responses:
         '200':
           description: Successful response
@@ -250,19 +250,19 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/key'
       - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     put:
       description: |-
         Inserts or updates the product in a Manufacturer Center account.

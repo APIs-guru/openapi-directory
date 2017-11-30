@@ -386,17 +386,17 @@ paths:
       description: Uploads an image for a resource with the given ID and image type.
       operationId: gamesConfiguration.imageConfigurations.upload
       parameters:
-        - description: The ID of the resource used by this method.
-          in: path
-          name: resourceId
-          required: true
-          type: string
         - description: Selects which image in a resource for this method.
           enum:
             - ACHIEVEMENT_ICON
             - LEADERBOARD_ICON
           in: path
           name: imageType
+          required: true
+          type: string
+        - description: The ID of the resource used by this method.
+          in: path
+          name: resourceId
           required: true
           type: string
       responses:
@@ -458,15 +458,15 @@ paths:
       description: Update the metadata of the leaderboard configuration with the given ID. This method supports patch semantics.
       operationId: gamesConfiguration.leaderboardConfigurations.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LeaderboardConfiguration'
         - description: The ID of the leaderboard.
           in: path
           name: leaderboardId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LeaderboardConfiguration'
       responses:
         '200':
           description: Successful response
@@ -481,15 +481,15 @@ paths:
       description: Update the metadata of the leaderboard configuration with the given ID.
       operationId: gamesConfiguration.leaderboardConfigurations.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LeaderboardConfiguration'
         - description: The ID of the leaderboard.
           in: path
           name: leaderboardId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LeaderboardConfiguration'
       responses:
         '200':
           description: Successful response

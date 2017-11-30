@@ -530,6 +530,16 @@ paths:
       tags:
         - enterprises
 definitions:
+  AlwaysOnVpnPackage:
+    description: Configuration for an always-on VPN connection.
+    properties:
+      lockdownEnabled:
+        description: Disallows networking when the VPN is not connected.
+        type: boolean
+      packageName:
+        description: The package name of the VPN app.
+        type: string
+    type: object
   ApiLevelCondition:
     description: A compliance rule condition which is satisfied if the Android Framework API level on the device does not meet a minimum requirement. There can only be one rule with this type of condition per policy.
     properties:
@@ -1217,6 +1227,15 @@ definitions:
         description: 'The normal response of the operation in case of success. If the original method returns no data on success, such as Delete, the response is google.protobuf.Empty. If the original method is standard Get/Create/Update, the response should be the resource. For other methods, the response should have the type XxxResponse, where Xxx is the original method name. For example, if the original method name is TakeSnapshot(), the inferred response type is TakeSnapshotResponse.'
         type: object
     type: object
+  PackageNameList:
+    description: A list of package names.
+    properties:
+      packageNames:
+        description: A list of package names.
+        items:
+          type: string
+        type: array
+    type: object
   PasswordRequirements:
     description: Requirements for the password used to unlock a device.
     properties:
@@ -1308,12 +1327,20 @@ definitions:
   Policy:
     description: 'A policy, which governs behavior for a device.'
     properties:
+      accountTypesWithManagementDisabled:
+        description: Account types that cannot be managed by the user. <i>Requires the beta version of Android Cloud Policy.</i>
+        items:
+          type: string
+        type: array
       addUserDisabled:
         description: Whether adding new users and profiles is disabled.
         type: boolean
       adjustVolumeDisabled:
         description: Whether adjusting the master volume is disabled.
         type: boolean
+      alwaysOnVpnPackage:
+        $ref: '#/definitions/AlwaysOnVpnPackage'
+        description: Configuration for an always-on VPN connection. <i>Requires the beta version of Android Cloud Policy.</i>
       applications:
         description: Policy applied to apps.
         items:
@@ -1325,14 +1352,35 @@ definitions:
       blockApplicationsEnabled:
         description: 'Whether applications other than the ones configured in applications are blocked from being installed. When set, applications that were installed under a previous policy but no longer appear in the policy are automatically uninstalled.'
         type: boolean
+      bluetoothConfigDisabled:
+        description: Whether configuring bluetooth is disabled. <i>Requires the beta version of Android Cloud Policy.</i>
+        type: boolean
+      bluetoothContactSharingDisabled:
+        description: Whether bluetooth contact sharing is disabled. <i>Requires the beta version of Android Cloud Policy.</i>
+        type: boolean
+      bluetoothDisabled:
+        description: Whether bluetooth is disabled. Prefer this setting over bluetooth_config_disabled because bluetooth_config_disabled can be bypassed by the user. <i>Requires the beta version of Android Cloud Policy.</i>
+        type: boolean
       cameraDisabled:
         description: Whether all cameras on the device are disabled.
+        type: boolean
+      cellBroadcastsConfigDisabled:
+        description: Whether configuring cell broadcast is disabled. <i>Requires the beta version of Android Cloud Policy.</i>
         type: boolean
       complianceRules:
         description: 'Rules declaring which mitigating actions to take when a device is not compliant with its policy. When the conditions for multiple rules are satisfied, all of the mitigating actions for the rules are taken. There is a maximum limit of 100 rules.'
         items:
           $ref: '#/definitions/ComplianceRule'
         type: array
+      createWindowsDisabled:
+        description: Whether creating windows besides app windows is disabled. <i>Requires the beta version of Android Cloud Policy.</i>
+        type: boolean
+      credentialsConfigDisabled:
+        description: Whether configuring user credentials is disabled. <i>Requires the beta version of Android Cloud Policy.</i>
+        type: boolean
+      dataRoamingDisabled:
+        description: Whether roaming data services are disabled. <i>Requires the beta version of Android Cloud Policy.</i>
+        type: boolean
       debuggingFeaturesAllowed:
         description: Whether the user is allowed to enable debugging features.
         type: boolean
@@ -1344,6 +1392,9 @@ definitions:
           - GRANT
           - DENY
         type: string
+      ensureVerifyAppsEnabled:
+        description: Whether application verification is forced to be enabled. <i>Requires the beta version of Android Cloud Policy.</i>
+        type: boolean
       factoryResetDisabled:
         description: Whether factory resetting from settings is disabled.
         type: boolean
@@ -1355,18 +1406,44 @@ definitions:
       funDisabled:
         description: Whether the user is allowed to have fun. Controls whether the Easter egg game in Settings is disabled.
         type: boolean
+      installAppsDisabled:
+        description: Whether user installation of apps is disabled. <i>Requires the beta version of Android Cloud Policy.</i>
+        type: boolean
       installUnknownSourcesAllowed:
         description: 'Whether the user is allowed to enable the "Unknown Sources" setting, which allows installation of apps from unknown sources.'
         type: boolean
       keyguardDisabled:
         description: Whether the keyguard is disabled.
         type: boolean
+      keyguardDisabledFeatures:
+        description: 'Disabled keyguard customizations, such as widgets. <i>Requires the beta version of Android Cloud Policy.</i>'
+        items:
+          enum:
+            - KEYGUARD_DISABLED_FEATURE_UNSPECIFIED
+            - CAMERA
+            - NOTIFICATIONS
+            - UNREDACTED_NOTIFICATIONS
+            - TRUST_AGENTS
+            - DISABLE_FINGERPRINT
+            - DISABLE_REMOTE_INPUT
+            - ALL_FEATURES
+          type: string
+        type: array
+      longSupportMessage:
+        $ref: '#/definitions/UserFacingMessage'
+        description: A message displayed to the user in the device administators settings screen. <i>Requires the beta version of Android Cloud Policy.</i>
       maximumTimeToLock:
         description: Maximum time in milliseconds for user activity until the device will lock. A value of 0 means there is no restriction.
         format: int64
         type: string
+      mobileNetworksConfigDisabled:
+        description: Whether configuring mobile networks is disabled. <i>Requires the beta version of Android Cloud Policy.</i>
+        type: boolean
       modifyAccountsDisabled:
         description: Whether adding or removing accounts is disabled.
+        type: boolean
+      mountPhysicalMediaDisabled:
+        description: Whether the user mounting physical external media is disabled. <i>Requires the beta version of Android Cloud Policy.</i>
         type: boolean
       name:
         description: 'The name of the policy in the form enterprises/{enterpriseId}/policies/{policyId}'
@@ -1374,19 +1451,34 @@ definitions:
       networkEscapeHatchEnabled:
         description: 'Whether the network escape hatch is enabled. If a network connection can''t be made at boot time, the escape hatch prompts the user to temporarily connect to a network in order to refresh the device policy. After applying policy, the temporary network will be forgotten and the device will continue booting. This prevents being unable to connect to a network if there is no suitable network in the last policy and the device boots into an app in lock task mode, or the user is otherwise unable to reach device settings.'
         type: boolean
+      networkResetDisabled:
+        description: Whether resetting network settings is disabled. <i>Requires the beta version of Android Cloud Policy.</i>
+        type: boolean
       openNetworkConfiguration:
         additionalProperties:
           description: Properties of the object.
         description: Network configuration for the device. See configure networks for more information.
         type: object
+      outgoingBeamDisabled:
+        description: Whether using NFC to beam out data from apps is disabled. <i>Requires the beta version of Android Cloud Policy.</i>
+        type: boolean
+      outgoingCallsDisabled:
+        description: Whether outgoing calls are disabled. <i>Requires the beta version of Android Cloud Policy.</i>
+        type: boolean
       passwordRequirements:
         $ref: '#/definitions/PasswordRequirements'
         description: Password requirements.
+      permittedInputMethods:
+        $ref: '#/definitions/PackageNameList'
+        description: 'If present, only input methods provided by packages in this list are permitted. If this field is present, but the list is empty, then only system input methods are permitted. <i>Requires the beta version of Android Cloud Policy.</i>'
       persistentPreferredActivities:
         description: Default intent handler activities.
         items:
           $ref: '#/definitions/PersistentPreferredActivity'
         type: array
+      recommendedGlobalProxy:
+        $ref: '#/definitions/ProxyInfo'
+        description: 'The network-independent global HTTP proxy. Typically proxies should be configured per-network in open_network_configuration. However for unusual configurations like general internal filtering a global HTTP proxy may be useful. If the proxy is not accessible, network access may break. The global proxy is only a recommendation and some apps may ignore it. <i>Requires the beta version of Android Cloud Policy.</i>'
       removeUserDisabled:
         description: Whether removing other users is disabled.
         type: boolean
@@ -1395,6 +1487,18 @@ definitions:
         type: boolean
       screenCaptureDisabled:
         description: Whether screen capture is disabled.
+        type: boolean
+      setUserIconDisabled:
+        description: Whether changing the user icon is disabled. <i>Requires the beta version of Android Cloud Policy.</i>
+        type: boolean
+      setWallpaperDisabled:
+        description: Whether changing the wallpaper is disabled. <i>Requires the beta version of Android Cloud Policy.</i>
+        type: boolean
+      shortSupportMessage:
+        $ref: '#/definitions/UserFacingMessage'
+        description: A message displayed to the user in the settings screen wherever functionality has been disabled by the admin. <i>Requires the beta version of Android Cloud Policy.</i>
+      smsDisabled:
+        description: Whether sending or receiving SMS messages is disabled. <i>Requires the beta version of Android Cloud Policy.</i>
         type: boolean
       statusBarDisabled:
         description: 'Whether the status bar is disabled. This disables notifications, quick settings and other screen overlays that allow escape from full-screen mode.'
@@ -1415,13 +1519,25 @@ definitions:
       systemUpdate:
         $ref: '#/definitions/SystemUpdate'
         description: 'The system update policy, which controls how OS updates are applied. If the update type is WINDOWED, the update window will automatically apply to Play app updates as well.'
+      tetheringConfigDisabled:
+        description: Whether configuring tethering and portable hotspots is disabled. <i>Requires the beta version of Android Cloud Policy.</i>
+        type: boolean
+      uninstallAppsDisabled:
+        description: Whether user uninstallation of applications is disabled. <i>Requires the beta version of Android Cloud Policy.</i>
+        type: boolean
       unmuteMicrophoneDisabled:
         description: Whether the microphone is muted and adjusting microphone volume is disabled.
+        type: boolean
+      usbFileTransferDisabled:
+        description: Whether transferring files over USB is disabled. <i>Requires the beta version of Android Cloud Policy.</i>
         type: boolean
       version:
         description: The version of the policy. This is a read-only field. The version is incremented each time the policy is updated.
         format: int64
         type: string
+      vpnConfigDisabled:
+        description: Whether configuring VPN is disabled. <i>Requires the beta version of Android Cloud Policy.</i>
+        type: boolean
       wifiConfigDisabled:
         description: Whether configuring WiFi access points is disabled.
         type: boolean
@@ -1452,6 +1568,25 @@ definitions:
           - BOOT_COMPLETED
           - SHUTDOWN
         type: string
+    type: object
+  ProxyInfo:
+    description: 'Configuration info for an HTTP proxy. For a direct proxy, set the host, port, and excluded_hosts fields. For a PAC script proxy, set the pac_uri field.'
+    properties:
+      excludedHosts:
+        description: 'For a direct proxy, the hosts for which the proxy is bypassed. The host names may contain wildcards such as *.example.com.'
+        items:
+          type: string
+        type: array
+      host:
+        description: The host of the direct proxy.
+        type: string
+      pacUri:
+        description: The URI of the PAC script used to configure the proxy.
+        type: string
+      port:
+        description: The port of the direct proxy.
+        format: int32
+        type: integer
     type: object
   SignupUrl:
     description: An enterprise signup URL.

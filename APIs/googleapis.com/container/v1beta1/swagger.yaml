@@ -1797,18 +1797,12 @@ paths:
       tags:
         - projects
     get:
-      description: Retrieves the node pool requested.
-      operationId: container.projects.locations.clusters.nodePools.get
+      description: Gets the specified operation.
+      operationId: container.projects.locations.operations.get
       parameters:
         - description: |-
-            The name of the cluster.
-            This field is deprecated, use name instead.
-          in: query
-          name: clusterId
-          type: string
-        - description: |-
-            The name (project, location, cluster, node pool id) of the node pool to get.
-            Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
+            The name (project, location, operation id) of the operation to get.
+            Specified in the format 'projects/*/locations/*/operations/*'.
           in: path
           name: name
           required: true
@@ -1821,8 +1815,14 @@ paths:
           name: nodePoolId
           type: string
         - description: |-
+            The server-assigned `name` of the operation.
+            This field is deprecated, use name instead.
+          in: query
+          name: operationId
+          type: string
+        - description: |-
             The Google Developers Console [project ID or project
-            number](https://developers.google.com/console/help/new/#projectnumber).
+            number](https://support.google.com/cloud/answer/6158840).
             This field is deprecated, use name instead.
           in: query
           name: projectId
@@ -1839,7 +1839,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/NodePool'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

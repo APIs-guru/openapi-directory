@@ -123,15 +123,15 @@ paths:
       description: Establishes the binding between the EMM and an enterprise. This is now deprecated; use enroll instead.
       operationId: androidenterprise.enterprises.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Enterprise'
         - description: The token provided by the enterprise to register the EMM.
           in: query
           name: token
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Enterprise'
       responses:
         '200':
           description: Successful response
@@ -211,15 +211,15 @@ paths:
       description: Enrolls an enterprise with the calling EMM.
       operationId: androidenterprise.enterprises.enroll
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Enterprise'
         - description: The token provided by the enterprise to register the EMM.
           in: query
           name: token
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Enterprise'
       responses:
         '200':
           description: Successful response
@@ -356,15 +356,15 @@ paths:
       description: Sets the account that will be used to authenticate to the API as the enterprise.
       operationId: androidenterprise.enterprises.setAccount
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EnterpriseAccount'
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EnterpriseAccount'
       responses:
         '200':
           description: Successful response
@@ -439,15 +439,15 @@ paths:
       description: 'Returns a unique token to access an embeddable UI. To generate a web UI, pass the generated token into the managed Google Play javascript API. Each token may only be used to start one UI session. See the javascript API documentation for further information.'
       operationId: androidenterprise.enterprises.createWebToken
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AdministratorWebTokenSpec'
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AdministratorWebTokenSpec'
       responses:
         '200':
           description: Successful response
@@ -557,15 +557,15 @@ paths:
       description: 'Finds approved products that match a query, or all approved products if there is no query.'
       operationId: androidenterprise.products.list
       parameters:
+        - description: 'Specifies whether to search among all products (false) or among only products that have been approved (true). Only "true" is supported, and should be specified.'
+          in: query
+          name: approved
+          type: boolean
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
           required: true
           type: string
-        - description: 'Specifies whether to search among all products (false) or among only products that have been approved (true). Only "true" is supported, and should be specified.'
-          in: query
-          name: approved
-          type: boolean
         - description: 'The BCP47 tag for the user''s preferred language (e.g. "en-US", "de"). Results are returned in the language best matching the preferred language.'
           in: query
           name: language
@@ -610,14 +610,14 @@ paths:
           name: enterpriseId
           required: true
           type: string
+        - description: 'The BCP47 tag for the user''s preferred language (e.g. "en-US", "de").'
+          in: query
+          name: language
+          type: string
         - description: 'The ID of the product, e.g. "app:com.google.android.gm".'
           in: path
           name: productId
           required: true
-          type: string
-        - description: 'The BCP47 tag for the user''s preferred language (e.g. "en-US", "de").'
-          in: query
-          name: language
           type: string
       responses:
         '200':
@@ -647,14 +647,14 @@ paths:
           name: enterpriseId
           required: true
           type: string
+        - description: 'The BCP47 tag for the user''s preferred language (e.g. "en-US", "de").'
+          in: query
+          name: language
+          type: string
         - description: The ID of the product.
           in: path
           name: productId
           required: true
-          type: string
-        - description: 'The BCP47 tag for the user''s preferred language (e.g. "en-US", "de").'
-          in: query
-          name: language
           type: string
       responses:
         '200':
@@ -690,6 +690,10 @@ paths:
         To learn how to use managed Google Play to design and create a store layout to display approved products to your users, see Store Layout Design.
       operationId: androidenterprise.products.approve
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ProductsApproveRequest'
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
@@ -700,10 +704,6 @@ paths:
           name: productId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ProductsApproveRequest'
       responses:
         '200':
           description: Successful response
@@ -733,14 +733,14 @@ paths:
           name: enterpriseId
           required: true
           type: string
+        - description: 'The BCP 47 language code used for permission names and descriptions in the returned iframe, for instance "en-US".'
+          in: query
+          name: languageCode
+          type: string
         - description: The ID of the product.
           in: path
           name: productId
           required: true
-          type: string
-        - description: 'The BCP 47 language code used for permission names and descriptions in the returned iframe, for instance "en-US".'
-          in: query
-          name: languageCode
           type: string
       responses:
         '200':
@@ -954,15 +954,15 @@ paths:
         Only the type of the key should be populated in the resource to be inserted.
       operationId: androidenterprise.serviceaccountkeys.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ServiceAccountKey'
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ServiceAccountKey'
       responses:
         '200':
           description: Successful response
@@ -1036,15 +1036,15 @@ paths:
       description: 'Sets the store layout for the enterprise. By default, storeLayoutType is set to "basic" and the basic store layout is enabled. The basic layout only contains apps approved by the admin, and that have been added to the available product set for a user (using the  setAvailableProductSet call). Apps on the page are sorted in order of their product ID value. If you create a custom store layout (by setting storeLayoutType = "custom" and setting a homepage), the basic store layout is disabled.'
       operationId: androidenterprise.enterprises.setStoreLayout
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StoreLayout'
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/StoreLayout'
       responses:
         '200':
           description: Successful response
@@ -1087,15 +1087,15 @@ paths:
       description: Inserts a new store page.
       operationId: androidenterprise.storelayoutpages.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StorePage'
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/StorePage'
       responses:
         '200':
           description: Successful response
@@ -1165,6 +1165,10 @@ paths:
       description: Updates the content of a store page. This method supports patch semantics.
       operationId: androidenterprise.storelayoutpages.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StorePage'
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
@@ -1175,10 +1179,6 @@ paths:
           name: pageId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/StorePage'
       responses:
         '200':
           description: Successful response
@@ -1193,6 +1193,10 @@ paths:
       description: Updates the content of a store page.
       operationId: androidenterprise.storelayoutpages.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StorePage'
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
@@ -1203,10 +1207,6 @@ paths:
           name: pageId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/StorePage'
       responses:
         '200':
           description: Successful response
@@ -1254,6 +1254,10 @@ paths:
       description: Inserts a new cluster in a page.
       operationId: androidenterprise.storelayoutclusters.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StoreCluster'
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
@@ -1264,10 +1268,6 @@ paths:
           name: pageId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/StoreCluster'
       responses:
         '200':
           description: Successful response
@@ -1283,6 +1283,11 @@ paths:
       description: Deletes a cluster.
       operationId: androidenterprise.storelayoutclusters.delete
       parameters:
+        - description: The ID of the cluster.
+          in: path
+          name: clusterId
+          required: true
+          type: string
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
@@ -1291,11 +1296,6 @@ paths:
         - description: The ID of the page.
           in: path
           name: pageId
-          required: true
-          type: string
-        - description: The ID of the cluster.
-          in: path
-          name: clusterId
           required: true
           type: string
       responses:
@@ -1310,6 +1310,11 @@ paths:
       description: Retrieves details of a cluster.
       operationId: androidenterprise.storelayoutclusters.get
       parameters:
+        - description: The ID of the cluster.
+          in: path
+          name: clusterId
+          required: true
+          type: string
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
@@ -1318,11 +1323,6 @@ paths:
         - description: The ID of the page.
           in: path
           name: pageId
-          required: true
-          type: string
-        - description: The ID of the cluster.
-          in: path
-          name: clusterId
           required: true
           type: string
       responses:
@@ -1347,6 +1347,15 @@ paths:
       description: Updates a cluster. This method supports patch semantics.
       operationId: androidenterprise.storelayoutclusters.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StoreCluster'
+        - description: The ID of the cluster.
+          in: path
+          name: clusterId
+          required: true
+          type: string
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
@@ -1357,15 +1366,6 @@ paths:
           name: pageId
           required: true
           type: string
-        - description: The ID of the cluster.
-          in: path
-          name: clusterId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/StoreCluster'
       responses:
         '200':
           description: Successful response
@@ -1380,6 +1380,15 @@ paths:
       description: Updates a cluster.
       operationId: androidenterprise.storelayoutclusters.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StoreCluster'
+        - description: The ID of the cluster.
+          in: path
+          name: clusterId
+          required: true
+          type: string
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
@@ -1390,15 +1399,6 @@ paths:
           name: pageId
           required: true
           type: string
-        - description: The ID of the cluster.
-          in: path
-          name: clusterId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/StoreCluster'
       responses:
         '200':
           description: Successful response
@@ -1440,14 +1440,14 @@ paths:
       description: Looks up a user by primary email address. This is only supported for Google-managed users. Lookup of the id is not needed for EMM-managed users because the id is already returned in the result of the Users.insert call.
       operationId: androidenterprise.users.list
       parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
         - description: The exact primary email address of the user to look up.
           in: query
           name: email
+          required: true
+          type: string
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
           required: true
           type: string
       responses:
@@ -1476,15 +1476,15 @@ paths:
         If a corresponding user already exists with the same account identifier, the user will be updated with the resource. In this case only the displayName field can be changed.
       operationId: androidenterprise.users.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/User'
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/User'
       responses:
         '200':
           description: Successful response
@@ -1557,6 +1557,10 @@ paths:
         Can be used with EMM-managed users only (not Google managed users). Pass the new details in the Users resource in the request body. Only the displayName field can be changed. Other fields must either be unset or have the currently active value. This method supports patch semantics.
       operationId: androidenterprise.users.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/User'
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
@@ -1567,10 +1571,6 @@ paths:
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/User'
       responses:
         '200':
           description: Successful response
@@ -1588,6 +1588,10 @@ paths:
         Can be used with EMM-managed users only (not Google managed users). Pass the new details in the Users resource in the request body. Only the displayName field can be changed. Other fields must either be unset or have the currently active value.
       operationId: androidenterprise.users.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/User'
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
@@ -1598,10 +1602,6 @@ paths:
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/User'
       responses:
         '200':
           description: Successful response
@@ -1685,6 +1685,10 @@ paths:
       description: Modifies the set of products that a user is entitled to access (referred to as whitelisted products). Only products that are approved or products that were previously approved (products with revoked approval) can be whitelisted.
       operationId: androidenterprise.users.setAvailableProductSet
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ProductSet'
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
@@ -1695,10 +1699,6 @@ paths:
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ProductSet'
       responses:
         '200':
           description: Successful response
@@ -1781,6 +1781,11 @@ paths:
       description: Retrieves the details of a device.
       operationId: androidenterprise.devices.get
       parameters:
+        - description: The ID of the device.
+          in: path
+          name: deviceId
+          required: true
+          type: string
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
@@ -1789,11 +1794,6 @@ paths:
         - description: The ID of the user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The ID of the device.
-          in: path
-          name: deviceId
           required: true
           type: string
       responses:
@@ -1814,11 +1814,96 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates the device policy. This method supports patch semantics.
+      operationId: androidenterprise.devices.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Device'
+        - description: The ID of the device.
+          in: path
+          name: deviceId
+          required: true
+          type: string
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: |-
+            Mask that identifies which fields to update. If not set, all modifiable fields will be modified.
+
+            When set in a query parameter, this field should be specified as updateMask=<field1>,<field2>,...
+          in: query
+          name: updateMask
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Device'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - devices
+    put:
+      description: Updates the device policy
+      operationId: androidenterprise.devices.update
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Device'
+        - description: The ID of the device.
+          in: path
+          name: deviceId
+          required: true
+          type: string
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: |-
+            Mask that identifies which fields to update. If not set, all modifiable fields will be modified.
+
+            When set in a query parameter, this field should be specified as updateMask=<field1>,<field2>,...
+          in: query
+          name: updateMask
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Device'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - devices
   '/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/installs':
     get:
       description: Retrieves the details of all apps installed on the specified device.
       operationId: androidenterprise.installs.list
       parameters:
+        - description: The Android ID of the device.
+          in: path
+          name: deviceId
+          required: true
+          type: string
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
@@ -1827,11 +1912,6 @@ paths:
         - description: The ID of the user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The Android ID of the device.
-          in: path
-          name: deviceId
           required: true
           type: string
       responses:
@@ -1857,24 +1937,24 @@ paths:
       description: Requests to remove an app from a device. A call to get or list will still show the app as installed on the device until it is actually removed.
       operationId: androidenterprise.installs.delete
       parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          type: string
         - description: The Android ID of the device.
           in: path
           name: deviceId
           required: true
           type: string
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
         - description: 'The ID of the product represented by the install, e.g. "app:com.google.android.gm".'
           in: path
           name: installId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
           required: true
           type: string
       responses:
@@ -1889,24 +1969,24 @@ paths:
       description: Retrieves details of an installation of an app on a device.
       operationId: androidenterprise.installs.get
       parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          type: string
         - description: The Android ID of the device.
           in: path
           name: deviceId
           required: true
           type: string
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
         - description: 'The ID of the product represented by the install, e.g. "app:com.google.android.gm".'
           in: path
           name: installId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
           required: true
           type: string
       responses:
@@ -1931,19 +2011,18 @@ paths:
       description: 'Requests to install the latest version of an app to a device. If the app is already installed, then it is updated to the latest version if necessary. This method supports patch semantics.'
       operationId: androidenterprise.installs.patch
       parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Install'
         - description: The Android ID of the device.
           in: path
           name: deviceId
+          required: true
+          type: string
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
           required: true
           type: string
         - description: 'The ID of the product represented by the install, e.g. "app:com.google.android.gm".'
@@ -1951,10 +2030,11 @@ paths:
           name: installId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Install'
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1969,19 +2049,18 @@ paths:
       description: 'Requests to install the latest version of an app to a device. If the app is already installed, then it is updated to the latest version if necessary.'
       operationId: androidenterprise.installs.update
       parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Install'
         - description: The Android ID of the device.
           in: path
           name: deviceId
+          required: true
+          type: string
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
           required: true
           type: string
         - description: 'The ID of the product represented by the install, e.g. "app:com.google.android.gm".'
@@ -1989,10 +2068,11 @@ paths:
           name: installId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Install'
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2008,6 +2088,11 @@ paths:
       description: Lists all the per-device managed configurations for the specified device. Only the ID is set.
       operationId: androidenterprise.managedconfigurationsfordevice.list
       parameters:
+        - description: The Android ID of the device.
+          in: path
+          name: deviceId
+          required: true
+          type: string
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
@@ -2016,11 +2101,6 @@ paths:
         - description: The ID of the user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The Android ID of the device.
-          in: path
-          name: deviceId
           required: true
           type: string
       responses:
@@ -2046,24 +2126,24 @@ paths:
       description: Removes a per-device managed configuration for an app for the specified device.
       operationId: androidenterprise.managedconfigurationsfordevice.delete
       parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          type: string
         - description: The Android ID of the device.
           in: path
           name: deviceId
           required: true
           type: string
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
         - description: 'The ID of the managed configuration (a product ID), e.g. "app:com.google.android.gm".'
           in: path
           name: managedConfigurationForDeviceId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
           required: true
           type: string
       responses:
@@ -2078,24 +2158,24 @@ paths:
       description: Retrieves details of a per-device managed configuration.
       operationId: androidenterprise.managedconfigurationsfordevice.get
       parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          type: string
         - description: The Android ID of the device.
           in: path
           name: deviceId
           required: true
           type: string
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
         - description: 'The ID of the managed configuration (a product ID), e.g. "app:com.google.android.gm".'
           in: path
           name: managedConfigurationForDeviceId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
           required: true
           type: string
       responses:
@@ -2120,19 +2200,18 @@ paths:
       description: Adds or updates a per-device managed configuration for an app for the specified device. This method supports patch semantics.
       operationId: androidenterprise.managedconfigurationsfordevice.patch
       parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ManagedConfiguration'
         - description: The Android ID of the device.
           in: path
           name: deviceId
+          required: true
+          type: string
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
           required: true
           type: string
         - description: 'The ID of the managed configuration (a product ID), e.g. "app:com.google.android.gm".'
@@ -2140,10 +2219,11 @@ paths:
           name: managedConfigurationForDeviceId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ManagedConfiguration'
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2158,19 +2238,18 @@ paths:
       description: Adds or updates a per-device managed configuration for an app for the specified device.
       operationId: androidenterprise.managedconfigurationsfordevice.update
       parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ManagedConfiguration'
         - description: The Android ID of the device.
           in: path
           name: deviceId
+          required: true
+          type: string
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
           required: true
           type: string
         - description: 'The ID of the managed configuration (a product ID), e.g. "app:com.google.android.gm".'
@@ -2178,10 +2257,11 @@ paths:
           name: managedConfigurationForDeviceId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ManagedConfiguration'
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2197,6 +2277,11 @@ paths:
       description: 'Retrieves whether a device''s access to Google services is enabled or disabled. The device state takes effect only if enforcing EMM policies on Android devices is enabled in the Google Admin Console. Otherwise, the device state is ignored and all devices are allowed access to Google services. This is only supported for Google-managed users.'
       operationId: androidenterprise.devices.getState
       parameters:
+        - description: The ID of the device.
+          in: path
+          name: deviceId
+          required: true
+          type: string
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
@@ -2205,11 +2290,6 @@ paths:
         - description: The ID of the user.
           in: path
           name: userId
-          required: true
-          type: string
-        - description: The ID of the device.
-          in: path
-          name: deviceId
           required: true
           type: string
       responses:
@@ -2234,6 +2314,15 @@ paths:
       description: 'Sets whether a device''s access to Google services is enabled or disabled. The device state takes effect only if enforcing EMM policies on Android devices is enabled in the Google Admin Console. Otherwise, the device state is ignored and all devices are allowed access to Google services. This is only supported for Google-managed users.'
       operationId: androidenterprise.devices.setState
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DeviceState'
+        - description: The ID of the device.
+          in: path
+          name: deviceId
+          required: true
+          type: string
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
@@ -2244,15 +2333,6 @@ paths:
           name: userId
           required: true
           type: string
-        - description: The ID of the device.
-          in: path
-          name: deviceId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DeviceState'
       responses:
         '200':
           description: Successful response
@@ -2306,14 +2386,14 @@ paths:
           name: enterpriseId
           required: true
           type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          type: string
         - description: 'The ID of the entitlement (a product ID), e.g. "app:com.google.android.gm".'
           in: path
           name: entitlementId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
           required: true
           type: string
       responses:
@@ -2333,14 +2413,14 @@ paths:
           name: enterpriseId
           required: true
           type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          type: string
         - description: 'The ID of the entitlement (a product ID), e.g. "app:com.google.android.gm".'
           in: path
           name: entitlementId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
           required: true
           type: string
       responses:
@@ -2365,14 +2445,13 @@ paths:
       description: Adds or updates an entitlement to an app for a user. This method supports patch semantics.
       operationId: androidenterprise.entitlements.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Entitlement'
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
           required: true
           type: string
         - description: 'The ID of the entitlement (a product ID), e.g. "app:com.google.android.gm".'
@@ -2384,10 +2463,11 @@ paths:
           in: query
           name: install
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Entitlement'
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2402,14 +2482,13 @@ paths:
       description: Adds or updates an entitlement to an app for a user.
       operationId: androidenterprise.entitlements.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Entitlement'
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
           required: true
           type: string
         - description: 'The ID of the entitlement (a product ID), e.g. "app:com.google.android.gm".'
@@ -2421,10 +2500,11 @@ paths:
           in: query
           name: install
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Entitlement'
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2478,14 +2558,14 @@ paths:
           name: enterpriseId
           required: true
           type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          type: string
         - description: 'The ID of the managed configuration (a product ID), e.g. "app:com.google.android.gm".'
           in: path
           name: managedConfigurationForUserId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
           required: true
           type: string
       responses:
@@ -2505,14 +2585,14 @@ paths:
           name: enterpriseId
           required: true
           type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          type: string
         - description: 'The ID of the managed configuration (a product ID), e.g. "app:com.google.android.gm".'
           in: path
           name: managedConfigurationForUserId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
           required: true
           type: string
       responses:
@@ -2537,14 +2617,13 @@ paths:
       description: 'Adds or updates the managed configuration settings for an app for the specified user. If you support the Managed configurations iframe, you can apply managed configurations to a user by specifying an mcmId and its associated configuration variables (if any) in the request. Alternatively, all EMMs can apply managed configurations by passing a list of managed properties. This method supports patch semantics.'
       operationId: androidenterprise.managedconfigurationsforuser.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ManagedConfiguration'
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
           required: true
           type: string
         - description: 'The ID of the managed configuration (a product ID), e.g. "app:com.google.android.gm".'
@@ -2552,10 +2631,11 @@ paths:
           name: managedConfigurationForUserId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ManagedConfiguration'
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2570,14 +2650,13 @@ paths:
       description: 'Adds or updates the managed configuration settings for an app for the specified user. If you support the Managed configurations iframe, you can apply managed configurations to a user by specifying an mcmId and its associated configuration variables (if any) in the request. Alternatively, all EMMs can apply managed configurations by passing a list of managed properties.'
       operationId: androidenterprise.managedconfigurationsforuser.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ManagedConfiguration'
         - description: The ID of the enterprise.
           in: path
           name: enterpriseId
-          required: true
-          type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
           required: true
           type: string
         - description: 'The ID of the managed configuration (a product ID), e.g. "app:com.google.android.gm".'
@@ -2585,10 +2664,11 @@ paths:
           name: managedConfigurationForUserId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ManagedConfiguration'
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2662,14 +2742,14 @@ paths:
       description: Retrieves details of an Android app permission for display to an enterprise admin.
       operationId: androidenterprise.permissions.get
       parameters:
+        - description: 'The BCP47 tag for the user''s preferred language (e.g. "en-US", "de")'
+          in: query
+          name: language
+          type: string
         - description: The ID of the permission.
           in: path
           name: permissionId
           required: true
-          type: string
-        - description: 'The BCP47 tag for the user''s preferred language (e.g. "en-US", "de")'
-          in: query
-          name: language
           type: string
       responses:
         '200':
@@ -2871,10 +2951,7 @@ definitions:
         type: array
     type: object
   Device:
-    description: |-
-      A Devices resource represents a mobile device managed by the EMM and belonging to a specific enterprise user.
-
-      This collection cannot be modified via the API. It is automatically populated as devices are set up to be managed.
+    description: A Devices resource represents a mobile device managed by the EMM and belonging to a specific enterprise user.
     properties:
       androidId:
         description: 'The Google Play Services Android ID for the device encoded as a lowercase hex string. For example, "123456789abcdef0".'
@@ -2893,6 +2970,9 @@ definitions:
           - "containerApp", no longer used (deprecated). 
           - "unmanagedProfile", a device that has been allowed (by the domain's admin, using the Admin Console to enable the privilege) to use managed Google Play, but the profile is itself not owned by a DPC.
         type: string
+      policy:
+        $ref: '#/definitions/Policy'
+        description: The policy enforced on the device.
     type: object
   DeviceState:
     description: 'The state of a user''s device, as accessed by the getState and setState methods on device resources.'
@@ -3369,6 +3449,18 @@ definitions:
         description: An opaque string uniquely identifying the permission.
         type: string
     type: object
+  Policy:
+    description: The device policy for a given managed device.
+    properties:
+      productAvailabilityPolicy:
+        description: 'The availability granted to the device for the specified products. "all" gives the device access to all products, regardless of approval status. "allApproved" entitles the device to access all products that are approved for the enterprise. "allApproved" and "all" do not enable automatic visibility of "alpha" or "beta" tracks. "whitelist" grants the device access the products specified in productPolicy[]. Only products that are approved or products that were previously approved (products with revoked approval) by the enterprise can be whitelisted. If no value is provided, the availability set at the user level is applied by default.'
+        type: string
+      productPolicy:
+        description: The list of product policies.
+        items:
+          $ref: '#/definitions/ProductPolicy'
+        type: array
+    type: object
   Product:
     description: |-
       A Products resource represents an app in the Google Play store that is available to at least some users in the enterprise. (Some apps are restricted to a single enterprise, and no information about them is made available outside that enterprise.)
@@ -3471,6 +3563,21 @@ definitions:
       productId:
         description: 'The ID of the app that the permissions relate to, e.g. "app:com.google.android.gm".'
         type: string
+    type: object
+  ProductPolicy:
+    description: The policy for a product.
+    properties:
+      productId:
+        description: 'The ID of the product. For example, "app:com.google.android.gm".'
+        type: string
+      tracks:
+        description: |-
+          Grants visibility to the specified track(s) of the product to the device. The track available to the device is based on the following order of preference: alpha, beta, production. For example, if an app has a prod version, a beta version and an alpha version and the enterprise has been granted visibility to both the alpha and beta tracks, if tracks is {"beta", "production"} then the beta version of the app is made available to the device. If there are no app versions in the specified track adding the "alpha" and "beta" values to the list of tracks will have no effect. Note that the enterprise requires access to alpha and/or beta tracks before users can be granted visibility to apps in those tracks.
+
+          The allowed sets are: {} (considered equivalent to {"production"}) {"production"} {"beta", "production"} {"alpha", "beta", "production"} The order of elements is not relevant. Any other set of tracks will be rejected with an error.
+        items:
+          type: string
+        type: array
     type: object
   ProductSet:
     description: A set of products.

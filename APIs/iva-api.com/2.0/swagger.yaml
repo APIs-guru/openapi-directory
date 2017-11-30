@@ -1340,6 +1340,124 @@ paths:
         Returns list of unique MovieId and Entity changes greater than or equal to date (UTC).
       tags:
         - Changes
+  /Changes/People/History/:
+    get:
+      deprecated: false
+      description: Requires a valid Date.
+      operationId: GetPersonChangeHistory
+      parameters:
+        - description: 'Starting date <= when record has changed (Maximum of 30 days back). ISO 8601 Format: yyyy-mm-dd hh:mm:ss.ffffff0Z'
+          format: date-time
+          in: query
+          name: Date
+          required: true
+          type: string
+          x-nullable: false
+        - description: Offset for paging. Default is 0.
+          format: int32
+          in: query
+          name: Skip
+          required: true
+          type: integer
+          x-nullable: false
+        - description: 'Maximum number of rows returned. Default is 1,000.'
+          format: int32
+          in: query
+          name: Take
+          required: true
+          type: integer
+          x-nullable: false
+      responses:
+        '200':
+          description: OK.
+          schema:
+            items:
+              $ref: '#/definitions/PersonChangeHistoryResponse'
+            title: List<PersonChangeHistoryResponse>
+            type: array
+        '204':
+          description: No content.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden. The subscription key does not have permission to access this method.
+        '404':
+          description: Not found. The item you requested could not be found or has been deleted.
+        '409':
+          description: Conflict.
+        '429':
+          description: Too many requests.
+        '500':
+          description: Internal server error.
+        '503':
+          description: Service unavailable.
+      security:
+        - ApiKeyHeader: []
+          ApiKeyQuery: []
+      summary: Returns list of unique PersonId changes greater than or equal to date (UTC).
+      tags:
+        - Changes
+  /Changes/People/HistoryWithEntity/:
+    get:
+      deprecated: false
+      description: Requires a valid Date.
+      operationId: GetPersonChangeHistoryWithEntity
+      parameters:
+        - description: 'Starting date <= when record has changed (Maximum of 30 days back). ISO 8601 Format: yyyy-mm-dd hh:mm:ss.ffffff0Z'
+          format: date-time
+          in: query
+          name: Date
+          required: true
+          type: string
+          x-nullable: false
+        - description: Offset for paging. Default is 0.
+          format: int32
+          in: query
+          name: Skip
+          required: true
+          type: integer
+          x-nullable: false
+        - description: 'Maximum number of rows returned. Default is 1,000.'
+          format: int32
+          in: query
+          name: Take
+          required: true
+          type: integer
+          x-nullable: false
+      responses:
+        '200':
+          description: OK.
+          schema:
+            items:
+              $ref: '#/definitions/PersonChangeHistoryWithEntityResponse'
+            title: List<PersonChangeHistoryWithEntityResponse>
+            type: array
+        '204':
+          description: No content.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden. The subscription key does not have permission to access this method.
+        '404':
+          description: Not found. The item you requested could not be found or has been deleted.
+        '409':
+          description: Conflict.
+        '429':
+          description: Too many requests.
+        '500':
+          description: Internal server error.
+        '503':
+          description: Service unavailable.
+      security:
+        - ApiKeyHeader: []
+          ApiKeyQuery: []
+      summary: Returns list of unique PersonId and Entity changes greater than or equal to date (UTC).
+      tags:
+        - Changes
   /Changes/Seasons/History/:
     get:
       deprecated: false
@@ -10216,6 +10334,54 @@ definitions:
       - Id
     title: GetPerson
     type: object
+  GetPersonChangeHistory:
+    description: GetPersonChangeHistory
+    properties:
+      Date:
+        description: 'Starting date <= when record has changed (Maximum of 30 days back). ISO 8601 Format: yyyy-mm-dd hh:mm:ss.ffffff0Z'
+        format: date-time
+        type: string
+        x-nullable: false
+      Skip:
+        description: Offset for paging. Default is 0.
+        format: int32
+        type: integer
+        x-nullable: false
+      Take:
+        description: 'Maximum number of rows returned. Default is 1,000.'
+        format: int32
+        type: integer
+        x-nullable: false
+    required:
+      - Date
+      - Skip
+      - Take
+    title: GetPersonChangeHistory
+    type: object
+  GetPersonChangeHistoryWithEntity:
+    description: GetPersonChangeHistoryWithEntity
+    properties:
+      Date:
+        description: 'Starting date <= when record has changed (Maximum of 30 days back). ISO 8601 Format: yyyy-mm-dd hh:mm:ss.ffffff0Z'
+        format: date-time
+        type: string
+        x-nullable: false
+      Skip:
+        description: Offset for paging. Default is 0.
+        format: int32
+        type: integer
+        x-nullable: false
+      Take:
+        description: 'Maximum number of rows returned. Default is 1,000.'
+        format: int32
+        type: integer
+        x-nullable: false
+    required:
+      - Date
+      - Skip
+      - Take
+    title: GetPersonChangeHistoryWithEntity
+    type: object
   GetPersonRanked:
     description: GetPersonRanked
     properties:
@@ -12669,6 +12835,16 @@ definitions:
       $ref: '#/definitions/MovieTicketsTheaterResponse'
     title: List<MovieTicketsTheaterResponse>
     type: array
+  List<PersonChangeHistoryResponse>:
+    items:
+      $ref: '#/definitions/PersonChangeHistoryResponse'
+    title: List<PersonChangeHistoryResponse>
+    type: array
+  List<PersonChangeHistoryWithEntityResponse>:
+    items:
+      $ref: '#/definitions/PersonChangeHistoryWithEntityResponse'
+    title: List<PersonChangeHistoryWithEntityResponse>
+    type: array
   List<PlatformHardwareResponse>:
     items:
       $ref: '#/definitions/PlatformHardwareResponse'
@@ -14229,6 +14405,29 @@ definitions:
       Type:
         type: string
     title: PersonAlternateId
+    type: object
+  PersonChangeHistoryResponse:
+    description: PersonChangeHistoryResponse
+    properties:
+      PersonId:
+        description: ID of the Person.
+        format: int64
+        type: integer
+        x-nullable: false
+    title: PersonChangeHistoryResponse
+    type: object
+  PersonChangeHistoryWithEntityResponse:
+    description: PersonChangeHistoryWithEntityResponse
+    properties:
+      Entity:
+        description: Object belonging to Person that has changed.
+        type: string
+      PersonId:
+        description: ID of the Person.
+        format: int64
+        type: integer
+        x-nullable: false
+    title: PersonChangeHistoryWithEntityResponse
     type: object
   PersonDescription:
     description: PersonDescription

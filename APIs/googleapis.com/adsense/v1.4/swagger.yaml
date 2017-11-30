@@ -665,16 +665,6 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: 'Start of the date range to report on in "YYYY-MM-DD" format, inclusive.'
-          in: query
-          name: startDate
-          required: true
-          type: string
-        - description: 'End of the date range to report on in "YYYY-MM-DD" format, inclusive.'
-          in: query
-          name: endDate
-          required: true
-          type: string
         - description: Optional currency to use when reporting on monetary metrics. Defaults to the account's currency if not set.
           in: query
           name: currency
@@ -686,6 +676,11 @@ paths:
             type: string
           name: dimension
           type: array
+        - description: 'End of the date range to report on in "YYYY-MM-DD" format, inclusive.'
+          in: query
+          name: endDate
+          required: true
+          type: string
         - collectionFormat: multi
           description: Filters to be run on the report.
           in: query
@@ -717,6 +712,11 @@ paths:
             type: string
           name: sort
           type: array
+        - description: 'Start of the date range to report on in "YYYY-MM-DD" format, inclusive.'
+          in: query
+          name: startDate
+          required: true
+          type: string
         - description: Index of the first row of report data to return.
           in: query
           maximum: 5000
@@ -797,11 +797,6 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: The saved report to retrieve.
-          in: path
-          name: savedReportId
-          required: true
-          type: string
         - description: Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
           in: query
           name: locale
@@ -812,6 +807,11 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
+        - description: The saved report to retrieve.
+          in: path
+          name: savedReportId
+          required: true
+          type: string
         - description: Index of the first row of report data to return.
           in: query
           maximum: 5000
@@ -1403,16 +1403,6 @@ paths:
       description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
       operationId: adsense.reports.generate
       parameters:
-        - description: 'Start of the date range to report on in "YYYY-MM-DD" format, inclusive.'
-          in: query
-          name: startDate
-          required: true
-          type: string
-        - description: 'End of the date range to report on in "YYYY-MM-DD" format, inclusive.'
-          in: query
-          name: endDate
-          required: true
-          type: string
         - collectionFormat: multi
           description: Accounts upon which to report.
           in: query
@@ -1431,6 +1421,11 @@ paths:
             type: string
           name: dimension
           type: array
+        - description: 'End of the date range to report on in "YYYY-MM-DD" format, inclusive.'
+          in: query
+          name: endDate
+          required: true
+          type: string
         - collectionFormat: multi
           description: Filters to be run on the report.
           in: query
@@ -1462,6 +1457,11 @@ paths:
             type: string
           name: sort
           type: array
+        - description: 'Start of the date range to report on in "YYYY-MM-DD" format, inclusive.'
+          in: query
+          name: startDate
+          required: true
+          type: string
         - description: Index of the first row of report data to return.
           in: query
           maximum: 5000
@@ -1532,11 +1532,6 @@ paths:
       description: Generate an AdSense report based on the saved report ID sent in the query parameters.
       operationId: adsense.reports.saved.generate
       parameters:
-        - description: The saved report to retrieve.
-          in: path
-          name: savedReportId
-          required: true
-          type: string
         - description: Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
           in: query
           name: locale
@@ -1547,6 +1542,11 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
+        - description: The saved report to retrieve.
+          in: path
+          name: savedReportId
+          required: true
+          type: string
         - description: Index of the first row of report data to return.
           in: query
           maximum: 5000

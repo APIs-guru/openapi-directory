@@ -4,7 +4,7 @@ schemes:
 host: wft-geo-db.p.mashape.com
 basePath: /
 info:
-  description: 'This developer-centric REST API focuses on getting global city and region data. Easily obtain country, region, and city data for use in your apps! <ul><li>Filter cities by name prefix, country, location, and even minimum population.</li> <li>Get all country regions.</li> <li>Get all cities in a given region.</li> <li>Developer-friendly RESTful API adheres to industry best-practices, including HATEOS-style links to facilitate paging results.</li> <li>Backed by Amazon AWS load-balanced infrastructure for resiliency and performance!</li> <li>Data is periodically refreshed from GeoNames.org.</li></ul><p>Notes:<ul><li>All endpoints implicitly support JSONP-style invocation via an optional <tt>callback</tt> param.</li><li>Since the database is periodically updated, this may <strong>very rarely</strong> result in certain cities being marked deleted (e.g., duplicates removed). By default, endpoints returning city data will exclude cities marked deleted. However, in the unlikely event that this occurs while your app is paging through a set of affected results - and you care about the paged results suddenly changing underneath - specify <tt>includeDeleted=SINCE_YESTERDAY</tt> (or <tt>SINCE_LAST_WEEK</tt> if you''re really paranoid!).</li></ul><hr/><h3>Useful Resources</h3><ul><li>SDKs<ul><li><a href=''https://www.npmjs.com/package/wft-geodb-angular-client''>Angular</a>, <a href=''https://github.com/wirefreethought/geo-db-sample-angular-app''>Sample App</a></li><li><a href=''https://github.com/wirefreethought/geo-db-java-client''>Java</a></li></ul><li><a href=''swagger.json''>Swagger Docs</a></li><li><a href=''http://creativecommons.org/licenses/by/3.0/''>Usage License</a></i></li></ul>'
+  description: 'This developer-centric REST API focuses on getting global city and region data. Easily obtain country, region, and city data for use in your apps! <ul><li>Filter cities by name prefix, country, location, time-zone, and even minimum population.</li> <li>Get all country regions.</li> <li>Get all cities in a given region.</li> <li>Developer-friendly RESTful API adheres to industry best-practices, including HATEOS-style links to facilitate paging results.</li> <li>Backed by Amazon AWS load-balanced infrastructure for resiliency and performance!</li> <li>Data is periodically refreshed from GeoNames.org.</li></ul><p>Notes:<ul><li>All endpoints implicitly support JSONP-style invocation via an optional <tt>callback</tt> param.</li><li>Since the database is periodically updated, this may <strong>very rarely</strong> result in certain cities being marked deleted (e.g., duplicates removed). By default, endpoints returning city data will exclude cities marked deleted. However, in the unlikely event that this occurs while your app is paging through a set of affected results - and you care about the paged results suddenly changing underneath - specify <tt>includeDeleted=SINCE_YESTERDAY</tt> (or <tt>SINCE_LAST_WEEK</tt> if you''re really paranoid!).</li></ul><hr/><h3>Useful Resources</h3><ul><li>SDKs<ul><li><a href=''https://www.npmjs.com/package/wft-geodb-angular-client''>Angular</a>, <a href=''https://github.com/wirefreethought/geo-db-sample-angular-app''>Sample App</a></li><li><a href=''https://github.com/wirefreethought/geo-db-java-client''>Java</a></li></ul><li><a href=''swagger.json''>Swagger Docs</a></li><li><a href=''http://creativecommons.org/licenses/by/3.0/''>Usage License</a></i></li></ul>'
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
@@ -82,6 +82,11 @@ paths:
           name: nearLocationRadiusUnit
           required: false
           type: string
+        - description: Only cities in these time-zones
+          in: query
+          name: timeZoneIds
+          required: false
+          type: string
         - default: NONE
           description: 'Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
           in: query
@@ -139,6 +144,31 @@ paths:
         '404':
           description: Not Found
       summary: Get city details
+      tags:
+        - Geo
+  '/v1/geo/cities/{cityId}/dateTime':
+    get:
+      description: Get city date-time
+      operationId: getCityDateTimeUsingGET
+      parameters:
+        - description: cityId
+          format: int32
+          in: path
+          name: cityId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CityResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get city date-time
       tags:
         - Geo
   '/v1/geo/cities/{cityId}/nearbyCities':
@@ -202,6 +232,31 @@ paths:
         '404':
           description: Not Found
       summary: 'Get cities near the given city, filtering by optional criteria.'
+      tags:
+        - Geo
+  '/v1/geo/cities/{cityId}/time':
+    get:
+      description: Get city time
+      operationId: getCityTimeUsingGET
+      parameters:
+        - description: cityId
+          format: int32
+          in: path
+          name: cityId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CityResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get city time
       tags:
         - Geo
   /v1/geo/countries:
@@ -457,6 +512,87 @@ paths:
         '404':
           description: Not Found
       summary: Get locales
+      tags:
+        - Locale
+  /v1/locale/timezones:
+    get:
+      description: Get available timezones
+      operationId: getTimezonesUsingGET
+      parameters:
+        - default: 10
+          description: The maximum number of results to retrieve
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: The zero-ary offset index into the results
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TimeZonesResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get available timezones
+      tags:
+        - Locale
+  '/v1/locale/timezones/{zoneId}/dateTime':
+    get:
+      description: Get time-zone date-time
+      operationId: getTimeZoneDateTimeUsingGET
+      parameters:
+        - description: zoneId
+          in: path
+          name: zoneId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TimeZoneDateTimeResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get time-zone date-time
+      tags:
+        - Locale
+  '/v1/locale/timezones/{zoneId}/time':
+    get:
+      description: Get time-zone time
+      operationId: getTimeZoneTimeUsingGET
+      parameters:
+        - description: zoneId
+          in: path
+          name: zoneId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TimeZoneDateTimeResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get time-zone time
       tags:
         - Locale
 definitions:
@@ -724,6 +860,42 @@ definitions:
         type: array
       links:
         description: A list of Links
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      metadata:
+        $ref: '#/definitions/Metadata'
+    type: object
+  TimeZoneDateTimeResponse:
+    properties:
+      data:
+        type: string
+      errors:
+        items:
+          $ref: '#/definitions/WftError'
+        type: array
+    type: object
+  TimeZoneDescriptor:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      rawUtcOffsetHours:
+        format: int32
+        type: integer
+    type: object
+  TimeZonesResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/TimeZoneDescriptor'
+        type: array
+      errors:
+        items:
+          $ref: '#/definitions/WftError'
+        type: array
+      links:
         items:
           $ref: '#/definitions/Link'
         type: array

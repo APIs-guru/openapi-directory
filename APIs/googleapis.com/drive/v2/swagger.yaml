@@ -399,6 +399,10 @@ paths:
           in: query
           name: pageToken
           type: string
+        - in: body
+          name: resource
+          schema:
+            $ref: '#/definitions/Channel'
         - description: 'A comma-separated list of spaces to query. Supported values are ''drive'', ''appDataFolder'' and ''photos''.'
           in: query
           name: spaces
@@ -416,10 +420,6 @@ paths:
           in: query
           name: teamDriveId
           type: string
-        - in: body
-          name: resource
-          schema:
-            $ref: '#/definitions/Channel'
       responses:
         '200':
           description: Successful response
@@ -631,6 +631,10 @@ paths:
       description: Insert a new file.
       operationId: drive.files.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/File'
         - default: false
           description: Whether to convert this file to the corresponding Google Docs format.
           in: query
@@ -676,10 +680,6 @@ paths:
           in: query
           name: visibility
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/File'
       responses:
         '200':
           description: Successful response
@@ -786,16 +786,16 @@ paths:
       description: Gets a file's metadata by ID.
       operationId: drive.files.get
       parameters:
-        - description: The ID for the file in question.
-          in: path
-          name: fileId
-          required: true
-          type: string
         - default: false
           description: Whether the user is acknowledging the risk of downloading known malware or other abusive files.
           in: query
           name: acknowledgeAbuse
           type: boolean
+        - description: The ID for the file in question.
+          in: path
+          name: fileId
+          required: true
+          type: string
         - description: This parameter is deprecated and has no function.
           enum:
             - BASIC
@@ -851,20 +851,24 @@ paths:
       description: Updates file metadata and/or content. This method supports patch semantics.
       operationId: drive.files.patch
       parameters:
-        - description: The ID of the file to update.
-          in: path
-          name: fileId
-          required: true
-          type: string
         - description: Comma-separated list of parent IDs to add.
           in: query
           name: addParents
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/File'
         - default: false
           description: This parameter is deprecated and has no function.
           in: query
           name: convert
           type: boolean
+        - description: The ID of the file to update.
+          in: path
+          name: fileId
+          required: true
+          type: string
         - description: Determines the behavior in which modifiedDate is updated. This overrides setModifiedDate.
           enum:
             - fromBody
@@ -927,10 +931,6 @@ paths:
           in: query
           name: useContentAsIndexableText
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/File'
       responses:
         '200':
           description: Successful response
@@ -957,20 +957,24 @@ paths:
       description: Updates file metadata and/or content.
       operationId: drive.files.update
       parameters:
-        - description: The ID of the file to update.
-          in: path
-          name: fileId
-          required: true
-          type: string
         - description: Comma-separated list of parent IDs to add.
           in: query
           name: addParents
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/File'
         - default: false
           description: This parameter is deprecated and has no function.
           in: query
           name: convert
           type: boolean
+        - description: The ID of the file to update.
+          in: path
+          name: fileId
+          required: true
+          type: string
         - description: Determines the behavior in which modifiedDate is updated. This overrides setModifiedDate.
           enum:
             - fromBody
@@ -1033,10 +1037,6 @@ paths:
           in: query
           name: useContentAsIndexableText
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/File'
       responses:
         '200':
           description: Successful response
@@ -1113,15 +1113,15 @@ paths:
       description: Creates a new comment on the given file.
       operationId: drive.comments.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Comment'
         - description: The ID of the file.
           in: path
           name: fileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Comment'
       responses:
         '200':
           description: Successful response
@@ -1139,14 +1139,14 @@ paths:
       description: Deletes a comment.
       operationId: drive.comments.delete
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
         - description: The ID of the comment.
           in: path
           name: commentId
+          required: true
+          type: string
+        - description: The ID of the file.
+          in: path
+          name: fileId
           required: true
           type: string
       responses:
@@ -1163,14 +1163,14 @@ paths:
       description: Gets a comment by ID.
       operationId: drive.comments.get
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
         - description: The ID of the comment.
           in: path
           name: commentId
+          required: true
+          type: string
+        - description: The ID of the file.
+          in: path
+          name: fileId
           required: true
           type: string
         - default: false
@@ -1204,20 +1204,20 @@ paths:
       description: Updates an existing comment. This method supports patch semantics.
       operationId: drive.comments.patch
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Comment'
         - description: The ID of the comment.
           in: path
           name: commentId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Comment'
+        - description: The ID of the file.
+          in: path
+          name: fileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1234,20 +1234,20 @@ paths:
       description: Updates an existing comment.
       operationId: drive.comments.update
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Comment'
         - description: The ID of the comment.
           in: path
           name: commentId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Comment'
+        - description: The ID of the file.
+          in: path
+          name: fileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1265,14 +1265,14 @@ paths:
       description: Lists all of the replies to a comment.
       operationId: drive.replies.list
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
         - description: The ID of the comment.
           in: path
           name: commentId
+          required: true
+          type: string
+        - description: The ID of the file.
+          in: path
+          name: fileId
           required: true
           type: string
         - default: false
@@ -1317,20 +1317,20 @@ paths:
       description: Creates a new reply to the given comment.
       operationId: drive.replies.insert
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CommentReply'
         - description: The ID of the comment.
           in: path
           name: commentId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CommentReply'
+        - description: The ID of the file.
+          in: path
+          name: fileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1348,14 +1348,14 @@ paths:
       description: Deletes a reply.
       operationId: drive.replies.delete
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
         - description: The ID of the comment.
           in: path
           name: commentId
+          required: true
+          type: string
+        - description: The ID of the file.
+          in: path
+          name: fileId
           required: true
           type: string
         - description: The ID of the reply.
@@ -1377,19 +1377,14 @@ paths:
       description: Gets a reply.
       operationId: drive.replies.get
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
         - description: The ID of the comment.
           in: path
           name: commentId
           required: true
           type: string
-        - description: The ID of the reply.
+        - description: The ID of the file.
           in: path
-          name: replyId
+          name: fileId
           required: true
           type: string
         - default: false
@@ -1397,6 +1392,11 @@ paths:
           in: query
           name: includeDeleted
           type: boolean
+        - description: The ID of the reply.
+          in: path
+          name: replyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1423,14 +1423,18 @@ paths:
       description: Updates an existing reply. This method supports patch semantics.
       operationId: drive.replies.patch
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CommentReply'
         - description: The ID of the comment.
           in: path
           name: commentId
+          required: true
+          type: string
+        - description: The ID of the file.
+          in: path
+          name: fileId
           required: true
           type: string
         - description: The ID of the reply.
@@ -1438,10 +1442,6 @@ paths:
           name: replyId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CommentReply'
       responses:
         '200':
           description: Successful response
@@ -1458,14 +1458,18 @@ paths:
       description: Updates an existing reply.
       operationId: drive.replies.update
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CommentReply'
         - description: The ID of the comment.
           in: path
           name: commentId
+          required: true
+          type: string
+        - description: The ID of the file.
+          in: path
+          name: fileId
           required: true
           type: string
         - description: The ID of the reply.
@@ -1473,10 +1477,6 @@ paths:
           name: replyId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CommentReply'
       responses:
         '200':
           description: Successful response
@@ -1502,16 +1502,20 @@ paths:
       description: Creates a copy of the specified file.
       operationId: drive.files.copy
       parameters:
-        - description: The ID of the file to copy.
-          in: path
-          name: fileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/File'
         - default: false
           description: Whether to convert this file to the corresponding Google Docs format.
           in: query
           name: convert
           type: boolean
+        - description: The ID of the file to copy.
+          in: path
+          name: fileId
+          required: true
+          type: string
         - default: false
           description: 'Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads.'
           in: query
@@ -1547,10 +1551,6 @@ paths:
           in: query
           name: visibility
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/File'
       responses:
         '200':
           description: Successful response
@@ -1648,6 +1648,10 @@ paths:
       description: Adds a parent folder for a file.
       operationId: drive.parents.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ParentReference'
         - description: The ID of the file.
           in: path
           name: fileId
@@ -1658,10 +1662,6 @@ paths:
           in: query
           name: supportsTeamDrives
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ParentReference'
       responses:
         '200':
           description: Successful response
@@ -2078,15 +2078,15 @@ paths:
       description: 'Adds a property to a file, or updates it if it already exists.'
       operationId: drive.properties.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Property'
         - description: The ID of the file.
           in: path
           name: fileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Property'
       responses:
         '200':
           description: Successful response
@@ -2190,6 +2190,10 @@ paths:
       description: 'Updates a property, or adds it if it doesn''t exist. This method supports patch semantics.'
       operationId: drive.properties.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Property'
         - description: The ID of the file.
           in: path
           name: fileId
@@ -2205,10 +2209,6 @@ paths:
           in: query
           name: visibility
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Property'
       responses:
         '200':
           description: Successful response
@@ -2229,6 +2229,10 @@ paths:
       description: 'Updates a property, or adds it if it doesn''t exist.'
       operationId: drive.properties.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Property'
         - description: The ID of the file.
           in: path
           name: fileId
@@ -2244,10 +2248,6 @@ paths:
           in: query
           name: visibility
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Property'
       responses:
         '200':
           description: Successful response
@@ -2305,14 +2305,14 @@ paths:
       description: Overwrites the Realtime API data model associated with this file with the provided JSON data model.
       operationId: drive.realtime.update
       parameters:
+        - description: 'The revision of the model to diff the uploaded model against. If set, the uploaded model is diffed against the provided revision and those differences are merged with any changes made to the model after the provided revision. If not set, the uploaded model replaces the current model on the server.'
+          in: query
+          name: baseRevision
+          type: string
         - description: The ID of the file that the Realtime API data model is associated with.
           in: path
           name: fileId
           required: true
-          type: string
-        - description: 'The revision of the model to diff the uploaded model against. If set, the uploaded model is diffed against the provided revision and those differences are merged with any changes made to the model after the provided revision. If not set, the uploaded model replaces the current model on the server.'
-          in: query
-          name: baseRevision
           type: string
       responses:
         '200':
@@ -2450,6 +2450,10 @@ paths:
       description: Updates a revision. This method supports patch semantics.
       operationId: drive.revisions.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Revision'
         - description: The ID for the file.
           in: path
           name: fileId
@@ -2460,10 +2464,6 @@ paths:
           name: revisionId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Revision'
       responses:
         '200':
           description: Successful response
@@ -2482,6 +2482,10 @@ paths:
       description: Updates a revision.
       operationId: drive.revisions.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Revision'
         - description: The ID for the file.
           in: path
           name: fileId
@@ -2492,10 +2496,6 @@ paths:
           name: revisionId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Revision'
       responses:
         '200':
           description: Successful response
@@ -2642,16 +2642,16 @@ paths:
       description: Subscribe to changes on a file
       operationId: drive.files.watch
       parameters:
-        - description: The ID for the file in question.
-          in: path
-          name: fileId
-          required: true
-          type: string
         - default: false
           description: Whether the user is acknowledging the risk of downloading known malware or other abusive files.
           in: query
           name: acknowledgeAbuse
           type: boolean
+        - description: The ID for the file in question.
+          in: path
+          name: fileId
+          required: true
+          type: string
         - description: This parameter is deprecated and has no function.
           enum:
             - BASIC
@@ -2659,6 +2659,10 @@ paths:
           in: query
           name: projection
           type: string
+        - in: body
+          name: resource
+          schema:
+            $ref: '#/definitions/Channel'
         - description: Specifies the Revision ID that should be downloaded. Ignored unless alt=media is specified.
           in: query
           name: revisionId
@@ -2673,10 +2677,6 @@ paths:
           in: query
           name: updateViewedDate
           type: boolean
-        - in: body
-          name: resource
-          schema:
-            $ref: '#/definitions/Channel'
       responses:
         '200':
           description: Successful response
@@ -2761,6 +2761,10 @@ paths:
       description: Inserts a file into a folder.
       operationId: drive.children.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ChildReference'
         - description: The ID of the folder.
           in: path
           name: folderId
@@ -2771,10 +2775,6 @@ paths:
           in: query
           name: supportsTeamDrives
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ChildReference'
       responses:
         '200':
           description: Successful response
@@ -2794,14 +2794,14 @@ paths:
       description: Removes a child from a folder.
       operationId: drive.children.delete
       parameters:
-        - description: The ID of the folder.
-          in: path
-          name: folderId
-          required: true
-          type: string
         - description: The ID of the child.
           in: path
           name: childId
+          required: true
+          type: string
+        - description: The ID of the folder.
+          in: path
+          name: folderId
           required: true
           type: string
       responses:
@@ -2818,14 +2818,14 @@ paths:
       description: Gets a specific child reference.
       operationId: drive.children.get
       parameters:
-        - description: The ID of the folder.
-          in: path
-          name: folderId
-          required: true
-          type: string
         - description: The ID of the child.
           in: path
           name: childId
+          required: true
+          type: string
+        - description: The ID of the folder.
+          in: path
+          name: folderId
           required: true
           type: string
       responses:
@@ -2949,15 +2949,15 @@ paths:
       description: Creates a new Team Drive.
       operationId: drive.teamdrives.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TeamDrive'
         - description: 'An ID, such as a random UUID, which uniquely identifies this user''s request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.'
           in: query
           name: requestId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TeamDrive'
       responses:
         '200':
           description: Successful response
@@ -3024,15 +3024,15 @@ paths:
       description: Updates a Team Drive's metadata
       operationId: drive.teamdrives.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TeamDrive'
         - description: The ID of the Team Drive
           in: path
           name: teamDriveId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TeamDrive'
       responses:
         '200':
           description: Successful response

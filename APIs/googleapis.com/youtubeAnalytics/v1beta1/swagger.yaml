@@ -159,6 +159,10 @@ paths:
       description: Creates a group item.
       operationId: youtubeAnalytics.groupItems.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GroupItem'
         - description: |-
             Note: This parameter is intended exclusively for YouTube content partners.
 
@@ -166,10 +170,6 @@ paths:
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GroupItem'
       responses:
         '200':
           description: Successful response
@@ -260,6 +260,10 @@ paths:
       description: Creates a group.
       operationId: youtubeAnalytics.groups.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Group'
         - description: |-
             Note: This parameter is intended exclusively for YouTube content partners.
 
@@ -267,10 +271,6 @@ paths:
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Group'
       responses:
         '200':
           description: Successful response
@@ -287,6 +287,10 @@ paths:
       description: 'Modifies a group. For example, you could change a group''s title.'
       operationId: youtubeAnalytics.groups.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Group'
         - description: |-
             Note: This parameter is intended exclusively for YouTube content partners.
 
@@ -294,10 +298,6 @@ paths:
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Group'
       responses:
         '200':
           description: Successful response
@@ -315,29 +315,6 @@ paths:
       description: Retrieve your YouTube Analytics reports.
       operationId: youtubeAnalytics.reports.query
       parameters:
-        - description: |-
-            Identifies the YouTube channel or content owner for which you are retrieving YouTube Analytics data.
-            - To request data for a YouTube user, set the ids parameter value to channel==CHANNEL_ID, where CHANNEL_ID specifies the unique YouTube channel ID.
-            - To request data for a YouTube CMS content owner, set the ids parameter value to contentOwner==OWNER_NAME, where OWNER_NAME is the CMS name of the content owner.
-          in: query
-          name: ids
-          required: true
-          type: string
-        - description: The start date for fetching YouTube Analytics data. The value should be in YYYY-MM-DD format.
-          in: query
-          name: start-date
-          required: true
-          type: string
-        - description: The end date for fetching YouTube Analytics data. The value should be in YYYY-MM-DD format.
-          in: query
-          name: end-date
-          required: true
-          type: string
-        - description: 'A comma-separated list of YouTube Analytics metrics, such as views or likes,dislikes. See the Available Reports document for a list of the reports that you can retrieve and the metrics available in each report, and see the Metrics document for definitions of those metrics.'
-          in: query
-          name: metrics
-          required: true
-          type: string
         - description: 'The currency to which financial metrics should be converted. The default is US Dollar (USD). If the result contains no financial metrics, this flag will be ignored. Responds with an error if the specified currency is not recognized.'
           in: query
           name: currency
@@ -346,9 +323,22 @@ paths:
           in: query
           name: dimensions
           type: string
+        - description: The end date for fetching YouTube Analytics data. The value should be in YYYY-MM-DD format.
+          in: query
+          name: end-date
+          required: true
+          type: string
         - description: 'A list of filters that should be applied when retrieving YouTube Analytics data. The Available Reports document identifies the dimensions that can be used to filter each report, and the Dimensions document defines those dimensions. If a request uses multiple filters, join them together with a semicolon (;), and the returned result table will satisfy both filters. For example, a filters parameter value of video==dMH0bHeiRNg;country==IT restricts the result set to include data for the given video in Italy.'
           in: query
           name: filters
+          type: string
+        - description: |-
+            Identifies the YouTube channel or content owner for which you are retrieving YouTube Analytics data.
+            - To request data for a YouTube user, set the ids parameter value to channel==CHANNEL_ID, where CHANNEL_ID specifies the unique YouTube channel ID.
+            - To request data for a YouTube CMS content owner, set the ids parameter value to contentOwner==OWNER_NAME, where OWNER_NAME is the CMS name of the content owner.
+          in: query
+          name: ids
+          required: true
           type: string
         - description: If set to true historical data (i.e. channel data from before the linking of the channel to the content owner) will be retrieved.
           in: query
@@ -359,9 +349,19 @@ paths:
           minimum: 1
           name: max-results
           type: integer
+        - description: 'A comma-separated list of YouTube Analytics metrics, such as views or likes,dislikes. See the Available Reports document for a list of the reports that you can retrieve and the metrics available in each report, and see the Metrics document for definitions of those metrics.'
+          in: query
+          name: metrics
+          required: true
+          type: string
         - description: A comma-separated list of dimensions or metrics that determine the sort order for YouTube Analytics data. By default the sort order is ascending. The '-' prefix causes descending sort order.
           in: query
           name: sort
+          type: string
+        - description: The start date for fetching YouTube Analytics data. The value should be in YYYY-MM-DD format.
+          in: query
+          name: start-date
+          required: true
           type: string
         - description: 'An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter (one-based, inclusive).'
           in: query

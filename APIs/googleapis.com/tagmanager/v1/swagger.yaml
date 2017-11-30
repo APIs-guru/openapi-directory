@@ -23,7 +23,7 @@ info:
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/tagmanager/v1/rest'
       version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: tagmanager
 externalDocs:
@@ -152,14 +152,14 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: 'When provided, this fingerprint must match the fingerprint of the account in storage.'
-          in: query
-          name: fingerprint
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Account'
+        - description: 'When provided, this fingerprint must match the fingerprint of the account in storage.'
+          in: query
+          name: fingerprint
+          type: string
       responses:
         '200':
           description: Successful response
@@ -289,6 +289,10 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Container'
         - description: The GTM Container ID.
           in: path
           name: containerId
@@ -298,10 +302,6 @@ paths:
           in: query
           name: fingerprint
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Container'
       responses:
         '200':
           description: Successful response
@@ -356,15 +356,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Environment'
         - description: The GTM Container ID.
           in: path
           name: containerId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Environment'
       responses:
         '200':
           description: Successful response
@@ -451,6 +451,10 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Environment'
         - description: The GTM Container ID.
           in: path
           name: containerId
@@ -465,10 +469,6 @@ paths:
           in: query
           name: fingerprint
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Environment'
       responses:
         '200':
           description: Successful response
@@ -488,6 +488,10 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Environment'
         - description: The GTM Container ID.
           in: path
           name: containerId
@@ -502,10 +506,6 @@ paths:
           in: query
           name: fingerprint
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Environment'
       responses:
         '200':
           description: Successful response
@@ -560,15 +560,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Folder'
         - description: The GTM Container ID.
           in: path
           name: containerId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Folder'
       responses:
         '200':
           description: Successful response
@@ -655,24 +655,24 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Folder'
         - description: The GTM Container ID.
           in: path
           name: containerId
-          required: true
-          type: string
-        - description: The GTM Folder ID.
-          in: path
-          name: folderId
           required: true
           type: string
         - description: 'When provided, this fingerprint must match the fingerprint of the folder in storage.'
           in: query
           name: fingerprint
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Folder'
+        - description: The GTM Folder ID.
+          in: path
+          name: folderId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -741,6 +741,10 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Folder'
         - description: The GTM Container ID.
           in: path
           name: containerId
@@ -772,10 +776,6 @@ paths:
             type: string
           name: variableId
           type: array
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Folder'
       responses:
         '200':
           description: Successful response
@@ -802,6 +802,10 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Environment'
         - description: The GTM Container ID.
           in: path
           name: containerId
@@ -812,10 +816,6 @@ paths:
           name: environmentId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Environment'
       responses:
         '200':
           description: Successful response
@@ -870,15 +870,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Tag'
         - description: The GTM Container ID.
           in: path
           name: containerId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Tag'
       responses:
         '200':
           description: Successful response
@@ -965,24 +965,24 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Tag'
         - description: The GTM Container ID.
           in: path
           name: containerId
-          required: true
-          type: string
-        - description: The GTM Tag ID.
-          in: path
-          name: tagId
           required: true
           type: string
         - description: 'When provided, this fingerprint must match the fingerprint of the tag in storage.'
           in: query
           name: fingerprint
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Tag'
+        - description: The GTM Tag ID.
+          in: path
+          name: tagId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1037,15 +1037,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Trigger'
         - description: The GTM Container ID.
           in: path
           name: containerId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Trigger'
       responses:
         '200':
           description: Successful response
@@ -1132,24 +1132,24 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Trigger'
         - description: The GTM Container ID.
           in: path
           name: containerId
-          required: true
-          type: string
-        - description: The GTM Trigger ID.
-          in: path
-          name: triggerId
           required: true
           type: string
         - description: 'When provided, this fingerprint must match the fingerprint of the trigger in storage.'
           in: query
           name: fingerprint
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Trigger'
+        - description: The GTM Trigger ID.
+          in: path
+          name: triggerId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1204,15 +1204,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Variable'
         - description: The GTM Container ID.
           in: path
           name: containerId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Variable'
       responses:
         '200':
           description: Successful response
@@ -1299,24 +1299,24 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Variable'
         - description: The GTM Container ID.
           in: path
           name: containerId
-          required: true
-          type: string
-        - description: The GTM Variable ID.
-          in: path
-          name: variableId
           required: true
           type: string
         - description: 'When provided, this fingerprint must match the fingerprint of the variable in storage.'
           in: query
           name: fingerprint
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Variable'
+        - description: The GTM Variable ID.
+          in: path
+          name: variableId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1383,15 +1383,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateContainerVersionRequestVersionOptions'
         - description: The GTM Container ID.
           in: path
           name: containerId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreateContainerVersionRequestVersionOptions'
       responses:
         '200':
           description: Successful response
@@ -1480,6 +1480,10 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ContainerVersion'
         - description: The GTM Container ID.
           in: path
           name: containerId
@@ -1494,10 +1498,6 @@ paths:
           in: query
           name: fingerprint
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ContainerVersion'
       responses:
         '200':
           description: Successful response
@@ -1741,15 +1741,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UserAccess'
         - description: The GTM User ID.
           in: path
           name: permissionId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UserAccess'
       responses:
         '200':
           description: Successful response
@@ -1798,10 +1798,10 @@ definitions:
     properties:
       parameter:
         description: |-
-          A list of named parameters (key/value), depending on the condition's type. Notes:
-          - For binary operators, include parameters named arg0 and arg1 for specifying the left and right operands, respectively.
-          - At this time, the left operand (arg0) must be a reference to a variable.
-          - For case-insensitive Regex matching, include a boolean parameter named ignore_case that is set to true. If not specified or set to any other value, the matching will be case sensitive.
+          A list of named parameters (key/value), depending on the condition's type. Notes: 
+          - For binary operators, include parameters named arg0 and arg1 for specifying the left and right operands, respectively. 
+          - At this time, the left operand (arg0) must be a reference to a variable. 
+          - For case-insensitive Regex matching, include a boolean parameter named ignore_case that is set to true. If not specified or set to any other value, the matching will be case sensitive. 
           - To negate an operator, include a boolean parameter named negate boolean parameter that is set to true.
         items:
           $ref: '#/definitions/Parameter'
@@ -2348,11 +2348,11 @@ definitions:
         type: array
       type:
         description: |-
-          The parameter type. Valid values are:
-          - boolean: The value represents a boolean, represented as 'true' or 'false'
-          - integer: The value represents a 64-bit signed integer value, in base 10
-          - list: A list of parameters should be specified
-          - map: A map of parameters should be specified
+          The parameter type. Valid values are: 
+          - boolean: The value represents a boolean, represented as 'true' or 'false' 
+          - integer: The value represents a 64-bit signed integer value, in base 10 
+          - list: A list of parameters should be specified 
+          - map: A map of parameters should be specified 
           - template: The value represents any text; this can include variable references (even variable references that might return non-string types)
         enum:
           - boolean

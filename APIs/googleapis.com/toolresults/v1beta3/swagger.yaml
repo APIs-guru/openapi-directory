@@ -92,14 +92,6 @@ paths:
       operationId: toolresults.projects.histories.list
       parameters:
         - description: |-
-            A Project id.
-
-            Required.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: |-
             If set, only return histories with the given name.
 
             Optional.
@@ -121,6 +113,14 @@ paths:
             Optional.
           in: query
           name: pageToken
+          type: string
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
           type: string
       responses:
         '200':
@@ -151,6 +151,10 @@ paths:
         - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing project does not exist
       operationId: toolresults.projects.histories.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/History'
         - description: |-
             A Project id.
 
@@ -166,10 +170,6 @@ paths:
           in: query
           name: requestId
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/History'
       responses:
         '200':
           description: Successful response
@@ -191,19 +191,19 @@ paths:
       operationId: toolresults.projects.histories.get
       parameters:
         - description: |-
-            A Project id.
-
-            Required.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: |-
             A History id.
 
             Required.
           in: path
           name: historyId
+          required: true
+          type: string
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
           required: true
           type: string
       responses:
@@ -237,14 +237,6 @@ paths:
       operationId: toolresults.projects.histories.executions.list
       parameters:
         - description: |-
-            A Project id.
-
-            Required.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: |-
             A History id.
 
             Required.
@@ -267,6 +259,14 @@ paths:
             Optional.
           in: query
           name: pageToken
+          type: string
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
           type: string
       responses:
         '200':
@@ -297,14 +297,10 @@ paths:
         - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing History does not exist
       operationId: toolresults.projects.histories.executions.create
       parameters:
-        - description: |-
-            A Project id.
-
-            Required.
-          in: path
-          name: projectId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Execution'
         - description: |-
             A History id.
 
@@ -314,16 +310,20 @@ paths:
           required: true
           type: string
         - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
             A unique request ID for server to detect duplicated requests. For example, a UUID.
 
             Optional, but strongly recommended.
           in: query
           name: requestId
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Execution'
       responses:
         '200':
           description: Successful response
@@ -345,11 +345,11 @@ paths:
       operationId: toolresults.projects.histories.executions.get
       parameters:
         - description: |-
-            A Project id.
+            An Execution id.
 
             Required.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: |-
@@ -361,11 +361,11 @@ paths:
           required: true
           type: string
         - description: |-
-            An Execution id.
+            A Project id.
 
             Required.
           in: path
-          name: executionId
+          name: projectId
           required: true
           type: string
       responses:
@@ -395,9 +395,13 @@ paths:
         - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal - NOT_FOUND - if the containing History does not exist
       operationId: toolresults.projects.histories.executions.patch
       parameters:
-        - description: A Project id. Required.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Execution'
+        - description: Required.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: Required.
@@ -405,9 +409,9 @@ paths:
           name: historyId
           required: true
           type: string
-        - description: Required.
+        - description: A Project id. Required.
           in: path
-          name: executionId
+          name: projectId
           required: true
           type: string
         - description: |-
@@ -417,10 +421,6 @@ paths:
           in: query
           name: requestId
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Execution'
       responses:
         '200':
           description: Successful response
@@ -543,11 +543,11 @@ paths:
       operationId: toolresults.projects.histories.executions.steps.list
       parameters:
         - description: |-
-            A Project id.
+            A Execution id.
 
             Required.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: |-
@@ -556,14 +556,6 @@ paths:
             Required.
           in: path
           name: historyId
-          required: true
-          type: string
-        - description: |-
-            A Execution id.
-
-            Required.
-          in: path
-          name: executionId
           required: true
           type: string
         - description: |-
@@ -581,6 +573,14 @@ paths:
             Optional.
           in: query
           name: pageToken
+          type: string
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
           type: string
       responses:
         '200':
@@ -611,12 +611,16 @@ paths:
         - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the step is too large (more than 10Mib) - NOT_FOUND - if the containing Execution does not exist
       operationId: toolresults.projects.histories.executions.steps.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Step'
         - description: |-
-            A Project id.
+            A Execution id.
 
             Required.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: |-
@@ -628,11 +632,11 @@ paths:
           required: true
           type: string
         - description: |-
-            A Execution id.
+            A Project id.
 
             Required.
           in: path
-          name: executionId
+          name: projectId
           required: true
           type: string
         - description: |-
@@ -642,10 +646,6 @@ paths:
           in: query
           name: requestId
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Step'
       responses:
         '200':
           description: Successful response
@@ -667,11 +667,11 @@ paths:
       operationId: toolresults.projects.histories.executions.steps.get
       parameters:
         - description: |-
-            A Project id.
+            A Execution id.
 
             Required.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: |-
@@ -683,11 +683,11 @@ paths:
           required: true
           type: string
         - description: |-
-            A Execution id.
+            A Project id.
 
             Required.
           in: path
-          name: executionId
+          name: projectId
           required: true
           type: string
         - description: |-
@@ -725,12 +725,16 @@ paths:
         - PERMISSION_DENIED - if the user is not authorized to write project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal (e.g try to upload a duplicate xml file), if the updated step is too large (more than 10Mib) - NOT_FOUND - if the containing Execution does not exist
       operationId: toolresults.projects.histories.executions.steps.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Step'
         - description: |-
-            A Project id.
+            A Execution id.
 
             Required.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: |-
@@ -742,19 +746,11 @@ paths:
           required: true
           type: string
         - description: |-
-            A Execution id.
+            A Project id.
 
             Required.
           in: path
-          name: executionId
-          required: true
-          type: string
-        - description: |-
-            A Step id.
-
-            Required.
-          in: path
-          name: stepId
+          name: projectId
           required: true
           type: string
         - description: |-
@@ -764,10 +760,14 @@ paths:
           in: query
           name: requestId
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Step'
+        - description: |-
+            A Step id.
+
+            Required.
+          in: path
+          name: stepId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -786,9 +786,9 @@ paths:
         May return any of the following error code(s): - NOT_FOUND - The specified PerfMetricsSummary does not exist
       operationId: toolresults.projects.histories.executions.steps.getPerfMetricsSummary
       parameters:
-        - description: The cloud project
+        - description: A tool results execution ID.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: A tool results history ID.
@@ -796,9 +796,9 @@ paths:
           name: historyId
           required: true
           type: string
-        - description: A tool results execution ID.
+        - description: The cloud project
           in: path
-          name: executionId
+          name: projectId
           required: true
           type: string
         - description: A tool results step ID.
@@ -831,9 +831,13 @@ paths:
         May return any of the following error code(s): - NOT_FOUND - The containing Step does not exist
       operationId: toolresults.projects.histories.executions.steps.perfMetricsSummary.create
       parameters:
-        - description: The cloud project
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PerfMetricsSummary'
+        - description: A tool results execution ID.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: A tool results history ID.
@@ -841,9 +845,9 @@ paths:
           name: historyId
           required: true
           type: string
-        - description: A tool results execution ID.
+        - description: The cloud project
           in: path
-          name: executionId
+          name: projectId
           required: true
           type: string
         - description: A tool results step ID.
@@ -851,10 +855,6 @@ paths:
           name: stepId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PerfMetricsSummary'
       responses:
         '200':
           description: Successful response
@@ -933,9 +933,13 @@ paths:
         May return any of the following error code(s): - ALREADY_EXISTS - PerfMetricSummary already exists for the given Step - NOT_FOUND - The containing Step does not exist
       operationId: toolresults.projects.histories.executions.steps.perfSampleSeries.create
       parameters:
-        - description: The cloud project
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PerfSampleSeries'
+        - description: A tool results execution ID.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: A tool results history ID.
@@ -943,9 +947,9 @@ paths:
           name: historyId
           required: true
           type: string
-        - description: A tool results execution ID.
+        - description: The cloud project
           in: path
-          name: executionId
+          name: projectId
           required: true
           type: string
         - description: A tool results step ID.
@@ -953,10 +957,6 @@ paths:
           name: stepId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PerfSampleSeries'
       responses:
         '200':
           description: Successful response
@@ -975,9 +975,9 @@ paths:
         May return any of the following error code(s): - NOT_FOUND - The specified PerfSampleSeries does not exist
       operationId: toolresults.projects.histories.executions.steps.perfSampleSeries.get
       parameters:
-        - description: The cloud project
+        - description: A tool results execution ID.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: A tool results history ID.
@@ -985,19 +985,19 @@ paths:
           name: historyId
           required: true
           type: string
-        - description: A tool results execution ID.
+        - description: The cloud project
           in: path
-          name: executionId
-          required: true
-          type: string
-        - description: A tool results step ID.
-          in: path
-          name: stepId
+          name: projectId
           required: true
           type: string
         - description: A sample series id
           in: path
           name: sampleSeriesId
+          required: true
+          type: string
+        - description: A tool results step ID.
+          in: path
+          name: stepId
           required: true
           type: string
       responses:
@@ -1026,29 +1026,14 @@ paths:
         May return any of the following canonical error codes: - OUT_OF_RANGE - The specified request page_token is out of valid range - NOT_FOUND - The containing PerfSampleSeries does not exist
       operationId: toolresults.projects.histories.executions.steps.perfSampleSeries.samples.list
       parameters:
-        - description: The cloud project
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: A tool results history ID.
-          in: path
-          name: historyId
-          required: true
-          type: string
         - description: A tool results execution ID.
           in: path
           name: executionId
           required: true
           type: string
-        - description: A tool results step ID.
+        - description: A tool results history ID.
           in: path
-          name: stepId
-          required: true
-          type: string
-        - description: A sample series id
-          in: path
-          name: sampleSeriesId
+          name: historyId
           required: true
           type: string
         - description: 'The default page size is 500 samples, and the maximum size is 5000. If the page_size is greater than 5000, the effective page size will be 5000'
@@ -1058,6 +1043,21 @@ paths:
         - description: 'Optional, the next_page_token returned in the previous response'
           in: query
           name: pageToken
+          type: string
+        - description: The cloud project
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: A sample series id
+          in: path
+          name: sampleSeriesId
+          required: true
+          type: string
+        - description: A tool results step ID.
+          in: path
+          name: stepId
+          required: true
           type: string
       responses:
         '200':
@@ -1093,9 +1093,13 @@ paths:
         May return any of the following canonical error codes: - NOT_FOUND - The containing PerfSampleSeries does not exist
       operationId: toolresults.projects.histories.executions.steps.perfSampleSeries.samples.batchCreate
       parameters:
-        - description: The cloud project
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchCreatePerfSamplesRequest'
+        - description: A tool results execution ID.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: A tool results history ID.
@@ -1103,14 +1107,9 @@ paths:
           name: historyId
           required: true
           type: string
-        - description: A tool results execution ID.
+        - description: The cloud project
           in: path
-          name: executionId
-          required: true
-          type: string
-        - description: A tool results step ID.
-          in: path
-          name: stepId
+          name: projectId
           required: true
           type: string
         - description: A sample series id
@@ -1118,10 +1117,11 @@ paths:
           name: sampleSeriesId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/BatchCreatePerfSamplesRequest'
+        - description: A tool results step ID.
+          in: path
+          name: stepId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1141,22 +1141,6 @@ paths:
       operationId: toolresults.projects.histories.executions.steps.thumbnails.list
       parameters:
         - description: |-
-            A Project id.
-
-            Required.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: |-
-            A History id.
-
-            Required.
-          in: path
-          name: historyId
-          required: true
-          type: string
-        - description: |-
             An Execution id.
 
             Required.
@@ -1165,11 +1149,11 @@ paths:
           required: true
           type: string
         - description: |-
-            A Step id.
+            A History id.
 
             Required.
           in: path
-          name: stepId
+          name: historyId
           required: true
           type: string
         - description: |-
@@ -1187,6 +1171,22 @@ paths:
             Optional.
           in: query
           name: pageToken
+          type: string
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            A Step id.
+
+            Required.
+          in: path
+          name: stepId
+          required: true
           type: string
       responses:
         '200':
@@ -1224,12 +1224,16 @@ paths:
         - PERMISSION_DENIED - if the user is not authorized to write project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal, e.g try to upload a duplicate xml file or a file too large. - NOT_FOUND - if the containing Execution does not exist
       operationId: toolresults.projects.histories.executions.steps.publishXunitXmlFiles
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PublishXunitXmlFilesRequest'
         - description: |-
-            A Project id.
+            A Execution id.
 
             Required.
           in: path
-          name: projectId
+          name: executionId
           required: true
           type: string
         - description: |-
@@ -1241,11 +1245,11 @@ paths:
           required: true
           type: string
         - description: |-
-            A Execution id.
+            A Project id.
 
             Required.
           in: path
-          name: executionId
+          name: projectId
           required: true
           type: string
         - description: |-
@@ -1256,10 +1260,6 @@ paths:
           name: stepId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PublishXunitXmlFilesRequest'
       responses:
         '200':
           description: Successful response

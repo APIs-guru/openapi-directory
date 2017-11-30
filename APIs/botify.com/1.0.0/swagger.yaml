@@ -1541,6 +1541,21 @@ definitions:
     required:
       - status
     type: object
+  AnalysesUpdateLaunch:
+    description: Launch Analyses Updates
+    properties:
+      analyses:
+        items:
+          type: string
+        type: array
+      refresh_features:
+        items:
+          type: string
+        type: array
+    required:
+      - analyses
+      - refresh_features
+    type: object
   Analysis:
     properties:
       computing_revision:
@@ -2527,7 +2542,7 @@ definitions:
         type: object
       sort:
         items:
-          type: object
+          type: string
         type: array
     type: object
   User:

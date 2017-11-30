@@ -123,14 +123,14 @@ paths:
       description: 'Retrieves, inserts, updates, and deletes multiple Merchant Center (sub-)accounts in a single request.'
       operationId: content.accounts.custombatch
       parameters:
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/AccountsCustomBatchRequest'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -180,14 +180,14 @@ paths:
       description: Retrieves and updates tax settings of multiple accounts in a single request.
       operationId: content.accounttax.custombatch
       parameters:
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/AccounttaxCustomBatchRequest'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -210,14 +210,14 @@ paths:
     post:
       operationId: content.datafeeds.custombatch
       parameters:
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/DatafeedsCustomBatchRequest'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -267,14 +267,14 @@ paths:
       description: Updates price and availability for multiple products or stores in a single request. This operation does not update the expiration date of the products.
       operationId: content.inventory.custombatch
       parameters:
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/InventoryCustomBatchRequest'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -325,14 +325,14 @@ paths:
       description: 'Retrieves, inserts, and deletes multiple products in a single request.'
       operationId: content.products.custombatch
       parameters:
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/ProductsCustomBatchRequest'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -387,14 +387,14 @@ paths:
       description: Retrieves and updates the shipping settings of multiple accounts in a single request.
       operationId: content.shippingsettings.custombatch
       parameters:
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/ShippingsettingsCustomBatchRequest'
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -487,7 +487,7 @@ paths:
           in: query
           name: force
           type: boolean
-        - description: The ID of the managing account. This must be a multi-client account.
+        - description: 'The ID of the managing account. This must be a multi-client account, and accountId must be the ID of a sub-account of this account.'
           in: path
           name: merchantId
           required: true
@@ -509,7 +509,7 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: 'The ID of the managing account. If this account is not a multi-client account, then this parameter must be the same as accountId.'
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
           in: path
           name: merchantId
           required: true
@@ -549,7 +549,7 @@ paths:
           in: query
           name: dryRun
           type: boolean
-        - description: 'The ID of the managing account. If this account is not a multi-client account, then this parameter must be the same as accountId.'
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
           in: path
           name: merchantId
           required: true
@@ -581,7 +581,7 @@ paths:
           in: query
           name: dryRun
           type: boolean
-        - description: 'The ID of the managing account. If this account is not a multi-client account, then this parameter must be the same as accountId.'
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
           in: path
           name: merchantId
           required: true
@@ -614,7 +614,7 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: 'The ID of the managing account. If this account is not a multi-client account, then this parameter must be the same as accountId.'
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
           in: path
           name: merchantId
           required: true
@@ -679,7 +679,7 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: 'The ID of the managing account. If this account is not a multi-client account, then this parameter must be the same as accountId.'
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
           in: path
           name: merchantId
           required: true
@@ -748,7 +748,7 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: 'The ID of the managing account. If this account is not a multi-client account, then this parameter must be the same as accountId.'
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
           in: path
           name: merchantId
           required: true
@@ -788,7 +788,7 @@ paths:
           in: query
           name: dryRun
           type: boolean
-        - description: 'The ID of the managing account. If this account is not a multi-client account, then this parameter must be the same as accountId.'
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
           in: path
           name: merchantId
           required: true
@@ -820,7 +820,7 @@ paths:
           in: query
           name: dryRun
           type: boolean
-        - description: 'The ID of the managing account. If this account is not a multi-client account, then this parameter must be the same as accountId.'
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
           in: path
           name: merchantId
           required: true
@@ -1837,7 +1837,7 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: 'The ID of the managing account. If this account is not a multi-client account, then this parameter must be the same as accountId.'
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
           in: path
           name: merchantId
           required: true
@@ -1877,7 +1877,7 @@ paths:
           in: query
           name: dryRun
           type: boolean
-        - description: 'The ID of the managing account. If this account is not a multi-client account, then this parameter must be the same as accountId.'
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
           in: path
           name: merchantId
           required: true
@@ -1909,7 +1909,7 @@ paths:
           in: query
           name: dryRun
           type: boolean
-        - description: 'The ID of the managing account. If this account is not a multi-client account, then this parameter must be the same as accountId.'
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
           in: path
           name: merchantId
           required: true
@@ -2067,6 +2067,9 @@ definitions:
         items:
           $ref: '#/definitions/AccountAdwordsLink'
         type: array
+      googleMyBusinessLink:
+        $ref: '#/definitions/AccountGoogleMyBusinessLink'
+        description: The GMB account which is linked or in the process of being linked with the Merchant Center accounnt.
       id:
         description: Merchant Center account ID.
         format: uint64
@@ -2106,6 +2109,15 @@ definitions:
         type: string
       status:
         description: 'Status of the link between this Merchant Center account and the AdWords account. Upon retrieval, it represents the actual status of the link and can be either active if it was approved in Google AdWords or pending if it''s pending approval. Upon insertion, it represents the intended status of the link. Re-uploading a link with status active when it''s still pending or with status pending when it''s already active will have no effect: the status will remain unchanged. Re-uploading a link with deprecated status inactive is equivalent to not submitting the link at all and will delete the link if it was active or cancel the link request if it was pending.'
+        type: string
+    type: object
+  AccountGoogleMyBusinessLink:
+    properties:
+      gmbEmail:
+        description: The GMB email address.
+        type: string
+      status:
+        description: Status of the link between this Merchant Center account and the GMB account.
         type: string
     type: object
   AccountIdentifier:
@@ -3546,26 +3558,20 @@ definitions:
           Acceptable values are:  
           - "gsx" 
           - "ups" 
-          - "united parcel service" 
           - "usps" 
-          - "united states postal service" 
           - "fedex" 
           - "dhl" 
           - "ecourier" 
           - "cxt" 
           - "google" 
-          - "on trac" 
           - "ontrac" 
-          - "on-trac" 
-          - "on_trac" 
-          - "delvic" 
+          - "emsy" 
+          - "ont" 
+          - "deliv" 
           - "dynamex" 
           - "lasership" 
-          - "smartpost" 
-          - "fedex smartpost" 
           - "mpx" 
-          - "uds" 
-          - "united delivery service"
+          - "uds"
         type: string
       creationDate:
         description: 'Date on which the shipment has been created, in ISO 8601 format.'
@@ -3592,6 +3598,9 @@ definitions:
     properties:
       lineItemId:
         description: The id of the line item that is shipped. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to ship. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity that is shipped.
@@ -3626,11 +3635,20 @@ definitions:
       amount:
         $ref: '#/definitions/Price'
         description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to cancellation amount in amountPretax.
       lineItemId:
         description: The ID of the line item to cancel. Either lineItemId or productId is required.
         type: string
       operationId:
         description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to cancel. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity to cancel.
@@ -3757,8 +3775,17 @@ definitions:
       amount:
         $ref: '#/definitions/Price'
         description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to cancellation amount in amountPretax.
       lineItemId:
         description: The ID of the line item to cancel. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to cancel. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity to cancel.
@@ -3776,6 +3803,12 @@ definitions:
       amount:
         $ref: '#/definitions/Price'
         description: The amount that is refunded.
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: The amount that is refunded. Either amount or amountPretax and amountTax should be filled.
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax.
       reason:
         description: The reason for the refund.
         type: string
@@ -3787,6 +3820,9 @@ definitions:
     properties:
       lineItemId:
         description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity to return.
@@ -3919,6 +3955,12 @@ definitions:
       amount:
         $ref: '#/definitions/Price'
         description: The amount that is refunded.
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: The amount that is refunded. Either amount or amountPretax and amountTax should be filled.
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax.
       operationId:
         description: The ID of the operation. Unique across all operations for a given order.
         type: string
@@ -3946,6 +3988,9 @@ definitions:
         type: string
       operationId:
         description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity to return.
@@ -4899,6 +4944,9 @@ definitions:
         items:
           $ref: '#/definitions/TestOrderLineItem'
         type: array
+      notificationMode:
+        description: Determines if test order must be pulled by merchant or pushed to merchant via push integration.
+        type: string
       paymentMethod:
         $ref: '#/definitions/TestOrderPaymentMethod'
         description: The details of the payment method.

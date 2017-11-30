@@ -336,11 +336,11 @@ info:
     | Updater Batch                                 | `UpdaterBatch`                             |
     | Usage                                         | `Usage`                                    |
   title: Zuora API Reference
-  version: '2017-11-08'
+  version: '2017-11-15'
   x-apisguru-categories:
     - financial
   x-logo:
-    url: 'https://twitter.com/Zuora/profile_image?size=original'
+    url: 'https://dl.dropboxusercontent.com/u/99612594/zuoralogo.png'
   x-origin:
     - format: swagger
       url: 'https://www.zuora.com/wp-content/themes/zuora/yaml/swagger.yaml?v-7.0'
@@ -2776,6 +2776,7 @@ paths:
         2. The request must provide either a **creditCard** structure or the **hpmCreditCardPaymentMethodId** field (but not both). The one provided becomes the default payment method for this account. If the credit card information is declined or can't be verified, then the account is not created.
         3. Customer accounts created with this call are automatically be set to Auto Pay.
         4. If either the **workEmail** or **personalEmail** are specified, then the account's email delivery preference is automatically set to `true`. (In that case, emails go to the **workEmail** address, if it exists, or else the **personalEmail**.) If neither field is specified, the email delivery preference is automatically set to `false`.
+        5. You cannot use this operation to create subscriptions if you have the Orders feature enabled. See [Orders Migration Guidance](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/AB_Orders_Migration_Guidance) for more information.
 
         ## Defaults for customerAcceptanceDate and serviceActivationDate
         Default values for **customerAcceptanceDate** and **serviceActivationDate** are set as follows.
@@ -3774,7 +3775,9 @@ paths:
 
         Use the amend call to change a subscription, such as upgrading the subscription.
 
-        **Note:** Zuora recommends that you use [Update subscription](https://www.zuora.com/developer/api-reference/#operation/PUT_Subscription) to amend subscriptions.
+        ## Notes
+        * This feature is unavailable if you have the Orders feature enabled. See [Orders Migration Guidance](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/AB_Orders_Migration_Guidance) for more information.
+        * If you do not have the Orders feature enabled, Zuora recommends that you use [Update subscription](https://www.zuora.com/developer/api-reference/#operation/PUT_Subscription) to amend subscriptions.
 
         The amend call:
 
@@ -4950,7 +4953,9 @@ paths:
     post:
       description: |
 
-        This call performs many actions.  Use the subscribe call to bundle information required to create at least one new subscription. 
+        This call performs many actions.  Use the subscribe call to bundle information required to create at least one new subscription.
+
+        **Note:** This feature is unavailable if you have the Orders feature enabled. See [Orders Migration Guidance](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/AB_Orders_Migration_Guidance) for more information.
 
         The call takes in an array of SubscribeRequests. Because it takes an array, you can submit a batch of subscription requests at once. You can create up to 50 different subscriptions in a single subscribe call.
 
@@ -11015,7 +11020,7 @@ paths:
   '/v1/creditmemos/{creditMemoNumber}/amountBreakdownByOrder':
     get:
       description: |
-        **Note:** This operation is only available if you have the [Advanced AR Settlement](https://knowledgecenter.zuora.com/CB_Billing/Advanced_AR_Settlement) and [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) features enabled. If you wish to have access to the features, submit a request at [Zuora Global Support](http://support.zuora.com/).
+        **Note:** This operation is only available if you have the [Advanced AR Settlement](https://knowledgecenter.zuora.com/CB_Billing/Advanced_AR_Settlement) and [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) features enabled. If you wish to have access to the features, submit a request at [Zuora Global Support](http://support.zuora.com/). If you have the [Orders](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders) feature enabled, you already have the Order Metrics feature enabled.
 
 
         Retrieves a specified credit memo that is broken down by orders. The credit memo items might be broken down into a list of order rated items.
@@ -16244,7 +16249,7 @@ paths:
   '/v1/invoices/{invoiceNumber}/amountBreakdownByOrder':
     get:
       description: |
-        **Note:** This feature is only available if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). We will investigate your use cases and data before enabling this feature for you.
+        **Note:** This feature is only available if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). We will investigate your use cases and data before enabling this feature for you. If you have the [Orders](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders) feature enabled, you already have the Order Metrics feature enabled.
 
 
         Retrieves a specified invoice that is broken down by orders. The invoice items might be broken down into a list of order rated items.
@@ -18639,7 +18644,9 @@ paths:
   /v1/object/amendment:
     post:
       description: |
-        This operation has some limitations. Zuora recommends that you use [Update subscription](https://www.zuora.com/developer/api-reference/#operation/PUT_Subscription) to amend subscriptions. If you need to create an Amendment object, Zuora recommends that you use [Amend](https://www.zuora.com/developer/api-reference/#operation/Action_POSTamend) instead of CRUD: Create Amendment.
+        ## Notes
+        * This feature is unavailable if you have the Orders feature enabled. See [Orders Migration Guidance](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/AB_Orders_Migration_Guidance) for more information.
+        * This operation has some limitations. If you do not have the Orders feature enabled, Zuora recommends that you use [Update subscription](https://www.zuora.com/developer/api-reference/#operation/PUT_Subscription) to amend subscriptions. If you need to create an Amendment object, Zuora recommends that you use [Amend](https://www.zuora.com/developer/api-reference/#operation/Action_POSTamend) instead of CRUD: Create Amendment.
       operationId: Object_POSTAmendment
       parameters:
         - $ref: '#/parameters/GLOBAL_HEADER_entityId'
@@ -18807,7 +18814,8 @@ paths:
             IRestResponse response = client.Execute(request);
   '/v1/object/amendment/{id}':
     delete:
-      description: ''
+      description: |
+        **Note:** This feature is unavailable if you have the Orders feature enabled. See [Orders Migration Guidance](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/AB_Orders_Migration_Guidance) for more information.
       operationId: Object_DELETEAmendment
       parameters:
         - $ref: '#/parameters/GLOBAL_HEADER_entityId'
@@ -19045,7 +19053,8 @@ paths:
             request.AddHeader("apiaccesskeyid", "dummyUser");
             IRestResponse response = client.Execute(request);
     put:
-      description: ''
+      description: |
+        **Note:** This feature is unavailable if you have the Orders feature enabled. See [Orders Migration Guidance](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/AB_Orders_Migration_Guidance) for more information.
       operationId: Object_PUTAmendment
       parameters:
         - $ref: '#/parameters/GLOBAL_HEADER_entityId'
@@ -27303,7 +27312,8 @@ paths:
             IRestResponse response = client.Execute(request);
   '/v1/object/subscription/{id}':
     delete:
-      description: ''
+      description: |
+        **Note:** This feature is unavailable if you have the Orders feature enabled. See [Orders Migration Guidance](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/AB_Orders_Migration_Guidance) for more information.
       operationId: Object_DELETESubscription
       parameters:
         - $ref: '#/parameters/GLOBAL_HEADER_entityId'
@@ -27522,7 +27532,8 @@ paths:
             request.AddHeader("apiaccesskeyid", "dummyUser");
             IRestResponse response = client.Execute(request);
     put:
-      description: ''
+      description: |
+        **Note:** This feature is unavailable if you have the Orders feature enabled. See [Orders Migration Guidance](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/AB_Orders_Migration_Guidance) for more information.
       operationId: Object_PUTSubscription
       parameters:
         - $ref: '#/parameters/GLOBAL_HEADER_entityId'
@@ -29489,7 +29500,7 @@ paths:
   /v1/orders:
     get:
       description: |
-        **Note:** This feature is only available if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). We will investigate your use cases and data before enabling this feature for you.
+        **Note:** This feature is only available if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). We will investigate your use cases and data before enabling this feature for you. If you have the [Orders](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders) feature enabled, you already have the Order Metrics feature enabled.
 
 
         Retrieves information about all orders in your tenant. By default, it returns the first page of the orders. 
@@ -29696,10 +29707,277 @@ paths:
             request.AddHeader("apisecretaccesskey", "dummyPassword");
             request.AddHeader("apiaccesskeyid", "dummyUser");
             IRestResponse response = client.Execute(request);
+    post:
+      description: |
+        **Note:** This feature is only available if you have the [Orders](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders) feature enabled. We are actively soliciting feedback from a small set of early adopters. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). 
+
+
+        Creates and activates an order. You can create subscriptions and make changes to subscriptions by creating orders. Creating a draft order is currently not supported.
+
+        See [Known Limitations in Orders](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/C_Known_Limitations_in_Orders) for more information.
+      operationId: POST_Order
+      parameters:
+        - $ref: '#/parameters/GLOBAL_HEADER_entityId'
+        - $ref: '#/parameters/GLOBAL_HEADER_entityName'
+        - description: ''
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/POSTOrderRequestType'
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              accountNumber: A-00002
+              orderNumber: OM-00001
+              subscriptionNumbers:
+                - SM-00001
+                - S-00003
+              success: true
+          schema:
+            $ref: '#/definitions/PostOrderResponseType'
+      summary: Create and activate order
+      tags:
+        - Orders
+      x-code-samples:
+        - lang: Curl
+          source: |-
+            curl -X POST -H "apiAccessKeyId: dummyUser" -H "apiSecretAccessKey: dummyPassword" -H "Content-Type: application/json" -d '{
+                "existingAccountNumber": "A-00002", 
+                "orderDate": "2017-01-01", 
+                "orderNumber": "OM-00001", 
+                "subscriptions": [
+                    {
+                        "orderActions": [
+                            {
+                                "createSubscription": {
+                                    "subscribeToRatePlans": [
+                                        {
+                                            "productRatePlanId": "8a8081085d834928015d9c54e67f0aa9", 
+                                            "uniqueToken": "Sugar-free Monthly"
+                                        }
+                                    ], 
+                                    "subscriptionNumber": "SM-00001", 
+                                    "terms": {
+                                        "autoRenew": true, 
+                                        "initialTerm": {
+                                            "period": 12, 
+                                            "periodType": "Month", 
+                                            "startDate": "2017-01-01", 
+                                            "termType": "TERMED"
+                                        }, 
+                                        "renewalSetting": "RENEW_WITH_SPECIFIC_TERM", 
+                                        "renewalTerms": [
+                                            {
+                                                "period": 12, 
+                                                "periodType": "Month"
+                                            }
+                                        ]
+                                    }
+                                }, 
+                                "triggerDates": [
+                                    {
+                                        "name": "ContractEffective", 
+                                        "triggerDate": "2017-01-01"
+                                    }
+                                ], 
+                                "type": "CreateSubscription"
+                            }
+                        ]
+                    }, 
+                    {
+                        "orderActions": [
+                            {
+                                "triggerDates": [
+                                    {
+                                        "name": "ContractEffective", 
+                                        "triggerDate": "2017-03-01"
+                                    }
+                                ], 
+                                "type": "UpdateProduct", 
+                                "updateProduct": {
+                                    "chargeUpdates": [
+                                        {
+                                            "chargeNumber": "C-00000013", 
+                                            "pricing": {
+                                                "recurringPerUnit": {
+                                                    "listPrice": 20
+                                                }
+                                            }
+                                        }
+                                    ], 
+                                    "ratePlanId": "8a8081085d834928015da1db5ee1201c"
+                                }
+                            }
+                        ], 
+                        "subscriptionNumber": "S-00003"
+                    }
+                ]
+            }' "https://rest.zuora.com/v1/orders"
+        - lang: PHP
+          source: |-
+            <?php
+
+            $request = new HttpRequest();
+            $request->setUrl('https://rest.zuora.com/v1/orders');
+            $request->setMethod(HTTP_METH_POST);
+
+            $request->setHeaders(array(
+              'content-type' => 'application/json',
+              'apisecretaccesskey' => 'dummyPassword',
+              'apiaccesskeyid' => 'dummyUser'
+            ));
+
+            $request->setBody('{
+                "existingAccountNumber": "A-00002", 
+                "orderDate": "2017-01-01", 
+                "orderNumber": "OM-00001", 
+                "subscriptions": [
+                    {
+                        "orderActions": [
+                            {
+                                "createSubscription": {
+                                    "subscribeToRatePlans": [
+                                        {
+                                            "productRatePlanId": "8a8081085d834928015d9c54e67f0aa9", 
+                                            "uniqueToken": "Sugar-free Monthly"
+                                        }
+                                    ], 
+                                    "subscriptionNumber": "SM-00001", 
+                                    "terms": {
+                                        "autoRenew": true, 
+                                        "initialTerm": {
+                                            "period": 12, 
+                                            "periodType": "Month", 
+                                            "startDate": "2017-01-01", 
+                                            "termType": "TERMED"
+                                        }, 
+                                        "renewalSetting": "RENEW_WITH_SPECIFIC_TERM", 
+                                        "renewalTerms": [
+                                            {
+                                                "period": 12, 
+                                                "periodType": "Month"
+                                            }
+                                        ]
+                                    }
+                                }, 
+                                "triggerDates": [
+                                    {
+                                        "name": "ContractEffective", 
+                                        "triggerDate": "2017-01-01"
+                                    }
+                                ], 
+                                "type": "CreateSubscription"
+                            }
+                        ]
+                    }, 
+                    {
+                        "orderActions": [
+                            {
+                                "triggerDates": [
+                                    {
+                                        "name": "ContractEffective", 
+                                        "triggerDate": "2017-03-01"
+                                    }
+                                ], 
+                                "type": "UpdateProduct", 
+                                "updateProduct": {
+                                    "chargeUpdates": [
+                                        {
+                                            "chargeNumber": "C-00000013", 
+                                            "pricing": {
+                                                "recurringPerUnit": {
+                                                    "listPrice": 20
+                                                }
+                                            }
+                                        }
+                                    ], 
+                                    "ratePlanId": "8a8081085d834928015da1db5ee1201c"
+                                }
+                            }
+                        ], 
+                        "subscriptionNumber": "S-00003"
+                    }
+                ]
+            }');
+
+            try {
+              $response = $request->send();
+
+              echo $response->getBody();
+            } catch (HttpException $ex) {
+              echo $ex;
+            }
+        - lang: Java
+          source: |-
+            OkHttpClient client = new OkHttpClient();
+
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody body = RequestBody.create(mediaType, "{\n    \"existingAccountNumber\": \"A-00002\", \n    \"orderDate\": \"2017-01-01\", \n    \"orderNumber\": \"OM-00001\", \n    \"subscriptions\": [\n        {\n            \"orderActions\": [\n                {\n                    \"createSubscription\": {\n                        \"subscribeToRatePlans\": [\n                            {\n                                \"productRatePlanId\": \"8a8081085d834928015d9c54e67f0aa9\", \n                                \"uniqueToken\": \"Sugar-free Monthly\"\n                            }\n                        ], \n                        \"subscriptionNumber\": \"SM-00001\", \n                        \"terms\": {\n                            \"autoRenew\": true, \n                            \"initialTerm\": {\n                                \"period\": 12, \n                                \"periodType\": \"Month\", \n                                \"startDate\": \"2017-01-01\", \n                                \"termType\": \"TERMED\"\n                            }, \n                            \"renewalSetting\": \"RENEW_WITH_SPECIFIC_TERM\", \n                            \"renewalTerms\": [\n                                {\n                                    \"period\": 12, \n                                    \"periodType\": \"Month\"\n                                }\n                            ]\n                        }\n                    }, \n                    \"triggerDates\": [\n                        {\n                            \"name\": \"ContractEffective\", \n                            \"triggerDate\": \"2017-01-01\"\n                        }\n                    ], \n                    \"type\": \"CreateSubscription\"\n                }\n            ]\n        }, \n        {\n            \"orderActions\": [\n                {\n                    \"triggerDates\": [\n                        {\n                            \"name\": \"ContractEffective\", \n                            \"triggerDate\": \"2017-03-01\"\n                        }\n                    ], \n                    \"type\": \"UpdateProduct\", \n                    \"updateProduct\": {\n                        \"chargeUpdates\": [\n                            {\n                                \"chargeNumber\": \"C-00000013\", \n                                \"pricing\": {\n                                    \"recurringPerUnit\": {\n                                        \"listPrice\": 20\n                                    }\n                                }\n                            }\n                        ], \n                        \"ratePlanId\": \"8a8081085d834928015da1db5ee1201c\"\n                    }\n                }\n            ], \n            \"subscriptionNumber\": \"S-00003\"\n        }\n    ]\n}");
+            Request request = new Request.Builder()
+              .url("https://rest.zuora.com/v1/orders")
+              .post(body)
+              .addHeader("apiaccesskeyid", "dummyUser")
+              .addHeader("apisecretaccesskey", "dummyPassword")
+              .addHeader("content-type", "application/json")
+              .addHeader("cache-control", "no-cache")
+              .build();
+
+            Response response = client.newCall(request).execute();
+        - lang: Python
+          source: |-
+            import http.client
+
+            conn = http.client.HTTPSConnection("https://rest.zuora.com/")
+
+            payload = "{\n    \"existingAccountNumber\": \"A-00002\", \n    \"orderDate\": \"2017-01-01\", \n    \"orderNumber\": \"OM-00001\", \n    \"subscriptions\": [\n        {\n            \"orderActions\": [\n                {\n                    \"createSubscription\": {\n                        \"subscribeToRatePlans\": [\n                            {\n                                \"productRatePlanId\": \"8a8081085d834928015d9c54e67f0aa9\", \n                                \"uniqueToken\": \"Sugar-free Monthly\"\n                            }\n                        ], \n                        \"subscriptionNumber\": \"SM-00001\", \n                        \"terms\": {\n                            \"autoRenew\": true, \n                            \"initialTerm\": {\n                                \"period\": 12, \n                                \"periodType\": \"Month\", \n                                \"startDate\": \"2017-01-01\", \n                                \"termType\": \"TERMED\"\n                            }, \n                            \"renewalSetting\": \"RENEW_WITH_SPECIFIC_TERM\", \n                            \"renewalTerms\": [\n                                {\n                                    \"period\": 12, \n                                    \"periodType\": \"Month\"\n                                }\n                            ]\n                        }\n                    }, \n                    \"triggerDates\": [\n                        {\n                            \"name\": \"ContractEffective\", \n                            \"triggerDate\": \"2017-01-01\"\n                        }\n                    ], \n                    \"type\": \"CreateSubscription\"\n                }\n            ]\n        }, \n        {\n            \"orderActions\": [\n                {\n                    \"triggerDates\": [\n                        {\n                            \"name\": \"ContractEffective\", \n                            \"triggerDate\": \"2017-03-01\"\n                        }\n                    ], \n                    \"type\": \"UpdateProduct\", \n                    \"updateProduct\": {\n                        \"chargeUpdates\": [\n                            {\n                                \"chargeNumber\": \"C-00000013\", \n                                \"pricing\": {\n                                    \"recurringPerUnit\": {\n                                        \"listPrice\": 20\n                                    }\n                                }\n                            }\n                        ], \n                        \"ratePlanId\": \"8a8081085d834928015da1db5ee1201c\"\n                    }\n                }\n            ], \n            \"subscriptionNumber\": \"S-00003\"\n        }\n    ]\n}"
+
+            headers = {
+                'apiaccesskeyid': "dummyUser",
+                'apisecretaccesskey': "dummyPassword",
+                'content-type': "application/json",
+                }
+
+            conn.request("POST", "/v1/orders", payload, headers)
+
+            res = conn.getresponse()
+            data = res.read()
+
+            print(data.decode("utf-8"))
+        - lang: Ruby
+          source: |-
+            require 'uri'
+            require 'net/http'
+
+            url = URI("https://rest.zuora.com/v1/orders")
+
+            http = Net::HTTP.new(url.host, url.port)
+            http.use_ssl = true
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+            request = Net::HTTP::Post.new(url)
+            request["apiaccesskeyid"] = 'dummyUser'
+            request["apisecretaccesskey"] = 'dummyPassword'
+            request["content-type"] = 'application/json'
+            request.body = "{\n    \"existingAccountNumber\": \"A-00002\", \n    \"orderDate\": \"2017-01-01\", \n    \"orderNumber\": \"OM-00001\", \n    \"subscriptions\": [\n        {\n            \"orderActions\": [\n                {\n                    \"createSubscription\": {\n                        \"subscribeToRatePlans\": [\n                            {\n                                \"productRatePlanId\": \"8a8081085d834928015d9c54e67f0aa9\", \n                                \"uniqueToken\": \"Sugar-free Monthly\"\n                            }\n                        ], \n                        \"subscriptionNumber\": \"SM-00001\", \n                        \"terms\": {\n                            \"autoRenew\": true, \n                            \"initialTerm\": {\n                                \"period\": 12, \n                                \"periodType\": \"Month\", \n                                \"startDate\": \"2017-01-01\", \n                                \"termType\": \"TERMED\"\n                            }, \n                            \"renewalSetting\": \"RENEW_WITH_SPECIFIC_TERM\", \n                            \"renewalTerms\": [\n                                {\n                                    \"period\": 12, \n                                    \"periodType\": \"Month\"\n                                }\n                            ]\n                        }\n                    }, \n                    \"triggerDates\": [\n                        {\n                            \"name\": \"ContractEffective\", \n                            \"triggerDate\": \"2017-01-01\"\n                        }\n                    ], \n                    \"type\": \"CreateSubscription\"\n                }\n            ]\n        }, \n        {\n            \"orderActions\": [\n                {\n                    \"triggerDates\": [\n                        {\n                            \"name\": \"ContractEffective\", \n                            \"triggerDate\": \"2017-03-01\"\n                        }\n                    ], \n                    \"type\": \"UpdateProduct\", \n                    \"updateProduct\": {\n                        \"chargeUpdates\": [\n                            {\n                                \"chargeNumber\": \"C-00000013\", \n                                \"pricing\": {\n                                    \"recurringPerUnit\": {\n                                        \"listPrice\": 20\n                                    }\n                                }\n                            }\n                        ], \n                        \"ratePlanId\": \"8a8081085d834928015da1db5ee1201c\"\n                    }\n                }\n            ], \n            \"subscriptionNumber\": \"S-00003\"\n        }\n    ]\n}"
+
+            response = http.request(request)
+            puts response.read_body
+        - lang: 'C#'
+          source: |-
+            var client = new RestClient("https://rest.zuora.com/v1/orders");
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("content-type", "application/json");
+            request.AddHeader("apisecretaccesskey", "dummyPassword");
+            request.AddHeader("apiaccesskeyid", "dummyUser");
+            request.AddParameter("application/json", "{\n    \"existingAccountNumber\": \"A-00002\", \n    \"orderDate\": \"2017-01-01\", \n    \"orderNumber\": \"OM-00001\", \n    \"subscriptions\": [\n        {\n            \"orderActions\": [\n                {\n                    \"createSubscription\": {\n                        \"subscribeToRatePlans\": [\n                            {\n                                \"productRatePlanId\": \"8a8081085d834928015d9c54e67f0aa9\", \n                                \"uniqueToken\": \"Sugar-free Monthly\"\n                            }\n                        ], \n                        \"subscriptionNumber\": \"SM-00001\", \n                        \"terms\": {\n                            \"autoRenew\": true, \n                            \"initialTerm\": {\n                                \"period\": 12, \n                                \"periodType\": \"Month\", \n                                \"startDate\": \"2017-01-01\", \n                                \"termType\": \"TERMED\"\n                            }, \n                            \"renewalSetting\": \"RENEW_WITH_SPECIFIC_TERM\", \n                            \"renewalTerms\": [\n                                {\n                                    \"period\": 12, \n                                    \"periodType\": \"Month\"\n                                }\n                            ]\n                        }\n                    }, \n                    \"triggerDates\": [\n                        {\n                            \"name\": \"ContractEffective\", \n                            \"triggerDate\": \"2017-01-01\"\n                        }\n                    ], \n                    \"type\": \"CreateSubscription\"\n                }\n            ]\n        }, \n        {\n            \"orderActions\": [\n                {\n                    \"triggerDates\": [\n                        {\n                            \"name\": \"ContractEffective\", \n                            \"triggerDate\": \"2017-03-01\"\n                        }\n                    ], \n                    \"type\": \"UpdateProduct\", \n                    \"updateProduct\": {\n                        \"chargeUpdates\": [\n                            {\n                                \"chargeNumber\": \"C-00000013\", \n                                \"pricing\": {\n                                    \"recurringPerUnit\": {\n                                        \"listPrice\": 20\n                                    }\n                                }\n                            }\n                        ], \n                        \"ratePlanId\": \"8a8081085d834928015da1db5ee1201c\"\n                    }\n                }\n            ], \n            \"subscriptionNumber\": \"S-00003\"\n        }\n    ]\n}", ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
   '/v1/orders/invoiceOwner/{accountNumber}':
     get:
       description: |
-        **Note:** This feature is only available if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). We will investigate your use cases and data before enabling this feature for you.
+        **Note:** This feature is only available if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). We will investigate your use cases and data before enabling this feature for you. If you have the [Orders](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders) feature enabled, you already have the Order Metrics feature enabled.
 
         Retrieves the detailed information about all orders for a specified invoice owner.
       operationId: GET_OrdersByInvoiceOwner
@@ -29919,10 +30197,388 @@ paths:
             request.AddHeader("apisecretaccesskey", "dummyPassword");
             request.AddHeader("apiaccesskeyid", "dummyUser");
             IRestResponse response = client.Execute(request);
+  /v1/orders/preview:
+    post:
+      description: |
+        **Note:** This feature is only available if you have the [Orders](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders) feature enabled. We are actively soliciting feedback from a small set of early adopters. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). 
+
+
+        Retrieves the preview of the charge metrics and invoice items of a specified order. This operation is only an order preview and no order is created.
+      operationId: POST_PreviewOrder
+      parameters:
+        - $ref: '#/parameters/GLOBAL_HEADER_entityId'
+        - $ref: '#/parameters/GLOBAL_HEADER_entityName'
+        - description: ''
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/POSTOrderPreviewRequestType'
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              previewResult:
+                chargeMetrics:
+                  - charges:
+                      - chargeNumber: C-00000024
+                        cmrr:
+                          regular: 150
+                          regularDelta: 50
+                        originRatePlanId: 8a8081085d834928015dc4f6ce772c03
+                        productRatePlanChargeId: 8a8081085d834928015d9c55d45f0aac
+                        productRatePlanId: 8a8081085d834928015d9c54e67f0aa9
+                        tax:
+                          regular: 0
+                          regularDelta: 0
+                        tcb:
+                          regular: 1680
+                          regularDelta: 480
+                        tcv:
+                          regular: 1685.8064516129032
+                          regularDelta: 485.80645161290323
+                    subscriptionNumber: SM-00004
+                invoices:
+                  - amount: 930
+                    amountWithoutTax: 930
+                    invoiceItems:
+                      - additionalInfo:
+                          quantity: 10
+                          unitOfMeasure: Each
+                        amountWithoutTax: 100
+                        chargeDescription: ''
+                        chargeName: Member-ship
+                        chargeNumber: C-00000024
+                        processingType: Charge
+                        productName: Sprite
+                        productRatePlanChargeId: 8a8081085d834928015d9c55d45f0aac
+                        serviceEndDate: '2017-01-31'
+                        serviceStartDate: '2017-01-01'
+                        subscriptionNumber: SM-00004
+                        taxAmount: 0
+                      - additionalInfo:
+                          quantity: 10
+                          unitOfMeasure: Each
+                        amountWithoutTax: 50
+                        chargeDescription: ''
+                        chargeName: Member-ship
+                        chargeNumber: C-00000024
+                        processingType: Charge
+                        productName: Sprite
+                        productRatePlanChargeId: 8a8081085d834928015d9c55d45f0aac
+                        serviceEndDate: '2017-02-14'
+                        serviceStartDate: '2017-02-01'
+                        subscriptionNumber: SM-00004
+                        taxAmount: 0
+                      - additionalInfo:
+                          quantity: 12
+                          unitOfMeasure: Each
+                        amountWithoutTax: 60
+                        chargeDescription: ''
+                        chargeName: Member-ship
+                        chargeNumber: C-00000024
+                        processingType: Charge
+                        productName: Sprite
+                        productRatePlanChargeId: 8a8081085d834928015d9c55d45f0aac
+                        serviceEndDate: '2017-02-28'
+                        serviceStartDate: '2017-02-15'
+                        subscriptionNumber: SM-00004
+                        taxAmount: 0
+                      - additionalInfo:
+                          quantity: 12
+                          unitOfMeasure: Each
+                        amountWithoutTax: 120
+                        chargeDescription: ''
+                        chargeName: Member-ship
+                        chargeNumber: C-00000024
+                        processingType: Charge
+                        productName: Sprite
+                        productRatePlanChargeId: 8a8081085d834928015d9c55d45f0aac
+                        serviceEndDate: '2017-03-31'
+                        serviceStartDate: '2017-03-01'
+                        subscriptionNumber: SM-00004
+                        taxAmount: 0
+                      - additionalInfo:
+                          quantity: 15
+                          unitOfMeasure: Each
+                        amountWithoutTax: 150
+                        chargeDescription: ''
+                        chargeName: Member-ship
+                        chargeNumber: C-00000024
+                        processingType: Charge
+                        productName: Sprite
+                        productRatePlanChargeId: 8a8081085d834928015d9c55d45f0aac
+                        serviceEndDate: '2017-04-30'
+                        serviceStartDate: '2017-04-01'
+                        subscriptionNumber: SM-00004
+                        taxAmount: 0
+                      - additionalInfo:
+                          quantity: 15
+                          unitOfMeasure: Each
+                        amountWithoutTax: 150
+                        chargeDescription: ''
+                        chargeName: Member-ship
+                        chargeNumber: C-00000024
+                        processingType: Charge
+                        productName: Sprite
+                        productRatePlanChargeId: 8a8081085d834928015d9c55d45f0aac
+                        serviceEndDate: '2017-05-31'
+                        serviceStartDate: '2017-05-01'
+                        subscriptionNumber: SM-00004
+                        taxAmount: 0
+                      - additionalInfo:
+                          quantity: 15
+                          unitOfMeasure: Each
+                        amountWithoutTax: 150
+                        chargeDescription: ''
+                        chargeName: Member-ship
+                        chargeNumber: C-00000024
+                        processingType: Charge
+                        productName: Sprite
+                        productRatePlanChargeId: 8a8081085d834928015d9c55d45f0aac
+                        serviceEndDate: '2017-06-30'
+                        serviceStartDate: '2017-06-01'
+                        subscriptionNumber: SM-00004
+                        taxAmount: 0
+                      - additionalInfo:
+                          quantity: 15
+                          unitOfMeasure: Each
+                        amountWithoutTax: 150
+                        chargeDescription: ''
+                        chargeName: Member-ship
+                        chargeNumber: C-00000024
+                        processingType: Charge
+                        productName: Sprite
+                        productRatePlanChargeId: 8a8081085d834928015d9c55d45f0aac
+                        serviceEndDate: '2017-07-31'
+                        serviceStartDate: '2017-07-01'
+                        subscriptionNumber: SM-00004
+                        taxAmount: 0
+                    targetDate: '2017-07-01'
+                    taxAmount: 0
+                orderMetrics:
+                  - orderActions:
+                      - orderMetrics:
+                          - chargeNumber: C-00000024
+                            mrr:
+                              - amount: 20
+                                endDate: '2018-01-01'
+                                invoiceOwner: A-00002
+                                startDate: '2017-02-15'
+                                subscriptionOwner: A-00002
+                                type: Regular
+                            originRatePlanId: 8a8081085d834928015dc4f6ce772c03
+                            productRatePlanChargeId: 8a8081085d834928015d9c55d45f0aac
+                            productRatePlanId: 8a8081085d834928015d9c54e67f0aa9
+                            quantity:
+                              - amount: 2
+                                endDate: '2018-01-01'
+                                invoiceOwner: A-00002
+                                startDate: '2017-02-15'
+                                subscriptionOwner: A-00002
+                            tcb:
+                              - amount: 210
+                                endDate: '2018-01-01'
+                                invoiceOwner: A-00002
+                                startDate: '2017-02-15'
+                                subscriptionOwner: A-00002
+                                type: Regular
+                            tcv:
+                              - amount: 210.96774193548387
+                                endDate: '2018-01-01'
+                                invoiceOwner: A-00002
+                                startDate: '2017-02-15'
+                                subscriptionOwner: A-00002
+                                type: Regular
+                        sequence: 0
+                        type: UpdateProduct
+                    subscriptionNumber: SM-00004
+              success: true
+          schema:
+            $ref: '#/definitions/PostOrderPreviewResponseType'
+      summary: Preview order
+      tags:
+        - Orders
+      x-code-samples:
+        - lang: Curl
+          source: |-
+            curl -X POST -H "apiAccessKeyId: dummyUser" -H "apiSecretAccessKey: dummyPassword" -H "Content-Type: application/json" -d '{
+                "existingAccountNumber": "A-00002", 
+                "orderDate": "2017-01-01", 
+                "orderNumber": "OM-00007", 
+                "previewOptions": {
+                    "previewThruType": "SpecificDate", 
+                    "previewTypes": [
+                        "OrderMetrics", 
+                        "ChargeMetrics", 
+                        "BillingDocs"
+                    ], 
+                    "specificPreviewThruDate": "2017-07-01"
+                }, 
+                "subscriptions": [
+                    {
+                        "orderActions": [
+                            {
+                                "triggerDates": [
+                                    {
+                                        "name": "ContractEffective", 
+                                        "triggerDate": "2017-02-15"
+                                    }
+                                ], 
+                                "type": "UpdateProduct", 
+                                "updateProduct": {
+                                    "chargeUpdates": [
+                                        {
+                                            "chargeNumber": "C-00000024", 
+                                            "pricing": {
+                                                "recurringVolume": {
+                                                    "quantity": 12
+                                                }
+                                            }
+                                        }
+                                    ], 
+                                    "ratePlanId": "8a8081085d834928015dc4f6ce772c03"
+                                }
+                            }
+                        ], 
+                        "subscriptionNumber": "SM-00004"
+                    }
+                ]
+            }' "https://rest.zuora.com/v1/orders/preview"
+        - lang: PHP
+          source: |-
+            <?php
+
+            $request = new HttpRequest();
+            $request->setUrl('https://rest.zuora.com/v1/orders/preview');
+            $request->setMethod(HTTP_METH_POST);
+
+            $request->setHeaders(array(
+              'content-type' => 'application/json',
+              'apisecretaccesskey' => 'dummyPassword',
+              'apiaccesskeyid' => 'dummyUser'
+            ));
+
+            $request->setBody('{
+                "existingAccountNumber": "A-00002", 
+                "orderDate": "2017-01-01", 
+                "orderNumber": "OM-00007", 
+                "previewOptions": {
+                    "previewThruType": "SpecificDate", 
+                    "previewTypes": [
+                        "OrderMetrics", 
+                        "ChargeMetrics", 
+                        "BillingDocs"
+                    ], 
+                    "specificPreviewThruDate": "2017-07-01"
+                }, 
+                "subscriptions": [
+                    {
+                        "orderActions": [
+                            {
+                                "triggerDates": [
+                                    {
+                                        "name": "ContractEffective", 
+                                        "triggerDate": "2017-02-15"
+                                    }
+                                ], 
+                                "type": "UpdateProduct", 
+                                "updateProduct": {
+                                    "chargeUpdates": [
+                                        {
+                                            "chargeNumber": "C-00000024", 
+                                            "pricing": {
+                                                "recurringVolume": {
+                                                    "quantity": 12
+                                                }
+                                            }
+                                        }
+                                    ], 
+                                    "ratePlanId": "8a8081085d834928015dc4f6ce772c03"
+                                }
+                            }
+                        ], 
+                        "subscriptionNumber": "SM-00004"
+                    }
+                ]
+            }');
+
+            try {
+              $response = $request->send();
+
+              echo $response->getBody();
+            } catch (HttpException $ex) {
+              echo $ex;
+            }
+        - lang: Java
+          source: |-
+            OkHttpClient client = new OkHttpClient();
+
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody body = RequestBody.create(mediaType, "{\n    \"existingAccountNumber\": \"A-00002\", \n    \"orderDate\": \"2017-01-01\", \n    \"orderNumber\": \"OM-00007\", \n    \"previewOptions\": {\n        \"previewThruType\": \"SpecificDate\", \n        \"previewTypes\": [\n            \"OrderMetrics\", \n            \"ChargeMetrics\", \n            \"BillingDocs\"\n        ], \n        \"specificPreviewThruDate\": \"2017-07-01\"\n    }, \n    \"subscriptions\": [\n        {\n            \"orderActions\": [\n                {\n                    \"triggerDates\": [\n                        {\n                            \"name\": \"ContractEffective\", \n                            \"triggerDate\": \"2017-02-15\"\n                        }\n                    ], \n                    \"type\": \"UpdateProduct\", \n                    \"updateProduct\": {\n                        \"chargeUpdates\": [\n                            {\n                                \"chargeNumber\": \"C-00000024\", \n                                \"pricing\": {\n                                    \"recurringVolume\": {\n                                        \"quantity\": 12\n                                    }\n                                }\n                            }\n                        ], \n                        \"ratePlanId\": \"8a8081085d834928015dc4f6ce772c03\"\n                    }\n                }\n            ], \n            \"subscriptionNumber\": \"SM-00004\"\n        }\n    ]\n}");
+            Request request = new Request.Builder()
+              .url("https://rest.zuora.com/v1/orders/preview")
+              .post(body)
+              .addHeader("apiaccesskeyid", "dummyUser")
+              .addHeader("apisecretaccesskey", "dummyPassword")
+              .addHeader("content-type", "application/json")
+              .addHeader("cache-control", "no-cache")
+              .build();
+
+            Response response = client.newCall(request).execute();
+        - lang: Python
+          source: |-
+            import http.client
+
+            conn = http.client.HTTPSConnection("https://rest.zuora.com/")
+
+            payload = "{\n    \"existingAccountNumber\": \"A-00002\", \n    \"orderDate\": \"2017-01-01\", \n    \"orderNumber\": \"OM-00007\", \n    \"previewOptions\": {\n        \"previewThruType\": \"SpecificDate\", \n        \"previewTypes\": [\n            \"OrderMetrics\", \n            \"ChargeMetrics\", \n            \"BillingDocs\"\n        ], \n        \"specificPreviewThruDate\": \"2017-07-01\"\n    }, \n    \"subscriptions\": [\n        {\n            \"orderActions\": [\n                {\n                    \"triggerDates\": [\n                        {\n                            \"name\": \"ContractEffective\", \n                            \"triggerDate\": \"2017-02-15\"\n                        }\n                    ], \n                    \"type\": \"UpdateProduct\", \n                    \"updateProduct\": {\n                        \"chargeUpdates\": [\n                            {\n                                \"chargeNumber\": \"C-00000024\", \n                                \"pricing\": {\n                                    \"recurringVolume\": {\n                                        \"quantity\": 12\n                                    }\n                                }\n                            }\n                        ], \n                        \"ratePlanId\": \"8a8081085d834928015dc4f6ce772c03\"\n                    }\n                }\n            ], \n            \"subscriptionNumber\": \"SM-00004\"\n        }\n    ]\n}"
+
+            headers = {
+                'apiaccesskeyid': "dummyUser",
+                'apisecretaccesskey': "dummyPassword",
+                'content-type': "application/json",
+                }
+
+            conn.request("POST", "/v1/orders/preview", payload, headers)
+
+            res = conn.getresponse()
+            data = res.read()
+
+            print(data.decode("utf-8"))
+        - lang: Ruby
+          source: |-
+            require 'uri'
+            require 'net/http'
+
+            url = URI("https://rest.zuora.com/v1/orders/preview")
+
+            http = Net::HTTP.new(url.host, url.port)
+            http.use_ssl = true
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+            request = Net::HTTP::Post.new(url)
+            request["apiaccesskeyid"] = 'dummyUser'
+            request["apisecretaccesskey"] = 'dummyPassword'
+            request["content-type"] = 'application/json'
+            request.body = "{\n    \"existingAccountNumber\": \"A-00002\", \n    \"orderDate\": \"2017-01-01\", \n    \"orderNumber\": \"OM-00007\", \n    \"previewOptions\": {\n        \"previewThruType\": \"SpecificDate\", \n        \"previewTypes\": [\n            \"OrderMetrics\", \n            \"ChargeMetrics\", \n            \"BillingDocs\"\n        ], \n        \"specificPreviewThruDate\": \"2017-07-01\"\n    }, \n    \"subscriptions\": [\n        {\n            \"orderActions\": [\n                {\n                    \"triggerDates\": [\n                        {\n                            \"name\": \"ContractEffective\", \n                            \"triggerDate\": \"2017-02-15\"\n                        }\n                    ], \n                    \"type\": \"UpdateProduct\", \n                    \"updateProduct\": {\n                        \"chargeUpdates\": [\n                            {\n                                \"chargeNumber\": \"C-00000024\", \n                                \"pricing\": {\n                                    \"recurringVolume\": {\n                                        \"quantity\": 12\n                                    }\n                                }\n                            }\n                        ], \n                        \"ratePlanId\": \"8a8081085d834928015dc4f6ce772c03\"\n                    }\n                }\n            ], \n            \"subscriptionNumber\": \"SM-00004\"\n        }\n    ]\n}"
+
+            response = http.request(request)
+            puts response.read_body
+        - lang: 'C#'
+          source: |-
+            var client = new RestClient("https://rest.zuora.com/v1/orders/preview");
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("content-type", "application/json");
+            request.AddHeader("apisecretaccesskey", "dummyPassword");
+            request.AddHeader("apiaccesskeyid", "dummyUser");
+            request.AddParameter("application/json", "{\n    \"existingAccountNumber\": \"A-00002\", \n    \"orderDate\": \"2017-01-01\", \n    \"orderNumber\": \"OM-00007\", \n    \"previewOptions\": {\n        \"previewThruType\": \"SpecificDate\", \n        \"previewTypes\": [\n            \"OrderMetrics\", \n            \"ChargeMetrics\", \n            \"BillingDocs\"\n        ], \n        \"specificPreviewThruDate\": \"2017-07-01\"\n    }, \n    \"subscriptions\": [\n        {\n            \"orderActions\": [\n                {\n                    \"triggerDates\": [\n                        {\n                            \"name\": \"ContractEffective\", \n                            \"triggerDate\": \"2017-02-15\"\n                        }\n                    ], \n                    \"type\": \"UpdateProduct\", \n                    \"updateProduct\": {\n                        \"chargeUpdates\": [\n                            {\n                                \"chargeNumber\": \"C-00000024\", \n                                \"pricing\": {\n                                    \"recurringVolume\": {\n                                        \"quantity\": 12\n                                    }\n                                }\n                            }\n                        ], \n                        \"ratePlanId\": \"8a8081085d834928015dc4f6ce772c03\"\n                    }\n                }\n            ], \n            \"subscriptionNumber\": \"SM-00004\"\n        }\n    ]\n}", ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
   '/v1/orders/subscription/{subscriptionNumber}':
     get:
       description: |
-        **Note:** This feature is only available if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). We will investigate your use cases and data before enabling this feature for you.
+        **Note:** This feature is only available if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). We will investigate your use cases and data before enabling this feature for you. If you have the [Orders](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders) feature enabled, you already have the Order Metrics feature enabled.
 
         Retrieves the detailed information about all orders for a specified subscription. Any orders containing the changes on the specified subscription are returned.
       operationId: GET_OrdersBySubscriptionNumber
@@ -30134,7 +30790,7 @@ paths:
   '/v1/orders/subscriptionOwner/{accountNumber}':
     get:
       description: |
-        **Note:** This feature is only available if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). We will investigate your use cases and data before enabling this feature for you.
+        **Note:** This feature is only available if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). We will investigate your use cases and data before enabling this feature for you. If you have the [Orders](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders) feature enabled, you already have the Order Metrics feature enabled.
 
         Retrieves the detailed information about all orders for a specified subscription owner. Any orders containing the changes on the subscriptions owned by this account are returned.
       operationId: GET_OrdersBySubscriptionOwner
@@ -30333,9 +30989,119 @@ paths:
             request.AddHeader("apiaccesskeyid", "dummyUser");
             IRestResponse response = client.Execute(request);
   '/v1/orders/{orderNumber}':
+    delete:
+      description: |
+        **Note:** This feature is only available if you have the [Orders](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders) feature enabled. We are actively soliciting feedback from a small set of early adopters. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). 
+
+
+        Deletes a specified order. All the subscriptions changed by this order are deleted. After the deletion, the subscriptions are rolled back to the previous version. 
+
+        You are not allowed to delete an order if the charges that are affected by this order are invoiced.
+      operationId: DELETE_Order
+      parameters:
+        - $ref: '#/parameters/GLOBAL_HEADER_entityId'
+        - $ref: '#/parameters/GLOBAL_HEADER_entityName'
+        - description: The number of the order to be deleted.
+          format: string
+          in: path
+          name: orderNumber
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              success: true
+          schema:
+            $ref: '#/definitions/CommonResponse'
+      summary: Delete order
+      tags:
+        - Orders
+      x-code-samples:
+        - lang: Curl
+          source: 'curl -X DELETE -H "apiAccessKeyId: dummyUser" -H "apiSecretAccessKey: dummyPassword" -H "Content-Type: application/json" "https://rest.zuora.com/v1/orders/{orderNumber}"'
+        - lang: PHP
+          source: |-
+            <?php
+
+            $request = new HttpRequest();
+            $request->setUrl('https://rest.zuora.com/v1/orders/{orderNumber}');
+            $request->setMethod(HTTP_METH_DELETE);
+
+            $request->setHeaders(array(
+              'content-type' => 'application/json',
+              'apisecretaccesskey' => 'dummyPassword',
+              'apiaccesskeyid' => 'dummyUser'
+            ));
+
+            try {
+              $response = $request->send();
+
+              echo $response->getBody();
+            } catch (HttpException $ex) {
+              echo $ex;
+            }
+        - lang: Java
+          source: |-
+            OkHttpClient client = new OkHttpClient();
+
+            MediaType mediaType = MediaType.parse("application/json");
+            Request request = new Request.Builder()
+              .url("https://rest.zuora.com/v1/orders/{orderNumber}")
+              .delete()
+              .addHeader("apiaccesskeyid", "dummyUser")
+              .addHeader("apisecretaccesskey", "dummyPassword")
+              .addHeader("content-type", "application/json")
+              .addHeader("cache-control", "no-cache")
+              .build();
+
+            Response response = client.newCall(request).execute();
+        - lang: Python
+          source: |-
+            import http.client
+
+            conn = http.client.HTTPSConnection("https://rest.zuora.com/")
+
+            headers = {
+                'apiaccesskeyid': "dummyUser",
+                'apisecretaccesskey': "dummyPassword",
+                }
+
+            conn.request("DELETE", "/v1/orders/{orderNumber}", headers=headers)
+
+            res = conn.getresponse()
+            data = res.read()
+
+            print(data.decode("utf-8"))
+        - lang: Ruby
+          source: |-
+            require 'uri'
+            require 'net/http'
+
+            url = URI("https://rest.zuora.com/v1/orders/{orderNumber}")
+
+            http = Net::HTTP.new(url.host, url.port)
+            http.use_ssl = true
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+            request = Net::HTTP::Delete.new(url)
+            request["apiaccesskeyid"] = 'dummyUser'
+            request["apisecretaccesskey"] = 'dummyPassword'
+
+            response = http.request(request)
+            puts response.read_body
+        - lang: 'C#'
+          source: |-
+            var client = new RestClient("https://rest.zuora.com/v1/orders/{orderNumber}");
+            var request = new RestRequest(Method.DELETE);
+            request.AddHeader("content-type", "application/json");
+            request.AddHeader("apisecretaccesskey", "dummyPassword");
+            request.AddHeader("apiaccesskeyid", "dummyUser");
+            IRestResponse response = client.Execute(request);
     get:
       description: |
-        **Note:** This feature is only available if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). We will investigate your use cases and data before enabling this feature for you.
+        **Note:** This feature is only available if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). We will investigate your use cases and data before enabling this feature for you. If you have the [Orders](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders) feature enabled, you already have the Order Metrics feature enabled.
 
 
         Retrieves the detailed information about a specified order.
@@ -30519,7 +31285,7 @@ paths:
   '/v1/orders/{orderNumber}/billingInfo':
     get:
       description: |
-        **Note:** This feature is only available if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). We will investigate your use cases and data before enabling this feature for you.
+        **Note:** This feature is only available if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). We will investigate your use cases and data before enabling this feature for you. If you have the [Orders](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders) feature enabled, you already have the Order Metrics feature enabled.
 
         Retrieves the billing information about a specified order. The information includes the billed and unbilled amount of the order.
       operationId: GET_OrderBillingInfo
@@ -30634,10 +31400,170 @@ paths:
             request.AddHeader("apisecretaccesskey", "dummyPassword");
             request.AddHeader("apiaccesskeyid", "dummyUser");
             IRestResponse response = client.Execute(request);
+  '/v1/orders/{orderNumber}/customFields':
+    put:
+      description: |
+        **Note:** This feature is only available if you have the [Orders](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders) feature enabled. We are actively soliciting feedback from a small set of early adopters. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). 
+
+        Updates the custom fields of a specified order.
+      operationId: PUT_UpdateOrderCustomFields
+      parameters:
+        - $ref: '#/parameters/GLOBAL_HEADER_entityId'
+        - $ref: '#/parameters/GLOBAL_HEADER_entityName'
+        - description: The order number.
+          format: string
+          in: path
+          name: orderNumber
+          required: true
+          type: string
+        - description: ''
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PUTOrderPatchRequestType'
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              success: true
+          schema:
+            $ref: '#/definitions/CommonResponse'
+      summary: Update order custom fields
+      tags:
+        - Orders
+      x-code-samples:
+        - lang: Curl
+          source: |-
+            curl -X PUT -H "apiAccessKeyId: dummyUser" -H "apiSecretAccessKey: dummyPassword" -H "Content-Type: application/json" -d '{
+                "customFields": {
+                    "order_cf__c": "order custom fields"
+                }, 
+                "subscriptions": [
+                    {
+                        "orderActions": [
+                            {
+                                "customFields": {
+                                    "order_action_cf__c": "Order action custom fields", 
+                                    "order_action_undex__c": "Order action custom fields"
+                                }, 
+                                "sequence": 0
+                            }
+                        ], 
+                        "subscriptionNumber": "S-00005"
+                    }
+                ]
+            }' "https://rest.zuora.com/v1/orders/{orderNumber}/customFields"
+        - lang: PHP
+          source: |-
+            <?php
+
+            $request = new HttpRequest();
+            $request->setUrl('https://rest.zuora.com/v1/orders/{orderNumber}/customFields');
+            $request->setMethod(HTTP_METH_PUT);
+
+            $request->setHeaders(array(
+              'content-type' => 'application/json',
+              'apisecretaccesskey' => 'dummyPassword',
+              'apiaccesskeyid' => 'dummyUser'
+            ));
+
+            $request->setBody('{
+                "customFields": {
+                    "order_cf__c": "order custom fields"
+                }, 
+                "subscriptions": [
+                    {
+                        "orderActions": [
+                            {
+                                "customFields": {
+                                    "order_action_cf__c": "Order action custom fields", 
+                                    "order_action_undex__c": "Order action custom fields"
+                                }, 
+                                "sequence": 0
+                            }
+                        ], 
+                        "subscriptionNumber": "S-00005"
+                    }
+                ]
+            }');
+
+            try {
+              $response = $request->send();
+
+              echo $response->getBody();
+            } catch (HttpException $ex) {
+              echo $ex;
+            }
+        - lang: Java
+          source: |-
+            OkHttpClient client = new OkHttpClient();
+
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody body = RequestBody.create(mediaType, "{\n    \"customFields\": {\n        \"order_cf__c\": \"order custom fields\"\n    }, \n    \"subscriptions\": [\n        {\n            \"orderActions\": [\n                {\n                    \"customFields\": {\n                        \"order_action_cf__c\": \"Order action custom fields\", \n                        \"order_action_undex__c\": \"Order action custom fields\"\n                    }, \n                    \"sequence\": 0\n                }\n            ], \n            \"subscriptionNumber\": \"S-00005\"\n        }\n    ]\n}");
+            Request request = new Request.Builder()
+              .url("https://rest.zuora.com/v1/orders/{orderNumber}/customFields")
+              .put(body)
+              .addHeader("apiaccesskeyid", "dummyUser")
+              .addHeader("apisecretaccesskey", "dummyPassword")
+              .addHeader("content-type", "application/json")
+              .addHeader("cache-control", "no-cache")
+              .build();
+
+            Response response = client.newCall(request).execute();
+        - lang: Python
+          source: |-
+            import http.client
+
+            conn = http.client.HTTPSConnection("https://rest.zuora.com/")
+
+            payload = "{\n    \"customFields\": {\n        \"order_cf__c\": \"order custom fields\"\n    }, \n    \"subscriptions\": [\n        {\n            \"orderActions\": [\n                {\n                    \"customFields\": {\n                        \"order_action_cf__c\": \"Order action custom fields\", \n                        \"order_action_undex__c\": \"Order action custom fields\"\n                    }, \n                    \"sequence\": 0\n                }\n            ], \n            \"subscriptionNumber\": \"S-00005\"\n        }\n    ]\n}"
+
+            headers = {
+                'apiaccesskeyid': "dummyUser",
+                'apisecretaccesskey': "dummyPassword",
+                'content-type': "application/json",
+                }
+
+            conn.request("PUT", "/v1/orders/{orderNumber}/customFields", payload, headers)
+
+            res = conn.getresponse()
+            data = res.read()
+
+            print(data.decode("utf-8"))
+        - lang: Ruby
+          source: |-
+            require 'uri'
+            require 'net/http'
+
+            url = URI("https://rest.zuora.com/v1/orders/{orderNumber}/customFields")
+
+            http = Net::HTTP.new(url.host, url.port)
+            http.use_ssl = true
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+            request = Net::HTTP::Put.new(url)
+            request["apiaccesskeyid"] = 'dummyUser'
+            request["apisecretaccesskey"] = 'dummyPassword'
+            request["content-type"] = 'application/json'
+            request.body = "{\n    \"customFields\": {\n        \"order_cf__c\": \"order custom fields\"\n    }, \n    \"subscriptions\": [\n        {\n            \"orderActions\": [\n                {\n                    \"customFields\": {\n                        \"order_action_cf__c\": \"Order action custom fields\", \n                        \"order_action_undex__c\": \"Order action custom fields\"\n                    }, \n                    \"sequence\": 0\n                }\n            ], \n            \"subscriptionNumber\": \"S-00005\"\n        }\n    ]\n}"
+
+            response = http.request(request)
+            puts response.read_body
+        - lang: 'C#'
+          source: |-
+            var client = new RestClient("https://rest.zuora.com/v1/orders/{orderNumber}/customFields");
+            var request = new RestRequest(Method.PUT);
+            request.AddHeader("content-type", "application/json");
+            request.AddHeader("apisecretaccesskey", "dummyPassword");
+            request.AddHeader("apiaccesskeyid", "dummyUser");
+            request.AddParameter("application/json", "{\n    \"customFields\": {\n        \"order_cf__c\": \"order custom fields\"\n    }, \n    \"subscriptions\": [\n        {\n            \"orderActions\": [\n                {\n                    \"customFields\": {\n                        \"order_action_cf__c\": \"Order action custom fields\", \n                        \"order_action_undex__c\": \"Order action custom fields\"\n                    }, \n                    \"sequence\": 0\n                }\n            ], \n            \"subscriptionNumber\": \"S-00005\"\n        }\n    ]\n}", ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
   '/v1/orders/{orderNumber}/evergreenMetrics/{subscriptionNumber}':
     get:
       description: |
-        **Note:** This feature is only available if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). We will investigate your use cases and data before enabling this feature for you.
+        **Note:** This feature is only available if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). We will investigate your use cases and data before enabling this feature for you. If you have the [Orders](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders) feature enabled, you already have the Order Metrics feature enabled.
 
 
         Retrieves the metrics of an evergreen subscription in a specified order.
@@ -30850,7 +31776,7 @@ paths:
   '/v1/orders/{orderNumber}/ratedResults':
     get:
       description: |
-        **Note:** This feature is only available if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). We will investigate your use cases and data before enabling this feature for you.
+        **Note:** This feature is only available if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). We will investigate your use cases and data before enabling this feature for you. If you have the [Orders](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders) feature enabled, you already have the Order Metrics feature enabled.
 
         Retrieves the rated results of all the subscriptions in the specified order.
       operationId: GET_OrderRatedResult
@@ -40063,6 +40989,8 @@ paths:
         This REST API reference describes how to create a new subscription for an existing customer account.
 
         ## Notes
+        This feature is unavailable if you have the Orders feature enabled. See [Orders Migration Guidance](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/AB_Orders_Migration_Guidance) for more information.
+
         If invoiceCollect is `true`, the call will not return success = `true` unless the subscription, invoice, and payment are all successful.
 
         Default values for **customerAcceptanceDate** and **serviceActivationDate** are set as follows.
@@ -40502,6 +41430,7 @@ paths:
         The REST API reference describes how to create a new subscription in preview mode. This call does not require a valid customer account. It can be used to show potential new customers a preview of a subscription with complete details and charges before creating an account, or to let existing customers preview a subscription with all charges before committing.
 
         ## Notes
+        - This feature is unavailable if you have the Orders feature enabled. See [Orders Migration Guidance](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/AB_Orders_Migration_Guidance) for more information.
         - The response of the Preview Subscription call is based on the REST API minor version you set in the request header. The response structure might be different if you use different minor version numbers. 
 
         - If you have the Advanced AR Settlement feature enabled, we recommend that you set the `zuora-version` parameter to `207.0` or later. Otherwise, an error is returned.
@@ -40974,6 +41903,7 @@ paths:
           * Change the quantity or price of an existing subscription rate plan
 
         ## Notes
+        * This feature is unavailable if you have the Orders feature enabled. See [Orders Migration Guidance](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/AB_Orders_Migration_Guidance) for more information.
         * The Update Subscription call creates a new subscription, which has the old subscription number but a new subscription ID.  The old subscription is canceled but remains in the system.
         * In one request, this call can make:
           * Up to 9 combined add, update, and remove changes
@@ -41190,6 +42120,8 @@ paths:
     put:
       description: |
         This REST API reference describes how to cancel an active subscription.
+
+        **Note:** This feature is unavailable if you have the Orders feature enabled. See [Orders Migration Guidance](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/AB_Orders_Migration_Guidance) for more information.
       operationId: PUT_CancelSubscription
       parameters:
         - $ref: '#/parameters/GLOBAL_HEADER_entityId'
@@ -41338,6 +42270,8 @@ paths:
     put:
       description: |
         Renews a termed subscription using existing renewal terms.
+
+         **Note:** This feature is unavailable if you have the Orders feature enabled. See [Orders Migration Guidance](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/AB_Orders_Migration_Guidance) for more information.
       operationId: PUT_RenewSubscription
       parameters:
         - $ref: '#/parameters/GLOBAL_HEADER_entityId'
@@ -41482,6 +42416,8 @@ paths:
         This REST API reference describes how to resume a suspended subscription. 
 
         This feature is in **Limited Availability**. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://suport.zuora.com). 
+
+        **Note:** This feature is unavailable if you have the Orders feature enabled. See [Orders Migration Guidance](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/AB_Orders_Migration_Guidance) for more information. This feature is also unavailable if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled.
       operationId: PUT_ResumeSubscription
       parameters:
         - $ref: '#/parameters/GLOBAL_HEADER_entityId'
@@ -41635,6 +42571,8 @@ paths:
         This REST API reference describes how to suspend an active subscription. 
 
         This feature is in **Limited Availability**. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://suport.zuora.com).
+
+        **Note:** This feature is unavailable if you have the Orders feature enabled. See [Orders Migration Guidance](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/AB_Orders_Migration_Guidance) for more information. This feature is also unavailable if you have the [Order Metrics](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders/Orders_Generation_for_Subscriptions_and_Amendments) feature enabled.
       operationId: PUT_SuspendSubscription
       parameters:
         - $ref: '#/parameters/GLOBAL_HEADER_entityId'
@@ -41985,6 +42923,171 @@ paths:
             request.AddHeader("content-type", "application/json");
             request.AddHeader("apisecretaccesskey", "dummyPassword");
             request.AddHeader("apiaccesskeyid", "dummyUser");
+            IRestResponse response = client.Execute(request);
+  '/v1/subscriptions/{subscriptionNumber}/customFields':
+    put:
+      description: |
+        **Note:** This feature is only available if you have the [Orders](https://knowledgecenter.zuora.com/BC_Subscription_Management/Orders) feature enabled. We are actively soliciting feedback from a small set of early adopters. If you wish to have access to the feature, submit a request at [Zuora Global Support](http://support.zuora.com/). 
+
+
+        Updates the custom fields of a specified subscription.
+      operationId: PUT_UpdateSubscriptionCustomFields
+      parameters:
+        - $ref: '#/parameters/GLOBAL_HEADER_entityId'
+        - $ref: '#/parameters/GLOBAL_HEADER_entityName'
+        - description: The subscription number to be updated.
+          format: string
+          in: path
+          name: subscriptionNumber
+          required: true
+          type: string
+        - description: ''
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PUTSubscriptionPatchRequestType'
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              success: true
+          schema:
+            $ref: '#/definitions/CommonResponse'
+      summary: Update subscription custom fields
+      tags:
+        - Subscriptions
+      x-code-samples:
+        - lang: Curl
+          source: |-
+            curl -X PUT -H "apiAccessKeyId: dummyUser" -H "apiSecretAccessKey: dummyPassword" -H "Content-Type: application/json" -d '{
+                "customFields": {
+                    "sub_cf__c": "subscription custom field"
+                }, 
+                "ratePlans": [
+                    {
+                        "charges": [
+                            {
+                                "chargeNumber": "C-00000016", 
+                                "customFields": {
+                                    "sub_rpc__c": "rate plan charge custom field"
+                                }
+                            }
+                        ], 
+                        "customFields": {
+                            "sub_rate_plan__c": "rate plan custom field"
+                        }, 
+                        "ratePlanId": "8a8081085d834928015da220da08207f"
+                    }
+                ]
+            }' "https://rest.zuora.com/v1/subscriptions/{subscriptionNumber}/customFields"
+        - lang: PHP
+          source: |-
+            <?php
+
+            $request = new HttpRequest();
+            $request->setUrl('https://rest.zuora.com/v1/subscriptions/{subscriptionNumber}/customFields');
+            $request->setMethod(HTTP_METH_PUT);
+
+            $request->setHeaders(array(
+              'content-type' => 'application/json',
+              'apisecretaccesskey' => 'dummyPassword',
+              'apiaccesskeyid' => 'dummyUser'
+            ));
+
+            $request->setBody('{
+                "customFields": {
+                    "sub_cf__c": "subscription custom field"
+                }, 
+                "ratePlans": [
+                    {
+                        "charges": [
+                            {
+                                "chargeNumber": "C-00000016", 
+                                "customFields": {
+                                    "sub_rpc__c": "rate plan charge custom field"
+                                }
+                            }
+                        ], 
+                        "customFields": {
+                            "sub_rate_plan__c": "rate plan custom field"
+                        }, 
+                        "ratePlanId": "8a8081085d834928015da220da08207f"
+                    }
+                ]
+            }');
+
+            try {
+              $response = $request->send();
+
+              echo $response->getBody();
+            } catch (HttpException $ex) {
+              echo $ex;
+            }
+        - lang: Java
+          source: |-
+            OkHttpClient client = new OkHttpClient();
+
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody body = RequestBody.create(mediaType, "{\n    \"customFields\": {\n        \"sub_cf__c\": \"subscription custom field\"\n    }, \n    \"ratePlans\": [\n        {\n            \"charges\": [\n                {\n                    \"chargeNumber\": \"C-00000016\", \n                    \"customFields\": {\n                        \"sub_rpc__c\": \"rate plan charge custom field\"\n                    }\n                }\n            ], \n            \"customFields\": {\n                \"sub_rate_plan__c\": \"rate plan custom field\"\n            }, \n            \"ratePlanId\": \"8a8081085d834928015da220da08207f\"\n        }\n    ]\n}");
+            Request request = new Request.Builder()
+              .url("https://rest.zuora.com/v1/subscriptions/{subscriptionNumber}/customFields")
+              .put(body)
+              .addHeader("apiaccesskeyid", "dummyUser")
+              .addHeader("apisecretaccesskey", "dummyPassword")
+              .addHeader("content-type", "application/json")
+              .addHeader("cache-control", "no-cache")
+              .build();
+
+            Response response = client.newCall(request).execute();
+        - lang: Python
+          source: |-
+            import http.client
+
+            conn = http.client.HTTPSConnection("https://rest.zuora.com/")
+
+            payload = "{\n    \"customFields\": {\n        \"sub_cf__c\": \"subscription custom field\"\n    }, \n    \"ratePlans\": [\n        {\n            \"charges\": [\n                {\n                    \"chargeNumber\": \"C-00000016\", \n                    \"customFields\": {\n                        \"sub_rpc__c\": \"rate plan charge custom field\"\n                    }\n                }\n            ], \n            \"customFields\": {\n                \"sub_rate_plan__c\": \"rate plan custom field\"\n            }, \n            \"ratePlanId\": \"8a8081085d834928015da220da08207f\"\n        }\n    ]\n}"
+
+            headers = {
+                'apiaccesskeyid': "dummyUser",
+                'apisecretaccesskey': "dummyPassword",
+                'content-type': "application/json",
+                }
+
+            conn.request("PUT", "/v1/subscriptions/{subscriptionNumber}/customFields", payload, headers)
+
+            res = conn.getresponse()
+            data = res.read()
+
+            print(data.decode("utf-8"))
+        - lang: Ruby
+          source: |-
+            require 'uri'
+            require 'net/http'
+
+            url = URI("https://rest.zuora.com/v1/subscriptions/{subscriptionNumber}/customFields")
+
+            http = Net::HTTP.new(url.host, url.port)
+            http.use_ssl = true
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+            request = Net::HTTP::Put.new(url)
+            request["apiaccesskeyid"] = 'dummyUser'
+            request["apisecretaccesskey"] = 'dummyPassword'
+            request["content-type"] = 'application/json'
+            request.body = "{\n    \"customFields\": {\n        \"sub_cf__c\": \"subscription custom field\"\n    }, \n    \"ratePlans\": [\n        {\n            \"charges\": [\n                {\n                    \"chargeNumber\": \"C-00000016\", \n                    \"customFields\": {\n                        \"sub_rpc__c\": \"rate plan charge custom field\"\n                    }\n                }\n            ], \n            \"customFields\": {\n                \"sub_rate_plan__c\": \"rate plan custom field\"\n            }, \n            \"ratePlanId\": \"8a8081085d834928015da220da08207f\"\n        }\n    ]\n}"
+
+            response = http.request(request)
+            puts response.read_body
+        - lang: 'C#'
+          source: |-
+            var client = new RestClient("https://rest.zuora.com/v1/subscriptions/{subscriptionNumber}/customFields");
+            var request = new RestRequest(Method.PUT);
+            request.AddHeader("content-type", "application/json");
+            request.AddHeader("apisecretaccesskey", "dummyPassword");
+            request.AddHeader("apiaccesskeyid", "dummyUser");
+            request.AddParameter("application/json", "{\n    \"customFields\": {\n        \"sub_cf__c\": \"subscription custom field\"\n    }, \n    \"ratePlans\": [\n        {\n            \"charges\": [\n                {\n                    \"chargeNumber\": \"C-00000016\", \n                    \"customFields\": {\n                        \"sub_rpc__c\": \"rate plan charge custom field\"\n                    }\n                }\n            ], \n            \"customFields\": {\n                \"sub_rate_plan__c\": \"rate plan custom field\"\n            }, \n            \"ratePlanId\": \"8a8081085d834928015da220da08207f\"\n        }\n    ]\n}", ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
   '/v1/taxationitems/{id}':
     delete:
@@ -43536,6 +44639,90 @@ paths:
             request.AddParameter("application/json", "{\n    \"targetEntityIds\": [\n        \"8a80825555a3c7a10155b46120d058e7\", \n        \"8a80825556ff28a4015708b93df82ba7\"\n    ]\n}", ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
 definitions:
+  Account:
+    description: The information of the new account to be created with the order.
+    properties:
+      accountNumber:
+        maxLength: 70
+        type: string
+      batch:
+        type: string
+      billCycleDay:
+        maximum: 31
+        minimum: 1
+        type: integer
+      billToContact:
+        $ref: '#/definitions/Contact'
+      communicationProfileId:
+        pattern: '[a-f0-9]{32}'
+        type: string
+      creditCard:
+        $ref: '#/definitions/creditCard'
+      crmId:
+        maxLength: 100
+        type: string
+      currency:
+        description: 3 uppercase character currency code
+        type: string
+      customFields:
+        $ref: '#/definitions/CustomFields'
+      hpmCreditCardPaymentMethodId:
+        pattern: '[a-f0-9]{32}'
+        type: string
+      invoiceTemplateId:
+        pattern: '[a-f0-9]{32}'
+        type: string
+      name:
+        maxLength: 70
+        type: string
+      notes:
+        maxLength: 65535
+        type: string
+      paymentGateway:
+        maxLength: 40
+        type: string
+      paymentTerm:
+        type: string
+      soldToContact:
+        $ref: '#/definitions/Contact'
+      taxInfo:
+        $ref: '#/definitions/TaxInfo'
+    required:
+      - name
+      - currency
+      - billCycleDay
+      - billToContact
+    type: object
+  AccountCreditCardHolder:
+    properties:
+      addressLine1:
+        maxLength: 255
+        type: string
+      addressLine2:
+        maxLength: 255
+        type: string
+      cardHolderName:
+        maxLength: 50
+        type: string
+      city:
+        maxLength: 40
+        type: string
+      country:
+        maxLength: 64
+        type: string
+      email:
+        maxLength: 80
+        type: string
+      phone:
+        maxLength: 40
+        type: string
+      state:
+        maxLength: 50
+        type: string
+      zipCode:
+        maxLength: 20
+        type: string
+    type: object
   AmendRequest:
     properties:
       AmendOptions:
@@ -44339,6 +45526,15 @@ definitions:
         description: Returns `true` if the request was processed successfully.
         type: boolean
     type: object
+  BillingOptions:
+    properties:
+      documentDate:
+        format: date
+        type: string
+      targetDate:
+        format: date
+        type: string
+    type: object
   BillingOverride:
     properties:
       billCycleDay:
@@ -44487,6 +45683,87 @@ definitions:
     required:
       - productRatePlanChargeId
     type: object
+  ChargePreviewMetrics:
+    properties:
+      chargeNumber:
+        type: string
+      cmrr:
+        properties:
+          discount:
+            description: Total discountCmrr of all discount charges which are applied to one specific recurring charge. This value is calculated from the rating results for the latest subscription version in the order. Only selects the applied discount charge when its endDateCondition is "Subscription_End".
+            format: BigDecimal
+            type: number
+          discountDelta:
+            description: Delta discountCmrr value between the order base and the latest subscription version.
+            format: BigDecimal
+            type: number
+          regular:
+            format: BigDecimal
+            type: number
+          regularDelta:
+            format: BigDecimal
+            type: number
+        type: object
+      originRatePlanId:
+        type: string
+      productRatePlanChargeId:
+        type: string
+      productRatePlanId:
+        type: string
+      tax:
+        properties:
+          discount:
+            description: Total tax amount of all discount charges which are applied to one specific recurring charge. This value is calculated from the rating results for the latest subscription version in the order.
+            format: BigDecimal
+            type: number
+          discountDelta:
+            description: Delta discount TAX value between the base and the latest subscription version in the order for the specific recurring charge.
+            format: BigDecimal
+            type: number
+          regular:
+            format: BigDecimal
+            type: number
+          regularDelta:
+            description: Delta tax value between the base and the latest subscription version in the order.
+            format: BigDecimal
+            type: number
+        type: object
+      tcb:
+        properties:
+          discount:
+            description: Total contract billing amount of all discount charges which are applied to one specific recurring charge. This value is calculated from the rating results for the latest subscription version in the order.
+            format: BigDecimal
+            type: number
+          discountDelta:
+            description: Delta discount TCB value between the base and the latest subscription version for specific recurring charge in the order.
+            format: BigDecimal
+            type: number
+          regular:
+            format: BigDecimal
+            type: number
+          regularDelta:
+            description: Delta TCB value between the base and the latest subscription version in the order.
+            format: BigDecimal
+            type: number
+        type: object
+      tcv:
+        properties:
+          discount:
+            description: Always equals to discountTcb.
+            format: BigDecimal
+            type: number
+          discountDelta:
+            description: Always equals to delta discountTcb.
+            format: BigDecimal
+            type: number
+          regular:
+            format: BigDecimal
+            type: number
+          regularDelta:
+            format: BigDecimal
+            type: number
+        type: object
+    type: object
   ChargeRatedResult:
     properties:
       appliedToChargeNumber:
@@ -44558,6 +45835,75 @@ definitions:
       success:
         description: Returns `true` if the request was processed successfully.
         type: boolean
+    type: object
+  Contact:
+    properties:
+      address1:
+        maxLength: 255
+        type: string
+      address2:
+        maxLength: 255
+        type: string
+      city:
+        maxLength: 40
+        type: string
+      country:
+        maxLength: 64
+        type: string
+      county:
+        maxLength: 32
+        type: string
+      fax:
+        maxLength: 40
+        type: string
+      firstName:
+        maxLength: 100
+        type: string
+      homePhone:
+        maxLength: 40
+        type: string
+      lastName:
+        maxLength: 100
+        type: string
+      mobilePhone:
+        maxLength: 40
+        type: string
+      nickname:
+        maxLength: 100
+        type: string
+      otherPhone:
+        maxLength: 40
+        type: string
+      otherPhoneType:
+        enum:
+          - Work
+          - Mobile
+          - Home
+          - Other
+        type: string
+      personalEmail:
+        format: email
+        maxLength: 80
+        type: string
+      postalCode:
+        maxLength: 20
+        type: string
+      state:
+        maxLength: 40
+        type: string
+      taxRegion:
+        maxLength: 32
+        type: string
+      workEmail:
+        format: email
+        maxLength: 80
+        type: string
+      workPhone:
+        maxLength: 40
+        type: string
+    required:
+      - firstName
+      - lastName
     type: object
   CreateEntityResponseType:
     properties:
@@ -45660,6 +47006,7 @@ definitions:
           - ONETIMERECURRINGUSAGE
         type: string
       discountAmount:
+        description: Only applicable if the charge is a fixed-amount discount.
         format: BigDecimal
         type: number
       discountLevel:
@@ -45669,6 +47016,15 @@ definitions:
           - account
         type: string
       discountPercentage:
+        description: Only applicable if the charge is a percentage discount.
+        format: BigDecimal
+        type: number
+    type: object
+  DiscountPricingUpdate:
+    properties:
+      discountPercentage:
+        description: |
+          The amount of the discount as a percentage. This field is only used for percentage discounts. 
         format: BigDecimal
         type: number
     type: object
@@ -55318,6 +56674,51 @@ definitions:
       subscriptionNumber:
         type: string
     type: object
+  InvoiceItemPreviewResult:
+    properties:
+      additionalInfo:
+        properties:
+          quantity:
+            format: BigDecimal
+            type: number
+          unitOfMeasure:
+            type: string
+        type: object
+      amountWithoutTax:
+        format: BigDecimal
+        type: number
+      appliedToChargeNumber:
+        description: Available when the chargeNumber of the charge that discount applies to was specified in the request or when the order is amending an existing subscription.
+        type: string
+      chargeDescription:
+        type: string
+      chargeName:
+        type: string
+      chargeNumber:
+        description: Available when the chargeNumber was specified in the request or when the order is amending an existing subscription.
+        type: string
+      processingType:
+        enum:
+          - Charge
+          - Discount
+          - Tax
+        type: string
+      productName:
+        type: string
+      productRatePlanChargeId:
+        type: string
+      serviceEndDate:
+        format: date
+        type: string
+      serviceStartDate:
+        format: date
+        type: string
+      subscriptionNumber:
+        type: string
+      taxAmount:
+        format: BigDecimal
+        type: number
+    type: object
   InvoicePayment:
     properties:
       Amount:
@@ -55554,6 +56955,43 @@ definitions:
                 type: string
             type: object
     type: object
+  OrderActionRequest:
+    description: |
+      For each specific type of order actions, corresponding parameters need to be specified. For example, if the 'updateProduct' node provided for the 'AddProduct' type, an error response will return. 'RenewSubscription' does not have have a specific parameter.
+    properties:
+      addProduct:
+        $ref: '#/definitions/RatePlanOverride'
+      cancelSubscription:
+        $ref: '#/definitions/CancelSubscription'
+      createSubscription:
+        $ref: '#/definitions/CreateSubscription'
+      customFields:
+        $ref: '#/definitions/CustomFields'
+      ownerTransfer:
+        $ref: '#/definitions/OwnerTransfer'
+      removeProduct:
+        $ref: '#/definitions/RemoveProduct'
+      termsAndConditions:
+        $ref: '#/definitions/TermsAndConditions'
+      triggerDates:
+        $ref: '#/definitions/TriggerDates'
+      type:
+        description: 'Type of the order action. For each specific type of order actions, corresponding parameters need to be specified. For example, if the ''updateProduct'' node provided for the ''AddProduct'' type, an error response will return. The ''RenewSubscription'' type does not require any parameter.'
+        enum:
+          - CreateSubscription
+          - TermsAndConditions
+          - AddProduct
+          - UpdateProduct
+          - RemoveProduct
+          - RenewSubscription
+          - CancelSubscription
+          - OwnerTransfer
+        type: string
+      updateProduct:
+        $ref: '#/definitions/RatePlanUpdate'
+    required:
+      - type
+    type: object
   OrderMetrics:
     items:
       description: Shows the delta metrics caused by a specific order action on a specific charge.
@@ -55608,7 +57046,8 @@ definitions:
           The account number of the account that the subscription is being transferred to.
         type: string
       destinationInvoiceAccountNumber:
-        description: The account number of the invoice owner account that the subscription is being transferred to.
+        description: |
+          The account number of the invoice owner account that the subscription is being transferred to.
         type: string
     type: object
   POSTAccountResponseType:
@@ -57283,6 +58722,156 @@ definitions:
         description: |
           Returns `true` if the request was processed successfully.
         type: boolean
+    type: object
+  POSTOrderPreviewRequestType:
+    example:
+      existingAccountNumber: A-00002
+      orderDate: '2017-01-01'
+      orderNumber: OM-00007
+      previewOptions:
+        previewThruType: SpecificDate
+        previewTypes:
+          - OrderMetrics
+          - ChargeMetrics
+          - BillingDocs
+        specificPreviewThruDate: '2017-07-01'
+      subscriptions:
+        - orderActions:
+            - triggerDates:
+                - name: ContractEffective
+                  triggerDate: '2017-02-15'
+              type: UpdateProduct
+              updateProduct:
+                chargeUpdates:
+                  - chargeNumber: C-00000024
+                    pricing:
+                      recurringVolume:
+                        quantity: 12
+                ratePlanId: 8a8081085d834928015dc4f6ce772c03
+          subscriptionNumber: SM-00004
+    properties:
+      customFields:
+        $ref: '#/definitions/CustomFields'
+      existingAccountNumber:
+        description: |
+          The account number that this order will be created under. It can be either the accountNumber or the account info. It will return an error if both are specified.
+          Note that invoice owner account of the subscriptions included in this order should be the same with the account of the order.
+        maxLength: 70
+        type: string
+      orderDate:
+        description: The date when the order is signed. All of the order actions under this order will use this order date as the contract effective date.
+        format: date
+        type: string
+      orderNumber:
+        description: The order number of this order.
+        maxLength: 100
+        type: string
+      previewAccountInfo:
+        $ref: '#/definitions/PreviewAccountInfo'
+      previewOptions:
+        $ref: '#/definitions/PreviewOptions'
+      subscriptions:
+        description: 'Each item includes a set of order actions, which will be applied to the same base subscription.'
+        items:
+          properties:
+            customFields:
+              $ref: '#/definitions/CustomFields'
+            orderActions:
+              description: The actions to be applied to the subscription. Order actions will be stored with the sequence when it was provided in the request.
+              items:
+                $ref: '#/definitions/OrderActionRequest'
+              type: array
+            subscriptionNumber:
+              description: |
+                Leave this field empty to represent new subscription creation, or specify a subscription number to update an existing subscription.
+              type: string
+          type: object
+        type: array
+    required:
+      - orderDate
+      - subscriptions
+    type: object
+  POSTOrderRequestType:
+    example:
+      existingAccountNumber: A-00002
+      orderDate: '2017-01-01'
+      orderNumber: OM-00001
+      subscriptions:
+        - orderActions:
+            - createSubscription:
+                subscribeToRatePlans:
+                  - productRatePlanId: 8a8081085d834928015d9c54e67f0aa9
+                    uniqueToken: Sugar-free Monthly
+                subscriptionNumber: SM-00001
+                terms:
+                  autoRenew: true
+                  initialTerm:
+                    period: 12
+                    periodType: Month
+                    startDate: '2017-01-01'
+                    termType: TERMED
+                  renewalSetting: RENEW_WITH_SPECIFIC_TERM
+                  renewalTerms:
+                    - period: 12
+                      periodType: Month
+              triggerDates:
+                - name: ContractEffective
+                  triggerDate: '2017-01-01'
+              type: CreateSubscription
+        - orderActions:
+            - triggerDates:
+                - name: ContractEffective
+                  triggerDate: '2017-03-01'
+              type: UpdateProduct
+              updateProduct:
+                chargeUpdates:
+                  - chargeNumber: C-00000013
+                    pricing:
+                      recurringPerUnit:
+                        listPrice: 20
+                ratePlanId: 8a8081085d834928015da1db5ee1201c
+          subscriptionNumber: S-00003
+    properties:
+      customFields:
+        $ref: '#/definitions/CustomFields'
+      existingAccountNumber:
+        description: |
+          The account number that this order will be created under. It can be either the accountNumber or the account info provided. It will return an error if both are specified.
+          Note that the invoice owner account of the subscriptions included in this order should be the same with order's account.
+        maxLength: 70
+        type: string
+      newAccount:
+        $ref: '#/definitions/Account'
+      orderDate:
+        description: The date when the order is signed. All the order actions under this order will use this order date as the contract effective date.
+        format: date
+        type: string
+      orderNumber:
+        description: 'The order number of the new order. If not provided, system will auto-generate a number for this order.'
+        maxLength: 100
+        type: string
+      processingOptions:
+        $ref: '#/definitions/ProcessingOptions'
+      subscriptions:
+        description: 'Each item includes a set of order actions, which will be applied to the same base subscription.'
+        items:
+          properties:
+            customFields:
+              $ref: '#/definitions/CustomFields'
+            orderActions:
+              description: The actions to be applied to the subscription. Order actions will be stored with the sequence when it was provided in the request.
+              items:
+                $ref: '#/definitions/OrderActionRequest'
+              type: array
+            subscriptionNumber:
+              description: |
+                Leave this empty to represent new subscription creation. Specify a subscription number to update an existing subscription.
+              type: string
+          type: object
+        type: array
+    required:
+      - orderDate
+      - subscriptions
     type: object
   POSTPaymentMethodDecryption:
     example:
@@ -60552,6 +62141,38 @@ definitions:
       - type
     title: journalEntryItems
     type: object
+  PUTOrderPatchRequestType:
+    example:
+      customFields:
+        order_cf__c: order custom fields
+      subscriptions:
+        - orderActions:
+            - customFields:
+                order_action_cf__c: Order action custom fields
+                order_action_undex__c: Order action custom fields
+              sequence: 0
+          subscriptionNumber: S-00005
+    properties:
+      customFields:
+        $ref: '#/definitions/CustomFields'
+      subscriptions:
+        items:
+          properties:
+            orderActions:
+              items:
+                properties:
+                  customFields:
+                    $ref: '#/definitions/CustomFields'
+                  sequence:
+                    description: The sequence number of the order action in the order.
+                    type: integer
+                type: object
+              type: array
+            subscriptionNumber:
+              type: string
+          type: object
+        type: array
+    type: object
   PUTPaymentMethodResponseType:
     properties:
       paymentMethodId:
@@ -61741,6 +63362,41 @@ definitions:
       - ratePlanId
       - contractEffectiveDate
     title: update
+    type: object
+  PUTSubscriptionPatchRequestType:
+    example:
+      customFields:
+        sub_cf__c: subscription custom field
+      ratePlans:
+        - charges:
+            - chargeNumber: C-00000016
+              customFields:
+                sub_rpc__c: rate plan charge custom field
+          customFields:
+            sub_rate_plan__c: rate plan custom field
+          ratePlanId: 8a8081085d834928015da220da08207f
+    properties:
+      customFields:
+        $ref: '#/definitions/CustomFields'
+      ratePlans:
+        items:
+          properties:
+            charges:
+              items:
+                properties:
+                  chargeNumber:
+                    type: string
+                  customFields:
+                    $ref: '#/definitions/CustomFields'
+                type: object
+              type: array
+            customFields:
+              $ref: '#/definitions/CustomFields'
+            ratePlanId:
+              description: The rate plan id in any version of the subscription. This will be linked to the only one rate plan in the current version.
+              type: string
+          type: object
+        type: array
     type: object
   PUTSubscriptionPreviewInvoiceItemsType:
     properties:
@@ -63558,6 +65214,46 @@ definitions:
       - totalAmount
       - type
     type: object
+  PostOrderPreviewResponseType:
+    allOf:
+      - $ref: '#/definitions/CommonResponse'
+      - properties:
+          previewResult:
+            $ref: '#/definitions/PreviewResult'
+        type: object
+  PostOrderResponseType:
+    allOf:
+      - $ref: '#/definitions/CommonResponse'
+      - properties:
+          accountNumber:
+            description: The account number for the order.
+            type: string
+          creditMemoNumbers:
+            description: An array of the credit memo numbers generated in this order request. The credit memo is only available if you have the Avdanced AR Settlement feature enabled.
+            items:
+              type: string
+            type: array
+          invoiceNumbers:
+            description: 'An array of the invoice numbers generated in this order request. Normally it includes one invoice number only, but can include multiple items when a subscription was tagged as invoice separately.'
+            items:
+              type: string
+            type: array
+          orderNumber:
+            description: The number of the order created.
+            type: string
+          paidAmount:
+            description: The total amount collected in this order request.
+            format: BigDecimal
+            type: string
+          paymentNumber:
+            description: The payment number that collected in this order request.
+            type: string
+          subscriptionNumbers:
+            description: An array of number of subscriptions included in this order.
+            items:
+              type: string
+            type: array
+        type: object
   PostRefundType:
     example:
       comment: Create a refund for unapplied payment.
@@ -63650,6 +65346,154 @@ definitions:
       - totalAmount
       - type
     type: object
+  PreviewAccountInfo:
+    description: The account info required for an order preview.
+    properties:
+      billCycleDay:
+        maximum: 31
+        minimum: 1
+        type: integer
+      currency:
+        description: 3 uppercase character currency code
+        type: string
+      customFields:
+        $ref: '#/definitions/CustomFields'
+      soldToContact:
+        $ref: '#/definitions/PreviewContactInfo'
+    required:
+      - currency
+      - billCycleDay
+      - soldToContact
+    type: object
+  PreviewContactInfo:
+    properties:
+      city:
+        maxLength: 40
+        type: string
+      country:
+        maxLength: 64
+        type: string
+      county:
+        maxLength: 32
+        type: string
+      postalCode:
+        maxLength: 20
+        type: string
+      state:
+        maxLength: 40
+        type: string
+      taxRegion:
+        maxLength: 32
+        type: string
+    type: object
+  PreviewOptions:
+    properties:
+      previewThruType:
+        description: |
+          The options on how the preview through date is calculated. Available for preview only. The 'TermEnd' option is invalid when any subscription included in this order is evergreen. 
+
+
+          If set the value of this field to 'SpecificDate', you must specify a specific date in the 'specificPreviewThruDate' field.
+        enum:
+          - SpecificDate
+          - TermEnd
+        type: string
+      previewTypes:
+        items:
+          description: One or more types of the preview.
+          enum:
+            - ChargeMetrics
+            - BillingDocs
+            - OrderMetrics
+          type: string
+        type: array
+      specificPreviewThruDate:
+        description: |
+          The end date of the order preview. You can preview the invoice charges through the preview through date. (Invoice preview only)
+
+
+          **Note:** This field is only applicable if the 'previewThruType' field is set to 'SpecificDate'. 
+        format: date
+        type: string
+    type: object
+  PreviewResult:
+    description: The result of each type of preview. Returned only when the current request is preview call.
+    properties:
+      chargeMetrics:
+        items:
+          properties:
+            charges:
+              items:
+                $ref: '#/definitions/ChargePreviewMetrics'
+              type: array
+            subscriptionNumber:
+              description: 'The number of the subscription that has been affected by this order. When creating a subscription, this value will not show if the subscription number was not specified in the request.'
+              type: string
+          type: object
+        type: array
+      creditMemos:
+        items:
+          properties:
+            amount:
+              format: BigDecimal
+              type: number
+            amountWithoutTax:
+              format: BigDecimal
+              type: number
+            creditMemoItems:
+              items:
+                $ref: '#/definitions/InvoiceItemPreviewResult'
+              type: array
+            targetDate:
+              format: date
+              type: string
+            taxAmount:
+              format: BigDecimal
+              type: number
+          type: object
+        type: array
+      invoices:
+        items:
+          properties:
+            amount:
+              format: BigDecimal
+              type: number
+            amountWithoutTax:
+              format: BigDecimal
+              type: number
+            invoiceItems:
+              items:
+                $ref: '#/definitions/InvoiceItemPreviewResult'
+              type: array
+            targetDate:
+              format: date
+              type: string
+            taxAmount:
+              format: BigDecimal
+              type: number
+          type: object
+        type: array
+      orderMetrics:
+        items:
+          properties:
+            orderActions:
+              items:
+                properties:
+                  orderMetrics:
+                    items:
+                      $ref: '#/definitions/OrderMetrics'
+                    type: array
+                  sequence:
+                    type: string
+                  type:
+                    type: string
+                type: object
+              type: array
+            subscriptionNumber:
+              type: string
+          type: object
+        type: array
+    type: object
   PriceChangeParams:
     description: The group fields of the price change related function.
     properties:
@@ -63701,6 +65545,8 @@ definitions:
     type: object
   PricingUpdate:
     properties:
+      discount:
+        $ref: '#/definitions/DiscountPricingUpdate'
       recurringFlatFee:
         $ref: '#/definitions/RecurringFlatFeePricingUpdate'
       recurringPerUnit:
@@ -63721,6 +65567,18 @@ definitions:
         $ref: '#/definitions/UsageTieredWithOveragePricingUpdate'
       usageVolume:
         $ref: '#/definitions/UsageVolumePricingUpdate'
+    type: object
+  ProcessingOptions:
+    description: Invoice or Payment.
+    properties:
+      billingOptions:
+        $ref: '#/definitions/BillingOptions'
+      collectPayment:
+        description: Indicates if the current request needs to collect payments. This value can not be 'true' when 'runBilling' flag is 'false'.
+        type: boolean
+      runBilling:
+        description: Indicates if the current request needs to generate an invoice. The invoice will be generated against all subscriptions included in this order.
+        type: boolean
     type: object
   ProvisionEntityResponseType:
     properties:
@@ -76145,6 +78003,43 @@ definitions:
       subscriptionNumber:
         type: string
     type: object
+  TaxInfo:
+    description: The taxation permission is required to specify tax info.
+    properties:
+      VATId:
+        maxLength: 25
+        type: string
+      companyCode:
+        maxLength: 50
+        type: string
+      exemptCertificateId:
+        maxLength: 32
+        type: string
+      exemptCertificateType:
+        maxLength: 32
+        type: string
+      exemptDescription:
+        maxLength: 500
+        type: string
+      exemptEffectiveDate:
+        format: date
+        type: string
+      exemptExpirationDate:
+        format: date
+        type: string
+      exemptIssuingJurisdiction:
+        maxLength: 32
+        type: string
+      exemptStatus:
+        default: 'No'
+        description: |
+          Possible values are 'No', 'Yes', or 'PendingVerification'.
+        enum:
+          - 'No'
+          - 'Yes'
+          - PendingVerification
+        type: string
+    type: object
   Terms:
     properties:
       autoRenew:
@@ -76583,6 +78478,25 @@ definitions:
               $ref: '#/definitions/ChargeTier'
             type: array
         type: object
+  creditCard:
+    description: The default payment method of the account. Only credit card type payment method is supported.
+    properties:
+      cardHolderInfo:
+        $ref: '#/definitions/AccountCreditCardHolder'
+      cardNumber:
+        type: string
+      cardType:
+        description: 'The credit card type, such as Visa, MasterCard, AmericanExpress, Discover, JCB, CUP, Diners.'
+        type: string
+      expirationMonth:
+        description: The range is from 1 to 12.
+        type: integer
+      expirationYear:
+        description: The range is from 1980 to 2500
+        type: integer
+      securityCode:
+        type: string
+    type: object
   tokenResponse:
     properties:
       access_token:

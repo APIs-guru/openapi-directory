@@ -89,11 +89,6 @@ paths:
       description: Search public activities.
       operationId: plus.activities.search
       parameters:
-        - description: Full-text search query string.
-          in: query
-          name: query
-          required: true
-          type: string
         - default: en-US
           description: Specify the preferred language to search with. See search language codes for available values.
           in: query
@@ -117,6 +112,11 @@ paths:
         - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response. This token can be of any length.'
           in: query
           name: pageToken
+          type: string
+        - description: Full-text search query string.
+          in: query
+          name: query
+          required: true
           type: string
       responses:
         '200':
@@ -301,11 +301,6 @@ paths:
       description: Search all public profiles.
       operationId: plus.people.search
       parameters:
-        - description: Specify a query string for full text search of public text in all profiles.
-          in: query
-          name: query
-          required: true
-          type: string
         - default: en-US
           description: Specify the preferred language to search with. See search language codes for available values.
           in: query
@@ -321,6 +316,11 @@ paths:
         - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response. This token can be of any length.'
           in: query
           name: pageToken
+          type: string
+        - description: Specify a query string for full text search of public text in all profiles.
+          in: query
+          name: query
+          required: true
           type: string
       responses:
         '200':
@@ -381,11 +381,6 @@ paths:
       description: List all of the activities in the specified collection for a particular user.
       operationId: plus.activities.list
       parameters:
-        - description: The ID of the user to get activities for. The special value "me" can be used to indicate the authenticated user.
-          in: path
-          name: userId
-          required: true
-          type: string
         - description: The collection of activities to list.
           enum:
             - public
@@ -403,6 +398,11 @@ paths:
         - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
           in: query
           name: pageToken
+          type: string
+        - description: The ID of the user to get activities for. The special value "me" can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
           type: string
       responses:
         '200':
@@ -429,11 +429,6 @@ paths:
       description: List all of the people in the specified collection.
       operationId: plus.people.list
       parameters:
-        - description: Get the collection of people for the person identified. Use "me" to indicate the authenticated user.
-          in: path
-          name: userId
-          required: true
-          type: string
         - description: The collection of people to list.
           enum:
             - connected
@@ -459,6 +454,11 @@ paths:
         - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
           in: query
           name: pageToken
+          type: string
+        - description: Get the collection of people for the person identified. Use "me" to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
           type: string
       responses:
         '200':

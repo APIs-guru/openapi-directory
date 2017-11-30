@@ -174,14 +174,15 @@ paths:
           name: pageSize
           type: integer
         - description: |-
-            Restricts returned courses to those having a teacher with the specified
-            identifier. The identifier can be one of the following:
+            nextPageToken
+            value returned from a previous
+            list call,
+            indicating that the subsequent page of results should be returned.
 
-            * the numeric identifier for the user
-            * the email address of the user
-            * the string literal `"me"`, indicating the requesting user
+            The list request must be
+            otherwise identical to the one that resulted in this token.
           in: query
-          name: teacherId
+          name: pageToken
           type: string
         - description: |-
             Restricts returned courses to those having a student with the specified
@@ -194,15 +195,14 @@ paths:
           name: studentId
           type: string
         - description: |-
-            nextPageToken
-            value returned from a previous
-            list call,
-            indicating that the subsequent page of results should be returned.
+            Restricts returned courses to those having a teacher with the specified
+            identifier. The identifier can be one of the following:
 
-            The list request must be
-            otherwise identical to the one that resulted in this token.
+            * the numeric identifier for the user
+            * the email address of the user
+            * the string literal `"me"`, indicating the requesting user
           in: query
-          name: pageToken
+          name: teacherId
           type: string
       responses:
         '200':
@@ -217,18 +217,18 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
@@ -315,18 +315,18 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
@@ -343,6 +343,10 @@ paths:
           attempts to access a domain-scoped alias).
       operationId: classroom.courses.aliases.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CourseAlias'
         - description: |-
             Identifier of the course to alias.
             This identifier can be either the Classroom-assigned identifier or an
@@ -351,10 +355,6 @@ paths:
           name: courseId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CourseAlias'
       responses:
         '200':
           description: Successful response
@@ -381,18 +381,18 @@ paths:
       operationId: classroom.courses.aliases.delete
       parameters:
         - description: |-
+            Alias to delete.
+            This may not be the Classroom-assigned identifier.
+          in: path
+          name: alias
+          required: true
+          type: string
+        - description: |-
             Identifier of the course whose alias should be deleted.
             This identifier can be either the Classroom-assigned identifier or an
             alias.
           in: path
           name: courseId
-          required: true
-          type: string
-        - description: |-
-            Alias to delete.
-            This may not be the Classroom-assigned identifier.
-          in: path
-          name: alias
           required: true
           type: string
       responses:
@@ -406,18 +406,18 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
   '/v1/courses/{courseId}/announcements':
     get:
@@ -798,14 +798,6 @@ paths:
           name: courseWorkStates
           type: array
         - description: |-
-            Maximum number of items to return. Zero or unspecified indicates that the
-            server may assign a maximum.
-
-            The server may return fewer than the specified number of results.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
             Optional sort ordering for results. A comma-separated list of fields with
             an optional sort direction keyword. Supported fields are `updateTime`
             and `dueDate`. Supported direction keywords are `asc` and `desc`.
@@ -814,6 +806,14 @@ paths:
           in: query
           name: orderBy
           type: string
+        - description: |-
+            Maximum number of items to return. Zero or unspecified indicates that the
+            server may assign a maximum.
+
+            The server may return fewer than the specified number of results.
+          in: query
+          name: pageSize
+          type: integer
         - description: |-
             nextPageToken
             value returned from a previous
@@ -842,18 +842,18 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
@@ -877,6 +877,10 @@ paths:
             * AttachmentNotVisible
       operationId: classroom.courses.courseWork.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CourseWork'
         - description: |-
             Identifier of the course.
             This identifier can be either the Classroom-assigned identifier or an
@@ -885,10 +889,6 @@ paths:
           name: courseId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CourseWork'
       responses:
         '200':
           description: Successful response
@@ -1012,18 +1012,18 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
   '/v1/courses/{courseId}/courseWork/{courseWorkId}/studentSubmissions/{id}':
     get:
@@ -1077,18 +1077,18 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
@@ -1160,18 +1160,18 @@ paths:
         - courses
   '/v1/courses/{courseId}/courseWork/{courseWorkId}/studentSubmissions/{id}:modifyAttachments':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
@@ -1195,6 +1195,10 @@ paths:
         does not exist.
       operationId: classroom.courses.courseWork.studentSubmissions.modifyAttachments
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ModifyAttachmentsRequest'
         - description: |-
             Identifier of the course.
             This identifier can be either the Classroom-assigned identifier or an
@@ -1213,10 +1217,6 @@ paths:
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ModifyAttachmentsRequest'
       responses:
         '200':
           description: Successful response
@@ -1231,18 +1231,18 @@ paths:
         - courses
   '/v1/courses/{courseId}/courseWork/{courseWorkId}/studentSubmissions/{id}:reclaim':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
@@ -1269,6 +1269,10 @@ paths:
         does not exist.
       operationId: classroom.courses.courseWork.studentSubmissions.reclaim
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReclaimStudentSubmissionRequest'
         - description: |-
             Identifier of the course.
             This identifier can be either the Classroom-assigned identifier or an
@@ -1287,10 +1291,6 @@ paths:
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ReclaimStudentSubmissionRequest'
       responses:
         '200':
           description: Successful response
@@ -1303,18 +1303,18 @@ paths:
         - courses
   '/v1/courses/{courseId}/courseWork/{courseWorkId}/studentSubmissions/{id}:return':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
@@ -1342,6 +1342,10 @@ paths:
         does not exist.
       operationId: classroom.courses.courseWork.studentSubmissions.return
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReturnStudentSubmissionRequest'
         - description: |-
             Identifier of the course.
             This identifier can be either the Classroom-assigned identifier or an
@@ -1360,10 +1364,6 @@ paths:
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ReturnStudentSubmissionRequest'
       responses:
         '200':
           description: Successful response
@@ -1376,18 +1376,18 @@ paths:
         - courses
   '/v1/courses/{courseId}/courseWork/{courseWorkId}/studentSubmissions/{id}:turnIn':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
@@ -1413,6 +1413,10 @@ paths:
         does not exist.
       operationId: classroom.courses.courseWork.studentSubmissions.turnIn
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TurnInStudentSubmissionRequest'
         - description: |-
             Identifier of the course.
             This identifier can be either the Classroom-assigned identifier or an
@@ -1431,10 +1435,6 @@ paths:
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TurnInStudentSubmissionRequest'
       responses:
         '200':
           description: Successful response
@@ -1531,18 +1531,18 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
@@ -1729,18 +1729,18 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
@@ -1760,6 +1760,10 @@ paths:
         course.
       operationId: classroom.courses.students.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Student'
         - description: |-
             Identifier of the course to create the student in.
             This identifier can be either the Classroom-assigned identifier or an
@@ -1776,10 +1780,6 @@ paths:
           in: query
           name: enrollmentCode
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Student'
       responses:
         '200':
           description: Successful response
@@ -1884,18 +1884,18 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
   '/v1/courses/{courseId}/teachers':
     get:
@@ -1952,18 +1952,18 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
@@ -1984,6 +1984,10 @@ paths:
         course.
       operationId: classroom.courses.teachers.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Teacher'
         - description: |-
             Identifier of the course.
             This identifier can be either the Classroom-assigned identifier or an
@@ -1992,10 +1996,6 @@ paths:
           name: courseId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Teacher'
       responses:
         '200':
           description: Successful response
@@ -2102,18 +2102,18 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
   '/v1/courses/{id}':
     delete:
@@ -2177,18 +2177,18 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
@@ -2263,6 +2263,10 @@ paths:
             * CourseNotModifiable
       operationId: classroom.courses.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Course'
         - description: |-
             Identifier of the course to update.
             This identifier can be either the Classroom-assigned identifier or an
@@ -2271,10 +2275,6 @@ paths:
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Course'
       responses:
         '200':
           description: Successful response
@@ -2313,16 +2313,6 @@ paths:
           name: pageSize
           type: integer
         - description: |-
-            Restricts returned invitations to those for a specific user. The identifier
-            can be one of the following:
-
-            * the numeric identifier for the user
-            * the email address of the user
-            * the string literal `"me"`, indicating the requesting user
-          in: query
-          name: userId
-          type: string
-        - description: |-
             nextPageToken
             value returned from a previous
             list call, indicating
@@ -2332,6 +2322,16 @@ paths:
             otherwise identical to the one that resulted in this token.
           in: query
           name: pageToken
+          type: string
+        - description: |-
+            Restricts returned invitations to those for a specific user. The identifier
+            can be one of the following:
+
+            * the numeric identifier for the user
+            * the email address of the user
+            * the string literal `"me"`, indicating the requesting user
+          in: query
+          name: userId
           type: string
       responses:
         '200':
@@ -2346,18 +2346,18 @@ paths:
       tags:
         - invitations
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
@@ -2445,33 +2445,33 @@ paths:
       tags:
         - invitations
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
   '/v1/invitations/{id}:accept':
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
@@ -2636,18 +2636,10 @@ paths:
       operationId: classroom.userProfiles.guardianInvitations.list
       parameters:
         - description: |-
-            The ID of the student whose guardian invitations are to be returned.
-            The identifier can be one of the following:
-
-            * the numeric identifier for the user
-            * the email address of the user
-            * the string literal `"me"`, indicating the requesting user
-            * the string literal `"-"`, indicating that results should be returned for
-              all students that the requesting user is permitted to view guardian
-              invitations.
-          in: path
-          name: studentId
-          required: true
+            If specified, only results with the specified `invited_email_address`
+            will be returned.
+          in: query
+          name: invitedEmailAddress
           type: string
         - description: |-
             Maximum number of items to return. Zero or unspecified indicates that the
@@ -2658,10 +2650,15 @@ paths:
           name: pageSize
           type: integer
         - description: |-
-            If specified, only results with the specified `invited_email_address`
-            will be returned.
+            nextPageToken
+            value returned from a previous
+            list call,
+            indicating that the subsequent page of results should be returned.
+
+            The list request
+            must be otherwise identical to the one that resulted in this token.
           in: query
-          name: invitedEmailAddress
+          name: pageToken
           type: string
         - collectionFormat: multi
           description: |-
@@ -2677,15 +2674,18 @@ paths:
           name: states
           type: array
         - description: |-
-            nextPageToken
-            value returned from a previous
-            list call,
-            indicating that the subsequent page of results should be returned.
+            The ID of the student whose guardian invitations are to be returned.
+            The identifier can be one of the following:
 
-            The list request
-            must be otherwise identical to the one that resulted in this token.
-          in: query
-          name: pageToken
+            * the numeric identifier for the user
+            * the email address of the user
+            * the string literal `"me"`, indicating the requesting user
+            * the string literal `"-"`, indicating that results should be returned for
+              all students that the requesting user is permitted to view guardian
+              invitations.
+          in: path
+          name: studentId
+          required: true
           type: string
       responses:
         '200':
@@ -2700,18 +2700,18 @@ paths:
       tags:
         - userProfiles
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
@@ -2747,15 +2747,15 @@ paths:
           `Guardian` for this user.
       operationId: classroom.userProfiles.guardianInvitations.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GuardianInvitation'
         - description: ID of the student (in standard format)
           in: path
           name: studentId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GuardianInvitation'
       responses:
         '200':
           description: Successful response
@@ -2785,14 +2785,14 @@ paths:
           requesting user does not have access to see that student.
       operationId: classroom.userProfiles.guardianInvitations.get
       parameters:
-        - description: The ID of the student whose guardian invitation is being requested.
-          in: path
-          name: studentId
-          required: true
-          type: string
         - description: The `id` field of the `GuardianInvitation` being requested.
           in: path
           name: invitationId
+          required: true
+          type: string
+        - description: The ID of the student whose guardian invitation is being requested.
+          in: path
+          name: studentId
           required: true
           type: string
       responses:
@@ -2808,18 +2808,18 @@ paths:
       tags:
         - userProfiles
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
@@ -2843,14 +2843,18 @@ paths:
           refer to a guardian invitation known to Classroom.
       operationId: classroom.userProfiles.guardianInvitations.patch
       parameters:
-        - description: The ID of the student whose guardian invitation is to be modified.
-          in: path
-          name: studentId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GuardianInvitation'
         - description: The `id` field of the `GuardianInvitation` to be modified.
           in: path
           name: invitationId
+          required: true
+          type: string
+        - description: The ID of the student whose guardian invitation is to be modified.
+          in: path
+          name: studentId
           required: true
           type: string
         - description: |-
@@ -2866,10 +2870,6 @@ paths:
           in: query
           name: updateMask
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GuardianInvitation'
       responses:
         '200':
           description: Successful response
@@ -2906,6 +2906,32 @@ paths:
       operationId: classroom.userProfiles.guardians.list
       parameters:
         - description: |-
+            Filter results by the email address that the original invitation was sent
+            to, resulting in this guardian link.
+            This filter can only be used by domain administrators.
+          in: query
+          name: invitedEmailAddress
+          type: string
+        - description: |-
+            Maximum number of items to return. Zero or unspecified indicates that the
+            server may assign a maximum.
+
+            The server may return fewer than the specified number of results.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            nextPageToken
+            value returned from a previous
+            list call,
+            indicating that the subsequent page of results should be returned.
+
+            The list request
+            must be otherwise identical to the one that resulted in this token.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
             Filter results by the student who the guardian is linked to.
             The identifier can be one of the following:
 
@@ -2917,32 +2943,6 @@ paths:
           in: path
           name: studentId
           required: true
-          type: string
-        - description: |-
-            Maximum number of items to return. Zero or unspecified indicates that the
-            server may assign a maximum.
-
-            The server may return fewer than the specified number of results.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            Filter results by the email address that the original invitation was sent
-            to, resulting in this guardian link.
-            This filter can only be used by domain administrators.
-          in: query
-          name: invitedEmailAddress
-          type: string
-        - description: |-
-            nextPageToken
-            value returned from a previous
-            list call,
-            indicating that the subsequent page of results should be returned.
-
-            The list request
-            must be otherwise identical to the one that resulted in this token.
-          in: query
-          name: pageToken
           type: string
       responses:
         '200':
@@ -2959,18 +2959,18 @@ paths:
       tags:
         - userProfiles
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
   '/v1/userProfiles/{studentId}/guardians/{guardianId}':
     delete:
@@ -2995,6 +2995,11 @@ paths:
           student with the provided `guardian_id`.
       operationId: classroom.userProfiles.guardians.delete
       parameters:
+        - description: The `id` field from a `Guardian`.
+          in: path
+          name: guardianId
+          required: true
+          type: string
         - description: |-
             The student whose guardian is to be deleted. One of the following:
 
@@ -3003,11 +3008,6 @@ paths:
             * the string literal `"me"`, indicating the requesting user
           in: path
           name: studentId
-          required: true
-          type: string
-        - description: The `id` field from a `Guardian`.
-          in: path
-          name: guardianId
           required: true
           type: string
       responses:
@@ -3039,6 +3039,11 @@ paths:
           student that matches the provided `guardian_id`.
       operationId: classroom.userProfiles.guardians.get
       parameters:
+        - description: The `id` field from a `Guardian`.
+          in: path
+          name: guardianId
+          required: true
+          type: string
         - description: |-
             The student whose guardian is being requested. One of the following:
 
@@ -3047,11 +3052,6 @@ paths:
             * the string literal `"me"`, indicating the requesting user
           in: path
           name: studentId
-          required: true
-          type: string
-        - description: The `id` field from a `Guardian`.
-          in: path
-          name: guardianId
           required: true
           type: string
       responses:
@@ -3069,18 +3069,18 @@ paths:
       tags:
         - userProfiles
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
   '/v1/userProfiles/{userId}':
     get:
@@ -3122,18 +3122,18 @@ paths:
       tags:
         - userProfiles
     parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
 definitions:
   Announcement:

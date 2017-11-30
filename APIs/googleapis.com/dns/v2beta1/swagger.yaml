@@ -92,14 +92,14 @@ paths:
       description: Fetch the representation of an existing Project.
       operationId: dns.projects.get
       parameters:
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          type: string
         - description: Identifies the project addressed by this request.
           in: path
           name: project
           required: true
-          type: string
-        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
-          in: query
-          name: clientOperationId
           type: string
       responses:
         '200':
@@ -130,11 +130,6 @@ paths:
       description: Enumerate ManagedZones that have been created but not yet deleted.
       operationId: dns.managedZones.list
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Restricts the list to return only zones with this domain name.
           in: query
           name: dnsName
@@ -146,6 +141,11 @@ paths:
         - description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
           in: query
           name: pageToken
+          type: string
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -175,19 +175,19 @@ paths:
       description: Create a new ManagedZone.
       operationId: dns.managedZones.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ManagedZone'
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          type: string
         - description: Identifies the project addressed by this request.
           in: path
           name: project
           required: true
           type: string
-        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
-          in: query
-          name: clientOperationId
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ManagedZone'
       responses:
         '200':
           description: Successful response
@@ -205,19 +205,19 @@ paths:
       description: Delete a previously created ManagedZone.
       operationId: dns.managedZones.delete
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
           type: string
         - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
           required: true
           type: string
-        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
-          in: query
-          name: clientOperationId
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -235,19 +235,19 @@ paths:
       description: Fetch the representation of an existing ManagedZone.
       operationId: dns.managedZones.get
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
           type: string
         - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
           required: true
           type: string
-        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
-          in: query
-          name: clientOperationId
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -277,24 +277,24 @@ paths:
       description: Update an existing ManagedZone. This method supports patch semantics.
       operationId: dns.managedZones.patch
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ManagedZone'
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
           type: string
         - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
           required: true
           type: string
-        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
-          in: query
-          name: clientOperationId
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ManagedZone'
       responses:
         '200':
           description: Successful response
@@ -311,24 +311,24 @@ paths:
       description: Update an existing ManagedZone.
       operationId: dns.managedZones.update
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ManagedZone'
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
           type: string
         - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
           required: true
           type: string
-        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
-          in: query
-          name: clientOperationId
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ManagedZone'
       responses:
         '200':
           description: Successful response
@@ -346,11 +346,6 @@ paths:
       description: Enumerate Changes to a ResourceRecordSet collection.
       operationId: dns.changes.list
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
@@ -363,6 +358,11 @@ paths:
         - description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
           in: query
           name: pageToken
+          type: string
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
           type: string
         - default: CHANGE_SEQUENCE
           description: Sorting criterion. The only supported value is change sequence.
@@ -403,24 +403,24 @@ paths:
       description: Atomically update the ResourceRecordSet collection.
       operationId: dns.changes.create
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Change'
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
           type: string
         - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
           required: true
           type: string
-        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
-          in: query
-          name: clientOperationId
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Change'
       responses:
         '200':
           description: Successful response
@@ -438,16 +438,6 @@ paths:
       description: Fetch the representation of an existing Change.
       operationId: dns.changes.get
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
-          in: path
-          name: managedZone
-          required: true
-          type: string
         - description: 'The identifier of the requested change, from a previous ResourceRecordSetsChangeResponse.'
           in: path
           name: changeId
@@ -456,6 +446,16 @@ paths:
         - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
           in: query
           name: clientOperationId
+          type: string
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
+          in: path
+          name: managedZone
+          required: true
+          type: string
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -486,19 +486,14 @@ paths:
       description: Enumerate DnsKeys to a ResourceRecordSet collection.
       operationId: dns.dnsKeys.list
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
+        - description: 'An optional comma-separated list of digest types to compute and display for key signing keys. If omitted, the recommended digest type will be computed and displayed.'
+          in: query
+          name: digestType
           type: string
         - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
           required: true
-          type: string
-        - description: 'An optional comma-separated list of digest types to compute and display for key signing keys. If omitted, the recommended digest type will be computed and displayed.'
-          in: query
-          name: digestType
           type: string
         - description: 'Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.'
           in: query
@@ -507,6 +502,11 @@ paths:
         - description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
           in: query
           name: pageToken
+          type: string
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -537,21 +537,6 @@ paths:
       description: Fetch the representation of an existing DnsKey.
       operationId: dns.dnsKeys.get
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
-          in: path
-          name: managedZone
-          required: true
-          type: string
-        - description: The identifier of the requested DnsKey.
-          in: path
-          name: dnsKeyId
-          required: true
-          type: string
         - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
           in: query
           name: clientOperationId
@@ -559,6 +544,21 @@ paths:
         - description: 'An optional comma-separated list of digest types to compute and display for key signing keys. If omitted, the recommended digest type will be computed and displayed.'
           in: query
           name: digestType
+          type: string
+        - description: The identifier of the requested DnsKey.
+          in: path
+          name: dnsKeyId
+          required: true
+          type: string
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
+          in: path
+          name: managedZone
+          required: true
+          type: string
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -589,11 +589,6 @@ paths:
       description: Enumerate Operations for the given ManagedZone.
       operationId: dns.managedZoneOperations.list
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Identifies the managed zone addressed by this request.
           in: path
           name: managedZone
@@ -606,6 +601,11 @@ paths:
         - description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
           in: query
           name: pageToken
+          type: string
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
           type: string
         - default: START_TIME
           description: Sorting criterion. The only supported values are START_TIME and ID.
@@ -644,10 +644,9 @@ paths:
       description: Fetch the representation of an existing Operation.
       operationId: dns.managedZoneOperations.get
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
           type: string
         - description: Identifies the managed zone addressed by this request.
           in: path
@@ -659,9 +658,10 @@ paths:
           name: operation
           required: true
           type: string
-        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
-          in: query
-          name: clientOperationId
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -692,11 +692,6 @@ paths:
       description: Enumerate ResourceRecordSets that have been created but not yet deleted.
       operationId: dns.resourceRecordSets.list
       parameters:
-        - description: Identifies the project addressed by this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
@@ -713,6 +708,11 @@ paths:
         - description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
           in: query
           name: pageToken
+          type: string
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
           type: string
         - description: 'Restricts the list to return only records of this type. If present, the "name" parameter must also be present.'
           in: query

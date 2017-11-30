@@ -3823,7 +3823,7 @@ paths:
         - products
   '/products/{slug}/reviews':
     get:
-      description: View reviews of a product
+      description: View reviews of a comparison shopping page
       parameters:
         - in: path
           name: slug
@@ -3832,7 +3832,7 @@ paths:
       responses:
         default:
           description: Unexpected error
-      summary: View reviews of a product
+      summary: View reviews of a comparison shopping page
       tags:
         - products
     post:

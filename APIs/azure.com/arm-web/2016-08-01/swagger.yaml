@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-web/2016-08-01/swagger/WebApps.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: arm-web
   x-tags:
@@ -7502,7 +7501,7 @@ definitions:
         additionalProperties:
           type: string
         description: |-
-          Application setting overrides for cloned app. If specified, these settings override the settings cloned
+          Application setting overrides for cloned app. If specified, these settings override the settings cloned 
            from source app. Otherwise, application settings from source app are retained.
         type: object
       cloneCustomHostNames:
@@ -7530,13 +7529,13 @@ definitions:
         type: boolean
       sourceWebAppId:
         description: |-
-          ARM resource ID of the source app. App resource ID is of the form
-           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and
+          ARM resource ID of the source app. App resource ID is of the form 
+           /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
         type: string
       trafficManagerProfileId:
         description: |-
-          ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form
+          ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form 
            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}.
         type: string
       trafficManagerProfileName:
@@ -7629,7 +7628,7 @@ definitions:
     properties:
       format:
         description: |-
-          Name of the format. Valid values are:
+          Name of the format. Valid values are: 
            FileZilla3
            WebDeploy -- default
            Ftp
@@ -7945,7 +7944,7 @@ definitions:
     type: object
   HandlerMapping:
     description: |-
-      The IIS handler mappings used to define which handler processes HTTP requests with certain extension.
+      The IIS handler mappings used to define which handler processes HTTP requests with certain extension. 
        For example, it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension.
     properties:
       arguments:
@@ -8481,7 +8480,7 @@ definitions:
         description: |-
           Gets or sets a JSON string containing a list of tags that require user authentication to be used in the push registration endpoint.
            Tags can consist of alphanumeric characters and the following:
-           '_', '@', '#', '.', ':', '-'.
+           '_', '@', '#', '.', ':', '-'. 
            Validation should be performed at the PushRequestHandler.
         type: string
     required:
@@ -8504,7 +8503,7 @@ definitions:
         type: integer
       changeStep:
         description: |-
-          In auto ramp up scenario this is the step to to add/remove from <code>ReroutePercentage</code> until it reaches
+          In auto ramp up scenario this is the step to to add/remove from <code>ReroutePercentage</code> until it reaches 
            <code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specificed in <code>ChangeIntervalInMinutes</code>.
            Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.
         format: double
@@ -8835,7 +8834,7 @@ definitions:
           ignoreConflictingHostNames:
             default: false
             description: |-
-              Changes a logic when restoring an app with custom domains. <code>true</code> to remove custom domains automatically. If <code>false</code>, custom domains are added to
+              Changes a logic when restoring an app with custom domains. <code>true</code> to remove custom domains automatically. If <code>false</code>, custom domains are added to 
                the app's object when it is being restored, but that might fail due to conflicts during the operation.
             type: boolean
           operationType:
@@ -9066,7 +9065,7 @@ definitions:
             type: array
           allowedAudiences:
             description: |-
-              Allowed audience values to consider when validating JWTs issued by
+              Allowed audience values to consider when validating JWTs issued by 
                Azure Active Directory. Note that the <code>ClientID</code> value is always considered an
                allowed audience, regardless of this setting.
             items:
@@ -9083,7 +9082,7 @@ definitions:
           clientId:
             description: |-
               The Client ID of this relying party application, known as the client_id.
-               This setting is required for enabling OpenID Connection authentication with Azure Active Directory or
+               This setting is required for enabling OpenID Connection authentication with Azure Active Directory or 
                other 3rd party OpenID Connect providers.
                More information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html
             type: string
@@ -9927,7 +9926,7 @@ definitions:
     properties:
       certBlob:
         description: |-
-          A certificate file (.cer) blob containing the public key of the private key used to authenticate a
+          A certificate file (.cer) blob containing the public key of the private key used to authenticate a 
            Point-To-Site VPN connection.
         type: string
       certThumbprint:
@@ -9975,7 +9974,7 @@ definitions:
                DEFAULT - By default, every app has routes to the local address ranges specified by RFC1918
                INHERITED - Routes inherited from the real Virtual Network routes
                STATIC - Static route set on the app only
-
+               
                These values will be used for syncing an app's routes with those from a Virtual Network.
             enum:
               - DEFAULT

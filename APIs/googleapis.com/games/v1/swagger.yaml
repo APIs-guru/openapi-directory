@@ -151,14 +151,14 @@ paths:
       description: Updates multiple achievements for the currently authenticated player.
       operationId: games.achievements.updateMultiple
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/AchievementUpdateMultipleRequest'
+        - description: The last-seen mutation timestamp.
+          in: query
+          name: consistencyToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -189,12 +189,6 @@ paths:
           name: achievementId
           required: true
           type: string
-        - description: The number of steps to increment.
-          in: query
-          minimum: 1
-          name: stepsToIncrement
-          required: true
-          type: integer
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -203,6 +197,12 @@ paths:
           in: query
           name: requestId
           type: string
+        - description: The number of steps to increment.
+          in: query
+          minimum: 1
+          name: stepsToIncrement
+          required: true
+          type: integer
       responses:
         '200':
           description: Successful response
@@ -267,16 +267,16 @@ paths:
           name: achievementId
           required: true
           type: string
+        - description: The last-seen mutation timestamp.
+          in: query
+          name: consistencyToken
+          type: string
         - description: The minimum value to set the steps to.
           in: query
           minimum: 1
           name: steps
           required: true
           type: integer
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
       responses:
         '200':
           description: Successful response
@@ -520,6 +520,10 @@ paths:
       description: Records a batch of changes to the number of times events have occurred for the currently authenticated user of this application.
       operationId: games.events.record
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EventRecordRequest'
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -528,10 +532,6 @@ paths:
           in: query
           name: language
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EventRecordRequest'
       responses:
         '200':
           description: Successful response
@@ -600,6 +600,10 @@ paths:
       description: Submits multiple scores to leaderboards.
       operationId: games.scores.submitMultiple
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PlayerScoreSubmissionList'
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -608,10 +612,6 @@ paths:
           in: query
           name: language
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PlayerScoreSubmissionList'
       responses:
         '200':
           description: Successful response
@@ -629,11 +629,6 @@ paths:
       description: Retrieves the metadata of the leaderboard with the given ID.
       operationId: games.leaderboards.get
       parameters:
-        - description: The ID of the leaderboard.
-          in: path
-          name: leaderboardId
-          required: true
-          type: string
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -641,6 +636,11 @@ paths:
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
+          type: string
+        - description: The ID of the leaderboard.
+          in: path
+          name: leaderboardId
+          required: true
           type: string
       responses:
         '200':
@@ -675,6 +675,14 @@ paths:
       description: Submits a score to the specified leaderboard.
       operationId: games.scores.submit
       parameters:
+        - description: The last-seen mutation timestamp.
+          in: query
+          name: consistencyToken
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
         - description: The ID of the leaderboard.
           in: path
           name: leaderboardId
@@ -684,14 +692,6 @@ paths:
           in: query
           name: score
           required: true
-          type: string
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
           type: string
         - description: Additional information about the score you're submitting. Values must contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
           in: query
@@ -714,11 +714,6 @@ paths:
       description: 'Lists the scores in a leaderboard, starting from the top.'
       operationId: games.scores.list
       parameters:
-        - description: The ID of the leaderboard.
-          in: path
-          name: leaderboardId
-          required: true
-          type: string
         - description: The collection of scores you're requesting.
           enum:
             - PUBLIC
@@ -726,15 +721,6 @@ paths:
             - SOCIAL_1P
           in: path
           name: collection
-          required: true
-          type: string
-        - description: The time span for the scores and ranks you're requesting.
-          enum:
-            - ALL_TIME
-            - DAILY
-            - WEEKLY
-          in: query
-          name: timeSpan
           required: true
           type: string
         - description: The last-seen mutation timestamp.
@@ -745,6 +731,11 @@ paths:
           in: query
           name: language
           type: string
+        - description: The ID of the leaderboard.
+          in: path
+          name: leaderboardId
+          required: true
+          type: string
         - description: 'The maximum number of leaderboard scores to return in the response. For any response, the actual number of leaderboard scores returned may be less than the specified maxResults.'
           in: query
           maximum: 30
@@ -754,6 +745,15 @@ paths:
         - description: The token returned by the previous request.
           in: query
           name: pageToken
+          type: string
+        - description: The time span for the scores and ranks you're requesting.
+          enum:
+            - ALL_TIME
+            - DAILY
+            - WEEKLY
+          in: query
+          name: timeSpan
+          required: true
           type: string
       responses:
         '200':
@@ -780,11 +780,6 @@ paths:
       description: Lists the scores in a leaderboard around (and including) a player's score.
       operationId: games.scores.listWindow
       parameters:
-        - description: The ID of the leaderboard.
-          in: path
-          name: leaderboardId
-          required: true
-          type: string
         - description: The collection of scores you're requesting.
           enum:
             - PUBLIC
@@ -794,15 +789,6 @@ paths:
           name: collection
           required: true
           type: string
-        - description: The time span for the scores and ranks you're requesting.
-          enum:
-            - ALL_TIME
-            - DAILY
-            - WEEKLY
-          in: query
-          name: timeSpan
-          required: true
-          type: string
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -810,6 +796,11 @@ paths:
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
+          type: string
+        - description: The ID of the leaderboard.
+          in: path
+          name: leaderboardId
+          required: true
           type: string
         - description: 'The maximum number of leaderboard scores to return in the response. For any response, the actual number of leaderboard scores returned may be less than the specified maxResults.'
           in: query
@@ -829,6 +820,15 @@ paths:
           in: query
           name: returnTopIfAbsent
           type: boolean
+        - description: The time span for the scores and ranks you're requesting.
+          enum:
+            - ALL_TIME
+            - DAILY
+            - WEEKLY
+          in: query
+          name: timeSpan
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -936,11 +936,6 @@ paths:
       description: 'Retrieves the Player resource with the given ID. To retrieve the player for the currently authenticated user, set playerId to me.'
       operationId: games.players.get
       parameters:
-        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
-          in: path
-          name: playerId
-          required: true
-          type: string
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -948,6 +943,11 @@ paths:
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
+          type: string
+        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
+          in: path
+          name: playerId
+          required: true
           type: string
       responses:
         '200':
@@ -974,11 +974,6 @@ paths:
       description: Lists the progress for all your application's achievements for the currently authenticated player.
       operationId: games.achievements.list
       parameters:
-        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
-          in: path
-          name: playerId
-          required: true
-          type: string
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -996,6 +991,11 @@ paths:
         - description: The token returned by the previous request.
           in: query
           name: pageToken
+          type: string
+        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
+          in: path
+          name: playerId
+          required: true
           type: string
         - description: 'Tells the server to return only achievements with the specified state. If this parameter isn''t specified, all achievements are returned.'
           enum:
@@ -1031,11 +1031,6 @@ paths:
       description: List play data aggregated per category for the player corresponding to playerId.
       operationId: games.metagame.listCategoriesByPlayer
       parameters:
-        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
-          in: path
-          name: playerId
-          required: true
-          type: string
         - description: The collection of categories for which data will be returned.
           enum:
             - all
@@ -1060,6 +1055,11 @@ paths:
         - description: The token returned by the previous request.
           in: query
           name: pageToken
+          type: string
+        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
+          in: path
+          name: playerId
+          required: true
           type: string
       responses:
         '200':
@@ -1088,26 +1088,6 @@ paths:
         NOTE: You cannot ask for 'ALL' leaderboards and 'ALL' timeSpans in the same request; only one parameter may be set to 'ALL'.
       operationId: games.scores.get
       parameters:
-        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
-          in: path
-          name: playerId
-          required: true
-          type: string
-        - description: The ID of the leaderboard. Can be set to 'ALL' to retrieve data for all leaderboards for this application.
-          in: path
-          name: leaderboardId
-          required: true
-          type: string
-        - description: The time span for the scores and ranks you're requesting.
-          enum:
-            - ALL
-            - ALL_TIME
-            - DAILY
-            - WEEKLY
-          in: path
-          name: timeSpan
-          required: true
-          type: string
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -1124,6 +1104,11 @@ paths:
           in: query
           name: language
           type: string
+        - description: The ID of the leaderboard. Can be set to 'ALL' to retrieve data for all leaderboards for this application.
+          in: path
+          name: leaderboardId
+          required: true
+          type: string
         - description: 'The maximum number of leaderboard scores to return in the response. For any response, the actual number of leaderboard scores returned may be less than the specified maxResults.'
           in: query
           maximum: 30
@@ -1133,6 +1118,21 @@ paths:
         - description: The token returned by the previous request.
           in: query
           name: pageToken
+          type: string
+        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
+          in: path
+          name: playerId
+          required: true
+          type: string
+        - description: The time span for the scores and ranks you're requesting.
+          enum:
+            - ALL
+            - ALL_TIME
+            - DAILY
+            - WEEKLY
+          in: path
+          name: timeSpan
+          required: true
           type: string
       responses:
         '200':
@@ -1159,11 +1159,6 @@ paths:
       description: Get a list of quests for your application and the currently authenticated player.
       operationId: games.quests.list
       parameters:
-        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
-          in: path
-          name: playerId
-          required: true
-          type: string
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -1181,6 +1176,11 @@ paths:
         - description: The token returned by the previous request.
           in: query
           name: pageToken
+          type: string
+        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
+          in: path
+          name: playerId
+          required: true
           type: string
       responses:
         '200':
@@ -1207,11 +1207,6 @@ paths:
       description: Retrieves a list of snapshots created by your application for the player corresponding to the player ID.
       operationId: games.snapshots.list
       parameters:
-        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
-          in: path
-          name: playerId
-          required: true
-          type: string
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -1229,6 +1224,11 @@ paths:
         - description: The token returned by the previous request.
           in: query
           name: pageToken
+          type: string
+        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
+          in: path
+          name: playerId
+          required: true
           type: string
       responses:
         '200':
@@ -1265,14 +1265,14 @@ paths:
       description: Registers a push token for the current user and application.
       operationId: games.pushtokens.update
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/PushToken'
+        - description: The last-seen mutation timestamp.
+          in: query
+          name: consistencyToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1296,14 +1296,14 @@ paths:
       description: Removes a push token for the current user and application. Removing a non-existent push token will report success.
       operationId: games.pushtokens.remove
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/PushTokenId'
+        - description: The last-seen mutation timestamp.
+          in: query
+          name: consistencyToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1327,11 +1327,6 @@ paths:
       description: Indicates that the currently authorized user will participate in the quest.
       operationId: games.quests.accept
       parameters:
-        - description: The ID of the quest.
-          in: path
-          name: questId
-          required: true
-          type: string
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -1339,6 +1334,11 @@ paths:
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
+          type: string
+        - description: The ID of the quest.
+          in: path
+          name: questId
+          required: true
           type: string
       responses:
         '200':
@@ -1365,24 +1365,24 @@ paths:
       description: Report that a reward for the milestone corresponding to milestoneId for the quest corresponding to questId has been claimed by the currently authorized user.
       operationId: games.questMilestones.claim
       parameters:
-        - description: The ID of the quest.
-          in: path
-          name: questId
-          required: true
+        - description: The last-seen mutation timestamp.
+          in: query
+          name: consistencyToken
           type: string
         - description: The ID of the milestone.
           in: path
           name: milestoneId
           required: true
           type: string
+        - description: The ID of the quest.
+          in: path
+          name: questId
+          required: true
+          type: string
         - description: A numeric ID to ensure that the request is handled correctly across retries. Your client application must generate this ID randomly.
           in: query
           name: requestId
           required: true
-          type: string
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
           type: string
       responses:
         '200':
@@ -1490,6 +1490,10 @@ paths:
       description: Create a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
       operationId: games.rooms.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RoomCreateRequest'
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -1498,10 +1502,6 @@ paths:
           in: query
           name: language
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RoomCreateRequest'
       responses:
         '200':
           description: Successful response
@@ -1519,11 +1519,6 @@ paths:
       description: Get the data for a room.
       operationId: games.rooms.get
       parameters:
-        - description: The ID of the room.
-          in: path
-          name: roomId
-          required: true
-          type: string
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -1531,6 +1526,11 @@ paths:
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
+          type: string
+        - description: The ID of the room.
+          in: path
+          name: roomId
+          required: true
           type: string
       responses:
         '200':
@@ -1565,11 +1565,6 @@ paths:
       description: Decline an invitation to join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
       operationId: games.rooms.decline
       parameters:
-        - description: The ID of the room.
-          in: path
-          name: roomId
-          required: true
-          type: string
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -1577,6 +1572,11 @@ paths:
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
+          type: string
+        - description: The ID of the room.
+          in: path
+          name: roomId
+          required: true
           type: string
       responses:
         '200':
@@ -1603,14 +1603,14 @@ paths:
       description: Dismiss an invitation to join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
       operationId: games.rooms.dismiss
       parameters:
+        - description: The last-seen mutation timestamp.
+          in: query
+          name: consistencyToken
+          type: string
         - description: The ID of the room.
           in: path
           name: roomId
           required: true
-          type: string
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
           type: string
       responses:
         '200':
@@ -1635,11 +1635,10 @@ paths:
       description: Join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
       operationId: games.rooms.join
       parameters:
-        - description: The ID of the room.
-          in: path
-          name: roomId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RoomJoinRequest'
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -1648,10 +1647,11 @@ paths:
           in: query
           name: language
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RoomJoinRequest'
+        - description: The ID of the room.
+          in: path
+          name: roomId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1677,11 +1677,10 @@ paths:
       description: Leave a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
       operationId: games.rooms.leave
       parameters:
-        - description: The ID of the room.
-          in: path
-          name: roomId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RoomLeaveRequest'
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -1690,10 +1689,11 @@ paths:
           in: query
           name: language
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RoomLeaveRequest'
+        - description: The ID of the room.
+          in: path
+          name: roomId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1719,11 +1719,10 @@ paths:
       description: Updates sent by a client reporting the status of peers in a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
       operationId: games.rooms.reportStatus
       parameters:
-        - description: The ID of the room.
-          in: path
-          name: roomId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RoomP2PStatuses'
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -1732,10 +1731,11 @@ paths:
           in: query
           name: language
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RoomP2PStatuses'
+        - description: The ID of the room.
+          in: path
+          name: roomId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1753,11 +1753,6 @@ paths:
       description: Retrieves the metadata for a given snapshot ID.
       operationId: games.snapshots.get
       parameters:
-        - description: The ID of the snapshot.
-          in: path
-          name: snapshotId
-          required: true
-          type: string
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -1765,6 +1760,11 @@ paths:
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
+          type: string
+        - description: The ID of the snapshot.
+          in: path
+          name: snapshotId
+          required: true
           type: string
       responses:
         '200':
@@ -1854,6 +1854,10 @@ paths:
       description: Create a turn-based match.
       operationId: games.turnBasedMatches.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TurnBasedMatchCreateRequest'
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -1862,10 +1866,6 @@ paths:
           in: query
           name: language
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TurnBasedMatchCreateRequest'
       responses:
         '200':
           description: Successful response
@@ -1936,11 +1936,6 @@ paths:
       description: Get the data for a turn-based match.
       operationId: games.turnBasedMatches.get
       parameters:
-        - description: The ID of the match.
-          in: path
-          name: matchId
-          required: true
-          type: string
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -1952,6 +1947,11 @@ paths:
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
+          type: string
+        - description: The ID of the match.
+          in: path
+          name: matchId
+          required: true
           type: string
       responses:
         '200':
@@ -1986,14 +1986,14 @@ paths:
       description: Cancel a turn-based match.
       operationId: games.turnBasedMatches.cancel
       parameters:
+        - description: The last-seen mutation timestamp.
+          in: query
+          name: consistencyToken
+          type: string
         - description: The ID of the match.
           in: path
           name: matchId
           required: true
-          type: string
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
           type: string
       responses:
         '200':
@@ -2018,11 +2018,6 @@ paths:
       description: Decline an invitation to play a turn-based match.
       operationId: games.turnBasedMatches.decline
       parameters:
-        - description: The ID of the match.
-          in: path
-          name: matchId
-          required: true
-          type: string
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -2030,6 +2025,11 @@ paths:
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
+          type: string
+        - description: The ID of the match.
+          in: path
+          name: matchId
+          required: true
           type: string
       responses:
         '200':
@@ -2056,14 +2056,14 @@ paths:
       description: Dismiss a turn-based match from the match list. The match will no longer show up in the list and will not generate notifications.
       operationId: games.turnBasedMatches.dismiss
       parameters:
+        - description: The last-seen mutation timestamp.
+          in: query
+          name: consistencyToken
+          type: string
         - description: The ID of the match.
           in: path
           name: matchId
           required: true
-          type: string
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
           type: string
       responses:
         '200':
@@ -2088,11 +2088,10 @@ paths:
       description: 'Finish a turn-based match. Each player should make this call once, after all results are in. Only the player whose turn it is may make the first call to Finish, and can pass in the final match state.'
       operationId: games.turnBasedMatches.finish
       parameters:
-        - description: The ID of the match.
-          in: path
-          name: matchId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TurnBasedMatchResults'
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -2101,10 +2100,11 @@ paths:
           in: query
           name: language
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TurnBasedMatchResults'
+        - description: The ID of the match.
+          in: path
+          name: matchId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2130,11 +2130,6 @@ paths:
       description: Join a turn-based match.
       operationId: games.turnBasedMatches.join
       parameters:
-        - description: The ID of the match.
-          in: path
-          name: matchId
-          required: true
-          type: string
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -2142,6 +2137,11 @@ paths:
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
+          type: string
+        - description: The ID of the match.
+          in: path
+          name: matchId
+          required: true
           type: string
       responses:
         '200':
@@ -2168,11 +2168,6 @@ paths:
       description: 'Leave a turn-based match when it is not the current player''s turn, without canceling the match.'
       operationId: games.turnBasedMatches.leave
       parameters:
-        - description: The ID of the match.
-          in: path
-          name: matchId
-          required: true
-          type: string
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -2180,6 +2175,11 @@ paths:
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
+          type: string
+        - description: The ID of the match.
+          in: path
+          name: matchId
+          required: true
           type: string
       responses:
         '200':
@@ -2206,6 +2206,14 @@ paths:
       description: 'Leave a turn-based match during the current player''s turn, without canceling the match.'
       operationId: games.turnBasedMatches.leaveTurn
       parameters:
+        - description: The last-seen mutation timestamp.
+          in: query
+          name: consistencyToken
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
         - description: The ID of the match.
           in: path
           name: matchId
@@ -2216,14 +2224,6 @@ paths:
           name: matchVersion
           required: true
           type: integer
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
         - description: 'The ID of another participant who should take their turn next. If not set, the match will wait for other player(s) to join via automatching; this is only valid if automatch criteria is set on the match with remaining slots for automatched players.'
           in: query
           name: pendingParticipantId
@@ -2253,11 +2253,6 @@ paths:
       description: 'Create a rematch of a match that was previously completed, with the same participants. This can be called by only one player on a match still in their list; the player must have called Finish first. Returns the newly created match; it will be the caller''s turn.'
       operationId: games.turnBasedMatches.rematch
       parameters:
-        - description: The ID of the match.
-          in: path
-          name: matchId
-          required: true
-          type: string
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -2265,6 +2260,11 @@ paths:
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
+          type: string
+        - description: The ID of the match.
+          in: path
+          name: matchId
+          required: true
           type: string
         - description: A randomly generated numeric ID for each request specified by the caller. This number is used at the server to ensure that the request is handled correctly across retries.
           in: query
@@ -2295,11 +2295,10 @@ paths:
       description: Commit the results of a player turn.
       operationId: games.turnBasedMatches.takeTurn
       parameters:
-        - description: The ID of the match.
-          in: path
-          name: matchId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TurnBasedMatchTurn'
         - description: The last-seen mutation timestamp.
           in: query
           name: consistencyToken
@@ -2308,10 +2307,11 @@ paths:
           in: query
           name: language
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TurnBasedMatchTurn'
+        - description: The ID of the match.
+          in: path
+          name: matchId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response

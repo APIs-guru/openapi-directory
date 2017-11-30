@@ -165,15 +165,15 @@ paths:
       description: Updates metadata for a calendar. This method supports patch semantics.
       operationId: calendar.calendars.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Calendar'
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
           in: path
           name: calendarId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Calendar'
       responses:
         '200':
           description: Successful response
@@ -188,15 +188,15 @@ paths:
       description: Updates metadata for a calendar.
       operationId: calendar.calendars.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Calendar'
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
           in: path
           name: calendarId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Calendar'
       responses:
         '200':
           description: Successful response
@@ -310,6 +310,10 @@ paths:
           in: query
           name: pageToken
           type: string
+        - in: body
+          name: resource
+          schema:
+            $ref: '#/definitions/Channel'
         - description: Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to "none". Deleted ACLs will always be included if syncToken is provided. Optional. The default is False.
           in: query
           name: showDeleted
@@ -322,10 +326,6 @@ paths:
           in: query
           name: syncToken
           type: string
-        - in: body
-          name: resource
-          schema:
-            $ref: '#/definitions/Channel'
       responses:
         '200':
           description: Successful response
@@ -611,6 +611,10 @@ paths:
       description: Creates an event.
       operationId: calendar.events.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Event'
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
           in: path
           name: calendarId
@@ -629,10 +633,6 @@ paths:
           in: query
           name: supportsAttachments
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Event'
       responses:
         '200':
           description: Successful response
@@ -656,6 +656,10 @@ paths:
       description: Imports an event. This operation is used to add a private copy of an existing event to a calendar.
       operationId: calendar.events.import
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Event'
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
           in: path
           name: calendarId
@@ -665,10 +669,6 @@ paths:
           in: query
           name: supportsAttachments
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Event'
       responses:
         '200':
           description: Successful response
@@ -697,15 +697,15 @@ paths:
           name: calendarId
           required: true
           type: string
+        - description: Whether to send notifications about the creation of the event. Optional. The default is False.
+          in: query
+          name: sendNotifications
+          type: boolean
         - description: The text describing the event to be created.
           in: query
           name: text
           required: true
           type: string
-        - description: Whether to send notifications about the creation of the event. Optional. The default is False.
-          in: query
-          name: sendNotifications
-          type: boolean
       responses:
         '200':
           description: Successful response
@@ -875,6 +875,10 @@ paths:
       description: Returns an event.
       operationId: calendar.events.get
       parameters:
+        - description: 'Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.'
+          in: query
+          name: alwaysIncludeEmail
+          type: boolean
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
           in: path
           name: calendarId
@@ -885,10 +889,6 @@ paths:
           name: eventId
           required: true
           type: string
-        - description: 'Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.'
-          in: query
-          name: alwaysIncludeEmail
-          type: boolean
         - description: 'The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.'
           in: query
           minimum: 1
@@ -922,6 +922,14 @@ paths:
       description: Updates an event. This method supports patch semantics.
       operationId: calendar.events.patch
       parameters:
+        - description: 'Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.'
+          in: query
+          name: alwaysIncludeEmail
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Event'
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
           in: path
           name: calendarId
@@ -932,10 +940,6 @@ paths:
           name: eventId
           required: true
           type: string
-        - description: 'Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.'
-          in: query
-          name: alwaysIncludeEmail
-          type: boolean
         - description: 'The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.'
           in: query
           minimum: 1
@@ -949,10 +953,6 @@ paths:
           in: query
           name: supportsAttachments
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Event'
       responses:
         '200':
           description: Successful response
@@ -967,6 +967,14 @@ paths:
       description: Updates an event.
       operationId: calendar.events.update
       parameters:
+        - description: 'Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.'
+          in: query
+          name: alwaysIncludeEmail
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Event'
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
           in: path
           name: calendarId
@@ -977,10 +985,6 @@ paths:
           name: eventId
           required: true
           type: string
-        - description: 'Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.'
-          in: query
-          name: alwaysIncludeEmail
-          type: boolean
         - description: 'The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.'
           in: query
           minimum: 1
@@ -994,10 +998,6 @@ paths:
           in: query
           name: supportsAttachments
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Event'
       responses:
         '200':
           description: Successful response
@@ -1013,6 +1013,10 @@ paths:
       description: Returns instances of the specified recurring event.
       operationId: calendar.events.instances
       parameters:
+        - description: 'Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.'
+          in: query
+          name: alwaysIncludeEmail
+          type: boolean
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
           in: path
           name: calendarId
@@ -1023,10 +1027,6 @@ paths:
           name: eventId
           required: true
           type: string
-        - description: 'Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.'
-          in: query
-          name: alwaysIncludeEmail
-          type: boolean
         - description: 'The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.'
           in: query
           minimum: 1
@@ -1099,14 +1099,14 @@ paths:
           name: calendarId
           required: true
           type: string
-        - description: Event identifier.
-          in: path
-          name: eventId
-          required: true
-          type: string
         - description: Calendar identifier of the target calendar where the event is to be moved to.
           in: query
           name: destination
+          required: true
+          type: string
+        - description: Event identifier.
+          in: path
+          name: eventId
           required: true
           type: string
         - description: Whether to send notifications about the change of the event's organizer. Optional. The default is False.
@@ -1267,14 +1267,14 @@ paths:
       description: Adds an entry to the user's calendar list.
       operationId: calendar.calendarList.insert
       parameters:
-        - description: 'Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.'
-          in: query
-          name: colorRgbFormat
-          type: boolean
         - in: body
           name: body
           schema:
             $ref: '#/definitions/CalendarListEntry'
+        - description: 'Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.'
+          in: query
+          name: colorRgbFormat
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -1316,6 +1316,10 @@ paths:
           in: query
           name: pageToken
           type: string
+        - in: body
+          name: resource
+          schema:
+            $ref: '#/definitions/Channel'
         - description: Whether to include deleted calendar list entries in the result. Optional. The default is False.
           in: query
           name: showDeleted
@@ -1333,10 +1337,6 @@ paths:
           in: query
           name: syncToken
           type: string
-        - in: body
-          name: resource
-          schema:
-            $ref: '#/definitions/Channel'
       responses:
         '200':
           description: Successful response
@@ -1400,6 +1400,10 @@ paths:
       description: Updates an entry on the user's calendar list. This method supports patch semantics.
       operationId: calendar.calendarList.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CalendarListEntry'
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
           in: path
           name: calendarId
@@ -1409,10 +1413,6 @@ paths:
           in: query
           name: colorRgbFormat
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CalendarListEntry'
       responses:
         '200':
           description: Successful response
@@ -1427,6 +1427,10 @@ paths:
       description: Updates an entry on the user's calendar list.
       operationId: calendar.calendarList.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CalendarListEntry'
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
           in: path
           name: calendarId
@@ -1436,10 +1440,6 @@ paths:
           in: query
           name: colorRgbFormat
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CalendarListEntry'
       responses:
         '200':
           description: Successful response
@@ -1514,6 +1514,10 @@ paths:
           in: query
           name: pageToken
           type: string
+        - in: body
+          name: resource
+          schema:
+            $ref: '#/definitions/Channel'
         - description: |-
             Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then.
             If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
@@ -1522,10 +1526,6 @@ paths:
           in: query
           name: syncToken
           type: string
-        - in: body
-          name: resource
-          schema:
-            $ref: '#/definitions/Channel'
       responses:
         '200':
           description: Successful response

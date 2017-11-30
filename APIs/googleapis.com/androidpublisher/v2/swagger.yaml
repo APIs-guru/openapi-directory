@@ -96,15 +96,15 @@ paths:
       description: 'Creates a new edit for an app, populated with the app''s current state.'
       operationId: androidpublisher.edits.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AppEdit'
         - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
           in: path
           name: packageName
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AppEdit'
       responses:
         '200':
           description: Successful response
@@ -120,14 +120,14 @@ paths:
       description: Deletes an edit for an app. Creating a new edit will automatically delete any of your previous edits so this method need only be called if you want to preemptively abandon an edit.
       operationId: androidpublisher.edits.delete
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: Unique identifier for this edit.
           in: path
           name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -142,14 +142,14 @@ paths:
       description: 'Returns information about the edit specified. Calls will fail if the edit is no long active (e.g. has been deleted, superseded or expired).'
       operationId: androidpublisher.edits.get
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: Unique identifier for this edit.
           in: path
           name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -174,14 +174,14 @@ paths:
     get:
       operationId: androidpublisher.edits.apks.list
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: Unique identifier for this edit.
           in: path
           name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -208,14 +208,14 @@ paths:
         - application/vnd.android.package-archive
       operationId: androidpublisher.edits.apks.upload
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: Unique identifier for this edit.
           in: path
           name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -241,20 +241,20 @@ paths:
       description: 'Creates a new APK without uploading the APK itself to Google Play, instead hosting the APK at a specified URL. This function is only available to enterprises using Google Play for Work whose application is configured to restrict distribution to the enterprise domain.'
       operationId: androidpublisher.edits.apks.addexternallyhosted
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ApksAddExternallyHostedRequest'
         - description: Unique identifier for this edit.
           in: path
           name: editId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ApksAddExternallyHostedRequest'
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -280,16 +280,6 @@ paths:
       description: 'Uploads the deobfuscation file of the specified APK. If a deobfuscation file already exists, it will be replaced.'
       operationId: androidpublisher.edits.deobfuscationfiles.upload
       parameters:
-        - description: 'Unique identifier of the Android app for which the deobfuscatiuon files are being uploaded; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
-        - description: Unique identifier for this edit.
-          in: path
-          name: editId
-          required: true
-          type: string
         - description: The version code of the APK whose deobfuscation file is being uploaded.
           in: path
           name: apkVersionCode
@@ -299,6 +289,16 @@ paths:
             - proguard
           in: path
           name: deobfuscationFileType
+          required: true
+          type: string
+        - description: Unique identifier for this edit.
+          in: path
+          name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier of the Android app for which the deobfuscatiuon files are being uploaded; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -316,26 +316,26 @@ paths:
       description: Fetches the Expansion File configuration for the APK specified.
       operationId: androidpublisher.edits.expansionfiles.get
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
-        - description: Unique identifier for this edit.
-          in: path
-          name: editId
-          required: true
-          type: string
         - description: The version code of the APK whose Expansion File configuration is being read or modified.
           in: path
           name: apkVersionCode
           required: true
           type: integer
+        - description: Unique identifier for this edit.
+          in: path
+          name: editId
+          required: true
+          type: string
         - enum:
             - main
             - patch
           in: path
           name: expansionFileType
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -360,21 +360,20 @@ paths:
       description: Updates the APK's Expansion File configuration to reference another APK's Expansion Files. To add a new Expansion File use the Upload method. This method supports patch semantics.
       operationId: androidpublisher.edits.expansionfiles.patch
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
-        - description: Unique identifier for this edit.
-          in: path
-          name: editId
-          required: true
-          type: string
         - description: The version code of the APK whose Expansion File configuration is being read or modified.
           in: path
           name: apkVersionCode
           required: true
           type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ExpansionFile'
+        - description: Unique identifier for this edit.
+          in: path
+          name: editId
+          required: true
+          type: string
         - enum:
             - main
             - patch
@@ -382,10 +381,11 @@ paths:
           name: expansionFileType
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ExpansionFile'
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -402,26 +402,26 @@ paths:
       description: Uploads and attaches a new Expansion File to the APK specified.
       operationId: androidpublisher.edits.expansionfiles.upload
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
-        - description: Unique identifier for this edit.
-          in: path
-          name: editId
-          required: true
-          type: string
         - description: The version code of the APK whose Expansion File configuration is being read or modified.
           in: path
           name: apkVersionCode
           required: true
           type: integer
+        - description: Unique identifier for this edit.
+          in: path
+          name: editId
+          required: true
+          type: string
         - enum:
             - main
             - patch
           in: path
           name: expansionFileType
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -438,21 +438,20 @@ paths:
       description: Updates the APK's Expansion File configuration to reference another APK's Expansion Files. To add a new Expansion File use the Upload method.
       operationId: androidpublisher.edits.expansionfiles.update
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
-        - description: Unique identifier for this edit.
-          in: path
-          name: editId
-          required: true
-          type: string
         - description: The version code of the APK whose Expansion File configuration is being read or modified.
           in: path
           name: apkVersionCode
           required: true
           type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ExpansionFile'
+        - description: Unique identifier for this edit.
+          in: path
+          name: editId
+          required: true
+          type: string
         - enum:
             - main
             - patch
@@ -460,10 +459,11 @@ paths:
           name: expansionFileType
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ExpansionFile'
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -479,21 +479,21 @@ paths:
       description: Deletes all the APK-specific localized listings for a specified APK.
       operationId: androidpublisher.edits.apklistings.deleteall
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
-        - description: Unique identifier for this edit.
-          in: path
-          name: editId
-          required: true
-          type: string
         - description: The APK version code whose APK-specific listings should be read or modified.
           in: path
           name: apkVersionCode
           required: true
           type: integer
+        - description: Unique identifier for this edit.
+          in: path
+          name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -506,21 +506,21 @@ paths:
       description: Lists all the APK-specific localized listings for a specified APK.
       operationId: androidpublisher.edits.apklistings.list
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
-        - description: Unique identifier for this edit.
-          in: path
-          name: editId
-          required: true
-          type: string
         - description: The APK version code whose APK-specific listings should be read or modified.
           in: path
           name: apkVersionCode
           required: true
           type: integer
+        - description: Unique identifier for this edit.
+          in: path
+          name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -544,24 +544,24 @@ paths:
       description: Deletes the APK-specific localized listing for a specified APK and language code.
       operationId: androidpublisher.edits.apklistings.delete
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
-        - description: Unique identifier for this edit.
-          in: path
-          name: editId
-          required: true
-          type: string
         - description: The APK version code whose APK-specific listings should be read or modified.
           in: path
           name: apkVersionCode
           required: true
           type: integer
+        - description: Unique identifier for this edit.
+          in: path
+          name: editId
+          required: true
+          type: string
         - description: 'The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass "de-AT".'
           in: path
           name: language
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -576,24 +576,24 @@ paths:
       description: Fetches the APK-specific localized listing for a specified APK and language code.
       operationId: androidpublisher.edits.apklistings.get
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
-        - description: Unique identifier for this edit.
-          in: path
-          name: editId
-          required: true
-          type: string
         - description: The APK version code whose APK-specific listings should be read or modified.
           in: path
           name: apkVersionCode
           required: true
           type: integer
+        - description: Unique identifier for this edit.
+          in: path
+          name: editId
+          required: true
+          type: string
         - description: 'The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass "de-AT".'
           in: path
           name: language
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -618,30 +618,30 @@ paths:
       description: Updates or creates the APK-specific localized listing for a specified APK and language code. This method supports patch semantics.
       operationId: androidpublisher.edits.apklistings.patch
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
-        - description: Unique identifier for this edit.
-          in: path
-          name: editId
-          required: true
-          type: string
         - description: The APK version code whose APK-specific listings should be read or modified.
           in: path
           name: apkVersionCode
           required: true
           type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ApkListing'
+        - description: Unique identifier for this edit.
+          in: path
+          name: editId
+          required: true
+          type: string
         - description: 'The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass "de-AT".'
           in: path
           name: language
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ApkListing'
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -656,30 +656,30 @@ paths:
       description: Updates or creates the APK-specific localized listing for a specified APK and language code.
       operationId: androidpublisher.edits.apklistings.update
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
-        - description: Unique identifier for this edit.
-          in: path
-          name: editId
-          required: true
-          type: string
         - description: The APK version code whose APK-specific listings should be read or modified.
           in: path
           name: apkVersionCode
           required: true
           type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ApkListing'
+        - description: Unique identifier for this edit.
+          in: path
+          name: editId
+          required: true
+          type: string
         - description: 'The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass "de-AT".'
           in: path
           name: language
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ApkListing'
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -695,14 +695,14 @@ paths:
       description: Fetches app details for this edit. This includes the default language and developer support contact information.
       operationId: androidpublisher.edits.details.get
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: Unique identifier for this edit.
           in: path
           name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -727,20 +727,20 @@ paths:
       description: Updates app details for this edit. This method supports patch semantics.
       operationId: androidpublisher.edits.details.patch
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AppDetails'
         - description: Unique identifier for this edit.
           in: path
           name: editId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AppDetails'
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -755,20 +755,20 @@ paths:
       description: Updates app details for this edit.
       operationId: androidpublisher.edits.details.update
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AppDetails'
         - description: Unique identifier for this edit.
           in: path
           name: editId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AppDetails'
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -784,14 +784,14 @@ paths:
       description: Deletes all localized listings from an edit.
       operationId: androidpublisher.edits.listings.deleteall
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: Unique identifier for this edit.
           in: path
           name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -806,14 +806,14 @@ paths:
       description: Returns all of the localized store listings attached to this edit.
       operationId: androidpublisher.edits.listings.list
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: Unique identifier for this edit.
           in: path
           name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -839,11 +839,6 @@ paths:
       description: Deletes the specified localized store listing from an edit.
       operationId: androidpublisher.edits.listings.delete
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: Unique identifier for this edit.
           in: path
           name: editId
@@ -852,6 +847,11 @@ paths:
         - description: 'The language code (a BCP-47 language tag) of the localized listing to read or modify. For example, to select Austrian German, pass "de-AT".'
           in: path
           name: language
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -866,11 +866,6 @@ paths:
       description: Fetches information about a localized store listing.
       operationId: androidpublisher.edits.listings.get
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: Unique identifier for this edit.
           in: path
           name: editId
@@ -879,6 +874,11 @@ paths:
         - description: 'The language code (a BCP-47 language tag) of the localized listing to read or modify. For example, to select Austrian German, pass "de-AT".'
           in: path
           name: language
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -903,11 +903,10 @@ paths:
       description: Creates or updates a localized store listing. This method supports patch semantics.
       operationId: androidpublisher.edits.listings.patch
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Listing'
         - description: Unique identifier for this edit.
           in: path
           name: editId
@@ -918,10 +917,11 @@ paths:
           name: language
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Listing'
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -936,11 +936,10 @@ paths:
       description: Creates or updates a localized store listing.
       operationId: androidpublisher.edits.listings.update
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Listing'
         - description: Unique identifier for this edit.
           in: path
           name: editId
@@ -951,10 +950,11 @@ paths:
           name: language
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Listing'
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -970,19 +970,9 @@ paths:
       description: Deletes all images for the specified language and image type.
       operationId: androidpublisher.edits.images.deleteall
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: Unique identifier for this edit.
           in: path
           name: editId
-          required: true
-          type: string
-        - description: 'The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass "de-AT".'
-          in: path
-          name: language
           required: true
           type: string
         - enum:
@@ -997,6 +987,16 @@ paths:
             - wearScreenshots
           in: path
           name: imageType
+          required: true
+          type: string
+        - description: 'The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass "de-AT".'
+          in: path
+          name: language
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -1013,19 +1013,9 @@ paths:
       description: Lists all images for the specified language and image type.
       operationId: androidpublisher.edits.images.list
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: Unique identifier for this edit.
           in: path
           name: editId
-          required: true
-          type: string
-        - description: 'The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass "de-AT".'
-          in: path
-          name: language
           required: true
           type: string
         - enum:
@@ -1040,6 +1030,16 @@ paths:
             - wearScreenshots
           in: path
           name: imageType
+          required: true
+          type: string
+        - description: 'The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass "de-AT".'
+          in: path
+          name: language
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -1143,19 +1143,9 @@ paths:
       description: Uploads a new image and adds it to the list of images for the specified language and image type.
       operationId: androidpublisher.edits.images.upload
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: Unique identifier for this edit.
           in: path
           name: editId
-          required: true
-          type: string
-        - description: 'The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass "de-AT".'
-          in: path
-          name: language
           required: true
           type: string
         - enum:
@@ -1170,6 +1160,16 @@ paths:
             - wearScreenshots
           in: path
           name: imageType
+          required: true
+          type: string
+        - description: 'The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass "de-AT".'
+          in: path
+          name: language
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -1187,19 +1187,14 @@ paths:
       description: Deletes the image (specified by id) from the edit.
       operationId: androidpublisher.edits.images.delete
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: Unique identifier for this edit.
           in: path
           name: editId
           required: true
           type: string
-        - description: 'The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass "de-AT".'
+        - description: Unique identifier an image within the set of images attached to this edit.
           in: path
-          name: language
+          name: imageId
           required: true
           type: string
         - enum:
@@ -1216,9 +1211,14 @@ paths:
           name: imageType
           required: true
           type: string
-        - description: Unique identifier an image within the set of images attached to this edit.
+        - description: 'The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass "de-AT".'
           in: path
-          name: imageId
+          name: language
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -1241,14 +1241,14 @@ paths:
     get:
       operationId: androidpublisher.edits.testers.get
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: Unique identifier for this edit.
           in: path
           name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
         - enum:
@@ -1281,14 +1281,18 @@ paths:
     patch:
       operationId: androidpublisher.edits.testers.patch
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Testers'
         - description: Unique identifier for this edit.
           in: path
           name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
         - enum:
@@ -1300,10 +1304,6 @@ paths:
           name: track
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Testers'
       responses:
         '200':
           description: Successful response
@@ -1317,14 +1317,18 @@ paths:
     put:
       operationId: androidpublisher.edits.testers.update
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Testers'
         - description: Unique identifier for this edit.
           in: path
           name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
         - enum:
@@ -1336,10 +1340,6 @@ paths:
           name: track
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Testers'
       responses:
         '200':
           description: Successful response
@@ -1355,14 +1355,14 @@ paths:
       description: Lists all the track configurations for this edit.
       operationId: androidpublisher.edits.tracks.list
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: Unique identifier for this edit.
           in: path
           name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -1388,14 +1388,14 @@ paths:
       description: Fetches the track configuration for the specified track type. Includes the APK version codes that are in this track.
       operationId: androidpublisher.edits.tracks.get
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: Unique identifier for this edit.
           in: path
           name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
         - description: The track type to read or modify.
@@ -1430,14 +1430,18 @@ paths:
       description: 'Updates the track configuration for the specified track type. When halted, the rollout track cannot be updated without adding new APKs, and adding new APKs will cause it to resume. This method supports patch semantics.'
       operationId: androidpublisher.edits.tracks.patch
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Track'
         - description: Unique identifier for this edit.
           in: path
           name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
         - description: The track type to read or modify.
@@ -1450,10 +1454,6 @@ paths:
           name: track
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Track'
       responses:
         '200':
           description: Successful response
@@ -1468,14 +1468,18 @@ paths:
       description: 'Updates the track configuration for the specified track type. When halted, the rollout track cannot be updated without adding new APKs, and adding new APKs will cause it to resume.'
       operationId: androidpublisher.edits.tracks.update
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Track'
         - description: Unique identifier for this edit.
           in: path
           name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
         - description: The track type to read or modify.
@@ -1488,10 +1492,6 @@ paths:
           name: track
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Track'
       responses:
         '200':
           description: Successful response
@@ -1515,14 +1515,14 @@ paths:
       description: Commits/applies the changes made in this edit back to the app.
       operationId: androidpublisher.edits.commit
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: Unique identifier for this edit.
           in: path
           name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -1548,14 +1548,14 @@ paths:
       description: Checks that the edit can be successfully committed. The edit's changes are not applied to the live app.
       operationId: androidpublisher.edits.validate
       parameters:
-        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: Unique identifier for this edit.
           in: path
           name: editId
+          required: true
+          type: string
+        - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
+          in: path
+          name: packageName
           required: true
           type: string
       responses:
@@ -1573,14 +1573,14 @@ paths:
       description: Lists the user's current inapp item or subscription entitlements
       operationId: androidpublisher.entitlements.list
       parameters:
+        - in: query
+          name: maxResults
+          type: integer
         - description: 'The package name of the application the inapp product was sold in (for example, ''com.some.thing'').'
           in: path
           name: packageName
           required: true
           type: string
-        - in: query
-          name: maxResults
-          type: integer
         - description: 'The product id of the inapp product (for example, ''sku1''). This can be used to restrict the result set.'
           in: query
           name: productId
@@ -1611,14 +1611,14 @@ paths:
       description: 'List all the in-app products for an Android app, both subscriptions and managed in-app products..'
       operationId: androidpublisher.inappproducts.list
       parameters:
+        - in: query
+          name: maxResults
+          type: integer
         - description: 'Unique identifier for the Android app with in-app products; for example, "com.spiffygame".'
           in: path
           name: packageName
           required: true
           type: string
-        - in: query
-          name: maxResults
-          type: integer
         - in: query
           name: startIndex
           type: integer
@@ -1647,11 +1647,6 @@ paths:
       description: Creates a new in-app product for an app.
       operationId: androidpublisher.inappproducts.insert
       parameters:
-        - description: 'Unique identifier for the Android app; for example, "com.spiffygame".'
-          in: path
-          name: packageName
-          required: true
-          type: string
         - description: If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
           in: query
           name: autoConvertMissingPrices
@@ -1660,6 +1655,11 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/InAppProduct'
+        - description: 'Unique identifier for the Android app; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1728,6 +1728,14 @@ paths:
       description: Updates the details of an in-app product. This method supports patch semantics.
       operationId: androidpublisher.inappproducts.patch
       parameters:
+        - description: If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
+          in: query
+          name: autoConvertMissingPrices
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InAppProduct'
         - description: 'Unique identifier for the Android app with the in-app product; for example, "com.spiffygame".'
           in: path
           name: packageName
@@ -1738,14 +1746,6 @@ paths:
           name: sku
           required: true
           type: string
-        - description: If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
-          in: query
-          name: autoConvertMissingPrices
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/InAppProduct'
       responses:
         '200':
           description: Successful response
@@ -1760,6 +1760,14 @@ paths:
       description: Updates the details of an in-app product.
       operationId: androidpublisher.inappproducts.update
       parameters:
+        - description: If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
+          in: query
+          name: autoConvertMissingPrices
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InAppProduct'
         - description: 'Unique identifier for the Android app with the in-app product; for example, "com.spiffygame".'
           in: path
           name: packageName
@@ -1770,14 +1778,6 @@ paths:
           name: sku
           required: true
           type: string
-        - description: If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
-          in: query
-          name: autoConvertMissingPrices
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/InAppProduct'
       responses:
         '200':
           description: Successful response
@@ -1913,6 +1913,10 @@ paths:
       description: Defers a user's subscription purchase until a specified future expiration time.
       operationId: androidpublisher.purchases.subscriptions.defer
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SubscriptionPurchasesDeferRequest'
         - description: 'The package name of the application for which this subscription was purchased (for example, ''com.some.thing'').'
           in: path
           name: packageName
@@ -1928,10 +1932,6 @@ paths:
           name: token
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SubscriptionPurchasesDeferRequest'
       responses:
         '200':
           description: Successful response
@@ -2064,14 +2064,14 @@ paths:
       description: Returns a list of reviews. Only reviews from last week will be returned.
       operationId: androidpublisher.reviews.list
       parameters:
+        - in: query
+          name: maxResults
+          type: integer
         - description: 'Unique identifier for the Android app for which we want reviews; for example, "com.spiffygame".'
           in: path
           name: packageName
           required: true
           type: string
-        - in: query
-          name: maxResults
-          type: integer
         - in: query
           name: startIndex
           type: integer
@@ -2147,6 +2147,10 @@ paths:
       description: 'Reply to a single review, or update an existing reply.'
       operationId: androidpublisher.reviews.reply
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReviewsReplyRequest'
         - description: 'Unique identifier for the Android app for which we want reviews; for example, "com.spiffygame".'
           in: path
           name: packageName
@@ -2156,10 +2160,6 @@ paths:
           name: reviewId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ReviewsReplyRequest'
       responses:
         '200':
           description: Successful response

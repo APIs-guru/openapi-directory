@@ -133,11 +133,6 @@ paths:
       description: Lists the changes for a user or Team Drive.
       operationId: drive.changes.list
       parameters:
-        - description: The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
-          in: query
-          name: pageToken
-          required: true
-          type: string
         - default: false
           description: 'Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.'
           in: query
@@ -160,6 +155,11 @@ paths:
           minimum: 1
           name: pageSize
           type: integer
+        - description: The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
+          in: query
+          name: pageToken
+          required: true
+          type: string
         - default: false
           description: Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.
           in: query
@@ -266,11 +266,6 @@ paths:
       description: Subscribes to changes for a user.
       operationId: drive.changes.watch
       parameters:
-        - description: The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
-          in: query
-          name: pageToken
-          required: true
-          type: string
         - default: false
           description: 'Whether changes should include the file resource if the file is still accessible by the user at the time of the request, even when a file was removed from the list of changes and there will be no further change entries for this file.'
           in: query
@@ -293,6 +288,15 @@ paths:
           minimum: 1
           name: pageSize
           type: integer
+        - description: The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
+          in: query
+          name: pageToken
+          required: true
+          type: string
+        - in: body
+          name: resource
+          schema:
+            $ref: '#/definitions/Channel'
         - default: false
           description: Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.
           in: query
@@ -312,10 +316,6 @@ paths:
           in: query
           name: teamDriveId
           type: string
-        - in: body
-          name: resource
-          schema:
-            $ref: '#/definitions/Channel'
       responses:
         '200':
           description: Successful response
@@ -465,6 +465,10 @@ paths:
       description: Creates a new file.
       operationId: drive.files.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/File'
         - default: false
           description: Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
           in: query
@@ -489,10 +493,6 @@ paths:
           in: query
           name: useContentAsIndexableText
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/File'
       responses:
         '200':
           description: Successful response
@@ -597,16 +597,16 @@ paths:
       description: Gets a file's metadata or content by ID.
       operationId: drive.files.get
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
         - default: false
           description: Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
           in: query
           name: acknowledgeAbuse
           type: boolean
+        - description: The ID of the file.
+          in: path
+          name: fileId
+          required: true
+          type: string
         - default: false
           description: Whether the requesting application supports Team Drives.
           in: query
@@ -648,14 +648,18 @@ paths:
       description: Updates a file's metadata and/or content with patch semantics.
       operationId: drive.files.update
       parameters:
+        - description: A comma-separated list of parent IDs to add.
+          in: query
+          name: addParents
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/File'
         - description: The ID of the file.
           in: path
           name: fileId
           required: true
-          type: string
-        - description: A comma-separated list of parent IDs to add.
-          in: query
-          name: addParents
           type: string
         - default: false
           description: Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Drive.
@@ -680,10 +684,6 @@ paths:
           in: query
           name: useContentAsIndexableText
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/File'
       responses:
         '200':
           description: Successful response
@@ -758,15 +758,15 @@ paths:
       description: Creates a new comment on a file.
       operationId: drive.comments.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Comment'
         - description: The ID of the file.
           in: path
           name: fileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Comment'
       responses:
         '200':
           description: Successful response
@@ -784,14 +784,14 @@ paths:
       description: Deletes a comment.
       operationId: drive.comments.delete
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
         - description: The ID of the comment.
           in: path
           name: commentId
+          required: true
+          type: string
+        - description: The ID of the file.
+          in: path
+          name: fileId
           required: true
           type: string
       responses:
@@ -808,14 +808,14 @@ paths:
       description: Gets a comment by ID.
       operationId: drive.comments.get
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
         - description: The ID of the comment.
           in: path
           name: commentId
+          required: true
+          type: string
+        - description: The ID of the file.
+          in: path
+          name: fileId
           required: true
           type: string
         - default: false
@@ -849,20 +849,20 @@ paths:
       description: Updates a comment with patch semantics.
       operationId: drive.comments.update
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Comment'
         - description: The ID of the comment.
           in: path
           name: commentId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Comment'
+        - description: The ID of the file.
+          in: path
+          name: fileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -880,14 +880,14 @@ paths:
       description: Lists a comment's replies.
       operationId: drive.replies.list
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
         - description: The ID of the comment.
           in: path
           name: commentId
+          required: true
+          type: string
+        - description: The ID of the file.
+          in: path
+          name: fileId
           required: true
           type: string
         - default: false
@@ -932,20 +932,20 @@ paths:
       description: Creates a new reply to a comment.
       operationId: drive.replies.create
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Reply'
         - description: The ID of the comment.
           in: path
           name: commentId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Reply'
+        - description: The ID of the file.
+          in: path
+          name: fileId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -963,14 +963,14 @@ paths:
       description: Deletes a reply.
       operationId: drive.replies.delete
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
         - description: The ID of the comment.
           in: path
           name: commentId
+          required: true
+          type: string
+        - description: The ID of the file.
+          in: path
+          name: fileId
           required: true
           type: string
         - description: The ID of the reply.
@@ -992,19 +992,14 @@ paths:
       description: Gets a reply by ID.
       operationId: drive.replies.get
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
         - description: The ID of the comment.
           in: path
           name: commentId
           required: true
           type: string
-        - description: The ID of the reply.
+        - description: The ID of the file.
           in: path
-          name: replyId
+          name: fileId
           required: true
           type: string
         - default: false
@@ -1012,6 +1007,11 @@ paths:
           in: query
           name: includeDeleted
           type: boolean
+        - description: The ID of the reply.
+          in: path
+          name: replyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1038,14 +1038,18 @@ paths:
       description: Updates a reply with patch semantics.
       operationId: drive.replies.update
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Reply'
         - description: The ID of the comment.
           in: path
           name: commentId
+          required: true
+          type: string
+        - description: The ID of the file.
+          in: path
+          name: fileId
           required: true
           type: string
         - description: The ID of the reply.
@@ -1053,10 +1057,6 @@ paths:
           name: replyId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Reply'
       responses:
         '200':
           description: Successful response
@@ -1082,6 +1082,10 @@ paths:
       description: Creates a copy of a file and applies any requested updates with patch semantics.
       operationId: drive.files.copy
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/File'
         - description: The ID of the file.
           in: path
           name: fileId
@@ -1106,10 +1110,6 @@ paths:
           in: query
           name: supportsTeamDrives
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/File'
       responses:
         '200':
           description: Successful response
@@ -1486,6 +1486,11 @@ paths:
       description: Gets a revision's metadata or content by ID.
       operationId: drive.revisions.get
       parameters:
+        - default: false
+          description: Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
+          in: query
+          name: acknowledgeAbuse
+          type: boolean
         - description: The ID of the file.
           in: path
           name: fileId
@@ -1496,11 +1501,6 @@ paths:
           name: revisionId
           required: true
           type: string
-        - default: false
-          description: Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
-          in: query
-          name: acknowledgeAbuse
-          type: boolean
       responses:
         '200':
           description: Successful response
@@ -1535,6 +1535,10 @@ paths:
       description: Updates a revision with patch semantics.
       operationId: drive.revisions.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Revision'
         - description: The ID of the file.
           in: path
           name: fileId
@@ -1545,10 +1549,6 @@ paths:
           name: revisionId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Revision'
       responses:
         '200':
           description: Successful response
@@ -1576,25 +1576,25 @@ paths:
       description: Subscribes to changes to a file
       operationId: drive.files.watch
       parameters:
-        - description: The ID of the file.
-          in: path
-          name: fileId
-          required: true
-          type: string
         - default: false
           description: Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
           in: query
           name: acknowledgeAbuse
           type: boolean
+        - description: The ID of the file.
+          in: path
+          name: fileId
+          required: true
+          type: string
+        - in: body
+          name: resource
+          schema:
+            $ref: '#/definitions/Channel'
         - default: false
           description: Whether the requesting application supports Team Drives.
           in: query
           name: supportsTeamDrives
           type: boolean
-        - in: body
-          name: resource
-          schema:
-            $ref: '#/definitions/Channel'
       responses:
         '200':
           description: Successful response
@@ -1666,15 +1666,15 @@ paths:
       description: Creates a new Team Drive.
       operationId: drive.teamdrives.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TeamDrive'
         - description: 'An ID, such as a random UUID, which uniquely identifies this user''s request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.'
           in: query
           name: requestId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TeamDrive'
       responses:
         '200':
           description: Successful response
@@ -1741,15 +1741,15 @@ paths:
       description: Updates a Team Drive's metadata
       operationId: drive.teamdrives.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TeamDrive'
         - description: The ID of the Team Drive
           in: path
           name: teamDriveId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TeamDrive'
       responses:
         '200':
           description: Successful response

@@ -1857,15 +1857,15 @@ paths:
       description: Updates a customer. This method supports patch semantics.
       operationId: directory.customers.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Customer'
         - description: Id of the customer to be updated
           in: path
           name: customerKey
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Customer'
       responses:
         '200':
           description: Successful response
@@ -1880,15 +1880,15 @@ paths:
       description: Updates a customer.
       operationId: directory.customers.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Customer'
         - description: Id of the customer to be updated
           in: path
           name: customerKey
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Customer'
       responses:
         '200':
           description: Successful response
@@ -2919,16 +2919,16 @@ paths:
       description: Delete an ASP issued by a user.
       operationId: directory.asps.delete
       parameters:
-        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
-          in: path
-          name: userKey
-          required: true
-          type: string
         - description: The unique ID of the ASP to be deleted.
           in: path
           name: codeId
           required: true
           type: integer
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2941,16 +2941,16 @@ paths:
       description: Get information about an ASP issued by a user.
       operationId: directory.asps.get
       parameters:
-        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
-          in: path
-          name: userKey
-          required: true
-          type: string
         - description: The unique ID of the ASP.
           in: path
           name: codeId
           required: true
           type: integer
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3125,14 +3125,14 @@ paths:
       description: Delete all access tokens issued by a user for an application.
       operationId: directory.tokens.delete
       parameters:
-        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
-          in: path
-          name: userKey
-          required: true
-          type: string
         - description: The Client ID of the application the token is issued to.
           in: path
           name: clientId
+          required: true
+          type: string
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
+          in: path
+          name: userKey
           required: true
           type: string
       responses:
@@ -3147,14 +3147,14 @@ paths:
       description: Get information about an access token issued by a user.
       operationId: directory.tokens.get
       parameters:
-        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
-          in: path
-          name: userKey
-          required: true
-          type: string
         - description: The Client ID of the application the token is issued to.
           in: path
           name: clientId
+          required: true
+          type: string
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
+          in: path
+          name: userKey
           required: true
           type: string
       responses:
@@ -3188,15 +3188,15 @@ paths:
       description: Undelete a deleted user
       operationId: directory.users.undelete
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UserUndelete'
         - description: The immutable id of the user
           in: path
           name: userKey
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UserUndelete'
       responses:
         '200':
           description: Successful response

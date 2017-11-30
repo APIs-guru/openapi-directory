@@ -130,19 +130,19 @@ tags:
 paths:
   '/v2/entries:list':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Lists log entries. Use this method to retrieve log entries from Stackdriver Logging. For ways to export log entries, see Exporting Logs.'
       operationId: logging.entries.list
@@ -169,19 +169,19 @@ paths:
         - entries
   '/v2/entries:write':
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Log entry resourcesWrites log entries to Stackdriver Logging. This API method is the only way to send log entries to Stackdriver Logging. This method is used, directly or indirectly, by the Stackdriver Logging agent (fluentd) and all logging libraries configured to use Stackdriver Logging.'
       operationId: logging.entries.write
@@ -209,14 +209,14 @@ paths:
       description: Lists the descriptors for monitored resource types used by Stackdriver Logging.
       operationId: logging.monitoredResourceDescriptors.list
       parameters:
-        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
-          in: query
-          name: pageToken
-          type: string
         - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
           in: query
           name: pageSize
           type: integer
+        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -234,23 +234,23 @@ paths:
       tags:
         - monitoredResourceDescriptors
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v2/{logName}':
     delete:
       description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
-      operationId: logging.folders.logs.delete
+      operationId: logging.billingAccounts.logs.delete
       parameters:
         - description: |-
             Required. The resource name of the log to delete:
@@ -275,21 +275,21 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - folders
+        - billingAccounts
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v2/{metricName}':
     delete:
       description: Deletes a logs-based metric.
@@ -346,23 +346,27 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     put:
       description: Creates or updates a logs-based metric.
       operationId: logging.projects.metrics.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LogMetric'
         - description: |-
             The resource name of the metric to update:
             "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
@@ -372,10 +376,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LogMetric'
       responses:
         '200':
           description: Successful response
@@ -393,7 +393,7 @@ paths:
   '/v2/{name}':
     delete:
       description: Deletes an exclusion.
-      operationId: logging.exclusions.delete
+      operationId: logging.billingAccounts.exclusions.delete
       parameters:
         - description: |-
             Required. The resource name of an existing exclusion to delete:
@@ -418,10 +418,10 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - exclusions
+        - billingAccounts
     get:
       description: Gets the description of an exclusion.
-      operationId: logging.exclusions.get
+      operationId: logging.billingAccounts.exclusions.get
       parameters:
         - description: |-
             Required. The resource name of an existing exclusion:
@@ -450,7 +450,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - exclusions
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -467,7 +467,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: Changes one or more properties of an existing exclusion.
-      operationId: logging.exclusions.patch
+      operationId: logging.billingAccounts.exclusions.patch
       parameters:
         - in: body
           name: body
@@ -500,11 +500,11 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - exclusions
+        - billingAccounts
   '/v2/{parent}/exclusions':
     get:
       description: Lists all the exclusions in a parent resource.
-      operationId: logging.exclusions.list
+      operationId: logging.billingAccounts.exclusions.list
       parameters:
         - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
           in: query
@@ -540,7 +540,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - exclusions
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -557,7 +557,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new exclusion in a specified parent resource. Only log entries belonging to that resource can be excluded. You can have up to 10 exclusions in a resource.
-      operationId: logging.exclusions.create
+      operationId: logging.billingAccounts.exclusions.create
       parameters:
         - in: body
           name: body
@@ -586,12 +586,20 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - exclusions
+        - billingAccounts
   '/v2/{parent}/logs':
     get:
       description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
-      operationId: logging.folders.logs.list
+      operationId: logging.billingAccounts.logs.list
       parameters:
+        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
+          in: query
+          name: pageToken
+          type: string
         - description: |
             Required. The resource name that owns the logs:
             "projects/[PROJECT_ID]"
@@ -603,14 +611,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
-          in: query
-          name: pageToken
-          type: string
-        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -626,26 +626,34 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - folders
+        - billingAccounts
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v2/{parent}/metrics':
     get:
       description: Lists logs-based metrics.
       operationId: logging.projects.metrics.list
       parameters:
+        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
+          in: query
+          name: pageToken
+          type: string
         - description: |
             Required. The name of the project containing the metrics:
             "projects/[PROJECT_ID]"
@@ -654,14 +662,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
-          in: query
-          name: pageToken
-          type: string
-        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -679,23 +679,27 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a logs-based metric.
       operationId: logging.projects.metrics.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LogMetric'
         - description: |-
             The resource name of the project in which to create the metric:
             "projects/[PROJECT_ID]"
@@ -705,10 +709,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LogMetric'
       responses:
         '200':
           description: Successful response
@@ -726,8 +726,16 @@ paths:
   '/v2/{parent}/sinks':
     get:
       description: Lists sinks.
-      operationId: logging.folders.sinks.list
+      operationId: logging.billingAccounts.sinks.list
       parameters:
+        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
+          in: query
+          name: pageToken
+          type: string
         - description: |
             Required. The parent resource whose sinks are to be listed:
             "projects/[PROJECT_ID]"
@@ -739,14 +747,6 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
-          in: query
-          name: pageToken
-          type: string
-        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
-          in: query
-          name: pageSize
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -762,25 +762,29 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - folders
+        - billingAccounts
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Creates a sink that exports specified log entries to a destination. The export of newly-ingested log entries begins immediately, unless the sink''s writer_identity is not permitted to write to the destination. A sink can export log entries only from the resource owning the sink.'
-      operationId: logging.folders.sinks.create
+      operationId: logging.billingAccounts.sinks.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LogSink'
         - description: |-
             Required. The resource in which to create the sink:
             "projects/[PROJECT_ID]"
@@ -797,10 +801,6 @@ paths:
           in: query
           name: uniqueWriterIdentity
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LogSink'
       responses:
         '200':
           description: Successful response
@@ -812,11 +812,11 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - folders
+        - billingAccounts
   '/v2/{sinkName}':
     delete:
       description: 'Deletes a sink. If the sink has a unique writer_identity, then that service account is also deleted.'
-      operationId: logging.folders.sinks.delete
+      operationId: logging.billingAccounts.sinks.delete
       parameters:
         - description: |-
             Required. The full resource name of the sink to delete, including the parent resource and the sink identifier:
@@ -841,10 +841,10 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - folders
+        - billingAccounts
     get:
       description: Gets a sink.
-      operationId: logging.folders.sinks.get
+      operationId: logging.billingAccounts.sinks.get
       parameters:
         - description: |-
             Required. The resource name of the sink:
@@ -873,24 +873,24 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - folders
+        - billingAccounts
     parameters:
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     patch:
       description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, and filter. The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
-      operationId: logging.folders.sinks.patch
+      operationId: logging.billingAccounts.sinks.patch
       parameters:
         - in: body
           name: body
@@ -931,10 +931,10 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - folders
+        - billingAccounts
     put:
       description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, and filter. The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
-      operationId: logging.folders.sinks.update
+      operationId: logging.billingAccounts.sinks.update
       parameters:
         - in: body
           name: body
@@ -975,7 +975,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - folders
+        - billingAccounts
 definitions:
   BucketOptions:
     description: 'BucketOptions describes the bucket boundaries used to create a histogram for the distribution. The buckets can be in a linear sequence, an exponential sequence, or each bucket can be specified explicitly. BucketOptions does not include the number of values in each bucket.A bucket has an inclusive lower bound and exclusive upper bound for the values that are counted for that bucket. The upper bound of a bucket must be strictly greater than the lower bound. The sequence of N buckets for a distribution consists of an underflow bucket (number 0), zero or more finite buckets (number 1 through N - 2) and an overflow bucket (number N - 1). The buckets are contiguous: the lower bound of bucket i (i > 0) is the same as the upper bound of bucket i - 1. The buckets span the whole range of finite values: lower bound of the underflow bucket is -infinity and the upper bound of the overflow bucket is +infinity. The finite buckets are so-called because both bounds are finite.'

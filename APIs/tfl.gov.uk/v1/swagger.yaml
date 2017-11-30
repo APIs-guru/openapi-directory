@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: 'push-api-neon.tfl.gov.uk:8001'
+host: api.tfl.gov.uk
 info:
   description: 'Our unified API brings together data across all modes of transport into a single RESTful API. This API provides access to the most highly requested realtime and status infomation across all the modes of transport, in a single and consistent way. Access to the developer documentation is available at https://api.tfl.gov.uk'
   title: Transport for London Unified
@@ -3522,6 +3522,7 @@ definitions:
           - BusyRoads
           - None
           - PushBike
+          - Quietway
         type: string
       turnDirection:
         type: string
@@ -3812,30 +3813,39 @@ definitions:
         type: array
     type: object
   MatchedRoute:
+    description: Description of a Route used in Route search results.
     properties:
       destination:
-        description: 'eg: Destination'
+        description: The Id (NaPTAN code) or the Destination StopPoint
         type: string
       destinationName:
-        description: 'eg: Destination Name'
+        description: The name of the Destination StopPoint
         type: string
       direction:
-        description: 'eg: N or S or I or O'
+        description: Inbound or Outbound
         type: string
       name:
         description: Name such as "72"
         type: string
       originationName:
-        description: 'eg: Origination Name'
+        description: The name of the Origin StopPoint
         type: string
       originator:
-        description: 'eg: Origination'
+        description: The Id (NaPTAN code) of the Origin StopPoint
         type: string
       routeCode:
         description: The route code
         type: string
       serviceType:
-        description: 'eg: Regular, Night'
+        description: Regular or Night
+        type: string
+      validFrom:
+        description: The DateTime that the Service containing this Route is valid from.
+        format: date-time
+        type: string
+      validTo:
+        description: The DateTime that the Service containing this Route is valid until.
+        format: date-time
         type: string
     type: object
   MatchedRouteSections:
@@ -4551,10 +4561,10 @@ definitions:
   RouteSection:
     properties:
       destinationName:
-        description: 'eg: Destination Name'
+        description: The name of the Destination StopPoint
         type: string
       direction:
-        description: 'eg: N or S or I or O'
+        description: Inbound or Outbound
         type: string
       id:
         description: The Id of the route
@@ -4563,13 +4573,13 @@ definitions:
         description: The Id of the Line
         type: string
       lineString:
-        description: 'eg: Path coordindates'
+        description: The co-ordinates of the route's path as a geoJSON lineString
         type: string
       name:
         description: Name such as "72"
         type: string
       originationName:
-        description: 'eg: Origination Name'
+        description: The name of the Origin StopPoint
         type: string
       routeCode:
         description: The route code
@@ -4578,6 +4588,14 @@ definitions:
         items:
           $ref: '#/definitions/RouteSectionNaptanEntrySequence'
         type: array
+      validFrom:
+        description: The DateTime that the Service containing this Route is valid from.
+        format: date-time
+        type: string
+      validTo:
+        description: The DateTime that the Service containing this Route is valid until.
+        format: date-time
+        type: string
     type: object
   RouteSectionNaptanEntrySequence:
     properties:

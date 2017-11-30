@@ -86,20 +86,31 @@ paths:
       description: Retrieves a list of conversions from a DoubleClick Search engine account.
       operationId: doubleclicksearch.conversion.get
       parameters:
-        - description: Numeric ID of the agency.
-          in: path
-          name: agencyId
-          required: true
+        - description: Numeric ID of the ad group.
+          in: query
+          name: adGroupId
+          type: string
+        - description: Numeric ID of the ad.
+          in: query
+          name: adId
           type: string
         - description: Numeric ID of the advertiser.
           in: path
           name: advertiserId
           required: true
           type: string
-        - description: Numeric ID of the engine account.
+        - description: Numeric ID of the agency.
           in: path
-          name: engineAccountId
+          name: agencyId
           required: true
+          type: string
+        - description: Numeric ID of the campaign.
+          in: query
+          name: campaignId
+          type: string
+        - description: Numeric ID of the criterion.
+          in: query
+          name: criterionId
           type: string
         - description: Last date (inclusive) on which to retrieve conversions. Format is yyyymmdd.
           in: query
@@ -108,6 +119,11 @@ paths:
           name: endDate
           required: true
           type: integer
+        - description: Numeric ID of the engine account.
+          in: path
+          name: engineAccountId
+          required: true
+          type: string
         - description: The number of conversions to return per call.
           in: query
           maximum: 1000
@@ -127,22 +143,6 @@ paths:
           name: startRow
           required: true
           type: integer
-        - description: Numeric ID of the ad group.
-          in: query
-          name: adGroupId
-          type: string
-        - description: Numeric ID of the ad.
-          in: query
-          name: adId
-          type: string
-        - description: Numeric ID of the campaign.
-          in: query
-          name: campaignId
-          type: string
-        - description: Numeric ID of the criterion.
-          in: query
-          name: criterionId
-          type: string
       responses:
         '200':
           description: Successful response
@@ -166,14 +166,14 @@ paths:
       description: Retrieve the list of saved columns for a specified advertiser.
       operationId: doubleclicksearch.savedColumns.list
       parameters:
-        - description: DS ID of the agency.
-          in: path
-          name: agencyId
-          required: true
-          type: string
         - description: DS ID of the advertiser.
           in: path
           name: advertiserId
+          required: true
+          type: string
+        - description: DS ID of the agency.
+          in: path
+          name: agencyId
           required: true
           type: string
       responses:
@@ -217,6 +217,10 @@ paths:
           name: agencyId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ConversionList'
         - description: Last date (inclusive) on which to retrieve conversions. Format is yyyymmdd.
           in: query
           maximum: 99991231
@@ -248,10 +252,6 @@ paths:
           name: startRow
           required: true
           type: integer
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ConversionList'
       responses:
         '200':
           description: Successful response
@@ -412,17 +412,17 @@ paths:
       description: Downloads a report file encoded in UTF-8.
       operationId: doubleclicksearch.reports.getFile
       parameters:
-        - description: ID of the report.
-          in: path
-          name: reportId
-          required: true
-          type: string
         - description: The index of the report fragment to download.
           in: path
           minimum: 0
           name: reportFragment
           required: true
           type: integer
+        - description: ID of the report.
+          in: path
+          name: reportId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response

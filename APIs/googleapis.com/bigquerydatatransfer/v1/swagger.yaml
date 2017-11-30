@@ -488,13 +488,16 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: |-
+        - collectionFormat: multi
+          description: |-
             Pagination token, which can be used to request a specific page
             of `ListTransfersRequest` list results. For multiple-page
             results, `ListTransfersResponse` outputs
             a `next_page` token, which can be used as the
             `page_token` value to request the next page of list results.
           in: query
+          items:
+            type: string
           name: pageToken
           type: string
         - description: |-

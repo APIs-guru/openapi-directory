@@ -1109,26 +1109,20 @@ definitions:
           Acceptable values are:  
           - "gsx" 
           - "ups" 
-          - "united parcel service" 
           - "usps" 
-          - "united states postal service" 
           - "fedex" 
           - "dhl" 
           - "ecourier" 
           - "cxt" 
           - "google" 
-          - "on trac" 
           - "ontrac" 
-          - "on-trac" 
-          - "on_trac" 
-          - "delvic" 
+          - "emsy" 
+          - "ont" 
+          - "deliv" 
           - "dynamex" 
           - "lasership" 
-          - "smartpost" 
-          - "fedex smartpost" 
           - "mpx" 
-          - "uds" 
-          - "united delivery service"
+          - "uds"
         type: string
       creationDate:
         description: 'Date on which the shipment has been created, in ISO 8601 format.'
@@ -1155,6 +1149,9 @@ definitions:
     properties:
       lineItemId:
         description: The id of the line item that is shipped. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to ship. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity that is shipped.
@@ -1189,11 +1186,20 @@ definitions:
       amount:
         $ref: '#/definitions/Price'
         description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to cancellation amount in amountPretax.
       lineItemId:
         description: The ID of the line item to cancel. Either lineItemId or productId is required.
         type: string
       operationId:
         description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to cancel. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity to cancel.
@@ -1320,8 +1326,17 @@ definitions:
       amount:
         $ref: '#/definitions/Price'
         description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to cancellation amount in amountPretax.
       lineItemId:
         description: The ID of the line item to cancel. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to cancel. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity to cancel.
@@ -1339,6 +1354,12 @@ definitions:
       amount:
         $ref: '#/definitions/Price'
         description: The amount that is refunded.
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: The amount that is refunded. Either amount or amountPretax and amountTax should be filled.
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax.
       reason:
         description: The reason for the refund.
         type: string
@@ -1350,6 +1371,9 @@ definitions:
     properties:
       lineItemId:
         description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity to return.
@@ -1482,6 +1506,12 @@ definitions:
       amount:
         $ref: '#/definitions/Price'
         description: The amount that is refunded.
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: The amount that is refunded. Either amount or amountPretax and amountTax should be filled.
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax.
       operationId:
         description: The ID of the operation. Unique across all operations for a given order.
         type: string
@@ -1509,6 +1539,9 @@ definitions:
         type: string
       operationId:
         description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       quantity:
         description: The quantity to return.
@@ -1636,6 +1669,9 @@ definitions:
         items:
           $ref: '#/definitions/TestOrderLineItem'
         type: array
+      notificationMode:
+        description: Determines if test order must be pulled by merchant or pushed to merchant via push integration.
+        type: string
       paymentMethod:
         $ref: '#/definitions/TestOrderPaymentMethod'
         description: The details of the payment method.
