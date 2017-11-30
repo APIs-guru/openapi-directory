@@ -299,7 +299,7 @@ function validateCollection(dir, command) {
 }
 
 function validatePreferred(specs) {
-  var preferred = {}
+  var preferred = {};
   _.each(specs, function (swagger) {
     var id = util.getApiId(swagger);
     preferred[id] = preferred[id] || {};
@@ -309,15 +309,33 @@ function validatePreferred(specs) {
 
   _.each(preferred, function (versions, id) {
     if (_.size(versions) === 1) {
-      versions = _.values(versions);
-      assert(_.isUndefined(versions[0]) || versions[0] === true,
-        'Preferred not true in "' + id + '"');
+      let oversion = Object.keys(versions)[0];
+      versions = _.values(versions); //?
+      //assert(_.isUndefined(versions[0]) || versions[0] === true,
+      //  'Preferred not true in "' + id + '"');
+      if (versions[0] === false) {
+        let swagger = specs[id.replace(':','/')+'/'+oversion+'/swagger.yaml'];
+        if (swagger) {
+          swagger.info["x-preferred"] = true;
+          util.saveSwagger(swagger);
+        }
+        else console.warn('Not found',id,oversion);
+      }
       return;
     }
 
     var seenTrue = false;
     _.each(versions, function (value, version) {
-      assert(!_.isUndefined(value), `Missing value for "x-preferred" in "${id}" "${version}"`);
+      //assert(!_.isUndefined(value), `Missing value for "x-preferred" in "${id}" "${version}"`);
+      if (_.isUndefined(value)) {
+        let swagger = specs[id.replace(':','/')+'/'+version+'/swagger.yaml'];
+        if (swagger) {
+          swagger.info["x-preferred"] = false;
+          util.saveSwagger(swagger);
+          value = false;
+        }
+        else console.warn('Not found',id,version);
+      }
       assert(_.isBoolean(value), `Non boolean value for "x-preferred" in "${id}" "${version}"`);
       assert(value !== true || !seenTrue, `Multiple preferred versions in "${id}" "${version}"`);
       seenTrue = value || seenTrue;
