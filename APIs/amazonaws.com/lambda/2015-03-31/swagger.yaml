@@ -444,6 +444,54 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2017-10-31/functions/{FunctionName}/concurrency':
+    put:
+      operationId: PutFunctionConcurrency
+      description: 'Sets a limit on the number of concurrent executions available to this function. It is a subset of your account''s total concurrent execution limit per region. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Concurrency'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutFunctionConcurrencyRequest'
+        - name: FunctionName
+          in: path
+          type: string
+          required: true
+        - name: FunctionName
+          in: query
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /2016-08-19/account-settings/:
     get:
       operationId: GetAccountSettings
@@ -949,6 +997,9 @@ definitions:
       ConcurrentExecutions:
         $ref: '#/definitions/Integer'
         description: 'Number of simultaneous executions of your function per region. For more information or to request a limit increase for concurrent executions, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Lambda Function Concurrent Executions</a>. The default limit is 1000.'
+      UnreservedConcurrentExecutions:
+        $ref: '#/definitions/UnreservedConcurrentExecutions'
+        description: The number of concurrent executions available to functions that do not have concurrency limits set.
     description: Provides limits of code size and concurrency associated with the current account and region.
   AccountUsage:
     type: object
@@ -1082,6 +1133,12 @@ definitions:
       message:
         $ref: '#/definitions/String'
     description: 'You have exceeded your maximum total code size per account. <a href="http://docs.aws.amazon.com/lambda/latest/dg/limits.html">Limits</a> '
+  Concurrency:
+    type: object
+    properties:
+      ReservedConcurrentExecutions:
+        $ref: '#/definitions/ReservedConcurrentExecutions'
+        description: The number of concurrent executions reserved for this function.
   CreateAliasRequest:
     type: object
     required:
@@ -1151,7 +1208,7 @@ definitions:
         description: 'The name you want to assign to the function you are uploading. The function names appear in the console and are returned in the <a>ListFunctions</a> API. Function names are used to specify functions to other AWS Lambda API operations, such as <a>Invoke</a>. Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length. '
       Runtime:
         $ref: '#/definitions/Runtime'
-        description: '<p>The runtime environment for the Lambda function you are uploading.</p> <p>To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3".</p> <note> <p>Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. You can request a one-time extension until June 30, 2017 by going to the Lambda console and following the instructions provided. Failure to do so will result in an invalid parmaeter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime.</p> </note>'
+        description: '<p>The runtime environment for the Lambda function you are uploading.</p> <p>To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3".</p> <note> <p>Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure to do so will result in an invalid parmaeter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime.</p> </note>'
       Role:
         $ref: '#/definitions/RoleArn'
         description: 'The Amazon Resource Name (ARN) of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services (AWS) resources. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html">AWS Lambda: How it Works</a>. '
@@ -1213,6 +1270,9 @@ definitions:
       UUID: 12345kxodurf3443
     properties: {}
     description: <p/>
+  DeleteFunctionConcurrencyRequest:
+    type: object
+    properties: {}
   DeleteFunctionRequest:
     type: object
     example:
@@ -1540,6 +1600,9 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
         description: Returns the list of tags associated with the function.
+      Concurrency:
+        $ref: '#/definitions/Concurrency'
+        description: The concurrent execution limit set for this function.
     description: This response contains the object for the Lambda function location (see <a>FunctionCodeLocation</a>.
   GetPolicyRequest:
     type: object
@@ -1574,7 +1637,7 @@ definitions:
       message:
         $ref: '#/definitions/String'
         description: <p/>
-    description: 'One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. You will also get this exception if you have selected a deprecated runtime, such as Node v0.10.42 or if you point to an additional version when the version specified is <code>$LATEST</code>.'
+    description: 'One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception.'
   InvalidRequestContentException:
     type: object
     properties:
@@ -1803,7 +1866,7 @@ definitions:
   MemorySize:
     type: integer
     minimum: 128
-    maximum: 1536
+    maximum: 3008
   NameSpacedFunctionArn:
     type: string
     pattern: 'arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_\.]+(:(\$LATEST|[a-zA-Z0-9-_]+))?'
@@ -1842,6 +1905,14 @@ definitions:
         $ref: '#/definitions/Description'
         description: 'The description for the version you are publishing. If not provided, AWS Lambda copies the description from the $LATEST version.'
     description: <p/>
+  PutFunctionConcurrencyRequest:
+    type: object
+    required:
+      - ReservedConcurrentExecutions
+    properties:
+      ReservedConcurrentExecutions:
+        $ref: '#/definitions/ReservedConcurrentExecutions'
+        description: The concurrent execution limit reserved for this function.
   Qualifier:
     type: string
     pattern: '(|[a-zA-Z0-9$_-]+)'
@@ -1863,6 +1934,9 @@ definitions:
       message:
         $ref: '#/definitions/String'
     description: 'The request payload exceeded the <code>Invoke</code> request body JSON input limit. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/limits.html">Limits</a>. '
+  ReservedConcurrentExecutions:
+    type: integer
+    minimum: 0
   ResourceArn:
     type: string
     pattern: '(arn:aws:[a-z0-9-.]+:.*)|()'
@@ -1984,6 +2058,8 @@ definitions:
     enum:
       - ConcurrentInvocationLimitExceeded
       - FunctionInvocationRateLimitExceeded
+      - ReservedFunctionConcurrentInvocationLimitExceeded
+      - ReservedFunctionInvocationRateLimitExceeded
       - CallerRateLimitExceeded
   Timeout:
     type: integer
@@ -1999,7 +2075,7 @@ definitions:
         $ref: '#/definitions/String'
       Reason:
         $ref: '#/definitions/ThrottleReason'
-    description: <p/>
+    description: 'You will get this exception for the following reasons. <code>ConcurrentInvocationLimitExceeded</code> is returned if you have no functions with reserved-concurrency and have exceeded your account concurrent limit or if a function without reserved concurrency exceeds the account''s unreserved concurrency limit. <code>ReservedFunctionConcurrentInvocationLimitExceeded</code> is returned when a function with reserved concurrency exceeds its configured concurrent limit. <code>CallerRateLimitExceeded</code> is returned when your account limit is exceeded and you have not reserved concurrency on any function. For more information, see <a>concurrent-executions</a> '
   TracingConfig:
     type: object
     properties:
@@ -2019,6 +2095,9 @@ definitions:
     enum:
       - Active
       - PassThrough
+  UnreservedConcurrentExecutions:
+    type: integer
+    minimum: 0
   UnsupportedMediaTypeException:
     type: object
     properties:
@@ -2128,7 +2207,7 @@ definitions:
         description: The parent object that contains your environment's configuration settings.
       Runtime:
         $ref: '#/definitions/Runtime'
-        description: '<p>The runtime environment for the Lambda function.</p> <p>To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use the Python runtime v3.6, set the value to "python3.6".</p> <note> <p>Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. You can request a one-time extension until June 30, 2017 by going to the Lambda console and following the instructions provided. Failure to do so will result in an invalid parameter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime.</p> </note>'
+        description: '<p>The runtime environment for the Lambda function.</p> <p>To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use the Python runtime v3.6, set the value to "python3.6".</p> <note> <p>Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure to do so will result in an invalid parameter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime.</p> </note>'
       DeadLetterConfig:
         $ref: '#/definitions/DeadLetterConfig'
         description: The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.
