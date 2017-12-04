@@ -1,0 +1,245 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  title: RecoveryServicesClient
+  version: '2016-06-01'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/recoveryservices/resource-manager/Microsoft.RecoveryServices/2016-06-01/registeredidentities.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: recoveryservices-registeredidentities
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account.
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersion:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  ResourceGroupName:
+    description: The name of the resource group where the recovery services vault is present.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionId:
+    description: The subscription Id.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+  VaultName:
+    description: The name of the recovery services vault.
+    in: path
+    name: vaultName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+paths:
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/certificates/{certificateName}':
+    put:
+      deprecated: false
+      description: Upload a certificate for a resource.
+      operationId: VaultCertificates_Create
+      parameters:
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/VaultName'
+        - description: Certificate friendly name.
+          in: path
+          name: certificateName
+          required: true
+          type: string
+        - description: Input parameters for uploading the vault certificate.
+          in: body
+          name: certificateRequest
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/VaultCertificateResponse'
+      tags:
+        - VaultCertificates
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/registeredIdentities/{identityName}':
+    delete:
+      deprecated: false
+      description: Unregisters the given container from your Recovery Services vault.
+      operationId: RegisteredIdentities_Delete
+      parameters:
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/VaultName'
+        - description: Name of the protection container to unregister.
+          in: path
+          name: identityName
+          required: true
+          type: string
+      responses:
+        '204':
+          description: NoContent
+      tags:
+        - RegisteredIdentities
+definitions:
+  CertificateRequest:
+    description: Details of the certificate to be uploaded to the vault.
+    properties:
+      properties:
+        $ref: '#/definitions/RawCertificateData'
+    type: object
+  RawCertificateData:
+    description: Raw certificate data.
+    properties:
+      authType:
+        description: Specifies the authentication type.
+        enum:
+          - Invalid
+          - ACS
+          - AAD
+          - AccessControlService
+          - AzureActiveDirectory
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: AuthType
+      certificate:
+        description: The base64 encoded certificate raw data string
+        format: byte
+        type: string
+    type: object
+  ResourceCertificateAndAadDetails:
+    allOf:
+      - $ref: '#/definitions/ResourceCertificateDetails'
+    description: Certificate details representing the Vault credentials for AAD.
+    properties:
+      aadAuthority:
+        description: AAD tenant authority.
+        type: string
+      aadTenantId:
+        description: AAD tenant Id.
+        type: string
+      azureManagementEndpointAudience:
+        description: Azure Management Endpoint Audience.
+        type: string
+      servicePrincipalClientId:
+        description: AAD service principal clientId.
+        type: string
+      servicePrincipalObjectId:
+        description: AAD service principal ObjectId.
+        type: string
+    required:
+      - certificate
+      - resourceId
+      - aadAuthority
+      - aadTenantId
+      - servicePrincipalClientId
+      - servicePrincipalObjectId
+      - azureManagementEndpointAudience
+      - subject
+      - validFrom
+      - validTo
+      - thumbprint
+      - friendlyName
+      - issuer
+    type: object
+    x-ms-discriminator-value: AzureActiveDirectory
+  ResourceCertificateAndAcsDetails:
+    allOf:
+      - $ref: '#/definitions/ResourceCertificateDetails'
+    description: Certificate details representing the Vault credentials for ACS.
+    properties:
+      globalAcsHostName:
+        description: Acs mgmt host name to connect to.
+        type: string
+      globalAcsNamespace:
+        description: ACS namespace name - tenant for our service.
+        type: string
+      globalAcsRPRealm:
+        description: Global ACS namespace RP realm.
+        type: string
+    required:
+      - certificate
+      - resourceId
+      - globalAcsNamespace
+      - globalAcsHostName
+      - globalAcsRPRealm
+      - subject
+      - validFrom
+      - validTo
+      - thumbprint
+      - friendlyName
+      - issuer
+    type: object
+    x-ms-discriminator-value: AccessControlService
+  ResourceCertificateDetails:
+    description: Certificate details representing the Vault credentials.
+    discriminator: authType
+    properties:
+      authType:
+        description: This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.
+        type: string
+      certificate:
+        description: The base64 encoded certificate raw data string.
+        format: byte
+        type: string
+      friendlyName:
+        description: Certificate friendlyname.
+        type: string
+      issuer:
+        description: Certificate issuer.
+        type: string
+      resourceId:
+        description: Resource ID of the vault.
+        format: int64
+        type: integer
+      subject:
+        description: Certificate Subject Name.
+        type: string
+      thumbprint:
+        description: Certificate thumbprint.
+        type: string
+      validFrom:
+        description: Certificate Validity start Date time.
+        format: date-time
+        type: string
+      validTo:
+        description: Certificate Validity End Date time.
+        format: date-time
+        type: string
+    required:
+      - authType
+    type: object
+  VaultCertificateResponse:
+    description: Certificate corresponding to a vault that can be used by clients to register themselves with the vault.
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      properties:
+        $ref: '#/definitions/ResourceCertificateDetails'
+      type:
+        type: string
+    type: object

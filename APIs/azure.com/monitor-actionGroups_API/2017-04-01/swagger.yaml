@@ -1,0 +1,599 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  title: Azure Action Groups
+  version: '2017-04-01'
+  x-ms-code-generation-settings:
+    name: MonitorManagementClient
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/monitor/resource-manager/microsoft.insights/2017-04-01/actionGroups_API.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: monitor-actionGroups_API
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ActionGroupNameParameter:
+    description: The name of the action group.
+    in: path
+    name: actionGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ApiVersionParameter:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  ResourceGroupNameParameter:
+    description: The name of the resource group.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: The Azure subscription Id.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/subscriptions/{subscriptionId}/providers/microsoft.insights/actionGroups':
+    get:
+      description: Get a list of all action groups in a subscription.
+      operationId: ActionGroups_ListBySubscriptionId
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request succeeded.
+          schema:
+            $ref: '#/definitions/ActionGroupList'
+        default:
+          description: An error occurred and the list of action groups could not be retrieved.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        List action groups:
+          parameters:
+            api-version: '2017-04-01'
+            resourceGroupName: Default-NotificationRules
+            subscriptionId: 187f412d-1758-44d9-b052-169e2564721d
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-NotificationRules/providers/microsoft.insights/actionGroups/SampleActionGroup
+                    location: Global
+                    name: SampleActionGroup
+                    properties:
+                      emailReceivers:
+                        - emailAddress: johndoe@email.com
+                          name: John Doe's email
+                          status: Enabled
+                        - emailAddress: janesmith@email.com
+                          name: Jane Smith's email
+                          status: Disabled
+                      enabled: true
+                      groupShortName: sample
+                      smsReceivers:
+                        - countryCode: '1'
+                          name: John Doe's mobile
+                          phoneNumber: '1234567890'
+                          status: Disabled
+                        - countryCode: '1'
+                          name: Jane Smith's mobile
+                          phoneNumber: 0987654321
+                          status: Enabled
+                      webhookReceivers:
+                        - name: Sample webhook
+                          serviceUri: 'http://www.example.com/webhook'
+                    tags: {}
+                    type: Microsoft.Insights/ActionGroups
+                  - id: /subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-NotificationRules/providers/microsoft.insights/actionGroups/SampleActionGroup2
+                    location: Global
+                    name: SampleActionGroup2
+                    properties:
+                      emailReceivers:
+                        - emailAddress: johndoe@email.com
+                          name: John Doe's email
+                          status: Enabled
+                      enabled: false
+                      groupShortName: sample2
+                      smsReceivers:
+                        - countryCode: '1'
+                          name: Jane Smith's mobile
+                          phoneNumber: 0987654321
+                          status: Enabled
+                      webhookReceivers: []
+                    tags: {}
+                    type: Microsoft.Insights/ActionGroups
+              headers: {}
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/actionGroups':
+    get:
+      description: Get a list of all action groups in a resource group.
+      operationId: ActionGroups_ListByResourceGroup
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request succeeded.
+          schema:
+            $ref: '#/definitions/ActionGroupList'
+        default:
+          description: An error occurred and the list of action groups could not be retrieved.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        List action groups:
+          parameters:
+            api-version: '2017-04-01'
+            resourceGroupName: Default-NotificationRules
+            subscriptionId: 187f412d-1758-44d9-b052-169e2564721d
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-NotificationRules/providers/microsoft.insights/actionGroups/SampleActionGroup
+                    location: Global
+                    name: SampleActionGroup
+                    properties:
+                      emailReceivers:
+                        - emailAddress: johndoe@email.com
+                          name: John Doe's email
+                          status: Enabled
+                        - emailAddress: janesmith@email.com
+                          name: Jane Smith's email
+                          status: Disabled
+                      enabled: true
+                      groupShortName: sample
+                      smsReceivers:
+                        - countryCode: '1'
+                          name: John Doe's mobile
+                          phoneNumber: '1234567890'
+                          status: Disabled
+                        - countryCode: '1'
+                          name: Jane Smith's mobile
+                          phoneNumber: 0987654321
+                          status: Enabled
+                      webhookReceivers:
+                        - name: Sample webhook
+                          serviceUri: 'http://www.example.com/webhook'
+                    tags: {}
+                    type: Microsoft.Insights/ActionGroups
+                  - id: /subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-NotificationRules/providers/microsoft.insights/actionGroups/SampleActionGroup2
+                    location: Global
+                    name: SampleActionGroup2
+                    properties:
+                      emailReceivers:
+                        - emailAddress: johndoe@email.com
+                          name: John Doe's email
+                          status: Enabled
+                      enabled: false
+                      groupShortName: sample2
+                      smsReceivers:
+                        - countryCode: '1'
+                          name: Jane Smith's mobile
+                          phoneNumber: 0987654321
+                          status: Enabled
+                      webhookReceivers: []
+                    tags: {}
+                    type: Microsoft.Insights/ActionGroups
+              headers: {}
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/actionGroups/{actionGroupName}':
+    delete:
+      description: Delete an action group.
+      operationId: ActionGroups_Delete
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ActionGroupNameParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The action group was successfully deleted.
+        '204':
+          description: The action group does not exist. It may have already been deleted.
+        default:
+          description: An error occurred and the action group could not be deleted.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Delete an action group:
+          parameters:
+            actionGroupName: SampleActionGroup
+            api-version: '2017-04-01'
+            resourceGroupName: Default-NotificationRules
+            subscriptionId: 187f412d-1758-44d9-b052-169e2564721d
+          responses:
+            '200':
+              body: null
+              headers: {}
+            '204':
+              body: null
+              headers: {}
+    get:
+      description: Get an action group.
+      operationId: ActionGroups_Get
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ActionGroupNameParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The request succeeded.
+          schema:
+            $ref: '#/definitions/ActionGroupResource'
+        default:
+          description: 'An error occurred and the action group could not be retrieved. 404: The action group does not exist.'
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Get an action group:
+          parameters:
+            actionGroupName: SampleActionGroup
+            api-version: '2017-04-01'
+            resourceGroupName: Default-NotificationRules
+            subscriptionId: 187f412d-1758-44d9-b052-169e2564721d
+          responses:
+            '200':
+              body:
+                id: /subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-NotificationRules/providers/microsoft.insights/actionGroups/SampleActionGroup
+                location: Global
+                name: SampleActionGroup
+                properties:
+                  emailReceivers:
+                    - emailAddress: johndoe@email.com
+                      name: John Doe's email
+                      status: Enabled
+                    - emailAddress: janesmith@email.com
+                      name: Jane Smith's email
+                      status: Disabled
+                  enabled: true
+                  groupShortName: sample
+                  smsReceivers:
+                    - countryCode: '1'
+                      name: John Doe's mobile
+                      phoneNumber: '1234567890'
+                      status: Disabled
+                    - countryCode: '1'
+                      name: Jane Smith's mobile
+                      phoneNumber: 0987654321
+                      status: Enabled
+                  webhookReceivers:
+                    - name: Sample webhook
+                      serviceUri: 'http://www.example.com/webhook'
+                tags: {}
+                type: Microsoft.Insights/ActionGroups
+              headers: {}
+    put:
+      description: Create a new action group or update an existing one.
+      operationId: ActionGroups_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ActionGroupNameParameter'
+        - description: The action group to create or use for the update.
+          in: body
+          name: actionGroup
+          required: true
+          schema:
+            $ref: '#/definitions/ActionGroupResource'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: An existing action group was successfully updated.
+          schema:
+            $ref: '#/definitions/ActionGroupResource'
+        '201':
+          description: A new action group was successfully created.
+          schema:
+            $ref: '#/definitions/ActionGroupResource'
+        default:
+          description: An error occurred and the action group could not be created or updated.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Create or update an action group:
+          parameters:
+            actionGroup:
+              location: Global
+              properties:
+                emailReceivers:
+                  - emailAddress: johndoe@email.com
+                    name: John Doe's email
+                  - emailAddress: janesmith@email.com
+                    name: Jane Smith's email
+                enabled: true
+                groupShortName: sample
+                smsReceivers:
+                  - countryCode: '1'
+                    name: John Doe's mobile
+                    phoneNumber: '1234567890'
+                  - countryCode: '1'
+                    name: Jane Smith's mobile
+                    phoneNumber: 0987654321
+                webhookReceivers:
+                  - name: Sample webhook
+                    serviceUri: 'http://www.example.com/webhook'
+              tags: {}
+            actionGroupName: SampleActionGroup
+            api-version: '2017-04-01'
+            resourceGroupName: Default-NotificationRules
+            subscriptionId: 187f412d-1758-44d9-b052-169e2564721d
+          responses:
+            '200':
+              body:
+                id: /subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-NotificationRules/providers/microsoft.insights/actionGroups/SampleActionGroup
+                location: Global
+                name: SampleActionGroup
+                properties:
+                  emailReceivers:
+                    - emailAddress: johndoe@email.com
+                      name: John Doe's email
+                      status: Enabled
+                    - emailAddress: janesmith@email.com
+                      name: Jane Smith's email
+                      status: Enabled
+                  enabled: true
+                  groupShortName: sample
+                  smsReceivers:
+                    - countryCode: '1'
+                      name: John Doe's mobile
+                      phoneNumber: '1234567890'
+                      status: Enabled
+                    - countryCode: '1'
+                      name: Jane Smith's mobile
+                      phoneNumber: 0987654321
+                      status: Enabled
+                  webhookReceivers:
+                    - name: Sample webhook
+                      serviceUri: 'http://www.example.com/webhook'
+                tags: {}
+                type: Microsoft.Insights/ActionGroups
+              headers: {}
+            '201':
+              body:
+                id: /subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-NotificationRules/providers/microsoft.insights/actionGroups/SampleActionGroup
+                location: Global
+                name: SampleActionGroup
+                properties:
+                  emailReceivers:
+                    - emailAddress: johndoe@email.com
+                      name: John Doe's email
+                      status: Enabled
+                    - emailAddress: janesmith@email.com
+                      name: Jane Smith's email
+                      status: Enabled
+                  enabled: true
+                  groupShortName: sample
+                  smsReceivers:
+                    - countryCode: '1'
+                      name: John Doe's mobile
+                      phoneNumber: '1234567890'
+                      status: Enabled
+                    - countryCode: '1'
+                      name: Jane Smith's mobile
+                      phoneNumber: 0987654321
+                      status: Enabled
+                  webhookReceivers:
+                    - name: Sample webhook
+                      serviceUri: 'http://www.example.com/webhook'
+                tags: {}
+                type: Microsoft.Insights/ActionGroups
+              headers: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/actionGroups/{actionGroupName}/subscribe':
+    post:
+      description: Enable a receiver in an action group. This changes the receiver's status from Disabled to Enabled.
+      operationId: ActionGroups_EnableReceiver
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ActionGroupNameParameter'
+        - description: The receiver to re-enable.
+          in: body
+          name: enableRequest
+          required: true
+          schema:
+            $ref: '#/definitions/EnableRequest'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The receiver was successfully enabled.
+        '409':
+          description: The receiver is already enabled in the action group.
+        default:
+          description: 'An error occurred and the receiver could not be enabled, e.g.: 404: The action group was not found or no matching receiver was found in the action group.'
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Enable the receiver:
+          parameters:
+            actionGroupName: SampleActionGroup
+            api-version: '2017-04-01'
+            enableRequest:
+              receiverName: John Doe's mobile
+            resourceGroupName: Default-NotificationRules
+            subscriptionId: 187f412d-1758-44d9-b052-169e2564721d
+          responses:
+            '200':
+              body: null
+              headers: {}
+definitions:
+  ActionGroup:
+    description: An Azure action group.
+    properties:
+      emailReceivers:
+        description: The list of email receivers that are part of this action group.
+        items:
+          $ref: '#/definitions/EmailReceiver'
+        type: array
+      enabled:
+        default: true
+        description: 'Indicates whether this action group is enabled. If an action group is not enabled, then none of its receivers will receive communications.'
+        type: boolean
+      groupShortName:
+        description: The short name of the action group. This will be used in SMS messages.
+        maxLength: 15
+        type: string
+      smsReceivers:
+        description: The list of SMS receivers that are part of this action group.
+        items:
+          $ref: '#/definitions/SmsReceiver'
+        type: array
+      webhookReceivers:
+        description: The list of webhook receivers that are part of this action group.
+        items:
+          $ref: '#/definitions/WebhookReceiver'
+        type: array
+    required:
+      - groupShortName
+      - enabled
+  ActionGroupList:
+    description: A list of action groups.
+    properties:
+      nextLink:
+        description: Provides the link to retrieve the next set of elements.
+        type: string
+      value:
+        description: The list of action groups.
+        items:
+          $ref: '#/definitions/ActionGroupResource'
+        type: array
+  ActionGroupResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: An action group resource.
+    properties:
+      properties:
+        $ref: '#/definitions/ActionGroup'
+        description: The action groups properties of the resource.
+        x-ms-client-flatten: true
+  EmailReceiver:
+    description: An email receiver.
+    properties:
+      emailAddress:
+        description: The email address of this receiver.
+        type: string
+      name:
+        description: The name of the email receiver. Names must be unique across all receivers within an action group.
+        type: string
+      status:
+        $ref: '#/definitions/ReceiverStatus'
+        description: The receiver status of the e-mail.
+        readOnly: true
+    required:
+      - name
+      - emailAddress
+  EnableRequest:
+    description: Describes a receiver that should be resubscribed.
+    properties:
+      receiverName:
+        description: The name of the receiver to resubscribe.
+        type: string
+    required:
+      - receiverName
+  ErrorResponse:
+    description: Describes the format of Error response.
+    properties:
+      code:
+        description: Error code
+        type: string
+      message:
+        description: Error message indicating why the operation failed.
+        type: string
+    type: object
+  ReceiverStatus:
+    description: Indicates the status of the receiver. Receivers that are not Enabled will not receive any communications.
+    enum:
+      - NotSpecified
+      - Enabled
+      - Disabled
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: ReceiverStatus
+  Resource:
+    description: An azure resource object
+    properties:
+      id:
+        description: Azure resource Id
+        readOnly: true
+        type: string
+      location:
+        description: Resource location
+        type: string
+        x-ms-mutability:
+          - create
+          - read
+      name:
+        description: Azure resource name
+        readOnly: true
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags
+      type:
+        description: Azure resource type
+        readOnly: true
+        type: string
+    required:
+      - location
+    x-ms-azure-resource: true
+  SmsReceiver:
+    description: An SMS receiver.
+    properties:
+      countryCode:
+        description: The country code of the SMS receiver.
+        type: string
+      name:
+        description: The name of the SMS receiver. Names must be unique across all receivers within an action group.
+        type: string
+      phoneNumber:
+        description: The phone number of the SMS receiver.
+        type: string
+      status:
+        $ref: '#/definitions/ReceiverStatus'
+        description: The status of the receiver.
+        readOnly: true
+    required:
+      - name
+      - countryCode
+      - phoneNumber
+  WebhookReceiver:
+    description: A webhook receiver.
+    properties:
+      name:
+        description: The name of the webhook receiver. Names must be unique across all receivers within an action group.
+        type: string
+      serviceUri:
+        description: The URI where webhooks should be sent.
+        type: string
+    required:
+      - name
+      - serviceUri

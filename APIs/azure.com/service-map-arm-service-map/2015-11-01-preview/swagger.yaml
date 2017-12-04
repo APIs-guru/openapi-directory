@@ -1,0 +1,1931 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: Service Map API Reference
+  title: Service Map
+  version: 2015-11-01-preview
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/service-map/resource-manager/Microsoft.OperationalInsights/2015-11-01-preview/arm-service-map.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: service-map-arm-service-map
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersionParameter:
+    description: API version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  ClientGroupNameParameter:
+    description: Client Group resource name.
+    in: path
+    maxLength: 256
+    minLength: 3
+    name: clientGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  MachineGroupNameParameter:
+    description: Machine Group resource name.
+    in: path
+    maxLength: 36
+    minLength: 36
+    name: machineGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  MachineNameParameter:
+    description: Machine resource name.
+    in: path
+    maxLength: 64
+    minLength: 3
+    name: machineName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  PortNameParameter:
+    description: Port resource name.
+    in: path
+    maxLength: 64
+    minLength: 3
+    name: portName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ProcessNameParameter:
+    description: Process resource name.
+    in: path
+    maxLength: 128
+    minLength: 3
+    name: processName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ResourceGroupNameParameter:
+    description: Resource group name within the specified subscriptionId.
+    in: path
+    maxLength: 64
+    minLength: 1
+    name: resourceGroupName
+    pattern: '[a-zA-Z0-9_-]+'
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: Azure subscription identifier.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+  WorkspaceNameParameter:
+    description: OMS workspace containing the resources of interest.
+    in: path
+    maxLength: 63
+    minLength: 3
+    name: workspaceName
+    pattern: '[a-zA-Z0-9_][a-zA-Z0-9_-]+[a-zA-Z0-9_]'
+    required: true
+    type: string
+    x-ms-parameter-location: method
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/clientGroups/{clientGroupName}':
+    get:
+      description: Retrieves the specified client group
+      operationId: ClientGroups_Get
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/ClientGroupNameParameter'
+        - description: UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m
+          format: date-time
+          in: query
+          name: startTime
+          required: false
+          type: string
+        - description: UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow
+          format: date-time
+          in: query
+          name: endTime
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/ClientGroup'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Client Groups
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/clientGroups/{clientGroupName}/members':
+    get:
+      description: Returns the members of the client group during the specified time interval.
+      operationId: ClientGroups_ListMembers
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/ClientGroupNameParameter'
+        - description: UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m
+          format: date-time
+          in: query
+          name: startTime
+          required: false
+          type: string
+        - description: UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow
+          format: date-time
+          in: query
+          name: endTime
+          required: false
+          type: string
+        - description: 'Page size to use. When not specified, the default page size is 100 records.'
+          format: int32
+          in: query
+          maximum: 200
+          minimum: 1
+          name: $top
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/ClientGroupMembersCollection'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Client Groups
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/clientGroups/{clientGroupName}/membersCount':
+    get:
+      description: Returns the approximate number of members in the client group.
+      operationId: ClientGroups_GetMembersCount
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/ClientGroupNameParameter'
+        - description: UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m
+          format: date-time
+          in: query
+          name: startTime
+          required: false
+          type: string
+        - description: UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow
+          format: date-time
+          in: query
+          name: endTime
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/ClientGroupMembersCount'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Client Groups
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/generateMap':
+    post:
+      description: Generates the specified map.
+      operationId: Maps_Generate
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: Request options.
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/MapRequest'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/MapResponse'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Maps
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machineGroups':
+    get:
+      description: Returns all machine groups.
+      operationId: MachineGroups_ListByWorkspace
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/MachineGroupCollection'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - MachineGroups
+      x-ms-pageable:
+        nextLinkName: nextLink
+    post:
+      description: Creates a new machine group.
+      operationId: MachineGroups_Create
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: Machine Group resource to create.
+          in: body
+          name: machineGroup
+          required: true
+          schema:
+            $ref: '#/definitions/MachineGroup'
+      responses:
+        '201':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/MachineGroup'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - MachineGroups
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machineGroups/{machineGroupName}':
+    delete:
+      description: Deletes the specified Machine Group.
+      operationId: MachineGroups_Delete
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/MachineGroupNameParameter'
+      responses:
+        '204':
+          description: The operation completed successfully.
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - MachineGroups
+    get:
+      description: Returns the specified machine group.
+      operationId: MachineGroups_Get
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/MachineGroupNameParameter'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/MachineGroup'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - MachineGroups
+    put:
+      description: Updates a machine group.
+      operationId: MachineGroups_Update
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/MachineGroupNameParameter'
+        - description: Machine Group resource to update.
+          in: body
+          name: machineGroup
+          required: true
+          schema:
+            $ref: '#/definitions/MachineGroup'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/MachineGroup'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - MachineGroups
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines':
+    get:
+      description: Returns a collection of machines matching the specified conditions.  The returned collection represents either machines that are active/live during the specified interval  of time (`live=true` and `startTime`/`endTime` are specified) or that are known to have existed at or  some time prior to the specified point in time (`live=false` and `timestamp` is specified).
+      operationId: Machines_ListByWorkspace
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - default: true
+          description: 'Specifies whether to return live resources (true) or inventory resources (false). Defaults to **true**. When retrieving live resources, the start time (`startTime`) and end time (`endTime`) of the desired interval should be included. When retrieving inventory resources, an optional timestamp (`timestamp`) parameter can be specified to return the version of each resource closest (not-after) that timestamp.'
+          in: query
+          name: live
+          required: false
+          type: boolean
+        - description: UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m
+          format: date-time
+          in: query
+          name: startTime
+          required: false
+          type: string
+        - description: UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow
+          format: date-time
+          in: query
+          name: endTime
+          required: false
+          type: string
+        - description: 'UTC date and time specifying a time instance relative to which to evaluate each machine resource. Only applies when `live=false`. When not specified, the service uses DateTime.UtcNow.'
+          format: date-time
+          in: query
+          name: timestamp
+          required: false
+          type: string
+        - description: 'Page size to use. When not specified, the default page size is 100 records.'
+          format: int32
+          in: query
+          maximum: 200
+          minimum: 1
+          name: $top
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/MachineCollection'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Machines
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}':
+    get:
+      description: Returns the specified machine.
+      operationId: Machines_Get
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/MachineNameParameter'
+        - description: 'UTC date and time specifying a time instance relative to which to evaluate the machine resource. When not specified, the service uses DateTime.UtcNow.'
+          format: date-time
+          in: query
+          name: timestamp
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/Machine'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Machines
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/connections':
+    get:
+      description: Returns a collection of connections terminating or originating at the specified machine
+      operationId: Machines_ListConnections
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/MachineNameParameter'
+        - description: UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m
+          format: date-time
+          in: query
+          name: startTime
+          required: false
+          type: string
+        - description: UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow
+          format: date-time
+          in: query
+          name: endTime
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/ConnectionCollection'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Machines
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/liveness':
+    get:
+      description: Obtains the liveness status of the machine during the specified time interval.
+      operationId: Machines_GetLiveness
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/MachineNameParameter'
+        - description: UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m
+          format: date-time
+          in: query
+          name: startTime
+          required: false
+          type: string
+        - description: UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow
+          format: date-time
+          in: query
+          name: endTime
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/Liveness'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Machines
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/machineGroups':
+    get:
+      description: Returns a collection of machine groups this machine belongs to.
+      operationId: Machines_ListMachineGroupMembership
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/MachineNameParameter'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/MachineGroupCollection'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Machines
+        - MachineGroups
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/ports':
+    get:
+      description: Returns a collection of live ports on the specified machine during the specified time interval.
+      operationId: Machines_ListPorts
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/MachineNameParameter'
+        - description: UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m
+          format: date-time
+          in: query
+          name: startTime
+          required: false
+          type: string
+        - description: UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow
+          format: date-time
+          in: query
+          name: endTime
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/PortCollection'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Machines
+        - Ports
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/ports/{portName}':
+    get:
+      description: 'Returns the specified port. The port must be live during the specified time interval. If the port is not live during the interval, status 404 (Not Found) is returned.'
+      operationId: Ports_Get
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/MachineNameParameter'
+        - $ref: '#/parameters/PortNameParameter'
+        - description: UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m
+          format: date-time
+          in: query
+          name: startTime
+          required: false
+          type: string
+        - description: UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow
+          format: date-time
+          in: query
+          name: endTime
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/Port'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Ports
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/ports/{portName}/acceptingProcesses':
+    get:
+      description: Returns a collection of processes accepting on the specified port
+      operationId: Ports_ListAcceptingProcesses
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/MachineNameParameter'
+        - $ref: '#/parameters/PortNameParameter'
+        - description: UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m
+          format: date-time
+          in: query
+          name: startTime
+          required: false
+          type: string
+        - description: UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow
+          format: date-time
+          in: query
+          name: endTime
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/ProcessCollection'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Ports
+        - Processes
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/ports/{portName}/connections':
+    get:
+      description: Returns a collection of connections established via the specified port.
+      operationId: Ports_ListConnections
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/MachineNameParameter'
+        - $ref: '#/parameters/PortNameParameter'
+        - description: UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m
+          format: date-time
+          in: query
+          name: startTime
+          required: false
+          type: string
+        - description: UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow
+          format: date-time
+          in: query
+          name: endTime
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/ConnectionCollection'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Ports
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/ports/{portName}/liveness':
+    get:
+      description: Obtains the liveness status of the port during the specified time interval.
+      operationId: Ports_GetLiveness
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/MachineNameParameter'
+        - $ref: '#/parameters/PortNameParameter'
+        - description: UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m
+          format: date-time
+          in: query
+          name: startTime
+          required: false
+          type: string
+        - description: UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow
+          format: date-time
+          in: query
+          name: endTime
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/Liveness'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Ports
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/processes':
+    get:
+      description: 'Returns a collection of processes on the specified machine matching the specified conditions. The returned collection represents either processes that are active/live during the specified interval  of time (`live=true` and `startTime`/`endTime` are specified) or that are known to have existed at or  some time prior to the specified point in time (`live=false` and `timestamp` is specified).        '
+      operationId: Machines_ListProcesses
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/MachineNameParameter'
+        - default: true
+          description: 'Specifies whether to return live resources (true) or inventory resources (false). Defaults to **true**. When retrieving live resources, the start time (`startTime`) and end time (`endTime`) of the desired interval should be included. When retrieving inventory resources, an optional timestamp (`timestamp`) parameter can be specified to return the version of each resource closest (not-after) that timestamp.'
+          in: query
+          name: live
+          required: false
+          type: boolean
+        - description: UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m
+          format: date-time
+          in: query
+          name: startTime
+          required: false
+          type: string
+        - description: UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow
+          format: date-time
+          in: query
+          name: endTime
+          required: false
+          type: string
+        - description: 'UTC date and time specifying a time instance relative to which to evaluate all process resource. Only applies when `live=false`. When not specified, the service uses DateTime.UtcNow.'
+          format: date-time
+          in: query
+          name: timestamp
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/ProcessCollection'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Processes
+        - Machines
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/processes/{processName}':
+    get:
+      description: Returns the specified process.
+      operationId: Processes_Get
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/MachineNameParameter'
+        - $ref: '#/parameters/ProcessNameParameter'
+        - description: 'UTC date and time specifying a time instance relative to which to evaluate a resource. When not specified, the service uses DateTime.UtcNow.'
+          format: date-time
+          in: query
+          name: timestamp
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/Process'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Processes
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/processes/{processName}/acceptingPorts':
+    get:
+      description: Returns a collection of ports on which this process is accepting
+      operationId: Processes_ListAcceptingPorts
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/MachineNameParameter'
+        - $ref: '#/parameters/ProcessNameParameter'
+        - description: UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m
+          format: date-time
+          in: query
+          name: startTime
+          required: false
+          type: string
+        - description: UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow
+          format: date-time
+          in: query
+          name: endTime
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/PortCollection'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Processes
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/processes/{processName}/connections':
+    get:
+      description: Returns a collection of connections terminating or originating at the specified process
+      operationId: Processes_ListConnections
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/MachineNameParameter'
+        - $ref: '#/parameters/ProcessNameParameter'
+        - description: UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m
+          format: date-time
+          in: query
+          name: startTime
+          required: false
+          type: string
+        - description: UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow
+          format: date-time
+          in: query
+          name: endTime
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/ConnectionCollection'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Processes
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/machines/{machineName}/processes/{processName}/liveness':
+    get:
+      description: Obtains the liveness status of the process during the specified time interval.
+      operationId: Processes_GetLiveness
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/MachineNameParameter'
+        - $ref: '#/parameters/ProcessNameParameter'
+        - description: UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m
+          format: date-time
+          in: query
+          name: startTime
+          required: false
+          type: string
+        - description: UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow
+          format: date-time
+          in: query
+          name: endTime
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/Liveness'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Processes
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/features/serviceMap/summaries/machines':
+    get:
+      description: Returns summary information about the machines in the workspace.
+      operationId: Summaries_GetMachines
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m
+          format: date-time
+          in: query
+          name: startTime
+          required: false
+          type: string
+        - description: UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow
+          format: date-time
+          in: query
+          name: endTime
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          schema:
+            $ref: '#/definitions/MachinesSummary'
+        default:
+          description: An error occurred while processing the request. See the error.code parameter to identify the specific error.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Summaries
+definitions:
+  Acceptor:
+    allOf:
+      - $ref: '#/definitions/Relationship'
+    description: A process accepting on a port.
+    properties:
+      properties:
+        $ref: '#/definitions/AcceptorProperties'
+        x-ms-client-flatten: true
+    x-ms-discriminator-value: 'rel:acceptor'
+  AcceptorProperties:
+    description: Properties for an acceptor relationship.
+    properties:
+      destination:
+        $ref: '#/definitions/ProcessReference'
+        description: Accepting process.
+      endTime:
+        description: Relationship end time.
+        format: date-time
+        type: string
+      source:
+        $ref: '#/definitions/PortReference'
+        description: Port being accepted.
+      startTime:
+        description: Relationship start time.
+        format: date-time
+        type: string
+    required:
+      - source
+      - destination
+  Accuracy:
+    description: Specifies the accuracy of a computation.
+    enum:
+      - actual
+      - estimated
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: Accuracy
+  AgentConfiguration:
+    description: Describes the configuration of the Dependency Agent installed on a machine.
+    properties:
+      agentId:
+        description: Health Service Agent unique identifier.
+        type: string
+      clockGranularity:
+        description: Machine clock granularity in milliseconds.
+        format: int32
+        type: integer
+      dependencyAgentId:
+        description: Dependency Agent unique identifier.
+        type: string
+      dependencyAgentRevision:
+        description: Dependency Agent revision number.
+        type: string
+      dependencyAgentVersion:
+        description: Dependency Agent version number.
+        type: string
+      rebootStatus:
+        $ref: '#/definitions/MachineRebootStatus'
+        description: Specifies whether the machine has been rebooted since the Dependency Agent installation.
+    required:
+      - agentId
+  Bitness:
+    description: Specifies the bitness of a machine or process.
+    enum:
+      - 32bit
+      - 64bit
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: Bitness
+  ClientGroup:
+    allOf:
+      - $ref: '#/definitions/CoreResource'
+    description: 'Represents a collection of clients of a resource. A client group can represent the clients of a port, process, or a machine.'
+    properties:
+      properties:
+        description: Resource properties.
+        properties:
+          clientsOf:
+            $ref: '#/definitions/ResourceReference'
+            description: Reference to the resource whose clients are represented by this group.
+        required:
+          - clientsOf
+        type: object
+        x-ms-client-flatten: true
+    x-ms-discriminator-value: clientGroup
+  ClientGroupMember:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents a member of a client group
+    properties:
+      properties:
+        description: Resource properties.
+        properties:
+          ipAddress:
+            description: IP address.
+            type: string
+          port:
+            $ref: '#/definitions/PortReference'
+            description: Port into which this client connected
+          processes:
+            description: Processes accepting on the above port that received connections from this client.
+            items:
+              $ref: '#/definitions/ProcessReference'
+            type: array
+        type: object
+        x-ms-client-flatten: true
+  ClientGroupMembersCollection:
+    description: Collection of ClientGroupMember resources.
+    properties:
+      nextLink:
+        description: The URL to the next set of resources.
+        type: string
+      value:
+        description: Collection of ClientGroupMember resources.
+        items:
+          $ref: '#/definitions/ClientGroupMember'
+        type: array
+    type: object
+  ClientGroupMembersCount:
+    description: Specifies the number of members in a client group.
+    properties:
+      accuracy:
+        $ref: '#/definitions/Accuracy'
+        description: Accuracy of the reported count.
+      count:
+        description: 'Number of members in the client group. Use this value together with the value of ```accuracy```. If accuracy is `exact` then the value represents the actual number of members in the cloud. When accuracy is `estimated`, the actual number of members is larger than the value of ```count```.'
+        format: int32
+        type: integer
+      endTime:
+        description: Membership interval start time.
+        format: date-time
+        type: string
+      groupId:
+        description: Client Group URI.
+        type: string
+      startTime:
+        description: Membership interval start time.
+        format: date-time
+        type: string
+    required:
+      - startTime
+      - endTime
+      - groupId
+      - count
+      - accuracy
+    type: object
+  Connection:
+    allOf:
+      - $ref: '#/definitions/Relationship'
+    description: A network connection.
+    properties:
+      properties:
+        $ref: '#/definitions/ConnectionProperties'
+        x-ms-client-flatten: true
+    x-ms-discriminator-value: 'rel:connection'
+  ConnectionCollection:
+    description: Collection of Connection resources.
+    properties:
+      nextLink:
+        description: The URL to the next set of resources.
+        type: string
+      value:
+        description: Collection of Connection resources.
+        items:
+          $ref: '#/definitions/Connection'
+        type: array
+    type: object
+  ConnectionFailureState:
+    description: |-
+      Connection failure state:
+       * ```ok``` indicates no failures
+       * ```failed``` indicates only failures
+       * ```mixed``` indicates both failures and successes
+    enum:
+      - ok
+      - failed
+      - mixed
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: ConnectionFailureState
+  ConnectionProperties:
+    allOf:
+      - $ref: '#/definitions/RelationshipProperties'
+    description: Properties for a connection resource.
+    properties:
+      failureState:
+        $ref: '#/definitions/ConnectionFailureState'
+        description: 'Specifies whether there are only successful, failed or a mixture of both connections represented by this resource.'
+      serverPort:
+        $ref: '#/definitions/PortReference'
+        description: Reference to the server port via which this connection has been established.
+  CoreResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Marker resource for the core Service Map resources
+    discriminator: kind
+    properties:
+      etag:
+        description: Resource ETAG.
+        type: string
+      kind:
+        description: Additional resource type qualifier.
+        enum:
+          - machine
+          - process
+          - port
+          - clientGroup
+          - machineGroup
+        type: string
+    required:
+      - kind
+  Error:
+    description: Error details.
+    properties:
+      code:
+        description: Error code identifying the specific error.
+        type: string
+      message:
+        description: Error message in the caller's locale.
+        type: string
+    required:
+      - code
+    type: object
+  ErrorResponse:
+    description: An error response from the API.
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+        description: Error information.
+    required:
+      - error
+    type: object
+  HypervisorConfiguration:
+    description: Describes the hypervisor configuration of a machine.
+    properties:
+      hypervisorType:
+        $ref: '#/definitions/HypervisorType'
+        description: 'Specifies the virtualization technology used by the hypervisor (hyperv, vmware, etc.)'
+      nativeHostMachineId:
+        description: The unique identifier of the hypervisor machine as reported by the underlying virtualization system.
+        type: string
+  HypervisorType:
+    description: Specifies the hypervisor type of a machine.
+    enum:
+      - unknown
+      - hyperv
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: HypervisorType
+  Ipv4NetworkInterface:
+    description: Describes an IPv4 network interface.
+    properties:
+      ipAddress:
+        description: IPv4 address.
+        type: string
+      subnetMask:
+        default: 255.255.255.255
+        description: IPv4 subnet mask.
+        type: string
+    required:
+      - ipAddress
+  Ipv6NetworkInterface:
+    description: Describes an IPv6 network interface.
+    properties:
+      ipAddress:
+        description: IPv6 address.
+        type: string
+    required:
+      - ipAddress
+  Liveness:
+    description: Specifies the contents of a check liveness response.
+    properties:
+      endTime:
+        description: Liveness interval end time.
+        format: date-time
+        type: string
+      live:
+        description: '`true` if the resource is live during [startTime, endTime], `false` otherwise'
+        type: boolean
+      startTime:
+        description: Liveness interval start time.
+        format: date-time
+        type: string
+    required:
+      - startTime
+      - endTime
+      - live
+    type: object
+  Machine:
+    allOf:
+      - $ref: '#/definitions/CoreResource'
+    description: 'A machine resource represents a discovered computer system. It can be *monitored*, i.e., a Dependency Agent is running on it, or *discovered*, i.e., its existence was inferred by observing the data stream from monitored machines. As machines change, prior versions of the machine resource are preserved and available for access. A machine is live during an interval of time, if either its Dependency Agent has reported data during (parts) of that interval, or a Dependency agent running on other machines has reported activity associated with the machine.'
+    properties:
+      properties:
+        description: Resource properties.
+        properties:
+          agent:
+            $ref: '#/definitions/AgentConfiguration'
+            description: Dependency Agent configuration.
+          bootTime:
+            description: UTC date and time when the machine last booted
+            format: date-time
+            type: string
+          computerName:
+            description: 'Name of the machine, e.g., server'
+            type: string
+          displayName:
+            description: Name to use for display purposes
+            type: string
+          fullyQualifiedDomainName:
+            description: 'Fully-qualified name of the machine, e.g., server.company.com'
+            type: string
+          hypervisor:
+            $ref: '#/definitions/HypervisorConfiguration'
+            description: Hypervisor-related configuration. Present only when 'virtualizationState' is `hypervisor`.
+          monitoringState:
+            $ref: '#/definitions/MonitoringState'
+            description: Specifies whether the machine is actively monitored or discovered.
+          networking:
+            $ref: '#/definitions/NetworkConfiguration'
+            description: 'Network configuration (ips, gateways, dns, etc.)'
+          operatingSystem:
+            $ref: '#/definitions/OperatingSystemConfiguration'
+            description: Operating system information.
+          resources:
+            $ref: '#/definitions/MachineResourcesConfiguration'
+            description: 'Machine resources (memory, cpu, etc.).'
+          timestamp:
+            description: UTC date and time when this resource was updated in the system.
+            format: date-time
+            type: string
+          timezone:
+            $ref: '#/definitions/Timezone'
+            description: Timezone of the machine.
+          virtualMachine:
+            $ref: '#/definitions/VirtualMachineConfiguration'
+            description: Virtualization-related configuration. Present only when `virtualizationState` is `virtual`.
+          virtualizationState:
+            $ref: '#/definitions/VirtualizationState'
+            description: Specifies whether the machine is virtualized.
+        type: object
+        x-ms-client-flatten: true
+    x-ms-discriminator-value: machine
+  MachineCollection:
+    description: Collection of Machine resources.
+    properties:
+      nextLink:
+        description: The URL to the next set of resources.
+        type: string
+      value:
+        description: Collection of Machine resources.
+        items:
+          $ref: '#/definitions/Machine'
+        type: array
+    type: object
+  MachineCountsByOperatingSystem:
+    description: Machines by operating system.
+    properties:
+      linux:
+        description: Number of live Linux machines.
+        format: int32
+        type: integer
+      windows:
+        description: Number of live Windows machines.
+        format: int32
+        type: integer
+    required:
+      - windows
+      - linux
+    type: object
+  MachineGroup:
+    allOf:
+      - $ref: '#/definitions/CoreResource'
+    description: A user-defined logical grouping of machines.
+    properties:
+      etag:
+        description: Resource ETAG.
+        type: string
+      properties:
+        description: Resource properties.
+        properties:
+          displayName:
+            description: User defined name for the group
+            maxLength: 256
+            minLength: 1
+            type: string
+          machines:
+            description: References of the machines in this group. The hints within each reference do not represent the current value of  the corresponding fields. They are a snapshot created during the last time the machine group was updated.
+            items:
+              $ref: '#/definitions/MachineReferenceWithHints'
+            type: array
+        required:
+          - displayName
+        type: object
+        x-ms-client-flatten: true
+    x-ms-discriminator-value: machineGroup
+  MachineGroupCollection:
+    description: Collection of Machine Group resources.
+    properties:
+      nextLink:
+        description: The URL to the next set of resources.
+        type: string
+      value:
+        description: Collection of Machine Group resources.
+        items:
+          $ref: '#/definitions/MachineGroup'
+        type: array
+    type: object
+  MachineGroupMapRequest:
+    allOf:
+      - $ref: '#/definitions/MapRequest'
+    description: Specifies the computation of a machine group dependency map. A machine group dependency map includes all direct dependencies of a group of machines.
+    properties:
+      filterProcesses:
+        description: 'If true, only processes between grouped machines will be included. Any connections in or out of those processes will be included.'
+        type: boolean
+      machineGroupId:
+        description: URI of machine group resource for which to generate the map.
+        type: string
+    required:
+      - machineGroupId
+    x-ms-discriminator-value: 'map:machine-group-dependency'
+  MachineRebootStatus:
+    description: Specifies if the machine has been rebooted since the installation of the dependency agent.
+    enum:
+      - unknown
+      - rebooted
+      - notRebooted
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: MachineRebootStatus
+  MachineReference:
+    allOf:
+      - $ref: '#/definitions/ResourceReference'
+    description: Reference to a machine.
+    x-ms-discriminator-value: 'ref:machine'
+  MachineReferenceWithHints:
+    allOf:
+      - $ref: '#/definitions/ResourceReference'
+    description: A machine reference with a hint of the machine's name and operating system.
+    properties:
+      properties:
+        description: Machine reference with name and os hints.
+        properties:
+          displayNameHint:
+            description: Last known display name.
+            readOnly: true
+            type: string
+          osFamilyHint:
+            $ref: '#/definitions/OperatingSystemFamily'
+            description: Last known operating system family.
+            readOnly: true
+        type: object
+        x-ms-client-flatten: true
+    x-ms-discriminator-value: 'ref:machinewithhints'
+  MachineResourcesConfiguration:
+    description: Describes the resources of a machine.
+    properties:
+      cpuSpeed:
+        description: CPU speed in megahertz (Mhz).
+        format: int32
+        type: integer
+      cpuSpeedAccuracy:
+        $ref: '#/definitions/Accuracy'
+        description: Describes the accuracy of the cpuSpeed field.
+      cpus:
+        description: Number of CPUs.
+        format: int32
+        type: integer
+      physicalMemory:
+        description: Physical memory in megabytes (MB).
+        format: int32
+        type: integer
+  MachinesSummary:
+    allOf:
+      - $ref: '#/definitions/Summary'
+    description: A summary of the machines in the workspace.
+    properties:
+      properties:
+        $ref: '#/definitions/MachinesSummaryProperties'
+        x-ms-client-flatten: true
+  MachinesSummaryProperties:
+    allOf:
+      - $ref: '#/definitions/SummaryProperties'
+    description: Summarizes machines in the workspace.
+    properties:
+      live:
+        description: Number of live machines.
+        format: int32
+        type: integer
+      os:
+        $ref: '#/definitions/MachineCountsByOperatingSystem'
+        description: Machine counts by operating system.
+      total:
+        description: Total number of machines.
+        format: int32
+        type: integer
+    required:
+      - total
+      - live
+      - os
+    type: object
+  Map:
+    description: A map of resources and relationships between them.
+    properties:
+      edges:
+        $ref: '#/definitions/MapEdges'
+      nodes:
+        $ref: '#/definitions/MapNodes'
+    required:
+      - nodes
+      - edges
+    type: object
+  MapEdges:
+    description: The edges (relationships) of a map.
+    properties:
+      acceptors:
+        description: Processes accepting on a port.
+        items:
+          $ref: '#/definitions/Acceptor'
+        type: array
+      connections:
+        description: Network connections.
+        items:
+          $ref: '#/definitions/Connection'
+        type: array
+    type: object
+  MapNodes:
+    description: The nodes (entities) of a map.
+    properties:
+      ClientGroups:
+        description: Client Group resources.
+        items:
+          $ref: '#/definitions/ClientGroup'
+        type: array
+      Ports:
+        description: Port resources.
+        items:
+          $ref: '#/definitions/Port'
+        type: array
+      machines:
+        description: Machine resources.
+        items:
+          $ref: '#/definitions/Machine'
+        type: array
+      processes:
+        description: Process resources.
+        items:
+          $ref: '#/definitions/Process'
+        type: array
+    type: object
+  MapRequest:
+    description: Specifies the contents of request to generate a map.
+    discriminator: kind
+    properties:
+      endTime:
+        description: Map interval end time.
+        format: date-time
+        type: string
+      kind:
+        description: The type of map to create.
+        enum:
+          - 'map:single-machine-dependency'
+          - 'map:machine-group-dependency'
+        type: string
+      startTime:
+        description: Map interval start time.
+        format: date-time
+        type: string
+    required:
+      - kind
+    type: object
+  MapResponse:
+    description: Specified the contents of a map response.
+    properties:
+      endTime:
+        description: Map interval end time.
+        format: date-time
+        type: string
+      map:
+        $ref: '#/definitions/Map'
+        description: The generated map.
+      startTime:
+        description: Map interval start time.
+        format: date-time
+        type: string
+    required:
+      - startTime
+      - endTime
+      - map
+    type: object
+  MonitoringState:
+    description: Used to specify if a resources is monitored or discovered.
+    enum:
+      - monitored
+      - discovered
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: MonitoringState
+  NetworkConfiguration:
+    description: Describes the network configuration of a machine.
+    properties:
+      defaultIpv4Gateways:
+        description: Default IPv4 gateways.
+        items:
+          description: IPv4 address.
+          type: string
+        type: array
+      dnsNames:
+        description: DNS names associated with the machine.
+        items:
+          description: DNS name.
+          type: string
+        type: array
+      ipv4Interfaces:
+        description: IPv4 interfaces.
+        items:
+          $ref: '#/definitions/Ipv4NetworkInterface'
+        type: array
+      ipv6Interfaces:
+        description: IPv6 interfaces.
+        items:
+          $ref: '#/definitions/Ipv6NetworkInterface'
+        type: array
+      macAddresses:
+        description: MAC addresses of all active network interfaces.
+        items:
+          description: MAC address.
+          type: string
+        type: array
+  OperatingSystemConfiguration:
+    description: Describes the configuration of the operating system of a machine.
+    properties:
+      bitness:
+        $ref: '#/definitions/Bitness'
+        description: Operating system bitness (32-bit or 64-bit).
+      family:
+        $ref: '#/definitions/OperatingSystemFamily'
+        description: 'Windows, Linux, etc.'
+      fullName:
+        description: Operating system full name.
+        type: string
+    required:
+      - family
+      - fullName
+      - bitness
+  OperatingSystemFamily:
+    description: 'Specifies the operating system family, e.g., Linux, Windows, etc.'
+    enum:
+      - unknown
+      - windows
+      - linux
+      - solaris
+      - aix
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: OperatingSystemFamily
+  Port:
+    allOf:
+      - $ref: '#/definitions/CoreResource'
+    description: 'A port resource represents a server port on a machine. The port may be actively *monitored*, i.e., a Dependency Agent is running on its machine, or *discovered*, i.e., its existence was inferred by observing the data stream from monitored machines. A port is live during an interval of time, if that port had associated activity during (parts) of that interval.'
+    properties:
+      properties:
+        description: Resource properties.
+        properties:
+          displayName:
+            description: Name to use for display purposes.
+            type: string
+          ipAddress:
+            description: IP address associated with the port. At present only IPv4 addresses are supported.
+            type: string
+          machine:
+            $ref: '#/definitions/ResourceReference'
+            description: Machine hosting this port.
+          monitoringState:
+            $ref: '#/definitions/MonitoringState'
+            description: Specifies whether the port is actively monitored or discovered.
+          portNumber:
+            description: Port number.
+            format: int32
+            type: integer
+        type: object
+        x-ms-client-flatten: true
+    x-ms-discriminator-value: port
+  PortCollection:
+    description: Collection of Port resources.
+    properties:
+      nextLink:
+        description: The URL to the next set of resources.
+        type: string
+      value:
+        description: Collection of Port resources.
+        items:
+          $ref: '#/definitions/Port'
+        type: array
+    type: object
+  PortReference:
+    allOf:
+      - $ref: '#/definitions/ResourceReference'
+    description: Reference to a port.
+    properties:
+      properties:
+        description: Resource properties.
+        properties:
+          ipAddress:
+            description: IP address of the port.
+            readOnly: true
+            type: string
+          machine:
+            $ref: '#/definitions/MachineReference'
+            description: Machine hosting the port.
+            readOnly: true
+          portNumber:
+            description: Port number.
+            format: int32
+            type: integer
+        type: object
+        x-ms-client-flatten: true
+    x-ms-discriminator-value: 'ref:port'
+  Process:
+    allOf:
+      - $ref: '#/definitions/CoreResource'
+    description: 'A process resource represents a process running on a machine. The process may be actively *monitored*, i.e., a Dependency Agent is running on its machine, or *discovered*, i.e., its existence was inferred by observing the data stream from monitored machines. A process resource represents a pool of actual operating system resources that share command lines and metadata. As the process pool evolves over time, prior versions of the process resource are preserved and available for access. A process is live during an interval of time, if that process is executing during (parts) of that interval'
+    properties:
+      properties:
+        description: Resource properties.
+        properties:
+          acceptorOf:
+            $ref: '#/definitions/ResourceReference'
+            description: Present only for a discovered process acting as a server. References the port on which the discovered process is accepting.
+          clientOf:
+            $ref: '#/definitions/ResourceReference'
+            description: Present only for a discovered process acting as a client of a monitored process/machine/port. References the monitored process/machine/port that this process is a client of.
+          details:
+            $ref: '#/definitions/ProcessDetails'
+            description: 'Process metadata (command line, product name, etc.).'
+          displayName:
+            description: Name to use for display purposes
+            type: string
+          executableName:
+            description: The name of the process executable
+            type: string
+          machine:
+            $ref: '#/definitions/ResourceReference'
+            description: Machine hosting this process.
+          monitoringState:
+            $ref: '#/definitions/MonitoringState'
+            description: Specifies whether the process is actively monitored or discovered.
+          role:
+            description: 'The inferred role of this process based on its name, command line, etc.'
+            enum:
+              - webServer
+              - appServer
+              - databaseServer
+              - ldapServer
+              - smbServer
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: ProcessRole
+          startTime:
+            description: UTC date and time when the process started
+            format: date-time
+            type: string
+          timestamp:
+            description: UTC date and time when this process resource was updated in the system
+            format: date-time
+            type: string
+          user:
+            $ref: '#/definitions/ProcessUser'
+            description: Information about the account under which the process is executing.
+        type: object
+        x-ms-client-flatten: true
+    x-ms-discriminator-value: process
+  ProcessCollection:
+    description: Collection of Process resources.
+    properties:
+      nextLink:
+        description: The URL to the next set of resources.
+        type: string
+      value:
+        description: Collection of Process resources.
+        items:
+          $ref: '#/definitions/Process'
+        type: array
+    type: object
+  ProcessDetails:
+    description: Describes process metadata.
+    properties:
+      commandLine:
+        description: Process command line.
+        type: string
+      companyName:
+        description: Name of company that created the process executable.
+        type: string
+      description:
+        description: Process description.
+        type: string
+      executablePath:
+        description: Process executable path.
+        type: string
+      fileVersion:
+        description: File version.
+        type: string
+      firstPid:
+        description: The Operating System Process Idendifier (PID) of the first process in this process pool.
+        format: int32
+        type: integer
+      internalName:
+        description: Internal process name.
+        type: string
+      persistentKey:
+        description: 'A unique indentifier for a process, generally resilient to process restart, computed by Service Map.'
+        type: string
+      poolId:
+        description: 'Represents the identity of the process pool assigned to the process by Dependency Agent. '
+        format: int32
+        type: integer
+      productName:
+        description: Product name.
+        type: string
+      productVersion:
+        description: Product version.
+        type: string
+      workingDirectory:
+        description: Process workingDirectory.
+        type: string
+  ProcessReference:
+    allOf:
+      - $ref: '#/definitions/ResourceReference'
+    description: Reference to a process.
+    properties:
+      properties:
+        description: Resource properties.
+        properties:
+          machine:
+            $ref: '#/definitions/MachineReference'
+            description: Machine hosting the process.
+            readOnly: true
+        type: object
+        x-ms-client-flatten: true
+    x-ms-discriminator-value: 'ref:process'
+  ProcessUser:
+    description: Describes the user under which a process is running.
+    properties:
+      userDomain:
+        description: Domain name for the user.
+        type: string
+      userName:
+        description: User name under which the process is running.
+        type: string
+  Relationship:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: A typed relationship between two entities.
+    discriminator: kind
+    properties:
+      kind:
+        description: Additional resource type qualifier.
+        enum:
+          - 'rel:connection'
+          - 'rel:acceptor'
+        type: string
+    required:
+      - kind
+  RelationshipProperties:
+    description: Relationship properties.
+    properties:
+      destination:
+        $ref: '#/definitions/ResourceReference'
+        description: Destination resource of the relationship.
+      endTime:
+        description: Relationship end time.
+        format: date-time
+        type: string
+      source:
+        $ref: '#/definitions/ResourceReference'
+        description: Source resource of the relationship.
+      startTime:
+        description: Relationship start time.
+        format: date-time
+        type: string
+    required:
+      - source
+      - destination
+  Resource:
+    description: Resource model definition.
+    properties:
+      id:
+        description: Resource identifier.
+        readOnly: true
+        type: string
+      name:
+        description: Resource name.
+        readOnly: true
+        type: string
+      type:
+        description: Resource type.
+        readOnly: true
+        type: string
+    x-ms-azure-resource: true
+  ResourceReference:
+    description: Represents a reference to another resource.
+    discriminator: kind
+    properties:
+      id:
+        description: Resource URI.
+        type: string
+      kind:
+        description: Specifies the sub-class of the reference.
+        enum:
+          - 'ref:machine'
+          - 'ref:machinewithhints'
+          - 'ref:process'
+          - 'ref:port'
+          - 'ref:onmachine'
+        type: string
+      name:
+        description: Resource name.
+        readOnly: true
+        type: string
+      type:
+        description: Resource type qualifier.
+        readOnly: true
+        type: string
+    required:
+      - id
+      - kind
+  SingleMachineDependencyMapRequest:
+    allOf:
+      - $ref: '#/definitions/MapRequest'
+    description: Specifies the computation of a single server dependency map. A single server dependency map includes all direct dependencies of a given machine.
+    properties:
+      machineId:
+        description: URI of machine resource for which to generate the map.
+        type: string
+    required:
+      - machineId
+    x-ms-discriminator-value: 'map:single-machine-dependency'
+  Summary:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Base for all resource summaries.
+  SummaryProperties:
+    description: Base for all summaries.
+    properties:
+      endTime:
+        description: Summary interval end time.
+        format: date-time
+        type: string
+      startTime:
+        description: Summary interval start time.
+        format: date-time
+        type: string
+    required:
+      - startTime
+      - endTime
+    type: object
+  Timezone:
+    description: Describes a timezone.
+    properties:
+      fullName:
+        description: Timezone full name.
+        type: string
+  VirtualMachineConfiguration:
+    description: Describes the virtualizaton-related configuration of a machine.
+    properties:
+      nativeHostMachineId:
+        description: The unique identifier of the host of this virtual machine as reported by the underlying virtualization system.
+        type: string
+      nativeMachineId:
+        description: The unique identifier of the virtual machine as reported by the underlying virtualization sytem.
+        type: string
+      virtualMachineName:
+        description: The Name of the virtual machine.
+        type: string
+      virtualMachineType:
+        $ref: '#/definitions/VirtualMachineType'
+        description: 'Specifies the virtualization technology used by the machine (hyperv, vmware, etc.)'
+  VirtualMachineType:
+    description: Specifies the virtualization type of a machine.
+    enum:
+      - unknown
+      - hyperv
+      - ldom
+      - lpar
+      - vmware
+      - virtualPc
+      - xen
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: VirtualMachineType
+  VirtualizationState:
+    description: 'Specifies if the machine is physical, virtual, hypervisor, or unknown.'
+    enum:
+      - unknown
+      - physical
+      - virtual
+      - hypervisor
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: VirtualizationState

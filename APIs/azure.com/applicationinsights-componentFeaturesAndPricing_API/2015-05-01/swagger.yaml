@@ -1,0 +1,216 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: Azure Application Insights client for selecting pricing plans and options.
+  title: ApplicationInsightsManagementClient
+  version: '2015-05-01'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/applicationinsights/resource-manager/microsoft.insights/2015-05-01/componentFeaturesAndPricing_API.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: applicationinsights-componentFeaturesAndPricing_API
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow.
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersionParameter:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  ResourceGroupNameParameter:
+    description: The name of the resource group.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ResourceNameParameter:
+    description: The name of the Application Insights component resource.
+    in: path
+    name: resourceName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: The Azure subscription ID.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/currentbillingfeatures':
+    get:
+      description: Returns current billing features for an Application Insights component.
+      operationId: ComponentCurrentBillingFeatures_Get
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceNameParameter'
+      responses:
+        '200':
+          description: An Application Insights component billing features definition.
+          schema:
+            $ref: '#/definitions/ApplicationInsightsComponentBillingFeatures'
+      x-ms-examples:
+        ComponentCurrentBillingFeaturesGet:
+          parameters:
+            api-version: '2015-05-01'
+            resourceGroupName: my-resource-group
+            resourceName: my-component
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                CurrentBillingFeatures:
+                  - Basic
+                DataVolumeCap:
+                  Cap: 500
+                  MaxHistoryCap: 500
+                  ResetTime: 16
+                  StopSendNotificationWhenHitCap: false
+                  StopSendNotificationWhenHitThreshold: false
+                  WarningThreshold: 90
+    put:
+      description: Update current billing features for an Application Insights component.
+      operationId: ComponentCurrentBillingFeatures_Update
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceNameParameter'
+        - description: Properties that need to be specified to update billing features for an Application Insights component.
+          in: body
+          name: BillingFeaturesProperties
+          required: true
+          schema:
+            $ref: '#/definitions/ApplicationInsightsComponentBillingFeatures'
+      responses:
+        '200':
+          description: Successful request when updating billing features for an Application Insights component. The updated current billing features are returned.
+          schema:
+            $ref: '#/definitions/ApplicationInsightsComponentBillingFeatures'
+      x-ms-examples:
+        ComponentCurrentBillingFeaturesUpdate:
+          parameters:
+            BillingFeaturesProperties:
+              CurrentBillingFeatures:
+                - Basic
+                - Application Insights Enterprise
+              DataVolumeCap:
+                Cap: 100
+                StopSendNotificationWhenHitCap: true
+            api-version: '2015-05-01'
+            resourceGroupName: my-resource-group
+            resourceName: my-component
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                CurrentBillingFeatures:
+                  - Basic
+                  - Application Insights Enterprise
+                DataVolumeCap:
+                  Cap: 100
+                  MaxHistoryCap: 500
+                  ResetTime: 16
+                  StopSendNotificationWhenHitCap: true
+                  StopSendNotificationWhenHitThreshold: false
+                  WarningThreshold: 90
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/quotastatus':
+    get:
+      description: Returns daily data volume cap (quota) status for an Application Insights component.
+      operationId: ComponentQuotaStatus_Get
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceNameParameter'
+      responses:
+        '200':
+          description: An Application Insights component daily data volume cap status definition.
+          schema:
+            $ref: '#/definitions/ApplicationInsightsComponentQuotaStatus'
+      x-ms-examples:
+        ComponentCurrentBillingFeaturesGet:
+          parameters:
+            api-version: '2015-05-01'
+            resourceGroupName: my-resource-group
+            resourceName: my-component
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                AppId: 887f4bfd-b5fd-40d7-9fc3-123456789abc
+                ExpirationTime: '2017-08-10T05:00:00'
+                ShouldBeThrottled: true
+definitions:
+  ApplicationInsightsComponentBillingFeatures:
+    description: An Application Insights component billing features
+    properties:
+      CurrentBillingFeatures:
+        description: 'Current enabled pricing plan. When the component is in the Enterprise plan, this will list both ''Basic'' and ''Application Insights Enterprise''.'
+        items:
+          type: string
+        type: array
+      DataVolumeCap:
+        $ref: '#/definitions/ApplicationInsightsComponentDataVolumeCap'
+        description: An Application Insights component daily data volumne cap
+    type: object
+  ApplicationInsightsComponentDataVolumeCap:
+    description: An Application Insights component daily data volumne cap
+    properties:
+      Cap:
+        description: Daily data volume cap in GB.
+        type: number
+      MaxHistoryCap:
+        description: Maximum daily data volume cap that the user can set for this component.
+        readOnly: true
+        type: number
+      ResetTime:
+        description: Daily data volume cap UTC reset hour.
+        readOnly: true
+        type: integer
+      StopSendNotificationWhenHitCap:
+        description: Do not send a notification email when the daily data volume cap is met.
+        type: boolean
+      StopSendNotificationWhenHitThreshold:
+        description: 'Reserved, not used for now.'
+        type: boolean
+      WarningThreshold:
+        description: 'Reserved, not used for now.'
+        type: integer
+    type: object
+  ApplicationInsightsComponentQuotaStatus:
+    description: An Application Insights component daily data volume cap status
+    properties:
+      AppId:
+        description: The Application ID for the Application Insights component.
+        readOnly: true
+        type: string
+      ExpirationTime:
+        description: 'Date and time when the daily data volume cap will be reset, and data ingestion will resume.'
+        readOnly: true
+        type: string
+      ShouldBeThrottled:
+        description: 'The daily data volume cap is met, and data ingestion will be stopped.'
+        readOnly: true
+        type: boolean
+    type: object

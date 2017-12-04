@@ -1,0 +1,947 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: 'Provides create, read, update and delete functionality for Azure SQL Database resources including servers, databases, elastic pools, recommendations, operations, and usage metrics.'
+  title: Azure SQL Database
+  version: '2014-04-01'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/sql/resource-manager/Microsoft.Sql/2014-04-01/operations.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: sql-operations
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+parameters:
+  ApiVersionParameter:
+    description: The API version to use for the request.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  SubscriptionIdParameter:
+    description: The subscription ID that identifies an Azure subscription.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  /providers/Microsoft.Sql/operations:
+    get:
+      description: Lists all of the available SQL Rest API operations.
+      operationId: Operations_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/OperationListResult'
+      tags:
+        - Operations
+      x-ms-examples:
+        Get a list of operations for a resource provider:
+          parameters:
+            api-version: '2014-04-01'
+          responses:
+            '200':
+              value:
+                - display:
+                    description: Return a list of servers in a resource group on a subscription
+                    operation: Get server details
+                    provider: Microsoft SQL Database
+                    resource: Server
+                  name: Microsoft.Sql/servers/read
+                - display:
+                    description: Create a new server or modify properties of existing server in a resource group on a subscription
+                    operation: Create new or update existing server
+                    provider: Microsoft SQL Database
+                    resource: Server
+                  name: Microsoft.Sql/servers/write
+                - display:
+                    description: Delete a server and all contained databases and elastic pools
+                    operation: Delete existing server
+                    provider: Microsoft SQL Database
+                    resource: Server
+                  name: Microsoft.Sql/servers/delete
+                - display:
+                    description: Create a new database on the server and deploy schema and data from a DacPac package
+                    operation: Create new database from DacPac
+                    provider: Microsoft SQL Database
+                    resource: Server
+                  name: Microsoft.Sql/servers/import/action
+                - display:
+                    description: Enable new functionality available on the latest version of server and specify databases edition conversion map
+                    operation: Upgrade server version
+                    provider: Microsoft SQL Database
+                    resource: Server
+                  name: Microsoft.Sql/servers/upgrade/action
+                - display:
+                    description: Retrieve server firewall rule details
+                    operation: Get server firewall rules
+                    provider: Microsoft SQL Database
+                    resource: Server Firewall Rule
+                  name: Microsoft.Sql/servers/firewallRules/read
+                - display:
+                    description: Create or update server firewall rule that controls IP address range allowed to connect to the server
+                    operation: Create new or update existing server firewall rule
+                    provider: Microsoft SQL Database
+                    resource: Server Firewall Rule
+                  name: Microsoft.Sql/servers/firewallRules/write
+                - display:
+                    description: Delete firewall rule from the server
+                    operation: Delete server firewall rule
+                    provider: Microsoft SQL Database
+                    resource: Server Firewall Rule
+                  name: Microsoft.Sql/servers/firewallRules/delete
+                - display:
+                    description: Retrieve server administrator details
+                    operation: Get server administrator
+                    provider: Microsoft SQL Database
+                    resource: The server administrator
+                  name: Microsoft.Sql/servers/administrators/read
+                - display:
+                    description: Create or update server administrator
+                    operation: Create new or update existing server administrator
+                    provider: Microsoft SQL Database
+                    resource: The server administrator
+                  name: Microsoft.Sql/servers/administrators/write
+                - display:
+                    description: Delete server administrator from the server
+                    operation: Delete server administrator
+                    provider: Microsoft SQL Database
+                    resource: The server administrator
+                  name: Microsoft.Sql/servers/administrators/delete
+                - display:
+                    description: Retrieve server administrator operation results
+                    operation: Get server administrator operation results
+                    provider: Microsoft SQL Database
+                    resource: The server administrator operation results
+                  name: Microsoft.Sql/servers/administratorOperationResults/read
+                - display:
+                    description: Retrieve list of service level objectives (also known as performance tiers) available on a given server
+                    operation: Get service level objectives
+                    provider: Microsoft SQL Database
+                    resource: Service Level Objective
+                  name: Microsoft.Sql/servers/serviceObjectives/read
+                - display:
+                    description: 'Retrieve a list of databases that were dropped on a given server that are still within retention policy. This operation returns a list of databases and associated metadata, like date of deletion.'
+                    operation: Get list of restorable dropped databases
+                    provider: Microsoft SQL Database
+                    resource: Restorable Dropped Database
+                  name: Microsoft.Sql/servers/restorableDroppedDatabases/read
+                - display:
+                    description: This operation is used for disaster recovery of live database to restore database to last-known good backup point. It returns information about the last good backup but it doesn't actually restore the database.
+                    operation: Get the last known database recovery point
+                    provider: Microsoft SQL Database
+                    resource: Recoverable Database
+                  name: Microsoft.Sql/servers/recoverableDatabases/read
+                - display:
+                    description: Return the list with details for database import operations from storage account on a given server
+                    operation: Get details about database import operation on the server
+                    provider: Microsoft SQL Database
+                    resource: Server Database Import Operation Result
+                  name: Microsoft.Sql/servers/importExportOperationResults/read
+                - display:
+                    description: Operation is used to track progress of server upgrade from lower version to higher
+                    operation: Get status of server upgrade operation
+                    provider: Microsoft SQL Database
+                    resource: Server Upgrade Operation Result
+                  name: Microsoft.Sql/servers/operationResults/read
+                - display:
+                    description: Abort server version upgrade in progress
+                    operation: Cancel server upgrade
+                    provider: Microsoft SQL Database
+                    resource: Server Upgrade Operation Result
+                  name: Microsoft.Sql/servers/operationResults/delete
+                - display:
+                    description: Return server DTU quota and current DTU consuption by all databases within the server
+                    operation: Get server usage details
+                    provider: Microsoft SQL Database
+                    resource: Server Usage
+                  name: Microsoft.Sql/servers/usages/read
+                - display:
+                    description: Retrieve recommendation for elastic database pools to reduce cost or improve performance based on historica resource utilization
+                    operation: Get recommended elastic database pools
+                    provider: Microsoft SQL Database
+                    resource: Recommended Elastic Database Pool
+                  name: Microsoft.Sql/servers/recommendedElasticPools/read
+                - display:
+                    description: Retrieve databases that should be added into recommended elastic database pools for a given server
+                    operation: Get recommended elastic pools databases
+                    provider: Microsoft SQL Database
+                    resource: Recommended Elastic Pool Databases
+                  name: Microsoft.Sql/servers/recommendedElasticPools/databases/read
+                - display:
+                    description: Retrieve metrics for recommended elastic database pools for a given server
+                    operation: Get recommended elastic database pools metrics
+                    provider: Microsoft SQL Database
+                    resource: Recommended Elastic Database Pool Metrics
+                  name: Microsoft.Sql/servers/recommendedElasticPools/metrics/read
+                - display:
+                    description: Get Disaster Recovery Configuration Operation Results
+                    operation: Retrieve result for Operation Results on a Disaster Recovery Configuration
+                    provider: Microsoft SQL Database
+                    resource: Server Disaster Recovery Configuration Operation Results
+                  name: Microsoft.Sql/servers/disasterRecoveryConfiguration/operationResults/read
+                - display:
+                    description: Returns list of advisors available for the server
+                    operation: Get advisors for a server
+                    provider: Microsoft SQL Database
+                    resource: Server advisor
+                  name: Microsoft.Sql/servers/advisors/read
+                - display:
+                    description: Updates auto-execute status of an advisor on server level.
+                    operation: Update auto-execute status of a server advisor
+                    provider: Microsoft SQL Database
+                    resource: Server advisor
+                  name: Microsoft.Sql/servers/advisors/write
+                - display:
+                    description: Returns list of recommended actions of specified advisor for the server
+                    operation: Get recommended actions of a server
+                    provider: Microsoft SQL Database
+                    resource: Returns list of recommended actions of specified advisor for the server
+                  name: Microsoft.Sql/servers/advisors/recommendedActions/read
+                - display:
+                    description: Apply the recommended action on the server
+                    operation: Update server recommended action state.
+                    provider: Microsoft SQL Database
+                    resource: Returns list of recommended actions of specified advisor for the server
+                  name: Microsoft.Sql/servers/advisors/recommendedActions/write
+                - display:
+                    description: Returns list of elastic pool estimates already created for this server
+                    operation: Get elastic pool estimates of a server
+                    provider: Microsoft SQL Database
+                    resource: Elastic pool estimate
+                  name: Microsoft.Sql/servers/elasticPoolEstimates/read
+                - display:
+                    description: Creates new elastic pool estimate for list of databases provided
+                    operation: Create an elastic pool estimate.
+                    provider: Microsoft SQL Database
+                    resource: Elastic pool estimate
+                  name: Microsoft.Sql/servers/elasticPoolEstimates/write
+                - display:
+                    description: Return a list of servers in a resource group on a subscription
+                    operation: Get server details
+                    provider: Microsoft SQL Database
+                    resource: Database
+                  name: Microsoft.Sql/servers/databases/read
+                - display:
+                    description: Create a new server or modify properties of existing server in a resource group on a subscription
+                    operation: Create new or update existing server
+                    provider: Microsoft SQL Database
+                    resource: Database
+                  name: Microsoft.Sql/servers/databases/write
+                - display:
+                    description: Delete a server and all contained databases and elastic pools
+                    operation: Delete existing server
+                    provider: Microsoft SQL Database
+                    resource: Database
+                  name: Microsoft.Sql/servers/databases/delete
+                - display:
+                    description: Create a new database on the server and deploy schema and data from a DacPac package
+                    operation: Create new database from DacPac
+                    provider: Microsoft SQL Database
+                    resource: Database
+                  name: Microsoft.Sql/servers/databases/export/action
+                - display:
+                    description: Return database maxiumum size that can be reached and current size occupied by data
+                    operation: Get database usage details
+                    provider: Microsoft SQL Database
+                    resource: Database Usage
+                  name: Microsoft.Sql/servers/databases/usages/read
+                - display:
+                    description: 'Operation is used to track progress of long running database operation, such as scale.'
+                    operation: Get status of database operation
+                    provider: Microsoft SQL Database
+                    resource: Database Operation Result
+                  name: Microsoft.Sql/servers/databases/operationResults/read
+                - display:
+                    description: Return details about database import or export operation from DacPac located in storage account
+                    operation: Get details about database import or export operation on the server
+                    provider: Microsoft SQL Database
+                    resource: Database Import/Export Operation Result
+                  name: Microsoft.Sql/servers/databases/importExportOperationResults/read
+                - display:
+                    description: Return details about replication links established for a particular database
+                    operation: Get database replication links
+                    provider: Microsoft SQL Database
+                    resource: Database Replication Link
+                  name: Microsoft.Sql/servers/databases/replicationLinks/read
+                - display:
+                    description: Terminate the replication relationship forcefully and with potential data loss
+                    operation: Force-terminate the replication relationship
+                    provider: Microsoft SQL Database
+                    resource: Database Replication Link
+                  name: Microsoft.Sql/servers/databases/replicationLinks/delete
+                - display:
+                    description: Terminate the replication relationship forcefully or after synchronizing with the partner
+                    operation: Terminate the replication relationship
+                    provider: Microsoft SQL Database
+                    resource: Database Replication Link
+                  name: Microsoft.Sql/servers/databases/replicationLinks/unlink/action
+                - display:
+                    description: 'Failover after synchronizing all changes from the primary, making this database into the replication relationship''s primary and making the remote primary into a secondary'
+                    operation: Failover replication relationship after synchronizing
+                    provider: Microsoft SQL Database
+                    resource: Database Replication Link
+                  name: Microsoft.Sql/servers/databases/replicationLinks/failover/action
+                - display:
+                    description: 'Failover immediately with potential data loss, making this database into the replication relationship''s primary and making the remote primary into a secondary'
+                    operation: Failover replication relationship immediately
+                    provider: Microsoft SQL Database
+                    resource: Database Replication Link
+                  name: Microsoft.Sql/servers/databases/replicationLinks/forceFailoverAllowDataLoss/action
+                - display:
+                    description: Update replication mode for link to synchronous or asynchronous mode
+                    operation: Update replication mode for link
+                    provider: Microsoft SQL Database
+                    resource: Database Replication Link
+                  name: Microsoft.Sql/servers/databases/replicationLinks/updateReplicationMode/action
+                - display:
+                    description: Get status of long-running operations on database replication links
+                    operation: Get status of replication link operations
+                    provider: Microsoft SQL Database
+                    resource: Replication Link Operation Result
+                  name: Microsoft.Sql/servers/databases/replicationLinks/operationResults/read
+                - display:
+                    description: Return types of metrics that are available for databases
+                    operation: Get database metric definitions
+                    provider: Microsoft SQL Database
+                    resource: Database Metric Definition
+                  name: Microsoft.Sql/servers/databases/providers/Microsoft.Insights/metricDefinitions/read
+                  properties:
+                    serviceSpecification:
+                      metricSpecifications:
+                        - aggregationType: Average
+                          displayDescription: CPU percentage
+                          displayName: CPU percentage
+                          fillGapWithZero: true
+                          name: cpu_percent
+                          unit: Percent
+                        - aggregationType: Average
+                          displayDescription: Data IO percentage
+                          displayName: Data IO percentage
+                          fillGapWithZero: true
+                          name: physical_data_read_percent
+                          unit: Percent
+                        - aggregationType: Average
+                          displayDescription: Log IO percentage
+                          displayName: Log IO percentage
+                          fillGapWithZero: true
+                          metricFilterPattern: ^((?!datawarehouse).)*$
+                          name: log_write_percent
+                          unit: Percent
+                        - aggregationType: Average
+                          displayDescription: DTU percentage
+                          displayName: DTU percentage
+                          fillGapWithZero: true
+                          metricFilterPattern: ^((?!datawarehouse).)*$
+                          name: dtu_consumption_percent
+                          unit: Percent
+                        - aggregationType: Maximum
+                          displayDescription: Total database size
+                          displayName: Total database size
+                          name: storage
+                          unit: Bytes
+                        - aggregationType: Total
+                          displayDescription: Successful Connections
+                          displayName: Successful Connections
+                          fillGapWithZero: true
+                          name: connection_successful
+                          unit: Count
+                        - aggregationType: Total
+                          displayDescription: Failed Connections
+                          displayName: Failed Connections
+                          fillGapWithZero: true
+                          name: connection_failed
+                          unit: Count
+                        - aggregationType: Total
+                          displayDescription: Blocked by Firewall
+                          displayName: Blocked by Firewall
+                          fillGapWithZero: true
+                          name: blocked_by_firewall
+                          unit: Count
+                        - aggregationType: Total
+                          displayDescription: Deadlocks
+                          displayName: Deadlocks
+                          fillGapWithZero: true
+                          metricFilterPattern: ^((?!datawarehouse).)*$
+                          name: deadlock
+                          unit: Count
+                        - aggregationType: Maximum
+                          displayDescription: Database size percentage
+                          displayName: Database size percentage
+                          metricFilterPattern: ^((?!datawarehouse).)*$
+                          name: storage_percent
+                          unit: Percent
+                        - aggregationType: Average
+                          displayDescription: In-Memory OLTP storage percent
+                          displayName: In-Memory OLTP storage percent
+                          fillGapWithZero: true
+                          metricFilterPattern: ^((?!datawarehouse).)*$
+                          name: xtp_storage_percent
+                          unit: Percent
+                        - aggregationType: Average
+                          displayDescription: Workers percentage
+                          displayName: Workers percentage
+                          fillGapWithZero: true
+                          metricFilterPattern: ^((?!datawarehouse).)*$
+                          name: workers_percent
+                          unit: Percent
+                        - aggregationType: Average
+                          displayDescription: Sessions percentage
+                          displayName: Sessions percentage
+                          fillGapWithZero: true
+                          metricFilterPattern: ^((?!datawarehouse).)*$
+                          name: sessions_percent
+                          unit: Percent
+                        - aggregationType: Average
+                          displayDescription: DTU Limit
+                          displayName: DTU Limit
+                          metricFilterPattern: ^((?!datawarehouse).)*$
+                          name: dtu_limit
+                          unit: Count
+                        - aggregationType: Average
+                          displayDescription: DTU used
+                          displayName: DTU used
+                          fillGapWithZero: true
+                          metricFilterPattern: ^((?!datawarehouse).)*$
+                          name: dtu_used
+                          unit: Count
+                        - aggregationType: Maximum
+                          displayDescription: DWU limit
+                          displayName: DWU limit
+                          metricFilterPattern: .*datawarehouse.*$
+                          name: dwu_limit
+                          unit: Count
+                        - aggregationType: Maximum
+                          displayDescription: DWU percentage
+                          displayName: DWU percentage
+                          fillGapWithZero: true
+                          metricFilterPattern: .*datawarehouse.*$
+                          name: dwu_consumption_percent
+                          unit: Percent
+                        - aggregationType: Maximum
+                          displayDescription: DWU used
+                          displayName: DWU used
+                          fillGapWithZero: true
+                          metricFilterPattern: .*datawarehouse.*$
+                          name: dwu_used
+                          unit: Count
+                - display:
+                    description: Return database resource utilization metrics
+                    operation: Get database resource consumption metrics
+                    provider: Microsoft SQL Database
+                    resource: Database Metric
+                  name: Microsoft.Sql/servers/databases/metrics/read
+                - display:
+                    description: Gets the diagnostic setting for the resource
+                    operation: Read diagnostic setting
+                    provider: Microsoft SQL Database
+                    resource: Database Diagnostic Settings
+                  name: Microsoft.Sql/servers/databases/providers/Microsoft.Insights/diagnosticSettings/read
+                - display:
+                    description: Creates or updates the diagnostic setting for the resource
+                    operation: Write diagnostic setting
+                    provider: Microsoft SQL Database
+                    resource: Database Diagnostic Settings
+                  name: Microsoft.Sql/servers/databases/providers/Microsoft.Insights/diagnosticSettings/write
+                - display:
+                    description: Gets the available logs for databases
+                    operation: Read databases log definitions
+                    provider: Microsoft SQL Database
+                    resource: The log definition of databases
+                  name: Microsoft.Sql/servers/databases/providers/Microsoft.Insights/logDefinitions/read
+                  properties:
+                    serviceSpecification:
+                      logSpecifications:
+                        - blobDuration: PT1H
+                          displayName: Query Store
+                          name: QueryStore
+                - display:
+                    description: 'Return suggestions about database indexes to create, modify or delete in order to improve query performance'
+                    operation: Get recommended database indexes
+                    provider: Microsoft SQL Database
+                    resource: Database Index Advisor
+                  name: Microsoft.Sql/servers/databases/missingindexes/read
+                - display:
+                    description: Use database index recommendation in a particular database
+                    operation: Apply recommended database index
+                    provider: Microsoft SQL Database
+                    resource: Database Index Advisor
+                  name: Microsoft.Sql/servers/databases/missingindexes/write
+                - display:
+                    description: Retrieve list of index recommendations on a database
+                    operation: Get list of index recommendations
+                    provider: Microsoft SQL Database
+                    resource: Recommended Index
+                  name: Microsoft.Sql/servers/databases/schemas/tables/recommendedIndexes/read
+                - display:
+                    description: Apply index recommendation
+                    operation: Update Recommended Index State
+                    provider: Microsoft SQL Database
+                    resource: Recommended Index
+                  name: Microsoft.Sql/servers/databases/schemas/tables/recommendedIndexes/write
+                - display:
+                    description: Retrieve list of columns of a table
+                    operation: Get columns
+                    provider: Microsoft SQL Database
+                    resource: Database table column
+                  name: Microsoft.Sql/servers/databases/schemas/tables/columns/read
+                - display:
+                    description: Returns current values of Query Store settings for the database
+                    operation: Get Query Store settings
+                    provider: Microsoft SQL Database
+                    resource: Query Store settings
+                  name: Microsoft.Sql/servers/databases/queryStore/read
+                - display:
+                    description: Updates Query Store setting for the database
+                    operation: Update Query Store settings
+                    provider: Microsoft SQL Database
+                    resource: Query Store settings
+                  name: Microsoft.Sql/servers/databases/queryStore/write
+                - display:
+                    description: Returns aggregated runtime statistics for selected query in selected time period
+                    operation: Get Top Queries for the database
+                    provider: Microsoft SQL Database
+                    resource: Database Top Queries
+                  name: Microsoft.Sql/servers/databases/topQueries/read
+                - display:
+                    description: Returns aggregated runtime statistics for selected query in selected time period
+                    operation: Get Database Top Queries statistics
+                    provider: Microsoft SQL Database
+                    resource: Database Top Queries Statistics
+                  name: Microsoft.Sql/servers/databases/topQueries/statistics/read
+                - display:
+                    description: Returns the Transact-SQL text for selected query ID
+                    operation: Get Database Top Queries query text
+                    provider: Microsoft SQL Database
+                    resource: Database Top Queries query text
+                  name: Microsoft.Sql/servers/databases/topQueries/queryText/read
+                - display:
+                    description: Return suggestion about scaling database up or down based on query execution statistics to improve performance or reduce cost
+                    operation: Get recommended database performance level
+                    provider: Microsoft SQL Database
+                    resource: Database Service Tier Advisor
+                  name: Microsoft.Sql/servers/databases/serviceTierAdvisors/read
+                - display:
+                    description: Retrieve status and details of transparent data encryption security feature for a given database
+                    operation: Get database transparent data encryption details
+                    provider: Microsoft SQL Database
+                    resource: Database Transparent Data Encryption
+                  name: Microsoft.Sql/servers/databases/transparentDataEncryption/read
+                - display:
+                    description: Enable or disable transparent data encryption for a given database
+                    operation: Change transparent data encryption state
+                    provider: Microsoft SQL Database
+                    resource: Database Transparent Data Encryption
+                  name: Microsoft.Sql/servers/databases/transparentDataEncryption/write
+                - display:
+                    description: Retrieve status and details of transparent data encryption security feature for a given database
+                    operation: Get database transparent data encryption details
+                    provider: Microsoft SQL Database
+                    resource: Database Transparent Data Encryption
+                  name: Microsoft.Sql/servers/databases/transparentDataEncryption/operationResults/read
+                - display:
+                    description: Retrieve details of the table auditing policy configured on a given database
+                    operation: Get database table auditing policy
+                    provider: Microsoft SQL Database
+                    resource: Database Table Auditing Policy
+                  name: Microsoft.Sql/servers/databases/auditingPolicies/read
+                - display:
+                    description: Change the table auditing policy for a given database
+                    operation: Set database table auditing policy
+                    provider: Microsoft SQL Database
+                    resource: Database Table Auditing Policy
+                  name: Microsoft.Sql/servers/databases/auditingPolicies/write
+                - display:
+                    description: Retrieve details of the default server table auditing policy configured on a given server
+                    operation: Get default server table auditing policy
+                    provider: Microsoft SQL Database
+                    resource: Default Server Table Auditing Policy
+                  name: Microsoft.Sql/servers/auditingPolicies/read
+                - display:
+                    description: Change the default server table auditing for a given server
+                    operation: Set default server table auditing policy
+                    provider: Microsoft SQL Database
+                    resource: Default Server Table Auditing Policy
+                  name: Microsoft.Sql/servers/auditingPolicies/write
+                - display:
+                    description: Retrieve details of the blob auditing policy configured on a given database
+                    operation: Get database blob auditing policy
+                    provider: Microsoft SQL Database
+                    resource: Database Blob Auditing Policy
+                  name: Microsoft.Sql/servers/databases/auditingSettings/read
+                - display:
+                    description: Change the blob auditing policy for a given database
+                    operation: Set database blob auditing policy
+                    provider: Microsoft SQL Database
+                    resource: Database Blob Auditing Policy
+                  name: Microsoft.Sql/servers/databases/auditingSettings/write
+                - display:
+                    description: Retrieve details of the server blob auditing policy configured on a given server
+                    operation: Get server blob auditing policy
+                    provider: Microsoft SQL Database
+                    resource: Server Blob Auditing Policy
+                  name: Microsoft.Sql/servers/auditingSettings/read
+                - display:
+                    description: Change the server blob auditing for a given server
+                    operation: Set server blob auditing policy
+                    provider: Microsoft SQL Database
+                    resource: Server Blob Auditing Policy
+                  name: Microsoft.Sql/servers/auditingSettings/write
+                - display:
+                    description: Retrieve result of the server blob auditing policy Set operation
+                    operation: Get server blob auditing operation results
+                    provider: Microsoft SQL Database
+                    resource: Server Blob Auditing Operation Results
+                  name: Microsoft.Sql/servers/auditingSettings/operationResults/read
+                - display:
+                    description: Retrieve the database blob audit records
+                    operation: Get database blob audit records
+                    provider: Microsoft SQL Database
+                    resource: Database Blob Audit Records
+                  name: Microsoft.Sql/servers/databases/auditRecords/read
+                - display:
+                    description: Retrieve details of the connection policy configured on a given database
+                    operation: Get database connection policy
+                    provider: Microsoft SQL Database
+                    resource: Database Connection Policy
+                  name: Microsoft.Sql/servers/databases/connectionPolicies/read
+                - display:
+                    description: Change connection policy for a given database
+                    operation: Set database connection policy
+                    provider: Microsoft SQL Database
+                    resource: Database Connection Policy
+                  name: Microsoft.Sql/servers/databases/connectionPolicies/write
+                - display:
+                    description: Retrieve details of the data masking policy configured on a given database
+                    operation: Get database data masking policy
+                    provider: Microsoft SQL Database
+                    resource: Database Data Masking Policy
+                  name: Microsoft.Sql/servers/databases/dataMaskingPolicies/read
+                - display:
+                    description: Change data masking policy for a given database
+                    operation: Set database data masking policy
+                    provider: Microsoft SQL Database
+                    resource: Database Data Masking Policy
+                  name: Microsoft.Sql/servers/databases/dataMaskingPolicies/write
+                - display:
+                    description: Retrieve details of the data masking policy rule configured on a given database
+                    operation: Get database data masking policy rule
+                    provider: Microsoft SQL Database
+                    resource: Database Data Masking Policy Rule
+                  name: Microsoft.Sql/servers/databases/dataMaskingPolicies/rules/read
+                - display:
+                    description: Change data masking policy rule for a given database
+                    operation: Set database data masking policy rule
+                    provider: Microsoft SQL Database
+                    resource: Database Data Masking Policy Rule
+                  name: Microsoft.Sql/servers/databases/dataMaskingPolicies/rules/write
+                - display:
+                    description: Retrieve details of the threat detection policy configured on a given database
+                    operation: Get database threat detection policy
+                    provider: Microsoft SQL Database
+                    resource: Database Threat Detection Policy
+                  name: Microsoft.Sql/servers/databases/securityAlertPolicies/read
+                - display:
+                    description: Change the threat detection policy for a given database
+                    operation: Set threat detection auditing policy
+                    provider: Microsoft SQL Database
+                    resource: Database Threat Detection Policy
+                  name: Microsoft.Sql/servers/databases/securityAlertPolicies/write
+                - display:
+                    description: Retrieve details of the server threat detection policy configured on a given server
+                    operation: Get server threat detection policy
+                    provider: Microsoft SQL Database
+                    resource: Server Threat Detection Policy
+                  name: Microsoft.Sql/servers/securityAlertPolicies/read
+                - display:
+                    description: Change the server threat detection for a given server
+                    operation: Set server threat detection policy
+                    provider: Microsoft SQL Database
+                    resource: Server Threat Detection Policy
+                  name: Microsoft.Sql/servers/securityAlertPolicies/write
+                - display:
+                    description: Retrieve results of the server Threat Detection policy Set operation
+                    operation: Get server Threat Detection operation results
+                    provider: Microsoft SQL Database
+                    resource: Server Threat Detection Operation Results
+                  name: Microsoft.Sql/servers/securityAlertPolicies/operationResults/read
+                - display:
+                    description: Execute vulnerability assessment database scan.
+                    operation: Execute vulnerability assessment database scan
+                    provider: Microsoft SQL Database
+                    resource: Vulnerability Assessment Database Scan
+                  name: Microsoft.Sql/servers/databases/VulnerabilityAssessmentScans/action
+                - display:
+                    description: Execute vulnerability assessment server scan
+                    operation: Execute vulnerability assessment server scan
+                    provider: Microsoft SQL Database
+                    resource: Vulnerability Assessment Server Scan
+                  name: Microsoft.Sql/servers/VulnerabilityAssessmentScans/action
+                - display:
+                    description: Returns list of advisors available for the database
+                    operation: Get advisors for a database
+                    provider: Microsoft SQL Database
+                    resource: Database advisor
+                  name: Microsoft.Sql/servers/databases/advisors/read
+                - display:
+                    description: Update auto-execute status of an advisor on database level.
+                    operation: Update auto-execute status of a database advisor
+                    provider: Microsoft SQL Database
+                    resource: Database advisor
+                  name: Microsoft.Sql/servers/databases/advisors/write
+                - display:
+                    description: Returns list of recommended actions of specified advisor for the database
+                    operation: Get recommended actions for a database
+                    provider: Microsoft SQL Database
+                    resource: Database recommended action
+                  name: Microsoft.Sql/servers/databases/advisors/recommendedActions/read
+                - display:
+                    description: Apply the recommended action on the database
+                    operation: Update database recommended action state.
+                    provider: Microsoft SQL Database
+                    resource: Database recommended action
+                  name: Microsoft.Sql/servers/databases/advisors/recommendedActions/write
+                - display:
+                    description: Retrieve details of elastic database pool on a given server
+                    operation: Get elastic database pool details
+                    provider: Microsoft SQL Database
+                    resource: Elastic Database Pool
+                  name: Microsoft.Sql/servers/elasticPools/read
+                - display:
+                    description: Create a new or change properties of existing elastic database pool
+                    operation: Create new or update existing elastic database pool
+                    provider: Microsoft SQL Database
+                    resource: Elastic Database Pool
+                  name: Microsoft.Sql/servers/elasticPools/write
+                - display:
+                    description: Delete existing elastic database pool
+                    operation: Delete elastic database pool
+                    provider: Microsoft SQL Database
+                    resource: Elastic Database Pool
+                  name: Microsoft.Sql/servers/elasticPools/delete
+                - display:
+                    description: Retrieve list and details of databases that are part of elastic database pool on a given server
+                    operation: Get elastic pool databases
+                    provider: Microsoft SQL Database
+                    resource: Database
+                  name: Microsoft.Sql/servers/elasticPools/databases/read
+                - display:
+                    description: Retrieve activities and details on a given elastic database pool
+                    operation: Get elastic database pool activity
+                    provider: Microsoft SQL Database
+                    resource: Elastic Database Pool Activity
+                  name: Microsoft.Sql/servers/elasticPools/elasticPoolActivity/read
+                - display:
+                    description: Retrieve activities and details on a given database that is part of elastic database pool
+                    operation: Get elastic pool database activity
+                    provider: Microsoft SQL Database
+                    resource: Elastic Pool Database Activity
+                  name: Microsoft.Sql/servers/elasticPools/elasticPoolDatabaseActivity/read
+                - display:
+                    description: Return types of metrics that are available for elastic database pools
+                    operation: Get elastic pool metric definitions
+                    provider: Microsoft SQL Database
+                    resource: Elastic Database Pool Metric Definition
+                  name: Microsoft.Sql/servers/elasticPools/providers/Microsoft.Insights/metricDefinitions/read
+                  properties:
+                    serviceSpecification:
+                      metricSpecifications:
+                        - aggregationType: Average
+                          displayDescription: CPU percentage
+                          displayName: CPU percentage
+                          fillGapWithZero: true
+                          name: cpu_percent
+                          unit: Percent
+                        - aggregationType: Average
+                          displayDescription: Data IO percentage
+                          displayName: Data IO percentage
+                          fillGapWithZero: true
+                          name: physical_data_read_percent
+                          unit: Percent
+                        - aggregationType: Average
+                          displayDescription: Log IO percentage
+                          displayName: Log IO percentage
+                          fillGapWithZero: true
+                          name: log_write_percent
+                          unit: Percent
+                        - aggregationType: Average
+                          displayDescription: DTU percentage
+                          displayName: DTU percentage
+                          fillGapWithZero: true
+                          name: dtu_consumption_percent
+                          unit: Percent
+                        - aggregationType: Average
+                          displayDescription: Storage percentage
+                          displayName: Storage percentage
+                          name: storage_percent
+                          unit: Percent
+                        - aggregationType: Average
+                          displayDescription: Workers percentage
+                          displayName: Workers percentage
+                          fillGapWithZero: true
+                          name: workers_percent
+                          unit: Percent
+                        - aggregationType: Average
+                          displayDescription: Sessions percentage
+                          displayName: Sessions percentage
+                          fillGapWithZero: true
+                          name: sessions_percent
+                          unit: Percent
+                        - aggregationType: Average
+                          displayDescription: eDTU limit
+                          displayName: eDTU limit
+                          name: eDTU_limit
+                          unit: Count
+                        - aggregationType: Average
+                          displayDescription: Storage limit
+                          displayName: Storage limit
+                          name: storage_limit
+                          unit: Bytes
+                        - aggregationType: Average
+                          displayDescription: eDTU used
+                          displayName: eDTU used
+                          fillGapWithZero: true
+                          name: eDTU_used
+                          unit: Count
+                        - aggregationType: Average
+                          displayDescription: Storage used
+                          displayName: Storage used
+                          name: storage_used
+                          unit: Bytes
+                        - aggregationType: Average
+                          displayDescription: In-Memory OLTP storage percent
+                          displayName: In-Memory OLTP storage percent
+                          fillGapWithZero: true
+                          name: xtp_storage_percent
+                          unit: Percent
+                - display:
+                    description: Return elastic database pool resource utilization metrics
+                    operation: Get elastic pool resource consumption metrics
+                    provider: Microsoft SQL Database
+                    resource: Elastic Database Pool Metric
+                  name: Microsoft.Sql/servers/elasticPools/metrics/read
+                - display:
+                    description: Retrieve details on a given elastic database pool operation
+                    operation: Get elastic database pool operation result
+                    provider: Microsoft SQL Database
+                    resource: Elastic Database Pool Operation Result
+                  name: Microsoft.Sql/servers/elasticPools/operationResults/read
+                - display:
+                    description: Returns list of advisors available for the elastic pool
+                    operation: Get advisors for an elastic pool
+                    provider: Microsoft SQL Database
+                    resource: Elastic pool advisor
+                  name: Microsoft.Sql/servers/elasticPools/advisors/read
+                - display:
+                    description: Update auto-execute status of an advisor on elastic pool level.
+                    operation: Update auto-execute status of a elastic pool advisor
+                    provider: Microsoft SQL Database
+                    resource: Elastic pool advisor
+                  name: Microsoft.Sql/servers/elasticPools/advisors/write
+                - display:
+                    description: Returns list of recommended actions of specified advisor for the elastic pool
+                    operation: Get recommended actions for an elastic pool
+                    provider: Microsoft SQL Database
+                    resource: Elastic pool recommended action
+                  name: Microsoft.Sql/servers/elasticPools/advisors/recommendedActions/read
+                - display:
+                    description: Apply the recommended action on the elastic pool
+                    operation: Update elastic pool recommended action state.
+                    provider: Microsoft SQL Database
+                    resource: Elastic pool recommended action
+                  name: Microsoft.Sql/servers/elasticPools/advisors/recommendedActions/write
+                - display:
+                    description: Gets the diagnostic setting for the resource
+                    operation: Read diagnostic setting
+                    provider: Microsoft SQL Database
+                    resource: Elastic Database Pool Diagnostic Settings
+                  name: Microsoft.Sql/servers/elasticPools/providers/Microsoft.Insights/diagnosticSettings/read
+                - display:
+                    description: Creates or updates the diagnostic setting for the resource
+                    operation: Write diagnostic setting
+                    provider: Microsoft SQL Database
+                    resource: Elastic Database Pool Diagnostic Settings
+                  name: Microsoft.Sql/servers/elasticPools/providers/Microsoft.Insights/diagnosticSettings/write
+                - display:
+                    description: Pause a DataWarehouse edition database
+                    operation: Pause a database
+                    provider: Microsoft SQL Database
+                    resource: Database
+                  name: Microsoft.Sql/servers/databases/pause/action
+                - display:
+                    description: Resume a DataWarehouse edition database
+                    operation: Resume a database
+                    provider: Microsoft SQL Database
+                    resource: Database
+                  name: Microsoft.Sql/servers/databases/resume/action
+                - display:
+                    description: Returns the data warehouse distribution query information for selected query ID
+                    operation: Get details about data warehouse query
+                    provider: Microsoft SQL Database
+                    resource: Data Warehouse Query
+                  name: Microsoft.Sql/servers/databases/dataWarehouseQueries/read
+                - display:
+                    description: Returns the distributed query step information of data warehouse query for selected step ID
+                    operation: Get details about data warehouse query step
+                    provider: Microsoft SQL Database
+                    resource: Data Warehouse Query Step
+                  name: Microsoft.Sql/servers/databases/dataWarehouseQueries/dataWarehouseQuerySteps/read
+                - display:
+                    description: This operation is used to get a backup long term retention vault. It returns information about the vault registered to this server.
+                    operation: Read a backup long term retention vault
+                    provider: Microsoft SQL Database
+                    resource: A backup long term retention vault
+                  name: Microsoft.Sql/servers/backupLongTermRetentionVaults/read
+                - display:
+                    description: Register a backup long term retention vault
+                    operation: This operation is used to register a backup long term retention vault to a server.
+                    provider: Microsoft SQL Database
+                    resource: A backup long term retention vault
+                  name: Microsoft.Sql/servers/backupLongTermRetentionVaults/write
+definitions:
+  Operation:
+    description: SQL REST API operation definition.
+    properties:
+      display:
+        description: Display metadata associated with the operation.
+        properties:
+          operation:
+            description: 'Type of operation: get, read, delete, etc.'
+            type: string
+          provider:
+            description: 'Service provider: Microsoft SQL Database.'
+            type: string
+          resource:
+            description: 'Resource on which the operation is performed: Server, Database, etc.'
+            type: string
+      name:
+        description: 'Operation name: {provider}/{resource}/{operation}'
+        type: string
+    type: object
+  OperationListResult:
+    description: Result of the request to list SQL operations. It contains a list of operations and a URL link to get the next set of results.
+    properties:
+      nextLink:
+        description: URL to get the next set of operation list results if there are any.
+        type: string
+      value:
+        description: List of SQL operations supported by the SQL resource provider.
+        items:
+          $ref: '#/definitions/Operation'
+        type: array

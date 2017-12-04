@@ -1,0 +1,246 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: 'Provides create, read, update and delete functionality for Azure SQL Database resources including servers, databases, elastic pools, recommendations, operations, and usage metrics.'
+  title: Azure SQL Database
+  version: '2014-04-01'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/sql/resource-manager/Microsoft.Sql/2014-04-01/usages.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: sql-usages
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+parameters:
+  ApiVersionParameter:
+    description: The API version to use for the request.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  ResourceGroupParameter:
+    description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ServerNameParameter:
+    description: The name of the server.
+    in: path
+    name: serverName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: The subscription ID that identifies an Azure subscription.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/usages':
+    get:
+      description: Returns database usages.
+      operationId: DatabaseUsages_ListByDatabase
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - description: The name of the database.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DatabaseUsageListResult'
+      tags:
+        - Databases
+      x-ms-examples:
+        List database usage metrics:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: '3481'
+            resourceGroupName: sqlcrudtest-6730
+            serverName: sqlcrudtest-9007
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - currentValue: 4194304
+                    displayName: Database Size
+                    limit: 268435456000
+                    name: database_size
+                    nextResetTime: null
+                    resourceName: '3481'
+                    unit: Bytes
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/usages':
+    get:
+      description: Returns server usages.
+      operationId: ServerUsages_ListByServer
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServerUsageListResult'
+      tags:
+        - Servers
+      x-ms-examples:
+        List servers usages:
+          parameters:
+            api-version: '2014-04-01'
+            resourceGroupName: sqlcrudtest-6730
+            serverName: sqlcrudtest-9007
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - currentValue: 0
+                    displayName: Database Throughput Unit Quota
+                    limit: 45000
+                    name: server_dtu_quota
+                    nextResetTime: null
+                    resourceName: sqlcrudtest-9007
+                    unit: DTUs
+                  - currentValue: 0
+                    displayName: Database Throughput Unit Quota
+                    limit: 45000
+                    name: server_dtu_quota_current
+                    nextResetTime: null
+                    resourceName: sqlcrudtest-9007
+                    unit: DTUs
+      x-ms-pageable: {}
+definitions:
+  DatabaseUsage:
+    description: The database usages.
+    properties:
+      currentValue:
+        description: The current value of the usage metric.
+        format: double
+        readOnly: true
+        type: number
+      displayName:
+        description: The usage metric display name.
+        readOnly: true
+        type: string
+      limit:
+        description: The current limit of the usage metric.
+        format: double
+        readOnly: true
+        type: number
+      name:
+        description: The name of the usage metric.
+        readOnly: true
+        type: string
+      nextResetTime:
+        description: The next reset time for the usage metric (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      resourceName:
+        description: The name of the resource.
+        readOnly: true
+        type: string
+      unit:
+        description: The units of the usage metric.
+        readOnly: true
+        type: string
+  DatabaseUsageListResult:
+    description: The response to a list database metrics request.
+    properties:
+      value:
+        description: The list of database usages for the database.
+        items:
+          $ref: '#/definitions/DatabaseUsage'
+        type: array
+    required:
+      - value
+  ProxyResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: ARM proxy resource.
+  Resource:
+    description: ARM resource.
+    properties:
+      id:
+        description: Resource ID.
+        readOnly: true
+        type: string
+      name:
+        description: Resource name.
+        readOnly: true
+        type: string
+      type:
+        description: Resource type.
+        readOnly: true
+        type: string
+    x-ms-azure-resource: true
+  ServerUsage:
+    description: Represents server metrics.
+    properties:
+      currentValue:
+        description: The current value of the metric.
+        format: double
+        readOnly: true
+        type: number
+      displayName:
+        description: The metric display name.
+        readOnly: true
+        type: string
+      limit:
+        description: The current limit of the metric.
+        format: double
+        readOnly: true
+        type: number
+      name:
+        description: Name of the server usage metric.
+        readOnly: true
+        type: string
+      nextResetTime:
+        description: The next reset time for the metric (ISO8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      resourceName:
+        description: The name of the resource.
+        readOnly: true
+        type: string
+      unit:
+        description: The units of the metric.
+        readOnly: true
+        type: string
+  ServerUsageListResult:
+    description: Represents the response to a list server metrics request.
+    properties:
+      value:
+        description: The list of server metrics for the server.
+        items:
+          $ref: '#/definitions/ServerUsage'
+        type: array
+    required:
+      - value
