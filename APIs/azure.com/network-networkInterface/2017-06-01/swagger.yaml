@@ -794,6 +794,8 @@ paths:
       x-ms-pageable:
         nextLinkName: nextLink
 definitions:
+  BackendAddressPoolPropertiesFormat:
+    type: object
   EffectiveNetworkSecurityGroup:
     description: Effective network security group.
     properties:
@@ -1085,6 +1087,8 @@ definitions:
             $ref: '#/definitions/SubnetPropertiesFormat'
             description: Properties of the subnet.
             x-ms-client-flatten: true
+  InboundNatRulePropertiesFormat:
+    type: object
   NetworkInterface:
     allOf:
       - description: Common resource representation.
@@ -1901,3 +1905,9 @@ definitions:
             description: Resource ID.
             type: string
         x-ms-azure-resource: true
+  NetworkSecurityGroupPropertiesFormat:
+    type: object
+  PublicIPAddressPropertiesFormat:
+    type: object
+  SubnetPropertiesFormat:
+    type: object

@@ -667,6 +667,8 @@ definitions:
     required:
       - protocol
       - frontendPort
+  NetworkInterfaceIPConfigurationPropertiesFormat:
+    type: object
   OutboundNatRule:
     allOf:
       - description: Azure resource manager sub resource properties.
@@ -776,9 +778,7 @@ definitions:
     required:
       - protocol
       - port
-  NetworkInterfaceIPConfigurationPropertiesFormat:
+  PublicIPAddressPropertiesFormat:
     type: object
   SubnetPropertiesFormat:
-    type: object
-  PublicIPAddressPropertiesFormat:
     type: object
