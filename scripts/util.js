@@ -207,16 +207,16 @@ exports.editFile = function (str) {
   });
 }
 
-exports.listGitHubFiles = function (user, repo, glob) {
+exports.listGitHubFiles = function (user, repo, branch, glob) {
   //TODO: use makeRequest lib to dowload archive
-  var files = exports.exec(`wget -q -O- https://codeload.github.com/${user}/${repo}/tar.gz/master | tar -tz --wildcards '*/${glob}'`);
+  var files = exports.exec(`wget -q -O- https://codeload.github.com/${user}/${repo}/tar.gz/${branch} | tar -tz --wildcards '*/${glob}'`);
   return _(files)
     .split('\n')
-    .map(file => file.replace(repo + '-master/', ''))
+    .map(file => file.replace(repo + '-' + branch + '/', ''))
     .filter(line => line != '' && line.slice(-1) != '/')
     .value();
 };
 
-exports.rawGitHubUrl = function (user, repo, path) {
-  return `https://raw.githubusercontent.com/${user}/${repo}/master/${path}`;
+exports.rawGitHubUrl = function (user, repo, branch, path) {
+  return `https://raw.githubusercontent.com/${user}/${repo}/${branch}/${path}`;
 }
