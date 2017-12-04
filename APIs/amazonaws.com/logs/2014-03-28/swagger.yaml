@@ -1,0 +1,2565 @@
+swagger: '2.0'
+info:
+  version: '2014-03-28'
+  x-release: v4
+  title: Amazon CloudWatch Logs
+  description: '<p>You can use Amazon CloudWatch Logs to monitor, store, and access your log files from Amazon EC2 instances, AWS CloudTrail, or other sources. You can then retrieve the associated log data from CloudWatch Logs using the CloudWatch console, CloudWatch Logs commands in the AWS CLI, CloudWatch Logs API, or CloudWatch Logs SDK.</p> <p>You can use CloudWatch Logs to:</p> <ul> <li> <p> <b>Monitor logs from EC2 instances in real-time</b>: You can use CloudWatch Logs to monitor applications and systems using log data. For example, CloudWatch Logs can track the number of errors that occur in your application logs and send you a notification whenever the rate of errors exceeds a threshold that you specify. CloudWatch Logs uses your log data for monitoring; so, no code changes are required. For example, you can monitor application logs for specific literal terms (such as "NullReferenceException") or count the number of occurrences of a literal term at a particular position in log data (such as "404" status codes in an Apache access log). When the term you are searching for is found, CloudWatch Logs reports the data to a CloudWatch metric that you specify.</p> </li> <li> <p> <b>Monitor AWS CloudTrail logged events</b>: You can create alarms in CloudWatch and receive notifications of particular API activity as captured by CloudTrail and use the notification to perform troubleshooting.</p> </li> <li> <p> <b>Archive log data</b>: You can use CloudWatch Logs to store your log data in highly durable storage. You can change the log retention setting so that any log events older than this setting are automatically deleted. The CloudWatch Logs agent makes it easy to quickly send both rotated and non-rotated log data off of a host and into the log service. You can then access the raw log data when you need it.</p> </li> </ul>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: logs
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/logs-2014-03-28.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/logs/'
+host: logs.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AssociateKmsKey
+      description: '<p>Associates the specified AWS Key Management Service (AWS KMS) customer master key (CMK) with the specified log group.</p> <p>Associating an AWS KMS CMK with a log group overrides any existing associations between the log group and a CMK. After a CMK is associated with a log group, all newly ingested data for the log group is encrypted using the CMK. This association is stored as long as the data encrypted with the CMK is still within Amazon CloudWatch Logs. This enables Amazon CloudWatch Logs to decrypt this data whenever it is requested.</p> <p>Note that it can take up to 5 minutes for this operation to take effect.</p> <p>If you attempt to associate a CMK with a log group but the CMK does not exist or the CMK is disabled, you will receive an <code>InvalidParameterException</code> error. </p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: OperationAbortedException
+          schema:
+            $ref: '#/definitions/OperationAbortedException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateKmsKeyRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CancelExportTask':
+    post:
+      operationId: CancelExportTask
+      description: <p>Cancels the specified export task.</p> <p>The task must be in the <code>PENDING</code> or <code>RUNNING</code> state.</p>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidOperationException
+          schema:
+            $ref: '#/definitions/InvalidOperationException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CancelExportTaskRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateExportTask':
+    post:
+      operationId: CreateExportTask
+      description: '<p>Creates an export task, which allows you to efficiently export data from a log group to an Amazon S3 bucket.</p> <p>This is an asynchronous call. If all the required information is provided, this operation initiates an export task and responds with the ID of the task. After the task has started, you can use <a>DescribeExportTasks</a> to get the status of the export task. Each account can only have one active (<code>RUNNING</code> or <code>PENDING</code>) export task at a time. To cancel an export task, use <a>CancelExportTask</a>.</p> <p>You can export logs from multiple log groups or multiple time ranges to the same S3 bucket. To separate out log data for each export task, you can specify a prefix to be used as the Amazon S3 key prefix for all exported objects.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateExportTaskResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: OperationAbortedException
+          schema:
+            $ref: '#/definitions/OperationAbortedException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '485':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateExportTaskRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateLogGroup':
+    post:
+      operationId: CreateLogGroup
+      description: '<p>Creates a log group with the specified name.</p> <p>You can create up to 5000 log groups per account.</p> <p>You must use the following guidelines when naming a log group:</p> <ul> <li> <p>Log group names must be unique within a region for an AWS account.</p> </li> <li> <p>Log group names can be between 1 and 512 characters long.</p> </li> <li> <p>Log group names consist of the following characters: a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (hyphen), ''/'' (forward slash), and ''.'' (period).</p> </li> </ul> <p>If you associate a AWS Key Management Service (AWS KMS) customer master key (CMK) with the log group, ingested data is encrypted using the CMK. This association is stored as long as the data encrypted with the CMK is still within Amazon CloudWatch Logs. This enables Amazon CloudWatch Logs to decrypt this data whenever it is requested.</p> <p>If you attempt to associate a CMK with the log group but the CMK does not exist or the CMK is disabled, you will receive an <code>InvalidParameterException</code> error. </p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: OperationAbortedException
+          schema:
+            $ref: '#/definitions/OperationAbortedException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLogGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateLogStream':
+    post:
+      operationId: CreateLogStream
+      description: '<p>Creates a log stream for the specified log group.</p> <p>There is no limit on the number of log streams that you can create for a log group.</p> <p>You must use the following guidelines when naming a log stream:</p> <ul> <li> <p>Log stream names must be unique within the log group.</p> </li> <li> <p>Log stream names can be between 1 and 512 characters long.</p> </li> <li> <p>The '':'' (colon) and ''*'' (asterisk) characters are not allowed.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLogStreamRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDestination':
+    post:
+      operationId: DeleteDestination
+      description: 'Deletes the specified destination, and eventually disables all the subscription filters that publish to it. This operation does not delete the physical resource encapsulated by the destination.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: OperationAbortedException
+          schema:
+            $ref: '#/definitions/OperationAbortedException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDestinationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteLogGroup':
+    post:
+      operationId: DeleteLogGroup
+      description: Deletes the specified log group and permanently deletes all the archived log events associated with the log group.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: OperationAbortedException
+          schema:
+            $ref: '#/definitions/OperationAbortedException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLogGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteLogStream':
+    post:
+      operationId: DeleteLogStream
+      description: Deletes the specified log stream and permanently deletes all the archived log events associated with the log stream.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: OperationAbortedException
+          schema:
+            $ref: '#/definitions/OperationAbortedException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLogStreamRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteMetricFilter':
+    post:
+      operationId: DeleteMetricFilter
+      description: Deletes the specified metric filter.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: OperationAbortedException
+          schema:
+            $ref: '#/definitions/OperationAbortedException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteMetricFilterRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteResourcePolicy':
+    post:
+      operationId: DeleteResourcePolicy
+      description: Deletes a resource policy from this account. This revokes the access of the identities in that policy to put log events to this account.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteResourcePolicyRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteRetentionPolicy':
+    post:
+      operationId: DeleteRetentionPolicy
+      description: <p>Deletes the specified retention policy.</p> <p>Log events do not expire if they belong to log groups without a retention policy.</p>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: OperationAbortedException
+          schema:
+            $ref: '#/definitions/OperationAbortedException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteRetentionPolicyRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteSubscriptionFilter':
+    post:
+      operationId: DeleteSubscriptionFilter
+      description: Deletes the specified subscription filter.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: OperationAbortedException
+          schema:
+            $ref: '#/definitions/OperationAbortedException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteSubscriptionFilterRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDestinations':
+    post:
+      operationId: DescribeDestinations
+      description: Lists all your destinations. The results are ASCII-sorted by destination name.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDestinationsResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDestinationsRequest'
+        - name: limit
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeExportTasks':
+    post:
+      operationId: DescribeExportTasks
+      description: Lists the specified export tasks. You can list all your export tasks or filter the results based on task ID or task status.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeExportTasksResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeExportTasksRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeLogGroups':
+    post:
+      operationId: DescribeLogGroups
+      description: Lists the specified log groups. You can list all your log groups or filter the results by prefix. The results are ASCII-sorted by log group name.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeLogGroupsResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeLogGroupsRequest'
+        - name: limit
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeLogStreams':
+    post:
+      operationId: DescribeLogStreams
+      description: '<p>Lists the log streams for the specified log group. You can list all the log streams or filter the results by prefix. You can also control how the results are ordered.</p> <p>This operation has a limit of five transactions per second, after which transactions are throttled.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeLogStreamsResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeLogStreamsRequest'
+        - name: limit
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeMetricFilters':
+    post:
+      operationId: DescribeMetricFilters
+      description: 'Lists the specified metric filters. You can list all the metric filters or filter the results by log name, prefix, metric name, or metric namespace. The results are ASCII-sorted by filter name.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeMetricFiltersResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeMetricFiltersRequest'
+        - name: limit
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeResourcePolicies':
+    post:
+      operationId: DescribeResourcePolicies
+      description: Lists the resource policies in this account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeResourcePoliciesResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeResourcePoliciesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSubscriptionFilters':
+    post:
+      operationId: DescribeSubscriptionFilters
+      description: Lists the subscription filters for the specified log group. You can list all the subscription filters or filter the results by prefix. The results are ASCII-sorted by filter name.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeSubscriptionFiltersResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeSubscriptionFiltersRequest'
+        - name: limit
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateKmsKey':
+    post:
+      operationId: DisassociateKmsKey
+      description: '<p>Disassociates the associated AWS Key Management Service (AWS KMS) customer master key (CMK) from the specified log group.</p> <p>After the AWS KMS CMK is disassociated from the log group, AWS CloudWatch Logs stops encrypting newly ingested data for the log group. All previously ingested data remains encrypted, and AWS CloudWatch Logs requires permissions for the CMK whenever the encrypted data is requested.</p> <p>Note that it can take up to 5 minutes for this operation to take effect.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: OperationAbortedException
+          schema:
+            $ref: '#/definitions/OperationAbortedException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateKmsKeyRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#FilterLogEvents':
+    post:
+      operationId: FilterLogEvents
+      description: '<p>Lists log events from the specified log group. You can list all the log events or filter the results using a filter pattern, a time range, and the name of the log stream.</p> <p>By default, this operation returns as many log events as can fit in 1 MB (up to 10,000 log events), or all the events found within the time range that you specify. If the results include a token, then there are more log events available, and you can get additional results by specifying the token in a subsequent call.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/FilterLogEventsResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/FilterLogEventsRequest'
+        - name: limit
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetLogEvents':
+    post:
+      operationId: GetLogEvents
+      description: '<p>Lists log events from the specified log stream. You can list all the log events or filter using a time range.</p> <p>By default, this operation returns as many log events as can fit in a response size of 1MB (up to 10,000 log events). You can get additional log events by specifying one of the tokens in a subsequent call.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLogEventsResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLogEventsRequest'
+        - name: limit
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListTagsLogGroup':
+    post:
+      operationId: ListTagsLogGroup
+      description: Lists the tags for the specified log group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsLogGroupResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsLogGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutDestination':
+    post:
+      operationId: PutDestination
+      description: '<p>Creates or updates a destination. A destination encapsulates a physical resource (such as an Amazon Kinesis stream) and enables you to subscribe to a real-time stream of log events for a different account, ingested using <a>PutLogEvents</a>. Currently, the only supported physical resource is a Kinesis stream belonging to the same account as the destination.</p> <p>Through an access policy, a destination controls what is written to its Kinesis stream. By default, <code>PutDestination</code> does not set any access policy with the destination, which means a cross-account user cannot call <a>PutSubscriptionFilter</a> against this destination. To enable this, the destination owner must call <a>PutDestinationPolicy</a> after <code>PutDestination</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutDestinationResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: OperationAbortedException
+          schema:
+            $ref: '#/definitions/OperationAbortedException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutDestinationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutDestinationPolicy':
+    post:
+      operationId: PutDestinationPolicy
+      description: 'Creates or updates an access policy associated with an existing destination. An access policy is an <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html">IAM policy document</a> that is used to authorize claims to register a subscription filter against a given destination.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: OperationAbortedException
+          schema:
+            $ref: '#/definitions/OperationAbortedException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutDestinationPolicyRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutLogEvents':
+    post:
+      operationId: PutLogEvents
+      description: '<p>Uploads a batch of log events to the specified log stream.</p> <p>You must include the sequence token obtained from the response of the previous call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using <a>DescribeLogStreams</a>. If you call <code>PutLogEvents</code> twice within a narrow time period using the same value for <code>sequenceToken</code>, both calls may be successful, or one may be rejected.</p> <p>The batch of events must satisfy the following constraints:</p> <ul> <li> <p>The maximum batch size is 1,048,576 bytes, and this size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for each log event.</p> </li> <li> <p>None of the log events in the batch can be more than 2 hours in the future.</p> </li> <li> <p>None of the log events in the batch can be older than 14 days or the retention period of the log group.</p> </li> <li> <p>The log events in the batch must be in chronological ordered by their time stamp (the time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC).</p> </li> <li> <p>The maximum number of log events in a batch is 10,000.</p> </li> <li> <p>A batch of log events in a single request cannot span more than 24 hours. Otherwise, the operation fails.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutLogEventsResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: InvalidSequenceTokenException
+          schema:
+            $ref: '#/definitions/InvalidSequenceTokenException'
+        '482':
+          description: DataAlreadyAcceptedException
+          schema:
+            $ref: '#/definitions/DataAlreadyAcceptedException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutLogEventsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutMetricFilter':
+    post:
+      operationId: PutMetricFilter
+      description: <p>Creates or updates a metric filter and associates it with the specified log group. Metric filters allow you to configure rules to extract metric data from log events ingested through <a>PutLogEvents</a>.</p> <p>The maximum number of metric filters that can be associated with a log group is 100.</p>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: OperationAbortedException
+          schema:
+            $ref: '#/definitions/OperationAbortedException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutMetricFilterRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutResourcePolicy':
+    post:
+      operationId: PutResourcePolicy
+      description: 'Creates or updates a resource policy allowing other AWS services to put log events to this account, such as Amazon Route 53. An account can have up to 50 resource policies per region.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutResourcePolicyResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutResourcePolicyRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutRetentionPolicy':
+    post:
+      operationId: PutRetentionPolicy
+      description: Sets the retention of the specified log group. A retention policy allows you to configure the number of days for which to retain log events in the specified log group.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: OperationAbortedException
+          schema:
+            $ref: '#/definitions/OperationAbortedException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutRetentionPolicyRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutSubscriptionFilter':
+    post:
+      operationId: PutSubscriptionFilter
+      description: '<p>Creates or updates a subscription filter and associates it with the specified log group. Subscription filters allow you to subscribe to a real-time stream of log events ingested through <a>PutLogEvents</a> and have them delivered to a specific destination. Currently, the supported destinations are:</p> <ul> <li> <p>An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.</p> </li> <li> <p>A logical destination that belongs to a different account, for cross-account delivery.</p> </li> <li> <p>An Amazon Kinesis Firehose delivery stream that belongs to the same account as the subscription filter, for same-account delivery.</p> </li> <li> <p>An AWS Lambda function that belongs to the same account as the subscription filter, for same-account delivery.</p> </li> </ul> <p>There can only be one subscription filter associated with a log group. If you are updating an existing filter, you must specify the correct name in <code>filterName</code>. Otherwise, the call fails because you cannot associate a second filter with a log group.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: OperationAbortedException
+          schema:
+            $ref: '#/definitions/OperationAbortedException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutSubscriptionFilterRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#TagLogGroup':
+    post:
+      operationId: TagLogGroup
+      description: '<p>Adds or updates the specified tags for the specified log group.</p> <p>To list the tags for a log group, use <a>ListTagsLogGroup</a>. To remove tags, use <a>UntagLogGroup</a>.</p> <p>For more information about tags, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/log-group-tagging.html">Tag Log Groups in Amazon CloudWatch Logs</a> in the <i>Amazon CloudWatch Logs User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagLogGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#TestMetricFilter':
+    post:
+      operationId: TestMetricFilter
+      description: Tests the filter pattern of a metric filter against a sample of log event messages. You can use this operation to validate the correctness of a metric filter pattern.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TestMetricFilterResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TestMetricFilterRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UntagLogGroup':
+    post:
+      operationId: UntagLogGroup
+      description: '<p>Removes the specified tags from the specified log group.</p> <p>To list the tags for a log group, use <a>ListTagsLogGroup</a>. To add tags, use <a>UntagLogGroup</a>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagLogGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AccessPolicy:
+    type: string
+    minLength: 1
+  Arn:
+    type: string
+  AssociateKmsKeyRequest:
+    type: object
+    required:
+      - logGroupName
+      - kmsKeyId
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      kmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: 'The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms">Amazon Resource Names - AWS Key Management Service (AWS KMS)</a>.'
+  CancelExportTaskRequest:
+    type: object
+    required:
+      - taskId
+    properties:
+      taskId:
+        $ref: '#/definitions/ExportTaskId'
+        description: The ID of the export task.
+  CreateExportTaskRequest:
+    type: object
+    required:
+      - logGroupName
+      - from
+      - to
+      - destination
+    properties:
+      taskName:
+        $ref: '#/definitions/ExportTaskName'
+        description: The name of the export task.
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      logStreamNamePrefix:
+        $ref: '#/definitions/LogStreamName'
+        description: 'Export only log streams that match the provided prefix. If you don''t specify a value, no prefix filter is applied.'
+      from:
+        $ref: '#/definitions/Timestamp'
+        description: 'The start time of the range for the request, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time stamp earlier than this time are not exported.'
+      to:
+        $ref: '#/definitions/Timestamp'
+        description: 'The end time of the range for the request, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than this time are not exported.'
+      destination:
+        $ref: '#/definitions/ExportDestinationBucket'
+        description: The name of S3 bucket for the exported log data. The bucket must be in the same AWS region.
+      destinationPrefix:
+        $ref: '#/definitions/ExportDestinationPrefix'
+        description: 'The prefix used as the start of the key for every object exported. If you don''t specify a value, the default is <code>exportedlogs</code>.'
+  CreateExportTaskResponse:
+    type: object
+    properties:
+      taskId:
+        $ref: '#/definitions/ExportTaskId'
+        description: The ID of the export task.
+  CreateLogGroupRequest:
+    type: object
+    required:
+      - logGroupName
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      kmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: 'The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms">Amazon Resource Names - AWS Key Management Service (AWS KMS)</a>.'
+      tags:
+        $ref: '#/definitions/Tags'
+        description: The key-value pairs to use for the tags.
+  CreateLogStreamRequest:
+    type: object
+    required:
+      - logGroupName
+      - logStreamName
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      logStreamName:
+        $ref: '#/definitions/LogStreamName'
+        description: The name of the log stream.
+  DataAlreadyAcceptedException:
+    type: object
+    properties:
+      expectedSequenceToken:
+        $ref: '#/definitions/SequenceToken'
+    description: The event was already logged.
+  Days:
+    type: integer
+    description: 'The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.'
+  DefaultValue:
+    type: number
+    format: double
+  DeleteDestinationRequest:
+    type: object
+    required:
+      - destinationName
+    properties:
+      destinationName:
+        $ref: '#/definitions/DestinationName'
+        description: The name of the destination.
+  DeleteLogGroupRequest:
+    type: object
+    required:
+      - logGroupName
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+  DeleteLogStreamRequest:
+    type: object
+    required:
+      - logGroupName
+      - logStreamName
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      logStreamName:
+        $ref: '#/definitions/LogStreamName'
+        description: The name of the log stream.
+  DeleteMetricFilterRequest:
+    type: object
+    required:
+      - logGroupName
+      - filterName
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      filterName:
+        $ref: '#/definitions/FilterName'
+        description: The name of the metric filter.
+  DeleteResourcePolicyRequest:
+    type: object
+    properties:
+      policyName:
+        $ref: '#/definitions/PolicyName'
+        description: The name of the policy to be revoked. This parameter is required.
+  DeleteRetentionPolicyRequest:
+    type: object
+    required:
+      - logGroupName
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+  DeleteSubscriptionFilterRequest:
+    type: object
+    required:
+      - logGroupName
+      - filterName
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      filterName:
+        $ref: '#/definitions/FilterName'
+        description: The name of the subscription filter.
+  Descending:
+    type: boolean
+  DescribeDestinationsRequest:
+    type: object
+    properties:
+      DestinationNamePrefix:
+        $ref: '#/definitions/DestinationName'
+        description: 'The prefix to match. If you don''t specify a value, no prefix filter is applied.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. (You received this token from a previous call.)
+      limit:
+        $ref: '#/definitions/DescribeLimit'
+        description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
+  DescribeDestinationsResponse:
+    type: object
+    properties:
+      destinations:
+        $ref: '#/definitions/Destinations'
+        description: The destinations.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+  DescribeExportTasksRequest:
+    type: object
+    properties:
+      taskId:
+        $ref: '#/definitions/ExportTaskId'
+        description: The ID of the export task. Specifying a task ID filters the results to zero or one export tasks.
+      statusCode:
+        $ref: '#/definitions/ExportTaskStatusCode'
+        description: The status code of the export task. Specifying a status code filters the results to zero or more export tasks.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. (You received this token from a previous call.)
+      limit:
+        $ref: '#/definitions/DescribeLimit'
+        description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
+  DescribeExportTasksResponse:
+    type: object
+    properties:
+      exportTasks:
+        $ref: '#/definitions/ExportTasks'
+        description: The export tasks.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+  DescribeLimit:
+    type: integer
+    minimum: 1
+    maximum: 50
+  DescribeLogGroupsRequest:
+    type: object
+    properties:
+      logGroupNamePrefix:
+        $ref: '#/definitions/LogGroupName'
+        description: The prefix to match.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. (You received this token from a previous call.)
+      limit:
+        $ref: '#/definitions/DescribeLimit'
+        description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
+  DescribeLogGroupsResponse:
+    type: object
+    properties:
+      logGroups:
+        $ref: '#/definitions/LogGroups'
+        description: The log groups.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+  DescribeLogStreamsRequest:
+    type: object
+    required:
+      - logGroupName
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      logStreamNamePrefix:
+        $ref: '#/definitions/LogStreamName'
+        description: '<p>The prefix to match.</p> <p>iIf <code>orderBy</code> is <code>LastEventTime</code>,you cannot specify this parameter.</p>'
+      orderBy:
+        $ref: '#/definitions/OrderBy'
+        description: '<p>If the value is <code>LogStreamName</code>, the results are ordered by log stream name. If the value is <code>LastEventTime</code>, the results are ordered by the event time. The default value is <code>LogStreamName</code>.</p> <p>If you order the results by event time, you cannot specify the <code>logStreamNamePrefix</code> parameter.</p> <p>lastEventTimestamp represents the time of the most recent log event in the log stream in CloudWatch Logs. This number is expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. lastEventTimeStamp updates on an eventual consistency basis. It typically updates in less than an hour from ingestion, but may take longer in some rare situations.</p>'
+      descending:
+        $ref: '#/definitions/Descending'
+        description: 'If the value is true, results are returned in descending order. If the value is to false, results are returned in ascending order. The default value is false.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. (You received this token from a previous call.)
+      limit:
+        $ref: '#/definitions/DescribeLimit'
+        description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
+  DescribeLogStreamsResponse:
+    type: object
+    properties:
+      logStreams:
+        $ref: '#/definitions/LogStreams'
+        description: The log streams.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+  DescribeMetricFiltersRequest:
+    type: object
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      filterNamePrefix:
+        $ref: '#/definitions/FilterName'
+        description: The prefix to match.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. (You received this token from a previous call.)
+      limit:
+        $ref: '#/definitions/DescribeLimit'
+        description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
+      metricName:
+        $ref: '#/definitions/MetricName'
+      metricNamespace:
+        $ref: '#/definitions/MetricNamespace'
+        description: The namespace of the CloudWatch metric.
+  DescribeMetricFiltersResponse:
+    type: object
+    properties:
+      metricFilters:
+        $ref: '#/definitions/MetricFilters'
+        description: The metric filters.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+  DescribeResourcePoliciesRequest:
+    type: object
+    properties:
+      nextToken:
+        $ref: '#/definitions/NextToken'
+      limit:
+        $ref: '#/definitions/DescribeLimit'
+        description: The maximum number of resource policies to be displayed with one call of this API.
+  DescribeResourcePoliciesResponse:
+    type: object
+    properties:
+      resourcePolicies:
+        $ref: '#/definitions/ResourcePolicies'
+        description: The resource policies that exist in this account.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+  DescribeSubscriptionFiltersRequest:
+    type: object
+    required:
+      - logGroupName
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      filterNamePrefix:
+        $ref: '#/definitions/FilterName'
+        description: 'The prefix to match. If you don''t specify a value, no prefix filter is applied.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. (You received this token from a previous call.)
+      limit:
+        $ref: '#/definitions/DescribeLimit'
+        description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
+  DescribeSubscriptionFiltersResponse:
+    type: object
+    properties:
+      subscriptionFilters:
+        $ref: '#/definitions/SubscriptionFilters'
+        description: The subscription filters.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+  Destination:
+    type: object
+    properties:
+      destinationName:
+        $ref: '#/definitions/DestinationName'
+        description: The name of the destination.
+      targetArn:
+        $ref: '#/definitions/TargetArn'
+        description: 'The Amazon Resource Name (ARN) of the physical target to where the log events are delivered (for example, a Kinesis stream).'
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: 'A role for impersonation, used when delivering log events to the target.'
+      accessPolicy:
+        $ref: '#/definitions/AccessPolicy'
+        description: An IAM policy document that governs which AWS accounts can create subscription filters against this destination.
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of this destination.
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The creation time of the destination, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+    description: Represents a cross-account destination that receives subscription log events.
+  DestinationArn:
+    type: string
+    minLength: 1
+  DestinationName:
+    type: string
+    pattern: '[^:*]*'
+    minLength: 1
+    maxLength: 512
+  Destinations:
+    type: array
+    items:
+      $ref: '#/definitions/Destination'
+  DisassociateKmsKeyRequest:
+    type: object
+    required:
+      - logGroupName
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+  Distribution:
+    type: string
+    enum:
+      - Random
+      - ByLogStream
+    description: 'The method used to distribute log data to the destination, which can be either random or grouped by log stream.'
+  EventId:
+    type: string
+  EventMessage:
+    type: string
+    minLength: 1
+  EventNumber:
+    type: integer
+  EventsLimit:
+    type: integer
+    minimum: 1
+    maximum: 10000
+  ExportDestinationBucket:
+    type: string
+    minLength: 1
+    maxLength: 512
+  ExportDestinationPrefix:
+    type: string
+  ExportTask:
+    type: object
+    properties:
+      taskId:
+        $ref: '#/definitions/ExportTaskId'
+        description: The ID of the export task.
+      taskName:
+        $ref: '#/definitions/ExportTaskName'
+        description: The name of the export task.
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group from which logs data was exported.
+      from:
+        $ref: '#/definitions/Timestamp'
+        description: 'The start time, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time stamp before this time are not exported.'
+      to:
+        $ref: '#/definitions/Timestamp'
+        description: 'The end time, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than this time are not exported.'
+      destination:
+        $ref: '#/definitions/ExportDestinationBucket'
+        description: The name of Amazon S3 bucket to which the log data was exported.
+      destinationPrefix:
+        $ref: '#/definitions/ExportDestinationPrefix'
+        description: The prefix that was used as the start of Amazon S3 key for every object exported.
+      status:
+        $ref: '#/definitions/ExportTaskStatus'
+        description: The status of the export task.
+      executionInfo:
+        $ref: '#/definitions/ExportTaskExecutionInfo'
+        description: Execution info about the export task.
+    description: Represents an export task.
+  ExportTaskExecutionInfo:
+    type: object
+    properties:
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The creation time of the export task, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+      completionTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The completion time of the export task, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+    description: Represents the status of an export task.
+  ExportTaskId:
+    type: string
+    minLength: 1
+    maxLength: 512
+  ExportTaskName:
+    type: string
+    minLength: 1
+    maxLength: 512
+  ExportTaskStatus:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/ExportTaskStatusCode'
+        description: The status code of the export task.
+      message:
+        $ref: '#/definitions/ExportTaskStatusMessage'
+        description: The status message related to the status code.
+    description: Represents the status of an export task.
+  ExportTaskStatusCode:
+    type: string
+    enum:
+      - CANCELLED
+      - COMPLETED
+      - FAILED
+      - PENDING
+      - PENDING_CANCEL
+      - RUNNING
+  ExportTaskStatusMessage:
+    type: string
+  ExportTasks:
+    type: array
+    items:
+      $ref: '#/definitions/ExportTask'
+  ExtractedValues:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Token'
+        value:
+          $ref: '#/definitions/Value'
+  FilterCount:
+    type: integer
+  FilterLogEventsRequest:
+    type: object
+    required:
+      - logGroupName
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      logStreamNames:
+        $ref: '#/definitions/InputLogStreamNames'
+        description: Optional list of log stream names.
+      startTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The start of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time stamp before this time are not returned.'
+      endTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The end of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than this time are not returned.'
+      filterPattern:
+        $ref: '#/definitions/FilterPattern'
+        description: 'The filter pattern to use. If not provided, all the events are matched.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of events to return. (You received this token from a previous call.)
+      limit:
+        $ref: '#/definitions/EventsLimit'
+        description: 'The maximum number of events to return. The default is 10,000 events.'
+      interleaved:
+        $ref: '#/definitions/Interleaved'
+        description: 'If the value is true, the operation makes a best effort to provide responses that contain events from multiple log streams within the log group, interleaved in a single response. If the value is false, all the matched log events in the first log stream are searched first, then those in the next log stream, and so on. The default is false.'
+  FilterLogEventsResponse:
+    type: object
+    properties:
+      events:
+        $ref: '#/definitions/FilteredLogEvents'
+        description: The matched events.
+      searchedLogStreams:
+        $ref: '#/definitions/SearchedLogStreams'
+        description: Indicates which log streams have been searched and whether each has been searched completely.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use when requesting the next set of items. The token expires after 24 hours.
+  FilterName:
+    type: string
+    pattern: '[^:*]*'
+    minLength: 1
+    maxLength: 512
+  FilterPattern:
+    type: string
+    description: 'A symbolic description of how CloudWatch Logs should interpret the data in each log event. For example, a log event may contain time stamps, IP addresses, strings, and so on. You use the filter pattern to specify what to look for in the log event message.'
+    minLength: 0
+    maxLength: 1024
+  FilteredLogEvent:
+    type: object
+    properties:
+      logStreamName:
+        $ref: '#/definitions/LogStreamName'
+        description: The name of the log stream this event belongs to.
+      timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+      message:
+        $ref: '#/definitions/EventMessage'
+        description: The data contained in the log event.
+      ingestionTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time the event was ingested, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+      eventId:
+        $ref: '#/definitions/EventId'
+        description: The ID of the event.
+    description: Represents a matched event.
+  FilteredLogEvents:
+    type: array
+    items:
+      $ref: '#/definitions/FilteredLogEvent'
+  GetLogEventsRequest:
+    type: object
+    required:
+      - logGroupName
+      - logStreamName
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      logStreamName:
+        $ref: '#/definitions/LogStreamName'
+        description: The name of the log stream.
+      startTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The start of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time stamp earlier than this time are not included.'
+      endTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The end of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than this time are not included.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. (You received this token from a previous call.)
+      limit:
+        $ref: '#/definitions/EventsLimit'
+        description: 'The maximum number of log events returned. If you don''t specify a value, the maximum is as many log events as can fit in a response size of 1 MB, up to 10,000 log events.'
+      startFromHead:
+        $ref: '#/definitions/StartFromHead'
+        description: 'If the value is true, the earliest log events are returned first. If the value is false, the latest log events are returned first. The default value is false.'
+  GetLogEventsResponse:
+    type: object
+    properties:
+      events:
+        $ref: '#/definitions/OutputLogEvents'
+        description: The events.
+      nextForwardToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items in the forward direction. The token expires after 24 hours.
+      nextBackwardToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items in the backward direction. The token expires after 24 hours.
+  InputLogEvent:
+    type: object
+    required:
+      - timestamp
+      - message
+    properties:
+      timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time the event occurred, expressed as the number of milliseconds fter Jan 1, 1970 00:00:00 UTC.'
+      message:
+        $ref: '#/definitions/EventMessage'
+        description: The raw event message.
+    description: 'Represents a log event, which is a record of activity that was recorded by the application or resource being monitored.'
+  InputLogEvents:
+    type: array
+    items:
+      $ref: '#/definitions/InputLogEvent'
+    minItems: 1
+    maxItems: 10000
+  InputLogStreamNames:
+    type: array
+    items:
+      $ref: '#/definitions/LogStreamName'
+    minItems: 1
+    maxItems: 100
+  Interleaved:
+    type: boolean
+  InvalidOperationException:
+    type: object
+    properties: {}
+    description: The operation is not valid on the specified resource.
+  InvalidParameterException:
+    type: object
+    properties: {}
+    description: A parameter is specified incorrectly.
+  InvalidSequenceTokenException:
+    type: object
+    properties:
+      expectedSequenceToken:
+        $ref: '#/definitions/SequenceToken'
+    description: The sequence token is not valid.
+  KmsKeyId:
+    type: string
+    maxLength: 256
+  LimitExceededException:
+    type: object
+    properties: {}
+    description: You have reached the maximum number of resources that can be created.
+  ListTagsLogGroupRequest:
+    type: object
+    required:
+      - logGroupName
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+  ListTagsLogGroupResponse:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/Tags'
+        description: The tags for the log group.
+  LogEventIndex:
+    type: integer
+  LogGroup:
+    type: object
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The creation time of the log group, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+      retentionInDays:
+        $ref: '#/definitions/Days'
+      metricFilterCount:
+        $ref: '#/definitions/FilterCount'
+        description: The number of metric filters.
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the log group.
+      storedBytes:
+        $ref: '#/definitions/StoredBytes'
+        description: The number of bytes stored.
+      kmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.
+    description: Represents a log group.
+  LogGroupName:
+    type: string
+    pattern: '[\.\-_/#A-Za-z0-9]+'
+    minLength: 1
+    maxLength: 512
+  LogGroups:
+    type: array
+    items:
+      $ref: '#/definitions/LogGroup'
+  LogStream:
+    type: object
+    properties:
+      logStreamName:
+        $ref: '#/definitions/LogStreamName'
+        description: The name of the log stream.
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The creation time of the stream, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+      firstEventTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time of the first event, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+      lastEventTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: ' the time of the most recent log event in the log stream in CloudWatch Logs. This number is expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. lastEventTime updates on an eventual consistency basis. It typically updates in less than an hour from ingestion, but may take longer in some rare situations.'
+      lastIngestionTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The ingestion time, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+      uploadSequenceToken:
+        $ref: '#/definitions/SequenceToken'
+        description: The sequence token.
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the log stream.
+      storedBytes:
+        $ref: '#/definitions/StoredBytes'
+        description: The number of bytes stored.
+    description: 'Represents a log stream, which is a sequence of log events from a single emitter of logs.'
+  LogStreamName:
+    type: string
+    pattern: '[^:*]*'
+    minLength: 1
+    maxLength: 512
+  LogStreamSearchedCompletely:
+    type: boolean
+  LogStreams:
+    type: array
+    items:
+      $ref: '#/definitions/LogStream'
+  MetricFilter:
+    type: object
+    properties:
+      filterName:
+        $ref: '#/definitions/FilterName'
+        description: The name of the metric filter.
+      filterPattern:
+        $ref: '#/definitions/FilterPattern'
+      metricTransformations:
+        $ref: '#/definitions/MetricTransformations'
+        description: The metric transformations.
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The creation time of the metric filter, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+    description: Metric filters express how CloudWatch Logs would extract metric observations from ingested log events and transform them into metric data in a CloudWatch metric.
+  MetricFilterMatchRecord:
+    type: object
+    properties:
+      eventNumber:
+        $ref: '#/definitions/EventNumber'
+        description: The event number.
+      eventMessage:
+        $ref: '#/definitions/EventMessage'
+        description: The raw event data.
+      extractedValues:
+        $ref: '#/definitions/ExtractedValues'
+        description: The values extracted from the event data by the filter.
+    description: Represents a matched event.
+  MetricFilterMatches:
+    type: array
+    items:
+      $ref: '#/definitions/MetricFilterMatchRecord'
+  MetricFilters:
+    type: array
+    items:
+      $ref: '#/definitions/MetricFilter'
+  MetricName:
+    type: string
+    pattern: '[^:*$]*'
+    description: 'The name of the CloudWatch metric to which the monitored log information should be published. For example, you may publish to a metric called ErrorCount.'
+    maxLength: 255
+  MetricNamespace:
+    type: string
+    pattern: '[^:*$]*'
+    maxLength: 255
+  MetricTransformation:
+    type: object
+    required:
+      - metricName
+      - metricNamespace
+      - metricValue
+    properties:
+      metricName:
+        $ref: '#/definitions/MetricName'
+        description: The name of the CloudWatch metric.
+      metricNamespace:
+        $ref: '#/definitions/MetricNamespace'
+        description: The namespace of the CloudWatch metric.
+      metricValue:
+        $ref: '#/definitions/MetricValue'
+        description: The value to publish to the CloudWatch metric when a filter pattern matches a log event.
+      defaultValue:
+        $ref: '#/definitions/DefaultValue'
+        description: (Optional) The value to emit when a filter pattern does not match a log event. This value can be null.
+    description: Indicates how to transform ingested log events in to metric data in a CloudWatch metric.
+  MetricTransformations:
+    type: array
+    items:
+      $ref: '#/definitions/MetricTransformation'
+    minItems: 1
+    maxItems: 1
+  MetricValue:
+    type: string
+    description: 'The value to publish to the CloudWatch metric. For example, if you''re counting the occurrences of a term like "Error", the value is "1" for each occurrence. If you''re counting the bytes transferred, the value is the value in the log event.'
+    maxLength: 100
+  NextToken:
+    type: string
+    description: The token for the next set of items to return. The token expires after 24 hours.
+    minLength: 1
+  OperationAbortedException:
+    type: object
+    properties: {}
+    description: Multiple requests to update the same resource were in conflict.
+  OrderBy:
+    type: string
+    enum:
+      - LogStreamName
+      - LastEventTime
+  OutputLogEvent:
+    type: object
+    properties:
+      timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+      message:
+        $ref: '#/definitions/EventMessage'
+        description: The data contained in the log event.
+      ingestionTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time the event was ingested, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+    description: Represents a log event.
+  OutputLogEvents:
+    type: array
+    items:
+      $ref: '#/definitions/OutputLogEvent'
+  PolicyDocument:
+    type: string
+    minLength: 1
+    maxLength: 5120
+  PolicyName:
+    type: string
+  PutDestinationPolicyRequest:
+    type: object
+    required:
+      - destinationName
+      - accessPolicy
+    properties:
+      destinationName:
+        $ref: '#/definitions/DestinationName'
+        description: A name for an existing destination.
+      accessPolicy:
+        $ref: '#/definitions/AccessPolicy'
+        description: An IAM policy document that authorizes cross-account users to deliver their log events to the associated destination.
+  PutDestinationRequest:
+    type: object
+    required:
+      - destinationName
+      - targetArn
+      - roleArn
+    properties:
+      destinationName:
+        $ref: '#/definitions/DestinationName'
+        description: A name for the destination.
+      targetArn:
+        $ref: '#/definitions/TargetArn'
+        description: The ARN of an Amazon Kinesis stream to which to deliver matching log events.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of an IAM role that grants CloudWatch Logs permissions to call the Amazon Kinesis PutRecord operation on the destination stream.
+  PutDestinationResponse:
+    type: object
+    properties:
+      destination:
+        $ref: '#/definitions/Destination'
+        description: The destination.
+  PutLogEventsRequest:
+    type: object
+    required:
+      - logGroupName
+      - logStreamName
+      - logEvents
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      logStreamName:
+        $ref: '#/definitions/LogStreamName'
+        description: The name of the log stream.
+      logEvents:
+        $ref: '#/definitions/InputLogEvents'
+        description: The log events.
+      sequenceToken:
+        $ref: '#/definitions/SequenceToken'
+        description: 'The sequence token obtained from the response of the previous <code>PutLogEvents</code> call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using <a>DescribeLogStreams</a>. If you call <code>PutLogEvents</code> twice within a narrow time period using the same value for <code>sequenceToken</code>, both calls may be successful, or one may be rejected.'
+  PutLogEventsResponse:
+    type: object
+    properties:
+      nextSequenceToken:
+        $ref: '#/definitions/SequenceToken'
+        description: The next sequence token.
+      rejectedLogEventsInfo:
+        $ref: '#/definitions/RejectedLogEventsInfo'
+        description: The rejected events.
+  PutMetricFilterRequest:
+    type: object
+    required:
+      - logGroupName
+      - filterName
+      - filterPattern
+      - metricTransformations
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      filterName:
+        $ref: '#/definitions/FilterName'
+        description: A name for the metric filter.
+      filterPattern:
+        $ref: '#/definitions/FilterPattern'
+        description: A filter pattern for extracting metric data out of ingested log events.
+      metricTransformations:
+        $ref: '#/definitions/MetricTransformations'
+        description: A collection of information that defines how metric data gets emitted.
+  PutResourcePolicyRequest:
+    type: object
+    properties:
+      policyName:
+        $ref: '#/definitions/PolicyName'
+        description: Name of the new policy. This parameter is required.
+      policyDocument:
+        $ref: '#/definitions/PolicyDocument'
+        description: '<p>Details of the new policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string.</p> <p>The following example creates a resource policy enabling the Route 53 service to put DNS query logs in to the specified log group. Replace "logArn" with the ARN of your CloudWatch Logs resource, such as a log group or log stream.</p> <p> { "Version": "2012-10-17" "Statement": [ { "Sid": "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": { "Service": [ "route53.amazonaws.com" ] }, "Action":"logs:PutLogEvents", "Resource": logArn } ] } </p>'
+  PutResourcePolicyResponse:
+    type: object
+    properties:
+      resourcePolicy:
+        $ref: '#/definitions/ResourcePolicy'
+        description: The new policy.
+  PutRetentionPolicyRequest:
+    type: object
+    required:
+      - logGroupName
+      - retentionInDays
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      retentionInDays:
+        $ref: '#/definitions/Days'
+  PutSubscriptionFilterRequest:
+    type: object
+    required:
+      - logGroupName
+      - filterName
+      - filterPattern
+      - destinationArn
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      filterName:
+        $ref: '#/definitions/FilterName'
+        description: 'A name for the subscription filter. If you are updating an existing filter, you must specify the correct name in <code>filterName</code>. Otherwise, the call fails because you cannot associate a second filter with a log group. To find the name of the filter currently associated with a log group, use <a>DescribeSubscriptionFilters</a>.'
+      filterPattern:
+        $ref: '#/definitions/FilterPattern'
+        description: A filter pattern for subscribing to a filtered stream of log events.
+      destinationArn:
+        $ref: '#/definitions/DestinationArn'
+        description: '<p>The ARN of the destination to deliver matching log events to. Currently, the supported destinations are:</p> <ul> <li> <p>An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.</p> </li> <li> <p>A logical destination (specified using an ARN) belonging to a different account, for cross-account delivery.</p> </li> <li> <p>An Amazon Kinesis Firehose delivery stream belonging to the same account as the subscription filter, for same-account delivery.</p> </li> <li> <p>An AWS Lambda function belonging to the same account as the subscription filter, for same-account delivery.</p> </li> </ul>'
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of an IAM role that grants CloudWatch Logs permissions to deliver ingested log events to the destination stream. You don't need to provide the ARN when you are working with a logical destination for cross-account delivery.
+      distribution:
+        $ref: '#/definitions/Distribution'
+        description: 'The method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. '
+  RejectedLogEventsInfo:
+    type: object
+    properties:
+      tooNewLogEventStartIndex:
+        $ref: '#/definitions/LogEventIndex'
+        description: The log events that are too new.
+      tooOldLogEventEndIndex:
+        $ref: '#/definitions/LogEventIndex'
+        description: The log events that are too old.
+      expiredLogEventEndIndex:
+        $ref: '#/definitions/LogEventIndex'
+        description: The expired log events.
+    description: Represents the rejected events.
+  ResourceAlreadyExistsException:
+    type: object
+    properties: {}
+    description: The specified resource already exists.
+  ResourceNotFoundException:
+    type: object
+    properties: {}
+    description: The specified resource does not exist.
+  ResourcePolicies:
+    type: array
+    items:
+      $ref: '#/definitions/ResourcePolicy'
+  ResourcePolicy:
+    type: object
+    properties:
+      policyName:
+        $ref: '#/definitions/PolicyName'
+        description: The name of the resource policy.
+      policyDocument:
+        $ref: '#/definitions/PolicyDocument'
+        description: The details of the policy.
+      lastUpdatedTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'Time stamp showing when this policy was last updated, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+    description: A policy enabling one or more entities to put logs to a log group in this account.
+  RoleArn:
+    type: string
+    minLength: 1
+  SearchedLogStream:
+    type: object
+    properties:
+      logStreamName:
+        $ref: '#/definitions/LogStreamName'
+        description: The name of the log stream.
+      searchedCompletely:
+        $ref: '#/definitions/LogStreamSearchedCompletely'
+        description: Indicates whether all the events in this log stream were searched.
+    description: Represents the search status of a log stream.
+  SearchedLogStreams:
+    type: array
+    items:
+      $ref: '#/definitions/SearchedLogStream'
+  SequenceToken:
+    type: string
+    minLength: 1
+  ServiceUnavailableException:
+    type: object
+    properties: {}
+    description: The service cannot complete the request.
+  StartFromHead:
+    type: boolean
+  StoredBytes:
+    type: integer
+    minimum: 0
+  SubscriptionFilter:
+    type: object
+    properties:
+      filterName:
+        $ref: '#/definitions/FilterName'
+        description: The name of the subscription filter.
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      filterPattern:
+        $ref: '#/definitions/FilterPattern'
+      destinationArn:
+        $ref: '#/definitions/DestinationArn'
+        description: The Amazon Resource Name (ARN) of the destination.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: <p/>
+      distribution:
+        $ref: '#/definitions/Distribution'
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The creation time of the subscription filter, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+    description: Represents a subscription filter.
+  SubscriptionFilters:
+    type: array
+    items:
+      $ref: '#/definitions/SubscriptionFilter'
+  TagKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]+)$'
+    minLength: 1
+    maxLength: 128
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+  TagLogGroupRequest:
+    type: object
+    required:
+      - logGroupName
+      - tags
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      tags:
+        $ref: '#/definitions/Tags'
+        description: The key-value pairs to use for the tags.
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    maxLength: 256
+  Tags:
+    type: array
+    minItems: 1
+    maxItems: 50
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
+  TargetArn:
+    type: string
+    minLength: 1
+  TestEventMessages:
+    type: array
+    items:
+      $ref: '#/definitions/EventMessage'
+    minItems: 1
+    maxItems: 50
+  TestMetricFilterRequest:
+    type: object
+    required:
+      - filterPattern
+      - logEventMessages
+    properties:
+      filterPattern:
+        $ref: '#/definitions/FilterPattern'
+      logEventMessages:
+        $ref: '#/definitions/TestEventMessages'
+        description: The log event messages to test.
+  TestMetricFilterResponse:
+    type: object
+    properties:
+      matches:
+        $ref: '#/definitions/MetricFilterMatches'
+        description: The matched events.
+  Timestamp:
+    type: integer
+    minimum: 0
+  Token:
+    type: string
+  UntagLogGroupRequest:
+    type: object
+    required:
+      - logGroupName
+      - tags
+    properties:
+      logGroupName:
+        $ref: '#/definitions/LogGroupName'
+        description: The name of the log group.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: The tag keys. The corresponding tags are removed from the log group.
+  Value:
+    type: string
