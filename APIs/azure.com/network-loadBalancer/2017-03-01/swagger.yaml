@@ -10,6 +10,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/network/resource-manager/Microsoft.Network/2017-03-01/loadBalancer.json'
       version: '2.0'
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-loadBalancer
 consumes:
@@ -755,3 +756,9 @@ definitions:
     required:
       - protocol
       - port
+  NetworkInterfaceIPConfigurationPropertiesFormat:
+    type: object
+  PublicIPAddressPropertiesFormat:
+    type: object
+  SubnetPropertiesFormat:
+    type: object

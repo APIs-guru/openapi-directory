@@ -10,6 +10,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/network/resource-manager/Microsoft.Network/2015-06-15/applicationGateway.json'
       version: '2.0'
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-applicationGateway
 consumes:
@@ -885,3 +886,5 @@ definitions:
       provisioningState:
         description: 'Provisioning state of the backend http settings resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
         type: string
+  NetworkInterfaceIPConfigurationPropertiesFormat:
+    type: object
