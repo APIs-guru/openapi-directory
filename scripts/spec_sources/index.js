@@ -1,5 +1,7 @@
 'use strict';
 
+const utilLib = require('util');
+
 var assert = require('assert');
 var _ = require('lodash');
 var Promise = require('bluebird');
@@ -79,7 +81,7 @@ function indexByOriginUrl(leads) {
   return _(leads)
     .groupBy(util.getOriginUrl)
     .mapValues(function (array, url) {
-      assert(_.size(array) === 1, `Duplicate leads for "${url}" URL.`);
+      assert(_.size(array) === 1, `Duplicate leads for "${url}" URL. `+utilLib.inspect(array));
       return array[0];
     }).value();
 }

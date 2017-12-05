@@ -643,7 +643,6 @@ definitions:
     required:
       - BudgetName
       - BudgetLimit
-      - CostTypes
       - TimeUnit
       - TimePeriod
       - BudgetType
@@ -711,17 +710,34 @@ definitions:
           $ref: '#/definitions/DimensionValues'
   CostTypes:
     type: object
-    required:
-      - IncludeTax
-      - IncludeSubscription
-      - UseBlended
     properties:
       IncludeTax:
-        $ref: '#/definitions/GenericBoolean'
+        $ref: '#/definitions/NullableBoolean'
+        description: A boolean value whether to include tax in the cost budget.
       IncludeSubscription:
-        $ref: '#/definitions/GenericBoolean'
+        $ref: '#/definitions/NullableBoolean'
+        description: A boolean value whether to include subscriptions in the cost budget.
       UseBlended:
-        $ref: '#/definitions/GenericBoolean'
+        $ref: '#/definitions/NullableBoolean'
+        description: A boolean value whether to use blended costs in the cost budget.
+      IncludeRefund:
+        $ref: '#/definitions/NullableBoolean'
+        description: A boolean value whether to include refunds in the cost budget.
+      IncludeCredit:
+        $ref: '#/definitions/NullableBoolean'
+        description: A boolean value whether to include credits in the cost budget.
+      IncludeUpfront:
+        $ref: '#/definitions/NullableBoolean'
+        description: A boolean value whether to include upfront costs in the cost budget.
+      IncludeRecurring:
+        $ref: '#/definitions/NullableBoolean'
+        description: A boolean value whether to include recurring costs in the cost budget.
+      IncludeOtherSubscription:
+        $ref: '#/definitions/NullableBoolean'
+        description: A boolean value whether to include other subscription costs in the cost budget.
+      IncludeSupport:
+        $ref: '#/definitions/NullableBoolean'
+        description: A boolean value whether to include support costs in the cost budget.
     description: This includes the options for getting the cost of a budget.
   CreateBudgetRequest:
     type: object
@@ -944,9 +960,6 @@ definitions:
       Message:
         $ref: '#/definitions/errorMessage'
     description: This exception is thrown if the paging token is expired - past its TTL
-  GenericBoolean:
-    type: boolean
-    description: A generic boolean value.
   GenericString:
     type: string
     description: A generic String.
@@ -1033,6 +1046,8 @@ definitions:
     description: A list of notifications.
     items:
       $ref: '#/definitions/Notification'
+  NullableBoolean:
+    type: boolean
   NumericValue:
     type: string
     pattern: '[0-9]*(\.)?[0-9]+'
@@ -1057,8 +1072,12 @@ definitions:
       SubscriptionType:
         $ref: '#/definitions/SubscriptionType'
       Address:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/SubscriberAddress'
     description: Subscriber model. Each notification may contain multiple subscribers with different addresses.
+  SubscriberAddress:
+    type: string
+    description: String containing email or sns topic for the subscriber address.
+    minLength: 1
   Subscribers:
     type: array
     description: A list of subscribers.
