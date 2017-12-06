@@ -99,6 +99,62 @@ security:
   - hmac: []
 paths:
   /prod/channels:
+    post:
+      operationId: CreateChannel
+      description: Creates a new channel
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateChannelResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '487':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateChannelRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListChannels
       description: Produces list of channels that have been created
@@ -147,6 +203,45 @@ paths:
           in: query
           description: Pagination token
           required: false
+  /prod/inputs:
+    post:
+      operationId: CreateInput
+      description: Create an input
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateInputResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateInputRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -157,7 +252,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /prod/inputs:
     get:
       operationId: ListInputs
       description: Produces list of inputs that have been created
@@ -206,6 +300,45 @@ paths:
           in: query
           description: Pagination token
           required: false
+  /prod/inputSecurityGroups:
+    post:
+      operationId: CreateInputSecurityGroup
+      description: Creates a Input Security Group
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateInputSecurityGroupResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateInputSecurityGroupRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -216,7 +349,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /prod/inputSecurityGroups:
     get:
       operationId: ListInputSecurityGroups
       description: Produces a list of Input Security Groups for an account
@@ -265,6 +397,57 @@ paths:
           in: query
           description: Pagination token
           required: false
+  '/prod/channels/{channelId}':
+    delete:
+      operationId: DeleteChannel
+      description: Starts deletion of channel. The associated outputs are also deleted.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '487':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteChannelRequest'
+        - name: channelId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -275,7 +458,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/prod/channels/{channelId}':
     get:
       operationId: DescribeChannel
       description: Gets details about a channel
@@ -322,6 +504,57 @@ paths:
           in: path
           type: string
           required: true
+  '/prod/inputs/{inputId}':
+    delete:
+      operationId: DeleteInput
+      description: Deletes the input end point
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteInputResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '487':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteInputRequest'
+        - name: inputId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -332,7 +565,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/prod/inputs/{inputId}':
     get:
       operationId: DescribeInput
       description: Produces details about an input
@@ -379,6 +611,49 @@ paths:
           in: path
           type: string
           required: true
+  '/prod/inputSecurityGroups/{inputSecurityGroupId}':
+    delete:
+      operationId: DeleteInputSecurityGroup
+      description: Deletes an Input Security Group
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteInputSecurityGroupResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '484':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteInputSecurityGroupRequest'
+        - name: inputSecurityGroupId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -389,7 +664,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/prod/inputSecurityGroups/{inputSecurityGroupId}':
     get:
       operationId: DescribeInputSecurityGroup
       description: Produces a summary of an Input Security Group
@@ -436,16 +710,6 @@ paths:
           in: path
           type: string
           required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/prod/channels/{channelId}/start':
     post:
       operationId: StartChannel

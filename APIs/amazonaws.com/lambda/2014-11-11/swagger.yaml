@@ -100,6 +100,40 @@ security:
   - hmac: []
 paths:
   /2014-11-13/event-source-mappings/:
+    post:
+      operationId: AddEventSource
+      description: '<p>Identifies a stream as an event source for an AWS Lambda function. It can be either an Amazon Kinesis stream or a Amazon DynamoDB stream. AWS Lambda invokes the specified function when records are posted to the stream.</p> <p>This is the pull model, where AWS Lambda invokes the function. For more information, go to <a href="http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html">AWS Lambda: How it Works</a> in the AWS Lambda Developer Guide.</p> <p>This association between an Amazon Kinesis stream and an AWS Lambda function is called the event source mapping. You provide the configuration information (for example, which stream to read from and which AWS Lambda function to invoke) for the event source mapping in the request body.</p> <p> Each event source, such as a Kinesis stream, can only be associated with one AWS Lambda function. If you call <a>AddEventSource</a> for an event source that is already mapped to another AWS Lambda function, the existing mapping is updated to call the new function instead of the old one. </p> <p>This operation requires permission for the <code>iam:PassRole</code> action for the IAM role. It also requires permission for the <code>lambda:AddEventSource</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EventSourceConfiguration'
+        '400':
+          description: InvalidParameterValueException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '500':
+          description: ServiceException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AddEventSourceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListEventSources
       description: '<p>Returns a list of event source mappings you created using the <code>AddEventSource</code> (see <a>AddEventSource</a>), where you identify a stream as event source. This list does not include Amazon S3 event sources. </p> <p>For each mapping, the API returns configuration information. You can optionally specify filters to retrieve specific event source mappings.</p> <p>This operation requires permission for the <code>lambda:ListEventSources</code> action.</p>'
@@ -139,6 +173,36 @@ paths:
           in: query
           description: Pagination token
           required: false
+  '/2014-11-13/functions/{FunctionName}':
+    delete:
+      operationId: DeleteFunction
+      description: '<p>Deletes the specified Lambda function code and configuration.</p> <p>This operation requires permission for the <code>lambda:DeleteFunction</code> action.</p>'
+      responses:
+        '204':
+          description: Success
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '500':
+          description: ServiceException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteFunctionRequest'
+        - name: FunctionName
+          in: path
+          type: string
+          required: true
+        - name: FunctionName
+          in: query
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -149,7 +213,37 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/2014-11-13/functions/{FunctionName}':
+    get:
+      operationId: GetFunction
+      description: '<p>Returns the configuration information of the Lambda function and a presigned URL link to the .zip file you uploaded with <a>UploadFunction</a> so you can download the .zip file. Note that the URL is valid for up to 10 minutes. The configuration information is the same information you provided as parameters when uploading the function.</p> <p>This operation requires permission for the <code>lambda:GetFunction</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetFunctionResponse'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '500':
+          description: ServiceException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetFunctionRequest'
+        - name: FunctionName
+          in: path
+          type: string
+          required: true
+        - name: FunctionName
+          in: query
+          type: string
     put:
       operationId: UploadFunction
       description: '<p>Creates a new Lambda function or updates an existing function. The function metadata is created from the request parameters, and the code for the function is provided by a .zip file in the request body. If the function name already exists, the existing Lambda function is updated with the new code and metadata. </p> <p>This operation requires permission for the <code>lambda:UploadFunction</code> action.</p>'
@@ -186,6 +280,40 @@ paths:
         - name: FunctionName
           in: query
           type: string
+  '/2014-11-13/event-source-mappings/{UUID}':
+    get:
+      operationId: GetEventSource
+      description: '<p>Returns configuration information for the specified event source mapping (see <a>AddEventSource</a>).</p> <p>This operation requires permission for the <code>lambda:GetEventSource</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EventSourceConfiguration'
+        '400':
+          description: InvalidParameterValueException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '500':
+          description: ServiceException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetEventSourceRequest'
+        - name: UUID
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -196,7 +324,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/2014-11-13/event-source-mappings/{UUID}':
     delete:
       operationId: RemoveEventSource
       description: '<p>Removes an event source mapping. This means AWS Lambda will no longer invoke the function for events in the associated source.</p> <p>This operation requires permission for the <code>lambda:RemoveEventSource</code> action.</p>'
@@ -228,6 +355,38 @@ paths:
           in: path
           type: string
           required: true
+  '/2014-11-13/functions/{FunctionName}/configuration':
+    get:
+      operationId: GetFunctionConfiguration
+      description: '<p>Returns the configuration information of the Lambda function. This the same information you provided as parameters when uploading the function by using <a>UploadFunction</a>.</p> <p>This operation requires permission for the <code>lambda:GetFunctionConfiguration</code> operation.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/FunctionConfiguration'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '500':
+          description: ServiceException
+          x-aws-exception: true
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetFunctionConfigurationRequest'
+        - name: FunctionName
+          in: path
+          type: string
+          required: true
+        - name: FunctionName
+          in: query
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -238,7 +397,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/2014-11-13/functions/{FunctionName}/configuration':
     put:
       operationId: UpdateFunctionConfiguration
       description: '<p>Updates the configuration parameters for the specified Lambda function by using the values provided in the request. You provide only the parameters you want to change. This operation must only be used on an existing Lambda function and cannot be used to update the function''s code. </p> <p>This operation requires permission for the <code>lambda:UpdateFunctionConfiguration</code> action.</p>'
@@ -275,16 +433,6 @@ paths:
         - name: FunctionName
           in: query
           type: string
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2014-11-13/functions/{FunctionName}/invoke-async/':
     post:
       operationId: InvokeAsync

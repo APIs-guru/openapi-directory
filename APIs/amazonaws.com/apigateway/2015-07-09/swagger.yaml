@@ -100,6 +100,54 @@ security:
   - hmac: []
 paths:
   /apikeys:
+    post:
+      operationId: CreateApiKey
+      description: '<p>Create an <a>ApiKey</a> resource. </p> <div class="seeAlso"><a href="http://docs.aws.amazon.com/cli/latest/reference/apigateway/create-api-key.html">AWS CLI</a></div>'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/ApiKey'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '485':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateApiKeyRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetApiKeys
       description: Gets information about the current <a>ApiKeys</a> resource.
@@ -136,6 +184,45 @@ paths:
           in: query
           description: Pagination token
           required: false
+  '/restapis/{restapi_id}/authorizers':
+    post:
+      operationId: CreateAuthorizer
+      description: '<p>Adds a new <a>Authorizer</a> resource to an existing <a>RestApi</a> resource.</p> <div class="seeAlso"><a href="http://docs.aws.amazon.com/cli/latest/reference/apigateway/create-authorizer.html">AWS CLI</a></div>'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/Authorizer'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateAuthorizerRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -146,7 +233,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/authorizers':
     get:
       operationId: GetAuthorizers
       description: '<p>Describe an existing <a>Authorizers</a> resource.</p> <div class="seeAlso"><a href="http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizers.html">AWS CLI</a></div>'
@@ -181,6 +267,45 @@ paths:
           in: path
           type: string
           required: true
+  '/domainnames/{domain_name}/basepathmappings':
+    post:
+      operationId: CreateBasePathMapping
+      description: Creates a new <a>BasePathMapping</a> resource.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/BasePathMapping'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateBasePathMappingRequest'
+        - name: domain_name
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -191,7 +316,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/domainnames/{domain_name}/basepathmappings':
     get:
       operationId: GetBasePathMappings
       description: Represents a collection of <a>BasePathMapping</a> resources.
@@ -232,6 +356,53 @@ paths:
           in: path
           type: string
           required: true
+  '/restapis/{restapi_id}/deployments':
+    post:
+      operationId: CreateDeployment
+      description: 'Creates a <a>Deployment</a> resource, which makes a specified <a>RestApi</a> callable over the internet.'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/Deployment'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '486':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDeploymentRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -242,7 +413,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/deployments':
     get:
       operationId: GetDeployments
       description: Gets information about a <a>Deployments</a> collection.
@@ -287,6 +457,49 @@ paths:
           in: path
           type: string
           required: true
+  '/restapis/{restapi_id}/documentation/parts':
+    post:
+      operationId: CreateDocumentationPart
+      description: ''
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/DocumentationPart'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDocumentationPartRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -297,7 +510,40 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/documentation/parts':
+    get:
+      operationId: GetDocumentationParts
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DocumentationParts'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDocumentationPartsRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
     put:
       operationId: ImportDocumentationParts
       description: ''
@@ -336,6 +582,49 @@ paths:
           in: path
           type: string
           required: true
+  '/restapis/{restapi_id}/documentation/versions':
+    post:
+      operationId: CreateDocumentationVersion
+      description: ''
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/DocumentationVersion'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDocumentationVersionRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -346,7 +635,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/documentation/versions':
     get:
       operationId: GetDocumentationVersions
       description: ''
@@ -381,6 +669,37 @@ paths:
           in: path
           type: string
           required: true
+  /domainnames:
+    post:
+      operationId: CreateDomainName
+      description: Creates a new domain name.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/DomainName'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDomainNameRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -391,7 +710,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /domainnames:
     get:
       operationId: GetDomainNames
       description: Represents a collection of <a>DomainName</a> resources.
@@ -428,6 +746,49 @@ paths:
           in: query
           description: Pagination token
           required: false
+  '/restapis/{restapi_id}/models':
+    post:
+      operationId: CreateModel
+      description: Adds a new <a>Model</a> resource to an existing <a>RestApi</a> resource.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/Model'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateModelRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -438,7 +799,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/models':
     get:
       operationId: GetModels
       description: Describes existing <a>Models</a> defined for a <a>RestApi</a> resource.
@@ -483,6 +843,45 @@ paths:
           in: path
           type: string
           required: true
+  '/restapis/{restapi_id}/requestvalidators':
+    post:
+      operationId: CreateRequestValidator
+      description: Creates a <a>ReqeustValidator</a> of a given <a>RestApi</a>.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/RequestValidator'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateRequestValidatorRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -493,7 +892,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/requestvalidators':
     get:
       operationId: GetRequestValidators
       description: Gets the <a>RequestValidators</a> collection of a given <a>RestApi</a>.
@@ -528,16 +926,6 @@ paths:
           in: path
           type: string
           required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/restapis/{restapi_id}/resources/{parent_id}':
     post:
       operationId: CreateResource
@@ -596,6 +984,46 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   /restapis:
+    post:
+      operationId: CreateRestApi
+      description: Creates a new <a>RestApi</a> resource.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/RestApi'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateRestApiRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetRestApis
       description: Lists the <a>RestApis</a> resources for your collection.
@@ -632,6 +1060,49 @@ paths:
           in: query
           description: Pagination token
           required: false
+  '/restapis/{restapi_id}/stages':
+    post:
+      operationId: CreateStage
+      description: 'Creates a new <a>Stage</a> resource that references a pre-existing <a>Deployment</a> for the API. '
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/Stage'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateStageRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -642,7 +1113,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/stages':
     get:
       operationId: GetStages
       description: Gets information about one or more <a>Stage</a> resources.
@@ -673,6 +1143,45 @@ paths:
           in: path
           type: string
           required: true
+  /usageplans:
+    post:
+      operationId: CreateUsagePlan
+      description: 'Creates a usage plan with the throttle and quota limits, as well as the associated API stages, specified in the payload. '
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/UsagePlan'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '485':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateUsagePlanRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -683,7 +1192,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /usageplans:
     get:
       operationId: GetUsagePlans
       description: Gets all the usage plans of the caller's account.
@@ -728,6 +1236,45 @@ paths:
           in: query
           description: Pagination token
           required: false
+  '/usageplans/{usageplanId}/keys':
+    post:
+      operationId: CreateUsagePlanKey
+      description: Creates a usage plan key for adding an existing API key to a usage plan.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/UsagePlanKey'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateUsagePlanKeyRequest'
+        - name: usageplanId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -738,7 +1285,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/usageplans/{usageplanId}/keys':
     get:
       operationId: GetUsagePlanKeys
       description: Gets all the usage plan keys representing the API keys added to a specified usage plan.
@@ -783,6 +1329,33 @@ paths:
           in: path
           type: string
           required: true
+  /vpclinks:
+    post:
+      operationId: CreateVpcLink
+      description: 'Creates a VPC link, under the caller''s account in a selected region, in an asynchronous operation that typically takes 2-4 minutes to complete and become operational. The caller must have permissions to create and update VPC Endpoint services.'
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/VpcLink'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateVpcLinkRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -793,7 +1366,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /vpclinks:
     get:
       operationId: GetVpcLinks
       description: Gets the <a>VpcLinks</a> collection under the caller's account in a selected region.
@@ -830,6 +1402,35 @@ paths:
           in: query
           description: Pagination token
           required: false
+  '/apikeys/{api_Key}':
+    delete:
+      operationId: DeleteApiKey
+      description: Deletes the <a>ApiKey</a> resource.
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteApiKeyRequest'
+        - name: api_Key
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -840,7 +1441,36 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/apikeys/{api_Key}':
+    get:
+      operationId: GetApiKey
+      description: Gets information about the current <a>ApiKey</a> resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ApiKey'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetApiKeyRequest'
+        - name: api_Key
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateApiKey
       description: Changes information about an <a>ApiKey</a> resource.
@@ -879,6 +1509,47 @@ paths:
           in: path
           type: string
           required: true
+  '/restapis/{restapi_id}/authorizers/{authorizer_id}':
+    delete:
+      operationId: DeleteAuthorizer
+      description: '<p>Deletes an existing <a>Authorizer</a> resource.</p> <div class="seeAlso"><a href="http://docs.aws.amazon.com/cli/latest/reference/apigateway/delete-authorizer.html">AWS CLI</a></div>'
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteAuthorizerRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: authorizer_id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -889,7 +1560,78 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/authorizers/{authorizer_id}':
+    get:
+      operationId: GetAuthorizer
+      description: '<p>Describe an existing <a>Authorizer</a> resource.</p> <div class="seeAlso"><a href="http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizer.html">AWS CLI</a></div>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Authorizer'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetAuthorizerRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: authorizer_id
+          in: path
+          type: string
+          required: true
+    post:
+      operationId: TestInvokeAuthorizer
+      description: '<p>Simulate the execution of an <a>Authorizer</a> in your <a>RestApi</a> with headers, parameters, and an incoming request body.</p> <div class="seeAlso"> <a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html">Enable custom authorizers</a> </div>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TestInvokeAuthorizerResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TestInvokeAuthorizerRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: authorizer_id
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateAuthorizer
       description: '<p>Updates an existing <a>Authorizer</a> resource.</p> <div class="seeAlso"><a href="http://docs.aws.amazon.com/cli/latest/reference/apigateway/update-authorizer.html">AWS CLI</a></div>'
@@ -928,6 +1670,47 @@ paths:
           in: path
           type: string
           required: true
+  '/domainnames/{domain_name}/basepathmappings/{base_path}':
+    delete:
+      operationId: DeleteBasePathMapping
+      description: Deletes the <a>BasePathMapping</a> resource.
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteBasePathMappingRequest'
+        - name: domain_name
+          in: path
+          type: string
+          required: true
+        - name: base_path
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -938,7 +1721,40 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/domainnames/{domain_name}/basepathmappings/{base_path}':
+    get:
+      operationId: GetBasePathMapping
+      description: Describe a <a>BasePathMapping</a> resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BasePathMapping'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBasePathMappingRequest'
+        - name: domain_name
+          in: path
+          type: string
+          required: true
+        - name: base_path
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateBasePathMapping
       description: Changes information about the <a>BasePathMapping</a> resource.
@@ -981,6 +1797,39 @@ paths:
           in: path
           type: string
           required: true
+  '/clientcertificates/{clientcertificate_id}':
+    delete:
+      operationId: DeleteClientCertificate
+      description: Deletes the <a>ClientCertificate</a> resource.
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteClientCertificateRequest'
+        - name: clientcertificate_id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -991,7 +1840,36 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/clientcertificates/{clientcertificate_id}':
+    get:
+      operationId: GetClientCertificate
+      description: Gets information about the current <a>ClientCertificate</a> resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ClientCertificate'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetClientCertificateRequest'
+        - name: clientcertificate_id
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateClientCertificate
       description: Changes information about an <a>ClientCertificate</a> resource.
@@ -1026,6 +1904,43 @@ paths:
           in: path
           type: string
           required: true
+  '/restapis/{restapi_id}/deployments/{deployment_id}':
+    delete:
+      operationId: DeleteDeployment
+      description: Deletes a <a>Deployment</a> resource. Deleting a deployment will only succeed if there are no <a>Stage</a> resources associated with it.
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDeploymentRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: deployment_id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1036,7 +1951,44 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/deployments/{deployment_id}':
+    get:
+      operationId: GetDeployment
+      description: Gets information about a <a>Deployment</a> resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Deployment'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDeploymentRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: deployment_id
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateDeployment
       description: Changes information about a <a>Deployment</a> resource.
@@ -1079,6 +2031,47 @@ paths:
           in: path
           type: string
           required: true
+  '/restapis/{restapi_id}/documentation/parts/{part_id}':
+    delete:
+      operationId: DeleteDocumentationPart
+      description: ''
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDocumentationPartRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: part_id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1089,7 +2082,40 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/documentation/parts/{part_id}':
+    get:
+      operationId: GetDocumentationPart
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DocumentationPart'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDocumentationPartRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: part_id
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateDocumentationPart
       description: ''
@@ -1136,6 +2162,47 @@ paths:
           in: path
           type: string
           required: true
+  '/restapis/{restapi_id}/documentation/versions/{doc_version}':
+    delete:
+      operationId: DeleteDocumentationVersion
+      description: ''
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDocumentationVersionRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: doc_version
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1146,7 +2213,40 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/documentation/versions/{doc_version}':
+    get:
+      operationId: GetDocumentationVersion
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DocumentationVersion'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDocumentationVersionRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: doc_version
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateDocumentationVersion
       description: ''
@@ -1189,6 +2289,35 @@ paths:
           in: path
           type: string
           required: true
+  '/domainnames/{domain_name}':
+    delete:
+      operationId: DeleteDomainName
+      description: Deletes the <a>DomainName</a> resource.
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDomainNameRequest'
+        - name: domain_name
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1199,7 +2328,40 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/domainnames/{domain_name}':
+    get:
+      operationId: GetDomainName
+      description: 'Represents a domain name that is contained in a simpler, more intuitive URL that can be called.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DomainName'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDomainNameRequest'
+        - name: domain_name
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateDomainName
       description: Changes information about the <a>DomainName</a> resource.
@@ -1238,6 +2400,47 @@ paths:
           in: path
           type: string
           required: true
+  '/restapis/{restapi_id}/gatewayresponses/{response_type}':
+    delete:
+      operationId: DeleteGatewayResponse
+      description: Clears any customization of a <a>GatewayResponse</a> of a specified response type on the given <a>RestApi</a> and resets it with the default settings.
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteGatewayResponseRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: response_type
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1248,7 +2451,82 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/gatewayresponses/{response_type}':
+    get:
+      operationId: GetGatewayResponse
+      description: Gets a <a>GatewayResponse</a> of a specified response type on the given <a>RestApi</a>.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GatewayResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetGatewayResponseRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: response_type
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: PutGatewayResponse
+      description: Creates a customization of a <a>GatewayResponse</a> of a specified response type and status code on the given <a>RestApi</a>.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/GatewayResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutGatewayResponseRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: response_type
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateGatewayResponse
       description: Updates a <a>GatewayResponse</a> of a specified response type on the given <a>RestApi</a>.
@@ -1287,6 +2565,47 @@ paths:
           in: path
           type: string
           required: true
+  '/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration':
+    delete:
+      operationId: DeleteIntegration
+      description: Represents a delete integration.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteIntegrationRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: resource_id
+          in: path
+          type: string
+          required: true
+        - name: http_method
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1297,7 +2616,90 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration':
+    get:
+      operationId: GetIntegration
+      description: Get the integration settings.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Integration'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetIntegrationRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: resource_id
+          in: path
+          type: string
+          required: true
+        - name: http_method
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: PutIntegration
+      description: Sets up a method's integration.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/Integration'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutIntegrationRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: resource_id
+          in: path
+          type: string
+          required: true
+        - name: http_method
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateIntegration
       description: Represents an update integration.
@@ -1344,6 +2746,55 @@ paths:
           in: path
           type: string
           required: true
+  '/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration/responses/{status_code}':
+    delete:
+      operationId: DeleteIntegrationResponse
+      description: Represents a delete integration response.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteIntegrationResponseRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: resource_id
+          in: path
+          type: string
+          required: true
+        - name: http_method
+          in: path
+          type: string
+          required: true
+        - name: status_code
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1354,7 +2805,102 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration/responses/{status_code}':
+    get:
+      operationId: GetIntegrationResponse
+      description: Represents a get integration response.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/IntegrationResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetIntegrationResponseRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: resource_id
+          in: path
+          type: string
+          required: true
+        - name: http_method
+          in: path
+          type: string
+          required: true
+        - name: status_code
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: PutIntegrationResponse
+      description: Represents a put integration.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/IntegrationResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '485':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutIntegrationResponseRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: resource_id
+          in: path
+          type: string
+          required: true
+        - name: http_method
+          in: path
+          type: string
+          required: true
+        - name: status_code
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateIntegrationResponse
       description: Represents an update integration response.
@@ -1405,6 +2951,47 @@ paths:
           in: path
           type: string
           required: true
+  '/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}':
+    delete:
+      operationId: DeleteMethod
+      description: Deletes an existing <a>Method</a> resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteMethodRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: resource_id
+          in: path
+          type: string
+          required: true
+        - name: http_method
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1415,7 +3002,136 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}':
+    get:
+      operationId: GetMethod
+      description: Describe an existing <a>Method</a> resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Method'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetMethodRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: resource_id
+          in: path
+          type: string
+          required: true
+        - name: http_method
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: PutMethod
+      description: Add a method to an existing <a>Resource</a> resource.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/Method'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutMethodRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: resource_id
+          in: path
+          type: string
+          required: true
+        - name: http_method
+          in: path
+          type: string
+          required: true
+    post:
+      operationId: TestInvokeMethod
+      description: 'Simulate the execution of a <a>Method</a> in your <a>RestApi</a> with headers, parameters, and an incoming request body.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TestInvokeMethodResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TestInvokeMethodRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: resource_id
+          in: path
+          type: string
+          required: true
+        - name: http_method
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateMethod
       description: Updates an existing <a>Method</a> resource.
@@ -1462,6 +3178,55 @@ paths:
           in: path
           type: string
           required: true
+  '/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/responses/{status_code}':
+    delete:
+      operationId: DeleteMethodResponse
+      description: Deletes an existing <a>MethodResponse</a> resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteMethodResponseRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: resource_id
+          in: path
+          type: string
+          required: true
+        - name: http_method
+          in: path
+          type: string
+          required: true
+        - name: status_code
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1472,7 +3237,102 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/responses/{status_code}':
+    get:
+      operationId: GetMethodResponse
+      description: Describes a <a>MethodResponse</a> resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/MethodResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetMethodResponseRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: resource_id
+          in: path
+          type: string
+          required: true
+        - name: http_method
+          in: path
+          type: string
+          required: true
+        - name: status_code
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: PutMethodResponse
+      description: Adds a <a>MethodResponse</a> to an existing <a>Method</a> resource.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/MethodResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutMethodResponseRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: resource_id
+          in: path
+          type: string
+          required: true
+        - name: http_method
+          in: path
+          type: string
+          required: true
+        - name: status_code
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateMethodResponse
       description: Updates an existing <a>MethodResponse</a> resource.
@@ -1527,6 +3387,47 @@ paths:
           in: path
           type: string
           required: true
+  '/restapis/{restapi_id}/models/{model_name}':
+    delete:
+      operationId: DeleteModel
+      description: Deletes a model.
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteModelRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: model_name
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1537,7 +3438,40 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/models/{model_name}':
+    get:
+      operationId: GetModel
+      description: Describes an existing model defined for a <a>RestApi</a> resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Model'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetModelRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: model_name
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateModel
       description: Changes information about a model.
@@ -1580,6 +3514,47 @@ paths:
           in: path
           type: string
           required: true
+  '/restapis/{restapi_id}/requestvalidators/{requestvalidator_id}':
+    delete:
+      operationId: DeleteRequestValidator
+      description: Deletes a <a>RequestValidator</a> of a given <a>RestApi</a>.
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteRequestValidatorRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: requestvalidator_id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1590,7 +3565,40 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/requestvalidators/{requestvalidator_id}':
+    get:
+      operationId: GetRequestValidator
+      description: Gets a <a>RequestValidator</a> of a given <a>RestApi</a>.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RequestValidator'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRequestValidatorRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: requestvalidator_id
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateRequestValidator
       description: Updates a <a>RequestValidator</a> of a given <a>RestApi</a>.
@@ -1629,6 +3637,47 @@ paths:
           in: path
           type: string
           required: true
+  '/restapis/{restapi_id}/resources/{resource_id}':
+    delete:
+      operationId: DeleteResource
+      description: Deletes a <a>Resource</a> resource.
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteResourceRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: resource_id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1639,7 +3688,40 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/resources/{resource_id}':
+    get:
+      operationId: GetResource
+      description: Lists information about a resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Resource'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetResourceRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: resource_id
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateResource
       description: Changes information about a <a>Resource</a> resource.
@@ -1682,6 +3764,39 @@ paths:
           in: path
           type: string
           required: true
+  '/restapis/{restapi_id}':
+    delete:
+      operationId: DeleteRestApi
+      description: Deletes the specified API.
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteRestApiRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1692,7 +3807,78 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}':
+    get:
+      operationId: GetRestApi
+      description: Lists the <a>RestApi</a> resource in the collection.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RestApi'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetRestApiRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: PutRestApi
+      description: A feature of the API Gateway control service for updating an existing API with an input of external API definitions. The update can take the form of merging the supplied definition into the existing API or overwriting the existing API.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RestApi'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '485':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutRestApiRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateRestApi
       description: Changes information about the specified API.
@@ -1731,6 +3917,43 @@ paths:
           in: path
           type: string
           required: true
+  '/restapis/{restapi_id}/stages/{stage_name}':
+    delete:
+      operationId: DeleteStage
+      description: Deletes a <a>Stage</a> resource.
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteStageRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: stage_name
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1741,7 +3964,40 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/restapis/{restapi_id}/stages/{stage_name}':
+    get:
+      operationId: GetStage
+      description: Gets information about a <a>Stage</a> resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Stage'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetStageRequest'
+        - name: restapi_id
+          in: path
+          type: string
+          required: true
+        - name: stage_name
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateStage
       description: Changes information about a <a>Stage</a> resource.
@@ -1784,6 +4040,39 @@ paths:
           in: path
           type: string
           required: true
+  '/usageplans/{usageplanId}':
+    delete:
+      operationId: DeleteUsagePlan
+      description: Deletes a usage plan of a given plan Id.
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteUsagePlanRequest'
+        - name: usageplanId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1794,7 +4083,40 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/usageplans/{usageplanId}':
+    get:
+      operationId: GetUsagePlan
+      description: Gets a usage plan of a given plan identifier.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UsagePlan'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetUsagePlanRequest'
+        - name: usageplanId
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateUsagePlan
       description: Updates a usage plan of a given plan Id.
@@ -1833,6 +4155,50 @@ paths:
           in: path
           type: string
           required: true
+  '/usageplans/{usageplanId}/keys/{keyId}':
+    delete:
+      operationId: DeleteUsagePlanKey
+      description: Deletes a usage plan key and remove the underlying API key from the associated usage plan.
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteUsagePlanKeyRequest'
+        - name: usageplanId
+          in: path
+          type: string
+          required: true
+        - name: keyId
+          in: path
+          type: string
+          required: true
+        - name: keyId
+          in: query
+          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1843,7 +4209,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/usageplans/{usageplanId}/keys/{keyId}':
     get:
       operationId: GetUsagePlanKey
       description: Gets a usage plan key of a given key identifier.
@@ -1885,6 +4250,39 @@ paths:
         - name: keyId
           in: query
           type: string
+  '/vpclinks/{vpclink_id}':
+    delete:
+      operationId: DeleteVpcLink
+      description: Deletes an existing <a>VpcLink</a> of a specified identifier.
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteVpcLinkRequest'
+        - name: vpclink_id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1895,7 +4293,36 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/vpclinks/{vpclink_id}':
+    get:
+      operationId: GetVpcLink
+      description: Gets a specified VPC link under the caller's account in a region.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/VpcLink'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetVpcLinkRequest'
+        - name: vpclink_id
+          in: path
+          type: string
+          required: true
     patch:
       operationId: UpdateVpcLink
       description: Updates an existing <a>VpcLink</a> of a specified identifier.
@@ -1934,16 +4361,6 @@ paths:
           in: path
           type: string
           required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/restapis/{restapi_id}/stages/{stage_name}/cache/authorizers':
     delete:
       operationId: FlushStageAuthorizersCache
@@ -2039,6 +4456,42 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   /clientcertificates:
+    post:
+      operationId: GenerateClientCertificate
+      description: Generates a <a>ClientCertificate</a> resource.
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/ClientCertificate'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GenerateClientCertificateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetClientCertificates
       description: Gets a collection of <a>ClientCertificate</a> resources.
@@ -2075,6 +4528,33 @@ paths:
           in: query
           description: Pagination token
           required: false
+  /account:
+    get:
+      operationId: GetAccount
+      description: Gets information about the current <a>Account</a> resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Account'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetAccountRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2085,7 +4565,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /account:
     patch:
       operationId: UpdateAccount
       description: Changes information about the current <a>Account</a> resource.
@@ -2116,16 +4595,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateAccountRequest'
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/restapis/{restapi_id}/stages/{stage_name}/exports/{export_type}':
     get:
       operationId: GetExport

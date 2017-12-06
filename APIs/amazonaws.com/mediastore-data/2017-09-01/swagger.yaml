@@ -100,6 +100,128 @@ security:
   - hmac: []
 paths:
   '/{Path}':
+    delete:
+      operationId: DeleteObject
+      description: Deletes an object at the specified path.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteObjectResponse'
+        '480':
+          description: ContainerNotFoundException
+          schema:
+            $ref: '#/definitions/ContainerNotFoundException'
+        '481':
+          description: ObjectNotFoundException
+          schema:
+            $ref: '#/definitions/ObjectNotFoundException'
+        '482':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteObjectRequest'
+        - name: Path
+          in: path
+          type: array
+          required: true
+          items:
+            type: string
+          collectionFormat: csv
+        - name: Path
+          in: query
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    head:
+      operationId: DescribeObject
+      description: Gets the header for an object at the specified path.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeObjectResponse'
+        '480':
+          description: ContainerNotFoundException
+          schema:
+            $ref: '#/definitions/ContainerNotFoundException'
+        '481':
+          description: ObjectNotFoundException
+          schema:
+            $ref: '#/definitions/ObjectNotFoundException'
+        '482':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeObjectRequest'
+        - name: Path
+          in: path
+          type: array
+          required: true
+          items:
+            type: string
+          collectionFormat: csv
+        - name: Path
+          in: query
+          type: string
+    get:
+      operationId: GetObject
+      description: Downloads the object at the specified path.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetObjectResponse'
+        '480':
+          description: ContainerNotFoundException
+          schema:
+            $ref: '#/definitions/ContainerNotFoundException'
+        '481':
+          description: ObjectNotFoundException
+          schema:
+            $ref: '#/definitions/ObjectNotFoundException'
+        '482':
+          description: RequestedRangeNotSatisfiableException
+          schema:
+            $ref: '#/definitions/RequestedRangeNotSatisfiableException'
+        '483':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetObjectRequest'
+        - name: Path
+          in: path
+          type: array
+          required: true
+          items:
+            type: string
+          collectionFormat: csv
+        - name: Path
+          in: query
+          type: string
     put:
       operationId: PutObject
       description: Uploads an object to the specified path. Object sizes are limited to 10 MB.
@@ -132,16 +254,6 @@ paths:
         - name: Path
           in: query
           type: string
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /:
     get:
       operationId: ListItems

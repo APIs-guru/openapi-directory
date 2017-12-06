@@ -60,19 +60,23 @@ security:
 paths:
   '/{Bucket}/{Key}':
     delete:
-      operationId: DeleteObject
-      description: 'Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn''t a null version, Amazon S3 does not remove any objects.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectDELETE.html</p>'
+      operationId: AbortMultipartUpload
+      description: '<p>Aborts a multipart upload.</p><p>To verify that all parts have been removed, so you don''t get charged for the part storage, you should call the List Parts operation and ensure the parts list is empty.</p><p>http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadAbort.html</p>'
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/DeleteObjectOutput'
+            $ref: '#/definitions/AbortMultipartUploadOutput'
+        '480':
+          description: NoSuchUpload
+          schema:
+            $ref: '#/definitions/NoSuchUpload'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/DeleteObjectRequest'
+            $ref: '#/definitions/AbortMultipartUploadRequest'
         - name: Bucket
           in: path
           type: string
@@ -86,7 +90,89 @@ paths:
           collectionFormat: csv
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
+    post:
+      operationId: CompleteMultipartUpload
+      description: 'Completes a multipart upload by assembling previously uploaded parts.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadComplete.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CompleteMultipartUploadOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CompleteMultipartUploadRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: array
+          required: true
+          items:
+            type: string
+          collectionFormat: csv
+    put:
+      operationId: CopyObject
+      description: 'Creates a copy of an object that is already stored in Amazon S3.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectCOPY.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CopyObjectOutput'
+        '480':
+          description: ObjectNotInActiveTierError
+          schema:
+            $ref: '#/definitions/ObjectNotInActiveTierError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CopyObjectRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: array
+          required: true
+          items:
+            type: string
+          collectionFormat: csv
   '/{Bucket}':
+    put:
+      operationId: CreateBucket
+      description: 'Creates a new bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUT.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateBucketOutput'
+        '480':
+          description: BucketAlreadyExists
+          schema:
+            $ref: '#/definitions/BucketAlreadyExists'
+        '481':
+          description: BucketAlreadyOwnedByYou
+          schema:
+            $ref: '#/definitions/BucketAlreadyOwnedByYou'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateBucketRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
     delete:
       operationId: DeleteBucket
       description: 'Deletes the bucket. All objects (including all object versions and Delete Markers) in the bucket must be deleted before the bucket itself can be deleted.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETE.html</p>'
@@ -103,8 +189,6 @@ paths:
           in: path
           type: string
           required: true
-    parameters:
-      - $ref: '#/parameters/x-amz-security-token'
   '/{Bucket}/{Key}?uploads':
     post:
       operationId: CreateMultipartUpload
@@ -134,20 +218,18 @@ paths:
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
   '/{Bucket}?analytics':
-    get:
-      operationId: GetBucketAnalyticsConfiguration
-      description: Gets an analytics configuration for the bucket (specified by the analytics configuration ID).
+    delete:
+      operationId: DeleteBucketAnalyticsConfiguration
+      description: Deletes an analytics configuration for the bucket (specified by the analytics configuration ID).
       responses:
         '200':
           description: Success
-          schema:
-            $ref: '#/definitions/GetBucketAnalyticsConfigurationOutput'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetBucketAnalyticsConfigurationRequest'
+            $ref: '#/definitions/DeleteBucketAnalyticsConfigurationRequest'
         - name: Bucket
           in: path
           type: string
@@ -155,20 +237,18 @@ paths:
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
   '/{Bucket}?cors':
-    get:
-      operationId: GetBucketCors
-      description: 'Returns the cors configuration for the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETcors.html</p>'
+    delete:
+      operationId: DeleteBucketCors
+      description: 'Deletes the cors configuration information set for the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEcors.html</p>'
       responses:
         '200':
           description: Success
-          schema:
-            $ref: '#/definitions/GetBucketCorsOutput'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetBucketCorsRequest'
+            $ref: '#/definitions/DeleteBucketCorsRequest'
         - name: Bucket
           in: path
           type: string
@@ -176,20 +256,18 @@ paths:
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
   '/{Bucket}?encryption':
-    get:
-      operationId: GetBucketEncryption
-      description: Returns the server-side encryption configuration of a bucket.
+    delete:
+      operationId: DeleteBucketEncryption
+      description: Deletes the server-side encryption configuration from the bucket.
       responses:
         '200':
           description: Success
-          schema:
-            $ref: '#/definitions/GetBucketEncryptionOutput'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetBucketEncryptionRequest'
+            $ref: '#/definitions/DeleteBucketEncryptionRequest'
         - name: Bucket
           in: path
           type: string
@@ -197,20 +275,18 @@ paths:
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
   '/{Bucket}?inventory':
-    get:
-      operationId: GetBucketInventoryConfiguration
-      description: Returns an inventory configuration (identified by the inventory ID) from the bucket.
+    delete:
+      operationId: DeleteBucketInventoryConfiguration
+      description: Deletes an inventory configuration (identified by the inventory ID) from the bucket.
       responses:
         '200':
           description: Success
-          schema:
-            $ref: '#/definitions/GetBucketInventoryConfigurationOutput'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetBucketInventoryConfigurationRequest'
+            $ref: '#/definitions/DeleteBucketInventoryConfigurationRequest'
         - name: Bucket
           in: path
           type: string
@@ -218,20 +294,18 @@ paths:
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
   '/{Bucket}?lifecycle':
-    get:
-      operationId: GetBucketLifecycle
-      description: 'Deprecated, see the GetBucketLifecycleConfiguration operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html</p>'
+    delete:
+      operationId: DeleteBucketLifecycle
+      description: 'Deletes the lifecycle configuration from the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html</p>'
       responses:
         '200':
           description: Success
-          schema:
-            $ref: '#/definitions/GetBucketLifecycleOutput'
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/GetBucketLifecycleRequest'
+            $ref: '#/definitions/DeleteBucketLifecycleRequest'
         - name: Bucket
           in: path
           type: string
@@ -333,7 +407,32 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}/{Key}?tagging':
+  '/{Bucket}/{Key}#DeleteObject':
+    delete:
+      operationId: DeleteObject
+      description: 'Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn''t a null version, Amazon S3 does not remove any objects.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectDELETE.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteObjectOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteObjectRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}?tagging#DeleteObjectTagging':
     delete:
       operationId: DeleteObjectTagging
       description: Removes the tag-set from an existing object.
@@ -354,14 +453,11 @@ paths:
           required: true
         - name: Key
           in: path
-          type: array
+          type: string
           required: true
-          items:
-            type: string
-          collectionFormat: csv
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?delete':
+  '/{Bucket}?delete#DeleteObjects':
     post:
       operationId: DeleteObjects
       description: 'This operation enables you to delete multiple objects from a bucket using a single HTTP request. You may specify up to 1000 keys.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/multiobjectdeleteapi.html</p>'
@@ -382,7 +478,7 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?accelerate':
+  '/{Bucket}?accelerate#GetBucketAccelerateConfiguration':
     get:
       operationId: GetBucketAccelerateConfiguration
       description: Returns the accelerate configuration of a bucket.
@@ -403,7 +499,7 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?acl':
+  '/{Bucket}?acl#GetBucketAcl':
     get:
       operationId: GetBucketAcl
       description: 'Gets the access control policy for the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETacl.html</p>'
@@ -418,6 +514,111 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketAclRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?analytics#GetBucketAnalyticsConfiguration':
+    get:
+      operationId: GetBucketAnalyticsConfiguration
+      description: Gets an analytics configuration for the bucket (specified by the analytics configuration ID).
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketAnalyticsConfigurationOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketAnalyticsConfigurationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?cors#GetBucketCors':
+    get:
+      operationId: GetBucketCors
+      description: 'Returns the cors configuration for the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETcors.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketCorsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketCorsRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?encryption#GetBucketEncryption':
+    get:
+      operationId: GetBucketEncryption
+      description: Returns the server-side encryption configuration of a bucket.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketEncryptionOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketEncryptionRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?inventory#GetBucketInventoryConfiguration':
+    get:
+      operationId: GetBucketInventoryConfiguration
+      description: Returns an inventory configuration (identified by the inventory ID) from the bucket.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketInventoryConfigurationOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketInventoryConfigurationRequest'
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}?lifecycle#GetBucketLifecycle':
+    get:
+      operationId: GetBucketLifecycle
+      description: 'Deprecated, see the GetBucketLifecycleConfiguration operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetBucketLifecycleOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetBucketLifecycleRequest'
         - name: Bucket
           in: path
           type: string

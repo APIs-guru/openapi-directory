@@ -100,6 +100,54 @@ security:
   - hmac: []
 paths:
   /channels:
+    post:
+      operationId: CreateChannel
+      description: Creates a new Channel.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateChannelResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateChannelRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListChannels
       description: Returns a collection of Channels.
@@ -148,6 +196,45 @@ paths:
           in: query
           description: Pagination token
           required: false
+  /origin_endpoints:
+    post:
+      operationId: CreateOriginEndpoint
+      description: Creates a new OriginEndpoint record.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateOriginEndpointResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateOriginEndpointRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -158,7 +245,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /origin_endpoints:
     get:
       operationId: ListOriginEndpoints
       description: Returns a collection of OriginEndpoint records.
@@ -207,6 +293,49 @@ paths:
           in: query
           description: Pagination token
           required: false
+  '/channels/{id}':
+    delete:
+      operationId: DeleteChannel
+      description: Deletes an existing Channel.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteChannelResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteChannelRequest'
+        - name: id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -217,7 +346,48 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/channels/{id}':
+    get:
+      operationId: DescribeChannel
+      description: Gets details about a Channel.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeChannelResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeChannelRequest'
+        - name: id
+          in: path
+          type: string
+          required: true
     put:
       operationId: UpdateChannel
       description: Updates an existing Channel.
@@ -260,6 +430,49 @@ paths:
           in: path
           type: string
           required: true
+  '/origin_endpoints/{id}':
+    delete:
+      operationId: DeleteOriginEndpoint
+      description: Deletes an existing OriginEndpoint.
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteOriginEndpointResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteOriginEndpointRequest'
+        - name: id
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -270,7 +483,48 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/origin_endpoints/{id}':
+    get:
+      operationId: DescribeOriginEndpoint
+      description: Gets details about an existing OriginEndpoint.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeOriginEndpointResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeOriginEndpointRequest'
+        - name: id
+          in: path
+          type: string
+          required: true
     put:
       operationId: UpdateOriginEndpoint
       description: Updates an existing OriginEndpoint.
@@ -313,16 +567,6 @@ paths:
           in: path
           type: string
           required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/channels/{id}/credentials':
     put:
       operationId: RotateChannelCredentials

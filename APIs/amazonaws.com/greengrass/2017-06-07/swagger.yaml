@@ -100,6 +100,68 @@ security:
   - hmac: []
 paths:
   '/greengrass/groups/{GroupId}/role':
+    put:
+      operationId: AssociateRoleToGroup
+      description: Associates a role with a group. The role will be used by the AWS Greengrass core in order to access AWS cloud services. The role's permissions will allow Greengrass core Lambda functions to perform actions against the cloud.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateRoleToGroupResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateRoleToGroupRequest'
+        - name: GroupId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DisassociateRoleFromGroup
+      description: Disassociates the role from a group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateRoleFromGroupResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateRoleFromGroupRequest'
+        - name: GroupId
+          in: path
+          type: string
+          required: true
     get:
       operationId: GetAssociatedRole
       description: Retrieves the role associated with a particular group.
@@ -126,6 +188,29 @@ paths:
           in: path
           type: string
           required: true
+  /greengrass/servicerole:
+    put:
+      operationId: AssociateServiceRoleToAccount
+      description: Associates a role which is used by AWS Greengrass. AWS Greengrass uses the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. It needs to have minimum permissions in policy ``AWSGreengrassResourceAccessRolePolicy``
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateServiceRoleToAccountResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateServiceRoleToAccountRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -136,7 +221,24 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /greengrass/servicerole:
+    delete:
+      operationId: DisassociateServiceRoleFromAccount
+      description: 'Disassociates the service role from the account. Without a service role, deployments will not work.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateServiceRoleFromAccountResponse'
+        '480':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateServiceRoleFromAccountRequest'
     get:
       operationId: GetServiceRoleForAccount
       description: Retrieves the service role that is attached to the account.
@@ -155,6 +257,25 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetServiceRoleForAccountRequest'
+  /greengrass/definition/cores:
+    post:
+      operationId: CreateCoreDefinition
+      description: Creates a core definition. You may optionally provide the initial version of the core definition or use ''CreateCoreDefinitionVersion'' at a later time. AWS Greengrass Groups must each contain exactly 1 AWS Greengrass Core.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateCoreDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateCoreDefinitionRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -165,7 +286,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /greengrass/definition/cores:
     get:
       operationId: ListCoreDefinitions
       description: Retrieves a list of core definitions.
@@ -180,6 +300,29 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListCoreDefinitionsRequest'
+  '/greengrass/definition/cores/{CoreDefinitionId}/versions':
+    post:
+      operationId: CreateCoreDefinitionVersion
+      description: Creates a version of a core definition that has already been defined. AWS Greengrass Groups must each contain exactly 1 AWS Greengrass Core.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateCoreDefinitionVersionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateCoreDefinitionVersionRequest'
+        - name: CoreDefinitionId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -190,7 +333,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/greengrass/definition/cores/{CoreDefinitionId}/versions':
     get:
       operationId: ListCoreDefinitionVersions
       description: Lists versions of a core definition.
@@ -213,6 +355,29 @@ paths:
           in: path
           type: string
           required: true
+  '/greengrass/groups/{GroupId}/deployments':
+    post:
+      operationId: CreateDeployment
+      description: Creates a deployment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDeploymentResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDeploymentRequest'
+        - name: GroupId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -223,7 +388,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/greengrass/groups/{GroupId}/deployments':
     get:
       operationId: ListDeployments
       description: Returns a history of deployments for the group.
@@ -246,6 +410,25 @@ paths:
           in: path
           type: string
           required: true
+  /greengrass/definition/devices:
+    post:
+      operationId: CreateDeviceDefinition
+      description: Creates a device definition. You may optinally provide the initial version of the device definition or use ``CreateDeviceDefinitionVersion`` at a later time.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDeviceDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDeviceDefinitionRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -256,7 +439,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /greengrass/definition/devices:
     get:
       operationId: ListDeviceDefinitions
       description: Retrieves a list of device definitions.
@@ -271,6 +453,29 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListDeviceDefinitionsRequest'
+  '/greengrass/definition/devices/{DeviceDefinitionId}/versions':
+    post:
+      operationId: CreateDeviceDefinitionVersion
+      description: Creates a version of a device definition that has already been defined.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDeviceDefinitionVersionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDeviceDefinitionVersionRequest'
+        - name: DeviceDefinitionId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -281,7 +486,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/greengrass/definition/devices/{DeviceDefinitionId}/versions':
     get:
       operationId: ListDeviceDefinitionVersions
       description: Lists the versions of a device definition.
@@ -304,6 +508,25 @@ paths:
           in: path
           type: string
           required: true
+  /greengrass/definition/functions:
+    post:
+      operationId: CreateFunctionDefinition
+      description: 'Creates a Lambda function definition which contains a list of Lambda functions and their configurations to be used in a group. You can create an initial version of the definition by providing a list of Lambda functions and their configurations now, or use ``CreateFunctionDefinitionVersion`` later.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateFunctionDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateFunctionDefinitionRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -314,7 +537,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /greengrass/definition/functions:
     get:
       operationId: ListFunctionDefinitions
       description: Retrieves a list of Lambda function definitions.
@@ -329,6 +551,29 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListFunctionDefinitionsRequest'
+  '/greengrass/definition/functions/{FunctionDefinitionId}/versions':
+    post:
+      operationId: CreateFunctionDefinitionVersion
+      description: Create a version of a Lambda function definition that has already been defined.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateFunctionDefinitionVersionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateFunctionDefinitionVersionRequest'
+        - name: FunctionDefinitionId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -339,7 +584,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/greengrass/definition/functions/{FunctionDefinitionId}/versions':
     get:
       operationId: ListFunctionDefinitionVersions
       description: Lists the versions of a Lambda function definition.
@@ -362,6 +606,25 @@ paths:
           in: path
           type: string
           required: true
+  /greengrass/groups:
+    post:
+      operationId: CreateGroup
+      description: Creates a group. You may optionally provide the initial version of the group or use ''CreateGroupVersion'' at a later time.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateGroupResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateGroupRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -372,7 +635,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /greengrass/groups:
     get:
       operationId: ListGroups
       description: Retrieves a list of groups.
@@ -387,6 +649,33 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListGroupsRequest'
+  '/greengrass/groups/{GroupId}/certificateauthorities':
+    post:
+      operationId: CreateGroupCertificateAuthority
+      description: 'Creates a CA for the group. If a CA already exists, it will rotate the existing CA.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateGroupCertificateAuthorityResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateGroupCertificateAuthorityRequest'
+        - name: GroupId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -397,7 +686,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/greengrass/groups/{GroupId}/certificateauthorities':
     get:
       operationId: ListGroupCertificateAuthorities
       description: Retrieves the current CAs for a group.
@@ -424,6 +712,29 @@ paths:
           in: path
           type: string
           required: true
+  '/greengrass/groups/{GroupId}/versions':
+    post:
+      operationId: CreateGroupVersion
+      description: Creates a version of a group which has already been defined.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateGroupVersionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateGroupVersionRequest'
+        - name: GroupId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -434,7 +745,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/greengrass/groups/{GroupId}/versions':
     get:
       operationId: ListGroupVersions
       description: List the versions of a group.
@@ -457,6 +767,25 @@ paths:
           in: path
           type: string
           required: true
+  /greengrass/definition/loggers:
+    post:
+      operationId: CreateLoggerDefinition
+      description: Creates a logger definition. You may optionally provide the initial version of the logger definition or use ``CreateLoggerDefinitionVersion`` at a later time.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateLoggerDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLoggerDefinitionRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -467,7 +796,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /greengrass/definition/loggers:
     get:
       operationId: ListLoggerDefinitions
       description: Retrieves a list of logger definitions.
@@ -482,6 +810,29 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListLoggerDefinitionsRequest'
+  '/greengrass/definition/loggers/{LoggerDefinitionId}/versions':
+    post:
+      operationId: CreateLoggerDefinitionVersion
+      description: Creates a version of a logger definition that has already been defined.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateLoggerDefinitionVersionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateLoggerDefinitionVersionRequest'
+        - name: LoggerDefinitionId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -492,7 +843,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/greengrass/definition/loggers/{LoggerDefinitionId}/versions':
     get:
       operationId: ListLoggerDefinitionVersions
       description: Lists the versions of a logger definition.
@@ -515,6 +865,25 @@ paths:
           in: path
           type: string
           required: true
+  /greengrass/definition/resources:
+    post:
+      operationId: CreateResourceDefinition
+      description: 'Creates a resource definition which contains a list of resources to be used in a group. You can create an initial version of the definition by providing a list of resources now, or use ``CreateResourceDefinitionVersion`` later.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateResourceDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateResourceDefinitionRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -525,7 +894,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  /greengrass/definition/resources:
     get:
       operationId: ListResourceDefinitions
       description: Retrieves a list of resource definitions.
@@ -540,6 +908,29 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListResourceDefinitionsRequest'
+  '/greengrass/definition/resources/{ResourceDefinitionId}/versions':
+    post:
+      operationId: CreateResourceDefinitionVersion
+      description: Create a version of a resource definition that has already been defined.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateResourceDefinitionVersionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateResourceDefinitionVersionRequest'
+        - name: ResourceDefinitionId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -550,7 +941,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/greengrass/definition/resources/{ResourceDefinitionId}/versions':
     get:
       operationId: ListResourceDefinitionVersions
       description: Lists the versions of a resource definition.
@@ -573,16 +963,6 @@ paths:
           in: path
           type: string
           required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /greengrass/updates:
     post:
       operationId: CreateSoftwareUpdateJob
@@ -617,6 +997,34 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   /greengrass/definition/subscriptions:
+    post:
+      operationId: CreateSubscriptionDefinition
+      description: Creates a subscription definition. You may optionally provide the initial version of the subscription definition or use ``CreateSubscriptionDefinitionVersion`` at a later time.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSubscriptionDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSubscriptionDefinitionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListSubscriptionDefinitions
       description: Retrieves a list of subscription definitions.
@@ -631,6 +1039,29 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListSubscriptionDefinitionsRequest'
+  '/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions':
+    post:
+      operationId: CreateSubscriptionDefinitionVersion
+      description: Creates a version of a subscription definition which has already been defined.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSubscriptionDefinitionVersionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSubscriptionDefinitionVersionRequest'
+        - name: SubscriptionDefinitionId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -641,7 +1072,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions':
     get:
       operationId: ListSubscriptionDefinitionVersions
       description: Lists the versions of a subscription definition.
@@ -664,6 +1094,29 @@ paths:
           in: path
           type: string
           required: true
+  '/greengrass/definition/cores/{CoreDefinitionId}':
+    delete:
+      operationId: DeleteCoreDefinition
+      description: Deletes a core definition. The core definition must not have been used in a deployment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteCoreDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteCoreDefinitionRequest'
+        - name: CoreDefinitionId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -674,7 +1127,28 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/greengrass/definition/cores/{CoreDefinitionId}':
+    get:
+      operationId: GetCoreDefinition
+      description: Retrieves information about a core definition version.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCoreDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCoreDefinitionRequest'
+        - name: CoreDefinitionId
+          in: path
+          type: string
+          required: true
     put:
       operationId: UpdateCoreDefinition
       description: Updates a core definition.
@@ -697,6 +1171,29 @@ paths:
           in: path
           type: string
           required: true
+  '/greengrass/definition/devices/{DeviceDefinitionId}':
+    delete:
+      operationId: DeleteDeviceDefinition
+      description: Deletes a device definition. The device definition must not have been used in a deployment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDeviceDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDeviceDefinitionRequest'
+        - name: DeviceDefinitionId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -707,7 +1204,28 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/greengrass/definition/devices/{DeviceDefinitionId}':
+    get:
+      operationId: GetDeviceDefinition
+      description: Retrieves information about a device definition.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDeviceDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDeviceDefinitionRequest'
+        - name: DeviceDefinitionId
+          in: path
+          type: string
+          required: true
     put:
       operationId: UpdateDeviceDefinition
       description: Updates a device definition.
@@ -730,6 +1248,29 @@ paths:
           in: path
           type: string
           required: true
+  '/greengrass/definition/functions/{FunctionDefinitionId}':
+    delete:
+      operationId: DeleteFunctionDefinition
+      description: Deletes a Lambda function definition. The Lambda function definition must not have been used in a deployment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteFunctionDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteFunctionDefinitionRequest'
+        - name: FunctionDefinitionId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -740,7 +1281,28 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/greengrass/definition/functions/{FunctionDefinitionId}':
+    get:
+      operationId: GetFunctionDefinition
+      description: 'Retrieves information about a Lambda function definition, such as its creation time and latest version.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetFunctionDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetFunctionDefinitionRequest'
+        - name: FunctionDefinitionId
+          in: path
+          type: string
+          required: true
     put:
       operationId: UpdateFunctionDefinition
       description: Updates a Lambda function definition.
@@ -763,6 +1325,29 @@ paths:
           in: path
           type: string
           required: true
+  '/greengrass/groups/{GroupId}':
+    delete:
+      operationId: DeleteGroup
+      description: Deletes a group. The group must not have been used in deployment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteGroupResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteGroupRequest'
+        - name: GroupId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -773,7 +1358,28 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/greengrass/groups/{GroupId}':
+    get:
+      operationId: GetGroup
+      description: Retrieves information about a group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetGroupResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetGroupRequest'
+        - name: GroupId
+          in: path
+          type: string
+          required: true
     put:
       operationId: UpdateGroup
       description: Updates a group.
@@ -796,6 +1402,29 @@ paths:
           in: path
           type: string
           required: true
+  '/greengrass/definition/loggers/{LoggerDefinitionId}':
+    delete:
+      operationId: DeleteLoggerDefinition
+      description: Deletes a logger definition. The logger definition must not have been used in a deployment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteLoggerDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLoggerDefinitionRequest'
+        - name: LoggerDefinitionId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -806,7 +1435,28 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/greengrass/definition/loggers/{LoggerDefinitionId}':
+    get:
+      operationId: GetLoggerDefinition
+      description: Retrieves information about a logger definition.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLoggerDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLoggerDefinitionRequest'
+        - name: LoggerDefinitionId
+          in: path
+          type: string
+          required: true
     put:
       operationId: UpdateLoggerDefinition
       description: Updates a logger definition.
@@ -829,6 +1479,29 @@ paths:
           in: path
           type: string
           required: true
+  '/greengrass/definition/resources/{ResourceDefinitionId}':
+    delete:
+      operationId: DeleteResourceDefinition
+      description: Deletes a resource definition.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteResourceDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteResourceDefinitionRequest'
+        - name: ResourceDefinitionId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -839,7 +1512,28 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/greengrass/definition/resources/{ResourceDefinitionId}':
+    get:
+      operationId: GetResourceDefinition
+      description: 'Retrieves information about a resource definition, such as its creation time and latest version.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetResourceDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetResourceDefinitionRequest'
+        - name: ResourceDefinitionId
+          in: path
+          type: string
+          required: true
     put:
       operationId: UpdateResourceDefinition
       description: Updates a resource definition.
@@ -862,6 +1556,29 @@ paths:
           in: path
           type: string
           required: true
+  '/greengrass/definition/subscriptions/{SubscriptionDefinitionId}':
+    delete:
+      operationId: DeleteSubscriptionDefinition
+      description: Deletes a subscription definition. The subscription definition must not have been used in a deployment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteSubscriptionDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteSubscriptionDefinitionRequest'
+        - name: SubscriptionDefinitionId
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -872,7 +1589,28 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/greengrass/definition/subscriptions/{SubscriptionDefinitionId}':
+    get:
+      operationId: GetSubscriptionDefinition
+      description: Retrieves information about a subscription definition.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetSubscriptionDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetSubscriptionDefinitionRequest'
+        - name: SubscriptionDefinitionId
+          in: path
+          type: string
+          required: true
     put:
       operationId: UpdateSubscriptionDefinition
       description: Updates a subscription definition.
@@ -895,6 +1633,33 @@ paths:
           in: path
           type: string
           required: true
+  '/greengrass/things/{ThingName}/connectivityInfo':
+    get:
+      operationId: GetConnectivityInfo
+      description: Retrieves the connectivity information for a core.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetConnectivityInfoResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetConnectivityInfoRequest'
+        - name: ThingName
+          in: path
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -905,7 +1670,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/greengrass/things/{ThingName}/connectivityInfo':
     put:
       operationId: UpdateConnectivityInfo
       description: Updates the connectivity information for the core. Any devices that belong to the group which has this core will receive this information in order to find the location of the core and connect to it.
@@ -932,16 +1696,6 @@ paths:
           in: path
           type: string
           required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/greengrass/definition/cores/{CoreDefinitionId}/versions/{CoreDefinitionVersionId}':
     get:
       operationId: GetCoreDefinitionVersion
@@ -1132,6 +1886,42 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/greengrass/groups/{GroupId}/certificateauthorities/configuration/expiry':
+    get:
+      operationId: GetGroupCertificateConfiguration
+      description: Retrieves the current configuration for the CA used by the group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetGroupCertificateConfigurationResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetGroupCertificateConfigurationRequest'
+        - name: GroupId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateGroupCertificateConfiguration
       description: Updates the Cert expiry time for a group.
@@ -1158,16 +1948,6 @@ paths:
           in: path
           type: string
           required: true
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/greengrass/groups/{GroupId}/versions/{GroupVersionId}':
     get:
       operationId: GetGroupVersion
