@@ -56,7 +56,7 @@ info:
     ```
   license:
     name: Rebilly
-    url: 'https://my.rebilly.com/api/license/'
+    url: 'https://www.rebilly.com/api-license/'
   termsOfService: 'https://www.rebilly.com/terms/'
   title: Rebilly
   version: '2.1'
@@ -205,6 +205,11 @@ responses:
     description: Conflict
     schema:
       $ref: '#/definitions/Error'
+  Found:
+    description: Resource was moved
+    headers:
+      Location:
+        type: string
   InvalidDataError:
     description: Invalid data was sent
     schema:
@@ -4705,7 +4710,7 @@ paths:
           $ref: '#/responses/AccessForbidden'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieve a File
+      summary: Retrieve a File Record
       tags:
         - Files
       x-code-samples:
@@ -4766,7 +4771,7 @@ paths:
   '/files/{id}/download':
     get:
       description: |
-        Retrieve a file
+        Download a file
       responses:
         '200':
           description: The file was retrieved successfully
@@ -4780,11 +4785,13 @@ paths:
           schema:
             readOnly: true
             type: string
+        '302':
+          $ref: '#/responses/Found'
         '401':
           $ref: '#/responses/AccessForbidden'
         '404':
           $ref: '#/responses/NotFound'
-      summary: Retrieve a file
+      summary: Download a file
       tags:
         - Files
     parameters:
@@ -4792,7 +4799,7 @@ paths:
   '/files/{id}/download{extension}':
     get:
       description: |
-        Used for converting images server-side
+        Download image in specific format. Images are converted server-side
       responses:
         '200':
           description: The file was retrieved successfully
@@ -4812,7 +4819,7 @@ paths:
           $ref: '#/responses/NotFound'
         '422':
           $ref: '#/responses/InvalidDataError'
-      summary: Used for converting images server-side
+      summary: Download image in specific format
       tags:
         - Files
     parameters:
@@ -4821,6 +4828,7 @@ paths:
         enum:
           - .png
           - .jpg
+          - .gif
         in: path
         name: extension
         required: true
@@ -13444,6 +13452,7 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
+          - $ref: '#/definitions/FileDownloadLink'
           - $ref: '#/definitions/PermalinkLink'
         minItems: 2
         readOnly: true
@@ -13503,6 +13512,18 @@ definitions:
         description: 'Image width, applicable to images only'
         readOnly: true
         type: integer
+    type: object
+  FileDownloadLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - download
+        type: string
+    required:
+      - rel
     type: object
   FileLink:
     allOf:

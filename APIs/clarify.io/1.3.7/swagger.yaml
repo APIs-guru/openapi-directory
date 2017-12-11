@@ -1070,40 +1070,9 @@ definitions:
       - _class
       - _links
   Ref_(of_Bundle):
-    $ref: '#/definitions/object'
-    properties:
-      _class:
-        description: Ref
-        type: string
-      _links:
-        $ref: '#/definitions/object'
-        description: 'HAL hyper links, keyed by relation (self, clarify:metadata, clarify:tracks, clarify:tracks (if track created))'
-      id:
-        description: id of the bundle
-        type: string
-      track_id:
-        description: id of created track (if a track was created)
-        type: string
-    required:
-      - _class
-      - _links
-      - id
+    type: object
   Ref_(of_Track):
-    $ref: '#/definitions/object'
-    properties:
-      _class:
-        description: Ref
-        type: string
-      _links:
-        $ref: '#/definitions/object'
-        description: 'HAL hyper links, keyed by relation (self, parent, clarify:bundle)'
-      id:
-        description: id of the track
-        type: string
-    required:
-      - _class
-      - _links
-      - id
+    type: object
   ReportPeriod:
     $ref: '#/definitions/object'
     properties:

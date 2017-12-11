@@ -6481,6 +6481,7 @@ definitions:
           - MusicPV
           - DramaPV
           - Live
+          - Illustration
           - Other
         type: string
       status:
@@ -7147,6 +7148,7 @@ definitions:
           - MusicPV
           - DramaPV
           - Live
+          - Illustration
           - Other
         type: string
       status:
@@ -7252,6 +7254,7 @@ definitions:
           - MusicPV
           - DramaPV
           - Live
+          - Illustration
           - Other
         type: string
       status:
@@ -7411,6 +7414,8 @@ definitions:
   TagBaseContract:
     properties:
       additionalNames:
+        type: string
+      categoryName:
         type: string
       id:
         format: int32

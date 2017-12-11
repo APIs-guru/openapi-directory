@@ -2149,6 +2149,11 @@ paths:
           name: includeHubs
           required: false
           type: boolean
+        - description: 'If the national-rail mode is included, this flag will filter the national rail stations so that only those operated by TfL are returned'
+          in: query
+          name: tflOperatedNationalRailStationsOnly
+          required: false
+          type: boolean
       produces:
         - application/json
         - text/json
@@ -2201,6 +2206,11 @@ paths:
         - description: 'If true, returns results including HUBs.'
           in: query
           name: includeHubs
+          required: false
+          type: boolean
+        - description: 'If the national-rail mode is included, this flag will filter the national rail stations so that only those operated by TfL are returned'
+          in: query
+          name: tflOperatedNationalRailStationsOnly
           required: false
           type: boolean
       produces:

@@ -5324,14 +5324,6 @@ definitions:
       - body
     type: object
   Change_Password:
-    properties:
-      newPassword:
-        type: string
-      oldPassword:
-        type: string
-    required:
-      - newPassword
-      - oldPassword
     type: object
   Conso:
     properties:
@@ -5708,21 +5700,6 @@ definitions:
       - type
     type: object
   Payment_Provider:
-    properties:
-      comingSoon:
-        default: false
-        type: boolean
-      imgUrl:
-        type: string
-      name:
-        type: string
-      title:
-        type: string
-    required:
-      - comingSoon
-      - imgUrl
-      - name
-      - title
     type: object
   Plan:
     properties:
@@ -6022,13 +5999,6 @@ definitions:
       - token
     type: object
   Transaction_Id:
-    description: A simple transaction id
-    properties:
-      transactionId:
-        description: The transaction Id
-        type: string
-    required:
-      - transactionId
     type: object
   URL:
     description: Must be a valid HTTP URL

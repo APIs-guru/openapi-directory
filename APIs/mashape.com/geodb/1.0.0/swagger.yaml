@@ -161,7 +161,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/CityResponse'
+            $ref: '#/definitions/DateTimeResponse'
         '401':
           description: Unauthorized
         '403':
@@ -169,6 +169,43 @@ paths:
         '404':
           description: Not Found
       summary: Get city date-time
+      tags:
+        - Geo
+  '/v1/geo/cities/{cityId}/distance':
+    get:
+      description: Get distance to city
+      operationId: getCityDistanceUsingGET
+      parameters:
+        - description: cityId
+          format: int32
+          in: path
+          name: cityId
+          required: true
+          type: integer
+        - description: Distance to this city
+          format: int32
+          in: query
+          name: toCityId
+          required: true
+          type: integer
+        - default: MI
+          description: 'The unit of distance: MI | KM'
+          in: query
+          name: distanceUnit
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DistanceResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get distance to the given city.
       tags:
         - Geo
   '/v1/geo/cities/{cityId}/nearbyCities':
@@ -249,7 +286,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/CityResponse'
+            $ref: '#/definitions/TimeResponse'
         '401':
           description: Unauthorized
         '403':
@@ -561,7 +598,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/TimeZoneDateTimeResponse'
+            $ref: '#/definitions/DateTimeResponse'
         '401':
           description: Unauthorized
         '403':
@@ -585,7 +622,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/TimeZoneDateTimeResponse'
+            $ref: '#/definitions/TimeResponse'
         '401':
           description: Unauthorized
         '403':
@@ -641,6 +678,8 @@ definitions:
         type: string
       regionCode:
         type: string
+      timezone:
+        type: string
     type: object
   CityResponse:
     properties:
@@ -660,9 +699,19 @@ definitions:
         type: string
       countryCode:
         type: string
+      distance:
+        description: Included if the result of a distance query
+        format: double
+        type: number
       id:
         format: int32
         type: integer
+      latitude:
+        format: double
+        type: number
+      longitude:
+        format: double
+        type: number
       region:
         type: string
       regionCode:
@@ -750,6 +799,26 @@ definitions:
         description: A list of ISO-3166 country codes
         items:
           type: string
+        type: array
+    type: object
+  DateTimeResponse:
+    properties:
+      data:
+        format: date-time
+        type: string
+      errors:
+        items:
+          $ref: '#/definitions/WftError'
+        type: array
+    type: object
+  DistanceResponse:
+    properties:
+      data:
+        format: double
+        type: number
+      errors:
+        items:
+          $ref: '#/definitions/WftError'
         type: array
     type: object
   GeoLocation:
@@ -866,7 +935,7 @@ definitions:
       metadata:
         $ref: '#/definitions/Metadata'
     type: object
-  TimeZoneDateTimeResponse:
+  TimeResponse:
     properties:
       data:
         type: string

@@ -49,12 +49,6 @@ parameters:
     name: userEmail
     required: true
     type: string
-  userId:
-    description: user's id
-    in: path
-    name: userId
-    required: true
-    type: string
 responses: {}
 tags: []
 paths:
@@ -718,14 +712,14 @@ paths:
       summary: Adds user to the offering.
       tags:
         - offering users
-  '/offerings/{offeringId}/users/{evaluatorId}/evaluates':
+  '/offerings/{offeringId}/users/{evaluatorEmail}/evaluates':
     delete:
       description: Remove learners from evaluator's list.
       parameters:
         - $ref: '#/parameters/offeringId'
         - description: evaluator's id
           in: path
-          name: evaluatorId
+          name: evaluatorEmail
           required: true
           type: string
         - description: array of learners e-mails
@@ -753,9 +747,9 @@ paths:
       description: Get learners evaluated by the peer evaluator.
       parameters:
         - $ref: '#/parameters/offeringId'
-        - description: evaluators's id
+        - description: evaluators's email
           in: path
-          name: evaluatorId
+          name: evaluatorEmail
           required: true
           type: string
       produces:
@@ -775,9 +769,9 @@ paths:
       description: Add learners to be evaluated by the peer evaluator.
       parameters:
         - $ref: '#/parameters/offeringId'
-        - description: evaluator's id
+        - description: evaluator's email
           in: path
-          name: evaluatorId
+          name: evaluatorEmail
           required: true
           type: string
         - description: array of learners e-mails
@@ -884,6 +878,20 @@ paths:
       summary: Add learners to be marked by the marker.
       tags:
         - offering users
+  '/offerings/{offeringId}/users/{userEmail}':
+    delete:
+      description: Removes user from the offering.
+      parameters:
+        - $ref: '#/parameters/offeringId'
+        - $ref: '#/parameters/userEmail'
+      produces:
+        - application/json
+      responses:
+        '204':
+          description: user successfully removed from the offering
+      summary: Removes user from the offering.
+      tags:
+        - offering users
   '/offerings/{offeringId}/users/{userEmail}/invite-email':
     post:
       description: Re-sends the invitation e-mail to the user.
@@ -898,26 +906,12 @@ paths:
       summary: Re-sends the invitation e-mail.
       tags:
         - offering users
-  '/offerings/{offeringId}/users/{userId}':
-    delete:
-      description: Removes user from the offering.
-      parameters:
-        - $ref: '#/parameters/offeringId'
-        - $ref: '#/parameters/userId'
-      produces:
-        - application/json
-      responses:
-        '204':
-          description: user successfully removed from the offering
-      summary: Removes user from the offering.
-      tags:
-        - offering users
-  '/offerings/{offeringId}/users/{userId}/submissions/open-response':
+  '/offerings/{offeringId}/users/{userEmail}/submissions/open-response':
     get:
       description: Gets user's open response assignment submissions.
       parameters:
         - $ref: '#/parameters/offeringId'
-        - $ref: '#/parameters/userId'
+        - $ref: '#/parameters/userEmail'
       produces:
         - application/json
       responses:
@@ -931,11 +925,56 @@ paths:
       summary: Gets user's open response assignment submissions
       tags:
         - submissions
-  '/users/{userId}':
+  /users/all/progress:
     get:
-      description: Returns a user matching the userId.
+      description: Returns offering progress for each learner
       parameters:
-        - $ref: '#/parameters/userId'
+        - default: 20
+          description: Returns only the first n results.
+          in: query
+          name: $top
+          type: integer
+        - description: Sorts the results.
+          in: query
+          name: $orderby
+          type: string
+        - description: 'Filters the results, based on a Boolean condition.'
+          in: query
+          name: $filter
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Learners progress
+          schema:
+            properties:
+              data:
+                properties:
+                  offerings:
+                    additionalProperties:
+                      properties:
+                        name:
+                          type: string
+                      title: Offering
+                      type: object
+                    title: Offerings detail
+                    type: object
+                  progress:
+                    items:
+                      $ref: '#/definitions/LearnerResponse'
+                    title: Learners
+                    type: array
+              top:
+                type: integer
+      summary: Learner progress for all offerings
+      tags:
+        - analytics
+  '/users/{userEmail}':
+    get:
+      description: Returns a user matching the email.
+      parameters:
+        - $ref: '#/parameters/userEmail'
       produces:
         - application/json
       responses:
@@ -943,13 +982,13 @@ paths:
           description: user data
           schema:
             $ref: '#/definitions/UserResponse'
-      summary: Find user by id
+      summary: Find user by email
       tags:
         - users
     patch:
       description: Updates the user
       parameters:
-        - $ref: '#/parameters/userId'
+        - $ref: '#/parameters/userEmail'
         - in: body
           name: user
           required: true
@@ -965,11 +1004,11 @@ paths:
       summary: Update the user
       tags:
         - users
-  '/users/{userId}/offerings':
+  '/users/{userEmail}/offerings':
     get:
       description: Responds with all user's offerings.
       parameters:
-        - $ref: '#/parameters/userId'
+        - $ref: '#/parameters/userEmail'
       produces:
         - application/json
       responses:
@@ -1233,6 +1272,22 @@ definitions:
       personId:
         type: string
     title: LearnerProgress
+  LearnerResponse:
+    properties:
+      email:
+        type: string
+      firstName:
+        type: string
+      id:
+        type: string
+      lastName:
+        type: string
+      offerings:
+        items:
+          $ref: '#/definitions/OfferingProgressRow'
+        type: array
+      personId:
+        type: string
   Mark:
     properties:
       createdAt:
@@ -1309,6 +1364,12 @@ definitions:
       version:
         description: 'Content version, if not specified, the most recent version is used.'
         minLength: 1
+        type: string
+  OfferingProgressRow:
+    properties:
+      completion:
+        type: string
+      id:
         type: string
   OfferingRequired:
     allOf:
@@ -1528,9 +1589,19 @@ definitions:
       lastName:
         minLength: 1
         type: string
+      metadata:
+        $ref: '#/definitions/UserMetadata'
       personId:
         minLength: 1
         type: string
+  UserMetadata:
+    additionalProperties: false
+    properties:
+      tags:
+        items:
+          type: string
+        type: array
+    type: object
   UserProfile:
     properties:
       displayName:
@@ -1556,6 +1627,8 @@ definitions:
       lastName:
         minLength: 1
         type: string
+      metadata:
+        $ref: '#/definitions/UserMetadata'
       personId:
         minLength: 1
         type: string

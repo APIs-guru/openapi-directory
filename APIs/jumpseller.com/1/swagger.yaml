@@ -955,7 +955,6 @@ paths:
             - Canceled
             - Pending Payment
             - Paid
-            - Shipped
           in: path
           name: status
           required: true
@@ -998,7 +997,7 @@ paths:
       tags:
         - Orders
     put:
-      description: 'Only ''status'', ''tracking_number'', ''tracking_company'', ''additional_information'' and ''additional_fields'' are available for update.<br/>Use the JSON format:<br/>''{ "order": {"status": "Shipped", "tracking_company": "other", "tracking_number": "123456789", "additional_information": "My custom message.", "additional_fields": [{"label": "Gift Name", "value": "Duarte"}, {"label": "Gift Wrapping Color", "value": "Green"}]} }}''<br/>or in CURL:<br/>curl -X PUT -d ''{ "order": {"status": "Paid", "additional_information": "My custom message."}}'' "https://api.jumpseller.com/v1/orders/{id}.json?login=storecode&authtoken=XXXXX" -H "Content-Type:application/json" '
+      description: 'Only ''status'', ''tracking_number'', ''tracking_company'', ''additional_information'' and ''additional_fields'' are available for update.<br/>Use the JSON format:<br/>''{ "order": {"status": "Paid", "tracking_company": "other", "tracking_number": "123456789", "additional_information": "My custom message.", "additional_fields": [{"label": "Gift Name", "value": "Duarte"}, {"label": "Gift Wrapping Color", "value": "Green"}]} }}''<br/>or in CURL:<br/>curl -X PUT -d ''{ "order": {"status": "Paid", "additional_information": "My custom message."}}'' "https://api.jumpseller.com/v1/orders/{id}.json?login=storecode&authtoken=XXXXX" -H "Content-Type:application/json" '
       parameters:
         - $ref: '#/parameters/LoginParam'
         - $ref: '#/parameters/AuthtokenParam'
@@ -2375,6 +2374,11 @@ definitions:
           - billing_shipping
           - other
         type: string
+      custom_field_select_options:
+        description: The values for the CheckoutCustomField selection
+        items:
+          type: string
+        type: array
       deletable:
         default: false
         description: True if the CheckoutCustomField can be removed from the store
@@ -2408,6 +2412,11 @@ definitions:
           - billing_shipping
           - other
         type: string
+      custom_field_select_options:
+        description: The values for the CheckoutCustomField selection
+        items:
+          type: string
+        type: array
       deletable:
         default: false
         description: True if the CheckoutCustomField can be removed from the store
@@ -2742,7 +2751,6 @@ definitions:
           - Canceled
           - Pending Payment
           - Paid
-          - Shipped
         type: string
       tracking_company:
         description: Shipping Company used for the given Order
@@ -2803,7 +2811,6 @@ definitions:
           - Canceled
           - Pending Payment
           - Paid
-          - Shipped
         type: string
       subtotal:
         description: 'Subtotal value for the given Order. Excluding taxes, shipping and discounts'

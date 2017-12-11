@@ -1019,6 +1019,32 @@ paths:
       summary: Create a new Timesheet Entry
       tags:
         - Timesheet
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      description: You can Mark a Timesheet as Invoiced/Uninvoiced. Useful if invoicing in an external system to lock timesheets. Note if the timesheet has been invoiced by Avaza you cannot mark it uninvoiced
+      operationId: Timesheet_Put
+      parameters:
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateTimesheetModel'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TimesheetDetails'
+      security:
+        - oauth2:
+            - write
+      summary: Update a Timesheet
+      tags:
+        - Timesheet
   '/api/Timesheet/{id}':
     delete:
       consumes: []
@@ -1064,71 +1090,6 @@ paths:
         - oauth2:
             - read
       summary: Gets a Timesheet Entry by Timesheet ID
-      tags:
-        - Timesheet
-    put:
-      consumes: []
-      description: You can Mark a Timesheet as Invoiced/Uninvoiced. Useful if invoicing in an external system to lock timesheets. Note if the timesheet has been invoiced by Avaza you cannot mark it uninvoiced
-      operationId: Timesheet_Put
-      parameters:
-        - description: TimesheetEntryID number
-          format: int64
-          in: path
-          name: id
-          required: true
-          type: integer
-        - format: int32
-          in: query
-          name: TaskIDFK
-          required: false
-          type: integer
-        - format: int32
-          in: query
-          name: UserIDFK
-          required: false
-          type: integer
-        - format: int32
-          in: query
-          name: ProjectIDFK
-          required: false
-          type: integer
-        - format: int32
-          in: query
-          name: TimeSheetCategoryIDFK
-          required: false
-          type: integer
-        - format: double
-          in: query
-          name: Duration
-          required: false
-          type: number
-        - format: date-time
-          in: query
-          name: EntryDate
-          required: false
-          type: string
-        - in: query
-          name: Notes
-          required: false
-          type: string
-        - description: Mark Timesheet as Invoiced (true/false)
-          in: query
-          name: isInvoiced
-          required: false
-          type: boolean
-        - in: query
-          name: hasStartEndTime
-          required: false
-          type: boolean
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/TimesheetDetails'
-      security:
-        - oauth2:
-            - write
-      summary: Update a Timesheet
       tags:
         - Timesheet
   /api/UserProfile:
@@ -2637,6 +2598,34 @@ definitions:
       TotalCount:
         format: int32
         type: integer
+    type: object
+  UpdateTimesheetModel:
+    properties:
+      Duration:
+        format: double
+        type: number
+      EntryDate:
+        format: date-time
+        type: string
+      Notes:
+        type: string
+      ProjectIDFK:
+        format: int32
+        type: integer
+      TaskIDFK:
+        format: int32
+        type: integer
+      TimeSheetCategoryIDFK:
+        format: int32
+        type: integer
+      TimeSheetEntryID:
+        format: int64
+        type: integer
+      UserIDFK:
+        format: int32
+        type: integer
+      hasStartEndTime:
+        type: boolean
     type: object
   UserDetails:
     properties:

@@ -560,15 +560,7 @@ definitions:
         format: int64
         type: integer
   Information_about_a_user_account.:
-    properties:
-      remainingQuotas:
-        description: Remaining quotas for the user account.
-        items:
-          $ref: '#/definitions/Entry«string,long»'
-        type: array
-      type:
-        description: Type (plan) of the user account.
-        type: string
+    type: object
   Label:
     description: The topic label
     properties:
@@ -623,23 +615,7 @@ definitions:
         description: 'URL of a document to be analysed, mutually exclusive with the ''text'' parameter'
         type: string
   Response_for_the_text_correction:
-    properties:
-      corrected:
-        type: boolean
-      correctedText:
-        description: Corrected text of the document
-        type: string
-      diacritized:
-        type: boolean
-      language:
-        description: The used language of the document
-        type: string
-      text:
-        description: The raw text of the document which has been analysed
-        type: string
-    required:
-      - correctedText
-      - language
+    type: object
   SentimentResponse:
     description: Response for the sentiment analysis
     properties:

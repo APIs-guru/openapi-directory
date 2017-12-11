@@ -248,6 +248,60 @@ paths:
       summary: Get Competitor information by Url
       tags:
         - CompetitorPremiumAPI
+  /v1/company/fuzzysearch:
+    get:
+      description: The Company Fuzzy Search API searches for a company based on the input and will return results containing basic details about matching companies. By default the API returns at most top 10 available results unless the limit is specified. The maximum limit is restricted to 30.
+      operationId: fuzzyCompanySearch
+      parameters:
+        - description: Search term
+          in: query
+          name: q
+          required: true
+          type: string
+        - description: 'Fields to be searched - name, website, ticker, permid, address, phone. Each field and its corresponding value has to be specified'
+          in: query
+          items:
+            enum:
+              - name
+              - website
+              - ticker
+              - permid
+              - address
+              - phone
+            type: string
+          name: fields
+          required: true
+          type: array
+        - description: 'Number of results to be displayed - 10 (by default, if not specified) to 30'
+          in: query
+          name: limit
+          required: false
+          type: string
+        - default: json
+          description: 'Format of the response content - json (by default if not specified), xml'
+          enum:
+            - xml
+            - json
+          in: query
+          name: format
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Search Results
+          schema:
+            $ref: '#/definitions/fuzzy_results'
+        '400':
+          description: Invalid Parameters
+        '403':
+          description: Authentication Failed
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      summary: Fuzzy Search Company by Name or Address or Phone
+      tags:
+        - CompanyAPI
   '/v1/company/id/{companyId}':
     get:
       description: 'The Company Data API provides complete information about a company for the specified Company Id '
@@ -805,6 +859,8 @@ definitions:
         type: array
       pagination_id:
         type: string
+  fuzzy_results:
+    type: object
   results:
     properties:
       feeds:

@@ -414,6 +414,36 @@ paths:
       summary: Resolve an incident or list of incidents
       tags:
         - Incidents
+  /api-public/v1/oncall/current:
+    get:
+      description: |
+        Get all on-call uesrs/teams for your organization.
+
+        This API may be called a maximum of 1 times per minute.
+      parameters:
+        - $ref: '#/parameters/apiId'
+        - $ref: '#/parameters/apiKey'
+      responses:
+        '200':
+          description: All users and escalation policies currently on call
+          schema:
+            properties:
+              teamsOnCall:
+                items:
+                  $ref: '#/definitions/OnCallTeamsResource'
+                type: array
+            type: object
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '500':
+          $ref: '#/responses/500'
+      summary: Get an organization's on-call users
+      tags:
+        - On-call
   /api-public/v1/org/routing-keys:
     get:
       description: |-
@@ -775,6 +805,8 @@ paths:
     get:
       deprecated: true
       description: |
+        __NOTE: This call is deprecated. Please use `GET /api-public/v2/team/{team}/oncall/schedule`.__
+
         Get the on-call schedule for a team, including on-call overrides.
 
         This API may be called a maximum of 15 times per minute.
@@ -811,7 +843,7 @@ paths:
     patch:
       deprecated: true
       description: |
-        __This API call is deprecated. Instead, use /api-public/v1/policies/{policy}/oncall/user__
+        __NOTE: This API call is deprecated. Please use `PATCH /api-public/v2/policies/{policy}/oncall/user`__
 
         Replaces a currently on-call user on the team with another.
 
@@ -1507,6 +1539,8 @@ paths:
     get:
       deprecated: true
       description: |
+        __NOTE: This call is deprecated. Please use `GET /api-public/v2/user/{user}/oncall/schedule`.__
+
         Get the on-call schedule for a user for all teams, including on-call overrides.
 
         This API may be called a maximum of 15 times per minute.
@@ -1645,7 +1679,11 @@ paths:
         - On-call
   /api-reporting/v1/incidents:
     get:
+      deprecated: true
       description: |
+
+        __NOTE: This call is deprecated. Please use `GET /api-reporting/v2/incidents`.__
+
         Retrieve incident history for your company, searching over date ranges and with filtering options.  This is historical
         data, and may be up to 15 minutes behind real-time incident data.  By default, only resolved incidents will be returned.
 
@@ -2028,28 +2066,6 @@ definitions:
     required:
       - alertId
     type: object
-  AllOnCall:
-    properties:
-      teams:
-        items:
-          $ref: '#/definitions/AllOnCallTeamsResource'
-        type: array
-      username:
-        type: string
-    type: object
-  AllOnCallTeamsResource:
-    properties:
-      escalation_policy:
-        items:
-          $ref: '#/definitions/OnCallEscalationPolicyResource'
-        type: array
-      name:
-        description: Team name
-        type: string
-      slug:
-        description: Team slug
-        type: string
-    type: object
   ContactDevice:
     properties:
       _selfUrl:
@@ -2396,14 +2412,9 @@ definitions:
     type: object
   OnCallEscalationPolicyResource:
     properties:
-      id:
-        description: Team ID
-        type: integer
       name:
-        description: Team name
         type: string
       slug:
-        description: Team slug
         type: string
     type: object
   OnCallInterval:
@@ -2437,6 +2448,15 @@ definitions:
           $ref: '#/definitions/UserLog'
         type: array
     type: object
+  OnCallNowResource:
+    properties:
+      escalationPolicy:
+        $ref: '#/definitions/OnCallEscalationPolicyResource'
+      users:
+        items:
+          $ref: '#/definitions/OnCallUsersResource'
+        type: array
+    type: object
   OnCallOverride:
     properties:
       end:
@@ -2467,6 +2487,22 @@ definitions:
       - end
       - isRoll
     type: object
+  OnCallTeamResource:
+    properties:
+      name:
+        type: string
+      slug:
+        type: string
+    type: object
+  OnCallTeamsResource:
+    properties:
+      onCallNow:
+        items:
+          $ref: '#/definitions/OnCallNowResource'
+        type: array
+      team:
+        $ref: '#/definitions/OnCallTeamResource'
+    type: object
   OnCallType:
     enum:
       - user
@@ -2479,6 +2515,14 @@ definitions:
       - email
       - policy_routing
     type: string
+  OnCallUsersResource:
+    properties:
+      onCallUser:
+        properties:
+          username:
+            type: string
+        type: object
+    type: object
   PagingPolicy:
     description: Paging policy fields
     properties:

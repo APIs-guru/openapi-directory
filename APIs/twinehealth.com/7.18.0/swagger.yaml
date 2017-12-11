@@ -324,6 +324,11 @@ paths:
           in: query
           name: 'filter[created_at]'
           type: string
+        - description: |
+            The start (inclusive) and end (exclusive) dates are ISO date and time strings separated by `..`. Example for events updated in November 2017 (America/New_York): `filter[updated_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
+          in: query
+          name: 'filter[updated_at]'
+          type: string
         - default: 1
           description: Page number
           in: query
@@ -1012,6 +1017,16 @@ paths:
           in: query
           name: 'filter[archived]'
           type: boolean
+        - description: |
+            The start (inclusive) and end (exclusive) dates are ISO date and time strings separated by `..`. Example for patients created in November 2017 (America/New_York): `filter[created_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
+          in: query
+          name: 'filter[created_at]'
+          type: string
+        - description: |
+            The start (inclusive) and end (exclusive) dates are ISO date and time strings separated by `..`. Example for patients updated in November 2017 (America/New_York): `filter[updated_at]=2017-11-01T00:00:00-04:00..2017-12-01T00:00:00-05:00`
+          in: query
+          name: 'filter[updated_at]'
+          type: string
         - default: 1
           description: Page number
           in: query

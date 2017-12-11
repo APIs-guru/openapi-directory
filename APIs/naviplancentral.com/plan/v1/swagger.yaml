@@ -8,7 +8,7 @@ info:
   contact:
     x-twitter: AdvicentFP
   description: An API for accessing NaviPlan plan data for a client.
-  title: Narrator Connect powered by NaviPlan
+  title: Published Plan Service
   version: v1
   x-apisguru-categories:
     - financial
@@ -318,6 +318,288 @@ paths:
       summary: Retrieve family
       tags:
         - Family
+  '/api/GoalAdjustments/Education/{id}/Adjustments':
+    get:
+      consumes: []
+      deprecated: false
+      description: This function retrieves a goal and the adjustments made to it
+      operationId: GoalAdjustments_GetEducationByIdClientidClientfileid
+      parameters:
+        - description: The id of the goal to retrieve adjustments for.
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: The id of the client to retrieve adjustments for.
+          in: query
+          name: clientId
+          required: false
+          type: string
+        - description: The id of the client file to be operated on.
+          format: int32
+          in: query
+          name: clientFileId
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.EducationGoalAdjustmentsModel'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized for plan data access
+        '404':
+          description: Object not found
+      summary: Retrieve the adjustments
+      tags:
+        - GoalAdjustments
+  '/api/GoalAdjustments/Education/{id}/Calculations':
+    post:
+      consumes:
+        - application/json
+        - text/json
+      deprecated: false
+      description: This function returns the posted object and the adjusted calculation values
+      operationId: GoalAdjustments_PostEducationByIdGoaladjustments
+      parameters:
+        - description: The id of the goal to retrieve adjustments for.
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: The original and adjusted values for this goal
+          in: body
+          name: goalAdjustments
+          required: true
+          schema:
+            $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.GoalAdjustmentsModelEducationGoalAdjustments'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.CoverageProjectionsResultModelEducationGoalAdjustments'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized for plan data access
+        '404':
+          description: Object not found
+      summary: Perform calculations
+      tags:
+        - GoalAdjustments
+  /api/GoalAdjustments/GoalSuccessRates:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: GoalAdjustments_GetGoalSuccessRatesByClientidClientfileid
+      parameters:
+        - description: The id of the client to retrieve adjustments for.
+          in: query
+          name: clientId
+          required: false
+          type: string
+        - description: The id of the client file to be operated on.
+          format: int32
+          in: query
+          name: clientFileId
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Goal Success Rates successfully retrieved.
+          schema:
+            $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.GoalSuccessRateResultsModel'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized for plan data access
+        '404':
+          description: Object not found
+      summary: Returns a list of goals with their relevant success rates.
+      tags:
+        - GoalAdjustments
+  '/api/GoalAdjustments/MajorPurchase/{id}/Adjustments':
+    get:
+      consumes: []
+      deprecated: false
+      description: This function retrieves a goal and the adjustments made to it
+      operationId: GoalAdjustments_GetMajorPurchaseByIdClientidClientfileid
+      parameters:
+        - description: The id of the goal to retrieve adjustments for.
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: The id of the client to retrieve adjustments for.
+          in: query
+          name: clientId
+          required: false
+          type: string
+        - description: The id of the client file to be operated on.
+          format: int32
+          in: query
+          name: clientFileId
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.MajorPurchaseGoalAdjustmentsModel'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized for plan data access
+        '404':
+          description: Object not found
+      summary: Retrieve the adjustments
+      tags:
+        - GoalAdjustments
+  '/api/GoalAdjustments/MajorPurchase/{id}/Calculations':
+    post:
+      consumes:
+        - application/json
+        - text/json
+      deprecated: false
+      description: This function returns the posted object and the adjusted calculation values
+      operationId: GoalAdjustments_PostMajorPurchaseByIdGoaladjustments
+      parameters:
+        - description: The id of the goal to retrieve adjustments for.
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: The original and adjusted values for this goal
+          in: body
+          name: goalAdjustments
+          required: true
+          schema:
+            $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.GoalAdjustmentsModelMajorPurchaseGoalAdjustments'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.CoverageProjectionsResultModelMajorPurchaseGoalAdjustments'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized for plan data access
+        '404':
+          description: Object not found
+      summary: Perform calculations
+      tags:
+        - GoalAdjustments
+  /api/GoalAdjustments/Restrictions:
+    get:
+      consumes: []
+      deprecated: false
+      description: This function returns a list of adjustment restrictions for all goals.
+      operationId: GoalAdjustments_GetGoalAdjustmentRestrictionsByClientidClientfileid
+      parameters:
+        - description: The id of the client user to act upon.
+          in: query
+          name: clientId
+          required: false
+          type: string
+        - description: The id of the client file to act upon.
+          format: int32
+          in: query
+          name: clientFileId
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Restrictions successfully retrieved.
+          schema:
+            $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.RestrictionsResultModel'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized for plan data access
+        '404':
+          description: Object not found
+      summary: Returns a list of goal adjustment restrictions.
+      tags:
+        - GoalAdjustments
+  '/api/GoalAdjustments/Retirement/{id}/Adjustments':
+    get:
+      consumes: []
+      deprecated: false
+      description: This function retrieves a goal and the adjustments made to it for a particular client
+      operationId: GoalAdjustments_GetRetirementByIdClientidClientfileid
+      parameters:
+        - description: The id of the goal to retrieve adjustments for.
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: The id of the client to retrieve adjustments for.
+          in: query
+          name: clientId
+          required: false
+          type: string
+        - description: The id of the client file to be operated on.
+          format: int32
+          in: query
+          name: clientFileId
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.RetirementGoalAdjustmentsModel'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized for plan data access
+        '404':
+          description: Object not found
+      summary: Retrieve the adjustments
+      tags:
+        - GoalAdjustments
+  '/api/GoalAdjustments/Retirement/{id}/Calculations':
+    post:
+      consumes:
+        - application/json
+        - text/json
+      deprecated: false
+      description: This function returns the posted object and the adjusted calculation values
+      operationId: GoalAdjustments_PostRetirementByIdGoaladjustments
+      parameters:
+        - description: The id of the goal to retrieve adjustments for.
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: The original and adjusted values for this goal
+          in: body
+          name: goalAdjustments
+          required: true
+          schema:
+            $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.GoalAdjustmentsModelRetirementGoalAdjustments'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.CoverageProjectionsResultModelRetirementGoalAdjustments'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized for plan data access
+        '404':
+          description: Object not found
+      summary: Perform calculations
+      tags:
+        - GoalAdjustments
   /api/Goals:
     get:
       consumes: []
@@ -1450,6 +1732,253 @@ definitions:
         format: int32
         type: integer
     type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.CalcProjection:
+    properties:
+      projectedAbilities:
+        format: double
+        type: number
+      projectedNeed:
+        format: double
+        type: number
+      projectedRetirementAssetValues:
+        format: double
+        type: number
+      year:
+        format: int32
+        type: integer
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.CoverageProjections:
+    properties:
+      goalId:
+        format: int32
+        type: integer
+      percentCovered:
+        format: double
+        type: number
+      projections:
+        items:
+          $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.CalcProjection'
+        type: array
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.CoverageProjectionsResultModelEducationGoalAdjustments:
+    properties:
+      goalAdjustments:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.GoalAdjustmentsResultEducationGoalAdjustments'
+      projectedResults:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.CoverageProjections'
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.CoverageProjectionsResultModelMajorPurchaseGoalAdjustments:
+    properties:
+      goalAdjustments:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.GoalAdjustmentsResultMajorPurchaseGoalAdjustments'
+      projectedResults:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.CoverageProjections'
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.CoverageProjectionsResultModelRetirementGoalAdjustments:
+    properties:
+      goalAdjustments:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.GoalAdjustmentsResultRetirementGoalAdjustments'
+      projectedResults:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.CoverageProjections'
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.EducationGoalAdjustments:
+    properties:
+      duration:
+        format: double
+        type: number
+      expensesCovered:
+        format: double
+        type: number
+      lumpSumContribution:
+        format: double
+        type: number
+      lumpSumDate:
+        format: date-time
+        type: string
+      monthlySavingsContribution:
+        format: double
+        type: number
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.EducationGoalAdjustmentsModel:
+    properties:
+      adjustedValues:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.EducationGoalAdjustments'
+      created:
+        format: date-time
+        type: string
+      goalId:
+        format: int32
+        type: integer
+      originalValues:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.EducationGoalAdjustments'
+      projectedResults:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.CoverageProjections'
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.EducationRestriction:
+    properties:
+      canChangeDuration:
+        type: boolean
+      goalId:
+        format: int32
+        type: integer
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.GoalAdjustmentsModelEducationGoalAdjustments:
+    properties:
+      adjustedValues:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.EducationGoalAdjustments'
+      originalValues:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.EducationGoalAdjustments'
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.GoalAdjustmentsModelMajorPurchaseGoalAdjustments:
+    properties:
+      adjustedValues:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.MajorPurchaseGoalAdjustments'
+      originalValues:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.MajorPurchaseGoalAdjustments'
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.GoalAdjustmentsModelRetirementGoalAdjustments:
+    properties:
+      adjustedValues:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.RetirementGoalAdjustments'
+      originalValues:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.RetirementGoalAdjustments'
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.GoalAdjustmentsResultEducationGoalAdjustments:
+    properties:
+      adjustedValues:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.EducationGoalAdjustments'
+      created:
+        format: date-time
+        type: string
+      goalId:
+        format: int32
+        type: integer
+      originalValues:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.EducationGoalAdjustments'
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.GoalAdjustmentsResultMajorPurchaseGoalAdjustments:
+    properties:
+      adjustedValues:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.MajorPurchaseGoalAdjustments'
+      created:
+        format: date-time
+        type: string
+      goalId:
+        format: int32
+        type: integer
+      originalValues:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.MajorPurchaseGoalAdjustments'
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.GoalAdjustmentsResultRetirementGoalAdjustments:
+    properties:
+      adjustedValues:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.RetirementGoalAdjustments'
+      created:
+        format: date-time
+        type: string
+      goalId:
+        format: int32
+        type: integer
+      originalValues:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.RetirementGoalAdjustments'
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.GoalSuccessRateModel:
+    properties:
+      description:
+        type: string
+      goalId:
+        format: int32
+        type: integer
+      successRate:
+        format: double
+        type: number
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.GoalSuccessRateResultsModel:
+    properties:
+      goalSuccessRateResults:
+        items:
+          $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.GoalSuccessRateModel'
+        type: array
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.MajorPurchaseGoalAdjustments:
+    properties:
+      lumpSumContribution:
+        format: double
+        type: number
+      lumpSumDate:
+        format: date-time
+        type: string
+      monthlySavingsContribution:
+        format: double
+        type: number
+      targetDate:
+        format: date-time
+        type: string
+      totalNeed:
+        format: double
+        type: number
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.MajorPurchaseGoalAdjustmentsModel:
+    properties:
+      adjustedValues:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.MajorPurchaseGoalAdjustments'
+      created:
+        format: date-time
+        type: string
+      goalId:
+        format: int32
+        type: integer
+      originalValues:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.MajorPurchaseGoalAdjustments'
+      projectedResults:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.CoverageProjections'
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.RestrictionsResultModel:
+    properties:
+      educationRestrictions:
+        items:
+          $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.EducationRestriction'
+        type: array
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.RetirementGoalAdjustments:
+    properties:
+      clientRetirementAge:
+        format: double
+        type: number
+      coClientRetirementAge:
+        format: double
+        type: number
+      discretionaryExpenseCoverage:
+        format: double
+        type: number
+      fixedExpenseCoverage:
+        format: double
+        type: number
+      lumpSumContribution:
+        format: double
+        type: number
+      lumpSumDate:
+        format: date-time
+        type: string
+      monthlySavingsContribution:
+        format: double
+        type: number
+    type: object
+  Advicent.NaviPlanRestApiIntegrationProxy.Models.RetirementGoalAdjustmentsModel:
+    properties:
+      adjustedValues:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.RetirementGoalAdjustments'
+      created:
+        format: date-time
+        type: string
+      goalId:
+        format: int32
+        type: integer
+      originalValues:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.RetirementGoalAdjustments'
+      projectedResults:
+        $ref: '#/definitions/Advicent.NaviPlanRestApiIntegrationProxy.Models.CoverageProjections'
+    type: object
   Advicent.PublishedPlanService.Auth.Models.LoginModel:
     properties:
       npoIdentifiers:
@@ -1459,6 +1988,17 @@ definitions:
       password:
         type: string
       username:
+        type: string
+    type: object
+  Advicent.PublishedPlanService.GoalWhatIf.Models.ClientIdQueryParameter:
+    description: Client user id query parameter model so the client id query parameter is optional.
+    properties:
+      clientFileId:
+        description: The id of the client file to act upon.
+        format: int32
+        type: integer
+      clientId:
+        description: The id of the client user to act upon.
         type: string
     type: object
   Advicent.PublishedPlanService.Models.AdvisorModel:
@@ -1803,6 +2343,8 @@ definitions:
         type: boolean
       hasAccountAggregation:
         type: boolean
+      hasGoalWhatIfing:
+        type: boolean
       hasUserSetPassword:
         type: boolean
       isAdmin:
@@ -1810,6 +2352,8 @@ definitions:
       isAdvisor:
         type: boolean
       isClient:
+        type: boolean
+      isPasswordExpired:
         type: boolean
       planIds:
         items:
@@ -1880,6 +2424,61 @@ definitions:
         type: string
       rel:
         type: string
+    type: object
+  NaviPlan.PlanObjectModel.AssetAllocationData.IAssetClass:
+    properties:
+      index:
+        format: int32
+        readOnly: true
+        type: integer
+      maxConstraint:
+        $ref: '#/definitions/NaviPlan.Util.Percent'
+        readOnly: true
+      minConstraint:
+        $ref: '#/definitions/NaviPlan.Util.Percent'
+        readOnly: true
+      name:
+        readOnly: true
+        type: string
+      parentSuperAssetClassIndex:
+        format: int32
+        readOnly: true
+        type: integer
+      weight:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.AssetAllocationData.IAssetClassWeight'
+        readOnly: true
+    type: object
+  NaviPlan.PlanObjectModel.AssetAllocationData.IAssetClassWeight:
+    properties:
+      dollarValue:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+      percentage:
+        $ref: '#/definitions/NaviPlan.Util.Percent'
+        readOnly: true
+    type: object
+  NaviPlan.PlanObjectModel.AssetAllocationData.IAssetMix:
+    properties:
+      assetClassDisplayLevel:
+        format: int32
+        readOnly: true
+        type: integer
+      assetClassInfoForDisplayLevel:
+        items:
+          format: int32
+          type: integer
+        readOnly: true
+        type: array
+      classes:
+        items:
+          $ref: '#/definitions/NaviPlan.PlanObjectModel.AssetAllocationData.IAssetClass'
+        readOnly: true
+        type: array
+      superAssetClasses:
+        items:
+          $ref: '#/definitions/NaviPlan.PlanObjectModel.AssetAllocationData.IAssetClass'
+        readOnly: true
+        type: array
     type: object
   NaviPlan.PlanObjectModel.IPlanModules:
     properties:
@@ -2155,6 +2754,224 @@ definitions:
         $ref: '#/definitions/NaviPlan.Util.Percent'
         readOnly: true
     type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.ContributionsData.IContributions:
+    properties:
+      interCompanyDividendsReceived:
+        items:
+          $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.ContributionsData.IInterCompanyDividendReceived'
+        readOnly: true
+        type: array
+      sharePurchases:
+        items:
+          $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.ContributionsData.ISharePurchase'
+        readOnly: true
+        type: array
+      shareholderLoans:
+        items:
+          $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.ContributionsData.IShareholderLoan'
+        readOnly: true
+        type: array
+    type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.ContributionsData.IInterCompanyDividendReceived:
+    properties:
+      activityData:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.IActivityData'
+        readOnly: true
+      dividendType:
+        $ref: '#/definitions/NaviPlan.Util.FormattedEnumType[NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.ContributionsData.InterCompanyDividendType]'
+        readOnly: true
+      generalRateOfIncomePoolAmount:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+      receivedFrom:
+        readOnly: true
+        type: string
+    type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.ContributionsData.ISharePurchase:
+    properties:
+      activityData:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.IActivityData'
+        readOnly: true
+      shareHolder:
+        enum:
+          - Undefined
+          - Head1
+          - Head2
+          - Other
+        readOnly: true
+        type: string
+      shareId:
+        format: int32
+        readOnly: true
+        type: integer
+      shareType:
+        $ref: '#/definitions/NaviPlan.Util.FormattedEnumType[NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.PrivateCorporationShareType]'
+        readOnly: true
+    type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.ContributionsData.IShareholderLoan:
+    properties:
+      activityData:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.IActivityData'
+        readOnly: true
+      shareHolder:
+        enum:
+          - Undefined
+          - Head1
+          - Head2
+          - Other
+        readOnly: true
+        type: string
+    type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.IActivityData:
+    properties:
+      amountWithGrowth:
+        $ref: '#/definitions/NaviPlan.Util.CurrencyWithGrowth'
+        readOnly: true
+      applicableDateRange:
+        $ref: '#/definitions/NaviPlan.Util.FormattedDateRange'
+        readOnly: true
+      directTo:
+        readOnly: true
+        type: string
+      frequency:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.Util.IFormattedFrequency'
+        readOnly: true
+    type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.WithdrawalsData.ILoanRepaymentToShareholder:
+    properties:
+      activityData:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.IActivityData'
+        readOnly: true
+      shareholder:
+        enum:
+          - Undefined
+          - Head1
+          - Head2
+          - Other
+        readOnly: true
+        type: string
+    type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.WithdrawalsData.IManualDividendDistribution:
+    properties:
+      activityData:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.IActivityData'
+        readOnly: true
+      directCoClientAfterTaxProceedsTo:
+        readOnly: true
+        type: string
+      dividendType:
+        $ref: '#/definitions/NaviPlan.Util.FormattedEnumType[NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.WithdrawalsData.DistributionDividendType]'
+        readOnly: true
+      shareId:
+        format: int32
+        readOnly: true
+        type: integer
+      shareType:
+        $ref: '#/definitions/NaviPlan.Util.FormattedEnumType[NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.PrivateCorporationShareType]'
+        readOnly: true
+    type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.WithdrawalsData.IShareRedemption:
+    properties:
+      activityData:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.IActivityData'
+        readOnly: true
+      shareId:
+        format: int32
+        readOnly: true
+        type: integer
+      shareType:
+        $ref: '#/definitions/NaviPlan.Util.FormattedEnumType[NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.PrivateCorporationShareType]'
+        readOnly: true
+      shareholder:
+        enum:
+          - Undefined
+          - Head1
+          - Head2
+          - Other
+        readOnly: true
+        type: string
+    type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.WithdrawalsData.IWithdrawals:
+    properties:
+      loanRepaymentsToShareholder:
+        items:
+          $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.WithdrawalsData.ILoanRepaymentToShareholder'
+        readOnly: true
+        type: array
+      manualDividendDistributions:
+        items:
+          $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.WithdrawalsData.IManualDividendDistribution'
+        readOnly: true
+        type: array
+      shareRedemptions:
+        items:
+          $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.WithdrawalsData.IShareRedemption'
+        readOnly: true
+        type: array
+    type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.HistoricalData.IHistoricalData:
+    properties:
+      notionalAccounts:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.HistoricalData.INotionalAccounts'
+        readOnly: true
+      outstandingShareholderLoans:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.HistoricalData.IOutstandingShareholderLoans'
+        readOnly: true
+    type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.HistoricalData.INotionalAccounts:
+    properties:
+      capitalDividendAccountEndOfYearValue:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+      capitalLossesCarryoverEndOfYearValue:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+      dividendRefund:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+      generalRateOfIncomePoolEndOfYearValue:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+      refundableDividendTaxOnHandEndOfYearValue:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+    type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.HistoricalData.IOutstandingShareholderLoans:
+    properties:
+      clientAmount:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+      coClientAmount:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+      otherAmount:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+    type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ICommonShareClassDetails:
+    properties:
+      shareClassStructure:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.IShareClassStructure'
+        readOnly: true
+    type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.IEstateDetails:
+    properties:
+      enableFiftyPercentSolution:
+        $ref: '#/definitions/NaviPlan.Util.DescriptiveBoolean'
+        readOnly: true
+      estateFreeze:
+        $ref: '#/definitions/NaviPlan.Util.DescriptiveBoolean'
+        readOnly: true
+      estateFreezeDate:
+        $ref: '#/definitions/NaviPlan.Util.Date'
+        readOnly: true
+      shareOptionsAtFirstDeath:
+        readOnly: true
+        type: string
+      shareOptionsAtSecondDeathAndDeathInTheSameYear:
+        readOnly: true
+        type: string
+    type: object
   NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.IHoldingCompany:
     properties:
       annualDividendYield:
@@ -2164,6 +2981,9 @@ definitions:
         format: int32
         readOnly: true
         type: integer
+      contributions:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.ContributionsData.IContributions'
+        readOnly: true
       corporateYearEnd:
         $ref: '#/definitions/NaviPlan.Util.Date'
         readOnly: true
@@ -2179,12 +2999,28 @@ definitions:
       dividendTypeFormatted:
         readOnly: true
         type: string
+      estateDetails:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.IEstateDetails'
+        readOnly: true
+      historicalData:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.HistoricalData.IHistoricalData'
+        readOnly: true
       id:
         $ref: '#/definitions/NaviPlan.Util.NaviplanItemIdentifier'
         readOnly: true
       investmentAccounts:
         items:
           $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.IInvestmentAccount'
+        readOnly: true
+        type: array
+      liabilities:
+        items:
+          $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.LiabilityData.ILiability'
+        readOnly: true
+        type: array
+      lifeInsurancePolicies:
+        items:
+          $ref: '#/definitions/NaviPlan.PlanObjectModel.ScenarioPropertiesData.InsurancePolicyData.ILifeInsurancePolicy'
         readOnly: true
         type: array
       marketValue:
@@ -2194,6 +3030,11 @@ definitions:
         format: int32
         readOnly: true
         type: integer
+      otherAssets:
+        items:
+          $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.RealEstateAssetData.IRealEstateAsset'
+        readOnly: true
+        type: array
       ownershipAsOfDate:
         $ref: '#/definitions/NaviPlan.Util.Date'
         readOnly: true
@@ -2210,11 +3051,19 @@ definitions:
       provinceOfTaxation:
         readOnly: true
         type: string
+      realEstateAssets:
+        items:
+          $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.RealEstateAssetData.IRealEstateAsset'
+        readOnly: true
+        type: array
       valueOfAllCommonShares:
         $ref: '#/definitions/NaviPlan.Util.Currency'
         readOnly: true
       valueOfAllPreferredShares:
         $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+      withdrawals:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.WithdrawalsData.IWithdrawals'
         readOnly: true
     type: object
   NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.IInvestmentAccount:
@@ -2321,9 +3170,19 @@ definitions:
           $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.IOwnershipData'
         readOnly: true
         type: array
+      commonSharesDetails:
+        items:
+          $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ICommonShareClassDetails'
+        readOnly: true
+        type: array
       preferred:
         items:
           $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.IOwnershipData'
+        readOnly: true
+        type: array
+      preferredSharesDetails:
+        items:
+          $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.IPreferredShareClassDetails'
         readOnly: true
         type: array
       shareholderPercentOwnership:
@@ -2331,6 +3190,40 @@ definitions:
           $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.IInvestmentAccountOwnershipData'
         readOnly: true
         type: array
+    type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.IPreferredShareClassDetails:
+    properties:
+      annualDividendYield:
+        $ref: '#/definitions/NaviPlan.Util.Percent'
+        readOnly: true
+      dividendType:
+        $ref: '#/definitions/NaviPlan.Util.FormattedEnumType[NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.WithdrawalsData.DistributionDividendType]'
+        readOnly: true
+      redemptionValuePerShare:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+      shareClassStructure:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.IShareClassStructure'
+        readOnly: true
+    type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.IShareClassStructure:
+    properties:
+      clientOwnershipData:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.IOwnershipData'
+        readOnly: true
+      coClientOwnershipData:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.IOwnershipData'
+        readOnly: true
+      description:
+        readOnly: true
+        type: string
+      id:
+        format: int32
+        readOnly: true
+        type: integer
+      otherOwnershipData:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.IOwnershipData'
+        readOnly: true
     type: object
   NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.ISEPPRedemptionStrategy:
     properties:
@@ -2407,6 +3300,48 @@ definitions:
         $ref: '#/definitions/NaviPlan.Util.FormattedLifestyleType'
         readOnly: true
     type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.PortfolioAssetData.IAssetValuation:
+    properties:
+      costBasis:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+      marketValue:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+      valuationDate:
+        $ref: '#/definitions/NaviPlan.Util.Date'
+        readOnly: true
+    type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.PortfolioAssetData.IHolding:
+    properties:
+      assetMix:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.AssetAllocationData.IAssetMix'
+        readOnly: true
+      description:
+        readOnly: true
+        type: string
+      holdAmount:
+        $ref: '#/definitions/NaviPlan.Util.PercentOr[NaviPlan.Util.Currency]'
+        readOnly: true
+      id:
+        $ref: '#/definitions/NaviPlan.Util.NaviplanItemIdentifier'
+        readOnly: true
+      isClassified:
+        readOnly: true
+        type: boolean
+      preRetirementReturnRates:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.Util.AssetAllocation.IPeriodRateOfReturnDetails'
+        readOnly: true
+      retirementReturnRates:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.Util.AssetAllocation.IPeriodRateOfReturnDetails'
+        readOnly: true
+      symbol:
+        readOnly: true
+        type: string
+      valuation:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.PortfolioAssetData.IAssetValuation'
+        readOnly: true
+    type: object
   NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.PortfolioAssetData.ILumpSumRedemptionStrategy:
     properties:
       amountOrPercentOfValue:
@@ -2481,6 +3416,9 @@ definitions:
     type: object
   NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.PortfolioAssetData.IPortfolioAccount:
     properties:
+      accountReturnRatesNoLongerCorrelateToAssumedAssetMixDueToOverrideInGsm:
+        readOnly: true
+        type: boolean
       annualFee:
         $ref: '#/definitions/NaviPlan.Util.Percent'
         readOnly: true
@@ -2499,6 +3437,11 @@ definitions:
       excludeInAA:
         readOnly: true
         type: boolean
+      holdings:
+        items:
+          $ref: '#/definitions/NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.PortfolioAssetData.IHolding'
+        readOnly: true
+        type: array
       id:
         $ref: '#/definitions/NaviPlan.Util.NaviplanItemIdentifier'
         readOnly: true
@@ -2653,6 +3596,60 @@ definitions:
         readOnly: true
       startDate:
         $ref: '#/definitions/NaviPlan.Util.Date'
+        readOnly: true
+    type: object
+  NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.RealEstateAssetData.IRealEstateAsset:
+    properties:
+      currentYearNetRentalIncome:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+      description:
+        readOnly: true
+        type: string
+      id:
+        $ref: '#/definitions/NaviPlan.Util.NaviplanItemIdentifier'
+        readOnly: true
+      marketValueAsOf:
+        $ref: '#/definitions/NaviPlan.Util.CurrencyWithDate'
+        readOnly: true
+      owner:
+        enum:
+          - All
+          - Head1
+          - Head2
+          - NonHead1
+          - NonHead2
+          - NonHead3
+          - NonHead4
+          - NonHead5
+          - NonHead6
+          - NonHead7
+          - NonHead8
+          - NonHead9
+          - CommunityProperty
+          - Joint
+          - Other
+          - AllDependents
+          - AllFamilyMembers
+        readOnly: true
+        type: string
+      preTaxGrowthRate:
+        $ref: '#/definitions/NaviPlan.Util.Percent'
+        readOnly: true
+      purchaseAmount:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+      purchaseDate:
+        $ref: '#/definitions/NaviPlan.Util.Date'
+        readOnly: true
+      standardDeviation:
+        $ref: '#/definitions/NaviPlan.Util.Percent'
+        readOnly: true
+      startOfYearCostBasis:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+      startOfYearMarketValue:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
         readOnly: true
     type: object
   NaviPlan.PlanObjectModel.PlanPropertiesData.DefinedBenefitPensionData.IDefinedBenefitPension:
@@ -3407,6 +4404,137 @@ definitions:
         $ref: '#/definitions/NaviPlan.PlanObjectModel.Util.Demographics.IPhoneNumbers'
         readOnly: true
     type: object
+  NaviPlan.PlanObjectModel.ScenarioPropertiesData.InsurancePolicyData.IInsurancePremium:
+    properties:
+      amount:
+        $ref: '#/definitions/NaviPlan.Util.CurrencyWithGrowth'
+        readOnly: true
+      annualAmount:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+      ceaseDate:
+        $ref: '#/definitions/NaviPlan.Util.Date'
+        readOnly: true
+      formattedPayingMember:
+        readOnly: true
+        type: string
+      frequency:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.Util.IFormattedFrequency'
+        readOnly: true
+      payingMember:
+        enum:
+          - All
+          - Head1
+          - Head2
+          - NonHead1
+          - NonHead2
+          - NonHead3
+          - NonHead4
+          - NonHead5
+          - NonHead6
+          - NonHead7
+          - NonHead8
+          - NonHead9
+          - CommunityProperty
+          - Joint
+          - Other
+          - AllDependents
+          - AllFamilyMembers
+        readOnly: true
+        type: string
+      premiumRefundAmount:
+        $ref: '#/definitions/NaviPlan.Util.Percent'
+        readOnly: true
+      startDate:
+        $ref: '#/definitions/NaviPlan.Util.Date'
+        readOnly: true
+    type: object
+  NaviPlan.PlanObjectModel.ScenarioPropertiesData.InsurancePolicyData.ILifeInsurancePolicy:
+    properties:
+      beneficiaryName:
+        readOnly: true
+        type: string
+      benefitPeriod:
+        $ref: '#/definitions/NaviPlan.Util.TimePeriod'
+        readOnly: true
+      cashSurrenderValue:
+        $ref: '#/definitions/NaviPlan.Util.Currency'
+        readOnly: true
+      coverageCeaseDate:
+        $ref: '#/definitions/NaviPlan.Util.Date'
+        readOnly: true
+      dailyBenefitValue:
+        format: double
+        readOnly: true
+        type: number
+      description:
+        readOnly: true
+        type: string
+      effectiveDate:
+        $ref: '#/definitions/NaviPlan.Util.Date'
+        readOnly: true
+      formattedBenefitValue:
+        readOnly: true
+        type: string
+      formattedInsuredType:
+        readOnly: true
+        type: string
+      formattedPolicyType:
+        readOnly: true
+        type: string
+      insured:
+        enum:
+          - Client
+          - CoClient
+          - FirstToDie
+          - SecondToDie
+          - Other
+        readOnly: true
+        type: string
+      isCSVPayableWithDeathBenefit:
+        $ref: '#/definitions/NaviPlan.Util.DescriptiveBoolean'
+        readOnly: true
+      monthlyBenefitValue:
+        format: double
+        readOnly: true
+        type: number
+      ownerName:
+        readOnly: true
+        type: string
+      policyType:
+        enum:
+          - WholeLife
+          - UniversalLife
+          - Term1Life
+          - Term5Life
+          - Term10Life
+          - Term20Life
+          - Term100Life
+          - VariableLife
+          - VariableUniversalLife
+          - GroupLongTermDisability
+          - GroupShortTermDisability
+          - IndividualDisability
+          - LongTermCare
+          - CriticalIllness
+          - MedicalCoveragePlan
+          - CashToInsuredCoverage
+        readOnly: true
+        type: string
+      premiumData:
+        $ref: '#/definitions/NaviPlan.PlanObjectModel.ScenarioPropertiesData.InsurancePolicyData.IInsurancePremium'
+        readOnly: true
+      premiumsWaivedAtDisability:
+        $ref: '#/definitions/NaviPlan.Util.DescriptiveBoolean'
+        readOnly: true
+      rawBenefitValue:
+        format: double
+        readOnly: true
+        type: number
+      waitingPeriod:
+        $ref: '#/definitions/NaviPlan.Util.TimePeriod'
+        readOnly: true
+    type: object
   NaviPlan.PlanObjectModel.ScenarioPropertiesData.NetWorthData.IAccumulationCategoryData:
     properties:
       allAssets:
@@ -3729,6 +4857,35 @@ definitions:
         readOnly: true
         type: integer
     type: object
+  NaviPlan.PlanObjectModel.Util.IFormattedFrequency:
+    properties:
+      everyNPeriods:
+        format: int32
+        readOnly: true
+        type: integer
+      formatted:
+        readOnly: true
+        type: string
+      formattedAbbrv:
+        readOnly: true
+        type: string
+      value:
+        enum:
+          - Annual
+          - SemiAnnual
+          - Quarterly
+          - Bimonthly
+          - Monthly
+          - TwiceMonthly
+          - BiWeekly
+          - Weekly
+          - Daily
+          - Continuously
+          - Onetime
+          - EveryXYears
+        readOnly: true
+        type: string
+    type: object
   'NaviPlan.PlanObjectModel.Util.IKeyedValueDescriptionPair[NaviPlan.Util.NaviplanItemIdentifier,NaviPlan.Util.Currency]':
     properties:
       description:
@@ -3982,6 +5139,55 @@ definitions:
         readOnly: true
         type: string
     type: object
+  'NaviPlan.Util.FormattedEnumType[NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.ContributionsData.InterCompanyDividendType]':
+    properties:
+      formatted:
+        readOnly: true
+        type: string
+      formattedAbbrv:
+        readOnly: true
+        type: string
+      value:
+        enum:
+          - NonTaxable
+          - NonTaxableCda
+          - NonTaxableEligible
+          - TaxableEligible
+        readOnly: true
+        type: string
+    type: object
+  'NaviPlan.Util.FormattedEnumType[NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.ActivityData.WithdrawalsData.DistributionDividendType]':
+    properties:
+      formatted:
+        readOnly: true
+        type: string
+      formattedAbbrv:
+        readOnly: true
+        type: string
+      value:
+        enum:
+          - TaxableIneligible
+          - NonTaxable
+          - TaxableEligible
+        readOnly: true
+        type: string
+    type: object
+  'NaviPlan.Util.FormattedEnumType[NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.HoldingCompanyData.PrivateCorporationShareType]':
+    properties:
+      formatted:
+        readOnly: true
+        type: string
+      formattedAbbrv:
+        readOnly: true
+        type: string
+      value:
+        enum:
+          - Undefined
+          - Common
+          - Preferred
+        readOnly: true
+        type: string
+    type: object
   'NaviPlan.Util.FormattedEnumType[NaviPlan.PlanObjectModel.PlanPropertiesData.AssetData.PortfolioAssetData.SavingsStrategyType]':
     properties:
       formatted:
@@ -4224,6 +5430,23 @@ definitions:
       percent:
         $ref: '#/definitions/NaviPlan.Util.Percent'
         readOnly: true
+    type: object
+  NaviPlan.Util.TimePeriod:
+    properties:
+      count:
+        format: int32
+        type: integer
+      duration:
+        enum:
+          - Days
+          - Weeks
+          - Months
+          - Years
+          - YearsOfAge
+        type: string
+      formatedTimePeriod:
+        readOnly: true
+        type: string
     type: object
   NaviPlan.Util.Year:
     properties:

@@ -13459,7 +13459,7 @@ definitions:
           $ref: '#/definitions/reportByDayByChannel'
         type: array
       day:
-        example: '2017-04-23T18:25:43.511Z'
+        example: '2017-04-23T00:00:00Z'
         format: date
         type: string
     required:
@@ -13565,7 +13565,7 @@ definitions:
       beginPeriodUtcDate:
         description: The begin date period you want to get the report
         example: '2006-11-20T00:00:00Z'
-        format: date-time
+        format: date
         type: string
       catalogCategoryId:
         $ref: '#/definitions/BeezUP.Common.CatalogCategoryId'
@@ -13579,7 +13579,7 @@ definitions:
       endPeriodUtcDate:
         description: The end date period you want to get the report.
         example: '2006-12-20T00:00:00Z'
-        format: date-time
+        format: date
         type: string
       productId:
         $ref: '#/definitions/BeezUP.Common.ProductId'
