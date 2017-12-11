@@ -3400,30 +3400,50 @@ definitions:
   CalendarResource:
     description: JSON template for Calendar Resource object in Directory API.
     properties:
+      buildingId:
+        description: Unique ID for the building a resource is located in.
+        type: string
+      capacity:
+        description: 'Capacity of a resource, number of seats in a room.'
+        format: int32
+        type: integer
       etags:
         description: ETag of the resource.
         type: string
+      featureInstances: {}
+      floorName:
+        description: Name of the floor a resource is located on.
+        type: string
+      floorSection:
+        description: Name of the section within a floor a resource is located in.
+        type: string
       generatedResourceName:
-        description: 'The auto-generated name of the calendar resource which includes metadata about the resource such as building name, floor, capacity, etc. For example, NYC-2-Training Room 1A (16)'
+        description: 'The read-only auto-generated name of the calendar resource which includes metadata about the resource such as building name, floor, capacity, etc. For example, "NYC-2-Training Room 1A (16)".'
         type: string
       kind:
         default: 'admin#directory#resources#calendars#CalendarResource'
         description: 'The type of the resource. For calendar resources, the value is admin#directory#resources#calendars#CalendarResource.'
         type: string
+      resourceCategory:
+        description: The category of the calendar resource. Either CONFERENCE_ROOM or OTHER. Legacy data is set to CATEGORY_UNKNOWN.
+        type: string
       resourceDescription:
-        description: The brief description of the calendar resource.
+        description: 'Description of the resource, visible only to admins. The brief description of the calendar resource.'
         type: string
       resourceEmail:
-        description: The read-only email ID for the calendar resource. Generated as part of creating a new calendar resource.
+        description: The read-only email ID for the calendar resource. Generated as part of creating a new calendar resource. The read-only email for the calendar resource. Generated as part of creating a new calendar resource.
         type: string
       resourceId:
         description: The unique ID for the calendar resource.
         type: string
       resourceName:
-        description: 'The name of the calendar resource. For example, Training Room 1A'
+        description: 'The name of the calendar resource. For example, "Training Room 1A". The name of the calendar resource. For example, Training Room 1A'
         type: string
       resourceType:
-        description: The type of the calendar resource. Used for grouping resources in the calendar user interface.
+        description: 'The type of the calendar resource, intended for non-room resources. The type of the calendar resource. Used for grouping resources in the calendar user interface.'
+        type: string
+      userVisibleDescription:
+        description: 'Description of the resource, visible to users and admins.'
         type: string
     type: object
   CalendarResources:
@@ -3513,6 +3533,25 @@ definitions:
       bootMode:
         description: Chromebook boot mode (Read-only)
         type: string
+      deviceFiles:
+        description: List of device files to download (Read-only)
+        items:
+          properties:
+            createTime:
+              description: Date and time the file was created
+              format: date-time
+              type: string
+            downloadUrl:
+              description: File downlod URL
+              type: string
+            name:
+              description: File name
+              type: string
+            type:
+              description: File type
+              type: string
+          type: object
+        type: array
       deviceId:
         description: Unique identifier of Chrome OS Device (Read-only)
         type: string
@@ -3772,6 +3811,26 @@ definitions:
         default: 'admin#directory#domains'
         description: Kind of resource this is.
         type: string
+    type: object
+  Feature:
+    description: JSON template for Feature object in Directory API.
+    properties:
+      etags:
+        description: ETag of the resource.
+        type: string
+      kind:
+        default: 'admin#directory#resources#features#Feature'
+        description: Kind of resource this is.
+        type: string
+      name:
+        description: The name of the feature.
+        type: string
+    type: object
+  FeatureInstance:
+    description: JSON template for a "feature instance".
+    properties:
+      feature:
+        $ref: '#/definitions/Feature'
     type: object
   Group:
     description: JSON template for Group resource in Directory API.

@@ -1,0 +1,234 @@
+swagger: '2.0'
+schemes:
+  - https
+host: abusiveexperiencereport.googleapis.com
+basePath: /
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'View Abusive Experience Report data, and get a list of sites that have a significant number of abusive experiences.'
+  title: Google Abusive Experience Report
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.6.0
+      format: google
+      url: 'https://abusiveexperiencereport.googleapis.com/$discovery/rest?version=v1'
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: abusiveexperiencereport
+externalDocs:
+  url: 'https://developers.google.com/abusive-experience-report/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/xapi.zoo': Test scope for access to the Zoo service
+    type: oauth2
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    enum:
+      - '1'
+      - '2'
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
+    in: query
+    name: alt
+    type: string
+  bearer_token:
+    description: OAuth bearer token.
+    in: query
+    name: bearer_token
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  pp:
+    default: true
+    description: Pretty-print response.
+    in: query
+    name: pp
+    type: boolean
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+tags:
+  - name: sites
+  - name: violatingSites
+paths:
+  /v1/violatingSites:
+    get:
+      description: Lists sites with Abusive Experience Report statuses of "Failing".
+      operationId: abusiveexperiencereport.violatingSites.list
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ViolatingSitesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/xapi.zoo'
+      tags:
+        - violatingSites
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/{name}':
+    get:
+      description: Gets a summary of the abusive experience rating of a site.
+      operationId: abusiveexperiencereport.sites.get
+      parameters:
+        - description: |-
+            The required site name. This is the site property whose abusive
+            experiences have been reviewed, and it must be URL-encoded. For example,
+            sites/https%3A%2F%2Fwww.google.com. The server will return an error of
+            BAD_REQUEST if this field is not filled in. Note that if the site property
+            is not yet verified in Search Console, the reportUrl field
+            returned by the API will lead to the verification page, prompting the user
+            to go through that process before they can gain access to the Abusive
+            Experience Report.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SiteSummaryResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/xapi.zoo'
+      tags:
+        - sites
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+definitions:
+  SiteSummaryResponse:
+    description: Response message for GetSiteSummary.
+    properties:
+      abusiveStatus:
+        description: The status of the site reviewed for the abusive experiences.
+        enum:
+          - UNKNOWN
+          - PASSING
+          - FAILING
+        type: string
+      enforcementTime:
+        description: The date on which enforcement begins.
+        format: google-datetime
+        type: string
+      filterStatus:
+        description: The abusive experience enforcement status of the site.
+        enum:
+          - UNKNOWN
+          - 'ON'
+          - 'OFF'
+          - PAUSED
+          - PENDING
+        type: string
+      lastChangeTime:
+        description: The last time that the site changed status.
+        format: google-datetime
+        type: string
+      reportUrl:
+        description: A link that leads to a full abusive experience report.
+        type: string
+      reviewedSite:
+        description: The name of the site reviewed.
+        type: string
+      underReview:
+        description: Whether the site is currently under review.
+        type: boolean
+    type: object
+  ViolatingSitesResponse:
+    description: Response message for ListViolatingSites.
+    properties:
+      violatingSites:
+        description: A list of summaries of violating sites.
+        items:
+          $ref: '#/definitions/SiteSummaryResponse'
+        type: array
+    type: object

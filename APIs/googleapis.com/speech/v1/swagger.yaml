@@ -35,6 +35,7 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-speech': Convert speech to text using Google speech recognition technology
     type: oauth2
 parameters:
   $.xgafv:
@@ -155,6 +156,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-speech'
       tags:
         - operations
     parameters:
@@ -194,6 +197,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-speech'
       tags:
         - operations
     get:
@@ -217,6 +222,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-speech'
       tags:
         - operations
     parameters:
@@ -280,6 +287,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-speech'
       tags:
         - operations
   '/v1/speech:longrunningrecognize':
@@ -317,6 +326,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-speech'
       tags:
         - speech
   '/v1/speech:recognize':
@@ -352,6 +363,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-speech'
       tags:
         - speech
 definitions:

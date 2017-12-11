@@ -4015,6 +4015,7 @@ definitions:
         enum:
           - 30fps
           - 60fps
+          - variable
         type: string
       ingestionInfo:
         $ref: '#/definitions/IngestionInfo'
@@ -4035,6 +4036,7 @@ definitions:
           - 360p
           - 480p
           - 720p
+          - variable
         type: string
     type: object
   Channel:
@@ -5914,6 +5916,9 @@ definitions:
           - closedCaptionsEmbedded
           - closedCaptionsHttpPost
         type: string
+      enableAutoStart:
+        description: This setting indicates whether auto start is enabled for this broadcast.
+        type: boolean
       enableClosedCaptions:
         description: 'This setting indicates whether HTTP POST closed captioning is enabled for this broadcast. The ingestion URL of the closed captions is returned through the liveStreams API. This is mutually exclusive with using the closed_captions_type property, and is equivalent to setting closed_captions_type to CLOSED_CAPTIONS_HTTP_POST.'
         type: boolean
@@ -7384,6 +7389,9 @@ definitions:
   Video:
     description: A video resource represents a YouTube video.
     properties:
+      accessToken:
+        description: The access token to uniquely identify a revocable unlisted video.
+        type: string
       ageGating:
         $ref: '#/definitions/VideoAgeGating'
         description: Age restriction details related to a video. This data can only be retrieved by the video owner.

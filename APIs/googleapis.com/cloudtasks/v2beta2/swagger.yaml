@@ -227,6 +227,8 @@ paths:
 
             * `PROJECT_ID` can contain letters ([A-Za-z]), numbers ([0-9]),
                hyphens (-), colons (:), or periods (.).
+               For more information, see
+               [Identifying projects](/resource-manager/docs/creating-managing-projects#identifying_projects)
             * `LOCATION_ID` is the canonical ID for the queue's location.
                The list of available locations can be obtained by calling
                google.cloud.location.Locations.ListLocations.
@@ -1325,13 +1327,6 @@ definitions:
           all tasks in the queue, no matter what the setting is for the
           task-level app_engine_routing.
     type: object
-  AppEngineQueueConfig:
-    description: Deprecated. Use AppEngineHttpTarget.
-    properties:
-      appEngineRoutingOverride:
-        $ref: '#/definitions/AppEngineRouting'
-        description: Deprecated. Use AppEngineHttpTarget.app_engine_routing_override.
-    type: object
   AppEngineRouting:
     description: |-
       App Engine Routing.
@@ -1447,35 +1442,6 @@ definitions:
           parsed by Cloud Tasks. If AppEngineRouting.host is not parsable, then
           AppEngineRouting.service, AppEngineRouting.version, and
           AppEngineRouting.instance are the empty string.
-        type: string
-    type: object
-  AppEngineTaskTarget:
-    description: Deprecated. Use AppEngineHttpRequest.
-    properties:
-      appEngineRouting:
-        $ref: '#/definitions/AppEngineRouting'
-        description: Deprecated. Use AppEngineHttpRequest.app_engine_routing.
-      headers:
-        additionalProperties:
-          type: string
-        description: Deprecated. Use AppEngineHttpRequest.headers.
-        type: object
-      httpMethod:
-        description: Deprecated. Use AppEngineHttpRequest.http_method.
-        enum:
-          - HTTP_METHOD_UNSPECIFIED
-          - POST
-          - GET
-          - HEAD
-          - PUT
-          - DELETE
-        type: string
-      payload:
-        description: Deprecated. Use AppEngineHttpRequest.payload.
-        format: byte
-        type: string
-      relativeUrl:
-        description: Deprecated. Use AppEngineHttpRequest.relative_url.
         type: string
     type: object
   AttemptStatus:
@@ -1833,25 +1799,9 @@ definitions:
         format: byte
         type: string
     type: object
-  PullQueueConfig:
-    description: Deprecated. Use PullTarget.
-    properties: {}
-    type: object
   PullTarget:
     description: Pull target.
     properties: {}
-    type: object
-  PullTaskTarget:
-    description: Deprecated. Use PullMessage.
-    properties:
-      payload:
-        description: Deprecated. Use PullMessage.payload.
-        format: byte
-        type: string
-      tag:
-        description: Deprecated. Use PullMessage.tag.
-        format: byte
-        type: string
     type: object
   PullTasksRequest:
     description: Request message for pulling tasks using CloudTasks.PullTasks.
@@ -1953,9 +1903,6 @@ definitions:
           App Engine HTTP target.
 
           An App Engine queue is a queue that has an AppEngineHttpTarget.
-      appEngineQueueConfig:
-        $ref: '#/definitions/AppEngineQueueConfig'
-        description: Deprecated. Use Queue.app_engine_http_target.
       name:
         description: |-
           The queue name.
@@ -1965,6 +1912,8 @@ definitions:
 
           * `PROJECT_ID` can contain letters ([A-Za-z]), numbers ([0-9]),
              hyphens (-), colons (:), or periods (.).
+             For more information, see
+             [Identifying projects](/resource-manager/docs/creating-managing-projects#identifying_projects)
           * `LOCATION_ID` is the canonical ID for the queue's location.
              The list of available locations can be obtained by calling
              google.cloud.location.Locations.ListLocations.
@@ -1975,9 +1924,6 @@ definitions:
           Caller-specified and required in CreateQueueRequest, after which
           it becomes output only.
         type: string
-      pullQueueConfig:
-        $ref: '#/definitions/PullQueueConfig'
-        description: Deprecated. Use Queue.pull_target.
       pullTarget:
         $ref: '#/definitions/PullTarget'
         description: |-
@@ -2374,9 +2320,6 @@ definitions:
           only if Queue.app_engine_http_target is set.
 
           An App Engine task is a task that has AppEngineHttpRequest set.
-      appEngineTaskTarget:
-        $ref: '#/definitions/AppEngineTaskTarget'
-        description: Deprecated. Use Task.app_engine_http_request.
       createTime:
         description: |-
           Output only. The time that the task was created.
@@ -2393,6 +2336,8 @@ definitions:
 
           * `PROJECT_ID` can contain letters ([A-Za-z]), numbers ([0-9]),
              hyphens (-), colons (:), or periods (.).
+             For more information, see
+             [Identifying projects](/resource-manager/docs/creating-managing-projects#identifying_projects)
           * `LOCATION_ID` is the canonical ID for the task's location.
              The list of available locations can be obtained by calling
              google.cloud.location.Locations.ListLocations.
@@ -2412,9 +2357,6 @@ definitions:
           Queue.pull_target is set.
 
           A pull task is a task that has PullMessage set.
-      pullTaskTarget:
-        $ref: '#/definitions/PullTaskTarget'
-        description: Deprecated. Use Task.pull_message.
       scheduleTime:
         description: |-
           The time when the task is scheduled to be attempted.

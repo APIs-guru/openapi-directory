@@ -1011,6 +1011,34 @@ definitions:
         description: 'The native way to select the alphabet. Must be in the range [2, 62].'
         format: int32
         type: integer
+      surrogateInfoType:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoType'
+        description: |-
+          The custom info type to annotate the surrogate with.
+          This annotation will be applied to the surrogate by prefixing it with
+          the name of the custom info type followed by the number of
+          characters comprising the surrogate. The following scheme defines the
+          format: info_type_name(surrogate_character_count):surrogate
+
+          For example, if the name of custom info type is 'MY_TOKEN_INFO_TYPE' and
+          the surrogate is 'abc', the full replacement value
+          will be: 'MY_TOKEN_INFO_TYPE(3):abc'
+
+          This annotation identifies the surrogate when inspecting content using the
+          custom info type
+          [`SurrogateType`](/dlp/docs/reference/rest/v2beta1/InspectConfig#surrogatetype).
+          This facilitates reversal of the surrogate when it occurs in free text.
+
+          In order for inspection to work properly, the name of this info type must
+          not occur naturally anywhere in your data; otherwise, inspection may
+          find a surrogate that does not correspond to an actual identifier.
+          Therefore, choose your custom info type name carefully after considering
+          what your data looks like. One way to select a name that has a high chance
+          of yielding reliable detection is to include one or more unicode characters
+          that are highly improbable to exist in your data.
+          For example, assuming your data is entered from a regular ASCII keyboard,
+          the symbol with the hex code point 29DD might be used like so:
+          ⧝MY_TOKEN_TYPE
     type: object
   GooglePrivacyDlpV2beta1CustomInfoType:
     description: |-
@@ -1025,6 +1053,9 @@ definitions:
         description: |-
           Info type configuration. All custom info types must have configurations
           that do not conflict with built-in info types or other custom info types.
+      surrogateType:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1SurrogateType'
+        description: Surrogate info type.
     type: object
   GooglePrivacyDlpV2beta1DatastoreKey:
     description: Record key for a finding in Cloud Datastore.
@@ -2258,6 +2289,17 @@ definitions:
           A place for warnings or errors to show up if a transformation didn't
           work as expected.
         type: string
+    type: object
+  GooglePrivacyDlpV2beta1SurrogateType:
+    description: |-
+      Message for detecting output from deidentification transformations
+      such as
+      [`CryptoReplaceFfxFpeConfig`](/dlp/docs/reference/rest/v2beta1/content/deidentify#CryptoReplaceFfxFpeConfig).
+      These types of transformations are
+      those that perform pseudonymization, thereby producing a "surrogate" as
+      output. This should be used in conjunction with a field on the
+      transformation such as `surrogate_info_type`.
+    properties: {}
     type: object
   GooglePrivacyDlpV2beta1Table:
     description: 'Structured content to inspect. Up to 50,000 `Value`s per request allowed.'

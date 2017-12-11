@@ -567,10 +567,8 @@ paths:
         - description: |-
             The BigQuery project id where the transfer configuration should be created.
             Must be in the format /projects/{project_id}/locations/{location_id}
-            or
-            /projects/{project_id}/locations/-
-            In case when '-' is specified as location_id, location is infered from
-            the destination dataset region.
+            If specified location and location of the destination bigquery dataset
+            do not match - the request will fail.
           in: path
           name: parent
           required: true
@@ -611,13 +609,21 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: |-
+        - collectionFormat: multi
+          description: |-
             Pagination token, which can be used to request a specific page
             of `ListTransferLogsRequest` list results. For multiple-page
             results, `ListTransferLogsResponse` outputs
             a `next_page` token, which can be used as the
             `page_token` value to request the next page of list results.
           in: query
+          items:
+            enum:
+              - MESSAGE_SEVERITY_UNSPECIFIED
+              - INFO
+              - WARNING
+              - ERROR
+            type: string
           name: pageToken
           type: string
         - description: |-
@@ -1206,6 +1212,8 @@ definitions:
           Output only. Unique ID of the user on whose behalf transfer is done.
           Applicable only to data sources that do not support service accounts.
           When set to 0, the data source service account credentials are used.
+          May be negative. Note, that this identifier is not stable.
+          It may change over time even for the same user.
         format: int64
         type: string
     type: object
@@ -1231,7 +1239,7 @@ definitions:
   TransferRun:
     description: |-
       Represents a data transfer run.
-      Next id: 23
+      Next id: 25
     properties:
       dataSourceId:
         description: Output only. Data source id.
@@ -1303,7 +1311,8 @@ definitions:
           Output only. Unique ID of the user on whose behalf transfer is done.
           Applicable only to data sources that do not support service accounts.
           When set to 0, the data source service account credentials are used.
-          May be negative.
+          May be negative. Note, that this identifier is not stable.
+          It may change over time even for the same user.
         format: int64
         type: string
     type: object

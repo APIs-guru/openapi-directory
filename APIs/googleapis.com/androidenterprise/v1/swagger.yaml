@@ -3475,11 +3475,25 @@ definitions:
       authorName:
         description: 'The name of the author of the product (for example, the app developer).'
         type: string
+      availableCountries:
+        description: The countries which this app is available in.
+        items:
+          type: string
+        type: array
       availableTracks:
         description: The tracks that are visible to the enterprise.
         items:
           type: string
         type: array
+      category:
+        description: 'The app category (e.g. RACING, SOCIAL, etc.)'
+        type: string
+      contentRating:
+        description: The content rating for this app.
+        type: string
+      description:
+        description: 'A localized promotional description, if available.'
+        type: string
       detailsUrl:
         description: A link to the (consumer) Google Play details page for the product.
         type: string
@@ -3493,15 +3507,36 @@ definitions:
         default: 'androidenterprise#product'
         description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#product".'
         type: string
+      lastUpdatedTimestampMillis:
+        description: The time (in milliseconds since epoch) when application was last published. (Timestamp is approximate within 7 days of actual publish time.)
+        format: int64
+        type: string
+      minAndroidSdkVersion:
+        description: The minimum Android SDK necessary to run the app.
+        format: int32
+        type: integer
+      permissions:
+        description: The permissions required for this app.
+        items:
+          $ref: '#/definitions/ProductPermission'
+        type: array
       productId:
         description: 'A string of the form app:<package name>. For example, app:com.google.android.gm represents the Gmail app.'
         type: string
       productPricing:
         description: 'Whether this product is free, free with in-app purchases, or paid. If the pricing is unknown, this means the product is not generally available anymore (even though it might still be available to people who own it).'
         type: string
+      recentChanges:
+        description: A description of the recent changes made to the app.
+        type: string
       requiresContainerApp:
         description: Deprecated.
         type: boolean
+      screenshotUrls:
+        description: A list of screenshot links representing the app.
+        items:
+          type: string
+        type: array
       signingCertificate:
         $ref: '#/definitions/ProductSigningCertificate'
         description: The certificate used to sign this product.

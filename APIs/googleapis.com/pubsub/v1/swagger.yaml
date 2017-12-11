@@ -133,6 +133,34 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
+    patch:
+      description: |-
+        Updates an existing snapshot. Note that certain properties of a
+        snapshot are not modifiable.
+      operationId: pubsub.projects.snapshots.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UpdateSnapshotRequest'
+        - description: The name of the snapshot.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Snapshot'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+      tags:
+        - projects
     put:
       description: Creates the given topic with the given name.
       operationId: pubsub.projects.topics.create
@@ -165,6 +193,56 @@ paths:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
+  '/v1/{project}/snapshots':
+    get:
+      description: Lists the existing snapshots.
+      operationId: pubsub.projects.snapshots.list
+      parameters:
+        - description: Maximum number of snapshots to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            The value returned by the last `ListSnapshotsResponse`; indicates that this
+            is a continuation of a prior `ListSnapshots` call, and that the system
+            should return the next page of data.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            The name of the cloud project that snapshots belong to.
+            Format is `projects/{project}`.
+          in: path
+          name: project
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListSnapshotsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{project}/subscriptions':
     get:
       description: Lists matching subscriptions.
@@ -402,6 +480,49 @@ paths:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
+  '/v1/{snapshot}':
+    delete:
+      description: |-
+        Removes an existing snapshot. All messages retained in the snapshot
+        are immediately dropped. After a snapshot is deleted, a new one may be
+        created with the same name, but the new one has no association with the old
+        snapshot or its subscription, unless the same subscription is specified.
+      operationId: pubsub.projects.snapshots.delete
+      parameters:
+        - description: |-
+            The name of the snapshot to delete.
+            Format is `projects/{project}/snapshots/{snap}`.
+          in: path
+          name: snapshot
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{subscription}':
     delete:
       description: |-
@@ -664,6 +785,49 @@ paths:
             - 'https://www.googleapis.com/auth/pubsub'
       tags:
         - projects
+  '/v1/{subscription}:seek':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Seeks an existing subscription to a point in time or to a given snapshot,
+        whichever is provided in the request.
+      operationId: pubsub.projects.subscriptions.seek
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SeekRequest'
+        - description: The subscription to affect.
+          in: path
+          name: subscription
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SeekResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+      tags:
+        - projects
   '/v1/{topic}':
     delete:
       description: |-
@@ -732,9 +896,59 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
+  '/v1/{topic}/snapshots':
+    get:
+      description: Lists the names of the snapshots on this topic.
+      operationId: pubsub.projects.topics.snapshots.list
+      parameters:
+        - description: Maximum number of snapshot names to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            The value returned by the last `ListTopicSnapshotsResponse`; indicates
+            that this is a continuation of a prior `ListTopicSnapshots` call, and
+            that the system should return the next page of data.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            The name of the topic that snapshots are attached to.
+            Format is `projects/{project}/topics/{topic}`.
+          in: path
+          name: topic
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListTopicSnapshotsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/pubsub'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{topic}/subscriptions':
     get:
-      description: Lists the name of the subscriptions for this topic.
+      description: Lists the names of the subscriptions on this topic.
       operationId: pubsub.projects.topics.subscriptions.list
       parameters:
         - description: Maximum number of subscription names to return.
@@ -878,6 +1092,22 @@ definitions:
           Required
         type: string
     type: object
+  CreateSnapshotRequest:
+    description: Request for the `CreateSnapshot` method.
+    properties:
+      subscription:
+        description: |-
+          The subscription whose backlog the snapshot retains.
+          Specifically, the created snapshot is guaranteed to retain:
+           (a) The existing backlog on the subscription. More precisely, this is
+               defined as the messages in the subscription's backlog that are
+               unacknowledged upon the successful completion of the
+               `CreateSnapshot` request; as well as:
+           (b) Any messages published to the subscription's topic following the
+               successful completion of the CreateSnapshot request.
+          Format is `projects/{project}/subscriptions/{sub}`.
+        type: string
+    type: object
   Empty:
     description: |-
       A generic empty message that you can re-use to avoid defining duplicated
@@ -890,6 +1120,20 @@ definitions:
 
       The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
+    type: object
+  ListSnapshotsResponse:
+    description: Response for the `ListSnapshots` method.
+    properties:
+      nextPageToken:
+        description: |-
+          If not empty, indicates that there may be more snapshot that match the
+          request; this value should be passed in a new `ListSnapshotsRequest`.
+        type: string
+      snapshots:
+        description: The resulting snapshots.
+        items:
+          $ref: '#/definitions/Snapshot'
+        type: array
     type: object
   ListSubscriptionsResponse:
     description: Response for the `ListSubscriptions` method.
@@ -904,6 +1148,21 @@ definitions:
         description: The subscriptions that match the request.
         items:
           $ref: '#/definitions/Subscription'
+        type: array
+    type: object
+  ListTopicSnapshotsResponse:
+    description: Response for the `ListTopicSnapshots` method.
+    properties:
+      nextPageToken:
+        description: |-
+          If not empty, indicates that there may be more snapshots that match
+          the request; this value should be passed in a new
+          `ListTopicSnapshotsRequest` to get more snapshots.
+        type: string
+      snapshots:
+        description: The names of the snapshots that match the request.
+        items:
+          type: string
         type: array
     type: object
   ListTopicSubscriptionsResponse:
@@ -1155,6 +1414,34 @@ definitions:
         $ref: '#/definitions/PubsubMessage'
         description: The message.
     type: object
+  SeekRequest:
+    description: Request for the `Seek` method.
+    properties:
+      snapshot:
+        description: |-
+          The snapshot to seek to. The snapshot's topic must be the same as that of
+          the provided subscription.
+          Format is `projects/{project}/snapshots/{snap}`.
+        type: string
+      time:
+        description: |-
+          The time to seek to.
+          Messages retained in the subscription that were published before this
+          time are marked as acknowledged, and messages retained in the
+          subscription that were published after this time are marked as
+          unacknowledged. Note that this operation affects only those messages
+          retained in the subscription (configured by the combination of
+          `message_retention_duration` and `retain_acked_messages`). For example,
+          if `time` corresponds to a point before the message retention
+          window (or to a point before the system's notion of the subscription
+          creation time), only retained messages will be marked as unacknowledged,
+          and already-expunged messages will not be restored.
+        format: google-datetime
+        type: string
+    type: object
+  SeekResponse:
+    properties: {}
+    type: object
   SetIamPolicyRequest:
     description: Request message for `SetIamPolicy` method.
     properties:
@@ -1165,6 +1452,30 @@ definitions:
           the policy is limited to a few 10s of KB. An empty policy is a
           valid policy but certain Cloud Platform services (such as Projects)
           might reject them.
+    type: object
+  Snapshot:
+    description: A snapshot resource.
+    properties:
+      expireTime:
+        description: |-
+          The snapshot is guaranteed to exist up until this time.
+          A newly-created snapshot expires no later than 7 days from the time of its
+          creation. Its exact lifetime is determined at creation by the existing
+          backlog in the source subscription. Specifically, the lifetime of the
+          snapshot is `7 days - (age of oldest unacked message in the subscription)`.
+          For example, consider a subscription whose oldest unacked message is 3 days
+          old. If a snapshot is created from this subscription, the snapshot -- which
+          will always capture this 3-day-old backlog as long as the snapshot
+          exists -- will expire in 4 days. The service will refuse to create a
+          snapshot that would expire in less than 1 hour after creation.
+        format: google-datetime
+        type: string
+      name:
+        description: The name of the snapshot.
+        type: string
+      topic:
+        description: The name of the topic from which this snapshot is retaining messages.
+        type: string
     type: object
   Subscription:
     description: A subscription resource.
@@ -1193,6 +1504,16 @@ definitions:
           system will eventually redeliver the message.
         format: int32
         type: integer
+      messageRetentionDuration:
+        description: |-
+          How long to retain unacknowledged messages in the subscription's backlog,
+          from the moment a message is published.
+          If `retain_acked_messages` is true, then this also configures the retention
+          of acknowledged messages, and thus configures how far back in time a `Seek`
+          can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
+          minutes.
+        format: google-duration
+        type: string
       name:
         description: |-
           The name of the subscription. It must have the format
@@ -1208,6 +1529,13 @@ definitions:
           If push delivery is used with this subscription, this field is
           used to configure it. An empty `pushConfig` signifies that the subscriber
           will pull and ack messages using API methods.
+      retainAckedMessages:
+        description: |-
+          Indicates whether to retain acknowledged messages. If true, then
+          messages are not expunged from the subscription's backlog, even if they are
+          acknowledged, until they fall out of the `message_retention_duration`
+          window.
+        type: boolean
       topic:
         description: |-
           The name of the topic from which this subscription is receiving messages.
@@ -1251,5 +1579,31 @@ definitions:
           underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
           signs (`%`). It must be between 3 and 255 characters in length, and it
           must not start with `"goog"`.
+        type: string
+    type: object
+  UpdateSnapshotRequest:
+    description: Request for the UpdateSnapshot method.
+    properties:
+      snapshot:
+        $ref: '#/definitions/Snapshot'
+        description: The updated snpashot object.
+      updateMask:
+        description: |-
+          Indicates which fields in the provided snapshot to update.
+          Must be specified and non-empty.
+        format: google-fieldmask
+        type: string
+    type: object
+  UpdateSubscriptionRequest:
+    description: Request for the UpdateSubscription method.
+    properties:
+      subscription:
+        $ref: '#/definitions/Subscription'
+        description: The updated subscription object.
+      updateMask:
+        description: |-
+          Indicates which fields in the provided subscription to update.
+          Must be specified and non-empty.
+        format: google-fieldmask
         type: string
     type: object

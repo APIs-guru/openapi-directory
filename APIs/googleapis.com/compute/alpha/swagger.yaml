@@ -5793,6 +5793,45 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - interconnects
+  '/{project}/global/interconnects/{resource}/setLabels':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Sets the labels on an Interconnect. To learn more about labels, read the Labeling Resources documentation.'
+      operationId: compute.interconnects.setLabels
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GlobalSetLabelsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - interconnects
   '/{project}/global/interconnects/{resource}/testIamPermissions':
     parameters:
       - $ref: '#/parameters/alt'
@@ -6452,7 +6491,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Patches the specified network with the data included in the request.
+      description: 'Patches the specified network with the data included in the request. Only the following fields can be modified: routingConfig.routingMode.'
       operationId: compute.networks.patch
       parameters:
         - in: body
@@ -13700,6 +13739,50 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates the specified interconnect attachment with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+      operationId: compute.interconnectAttachments.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InterconnectAttachment'
+        - description: Name of the interconnect attachment to patch.
+          in: path
+          name: interconnectAttachment
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - interconnectAttachments
   '/{project}/regions/{region}/interconnectAttachments/{resource}/getIamPolicy':
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
@@ -13779,6 +13862,59 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - interconnectAttachments
+  '/{project}/regions/{region}/interconnectAttachments/{resource}/setLabels':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Sets the labels on an InterconnectAttachment. To learn more about labels, read the Labeling Resources documentation.'
+      operationId: compute.interconnectAttachments.setLabels
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionSetLabelsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -17534,7 +17670,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Resizes the specified persistent disk.
+      description: Resizes the specified persistent disk. You can only increase the size of the disk.
       operationId: compute.disks.resize
       parameters:
         - in: body
@@ -22479,7 +22615,7 @@ definitions:
         type: string
     type: object
   AcceleratorType:
-    description: An Accelerator Type resource.
+    description: An Accelerator Type resource. (== resource_for beta.acceleratorTypes ==) (== resource_for v1.acceleratorTypes ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -22754,7 +22890,7 @@ definitions:
         type: string
     type: object
   Address:
-    description: A reserved address resource.
+    description: A reserved address resource. (== resource_for beta.addresses ==) (== resource_for v1.addresses ==) (== resource_for beta.globalAddresses ==) (== resource_for v1.globalAddresses ==)
     properties:
       address:
         description: The static IP address represented by this resource.
@@ -22827,10 +22963,7 @@ definitions:
           - RESERVED
         type: string
       subnetwork:
-        description: |-
-          For external addresses, this field should not be used.
-
-          The URL of the subnetwork in which to reserve the address. If an IP address is specified, it must be within the subnetwork's IP range.
+        description: 'The URL of the subnetwork in which to reserve the address. If an IP address is specified, it must be within the subnetwork''s IP range. This field can only be used with INTERNAL type with GCE_ENDPOINT/DNS_RESOLVER purposes.'
         type: string
       users:
         description: '[Output Only] The URLs of the resources that are using this address.'
@@ -23075,6 +23208,11 @@ definitions:
         description: The size of the disk in base-2 GB. This supersedes disk_size_gb in InitializeParams.
         format: int64
         type: string
+      guestOsFeatures:
+        description: A list of features to enable on the guest operating system. Applicable only for bootable images. Read  Enabling guest operating system features to see a list of available options.
+        items:
+          $ref: '#/definitions/GuestOsFeature'
+        type: array
       index:
         description: '[Output Only] A zero-based index to this disk, where 0 is reserved for the boot disk. If you have many disks attached to an instance, each disk would have a unique index number.'
         format: int32
@@ -23242,7 +23380,7 @@ definitions:
         type: string
     type: object
   Autoscaler:
-    description: 'Represents an Autoscaler resource. Autoscalers allow you to automatically scale virtual machine instances in managed instance groups according to an autoscaling policy that you define. For more information, read Autoscaling Groups of Instances.'
+    description: 'Represents an Autoscaler resource. Autoscalers allow you to automatically scale virtual machine instances in managed instance groups according to an autoscaling policy that you define. For more information, read Autoscaling Groups of Instances. (== resource_for beta.autoscalers ==) (== resource_for v1.autoscalers ==) (== resource_for beta.regionAutoscalers ==) (== resource_for v1.regionAutoscalers ==)'
     properties:
       autoscalingPolicy:
         $ref: '#/definitions/AutoscalingPolicy'
@@ -23852,7 +23990,7 @@ definitions:
         type: object
     type: object
   BackendService:
-    description: A BackendService resource. This resource defines a group of backend virtual machines and their serving capacity.
+    description: A BackendService resource. This resource defines a group of backend virtual machines and their serving capacity. (== resource_for v1.backendService ==) (== resource_for beta.backendService ==)
     properties:
       affinityCookieTtlSec:
         description: |-
@@ -24345,7 +24483,7 @@ definitions:
     description: |-
       Represents a Commitment resource. Creating a Commitment resource means that you are purchasing a committed use contract with an explicit start and end time. You can create commitments based on vCPUs and memory usage and receive discounted rates. For full details, read Signing Up for Committed Use Discounts.
 
-      Committed use discounts are subject to Google Cloud Platform's Service Specific Terms. By purchasing a committed use discount, you agree to these terms. Committed use discounts will not renew, so you must purchase a new commitment to continue receiving discounts.
+      Committed use discounts are subject to Google Cloud Platform's Service Specific Terms. By purchasing a committed use discount, you agree to these terms. Committed use discounts will not renew, so you must purchase a new commitment to continue receiving discounts. (== resource_for beta.commitments ==) (== resource_for v1.commitments ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -24718,7 +24856,7 @@ definitions:
         type: string
     type: object
   Disk:
-    description: A Disk resource.
+    description: A Disk resource. (== resource_for beta.disks ==) (== resource_for v1.disks ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -24737,10 +24875,7 @@ definitions:
 
           If you do not provide an encryption key when creating the disk, then the disk will be encrypted using an automatically generated key and you do not need to provide a key to use the disk later.
       guestOsFeatures:
-        description: |-
-          A list of features to enable on the guest OS. Applicable for bootable disks only. Currently, only one feature can be enabled, VIRTIO_SCSI_MULTIQUEUE, which allows each virtual CPU to have its own queue. For Windows disks, you can only enable VIRTIO_SCSI_MULTIQUEUE on images with driver version 1.2.0.1621 or higher. Linux disks with kernel versions 3.17 and higher will support VIRTIO_SCSI_MULTIQUEUE.
-
-          For newer Windows images, the server might also populate this property with the value WINDOWS to indicate that this is a Windows image.
+        description: A list of features to enable on the guest operating system. Applicable only for bootable images. Read  Enabling guest operating system features to see a list of available options.
         items:
           $ref: '#/definitions/GuestOsFeature'
         type: array
@@ -25057,7 +25192,7 @@ definitions:
         type: string
     type: object
   DiskType:
-    description: A DiskType resource.
+    description: A DiskType resource. (== resource_for beta.diskTypes ==) (== resource_for v1.diskTypes ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -25594,7 +25729,7 @@ definitions:
         type: integer
     type: object
   ForwardingRule:
-    description: 'A ForwardingRule resource. A ForwardingRule resource specifies which pool of target virtual machines to forward a packet to if it matches the given [IPAddress, IPProtocol, ports] tuple.'
+    description: 'A ForwardingRule resource. A ForwardingRule resource specifies which pool of target virtual machines to forward a packet to if it matches the given [IPAddress, IPProtocol, ports] tuple. (== resource_for beta.forwardingRules ==) (== resource_for v1.forwardingRules ==) (== resource_for beta.globalForwardingRules ==) (== resource_for v1.globalForwardingRules ==) (== resource_for beta.regionForwardingRules ==) (== resource_for v1.regionForwardingRules ==)'
     properties:
       IPAddress:
         description: |-
@@ -25996,7 +26131,7 @@ definitions:
     description: Guest OS features.
     properties:
       type:
-        description: 'The type of supported feature. Currently only VIRTIO_SCSI_MULTIQUEUE is supported. For newer Windows images, the server might also populate this property with the value WINDOWS to indicate that this is a Windows image.'
+        description: The ID of a supported feature. Read  Enabling guest operating system features to see a list of available options.
         enum:
           - FEATURE_TYPE_UNSPECIFIED
           - MULTI_IP_SUBNET
@@ -27101,7 +27236,7 @@ definitions:
         type: object
     type: object
   Image:
-    description: An Image resource.
+    description: An Image resource. (== resource_for beta.images ==) (== resource_for v1.images ==)
     properties:
       archiveSizeBytes:
         description: Size of the image tar.gz archive stored in Google Cloud Storage (in bytes).
@@ -27124,10 +27259,7 @@ definitions:
         description: The name of the image family to which this image belongs. You can create disks by specifying an image family instead of a specific image name. The image family always returns its latest image that is not deprecated. The name of the image family must comply with RFC1035.
         type: string
       guestOsFeatures:
-        description: |-
-          A list of features to enable on the guest OS. Applicable for bootable images only. Currently, only one feature can be enabled, VIRTIO_SCSI_MULTIQUEUE, which allows each virtual CPU to have its own queue. For Windows images, you can only enable VIRTIO_SCSI_MULTIQUEUE on images with driver version 1.2.0.1621 or higher. Linux images with kernel versions 3.17 and higher will support VIRTIO_SCSI_MULTIQUEUE.
-
-          For newer Windows images, the server might also populate this property with the value WINDOWS to indicate that this is a Windows image.
+        description: A list of features to enable on the guest operating system. Applicable only for bootable images. Read  Enabling guest operating system features to see a list of available options.
         items:
           $ref: '#/definitions/GuestOsFeature'
         type: array
@@ -27320,7 +27452,7 @@ definitions:
         type: object
     type: object
   Instance:
-    description: An Instance resource.
+    description: An Instance resource. (== resource_for beta.instances ==) (== resource_for v1.instances ==)
     properties:
       canIpForward:
         description: 'Allows this instance to send and receive packets with non-matching destination or source IPs. This is required if you plan to use this instance to forward routes. For more information, see Enabling IP Forwarding.'
@@ -27533,6 +27665,7 @@ definitions:
         type: object
     type: object
   InstanceGroup:
+    description: InstanceGroups (== resource_for beta.instanceGroups ==) (== resource_for v1.instanceGroups ==) (== resource_for beta.regionInstanceGroups ==) (== resource_for v1.regionInstanceGroups ==)
     properties:
       creationTimestamp:
         description: '[Output Only] The creation timestamp for this instance group in RFC3339 text format.'
@@ -27727,7 +27860,7 @@ definitions:
         type: object
     type: object
   InstanceGroupManager:
-    description: An Instance Group Manager resource.
+    description: An Instance Group Manager resource. (== resource_for beta.instanceGroupManagers ==) (== resource_for v1.instanceGroupManagers ==) (== resource_for beta.regionInstanceGroupManagers ==) (== resource_for v1.regionInstanceGroupManagers ==)
     properties:
       activities:
         $ref: '#/definitions/InstanceGroupManagerActivities'
@@ -28097,7 +28230,7 @@ definitions:
 
            
           - The instance's status is RUNNING. 
-          - If there is a health check on the instance grourp, the instance's liveness health check result must be HEALTHY at least once. If there is no health check on the group, then the instance only needs to have a status of RUNNING to be considered available.  By default, a fixed value of 1 is used. This value can be either a fixed number or a percentage if the instance group has 10 or more instances. If you set a percentage, the number of instances will be rounded up if necessary.
+          - If there is a health check on the instance group, the instance's liveness health check result must be HEALTHY at least once. If there is no health check on the group, then the instance only needs to have a status of RUNNING to be considered available.  By default, a fixed value of 1 is used. This value can be either a fixed number or a percentage if the instance group has 10 or more instances. If you set a percentage, the number of instances will be rounded up if necessary.
 
           At least one of either maxSurge or maxUnavailable must be greater than 0. Learn more about maxUnavailable.
       minReadySec:
@@ -28746,7 +28879,7 @@ definitions:
         type: string
     type: object
   InstanceTemplate:
-    description: An Instance Template resource.
+    description: An Instance Template resource. (== resource_for beta.instanceTemplates ==) (== resource_for v1.instanceTemplates ==)
     properties:
       creationTimestamp:
         description: '[Output Only] The creation timestamp for this instance template in RFC3339 text format.'
@@ -29009,7 +29142,7 @@ definitions:
           If the instance you are starting is protected with a customer-supplied encryption key, the correct key must be provided otherwise the instance start will not succeed.
     type: object
   Interconnect:
-    description: 'Represents an Interconnects resource. The Interconnects resource is a dedicated connection between Google''s network and your on-premises network. For more information, see the  Dedicated overview page.'
+    description: 'Represents an Interconnects resource. The Interconnects resource is a dedicated connection between Google''s network and your on-premises network. For more information, see the  Dedicated overview page. (== resource_for v1.interconnects ==) (== resource_for beta.interconnects ==)'
     properties:
       adminEnabled:
         description: 'Administrative status of the interconnect. When this is set to true, the Interconnect is functional and can carry traffic. When set to false, no packets can be carried over the interconnect and no BGP routes are exchanged over it. By default, the status is set to true.'
@@ -29059,6 +29192,18 @@ definitions:
         default: 'compute#interconnect'
         description: '[Output Only] Type of the resource. Always compute#interconnect for interconnects.'
         type: string
+      labelFingerprint:
+        description: |-
+          A fingerprint for the labels being applied to this Interconnect, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels.
+
+          To see the latest fingerprint, make a get() request to retrieve an Interconnect.
+        format: byte
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to this Interconnect resource. These can be later modified by the setLabels method. Each label key/value must comply with RFC1035. Label values may be empty.
+        type: object
       linkType:
         description: 'Type of link requested. This field indicates speed of each of the links in the bundle, not the entire bundle. Only 10G per link is allowed for a dedicated interconnect. Options: Ethernet_10G_LR'
         enum:
@@ -29094,9 +29239,15 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
+      state:
+        description: '[Output Only] The current state of whether or not this Interconnect is functional.'
+        enum:
+          - ACTIVE
+          - UNPROVISIONED
+        type: string
     type: object
   InterconnectAttachment:
-    description: 'Represents an InterconnectAttachment (VLAN attachment) resource. For more information, see  Creating VLAN Attachments.'
+    description: 'Represents an InterconnectAttachment (VLAN attachment) resource. For more information, see  Creating VLAN Attachments. (== resource_for beta.interconnectAttachments ==) (== resource_for v1.interconnectAttachments ==)'
     properties:
       adminEnabled:
         description: Determines whether this Attachment will carry packets. Not present for PARTNER_PROVIDER.
@@ -29151,6 +29302,18 @@ definitions:
         default: 'compute#interconnectAttachment'
         description: '[Output Only] Type of the resource. Always compute#interconnectAttachment for interconnect attachments.'
         type: string
+      labelFingerprint:
+        description: |-
+          A fingerprint for the labels being applied to this InterconnectAttachment, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels.
+
+          To see the latest fingerprint, make a get() request to retrieve an InterconnectAttachment.
+        format: byte
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to this InterconnectAttachment resource. These can be later modified by the setLabels method. Each label key/value must comply with RFC1035. Label values may be empty.
+        type: object
       name:
         description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
@@ -29164,6 +29327,12 @@ definitions:
       pairingKey:
         description: '[Output only for type PARTNER. Input only for PARTNER_PROVIDER. Not present for DEDICATED]. Opaque string identifying an PARTNER attachment. Of the form ?cloud-region/XXXXXX?.'
         type: string
+      partnerAsn:
+        description: '[Output only for PARTNER. Input for PARTNER_PROVIDER. Not present for DEDICATED] BGP ASN of the Partner. A layer 3 Partner should supply this if they configured BGP on behalf of the customer.'
+        format: int64
+        type: string
+      partnerMetadata:
+        $ref: '#/definitions/InterconnectAttachmentPartnerMetadata'
       privateInterconnectInfo:
         $ref: '#/definitions/InterconnectAttachmentPrivateInfo'
         description: '[Output Only] Information specific to an InterconnectAttachment. This property is populated if the interconnect that this is attached to is of type DEDICATED.'
@@ -29180,6 +29349,10 @@ definitions:
         description: '[Output Only] The current state of whether or not this interconnect attachment is functional.'
         enum:
           - ACTIVE
+          - DEFUNCT
+          - PARTNER_REQUEST_RECEIVED
+          - PENDING_CUSTOMER
+          - PENDING_PARTNER
           - STATE_UNSPECIFIED
           - UNPROVISIONED
         type: string
@@ -29190,7 +29363,7 @@ definitions:
           - PARTNER_PROVIDER
         type: string
       vlanTag8021q:
-        description: 'Available only for DEDICATED and PARTNER_PROVIDER New field: VLAN. Only specified at creation time. This field is mapped to ieee_802_1q_tag in the resource proto.'
+        description: 'Available only for DEDICATED and PARTNER_PROVIDER. Desired VLAN tag for this attachment, in the range 2-4094. This field refers to 802.1q VLAN tag, also known as IEEE 802.1Q Only specified at creation time.'
         format: int32
         type: integer
     type: object
@@ -29333,6 +29506,19 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  InterconnectAttachmentPartnerMetadata:
+    description: 'Informational metadata about Partner attachments from Partners to display to customers. These fields are propagated from PARTNER_PROVIDER attachments to their corresponding PARTNER attachments. Only mutable for PARTNER_PROVIDER type, output-only for PARTNER, not available for DEDICATED.'
+    properties:
+      interconnectName:
+        description: 'Plain text name of the Interconnect this attachment is connected to, as displayed in the Partner?s portal. For instance ?Chicago 1?. This value may be validated to match approved Partner values.'
+        type: string
+      partnerName:
+        description: Plain text name of the Partner providing this attachment. This value may be validated to match approved Partner values.
+        type: string
+      portalUrl:
+        description: URL of the Partner?s portal for this Attachment. Partners may customise this to be a deep-link to the specific resource on the Partner portal. This value may be validated to match approved Partner values.
+        type: string
     type: object
   InterconnectAttachmentPrivateInfo:
     description: Information for an interconnect attachment when this belongs to an interconnect of type DEDICATED.
@@ -29982,7 +30168,7 @@ definitions:
         type: string
     type: object
   MachineType:
-    description: A Machine Type resource.
+    description: A Machine Type resource. (== resource_for v1.machineTypes ==) (== resource_for beta.machineTypes ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -30622,7 +30808,7 @@ definitions:
         type: integer
     type: object
   Network:
-    description: Represents a Network resource. Read Networks and Firewalls for more information.
+    description: Represents a Network resource. Read Networks and Firewalls for more information. (== resource_for v1.networks ==) (== resource_for beta.networks ==)
     properties:
       IPv4Range:
         description: 'The range of internal addresses that are legal on this network. This range is a CIDR specification, for example: 192.168.0.0/16. Provided by the client when the network is created.'
@@ -31223,7 +31409,7 @@ definitions:
         type: string
     type: object
   Operation:
-    description: 'An Operation resource, used to manage asynchronous API requests.'
+    description: 'An Operation resource, used to manage asynchronous API requests. (== resource_for v1.globalOperations ==) (== resource_for beta.globalOperations ==) (== resource_for v1.regionOperations ==) (== resource_for beta.regionOperations ==) (== resource_for v1.zoneOperations ==) (== resource_for beta.zoneOperations ==)'
     properties:
       clientOperationId:
         description: '[Output Only] Reserved for future use.'
@@ -31650,7 +31836,7 @@ definitions:
         type: integer
     type: object
   Project:
-    description: 'A Project resource. Projects can only be created in the Google Cloud Platform Console. Unless marked otherwise, values can only be modified in the console.'
+    description: 'A Project resource. Projects can only be created in the Google Cloud Platform Console. Unless marked otherwise, values can only be modified in the console. (== resource_for v1.projects ==) (== resource_for beta.projects ==)'
     properties:
       commonInstanceMetadata:
         $ref: '#/definitions/Metadata'
@@ -31838,7 +32024,7 @@ definitions:
         type: string
     type: object
   Region:
-    description: Region resource.
+    description: Region resource. (== resource_for beta.regions ==) (== resource_for v1.regions ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -32532,7 +32718,7 @@ definitions:
 
       For each packet leaving an instance, the system searches that instance's routing table for a single best matching route. Routes match packets by destination IP address, preferring smaller or more specific ranges over larger ones. If there is a tie, the system selects the route with the smallest priority value. If there is still a tie, it uses the layer three and four packet headers to select just one of the remaining matching routes. The packet is then forwarded as specified by the nextHop field of the winning route - either to another instance destination, an instance gateway, or a Google Compute Engine-operated gateway.
 
-      Packets that do not match any route in the sending instance's routing table are dropped.
+      Packets that do not match any route in the sending instance's routing table are dropped. (== resource_for beta.routes ==) (== resource_for v1.routes ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -33487,11 +33673,6 @@ definitions:
         items:
           type: string
         type: array
-      srcRegionCodes:
-        description: Match by country or region code.
-        items:
-          type: string
-        type: array
       versionedExpr:
         description: 'Preconfigured versioned expression. If this field is specified, config must also be specified. Available preconfigured expressions along with their requirements are: SRC_IPS_V1 - must specify the corresponding src_ip_range field in config.'
         enum:
@@ -33563,7 +33744,7 @@ definitions:
         type: string
     type: object
   Snapshot:
-    description: A persistent disk snapshot resource.
+    description: A persistent disk snapshot resource. (== resource_for beta.snapshots ==) (== resource_for v1.snapshots ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -33651,6 +33832,11 @@ definitions:
           - UPDATING
           - UP_TO_DATE
         type: string
+      storageLocations:
+        description: GCS bucket storage location of the snapshot (regional or multi-regional).
+        items:
+          type: string
+        type: array
     type: object
   SnapshotList:
     description: Contains a list of Snapshot resources.
@@ -33732,7 +33918,7 @@ definitions:
         type: array
     type: object
   SslCertificate:
-    description: An SslCertificate resource. This resource provides a mechanism to upload an SSL key and certificate to the load balancer to serve secure connections from the user.
+    description: An SslCertificate resource. This resource provides a mechanism to upload an SSL key and certificate to the load balancer to serve secure connections from the user. (== resource_for beta.sslCertificates ==) (== resource_for v1.sslCertificates ==)
     properties:
       certificate:
         description: A local certificate file. The certificate must be in PEM format. The certificate chain must be no greater than 5 certs long. The chain must include at least one intermediate cert.
@@ -34042,7 +34228,7 @@ definitions:
         type: array
     type: object
   Subnetwork:
-    description: A Subnetwork resource.
+    description: A Subnetwork resource. (== resource_for beta.subnetworks ==) (== resource_for v1.subnetworks ==)
     properties:
       allowSubnetCidrRoutesOverlap:
         description: |-
@@ -34378,7 +34564,7 @@ definitions:
         type: array
     type: object
   TargetHttpProxy:
-    description: A TargetHttpProxy resource. This resource defines an HTTP proxy.
+    description: A TargetHttpProxy resource. This resource defines an HTTP proxy. (== resource_for beta.targetHttpProxies ==) (== resource_for v1.targetHttpProxies ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -34494,7 +34680,7 @@ definitions:
         type: array
     type: object
   TargetHttpsProxy:
-    description: A TargetHttpsProxy resource. This resource defines an HTTPS proxy.
+    description: A TargetHttpsProxy resource. This resource defines an HTTPS proxy. (== resource_for beta.targetHttpsProxies ==) (== resource_for v1.targetHttpsProxies ==)
     properties:
       clientSslPolicy:
         description: URL to ClientSslPolicy resource which controls the set of allowed SSL versions and ciphers.
@@ -34614,7 +34800,7 @@ definitions:
         type: object
     type: object
   TargetInstance:
-    description: A TargetInstance resource. This resource defines an endpoint instance that terminates traffic of certain protocols.
+    description: A TargetInstance resource. This resource defines an endpoint instance that terminates traffic of certain protocols. (== resource_for beta.targetInstances ==) (== resource_for v1.targetInstances ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -34850,7 +35036,7 @@ definitions:
         type: object
     type: object
   TargetPool:
-    description: 'A TargetPool resource. This resource defines a pool of instances, an associated HttpHealthCheck resource, and the fallback target pool.'
+    description: 'A TargetPool resource. This resource defines a pool of instances, an associated HttpHealthCheck resource, and the fallback target pool. (== resource_for beta.targetPools ==) (== resource_for v1.targetPools ==)'
     properties:
       backupPool:
         description: |-
@@ -35193,7 +35379,7 @@ definitions:
         type: array
     type: object
   TargetSslProxy:
-    description: A TargetSslProxy resource. This resource defines an SSL proxy.
+    description: A TargetSslProxy resource. This resource defines an SSL proxy. (== resource_for beta.targetSslProxies ==) (== resource_for v1.targetSslProxies ==)
     properties:
       clientSslPolicy:
         description: URL to ClientSslPolicy resource which controls the set of allowed SSL versions and ciphers.
@@ -35323,7 +35509,7 @@ definitions:
         type: string
     type: object
   TargetTcpProxy:
-    description: A TargetTcpProxy resource. This resource defines a TCP proxy.
+    description: A TargetTcpProxy resource. This resource defines a TCP proxy. (== resource_for beta.targetTcpProxies ==) (== resource_for v1.targetTcpProxies ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -35427,7 +35613,7 @@ definitions:
         type: object
     type: object
   TargetVpnGateway:
-    description: Represents a Target VPN gateway resource.
+    description: Represents a Target VPN gateway resource. (== resource_for beta.targetVpnGateways ==) (== resource_for v1.targetVpnGateways ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -35993,6 +36179,7 @@ definitions:
         description: Maintenance windows that are applied to VMs covered by this policy.
     type: object
   VpnTunnel:
+    description: VPN tunnel resource. (== resource_for beta.vpnTunnels ==) (== resource_for v1.vpnTunnels ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -36358,7 +36545,7 @@ definitions:
         type: string
     type: object
   Zone:
-    description: A Zone resource.
+    description: A Zone resource. (== resource_for beta.zones ==) (== resource_for v1.zones ==)
     properties:
       availableCpuPlatforms:
         description: '[Output Only] Available cpu/platform selections for the zone.'

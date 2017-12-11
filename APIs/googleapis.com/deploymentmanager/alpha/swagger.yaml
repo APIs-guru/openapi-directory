@@ -2151,7 +2151,7 @@ definitions:
         type: string
     type: object
   Operation:
-    description: 'An Operation resource, used to manage asynchronous API requests.'
+    description: 'An Operation resource, used to manage asynchronous API requests. (== resource_for v1.globalOperations ==) (== resource_for beta.globalOperations ==) (== resource_for v1.regionOperations ==) (== resource_for beta.regionOperations ==) (== resource_for v1.zoneOperations ==) (== resource_for beta.zoneOperations ==)'
     properties:
       clientOperationId:
         description: '[Output Only] Reserved for future use.'
@@ -2392,6 +2392,11 @@ definitions:
       properties:
         description: Output only. The current properties of the resource before any references have been filled in. Returned as serialized YAML.
         type: string
+      runtimePolicies:
+        description: 'Output only. In case this is an action, it will show the runtimePolicies on which this action will run in the deployment'
+        items:
+          type: string
+        type: array
       type:
         description: 'Output only. The type of the resource, for example compute.v1.instance, or cloudfunctions.v1beta1.function.'
         type: string
@@ -2478,6 +2483,11 @@ definitions:
       properties:
         description: 'Output only. The set of updated properties for this resource, before references are expanded. Returned as serialized YAML.'
         type: string
+      runtimePolicies:
+        description: 'Output only. In case this is an action, it will show the runtimePolicies that this action will have after updating the deployment.'
+        items:
+          type: string
+        type: array
       state:
         description: Output only. The state of the resource.
         type: string

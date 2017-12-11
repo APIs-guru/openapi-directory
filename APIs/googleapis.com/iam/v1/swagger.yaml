@@ -255,7 +255,7 @@ paths:
         Existing Bindings remains, but are inactive. The Role can be undeleted
         within 7 days. After 7 days the Role is deleted and all Bindings associated
         with the role are removed.
-      operationId: iam.projects.roles.delete
+      operationId: iam.organizations.roles.delete
       parameters:
         - description: Used to perform a consistent read-modify-write.
           in: query
@@ -279,10 +279,10 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     get:
       description: Gets a Role definition.
-      operationId: iam.roles.get
+      operationId: iam.organizations.roles.get
       parameters:
         - description: |-
             The resource name of the role in one of the following formats:
@@ -313,7 +313,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - roles
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -330,7 +330,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: Updates a Role definition.
-      operationId: iam.projects.roles.patch
+      operationId: iam.organizations.roles.patch
       parameters:
         - in: body
           name: body
@@ -359,7 +359,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     put:
       description: |-
         Updates a ServiceAccount.
@@ -673,7 +673,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Undelete a Role, bringing it back in its previous state.'
-      operationId: iam.projects.roles.undelete
+      operationId: iam.organizations.roles.undelete
       parameters:
         - in: body
           name: body
@@ -697,11 +697,11 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v1/{parent}/roles':
     get:
       description: Lists the Roles defined on a resource.
-      operationId: iam.projects.roles.list
+      operationId: iam.organizations.roles.list
       parameters:
         - description: Optional limit on the number of roles to include in the response.
           in: query
@@ -741,7 +741,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -758,7 +758,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new Role.
-      operationId: iam.projects.roles.create
+      operationId: iam.organizations.roles.create
       parameters:
         - in: body
           name: body
@@ -782,7 +782,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:getIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'

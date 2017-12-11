@@ -81,6 +81,7 @@ tags:
   - name: activities
   - name: channels
   - name: customerUsageReports
+  - name: entityUsageReports
   - name: userUsageReport
 paths:
   '/activity/users/{userKey}/applications/{applicationName}':
@@ -88,19 +89,14 @@ paths:
       description: Retrieves a list of activities for a specific customer and application.
       operationId: reports.activities.list
       parameters:
-        - description: 'Represents the profile id or the user email for which the data should be filtered. When ''all'' is specified as the userKey, it returns usageReports for all users.'
-          in: path
-          name: userKey
-          required: true
+        - description: IP Address of host where the event was performed. Supports both IPv4 and IPv6 addresses.
+          in: query
+          name: actorIpAddress
           type: string
         - description: Application name for which the events are to be retrieved.
           in: path
           name: applicationName
           required: true
-          type: string
-        - description: IP Address of host where the event was performed. Supports both IPv4 and IPv6 addresses.
-          in: query
-          name: actorIpAddress
           type: string
         - description: Represents the customer for which the data is to be fetched.
           in: query
@@ -131,6 +127,11 @@ paths:
         - description: Return events which occurred at or after this time.
           in: query
           name: startTime
+          type: string
+        - description: 'Represents the profile id or the user email for which the data should be filtered. When ''all'' is specified as the userKey, it returns usageReports for all users.'
+          in: path
+          name: userKey
+          required: true
           type: string
       responses:
         '200':
@@ -163,19 +164,14 @@ paths:
       description: Push changes to activities
       operationId: reports.activities.watch
       parameters:
-        - description: 'Represents the profile id or the user email for which the data should be filtered. When ''all'' is specified as the userKey, it returns usageReports for all users.'
-          in: path
-          name: userKey
-          required: true
+        - description: IP Address of host where the event was performed. Supports both IPv4 and IPv6 addresses.
+          in: query
+          name: actorIpAddress
           type: string
         - description: Application name for which the events are to be retrieved.
           in: path
           name: applicationName
           required: true
-          type: string
-        - description: IP Address of host where the event was performed. Supports both IPv4 and IPv6 addresses.
-          in: query
-          name: actorIpAddress
           type: string
         - description: Represents the customer for which the data is to be fetched.
           in: query
@@ -203,14 +199,19 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: Return events which occurred at or after this time.
-          in: query
-          name: startTime
-          type: string
         - in: body
           name: resource
           schema:
             $ref: '#/definitions/Channel'
+        - description: Return events which occurred at or after this time.
+          in: query
+          name: startTime
+          type: string
+        - description: 'Represents the profile id or the user email for which the data should be filtered. When ''all'' is specified as the userKey, it returns usageReports for all users.'
+          in: path
+          name: userKey
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -251,14 +252,14 @@ paths:
       description: Retrieves a report which is a collection of properties / statistics for a specific customer.
       operationId: reports.customerUsageReports.get
       parameters:
+        - description: Represents the customer for which the data is to be fetched.
+          in: query
+          name: customerId
+          type: string
         - description: Represents the date in yyyy-mm-dd format for which the data is to be fetched.
           in: path
           name: date
           required: true
-          type: string
-        - description: Represents the customer for which the data is to be fetched.
-          in: query
-          name: customerId
           type: string
         - description: Token to specify next page.
           in: query
@@ -291,19 +292,78 @@ paths:
       description: Retrieves a report which is a collection of properties / statistics for a set of users.
       operationId: reports.userUsageReport.get
       parameters:
-        - description: Represents the profile id or the user email for which the data should be filtered.
-          in: path
-          name: userKey
-          required: true
+        - description: Represents the customer for which the data is to be fetched.
+          in: query
+          name: customerId
           type: string
         - description: Represents the date in yyyy-mm-dd format for which the data is to be fetched.
           in: path
           name: date
           required: true
           type: string
+        - description: Represents the set of filters including parameter operator value.
+          in: query
+          name: filters
+          type: string
+        - description: Maximum number of results to return. Maximum allowed is 1000
+          in: query
+          maximum: 1000
+          name: maxResults
+          type: integer
+        - description: Token to specify next page.
+          in: query
+          name: pageToken
+          type: string
+        - description: 'Represents the application name, parameter name pairs to fetch in csv as app_name1:param_name1, app_name2:param_name2.'
+          in: query
+          name: parameters
+          type: string
+        - description: Represents the profile id or the user email for which the data should be filtered.
+          in: path
+          name: userKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/UsageReports'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.reports.usage.readonly'
+      tags:
+        - userUsageReport
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/usage/{entityType}/{entityKey}/dates/{date}':
+    get:
+      description: Retrieves a report which is a collection of properties / statistics for a set of objects.
+      operationId: reports.entityUsageReports.get
+      parameters:
         - description: Represents the customer for which the data is to be fetched.
           in: query
           name: customerId
+          type: string
+        - description: Represents the date in yyyy-mm-dd format for which the data is to be fetched.
+          in: path
+          name: date
+          required: true
+          type: string
+        - description: Represents the key of object for which the data should be filtered.
+          in: path
+          name: entityKey
+          required: true
+          type: string
+        - description: Type of object. Should be one of - gplus_communities.
+          in: path
+          name: entityType
+          required: true
           type: string
         - description: Represents the set of filters including parameter operator value.
           in: query
@@ -331,7 +391,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.reports.usage.readonly'
       tags:
-        - userUsageReport
+        - entityUsageReports
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -506,16 +566,20 @@ definitions:
             description: Obfuscated customer id for the record.
             readOnly: true
             type: string
+          entityId:
+            description: 'Object key. Only relevant if entity.type = "OBJECT" Note: external-facing name of report is "Entities" rather than "Objects".'
+            readOnly: true
+            type: string
           profileId:
             description: Obfuscated user id for the record.
             readOnly: true
             type: string
           type:
-            description: 'The type of item, can be a customer or user.'
+            description: 'The type of item, can be customer, user, or entity (aka. object).'
             readOnly: true
             type: string
           userEmail:
-            description: user's email.
+            description: user's email. Only relevant if entity.type = "USER"
             readOnly: true
             type: string
         readOnly: true

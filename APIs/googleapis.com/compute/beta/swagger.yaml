@@ -120,6 +120,7 @@ tags:
   - name: securityPolicies
   - name: snapshots
   - name: sslCertificates
+  - name: sslPolicies
   - name: subnetworks
   - name: targetHttpProxies
   - name: targetHttpsProxies
@@ -5306,7 +5307,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Patches the specified network with the data included in the request.
+      description: 'Patches the specified network with the data included in the request. Only the following fields can be modified: routingConfig.routingMode.'
       operationId: compute.networks.patch
       parameters:
         - in: body
@@ -6111,6 +6112,168 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - securityPolicies
+  '/{project}/global/securityPolicies/{securityPolicy}/addRule':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Inserts a rule into a security policy.
+      operationId: compute.securityPolicies.addRule
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SecurityPolicyRule'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the security policy to update.
+          in: path
+          name: securityPolicy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - securityPolicies
+  '/{project}/global/securityPolicies/{securityPolicy}/getRule':
+    get:
+      description: Gets a rule at the specified priority.
+      operationId: compute.securityPolicies.getRule
+      parameters:
+        - description: The priority of the rule to get from the security policy.
+          in: query
+          name: priority
+          type: integer
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the security policy to which the queried rule belongs.
+          in: path
+          name: securityPolicy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SecurityPolicyRule'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - securityPolicies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/global/securityPolicies/{securityPolicy}/patchRule':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Patches a rule at the specified priority.
+      operationId: compute.securityPolicies.patchRule
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SecurityPolicyRule'
+        - description: The priority of the rule to patch.
+          in: query
+          name: priority
+          type: integer
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the security policy to update.
+          in: path
+          name: securityPolicy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - securityPolicies
+  '/{project}/global/securityPolicies/{securityPolicy}/removeRule':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Deletes a rule at the specified priority.
+      operationId: compute.securityPolicies.removeRule
+      parameters:
+        - description: The priority of the rule to remove from the security policy.
+          in: query
+          name: priority
+          type: integer
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the security policy to update.
+          in: path
+          name: securityPolicy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - securityPolicies
   '/{project}/global/snapshots':
     get:
       description: Retrieves the list of Snapshot resources contained within the specified project.
@@ -6541,6 +6704,320 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/global/sslPolicies':
+    get:
+      description: List all the SSL policies that have been configured for the specified project.
+      operationId: compute.sslPolicies.list
+      parameters:
+        - description: |-
+            Sets a filter {expression} for filtering listed resources. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SslPoliciesList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - sslPolicies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns the specified SSL policy resource. Get a list of available SSL policies by making a list() request.
+      operationId: compute.sslPolicies.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SslPolicy'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - sslPolicies
+  '/{project}/global/sslPolicies/listAvailableFeatures':
+    get:
+      description: Lists all features that can be specified in the SSL policy when using custom profile.
+      operationId: compute.sslPolicies.listAvailableFeatures
+      parameters:
+        - description: |-
+            Sets a filter {expression} for filtering listed resources. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SslPoliciesListAvailableFeaturesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - sslPolicies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/global/sslPolicies/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.sslPolicies.testIamPermissions
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - sslPolicies
+  '/{project}/global/sslPolicies/{sslPolicy}':
+    delete:
+      description: Deletes the specified SSL policy. The SSL policy resource can be deleted only if it is not in use by any TargetHttpsProxy or TargetSslProxy resources.
+      operationId: compute.sslPolicies.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: 'Name of the SSL policy to delete. The name must be 1-63 characters long, and comply with RFC1035.'
+          in: path
+          name: sslPolicy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - sslPolicies
+    get:
+      description: List all of the ordered rules present in a single specified policy.
+      operationId: compute.sslPolicies.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: 'Name of the SSL policy to update. The name must be 1-63 characters long, and comply with RFC1035.'
+          in: path
+          name: sslPolicy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SslPolicy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - sslPolicies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Patches the specified SSL policy with the data included in the request.
+      operationId: compute.sslPolicies.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SslPolicy'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: 'Name of the SSL policy to update. The name must be 1-63 characters long, and comply with RFC1035.'
+          in: path
+          name: sslPolicy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - sslPolicies
   '/{project}/global/targetHttpProxies':
     get:
       description: Retrieves the list of TargetHttpProxy resources available to the specified project.
@@ -6963,6 +7440,102 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/global/targetHttpsProxies/{targetHttpsProxy}/setQuicOverride':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the QUIC override policy for TargetHttpsProxy.
+      operationId: compute.targetHttpsProxies.setQuicOverride
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TargetHttpsProxiesSetQuicOverrideRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the TargetHttpsProxy resource to set the QUIC override policy for. The name should conform to RFC1035.
+          in: path
+          name: targetHttpsProxy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - targetHttpsProxies
+  '/{project}/global/targetHttpsProxies/{targetHttpsProxy}/setSslPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the SSL policy for TargetHttpsProxy. The SSL policy specifies the server-side support for SSL features. This affects connections between clients and the HTTPS proxy load balancer. They do not affect the connection between the load balancer and the backends.
+      operationId: compute.targetHttpsProxies.setSslPolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SslPolicyReference'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: 'Name of the TargetHttpsProxy resource whose SSL policy is to be set. The name must be 1-63 characters long, and comply with RFC1035.'
+          in: path
+          name: targetHttpsProxy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - targetHttpsProxies
   '/{project}/global/targetSslProxies':
     get:
       description: Retrieves the list of TargetSslProxy resources available to the specified project.
@@ -7302,6 +7875,54 @@ paths:
           name: requestId
           type: string
         - description: Name of the TargetSslProxy resource whose SslCertificate resource is to be set.
+          in: path
+          name: targetSslProxy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - targetSslProxies
+  '/{project}/global/targetSslProxies/{targetSslProxy}/setSslPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the SSL policy for TargetSslProxy. The SSL policy specifies the server-side support for SSL features. This affects connections between clients and the SSL proxy load balancer. They do not affect the connection between the load balancer and the backends.
+      operationId: compute.targetSslProxies.setSslPolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SslPolicyReference'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: 'Name of the TargetSslProxy resource whose SSL policy is to be set. The name must be 1-63 characters long, and comply with RFC1035.'
           in: path
           name: targetSslProxy
           required: true
@@ -12648,6 +13269,59 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - targetVpnGateways
+  '/{project}/regions/{region}/targetVpnGateways/{resource}/setLabels':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Sets the labels on a TargetVpnGateway. To learn more about labels, read the Labeling Resources documentation.'
+      operationId: compute.targetVpnGateways.setLabels
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionSetLabelsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - targetVpnGateways
   '/{project}/regions/{region}/targetVpnGateways/{resource}/testIamPermissions':
     parameters:
       - $ref: '#/parameters/alt'
@@ -12871,6 +13545,59 @@ paths:
             The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
           in: query
           name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - vpnTunnels
+  '/{project}/regions/{region}/vpnTunnels/{resource}/setLabels':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Sets the labels on a VpnTunnel. To learn more about labels, read the Labeling Resources documentation.'
+      operationId: compute.vpnTunnels.setLabels
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionSetLabelsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
           type: string
       responses:
         '200':
@@ -14153,7 +14880,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Resizes the specified persistent disk.
+      description: Resizes the specified persistent disk. You can only increase the size of the disk.
       operationId: compute.disks.resize
       parameters:
         - in: body
@@ -17552,7 +18279,7 @@ definitions:
         type: string
     type: object
   AcceleratorType:
-    description: An Accelerator Type resource.
+    description: An Accelerator Type resource. (== resource_for beta.acceleratorTypes ==) (== resource_for v1.acceleratorTypes ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -17809,7 +18536,7 @@ definitions:
         type: string
     type: object
   Address:
-    description: A reserved address resource.
+    description: A reserved address resource. (== resource_for beta.addresses ==) (== resource_for v1.addresses ==) (== resource_for beta.globalAddresses ==) (== resource_for v1.globalAddresses ==)
     properties:
       address:
         description: The static IP address represented by this resource.
@@ -17871,10 +18598,7 @@ definitions:
           - RESERVED
         type: string
       subnetwork:
-        description: |-
-          For external addresses, this field should not be used.
-
-          The URL of the subnetwork in which to reserve the address. If an IP address is specified, it must be within the subnetwork's IP range.
+        description: 'The URL of the subnetwork in which to reserve the address. If an IP address is specified, it must be within the subnetwork''s IP range. This field can only be used with INTERNAL type with GCE_ENDPOINT/DNS_RESOLVER purposes.'
         type: string
       users:
         description: '[Output Only] The URLs of the resources that are using this address.'
@@ -18282,7 +19006,7 @@ definitions:
         type: string
     type: object
   Autoscaler:
-    description: 'Represents an Autoscaler resource. Autoscalers allow you to automatically scale virtual machine instances in managed instance groups according to an autoscaling policy that you define. For more information, read Autoscaling Groups of Instances.'
+    description: 'Represents an Autoscaler resource. Autoscalers allow you to automatically scale virtual machine instances in managed instance groups according to an autoscaling policy that you define. For more information, read Autoscaling Groups of Instances. (== resource_for beta.autoscalers ==) (== resource_for v1.autoscalers ==) (== resource_for beta.regionAutoscalers ==) (== resource_for v1.regionAutoscalers ==)'
     properties:
       autoscalingPolicy:
         $ref: '#/definitions/AutoscalingPolicy'
@@ -18823,7 +19547,7 @@ definitions:
         type: object
     type: object
   BackendService:
-    description: A BackendService resource. This resource defines a group of backend virtual machines and their serving capacity.
+    description: A BackendService resource. This resource defines a group of backend virtual machines and their serving capacity. (== resource_for v1.backendService ==) (== resource_for beta.backendService ==)
     properties:
       affinityCookieTtlSec:
         description: |-
@@ -19239,7 +19963,7 @@ definitions:
     description: |-
       Represents a Commitment resource. Creating a Commitment resource means that you are purchasing a committed use contract with an explicit start and end time. You can create commitments based on vCPUs and memory usage and receive discounted rates. For full details, read Signing Up for Committed Use Discounts.
 
-      Committed use discounts are subject to Google Cloud Platform's Service Specific Terms. By purchasing a committed use discount, you agree to these terms. Committed use discounts will not renew, so you must purchase a new commitment to continue receiving discounts.
+      Committed use discounts are subject to Google Cloud Platform's Service Specific Terms. By purchasing a committed use discount, you agree to these terms. Committed use discounts will not renew, so you must purchase a new commitment to continue receiving discounts. (== resource_for beta.commitments ==) (== resource_for v1.commitments ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -19595,7 +20319,7 @@ definitions:
         type: string
     type: object
   Disk:
-    description: A Disk resource.
+    description: A Disk resource. (== resource_for beta.disks ==) (== resource_for v1.disks ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -19802,6 +20526,30 @@ definitions:
             type: string
         type: object
     type: object
+  DiskInstantiationConfig:
+    description: A specification of the desired way to instantiate a disk in the instance template when its created from a source instance.
+    properties:
+      autoDelete:
+        description: Specifies whether the disk will be auto-deleted when the instance is deleted (but not when the disk is detached from the instance).
+        type: boolean
+      deviceName:
+        description: Specifies the device name of the disk to which the configurations apply to.
+        type: string
+      instantiateFrom:
+        description: Specifies whether to include the disk and what image to use.
+        enum:
+          - ATTACH_READ_ONLY
+          - BLANK
+          - DEFAULT
+          - DO_NOT_INCLUDE
+          - IMAGE_URL
+          - SOURCE_IMAGE
+          - SOURCE_IMAGE_FAMILY
+        type: string
+      sourceImage:
+        description: The custom source image to be used to restore this disk when instantiating this instance template.
+        type: string
+    type: object
   DiskList:
     description: A list of Disk resources.
     properties:
@@ -19890,7 +20638,7 @@ definitions:
         type: string
     type: object
   DiskType:
-    description: A DiskType resource.
+    description: A DiskType resource. (== resource_for beta.diskTypes ==) (== resource_for v1.diskTypes ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -20421,7 +21169,7 @@ definitions:
         type: integer
     type: object
   ForwardingRule:
-    description: 'A ForwardingRule resource. A ForwardingRule resource specifies which pool of target virtual machines to forward a packet to if it matches the given [IPAddress, IPProtocol, ports] tuple.'
+    description: 'A ForwardingRule resource. A ForwardingRule resource specifies which pool of target virtual machines to forward a packet to if it matches the given [IPAddress, IPProtocol, ports] tuple. (== resource_for beta.forwardingRules ==) (== resource_for v1.forwardingRules ==) (== resource_for beta.globalForwardingRules ==) (== resource_for v1.globalForwardingRules ==) (== resource_for beta.regionForwardingRules ==) (== resource_for v1.regionForwardingRules ==)'
     properties:
       IPAddress:
         description: |-
@@ -20782,7 +21530,7 @@ definitions:
     description: Guest OS features.
     properties:
       type:
-        description: 'The type of supported feature. Currently only VIRTIO_SCSI_MULTIQUEUE is supported. For newer Windows images, the server might also populate this property with the value WINDOWS to indicate that this is a Windows image.'
+        description: The ID of a supported feature. Read  Enabling guest operating system features to see a list of available options.
         enum:
           - FEATURE_TYPE_UNSPECIFIED
           - MULTI_IP_SUBNET
@@ -21260,7 +22008,7 @@ definitions:
         type: object
     type: object
   Image:
-    description: An Image resource.
+    description: An Image resource. (== resource_for beta.images ==) (== resource_for v1.images ==)
     properties:
       archiveSizeBytes:
         description: Size of the image tar.gz archive stored in Google Cloud Storage (in bytes).
@@ -21283,10 +22031,7 @@ definitions:
         description: The name of the image family to which this image belongs. You can create disks by specifying an image family instead of a specific image name. The image family always returns its latest image that is not deprecated. The name of the image family must comply with RFC1035.
         type: string
       guestOsFeatures:
-        description: |-
-          A list of features to enable on the guest OS. Applicable for bootable images only. Currently, only one feature can be enabled, VIRTIO_SCSI_MULTIQUEUE, which allows each virtual CPU to have its own queue. For Windows images, you can only enable VIRTIO_SCSI_MULTIQUEUE on images with driver version 1.2.0.1621 or higher. Linux images with kernel versions 3.17 and higher will support VIRTIO_SCSI_MULTIQUEUE.
-
-          For newer Windows images, the server might also populate this property with the value WINDOWS to indicate that this is a Windows image.
+        description: A list of features to enable on the guest operating system. Applicable only for bootable images. Read  Enabling guest operating system features to see a list of available options.
         items:
           $ref: '#/definitions/GuestOsFeature'
         type: array
@@ -21465,7 +22210,7 @@ definitions:
         type: object
     type: object
   Instance:
-    description: An Instance resource.
+    description: An Instance resource. (== resource_for beta.instances ==) (== resource_for v1.instances ==)
     properties:
       canIpForward:
         description: 'Allows this instance to send and receive packets with non-matching destination or source IPs. This is required if you plan to use this instance to forward routes. For more information, see Enabling IP Forwarding.'
@@ -21651,6 +22396,7 @@ definitions:
         type: object
     type: object
   InstanceGroup:
+    description: InstanceGroups (== resource_for beta.instanceGroups ==) (== resource_for v1.instanceGroups ==) (== resource_for beta.regionInstanceGroups ==) (== resource_for v1.regionInstanceGroups ==)
     properties:
       creationTimestamp:
         description: '[Output Only] The creation timestamp for this instance group in RFC3339 text format.'
@@ -21845,7 +22591,7 @@ definitions:
         type: object
     type: object
   InstanceGroupManager:
-    description: An Instance Group Manager resource.
+    description: An Instance Group Manager resource. (== resource_for beta.instanceGroupManagers ==) (== resource_for v1.instanceGroupManagers ==) (== resource_for beta.regionInstanceGroupManagers ==) (== resource_for v1.regionInstanceGroupManagers ==)
     properties:
       autoHealingPolicies:
         description: The autohealing policy for this managed instance group. You can specify only one value.
@@ -22163,7 +22909,7 @@ definitions:
 
            
           - The instance's status is RUNNING. 
-          - If there is a health check on the instance grourp, the instance's liveness health check result must be HEALTHY at least once. If there is no health check on the group, then the instance only needs to have a status of RUNNING to be considered available.  By default, a fixed value of 1 is used. This value can be either a fixed number or a percentage if the instance group has 10 or more instances. If you set a percentage, the number of instances will be rounded up if necessary.
+          - If there is a health check on the instance group, the instance's liveness health check result must be HEALTHY at least once. If there is no health check on the group, then the instance only needs to have a status of RUNNING to be considered available.  By default, a fixed value of 1 is used. This value can be either a fixed number or a percentage if the instance group has 10 or more instances. If you set a percentage, the number of instances will be rounded up if necessary.
 
           At least one of either maxSurge or maxUnavailable must be greater than 0. Learn more about maxUnavailable.
       minReadySec:
@@ -22705,7 +23451,7 @@ definitions:
         type: string
     type: object
   InstanceTemplate:
-    description: An Instance Template resource.
+    description: An Instance Template resource. (== resource_for beta.instanceTemplates ==) (== resource_for v1.instanceTemplates ==)
     properties:
       creationTimestamp:
         description: '[Output Only] The creation timestamp for this instance template in RFC3339 text format.'
@@ -22731,6 +23477,15 @@ definitions:
       selfLink:
         description: '[Output Only] The URL for this instance template. The server defines this URL.'
         type: string
+      sourceInstance:
+        description: |-
+          The source instance used to create the template. You can provide this as a partial or full URL to the resource. For example, the following are valid values:  
+          - https://www.googleapis.com/compute/v1/projects/project/zones/zone/instances/instance 
+          - projects/project/zones/zone/instances/instance
+        type: string
+      sourceInstanceParams:
+        $ref: '#/definitions/SourceInstanceParams'
+        description: The source instance params to use to create this instance template.
     type: object
   InstanceTemplateList:
     description: A list of instance templates.
@@ -22937,7 +23692,7 @@ definitions:
         type: array
     type: object
   Interconnect:
-    description: 'Represents an Interconnects resource. The Interconnects resource is a dedicated connection between Google''s network and your on-premises network. For more information, see the  Dedicated overview page.'
+    description: 'Represents an Interconnects resource. The Interconnects resource is a dedicated connection between Google''s network and your on-premises network. For more information, see the  Dedicated overview page. (== resource_for v1.interconnects ==) (== resource_for beta.interconnects ==)'
     properties:
       adminEnabled:
         description: 'Administrative status of the interconnect. When this is set to true, the Interconnect is functional and can carry traffic. When set to false, no packets can be carried over the interconnect and no BGP routes are exchanged over it. By default, the status is set to true.'
@@ -23023,7 +23778,7 @@ definitions:
         type: string
     type: object
   InterconnectAttachment:
-    description: 'Represents an InterconnectAttachment (VLAN attachment) resource. For more information, see  Creating VLAN Attachments.'
+    description: 'Represents an InterconnectAttachment (VLAN attachment) resource. For more information, see  Creating VLAN Attachments. (== resource_for beta.interconnectAttachments ==) (== resource_for v1.interconnectAttachments ==)'
     properties:
       cloudRouterIpAddress:
         description: '[Output Only] IPv4 address + prefix length to be configured on Cloud Router Interface for this interconnect attachment.'
@@ -23778,7 +24533,7 @@ definitions:
         type: string
     type: object
   MachineType:
-    description: A Machine Type resource.
+    description: A Machine Type resource. (== resource_for v1.machineTypes ==) (== resource_for beta.machineTypes ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -24141,7 +24896,7 @@ definitions:
         type: integer
     type: object
   Network:
-    description: Represents a Network resource. Read Networks and Firewalls for more information.
+    description: Represents a Network resource. Read Networks and Firewalls for more information. (== resource_for v1.networks ==) (== resource_for beta.networks ==)
     properties:
       IPv4Range:
         description: 'The range of internal addresses that are legal on this network. This range is a CIDR specification, for example: 192.168.0.0/16. Provided by the client when the network is created.'
@@ -24358,7 +25113,7 @@ definitions:
         type: string
     type: object
   Operation:
-    description: 'An Operation resource, used to manage asynchronous API requests.'
+    description: 'An Operation resource, used to manage asynchronous API requests. (== resource_for v1.globalOperations ==) (== resource_for beta.globalOperations ==) (== resource_for v1.regionOperations ==) (== resource_for beta.regionOperations ==) (== resource_for v1.zoneOperations ==) (== resource_for beta.zoneOperations ==)'
     properties:
       clientOperationId:
         description: '[Output Only] Reserved for future use.'
@@ -24777,7 +25532,7 @@ definitions:
         type: integer
     type: object
   Project:
-    description: 'A Project resource. Projects can only be created in the Google Cloud Platform Console. Unless marked otherwise, values can only be modified in the console.'
+    description: 'A Project resource. Projects can only be created in the Google Cloud Platform Console. Unless marked otherwise, values can only be modified in the console. (== resource_for v1.projects ==) (== resource_for beta.projects ==)'
     properties:
       commonInstanceMetadata:
         $ref: '#/definitions/Metadata'
@@ -24940,7 +25695,7 @@ definitions:
         type: string
     type: object
   Region:
-    description: Region resource.
+    description: Region resource. (== resource_for beta.regions ==) (== resource_for v1.regions ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -25455,7 +26210,7 @@ definitions:
 
       For each packet leaving an instance, the system searches that instance's routing table for a single best matching route. Routes match packets by destination IP address, preferring smaller or more specific ranges over larger ones. If there is a tie, the system selects the route with the smallest priority value. If there is still a tie, it uses the layer three and four packet headers to select just one of the remaining matching routes. The packet is then forwarded as specified by the nextHop field of the winning route - either to another instance destination, an instance gateway, or a Google Compute Engine-operated gateway.
 
-      Packets that do not match any route in the sending instance's routing table are dropped.
+      Packets that do not match any route in the sending instance's routing table are dropped. (== resource_for beta.routes ==) (== resource_for v1.routes ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -25678,6 +26433,16 @@ definitions:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
     type: object
+  RouterAdvertisedIpRange:
+    description: Description-tagged IP ranges for the router to advertise.
+    properties:
+      description:
+        description: User-specified description for the IP range.
+        type: string
+      range:
+        description: The IP range to advertise. The value must be a CIDR-formatted string.
+        type: string
+    type: object
   RouterAggregatedList:
     description: Contains a list of routers.
     properties:
@@ -25751,6 +26516,24 @@ definitions:
     type: object
   RouterBgp:
     properties:
+      advertiseMode:
+        description: User-specified flag to indicate which mode to use for advertisement.
+        enum:
+          - CUSTOM
+          - DEFAULT
+        type: string
+      advertisedGroups:
+        description: User-specified list of prefix groups to advertise in custom mode. This field can only be populated if advertise_mode is CUSTOM and is advertised to all peers of the router. These groups will be advertised in addition to any specified prefixes. Leave this field blank to advertise no custom groups.
+        items:
+          enum:
+            - ALL_SUBNETS
+          type: string
+        type: array
+      advertisedIpRanges:
+        description: User-specified list of individual IP ranges to advertise in custom mode. This field can only be populated if advertise_mode is CUSTOM and is advertised to all peers of the router. These IP ranges will be advertised in addition to any specified groups. Leave this field blank to advertise no custom IP ranges.
+        items:
+          $ref: '#/definitions/RouterAdvertisedIpRange'
+        type: array
       asn:
         description: 'Local BGP Autonomous System Number (ASN). Must be an RFC6996 private ASN, either 16-bit or 32-bit. The value will be fixed for this router resource. All VPN tunnels that link to this router will have the same local ASN.'
         format: uint32
@@ -25758,6 +26541,24 @@ definitions:
     type: object
   RouterBgpPeer:
     properties:
+      advertiseMode:
+        description: User-specified flag to indicate which mode to use for advertisement.
+        enum:
+          - CUSTOM
+          - DEFAULT
+        type: string
+      advertisedGroups:
+        description: User-specified list of prefix groups to advertise in custom mode. This field can only be populated if advertise_mode is CUSTOM and overrides the list defined for the router (in Bgp message). These groups will be advertised in addition to any specified prefixes. Leave this field blank to advertise no custom groups.
+        items:
+          enum:
+            - ALL_SUBNETS
+          type: string
+        type: array
+      advertisedIpRanges:
+        description: User-specified list of individual IP ranges to advertise in custom mode. This field can only be populated if advertise_mode is CUSTOM and overrides the list defined for the router (in Bgp message). These IP ranges will be advertised in addition to any specified groups. Leave this field blank to advertise no custom IP ranges.
+        items:
+          $ref: '#/definitions/RouterAdvertisedIpRange'
+        type: array
       advertisedRoutePriority:
         description: 'The priority of routes advertised to this BGP peer. In the case where there is more than one matching route of maximum length, the routes with lowest priority value win.'
         format: uint32
@@ -26215,6 +27016,23 @@ definitions:
   SecurityPolicyRuleMatcher:
     description: Represents a match condition that incoming traffic is evaluated against. Exactly one field must be specified.
     properties:
+      config:
+        $ref: '#/definitions/SecurityPolicyRuleMatcherConfig'
+        description: The configuration options available when specifying versioned_expr. This field must be specified if versioned_expr is specified and cannot be specified if versioned_expr is not specified.
+      srcIpRanges:
+        description: CIDR IP address range. Only IPv4 is supported.
+        items:
+          type: string
+        type: array
+      versionedExpr:
+        description: 'Preconfigured versioned expression. If this field is specified, config must also be specified. Available preconfigured expressions along with their requirements are: SRC_IPS_V1 - must specify the corresponding src_ip_range field in config.'
+        enum:
+          - SRC_IPS_V1
+          - VERSIONED_EXPR_UNSPECIFIED
+        type: string
+    type: object
+  SecurityPolicyRuleMatcherConfig:
+    properties:
       srcIpRanges:
         description: CIDR IP address range. Only IPv4 is supported.
         items:
@@ -26256,7 +27074,7 @@ definitions:
         type: array
     type: object
   Snapshot:
-    description: A persistent disk snapshot resource.
+    description: A persistent disk snapshot resource. (== resource_for beta.snapshots ==) (== resource_for v1.snapshots ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -26415,8 +27233,17 @@ definitions:
             type: string
         type: object
     type: object
+  SourceInstanceParams:
+    description: A specification of the parameters to use when creating the instance template from a source instance.
+    properties:
+      diskConfigs:
+        description: 'Attached disks configuration. If not provided, defaults are applied: For boot disk and any other R/W disks, new custom images will be created from each disk. For read-only disks, they will be attached in read-only mode. Local SSD disks will be created as blank volumes.'
+        items:
+          $ref: '#/definitions/DiskInstantiationConfig'
+        type: array
+    type: object
   SslCertificate:
-    description: An SslCertificate resource. This resource provides a mechanism to upload an SSL key and certificate to the load balancer to serve secure connections from the user.
+    description: An SslCertificate resource. This resource provides a mechanism to upload an SSL key and certificate to the load balancer to serve secure connections from the user. (== resource_for beta.sslCertificates ==) (== resource_for v1.sslCertificates ==)
     properties:
       certificate:
         description: A local certificate file. The certificate must be in PEM format. The certificate chain must be no greater than 5 certs long. The chain must include at least one intermediate cert.
@@ -26516,8 +27343,197 @@ definitions:
             type: string
         type: object
     type: object
+  SslPoliciesList:
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of SslPolicy resources.
+        items:
+          $ref: '#/definitions/SslPolicy'
+        type: array
+      kind:
+        default: 'compute#sslPoliciesList'
+        description: '[Output Only] Type of the resource. Always compute#sslPoliciesList for lists of sslPolicies.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  SslPoliciesListAvailableFeaturesResponse:
+    properties:
+      features:
+        items:
+          type: string
+        type: array
+    type: object
+  SslPolicy:
+    description: A SSL policy specifies the server-side support for SSL features. This can be attached to a TargetHttpsProxy or a TargetSslProxy. This affects connections between clients and the HTTPS or SSL proxy load balancer. They do not affect the connection between the load balancers and the backends.
+    properties:
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      customFeatures:
+        description: |-
+          List of features enabled when the selected profile is CUSTOM. The
+          - method returns the set of features that can be specified in this list. This field must be empty if the profile is not CUSTOM.
+        items:
+          type: string
+        type: array
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      enabledFeatures:
+        description: '[Output Only] The list of features enabled in the SSL policy.'
+        items:
+          type: string
+        type: array
+      fingerprint:
+        description: Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a SslPolicy. An up-to-date fingerprint must be provided in order to update the SslPolicy.
+        format: byte
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#sslPolicy'
+        description: '[Output only] Type of the resource. Always compute#sslPolicyfor SSL policies.'
+        type: string
+      minTlsVersion:
+        description: 'The minimum version of SSL protocol that can be used by the clients to establish a connection with the load balancer. This can be one of TLS_1_0, TLS_1_1, TLS_1_2, TLS_1_3.'
+        enum:
+          - TLS_1_0
+          - TLS_1_1
+          - TLS_1_2
+          - TLS_1_3
+        type: string
+      name:
+        description: 'Name of the resource. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      profile:
+        description: 'Profile specifies the set of SSL features that can be used by the load balancer when negotiating SSL with clients. This can be one of COMPATIBLE, MODERN, RESTRICTED, or CUSTOM. If using CUSTOM, the set of SSL features to enable must be specified in the customFeatures field.'
+        enum:
+          - COMPATIBLE
+          - CUSTOM
+          - MODERN
+          - RESTRICTED
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      warnings:
+        description: '[Output Only] If potential misconfigurations are detected for this SSL policy, this field will be populated with warning messages.'
+        items:
+          properties:
+            code:
+              description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+              enum:
+                - CLEANUP_FAILED
+                - DEPRECATED_RESOURCE_USED
+                - DEPRECATED_TYPE_USED
+                - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - EXPERIMENTAL_TYPE_USED
+                - EXTERNAL_API_WARNING
+                - FIELD_VALUE_OVERRIDEN
+                - INJECTED_KERNELS_DEPRECATED
+                - MISSING_TYPE_DEPENDENCY
+                - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+                - NEXT_HOP_CANNOT_IP_FORWARD
+                - NEXT_HOP_INSTANCE_NOT_FOUND
+                - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+                - NEXT_HOP_NOT_RUNNING
+                - NOT_CRITICAL_ERROR
+                - NO_RESULTS_ON_PAGE
+                - REQUIRED_TOS_AGREEMENT
+                - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+                - RESOURCE_NOT_DELETED
+                - SCHEMA_VALIDATION_IGNORED
+                - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+                - UNDECLARED_PROPERTIES
+                - UNREACHABLE
+              type: string
+            data:
+              description: |-
+                [Output Only] Metadata about this warning in key: value format. For example:
+                "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+              items:
+                properties:
+                  key:
+                    description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                    type: string
+                  value:
+                    description: '[Output Only] A warning data value corresponding to the key.'
+                    type: string
+                type: object
+              type: array
+            message:
+              description: '[Output Only] A human-readable description of the warning code.'
+              type: string
+          type: object
+        type: array
+    type: object
+  SslPolicyReference:
+    properties:
+      sslPolicy:
+        description: URL of the SSL policy resource. Set this to empty string to clear any existing SSL policy associated with the target proxy resource.
+        type: string
+    type: object
   Subnetwork:
-    description: A Subnetwork resource.
+    description: A Subnetwork resource. (== resource_for beta.subnetworks ==) (== resource_for v1.subnetworks ==)
     properties:
       allowSubnetCidrRoutesOverlap:
         description: |-
@@ -26831,7 +27847,7 @@ definitions:
         type: array
     type: object
   TargetHttpProxy:
-    description: A TargetHttpProxy resource. This resource defines an HTTP proxy.
+    description: A TargetHttpProxy resource. This resource defines an HTTP proxy. (== resource_for beta.targetHttpProxies ==) (== resource_for v1.targetHttpProxies ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -26928,6 +27944,16 @@ definitions:
             type: string
         type: object
     type: object
+  TargetHttpsProxiesSetQuicOverrideRequest:
+    properties:
+      quicOverride:
+        description: QUIC policy for the TargetHttpsProxy resource.
+        enum:
+          - DISABLE
+          - ENABLE
+          - NONE
+        type: string
+    type: object
   TargetHttpsProxiesSetSslCertificatesRequest:
     properties:
       sslCertificates:
@@ -26937,7 +27963,7 @@ definitions:
         type: array
     type: object
   TargetHttpsProxy:
-    description: A TargetHttpsProxy resource. This resource defines an HTTPS proxy.
+    description: A TargetHttpsProxy resource. This resource defines an HTTPS proxy. (== resource_for beta.targetHttpsProxies ==) (== resource_for v1.targetHttpsProxies ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -26957,6 +27983,13 @@ definitions:
         description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
+      quicOverride:
+        description: 'Specifies the QUIC override policy for this TargetHttpsProxy resource. This determines whether the load balancer will attempt to negotiate QUIC with clients or not. Can specify one of NONE, ENABLE, or DISABLE. Specify ENABLE to always enable QUIC, Enables QUIC when set to ENABLE, and disables QUIC when set to DISABLE. If NONE is specified, uses the QUIC policy with no user overrides, which is equivalent to DISABLE. Not specifying this field is equivalent to specifying NONE.'
+        enum:
+          - DISABLE
+          - ENABLE
+          - NONE
+        type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
@@ -26965,6 +27998,9 @@ definitions:
         items:
           type: string
         type: array
+      sslPolicy:
+        description: 'URL of SslPolicy resource that will be associated with the TargetHttpsProxy resource. If not set, the TargetHttpsProxy resource will not have any SSL policy configured.'
+        type: string
       urlMap:
         description: |-
           A fully-qualified or valid partial URL to the UrlMap resource that defines the mapping from URL to the BackendService. For example, the following are all valid URLs for specifying a URL map:  
@@ -27044,7 +28080,7 @@ definitions:
         type: object
     type: object
   TargetInstance:
-    description: A TargetInstance resource. This resource defines an endpoint instance that terminates traffic of certain protocols.
+    description: A TargetInstance resource. This resource defines an endpoint instance that terminates traffic of certain protocols. (== resource_for beta.targetInstances ==) (== resource_for v1.targetInstances ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -27280,7 +28316,7 @@ definitions:
         type: object
     type: object
   TargetPool:
-    description: 'A TargetPool resource. This resource defines a pool of instances, an associated HttpHealthCheck resource, and the fallback target pool.'
+    description: 'A TargetPool resource. This resource defines a pool of instances, an associated HttpHealthCheck resource, and the fallback target pool. (== resource_for beta.targetPools ==) (== resource_for v1.targetPools ==)'
     properties:
       backupPool:
         description: |-
@@ -27623,7 +28659,7 @@ definitions:
         type: array
     type: object
   TargetSslProxy:
-    description: A TargetSslProxy resource. This resource defines an SSL proxy.
+    description: A TargetSslProxy resource. This resource defines an SSL proxy. (== resource_for beta.targetSslProxies ==) (== resource_for v1.targetSslProxies ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -27660,6 +28696,9 @@ definitions:
         items:
           type: string
         type: array
+      sslPolicy:
+        description: 'URL of SslPolicy resource that will be associated with the TargetSslProxy resource. If not set, the TargetSslProxy resource will not have any SSL policy configured.'
+        type: string
     type: object
   TargetSslProxyList:
     description: Contains a list of TargetSslProxy resources.
@@ -27747,7 +28786,7 @@ definitions:
         type: string
     type: object
   TargetTcpProxy:
-    description: A TargetTcpProxy resource. This resource defines a TCP proxy.
+    description: A TargetTcpProxy resource. This resource defines a TCP proxy. (== resource_for beta.targetTcpProxies ==) (== resource_for v1.targetTcpProxies ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -27851,7 +28890,7 @@ definitions:
         type: object
     type: object
   TargetVpnGateway:
-    description: Represents a Target VPN gateway resource.
+    description: Represents a Target VPN gateway resource. (== resource_for beta.targetVpnGateways ==) (== resource_for v1.targetVpnGateways ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -27872,6 +28911,18 @@ definitions:
         default: 'compute#targetVpnGateway'
         description: '[Output Only] Type of resource. Always compute#targetVpnGateway for target VPN gateways.'
         type: string
+      labelFingerprint:
+        description: |-
+          A fingerprint for the labels being applied to this TargetVpnGateway, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels.
+
+          To see the latest fingerprint, make a get() request to retrieve an TargetVpnGateway.
+        format: byte
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to this TargetVpnGateway resource. These can be later modified by the setLabels method. Each label key/value must comply with RFC1035. Label values may be empty.
+        type: object
       name:
         description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
@@ -28316,6 +29367,7 @@ definitions:
         type: string
     type: object
   VpnTunnel:
+    description: VPN tunnel resource. (== resource_for beta.vpnTunnels ==) (== resource_for v1.vpnTunnels ==)
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -28338,6 +29390,18 @@ definitions:
         default: 'compute#vpnTunnel'
         description: '[Output Only] Type of resource. Always compute#vpnTunnel for VPN tunnels.'
         type: string
+      labelFingerprint:
+        description: |-
+          A fingerprint for the labels being applied to this VpnTunnel, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels.
+
+          To see the latest fingerprint, make a get() request to retrieve a VpnTunnel.
+        format: byte
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to this VpnTunnel. These can be later modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
+        type: object
       localTrafficSelector:
         description: 'Local traffic selector to use when establishing the VPN tunnel with peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges should be disjoint. Only IPv4 is supported.'
         items:
@@ -28669,7 +29733,7 @@ definitions:
         type: string
     type: object
   Zone:
-    description: A Zone resource.
+    description: A Zone resource. (== resource_for beta.zones ==) (== resource_for v1.zones ==)
     properties:
       availableCpuPlatforms:
         description: '[Output Only] Available cpu/platform selections for the zone.'

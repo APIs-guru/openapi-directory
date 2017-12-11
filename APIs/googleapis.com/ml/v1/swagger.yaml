@@ -541,6 +541,60 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1/{parent}/locations':
+    get:
+      description: List all locations that provides at least one type of CMLE capability.
+      operationId: ml.projects.locations.list
+      parameters:
+        - description: |-
+            Optional. The number of locations to retrieve per "page" of results. If there
+            are more remaining results than this number, the response message will
+            contain a valid value in the `next_page_token` field.
+
+            The default value is 20, and the maximum page size is 100.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            Optional. A page token to request the next page of results.
+
+            You get the token from the `next_page_token` field of the response from
+            the previous call.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Required. The name of the project for which available locations are to be
+            listed (since some locations might be whitelisted for specific projects).
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleCloudMlV1__ListLocationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{parent}/models':
     get:
       description: |-
@@ -955,6 +1009,25 @@ definitions:
     description: Request message for the CancelJob method.
     properties: {}
     type: object
+  GoogleCloudMlV1__Capability:
+    properties:
+      availableAccelerators:
+        description: Available accelerators for the capability.
+        items:
+          enum:
+            - ACCELERATOR_TYPE_UNSPECIFIED
+            - NVIDIA_TESLA_K80
+            - NVIDIA_TESLA_P100
+          type: string
+        type: array
+      type:
+        enum:
+          - TYPE_UNSPECIFIED
+          - TRAINING
+          - BATCH_PREDICTION
+          - ONLINE_PREDICTION
+        type: string
+    type: object
   GoogleCloudMlV1__GetConfigResponse:
     description: Returns service account information associated with a project.
     properties:
@@ -1123,6 +1196,19 @@ definitions:
           subsequent call.
         type: string
     type: object
+  GoogleCloudMlV1__ListLocationsResponse:
+    properties:
+      locations:
+        description: Locations where at least one type of CMLE capability is available.
+        items:
+          $ref: '#/definitions/GoogleCloudMlV1__Location'
+        type: array
+      nextPageToken:
+        description: |-
+          Optional. Pass this token as the `page_token` field of the request for a
+          subsequent call.
+        type: string
+    type: object
   GoogleCloudMlV1__ListModelsResponse:
     description: Response message for the ListModels method.
     properties:
@@ -1150,6 +1236,16 @@ definitions:
         items:
           $ref: '#/definitions/GoogleCloudMlV1__Version'
         type: array
+    type: object
+  GoogleCloudMlV1__Location:
+    properties:
+      capabilities:
+        description: Capabilities available in the location.
+        items:
+          $ref: '#/definitions/GoogleCloudMlV1__Capability'
+        type: array
+      name:
+        type: string
     type: object
   GoogleCloudMlV1__ManualScaling:
     description: Options for manually scaling a model.
@@ -1360,6 +1456,7 @@ definitions:
         description: Required. The format of the input data files.
         enum:
           - DATA_FORMAT_UNSPECIFIED
+          - JSON
           - TEXT
           - TF_RECORD
           - TF_RECORD_GZIP

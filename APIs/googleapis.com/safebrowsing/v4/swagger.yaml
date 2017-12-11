@@ -108,6 +108,7 @@ tags:
   - name: encodedFullHashes
   - name: encodedUpdates
   - name: fullHashes
+  - name: threatHits
   - name: threatListUpdates
   - name: threatLists
   - name: threatMatches
@@ -224,6 +225,38 @@ paths:
             $ref: '#/definitions/FindFullHashesResponse'
       tags:
         - fullHashes
+  /v4/threatHits:
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Reports a Safe Browsing threat list hit to Google. Only projects with
+        TRUSTED_REPORTER visibility can use this method.
+      operationId: safebrowsing.threatHits.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ThreatHit'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      tags:
+        - threatHits
   '/v4/threatListUpdates:fetch':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -366,6 +399,19 @@ definitions:
             - RICE
           type: string
         type: array
+    type: object
+  Empty:
+    description: |-
+      A generic empty message that you can re-use to avoid defining duplicated
+      empty messages in your APIs. A typical example is to use it as the request
+      or the response type of an API method. For instance:
+
+          service Foo {
+            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+          }
+
+      The JSON representation for `Empty` is empty JSON object `{}`.
+    properties: {}
     type: object
   FetchThreatListUpdatesRequest:
     description: |-
@@ -741,6 +787,56 @@ definitions:
           removal indices (uint32) are sorted in ascending order, then delta encoded
           and stored as encoded_data.
     type: object
+  ThreatHit:
+    properties:
+      clientInfo:
+        $ref: '#/definitions/ClientInfo'
+        description: Client-reported identification.
+      entry:
+        $ref: '#/definitions/ThreatEntry'
+        description: |-
+          The threat entry responsible for the hit. Full hash should be reported for
+          hash-based hits.
+      platformType:
+        description: The platform type reported.
+        enum:
+          - PLATFORM_TYPE_UNSPECIFIED
+          - WINDOWS
+          - LINUX
+          - ANDROID
+          - OSX
+          - IOS
+          - ANY_PLATFORM
+          - ALL_PLATFORMS
+          - CHROME
+        type: string
+      resources:
+        description: The resources related to the threat hit.
+        items:
+          $ref: '#/definitions/ThreatSource'
+        type: array
+      threatType:
+        description: The threat type reported.
+        enum:
+          - THREAT_TYPE_UNSPECIFIED
+          - MALWARE
+          - SOCIAL_ENGINEERING
+          - UNWANTED_SOFTWARE
+          - POTENTIALLY_HARMFUL_APPLICATION
+          - SOCIAL_ENGINEERING_INTERNAL
+          - API_ABUSE
+          - MALICIOUS_BINARY
+          - CSD_WHITELIST
+          - CSD_DOWNLOAD_WHITELIST
+          - CLIENT_INCIDENT
+          - CLIENT_INCIDENT_WHITELIST
+          - APK_MALWARE_OFFLINE
+          - SUBRESOURCE_FILTER
+        type: string
+      userInfo:
+        $ref: '#/definitions/UserInfo'
+        description: Details about the user that encountered the threat.
+    type: object
   ThreatInfo:
     description: |-
       The information regarding one or more threats that a client submits when
@@ -905,5 +1001,38 @@ definitions:
           - CLIENT_INCIDENT_WHITELIST
           - APK_MALWARE_OFFLINE
           - SUBRESOURCE_FILTER
+        type: string
+    type: object
+  ThreatSource:
+    description: A single resource related to a threat hit.
+    properties:
+      referrer:
+        description: Referrer of the resource. Only set if the referrer is available.
+        type: string
+      remoteIp:
+        description: The remote IP of the resource in ASCII format. Either IPv4 or IPv6.
+        type: string
+      type:
+        description: The type of source reported.
+        enum:
+          - THREAT_SOURCE_TYPE_UNSPECIFIED
+          - MATCHING_URL
+          - TAB_URL
+          - TAB_REDIRECT
+          - TAB_RESOURCE
+        type: string
+      url:
+        description: The URL of the resource.
+        type: string
+    type: object
+  UserInfo:
+    description: Details about the user that encountered the threat.
+    properties:
+      regionCode:
+        description: The UN M.49 region code associated with the user's location.
+        type: string
+      userId:
+        description: Unique user identifier defined by the client.
+        format: byte
         type: string
     type: object

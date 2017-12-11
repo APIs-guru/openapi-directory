@@ -1152,6 +1152,10 @@ definitions:
     type: object
   ExplainQueryStage:
     properties:
+      completedParallelInputs:
+        description: Number of parallel input segments completed.
+        format: int64
+        type: string
       computeMsAvg:
         description: Milliseconds the average shard spent on CPU-bound tasks.
         format: int64
@@ -1174,6 +1178,10 @@ definitions:
         type: string
       name:
         description: Human-readable name for stage.
+        type: string
+      parallelInputs:
+        description: Number of parallel input segments to be processed.
+        format: int64
         type: string
       readMsAvg:
         description: Milliseconds the average shard spent reading input.
@@ -1728,6 +1736,10 @@ definitions:
       ddlTargetTable:
         $ref: '#/definitions/TableReference'
         description: '[Output-only, Experimental] The DDL target table. Present only for CREATE/DROP TABLE/VIEW queries.'
+      estimatedBytesProcessed:
+        description: '[Output-only] The original estimate of bytes processed for the job.'
+        format: int64
+        type: string
       numDmlAffectedRows:
         description: '[Output-only] The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.'
         format: int64
@@ -1746,7 +1758,7 @@ definitions:
         $ref: '#/definitions/TableSchema'
         description: '[Output-only, Experimental] The schema of the results. Present only for successful dry run of non-legacy SQL queries.'
       statementType:
-        description: '[Output-only, Experimental] The type of query statement, if valid.'
+        description: '[Output-only, Experimental] The type of query statement, if valid. Possible values (new values might be added in the future): "SELECT": SELECT query. "INSERT": INSERT query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language "UPDATE": UPDATE query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language "DELETE": DELETE query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language "CREATE_TABLE": CREATE [OR REPLACE] TABLE without AS SELECT. "CREATE_TABLE_AS_SELECT": CREATE [OR REPLACE] TABLE ... AS SELECT ... "DROP_TABLE": DROP TABLE query. "CREATE_VIEW": CREATE [OR REPLACE] VIEW ... AS SELECT ... "DROP_VIEW": DROP VIEW query.'
         type: string
       totalBytesBilled:
         description: '[Output-only] Total bytes billed for the job.'

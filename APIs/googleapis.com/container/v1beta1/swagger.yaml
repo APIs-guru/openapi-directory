@@ -1797,12 +1797,18 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the specified operation.
-      operationId: container.projects.locations.operations.get
+      description: Retrieves the node pool requested.
+      operationId: container.projects.locations.clusters.nodePools.get
       parameters:
         - description: |-
-            The name (project, location, operation id) of the operation to get.
-            Specified in the format 'projects/*/locations/*/operations/*'.
+            The name of the cluster.
+            This field is deprecated, use name instead.
+          in: query
+          name: clusterId
+          type: string
+        - description: |-
+            The name (project, location, cluster, node pool id) of the node pool to get.
+            Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
           in: path
           name: name
           required: true
@@ -1815,14 +1821,8 @@ paths:
           name: nodePoolId
           type: string
         - description: |-
-            The server-assigned `name` of the operation.
-            This field is deprecated, use name instead.
-          in: query
-          name: operationId
-          type: string
-        - description: |-
             The Google Developers Console [project ID or project
-            number](https://support.google.com/cloud/answer/6158840).
+            number](https://developers.google.com/console/help/new/#projectnumber).
             This field is deprecated, use name instead.
           in: query
           name: projectId
@@ -1839,7 +1839,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/NodePool'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -3354,6 +3354,21 @@ definitions:
   IPAllocationPolicy:
     description: Configuration for controlling how IPs are allocated in the cluster.
     properties:
+      allowRouteOverlap:
+        description: |-
+          If true, allow allocation of cluster CIDR ranges that overlap with certain
+          kinds of network routes. By default we do not allow cluster CIDR ranges to
+          intersect with any user declared routes. With allow_route_overlap == true,
+          we allow overlapping with CIDR ranges that are larger than the cluster CIDR
+          range.
+
+          If this field is set to true, then cluster and services CIDRs must be
+          fully-specified (e.g. `10.96.0.0/14`, but not `/14`), which means:
+          1) When `use_ip_aliases` is true, `cluster_ipv4_cidr_block` and
+             `services_ipv4_cidr_block` must be fully-specified.
+          2) When `use_ip_aliases` is false, `cluster.cluster_ipv4_cidr` muse be
+             fully-specified.
+        type: boolean
       clusterIpv4Cidr:
         description: 'This field is deprecated, use cluster_ipv4_cidr_block.'
         type: string
