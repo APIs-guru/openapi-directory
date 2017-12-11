@@ -5,12 +5,19 @@ host: management.azure.com
 info:
   title: AutomationManagement
   version: '2015-10-31'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/automation/resource-manager/Microsoft.Automation/2015-10-31/runbook.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: automation-runbook
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -657,6 +664,7 @@ paths:
                   parameters: {}
                   provisioningState: Succeeded
                   runbookType: PowerShellWorkflow
+                  serviceManagementTags: null
                   state: Published
                 tags:
                   tag01: value01
@@ -983,6 +991,7 @@ paths:
                 parameters: {}
                 provisioningState: Succeeded
                 runbookType: PowerShellWorkflow
+                serviceManagementTags: null
                 state: Published
               tags:
                 tag01: value01
@@ -1218,6 +1227,7 @@ paths:
                   parameters: {}
                   provisioningState: Succeeded
                   runbookType: PowerShellWorkflow
+                  serviceManagementTags: null
                   state: Published
                 tags:
                   tag01: value01
@@ -1243,6 +1253,7 @@ paths:
                   parameters: {}
                   provisioningState: Succeeded
                   runbookType: PowerShellWorkflow
+                  serviceManagementTags: null
                   state: Published
                 tags:
                   tag01: value01
@@ -1455,6 +1466,7 @@ paths:
                   parameters: {}
                   provisioningState: Succeeded
                   runbookType: PowerShellWorkflow
+                  serviceManagementTags: null
                   state: Published
                 tags:
                   tag01: value01

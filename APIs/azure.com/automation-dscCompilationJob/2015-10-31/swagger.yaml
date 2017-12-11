@@ -5,12 +5,19 @@ host: management.azure.com
 info:
   title: AutomationManagement
   version: '2015-10-31'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/automation/resource-manager/Microsoft.Automation/2015-10-31/dscCompilationJob.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: automation-dscCompilationJob
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -483,15 +490,20 @@ paths:
             '201':
               body:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/compilationjobs/ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a
+                name: null
                 properties:
                   configuration:
                     name: SetupServer
                   creationTime: '2017-03-28T23:14:26.903+00:00'
+                  endTime: null
+                  exception: null
                   jobId: ce6fe3e3-9db3-4096-a6b4-82bfb4c10a9a
                   lastModifiedTime: '2017-03-28T23:14:26.903+00:00'
                   lastStatusModifiedTime: '2017-03-28T23:14:26.903+00:00'
                   parameters: {}
                   provisioningState: Processing
+                  runOn: null
+                  startTime: null
                   status: New
                   statusDetails: None
               headers: {}

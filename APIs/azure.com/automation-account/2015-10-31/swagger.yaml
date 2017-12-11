@@ -5,12 +5,19 @@ host: management.azure.com
 info:
   title: AutomationManagement
   version: '2015-10-31'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/automation/resource-manager/Microsoft.Automation/2015-10-31/account.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: automation-account
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -1108,6 +1115,7 @@ paths:
           responses:
             '200':
               body:
+                etag: null
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9
                 location: East US 2
                 name: myAutomationAccount9
@@ -1116,6 +1124,8 @@ paths:
                   lastModifiedBy: myEmailId@microsoft.com
                   lastModifiedTime: '2017-03-26T01:13:43.267+00:00'
                   sku:
+                    capacity: null
+                    family: null
                     name: Free
                   state: Ok
                 tags: {}
@@ -1309,6 +1319,7 @@ paths:
           responses:
             '200':
               body:
+                etag: null
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9
                 location: East US 2
                 name: myAutomationAccount9
@@ -1317,6 +1328,8 @@ paths:
                   lastModifiedBy: myEmailId@microsoft.com
                   lastModifiedTime: '2017-03-26T01:13:43.267+00:00'
                   sku:
+                    capacity: null
+                    family: null
                     name: Free
                   state: Ok
                 tags: {}
@@ -1593,6 +1606,7 @@ paths:
           responses:
             '200':
               body:
+                etag: null
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9
                 location: East US 2
                 name: ContoseAutomationAccount
@@ -1601,6 +1615,8 @@ paths:
                   lastModifiedBy: myEmaild@microsoft.com
                   lastModifiedTime: '2017-03-28T18:21:15.187+00:00'
                   sku:
+                    capacity: null
+                    family: null
                     name: Free
                   state: Ok
                 tags: {}
@@ -1608,6 +1624,7 @@ paths:
               headers: {}
             '201':
               body:
+                etag: null
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9
                 location: East US 2
                 name: myAutomationAccount9
@@ -1616,6 +1633,8 @@ paths:
                   lastModifiedBy: myEmailId@microsoft.com
                   lastModifiedTime: '2017-03-26T01:13:43.267+00:00'
                   sku:
+                    capacity: null
+                    family: null
                     name: Free
                   state: Ok
                 tags: {}

@@ -5,12 +5,19 @@ host: management.azure.com
 info:
   title: AutomationManagement
   version: '2015-10-31'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/automation/resource-manager/Microsoft.Automation/2015-10-31/dscNode.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: automation-dscNode
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -754,6 +761,7 @@ paths:
                   name: SetupServer.localhost
                 nodeId: nodeId
                 registrationTime: '2017-03-28T20:19:24.7915026+00:00'
+                status: null
               headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodes/{nodeId}/reports':
     get:
@@ -1433,6 +1441,7 @@ paths:
                   rebootNodeIfNeeded: false
                   refreshFrequencyMins: 30
                 numberOfResources: 1
+                rawErrors: null
                 rebootRequested: 'False'
                 refreshMode: Pull
                 reportFormatVersion: '2.0'
@@ -1440,6 +1449,7 @@ paths:
                 resources:
                   - dependsOn: []
                     durationInSeconds: 0.25
+                    error: null
                     moduleName: PsDesiredStateConfiguration
                     moduleVersion: '1.1'
                     resourceId: '[WindowsFeature]IIS'
