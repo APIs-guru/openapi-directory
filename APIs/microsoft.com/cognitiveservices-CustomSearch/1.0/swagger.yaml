@@ -4,15 +4,23 @@ schemes:
 host: api.cognitive.microsoft.com
 basePath: /bingcustomsearch/v7.0
 info:
+  contact:
+    x-twitter: microsoft
   description: The Bing Custom Search API lets you send a search query to Bing and get back search results customized to meet your custom search definition.
   title: Custom Search
   version: '1.0'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://twitter.com/microsoft/profile_image?size=original'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/cognitiveservices/data-plane/CustomSearch/v1.0/CustomSearch.json'
       version: '2.0'
   x-providerName: microsoft.com
   x-serviceName: cognitiveservices-CustomSearch
+  x-tags:
+    - Microsoft
 produces:
   - application/json
 securityDefinitions:

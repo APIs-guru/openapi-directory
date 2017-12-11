@@ -4,15 +4,23 @@ schemes:
 host: api.cognitive.microsoft.com
 basePath: /bing/v7.0
 info:
+  contact:
+    x-twitter: microsoft
   description: 'The Video Search API lets you search on Bing for video that are relevant to the user''s search query, for insights about a video or for videos that are trending based on search requests made by others. This section provides technical details about the query parameters and headers that you use to request videos and the JSON response objects that contain them. For examples that show how to make requests, see [Searching the Web for Videos](https://docs.microsoft.com/azure/cognitive-services/bing-video-search/search-the-web).'
   title: Video Search
   version: '1.0'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://twitter.com/microsoft/profile_image?size=original'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/cognitiveservices/data-plane/VideoSearch/v1.0/VideoSearch.json'
       version: '2.0'
   x-providerName: microsoft.com
   x-serviceName: cognitiveservices-VideoSearch
+  x-tags:
+    - Microsoft
 produces:
   - application/json
 securityDefinitions:

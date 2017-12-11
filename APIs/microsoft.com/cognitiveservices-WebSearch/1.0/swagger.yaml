@@ -4,15 +4,23 @@ schemes:
 host: api.cognitive.microsoft.com
 basePath: /bing/v7.0
 info:
+  contact:
+    x-twitter: microsoft
   description: 'The Web Search API lets you send a search query to Bing and get back search results that include links to webpages, images, and more.'
   title: Web Search
   version: '1.0'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://twitter.com/microsoft/profile_image?size=original'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/cognitiveservices/data-plane/WebSearch/v1.0/WebSearch.json'
       version: '2.0'
   x-providerName: microsoft.com
   x-serviceName: cognitiveservices-WebSearch
+  x-tags:
+    - Microsoft
 produces:
   - application/json
 securityDefinitions:
