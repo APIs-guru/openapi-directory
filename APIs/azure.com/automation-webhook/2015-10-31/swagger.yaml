@@ -1,0 +1,790 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  title: AutomationManagementClient
+  version: '2015-10-31'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/automation/resource-manager/Microsoft.Automation/2015-10-31/webhook.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: automation-webhook
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters: {}
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/webhooks':
+    get:
+      description: Retrieve a list of webhooks.
+      externalDocs:
+        url: 'http://aka.ms/azureautomationsdk/webhookoperations'
+      operationId: Webhook_ListByAutomationAccount
+      parameters:
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          pattern: '^[-\w\._]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The automation account name.
+          in: path
+          name: automationAccountName
+          required: true
+          type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: The response model for the list webhook operation.
+            properties:
+              nextLink:
+                description: Gets or sets the next link.
+                type: string
+              value:
+                description: Gets or sets a list of webhooks.
+                items:
+                  description: Definition of the webhook type.
+                  properties:
+                    id:
+                      description: Gets or sets the id of the resource.
+                      type: string
+                    name:
+                      description: Gets or sets the name of the webhook.
+                      type: string
+                    properties:
+                      description: Definition of the webhook properties
+                      properties:
+                        creationTime:
+                          description: Gets or sets the creation time.
+                          format: date-time
+                          type: string
+                        description:
+                          description: Gets or sets the description.
+                          type: string
+                        expiryTime:
+                          description: Gets or sets the expiry time.
+                          format: date-time
+                          type: string
+                        isEnabled:
+                          default: false
+                          description: Gets or sets the value of the enabled flag of the webhook.
+                          type: boolean
+                        lastInvokedTime:
+                          description: Gets or sets the last invoked time.
+                          format: date-time
+                          type: string
+                        lastModifiedTime:
+                          description: Gets or sets the last modified time.
+                          format: date-time
+                          type: string
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: Gets or sets the parameters of the job that is created when the webhook calls the runbook it is associated with.
+                          type: object
+                        runOn:
+                          description: Gets or sets the name of the hybrid worker group the webhook job will run on.
+                          type: string
+                        runbook:
+                          description: The runbook property associated with the entity.
+                          properties:
+                            name:
+                              description: Gets or sets the name of the runbook.
+                              type: string
+                        uri:
+                          description: Gets or sets the webhook uri.
+                          type: string
+                type: array
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - Webhook
+      x-ms-examples:
+        List webhooks by Automation Account:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: myAutomationAccount33
+            resourceGroupName: rg
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/webhooks/TestWebhook
+                    name: TestWebhook
+                    properties:
+                      creationTime: '2017-03-29T22:18:14.6651862+00:00'
+                      expiryTime: '2018-03-29T22:18:13.7002872+00:00'
+                      isEnabled: true
+                      lastModifiedBy: ''
+                      lastModifiedTime: '2017-03-29T22:18:14.6651862+00:00'
+                      runbook:
+                        name: TestRunbook
+              headers: {}
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/webhooks/generateUri':
+    post:
+      description: Generates a Uri for use in creating a webhook.
+      externalDocs:
+        url: 'http://aka.ms/azureautomationsdk/webhookoperations'
+      operationId: Webhook_GenerateUri
+      parameters:
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          pattern: '^[-\w\._]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The automation account name.
+          in: path
+          name: automationAccountName
+          required: true
+          type: string
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - Webhook
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/webhooks/{webhookName}':
+    delete:
+      description: Delete the webhook by name.
+      externalDocs:
+        url: 'http://aka.ms/azureautomationsdk/webhookoperations'
+      operationId: Webhook_Delete
+      parameters:
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          pattern: '^[-\w\._]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The automation account name.
+          in: path
+          name: automationAccountName
+          required: true
+          type: string
+        - description: The webhook name.
+          in: path
+          name: webhookName
+          required: true
+          type: string
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - Webhook
+      x-ms-examples:
+        Delete webhook:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: myAutomationAccount33
+            resourceGroupName: rg
+            subscriptionId: subid
+            webhookName: TestWebhook
+          responses:
+            '200': {}
+    get:
+      description: Retrieve the webhook identified by webhook name.
+      externalDocs:
+        url: 'http://aka.ms/azureautomationsdk/webhookoperations'
+      operationId: Webhook_Get
+      parameters:
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          pattern: '^[-\w\._]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The automation account name.
+          in: path
+          name: automationAccountName
+          required: true
+          type: string
+        - description: The webhook name.
+          in: path
+          name: webhookName
+          required: true
+          type: string
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: Definition of the webhook type.
+            properties:
+              id:
+                description: Gets or sets the id of the resource.
+                type: string
+              name:
+                description: Gets or sets the name of the webhook.
+                type: string
+              properties:
+                description: Definition of the webhook properties
+                properties:
+                  creationTime:
+                    description: Gets or sets the creation time.
+                    format: date-time
+                    type: string
+                  description:
+                    description: Gets or sets the description.
+                    type: string
+                  expiryTime:
+                    description: Gets or sets the expiry time.
+                    format: date-time
+                    type: string
+                  isEnabled:
+                    default: false
+                    description: Gets or sets the value of the enabled flag of the webhook.
+                    type: boolean
+                  lastInvokedTime:
+                    description: Gets or sets the last invoked time.
+                    format: date-time
+                    type: string
+                  lastModifiedTime:
+                    description: Gets or sets the last modified time.
+                    format: date-time
+                    type: string
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: Gets or sets the parameters of the job that is created when the webhook calls the runbook it is associated with.
+                    type: object
+                  runOn:
+                    description: Gets or sets the name of the hybrid worker group the webhook job will run on.
+                    type: string
+                  runbook:
+                    description: The runbook property associated with the entity.
+                    properties:
+                      name:
+                        description: Gets or sets the name of the runbook.
+                        type: string
+                  uri:
+                    description: Gets or sets the webhook uri.
+                    type: string
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - Webhook
+      x-ms-examples:
+        Get webhook:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: myAutomationAccount33
+            resourceGroupName: rg
+            subscriptionId: subid
+            webhookName: TestWebhook
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/webhooks/TestWebhook
+                name: TestWebhook
+                properties:
+                  creationTime: '2017-03-29T22:18:14.6651862+00:00'
+                  expiryTime: '2018-03-29T22:18:13.7002872+00:00'
+                  isEnabled: true
+                  lastModifiedBy: ''
+                  lastModifiedTime: '2017-03-29T22:18:14.6651862+00:00'
+                  runbook:
+                    name: TestRunbook
+                  uri: ''
+              headers: {}
+    patch:
+      description: Update the webhook identified by webhook name.
+      externalDocs:
+        url: 'http://aka.ms/azureautomationsdk/webhookoperations'
+      operationId: Webhook_Update
+      parameters:
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          pattern: '^[-\w\._]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The automation account name.
+          in: path
+          name: automationAccountName
+          required: true
+          type: string
+        - description: The webhook name.
+          in: path
+          name: webhookName
+          required: true
+          type: string
+        - description: The update parameters for webhook.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            description: The parameters supplied to the update webhook operation.
+            properties:
+              name:
+                description: Gets or sets the name of the webhook.
+                type: string
+              properties:
+                description: The properties of the update webhook.
+                properties:
+                  description:
+                    description: Gets or sets the description of the webhook.
+                    type: string
+                  isEnabled:
+                    description: Gets or sets the value of the enabled flag of webhook.
+                    type: boolean
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: Gets or sets the parameters of the job.
+                    type: object
+                  runOn:
+                    description: Gets or sets the name of the hybrid worker group the webhook job will run on.
+                    type: string
+            required:
+              - name
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: Definition of the webhook type.
+            properties:
+              id:
+                description: Gets or sets the id of the resource.
+                type: string
+              name:
+                description: Gets or sets the name of the webhook.
+                type: string
+              properties:
+                description: Definition of the webhook properties
+                properties:
+                  creationTime:
+                    description: Gets or sets the creation time.
+                    format: date-time
+                    type: string
+                  description:
+                    description: Gets or sets the description.
+                    type: string
+                  expiryTime:
+                    description: Gets or sets the expiry time.
+                    format: date-time
+                    type: string
+                  isEnabled:
+                    default: false
+                    description: Gets or sets the value of the enabled flag of the webhook.
+                    type: boolean
+                  lastInvokedTime:
+                    description: Gets or sets the last invoked time.
+                    format: date-time
+                    type: string
+                  lastModifiedTime:
+                    description: Gets or sets the last modified time.
+                    format: date-time
+                    type: string
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: Gets or sets the parameters of the job that is created when the webhook calls the runbook it is associated with.
+                    type: object
+                  runOn:
+                    description: Gets or sets the name of the hybrid worker group the webhook job will run on.
+                    type: string
+                  runbook:
+                    description: The runbook property associated with the entity.
+                    properties:
+                      name:
+                        description: Gets or sets the name of the runbook.
+                        type: string
+                  uri:
+                    description: Gets or sets the webhook uri.
+                    type: string
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - Webhook
+      x-ms-examples:
+        Update webhook:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: myAutomationAccount33
+            parameters:
+              name: TestWebhook
+              properties:
+                description: updated webhook
+                isEnabled: false
+            resourceGroupName: rg
+            subscriptionId: subid
+            webhookName: TestWebhook
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/webhooks/TestWebhook
+                name: TestWebhook
+                properties:
+                  creationTime: '2017-03-30T21:52:01.272378+00:00'
+                  expiryTime: '2018-03-30T23:03:14.5752078+00:00'
+                  isEnabled: false
+                  lastModifiedBy: ''
+                  lastModifiedTime: '2017-03-30T23:03:14.9069441+00:00'
+                  runbook:
+                    name: TestRunbook
+                  uri: ''
+              headers: {}
+    put:
+      description: Create the webhook identified by webhook name.
+      externalDocs:
+        url: 'http://aka.ms/azureautomationsdk/webhookoperations'
+      operationId: Webhook_CreateOrUpdate
+      parameters:
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          pattern: '^[-\w\._]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The automation account name.
+          in: path
+          name: automationAccountName
+          required: true
+          type: string
+        - description: The webhook name.
+          in: path
+          name: webhookName
+          required: true
+          type: string
+        - description: The create or update parameters for webhook.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            description: The parameters supplied to the create or update webhook operation.
+            properties:
+              name:
+                description: Gets or sets the name of the webhook.
+                type: string
+              properties:
+                description: The properties of the create webhook operation.
+                properties:
+                  expiryTime:
+                    description: Gets or sets the expiry time.
+                    format: date-time
+                    type: string
+                  isEnabled:
+                    description: Gets or sets the value of the enabled flag of webhook.
+                    type: boolean
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: Gets or sets the parameters of the job.
+                    type: object
+                  runOn:
+                    description: Gets or sets the name of the hybrid worker group the webhook job will run on.
+                    type: string
+                  runbook:
+                    description: The runbook property associated with the entity.
+                    properties:
+                      name:
+                        description: Gets or sets the name of the runbook.
+                        type: string
+                  uri:
+                    description: Gets or sets the uri.
+                    type: string
+            required:
+              - name
+              - properties
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: Definition of the webhook type.
+            properties:
+              id:
+                description: Gets or sets the id of the resource.
+                type: string
+              name:
+                description: Gets or sets the name of the webhook.
+                type: string
+              properties:
+                description: Definition of the webhook properties
+                properties:
+                  creationTime:
+                    description: Gets or sets the creation time.
+                    format: date-time
+                    type: string
+                  description:
+                    description: Gets or sets the description.
+                    type: string
+                  expiryTime:
+                    description: Gets or sets the expiry time.
+                    format: date-time
+                    type: string
+                  isEnabled:
+                    default: false
+                    description: Gets or sets the value of the enabled flag of the webhook.
+                    type: boolean
+                  lastInvokedTime:
+                    description: Gets or sets the last invoked time.
+                    format: date-time
+                    type: string
+                  lastModifiedTime:
+                    description: Gets or sets the last modified time.
+                    format: date-time
+                    type: string
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: Gets or sets the parameters of the job that is created when the webhook calls the runbook it is associated with.
+                    type: object
+                  runOn:
+                    description: Gets or sets the name of the hybrid worker group the webhook job will run on.
+                    type: string
+                  runbook:
+                    description: The runbook property associated with the entity.
+                    properties:
+                      name:
+                        description: Gets or sets the name of the runbook.
+                        type: string
+                  uri:
+                    description: Gets or sets the webhook uri.
+                    type: string
+        '201':
+          description: Created
+          schema:
+            description: Definition of the webhook type.
+            properties:
+              id:
+                description: Gets or sets the id of the resource.
+                type: string
+              name:
+                description: Gets or sets the name of the webhook.
+                type: string
+              properties:
+                description: Definition of the webhook properties
+                properties:
+                  creationTime:
+                    description: Gets or sets the creation time.
+                    format: date-time
+                    type: string
+                  description:
+                    description: Gets or sets the description.
+                    type: string
+                  expiryTime:
+                    description: Gets or sets the expiry time.
+                    format: date-time
+                    type: string
+                  isEnabled:
+                    default: false
+                    description: Gets or sets the value of the enabled flag of the webhook.
+                    type: boolean
+                  lastInvokedTime:
+                    description: Gets or sets the last invoked time.
+                    format: date-time
+                    type: string
+                  lastModifiedTime:
+                    description: Gets or sets the last modified time.
+                    format: date-time
+                    type: string
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: Gets or sets the parameters of the job that is created when the webhook calls the runbook it is associated with.
+                    type: object
+                  runOn:
+                    description: Gets or sets the name of the hybrid worker group the webhook job will run on.
+                    type: string
+                  runbook:
+                    description: The runbook property associated with the entity.
+                    properties:
+                      name:
+                        description: Gets or sets the name of the runbook.
+                        type: string
+                  uri:
+                    description: Gets or sets the webhook uri.
+                    type: string
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - Webhook
+      x-ms-examples:
+        Create or update webhook:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: myAutomationAccount33
+            parameters:
+              name: TestWebhook
+              properties:
+                expiryTime: '2018-03-29T22:18:13.7002872Z'
+                isEnabled: true
+                runbook:
+                  name: TestRunbook
+                uri: 'https://s1events.azure-automation.net/webhooks?token=7u3KfQvM1vUPWaDMFRv2%2fAA4Jqx8QwS8aBuyO6Xsdcw%3d'
+            resourceGroupName: rg
+            subscriptionId: subid
+            webhookName: TestWebhook
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/webhooks/TestWebhook
+                name: TestWebhook
+                properties:
+                  creationTime: '2017-03-29T22:18:14.6651862+00:00'
+                  expiryTime: '2018-03-29T22:18:13.7002872+00:00'
+                  isEnabled: true
+                  lastModifiedBy: ''
+                  lastModifiedTime: '2017-03-29T22:18:14.6651862+00:00'
+                  runbook:
+                    name: TestRunbook
+                  uri: ''
+              headers: {}
+            '201':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/webhooks/TestWebhook
+                name: TestWebhook
+                properties:
+                  creationTime: '2017-03-29T22:18:14.6651862+00:00'
+                  expiryTime: '2018-03-29T22:18:13.7002872+00:00'
+                  isEnabled: true
+                  lastModifiedBy: ''
+                  lastModifiedTime: '2017-03-29T22:18:14.6651862+00:00'
+                  runbook:
+                    name: TestRunbook
+                  uri: ''
+              headers: {}
+definitions: {}

@@ -1,0 +1,2698 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: Creates an Azure Data Lake Analytics account management client.
+  title: DataLakeAnalyticsAccountManagementClient
+  version: '2016-11-01'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/datalake-analytics/resource-manager/Microsoft.DataLakeAnalytics/2016-11-01/account.json'
+      version: '2.0'
+  x-preferred: true
+  x-providerName: azure.com
+  x-serviceName: datalake-analytics-account
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersionParameter:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  SubscriptionIdParameter:
+    description: Get subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  /providers/Microsoft.DataLakeAnalytics/operations:
+    get:
+      description: Lists all of the available Data Lake Analytics REST API operations.
+      operationId: Operations_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully listed the available operations for Data Lake Analytics.
+          schema:
+            $ref: '#/definitions/OperationListResult'
+      tags:
+        - Operations
+      x-ms-examples:
+        Lists all of the available Data Lake Analytics REST API operations:
+          parameters:
+            api-version: '2016-11-01'
+          responses:
+            '200':
+              body:
+                nextLink: 'https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeAnalytics/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>'
+                value:
+                  - display:
+                      description: Get available operations of DataLakeAnalytics.
+                      operation: Get Available Operations
+                      provider: Microsoft DataLakeAnalytics
+                      resource: Available Operations
+                    name: Microsoft.DataLakeAnalytics/operations/read
+  '/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeAnalytics/accounts':
+    get:
+      description: 'Gets the first page of Data Lake Analytics accounts, if any, within the current subscription. This includes a link to the next page, if any.'
+      operationId: Account_List
+      parameters:
+        - description: OData filter. Optional.
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: The number of items to return. Optional.
+          format: int32
+          in: query
+          minimum: 1
+          name: $top
+          required: false
+          type: integer
+        - description: The number of items to skip over before returning elements. Optional.
+          format: int32
+          in: query
+          minimum: 1
+          name: $skip
+          required: false
+          type: integer
+        - description: 'OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional.'
+          in: query
+          name: $select
+          required: false
+          type: string
+        - description: 'OrderBy clause. One or more comma-separated expressions with an optional "asc" (the default) or "desc" depending on the order you''d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional.'
+          in: query
+          name: $orderby
+          required: false
+          type: string
+        - description: 'The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional.'
+          in: query
+          name: $count
+          required: false
+          type: boolean
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the list of Azure Data Lake Analytics accounts.
+          schema:
+            $ref: '#/definitions/DataLakeAnalyticsAccountListResult'
+      tags:
+        - Account
+      x-ms-examples:
+        Gets the first page of Data Lake Analytics accounts within the current subscription:
+          parameters:
+            $count: false
+            $filter: test_filter
+            $orderby: test_orderby
+            $select: test_select
+            $skip: 1
+            $top: 1
+            api-version: '2016-11-01'
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                nextLink: 'https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeAnalytics/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>'
+                value:
+                  - id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                    location: test_location
+                    name: test_account
+                    properties:
+                      accountId: 94f4bf5d-78a9-4c31-8aa7-b34d07bad898
+                      creationTime: '2017-04-14T13:21:56.6819037-07:00'
+                      endpoint: test_endpoint
+                      lastModifiedTime: '2017-04-14T13:21:56.6819037-07:00'
+                      provisioningState: Succeeded
+                      state: Active
+                    tags:
+                      test_key: test_value
+                    type: test_type
+      x-ms-odata: '#/definitions/DataLakeAnalyticsAccountBasic'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeAnalytics/locations/{location}/capability':
+    get:
+      description: Gets subscription-level properties and limits for Data Lake Analytics specified by Resource location.
+      operationId: Locations_GetCapability
+      parameters:
+        - description: The Resource location without whitespace.
+          in: path
+          name: location
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the subscription-level properties and limits for Data Lake Analytics specified by Resource location.
+          schema:
+            $ref: '#/definitions/CapabilityInformation'
+        '404':
+          description: Subscription not found.
+      tags:
+        - Locations
+      x-ms-examples:
+        Gets subscription-level properties and limits for Data Lake Analytics specified by Resource location:
+          parameters:
+            api-version: '2016-11-01'
+            location: EastUS2
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                accountCount: 100
+                maxAccountCount: 150
+                migrationState: false
+                state: Registered
+                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            '404': {}
+  '/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeAnalytics/locations/{location}/checkNameAvailability':
+    post:
+      description: Checks whether the specified account name is available or taken.
+      operationId: Account_CheckNameAvailability
+      parameters:
+        - description: The Resource location without whitespace.
+          in: path
+          name: location
+          required: true
+          type: string
+        - description: Parameters supplied to check the Data Lake Analytics account name availability.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CheckNameAvailabilityParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the Data Lake Analytics account name availability information.
+          schema:
+            $ref: '#/definitions/NameAvailabilityInformation'
+      tags:
+        - Account
+      x-ms-examples:
+        Checks whether the specified account name is available or taken:
+          parameters:
+            api-version: '2016-11-01'
+            location: EastUS2
+            parameters:
+              name: contosoadla
+              type: Microsoft.DataLakeAnalytics/accounts
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                message: An account named 'abc' already exists.
+                nameAvailable: false
+                reason: AlreadyExists
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts':
+    get:
+      description: 'Gets the first page of Data Lake Analytics accounts, if any, within a specific resource group. This includes a link to the next page, if any.'
+      operationId: Account_ListByResourceGroup
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: OData filter. Optional.
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: The number of items to return. Optional.
+          format: int32
+          in: query
+          minimum: 1
+          name: $top
+          required: false
+          type: integer
+        - description: The number of items to skip over before returning elements. Optional.
+          format: int32
+          in: query
+          minimum: 1
+          name: $skip
+          required: false
+          type: integer
+        - description: 'OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional.'
+          in: query
+          name: $select
+          required: false
+          type: string
+        - description: 'OrderBy clause. One or more comma-separated expressions with an optional "asc" (the default) or "desc" depending on the order you''d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional.'
+          in: query
+          name: $orderby
+          required: false
+          type: string
+        - description: 'The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional.'
+          in: query
+          name: $count
+          required: false
+          type: boolean
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the list of accounts in the specified resource group.
+          schema:
+            $ref: '#/definitions/DataLakeAnalyticsAccountListResult'
+      tags:
+        - Account
+      x-ms-examples:
+        Gets the first page of Data Lake Analytics accounts within a specific resource group:
+          parameters:
+            $count: false
+            $filter: test_filter
+            $orderby: test_orderby
+            $select: test_select
+            $skip: 1
+            $top: 1
+            api-version: '2016-11-01'
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                nextLink: 'https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeAnalytics/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>'
+                value:
+                  - id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                    location: test_location
+                    name: test_account
+                    properties:
+                      accountId: 94f4bf5d-78a9-4c31-8aa7-b34d07bad898
+                      creationTime: '2017-04-14T13:21:56.6819037-07:00'
+                      endpoint: test_endpoint
+                      lastModifiedTime: '2017-04-14T13:21:56.6819037-07:00'
+                      provisioningState: Succeeded
+                      state: Active
+                    tags:
+                      test_key: test_value
+                    type: test_type
+      x-ms-odata: '#/definitions/DataLakeAnalyticsAccountBasic'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}':
+    delete:
+      description: Begins the delete process for the Data Lake Analytics account object specified by the account name.
+      operationId: Account_Delete
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account to delete
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully deleted the specified account.
+        '202':
+          description: Successfully initiated the deletion of the specified account.
+        '204':
+          description: The specified account was not found.
+      tags:
+        - Account
+      x-ms-examples:
+        Begins the delete process for the Data Lake Analytics account object specified by the account name:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200': {}
+            '202': {}
+            '204': {}
+      x-ms-long-running-operation: true
+    get:
+      description: Gets details of the specified Data Lake Analytics account.
+      operationId: Account_Get
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account to retrieve.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the details of the specified account.
+          schema:
+            $ref: '#/definitions/DataLakeAnalyticsAccount'
+      tags:
+        - Account
+      x-ms-examples:
+        Gets details of the specified Data Lake Analytics account:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                location: test_location
+                name: test_account
+                properties:
+                  accountId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                  computePolicies:
+                    - name: test_policy
+                      properties:
+                        maxDegreeOfParallelismPerJob: 1
+                        minPriorityPerJob: 1
+                        objectId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                        objectType: User
+                  creationTime: '2017-04-14T13:21:56.6819037-07:00'
+                  currentTier: Consumption
+                  dataLakeStoreAccounts:
+                    - id: test_adls_id
+                      name: test_adls
+                      properties:
+                        suffix: test_suffix
+                      type: test_type
+                  defaultDataLakeStoreAccount: test_account
+                  endpoint: test_endpoint
+                  firewallAllowAzureIps: Enabled
+                  firewallRules:
+                    - id: test_firewall_id
+                      name: test_rule
+                      properties:
+                        endIpAddress: 2.2.2.2
+                        startIpAddress: 1.1.1.1
+                      type: test_type
+                  firewallState: Enabled
+                  lastModifiedTime: '2017-04-14T13:21:56.6819037-07:00'
+                  maxDegreeOfParallelism: 30
+                  maxDegreeOfParallelismPerJob: 1
+                  maxJobCount: 3
+                  minPriorityPerJob: 1
+                  newTier: Consumption
+                  provisioningState: Succeeded
+                  queryStoreRetention: 30
+                  state: Active
+                  storageAccounts:
+                    - id: test_storage_id
+                      name: test_storage
+                      properties:
+                        accessKey: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab346
+                        suffix: test_suffix
+                      type: test_type
+                  systemMaxDegreeOfParallelism: 1
+                  systemMaxJobCount: 1
+                tags:
+                  test_key: test_value
+                type: test_type
+    patch:
+      description: Updates the Data Lake Analytics account object specified by the accountName with the contents of the account object.
+      operationId: Account_Update
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account to update.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: Parameters supplied to the update Data Lake Analytics account operation.
+          in: body
+          name: parameters
+          required: false
+          schema:
+            $ref: '#/definitions/DataLakeAnalyticsAccountUpdateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully updated the specified account.
+          schema:
+            $ref: '#/definitions/DataLakeAnalyticsAccount'
+        '201':
+          description: Successfully initiated an update of the specified account.
+          schema:
+            $ref: '#/definitions/DataLakeAnalyticsAccount'
+        '202':
+          description: Successfully initiated an update of the specified account.
+          schema:
+            $ref: '#/definitions/DataLakeAnalyticsAccount'
+      tags:
+        - Account
+      x-ms-examples:
+        Updates the Data Lake Analytics account object:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            parameters:
+              properties:
+                computePolicies:
+                  - name: test_policy
+                    properties:
+                      maxDegreeOfParallelismPerJob: 1
+                      minPriorityPerJob: 1
+                      objectId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                      objectType: User
+                firewallAllowAzureIps: Enabled
+                firewallRules:
+                  - id: test_firewall_id
+                    name: test_rule
+                    properties:
+                      endIpAddress: 2.2.2.2
+                      startIpAddress: 1.1.1.1
+                    type: test_type
+                firewallState: Enabled
+                maxDegreeOfParallelism: 1
+                maxDegreeOfParallelismPerJob: 1
+                maxJobCount: 1
+                minPriorityPerJob: 1
+                newTier: Consumption
+                queryStoreRetention: 1
+              tags:
+                test_key: test_value
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                location: test_location
+                name: test_account
+                properties:
+                  accountId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                  computePolicies:
+                    - name: test_policy
+                      properties:
+                        maxDegreeOfParallelismPerJob: 1
+                        minPriorityPerJob: 1
+                        objectId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                        objectType: User
+                  creationTime: '2017-04-14T13:21:56.6819037-07:00'
+                  currentTier: Consumption
+                  dataLakeStoreAccounts:
+                    - id: test_adls_id
+                      name: test_adls
+                      properties:
+                        suffix: test_suffix
+                      type: test_type
+                  defaultDataLakeStoreAccount: test_account
+                  endpoint: test_endpoint
+                  firewallAllowAzureIps: Enabled
+                  firewallRules:
+                    - id: test_firewall_id
+                      name: test_rule
+                      properties:
+                        endIpAddress: 2.2.2.2
+                        startIpAddress: 1.1.1.1
+                      type: test_type
+                  firewallState: Enabled
+                  lastModifiedTime: '2017-04-14T13:21:56.6819037-07:00'
+                  maxDegreeOfParallelism: 30
+                  maxDegreeOfParallelismPerJob: 1
+                  maxJobCount: 3
+                  minPriorityPerJob: 1
+                  newTier: Consumption
+                  provisioningState: Succeeded
+                  queryStoreRetention: 30
+                  state: Active
+                  storageAccounts:
+                    - id: test_storage_id
+                      name: test_storage
+                      properties:
+                        accessKey: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab346
+                        suffix: test_suffix
+                      type: test_type
+                  systemMaxDegreeOfParallelism: 1
+                  systemMaxJobCount: 1
+                tags:
+                  test_key: test_value
+                type: test_type
+            '201':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                location: test_location
+                name: test_account
+                properties:
+                  accountId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                  computePolicies:
+                    - name: test_policy
+                      properties:
+                        maxDegreeOfParallelismPerJob: 1
+                        minPriorityPerJob: 1
+                        objectId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                        objectType: User
+                  creationTime: '2017-04-14T13:21:56.6819037-07:00'
+                  currentTier: Consumption
+                  dataLakeStoreAccounts:
+                    - id: test_adls_id
+                      name: test_adls
+                      properties:
+                        suffix: test_suffix
+                      type: test_type
+                  defaultDataLakeStoreAccount: test_account
+                  endpoint: test_endpoint
+                  firewallAllowAzureIps: Enabled
+                  firewallRules:
+                    - id: test_firewall_id
+                      name: test_rule
+                      properties:
+                        endIpAddress: 2.2.2.2
+                        startIpAddress: 1.1.1.1
+                      type: test_type
+                  firewallState: Enabled
+                  lastModifiedTime: '2017-04-14T13:21:56.6819037-07:00'
+                  maxDegreeOfParallelism: 30
+                  maxDegreeOfParallelismPerJob: 1
+                  maxJobCount: 3
+                  minPriorityPerJob: 1
+                  newTier: Consumption
+                  provisioningState: Succeeded
+                  queryStoreRetention: 30
+                  state: Active
+                  storageAccounts:
+                    - id: test_storage_id
+                      name: test_storage
+                      properties:
+                        accessKey: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab346
+                        suffix: test_suffix
+                      type: test_type
+                  systemMaxDegreeOfParallelism: 1
+                  systemMaxJobCount: 1
+                tags:
+                  test_key: test_value
+                type: test_type
+      x-ms-long-running-operation: true
+    put:
+      description: Creates the specified Data Lake Analytics account. This supplies the user with computation services for Data Lake Analytics workloads
+      operationId: Account_Create
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.the account will be associated with.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account to create.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: Parameters supplied to the create Data Lake Analytics account operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/DataLakeAnalyticsAccount'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully created the specified account.
+          schema:
+            $ref: '#/definitions/DataLakeAnalyticsAccount'
+        '201':
+          description: Successfully initiated creation of the specified account.
+          schema:
+            $ref: '#/definitions/DataLakeAnalyticsAccount'
+      tags:
+        - Account
+      x-ms-examples:
+        Creates the specified Data Lake Analytics account:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            parameters:
+              location: test_location
+              properties:
+                computePolicies:
+                  - name: test_policy
+                    properties:
+                      maxDegreeOfParallelismPerJob: 1
+                      minPriorityPerJob: 1
+                      objectId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                      objectType: User
+                dataLakeStoreAccounts:
+                  - id: test_adls_id
+                    name: test_adls
+                    properties:
+                      suffix: test_suffix
+                    type: test_type
+                defaultDataLakeStoreAccount: test_account
+                firewallAllowAzureIps: Enabled
+                firewallRules:
+                  - id: test_firewall_id
+                    name: test_rule
+                    properties:
+                      endIpAddress: 2.2.2.2
+                      startIpAddress: 1.1.1.1
+                    type: test_type
+                firewallState: Enabled
+                maxDegreeOfParallelism: 30
+                maxDegreeOfParallelismPerJob: 1
+                maxJobCount: 3
+                minPriorityPerJob: 1
+                newTier: Consumption
+                queryStoreRetention: 30
+                storageAccounts:
+                  - id: test_storage_id
+                    name: test_storage
+                    properties:
+                      accessKey: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab346
+                      suffix: test_suffix
+                    type: test_type
+              tags:
+                test_key: test_value
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                location: test_location
+                name: test_account
+                properties:
+                  accountId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                  computePolicies:
+                    - name: test_policy
+                      properties:
+                        maxDegreeOfParallelismPerJob: 1
+                        minPriorityPerJob: 1
+                        objectId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                        objectType: User
+                  creationTime: '2017-04-14T13:21:56.6819037-07:00'
+                  currentTier: Consumption
+                  dataLakeStoreAccounts:
+                    - id: test_adls_id
+                      name: test_adls
+                      properties:
+                        suffix: test_suffix
+                      type: test_type
+                  defaultDataLakeStoreAccount: test_account
+                  endpoint: test_endpoint
+                  firewallAllowAzureIps: Enabled
+                  firewallRules:
+                    - id: test_firewall_id
+                      name: test_rule
+                      properties:
+                        endIpAddress: 2.2.2.2
+                        startIpAddress: 1.1.1.1
+                      type: test_type
+                  firewallState: Enabled
+                  lastModifiedTime: '2017-04-14T13:21:56.6819037-07:00'
+                  maxDegreeOfParallelism: 30
+                  maxDegreeOfParallelismPerJob: 1
+                  maxJobCount: 3
+                  minPriorityPerJob: 1
+                  newTier: Consumption
+                  provisioningState: Succeeded
+                  queryStoreRetention: 30
+                  state: Active
+                  storageAccounts:
+                    - id: test_storage_id
+                      name: test_storage
+                      properties:
+                        accessKey: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab346
+                        suffix: test_suffix
+                      type: test_type
+                  systemMaxDegreeOfParallelism: 1
+                  systemMaxJobCount: 1
+                tags:
+                  test_key: test_value
+                type: test_type
+            '201':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                location: test_location
+                name: test_account
+                properties:
+                  accountId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                  computePolicies:
+                    - name: test_policy
+                      properties:
+                        maxDegreeOfParallelismPerJob: 1
+                        minPriorityPerJob: 1
+                        objectId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                        objectType: User
+                  creationTime: '2017-04-14T13:21:56.6819037-07:00'
+                  currentTier: Consumption
+                  dataLakeStoreAccounts:
+                    - id: test_adls_id
+                      name: test_adls
+                      properties:
+                        suffix: test_suffix
+                      type: test_type
+                  defaultDataLakeStoreAccount: test_account
+                  endpoint: test_endpoint
+                  firewallAllowAzureIps: Enabled
+                  firewallRules:
+                    - id: test_firewall_id
+                      name: test_rule
+                      properties:
+                        endIpAddress: 2.2.2.2
+                        startIpAddress: 1.1.1.1
+                      type: test_type
+                  firewallState: Enabled
+                  lastModifiedTime: '2017-04-14T13:21:56.6819037-07:00'
+                  maxDegreeOfParallelism: 30
+                  maxDegreeOfParallelismPerJob: 1
+                  maxJobCount: 3
+                  minPriorityPerJob: 1
+                  newTier: Consumption
+                  provisioningState: Succeeded
+                  queryStoreRetention: 30
+                  state: Active
+                  storageAccounts:
+                    - id: test_storage_id
+                      name: test_storage
+                      properties:
+                        accessKey: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab346
+                        suffix: test_suffix
+                      type: test_type
+                  systemMaxDegreeOfParallelism: 1
+                  systemMaxJobCount: 1
+                tags:
+                  test_key: test_value
+                type: test_type
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/DataLakeStoreAccounts':
+    get:
+      description: 'Gets the first page of Data Lake Store accounts linked to the specified Data Lake Analytics account. The response includes a link to the next page, if any.'
+      operationId: DataLakeStoreAccounts_ListByAccount
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account for which to list Data Lake Store accounts.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: OData filter. Optional.
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: The number of items to return. Optional.
+          format: int32
+          in: query
+          minimum: 1
+          name: $top
+          required: false
+          type: integer
+        - description: The number of items to skip over before returning elements. Optional.
+          format: int32
+          in: query
+          minimum: 1
+          name: $skip
+          required: false
+          type: integer
+        - description: 'OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional.'
+          in: query
+          name: $select
+          required: false
+          type: string
+        - description: 'OrderBy clause. One or more comma-separated expressions with an optional "asc" (the default) or "desc" depending on the order you''d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional.'
+          in: query
+          name: $orderby
+          required: false
+          type: string
+        - description: 'The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional.'
+          in: query
+          name: $count
+          required: false
+          type: boolean
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the list of Azure Data Lake Store accounts.
+          schema:
+            $ref: '#/definitions/DataLakeAnalyticsAccountListDataLakeStoreResult'
+      tags:
+        - DataLakeStoreAccounts
+      x-ms-examples:
+        Gets the first page of Data Lake Store accounts linked to the specified Data Lake Analytics account:
+          parameters:
+            $count: false
+            $filter: test_filter
+            $orderby: test_orderby
+            $select: test_select
+            $skip: 1
+            $top: 1
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                nextLink: 'https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeAnalytics/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>'
+                value:
+                  - id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                    name: test_adls
+                    properties:
+                      suffix: test_suffix
+                    type: test_type
+      x-ms-odata: '#/definitions/DataLakeStoreAccountInfo'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/DataLakeStoreAccounts/{dataLakeStoreAccountName}':
+    delete:
+      description: Updates the Data Lake Analytics account specified to remove the specified Data Lake Store account.
+      operationId: DataLakeStoreAccounts_Delete
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account from which to remove the Data Lake Store account.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The name of the Data Lake Store account to remove
+          in: path
+          name: dataLakeStoreAccountName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully removed the specified Azure Data Lake Store account information from the specified Azure Data Lake Analytics account.
+      tags:
+        - DataLakeStoreAccounts
+      x-ms-examples:
+        Removes the specified Data Lake Store account:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            dataLakeStoreAccountName: test_adls_account
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200': {}
+    get:
+      description: Gets the specified Data Lake Store account details in the specified Data Lake Analytics account.
+      operationId: DataLakeStoreAccounts_Get
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account from which to retrieve the Data Lake Store account details.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The name of the Data Lake Store account to retrieve
+          in: path
+          name: dataLakeStoreAccountName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the specified Azure Data Lake Store account information.
+          schema:
+            $ref: '#/definitions/DataLakeStoreAccountInfo'
+      tags:
+        - DataLakeStoreAccounts
+      x-ms-examples:
+        Gets the specified Data Lake Store account details:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            dataLakeStoreAccountName: test_adls_account
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                name: test_adls
+                properties:
+                  suffix: test_suffix
+                type: test_type
+    put:
+      description: Updates the specified Data Lake Analytics account to include the additional Data Lake Store account.
+      operationId: DataLakeStoreAccounts_Add
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account to which to add the Data Lake Store account.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The name of the Data Lake Store account to add.
+          in: path
+          name: dataLakeStoreAccountName
+          required: true
+          type: string
+        - description: The details of the Data Lake Store account.
+          in: body
+          name: parameters
+          schema:
+            $ref: '#/definitions/AddDataLakeStoreParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully added the specified Azure Data Lake Store account information.
+      tags:
+        - DataLakeStoreAccounts
+      x-ms-examples:
+        Adds a Data Lake Store account:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            dataLakeStoreAccountName: test_adls_account
+            parameters:
+              properties:
+                suffix: test_suffix
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200': {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts':
+    get:
+      description: 'Gets the first page of Azure Storage accounts, if any, linked to the specified Data Lake Analytics account. The response includes a link to the next page, if any.'
+      operationId: StorageAccounts_ListByAccount
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account for which to list Azure Storage accounts.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The OData filter. Optional.
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: The number of items to return. Optional.
+          format: int32
+          in: query
+          minimum: 1
+          name: $top
+          required: false
+          type: integer
+        - description: The number of items to skip over before returning elements. Optional.
+          format: int32
+          in: query
+          minimum: 1
+          name: $skip
+          required: false
+          type: integer
+        - description: 'OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional.'
+          in: query
+          name: $select
+          required: false
+          type: string
+        - description: 'OrderBy clause. One or more comma-separated expressions with an optional "asc" (the default) or "desc" depending on the order you''d like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional.'
+          in: query
+          name: $orderby
+          required: false
+          type: string
+        - description: 'The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional.'
+          in: query
+          name: $count
+          required: false
+          type: boolean
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the list of Azure Storage accounts.
+          schema:
+            $ref: '#/definitions/DataLakeAnalyticsAccountListStorageAccountsResult'
+      tags:
+        - StorageAccounts
+      x-ms-examples:
+        Gets the first page of Azure Storage accounts linked to the specified Data Lake Analytics account:
+          parameters:
+            $count: false
+            $filter: test_filter
+            $orderby: test_orderby
+            $select: test_select
+            $skip: 1
+            $top: 1
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                nextLink: 'https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeAnalytics/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>'
+                value:
+                  - id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                    name: test_storage
+                    properties:
+                      accessKey: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab346
+                      suffix: test_suffix
+                    type: test_type
+      x-ms-odata: '#/definitions/StorageAccountInfo'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/{storageAccountName}':
+    delete:
+      description: Updates the specified Data Lake Analytics account to remove an Azure Storage account.
+      operationId: StorageAccounts_Delete
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account from which to remove the Azure Storage account.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The name of the Azure Storage account to remove
+          in: path
+          name: storageAccountName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully deleted the specified Azure Storage account information from the Azure Data Lake Analytics account.
+      tags:
+        - StorageAccounts
+      x-ms-examples:
+        Removes an Azure Storage account:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            resourceGroupName: contosorg
+            storageAccountName: test_storage
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200': {}
+    get:
+      description: Gets the specified Azure Storage account linked to the given Data Lake Analytics account.
+      operationId: StorageAccounts_Get
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account from which to retrieve Azure storage account details.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The name of the Azure Storage account for which to retrieve the details.
+          in: path
+          name: storageAccountName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the specified Azure Storage account information.
+          schema:
+            $ref: '#/definitions/StorageAccountInfo'
+      tags:
+        - StorageAccounts
+      x-ms-examples:
+        Gets the specified Azure Storage account:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            resourceGroupName: contosorg
+            storageAccountName: test_storage
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                name: test_storage
+                properties:
+                  accessKey: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab346
+                  suffix: test_suffix
+                type: test_type
+    patch:
+      description: 'Updates the Data Lake Analytics account to replace Azure Storage blob account details, such as the access key and/or suffix.'
+      operationId: StorageAccounts_Update
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account to modify storage accounts in
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The Azure Storage account to modify
+          in: path
+          name: storageAccountName
+          required: true
+          type: string
+        - description: 'The parameters containing the access key and suffix to update the storage account with, if any. Passing nothing results in no change.'
+          in: body
+          name: parameters
+          required: false
+          schema:
+            $ref: '#/definitions/UpdateStorageAccountParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully update the specified Azure Storage account information for the specified Azure Data Lake Analytics account.
+      tags:
+        - StorageAccounts
+      x-ms-examples:
+        Replaces Azure Storage blob account details:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            parameters:
+              properties:
+                accessKey: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab346
+                suffix: test_suffix
+            resourceGroupName: contosorg
+            storageAccountName: test_storage
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200': {}
+    put:
+      description: Updates the specified Data Lake Analytics account to add an Azure Storage account.
+      operationId: StorageAccounts_Add
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account to which to add the Azure Storage account.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The name of the Azure Storage account to add
+          in: path
+          name: storageAccountName
+          required: true
+          type: string
+        - description: The parameters containing the access key and optional suffix for the Azure Storage Account.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/AddStorageAccountParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully added the specified Azure Storage account information to the specified Azure Data Lake Analytics account.
+      tags:
+        - StorageAccounts
+      x-ms-examples:
+        Adds an Azure Storage account:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            parameters:
+              properties:
+                accessKey: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab346
+                suffix: test_suffix
+            resourceGroupName: contosorg
+            storageAccountName: test_storage
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200': {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/{storageAccountName}/Containers':
+    get:
+      description: 'Lists the Azure Storage containers, if any, associated with the specified Data Lake Analytics and Azure Storage account combination. The response includes a link to the next page of results, if any.'
+      operationId: StorageAccounts_ListStorageContainers
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account for which to list Azure Storage blob containers.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The name of the Azure storage account from which to list blob containers.
+          in: path
+          name: storageAccountName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the list of Azure Storage containers under the specified Azure Data Lake Analytics account.
+          schema:
+            $ref: '#/definitions/ListStorageContainersResult'
+      tags:
+        - StorageAccounts
+      x-ms-examples:
+        Lists the Azure Storage containers:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            resourceGroupName: contosorg
+            storageAccountName: test_storage
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                nextLink: 'https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeAnalytics/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>'
+                value:
+                  - id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                    name: test_storage
+                    properties:
+                      lastModifiedTime: '2017-04-14T13:21:56.6819037-07:00'
+                    type: test_type
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/{storageAccountName}/Containers/{containerName}':
+    get:
+      description: Gets the specified Azure Storage container associated with the given Data Lake Analytics and Azure Storage accounts.
+      operationId: StorageAccounts_GetStorageContainer
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account for which to retrieve blob container.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The name of the Azure storage account from which to retrieve the blob container.
+          in: path
+          name: storageAccountName
+          required: true
+          type: string
+        - description: The name of the Azure storage container to retrieve
+          in: path
+          name: containerName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the specified Azure Storage container information.
+          schema:
+            $ref: '#/definitions/StorageContainer'
+      tags:
+        - StorageAccounts
+      x-ms-examples:
+        Gets the specified Azure Storage container:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            containerName: test_container
+            resourceGroupName: contosorg
+            storageAccountName: test_storage
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                name: test_storage
+                properties:
+                  lastModifiedTime: '2017-04-14T13:21:56.6819037-07:00'
+                type: test_type
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/{storageAccountName}/Containers/{containerName}/listSasTokens':
+    post:
+      description: Gets the SAS token associated with the specified Data Lake Analytics and Azure Storage account and container combination.
+      operationId: StorageAccounts_ListSasTokens
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account from which an Azure Storage account's SAS token is being requested.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The name of the Azure storage account for which the SAS token is being requested.
+          in: path
+          name: storageAccountName
+          required: true
+          type: string
+        - description: The name of the Azure storage container for which the SAS token is being requested.
+          in: path
+          name: containerName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the list of Storage Account SAS tokens for the specified Azure Storage account container.
+          schema:
+            $ref: '#/definitions/ListSasTokensResult'
+      tags:
+        - StorageAccounts
+      x-ms-examples:
+        Gets the SAS token:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            containerName: test_container
+            resourceGroupName: contosorg
+            storageAccountName: test_storage
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                nextLink: 'https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeAnalytics/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>'
+                value:
+                  - accessToken: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab346
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/computePolicies':
+    get:
+      description: 'Lists the Data Lake Analytics compute policies within the specified Data Lake Analytics account. An account supports, at most, 50 policies'
+      operationId: ComputePolicies_ListByAccount
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account from which to get the compute policies.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully listed the compute policies.
+          schema:
+            $ref: '#/definitions/ComputePolicyListResult'
+      tags:
+        - ComputePolicies
+      x-ms-examples:
+        Lists the compute policies within the adla account:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                nextLink: 'https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeAnalytics/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>'
+                value:
+                  - name: test_policy
+                    properties:
+                      maxDegreeOfParallelismPerJob: 10
+                      minPriorityPerJob: 30
+                      objectId: 776b9091-8916-4638-87f7-9c989a38da98
+                      objectType: User
+                  - name: test_policy1
+                    properties:
+                      maxDegreeOfParallelismPerJob: 5
+                      minPriorityPerJob: 15
+                      objectId: 776b9091-8916-4638-87f7-9c989a38da99
+                      objectType: Group
+                  - name: test_policy2
+                    properties:
+                      maxDegreeOfParallelismPerJob: 20
+                      minPriorityPerJob: 60
+                      objectId: 776b9091-8916-4638-87f7-9c989a38da97
+                      objectType: ServicePrincipal
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/computePolicies/{computePolicyName}':
+    delete:
+      description: Deletes the specified compute policy from the specified Data Lake Analytics account
+      operationId: ComputePolicies_Delete
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account from which to delete the compute policy.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The name of the compute policy to delete.
+          in: path
+          name: computePolicyName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully deleted the specified compute policy
+        '204':
+          description: The specified compute policy does not exist or was already deleted.
+      tags:
+        - ComputePolicies
+      x-ms-examples:
+        Deletes the specified compute policy from the adla account:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            computePolicyName: test_policy
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Gets the specified Data Lake Analytics compute policy.
+      operationId: ComputePolicies_Get
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account from which to get the compute policy.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The name of the compute policy to retrieve.
+          in: path
+          name: computePolicyName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the specified compute policy.
+          schema:
+            $ref: '#/definitions/ComputePolicy'
+      tags:
+        - ComputePolicies
+      x-ms-examples:
+        Gets the specified compute policy:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            computePolicyName: test_policy
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                name: test_policy
+                properties:
+                  maxDegreeOfParallelismPerJob: 10
+                  minPriorityPerJob: 30
+                  objectId: 776b9091-8916-4638-87f7-9c989a38da98
+                  objectType: User
+    patch:
+      description: Updates the specified compute policy.
+      operationId: ComputePolicies_Update
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account to which to update the compute policy.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The name of the compute policy to update.
+          in: path
+          name: computePolicyName
+          required: true
+          type: string
+        - description: Parameters supplied to update the compute policy.
+          in: body
+          name: parameters
+          required: false
+          schema:
+            $ref: '#/definitions/ComputePolicy'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully updated the specified compute policy
+          schema:
+            $ref: '#/definitions/ComputePolicy'
+      tags:
+        - ComputePolicies
+      x-ms-examples:
+        Updates the specified compute policy:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            computePolicyName: test_policy
+            parameters:
+              properties:
+                maxDegreeOfParallelismPerJob: 11
+                minPriorityPerJob: 31
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                name: test_policy
+                properties:
+                  maxDegreeOfParallelismPerJob: 11
+                  minPriorityPerJob: 31
+                  objectId: 776b9091-8916-4638-87f7-9c989a38da98
+                  objectType: User
+    put:
+      description: 'Creates or updates the specified compute policy. During update, the compute policy with the specified name will be replaced with this new compute policy. An account supports, at most, 50 policies'
+      operationId: ComputePolicies_CreateOrUpdate
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account to add or replace the compute policy.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The name of the compute policy to create or update.
+          in: path
+          name: computePolicyName
+          required: true
+          type: string
+        - description: 'Parameters supplied to create or update the compute policy. The max degree of parallelism per job property, min priority per job property, or both must be present.'
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ComputePolicyCreateOrUpdateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully created or updated the specified compute policy
+          schema:
+            $ref: '#/definitions/ComputePolicy'
+      tags:
+        - ComputePolicies
+      x-ms-examples:
+        Creates or updates the specified compute policy:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            computePolicyName: test_policy
+            parameters:
+              properties:
+                maxDegreeOfParallelismPerJob: 10
+                minPriorityPerJob: 30
+                objectId: 776b9091-8916-4638-87f7-9c989a38da98
+                objectType: User
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                name: test_policy
+                properties:
+                  maxDegreeOfParallelismPerJob: 10
+                  minPriorityPerJob: 30
+                  objectId: 776b9091-8916-4638-87f7-9c989a38da98
+                  objectType: User
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/firewallRules':
+    get:
+      description: Lists the Data Lake Analytics firewall rules within the specified Data Lake Analytics account.
+      operationId: FirewallRules_ListByAccount
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account from which to get the firewall rules.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully listed the firewall rules.
+          schema:
+            $ref: '#/definitions/DataLakeAnalyticsFirewallRuleListResult'
+      tags:
+        - FirewallRules
+      x-ms-examples:
+        Lists the Data Lake Analytics firewall rules:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                nextLink: 'https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeAnalytics/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>'
+                value:
+                  - id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                    name: test_rule
+                    properties:
+                      endIpAddress: 2.2.2.2
+                      startIpAddress: 1.1.1.1
+                    type: test_type
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/firewallRules/{firewallRuleName}':
+    delete:
+      description: Deletes the specified firewall rule from the specified Data Lake Analytics account
+      operationId: FirewallRules_Delete
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account from which to delete the firewall rule.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The name of the firewall rule to delete.
+          in: path
+          name: firewallRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully deleted the specified firewall rule
+        '204':
+          description: The specified firewall rule does not exist or was already deleted.
+      tags:
+        - FirewallRules
+      x-ms-examples:
+        Deletes the specified firewall rule:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            firewallRuleName: test_rule
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Gets the specified Data Lake Analytics firewall rule.
+      operationId: FirewallRules_Get
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account from which to get the firewall rule.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The name of the firewall rule to retrieve.
+          in: path
+          name: firewallRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the specified firewall rule.
+          schema:
+            $ref: '#/definitions/FirewallRule'
+      tags:
+        - FirewallRules
+      x-ms-examples:
+        Gets the specified Data Lake Analytics firewall rule:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            firewallRuleName: test_rule
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                name: test_rule
+                properties:
+                  endIpAddress: 2.2.2.2
+                  startIpAddress: 1.1.1.1
+                type: test_type
+    patch:
+      description: Updates the specified firewall rule.
+      operationId: FirewallRules_Update
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account to which to update the firewall rule.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The name of the firewall rule to update.
+          in: path
+          name: firewallRuleName
+          required: true
+          type: string
+        - description: Parameters supplied to update the firewall rule.
+          in: body
+          name: parameters
+          required: false
+          schema:
+            $ref: '#/definitions/UpdateFirewallRuleParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully updated the specified firewall rule
+          schema:
+            $ref: '#/definitions/FirewallRule'
+      tags:
+        - FirewallRules
+      x-ms-examples:
+        Updates the specified firewall rule:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            firewallRuleName: test_rule
+            parameters:
+              properties:
+                endIpAddress: 2.2.2.2
+                startIpAddress: 1.1.1.1
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                name: test_rule
+                properties:
+                  endIpAddress: 2.2.2.2
+                  startIpAddress: 1.1.1.1
+                type: test_type
+    put:
+      description: 'Creates or updates the specified firewall rule. During update, the firewall rule with the specified name will be replaced with this new firewall rule.'
+      operationId: FirewallRules_CreateOrUpdate
+      parameters:
+        - description: The name of the Azure resource group that contains the Data Lake Analytics account.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the Data Lake Analytics account to add or replace the firewall rule.
+          in: path
+          name: accountName
+          required: true
+          type: string
+        - description: The name of the firewall rule to create or update.
+          in: path
+          name: firewallRuleName
+          required: true
+          type: string
+        - description: Parameters supplied to create or update the firewall rule.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/FirewallRule'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully created or updated the specified firewall rule
+          schema:
+            $ref: '#/definitions/FirewallRule'
+      tags:
+        - FirewallRules
+      x-ms-examples:
+        Creates or updates the specified firewall rule:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            firewallRuleName: test_rule
+            parameters:
+              name: test_rule
+              properties:
+                endIpAddress: 2.2.2.2
+                startIpAddress: 1.1.1.1
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                name: test_rule
+                properties:
+                  endIpAddress: 2.2.2.2
+                  startIpAddress: 1.1.1.1
+                type: test_type
+definitions:
+  AddDataLakeStoreParameters:
+    description: Additional Data Lake Store parameters.
+    properties:
+      properties:
+        $ref: '#/definitions/DataLakeStoreAccountInfoProperties'
+        description: the properties for the Data Lake Store account being added.
+        x-ms-client-flatten: true
+  AddStorageAccountParameters:
+    description: Storage account parameters for a storage account being added to a Data Lake Analytics account.
+    properties:
+      properties:
+        $ref: '#/definitions/StorageAccountProperties'
+        description: the properties for the Azure Storage account being added.
+        x-ms-client-flatten: true
+    required:
+      - properties
+  CapabilityInformation:
+    description: Subscription-level properties and limits for Data Lake Analytics
+    properties:
+      accountCount:
+        description: the current number of accounts under this subscription.
+        format: int32
+        readOnly: true
+        type: integer
+      maxAccountCount:
+        description: the maximum supported number of accounts under this subscription.
+        format: int32
+        readOnly: true
+        type: integer
+      migrationState:
+        description: the Boolean value of true or false to indicate the maintenance state.
+        readOnly: true
+        type: boolean
+      state:
+        description: the subscription state.
+        enum:
+          - Registered
+          - Suspended
+          - Deleted
+          - Unregistered
+          - Warned
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SubscriptionState
+      subscriptionId:
+        description: the subscription credentials that uniquely identifies the subscription.
+        format: uuid
+        readOnly: true
+        type: string
+  CheckNameAvailabilityParameters:
+    description: Data Lake Analytics account name availability check parameters
+    properties:
+      name:
+        description: the Data Lake Analytics name to check availability for.
+        type: string
+      type:
+        description: 'the Resource type. Note: This should not be set by the user, as the constant value is Microsoft.DataLakeAnalytics/accounts'
+        enum:
+          - Microsoft.DataLakeAnalytics/accounts
+        type: string
+    required:
+      - name
+      - type
+  ComputePolicy:
+    description: The parameters used to create a new compute policy.
+    properties:
+      name:
+        description: The name of the compute policy
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/ComputePolicyProperties'
+        description: The compute policy properties
+        x-ms-client-flatten: true
+  ComputePolicyAccountCreateParameters:
+    description: The parameters used to create a new compute policy.
+    properties:
+      name:
+        description: The unique name of the policy to create
+        type: string
+      properties:
+        $ref: '#/definitions/ComputePolicyPropertiesCreateParameters'
+        description: The policy properties to use when creating a new compute policy
+        x-ms-client-flatten: true
+    required:
+      - name
+      - properties
+  ComputePolicyCreateOrUpdateParameters:
+    description: The parameters used to create a new compute policy.
+    properties:
+      properties:
+        $ref: '#/definitions/ComputePolicyPropertiesCreateParameters'
+        description: The policy properties to use when creating a new compute policy
+        x-ms-client-flatten: true
+    required:
+      - properties
+  ComputePolicyListResult:
+    description: The list of compute policies in the account.
+    properties:
+      nextLink:
+        description: the link (url) to the next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: the results of the list operation
+        items:
+          $ref: '#/definitions/ComputePolicy'
+        readOnly: true
+        type: array
+  ComputePolicyProperties:
+    description: The compute policy properties to use when creating a new compute policy
+    properties:
+      maxDegreeOfParallelismPerJob:
+        description: The maximum degree of parallelism per job this user can use to submit jobs.
+        format: int32
+        minimum: 1
+        type: integer
+      minPriorityPerJob:
+        description: The minimum priority per job this user can use to submit jobs.
+        format: int32
+        minimum: 1
+        type: integer
+      objectId:
+        description: The AAD object identifier for the entity to create a policy for.
+        format: uuid
+        readOnly: true
+        type: string
+      objectType:
+        description: The type of AAD object the object identifier refers to.
+        enum:
+          - User
+          - Group
+          - ServicePrincipal
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: AADObjectType
+  ComputePolicyPropertiesCreateParameters:
+    description: The compute policy properties to use when creating a new compute policy
+    properties:
+      maxDegreeOfParallelismPerJob:
+        description: 'The maximum degree of parallelism per job this user can use to submit jobs. This property, the min priority per job property, or both must be passed.'
+        format: int32
+        minimum: 1
+        type: integer
+      minPriorityPerJob:
+        description: 'The minimum priority per job this user can use to submit jobs. This property, the max degree of parallelism per job property, or both must be passed.'
+        format: int32
+        minimum: 1
+        type: integer
+      objectId:
+        description: The AAD object identifier for the entity to create a policy for.
+        format: uuid
+        type: string
+      objectType:
+        description: The type of AAD object the object identifier refers to.
+        enum:
+          - User
+          - Group
+          - ServicePrincipal
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: AADObjectType
+    required:
+      - objectId
+      - objectType
+  DataLakeAnalyticsAccount:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: 'A Data Lake Analytics account object, containing all information associated with the named Data Lake Analytics account.'
+    properties:
+      properties:
+        $ref: '#/definitions/DataLakeAnalyticsAccountProperties'
+        description: The properties defined by Data Lake Analytics all properties are specific to each resource provider.
+        x-ms-client-flatten: true
+    required:
+      - properties
+  DataLakeAnalyticsAccountBasic:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: 'A Data Lake Analytics account object, containing all information associated with the named Data Lake Analytics account.'
+    properties:
+      properties:
+        $ref: '#/definitions/DataLakeAnalyticsAccountPropertiesBasic'
+        description: The properties defined by Data Lake Analytics all properties are specific to each resource provider.
+        x-ms-client-flatten: true
+    required:
+      - properties
+  DataLakeAnalyticsAccountListDataLakeStoreResult:
+    description: Data Lake Account list information.
+    properties:
+      nextLink:
+        description: the link (url) to the next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: the results of the list operation
+        items:
+          $ref: '#/definitions/DataLakeStoreAccountInfo'
+        readOnly: true
+        type: array
+  DataLakeAnalyticsAccountListResult:
+    description: DataLakeAnalytics Account list information.
+    properties:
+      nextLink:
+        description: the link (url) to the next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: the results of the list operation
+        items:
+          $ref: '#/definitions/DataLakeAnalyticsAccountBasic'
+        readOnly: true
+        type: array
+  DataLakeAnalyticsAccountListStorageAccountsResult:
+    description: Azure Storage Account list information.
+    properties:
+      nextLink:
+        description: the link (url) to the next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: the results of the list operation
+        items:
+          $ref: '#/definitions/StorageAccountInfo'
+        readOnly: true
+        type: array
+  DataLakeAnalyticsAccountProperties:
+    allOf:
+      - $ref: '#/definitions/DataLakeAnalyticsAccountPropertiesBasic'
+    description: The account specific properties that are associated with an underlying Data Lake Analytics account. Returned only when retrieving a specific account.
+    properties:
+      computePolicies:
+        description: the list of compute policies to create in this account.
+        items:
+          $ref: '#/definitions/ComputePolicyAccountCreateParameters'
+        type: array
+      currentTier:
+        description: the commitment tier in use for the current month.
+        enum:
+          - Consumption
+          - Commitment_100AUHours
+          - Commitment_500AUHours
+          - Commitment_1000AUHours
+          - Commitment_5000AUHours
+          - Commitment_10000AUHours
+          - Commitment_50000AUHours
+          - Commitment_100000AUHours
+          - Commitment_500000AUHours
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: TierType
+      dataLakeStoreAccounts:
+        description: the list of Data Lake storage accounts associated with this account.
+        items:
+          $ref: '#/definitions/DataLakeStoreAccountInfo'
+        type: array
+      defaultDataLakeStoreAccount:
+        description: the default data lake storage account associated with this Data Lake Analytics account.
+        type: string
+      firewallAllowAzureIps:
+        description: 'The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced.'
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: FirewallAllowAzureIpsState
+      firewallRules:
+        description: The list of firewall rules associated with this Data Lake Analytics account.
+        items:
+          $ref: '#/definitions/FirewallRule'
+        type: array
+      firewallState:
+        description: The current state of the IP address firewall for this Data Lake Analytics account.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: FirewallState
+      maxDegreeOfParallelism:
+        default: 30
+        description: the maximum supported degree of parallelism for this account.
+        format: int32
+        minimum: 1
+        type: integer
+      maxDegreeOfParallelismPerJob:
+        description: the maximum supported degree of parallelism per job for this account.
+        format: int32
+        minimum: 1
+        type: integer
+      maxJobCount:
+        default: 3
+        description: the maximum supported jobs running under the account at the same time.
+        format: int32
+        minimum: 1
+        type: integer
+      minPriorityPerJob:
+        description: the minimum supported priority per job for this account.
+        format: int32
+        minimum: 1
+        type: integer
+      newTier:
+        description: the commitment tier for the next month.
+        enum:
+          - Consumption
+          - Commitment_100AUHours
+          - Commitment_500AUHours
+          - Commitment_1000AUHours
+          - Commitment_5000AUHours
+          - Commitment_10000AUHours
+          - Commitment_50000AUHours
+          - Commitment_100000AUHours
+          - Commitment_500000AUHours
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: TierType
+      queryStoreRetention:
+        default: 30
+        description: the number of days that job metadata is retained.
+        format: int32
+        maximum: 180
+        minimum: 1
+        type: integer
+      storageAccounts:
+        description: the list of Azure Blob storage accounts associated with this account.
+        items:
+          $ref: '#/definitions/StorageAccountInfo'
+        type: array
+      systemMaxDegreeOfParallelism:
+        description: 'the system defined maximum supported degree of parallelism for this account, which restricts the maximum value of parallelism the user can set for the account.'
+        format: int32
+        readOnly: true
+        type: integer
+      systemMaxJobCount:
+        description: 'the system defined maximum supported jobs running under the account at the same time, which restricts the maximum number of running jobs the user can set for the account.'
+        format: int32
+        readOnly: true
+        type: integer
+    required:
+      - defaultDataLakeStoreAccount
+      - dataLakeStoreAccounts
+  DataLakeAnalyticsAccountPropertiesBasic:
+    description: The basic account specific properties that are associated with an underlying Data Lake Analytics account.
+    properties:
+      accountId:
+        description: The unique identifier associated with this Data Lake Analytics account.
+        format: uuid
+        readOnly: true
+        type: string
+      creationTime:
+        description: the account creation time.
+        format: date-time
+        readOnly: true
+        type: string
+      endpoint:
+        description: the full CName endpoint for this account.
+        readOnly: true
+        type: string
+      lastModifiedTime:
+        description: the account last modified time.
+        format: date-time
+        readOnly: true
+        type: string
+      provisioningState:
+        description: the provisioning status of the Data Lake Analytics account.
+        enum:
+          - Failed
+          - Creating
+          - Running
+          - Succeeded
+          - Patching
+          - Suspending
+          - Resuming
+          - Deleting
+          - Deleted
+          - Undeleting
+          - Canceled
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: DataLakeAnalyticsAccountStatus
+      state:
+        description: the state of the Data Lake Analytics account.
+        enum:
+          - Active
+          - Suspended
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: DataLakeAnalyticsAccountState
+  DataLakeAnalyticsAccountUpdateParameters:
+    description: The parameters that can be used to update an existing Data Lake Analytics account.
+    properties:
+      properties:
+        $ref: '#/definitions/UpdateDataLakeAnalyticsAccountProperties'
+        description: The properties that can be updated in an existing Data Lake Analytics account.
+        x-ms-client-flatten: true
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags
+        type: object
+  DataLakeAnalyticsFirewallRuleListResult:
+    description: Data Lake Analytics firewall rule list information.
+    properties:
+      nextLink:
+        description: the link (url) to the next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: the results of the list operation
+        items:
+          $ref: '#/definitions/FirewallRule'
+        readOnly: true
+        type: array
+  DataLakeStoreAccountInfo:
+    allOf:
+      - $ref: '#/definitions/SubResource'
+    description: Data Lake Store account information.
+    properties:
+      properties:
+        $ref: '#/definitions/DataLakeStoreAccountInfoProperties'
+        description: the properties associated with this Data Lake Store account.
+        x-ms-client-flatten: true
+  DataLakeStoreAccountInfoProperties:
+    description: Data Lake Store account properties information.
+    properties:
+      suffix:
+        description: the optional suffix for the Data Lake Store account.
+        type: string
+  FirewallRule:
+    allOf:
+      - $ref: '#/definitions/OptionalSubResource'
+    description: Data Lake Analytics firewall rule information
+    properties:
+      properties:
+        $ref: '#/definitions/FirewallRuleProperties'
+        description: the properties of the firewall rule.
+        x-ms-client-flatten: true
+    required:
+      - properties
+  FirewallRuleProperties:
+    description: Data Lake Analytics firewall rule properties information
+    properties:
+      endIpAddress:
+        description: the end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        type: string
+      startIpAddress:
+        description: the start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        type: string
+    required:
+      - startIpAddress
+      - endIpAddress
+  ListSasTokensResult:
+    description: 'The SAS response that contains the storage account, container and associated SAS token for connection use.'
+    properties:
+      nextLink:
+        description: the link (url) to the next page of results.
+        readOnly: true
+        type: string
+      value:
+        items:
+          $ref: '#/definitions/SasTokenInfo'
+        readOnly: true
+        type: array
+  ListStorageContainersResult:
+    description: The list of blob containers associated with the storage account attached to the Data Lake Analytics account.
+    properties:
+      nextLink:
+        description: the link (url) to the next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: the results of the list operation
+        items:
+          $ref: '#/definitions/StorageContainer'
+        readOnly: true
+        type: array
+  NameAvailabilityInformation:
+    description: Data Lake Analytics account name availability result information
+    properties:
+      message:
+        description: 'the message describing why the Data Lake Analytics account name is not available, if nameAvailable is false.'
+        readOnly: true
+        type: string
+      nameAvailable:
+        description: the Boolean value of true or false to indicate whether the Data Lake Analytics account name is available or not.
+        readOnly: true
+        type: boolean
+      reason:
+        description: 'the reason why the Data Lake Analytics account name is not available, if nameAvailable is false.'
+        readOnly: true
+        type: string
+  Operation:
+    description: An available operation for Data Lake Analytics
+    properties:
+      display:
+        $ref: '#/definitions/OperationDisplay'
+        description: the display information for the operation.
+      name:
+        description: the name of the operation.
+        readOnly: true
+        type: string
+      origin:
+        description: the intended executor of the operation.
+        enum:
+          - user
+          - system
+          - 'user,system'
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: OperationOrigin
+  OperationDisplay:
+    description: The display information for a particular operation
+    properties:
+      description:
+        description: a friendly description of the operation.
+        readOnly: true
+        type: string
+      operation:
+        description: a friendly name of the operation.
+        readOnly: true
+        type: string
+      provider:
+        description: the Resource provider of the operation.
+        readOnly: true
+        type: string
+      resource:
+        description: the Resource type of the operation.
+        readOnly: true
+        type: string
+  OperationListResult:
+    description: The list of available operations for Data Lake Analytics
+    properties:
+      nextLink:
+        description: the link (url) to the next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: the results of the list operation.
+        items:
+          $ref: '#/definitions/Operation'
+        readOnly: true
+        type: array
+  OptionalSubResource:
+    description: The Resource model definition for a nested resource with no required properties.
+    properties:
+      id:
+        description: Resource Id
+        readOnly: true
+        type: string
+      name:
+        description: Resource name
+        type: string
+      type:
+        description: Resource type
+        readOnly: true
+        type: string
+  Resource:
+    description: The Resource model definition.
+    properties:
+      id:
+        description: Resource Id
+        readOnly: true
+        type: string
+      location:
+        description: Resource location
+        type: string
+      name:
+        description: Resource name
+        readOnly: true
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags
+        type: object
+      type:
+        description: Resource type
+        readOnly: true
+        type: string
+    required:
+      - location
+    x-ms-azure-resource: true
+  SasTokenInfo:
+    description: SAS token information.
+    properties:
+      accessToken:
+        description: the access token for the associated Azure Storage Container.
+        readOnly: true
+        type: string
+  StorageAccountInfo:
+    allOf:
+      - $ref: '#/definitions/SubResource'
+    description: Azure Storage account information.
+    properties:
+      properties:
+        $ref: '#/definitions/StorageAccountProperties'
+        description: the properties associated with this storage account.
+        x-ms-client-flatten: true
+    required:
+      - properties
+  StorageAccountProperties:
+    description: Azure Storage account properties information.
+    properties:
+      accessKey:
+        description: the access key associated with this Azure Storage account that will be used to connect to it.
+        type: string
+      suffix:
+        description: the optional suffix for the storage account.
+        type: string
+    required:
+      - accessKey
+  StorageContainer:
+    description: Azure Storage blob container information.
+    properties:
+      id:
+        description: the unique identifier of the blob container.
+        readOnly: true
+        type: string
+      name:
+        description: the name of the blob container.
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/StorageContainerProperties'
+        description: the properties of the blob container.
+        readOnly: true
+        x-ms-client-flatten: true
+      type:
+        description: the type of the blob container.
+        readOnly: true
+        type: string
+  StorageContainerProperties:
+    description: Azure Storage blob container properties information.
+    properties:
+      lastModifiedTime:
+        description: the last modified time of the blob container.
+        format: date-time
+        readOnly: true
+        type: string
+  SubResource:
+    description: The Sub Resource model definition.
+    properties:
+      id:
+        description: Resource Id
+        readOnly: true
+        type: string
+      name:
+        description: Resource name
+        type: string
+      type:
+        description: Resource type
+        readOnly: true
+        type: string
+    required:
+      - name
+  UpdateDataLakeAnalyticsAccountProperties:
+    description: The properties to update that are associated with an underlying Data Lake Analytics account to.
+    properties:
+      computePolicies:
+        description: the list of existing compute policies to update in this account.
+        items:
+          $ref: '#/definitions/ComputePolicy'
+        type: array
+      firewallAllowAzureIps:
+        description: 'The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced.'
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: FirewallAllowAzureIpsState
+      firewallRules:
+        description: The list of firewall rules associated with this Data Lake Analytics account.
+        items:
+          $ref: '#/definitions/FirewallRule'
+        type: array
+      firewallState:
+        description: The current state of the IP address firewall for this Data Lake Analytics account.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: FirewallState
+      maxDegreeOfParallelism:
+        description: the maximum supported degree of parallelism for this account.
+        format: int32
+        minimum: 1
+        type: integer
+      maxDegreeOfParallelismPerJob:
+        description: the maximum supported degree of parallelism per job for this account.
+        format: int32
+        minimum: 1
+        type: integer
+      maxJobCount:
+        description: the maximum supported jobs running under the account at the same time.
+        format: int32
+        minimum: 1
+        type: integer
+      minPriorityPerJob:
+        description: the minimum supported priority per job for this account.
+        format: int32
+        minimum: 1
+        type: integer
+      newTier:
+        description: the commitment tier to use for next month.
+        enum:
+          - Consumption
+          - Commitment_100AUHours
+          - Commitment_500AUHours
+          - Commitment_1000AUHours
+          - Commitment_5000AUHours
+          - Commitment_10000AUHours
+          - Commitment_50000AUHours
+          - Commitment_100000AUHours
+          - Commitment_500000AUHours
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: TierType
+      queryStoreRetention:
+        description: the number of days that job metadata is retained.
+        format: int32
+        maximum: 180
+        minimum: 1
+        type: integer
+  UpdateFirewallRuleParameters:
+    description: Data Lake Analytics firewall rule update parameters
+    properties:
+      properties:
+        $ref: '#/definitions/UpdateFirewallRuleProperties'
+        description: the properties of the firewall rule to update.
+        x-ms-client-flatten: true
+  UpdateFirewallRuleProperties:
+    description: Data Lake Analytics firewall rule properties information
+    properties:
+      endIpAddress:
+        description: the end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        type: string
+      startIpAddress:
+        description: the start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        type: string
+  UpdateStorageAccountParameters:
+    description: Storage account parameters for a storage account being updated in a Data Lake Analytics account.
+    properties:
+      properties:
+        $ref: '#/definitions/UpdateStorageAccountProperties'
+        description: the properties for the Azure Storage account being updated.
+        x-ms-client-flatten: true
+  UpdateStorageAccountProperties:
+    description: Azure Storage account properties information to update.
+    properties:
+      accessKey:
+        description: the updated access key associated with this Azure Storage account that will be used to connect to it.
+        type: string
+      suffix:
+        description: the optional suffix for the storage account.
+        type: string

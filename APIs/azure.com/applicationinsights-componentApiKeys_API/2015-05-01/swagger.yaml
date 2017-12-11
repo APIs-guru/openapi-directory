@@ -1,0 +1,287 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: Azure Application Insights client for API keys of a component.
+  title: ApplicationInsightsManagementClient
+  version: '2015-05-01'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/applicationinsights/resource-manager/microsoft.insights/2015-05-01/componentApiKeys_API.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: applicationinsights-componentApiKeys_API
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow.
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersionParameter:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  KeyId:
+    description: The API Key ID. This is unique within a Application Insights component.
+    in: path
+    name: keyId
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ResourceGroupNameParameter:
+    description: The name of the resource group.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ResourceNameParameter:
+    description: The name of the Application Insights component resource.
+    in: path
+    name: resourceName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: The Azure subscription ID.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/APIKeys/{keyId}':
+    delete:
+      description: Delete an API Key of an Application Insights component.
+      operationId: APIKeys_Delete
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceNameParameter'
+        - $ref: '#/parameters/KeyId'
+      responses:
+        '200':
+          description: The API Key that was successfully deleted.
+          schema:
+            $ref: '#/definitions/ApplicationInsightsComponentAPIKey'
+      x-ms-examples:
+        APIKeyDelete:
+          parameters:
+            api-version: '2015-05-01'
+            keyId: bb820f1b-3110-4a8b-ba2c-8c1129d7eb6a
+            resourceGroupName: my-resource-group
+            resourceName: my-component
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                createdDate: 'Thu, 28 Sep 2017 16:59:18 GMT'
+                id: /subscriptions/subid/resourcegroups/my-resource-group/providers/microsoft.insights/components/my-component/apikeys/bb820f1b-3110-4a8b-ba2c-8c1129d7eb6a
+                linkedReadProperties:
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/api
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/draft
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/extendqueries
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/search
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/aggregate
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/agentconfig
+                linkedWriteProperties: []
+                name: test2
+    get:
+      description: Get the API Key for this key id.
+      operationId: APIKeys_Get
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceNameParameter'
+        - $ref: '#/parameters/KeyId'
+      responses:
+        '200':
+          description: The API Key for this key id.
+          schema:
+            $ref: '#/definitions/ApplicationInsightsComponentAPIKey'
+      x-ms-examples:
+        APIKeysGet:
+          parameters:
+            api-version: '2015-05-01'
+            keyId: bb820f1b-3110-4a8b-ba2c-8c1129d7eb6a
+            resourceGroupName: my-resource-group
+            resourceName: my-component
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                createdDate: 'Thu, 28 Sep 2017 16:59:18 GMT'
+                id: /subscriptions/subid/resourcegroups/my-resource-group/providers/microsoft.insights/components/my-component/apikeys/bb820f1b-3110-4a8b-ba2c-8c1129d7eb6a
+                linkedReadProperties:
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/api
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/draft
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/extendqueries
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/search
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/aggregate
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/agentconfig
+                linkedWriteProperties: []
+                name: test2
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/ApiKeys':
+    get:
+      description: Gets a list of API keys of an Application Insights component.
+      operationId: APIKeys_List
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceNameParameter'
+      responses:
+        '200':
+          description: A list containing 0 or more API key definitions of an Application Insights component.
+          schema:
+            $ref: '#/definitions/ApplicationInsightsComponentAPIKeyListResult'
+      x-ms-examples:
+        APIKeysList:
+          parameters:
+            api-version: '2015-05-01'
+            resourceGroupName: my-resource-group
+            resourceName: my-component
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - createdDate: 'Thu, 28 Sep 2017 16:58:52 GMT'
+                    id: /subscriptions/subid/resourcegroups/my-resource-group/providers/microsoft.insights/components/my-component/apikeys/fe2e0138-47c1-46c5-8726-872f54c1ca08
+                    linkedReadProperties:
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/api
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/draft
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/extendqueries
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/search
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/aggregate
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/agentconfig
+                    linkedWriteProperties:
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/annotations
+                    name: test
+                  - createdDate: 'Thu, 28 Sep 2017 16:59:18 GMT'
+                    id: /subscriptions/subid/resourcegroups/my-resource-group/providers/microsoft.insights/components/my-component/apikeys/bb820f1b-3110-4a8b-ba2c-8c1129d7eb6a
+                    linkedReadProperties:
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/api
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/draft
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/extendqueries
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/search
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/aggregate
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/agentconfig
+                    linkedWriteProperties: []
+                    name: test2
+      x-ms-pageable: {}
+    post:
+      description: Create an API Key of an Application Insights component.
+      operationId: APIKeys_Create
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceNameParameter'
+        - description: Properties that need to be specified to create an API key of a Application Insights component.
+          in: body
+          name: APIKeyProperties
+          required: true
+          schema:
+            $ref: '#/definitions/APIKeyRequest'
+      responses:
+        '200':
+          description: An object containing the API Key definition created by this POST call.
+          schema:
+            $ref: '#/definitions/ApplicationInsightsComponentAPIKey'
+      x-ms-examples:
+        APIKeyCreate:
+          parameters:
+            APIKeyProperties:
+              linkedReadProperties:
+                - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/api
+                - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/agentconfig
+              linkedWriteProperties:
+                - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/annotations
+              name: test2
+            api-version: '2015-05-01'
+            resourceGroupName: my-resource-group
+            resourceName: my-component
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                apiKey: eip8wlzuzlf4wzczhnzao54zcswew25azs4kadhb
+                createdDate: 'Thu, 28 Sep 2017 16:58:52 GMT'
+                id: /subscriptions/subid/resourcegroups/my-resource-group/providers/microsoft.insights/components/my-component/apikeys/fe2e0138-47c1-46c5-8726-872f54c1ca08
+                linkedReadProperties:
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/api
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/agentconfig
+                linkedWriteProperties:
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/annotations
+                name: test
+definitions:
+  APIKeyRequest:
+    description: An Application Insights component API Key createion request definition.
+    properties:
+      linkedReadProperties:
+        description: The read access rights of this API Key.
+        items:
+          type: string
+        type: array
+      linkedWriteProperties:
+        description: The write access rights of this API Key.
+        items:
+          type: string
+        type: array
+      name:
+        description: The name of the API Key.
+        type: string
+    type: object
+  ApplicationInsightsComponentAPIKey:
+    description: Properties that define an API key of an Application Insights Component.
+    properties:
+      apiKey:
+        description: The API key value. It will be only return once when the API Key was created.
+        readOnly: true
+        type: string
+      createdDate:
+        description: The create date of this API key.
+        type: string
+      id:
+        description: The unique ID of the API key inside an Applciation Insights component. It is auto generated when the API key is created.
+        readOnly: true
+        type: string
+      linkedReadProperties:
+        description: The read access rights of this API Key.
+        items:
+          type: string
+        type: array
+      linkedWriteProperties:
+        description: The write access rights of this API Key.
+        items:
+          type: string
+        type: array
+      name:
+        description: The name of the API key.
+        type: string
+    type: object
+  ApplicationInsightsComponentAPIKeyListResult:
+    description: Describes the list of API Keys of an Application Insights Component.
+    properties:
+      value:
+        description: List of API Key definitions.
+        items:
+          $ref: '#/definitions/ApplicationInsightsComponentAPIKey'
+        type: array
+    required:
+      - value

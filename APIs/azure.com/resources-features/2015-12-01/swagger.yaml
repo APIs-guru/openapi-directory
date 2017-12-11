@@ -1,0 +1,163 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: Azure Feature Exposure Control (AFEC) provides a mechanism for the resource providers to control feature exposure to users. Resource providers typically use this mechanism to provide public/private preview for new features prior to making them generally available. Users need to explicitly register for AFEC features to get access to such functionality.
+  title: FeatureClient
+  version: '2015-12-01'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/resources/resource-manager/Microsoft.Features/2015-12-01/features.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: resources-features
+consumes:
+  - application/json
+  - text/json
+produces:
+  - application/json
+  - text/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersionParameter:
+    description: The API version to use for this operation.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  SubscriptionIdParameter:
+    description: The ID of the target subscription.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Features/features':
+    get:
+      description: Gets all the preview features that are available through AFEC for the subscription.
+      operationId: Features_ListAll
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: 'OK - Returns an array containing metadata for each feature. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.'
+          schema:
+            $ref: '#/definitions/FeatureOperationsListResult'
+      tags:
+        - Features
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features':
+    get:
+      description: Gets all the preview features in a provider namespace that are available through AFEC for the subscription.
+      operationId: Features_List
+      parameters:
+        - description: The namespace of the resource provider for getting features.
+          in: path
+          name: resourceProviderNamespace
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: 'OK - Returns an array containing metadata for each feature in the resource provider. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.'
+          schema:
+            $ref: '#/definitions/FeatureOperationsListResult'
+      tags:
+        - Features
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features/{featureName}':
+    get:
+      description: Gets the preview feature with the specified name.
+      operationId: Features_Get
+      parameters:
+        - description: The resource provider namespace for the feature.
+          in: path
+          name: resourceProviderNamespace
+          required: true
+          type: string
+        - description: The name of the feature to get.
+          in: path
+          name: featureName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: 'OK - Returns metadata about the feature. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.'
+          schema:
+            $ref: '#/definitions/FeatureResult'
+      tags:
+        - Features
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features/{featureName}/register':
+    post:
+      description: Registers the preview feature for the subscription.
+      operationId: Features_Register
+      parameters:
+        - description: The namespace of the resource provider.
+          in: path
+          name: resourceProviderNamespace
+          required: true
+          type: string
+        - description: The name of the feature to register.
+          in: path
+          name: featureName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: 'OK - Returns metadata about the registerd feature. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.'
+          schema:
+            $ref: '#/definitions/FeatureResult'
+      tags:
+        - Features
+definitions:
+  FeatureOperationsListResult:
+    description: List of previewed features.
+    properties:
+      nextLink:
+        description: The URL to use for getting the next set of results.
+        type: string
+      value:
+        description: The array of features.
+        items:
+          $ref: '#/definitions/FeatureResult'
+        type: array
+  FeatureProperties:
+    description: Information about feature.
+    properties:
+      state:
+        description: The registration state of the feature for the subscription.
+        type: string
+  FeatureResult:
+    description: Previewed feature information.
+    properties:
+      id:
+        description: The resource ID of the feature.
+        type: string
+      name:
+        description: The name of the feature.
+        type: string
+      properties:
+        $ref: '#/definitions/FeatureProperties'
+        description: Properties of the previewed feature.
+      type:
+        description: The resource type of the feature.
+        type: string

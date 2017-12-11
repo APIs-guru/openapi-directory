@@ -1,0 +1,385 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  title: AutomationManagement
+  version: '2015-10-31'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/automation/resource-manager/Microsoft.Automation/2015-10-31/hybridRunbookWorkerGroup.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: automation-hybridRunbookWorkerGroup
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters: {}
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups':
+    get:
+      description: Retrieve a list of hybrid runbook worker groups.
+      externalDocs:
+        url: 'http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations'
+      operationId: HybridRunbookWorkerGroup_ListByAutomationAccount
+      parameters:
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          pattern: '^[-\w\._]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The automation account name.
+          in: path
+          name: automationAccountName
+          required: true
+          type: string
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: The response model for the list hybrid runbook worker groups.
+            properties:
+              nextLink:
+                description: Gets or sets the next link.
+                type: string
+              value:
+                description: Gets or sets a list of hybrid runbook worker groups.
+                items:
+                  description: Definition of hybrid runbook worker group.
+                  properties:
+                    credential:
+                      description: Definition of runas credential to use for hybrid worker.
+                      properties:
+                        name:
+                          description: Gets or sets the name of the credential.
+                          type: string
+                    hybridRunbookWorkers:
+                      description: Gets or sets the list of hybrid runbook workers.
+                      items:
+                        description: Definition of hybrid runbook worker.
+                        properties:
+                          ip:
+                            description: Gets or sets the assigned machine IP address.
+                            type: string
+                          name:
+                            description: Gets or sets the worker machine name.
+                            type: string
+                          registrationTime:
+                            description: Gets or sets the registration time of the worker machine.
+                            format: date-time
+                            type: string
+                      type: array
+                    id:
+                      description: Gets or sets the id of the resource.
+                      type: string
+                    name:
+                      description: Gets or sets the name of the group.
+                      type: string
+                type: array
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - HybridRunbookWorkerGroup
+      x-ms-examples:
+        List hybrid worker groups by Automation Account:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: testaccount
+            hybridRunbookWorkerGroupName: TestWorkerGroup
+            resourceGroupName: udtest
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - credential:
+                      name: myRunAsCredentialName
+                    hybridRunbookWorkers:
+                      - ip: 134.1.1.1
+                        name: TestMachine
+                        registrationTime: '2017-03-24T12:43:43.053855-07:00'
+                    id: /subscriptions/subid/resourceGroups/udtest/providers/Microsoft.Automation/automationAccounts/testaccount/hybridRunbookWorkerGroups/TestWorkerGroup
+                    name: TestWorkerGroup
+              headers: {}
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/hybridRunbookWorkerGroups/{hybridRunbookWorkerGroupName}':
+    delete:
+      description: Delete a hybrid runbook worker group.
+      externalDocs:
+        url: 'http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations'
+      operationId: HybridRunbookWorkerGroup_Delete
+      parameters:
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          pattern: '^[-\w\._]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Automation account name.
+          in: path
+          name: automationAccountName
+          required: true
+          type: string
+        - description: The hybrid runbook worker group name
+          in: path
+          name: hybridRunbookWorkerGroupName
+          required: true
+          type: string
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - HybridRunbookWorkerGroup
+      x-ms-examples:
+        Delete a hybrid worker group:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: myAutomationAccount20
+            hybridRunbookWorkerGroupName: myGroup
+            resourceGroupName: rg
+            subscriptionId: subid
+          responses:
+            '200': {}
+    get:
+      description: Retrieve a hybrid runbook worker group.
+      externalDocs:
+        url: 'http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations'
+      operationId: HybridRunbookWorkerGroup_Get
+      parameters:
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          pattern: '^[-\w\._]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The automation account name.
+          in: path
+          name: automationAccountName
+          required: true
+          type: string
+        - description: The hybrid runbook worker group name
+          in: path
+          name: hybridRunbookWorkerGroupName
+          required: true
+          type: string
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: Definition of hybrid runbook worker group.
+            properties:
+              credential:
+                description: Definition of runas credential to use for hybrid worker.
+                properties:
+                  name:
+                    description: Gets or sets the name of the credential.
+                    type: string
+              hybridRunbookWorkers:
+                description: Gets or sets the list of hybrid runbook workers.
+                items:
+                  description: Definition of hybrid runbook worker.
+                  properties:
+                    ip:
+                      description: Gets or sets the assigned machine IP address.
+                      type: string
+                    name:
+                      description: Gets or sets the worker machine name.
+                      type: string
+                    registrationTime:
+                      description: Gets or sets the registration time of the worker machine.
+                      format: date-time
+                      type: string
+                type: array
+              id:
+                description: Gets or sets the id of the resource.
+                type: string
+              name:
+                description: Gets or sets the name of the group.
+                type: string
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - HybridRunbookWorkerGroup
+      x-ms-examples:
+        Get a hybrid worker group:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: testaccount
+            hybridRunbookWorkerGroupName: TestHybridGroup
+            resourceGroupName: rg
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                credential:
+                  name: myRunAsCredentialName
+                hybridRunbookWorkers:
+                  - ip: 100.1.1.1
+                    name: TestHybridWorker
+                    registrationTime: '2017-03-24T12:43:45.0146578-07:00'
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/testaccount/hybridRunbookWorkerGroups/TestHybridGroup
+                name: TestHybridGroup
+              headers: {}
+    patch:
+      description: Update a hybrid runbook worker group.
+      externalDocs:
+        url: 'http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations'
+      operationId: HybridRunbookWorkerGroup_Update
+      parameters:
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          pattern: '^[-\w\._]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The automation account name.
+          in: path
+          name: automationAccountName
+          required: true
+          type: string
+        - description: The hybrid runbook worker group name
+          in: path
+          name: hybridRunbookWorkerGroupName
+          required: true
+          type: string
+        - description: The hybrid runbook worker group
+          in: body
+          name: parameters
+          required: true
+          schema:
+            description: Parameters supplied to the update operation.
+            properties:
+              credential:
+                description: Definition of runas credential to use for hybrid worker.
+                properties:
+                  name:
+                    description: Gets or sets the name of the credential.
+                    type: string
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: Definition of hybrid runbook worker group.
+            properties:
+              credential:
+                description: Definition of runas credential to use for hybrid worker.
+                properties:
+                  name:
+                    description: Gets or sets the name of the credential.
+                    type: string
+              hybridRunbookWorkers:
+                description: Gets or sets the list of hybrid runbook workers.
+                items:
+                  description: Definition of hybrid runbook worker.
+                  properties:
+                    ip:
+                      description: Gets or sets the assigned machine IP address.
+                      type: string
+                    name:
+                      description: Gets or sets the worker machine name.
+                      type: string
+                    registrationTime:
+                      description: Gets or sets the registration time of the worker machine.
+                      format: date-time
+                      type: string
+                type: array
+              id:
+                description: Gets or sets the id of the resource.
+                type: string
+              name:
+                description: Gets or sets the name of the group.
+                type: string
+        default:
+          description: Automation error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - HybridRunbookWorkerGroup
+definitions: {}

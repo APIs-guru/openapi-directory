@@ -1,0 +1,215 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: The HDInsight Management Client.
+  title: HDInsightManagementClient
+  version: 2015-03-01-preview
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/hdinsight/resource-manager/Microsoft.HDInsight/2015-03-01-preview/configurations.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: hdinsight-configurations
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersionParameter:
+    description: The HDInsight client API Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  SubscriptionIdParameter:
+    description: The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/configurations/{configurationName}':
+    get:
+      description: The configuration object for the specified cluster.
+      operationId: Configurations_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the cluster.
+          in: path
+          name: clusterName
+          required: true
+          type: string
+        - description: The constant for configuration type of gateway.
+          in: path
+          name: configurationName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK response definition.
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      tags:
+        - Configurations
+      x-ms-examples:
+        Get HTTP settings:
+          parameters:
+            api-version: 2015-03-01-preview
+            clusterName: cluster1
+            configurationName: gateway
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                restAuthCredential.isEnabled: 'true'
+                restAuthCredential.password: '**********'
+                restAuthCredential.username: hadoop
+    post:
+      description: Configures the HTTP settings on the specified cluster.
+      operationId: Configurations_UpdateHTTPSettings
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the cluster.
+          in: path
+          name: clusterName
+          required: true
+          type: string
+        - description: The constant for configuration type of gateway.
+          enum:
+            - gateway
+          in: path
+          name: configurationName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: ConfigurationName
+        - description: The name of the resource group.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/HttpConnectivitySettings'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Ok response definition
+        '202':
+          description: Accepted response definition
+        '204':
+          description: No content response definition
+      tags:
+        - Configurations
+      x-ms-examples:
+        Disable HTTP connectivity:
+          parameters:
+            api-version: 2015-03-01-preview
+            clusterName: cluster1
+            configurationName: gateway
+            parameters:
+              restAuthCredential.isEnabled: 'false'
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200': {}
+            '202':
+              headers:
+                location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult'
+            '204': {}
+        Enable HTTP connectivity:
+          parameters:
+            api-version: 2015-03-01-preview
+            clusterName: cluster1
+            configurationName: gateway
+            parameters:
+              restAuthCredential.isEnabled: 'true'
+              restAuthCredential.password: '**********'
+              restAuthCredential.username: hadoop
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200': {}
+            '202':
+              headers:
+                location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult'
+            '204': {}
+      x-ms-long-running-operation: true
+definitions:
+  HttpConnectivitySettings:
+    description: The payload for a Configure HTTP settings request.
+    properties:
+      restAuthCredential.isEnabled:
+        description: Whether or not the HTTP based authorization is enabled.
+        enum:
+          - 'true'
+          - 'false'
+        type: string
+        x-ms-client-name: enabledCredential
+      restAuthCredential.password:
+        description: The HTTP user password.
+        format: password
+        type: string
+        x-ms-client-name: password
+      restAuthCredential.username:
+        description: The HTTP username.
+        type: string
+        x-ms-client-name: username
+  LinuxOperatingSystemProfile:
+    description: 'The ssh username, password, and ssh public key.'
+    properties:
+      password:
+        description: The password.
+        type: string
+      sshProfile:
+        $ref: '#/definitions/SshProfile'
+        description: The SSH profile.
+      username:
+        description: The username.
+        type: string
+  OsProfile:
+    description: The Linux operation systems profile.
+    properties:
+      linuxOperatingSystemProfile:
+        $ref: '#/definitions/LinuxOperatingSystemProfile'
+        description: The Linux OS profile.
+  SshProfile:
+    description: The list of SSH public keys.
+    properties:
+      publicKeys:
+        description: The list of SSH public keys.
+        items:
+          $ref: '#/definitions/SshPublicKey'
+        type: array
+  SshPublicKey:
+    description: The SSH public key for the cluster nodes.
+    properties:
+      certificateData:
+        description: The certificate for SSH.
+        type: string

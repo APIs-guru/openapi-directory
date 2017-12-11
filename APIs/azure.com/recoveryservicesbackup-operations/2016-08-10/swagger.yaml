@@ -1,0 +1,1060 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  title: RecoveryServicesBackupClient
+  version: '2016-08-10'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/recoveryservicesbackup/resource-manager/Microsoft.RecoveryServices/2016-08-10/operations.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: recoveryservicesbackup-operations
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account.
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersion:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+paths:
+  /providers/Microsoft.RecoveryServices/operations:
+    get:
+      deprecated: false
+      description: Returns the list of available operations.
+      operationId: Operations_List
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ClientDiscoveryResponse'
+      tags:
+        - Operations
+      x-ms-examples:
+        ListOperations:
+          parameters:
+            api-version: '2016-08-10'
+          responses:
+            '200':
+              body:
+                Value:
+                  - Display:
+                      Description: Returnsusage details for a Recovery Services Vault.
+                      Operation: Recovery Services Vault usage details.
+                      Provider: Microsoft.RecoveryServices
+                      Resource: VaultUsage
+                    Name: Microsoft.RecoveryServices/Vaults/usages/read
+                    Origin: user
+                  - Display:
+                      Description: Returns summaries for ProtectedItems and Protected Servers for a Recovery Services .
+                      Operation: Recovery Services Protected Items and ProtectedServers usage summaries details.
+                      Provider: Microsoft.RecoveryServices
+                      Resource: BackupUsages Summaries
+                    Name: Microsoft.RecoveryServices/Vaults/backupUsageSummaries/read
+                    Origin: user
+                  - Display:
+                      Description: ReturnsStorage Configuration for Recovery Services Vault.
+                      Operation: Get Resource Storage Config
+                      Provider: Microsoft.RecoveryServices
+                      Resource: VaultStorage Config
+                    Name: Microsoft.RecoveryServices/Vaults/storageConfig/read
+                    Origin: user
+                  - Display:
+                      Description: UpdatesStorage Configuration for Recovery Services Vault.
+                      Operation: Write Resource Storage Config
+                      Provider: Microsoft.RecoveryServices
+                      Resource: VaultStorage Config
+                    Name: Microsoft.RecoveryServices/Vaults/storageConfig/write
+                    Origin: user
+                  - Display:
+                      Description: Returns Configurationfor Recovery Services Vault.
+                      Operation: Get Resource Config
+                      Provider: Microsoft.RecoveryServices
+                      Resource: VaultConfig
+                    Name: Microsoft.RecoveryServices/Vaults/backupconfig/vaultconfig/read
+                    Origin: user
+                  - Display:
+                      Description: Updates Configurationfor Recovery Services Vault.
+                      Operation: Update Resource Config
+                      Provider: Microsoft.RecoveryServices
+                      Resource: VaultConfig
+                    Name: Microsoft.RecoveryServices/Vaults/backupconfig/vaultconfig/write
+                    Origin: user
+                  - Display:
+                      Description: Returns token informationfor Recovery Services Vault.
+                      Operation: Get Vault Token Info
+                      Provider: Microsoft.RecoveryServices
+                      Resource: TokenInfo
+                    Name: Microsoft.RecoveryServices/Vaults/tokenInfo/read
+                    Origin: user
+                  - Display:
+                      Description: Returns Security PIN Information for RecoveryServices Vault.
+                      Operation: GetSecurity PIN Info
+                      Provider: Microsoft.RecoveryServices
+                      Resource: SecurityPINInfo
+                    Name: Microsoft.RecoveryServices/Vaults/backupSecurityPIN/read
+                    Origin: user
+                  - Display:
+                      Description: ReturnsBackup Management Metadata for Recovery Services Vault.
+                      Operation: Get Backup Management Metadata
+                      Provider: Microsoft.RecoveryServices
+                      Resource: BackupManagement Metadata
+                    Name: Microsoft.RecoveryServices/Vaults/backupManagementMetaData/read
+                    Origin: user
+                  - Display:
+                      Description: ReturnsBackup Operation Result for Recovery Services Vault.
+                      Operation: Get Backup Operation Result
+                      Provider: Microsoft.RecoveryServices
+                      Resource: BackupOperation Results
+                    Name: Microsoft.RecoveryServices/Vaults/backupOperationResults/read
+                    Origin: user
+                  - Display:
+                      Description: ReturnsBackup Operation Status for Recovery Services Vault.
+                      Operation: Get Backup Operation Status
+                      Provider: Microsoft.RecoveryServices
+                      Resource: BackupOperation Status
+                    Name: Microsoft.RecoveryServices/Vaults/backupOperations/read
+                    Origin: user
+                  - Display:
+                      Description: Returns all Job Objects
+                      Operation: Get Jobs
+                      Provider: Microsoft.RecoveryServices
+                      Resource: BackupJobs
+                    Name: Microsoft.RecoveryServices/Vaults/backupJobs/read
+                    Origin: user
+                  - Display:
+                      Description: Cancel the Job
+                      Operation: Cancel Jobs
+                      Provider: Microsoft.RecoveryServices
+                      Resource: BackupJobs
+                    Name: Microsoft.RecoveryServices/Vaults/backupJobs/cancel/action
+                    Origin: user
+                  - Display:
+                      Description: Export Jobs
+                      Operation: Export Jobs
+                      Provider: Microsoft.RecoveryServices
+                      Resource: ExportBackup Jobs
+                    Name: Microsoft.RecoveryServices/Vaults/backupJobsExport/action
+                    Origin: user
+                  - Display:
+                      Description: Returnsthe Result of Job Operation.
+                      Operation: Get Job Operation Result
+                      Provider: Microsoft.RecoveryServices
+                      Resource: BackupJobs Operation Results
+                    Name: Microsoft.RecoveryServices/Vaults/backupJobs/operationResults/read
+                    Origin: user
+                  - Display:
+                      Description: Returnsthe Result of Export Job Operation.
+                      Operation: Get Export Job Operation Result
+                      Provider: Microsoft.RecoveryServices
+                      Resource: ExportBackup Jobs Operation Results
+                    Name: Microsoft.RecoveryServices/Vaults/backupJobsExport/operationResults/read
+                    Origin: user
+                  - Display:
+                      Description: Get Recovery Pointsfor Protected Items.
+                      Operation: Get Recovery Points
+                      Provider: Microsoft.RecoveryServices
+                      Resource: RecoveryPoints
+                    Name: Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints/read
+                    Origin: user
+                  - Display:
+                      Description: Restore RecoveryPoints for Protected Items.
+                      Operation: Restore Recovery Points
+                      Provider: Microsoft.RecoveryServices
+                      Resource: RecoveryPoints
+                    Name: Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints/restore/action
+                    Origin: user
+                  - Display:
+                      Description: ProvisionInstant Item Recovery for Protected Item
+                      Operation: Provision Instant Item Recovery for Protected Item
+                      Provider: Microsoft.RecoveryServices
+                      Resource: RecoveryPoints
+                    Name: Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints/provisionInstantItemRecovery/action
+                    Origin: user
+                  - Display:
+                      Description: RevokeInstant Item Recovery for Protected Item
+                      Operation: Revoke Instant Item Recovery for Protected Item
+                      Provider: Microsoft.RecoveryServices
+                      Resource: RecoveryPoints
+                    Name: Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints/revokeInstantItemRecovery/action
+                    Origin: user
+                  - Display:
+                      Description: Returns all ProtectionPolicies
+                      Operation: Get Protection Policy
+                      Provider: Microsoft.RecoveryServices
+                      Resource: BackupPolicies
+                    Name: Microsoft.RecoveryServices/Vaults/backupPolicies/read
+                    Origin: user
+                  - Display:
+                      Description: Creates ProtectionPolicy
+                      Operation: Create Protection Policy
+                      Provider: Microsoft.RecoveryServices
+                      Resource: BackupPolicies
+                    Name: Microsoft.RecoveryServices/Vaults/backupPolicies/write
+                    Origin: user
+                  - Display:
+                      Description: Delete a ProtectionPolicy
+                      Operation: Delete Protection Policy
+                      Provider: Microsoft.RecoveryServices
+                      Resource: BackupPolicies
+                    Name: Microsoft.RecoveryServices/Vaults/backupPolicies/delete
+                    Origin: user
+                  - Display:
+                      Description: GetResults of Policy Operation.
+                      Operation: Get Policy Operation Results
+                      Provider: Microsoft.RecoveryServices
+                      Resource: BackupPolicy Operation Results
+                    Name: Microsoft.RecoveryServices/Vaults/backupPolicies/operationResults/read
+                    Origin: user
+                  - Display:
+                      Description: GetStatus of Policy Operation.
+                      Operation: Get Policy Operation Status
+                      Provider: Microsoft.RecoveryServices
+                      Resource: BackupPolicy Operation Status
+                    Name: Microsoft.RecoveryServices/Vaults/backupPolicies/operationStatus/read
+                    Origin: user
+                  - Display:
+                      Description: Returns objectdetails of the Protected Item
+                      Operation: Get Protected Item Details
+                      Provider: Microsoft.RecoveryServices
+                      Resource: ProtectedItems
+                    Name: Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/read
+                    Origin: user
+                  - Display:
+                      Description: Returns the listof all Protected Items.
+                      Operation: Get All Protected Items
+                      Provider: Microsoft.RecoveryServices
+                      Resource: ProtectedItems
+                    Name: Microsoft.RecoveryServices/Vaults/backupProtectedItems/read
+                    Origin: user
+                  - Display:
+                      Description: Create abackup Protected Item
+                      Operation: Create Backup Protected Item
+                      Provider: Microsoft.RecoveryServices
+                      Resource: ProtectedItems
+                    Name: Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/write
+                    Origin: user
+                  - Display:
+                      Description: Deletes ProtectedItem
+                      Operation: Delete Protected Items
+                      Provider: Microsoft.RecoveryServices
+                      Resource: ProtectedItems
+                    Name: Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/delete
+                    Origin: user
+                  - Display:
+                      Description: GetsResult of Operation Performed on Protected Items.
+                      Operation: Get Protected Items Operation Results
+                      Provider: Microsoft.RecoveryServices
+                      Resource: ProtectedItem Operation Results
+                    Name: Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/operationResults/read
+                    Origin: user
+                  - Display:
+                      Description: Returnsthe status of Operation performed on Protected Items.
+                      Operation: Get Protected Items operation status
+                      Provider: Microsoft.RecoveryServices
+                      Resource: ProtectedItem Operation Status
+                    Name: Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/operationStatus/read
+                    Origin: user
+                  - Display:
+                      Description: Performs Backupfor Protected Item.
+                      Operation: Backup Protected Item
+                      Provider: Microsoft.RecoveryServices
+                      Resource: ProtectedItems
+                    Name: Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/backup/action
+                    Origin: user
+                  - Display:
+                      Description: Returnslist of all Protectable Items.
+                      Operation: Get Protectable Items
+                      Provider: Microsoft.RecoveryServices
+                      Resource: BackupProtectable Items
+                    Name: Microsoft.RecoveryServices/Vaults/backupProtectableItems/read
+                    Origin: user
+                  - Display:
+                      Description: Refreshes the containerlist
+                      Operation: Refresh container
+                      Provider: Microsoft.RecoveryServices
+                      Resource: RefreshContainers
+                    Name: Microsoft.RecoveryServices/Vaults/refreshContainers/read
+                    Origin: user
+                  - Display:
+                      Description: Returnsstatus of the operation
+                      Operation: Get Operation Results
+                      Provider: Microsoft.RecoveryServices
+                      Resource: RefreshContainers Operation Results
+                    Name: Microsoft.RecoveryServices/Vaults/backupFabrics/operationResults/read
+                    Origin: user
+                  - Display:
+                      Description: Returnsall containers belonging to the subscription
+                      Operation: Get Containers In Subscription
+                      Provider: Microsoft.RecoveryServices
+                      Resource: BackupProtection Containers
+                    Name: Microsoft.RecoveryServices/Vaults/backupProtectionContainers/read
+                    Origin: user
+                  - Display:
+                      Description: Returnsall registered containers
+                      Operation: Get Registered Container
+                      Provider: Microsoft.RecoveryServices
+                      Resource: ProtectionContainers
+                    Name: Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/read
+                    Origin: user
+                  - Display:
+                      Description: Getsresult of Operation performed on Protection Container.
+                      Operation: Get Container Operation Results
+                      Provider: Microsoft.RecoveryServices
+                      Resource: ProtectionContainers Operation Results
+                    Name: Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/operationResults/read
+                    Origin: user
+                  - Display:
+                      Description: Returnsall the backup management servers registered with vault.
+                      Operation: List of backup management servers.
+                      Provider: Microsoft.RecoveryServices
+                      Resource: BackupEngines
+                    Name: Microsoft.RecoveryServices/Vaults/backupEngines
+                    Origin: user
+                  - Display:
+                      Description: Check BackupStatus for Recovery Services Vaults
+                      Operation: Check Backup Status for Vault
+                      Provider: Microsoft.RecoveryServices
+                      Resource: BackupStatus
+                    Name: Microsoft.RecoveryServices/Vaults/backupStatus
+                    Origin: user
+                  - Display:
+                      Description: ReadAny Alerts Settings
+                      Operation: Read Alerts Settings
+                      Provider: MicrosoftRecovery Services
+                      Resource: Alerts Settings
+                    Name: Microsoft.RecoveryServices/vaults/replicationAlertSettings/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Create or Update Any Alerts Settings
+                      Operation: Create or UpdateAlerts Settings
+                      Provider: MicrosoftRecovery Services
+                      Resource: Alerts Settings
+                    Name: Microsoft.RecoveryServices/vaults/replicationAlertSettings/write
+                    Origin: 'user,system'
+                  - Display:
+                      Description: ReadAny Events
+                      Operation: Read Events
+                      Provider: MicrosoftRecovery Services
+                      Resource: Events
+                    Name: Microsoft.RecoveryServices/vaults/replicationEvents/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: ReadAny Networks
+                      Operation: Read Networks
+                      Provider: MicrosoftRecovery Services
+                      Resource: Networks
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationNetworks/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Read Any Network Mappings
+                      Operation: Read NetworkMappings
+                      Provider: MicrosoftRecovery Services
+                      Resource: Network Mappings
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationNetworks/replicationNetworkMappings/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Create or Update Any Network Mappings
+                      Operation: Create or UpdateNetwork Mappings
+                      Provider: MicrosoftRecovery Services
+                      Resource: Network Mappings
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationNetworks/replicationNetworkMappings/write
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Delete Any Network Mappings
+                      Operation: Delete NetworkMappings
+                      Provider: MicrosoftRecovery Services
+                      Resource: Network Mappings
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationNetworks/replicationNetworkMappings/delete
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Read Any Protectable Items
+                      Operation: Read ProtectableItems
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protectable Items
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectableItems/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Read Any Protection ContainerMappings
+                      Operation: ReadProtection Container Mappings
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protection Container Mappings
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionContainerMappings/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Create or Update AnyProtection Container Mappings
+                      Operation: Createor Update Protection Container Mappings
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protection Container Mappings
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionContainerMappings/write
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Remove Protection Container Mapping
+                      Operation: RemoveProtection Container Mapping
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protection Container Mappings
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionContainerMappings/remove/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Delete Any Protection ContainerMappings
+                      Operation: DeleteProtection Container Mappings
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protection Container Mappings
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionContainerMappings/delete
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Read Any Replication RecoveryPoints
+                      Operation: ReadReplication Recovery Points
+                      Provider: MicrosoftRecovery Services
+                      Resource: Replication Recovery Points
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/recoveryPoints/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Read Any Protected Items
+                      Operation: Read ProtectedItems
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protected Items
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Create or Update Any Protected Items
+                      Operation: Create or UpdateProtected Items
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protected Items
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/write
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Delete Any Protected Items
+                      Operation: Delete ProtectedItems
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protected Items
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/delete
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Remove Protected Item
+                      Operation: Remove ProtectedItem
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protected Items
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/remove/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: PlannedFailover
+                      Operation: Planned Failover
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protected Items
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/plannedFailover/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Failover
+                      Operation: Failover
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protected Items
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/unplannedFailover/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: TestFailover
+                      Operation: Test Failover
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protected Items
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/testFailover/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Test Failover Cleanup
+                      Operation: Test FailoverCleanup
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protected Items
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/testFailoverCleanup/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: FailoverCommit
+                      Operation: Failover Commit
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protected Items
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/failoverCommit/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: ReProtect Protected Item
+                      Operation: ReProtect ProtectedItem
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protected Items
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/reProtect/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Update Mobility Service
+                      Operation: Update MobilityService
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protected Items
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/updateMobilityService/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Repairreplication
+                      Operation: Repair replication
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protected Items
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/repairReplication/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Apply Recovery Point
+                      Operation: Apply RecoveryPoint
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protected Items
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/applyRecoveryPoint/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: ReadAny Jobs
+                      Operation: Read Jobs
+                      Provider: MicrosoftRecovery Services
+                      Resource: Jobs
+                    Name: Microsoft.RecoveryServices/vaults/replicationJobs/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: CancelJob
+                      Operation: Cancel Job
+                      Provider: MicrosoftRecovery Services
+                      Resource: Jobs
+                    Name: Microsoft.RecoveryServices/vaults/replicationJobs/cancel/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Restartjob
+                      Operation: Restart job
+                      Provider: MicrosoftRecovery Services
+                      Resource: Jobs
+                    Name: Microsoft.RecoveryServices/vaults/replicationJobs/restart/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: ResumeJob
+                      Operation: Resume Job
+                      Provider: MicrosoftRecovery Services
+                      Resource: Jobs
+                    Name: Microsoft.RecoveryServices/vaults/replicationJobs/resume/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Read Any Protection Containers
+                      Operation: Read ProtectionContainers
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protection Containers
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Discover Protectable Item
+                      Operation: DiscoverProtectable Item
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protection Containers
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/discoverProtectableItem/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Create or Update Any ProtectionContainers
+                      Operation: Createor Update Protection Containers
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protection Containers
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/write
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Remove Protection Container
+                      Operation: RemoveProtection Container
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protection Containers
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/remove/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Switch Protection Container
+                      Operation: SwitchProtection Container
+                      Provider: MicrosoftRecovery Services
+                      Resource: Protection Containers
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/switchprotection/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: ReadAny Policies
+                      Operation: Read Policies
+                      Provider: MicrosoftRecovery Services
+                      Resource: Policies
+                    Name: Microsoft.RecoveryServices/vaults/replicationPolicies/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Createor Update Any Policies
+                      Operation: Create or Update Policies
+                      Provider: MicrosoftRecovery Services
+                      Resource: Policies
+                    Name: Microsoft.RecoveryServices/vaults/replicationPolicies/write
+                    Origin: 'user,system'
+                  - Display:
+                      Description: DeleteAny Policies
+                      Operation: Delete Policies
+                      Provider: MicrosoftRecovery Services
+                      Resource: Policies
+                    Name: Microsoft.RecoveryServices/vaults/replicationPolicies/delete
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Read Any Recovery Plans
+                      Operation: Read RecoveryPlans
+                      Provider: MicrosoftRecovery Services
+                      Resource: Recovery Plans
+                    Name: Microsoft.RecoveryServices/vaults/replicationRecoveryPlans/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Create or Update Any Recovery Plans
+                      Operation: Create or UpdateRecovery Plans
+                      Provider: MicrosoftRecovery Services
+                      Resource: Recovery Plans
+                    Name: Microsoft.RecoveryServices/vaults/replicationRecoveryPlans/write
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Delete Any Recovery Plans
+                      Operation: Delete RecoveryPlans
+                      Provider: MicrosoftRecovery Services
+                      Resource: Recovery Plans
+                    Name: Microsoft.RecoveryServices/vaults/replicationRecoveryPlans/delete
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Planned Failover Recovery Plan
+                      Operation: Planned FailoverRecovery Plan
+                      Provider: MicrosoftRecovery Services
+                      Resource: Recovery Plans
+                    Name: Microsoft.RecoveryServices/vaults/replicationRecoveryPlans/plannedFailover/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Failover Recovery Plan
+                      Operation: Failover RecoveryPlan
+                      Provider: MicrosoftRecovery Services
+                      Resource: Recovery Plans
+                    Name: Microsoft.RecoveryServices/vaults/replicationRecoveryPlans/unplannedFailover/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Test Failover Recovery Plan
+                      Operation: Test FailoverRecovery Plan
+                      Provider: MicrosoftRecovery Services
+                      Resource: Recovery Plans
+                    Name: Microsoft.RecoveryServices/vaults/replicationRecoveryPlans/testFailover/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Test Failover Cleanup Recovery Plan
+                      Operation: Test FailoverCleanup Recovery Plan
+                      Provider: MicrosoftRecovery Services
+                      Resource: Recovery Plans
+                    Name: Microsoft.RecoveryServices/vaults/replicationRecoveryPlans/testFailoverCleanup/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Failover Commit Recovery Plan
+                      Operation: Failover CommitRecovery Plan
+                      Provider: MicrosoftRecovery Services
+                      Resource: Recovery Plans
+                    Name: Microsoft.RecoveryServices/vaults/replicationRecoveryPlans/failoverCommit/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: ReProtect Recovery Plan
+                      Operation: ReProtect RecoveryPlan
+                      Provider: MicrosoftRecovery Services
+                      Resource: Recovery Plans
+                    Name: Microsoft.RecoveryServices/vaults/replicationRecoveryPlans/reProtect/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Read Any Recovery Services Providers
+                      Operation: ReadRecovery Services Providers
+                      Provider: MicrosoftRecovery Services
+                      Resource: Recovery Services Providers
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationRecoveryServicesProviders/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Remove Recovery Services Provider
+                      Operation: RemoveRecovery Services Provider
+                      Provider: MicrosoftRecovery Services
+                      Resource: Recovery Services Providers
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationRecoveryServicesProviders/remove/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Delete Any Recovery Services Providers
+                      Operation: DeleteRecovery Services Providers
+                      Provider: MicrosoftRecovery Services
+                      Resource: Recovery Services Providers
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationRecoveryServicesProviders/delete
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Refresh Provider
+                      Operation: RefreshProvider
+                      Provider: MicrosoftRecovery Services
+                      Resource: Recovery Services Providers
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationRecoveryServicesProviders/refreshProvider/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: ReadAny Fabrics
+                      Operation: Read Fabrics
+                      Provider: MicrosoftRecovery Services
+                      Resource: Fabrics
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Createor Update Any Fabrics
+                      Operation: Create or Update Fabrics
+                      Provider: MicrosoftRecovery Services
+                      Resource: Fabrics
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/write
+                    Origin: 'user,system'
+                  - Display:
+                      Description: RemoveFabric
+                      Operation: Remove Fabric
+                      Provider: MicrosoftRecovery Services
+                      Resource: Fabrics
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/remove/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Checks Consistency of the Fabric
+                      Operation: Checks Consistency ofthe Fabric
+                      Provider: MicrosoftRecovery Services
+                      Resource: Fabrics
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/checkConsistency/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: DeleteAny Fabrics
+                      Operation: Delete Fabrics
+                      Provider: MicrosoftRecovery Services
+                      Resource: Fabrics
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/delete
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Renew Certificate for Fabric
+                      Operation: Renew Certificate forFabric
+                      Provider: MicrosoftRecovery Services
+                      Resource: Fabrics
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/renewcertificate/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Deploy Process Server Image
+                      Operation: Deploy Process ServerImage
+                      Provider: MicrosoftRecovery Services
+                      Resource: Fabrics
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/deployProcessServerImage/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: ReassociateGateway
+                      Operation: Reassociate Gateway
+                      Provider: MicrosoftRecovery Services
+                      Resource: Fabrics
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/reassociateGateway/action
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Read Any Storage Classifications
+                      Operation: ReadStorage Classifications
+                      Provider: MicrosoftRecovery Services
+                      Resource: Storage Classifications
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationStorageClassifications/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Read Any Storage ClassificationMappings
+                      Operation: ReadStorage Classification Mappings
+                      Provider: MicrosoftRecovery Services
+                      Resource: Storage Classification Mappings
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationStorageClassifications/replicationStorageClassificationMappings/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Create or UpdateAny Storage Classification Mappings
+                      Operation: Createor Update Storage Classification Mappings
+                      Provider: MicrosoftRecovery Services
+                      Resource: Storage Classification Mappings
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationStorageClassifications/replicationStorageClassificationMappings/write
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Delete Any Storage ClassificationMappings
+                      Operation: DeleteStorage Classification Mappings
+                      Provider: MicrosoftRecovery Services
+                      Resource: Storage Classification Mappings
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationStorageClassifications/replicationStorageClassificationMappings/delete
+                    Origin: 'user,system'
+                  - Display:
+                      Description: ReadAny Vault Usages
+                      Operation: Read Vault Usages
+                      Provider: MicrosoftRecovery Services
+                      Resource: Vault Usages
+                    Name: Microsoft.RecoveryServices/vaults/usages/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: ReadAny Jobs
+                      Operation: Read Jobs
+                      Provider: MicrosoftRecovery Services
+                      Resource: Jobs
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationvCenters/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: Createor Update Any Jobs
+                      Operation: Create or Update Jobs
+                      Provider: MicrosoftRecovery Services
+                      Resource: Jobs
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationvCenters/write
+                    Origin: 'user,system'
+                  - Display:
+                      Description: DeleteAny Jobs
+                      Operation: Delete Jobs
+                      Provider: MicrosoftRecovery Services
+                      Resource: Jobs
+                    Name: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationvCenters/delete
+                    Origin: 'user,system'
+                  - Display:
+                      Description: The Vault Token operation can be used to get Vault Tokenfor vault level backend operations.
+                      Operation: VaultToken
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/vaultTokens/read
+                    Origin: user
+                  - Display:
+                      Description: The Register Service Container operationcan be used to register a container with Recovery Service.
+                      Operation: RegisterService Container
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/registeredIdentities/write
+                    Origin: 'user,system'
+                  - Display:
+                      Description: The Get Operation Results operation canbe used get the operation status and result for the asynchronously submittedoperation
+                      Operation: GetOperation Results
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/registeredIdentities/operationResults/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: The Get Containers operation can be used get thecontainers registered for a resource.
+                      Operation: GetContainers
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/registeredIdentities/read
+                    Origin: 'user,system'
+                  - Display:
+                      Description: The UnRegister Container operation can beused to unregister a container.
+                      Operation: UnregisterService Container
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/registeredIdentities/delete
+                    Origin: 'user,system'
+                  - Display:
+                      Description: The Update Resource Certificate operationupdates the resource/vault credential certificate.
+                      Operation: UpdateResource Certificate
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/certificates/write
+                    Origin: user
+                  - Display:
+                      Description: Gets the alerts for the Recovery services vault.
+                      Operation: Getalerts
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/monitoringAlerts/read
+                    Origin: user
+                  - Display:
+                      Description: Gets the details of the alert.
+                      Operation: Getalert details
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: 'Microsoft.RecoveryServices/Vaults/monitoringAlerts/{uniqueAlertId}/read'
+                    Origin: user
+                  - Display:
+                      Description: Resolves the alert.
+                      Operation: Resolvealert
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: 'Microsoft.RecoveryServices/Vaults/monitoringAlerts/{uniqueAlertId}/patch'
+                    Origin: user
+                  - Display:
+                      Description: Gets the Recovery services vault notificationconfiguration.
+                      Operation: Getconfiguration
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/monitoringConfigurations/notificationConfiguration/read
+                    Origin: user
+                  - Display:
+                      Description: Configures e-mail notifications to Recoveryservices vault.
+                      Operation: Configuree-mail notification
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/monitoringConfigurations/notificationConfiguration/patch
+                    Origin: user
+                  - Display:
+                      Description: Azure Backup Logs
+                      Operation: AzureBackup Logs
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/providers/Microsoft.Insights/logDefinitions/read
+                    Origin: system
+                    Properties:
+                      serviceSpecification:
+                        logSpecifications:
+                          - blobDuration: PT1H
+                            displayName: AzureBackup Reporting Data
+                            name: AzureBackupReport
+                          - blobDuration: PT1H
+                            displayName: AzureSite Recovery Jobs
+                            name: AzureSiteRecoveryJobs
+                          - blobDuration: PT1H
+                            displayName: AzureSite Recovery Events
+                            name: AzureSiteRecoveryEvents
+                          - blobDuration: PT1H
+                            displayName: AzureSite Recovery Replicated Items
+                            name: AzureSiteRecoveryReplicatedItems
+                  - Display:
+                      Description: Azure Backup Metrics
+                      Operation: AzureBackup Metrics
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/providers/Microsoft.Insights/metricDefinitions/read
+                    Origin: system
+                  - Display:
+                      Description: Azure Backup Diagnostics
+                      Operation: AzureBackup Diagnostics
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/providers/Microsoft.Insights/diagnosticSettings/read
+                    Origin: system
+                  - Display:
+                      Description: Azure Backup Diagnostics
+                      Operation: AzureBackup Diagnostics
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/providers/Microsoft.Insights/diagnosticSettings/write
+                    Origin: system
+                  - Display:
+                      Description: Create Vault operation creates an Azure resource oftype ''vault''
+                      Operation: CreateVault
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/write
+                    Origin: user
+                  - Display:
+                      Description: The Get Vault operation gets an object representingthe Azure resource of type ''vault''
+                      Operation: GetVault
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/read
+                    Origin: user
+                  - Display:
+                      Description: The Delete Vault operation deletes the specified Azureresource of type ''vault''
+                      Operation: DeleteVault
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/delete
+                    Origin: user
+                  - Display:
+                      Description: The Get Extended Info operation gets an object''sExtended Info representing the Azure resource of type ?vault?
+                      Operation: GetExtended Info
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/extendedInformation/read
+                    Origin: user
+                  - Display:
+                      Description: The Get Extended Info operation gets an object''sExtended Info representing the Azure resource of type ?vault?
+                      Operation: GetExtended Info
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/extendedInformation/write
+                    Origin: user
+                  - Display:
+                      Description: The Get Extended Info operation gets an object''sExtended Info representing the Azure resource of type ?vault?
+                      Operation: GetExtended Info
+                      Provider: Microsoft.RecoveryServices
+                      Resource: Vaults
+                    Name: Microsoft.RecoveryServices/Vaults/extendedInformation/delete
+                    Origin: user
+                  - Display:
+                      Description: GetAllocatedStamp is internal operation usedby service
+                      Operation: GetAllocated Stamp
+                      Provider: Microsoft.RecoveryServices
+                      Resource: locations/allocatedStamp
+                    Name: Microsoft.RecoveryServices/locations/allocatedStamp/read
+                    Origin: user
+                  - Display:
+                      Description: AllocateStamp is internal operation used by service
+                      Operation: AllocatedStamp Action
+                      Provider: Microsoft.RecoveryServices
+                      Resource: locations/allocateStamp
+                    Name: Microsoft.RecoveryServices/locations/allocateStamp/action
+                    Origin: user
+      x-ms-pageable:
+        itemName: Value
+        nextLinkName: NextLink
+definitions:
+  ClientDiscoveryDisplay:
+    description: Localized display information of an operation.
+    properties:
+      Description:
+        description: Description of the operation for display purposes
+        type: string
+      Operation:
+        description: Name of the operation for display purposes
+        type: string
+      Provider:
+        description: Name of the provider for display purposes
+        type: string
+      Resource:
+        description: Name of the resource type for display purposes
+        type: string
+    type: object
+  ClientDiscoveryForLogSpecification:
+    description: Class to represent shoebox log specification in json client discovery.
+    properties:
+      blobDuration:
+        description: blob duration
+        type: string
+      displayName:
+        description: Localized display name
+        type: string
+      name:
+        description: Name
+        type: string
+    type: object
+  ClientDiscoveryForProperties:
+    description: Class to represent shoebox properties in json client discovery.
+    properties:
+      serviceSpecification:
+        $ref: '#/definitions/ClientDiscoveryForServiceSpecification'
+        description: Operation properties.
+    type: object
+  ClientDiscoveryForServiceSpecification:
+    description: Class to represent shoebox service specification in json client discovery.
+    properties:
+      logSpecifications:
+        description: List of log specifications of this operation.
+        items:
+          $ref: '#/definitions/ClientDiscoveryForLogSpecification'
+        type: array
+    type: object
+  ClientDiscoveryResponse:
+    description: Operations List response which contains list of available APIs.
+    properties:
+      NextLink:
+        description: NextLink
+        type: string
+      Value:
+        description: List of available operationss.
+        items:
+          $ref: '#/definitions/ClientDiscoveryValueForSingleApi'
+        type: array
+    type: object
+  ClientDiscoveryValueForSingleApi:
+    description: Available operation details.
+    properties:
+      Display:
+        $ref: '#/definitions/ClientDiscoveryDisplay'
+        description: Contains the localized display information for this particular operation
+      Name:
+        description: Name
+        type: string
+      Origin:
+        description: The intended executor of the operation;governs the display of the operation in the RBAC UX and the audit logs UX
+        type: string
+      Properties:
+        $ref: '#/definitions/ClientDiscoveryForProperties'
+        description: Properties
+    type: object

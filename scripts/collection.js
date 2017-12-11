@@ -152,6 +152,7 @@ program
   .command('validate')
   .description('validate collection')
   .option('-q, --quiet', 'suppress two common warnings')
+  .option('-f, --fix', 'test fixing in validate')
   .arguments('[DIR]')
   .action(validateCollection);
 
@@ -275,11 +276,14 @@ function validateCollection(dir, command) {
     //  assert(key.indexOf('?') === -1, 'Path contains hard-coded query parameters');
     //});
     //FIXME: check location
-    //assert(util.getSwaggerPath(swagger) === filename, 'Incorect location');
+    //assert(util.getSwaggerPath(swagger) === filename, 'Incorrect location');
 
     var source = util.getOriginUrl(swagger);
 
-    return validateSwagger(swagger, source)
+    let f = validateSwagger;
+    if (command.fix) f = validateAndFix;
+
+    return f(swagger, source)
       .then(({errors, warnings}) => {
         if (warnings) {
           if (command.quiet) {
@@ -294,6 +298,11 @@ function validateCollection(dir, command) {
           logYaml(errors);
           throw Error('Validation errors detected');
         }
+        else {
+          if (command.fix) {
+            util.saveSwagger(swagger);
+          }
+        }
       });
   }).done();
 }
@@ -302,9 +311,10 @@ function validatePreferred(specs) {
   var preferred = {};
   _.each(specs, function (swagger) {
     var id = util.getApiId(swagger);
+    var version = swagger.info.version;
     preferred[id] = preferred[id] || {};
     preferred[id][swagger.info.version] = swagger.info['x-preferred'];
-    assert(Object.keys(swagger.paths).length>0, `"${id}" has no paths`);
+    assert(Object.keys(swagger.paths).length>0, `"${id}" "${version}" has no paths`);
   });
 
   _.each(preferred, function (versions, id) {
@@ -325,10 +335,12 @@ function validatePreferred(specs) {
     }
 
     var seenTrue = false;
+    var maxVersion = '';
+    var latest = undefined;
     _.each(versions, function (value, version) {
       //assert(!_.isUndefined(value), `Missing value for "x-preferred" in "${id}" "${version}"`);
+      let swagger = specs[id.replace(':','/')+'/'+version+'/swagger.yaml'];
       if (_.isUndefined(value)) {
-        let swagger = specs[id.replace(':','/')+'/'+version+'/swagger.yaml'];
         if (swagger) {
           swagger.info["x-preferred"] = false;
           util.saveSwagger(swagger);
@@ -339,7 +351,19 @@ function validatePreferred(specs) {
       assert(_.isBoolean(value), `Non boolean value for "x-preferred" in "${id}" "${version}"`);
       assert(value !== true || !seenTrue, `Multiple preferred versions in "${id}" "${version}"`);
       seenTrue = value || seenTrue;
+      if ((version > maxVersion) && (version.indexOf('alpha')<0) && (version.indexOf('beta')<0)) {
+        maxVersion = version;
+        latest = swagger;
+      }
     });
+    if (!seenTrue) {
+      if (maxVersion && latest) {
+        console.warn('Forcing preferred true in',id,maxVersion);
+        latest.info["x-preferred"] = true;
+        util.saveSwagger(latest);
+        seenTrue = true;
+      }
+    }
     assert(seenTrue, `At least one preferred should be true in "${id}"`);
   });
 }
@@ -803,8 +827,17 @@ function fixSpec(swagger, errors) {
         if (value.indexOf(' ') !== -1)
           newValue = value = replaceSpaces(value);
 
+        if (!swagger.definitions)
+          swagger.definitions = {};
+
         if (typeof swagger.definitions[value] !== 'undefined')
           newValue = '#/definitions/' + value;
+        else {
+          console.warn(value);
+          let ptr = value.replace('#/definitions/','');
+          swagger.definitions[ptr] = { type: 'object' };
+          fixed = true;
+        }
         break;
       case 'DUPLICATE_OPERATIONID':
         //FIXME: find better solution than to strip all duplicate 'operationId'
@@ -929,7 +962,8 @@ function validateSwagger(swagger, source) {
       var relativeBase = source.split('/');
       relativeBase.pop();
       relativeBase = relativeBase.join('/');
-      spec.jsonRefs = {relativeBase: relativeBase, loaderOptions: {processContent:
+      // 'relativeBase' is for the released version of sway/json-refs, the latest version uses 'location'
+      spec.jsonRefs = {relativeBase: relativeBase, location: source, loaderOptions: {processContent:
       function (res, cb) {
         cb(undefined, YAML.safeLoad(res.text,{json:true}));
       }
