@@ -6,6 +6,10 @@ info:
   description: Use these REST APIs for performing operations on Identity Provider entity associated with your Azure API Management deployment. Setting up an external Identity Provider for authentication can help you manage the developer portal logins using the OAuth2 flow.
   title: ApiManagementClient
   version: '2017-03-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/apimanagement/resource-manager/Microsoft.ApiManagement/2017-03-01/apimidentityprovider.json'
@@ -13,6 +17,9 @@ info:
   x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimidentityprovider
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -43,8 +50,21 @@ parameters:
     required: true
     type: string
     x-ms-enum:
-      modelAsString: false
+      modelAsString: true
       name: IdentityProviderType
+      values:
+        - description: Facebook as Identity provider.
+          value: facebook
+        - description: Google as Identity provider.
+          value: google
+        - description: Microsoft Live as Identity provider.
+          value: microsoft
+        - description: Twitter as Identity provider.
+          value: twitter
+        - description: Azure Active Directory as Identity provider.
+          value: aad
+        - description: Azure Active Directory B2C as Identity provider.
+          value: aadB2C
     x-ms-parameter-location: method
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identityProviders':
@@ -546,8 +566,21 @@ definitions:
           - aadB2C
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: IdentityProviderType
+          values:
+            - description: Facebook as Identity provider.
+              value: facebook
+            - description: Google as Identity provider.
+              value: google
+            - description: Microsoft Live as Identity provider.
+              value: microsoft
+            - description: Twitter as Identity provider.
+              value: twitter
+            - description: Azure Active Directory as Identity provider.
+              value: aad
+            - description: Azure Active Directory B2C as Identity provider.
+              value: aadB2C
   IdentityProviderContract:
     allOf:
       - description: The Resource definition.

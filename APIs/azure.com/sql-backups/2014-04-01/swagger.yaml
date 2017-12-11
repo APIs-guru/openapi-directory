@@ -6,12 +6,19 @@ info:
   description: Provides read functionality for Azure SQL Database Backups
   title: Azure SQL Database Backup
   version: '2014-04-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/sql/resource-manager/Microsoft.Sql/2014-04-01/backups.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: sql-backups
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -96,6 +103,7 @@ paths:
                     location: West US
                     name: '131448209670000000'
                     properties:
+                      earliestRestoreDate: null
                       restorePointCreationDate: '2017-07-18T03:09:27Z'
                       restorePointType: DISCRETE
                     type: Microsoft.Sql/servers/databases/restorePoints
@@ -103,6 +111,7 @@ paths:
                     location: West US
                     name: '131448353660000000'
                     properties:
+                      earliestRestoreDate: null
                       restorePointCreationDate: '2017-07-18T07:09:26Z'
                       restorePointType: DISCRETE
                     type: Microsoft.Sql/servers/databases/restorePoints
@@ -110,6 +119,7 @@ paths:
                     location: West US
                     name: '131448497660000000'
                     properties:
+                      earliestRestoreDate: null
                       restorePointCreationDate: '2017-07-18T11:09:26Z'
                       restorePointType: DISCRETE
                     type: Microsoft.Sql/servers/databases/restorePoints
@@ -117,6 +127,7 @@ paths:
                     location: West US
                     name: '131448641650000000'
                     properties:
+                      earliestRestoreDate: null
                       restorePointCreationDate: '2017-07-18T15:09:25Z'
                       restorePointType: DISCRETE
                     type: Microsoft.Sql/servers/databases/restorePoints
@@ -136,6 +147,7 @@ paths:
                     name: ContinuousRestorePoint
                     properties:
                       earliestRestoreDate: '2017-06-12T00:00:00Z'
+                      restorePointCreationDate: null
                       restorePointType: CONTINUOUS
                     type: Microsoft.Sql/servers/databases/restorePoints
       x-ms-pageable: {}
@@ -170,6 +182,7 @@ paths:
                     name: recoverabledatabasetest-1235
                     properties:
                       edition: Standard
+                      elasticPoolName: null
                       lastAvailableBackupDate: '2017-05-26T01:06:29.78Z'
                       serviceLevelObjective: S0
                     type: Microsoft.Sql/servers/recoverabledatabases
@@ -177,6 +190,7 @@ paths:
                     name: recoverabledatabasetest-9231
                     properties:
                       edition: Premium
+                      elasticPoolName: null
                       lastAvailableBackupDate: '2017-05-26T03:20:31.78Z'
                       serviceLevelObjective: P1
                     type: Microsoft.Sql/servers/recoverabledatabases
@@ -184,6 +198,7 @@ paths:
                     name: recoverabledatabasetest-0342
                     properties:
                       edition: Basic
+                      elasticPoolName: null
                       lastAvailableBackupDate: '2017-05-24T02:06:18.78Z'
                       serviceLevelObjective: Basic
                     type: Microsoft.Sql/servers/recoverabledatabases
@@ -224,6 +239,7 @@ paths:
                 name: recoverabledatabasetest-9187
                 properties:
                   edition: Basic
+                  elasticPoolName: null
                   lastAvailableBackupDate: '2017-05-26T01:06:29.78Z'
                   serviceLevelObjective: Basic
                 type: Microsoft.Sql/servers/recoverabledatabases
@@ -263,6 +279,7 @@ paths:
                       deletionDate: '2017-05-27T02:49:47.69Z'
                       earliestRestoreDate: '2017-05-20T02:49:47.69Z'
                       edition: Basic
+                      elasticPoolName: null
                       maxSizeBytes: '2147483648'
                       serviceLevelObjective: Basic
                     type: Microsoft.Sql/servers/restorableDroppedDatabases
@@ -275,6 +292,7 @@ paths:
                       deletionDate: '2017-05-27T02:16:08.403Z'
                       earliestRestoreDate: '2017-04-21T02:49:47.69Z'
                       edition: Standard
+                      elasticPoolName: null
                       maxSizeBytes: '268435456000'
                       serviceLevelObjective: S0
                     type: Microsoft.Sql/servers/restorableDroppedDatabases
@@ -320,6 +338,7 @@ paths:
                   deletionDate: '2017-05-27T02:49:47.69Z'
                   earliestRestoreDate: '2017-05-20T02:49:47.69Z'
                   edition: Basic
+                  elasticPoolName: null
                   maxSizeBytes: '2147483648'
                   serviceLevelObjective: Basic
                 type: Microsoft.Sql/servers/restorableDroppedDatabases

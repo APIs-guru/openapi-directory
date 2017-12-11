@@ -6,12 +6,19 @@ info:
   description: The Compute Management Client.
   title: ComputeManagementClient
   version: '2017-09-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/compute/resource-manager/Microsoft.Compute/2017-09-01/skus.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: compute-skus
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -211,6 +218,7 @@ definitions:
         description: The type of restrictions.
         enum:
           - Location
+          - Zone
         readOnly: true
         type: string
         x-ms-enum:

@@ -6,6 +6,10 @@ info:
   description: Time Series Insights client
   title: TimeSeriesInsightsClient
   version: '2017-11-15'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/timeseriesinsights/resource-manager/Microsoft.TimeSeriesInsights/2017-11-15/timeseriesinsights.json'
@@ -13,6 +17,9 @@ info:
   x-preferred: true
   x-providerName: azure.com
   x-serviceName: timeseriesinsights
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -99,113 +106,83 @@ paths:
               body:
                 value:
                   - display:
-                      description: Start Stream Analytics Job
-                      operation: Start Stream Analytics Job
-                      provider: Microsoft Azure Stream Analytics
-                      resource: Stream Analytics Job
-                    name: Microsoft.StreamAnalytics/streamingjobs/Start/action
+                      description: Registers the subscription for the Time Series Insights resource provider and enables the creation of Time Series Insights environments.
+                      operation: Registers the Time Series Insights Resource Provider
+                      provider: Microsoft Time Series Insights
+                      resource: Time Series Insights Resource Provider
+                    name: Microsoft.TimeSeriesInsights/register/action
                   - display:
-                      description: Stop Stream Analytics Job
-                      operation: Stop Stream Analytics Job
-                      provider: Microsoft Azure Stream Analytics
-                      resource: Stream Analytics Job
-                    name: Microsoft.StreamAnalytics/streamingjobs/Stop/action
+                      description: Get the properties of an environment.
+                      operation: Read Environment
+                      provider: Microsoft Time Series Insights
+                      resource: Environment
+                    name: Microsoft.TimeSeriesInsights/environments/read
                   - display:
-                      description: Read Stream Analytics Job
-                      operation: Read Stream Analytics Job
-                      provider: Microsoft Azure Stream Analytics
-                      resource: Stream Analytics Job
-                    name: Microsoft.StreamAnalytics/streamingjobs/Read
+                      description: 'Creates a new environment, or updates an existing environment.'
+                      operation: Create or Update Environment
+                      provider: Microsoft Time Series Insights
+                      resource: Environment
+                    name: Microsoft.TimeSeriesInsights/environments/write
                   - display:
-                      description: Write Stream Analytics Job
-                      operation: Write Stream Analytics Job
-                      provider: Microsoft Azure Stream Analytics
-                      resource: Stream Analytics Job
-                    name: Microsoft.StreamAnalytics/streamingjobs/Write
+                      description: Deletes the environment.
+                      operation: Delete Environment
+                      provider: Microsoft Time Series Insights
+                      resource: Environment
+                    name: Microsoft.TimeSeriesInsights/environments/delete
                   - display:
-                      description: Delete Stream Analytics Job
-                      operation: Delete Stream Analytics Job
-                      provider: Microsoft Azure Stream Analytics
-                      resource: Stream Analytics Job
-                    name: Microsoft.StreamAnalytics/streamingjobs/Delete
+                      description: Get the properties of an event source.
+                      operation: Read Event Source
+                      provider: Microsoft Time Series Insights
+                      resource: Event Source
+                    name: Microsoft.TimeSeriesInsights/environments/eventsources/read
                   - display:
-                      description: Read Stream Analytics Job Input
-                      operation: Read Stream Analytics Job Input
-                      provider: Microsoft Azure Stream Analytics
-                      resource: Stream Analytics Job Input
-                    name: Microsoft.StreamAnalytics/streamingjobs/inputs/Read
+                      description: 'Creates a new event source for an environment, or updates an existing event source.'
+                      operation: Create or Update Event Source
+                      provider: Microsoft Time Series Insights
+                      resource: Event Source
+                    name: Microsoft.TimeSeriesInsights/environments/eventsources/write
                   - display:
-                      description: Write Stream Analytics Job Input
-                      operation: Write Stream Analytics Job Input
-                      provider: Microsoft Azure Stream Analytics
-                      resource: Stream Analytics Job Input
-                    name: Microsoft.StreamAnalytics/streamingjobs/inputs/Write
+                      description: Deletes the event source.
+                      operation: Delete Event Source
+                      provider: Microsoft Time Series Insights
+                      resource: Event Source
+                    name: Microsoft.TimeSeriesInsights/environments/eventsources/delete
                   - display:
-                      description: Delete Stream Analytics Job Input
-                      operation: Delete Stream Analytics Job Input
-                      provider: Microsoft Azure Stream Analytics
-                      resource: Stream Analytics Job Input
-                    name: Microsoft.StreamAnalytics/streamingjobs/inputs/Delete
+                      description: Get the properties of a reference data set.
+                      operation: Read Reference Data Set
+                      provider: Microsoft Time Series Insights
+                      resource: Reference Data Set
+                    name: Microsoft.TimeSeriesInsights/environments/referencedatasets/read
                   - display:
-                      description: Read Stream Analytics Job Output
-                      operation: Read Stream Analytics Job Output
-                      provider: Microsoft Azure Stream Analytics
-                      resource: Stream Analytics Job Output
-                    name: Microsoft.StreamAnalytics/streamingjobs/outputs/Read
+                      description: 'Creates a new reference data set for an environment, or updates an existing reference data set.'
+                      operation: Create or Update Reference Data Set
+                      provider: Microsoft Time Series Insights
+                      resource: Reference Data Set
+                    name: Microsoft.TimeSeriesInsights/environments/referencedatasets/write
                   - display:
-                      description: Write Stream Analytics Job Output
-                      operation: Write Stream Analytics Job Output
-                      provider: Microsoft Azure Stream Analytics
-                      resource: Stream Analytics Job Output
-                    name: Microsoft.StreamAnalytics/streamingjobs/outputs/Write
+                      description: Deletes the reference data set.
+                      operation: Delete Reference Data Set
+                      provider: Microsoft Time Series Insights
+                      resource: Reference Data Set
+                    name: Microsoft.TimeSeriesInsights/environments/referencedatasets/delete
                   - display:
-                      description: Delete Stream Analytics Job Output
-                      operation: Delete Stream Analytics Job Output
-                      provider: Microsoft Azure Stream Analytics
-                      resource: Stream Analytics Job Output
-                    name: Microsoft.StreamAnalytics/streamingjobs/outputs/Delete
+                      description: Get the properties of an access policy.
+                      operation: Read Access Policy
+                      provider: Microsoft Time Series Insights
+                      resource: Access Policy
+                    name: Microsoft.TimeSeriesInsights/environments/accesspolicies/read
                   - display:
-                      description: Read Stream Analytics Job Transformation
-                      operation: Read Stream Analytics Job Transformation
-                      provider: Microsoft Azure Stream Analytics
-                      resource: Stream Analytics Job Transformation
-                    name: Microsoft.StreamAnalytics/streamingjobs/transformations/Read
+                      description: 'Creates a new access policy for an environment, or updates an existing access policy.'
+                      operation: Create or Update Access Policy
+                      provider: Microsoft Time Series Insights
+                      resource: Access Policy
+                    name: Microsoft.TimeSeriesInsights/environments/accesspolicies/write
                   - display:
-                      description: Write Stream Analytics Job Transformation
-                      operation: Write Stream Analytics Job Transformation
-                      provider: Microsoft Azure Stream Analytics
-                      resource: Stream Analytics Job Transformation
-                    name: Microsoft.StreamAnalytics/streamingjobs/transformations/Write
-                  - display:
-                      description: Delete Stream Analytics Job Transformation
-                      operation: Delete Stream Analytics Job Transformation
-                      provider: Microsoft Azure Stream Analytics
-                      resource: Stream Analytics Job Transformation
-                    name: Microsoft.StreamAnalytics/streamingjobs/transformations/Delete
-                  - display:
-                      description: Gets the available metrics for streamingjobs
-                      operation: Read streamingjobs metric definitions
-                      provider: Microsoft Azure Stream Analytics
-                      resource: The metric definition of streamingjobs
-                    name: Microsoft.StreamAnalytics/streamingjobs/providers/Microsoft.Insights/metricDefinitions/read
-                  - display:
-                      description: Gets the available logs for streamingjobs
-                      operation: Read streamingjobs log definitions
-                      provider: Microsoft Azure Stream Analytics
-                      resource: The log definition of streamingjobs
-                    name: Microsoft.StreamAnalytics/streamingjobs/providers/Microsoft.Insights/logDefinitions/read
-                  - display:
-                      description: Read diagnostic setting.
-                      operation: Read diagnostic setting.
-                      provider: Microsoft Azure Stream Analytics
-                      resource: streamingjobs
-                    name: Microsoft.StreamAnalytics/streamingjobs/providers/Microsoft.Insights/diagnosticSettings/read
-                  - display:
-                      description: Write diagnostic setting.
-                      operation: Write diagnostic setting.
-                      provider: Microsoft Azure Stream Analytics
-                      resource: streamingjobs
-                    name: Microsoft.StreamAnalytics/streamingjobs/providers/Microsoft.Insights/diagnosticSettings/write
+                      description: Deletes the access policy.
+                      operation: Delete Access Policy
+                      provider: Microsoft Time Series Insights
+                      resource: Access Policy
+                    name: Microsoft.TimeSeriesInsights/environments/accesspolicies/delete
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.TimeSeriesInsights/environments':

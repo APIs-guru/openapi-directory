@@ -6,12 +6,19 @@ info:
   description: 'Provides create, read, update and delete functionality for Azure SQL Database datamasking policies and rules.'
   title: Azure SQL Database Datamasking Policies and Rules
   version: '2014-04-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/sql/resource-manager/Microsoft.Sql/2014-04-01/dataMasking.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: sql-dataMasking
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -102,6 +109,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-2080/databases/sqlcrudtest-331/dataMaskingPolicies/Default
+                kind: null
                 location: Central US
                 name: Default
                 properties:
@@ -150,6 +158,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-2080/databases/sqlcrudtest-331/dataMaskingPolicies/Default
+                kind: null
                 location: Central US
                 name: Default
                 properties:
@@ -173,6 +182,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-2080/databases/sqlcrudtest-331/dataMaskingPolicies/Default
+                kind: null
                 location: Central US
                 name: Default
                 properties:
@@ -213,11 +223,16 @@ paths:
               body:
                 value:
                   - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-6852/databases/sqlcrudtest-331/dataMaskingPolicies/Default/rules/
+                    kind: null
                     location: Central US
+                    name: null
                     properties:
+                      aliasName: null
                       columnName: test1
                       id: dbo_Table_1_test1
                       maskingFunction: Text
+                      numberFrom: null
+                      numberTo: null
                       prefixSize: '1'
                       replacementString: asdf
                       ruleState: Enabled
@@ -226,15 +241,21 @@ paths:
                       tableName: Table_1
                     type: Microsoft.Sql/servers/databases/dataMaskingPolicies/rules
                   - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-6852/databases/sqlcrudtest-331/dataMaskingPolicies/Default/rules/
+                    kind: null
                     location: Central US
+                    name: null
                     properties:
+                      aliasName: null
                       columnName: test1
                       id: dbo_Table_1_test1
                       maskingFunction: Number
                       numberFrom: '0'
                       numberTo: '2'
+                      prefixSize: null
+                      replacementString: null
                       ruleState: Enabled
                       schemaName: dbo
+                      suffixSize: null
                       tableName: Table_1
                     type: Microsoft.Sql/servers/databases/dataMaskingPolicies/rules
       x-ms-pageable: {}
@@ -293,27 +314,41 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-6852/databases/sqlcrudtest-331/dataMaskingPolicies/Default/rules/
+                kind: null
                 location: Central US
+                name: null
                 properties:
                   aliasName: nickname
                   columnName: test1
                   id: dbo_Table_1_test1
                   maskingFunction: Default
+                  numberFrom: null
+                  numberTo: null
+                  prefixSize: null
+                  replacementString: null
                   ruleState: Enabled
                   schemaName: dbo
+                  suffixSize: null
                   tableName: Table_1
                 type: Microsoft.Sql/servers/databases/dataMaskingPolicies/rules
             '201':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-6852/databases/sqlcrudtest-331/dataMaskingPolicies/Default/rules/
+                kind: null
                 location: Central US
+                name: null
                 properties:
                   aliasName: nickname
                   columnName: test1
                   id: dbo_Table_1_test1
                   maskingFunction: Default
+                  numberFrom: null
+                  numberTo: null
+                  prefixSize: null
+                  replacementString: null
                   ruleState: Enabled
                   schemaName: dbo
+                  suffixSize: null
                   tableName: Table_1
                 type: Microsoft.Sql/servers/databases/dataMaskingPolicies/rules
         Create/Update data masking rule for default min:
@@ -335,25 +370,41 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-6852/databases/sqlcrudtest-331/dataMaskingPolicies/Default/rules/
+                kind: null
                 location: Central US
+                name: null
                 properties:
+                  aliasName: null
                   columnName: test1
                   id: dbo_Table_1_test1
                   maskingFunction: Default
+                  numberFrom: null
+                  numberTo: null
+                  prefixSize: null
+                  replacementString: null
                   ruleState: Enabled
                   schemaName: dbo
+                  suffixSize: null
                   tableName: Table_1
                 type: Microsoft.Sql/servers/databases/dataMaskingPolicies/rules
             '201':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-6852/databases/sqlcrudtest-331/dataMaskingPolicies/Default/rules/
+                kind: null
                 location: Central US
+                name: null
                 properties:
+                  aliasName: null
                   columnName: test1
                   id: dbo_Table_1_test1
                   maskingFunction: Default
+                  numberFrom: null
+                  numberTo: null
+                  prefixSize: null
+                  replacementString: null
                   ruleState: Enabled
                   schemaName: dbo
+                  suffixSize: null
                   tableName: Table_1
                 type: Microsoft.Sql/servers/databases/dataMaskingPolicies/rules
         Create/Update data masking rule for numbers:
@@ -377,29 +428,41 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-6852/databases/sqlcrudtest-331/dataMaskingPolicies/Default/rules/
+                kind: null
                 location: Central US
+                name: null
                 properties:
+                  aliasName: null
                   columnName: test1
                   id: dbo_Table_1_test1
                   maskingFunction: Number
                   numberFrom: '0'
                   numberTo: '2'
+                  prefixSize: null
+                  replacementString: null
                   ruleState: Enabled
                   schemaName: dbo
+                  suffixSize: null
                   tableName: Table_1
                 type: Microsoft.Sql/servers/databases/dataMaskingPolicies/rules
             '201':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-6852/databases/sqlcrudtest-331/dataMaskingPolicies/Default/rules/
+                kind: null
                 location: Central US
+                name: null
                 properties:
+                  aliasName: null
                   columnName: test1
                   id: dbo_Table_1_test1
                   maskingFunction: Number
                   numberFrom: '0'
                   numberTo: '2'
+                  prefixSize: null
+                  replacementString: null
                   ruleState: Enabled
                   schemaName: dbo
+                  suffixSize: null
                   tableName: Table_1
                 type: Microsoft.Sql/servers/databases/dataMaskingPolicies/rules
         Create/Update data masking rule for text:
@@ -424,11 +487,16 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-6852/databases/sqlcrudtest-331/dataMaskingPolicies/Default/rules/
+                kind: null
                 location: Central US
+                name: null
                 properties:
+                  aliasName: null
                   columnName: test1
                   id: dbo_Table_1_test1
                   maskingFunction: Text
+                  numberFrom: null
+                  numberTo: null
                   prefixSize: '1'
                   replacementString: asdf
                   ruleState: Enabled
@@ -439,11 +507,16 @@ paths:
             '201':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-6852/providers/Microsoft.Sql/servers/sqlcrudtest-6852/databases/sqlcrudtest-331/dataMaskingPolicies/Default/rules/
+                kind: null
                 location: Central US
+                name: null
                 properties:
+                  aliasName: null
                   columnName: test1
                   id: dbo_Table_1_test1
                   maskingFunction: Text
+                  numberFrom: null
+                  numberTo: null
                   prefixSize: '1'
                   replacementString: asdf
                   ruleState: Enabled

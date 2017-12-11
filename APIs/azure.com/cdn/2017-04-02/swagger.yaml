@@ -6,6 +6,10 @@ info:
   description: Use these APIs to manage Azure CDN resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure.
   title: CdnManagementClient
   version: '2017-04-02'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/cdn/resource-manager/Microsoft.Cdn/2017-04-02/cdn.json'
@@ -13,6 +17,9 @@ info:
   x-preferred: true
   x-providerName: azure.com
   x-serviceName: cdn
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -75,6 +82,19 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - CheckNameAvailability
+      x-ms-examples:
+        CheckNameAvailability:
+          parameters:
+            api-version: '2017-04-02'
+            checkNameAvailabilityInput:
+              name: sampleName
+              type: Microsoft.Cdn/Profiles/Endpoints
+          responses:
+            '200':
+              body:
+                message: Name not available
+                nameAvailable: false
+                reason: Name is already in use
   /providers/Microsoft.Cdn/edgenodes:
     get:
       description: Edgenodes are the global Point of Presence (POP) locations used to deliver CDN content to end users.
@@ -92,6 +112,61 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Edgenodes
+      x-ms-examples:
+        EdgeNodes_List:
+          parameters:
+            api-version: '2017-04-02'
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /providers/Microsoft.Cdn/edgenodes/Standard_Verizon
+                    name: Standard_Verizon
+                    properties:
+                      ipAddressGroups:
+                        - deliveryRegion: All
+                          ipv4Addresses:
+                            - baseIpAddress: 192.229.176.0
+                              prefixLength: 24
+                            - baseIpAddress: 180.240.184.128
+                              prefixLength: 25
+                            - baseIpAddress: 152.195.27.0
+                              prefixLength: 24
+                          ipv6Addresses:
+                            - baseIpAddress: '2606:2800:60f2::'
+                              prefixLength: 48
+                            - baseIpAddress: '2606:2800:700c::'
+                              prefixLength: 48
+                    type: Microsoft.Cdn/edgenodes
+                  - id: /providers/Microsoft.Cdn/edgenodes/Premium_Verizon
+                    name: Premium_Verizon
+                    properties:
+                      ipAddressGroups:
+                        - deliveryRegion: All
+                          ipv4Addresses:
+                            - baseIpAddress: 192.229.176.0
+                              prefixLength: 24
+                            - baseIpAddress: 152.195.27.0
+                              prefixLength: 24
+                          ipv6Addresses:
+                            - baseIpAddress: '2606:2800:60f2::'
+                              prefixLength: 48
+                            - baseIpAddress: '2606:2800:700c::'
+                              prefixLength: 48
+                    type: Microsoft.Cdn/edgenodes
+                  - id: /providers/Microsoft.Cdn/edgenodes/Custom_Verizon
+                    name: Custom_Verizon
+                    properties:
+                      ipAddressGroups:
+                        - deliveryRegion: All
+                          ipv4Addresses:
+                            - baseIpAddress: 192.229.176.0
+                              prefixLength: 24
+                            - baseIpAddress: '2606:2800:420b::'
+                              prefixLength: 48
+                            - baseIpAddress: '2606:2800:700c::'
+                              prefixLength: 48
+                    type: Microsoft.Cdn/edgenodes
       x-ms-pageable:
         nextLinkName: nextLink
   /providers/Microsoft.Cdn/operations:
@@ -111,6 +186,65 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Operations
+      x-ms-examples:
+        Operations_List:
+          parameters:
+            api-version: '2017-04-02'
+          responses:
+            '200':
+              body:
+                value:
+                  - display:
+                      description: Registers the subscription for the CDN resource provider and enables the creation of CDN profiles.
+                      operation: Registers the Microsoft.Cdn Resource Provider
+                      provider: Microsoft.Cdn
+                      resource: Microsoft.Cdn Resource Provider
+                    name: Microsoft.Cdn/register/action
+                  - display:
+                      operation: read
+                      provider: Microsoft.Cdn
+                      resource: EdgeNode
+                    name: Microsoft.Cdn/edgenodes/read
+                  - display:
+                      operation: write
+                      provider: Microsoft.Cdn
+                      resource: EdgeNode
+                    name: Microsoft.Cdn/edgenodes/write
+                  - display:
+                      operation: delete
+                      provider: Microsoft.Cdn
+                      resource: EdgeNode
+                    name: Microsoft.Cdn/edgenodes/delete
+                  - display:
+                      operation: read
+                      provider: Microsoft.Cdn
+                      resource: Profile
+                    name: Microsoft.Cdn/profiles/read
+                  - display:
+                      operation: write
+                      provider: Microsoft.Cdn
+                      resource: Profile
+                    name: Microsoft.Cdn/profiles/write
+                  - display:
+                      operation: write
+                      provider: Microsoft.Cdn
+                      resource: Profile
+                    name: Microsoft.Cdn/operationresults/profileresults/write
+                  - display:
+                      operation: delete
+                      provider: Microsoft.Cdn
+                      resource: Profile
+                    name: Microsoft.Cdn/operationresults/profileresults/delete
+                  - display:
+                      operation: CheckResourceUsage
+                      provider: Microsoft.Cdn
+                      resource: Profile
+                    name: Microsoft.Cdn/operationresults/profileresults/CheckResourceUsage/action
+                  - display:
+                      operation: GenerateSsoUri
+                      provider: Microsoft.Cdn
+                      resource: Profile
+                    name: Microsoft.Cdn/operationresults/profileresults/GenerateSsoUri/action
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/checkResourceUsage':
@@ -131,6 +265,19 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - CheckResourceUsage
+      x-ms-examples:
+        ResourceUsage_List:
+          parameters:
+            api-version: '2017-04-02'
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - currentValue: 31
+                    limit: 200
+                    resourceType: profile
+                    unit: count
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/profiles':
@@ -151,6 +298,35 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Profiles
+      x-ms-examples:
+        Profiles_List:
+          parameters:
+            api-version: '2017-04-02'
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/resourcegroups/RG1/providers/Microsoft.Cdn/profiles/profile1
+                    location: WestCentralUs
+                    name: profile1
+                    properties:
+                      provisioningState: Succeeded
+                      resourceState: Active
+                    sku:
+                      name: Standard_Akamai
+                    tags: {}
+                    type: Microsoft.Cdn/profiles
+                  - id: /subscriptions/subid/resourcegroups/RG1/providers/Microsoft.Cdn/profiles/profile2
+                    location: WestCentralUs
+                    name: profile2
+                    properties:
+                      provisioningState: Succeeded
+                      resourceState: Active
+                    sku:
+                      name: Standard_Akamai
+                    tags: {}
+                    type: Microsoft.Cdn/profiles
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/validateProbe':
@@ -177,6 +353,18 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - ValidateProbe
+      x-ms-examples:
+        ValidateProbe:
+          parameters:
+            api-version: '2017-04-02'
+            validateProbeInput:
+              probeURL: 'https://www.bing.com/image'
+          responses:
+            '200':
+              body:
+                errorCode: None
+                isValid: true
+                message: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles':
     get:
       description: Lists all of the CDN profiles within a resource group.
@@ -196,6 +384,36 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Profiles
+      x-ms-examples:
+        Profiles_ListByResourceGroup:
+          parameters:
+            api-version: '2017-04-02'
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1
+                    location: WestCentralUs
+                    name: profile1
+                    properties:
+                      provisioningState: Succeeded
+                      resourceState: Active
+                    sku:
+                      name: Standard_Akamai
+                    tags: {}
+                    type: Microsoft.Cdn/profiles
+                  - id: /subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile2
+                    location: WestCentralUs
+                    name: profile2
+                    properties:
+                      provisioningState: Succeeded
+                      resourceState: Active
+                    sku:
+                      name: Standard_Akamai
+                    tags: {}
+                    type: Microsoft.Cdn/profiles
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}':
@@ -222,6 +440,16 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Profiles
+      x-ms-examples:
+        Profiles_Delete:
+          parameters:
+            api-version: '2017-04-02'
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '202':
+              body: {}
       x-ms-long-running-operation: true
     get:
       description: Gets a CDN profile with the specified profile name under the specified subscription and resource group.
@@ -246,6 +474,27 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Profiles
+      x-ms-examples:
+        Profiles_Get:
+          parameters:
+            api-version: '2017-04-02'
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1
+                    location: WestCentralUs
+                    name: profile1
+                    properties:
+                      provisioningState: Succeeded
+                      resourceState: Active
+                    sku:
+                      name: Standard_Akamai
+                    tags: {}
+                    type: Microsoft.Cdn/profiles
     patch:
       description: Updates an existing CDN profile with the specified profile name under the specified subscription and resource group.
       operationId: Profiles_Update
@@ -279,6 +528,30 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Profiles
+      x-ms-examples:
+        Profiles_Update:
+          parameters:
+            api-version: '2017-04-02'
+            profileName: profile1
+            profileUpdateParameters:
+              tags:
+                additionalProperties: Tag1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '201':
+              body:
+                id: /subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1
+                location: WestCentralUs
+                name: profile1
+                properties:
+                  provisioningState: Succeeded
+                  resourceState: Active
+                sku:
+                  name: Standard_Verizon
+                tags:
+                  additionalProperties: Tag1
+                type: Microsoft.Cdn/profiles
       x-ms-long-running-operation: true
     put:
       description: Creates a new CDN profile with a profile name under the specified subscription and resource group.
@@ -317,6 +590,30 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Profiles
+      x-ms-examples:
+        Profiles_Create:
+          parameters:
+            api-version: '2017-04-02'
+            profile:
+              location: WestCentralUs
+              sku:
+                name: Standard_Verizon
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '201':
+              body:
+                id: /subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1
+                location: WestCentralUs
+                name: profile1
+                properties:
+                  provisioningState: Creating
+                  resourceState: Creating
+                sku:
+                  name: Standard_Verizon
+                tags: {}
+                type: Microsoft.Cdn/profiles
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/checkResourceUsage':
     post:
@@ -342,6 +639,21 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Profiles
+      x-ms-examples:
+        Profiles_ListResourceUsage:
+          parameters:
+            api-version: '2017-04-02'
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - currentValue: 0
+                    limit: 25
+                    resourceType: endpoint
+                    unit: count
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints':
@@ -368,6 +680,43 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Endpoints
+      x-ms-examples:
+        Endpoints_ListByProfile:
+          parameters:
+            api-version: '2017-04-02'
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1
+                    location: CentralUs
+                    name: endpoint1
+                    properties:
+                      contentTypesToCompress: []
+                      customDomains: []
+                      geoFilters: []
+                      hostName: endpoint1.azureedge.net
+                      isCompressionEnabled: false
+                      isHttpAllowed: true
+                      isHttpsAllowed: true
+                      optimizationType: DynamicSiteAcceleration
+                      originHostHeader: www.bing.com
+                      originPath: null
+                      origins:
+                        - name: www-bing-com
+                          properties:
+                            hostName: www.bing.com
+                            httpPort: 80
+                            httpsPort: 443
+                      probePath: /image
+                      provisioningState: Succeeded
+                      queryStringCachingBehavior: NotSet
+                      resourceState: Running
+                    tags: {}
+                    type: Microsoft.Cdn/profiles/endpoints
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}':
@@ -399,6 +748,17 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Endpoints
+      x-ms-examples:
+        Endpoints_Delete:
+          parameters:
+            api-version: '2017-04-02'
+            endpointName: endpoint1
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '202':
+              body: {}
       x-ms-long-running-operation: true
     get:
       description: 'Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.'
@@ -428,6 +788,43 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Endpoints
+      x-ms-examples:
+        Endpoints_Get:
+          parameters:
+            api-version: '2017-04-02'
+            endpointName: endpoint1
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1
+                location: CentralUs
+                name: endpoint1
+                properties:
+                  contentTypesToCompress: []
+                  customDomains: []
+                  geoFilters: []
+                  hostName: endpoint1.azureedge.net
+                  isCompressionEnabled: false
+                  isHttpAllowed: true
+                  isHttpsAllowed: true
+                  optimizationType: DynamicSiteAcceleration
+                  originHostHeader: www.bing.com
+                  originPath: null
+                  origins:
+                    - name: www-bing-com
+                      properties:
+                        hostName: www.bing.com
+                        httpPort: 80
+                        httpsPort: 443
+                  probePath: /image
+                  provisioningState: Succeeded
+                  queryStringCachingBehavior: NotSet
+                  resourceState: Running
+                tags: {}
+                type: Microsoft.Cdn/profiles/endpoints
     patch:
       description: 'Updates an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. Only tags and Origin HostHeader can be updated after creating an endpoint. To update origins, use the Update Origin operation. To update custom domains, use the Update Custom Domain operation.'
       operationId: Endpoints_Update
@@ -466,6 +863,47 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Endpoints
+      x-ms-examples:
+        Endpoints_Update:
+          parameters:
+            api-version: '2017-04-02'
+            endpointName: endpoint1
+            endpointUpdateProperties:
+              tags:
+                additionalProperties: Tag1
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1
+                location: WestCentralUs
+                name: endpoint1
+                properties:
+                  contentTypesToCompress: []
+                  customDomains: []
+                  geoFilters: []
+                  hostName: endpoint1.azureedge.net
+                  isCompressionEnabled: false
+                  isHttpAllowed: true
+                  isHttpsAllowed: true
+                  optimizationType: null
+                  originHostHeader: null
+                  originPath: null
+                  origins:
+                    - name: www-bing-com
+                      properties:
+                        hostName: www.bing.com
+                        httpPort: 80
+                        httpsPort: 443
+                  probePath: null
+                  provisioningState: Creating
+                  queryStringCachingBehavior: IgnoreQueryString
+                  resourceState: Creating
+                tags:
+                  additionalProperties: Tag1
+                type: Microsoft.Cdn/profiles/endpoints
       x-ms-long-running-operation: true
     put:
       description: 'Creates a new CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.'
@@ -509,6 +947,52 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Endpoints
+      x-ms-examples:
+        Endpoints_Create:
+          parameters:
+            api-version: '2017-04-02'
+            endpoint:
+              location: WestCentralUs
+              properties:
+                origins:
+                  - name: www-bing-com
+                    properties:
+                      hostName: www.bing.com
+                      httpPort: 80
+                      httpsPort: 443
+            endpointName: endpoint1
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '201':
+              body:
+                id: /subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1
+                location: WestCentralUs
+                name: endpoint1
+                properties:
+                  contentTypesToCompress: []
+                  customDomains: []
+                  geoFilters: []
+                  hostName: endpoint1.azureedge.net
+                  isCompressionEnabled: false
+                  isHttpAllowed: true
+                  isHttpsAllowed: true
+                  optimizationType: null
+                  originHostHeader: null
+                  originPath: null
+                  origins:
+                    - name: www-bing-com
+                      properties:
+                        hostName: www.bing.com
+                        httpPort: 80
+                        httpsPort: 443
+                  probePath: null
+                  provisioningState: Creating
+                  queryStringCachingBehavior: IgnoreQueryString
+                  resourceState: Creating
+                tags: {}
+                type: Microsoft.Cdn/profiles/endpoints
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/checkResourceUsage':
     post:
@@ -539,6 +1023,26 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Endpoints
+      x-ms-examples:
+        Endpoints_ListResourceUsage:
+          parameters:
+            api-version: '2017-04-02'
+            endpointName: endpoint1
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '202':
+              body:
+                value:
+                  - currentValue: 1
+                    limit: 20
+                    resourceType: customdomain
+                    unit: count
+                  - currentValue: 0
+                    limit: 25
+                    resourceType: geofilter
+                    unit: count
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains':
@@ -570,6 +1074,28 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - CustomDomains
+      x-ms-examples:
+        CustomDomains_ListByEndpoint:
+          parameters:
+            api-version: '2017-04-02'
+            endpointName: endpoint1
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/customdomains/www-someDomain-net
+                    name: www-someDomain-net
+                    properties:
+                      customHttpsProvisioningState: Disabled
+                      customHttpsProvisioningSubstate: None
+                      hostName: www.someDomain.net
+                      provisioningState: Succeeded
+                      resourceState: Active
+                      validationData: null
+                    type: Microsoft.Cdn/profiles/endpoints/customdomains
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains/{customDomainName}':
@@ -610,6 +1136,18 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - CustomDomains
+      x-ms-examples:
+        CustomDomains_Delete:
+          parameters:
+            api-version: '2017-04-02'
+            customDomainName: www-someDomain-net
+            endpointName: endpoint1
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '200':
+              body: {}
       x-ms-long-running-operation: true
     get:
       description: Gets an exisitng custom domain within an endpoint.
@@ -644,6 +1182,28 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - CustomDomains
+      x-ms-examples:
+        CustomDomains_Get:
+          parameters:
+            api-version: '2017-04-02'
+            customDomainName: www-someDomain-net
+            endpointName: endpoint1
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/customdomains/www-someDomain-net
+                name: www-someDomain-net
+                properties:
+                  customHttpsProvisioningState: Disabled
+                  customHttpsProvisioningSubstate: None
+                  hostName: www.someDomain.net
+                  provisioningState: Succeeded
+                  resourceState: Active
+                  validationData: null
+                type: Microsoft.Cdn/profiles/endpoints/customdomains
     put:
       description: Creates a new custom domain within an endpoint.
       operationId: CustomDomains_Create
@@ -691,6 +1251,30 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - CustomDomains
+      x-ms-examples:
+        CustomDomains_Create:
+          parameters:
+            api-version: '2017-04-02'
+            customDomainName: www-someDomain-net
+            customDomainProperties:
+              hostName: www.someDomain.net
+            endpointName: endpoint1
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/customdomains/www-someDomain-net
+                name: www-someDomain-net
+                properties:
+                  customHttpsProvisioningState: Enabling
+                  customHttpsProvisioningSubstate: PendingDomainControlValidationRequestApproval
+                  hostName: www.someDomain.net
+                  provisioningState: Succeeded
+                  resourceState: Active
+                  validationData: null
+                type: Microsoft.Cdn/profiles/endpoints/customdomains
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains/{customDomainName}/disableCustomHttps':
     post:
@@ -728,6 +1312,18 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - CustomDomains
+      x-ms-examples:
+        CustomDomains_DisableCustomHttps:
+          parameters:
+            api-version: '2017-04-02'
+            customDomainName: www-someDomain-net
+            endpointName: endpoint1
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '200':
+              body: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains/{customDomainName}/enableCustomHttps':
     post:
       description: Enable https delivery of the custom domain.
@@ -764,6 +1360,18 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - CustomDomains
+      x-ms-examples:
+        CustomDomains_EnableCustomHttps:
+          parameters:
+            api-version: '2017-04-02'
+            customDomainName: www-someDomain-net
+            endpointName: endpoint1
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '200':
+              body: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/load':
     post:
       description: Pre-loads a content to CDN. Available for Verizon Profiles.
@@ -789,6 +1397,8 @@ paths:
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       responses:
+        '200':
+          description: OK. The request has succeeded.
         '202':
           description: Accepted and the operation will complete asynchronously.
         default:
@@ -797,6 +1407,20 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Endpoints
+      x-ms-examples:
+        Endpoints_LoadContent:
+          parameters:
+            api-version: '2017-04-02'
+            contentFilePaths:
+              contentPaths:
+                - /folder1
+            endpointName: endpoint1
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '202':
+              body: {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/origins':
     get:
@@ -827,6 +1451,27 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Origins
+      x-ms-examples:
+        Origins_ListByEndpoint:
+          parameters:
+            api-version: '2017-04-02'
+            endpointName: endpoint1
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-someDomain-net
+                    name: www-someDomain-net
+                    properties:
+                      hostName: www.someDomain.net
+                      httpPort: null
+                      httpsPort: null
+                      provisioningState: Succeeded
+                      resourceState: Active
+                    type: Microsoft.Cdn/profiles/endpoints/origins
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/origins/{originName}':
@@ -863,6 +1508,27 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Origins
+      x-ms-examples:
+        Origins_Get:
+          parameters:
+            api-version: '2017-04-02'
+            endpointName: endpoint1
+            originName: www-someDomain-net
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-someDomain-net
+                name: www-someDomain-net
+                properties:
+                  hostName: www.someDomain.net
+                  httpPort: null
+                  httpsPort: null
+                  provisioningState: Succeeded
+                  resourceState: Active
+                type: Microsoft.Cdn/profiles/endpoints/origins
     patch:
       description: Updates an existing origin within an endpoint.
       operationId: Origins_Update
@@ -906,6 +1572,30 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Origins
+      x-ms-examples:
+        Origins_Update:
+          parameters:
+            api-version: '2017-04-02'
+            endpointName: endpoint1
+            originName: www-someDomain-net
+            originUpdateProperties:
+              httpPort: 42
+              httpsPort: 43
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '202':
+              body:
+                id: /subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-someDomain-net
+                name: www-someDomain-net
+                properties:
+                  hostName: www.someDomain.net
+                  httpPort: 42
+                  httpsPort: 43
+                  provisioningState: Succeeded
+                  resourceState: Active
+                type: Microsoft.Cdn/profiles/endpoints/origins
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/purge':
     post:
@@ -932,6 +1622,8 @@ paths:
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       responses:
+        '200':
+          description: OK. The request has succeeded.
         '202':
           description: Accepted and the operation will complete asynchronously.
         default:
@@ -940,6 +1632,20 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Endpoints
+      x-ms-examples:
+        Endpoints_PurgeContent:
+          parameters:
+            api-version: '2017-04-02'
+            contentFilePaths:
+              contentPaths:
+                - /folder1
+            endpointName: endpoint1
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '202':
+              body: {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/start':
     post:
@@ -960,6 +1666,10 @@ paths:
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/Endpoint'
         '202':
           description: Accepted and the operation will complete asynchronously.
           schema:
@@ -970,6 +1680,37 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Endpoints
+      x-ms-examples:
+        Endpoints_Start:
+          parameters:
+            api-version: '2017-04-02'
+            endpointName: endpoint1
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '202':
+              body:
+                contentTypesToCompress: []
+                customDomains: []
+                geoFilters: []
+                hostName: endpoint1.azureedge.net
+                isCompressionEnabled: false
+                isHttpAllowed: true
+                isHttpsAllowed: true
+                optimizationType: DynamicSiteAcceleration
+                originHostHeader: www.bing.com
+                originPath: null
+                origins:
+                  - name: www-bing-com
+                    properties:
+                      hostName: www.bing.com
+                      httpPort: 80
+                      httpsPort: 443
+                probePath: /image
+                provisioningState: Succeeded
+                queryStringCachingBehavior: NotSet
+                resourceState: Starting
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/stop':
     post:
@@ -990,6 +1731,10 @@ paths:
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/Endpoint'
         '202':
           description: Accepted and the operation will complete asynchronously.
           schema:
@@ -1000,6 +1745,37 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Endpoints
+      x-ms-examples:
+        Endpoints_Stop:
+          parameters:
+            api-version: '2017-04-02'
+            endpointName: endpoint1
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '202':
+              body:
+                contentTypesToCompress: []
+                customDomains: []
+                geoFilters: []
+                hostName: endpoint1.azureedge.net
+                isCompressionEnabled: false
+                isHttpAllowed: true
+                isHttpsAllowed: true
+                optimizationType: DynamicSiteAcceleration
+                originHostHeader: www.bing.com
+                originPath: null
+                origins:
+                  - name: www-bing-com
+                    properties:
+                      hostName: www.bing.com
+                      httpPort: 80
+                      httpsPort: 443
+                probePath: /image
+                provisioningState: Succeeded
+                queryStringCachingBehavior: NotSet
+                resourceState: Stopping
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/validateCustomDomain':
     post:
@@ -1036,6 +1812,22 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Endpoints
+      x-ms-examples:
+        Endpoints_ValidateCustomDomain:
+          parameters:
+            api-version: '2017-04-02'
+            customDomainProperties:
+              hostname: www.someDomain.com
+            endpointName: endpoint1
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                customDomainValidated: true
+                message: null
+                reason: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/generateSsoUri':
     post:
       description: 'Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemnetal portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.'
@@ -1060,6 +1852,17 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Profiles
+      x-ms-examples:
+        Profiles_GenerateSsoUri:
+          parameters:
+            api-version: '2017-04-02'
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                ssoUriValue: 'https://someuri.com'
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getSupportedOptimizationTypes':
     post:
       description: Gets the supported optimization types for the current profile. A user can create an endpoint with an optimization type from the listed values.
@@ -1084,6 +1887,19 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
         - Profiles
+      x-ms-examples:
+        Profiles_ListSupportedOptimizationTypes:
+          parameters:
+            api-version: '2017-04-02'
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                supportedOptimizationTypes:
+                  - GeneralWebDelivery
+                  - DynamicSiteAcceleration
 definitions:
   CheckNameAvailabilityInput:
     description: Input of CheckNameAvailability API.
@@ -1116,7 +1932,7 @@ definitions:
     type: object
   CustomDomain:
     allOf:
-      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/ProxyResource'
     description: 'Friendly domain name mapping to the endpoint hostname that the customer provides for branding purposes, e.g. www.consoto.com.'
     properties:
       properties:
@@ -1246,7 +2062,7 @@ definitions:
     x-ms-azure-resource: true
   EdgeNode:
     allOf:
-      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/ProxyResource'
     description: Edgenode is a global Point of Presence (POP) location used to deliver CDN content to end users.
     properties:
       properties:
@@ -1277,7 +2093,7 @@ definitions:
         type: array
   Endpoint:
     allOf:
-      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/TrackedResource'
     description: 'CDN endpoint is the entity within a CDN profile containing configuration information such as origin, protocol, content caching and delivery behavior. The CDN endpoint uses the URL format <endpointname>.azureedge.net.'
     properties:
       properties:
@@ -1356,7 +2172,7 @@ definitions:
         $ref: '#/definitions/OptimizationType'
         description: 'Specifies what scenario the customer wants this CDN endpoint to optimize for, e.g. Download, Media services. With this information, CDN can apply scenario driven optimization.'
       originHostHeader:
-        description: The host header CDN sends along with content requests to origin. The default value is the host name of the origin.
+        description: 'The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default.'
         type: string
       originPath:
         description: 'A directory path on the origin that CDN can use to retreive content from, e.g. contoso.cloudapp.net/originpath.'
@@ -1494,7 +2310,7 @@ definitions:
       name: OptimizationType
   Origin:
     allOf:
-      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/TrackedResource'
     description: 'CDN origin is the source of the content being delivered via CDN. When the edge nodes represented by an endpoint do not have the requested content cached, they attempt to fetch it from one or more of the configured origins.'
     properties:
       properties:
@@ -1580,7 +2396,7 @@ definitions:
     x-ms-azure-resource: true
   Profile:
     allOf:
-      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/TrackedResource'
     description: 'CDN profile is a logical grouping of endpoints that share the same settings, such as CDN provider and pricing tier.'
     properties:
       properties:
@@ -1631,10 +2447,12 @@ definitions:
           type: string
         description: Profile tags
         type: object
-    required:
-      - tags
     type: object
     x-ms-azure-resource: true
+  ProxyResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
   PurgeParameters:
     description: Parameters required for content purge.
     properties:
@@ -1658,30 +2476,20 @@ definitions:
       modelAsString: false
       name: QueryStringCachingBehavior
   Resource:
-    description: The Resource definition.
+    description: The core properties of ARM resources
     properties:
       id:
         description: Resource ID.
         readOnly: true
         type: string
-      location:
-        description: Resource location.
-        type: string
       name:
         description: Resource name.
         readOnly: true
         type: string
-      tags:
-        additionalProperties:
-          type: string
-        description: Resource tags.
-        type: object
       type:
         description: Resource type.
         readOnly: true
         type: string
-    required:
-      - location
     x-ms-azure-resource: true
   ResourceType:
     description: Type of CDN resource used in CheckNameAvailability.
@@ -1757,6 +2565,25 @@ definitions:
         readOnly: true
         type: array
     type: object
+  TrackedResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The resource model definition for a ARM tracked top level resource.
+    properties:
+      location:
+        description: Resource location.
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags.
+        type: object
+        x-ms-mutability:
+          - read
+          - create
+          - update
+    required:
+      - location
   ValidateCustomDomainInput:
     description: Input of the custom domain to be validated for DNS mapping.
     properties:

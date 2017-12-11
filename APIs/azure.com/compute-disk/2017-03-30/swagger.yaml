@@ -6,6 +6,10 @@ info:
   description: The Disk Resource Provider Client.
   title: DiskResourceProviderClient
   version: '2017-03-30'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/compute/resource-manager/Microsoft.Compute/2017-03-30/disk.json'
@@ -13,6 +17,9 @@ info:
   x-preferred: true
   x-providerName: azure.com
   x-serviceName: compute-disk
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -469,7 +476,7 @@ definitions:
         description: 'If createOption is Copy, this is the ARM id of the source snapshot or disk.'
         type: string
       sourceUri:
-        description: 'If creationOption is Import, this is the URI of a blob to be imported into a managed disk.'
+        description: 'If createOption is Import, this is the URI of a blob to be imported into a managed disk.'
         type: string
       storageAccountId:
         description: 'If createOption is Import, the Azure Resource Manager identifier of the storage account containing the blob to import as a disk. Required only if the blob is in a different subscription'

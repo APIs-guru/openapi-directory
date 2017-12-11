@@ -6,12 +6,19 @@ info:
   description: 'The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.'
   title: SqlManagementClient
   version: '2014-04-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/sql/resource-manager/Microsoft.Sql/2014-04-01/tableAuditing.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: sql-tableAuditing
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -114,6 +121,7 @@ paths:
               body:
                 value:
                   - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-6852/providers/Microsoft.Sql/servers/blobauditingtest-2080/databases/testdb/auditingPolicies/Default
+                    kind: null
                     location: West US
                     name: Default
                     properties:
@@ -122,6 +130,12 @@ paths:
                       eventTypesToAudit: 'PlainSQL_Success,PlainSQL_Failure,ParameterizedSQL_Success,ParameterizedSQL_Failure,StoredProcedure_Success,StoredProcedure_Failure,Login_Success,Login_Failure,TransactionManagement_Success,TransactionManagement_Failure'
                       fullAuditLogsTableName: SQLDBAuditLogsBlobauditingtest2080
                       retentionDays: '0'
+                      storageAccountKey: null
+                      storageAccountName: null
+                      storageAccountResourceGroupName: null
+                      storageAccountSecondaryKey: null
+                      storageAccountSubscriptionId: null
+                      storageTableEndpoint: null
                     type: Microsoft.Sql/servers/databases/auditingPolicies
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingPolicies/{tableAuditingPolicyName}':
     get:
@@ -153,6 +167,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-6852/providers/Microsoft.Sql/servers/blobauditingtest-2080/databases/testdb/auditingPolicies/Default
+                kind: null
                 location: West US
                 name: Default
                 properties:
@@ -161,6 +176,12 @@ paths:
                   eventTypesToAudit: 'PlainSQL_Success,PlainSQL_Failure,ParameterizedSQL_Success,ParameterizedSQL_Failure,StoredProcedure_Success,StoredProcedure_Failure,Login_Success,Login_Failure,TransactionManagement_Success,TransactionManagement_Failure'
                   fullAuditLogsTableName: SQLDBAuditLogsBlobauditingtest2080
                   retentionDays: '0'
+                  storageAccountKey: null
+                  storageAccountName: null
+                  storageAccountResourceGroupName: null
+                  storageAccountSecondaryKey: null
+                  storageAccountSubscriptionId: null
+                  storageTableEndpoint: null
                 type: Microsoft.Sql/servers/databases/auditingPolicies
     put:
       deprecated: true
@@ -202,6 +223,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-6852/providers/Microsoft.Sql/servers/blobauditingtest-2080/databases/testdb/auditingPolicies/Default
+                kind: null
                 location: West US
                 name: Default
                 properties:
@@ -210,6 +232,12 @@ paths:
                   eventTypesToAudit: 'PlainSQL_Success,PlainSQL_Failure,ParameterizedSQL_Success,ParameterizedSQL_Failure,StoredProcedure_Success,StoredProcedure_Failure,Login_Success,Login_Failure,TransactionManagement_Success,TransactionManagement_Failure'
                   fullAuditLogsTableName: SQLDBAuditLogsBlobauditingtest2080
                   retentionDays: '0'
+                  storageAccountKey: null
+                  storageAccountName: null
+                  storageAccountResourceGroupName: null
+                  storageAccountSecondaryKey: null
+                  storageAccountSubscriptionId: null
+                  storageTableEndpoint: null
                 type: Microsoft.Sql/servers/databases/auditingPolicies
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingPolicies':
     get:
@@ -246,6 +274,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-6852/providers/Microsoft.Sql/servers/blobauditingtest-2080/databases/testdb/auditingPolicies/Default
+                kind: null
                 location: West US
                 name: Default
                 properties:
@@ -254,6 +283,12 @@ paths:
                   eventTypesToAudit: 'PlainSQL_Success,PlainSQL_Failure,ParameterizedSQL_Success,ParameterizedSQL_Failure,StoredProcedure_Success,StoredProcedure_Failure,Login_Success,Login_Failure,TransactionManagement_Success,TransactionManagement_Failure'
                   fullAuditLogsTableName: SQLDBAuditLogsBlobauditingtest2080Testdb
                   retentionDays: '0'
+                  storageAccountKey: null
+                  storageAccountName: null
+                  storageAccountResourceGroupName: null
+                  storageAccountSecondaryKey: null
+                  storageAccountSubscriptionId: null
+                  storageTableEndpoint: null
                   useServerDefault: Enabled
                 type: Microsoft.Sql/servers/databases/auditingPolicies
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingPolicies/{tableAuditingPolicyName}':
@@ -292,6 +327,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-6852/providers/Microsoft.Sql/servers/blobauditingtest-2080/databases/testdb/auditingPolicies/Default
+                kind: null
                 location: West US
                 name: Default
                 properties:
@@ -300,6 +336,12 @@ paths:
                   eventTypesToAudit: 'PlainSQL_Success,PlainSQL_Failure,ParameterizedSQL_Success,ParameterizedSQL_Failure,StoredProcedure_Success,StoredProcedure_Failure,Login_Success,Login_Failure,TransactionManagement_Success,TransactionManagement_Failure'
                   fullAuditLogsTableName: SQLDBAuditLogsBlobauditingtest2080Testdb
                   retentionDays: '0'
+                  storageAccountKey: null
+                  storageAccountName: null
+                  storageAccountResourceGroupName: null
+                  storageAccountSecondaryKey: null
+                  storageAccountSubscriptionId: null
+                  storageTableEndpoint: null
                   useServerDefault: Enabled
                 type: Microsoft.Sql/servers/databases/auditingPolicies
     put:
@@ -348,6 +390,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-6852/providers/Microsoft.Sql/servers/blobauditingtest-2080/databases/testdb/auditingPolicies/Default
+                kind: null
                 location: West US
                 name: Default
                 properties:
@@ -356,6 +399,12 @@ paths:
                   eventTypesToAudit: 'PlainSQL_Success,PlainSQL_Failure,ParameterizedSQL_Success,ParameterizedSQL_Failure,StoredProcedure_Success,StoredProcedure_Failure,Login_Success,Login_Failure,TransactionManagement_Success,TransactionManagement_Failure'
                   fullAuditLogsTableName: SQLDBAuditLogsBlobauditingtest2080Testdb
                   retentionDays: '0'
+                  storageAccountKey: null
+                  storageAccountName: null
+                  storageAccountResourceGroupName: null
+                  storageAccountSecondaryKey: null
+                  storageAccountSubscriptionId: null
+                  storageTableEndpoint: null
                   useServerDefault: Enabled
                 type: Microsoft.Sql/servers/databases/auditingPolicies
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/connectionPolicies/{connectionPolicyName}':
@@ -394,6 +443,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-6852/providers/Microsoft.Sql/servers/blobauditingtest-2080/databases/testdb/connectionPolicies/default
+                kind: null
                 location: West US
                 name: default
                 properties:
@@ -451,6 +501,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-6852/providers/Microsoft.Sql/servers/blobauditingtest-2080/databases/testdb/connectionPolicies/default
+                kind: null
                 location: West US
                 name: default
                 properties:

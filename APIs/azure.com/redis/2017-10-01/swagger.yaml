@@ -6,6 +6,10 @@ info:
   description: REST API for Azure Redis Cache Service.
   title: RedisManagementClient
   version: '2017-10-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/redis/resource-manager/Microsoft.Cache/2017-10-01/redis.json'
@@ -13,6 +17,9 @@ info:
   x-preferred: true
   x-providerName: azure.com
   x-serviceName: redis
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -308,7 +315,7 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/RedisFirewallRule'
+            $ref: '#/definitions/RedisFirewallRuleCreateParameters'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -458,12 +465,12 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/RedisPatchResource'
+            $ref: '#/definitions/RedisUpdateParameters'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: ''
+          description: The existing redis cache was successfully updated. Check provisioningStatus to see detailed status.
           schema:
             $ref: '#/definitions/RedisResource'
       tags:
@@ -523,7 +530,7 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/RedisResource'
+            $ref: '#/definitions/RedisCreateParameters'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -760,7 +767,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/linkedServers':
     get:
       description: Gets the list of linked servers associated with this redis cache (requires Premium SKU).
-      operationId: RedisLinkedServer_List
+      operationId: LinkedServer_List
       parameters:
         - description: The name of the resource group.
           in: path
@@ -782,7 +789,7 @@ paths:
       tags:
         - Redis
       x-ms-examples:
-        RedisLinkedServer_List:
+        LinkedServer_List:
           parameters:
             api-version: '2017-10-01'
             name: cache1
@@ -807,10 +814,12 @@ paths:
                     provisioningState: Succeeded
                     serverRole: Secondary
                   type: Microsoft.Cache/Redis/linkedServers
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/linkedServers/{linkedServerName}':
     delete:
       description: Deletes the linked server from a redis cache (requires Premium SKU).
-      operationId: RedisLinkedServer_Delete
+      operationId: LinkedServer_Delete
       parameters:
         - description: The name of the resource group.
           in: path
@@ -835,7 +844,7 @@ paths:
       tags:
         - Redis
       x-ms-examples:
-        RedisLinkedServerDelete:
+        LinkedServerDelete:
           parameters:
             api-version: '2017-10-01'
             linkedServerName: cache2
@@ -846,7 +855,7 @@ paths:
             '200': {}
     get:
       description: Gets the detailed information about a linked server of a redis cache (requires Premium SKU).
-      operationId: RedisLinkedServer_Get
+      operationId: LinkedServer_Get
       parameters:
         - description: The name of the resource group.
           in: path
@@ -873,7 +882,7 @@ paths:
       tags:
         - Redis
       x-ms-examples:
-        RedisLinkedServer_Get:
+        LinkedServer_Get:
           parameters:
             api-version: '2017-10-01'
             linkedServerName: cache2
@@ -893,7 +902,7 @@ paths:
                 type: Microsoft.Cache/Redis/linkedServers
     put:
       description: Adds a linked server to the Redis cache (requires Premium SKU).
-      operationId: RedisLinkedServer_Create
+      operationId: LinkedServer_Create
       parameters:
         - description: The name of the resource group.
           in: path
@@ -930,7 +939,7 @@ paths:
       tags:
         - Redis
       x-ms-examples:
-        RedisLinkedServer_Create:
+        LinkedServer_Create:
           parameters:
             api-version: '2017-10-01'
             linkedServerName: cache2
@@ -1272,6 +1281,72 @@ definitions:
         description: The current secondary key that clients can use to authenticate with Redis cache.
         readOnly: true
         type: string
+  RedisCommonProperties:
+    description: Create/Update/Get common properties of the redis cache.
+    properties:
+      enableNonSslPort:
+        description: Specifies whether the non-ssl Redis server port (6379) is enabled.
+        type: boolean
+      redisConfiguration:
+        additionalProperties:
+          type: string
+        description: 'All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value etc.'
+        type: object
+      shardCount:
+        description: The number of shards to be created on a Premium Cluster Cache.
+        format: int32
+        type: integer
+      tenantSettings:
+        additionalProperties:
+          type: string
+        description: A dictionary of tenant settings
+        type: object
+    x-ms-external: true
+  RedisCreateParameters:
+    description: Parameters supplied to the Create Redis operation.
+    properties:
+      location:
+        description: The geo-location where the resource lives
+        type: string
+        x-ms-mutability:
+          - read
+          - create
+      properties:
+        $ref: '#/definitions/RedisCreateProperties'
+        description: Redis cache properties.
+        x-ms-client-flatten: true
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags.
+        type: object
+      zones:
+        description: A list of availability zones denoting where the resource needs to come from.
+        items:
+          type: string
+        type: array
+    required:
+      - properties
+      - location
+  RedisCreateProperties:
+    allOf:
+      - $ref: '#/definitions/RedisCommonProperties'
+    description: Properties supplied to Create Redis operation.
+    properties:
+      sku:
+        $ref: '#/definitions/Sku'
+        description: The SKU of the Redis cache to deploy.
+      staticIP:
+        description: Static IP address. Required when deploying a Redis cache inside an existing Azure Virtual Network.
+        pattern: ^\d+\.\d+\.\d+\.\d+$
+        type: string
+      subnetId:
+        description: 'The full resource ID of a subnet in a virtual network to deploy the Redis cache in. Example format: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1'
+        pattern: '^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$'
+        type: string
+    required:
+      - sku
+    x-ms-external: true
   RedisFirewallRule:
     allOf:
       - $ref: '#/definitions/ProxyResource'
@@ -1280,6 +1355,15 @@ definitions:
       properties:
         $ref: '#/definitions/RedisFirewallRuleProperties'
         description: redis cache firewall rule properties
+        x-ms-client-flatten: true
+    required:
+      - properties
+  RedisFirewallRuleCreateParameters:
+    description: Parameters required for creating a firewall rule on redis cache.
+    properties:
+      properties:
+        $ref: '#/definitions/RedisFirewallRuleProperties'
+        description: Properties required to create a firewall rule .
         x-ms-client-flatten: true
     required:
       - properties
@@ -1352,16 +1436,6 @@ definitions:
       - linkedRedisCacheId
       - linkedRedisCacheLocation
       - serverRole
-  RedisLinkedServerList:
-    description: List of linked server Ids of a Redis cache.
-    properties:
-      value:
-        description: List of linked server Ids of a Redis cache.
-        items:
-          $ref: '#/definitions/RedisLinkedServer'
-        type: array
-    required:
-      - value
   RedisLinkedServerProperties:
     allOf:
       - $ref: '#/definitions/RedisLinkedServerCreateProperties'
@@ -1383,13 +1457,15 @@ definitions:
   RedisLinkedServerWithPropertiesList:
     description: List of linked servers (with properites) of a Redis cache.
     properties:
+      nextLink:
+        description: Link for next set.
+        readOnly: true
+        type: string
       value:
         description: List of linked servers (with properites) of a Redis cache.
         items:
           $ref: '#/definitions/RedisLinkedServerWithProperties'
         type: array
-    required:
-      - value
   RedisListResult:
     description: The response of list Redis operation.
     properties:
@@ -1402,39 +1478,6 @@ definitions:
         items:
           $ref: '#/definitions/RedisResource'
         type: array
-  RedisPatchProperties:
-    description: Patchable properties of the redis cache.
-    properties:
-      enableNonSslPort:
-        description: Specifies whether the non-ssl Redis server port (6379) is enabled.
-        type: boolean
-      redisConfiguration:
-        additionalProperties:
-          type: string
-        description: 'All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value etc.'
-        type: object
-      shardCount:
-        description: The number of shards to be created on a Premium Cluster Cache.
-        format: int32
-        type: integer
-      sku:
-        $ref: '#/definitions/Sku'
-        description: The SKU of the Redis cache to deploy.
-      tenantSettings:
-        additionalProperties:
-          type: string
-        description: A dictionary of tenant settings
-        type: object
-    x-ms-external: true
-  RedisPatchResource:
-    allOf:
-      - $ref: '#/definitions/Resource'
-    description: A request holding properties to patch a redis cache.
-    properties:
-      properties:
-        $ref: '#/definitions/RedisPatchProperties'
-        description: Redis cache patchable properties.
-        x-ms-client-flatten: true
   RedisPatchSchedule:
     allOf:
       - $ref: '#/definitions/ProxyResource'
@@ -1447,23 +1490,24 @@ definitions:
     required:
       - properties
   RedisProperties:
+    allOf:
+      - $ref: '#/definitions/RedisCreateProperties'
     description: Properties of the redis cache.
     properties:
       accessKeys:
         $ref: '#/definitions/RedisAccessKeys'
         description: The keys of the Redis cache - not set if this object is not the response to Create or Update redis cache
         readOnly: true
-      enableNonSslPort:
-        description: Specifies whether the non-ssl Redis server port (6379) is enabled.
-        type: boolean
       hostName:
         description: Redis host name.
         readOnly: true
         type: string
       linkedServers:
-        $ref: '#/definitions/RedisLinkedServerList'
         description: List of the linked servers associated with the cache
+        items:
+          $ref: '#/definitions/RedisLinkedServer'
         readOnly: true
+        type: array
       port:
         description: Redis non-SSL port.
         format: int32
@@ -1473,42 +1517,15 @@ definitions:
         description: Redis instance provisioning status.
         readOnly: true
         type: string
-      redisConfiguration:
-        additionalProperties:
-          type: string
-        description: 'All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value etc.'
-        type: object
       redisVersion:
         description: Redis version.
         readOnly: true
         type: string
-      shardCount:
-        description: The number of shards to be created on a Premium Cluster Cache.
-        format: int32
-        type: integer
-      sku:
-        $ref: '#/definitions/Sku'
-        description: The SKU of the Redis cache to deploy.
       sslPort:
         description: Redis SSL port.
         format: int32
         readOnly: true
         type: integer
-      staticIP:
-        description: Static IP address. Required when deploying a Redis cache inside an existing Azure Virtual Network.
-        pattern: ^\d+\.\d+\.\d+\.\d+$
-        type: string
-      subnetId:
-        description: 'The full resource ID of a subnet in a virtual network to deploy the Redis cache in. Example format: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1'
-        pattern: '^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$'
-        type: string
-      tenantSettings:
-        additionalProperties:
-          type: string
-        description: A dictionary of tenant settings
-        type: object
-    required:
-      - sku
     x-ms-external: true
   RedisRebootParameters:
     description: Specifies which Redis node(s) to reboot.
@@ -1559,6 +1576,27 @@ definitions:
         type: array
     required:
       - properties
+  RedisUpdateParameters:
+    description: Parameters supplied to the Update Redis operation.
+    properties:
+      properties:
+        $ref: '#/definitions/RedisUpdateProperties'
+        description: Redis cache properties.
+        x-ms-client-flatten: true
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags.
+        type: object
+  RedisUpdateProperties:
+    allOf:
+      - $ref: '#/definitions/RedisCommonProperties'
+    description: Patchable properties of the redis cache.
+    properties:
+      sku:
+        $ref: '#/definitions/Sku'
+        description: The SKU of the Redis cache to deploy.
+    x-ms-external: true
   Resource:
     description: The Resource definition.
     properties:
@@ -1583,6 +1621,7 @@ definitions:
         items:
           $ref: '#/definitions/ScheduleEntry'
         type: array
+        x-ms-client-name: ScheduleEntries
     required:
       - scheduleEntries
   ScheduleEntry:

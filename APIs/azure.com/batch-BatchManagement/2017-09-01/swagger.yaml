@@ -5,6 +5,10 @@ host: management.azure.com
 info:
   title: BatchManagement
   version: '2017-09-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-ms-code-generation-settings:
     name: BatchManagementClient
   x-origin:
@@ -14,6 +18,9 @@ info:
   x-preferred: true
   x-providerName: azure.com
   x-serviceName: batch-BatchManagement
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -553,6 +560,34 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - Application
+      x-ms-examples:
+        ApplicationList:
+          parameters:
+            accountName: sampleacct
+            api-version: '2017-09-01'
+            resourceGroupName: default-azurebatch-japaneast
+            subscriptionId: subid
+          responses:
+            '200':
+              value:
+                - allowUpdates: false
+                  defaultVersion: '1'
+                  displayName: myAppName
+                  id: app1
+                  packages:
+                    - format: zip
+                      lastActivationTime: '2017-06-27T18:48:09.9330991Z'
+                      state: active
+                      version: '1'
+                - allowUpdates: false
+                  defaultVersion: '1'
+                  displayName: myAppName
+                  id: app2
+                  packages:
+                    - format: zip
+                      lastActivationTime: '2017-06-27T18:48:09.9330991Z'
+                      state: active
+                      version: '1'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationId}':
@@ -578,6 +613,16 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - Application
+      x-ms-examples:
+        ApplicationDelete:
+          parameters:
+            accountName: sampleacct
+            api-version: '2017-09-01'
+            applicationId: app1
+            resourceGroupName: default-azurebatch-japaneast
+            subscriptionId: subid
+          responses:
+            '204': {}
     get:
       description: Gets information about the specified application.
       operationId: Application_Get
@@ -602,6 +647,26 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - Application
+      x-ms-examples:
+        ApplicationGet:
+          parameters:
+            accountName: sampleacct
+            api-version: '2017-09-01'
+            applicationId: app1
+            resourceGroupName: default-azurebatch-japaneast
+            subscriptionId: subid
+          responses:
+            '200':
+              allowUpdates: false
+              defaultVersion: '1'
+              displayName: myAppName
+              id: app1
+              packages:
+                - format: zip
+                  id: app1
+                  lastActivationTime: '2017-06-27T18:48:09.9330991Z'
+                  state: active
+                  version: '1'
     patch:
       description: Updates settings for the specified application.
       operationId: Application_Update
@@ -630,6 +695,20 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - Application
+      x-ms-examples:
+        ApplicationUpdate:
+          parameters:
+            accountName: sampleacct
+            api-version: '2017-09-01'
+            applicationId: app1
+            parameters:
+              allowUpdates: true
+              defaultVersion: '2'
+              displayName: myAppName
+            resourceGroupName: default-azurebatch-japaneast
+            subscriptionId: subid
+          responses:
+            '204': {}
     put:
       description: Adds an application to the specified Batch account.
       operationId: Application_Create
@@ -660,6 +739,23 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - Application
+      x-ms-examples:
+        ApplicationCreate:
+          parameters:
+            accountName: sampleacct
+            api-version: '2017-09-01'
+            applicationId: app1
+            parameters:
+              allowUpdates: false
+              displayName: myAppName
+            resourceGroupName: default-azurebatch-japaneast
+            subscriptionId: subid
+          responses:
+            '201':
+              allowUpdates: false
+              displayName: myAppName
+              id: app1
+              packages: []
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationId}/versions/{version}':
     delete:
       description: Deletes an application package record and its associated binary file.
@@ -688,6 +784,17 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - ApplicationPackage
+      x-ms-examples:
+        ApplicationPackageDelete:
+          parameters:
+            accountName: sampleacct
+            api-version: '2017-09-01'
+            applicationId: app1
+            resourceGroupName: default-azurebatch-japaneast
+            subscriptionId: subid
+            version: '1'
+          responses:
+            '204': {}
     get:
       description: Gets information about the specified application package.
       operationId: ApplicationPackage_Get
@@ -717,6 +824,22 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - ApplicationPackage
+      x-ms-examples:
+        ApplicationPackageGet:
+          parameters:
+            accountName: sampleacct
+            api-version: '2017-09-01'
+            applicationId: app1
+            resourceGroupName: default-azurebatch-japaneast
+            subscriptionId: subid
+            version: '1'
+          responses:
+            '200':
+              format: zip
+              id: app1
+              lastActivationTime: '2017-06-27T18:48:09.9330991Z'
+              state: active
+              version: '1'
     put:
       description: Creates an application package record.
       operationId: ApplicationPackage_Create
@@ -746,6 +869,23 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - ApplicationPackage
+      x-ms-examples:
+        ApplicationPackageCreate:
+          parameters:
+            accountName: sampleacct
+            api-version: '2017-09-01'
+            applicationId: app1
+            resourceGroupName: default-azurebatch-japaneast
+            subscriptionId: subid
+            version: '1'
+          responses:
+            '201':
+              format: zip
+              id: app1
+              state: active
+              storageUrl: 'http://mystorage1.blob.core.windows.net/myapp?mysas'
+              storageUrlExpiry: '2017-06-27T18:48:09.9330991Z'
+              version: '1'
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationId}/versions/{version}/activate':
     post:
       description: Activates the specified application package.
@@ -780,6 +920,19 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - ApplicationPackage
+      x-ms-examples:
+        ApplicationPackageActivate:
+          parameters:
+            accountName: sampleacct
+            api-version: '2017-09-01'
+            applicationId: app1
+            parameters:
+              format: zip
+            resourceGroupName: default-azurebatch-japaneast
+            subscriptionId: subid
+            version: '1'
+          responses:
+            '204': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/certificates':
     get:
       description: Lists all of the certificates in the specified account.
@@ -2582,6 +2735,15 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - BatchAccount
+      x-ms-examples:
+        BatchAccountSynchronizeAutoStorageKeys:
+          parameters:
+            accountName: sampleacct
+            api-version: '2017-09-01'
+            resourceGroupName: default-azurebatch-japaneast
+            subscriptionId: subid
+          responses:
+            '204': {}
 definitions:
   ActivateApplicationPackageParameters:
     description: Parameters for an activating an application package.

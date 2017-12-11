@@ -5,6 +5,10 @@ host: management.azure.com
 info:
   title: Azure Activity Log Alerts
   version: 2017-03-01-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-ms-code-generation-settings:
     name: MonitorManagementClient
   x-origin:
@@ -14,6 +18,9 @@ info:
   x-preferred: false
   x-providerName: azure.com
   x-serviceName: monitor-activityLogAlerts_API
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -220,8 +227,10 @@ paths:
             subscriptionId: 187f412d-1758-44d9-b052-169e2564721d
           responses:
             '200':
+              body: null
               headers: {}
             '204':
+              body: null
               headers: {}
     get:
       deprecated: true

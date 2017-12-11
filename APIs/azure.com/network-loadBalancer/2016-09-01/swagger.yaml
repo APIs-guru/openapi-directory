@@ -6,6 +6,10 @@ info:
   description: The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.
   title: NetworkManagementClient
   version: '2016-09-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/network/resource-manager/Microsoft.Network/2016-09-01/loadBalancer.json'
@@ -13,6 +17,9 @@ info:
   x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-loadBalancer
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
   - text/json
@@ -651,8 +658,6 @@ definitions:
     required:
       - protocol
       - frontendPort
-  NetworkInterfaceIPConfigurationPropertiesFormat:
-    type: object
   OutboundNatRule:
     allOf:
       - properties:
@@ -758,7 +763,3 @@ definitions:
     required:
       - protocol
       - port
-  PublicIPAddressPropertiesFormat:
-    type: object
-  SubnetPropertiesFormat:
-    type: object

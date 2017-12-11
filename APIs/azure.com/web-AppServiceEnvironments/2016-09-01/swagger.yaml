@@ -5,12 +5,19 @@ host: management.azure.com
 info:
   title: AppServiceEnvironments API Client
   version: '2016-09-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/web/resource-manager/Microsoft.Web/2016-09-01/AppServiceEnvironments.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: web-AppServiceEnvironments
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -7433,8 +7440,6 @@ definitions:
           - virtualNetwork
           - workerPools
         type: object
-    type: object
-  ErrorEntity:
     type: object
   HostingEnvironmentDiagnostics:
     description: Diagnostics for an App Service Environment.

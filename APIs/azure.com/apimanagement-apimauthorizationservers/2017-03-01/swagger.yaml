@@ -6,6 +6,10 @@ info:
   description: 'Use these REST APIs for managing OAuth2 servers configuration in your Azure API Management deployment. OAuth 2.0 can be used to authorize developer accounts for Azure API Management. For more information refer to [How to OAuth2](https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-oauth2).'
   title: ApiManagementClient
   version: '2017-03-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/apimanagement/resource-manager/Microsoft.ApiManagement/2017-03-01/apimauthorizationservers.json'
@@ -13,6 +17,9 @@ info:
   x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimauthorizationservers
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -648,7 +655,7 @@ definitions:
             - query
           type: string
           x-ms-enum:
-            modelAsString: false
+            modelAsString: true
             name: BearerTokenSendingMethod
         type: array
       clientAuthenticationMethod:
@@ -659,8 +666,13 @@ definitions:
             - Body
           type: string
           x-ms-enum:
-            modelAsString: false
+            modelAsString: true
             name: ClientAuthenticationMethod
+            values:
+              - description: Basic Client Authentication method.
+                value: Basic
+              - description: Body based Authentication method.
+                value: Body
         type: array
       clientSecret:
         description: Client or app secret registered with this authorization server.
@@ -725,8 +737,17 @@ definitions:
             - clientCredentials
           type: string
           x-ms-enum:
-            modelAsString: false
+            modelAsString: true
             name: GrantType
+            values:
+              - description: 'Authorization Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.1.'
+                value: authorizationCode
+              - description: 'Implicit Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.2.'
+                value: implicit
+              - description: 'Resource Owner Password Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.3.'
+                value: resourceOwnerPassword
+              - description: 'Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4.'
+                value: clientCredentials
         type: array
     required:
       - displayName
@@ -788,8 +809,17 @@ definitions:
             - clientCredentials
           type: string
           x-ms-enum:
-            modelAsString: false
+            modelAsString: true
             name: GrantType
+            values:
+              - description: 'Authorization Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.1.'
+                value: authorizationCode
+              - description: 'Implicit Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.2.'
+                value: implicit
+              - description: 'Resource Owner Password Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.3.'
+                value: resourceOwnerPassword
+              - description: 'Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4.'
+                value: clientCredentials
         type: array
   TokenBodyParameterContract:
     description: OAuth acquire token request body parameter (www-url-form-encoded).

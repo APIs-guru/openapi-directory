@@ -5,12 +5,19 @@ host: management.azure.com
 info:
   title: DataFactoryManagementClient
   version: 2017-09-01-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/datafactory/resource-manager/Microsoft.DataFactory/2017-09-01-preview/datafactory.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: datafactory
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -432,6 +439,7 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:31 GMT'
                 X-Content-Type-Options: nosniff
@@ -439,6 +447,7 @@ paths:
                 x-ms-ratelimit-remaining-subscription-writes: '1177'
                 x-ms-request-id: 00d8b4cd-058f-4da8-a3a9-7a7a9ae772f0
             '204':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:31 GMT'
                 x-ms-correlation-request-id: 95fce457-ddee-44a2-84a1-05c33b32d807
@@ -624,6 +633,7 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Mon, 02 Oct 2017 17:27:33 GMT'
                 X-Content-Type-Options: nosniff
@@ -723,6 +733,7 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:27 GMT'
                 X-Content-Type-Options: nosniff
@@ -730,6 +741,7 @@ paths:
                 x-ms-ratelimit-remaining-subscription-writes: '1183'
                 x-ms-request-id: 70d3cf1f-bf14-40f5-bb56-1550a317ce8b
             '204':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:27 GMT'
                 X-Content-Type-Options: nosniff
@@ -853,6 +865,7 @@ paths:
                     type: TextFormat
             datasetName: exampleDataset
             factoryName: exampleFactoryName
+            ifMatch: null
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
@@ -912,6 +925,7 @@ paths:
                     type: TextFormat
             datasetName: exampleDataset
             factoryName: exampleFactoryName
+            ifMatch: null
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
@@ -1035,6 +1049,7 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:29 GMT'
                 X-Content-Type-Options: nosniff
@@ -1042,6 +1057,7 @@ paths:
                 x-ms-ratelimit-remaining-subscription-writes: '1179'
                 x-ms-request-id: 6d1ee741-7850-484b-99cd-b42ef08fd18c
             '204':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:29 GMT'
                 X-Content-Type-Options: nosniff
@@ -1226,6 +1242,7 @@ paths:
           parameters:
             api-version: 2017-09-01-preview
             factoryName: exampleFactoryName
+            ifMatch: null
             integrationRuntime:
               properties:
                 description: A managed reserved integration runtime
@@ -1244,6 +1261,7 @@ paths:
                       catalogAdminUserName: yanzhang
                       catalogPricingTier: S1
                       catalogServerEndpoint: yandongtestsvr.database.windows.net
+                    licenseType: BasePrice
             integrationRuntimeName: exampleIntegrationRuntime
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
@@ -1271,6 +1289,7 @@ paths:
                         catalogAdminUserName: yanzhang
                         catalogPricingTier: S1
                         catalogServerEndpoint: yandongtestsvr.database.windows.net
+                      licenseType: BasePrice
               headers:
                 Date: 'Tue, 28 Nov 2017 07:05:28 GMT'
                 X-Content-Type-Options: nosniff
@@ -1559,11 +1578,13 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Thu, 19 Oct 2017 15:22:16 GMT'
                 X-Content-Type-Options: nosniff
                 x-ms-request-id: 75a166f9-75ed-48d9-bc9b-08682dfdd0eb
             '204':
+              body: null
               headers:
                 Date: 'Thu, 19 Oct 2017 15:22:16 GMT'
                 X-Content-Type-Options: nosniff
@@ -1992,11 +2013,13 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Tue, 28 Nov 2017 06:05:42 GMT'
                 X-Content-Type-Options: nosniff
                 x-ms-request-id: f1b13f98-0659-4eaa-a676-29912ae0a4f3
             '204':
+              body: null
               headers:
                 Date: 'Tue, 28 Nov 2017 06:05:44 GMT'
                 X-Content-Type-Options: nosniff
@@ -2061,6 +2084,7 @@ paths:
                 X-Content-Type-Options: nosniff
                 x-ms-request-id: a0190274-060e-43a0-84ea-403d1c0c4a06
             '202':
+              body: null
               headers:
                 Date: 'Tue, 28 Nov 2017 07:17:56 GMT'
                 Location: 'https://adfrpnightly.svc.datafactory-test.azure.com/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationRuntimes/exampleManagedIntegrationRuntime/start/operationresults/9a070152cddb4c839d482ccfb76a7537?api-version=2017-09-01-preview'
@@ -2099,11 +2123,13 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Tue, 28 Nov 2017 07:40:23 GMT'
                 X-Content-Type-Options: nosniff
                 x-ms-request-id: bcff281c-ae61-4e2d-8a0c-044e34c1d04a
             '202':
+              body: null
               headers:
                 Date: 'Tue, 28 Nov 2017 07:39:21 GMT'
                 Location: 'https://adfrpnightly.svc.datafactory-test.azure.com/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationRuntimes/exampleManagedIntegrationRuntime/stop/operationresults/50799841b7f94497ae43291b791db7e0?api-version=2017-09-01-preview'
@@ -2140,6 +2166,7 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Sun, 20 Aug 2017 08:46:58 GMT'
                 X-Content-Type-Options: nosniff
@@ -2173,6 +2200,7 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Tue, 14 Nov 2017 03:42:42 GMT'
                 X-Content-Type-Options: nosniff
@@ -2257,6 +2285,7 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:28 GMT'
                 X-Content-Type-Options: nosniff
@@ -2264,6 +2293,7 @@ paths:
                 x-ms-ratelimit-remaining-subscription-writes: '1181'
                 x-ms-request-id: 7383dae8-e077-4472-8f2e-91e1163dcbb2
             '204':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:28 GMT'
                 X-Content-Type-Options: nosniff
@@ -2353,6 +2383,7 @@ paths:
           parameters:
             api-version: 2017-09-01-preview
             factoryName: exampleFactoryName
+            ifMatch: null
             linkedService:
               properties:
                 type: AzureStorage
@@ -2385,6 +2416,7 @@ paths:
           parameters:
             api-version: 2017-09-01-preview
             factoryName: exampleFactoryName
+            ifMatch: null
             linkedService:
               properties:
                 description: Example description
@@ -2584,12 +2616,15 @@ paths:
       x-ms-examples:
         ActivityRuns_ListByPipelineRun:
           parameters:
+            activityName: null
             api-version: 2017-09-01-preview
             endTime: 2017-09-13T18%3A07%3A59.6211018Z
             factoryName: exampleFactoryName
+            linkedServiceName: null
             resourceGroupName: exampleResourceGroup
             runId: a420e4fd-ebe9-4758-8db7-852b4d06245e
             startTime: 2017-09-13T17%3A54%3A57.0811551Z
+            status: null
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
@@ -2776,6 +2811,7 @@ paths:
             subscriptionId: 12345678-1234-1234-12345678abc
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:27 GMT'
                 X-Content-Type-Options: nosniff
@@ -2783,6 +2819,7 @@ paths:
                 x-ms-ratelimit-remaining-subscription-writes: '1185'
                 x-ms-request-id: 74ec3492-79c4-4028-9db1-fe7054e794d4
             '204':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:27 GMT'
                 X-Content-Type-Options: nosniff
@@ -2900,6 +2937,7 @@ paths:
           parameters:
             api-version: 2017-09-01-preview
             factoryName: exampleFactoryName
+            ifMatch: null
             pipeline:
               properties:
                 activities:
@@ -2988,6 +3026,7 @@ paths:
           parameters:
             api-version: 2017-09-01-preview
             factoryName: exampleFactoryName
+            ifMatch: null
             pipeline:
               properties:
                 activities:
@@ -3213,6 +3252,7 @@ paths:
             triggerName: exampleTrigger
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:26 GMT'
                 X-Content-Type-Options: nosniff
@@ -3220,6 +3260,7 @@ paths:
                 x-ms-ratelimit-remaining-subscription-writes: '1187'
                 x-ms-request-id: 797186e9-af57-4d6c-8b4b-c363df9e9bf1
             '204':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:26 GMT'
                 X-Content-Type-Options: nosniff
@@ -3320,6 +3361,7 @@ paths:
           parameters:
             api-version: 2017-09-01-preview
             factoryName: exampleFactoryName
+            ifMatch: null
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
             trigger:
@@ -3373,6 +3415,7 @@ paths:
           parameters:
             api-version: 2017-09-01-preview
             factoryName: exampleFactoryName
+            ifMatch: null
             resourceGroupName: exampleResourceGroup
             subscriptionId: 12345678-1234-1234-12345678abc
             trigger:
@@ -3453,6 +3496,7 @@ paths:
             triggerName: exampleTrigger
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 17:58:23 GMT'
                 X-Content-Type-Options: nosniff
@@ -3489,6 +3533,7 @@ paths:
             triggerName: exampleTrigger
           responses:
             '200':
+              body: null
               headers:
                 Date: 'Wed, 13 Sep 2017 18:04:25 GMT'
                 X-Content-Type-Options: nosniff

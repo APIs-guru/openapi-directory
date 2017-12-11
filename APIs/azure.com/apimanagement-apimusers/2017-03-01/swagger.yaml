@@ -6,6 +6,10 @@ info:
   description: Use these REST APIs for performing operations on User entity in Azure API Management deployment. The User entity in API Management represents the developers that call the APIs of the products to which they are subscribed.
   title: ApiManagementClient
   version: '2017-03-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/apimanagement/resource-manager/Microsoft.ApiManagement/2017-03-01/apimusers.json'
@@ -13,6 +17,9 @@ info:
   x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimusers
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -1380,7 +1387,7 @@ definitions:
           - blocked
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: UserState
   UserIdentityCollection:
     description: List of Users Identity list representation.

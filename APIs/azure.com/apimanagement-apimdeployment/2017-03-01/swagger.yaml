@@ -6,6 +6,10 @@ info:
   description: Use these REST APIs to manage Azure API Management deployment.
   title: ApiManagementClient
   version: '2017-03-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/apimanagement/resource-manager/Microsoft.ApiManagement/2017-03-01/apimdeployment.json'
@@ -13,6 +17,9 @@ info:
   x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimdeployment
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -1821,8 +1828,15 @@ definitions:
           - Internal
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: VirtualNetworkType
+          values:
+            - description: The service is not part of any Virtual Network.
+              value: None
+            - description: The service is part of Virtual Network and it is accessible from Internet.
+              value: External
+            - description: The service is part of Virtual Network and it is only accessible from within the virtual network.
+              value: Internal
   ApiManagementServiceCheckNameAvailabilityParameters:
     description: Parameters supplied to the CheckNameAvailability operation.
     properties:
@@ -1856,7 +1870,7 @@ definitions:
           - SystemAssigned
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: ApimIdentityType
     required:
       - type
@@ -1953,12 +1967,22 @@ definitions:
           - Developer
           - Standard
           - Premium
+          - Basic
         externalDocs:
           url: 'https://azure.microsoft.com/en-us/pricing/details/api-management/'
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: SkuType
+          values:
+            - description: Developer SKU of Api Management.
+              value: Developer
+            - description: Standard SKU of Api Management.
+              value: Standard
+            - description: Premium SKU of Api Management.
+              value: Premium
+            - description: Basic SKU of Api Management.
+              value: Basic
     required:
       - name
   ApiManagementServiceUpdateHostnameParameters:

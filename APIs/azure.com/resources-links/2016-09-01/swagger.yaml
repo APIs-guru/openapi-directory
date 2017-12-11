@@ -6,12 +6,19 @@ info:
   description: 'Azure resources can be linked together to form logical relationships. You can establish links between resources belonging to different resource groups. However, all the linked resources must belong to the same subscription. Each resource can be linked to 50 other resources. If any of the linked resources are deleted or moved, the link owner must clean up the remaining link.'
   title: ManagementLinkClient
   version: '2016-09-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/resources/resource-manager/Microsoft.Resources/2016-09-01/links.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: resources-links
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:

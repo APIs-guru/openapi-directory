@@ -5,6 +5,10 @@ host: management.azure.com
 info:
   title: ResourceManagementClient
   version: '2016-02-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/resources/resource-manager/Microsoft.Resources/2016-02-01/resources.json'
@@ -12,6 +16,9 @@ info:
   x-preferred: false
   x-providerName: azure.com
   x-serviceName: resources
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -829,6 +836,62 @@ paths:
           description: ''
       tags:
         - Resources
+    patch:
+      description: Updates a resource.
+      operationId: Resources_Update
+      parameters:
+        - description: The name of the resource group for the resource. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+        - description: The namespace of the resource provider.
+          in: path
+          name: resourceProviderNamespace
+          required: true
+          type: string
+        - description: The parent resource identity.
+          in: path
+          name: parentResourcePath
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The resource type of the resource to update.
+          in: path
+          name: resourceType
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The name of the resource to update.
+          in: path
+          name: resourceName
+          required: true
+          type: string
+        - description: The API version to use for the operation.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Parameters for updating the resource.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/GenericResource'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK - Returns information about the resource.
+          schema:
+            $ref: '#/definitions/GenericResource'
+        '202':
+          description: Accepted
+      tags:
+        - Resources
+      x-ms-long-running-operation: true
     put:
       description: Create a resource.
       operationId: Resources_CreateOrUpdate

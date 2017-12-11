@@ -6,12 +6,19 @@ info:
   description: Provides create and read functionality for Import/Export operations on Azure SQL databases.
   title: Azure SQL Database Import/Export spec
   version: '2014-04-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/sql/resource-manager/Microsoft.Sql/2014-04-01/importExport.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: sql-importExport
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -103,6 +110,7 @@ paths:
               properties:
                 blobUri: 'https://test.blob.core.windows.net/bacpacs/test.bacpac'
                 databaseName: testdb
+                errorMessage: null
                 lastModifiedTime: '3/1/2017 12:16:33 AM'
                 queuedTime: '3/1/2017 12:14:25 AM'
                 requestId: f01d7bfe-7162-44e7-9350-f1c85ce83e4c
@@ -132,6 +140,7 @@ paths:
               properties:
                 blobUri: 'https://test.blob.core.windows.net/bacpacs/test.bacpac'
                 databaseName: testdb
+                errorMessage: null
                 lastModifiedTime: '3/1/2017 12:16:33 AM'
                 queuedTime: '3/1/2017 12:14:25 AM'
                 requestId: f01d7bfe-7162-44e7-9350-f1c85ce83e4c
@@ -208,6 +217,7 @@ paths:
                 properties:
                   blobUri: 'https://test.blob.core.windows.net/bacpacs/test.bacpac'
                   databaseName: testdb
+                  errorMessage: null
                   lastModifiedTime: '3/1/2017 12:16:33 AM'
                   queuedTime: '3/1/2017 12:14:25 AM'
                   requestId: f01d7bfe-7162-44e7-9350-f1c85ce83e4c
@@ -243,6 +253,7 @@ paths:
                 properties:
                   blobUri: 'https://test.blob.core.windows.net/bacpacs/test.bacpac'
                   databaseName: testdb
+                  errorMessage: null
                   lastModifiedTime: '3/1/2017 12:16:33 AM'
                   queuedTime: '3/1/2017 12:14:25 AM'
                   requestId: f01d7bfe-7162-44e7-9350-f1c85ce83e4c
@@ -275,6 +286,7 @@ paths:
                 properties:
                   blobUri: 'https://test.blob.core.windows.net/bacpacs/test.bacpac'
                   databaseName: testdb
+                  errorMessage: null
                   lastModifiedTime: '3/1/2017 12:16:33 AM'
                   queuedTime: '3/1/2017 12:14:25 AM'
                   requestId: f01d7bfe-7162-44e7-9350-f1c85ce83e4c
@@ -307,6 +319,7 @@ paths:
                 properties:
                   blobUri: 'https://test.blob.core.windows.net/bacpacs/test.bacpac'
                   databaseName: testdb
+                  errorMessage: null
                   lastModifiedTime: '3/1/2017 12:16:33 AM'
                   queuedTime: '3/1/2017 12:14:25 AM'
                   requestId: f01d7bfe-7162-44e7-9350-f1c85ce83e4c
@@ -366,6 +379,7 @@ paths:
                 properties:
                   blobUri: 'https://test.blob.core.windows.net/bacpacs/test.bacpac'
                   databaseName: testdb
+                  errorMessage: null
                   lastModifiedTime: '3/1/2017 12:16:33 AM'
                   queuedTime: '3/1/2017 12:14:25 AM'
                   requestId: f01d7bfe-7162-44e7-9350-f1c85ce83e4c
@@ -399,6 +413,7 @@ paths:
                 properties:
                   blobUri: 'https://test.blob.core.windows.net/bacpacs/test.bacpac'
                   databaseName: testdb
+                  errorMessage: null
                   lastModifiedTime: '3/1/2017 12:16:33 AM'
                   queuedTime: '3/1/2017 12:14:25 AM'
                   requestId: f01d7bfe-7162-44e7-9350-f1c85ce83e4c
@@ -431,6 +446,7 @@ paths:
                 properties:
                   blobUri: 'https://test.blob.core.windows.net/bacpacs/test.bacpac'
                   databaseName: testdb
+                  errorMessage: null
                   lastModifiedTime: '3/1/2017 12:16:33 AM'
                   queuedTime: '3/1/2017 12:14:25 AM'
                   requestId: f01d7bfe-7162-44e7-9350-f1c85ce83e4c
@@ -463,6 +479,7 @@ paths:
                 properties:
                   blobUri: 'https://test.blob.core.windows.net/bacpacs/test.bacpac'
                   databaseName: testdb
+                  errorMessage: null
                   lastModifiedTime: '3/1/2017 12:16:33 AM'
                   queuedTime: '3/1/2017 12:14:25 AM'
                   requestId: f01d7bfe-7162-44e7-9350-f1c85ce83e4c

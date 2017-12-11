@@ -6,12 +6,19 @@ info:
   description: 'Subscription definitions client provides an interface to create, modify and retrieve azure subscriptions programmatically.'
   title: SubscriptionDefinitionsClient
   version: 2017-11-01-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/subscription/resource-manager/Microsoft.Subscription/2017-11-01-preview/subscriptionDefinitions.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: subscription-subscriptionDefinitions
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -19,7 +26,7 @@ produces:
 securityDefinitions:
   azure_auth:
     authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow.
+    description: Azure Active Directory OAuth2 Flow
     flow: implicit
     scopes:
       user_impersonation: impersonate your user account

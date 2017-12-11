@@ -5,6 +5,10 @@ host: management.azure.com
 info:
   title: SchedulerManagementClient
   version: '2016-03-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/scheduler/resource-manager/Microsoft.Scheduler/2016-03-01/scheduler.json'
@@ -12,6 +16,9 @@ info:
   x-preferred: true
   x-providerName: azure.com
   x-serviceName: scheduler
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
   - text/json
@@ -487,6 +494,7 @@ definitions:
       username:
         description: Gets or sets the username.
         type: string
+    x-ms-discriminator-value: Basic
   ClientCertAuthentication:
     allOf:
       - $ref: '#/definitions/HttpAuthentication'
@@ -507,7 +515,9 @@ definitions:
       pfx:
         description: 'Gets or sets the pfx certificate. Accepts certification in base64 encoding, return value will always be empty.'
         type: string
+    x-ms-discriminator-value: ClientCertificate
   HttpAuthentication:
+    discriminator: type
     properties:
       type:
         description: Gets or sets the HTTP authentication type.
@@ -520,6 +530,8 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: HttpAuthenticationType
+    required:
+      - type
   HttpRequest:
     properties:
       authentication:
@@ -955,6 +967,7 @@ definitions:
       tenant:
         description: Gets or sets the tenant.
         type: string
+    x-ms-discriminator-value: ActiveDirectoryOAuth
   RecurrenceFrequency:
     description: 'Gets or sets the frequency of recurrence (minute, hour, day, week, month).'
     enum:

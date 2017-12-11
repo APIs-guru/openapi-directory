@@ -6,6 +6,10 @@ info:
   description: Azure Service Bus client
   title: ServiceBusManagementClient
   version: '2017-04-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/servicebus/resource-manager/Microsoft.ServiceBus/2017-04-01/servicebus.json'
@@ -13,6 +17,9 @@ info:
   x-preferred: true
   x-providerName: azure.com
   x-serviceName: servicebus
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -4368,10 +4375,10 @@ definitions:
         description: A value that indicates whether the queue is to be partitioned across multiple message brokers.
         type: boolean
       forwardDeadLetteredMessagesTo:
-        description: Queue name to forward the Dead Letter message
+        description: Queue/Topic name to forward the Dead Letter message
         type: string
       forwardTo:
-        description: Queue name to forward the messages
+        description: Queue/Topic name to forward the messages
         type: string
       lockDuration:
         description: 'ISO 8601 timespan duration of a peek-lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute.'
@@ -4494,6 +4501,12 @@ definitions:
       enableBatchedOperations:
         description: Value that indicates whether server-side batched operations are enabled.
         type: boolean
+      forwardDeadLetteredMessagesTo:
+        description: Queue/Topic name to forward the Dead Letter message
+        type: string
+      forwardTo:
+        description: Queue/Topic name to forward the messages
+        type: string
       lockDuration:
         description: ISO 8061 lock duration timespan for the subscription. The default value is 1 minute.
         format: duration

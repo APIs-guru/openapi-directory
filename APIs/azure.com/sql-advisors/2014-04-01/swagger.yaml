@@ -6,6 +6,10 @@ info:
   description: 'The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.'
   title: SqlManagementClient
   version: '2014-04-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/sql/resource-manager/Microsoft.Sql/2014-04-01/advisors.json'
@@ -13,6 +17,9 @@ info:
   x-preferred: false
   x-providerName: azure.com
   x-serviceName: sql-advisors
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -135,6 +142,8 @@ paths:
                     properties:
                       advisorStatus: PrivatePreview
                       autoExecuteValue: Disabled
+                      lastChecked: null
+                      recommendationsStatus: null
                     type: Microsoft.Sql/servers/databases/advisors
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}':
     get:

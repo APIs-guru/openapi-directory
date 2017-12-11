@@ -6,6 +6,10 @@ info:
   description: Use these REST APIs for performing operations on logger entity Azure API Management deployment.The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure EventHub.
   title: ApiManagementClient
   version: '2017-03-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/apimanagement/resource-manager/Microsoft.ApiManagement/2017-03-01/apimloggers.json'
@@ -13,6 +17,9 @@ info:
   x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimloggers
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -593,8 +600,11 @@ definitions:
           - azureEventHub
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: LoggerType
+          values:
+            - description: Azure Event Hub as log destination.
+              value: azureEventHub
     required:
       - loggerType
       - credentials
@@ -625,5 +635,8 @@ definitions:
           - azureEventHub
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: LoggerType
+          values:
+            - description: Azure Event Hub as log destination.
+              value: azureEventHub

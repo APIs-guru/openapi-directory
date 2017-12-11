@@ -5,12 +5,19 @@ host: management.azure.com
 info:
   title: WebApps API Client
   version: '2016-08-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/web/resource-manager/Microsoft.Web/2016-08-01/WebApps.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: web-WebApps
+  x-tags:
+    - Azure
+    - Microsoft
 consumes:
   - application/json
 produces:
@@ -8025,6 +8032,8 @@ paths:
           type: string
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/octet-stream
       responses:
         '200':
           description: OK
@@ -8038,7 +8047,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/containerlogs/zip/download':
     post:
       description: Gets the ZIP archived docker log files for the given site
-      operationId: WebApps_GetContainerLogsZip
+      operationId: WebApps_GetWebSiteContainerLogsZip
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
         - description: Name of web app.
@@ -8048,6 +8057,8 @@ paths:
           type: string
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/zip
       responses:
         '200':
           description: OK
@@ -18422,6 +18433,8 @@ paths:
           type: string
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/octet-stream
       responses:
         '200':
           description: OK
@@ -18435,7 +18448,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/containerlogs/zip/download':
     post:
       description: Gets the ZIP archived docker log files for the given site
-      operationId: WebApps_GetContainerLogsZipSlot
+      operationId: WebApps_GetWebSiteContainerLogsZipSlot
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
         - description: Name of web app.
@@ -18450,6 +18463,8 @@ paths:
           type: string
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/zip
       responses:
         '200':
           description: OK
@@ -25935,8 +25950,6 @@ definitions:
       enabled:
         description: 'True if configuration is enabled, false if it is disabled and null if configuration is not set.'
         type: boolean
-    type: object
-  ErrorEntity:
     type: object
   FileSystemApplicationLogsConfig:
     description: Application logs to file system configuration.
