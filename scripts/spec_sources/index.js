@@ -13,6 +13,7 @@ exports.deletions = [];
 var specSources = {
   'googleapis.com': require('./google'),
   'azure.com': require('./azure'),
+  'microsoft.com': require('./azure'),
   'windows.net': require('./azure'),
   'nytimes.com': require('./ny_times'),
   'swaggerhub.com': require('./swaggerhub'),

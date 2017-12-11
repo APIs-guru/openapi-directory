@@ -832,6 +832,9 @@ function fixSpec(swagger, errors) {
 
         if (typeof swagger.definitions[value] !== 'undefined')
           newValue = '#/definitions/' + value;
+        else if (value.indexOf('#/definitions/#/parameters')>=0) {
+          newValue = value.replace('#/definitions/','');
+        }
         else {
           console.warn(value);
           let ptr = value.replace('#/definitions/','');
