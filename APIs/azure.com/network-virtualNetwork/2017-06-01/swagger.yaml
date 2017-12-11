@@ -992,6 +992,8 @@ definitions:
         items:
           type: string
         type: array
+  IPConfigurationPropertiesFormat:
+    type: object
   ResourceNavigationLink:
     allOf:
       - description: Reference to another subresource.
@@ -1035,6 +1037,8 @@ definitions:
         description: Provisioning state of the ResourceNavigationLink resource.
         readOnly: true
         type: string
+  RouteTablePropertiesFormat:
+    type: object
   ServiceEndpointPropertiesFormat:
     description: The service endpoint properties.
     properties:

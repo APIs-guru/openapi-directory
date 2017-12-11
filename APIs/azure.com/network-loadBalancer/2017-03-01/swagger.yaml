@@ -658,6 +658,8 @@ definitions:
     required:
       - protocol
       - frontendPort
+  NetworkInterfaceIPConfigurationPropertiesFormat:
+    type: object
   OutboundNatRule:
     allOf:
       - properties:
@@ -763,3 +765,7 @@ definitions:
     required:
       - protocol
       - port
+  PublicIPAddressPropertiesFormat:
+    type: object
+  SubnetPropertiesFormat:
+    type: object

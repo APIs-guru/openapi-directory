@@ -536,6 +536,8 @@ definitions:
         items:
           type: string
         type: array
+  IPConfigurationPropertiesFormat:
+    type: object
   ResourceNavigationLink:
     allOf:
       - properties:
@@ -578,6 +580,8 @@ definitions:
         description: Provisioning state of the ResourceNavigationLink resource.
         readOnly: true
         type: string
+  RouteTablePropertiesFormat:
+    type: object
   Subnet:
     allOf:
       - properties:

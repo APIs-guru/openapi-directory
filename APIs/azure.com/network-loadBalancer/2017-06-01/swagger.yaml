@@ -2077,6 +2077,10 @@ definitions:
     required:
       - protocol
       - frontendPort
+  NetworkInterfaceIPConfigurationPropertiesFormat:
+    type: object
+  NetworkInterfacePropertiesFormat:
+    type: object
   OutboundNatRule:
     allOf:
       - description: Reference to another subresource.
@@ -2190,3 +2194,7 @@ definitions:
     required:
       - protocol
       - port
+  PublicIPAddressPropertiesFormat:
+    type: object
+  SubnetPropertiesFormat:
+    type: object

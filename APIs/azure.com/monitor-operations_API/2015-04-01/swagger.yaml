@@ -177,11 +177,8 @@ paths:
                     name: Microsoft.Insights/AutoscaleSettings/providers/Microsoft.Insights/MetricDefinitions/Read
                     properties:
                       serviceSpecification:
-                        legacyMetricSpecifications: null
-                        logSpecifications: null
                         metricSpecifications:
                           - aggregationType: Average
-                            availabilities: null
                             category: Metric
                             dimensions:
                               - displayName: Metric Trigger Source
@@ -193,7 +190,6 @@ paths:
                             name: ObservedMetricValue
                             unit: Count
                           - aggregationType: Average
-                            availabilities: null
                             category: Metric
                             dimensions:
                               - displayName: Metric Trigger Rule
@@ -205,16 +201,13 @@ paths:
                             name: MetricThreshold
                             unit: Count
                           - aggregationType: Average
-                            availabilities: null
                             category: ScaleAction
-                            dimensions: null
                             displayDescription: The capacity reported to autoscale when it executed.
                             displayName: Observed Capacity
                             fillGapWithZero: false
                             name: ObservedCapacity
                             unit: Count
                           - aggregationType: Total
-                            availabilities: null
                             category: ScaleAction
                             dimensions:
                               - displayName: Scale Direction
