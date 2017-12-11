@@ -430,6 +430,33 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeEndpointInput'
+      x-waiters:
+        - delay: 30
+          maxAttempts: 120
+          operation: DescribeEndpoint
+          acceptors:
+            - expected: InService
+              matcher: path
+              state: success
+              argument: EndpointStatus
+            - expected: Failed
+              matcher: path
+              state: failure
+              argument: EndpointStatus
+            - expected: ValidationException
+              matcher: error
+              state: failure
+        - delay: 30
+          maxAttempts: 60
+          operation: DescribeEndpoint
+          acceptors:
+            - expected: ValidationException
+              matcher: error
+              state: success
+            - expected: Failed
+              matcher: path
+              state: failure
+              argument: EndpointStatus
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -505,6 +532,42 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeNotebookInstanceInput'
+      x-waiters:
+        - delay: 30
+          maxAttempts: 60
+          operation: DescribeNotebookInstance
+          acceptors:
+            - expected: InService
+              matcher: path
+              state: success
+              argument: NotebookInstanceStatus
+            - expected: Failed
+              matcher: path
+              state: failure
+              argument: NotebookInstanceStatus
+        - delay: 30
+          operation: DescribeNotebookInstance
+          maxAttempts: 60
+          acceptors:
+            - expected: Stopped
+              matcher: path
+              state: success
+              argument: NotebookInstanceStatus
+            - expected: Failed
+              matcher: path
+              state: failure
+              argument: NotebookInstanceStatus
+        - delay: 30
+          maxAttempts: 60
+          operation: DescribeNotebookInstance
+          acceptors:
+            - expected: ValidationException
+              matcher: error
+              state: success
+            - expected: Failed
+              matcher: path
+              state: failure
+              argument: NotebookInstanceStatus
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -534,6 +597,26 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeTrainingJobRequest'
+      x-waiters:
+        - delay: 120
+          maxAttempts: 180
+          operation: DescribeTrainingJob
+          acceptors:
+            - expected: Completed
+              matcher: path
+              state: success
+              argument: TrainingJobStatus
+            - expected: Stopped
+              matcher: path
+              state: success
+              argument: TrainingJobStatus
+            - expected: Failed
+              matcher: path
+              state: failure
+              argument: TrainingJobStatus
+            - expected: ValidationException
+              matcher: error
+              state: failure
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'

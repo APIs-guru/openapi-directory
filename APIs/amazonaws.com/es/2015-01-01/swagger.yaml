@@ -793,6 +793,9 @@ definitions:
       VPCOptions:
         $ref: '#/definitions/VPCOptions'
         description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc" target="_blank">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i>'
+      EncryptionAtRestOptions:
+        $ref: '#/definitions/EncryptionAtRestOptions'
+        description: Specifies the Encryption At Rest Options.
       AdvancedOptions:
         $ref: '#/definitions/AdvancedOptions'
         description: ' Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.'
@@ -1030,6 +1033,9 @@ definitions:
       VPCOptions:
         $ref: '#/definitions/VPCDerivedInfoStatus'
         description: 'The <code>VPCOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank">VPC Endpoints for Amazon Elasticsearch Service Domains</a>.'
+      EncryptionAtRestOptions:
+        $ref: '#/definitions/EncryptionAtRestOptionsStatus'
+        description: Specifies the <code>EncryptionAtRestOptions</code> for the Elasticsearch domain.
       AdvancedOptions:
         $ref: '#/definitions/AdvancedOptionsStatus'
         description: 'Specifies the <code>AdvancedOptions</code> for the domain. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuring Advanced Options</a> for more information.'
@@ -1086,6 +1092,9 @@ definitions:
       VPCOptions:
         $ref: '#/definitions/VPCDerivedInfo'
         description: 'The <code>VPCOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank">VPC Endpoints for Amazon Elasticsearch Service Domains</a>.'
+      EncryptionAtRestOptions:
+        $ref: '#/definitions/EncryptionAtRestOptions'
+        description: ' Specifies the status of the <code>EncryptionAtRestOptions</code>.'
       AdvancedOptions:
         $ref: '#/definitions/AdvancedOptions'
         description: Specifies the status of the <code>AdvancedOptions</code>
@@ -1123,6 +1132,29 @@ definitions:
     description: ' Status of the Elasticsearch version options for the specified Elasticsearch domain.'
   ElasticsearchVersionString:
     type: string
+  EncryptionAtRestOptions:
+    type: object
+    properties:
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Specifies the option to enable Encryption At Rest.
+      KmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: ' Specifies the KMS Key ID for Encryption At Rest options.'
+    description: Specifies the Encryption At Rest Options.
+  EncryptionAtRestOptionsStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/EncryptionAtRestOptions'
+        description: ' Specifies the Encryption At Rest options for the specified Elasticsearch domain.'
+      Status:
+        $ref: '#/definitions/OptionStatus'
+        description: ' Specifies the status of the Encryption At Rest options for the specified Elasticsearch domain.'
+    description: ' Status of the Encryption At Rest options for the specified Elasticsearch domain.'
   EndpointsMap:
     type: array
     items:
@@ -1160,6 +1192,10 @@ definitions:
     type: object
     properties: {}
     description: An exception for trying to create or access sub-resource that is either invalid or not supported. Gives http status code of 409.
+  KmsKeyId:
+    type: string
+    minLength: 1
+    maxLength: 500
   LimitExceededException:
     type: object
     properties: {}

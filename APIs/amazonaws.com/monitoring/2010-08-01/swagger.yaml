@@ -766,6 +766,9 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Datapoint'
+  DatapointsToAlarm:
+    type: integer
+    minimum: 1
   DeleteAlarmsInput:
     type: object
     required:
@@ -776,10 +779,12 @@ definitions:
         description: The alarms to be deleted.
   DeleteDashboardsInput:
     type: object
+    required:
+      - DashboardNames
     properties:
       DashboardNames:
         $ref: '#/definitions/DashboardNames'
-        description: The dashboards to be deleted.
+        description: The dashboards to be deleted. This parameter is required.
   DeleteDashboardsOutput:
     type: object
     properties: {}
@@ -959,6 +964,8 @@ definitions:
     type: string
   GetDashboardInput:
     type: object
+    required:
+      - DashboardName
     properties:
       DashboardName:
         $ref: '#/definitions/DashboardName'
@@ -1203,6 +1210,9 @@ definitions:
       EvaluationPeriods:
         $ref: '#/definitions/EvaluationPeriods'
         description: The number of periods over which data is compared to the specified threshold.
+      DatapointsToAlarm:
+        $ref: '#/definitions/DatapointsToAlarm'
+        description: The number of datapoints that must be breaching to trigger the alarm.
       Threshold:
         $ref: '#/definitions/Threshold'
         description: The value to compare with the specified statistic.
@@ -1282,13 +1292,16 @@ definitions:
     minimum: 1
   PutDashboardInput:
     type: object
+    required:
+      - DashboardName
+      - DashboardBody
     properties:
       DashboardName:
         $ref: '#/definitions/DashboardName'
-        description: 'The name of the dashboard. If a dashboard with this name already exists, this call modifies that dashboard, replacing its current contents. Otherwise, a new dashboard is created. The maximum length is 255, and valid characters are A-Z, a-z, 0-9, "-", and "_".'
+        description: 'The name of the dashboard. If a dashboard with this name already exists, this call modifies that dashboard, replacing its current contents. Otherwise, a new dashboard is created. The maximum length is 255, and valid characters are A-Z, a-z, 0-9, "-", and "_". This parameter is required.'
       DashboardBody:
         $ref: '#/definitions/DashboardBody'
-        description: '<p>The detailed information about the dashboard in JSON format, including the widgets to include and their location on the dashboard.</p> <p>For more information about the syntax, see <a>CloudWatch-Dashboard-Body-Structure</a>.</p>'
+        description: '<p>The detailed information about the dashboard in JSON format, including the widgets to include and their location on the dashboard. This parameter is required.</p> <p>For more information about the syntax, see <a>CloudWatch-Dashboard-Body-Structure</a>.</p>'
   PutDashboardOutput:
     type: object
     properties:
@@ -1317,13 +1330,13 @@ definitions:
         description: Indicates whether actions should be executed during any changes to the alarm state.
       OKActions:
         $ref: '#/definitions/ResourceList'
-        description: '<p>The actions to execute when this alarm transitions to an <code>OK</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: arn:aws:automate:<i>region</i>:ec2:stop | arn:aws:automate:<i>region</i>:ec2:terminate | arn:aws:automate:<i>region</i>:ec2:recover</p> <p>Valid Values (for use with IAM roles): arn:aws:swf:us-east-1:{<i>customer-account</i>}:action/actions/AWS_EC2.InstanceId.Stop/1.0 | arn:aws:swf:us-east-1:{<i>customer-account</i>}:action/actions/AWS_EC2.InstanceId.Terminate/1.0 | arn:aws:swf:us-east-1:{<i>customer-account</i>}:action/actions/AWS_EC2.InstanceId.Reboot/1.0</p>'
+        description: '<p>The actions to execute when this alarm transitions to an <code>OK</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: arn:aws:automate:<i>region</i>:ec2:stop | arn:aws:automate:<i>region</i>:ec2:terminate | arn:aws:automate:<i>region</i>:ec2:recover | arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> | arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i> autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </p> <p>Valid Values (for use with IAM roles): arn:aws:swf:<i>region</i>:{<i>account-id</i>}:action/actions/AWS_EC2.InstanceId.Stop/1.0 | arn:aws:swf:<i>region</i>:{<i>account-id</i>}:action/actions/AWS_EC2.InstanceId.Terminate/1.0 | arn:aws:swf:<i>region</i>:{<i>account-id</i>}:action/actions/AWS_EC2.InstanceId.Reboot/1.0</p>'
       AlarmActions:
         $ref: '#/definitions/ResourceList'
-        description: '<p>The actions to execute when this alarm transitions to the <code>ALARM</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: arn:aws:automate:<i>region</i>:ec2:stop | arn:aws:automate:<i>region</i>:ec2:terminate | arn:aws:automate:<i>region</i>:ec2:recover</p> <p>Valid Values (for use with IAM roles): arn:aws:swf:us-east-1:{<i>customer-account</i>}:action/actions/AWS_EC2.InstanceId.Stop/1.0 | arn:aws:swf:us-east-1:{<i>customer-account</i>}:action/actions/AWS_EC2.InstanceId.Terminate/1.0 | arn:aws:swf:us-east-1:{<i>customer-account</i>}:action/actions/AWS_EC2.InstanceId.Reboot/1.0</p>'
+        description: '<p>The actions to execute when this alarm transitions to the <code>ALARM</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: arn:aws:automate:<i>region</i>:ec2:stop | arn:aws:automate:<i>region</i>:ec2:terminate | arn:aws:automate:<i>region</i>:ec2:recover | arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> | arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i> autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </p> <p>Valid Values (for use with IAM roles): arn:aws:swf:<i>region</i>:{<i>account-id</i>}:action/actions/AWS_EC2.InstanceId.Stop/1.0 | arn:aws:swf:<i>region</i>:{<i>account-id</i>}:action/actions/AWS_EC2.InstanceId.Terminate/1.0 | arn:aws:swf:<i>region</i>:{<i>account-id</i>}:action/actions/AWS_EC2.InstanceId.Reboot/1.0</p>'
       InsufficientDataActions:
         $ref: '#/definitions/ResourceList'
-        description: '<p>The actions to execute when this alarm transitions to the <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: arn:aws:automate:<i>region</i>:ec2:stop | arn:aws:automate:<i>region</i>:ec2:terminate | arn:aws:automate:<i>region</i>:ec2:recover</p> <p>Valid Values (for use with IAM roles): arn:aws:swf:us-east-1:{<i>customer-account</i>}:action/actions/AWS_EC2.InstanceId.Stop/1.0 | arn:aws:swf:us-east-1:{<i>customer-account</i>}:action/actions/AWS_EC2.InstanceId.Terminate/1.0 | arn:aws:swf:us-east-1:{<i>customer-account</i>}:action/actions/AWS_EC2.InstanceId.Reboot/1.0</p>'
+        description: '<p>The actions to execute when this alarm transitions to the <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: arn:aws:automate:<i>region</i>:ec2:stop | arn:aws:automate:<i>region</i>:ec2:terminate | arn:aws:automate:<i>region</i>:ec2:recover | arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> | arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i> autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </p> <p>Valid Values (for use with IAM roles): arn:aws:swf:<i>region</i>:{<i>account-id</i>}:action/actions/AWS_EC2.InstanceId.Stop/1.0 | arn:aws:swf:<i>region</i>:{<i>account-id</i>}:action/actions/AWS_EC2.InstanceId.Terminate/1.0 | arn:aws:swf:<i>region</i>:{<i>account-id</i>}:action/actions/AWS_EC2.InstanceId.Reboot/1.0</p>'
       MetricName:
         $ref: '#/definitions/MetricName'
         description: The name for the metric associated with the alarm.
@@ -1332,10 +1345,10 @@ definitions:
         description: The namespace for the metric associated with the alarm.
       Statistic:
         $ref: '#/definitions/Statistic'
-        description: 'The statistic for the metric associated with the alarm, other than percentile. For percentile statistics, use <code>ExtendedStatistic</code>.'
+        description: 'The statistic for the metric associated with the alarm, other than percentile. For percentile statistics, use <code>ExtendedStatistic</code>. When you call <code>PutMetricAlarm</code>, you must specify either <code>Statistic</code> or <code>ExtendedStatistic,</code> but not both.'
       ExtendedStatistic:
         $ref: '#/definitions/ExtendedStatistic'
-        description: The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.
+        description: 'The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100. When you call <code>PutMetricAlarm</code>, you must specify either <code>Statistic</code> or <code>ExtendedStatistic,</code> but not both.'
       Dimensions:
         $ref: '#/definitions/Dimensions'
         description: The dimensions for the metric associated with the alarm.
@@ -1348,6 +1361,9 @@ definitions:
       EvaluationPeriods:
         $ref: '#/definitions/EvaluationPeriods'
         description: 'The number of periods over which data is compared to the specified threshold. An alarm''s total current evaluation period can be no longer than one day, so this number multiplied by <code>Period</code> cannot be more than 86,400 seconds.'
+      DatapointsToAlarm:
+        $ref: '#/definitions/DatapointsToAlarm'
+        description: The number of datapoints that must be breaching to trigger the alarm.
       Threshold:
         $ref: '#/definitions/Threshold'
         description: The value against which the specified statistic is compared.
