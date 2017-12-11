@@ -21,9 +21,6 @@ module.exports = function () {
       service += '-' + basename;
     }
 
-    console.warn(util.rawGitHubUrl('Azure', 'azure-rest-api-specs', 'current', filename));
-    console.warn(service);
-
     return {
       info: {
         'x-providerName': 'azure.com',
