@@ -2181,6 +2181,47 @@ paths:
                     type: Microsoft.ServiceBus/Namespaces/DisasterRecoveryConfig
       x-ms-pageable:
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/CheckNameAvailability':
+    post:
+      description: Check the give namespace name availability.
+      operationId: DisasterRecoveryConfigs_CheckNameAvailability
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: Parameters to check availability of the given namespace name
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CheckNameAvailability'
+      responses:
+        '200':
+          description: check availability returned successfully.
+          schema:
+            $ref: '#/definitions/CheckNameAvailabilityResult'
+        default:
+          description: ServiceBus error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - DisasterRecoveryConfigs
+      x-ms-examples:
+        AliasNameAvailability:
+          parameters:
+            api-version: '2017-04-01'
+            namespaceName: sdk-Namespace-9080
+            parameters:
+              name: sdk-DisasterRecovery-9474
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: exampleSubscriptionId
+          responses:
+            '200':
+              body:
+                message: ''
+                nameAvailable: true
+                reason: None
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}':
     delete:
       description: Deletes an Alias(Disaster Recovery configuration)
@@ -2280,26 +2321,178 @@ paths:
       x-ms-examples:
         SBAliasCreate:
           parameters:
-            alias: sdk-DisasterRecovery-3814
+            alias: sdk-Namespace-8860
             api-version: '2017-04-01'
             namespaceName: sdk-Namespace-8860
             parameters:
               properties:
+                alternateName: alternameforAlias-Namespace-8860
                 partnerNamespace: sdk-Namespace-37
             resourceGroupName: ardsouzatestRG
             subscriptionId: 5f750a97-50d9-4e36-8081-c9ee4c0210d4
           responses:
             '200':
               body:
-                id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/ardsouzatestRG/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-8860/disasterRecoveryConfig/sdk-DisasterRecovery-3814
-                name: sdk-DisasterRecovery-3814
+                id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/ardsouzatestRG/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-8860/disasterRecoveryConfig/sdk-Namespace-8860
+                name: sdk-Namespace-8860
                 properties:
+                  alternateName: alternameforAlias-Namespace-8860
                   partnerNamespace: sdk-Namespace-37
                   provisioningState: Accepted
                   role: Primary
                   type: MetadataReplication
                 type: Microsoft.ServiceBus/Namespaces/DisasterRecoveryConfig
             '201': {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules':
+    get:
+      description: Gets the authorization rules for a namespace.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx'
+      operationId: DisasterRecoveryConfigs_ListAuthorizationRules
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/aliasNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: DisasterRecoveryConfigs authorization rules returned successfully.
+          schema:
+            $ref: '#/definitions/SBAuthorizationRuleListResult'
+        default:
+          description: ServiceBus error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - DisasterRecoveryConfigs
+      x-ms-examples:
+        NameSpaceAutorizationRuleListAll:
+          parameters:
+            alias: sdk-DisasterRecovery-4047
+            api-version: '2017-04-01'
+            namespaceName: sdk-Namespace-9080
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: exampleSubscriptionId
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/exampleSubscriptionId/resourceGroups/exampleResourceGroup/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-9080/disasterRecoveryConfigs/sdk-DisasterRecovery-4047/AuthorizationRules/RootManageSharedAccessKey
+                    name: RootManageSharedAccessKey
+                    properties:
+                      rights:
+                        - Listen
+                        - Manage
+                        - Send
+                    type: Microsoft.ServiceBus/Namespaces/AuthorizationRules
+                  - id: /subscriptions/exampleSubscriptionId/resourceGroups/exampleResourceGroup/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-9080/disasterRecoveryConfigs/sdk-DisasterRecovery-4047/AuthorizationRules/sdk-Authrules-1067
+                    name: sdk-Authrules-1067
+                    properties:
+                      rights:
+                        - Listen
+                        - Send
+                    type: Microsoft.ServiceBus/Namespaces/AuthorizationRules
+                  - id: /subscriptions/exampleSubscriptionId/resourceGroups/exampleResourceGroup/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-9080/disasterRecoveryConfigs/sdk-DisasterRecovery-4047/AuthorizationRules/sdk-Authrules-1684
+                    name: sdk-Authrules-1684
+                    properties:
+                      rights:
+                        - Listen
+                        - Send
+                    type: Microsoft.ServiceBus/Namespaces/AuthorizationRules
+                  - id: /subscriptions/exampleSubscriptionId/resourceGroups/exampleResourceGroup/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-9080/disasterRecoveryConfigs/sdk-DisasterRecovery-4047/AuthorizationRules/sdk-Authrules-4879
+                    name: sdk-Authrules-4879
+                    properties:
+                      rights:
+                        - Listen
+                        - Send
+                    type: Microsoft.ServiceBus/Namespaces/AuthorizationRules
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules/{authorizationRuleName}':
+    get:
+      description: Gets an authorization rule for a namespace by rule name.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx'
+      operationId: DisasterRecoveryConfigs_GetAuthorizationRule
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/aliasNameParameter'
+        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: DisasterRecoveryConfigs authorization rule returned successfully.
+          schema:
+            $ref: '#/definitions/SBAuthorizationRule'
+        default:
+          description: ServiceBus error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - DisasterRecoveryConfigs
+      x-ms-examples:
+        DisasterRecoveryConfigsAutorizationRuleGet:
+          parameters:
+            alias: sdk-DisasterRecovery-4879
+            api-version: '2017-04-01'
+            authorizationRuleName: sdk-Authrules-4879
+            namespaceName: sdk-Namespace-9080
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: exampleSubscriptionId
+          responses:
+            '200':
+              body:
+                id: /subscriptions/exampleSubscriptionId/resourceGroups/exampleResourceGroup/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-9080/disasterRecoveryConfigs/sdk-DisasterRecovery-4047/AuthorizationRules/sdk-Authrules-4879
+                name: sdk-Authrules-4879
+                properties:
+                  rights:
+                    - Listen
+                    - Send
+                type: Microsoft.ServiceBus/Namespaces/AuthorizationRules
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules/{authorizationRuleName}/listKeys':
+    post:
+      description: Gets the primary and secondary connection strings for the namespace.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639398.aspx'
+      operationId: DisasterRecoveryConfigs_ListKeys
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/aliasNameParameter'
+        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Connection strings successfully returned.
+          schema:
+            $ref: '#/definitions/AccessKeys'
+        default:
+          description: ServiceBus error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - DisasterRecoveryConfigs
+      x-ms-examples:
+        DisasterRecoveryConfigsAuthorizationRuleListKey:
+          parameters:
+            alias: sdk-DisasterRecovery-4047
+            api-version: '2017-04-01'
+            authorizationRuleName: sdk-Authrules-1746
+            namespaceName: sdk-Namespace-2702
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: exampleSubscriptionId
+          responses:
+            '200':
+              body:
+                aliasPrimaryConnectionString: 'Endpoint=sb://sdk-disasterrecovery-4047.servicebus.windows-int.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=############################################'
+                aliasSecondaryConnectionString: 'Endpoint=sb://sdk-disasterrecovery-4047.servicebus.windows-int.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=############################################'
+                keyName: sdk-Authrules-1746
+                primaryKey: '############################################'
+                secondaryKey: '############################################'
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing':
     post:
       description: This operation disables the Disaster Recovery and stops replicating changes from primary to secondary namespaces
@@ -3789,8 +3982,11 @@ definitions:
       properties:
         description: Properties required to the Create Or Update Alias(Disaster Recovery configurations)
         properties:
-          partnerNamespace:
+          alternateName:
             description: 'Primary/Secondary eventhub namespace name, which is part of GEO DR pairning'
+            type: string
+          partnerNamespace:
+            description: 'ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairning'
             type: string
           provisioningState:
             description: Provisioning state of the Alias(Disaster Recovery configuration) - possible values 'Accepted' or 'Succeeded' or 'Failed'

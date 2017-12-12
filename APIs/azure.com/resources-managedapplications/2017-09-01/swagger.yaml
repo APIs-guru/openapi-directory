@@ -107,7 +107,9 @@ paths:
               body:
                 value:
                   - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myManagedApplicationDef
+                    identity: null
                     location: East US 2
+                    managedBy: null
                     name: myManagedApplicationDef
                     properties:
                       artifacts:
@@ -122,11 +124,16 @@ paths:
                           roleDefinitionId: validroleguid
                       description: myManagedApplicationDef description
                       displayName: myManagedApplicationDef
+                      lockLevel: null
                       packageFileUri: 'https://path/to/packagezipfile'
                     resourceGroup: rg
+                    sku: null
+                    tags: null
                     type: Microsoft.Solutions/applicationDefinitions
                   - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myManagedApplicationDef2
+                    identity: null
                     location: West US
+                    managedBy: null
                     name: myManagedApplicationDef2
                     properties:
                       artifacts:
@@ -141,8 +148,11 @@ paths:
                           roleDefinitionId: validroleguid
                       description: myManagedApplicationDef2 description
                       displayName: myManagedApplicationDef2
+                      lockLevel: null
                       packageFileUri: 'https://path/to/packagezipfile'
                     resourceGroup: rg
+                    sku: null
+                    tags: null
                     type: Microsoft.Solutions/applicationDefinitions
               headers: {}
       x-ms-pageable:
@@ -228,7 +238,9 @@ paths:
             '200':
               body:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myManagedApplicationDef
+                identity: null
                 location: East US 2
+                managedBy: null
                 name: myManagedApplicationDef
                 properties:
                   artifacts:
@@ -243,8 +255,11 @@ paths:
                       roleDefinitionId: validroleguid
                   description: myManagedApplicationDef description
                   displayName: myManagedApplicationDef
+                  lockLevel: null
                   packageFileUri: 'https://path/to/packagezipfile'
                 resourceGroup: rg
+                sku: null
+                tags: null
                 type: Microsoft.Solutions/applicationDefinitions
               headers: {}
     put:
@@ -310,7 +325,9 @@ paths:
             '201':
               body:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myManagedApplicationDef
+                identity: null
                 location: East US 2
+                managedBy: null
                 name: myManagedApplicationDef
                 properties:
                   artifacts:
@@ -325,8 +342,11 @@ paths:
                       roleDefinitionId: validroleguid
                   description: myManagedApplicationDef description
                   displayName: myManagedApplicationDef
+                  lockLevel: null
                   packageFileUri: 'https://path/to/packagezipfile'
                 resourceGroup: rg
+                sku: null
+                tags: null
                 type: Microsoft.Solutions/applicationDefinitions
               headers: {}
       x-ms-long-running-operation: true
@@ -367,26 +387,40 @@ paths:
               body:
                 value:
                   - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/myManagedApplication
+                    identity: null
                     kind: ServiceCatalog
                     location: East US 2
+                    managedBy: null
                     name: myManagedApplication
+                    plan: null
                     properties:
                       managedApplicationDefinitionId: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/managedApplicationDefinitions/myAppDef
                       managedResourceGroupId: /subscriptions/subid/resourceGroups/myManagedRG
+                      outputs: null
+                      parameters: null
                       provisioningState: Created
                       uiDefinitionUri: 'https://path/to/managedApplicationCreateUiDefinition.json'
                     resourceGroup: rg
+                    sku: null
+                    tags: null
                     type: Microsoft.Solutions/applications
                   - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/myManagedApplication2
+                    identity: null
                     kind: ServiceCatalog
                     location: West US
+                    managedBy: null
                     name: myManagedApplication2
+                    plan: null
                     properties:
                       managedApplicationDefinitionId: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/managedApplicationDefinitions/myAppDef2
                       managedResourceGroupId: /subscriptions/subid/resourceGroups/myManagedRG
+                      outputs: null
+                      parameters: null
                       provisioningState: Created
                       uiDefinitionUri: 'https://path/to/managedApplicationCreateUiDefinition.json'
                     resourceGroup: rg
+                    sku: null
+                    tags: null
                     type: Microsoft.Solutions/applications
               headers: {}
       x-ms-pageable:
@@ -470,15 +504,22 @@ paths:
             '200':
               body:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/myManagedApplication
+                identity: null
                 kind: ServiceCatalog
                 location: East US 2
+                managedBy: null
                 name: myManagedApplication
+                plan: null
                 properties:
                   managedApplicationDefinitionId: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/managedApplicationDefinitions/myAppDef
                   managedResourceGroupId: /subscriptions/subid/resourceGroups/myManagedRG
+                  outputs: null
+                  parameters: null
                   provisioningState: Created
                   uiDefinitionUri: 'https://path/to/managedApplicationCreateUiDefinition.json'
                 resourceGroup: rg
+                sku: null
+                tags: null
                 type: Microsoft.Solutions/applications
               headers: {}
     patch:
@@ -578,15 +619,22 @@ paths:
             '201':
               body:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/myManagedApplication
+                identity: null
                 kind: ServiceCatalog
                 location: East US 2
+                managedBy: null
                 name: myManagedApplication
+                plan: null
                 properties:
                   managedApplicationDefinitionId: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myAppDef
                   managedResourceGroupId: /subscriptions/subid/resourceGroups/myManagedRG
+                  outputs: null
+                  parameters: null
                   provisioningState: Created
                   uiDefinitionUri: 'https://path/to/managedApplicationCreateUiDefinition.json'
                 resourceGroup: rg
+                sku: null
+                tags: null
                 type: Microsoft.Solutions/applications
               headers: {}
       x-ms-long-running-operation: true

@@ -1215,8 +1215,7 @@ paths:
                         type: string
                       innerErrors:
                         description: Inner errors.
-                        items:
-                          $ref: '#/definitions/ErrorEntity'
+                        items: {}
                         type: array
                       message:
                         description: Any details of the error.
@@ -7440,8 +7439,6 @@ definitions:
           - virtualNetwork
           - workerPools
         type: object
-    type: object
-  ErrorEntity:
     type: object
   HostingEnvironmentDiagnostics:
     description: Diagnostics for an App Service Environment.

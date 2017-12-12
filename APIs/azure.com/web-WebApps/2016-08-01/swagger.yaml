@@ -10258,8 +10258,7 @@ paths:
                       type: string
                     innerErrors:
                       description: Inner errors.
-                      items:
-                        $ref: '#/definitions/ErrorEntity'
+                      items: {}
                       type: array
                     message:
                       description: Any details of the error.
@@ -25792,8 +25791,7 @@ definitions:
                 type: string
               innerErrors:
                 description: Inner errors.
-                items:
-                  $ref: '#/definitions/ErrorEntity'
+                items: {}
                 type: array
               message:
                 description: Any details of the error.
@@ -25950,8 +25948,6 @@ definitions:
       enabled:
         description: 'True if configuration is enabled, false if it is disabled and null if configuration is not set.'
         type: boolean
-    type: object
-  ErrorEntity:
     type: object
   FileSystemApplicationLogsConfig:
     description: Application logs to file system configuration.

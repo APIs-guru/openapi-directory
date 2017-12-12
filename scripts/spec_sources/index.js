@@ -48,14 +48,14 @@ exports.getLeads = function (specs) {
       leads = indexByOriginUrl(leads);
 
 	  // add new catalog leads (MER)
-	  for (var l in leads) {
-	  	var lead = leads[l];
-	  	var filename = util.getSwaggerPath(lead);
-		if (!specs[filename]) { // we should compare on origin url
-		  console.log('!!! Adding ' + filename);
-	  	  specs[filename] = lead;
-		}
-	  }
+	  //for (var l in leads) {
+	  //	var lead = leads[l];
+	  //	var filename = util.getSwaggerPath(lead);
+		//  if (!specs[filename]) { // we should compare on origin url
+		//    console.log('!!! Adding ' + filename);
+	  //	  specs[filename] = lead;
+		//  }
+	  //}
 
       return _(specs).mapValues((swagger, filename) => {
         var lead = leads[util.getOriginUrl(swagger)];

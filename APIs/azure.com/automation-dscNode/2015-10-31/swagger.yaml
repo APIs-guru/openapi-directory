@@ -761,6 +761,7 @@ paths:
                   name: SetupServer.localhost
                 nodeId: nodeId
                 registrationTime: '2017-03-28T20:19:24.7915026+00:00'
+                status: null
               headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodes/{nodeId}/reports':
     get:
@@ -1440,6 +1441,7 @@ paths:
                   rebootNodeIfNeeded: false
                   refreshFrequencyMins: 30
                 numberOfResources: 1
+                rawErrors: null
                 rebootRequested: 'False'
                 refreshMode: Pull
                 reportFormatVersion: '2.0'
@@ -1447,6 +1449,7 @@ paths:
                 resources:
                   - dependsOn: []
                     durationInSeconds: 0.25
+                    error: null
                     moduleName: PsDesiredStateConfiguration
                     moduleVersion: '1.1'
                     resourceId: '[WindowsFeature]IIS'

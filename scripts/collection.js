@@ -530,8 +530,12 @@ function writeSpec(source, format, exPatch, command) {
       if (validation.warnings)
         logYaml(validation.warnings);
 
-      if (validation.remotesResolved)
+      if (validation.remotesResolved) {
         context.swagger = validation.remotesResolved;
+      }
+      else {
+        console.warn('No remotesResolved returned');
+      }
 
       var filename = util.saveSwagger(context.swagger);
 
@@ -966,7 +970,7 @@ function validateSwagger(swagger, source) {
       relativeBase.pop();
       relativeBase = relativeBase.join('/');
       // 'relativeBase' is for the released version of sway/json-refs, the latest version uses 'location'
-      spec.jsonRefs = {relativeBase: relativeBase, location: source, loaderOptions: {processContent:
+      spec.jsonRefs = {relativeBase: relativeBase, location: source, includeInvalid: true, resolveCirculars: true, loaderOptions: {processContent:
       function (res, cb) {
         cb(undefined, YAML.safeLoad(res.text,{json:true}));
       }
@@ -1116,6 +1120,9 @@ function parseHost(swagger, altSource) {
 
   assert(swHost, 'Missing host');
   assert(!/^localhost/.test(swHost), 'Can not add localhost API');
+  if (swHost === 'raw.githubusercontent.com') {
+    throw new Error('Warning: relative/github host');
+  }
   assert(swHost !== 'raw.githubusercontent.com', 'Missing host + spec hosted on GitHub');
   assert(swHost !== 'virtserver.swaggerhub.com', 'Cannot add swaggerhub mock server API');
   assert(swHost !== 'example.com', 'Cannot add example.com API');

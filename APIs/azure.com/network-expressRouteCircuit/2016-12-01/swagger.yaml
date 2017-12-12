@@ -728,9 +728,7 @@ definitions:
       name:
         description: Gets name of the resource that is unique within a resource group. This name can be used to access the resource.
         type: string
-      properties:
-        $ref: '#/definitions/ExpressRouteCircuitPeeringPropertiesFormat'
-        x-ms-client-flatten: true
+      properties: {}
   ExpressRouteCircuitPeeringConfig:
     description: Specifies the peering configuration.
     properties:
@@ -830,8 +828,125 @@ definitions:
         description: 'Gets the provisioning state of the public IP resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
         type: string
       routeFilter:
-        $ref: './routeFilter.json#/definitions/RouteFilter'
-        description: The reference of the RouteFilter resource.
+        allOf:
+          - properties:
+              id:
+                description: Resource ID.
+                type: string
+              location:
+                description: Resource location.
+                type: string
+              name:
+                description: Resource name.
+                readOnly: true
+                type: string
+              tags:
+                additionalProperties:
+                  type: string
+                description: Resource tags.
+                type: object
+              type:
+                description: Resource type.
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
+        description: Route Filter Resource.
+        properties:
+          etag:
+            description: Gets a unique read-only string that changes whenever the resource is updated.
+            readOnly: true
+            type: string
+          properties:
+            description: Route Filter Resource
+            properties:
+              peerings:
+                description: A collection of references to express route circuit peerings.
+                items:
+                  allOf:
+                    - properties:
+                        id:
+                          description: Resource ID.
+                          type: string
+                      x-ms-azure-resource: true
+                  description: Peering in an ExpressRouteCircuit resource.
+                  properties:
+                    etag:
+                      description: A unique read-only string that changes whenever the resource is updated.
+                      readOnly: true
+                      type: string
+                    name:
+                      description: Gets name of the resource that is unique within a resource group. This name can be used to access the resource.
+                      type: string
+                    properties: {}
+                readOnly: true
+                type: array
+              provisioningState:
+                description: 'The provisioning state of the resource. Possible values are: ''Updating'', ''Deleting'', ''Succeeded'' and ''Failed''.'
+                readOnly: true
+                type: string
+              rules:
+                description: Collection of RouteFilterRules contained within a route filter.
+                items:
+                  allOf:
+                    - properties:
+                        id:
+                          description: Resource ID.
+                          type: string
+                      x-ms-azure-resource: true
+                  description: Route Filter Rule Resource
+                  properties:
+                    etag:
+                      description: A unique read-only string that changes whenever the resource is updated.
+                      readOnly: true
+                      type: string
+                    location:
+                      description: Resource location.
+                      type: string
+                    name:
+                      description: The name of the resource that is unique within a resource group. This name can be used to access the resource.
+                      readOnly: true
+                      type: string
+                    properties:
+                      description: Route Filter Rule Resource
+                      properties:
+                        access:
+                          description: 'The access type of the rule. Valid values are: ''Allow'', ''Deny'''
+                          enum:
+                            - Allow
+                            - Deny
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: Access
+                        communities:
+                          description: 'The collection for bgp community values to filter on. e.g. [''12076:5010'',''12076:5020'']'
+                          items:
+                            type: string
+                          type: array
+                        provisioningState:
+                          description: 'The provisioning state of the resource. Possible values are: ''Updating'', ''Deleting'', ''Succeeded'' and ''Failed''.'
+                          readOnly: true
+                          type: string
+                        routeFilterRuleType:
+                          description: 'The rule type of the rule. Valid value is: ''Community'''
+                          enum:
+                            - Community
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: RouteFilterRuleType
+                      required:
+                        - access
+                        - routeFilterRuleType
+                        - communities
+                    tags:
+                      additionalProperties:
+                        type: string
+                      description: Resource tags.
+                      type: object
+                type: array
+        required:
+          - location
       secondaryAzurePort:
         description: The secondary port.
         type: string
