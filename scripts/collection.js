@@ -970,11 +970,16 @@ function validateSwagger(swagger, source) {
       relativeBase.pop();
       relativeBase = relativeBase.join('/');
       // 'relativeBase' is for the released version of sway/json-refs, the latest version uses 'location'
-      spec.jsonRefs = {relativeBase: relativeBase, location: source, includeInvalid: true, resolveCirculars: true, loaderOptions: {processContent:
-      function (res, cb) {
-        cb(undefined, YAML.safeLoad(res.text,{json:true}));
+      let jsonRefs = {relativeBase: relativeBase, location: source, loaderOptions: {processContent:
+        function (res, cb) {
+          cb(undefined, YAML.safeLoad(res.text,{json:true}));
+        }
+      }};
+      if (source.indexOf('azure.com')>=0) {
+        jsonRefs.includeInvalid = true;
+        jsonRefs.resolveCirculars = true;
       }
-    }};
+      spec.jsonRefs = jsonRefs;
       return spec;
     })
     .then(spec => spec.validate())
