@@ -5685,8 +5685,10 @@ definitions:
         description: 'Specifies the options for MFA (e.g., email or phone number).'
       PreferredMfaSetting:
         $ref: '#/definitions/StringType'
+        description: The user's preferred MFA setting.
       UserMFASettingList:
         $ref: '#/definitions/UserMFASettingListType'
+        description: The list of the user's MFA settings.
     description: Represents the response from the server from the request to get the specified user as an administrator.
   AdminInitiateAuthRequest:
     type: object
@@ -7520,8 +7522,10 @@ definitions:
         description: 'Specifies the options for MFA (e.g., email or phone number).'
       PreferredMfaSetting:
         $ref: '#/definitions/StringType'
+        description: The user's preferred MFA setting.
       UserMFASettingList:
         $ref: '#/definitions/UserMFASettingListType'
+        description: The list of the user's MFA settings.
     description: Represents the response from the server from the request to get information about the user.
   GlobalSignOutRequest:
     type: object
@@ -9506,6 +9510,9 @@ definitions:
       EmailConfigurationFailure:
         $ref: '#/definitions/StringType'
         description: The reason why the email configuration cannot send the messages to your users.
+      Domain:
+        $ref: '#/definitions/DomainType'
+        description: Holds the domain prefix if the user pool has a domain associated with it.
       AdminCreateUserConfig:
         $ref: '#/definitions/AdminCreateUserConfigType'
         description: The configuration for <code>AdminCreateUser</code> requests.

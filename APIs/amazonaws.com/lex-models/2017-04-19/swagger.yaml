@@ -925,7 +925,7 @@ paths:
   '/bots/{botName}/utterances/{userId}':
     delete:
       operationId: DeleteUtterances
-      description: '<p>Deletes stored utterances.</p> <p>Amazon Lex stores the utterances that users send to your bot unless the <code>childDirected</code> field in the bot is set to <code>true</code>. Utterances are stored for 15 days for use with the <a>GetUtterancesView</a> operation, and then stored indefinately for use in improving the ability of your bot to respond to user input.</p> <p>Use the <code>DeleteStoredUtterances</code> operation to manually delete stored utterances for a specific user.</p> <p>This operation requires permissions for the <code>lex:DeleteUtterances</code> action.</p>'
+      description: '<p>Deletes stored utterances.</p> <p>Amazon Lex stores the utterances that users send to your bot unless the <code>childDirected</code> field in the bot is set to <code>true</code>. Utterances are stored for 15 days for use with the <a>GetUtterancesView</a> operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input.</p> <p>Use the <code>DeleteStoredUtterances</code> operation to manually delete stored utterances for a specific user.</p> <p>This operation requires permissions for the <code>lex:DeleteUtterances</code> action.</p>'
       responses:
         '204':
           description: Success
@@ -1792,7 +1792,7 @@ paths:
   '/intents/{name}/versions/$LATEST':
     put:
       operationId: PutIntent
-      description: '<p>Creates an intent or replaces an existing intent.</p> <p>To define the interaction between the user and your bot, you use one or more intents. For a pizza ordering bot, for example, you would create an <code>OrderPizza</code> intent. </p> <p>To create an intent or replace an existing intent, you must provide the following:</p> <ul> <li> <p>Intent name. For example, <code>OrderPizza</code>.</p> </li> <li> <p>Sample utterances. For example, "Can I order a pizza, please." and "I want to order a pizza."</p> </li> <li> <p>Information to be gathered. You specify slot types for the information that your bot will request from the user. You can specify standard slot types, such as a date or a time, or custom slot types such as the size and crust of a pizza.</p> </li> <li> <p>How the intent will be fulfilled. You can provide a Lambda function or configure the intent to return the intent information to the client application. If you use a Lambda function, when all of the intent information is available, Amazon Lex invokes your Lambda function. If you configure your intent to return the intent information to the client application. </p> </li> </ul> <p>You can specify other optional information in the request, such as:</p> <ul> <li> <p>A confirmation prompt to ask the user to confirm an intent. For example, "Shall I order your pizza?"</p> </li> <li> <p>A conclusion statement to send to the user after the intent has been fulfilled. For example, "I placed your pizza order."</p> </li> <li> <p>A follow-up prompt that asks the user for additional activity. For example, asking "Do you want to order a drink with your pizza?"</p> </li> </ul> <p>If you specify an existing intent name to update the intent, Amazon Lex replaces the values in the <code>$LATEST</code> version of the slot type with the values in the request. Amazon Lex removes fields that you don''t provide in the request. If you don''t specify the required fields, Amazon Lex throws an exception.</p> <p>For more information, see <a>how-it-works</a>.</p> <p>This operation requires permissions for the <code>lex:PutIntent</code> action.</p>'
+      description: '<p>Creates an intent or replaces an existing intent.</p> <p>To define the interaction between the user and your bot, you use one or more intents. For a pizza ordering bot, for example, you would create an <code>OrderPizza</code> intent. </p> <p>To create an intent or replace an existing intent, you must provide the following:</p> <ul> <li> <p>Intent name. For example, <code>OrderPizza</code>.</p> </li> <li> <p>Sample utterances. For example, "Can I order a pizza, please." and "I want to order a pizza."</p> </li> <li> <p>Information to be gathered. You specify slot types for the information that your bot will request from the user. You can specify standard slot types, such as a date or a time, or custom slot types such as the size and crust of a pizza.</p> </li> <li> <p>How the intent will be fulfilled. You can provide a Lambda function or configure the intent to return the intent information to the client application. If you use a Lambda function, when all of the intent information is available, Amazon Lex invokes your Lambda function. If you configure your intent to return the intent information to the client application. </p> </li> </ul> <p>You can specify other optional information in the request, such as:</p> <ul> <li> <p>A confirmation prompt to ask the user to confirm an intent. For example, "Shall I order your pizza?"</p> </li> <li> <p>A conclusion statement to send to the user after the intent has been fulfilled. For example, "I placed your pizza order."</p> </li> <li> <p>A follow-up prompt that asks the user for additional activity. For example, asking "Do you want to order a drink with your pizza?"</p> </li> </ul> <p>If you specify an existing intent name to update the intent, Amazon Lex replaces the values in the <code>$LATEST</code> version of the intent with the values in the request. Amazon Lex removes fields that you don''t provide in the request. If you don''t specify the required fields, Amazon Lex throws an exception. When you update the <code>$LATEST</code> version of an intent, the <code>status</code> field of any bot that uses the <code>$LATEST</code> version of the intent is set to <code>NOT_BUILT</code>.</p> <p>For more information, see <a>how-it-works</a>.</p> <p>This operation requires permissions for the <code>lex:PutIntent</code> action.</p>'
       responses:
         '200':
           description: Success
@@ -1845,7 +1845,7 @@ paths:
   '/slottypes/{name}/versions/$LATEST':
     put:
       operationId: PutSlotType
-      description: '<p>Creates a custom slot type or replaces an existing custom slot type.</p> <p>To create a custom slot type, specify a name for the slot type and a set of enumeration values, which are the values that a slot of this type can assume. For more information, see <a>how-it-works</a>.</p> <p>If you specify the name of an existing slot type, the fields in the request replace the existing values in the <code>$LATEST</code> version of the slot type. Amazon Lex removes the fields that you don''t provide in the request. If you don''t specify required fields, Amazon Lex throws an exception.</p> <p>This operation requires permissions for the <code>lex:PutSlotType</code> action.</p>'
+      description: '<p>Creates a custom slot type or replaces an existing custom slot type.</p> <p>To create a custom slot type, specify a name for the slot type and a set of enumeration values, which are the values that a slot of this type can assume. For more information, see <a>how-it-works</a>.</p> <p>If you specify the name of an existing slot type, the fields in the request replace the existing values in the <code>$LATEST</code> version of the slot type. Amazon Lex removes the fields that you don''t provide in the request. If you don''t specify required fields, Amazon Lex throws an exception. When you update the <code>$LATEST</code> version of a slot type, if a bot uses the <code>$LATEST</code> version of an intent that contains the slot type, the bot''s <code>status</code> field is set to <code>NOT_BUILT</code>.</p> <p>This operation requires permissions for the <code>lex:PutSlotType</code> action.</p>'
       responses:
         '200':
           description: Success
@@ -1898,12 +1898,12 @@ paths:
 definitions:
   AliasName:
     type: string
-    pattern: '^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
+    pattern: '^([A-Za-z]_?)+$'
     minLength: 1
     maxLength: 100
   AliasNameOrListAll:
     type: string
-    pattern: '^(-|^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*))$'
+    pattern: '^(-|^([A-Za-z]_?)+$)$'
     minLength: 1
     maxLength: 100
   BadRequestException:
@@ -1967,6 +1967,12 @@ definitions:
       botConfiguration:
         $ref: '#/definitions/ChannelConfigurationMap'
         description: 'Provides information necessary to communicate with the messaging platform. '
+      status:
+        $ref: '#/definitions/ChannelStatus'
+        description: '<p>The status of the bot channel. </p> <ul> <li> <p> <code>CREATED</code> - The channel has been created and is ready for use.</p> </li> <li> <p> <code>IN_PROGRESS</code> - Channel creation is in progress.</p> </li> <li> <p> <code>FAILED</code> - There was an error creating the channel. For information about the reason for the failure, see the <code>failureReason</code> field.</p> </li> </ul>'
+      failureReason:
+        $ref: '#/definitions/String'
+        description: 'If <code>status</code> is <code>FAILED</code>, Amazon Lex provides the reason that it failed to create the association.'
     description: Represents an association between an Amazon Lex bot and an external messaging platform.
   BotChannelAssociationList:
     type: array
@@ -1974,7 +1980,7 @@ definitions:
       $ref: '#/definitions/BotChannelAssociation'
   BotChannelName:
     type: string
-    pattern: '^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
+    pattern: '^([A-Za-z]_?)+$'
     minLength: 1
     maxLength: 100
   BotMetadata:
@@ -2005,7 +2011,7 @@ definitions:
       $ref: '#/definitions/BotMetadata'
   BotName:
     type: string
-    pattern: '^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
+    pattern: '^([A-Za-z]_?)+$'
     minLength: 2
     maxLength: 50
   BotVersions:
@@ -2068,6 +2074,12 @@ definitions:
           $ref: '#/definitions/String'
         value:
           $ref: '#/definitions/String'
+  ChannelStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - CREATED
+      - FAILED
   ChannelType:
     type: string
     enum:
@@ -2247,7 +2259,7 @@ definitions:
         description: 'The strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.'
   CustomOrBuiltinSlotTypeName:
     type: string
-    pattern: '^([a-zA-Z]|AMAZON.)+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
+    pattern: '^((AMAZON\.)_?|[A-Za-z]_?)+'
     minLength: 1
     maxLength: 100
   DeleteBotAliasRequest:
@@ -2405,6 +2417,12 @@ definitions:
       botConfiguration:
         $ref: '#/definitions/ChannelConfigurationMap'
         description: Provides information that the messaging platform needs to communicate with the Amazon Lex bot.
+      status:
+        $ref: '#/definitions/ChannelStatus'
+        description: '<p>The status of the bot channel. </p> <ul> <li> <p> <code>CREATED</code> - The channel has been created and is ready for use.</p> </li> <li> <p> <code>IN_PROGRESS</code> - Channel creation is in progress.</p> </li> <li> <p> <code>FAILED</code> - There was an error creating the channel. For information about the reason for the failure, see the <code>failureReason</code> field.</p> </li> </ul>'
+      failureReason:
+        $ref: '#/definitions/String'
+        description: 'If <code>status</code> is <code>FAILED</code>, Amazon Lex provides the reason that it failed to create the association.'
   GetBotChannelAssociationsRequest:
     type: object
     properties: {}
@@ -2912,7 +2930,7 @@ definitions:
       $ref: '#/definitions/IntentMetadata'
   IntentName:
     type: string
-    pattern: '^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
+    pattern: '^([A-Za-z]_?)+$'
     minLength: 1
     maxLength: 100
   IntentUtteranceList:
@@ -3596,7 +3614,7 @@ definitions:
     maxItems: 100
   SlotName:
     type: string
-    pattern: '^[a-zA-Z]+(((_|.)[a-zA-Z]+)*|([a-zA-Z]+(_|.))*|(_|.))'
+    pattern: '^([A-Za-z](-|_|.)?)+$'
     minLength: 1
     maxLength: 100
   SlotTypeMetadata:
@@ -3624,7 +3642,7 @@ definitions:
       $ref: '#/definitions/SlotTypeMetadata'
   SlotTypeName:
     type: string
-    pattern: '^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
+    pattern: '^([A-Za-z]_?)+$'
     minLength: 1
     maxLength: 100
   SlotUtteranceList:
