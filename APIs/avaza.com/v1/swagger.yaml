@@ -748,7 +748,7 @@ paths:
           format: int32
           in: query
           name: ProjectID
-          required: true
+          required: false
           type: integer
       responses:
         '200':
@@ -1026,10 +1026,11 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: You can Mark a Timesheet as Invoiced/Uninvoiced. Useful if invoicing in an external system to lock timesheets. Note if the timesheet has been invoiced by Avaza you cannot mark it uninvoiced
+      description: Expects a full set of updated values for the timesheet
       operationId: Timesheet_Put
       parameters:
-        - in: body
+        - description: ''
+          in: body
           name: model
           required: true
           schema:
@@ -1207,6 +1208,9 @@ paths:
 definitions:
   AccountDetails:
     properties:
+      AccountID:
+        format: int32
+        type: integer
       CompanyName:
         type: string
       LockApprovedTimesheets:

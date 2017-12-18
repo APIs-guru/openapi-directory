@@ -90,7 +90,7 @@ securityDefinitions:
 parameters:
   acceptEncodingOptionalParameter:
     collectionFormat: csv
-    description: Allows the client to indicate wether it accepts a compressed encoding to reduce traffic size.
+    description: Allows the client to indicate whether it accepts a compressed encoding to reduce traffic size.
     in: header
     items:
       type: string
@@ -99,7 +99,7 @@ parameters:
     type: array
   acceptEncodingRequiredParameter:
     collectionFormat: csv
-    description: Allows the client to indicate wether it accepts a compressed encoding to reduce traffic size.
+    description: Allows the client to indicate whether it accepts a compressed encoding to reduce traffic size.
     in: header
     items:
       type: string
@@ -775,6 +775,35 @@ paths:
       summary: Get the Analytics API operation index for one store
       tags:
         - Analytics - Global
+  '/user/analytics/{storeId}/optimisations/all/{actionName}':
+    post:
+      description: |
+        /!\ WARNING /!\ \
+        Apply the operation on every product related to this request. \
+        This operation is used at the bottom of the analytics page result.
+      operationId: OptimiseAll
+      parameters:
+        - $ref: '#/parameters/storeIdOnlyGeneralParameters'
+        - $ref: '#/parameters/optimisationActionNameGeneralParameters'
+        - in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/optimiseAllRequest'
+      responses:
+        '204':
+          description: Products optimisatized
+        '400':
+          $ref: '#/responses/BadRequestResponse'
+        '404':
+          $ref: '#/responses/StoreNotFoundResponse'
+        default:
+          $ref: '#/responses/GeneralError'
+      security:
+        - api_key: []
+      summary: Optimise all products
+      tags:
+        - Analytics - Optimisations
   '/user/analytics/{storeId}/optimisations/bycategory/{catalogCategoryId}/{actionName}':
     post:
       description: |
@@ -815,7 +844,7 @@ paths:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
-      summary: Optimise products's category
+      summary: Optimise products by category
       tags:
         - Analytics - Optimisations
   '/user/analytics/{storeId}/optimisations/bychannel/{channelId}/{actionName}':
@@ -844,7 +873,7 @@ paths:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
-      summary: Optimise products's category
+      summary: Optimise products by channel
       tags:
         - Analytics - Optimisations
   '/user/analytics/{storeId}/optimisations/byproduct/{productId}/{actionName}':
@@ -887,7 +916,7 @@ paths:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
-      summary: Optimise products
+      summary: Optimise product
       tags:
         - Analytics - Optimisations
   '/user/analytics/{storeId}/optimisations/copy':
@@ -911,7 +940,7 @@ paths:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
-      summary: Copy products optimisation between 2 channels
+      summary: Copy product optimisations between 2 channels
       tags:
         - Analytics - Optimisations
   '/user/analytics/{storeId}/optimisations/{actionName}':
@@ -940,7 +969,7 @@ paths:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
-      summary: Optimise products
+      summary: Optimise products by page
       tags:
         - Analytics - Optimisations
   '/user/analytics/{storeId}/reports/bycategory':
@@ -5350,7 +5379,7 @@ definitions:
         $ref: '#/definitions/BeezUP.Common.ProductFilterOperatorName'
       values:
         description: |
-          Must be null if the operator is "IsNull" or "IsNotNull". 
+          Must be null if the operator is "IsNull" or "IsNotNull".
           Can contains multiple value in case of "InList" operator. Otherwise a single value is expected.
         example:
           - My value
@@ -11127,6 +11156,50 @@ definitions:
       - example:
           href: /v2/user/analytics/10af9486-e28e-47ab-b045-e13e4acd55c3/rules/c38006b4-29d0-4b8a-978b-701a0b12d5a8/moveup
           method: POST
+  links.OptimiseAllLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/analytics/8f95eb1a-3691-4750-950d-a13c4a8a9bcc/optimisations/all/enable
+          method: POST
+          parameters:
+            request:
+              in: body
+              schema: optimiseAllRequest
+              type: object
+              value:
+                advancedFilters:
+                  globalmarginPercent: 10
+                  linkClickToOrderMaxDay: 5
+                  linkClickToOrderType: OnClickDate
+                  marginType: Global
+                  onlyDirectSales: true
+                  onlyPaymentValidatedOrders: true
+                  performanceIndicatorFormula:
+                    firstParameter: Cost
+                    operatorName: Multiply
+                    secondParamter: ROI
+                    thirdParameter: 100
+                beginPeriodUtcDate: '2006-11-20T00:00:00Z'
+                categoryFilter:
+                  categoryPath:
+                    - Home
+                    - Bedroom
+                channelId: 2dc136a7-0d3d-4cc9-a825-a28a42c53e28
+                endPeriodUtcDate: '2006-12-20T00:00:00Z'
+                indicatorFilters:
+                  - indicator: Cost
+                    operatorName: Equals
+                    value: 10.42
+                productFilters:
+                  additionalProductFilters:
+                    - columnId: 672644c7-5bd0-4e25-88c1-1f732bda5e4c
+                      operatorName: GreaterTo
+                      values:
+                        - 100
+                  sku: M1234
+                  title: RefrigÃ©rateur
+                productState: All
   links.OptimiseByCategoryLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -11179,7 +11252,7 @@ definitions:
                   performanceIndicatorFormula:
                     firstParameter: Cost
                     operatorName: Multiply
-                    secondParamter: Turnover
+                    secondParamter: ROI
                     thirdParameter: 100
                 beginPeriodUtcDate: '2006-11-20T00:00:00Z'
                 categoryFilter:
@@ -11767,9 +11840,24 @@ definitions:
       - disable
     example: reenable
     type: string
-  optimiseRequest:
+  optimiseAllRequest:
     allOf:
       - $ref: '#/definitions/reportFilterCommonParameters'
+      - properties:
+          productColumnsToDisplay:
+            $ref: '#/definitions/productColumnsToDisplay'
+          productFilters:
+            $ref: '#/definitions/BeezUP.Common.ProductFilters'
+          productState:
+            $ref: '#/definitions/productStateFilter'
+          reportType:
+            $ref: '#/definitions/reportType'
+        required:
+          - reportType
+        type: object
+  optimiseRequest:
+    allOf:
+      - $ref: '#/definitions/optimiseAllRequest'
       - $ref: '#/definitions/paginationRequestParameters'
       - properties:
           productFilters:
@@ -12666,7 +12754,7 @@ definitions:
     example:
       firstParameter: Cost
       operatorName: Multiply
-      secondParamter: Turnover
+      secondParamter: ROI
       thirdParameter: 100
     properties:
       firstParameter:
@@ -12691,9 +12779,9 @@ definitions:
     description: Indicate on which indicator or value you want to make your formula
     enum:
       - Cost
-      - Turnover
+      - TotalSales
       - Margin
-      - TunoverMinusCost
+      - TotalSalesMinusCost
       - MarginMinusCost
       - OrderCount
       - ClickCount
@@ -12705,11 +12793,12 @@ definitions:
     description: Indicate on which indicator or value you want to make your formula
     enum:
       - Cost
-      - Turnover
+      - TotalSales
       - Margin
       - OrderCount
       - ClickCount
-      - TotalSales
+      - ROI
+      - ProductCount
       - SoldProductCount
       - DisabledProductCount
       - EnabledProductCount
@@ -13298,6 +13387,10 @@ definitions:
         description: The performance indicator based on the performance indicator formula indicated in the request for this category
         example: 25.33
         type: number
+      roi:
+        description: The Return On Investment for this category
+        example: 25.33
+        type: number
       soldProductCount:
         description: The product sold count count for this category
         example: 2
@@ -13306,10 +13399,6 @@ definitions:
         description: The total sales related to this category
         example: 234.42
         type: number
-      turnover:
-        description: The Turnover for this category
-        example: 25.33
-        type: number
     required:
       - catalogCategoryId
       - enabledProductCount
@@ -13317,7 +13406,7 @@ definitions:
       - clickCount
       - cost
       - orderCount
-      - turnover
+      - roi
       - margin
       - performanceIndicator
       - totalSales
@@ -13385,6 +13474,10 @@ definitions:
         description: The performance indicator based on the performance indicator formula indicated in the request for this channel
         example: 12.21
         type: number
+      roi:
+        description: The Return On Investment for this channel
+        example: 42.42
+        type: number
       soldProductCount:
         description: The product sold count count for this channel
         example: 2
@@ -13393,10 +13486,6 @@ definitions:
         description: The total sales related to this channel
         example: 234.42
         type: number
-      turnover:
-        description: The Turnover for this channel
-        example: 42.42
-        type: number
     required:
       - channel
       - enabledProductCount
@@ -13404,7 +13493,7 @@ definitions:
       - clickCount
       - cost
       - orderCount
-      - turnover
+      - roi
       - margin
       - performanceIndicator
       - totalSales
@@ -13446,8 +13535,12 @@ definitions:
   reportByCommonResponseLinks:
     properties:
       disableAllProducts:
+        $ref: '#/definitions/links.OptimiseAllLink'
+      disableProducts:
         $ref: '#/definitions/links.OptimiseLink'
       enableAllProducts:
+        $ref: '#/definitions/links.OptimiseAllLink'
+      enableProducts:
         $ref: '#/definitions/links.OptimiseLink'
     type: object
   reportByDay:
@@ -13489,6 +13582,10 @@ definitions:
         description: The performance indicator based on the performance indicator formula indicated in the request for this day and all channels
         example: 23.09
         type: number
+      roi:
+        description: The Return On Investment for this day and all channels
+        example: 23.11
+        type: number
       soldProductCount:
         description: The product sold count count for this day and all channels
         example: 2
@@ -13497,15 +13594,11 @@ definitions:
         description: The total sales related to this day and all channels
         example: 234.42
         type: number
-      turnover:
-        description: The Turnover for this day and all channels
-        example: 23.11
-        type: number
     required:
       - clickCount
       - cost
       - orderCount
-      - turnover
+      - roi
       - margin
       - performanceIndicator
       - totalSales
@@ -13535,6 +13628,10 @@ definitions:
         description: The performance indicator based on the performance indicator formula indicated in the request for this day and this channel
         example: 23.09
         type: number
+      roi:
+        description: The Return On Investment for this day and this channel
+        example: 23.11
+        type: number
       soldProductCount:
         description: The product sold count count for this day and this channel
         example: 2
@@ -13543,16 +13640,12 @@ definitions:
         description: The total sales related to this day and this channel
         example: 234.42
         type: number
-      turnover:
-        description: The Turnover for this day and this channel
-        example: 23.11
-        type: number
     required:
       - channel
       - clickCount
       - cost
       - orderCount
-      - turnover
+      - roi
       - margin
       - performanceIndicator
       - totalSales
@@ -13638,6 +13731,10 @@ definitions:
         type: number
       product:
         $ref: '#/definitions/BeezUP.Common.ProductBasicInfo'
+      roi:
+        description: The Return On Investment for this product
+        example: 42.01
+        type: number
       soldProductCount:
         description: The product sold count count for this product
         example: 2
@@ -13646,10 +13743,6 @@ definitions:
         description: The total sales related to this product
         example: 234.42
         type: number
-      turnover:
-        description: The Turnover for this product
-        example: 42.01
-        type: number
     required:
       - product
       - enabledOnChannelCount
@@ -13657,7 +13750,7 @@ definitions:
       - clickCount
       - cost
       - orderCount
-      - turnover
+      - roi
       - margin
       - performanceIndicator
       - totalSales
@@ -13685,10 +13778,16 @@ definitions:
   reportByProductOneChannelLinks:
     description: If the report concerned one product for one channel the channel catalog product info will give you all you need to enable or disable the product.
     properties:
+      disableProductForOneChannel:
+        $ref: '#/definitions/links.OptimiseByProductLink'
+      enableProductForOneChannel:
+        $ref: '#/definitions/links.OptimiseByProductLink'
       productInfo:
         $ref: '#/definitions/links.GetChannelCatalogProductInfoLink'
     required:
       - productInfo
+      - enableProductForOneChannel
+      - disableProductForOneChannel
     type: object
   reportByProductRequest:
     allOf:

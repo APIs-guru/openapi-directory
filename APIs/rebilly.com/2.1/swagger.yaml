@@ -1563,7 +1563,7 @@ paths:
         Deactivate a Bank Account
       responses:
         '201':
-          description: Deactivated successful
+          description: Deactivated successfully
           headers:
             Rate-Limit-Limit:
               description: The number of allowed requests in the current period
@@ -1580,10 +1580,8 @@ paths:
             $ref: '#/definitions/BankAccount'
         '401':
           $ref: '#/responses/AccessForbidden'
-        '422':
-          description: Invalid data was sent
-          schema:
-            $ref: '#/definitions/InvalidError'
+        '404':
+          $ref: '#/responses/NotFound'
       summary: Deactivate a Bank Account
       tags:
         - Bank Accounts
@@ -5182,6 +5180,72 @@ paths:
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
+  '/gateway-accounts/{id}/disable':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: |
+        Disable a gateway account with specified identifier string.
+        Disabled gateway accounts have their "status" attribute set to "inactive" and cannot process transactions.
+      responses:
+        '201':
+          description: Disabled successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/GatewayAccount'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '409':
+          description: Gateway account is pending activation and cannot be disabled.
+      summary: Disable a Gateway Account
+      tags:
+        - Gateway Accounts
+  '/gateway-accounts/{id}/enable':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: |
+        Enable a gateway account with specified identifier string.
+        Enabled gateway accounts have their "status" attribute set to "active" and can process transactions.
+      responses:
+        '201':
+          description: Enabled successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/GatewayAccount'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '409':
+          description: Gateway account is pending activation and cannot be enabled.
+      summary: Enable a Gateway Account
+      tags:
+        - Gateway Accounts
   /invoices:
     get:
       description: |
@@ -10409,60 +10473,6 @@ paths:
         - Tracking
     parameters:
       - $ref: '#/parameters/resourceId'
-  /tracking/website-webhooks:
-    get:
-      parameters:
-        - $ref: '#/parameters/collectionLimit'
-        - $ref: '#/parameters/collectionOffset'
-      responses:
-        '200':
-          description: Tracking webhook notifications was retrieved successfully
-          headers:
-            Pagination-Limit:
-              description: Items per page limit
-              type: integer
-            Pagination-Offset:
-              description: Pagination offset
-              type: integer
-            Pagination-Total:
-              description: Total items count
-              type: integer
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            items:
-              $ref: '#/definitions/WebsiteWebhookTracking'
-            type: array
-        '401':
-          $ref: '#/responses/AccessForbidden'
-      summary: Retrieve a list of tracking webhook notifications
-      tags:
-        - Tracking
-  '/tracking/website-webhooks/{id}':
-    get:
-      responses:
-        '200':
-          description: Tracking webhook notification was retrieved successfully
-          schema:
-            $ref: '#/definitions/WebsiteWebhookTracking'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieve a tracking webhook notification with specified identifier string
-      tags:
-        - Tracking
-    parameters:
-      - $ref: '#/parameters/resourceId'
   /transactions:
     get:
       description: |
@@ -11584,96 +11594,6 @@ paths:
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
-  '/websites/{id}/webhook':
-    delete:
-      description: |
-        Delete a webhook that belongs to a website with predefined ID
-      responses:
-        '204':
-          description: Webhook was deleted
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Delete a webhook
-      tags:
-        - Websites
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $client->websiteWebhook()->delete('websiteId');
-    get:
-      description: |
-        Retrieve a webhook for website with specified identifier string
-      responses:
-        '200':
-          description: Webhook was retrieved successfully
-          schema:
-            $ref: '#/definitions/WebsiteWebhook'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Retrieve a webhook for website
-      tags:
-        - Websites
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $websiteWebhook = $client->websiteWebhook()->load('websiteId');
-    parameters:
-      - $ref: '#/parameters/resourceId'
-    put:
-      description: |
-        Create or update a webhook for website with predefined identifier string
-      parameters:
-        - description: Webhook resource
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/WebsiteWebhook'
-      responses:
-        '200':
-          description: Webhook was updated
-          schema:
-            $ref: '#/definitions/WebsiteWebhook'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-        '422':
-          description: Invalid data was sent
-          schema:
-            $ref: '#/definitions/InvalidError'
-      summary: Create or update a webhook for website with predefined ID
-      tags:
-        - Websites
-      x-code-samples:
-        - lang: PHP
-          source: |
-            $websiteWebhookForm = new Rebilly\Entities\WebsiteWebhook();
-            $websiteWebhookForm->setWebHookUrl('http://testwebsite.com/webhook');
-            $websiteWebhookForm->setWebHookUsername('test');
-            $websiteWebhookForm->setWebHookPassword('1234');
-
-            try {
-                $website = $client->websiteWebhook()->update('websiteId', $websiteWebhookForm);
-            } catch (UnprocessableEntityException $e) {
-                echo $e->getMessage();
-            }
 definitions:
   A1Gateway:
     allOf:
@@ -11716,6 +11636,7 @@ definitions:
     enum:
       - Alipay
       - AIB
+      - AstroPay Card
       - B+S
       - Bank of America
       - Bank of Moscow
@@ -11971,6 +11892,33 @@ definitions:
     required:
       - rel
     type: object
+  AstroPayCard:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            description: AstroPay Card credentials object
+            properties:
+              secret_key:
+                description: AstroPay Card secret key
+                format: password
+                type: string
+              x_login:
+                description: AstroPay Card login
+                type: string
+              x_tran_key:
+                description: AstroPay Card transaction key
+                format: password
+                type: string
+            required:
+              - x_login
+              - x_tran_key
+              - secret_key
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: AstroPay Card config
   Attachment:
     properties:
       _links:
@@ -13788,6 +13736,7 @@ definitions:
     enum:
       - A1Gateway
       - AmexVPC
+      - AstroPayCard
       - AuthorizeNet
       - Beanstream
       - BraintreePayments
@@ -15187,6 +15136,7 @@ definitions:
           - Switch
           - Laser
           - China UnionPay
+          - AstroPay Card
         readOnly: true
         type: string
       createdTime:
@@ -17799,22 +17749,6 @@ definitions:
         type: string
     required:
       - rel
-    type: object
-  WebsiteWebhook:
-    properties:
-      webHookPassword:
-        description: Webhook HTTP Authentication Password. An empty string will be returned in the response
-        type: string
-      webHookUrl:
-        description: Webhook Url
-        type: string
-      webHookUsername:
-        description: Webhook HTTP Authentication Username
-        type: string
-    required:
-      - webHookUrl
-      - webHookUsername
-      - webHookPassword
     type: object
   WebsiteWebhookTracking:
     description: Webhook Tracking Requests.

@@ -6102,14 +6102,15 @@ definitions:
         type: integer
     type: object
   NumberList:
+    allOf:
+      - $ref: '#/definitions/ItemList'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/Number'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/Number'
-        type: array
-    type: object
   NumberOrder:
     description: Represents an order created on the CallFire platform
     properties:
@@ -6669,14 +6670,15 @@ definitions:
         type: integer
     type: object
   TextList:
+    allOf:
+      - $ref: '#/definitions/ItemList'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/Text'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/Text'
-        type: array
-    type: object
   TextPage:
     description: '~'
     properties:

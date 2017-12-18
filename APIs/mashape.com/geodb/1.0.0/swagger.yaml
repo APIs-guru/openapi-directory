@@ -41,7 +41,7 @@ tags:
 paths:
   /v1/geo/cities:
     get:
-      description: 'Get cities, filtering by optional criteria. If no criteria are set, you will get back all known cities with a population of at least 1000. (Currently over 115,000.) If countryCode is specified, the country info will be omitted in the response.'
+      description: 'Find cities, filtering by optional criteria. If no criteria are set, you will get back all known cities with a population of at least 1000. (Currently over 115,000.) If countryCode is specified, the country info will be omitted in the response.'
       operationId: findCitiesUsingGET
       parameters:
         - description: Only cities whose names start with this prefix
@@ -118,7 +118,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: Get cities
+      summary: Find cities
       tags:
         - Geo
   '/v1/geo/cities/{cityId}':
@@ -173,7 +173,7 @@ paths:
         - Geo
   '/v1/geo/cities/{cityId}/distance':
     get:
-      description: Get distance to city
+      description: Get distance to the given city
       operationId: getCityDistanceUsingGET
       parameters:
         - description: cityId
@@ -205,7 +205,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: Get distance to the given city.
+      summary: Get city distance
       tags:
         - Geo
   '/v1/geo/cities/{cityId}/nearbyCities':
@@ -268,7 +268,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: 'Get cities near the given city, filtering by optional criteria.'
+      summary: 'Find cities near the given city, filtering by optional criteria.'
       tags:
         - Geo
   '/v1/geo/cities/{cityId}/time':
@@ -298,7 +298,7 @@ paths:
         - Geo
   /v1/geo/countries:
     get:
-      description: 'Get countries, filtering by optional criteria. If no criteria are set, you will get back all known countries.'
+      description: 'Find countries, filtering by optional criteria. If no criteria are set, you will get back all known countries.'
       operationId: getCountriesUsingGET
       parameters:
         - description: Only countries supporting this currency
@@ -331,7 +331,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: Get countries
+      summary: Find countries
       tags:
         - Geo
   '/v1/geo/countries/{countryCode}':
@@ -393,7 +393,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: Get country regions
+      summary: Find country regions
       tags:
         - Geo
   '/v1/geo/countries/{countryCode}/regions/{regionCode}':
@@ -477,12 +477,12 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: Get country region cities
+      summary: Find country region cities
       tags:
         - Geo
   /v1/locale/currencies:
     get:
-      description: 'Get currencies, filtering by optional criteria. If no criteria are set, you will get back all known currencies.'
+      description: 'Find currencies, filtering by optional criteria. If no criteria are set, you will get back all known currencies.'
       operationId: getCurrenciesUsingGET
       parameters:
         - description: Only currencies supported by this country
@@ -515,7 +515,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: Get currencies
+      summary: Find currencies
       tags:
         - Locale
   /v1/locale/locales:
@@ -553,7 +553,7 @@ paths:
         - Locale
   /v1/locale/timezones:
     get:
-      description: Get available timezones
+      description: Get all known time-zones
       operationId: getTimezonesUsingGET
       parameters:
         - default: 10
@@ -581,7 +581,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: Get available timezones
+      summary: Get time-zones
       tags:
         - Locale
   '/v1/locale/timezones/{zoneId}/dateTime':

@@ -1708,6 +1708,15 @@ definitions:
       - add_on_features
       - features_to_update
     type: object
+  BqlDryRun:
+    properties:
+      error:
+        type: object
+      query:
+        type: string
+    required:
+      - query
+    type: object
   CheckExternalStorageAccess:
     properties:
       access_ok:

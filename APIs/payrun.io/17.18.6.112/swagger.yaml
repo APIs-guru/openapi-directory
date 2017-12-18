@@ -8,7 +8,7 @@ info:
     x-twitter: PayRun_io
   description: 'Open, scableable, transparent payroll API.'
   title: PayRun.IO
-  version: 17.18.6.71
+  version: 17.18.6.112
   x-apisguru-categories:
     - financial
   x-logo:
@@ -7597,6 +7597,91 @@ paths:
       summary: Runs the specified report definition
       tags:
         - Reports
+  /ReportTransform:
+    get:
+      description: Transforms the report data into a speicifed output format based on the report transform definition.
+      operationId: GetReportTransform
+      parameters:
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The result of the transform execution
+          schema:
+            type: file
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Transforms the report into new output format.
+      tags:
+        - Reports
+    post:
+      description: Transforms the report data into a speicifed output format based on the report transform definition.
+      operationId: PostReportTransform
+      parameters:
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The result of the transform execution
+          schema:
+            type: file
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Transforms the report into new output format.
+      tags:
+        - Reports
   /Reports:
     get:
       description: Get links to all saved report definitions under authorised application
@@ -12117,6 +12202,243 @@ paths:
       summary: Gets the tax YTD pay instruction template
       tags:
         - Templates
+  '/Transform/{TransformDefinitionId}':
+    delete:
+      description: Delete the specified transform definition
+      operationId: DeleteTransformDefinition
+      parameters:
+        - description: The transform definition unique identifier.
+          in: path
+          name: TransformDefinitionId
+          required: true
+          type: string
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Deletes a transform definition
+      tags:
+        - Reports
+    get:
+      description: Returns the specified transform definition from the authroised application
+      operationId: GetTransformDefinitionFromApplication
+      parameters:
+        - description: The transform definition unique identifier.
+          in: path
+          name: TransformDefinitionId
+          required: true
+          type: string
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The transform definition object.
+          schema:
+            $ref: '#/definitions/TransformDefinition'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Get the transform definition
+      tags:
+        - Reports
+    put:
+      description: Updates the existing specified transform definition object
+      operationId: PutTransformDefinition
+      parameters:
+        - description: The transform definition unique identifier.
+          in: path
+          name: TransformDefinitionId
+          required: true
+          type: string
+        - description: The transform definition object to be executed against the report data.
+          in: body
+          name: TransformDefinition
+          required: true
+          schema:
+            $ref: '#/definitions/TransformDefinition'
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The transform definition object.
+          schema:
+            $ref: '#/definitions/TransformDefinition'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Updates a transform definition
+      tags:
+        - Reports
+  /Transforms:
+    get:
+      description: Get links to all saved transform definitions under authorised application
+      operationId: GetTransformDefinitionsFromApplication
+      parameters:
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The link collection object.
+          schema:
+            $ref: '#/definitions/LinkCollection'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Gets all transform definitions
+      tags:
+        - Reports
+    post:
+      description: Creates a new transform defintion object
+      operationId: PostTransformDefinition
+      parameters:
+        - description: The transform definition object to be executed against the report data.
+          in: body
+          name: TransformDefinition
+          required: true
+          schema:
+            $ref: '#/definitions/TransformDefinition'
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '201':
+          description: The link object.
+          schema:
+            $ref: '#/definitions/Link'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Create a new transform definition
+      tags:
+        - Reports
 definitions:
   Commentary:
     properties:
@@ -13393,7 +13715,15 @@ definitions:
                     Condition:
                       description: The entity group's conditions
                       items:
-                        properties: {}
+                        properties:
+                          '@ValueA':
+                            description: The compare condition base's value a
+                            title: '@ValueA'
+                            type: string
+                          '@ValueB':
+                            description: The compare condition base's value b
+                            title: '@ValueB'
+                            type: string
                         type: object
                       title: Condition
                       type: array
@@ -13435,6 +13765,8 @@ definitions:
                               - Variable
                               - VariableSum
                               - VariableAppend
+                              - VariablePrepend
+                              - ElementDatePart
                             title: '@Output'
                             type: string
                         type: object
@@ -13509,7 +13841,15 @@ definitions:
                         Condition:
                           description: The entity group's conditions
                           items:
-                            properties: {}
+                            properties:
+                              '@ValueA':
+                                description: The compare condition base's value a
+                                title: '@ValueA'
+                                type: string
+                              '@ValueB':
+                                description: The compare condition base's value b
+                                title: '@ValueB'
+                                type: string
                             type: object
                           title: Condition
                           type: array
@@ -13551,6 +13891,8 @@ definitions:
                                   - Variable
                                   - VariableSum
                                   - VariableAppend
+                                  - VariablePrepend
+                                  - ElementDatePart
                                 title: '@Output'
                                 type: string
                             type: object
@@ -13882,3 +14224,41 @@ definitions:
     type: object
     xml:
       name: Tag
+  TransformDefinition:
+    properties:
+      TransformDefinition:
+        properties:
+          ContentType:
+            description: The transform definition's content type
+            title: ContentType
+            type: string
+          Definition:
+            description: The transform definition's definition
+            title: Definition
+            type: string
+          DefinitionType:
+            description: The transform definition's definition type
+            title: DefinitionType
+            type: string
+          Readonly:
+            description: The transform definition's readonly
+            title: Readonly
+            type: boolean
+          SupportedReports:
+            description: The transform definition's supported reports
+            title: SupportedReports
+            type: string
+          TaxYear:
+            description: The transform definition's tax year
+            format: int32
+            title: TaxYear
+            type: integer
+          Title:
+            description: The transform definition's title
+            title: Title
+            type: string
+        title: TransformDefinition
+        type: object
+    type: object
+    xml:
+      name: TransformDefinition

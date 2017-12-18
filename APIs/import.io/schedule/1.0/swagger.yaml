@@ -195,6 +195,15 @@ definitions:
       urlListId:
         type: string
     type: object
+  Inputs:
+    properties:
+      Example Input:
+        type: string
+      _url:
+        type: string
+    required:
+      - _url
+    type: object
   ObjectStoreSearchResult:
     properties:
       hits:

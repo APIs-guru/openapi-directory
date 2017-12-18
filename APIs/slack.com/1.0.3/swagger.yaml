@@ -6,7 +6,7 @@ basePath: /api
 info:
   description: 'One way to interact with the Slack platform is its HTTP RPC-based Web API, a collection of methods requiring OAuth 2.0-based user, bot, or workspace tokens blessed with related OAuth scopes.'
   title: Slack
-  version: 1.0.2
+  version: 1.0.3
   x-apisguru-categories:
     - collaboration
     - messaging
@@ -33,6 +33,7 @@ securityDefinitions:
       'channels:read': 'channels:read'
       'channels:write': 'channels:write'
       'chat:write': 'chat:write'
+      'chat:write:bot': Author messages as a bot
       'chat:write:user': 'chat:write:user'
       'conversations:history': 'conversations:history'
       'conversations:read': 'conversations:read'
@@ -71,6 +72,7 @@ securityDefinitions:
       'users.profile:read': 'users.profile:read'
       'users.profile:write': 'users.profile:write'
       'users:read': 'users:read'
+      'users:read.email': 'users:read.email'
       'users:write': 'users:write'
     tokenUrl: 'https://slack.com/api/oauth.access'
     type: oauth2
@@ -248,7 +250,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Typical success response
+          description: Standard success response when used with a user token
           examples:
             application/json:
               ok: true
@@ -263,10 +265,10 @@ paths:
             title: Default success template
             type: object
         default:
-          description: Typical error response
+          description: Standard failure response when trigger_id is invalid
           examples:
             application/json:
-              error: invalid_auth
+              error: invalid_trigger_id
               ok: false
           schema:
             additionalProperties: true
@@ -772,7 +774,6 @@ paths:
                   user: U2147483896
                 - ts: '1358546515.000007'
                   type: something_else
-                  wibblr: true
                 - attachments:
                     - fallback: This is an attachment fallback
                       id: 1
@@ -1946,7 +1947,8 @@ paths:
             type: object
       security:
         - slackAuth:
-            - 'chat:write'
+            - 'chat:write:user'
+            - 'chat:write:bot'
       tags:
         - chat
   /chat.getPermalink:
@@ -1976,9 +1978,9 @@ paths:
           description: Standard success response
           examples:
             application/json:
-              channel: C1H9RESGL
+              channel: C1H9RESGA
               ok: true
-              permalink: 'https://ghostbusters.slack.com/archives/C1H9RESGL/p135854651500000'
+              permalink: 'https://ghostbusters.slack.com/archives/C1H9RESGA/p135854651500008'
           schema:
             additionalProperties: true
             description: Schema for successful response chat.getPermalink
@@ -2141,7 +2143,8 @@ paths:
           schema: {}
       security:
         - slackAuth:
-            - 'chat:write'
+            - 'chat:write:user'
+            - 'chat:write:bot'
       tags:
         - chat
   /chat.postMessage:
@@ -2287,7 +2290,8 @@ paths:
             type: object
       security:
         - slackAuth:
-            - 'chat:write'
+            - 'chat:write:user'
+            - 'chat:write:bot'
       tags:
         - chat
   /chat.unfurl:
@@ -2438,7 +2442,8 @@ paths:
           schema: {}
       security:
         - slackAuth:
-            - 'chat:write'
+            - 'chat:write:user'
+            - 'chat:write:bot'
       tags:
         - chat
   /conversations.archive:
@@ -2768,6 +2773,10 @@ paths:
         url: 'https://api.slack.com/methods/conversations.history'
       operationId: conversations_history
       parameters:
+        - description: Include messages with latest or oldest timestamp in results only when either timestamp is specified.
+          in: query
+          name: inclusive
+          type: boolean
         - description: 'Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request''s `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.'
           in: query
           name: cursor
@@ -2800,30 +2809,17 @@ paths:
               has_more: true
               messages:
                 - text: I find you punny and would like to smell your nose letter
-                  ts: '1502126499.221215'
+                  ts: '1512085950.000216'
                   type: message
                   user: U012AB3CDE
-                - attachments:
-                    - fallback: We're withholding a pun from you
-                      from_url: 'https://badpuns.example.com/puns/123'
-                      id: 1
-                      service_icon: 'https://badpuns.example.com/puns.png'
-                      service_name: 'Leg end nary a laugh, Ink.'
-                      text: This is likely a pun about the weather.
-                      thumb_height: 700
-                      thumb_url: 'https://badpuns.example.com/puns/123.png'
-                      thumb_width: 1920
-                      title: 'Leg end nary a laugh, Ink.'
-                      title_link: 'https://badpuns.example.com/puns/123'
-                  text: 'Isn''t this whether dreadful? <https://badpuns.example.com/puns/123>'
-                  ts: '1502126439.218404'
+                - text: 'What, you want to smell my shoes better?'
+                  ts: '1512104434.000490'
                   type: message
                   user: U061F7AUR
               ok: true
               pin_count: 0
               response_metadata:
-                next_cursor: bmV4dF90czoxNTAyMTI2Mzk0MjE2NzEw
-              unread_count_display: 0
+                next_cursor: bmV4dF90czoxNTEyMDg1ODYxMDAwNTQz
           schema:
             additionalProperties: true
             description: Schema for successful response from conversations.history method
@@ -3552,14 +3548,14 @@ paths:
           in: query
           name: token
           type: string
-        - description: Set to `true` to exclude archived channels from the list
-          in: query
-          name: exclude_archived
-          type: boolean
         - description: 'The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn''t been reached. Must be an integer no larger than 1000.'
           in: query
           name: limit
           type: integer
+        - description: Set to `true` to exclude archived channels from the list
+          in: query
+          name: exclude_archived
+          type: boolean
         - description: 'Mix and match channel types by providing a comma-separated list of any combination of `public_channel`, `private_channel`, `mpim`, `im`'
           in: query
           name: types
@@ -4058,7 +4054,11 @@ paths:
         url: 'https://api.slack.com/methods/conversations.replies'
       operationId: conversations_replies
       parameters:
-        - description: Unique identifier of a thread's parent message
+        - description: Include messages with latest or oldest timestamp in results only when either timestamp is specified.
+          in: query
+          name: inclusive
+          type: boolean
+        - description: Unique identifier of a thread's parent message.
           in: query
           name: ts
           type: number
@@ -4074,10 +4074,18 @@ paths:
           in: query
           name: limit
           type: integer
-        - description: Conversation ID to fetch thread from
+        - description: Start of time range of messages to include in results.
+          in: query
+          name: oldest
+          type: number
+        - description: Conversation ID to fetch thread from.
           in: query
           name: channel
           type: string
+        - description: End of time range of messages to include in results.
+          in: query
+          name: latest
+          type: number
       responses:
         '200':
           description: Typical success response
@@ -4578,7 +4586,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Typical success response
+          description: Typical success response is quite minimal.
           examples:
             application/json:
               ok: true
@@ -4593,10 +4601,10 @@ paths:
             title: Default success template
             type: object
         default:
-          description: Typical error response
+          description: 'Typical error response, before getting to any possible validation errors.'
           examples:
             application/json:
-              error: invalid_auth
+              error: missing_trigger
               ok: false
           schema:
             additionalProperties: true
@@ -5036,6 +5044,7 @@ paths:
                   - not_authed
                   - invalid_auth
                   - account_inactive
+                  - no_permission
                   - invalid_arg_name
                   - invalid_array_arg
                   - invalid_charset
@@ -5052,7 +5061,7 @@ paths:
             required:
               - ok
               - error
-            title: files.comments.edit error schema
+            title: files.comments.add error schema
             type: object
       security:
         - slackAuth:
@@ -5116,6 +5125,7 @@ paths:
                   - not_authed
                   - invalid_auth
                   - account_inactive
+                  - no_permission
                   - invalid_arg_name
                   - invalid_array_arg
                   - invalid_charset
@@ -5208,6 +5218,7 @@ paths:
                   - not_authed
                   - invalid_auth
                   - account_inactive
+                  - no_permission
                   - invalid_arg_name
                   - invalid_array_arg
                   - invalid_charset
@@ -5259,13 +5270,13 @@ paths:
               ok: true
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for successful response files.delete method
             properties:
               ok:
                 $ref: '#/definitions/defs_ok_true'
             required:
               - ok
-            title: Default success template
+            title: files.delete schema
             type: object
         default:
           description: Typical error response
@@ -5275,13 +5286,35 @@ paths:
               ok: false
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for error response files.delete method
             properties:
+              error:
+                enum:
+                  - file_not_found
+                  - file_deleted
+                  - cant_delete_file
+                  - not_authed
+                  - invalid_auth
+                  - account_inactive
+                  - no_permission
+                  - invalid_arg_name
+                  - invalid_array_arg
+                  - invalid_charset
+                  - invalid_form_data
+                  - invalid_post_type
+                  - missing_post_type
+                  - team_added_to_org
+                  - invalid_json
+                  - json_not_object
+                  - request_timeout
+                  - upgrade_required
+                type: string
               ok:
-                $ref: '#/definitions/defs_ok_true'
+                $ref: '#/definitions/defs_ok_false'
             required:
               - ok
-            title: Default error template
+              - error
+            title: files.delete error schema
             type: object
       security:
         - slackAuth:
@@ -5343,7 +5376,38 @@ paths:
             application/json:
               error: invalid_auth
               ok: false
-          schema: {}
+          schema:
+            additionalProperties: true
+            description: Schema for error response files.info method
+            properties:
+              error:
+                enum:
+                  - file_not_found
+                  - file_deleted
+                  - timezone_count_failed
+                  - not_authed
+                  - invalid_auth
+                  - account_inactive
+                  - no_permission
+                  - invalid_arg_name
+                  - invalid_array_arg
+                  - invalid_charset
+                  - invalid_form_data
+                  - invalid_post_type
+                  - missing_post_type
+                  - team_added_to_org
+                  - invalid_json
+                  - json_not_object
+                  - request_timeout
+                  - upgrade_required
+                type: string
+              ok:
+                $ref: '#/definitions/defs_ok_false'
+            required:
+              - ok
+              - error
+            title: files.info error schema
+            type: object
       security:
         - slackAuth:
             - 'files:read'
@@ -5599,13 +5663,16 @@ paths:
               ok: true
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for successful response files.upload method
             properties:
+              file:
+                $ref: '#/definitions/objs_file'
               ok:
                 $ref: '#/definitions/defs_ok_true'
             required:
               - ok
-            title: Default success template
+              - file
+            title: files.upload schema
             type: object
         default:
           description: Typical error response
@@ -5615,13 +5682,37 @@ paths:
               ok: false
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for error response files.upload method
             properties:
+              error:
+                enum:
+                  - posting_to_general_channel_denied
+                  - invalid_channel
+                  - file_uploads_disabled
+                  - file_uploads_except_images_disabled
+                  - storage_limit_reached
+                  - not_authed
+                  - invalid_auth
+                  - account_inactive
+                  - no_permission
+                  - invalid_arg_name
+                  - invalid_array_arg
+                  - invalid_charset
+                  - invalid_form_data
+                  - invalid_post_type
+                  - missing_post_type
+                  - team_added_to_org
+                  - invalid_json
+                  - json_not_object
+                  - request_timeout
+                  - upgrade_required
+                type: string
               ok:
-                $ref: '#/definitions/defs_ok_true'
+                $ref: '#/definitions/defs_ok_false'
             required:
               - ok
-            title: Default error template
+              - error
+            title: files.upload error schema
             type: object
       security:
         - slackAuth:
@@ -5873,6 +5964,20 @@ paths:
           description: Typical success response
           examples:
             application/json:
+              has_more: false
+              latest: '1358547726.000003'
+              messages:
+                - text: Hello
+                  ts: '1358546515.000008'
+                  type: message
+                  user: U2147483896
+                - is_starred: true
+                  text: World
+                  ts: '1358546515.000007'
+                  type: message
+                  user: U2147483896
+                - ts: '1358546515.000007'
+                  type: something_else
               ok: true
           schema:
             additionalProperties: true
@@ -5898,7 +6003,7 @@ paths:
           description: Typical error response
           examples:
             application/json:
-              error: invalid_auth
+              error: channel_not_found
               ok: false
           schema:
             additionalProperties: true
@@ -6531,6 +6636,18 @@ paths:
           description: Typical success response
           examples:
             application/json:
+              messages:
+                - text: Hello
+                  ts: '1358546515.000008'
+                  type: message
+                  user: U2147483896
+                - is_starred: true
+                  text: World
+                  ts: '1358546515.000007'
+                  type: message
+                  user: U2147483896
+                - ts: '1358546515.000007'
+                  type: something_else
               ok: true
           schema:
             additionalProperties: true
@@ -6546,7 +6663,7 @@ paths:
           description: Typical error response
           examples:
             application/json:
-              error: invalid_auth
+              error: channel_not_found
               ok: false
           schema:
             additionalProperties: true
@@ -6838,6 +6955,20 @@ paths:
           description: Typical success response
           examples:
             application/json:
+              has_more: false
+              latest: '1358547726.000003'
+              messages:
+                - text: Hello
+                  ts: '1358546515.000008'
+                  type: message
+                  user: U2147483896
+                - is_starred: true
+                  text: World
+                  ts: '1358546515.000007'
+                  type: message
+                  user: U2147483896
+                - ts: '1358546515.000007'
+                  type: something_else
               ok: true
           schema:
             additionalProperties: true
@@ -6863,7 +6994,7 @@ paths:
           description: Typical error response
           examples:
             application/json:
-              error: invalid_auth
+              error: channel_not_found
               ok: false
           schema:
             additionalProperties: true
@@ -7256,6 +7387,18 @@ paths:
           description: Typical success response
           examples:
             application/json:
+              messages:
+                - text: Hello
+                  ts: '1358546515.000008'
+                  type: message
+                  user: U2147483896
+                - is_starred: true
+                  text: World
+                  ts: '1358546515.000007'
+                  type: message
+                  user: U2147483896
+                - ts: '1358546515.000007'
+                  type: something_else
               ok: true
           schema:
             additionalProperties: true
@@ -7271,7 +7414,7 @@ paths:
           description: Typical error response
           examples:
             application/json:
-              error: invalid_auth
+              error: channel_not_found
               ok: false
           schema:
             additionalProperties: true
@@ -7328,13 +7471,30 @@ paths:
                 W06UAZ65Q: W06UAZ65Q
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Bulk exchange local workspace user IDs for global IDs
             properties:
+              enterprise_id:
+                title: The enterprise grid organization ID containing the workspace/team.
+                type: string
+              invalid_user_ids:
+                items:
+                  type: string
+                title: A list of User IDs that cannot be mapped or found
+                type: array
               ok:
                 $ref: '#/definitions/defs_ok_true'
+              team_id:
+                title: The workspace/team ID containing the mapped users
+                type: string
+              user_id_map:
+                additionalProperties: true
+                title: A mapping of provided user IDs with mapped user IDs
+                type: object
             required:
               - ok
-            title: Default success template
+              - team_id
+              - enterprise_id
+            title: HTTP 200 response schema for migration.exchange
             type: object
         default:
           description: Typical error response when there are no mappings to provide
@@ -7342,16 +7502,7 @@ paths:
             application/json:
               error: not_enterprise_team
               ok: false
-          schema:
-            additionalProperties: true
-            description: Verbose schema not yet ready for this method.
-            properties:
-              ok:
-                $ref: '#/definitions/defs_ok_true'
-            required:
-              - ok
-            title: Default error template
-            type: object
+          schema: {}
       security:
         - slackAuth:
             - tokens.basic
@@ -7456,6 +7607,20 @@ paths:
           description: Typical success response
           examples:
             application/json:
+              has_more: false
+              latest: '1358547726.000003'
+              messages:
+                - text: Hello
+                  ts: '1358546515.000008'
+                  type: message
+                  user: U2147483896
+                - is_starred: true
+                  text: World
+                  ts: '1358546515.000007'
+                  type: message
+                  user: U2147483896
+                - ts: '1358546515.000007'
+                  type: something_else
               ok: true
           schema:
             additionalProperties: true
@@ -7471,7 +7636,7 @@ paths:
           description: Typical error response
           examples:
             application/json:
-              error: invalid_auth
+              error: channel_not_found
               ok: false
           schema:
             additionalProperties: true
@@ -7709,6 +7874,18 @@ paths:
           description: Typical success response
           examples:
             application/json:
+              messages:
+                - text: Hello
+                  ts: '1358546515.000008'
+                  type: message
+                  user: U2147483896
+                - is_starred: true
+                  text: World
+                  ts: '1358546515.000007'
+                  type: message
+                  user: U2147483896
+                - ts: '1358546515.000007'
+                  type: something_else
               ok: true
           schema:
             additionalProperties: true
@@ -7724,7 +7901,7 @@ paths:
           description: Typical error response
           examples:
             application/json:
-              error: invalid_auth
+              error: channel_not_found
               ok: false
           schema:
             additionalProperties: true
@@ -7910,13 +8087,13 @@ paths:
               ok: true
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for successful response from pins.add method
             properties:
               ok:
                 $ref: '#/definitions/defs_ok_true'
             required:
               - ok
-            title: Default success template
+            title: pins.add schema
             type: object
         default:
           description: Typical error response
@@ -7926,13 +8103,42 @@ paths:
               ok: false
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for error response from pins.add method
             properties:
+              error:
+                enum:
+                  - bad_timestamp
+                  - file_not_found
+                  - file_comment_not_found
+                  - message_not_found
+                  - channel_not_found
+                  - no_item_specified
+                  - already_pinned
+                  - permission_denied
+                  - file_not_shared
+                  - not_pinnable
+                  - not_authed
+                  - invalid_auth
+                  - account_inactive
+                  - no_permission
+                  - invalid_arg_name
+                  - invalid_array_arg
+                  - invalid_charset
+                  - invalid_form_data
+                  - invalid_post_type
+                  - missing_post_type
+                  - team_added_to_org
+                  - invalid_json
+                  - json_not_object
+                  - request_timeout
+                  - upgrade_required
+                type: string
               ok:
-                $ref: '#/definitions/defs_ok_true'
+                $ref: '#/definitions/defs_ok_false'
             required:
               - ok
-            title: Default error template
+              - error
+            title: pins.add error schema
             type: object
       security:
         - slackAuth:
@@ -8058,13 +8264,13 @@ paths:
               ok: true
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for successful response from pins.remove method
             properties:
               ok:
                 $ref: '#/definitions/defs_ok_true'
             required:
               - ok
-            title: Default success template
+            title: pins.remove schema
             type: object
         default:
           description: Typical error response
@@ -8074,13 +8280,39 @@ paths:
               ok: false
           schema:
             additionalProperties: true
-            description: Verbose schema not yet ready for this method.
+            description: Schema for error response from pins.remove method
             properties:
+              error:
+                enum:
+                  - bad_timestamp
+                  - file_not_found
+                  - file_comment_not_found
+                  - message_not_found
+                  - no_item_specified
+                  - not_pinned
+                  - permission_denied
+                  - not_authed
+                  - invalid_auth
+                  - account_inactive
+                  - no_permission
+                  - invalid_arg_name
+                  - invalid_array_arg
+                  - invalid_charset
+                  - invalid_form_data
+                  - invalid_post_typ
+                  - missing_post_typ
+                  - team_added_to_org
+                  - invalid_json
+                  - json_not_object
+                  - request_timeou
+                  - upgrade_required
+                type: string
               ok:
-                $ref: '#/definitions/defs_ok_true'
+                $ref: '#/definitions/defs_ok_false'
             required:
               - ok
-            title: Default error template
+              - error
+            title: pins.remove error schema
             type: object
       security:
         - slackAuth:
@@ -8198,7 +8430,25 @@ paths:
           description: Typical success response
           examples:
             application/json:
+              file:
+                channels:
+                  - C2U7V2YA2
+                comments_count: 1
+                created: 1507850315
+                groups: []
+                id: F7H0D7ZA4
+                ims: []
+                name: computer.gif
+                reactions:
+                  - count: 1
+                    name: stuck_out_tongue_winking_eye
+                    users:
+                      - U2U85N1RV
+                timestamp: 1507850315
+                title: computer.gif
+                user: U2U85N1RV
               ok: true
+              type: file
           schema:
             additionalProperties: true
             description: Verbose schema not yet ready for this method.
@@ -10910,6 +11160,104 @@ paths:
       security:
         - slackAuth:
             - 'users:read'
+      tags:
+        - users
+  /users.lookupByEmail:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Find a user with an email address.
+      externalDocs:
+        description: API method documentation
+        url: 'https://api.slack.com/methods/users.lookupByEmail'
+      operationId: users_lookupByEmail
+      parameters:
+        - description: 'Authentication token. Requires scope: `users:read.email`'
+          in: query
+          name: token
+          type: string
+        - description: An email address belonging to a user in the workspace
+          in: query
+          name: email
+          type: string
+      responses:
+        '200':
+          description: Typical success response
+          examples:
+            application/json:
+              ok: true
+              user:
+                color: 9f69e7
+                deleted: false
+                has_2fa: false
+                id: W012A3CDE
+                is_admin: true
+                is_app_user: false
+                is_bot: false
+                is_owner: false
+                is_primary_owner: false
+                is_restricted: false
+                is_ultra_restricted: false
+                name: spengler
+                profile:
+                  avatar_hash: ge3b51ca72de
+                  display_name: spengler
+                  display_name_normalized: spengler
+                  email: spengler@ghostbusters.example.com
+                  image_192: 'https://.../avatar/e3b51ca72dee4ef87916ae2b9240df50.jpg'
+                  image_24: 'https://.../avatar/e3b51ca72dee4ef87916ae2b9240df50.jpg'
+                  image_32: 'https://.../avatar/e3b51ca72dee4ef87916ae2b9240df50.jpg'
+                  image_48: 'https://.../avatar/e3b51ca72dee4ef87916ae2b9240df50.jpg'
+                  image_512: 'https://.../avatar/e3b51ca72dee4ef87916ae2b9240df50.jpg'
+                  image_72: 'https://.../avatar/e3b51ca72dee4ef87916ae2b9240df50.jpg'
+                  real_name: Egon Spengler
+                  real_name_normalized: Egon Spengler
+                  status_emoji: ':books:'
+                  status_text: Print is dead
+                  team: T012AB3C4
+                real_name: episod
+                team_id: T012AB3C4
+                tz: America/Los_Angeles
+                tz_label: Pacific Daylight Time
+                tz_offset: -25200
+                updated: 1502138686
+          schema:
+            additionalProperties: true
+            description: Schema for successful response from users.lookupByEmail method
+            properties:
+              ok:
+                $ref: '#/definitions/defs_ok_true'
+              user:
+                $ref: '#/definitions/defs_user'
+            required:
+              - ok
+              - user
+            title: users.lookupByEmail success schema
+            type: object
+        default:
+          description: Typical error response
+          examples:
+            application/json:
+              error: user_not_found
+              ok: false
+          schema:
+            additionalProperties: true
+            description: Schema for error response from users.lookupByEmail method
+            properties:
+              error:
+                enum:
+                  - user_not_found
+                type: string
+              ok:
+                $ref: '#/definitions/defs_ok_false'
+            required:
+              - ok
+              - error
+            title: users.lookupByEmail error schema
+            type: object
+      security:
+        - slackAuth:
+            - 'users:read.email'
       tags:
         - users
   /users.profile.get:

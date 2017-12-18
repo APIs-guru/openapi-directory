@@ -23,9 +23,6 @@ info:
   x-tags:
     - SMS
     - bulk SMS
-consumes:
-  - application/json
-  - application/xml
 produces:
   - application/json
   - application/xml
@@ -53,9 +50,14 @@ tags:
     name: sms
   - description: Manage your templates
     name: templates
+  - description: '(BETA) Send, schedule and manage voice messages'
+    name: voice
 paths:
   /api/rest/v1/account/balance:
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Returns your account's credit balance
       operationId: getBalance
@@ -75,6 +77,9 @@ paths:
         - account
   /api/rest/v1/account/transfer:
     post:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: 'Transfers credits between two users in the same team. The <i>account email address</i> fields as well as the <i>number of credits to transfer</i> are required. '
       operationId: transfer
@@ -88,6 +93,8 @@ paths:
       responses:
         '200':
           description: Description was not specified
+          schema:
+            $ref: '#/definitions/WebServiceUser'
         '201':
           description: Created
         '401':
@@ -101,6 +108,9 @@ paths:
         - account
   /api/rest/v1/account/user:
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Find a user for a particular email address
       operationId: search
@@ -125,6 +135,9 @@ paths:
       tags:
         - account
     put:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: 'Creates a new sub-account in your team. The following fields are required <i>firstname, lastname, email address, contact number</i> and <i>password.</i>'
       parameters:
@@ -152,6 +165,9 @@ paths:
         - account
   '/api/rest/v1/account/user/{userId}':
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Gets a user from a given user id
       operationId: getUser
@@ -177,6 +193,9 @@ paths:
       tags:
         - account
     post:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: 'Updates a sub-account in your team. The following fields can be updated <i>firstname, lastname, contact number</i> and <i>password.</i>'
       parameters:
@@ -210,6 +229,9 @@ paths:
         - account
   /api/rest/v1/contacts/all:
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Returns all contacts
       responses:
@@ -228,6 +250,9 @@ paths:
         - contacts
   /api/rest/v1/contacts/create:
     post:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Creates a  contact
       parameters:
@@ -257,6 +282,9 @@ paths:
         - contacts
   '/api/rest/v1/contacts/{contactId}':
     delete:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Deletes a  contact
       parameters:
@@ -278,6 +306,9 @@ paths:
       tags:
         - contacts
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Returns details for a single contact
       parameters:
@@ -301,6 +332,9 @@ paths:
       tags:
         - contacts
     post:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Updates a  contact
       parameters:
@@ -333,6 +367,9 @@ paths:
         - contacts
   '/api/rest/v1/contacts/{contactId}/addFromGroup/{groupId}':
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Remove a contact from a group
       parameters:
@@ -359,6 +396,9 @@ paths:
       tags:
         - contacts
     post:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Remove a contact from a group
       parameters:
@@ -388,6 +428,9 @@ paths:
         - contacts
   '/api/rest/v1/contacts/{contactId}/addToGroup/{groupId}':
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Add a contact to a group
       parameters:
@@ -414,6 +457,9 @@ paths:
       tags:
         - contacts
     post:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Add a contact to a group
       parameters:
@@ -443,6 +489,9 @@ paths:
         - contacts
   /api/rest/v1/context/lookup:
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Returns context information for a single provided
       parameters:
@@ -467,6 +516,9 @@ paths:
       tags:
         - context
     post:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Returns context information for a single provided
       parameters:
@@ -494,6 +546,9 @@ paths:
         - context
   /api/rest/v1/groups/all:
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Returns all groups
       responses:
@@ -512,6 +567,9 @@ paths:
         - groups
   /api/rest/v1/groups/create:
     post:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Create a  group
       parameters:
@@ -541,6 +599,9 @@ paths:
         - groups
   '/api/rest/v1/groups/{groupId}':
     delete:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Deletes a  group
       parameters:
@@ -562,6 +623,9 @@ paths:
       tags:
         - groups
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Returns details for a single group
       parameters:
@@ -585,6 +649,9 @@ paths:
       tags:
         - groups
     post:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Update a  group
       parameters:
@@ -617,6 +684,9 @@ paths:
         - groups
   '/api/rest/v1/groups/{groupId}/addContact/{contactId}':
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Add a contact to a group
       parameters:
@@ -643,6 +713,9 @@ paths:
       tags:
         - groups
     post:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Add a contact to a group
       parameters:
@@ -672,6 +745,9 @@ paths:
         - groups
   '/api/rest/v1/groups/{groupId}/removeContact/{contactId}':
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Remove a contact from a group
       parameters:
@@ -698,6 +774,9 @@ paths:
       tags:
         - groups
     post:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Remove a contact from a group
       parameters:
@@ -727,6 +806,9 @@ paths:
         - groups
   /api/rest/v1/messages/all:
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Returns all messages
       parameters:
@@ -840,6 +922,9 @@ paths:
         - messages
   '/api/rest/v1/messages/{messageId}':
     delete:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Deletes a  message
       parameters:
@@ -861,6 +946,9 @@ paths:
       tags:
         - messages
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Returns details for a single message
       parameters:
@@ -885,6 +973,9 @@ paths:
         - messages
   '/api/rest/v1/messages/{messageId}/markRead':
     post:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Marks a  message as read
       parameters:
@@ -910,6 +1001,9 @@ paths:
       tags:
         - messages
     put:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Marks a  message as read
       parameters:
@@ -936,6 +1030,9 @@ paths:
         - messages
   '/api/rest/v1/messages/{messageId}/markUnread':
     post:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Marks a  message as unread
       parameters:
@@ -961,6 +1058,9 @@ paths:
       tags:
         - messages
     put:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Marks a  message as unread
       parameters:
@@ -987,6 +1087,9 @@ paths:
         - messages
   /api/rest/v1/sms/send:
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Returns an example of the data to POST to send a single message.
       responses:
@@ -1004,6 +1107,9 @@ paths:
       tags:
         - sms
     post:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Sends a single message. The <i>recipientNumber</i> and <i>message</i> fields are required. All other fields are optional.
       parameters:
@@ -1035,6 +1141,9 @@ paths:
         - sms
   /api/rest/v1/sms/send-bulk:
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Returns an example of the data to POST to send multiple messages in one transaction.
       responses:
@@ -1052,6 +1161,9 @@ paths:
       tags:
         - sms
     post:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Send multiple messages in one transaction.
       parameters:
@@ -1079,6 +1191,9 @@ paths:
         - sms
   /api/rest/v1/sms/send-url-parameters:
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Send a single message using URL parameters.The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional.
       parameters:
@@ -1123,6 +1238,9 @@ paths:
       tags:
         - sms
     post:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Send a single message using URL parameters.The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional.
       parameters:
@@ -1170,6 +1288,9 @@ paths:
         - sms
   '/api/rest/v1/sms/send-url/{token}':
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: 'Send a single message using your unique URL without having to authenticate using your email address or REST API token. The token required is the URL Sending token available on the developer setting page. The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional. Not that the token required here is '
       parameters:
@@ -1219,6 +1340,9 @@ paths:
       tags:
         - sms
     post:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: 'Send a single message using your unique URL without having to authenticate using your email address or REST API token. The token required is the URL Sending token available on the developer setting page. The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional. Not that the token required here is '
       parameters:
@@ -1271,6 +1395,9 @@ paths:
         - sms
   /api/rest/v1/templates/all:
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Returns all templates
       responses:
@@ -1289,6 +1416,9 @@ paths:
         - templates
   '/api/rest/v1/templates/{templateId}':
     delete:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Deletes a  template
       parameters:
@@ -1311,6 +1441,9 @@ paths:
       tags:
         - templates
     get:
+      consumes:
+        - application/json
+        - application/xml
       deprecated: false
       description: Returns details for a single template
       parameters:
@@ -1334,6 +1467,218 @@ paths:
       summary: get
       tags:
         - templates
+  /api/rest/v1/voice/all:
+    get:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Returns all voice messages
+      parameters:
+        - default: 100
+          description: number of elements to return at a time
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - default: 1
+          description: page number
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: filter by message status
+          enum:
+            - SCHEDULED
+            - UNKNOWN
+            - SENT
+            - FAILED
+            - FAILED_REFUNDED
+            - FAILED_OPTOUT
+            - DELIVERED
+          in: query
+          name: status
+          required: false
+          type: string
+        - description: 'date format: yyyyMMdd'
+          format: date-time
+          in: query
+          name: fromDateTimeSent
+          required: false
+          type: string
+        - description: 'date format: yyyyMMdd'
+          format: date-time
+          in: query
+          name: toDateTimeSent
+          required: false
+          type: string
+        - description: phone number the message was sent to
+          in: query
+          name: toNumber
+          required: false
+          type: string
+        - description: search matching message text
+          in: query
+          name: message
+          required: false
+          type: string
+        - description: search by campaign
+          in: query
+          name: campaign
+          required: false
+          type: string
+        - description: search by data field
+          in: query
+          name: dataField
+          required: false
+          type: string
+        - description: return only deleted / not deleted messages
+          in: query
+          name: deleted
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WebServiceVoiceMessages'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: all
+      tags:
+        - voice
+  /api/rest/v1/voice/single-audio:
+    post:
+      consumes:
+        - multipart/form-data
+      deprecated: false
+      description: Send a single audio voice message to one recipient
+      operationId: single-audio
+      parameters:
+        - description: file
+          in: formData
+          name: file
+          required: true
+          type: file
+        - description: recipientNumber
+          in: query
+          name: recipientNumber
+          required: true
+          type: string
+        - description: campaign
+          in: query
+          name: campaign
+          required: false
+          type: string
+        - description: dataField
+          in: query
+          name: dataField
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            $ref: '#/definitions/WebServiceSendVoiceMessageResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: single-audio
+      tags:
+        - voice
+  /api/rest/v1/voice/single-text:
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Send a single text voice message to one recipient
+      operationId: single-text
+      parameters:
+        - description: request
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WebServiceVoiceMessageSendSingleTextRequest'
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            $ref: '#/definitions/WebServiceSendVoiceMessageResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: single-text
+      tags:
+        - voice
+  '/api/rest/v1/voice/{messageId}':
+    delete:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Deletes a  message
+      parameters:
+        - description: messageId
+          in: path
+          name: messageId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Description was not specified
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: delete
+      tags:
+        - voice
+    get:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Returns details for a single message
+      parameters:
+        - description: messageId
+          in: path
+          name: messageId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WebServiceVoiceMessage'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: get
+      tags:
+        - voice
 definitions:
   Link:
     properties:
@@ -1560,6 +1905,13 @@ definitions:
         items:
           $ref: '#/definitions/WebServiceSendSmsResponse'
         type: array
+  WebServiceSendVoiceMessageResponse:
+    description: WebServiceSendVoiceMessageResponse
+    properties:
+      error:
+        type: string
+      voiceMessageId:
+        type: string
   WebServiceTemplate:
     description: WebServiceTemplate
     properties:
@@ -1623,3 +1975,70 @@ definitions:
         items:
           $ref: '#/definitions/WebServiceUser'
         type: array
+  WebServiceVoiceMessage:
+    description: WebServiceVoiceMessage
+    properties:
+      audioFileUrl:
+        type: string
+      campaign:
+        type: string
+      dateTimeSent:
+        format: date-time
+        type: string
+      deleted:
+        type: boolean
+      language:
+        type: string
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      message:
+        type: string
+      messageStatus:
+        type: string
+      toNumber:
+        type: string
+      userDataField:
+        type: string
+      voiceMessageId:
+        type: string
+  WebServiceVoiceMessageSendSingleTextRequest:
+    description: WebServiceVoiceMessageSendSingleTextRequest
+    properties:
+      campaign:
+        type: string
+      dataField:
+        type: string
+      language:
+        type: string
+      message:
+        type: string
+      recipientNumber:
+        type: string
+  WebServiceVoiceMessages:
+    description: WebServiceVoiceMessages
+    properties:
+      elements:
+        format: int32
+        type: integer
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      messages:
+        items:
+          $ref: '#/definitions/WebServiceVoiceMessage'
+        type: array
+      page:
+        format: int32
+        type: integer
+      pageSize:
+        format: int32
+        type: integer
+      totalElements:
+        format: int64
+        type: integer
+      totalPages:
+        format: int32
+        type: integer

@@ -195,7 +195,7 @@ paths:
     get:
       description: |
 
-        Use this to retrieve sentences extracted from  corpora which show how a word is used in the language. This is available for English and Spanish. For English, the sentences are linked to the correct sense of the word in the dictionary. In Spanish, they are linked at the headword level.
+        Use this to retrieve sentences extracted from  corpora which show how a word is used in the language. This is available for English and Spanish. For English, the sentences are linked to the correct [sense](documentation/glossary?term=sense) of the word in the dictionary. In Spanish, they are linked at the [headword](documentation/glossary?term=headword) level.
           <div id="sentences"></div>
       externalDocs:
         description: find more info here
@@ -231,7 +231,7 @@ paths:
     get:
       description: |
 
-        Use this to retrieve definitions, pronunciations, example sentences, grammatical information and word origins. It only works for dictionary headwords, so you may need to use the Lemmatron first if your input is likely to be an inflected form (e.g., 'swimming'). This would return the linked headword (e.g., 'swim') which you can then use in the Entries endpoint. Unless specified using a region filter, the default lookup will be the Oxford Dictionary of English (GB). 
+        Use this to retrieve definitions, [pronunciations](documentation/glossary?term=pronunciation), example sentences, [grammatical information](documentation/glossary?term=grammaticalfeatures) and [word origins](documentation/glossary?term=etymology). It only works for dictionary [headwords](documentation/glossary?term=headword), so you may need to use the [Lemmatron](documentation/glossary?term=lemma) first if your input is likely to be an [inflected](documentation/glossary?term=inflection) form (e.g., 'swimming'). This would return the linked [headword](documentation/glossary?term=headword) (e.g., 'swim') which you can then use in the Entries endpoint. Unless specified using a region filter, the default lookup will be the Oxford Dictionary of English (GB). 
           <div id="dictionary_entries"></div>
       externalDocs:
         description: find more info here
@@ -260,7 +260,7 @@ paths:
     get:
       description: |
 
-        Retrieve words that are opposite in meaning to the input word (antonym).
+        Retrieve words that are opposite in meaning to the input word ([antonym](documentation/glossary?term=thesaurus)).
 
           <div id="antonyms"></div>
       externalDocs:
@@ -333,7 +333,7 @@ paths:
     get:
       description: |
 
-        Use this to retrieve words that are similar in meaning to the input word (synonym).
+        Use this to retrieve words that are similar in meaning to the input word ([synonym](documentation/glossary?term=synonym)).
 
           <div id="synonyms"></div>
       externalDocs:
@@ -393,7 +393,7 @@ paths:
     get:
       description: |
 
-        Use filters to limit the entry information that is returned. For example, you may only require definitions and not everything else, or just pronunciations. The full list of filters can be retrieved from the filters Utility endpoint. You can also specify values within the filter using '='. For example 'grammaticalFeatures=singular'. Filters can also be combined using a semicolon.
+        Use filters to limit the [entry](documentation/glossary?term=entry) information that is returned. For example, you may only require definitions and not everything else, or just [pronunciations](documentation/glossary?term=pronunciation). The full list of filters can be retrieved from the filters Utility endpoint. You can also specify values within the filter using '='. For example 'grammaticalFeatures=singular'. Filters can also be combined using a semicolon.
 
           <div id="dictionary_entries_filters"></div>
       parameters:
@@ -847,7 +847,7 @@ paths:
     get:
       description: |
 
-        Use this to retrieve possible headword matches for a given string of text. The results are culculated using headword matching, fuzzy matching, and lemmatization 
+        Use this to retrieve possible [headword](documentation/glossary?term=headword) matches for a given string of text. The results are culculated using headword matching, fuzzy matching, and [lemmatization](documentation/glossary?term=lemma) 
 
           <div id="search"></div>
       externalDocs:
@@ -1001,10 +1001,338 @@ paths:
       summary: Retrieve possible translation matches to input
       tags:
         - Search
+  '/stats/frequency/ngrams/{source_lang}/{corpus}/{ngram-size}/':
+    get:
+      description: |
+        This endpoint returns frequencies of ngrams of size 1-4. That is the number of times a word (ngram size = 1) or words (ngram size > 1) appear in the corpus. Ngrams are case sensitive ("I AM" and "I am" will have different frequency) and frequencies are calculated per word (true case) so "the book" and "the books" are two different ngrams. The results can be filtered based on query parameters. <br> <br> Parameters can be provided in PATH, GET or POST (form or json). The parameters in PATH are overriden by parameters in GET, POST and json (in that order). In PATH, individual options are separated by semicolon and values are separated by commas (where multiple values can be used). <br> <br> Example for bigrams (ngram of size 2):
+        * PATH: /tokens=a word,another word
+        * GET: /?tokens=a word&tokens=another word
+        * POST (json):
+
+          ```javascript
+            {
+                "tokens": ["a word", "another word"]
+            }
+          ```
+      parameters:
+        - default: en
+          description: IANA language code
+          in: path
+          name: source_lang
+          required: true
+          type: string
+        - default: nmc
+          description: For corpora other than 'nmc' (New Monitor Corpus) please contact api@oxforddictionaries.com
+          in: path
+          name: corpus
+          required: true
+          type: string
+        - description: the size of ngrams requested (1-4)
+          in: path
+          name: ngram-size
+          required: true
+          type: string
+        - default: a word
+          description: 'List of tokens to filter. The tokens are separated by spaces, the list items are separated by comma (e.g., for bigrams (n=2) tokens=this is,this was, this will)'
+          in: query
+          name: tokens
+          required: false
+          type: string
+        - description: Find ngrams containing the given token(s). Use comma or space as token separators; the order of tokens is irrelevant.
+          in: query
+          name: contains
+          required: false
+          type: string
+        - description: Flag specifying whether to lookup ngrams that include punctuation or not (possible values are "true" and "false"; default is "false")
+          in: query
+          name: punctuation
+          required: false
+          type: string
+        - default: oup
+          description: Option specifying whether tokens should be returned as a single string (option "google") or as a list of strings (option "oup")
+          in: query
+          name: format
+          required: false
+          type: string
+        - description: Restrict the query to entries with frequency of at least `minFrequency`
+          format: int64
+          in: query
+          name: minFrequency
+          required: false
+          type: integer
+        - description: Restrict the query to entries with frequency of at most `maxFrequency`
+          format: int64
+          in: query
+          name: maxFrequency
+          required: false
+          type: integer
+        - description: Restrict the query to entries that appear in at least `minDocumentFrequency` documents
+          format: int64
+          in: query
+          name: minDocumentFrequency
+          required: false
+          type: integer
+        - description: Restrict the query to entries that appera in at most `maxDocumentFrequency` documents
+          format: int64
+          in: query
+          name: maxDocumentFrequency
+          required: false
+          type: integer
+        - default: 0
+          description: pagination - results offset
+          format: int64
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - default: 100
+          description: pagination - results limit
+          format: int64
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - $ref: '#/parameters/appId'
+        - $ref: '#/parameters/appKey'
+      produces:
+        - application/json
+        - text/csv
+      responses:
+        '200':
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/NgramsResult'
+            title: NgramsResult
+        '400':
+          description: |
+            Invalid option name...
+        '404':
+          description: |
+            language is not in...
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Retrieve the frequency of ngrams (1-4) derived from a corpus
+      tags:
+        - LexiStats
+  '/stats/frequency/word/{source_lang}/':
+    get:
+      description: |
+        This endpoint provides the frequency of a given word. When multiple database records match the query parameters, the returned frequency is the sum of the individual frequencies. For example, if the query parameters are lemma=test, the returned frequency will include the verb "test", the noun "test" and the adjective "test" in all forms (Test, tested, testing, etc.) <br> <br> If you are interested in the frequency of the word "test" but want to exclude other forms (e.g., tested) use the option trueCase=test. Normally, the word "test" will be spelt with a capital letter at the beginning of a sentence. The option trueCase will ignore this and it will count "Test" and "test" as the same token. If you are interested in frequencies of "Test" and "test", use the option wordform=test or wordform=Test. Note that trueCase is not just a lower case of the word as some words are genuinely spelt with a capital letter such as the word "press" in Oxford University Press. <br> <br> Parameters can be provided in PATH, GET or POST (form or json). The parameters in PATH are overriden by parameters in GET, POST and json (in that order). In PATH, individual options are separated by semicolon and values are separated by commas (where multiple values can be used). Examples:
+        * PATH: /lemma=test;lexicalCategory=noun
+        * GET: /?lemma=test&lexicalCategory=noun
+        * POST (json):
+
+          ```javascript
+            {
+              "lemma": "test",
+              "lexicalCategory": "noun"
+            }
+          ```
+
+        <br> One of the options wordform/trueCase/lemma/lexicalCategory has to be provided.
+      parameters:
+        - default: en
+          description: IANA language code
+          in: path
+          name: source_lang
+          required: true
+          type: string
+        - default: nmc
+          description: For corpora other than 'nmc' (New Monitor Corpus) please contact api@oxforddictionaries.com
+          in: query
+          name: corpus
+          required: false
+          type: string
+        - description: 'The written form of the word to look up (preserving case e.g., Books vs books)'
+          in: query
+          name: wordform
+          required: false
+          type: string
+        - description: The written form of the word to look up with normalised case (Books --> books)
+          in: query
+          name: trueCase
+          required: false
+          type: string
+        - default: test
+          description: 'The lemma of the word to look up (e.g., Book, booked, books all have the lemma "book")'
+          in: query
+          name: lemma
+          required: false
+          type: string
+        - description: 'The lexical category of the word(s) to look up (e.g., noun or verb)'
+          in: query
+          name: lexicalCategory
+          required: false
+          type: string
+        - $ref: '#/parameters/appId'
+        - $ref: '#/parameters/appKey'
+      produces:
+        - application/json
+        - text/csv
+      responses:
+        '200':
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/StatsWordResult'
+            title: StatsWordResult
+        '400':
+          description: |
+            You need to specify at least one option. Try one of 'wordform, lemma, trueCase, lexicalCategory'.
+        '404':
+          description: |
+            language is not in...
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Retrieve the frequency of a word derived from a corpus.
+      tags:
+        - LexiStats
+  '/stats/frequency/words/{source_lang}/':
+    get:
+      description: |
+        This endpoint provides a list of frequencies for a given word or words. Unlike the /word/ endpoint, the results are split into the smallest units. <br> <br> To exclude a specific value, prepend it with the minus sign ('-'). For example, to get frequencies of the lemma 'happy' but exclude superlative forms (i.e., happiest) you could use options 'lemma=happy;grammaticalFeatures=-degreeType:superlative'. <br> <br> Parameters can be provided in PATH, GET or POST (form or json). The parameters in PATH are overriden by parameters in GET, POST and json (in that order). In PATH, individual options are separated by semicolon and values are separated by commas (where multiple values can be used). <br> <br> The parameters wordform/trueCase/lemma/lexicalCategory also exist in a plural form, taking a lists of items. Examples:
+        * PATH: /wordforms=happy,happier,happiest
+        * GET: /?wordforms=happy&wordforms=happier&wordforms=happiest
+        * POST (json):
+        ```javascript
+          {
+            "wordforms": ["happy", "happier", "happiest"]
+          }
+        ```
+        <br> Aside from individual frequency requests, users can also post a list of items for which they would like to get frequencies. The list has to be uploaded in json and the required fields are "items" and "collate". <br> <br> The field "items" is a list of items for which you want the frequencies. The content of the items depends on the option for "collate". The value of "collate" should be a list of "columns" that the items contain. The list is limited to combinations of "wordform", "lemma", "trueCase" and "lexicalCategory". The fields that are listed in the "collate" options have to be present in each item. Here are some examples of queries:
+        * ### Get frequencies of provided wordforms:
+        ```javascript
+          {
+              "collate": ["wordform"],
+              "items": [{"wordform": "test"}, {"wordform": "Test"}]
+          }
+        ```
+        * ### Get frequencies of provided lemmas:
+        ```javascript
+          {
+              "collate": ["lemma"],
+              "items": [{"lemma": "test"}, {"lemma": "Test"}]
+          }
+        ```
+        * ### Get frequencies of provided lemmas per lexical category:
+        ```javascript
+          {
+              "collate": ["lemma", "lexicalCategory"],
+              "items": [
+                  {"lemma": "test", "lexicalCategory": "verb"},
+                  {"lemma": "test", "lexicalCategory": "noun"}
+              ]
+          }
+        ```
+      parameters:
+        - default: en
+          description: IANA language code
+          in: path
+          name: source_lang
+          required: true
+          type: string
+        - default: nmc
+          description: For corpora other than 'nmc' (New Monitor Corpus) please contact api@oxforddictionaries.com
+          in: query
+          name: corpus
+          required: false
+          type: string
+        - description: 'The written form of the word to look up (preserving case e.g., Book vs book)'
+          in: query
+          name: wordform
+          required: false
+          type: string
+        - description: The written form of the word to look up with normalised case (Books --> books)
+          in: query
+          name: trueCase
+          required: false
+          type: string
+        - default: test
+          description: 'The lemma of the word to look up (e.g., Book, booked, books all have the lemma "book")'
+          in: query
+          name: lemma
+          required: false
+          type: string
+        - description: 'The lexical category of the word(s) to look up (e.g., adjective or noun)'
+          in: query
+          name: lexicalCategory
+          required: false
+          type: string
+        - description: 'The grammatical features of the word(s) to look up entered as a list of k:v (e.g., degree_type:comparative)'
+          in: query
+          name: grammaticalFeatures
+          required: false
+          type: string
+        - description: 'sort the resulting list by wordform, trueCase, lemma, lexicalCategory, frequency, normalizedFrequency. Descending order is achieved by prepending the value with the minus sign (''-''). Multiple values can be separated by commas (e.g., sort=lexicalCategory,-frequency)'
+          in: query
+          name: sort
+          required: false
+          type: string
+        - description: Restrict the query to entries with frequency of at least `minFrequency`
+          format: int64
+          in: query
+          name: minFrequency
+          required: false
+          type: integer
+        - description: Restrict the query to entries with frequency of at most `maxFrequency`
+          format: int64
+          in: query
+          name: maxFrequency
+          required: false
+          type: integer
+        - description: Restrict the query to entries with frequency of at least `minNormalizedFrequency`
+          format: float
+          in: query
+          name: minNormalizedFrequency
+          required: false
+          type: number
+        - description: Restrict the query to entries with frequency of at most `maxNormalizedFrequency`
+          format: float
+          in: query
+          name: maxNormalizedFrequency
+          required: false
+          type: number
+        - default: 0
+          description: pagination - results offset
+          format: int64
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - default: 100
+          description: pagination - results limit
+          format: int64
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - $ref: '#/parameters/appId'
+        - $ref: '#/parameters/appKey'
+      produces:
+        - application/json
+        - text/csv
+      responses:
+        '200':
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/StatsWordResultList'
+            title: StatsWordResultList
+        '400':
+          description: Invalid option name...; Option ... must have a value.; The option 'minFrequency' has to have an non-negative integer parameter.; The option 'maxFrequency' has to have an non-negative integer parameter.; The option 'limit' has to have an non-negative integer parameter.; The option 'offset' has to have an non-negative integer parameter.
+        '404':
+          description: |
+            language is not in...
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Retrieve a list of frequencies of a word/words derived from a corpus.
+      tags:
+        - LexiStats
   '/wordlist/{source_lang}/{filters_advanced}':
     get:
       description: |
-        Use this to apply more complex filters to the list of words. For example, you may only want to filter out words for which all senses match the filter, or only its 'prime sense'. You can also filter by word length or match by substring (prefix). 
+        Use this to apply more complex filters to the [list of words](documentation/glossary?term=wordlist). For example, you may only want to filter out words for which all [senses](documentation/glossary?term=sense) match the filter, or only its 'prime sense'. You can also filter by word length or match by substring (prefix). 
 
           <div id="wordlist_advanced"></div>
       parameters:
@@ -1083,7 +1411,7 @@ paths:
     get:
       description: |
 
-        Use this to retrieve a list of words for particular [domain](documentation/glossary?term=domain), [lexical category](documentation/glossary?term=lexicalcategory), [register](documentation/glossary?term=registers) and/or [region](documentation/glossary?term=regions). View the full list of possible filters using the filters Utility endpoint.  The response only includes headwords, not all their possible inflections. If you require a full wordlist including inflected forms, contact us and we can help.
+        Use this to retrieve a [list of words](documentation/glossary?term=wordlist) for particular [domain](documentation/glossary?term=domain), [lexical category](documentation/glossary?term=lexicalcategory), [register](documentation/glossary?term=registers) and/or [region](documentation/glossary?term=regions). View the full list of possible filters using the filters Utility endpoint.  The response only includes [headwords](documentation/glossary?term=headword), not all their possible [inflections](documentation/glossary?term=inflection). If you require a full [wordlist](documentation/glossary?term=wordlist) including [inflected forms](documentation/glossary?term=inflection), contact us and we can help.
 
           <div id="wordlist"></div>
       parameters:
@@ -1478,6 +1806,38 @@ definitions:
       - lexicalCategory
       - text
     type: object
+  NgramsResult:
+    description: Schema for corpus ngrams.
+    properties:
+      metadata:
+        description: Additional Information provided by OUP
+        type: object
+      results:
+        description: A list of found ngrams along with their frequencies
+        items:
+          additionalProperties: true
+          description: Ngrams matching the given options
+          properties:
+            documentFrequency:
+              description: The document frequency (number of documents containing the ngram) of the ngram in the given corpus
+              type: integer
+            frequency:
+              description: The frequency of the ngram in the given corpus
+              type: integer
+            tokens:
+              description: A list of tokens
+              items:
+                type: string
+              minItems: 1
+              type: array
+          required:
+            - tokens
+            - frequency
+            - documentFrequency
+          type: object
+        minItems: 0
+        type: array
+    type: object
   PronunciationsList:
     description: A list of possible pronunciations of a word
     items:
@@ -1633,6 +1993,84 @@ definitions:
         items:
           $ref: '#/definitions/SentencesEntry'
         minItems: 1
+        type: array
+    type: object
+  StatsWordResult:
+    description: Schema for LexiStats results for a word/trueCase/lemma/lexicalCategory returned as a frequency
+    properties:
+      metadata:
+        description: Additional Information provided by OUP
+        type: object
+      result:
+        additionalProperties: true
+        description: Frequency information for a given entity
+        properties:
+          frequency:
+            description: The frequency of the word calculated from a corpus ("sample_corpus" used by default)
+            type: integer
+          lemma:
+            description: 'A lemma of the word (e.g., wordforms "lay", "laid" and "laying" have all lemma "lay").'
+            type: string
+          lexicalCategory:
+            description: A lexical category such as 'verb' or 'noun'
+            type: string
+          matchCount:
+            description: The number of database records that matched the query params (stated frequency is the sum of the individual frequencies)
+            type: integer
+          normalizedFrequency:
+            description: The frequency of the word per million calculated from a corpus ("sample_corpus" used by default)
+            type: integer
+          trueCase:
+            description: 'A given written realisation of a an entry (e.g., "lay") usually lower case'
+            type: string
+          wordform:
+            description: 'A given written realisation of a an entry (e.g., "Lay") preserving case'
+            type: string
+        required:
+          - frequency
+          - normalizedFrequency
+          - matchCount
+        type: object
+    type: object
+  StatsWordResultList:
+    description: Schema for LexiStats results for a word/trueCase/lemma/lexicalCategory returned as a list of frequencies per wordform-trueCase-lemma-lexicalCategory entry.
+    properties:
+      metadata:
+        description: Additional Information provided by OUP
+        type: object
+      results:
+        description: A list of found words along with their frequencies
+        items:
+          additionalProperties: true
+          description: Statistical information about a word
+          properties:
+            frequency:
+              description: The frequency of the word calculated from a corpus ("sample_corpus" used by default)
+              type: integer
+            lemma:
+              description: A lemma of the word.
+              type: string
+            lexicalCategory:
+              description: A lexical category such as 'verb' or 'noun'
+              type: string
+            normalizedFrequency:
+              description: The frequency of the word per million calculated from a corpus ("sample_corpus" used by default)
+              type: integer
+            trueCase:
+              description: 'A given written realisation of a an entry (e.g., "lay") usually lower case'
+              type: string
+            wordform:
+              description: 'A given written realisation of a an entry (e.g., "lay") preserving case'
+              type: string
+          required:
+            - wordform
+            - trueCase
+            - lemma
+            - lexicalCategory
+            - frequency
+            - normalizedFrequency
+          type: object
+        minItems: 0
         type: array
     type: object
   SynonymsAntonyms:
@@ -1852,6 +2290,9 @@ definitions:
       derivativeOf:
         $ref: '#/definitions/ArrayOfRelatedEntries'
         description: Other words from which this one derives
+      derivatives:
+        $ref: '#/definitions/ArrayOfRelatedEntries'
+        description: Other words from which their Sense derives
       entries:
         items:
           $ref: '#/definitions/Entry'
