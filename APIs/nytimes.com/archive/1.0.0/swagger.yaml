@@ -12,6 +12,7 @@ info:
   x-apiClientRegistration:
     url: 'http://developer.nytimes.com/signup'
   x-apisguru-categories:
+    - media
     - open_data
   x-logo:
     url: 'https://static01.nyt.com/images/icons/t_logo_291_black.png'
@@ -91,8 +92,7 @@ definitions:
       abstract:
         type: string
       blog:
-        items:
-          type: string
+        items: {}
         type: array
       byline:
         properties:
@@ -101,8 +101,7 @@ definitions:
           original:
             type: string
           person:
-            items:
-              type: string
+            items: {}
             type: array
         type: object
       document_type:
