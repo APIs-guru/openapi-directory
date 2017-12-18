@@ -38,7 +38,7 @@ function saveShield(subject, status, color, icon) {
     url.addQuery('logo', 'data:image/png;base64,' + base64);
   }
 
-  return makeRequest.getRaw(url.href())
+  return makeRequest.getRaw(url.href(), { retries: 10 })
     .then(data => {
       util.saveFile(`badges/${subject.toLowerCase()}.svg`, data);
     });

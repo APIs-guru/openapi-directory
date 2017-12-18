@@ -46,6 +46,9 @@ If you see some APIs are not updated for more than 2 weeks please open [an issue
 
 Existing integrations
 --------------------------
+
+![Sponsored by](branding/sponsor1.gif)
+
  - https://any-api.com - Documentation and Test Consoles for Public APIs
  - [https://sdks.io](https://sdks.io/Search/FindSDKs?Bridge=APIs.guru) - Explore Automatically Generated SDKs
  - [https://cenit.io](https://cenit.io/directory?spec=swagger) - Data integration platform
@@ -61,7 +64,7 @@ Also used as test suite in following projects:
  - [ReDoc](https://github.com/Rebilly/ReDoc) - Swagger-generated API Reference Documentation
  - [ardoq-swagger-addon](https://github.com/ardoq/ardoq-swagger-addon) - Ardoq Open API (Swagger) Addon
  - [swagvali](https://github.com/subeeshcbabu/swagvali/) - Module to build validators for Swagger(OpenApi) Request parameters and Response objects
- - [swagger-search](https://github.com/IG-Group/swagger-search) - An application that collects and indexes swagger docs from your microservices architecture 
+ - [swagger-search](https://github.com/IG-Group/swagger-search) - An application that collects and indexes swagger docs from your microservices architecture
 
 
 
