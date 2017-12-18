@@ -193,7 +193,7 @@ exports.urlToFilename = function (url, stripQuery) {
 }
 
 exports.editFile = function (str) {
-  var pattern = Path.join(os.tmpdir(),'XXXXXX.txt');
+  var pattern = Path.join(os.tmpdir(),'XXXXXX.yaml');
   var tmpfile = mktemp(pattern);
   fs.writeFileSync(tmpfile, str);
 
