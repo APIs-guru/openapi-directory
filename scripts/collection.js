@@ -141,6 +141,7 @@ program
 program
   .command('update')
   .description('run update')
+  .option('-i, --ignore', 'ignore validation errors')
   .option('-f, --force', 'update even if skip flag set')
   .option('-q, --quiet', 'suppress two common warnings')
   .option('-r, --resume <PROVIDER>','resume update at a particular provider')
