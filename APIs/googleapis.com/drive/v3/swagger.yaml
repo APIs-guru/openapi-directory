@@ -1227,7 +1227,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/Permission'
-        - description: A custom message to include in the notification email.
+        - description: A plain text custom message to include in the notification email.
           in: query
           name: emailMessage
           type: string

@@ -239,13 +239,10 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: cloudfunctions.operations.get
+      description: Returns a function with the given name from the requested project.
+      operationId: cloudfunctions.projects.locations.functions.get
       parameters:
-        - description: The name of the operation resource.
+        - description: The name of the function which details should be obtained.
           in: path
           name: name
           required: true
@@ -255,12 +252,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/CloudFunction'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - operations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -509,10 +506,21 @@ paths:
       description: |-
         Returns a signed URL for uploading a function source code.
         For more information about the signed URL usage see:
-        https://cloud.google.com/storage/docs/access-control/signed-urls
+        https://cloud.google.com/storage/docs/access-control/signed-urls.
         Once the function source code upload is complete, the used signed
         URL should be provided in CreateFunction or UpdateFunction request
         as a reference to the function source code.
+
+        When uploading source code to the generated signed URL, please follow
+        these restrictions:
+
+        * Source file type should be a zip file.
+        * Source file size should not exceed 100MB limit.
+
+        When making a HTTP PUT request, these two headers need to be specified:
+
+        * `content-type: application/zip`
+        * `x-google-content-length-range: 0,104857600`
       operationId: cloudfunctions.projects.locations.functions.generateUploadUrl
       parameters:
         - in: body
@@ -521,7 +529,7 @@ paths:
             $ref: '#/definitions/GenerateUploadUrlRequest'
         - description: |-
             The project and location in which the Google Cloud Storage signed URL
-            should be generated, specified in the format `projects/*/locations/*
+            should be generated, specified in the format `projects/*/locations/*`.
           in: path
           name: parent
           required: true
@@ -662,12 +670,13 @@ definitions:
 
           Event types match pattern `providers/*/eventTypes/*.*`.
           The pattern contains:
-           1. namespace: For example, `cloud.storage` and
-              `google.firebase.analytics`.
-           2. resource type: The type of resource on which event occurs. For
-              example, the Google Cloud Storage API includes the type `object`.
-           3. action: The action that generates the event. For example, action for
-              a Google Cloud Storage Object is 'change'.
+
+          1. namespace: For example, `cloud.storage` and
+             `google.firebase.analytics`.
+          2. resource type: The type of resource on which event occurs. For
+             example, the Google Cloud Storage API includes the type `object`.
+          3. action: The action that generates the event. For example, action for
+             a Google Cloud Storage Object is 'change'.
           These parts are lower case.
         type: string
       failurePolicy:

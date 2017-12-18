@@ -278,6 +278,10 @@ paths:
           name: clusterName
           required: true
           type: string
+        - description: 'Optional. Timeout for graceful YARN decomissioning. Graceful decommissioning allows removing nodes from the cluster without interrupting jobs in progress. Timeout specifies how long to wait for jobs in progress to finish before forcefully removing nodes (and potentially interrupting jobs). Default timeout is 0 (for forceful decommission), and the maximum allowed timeout is 1 day.Only supported on Dataproc image versions 1.2 and higher.'
+          in: query
+          name: gracefulDecommissionTimeout
+          type: string
         - description: Required. The ID of the Google Cloud Platform project the cluster belongs to.
           in: path
           name: projectId
@@ -1171,7 +1175,7 @@ definitions:
         type: string
     type: object
   JobScheduling:
-    description: 'Job scheduling options.Beta Feature: These options are available for testing purposes only. They may be changed before final release.'
+    description: Job scheduling options.
     properties:
       maxFailuresPerHour:
         description: Optional. Maximum number of times per hour a driver may be restarted as a result of driver terminating with non-zero code before job is reported failed.A job may be reported as thrashing if driver exits with non-zero code 4 times within 10 minute window.Maximum value is 10.

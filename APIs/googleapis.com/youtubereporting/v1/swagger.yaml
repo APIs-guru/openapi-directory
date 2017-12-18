@@ -413,7 +413,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Media'
+            $ref: '#/definitions/GdataMedia'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
@@ -507,6 +507,304 @@ definitions:
       The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
     type: object
+  GdataBlobstore2Info:
+    description: gdata
+    properties:
+      blobGeneration:
+        description: gdata
+        format: int64
+        type: string
+      blobId:
+        description: gdata
+        type: string
+      downloadReadHandle:
+        description: gdata
+        format: byte
+        type: string
+      readToken:
+        description: gdata
+        type: string
+      uploadMetadataContainer:
+        description: gdata
+        format: byte
+        type: string
+    type: object
+  GdataCompositeMedia:
+    description: gdata
+    properties:
+      blobRef:
+        description: gdata
+        format: byte
+        type: string
+      blobstore2Info:
+        $ref: '#/definitions/GdataBlobstore2Info'
+        description: gdata
+      cosmoBinaryReference:
+        description: gdata
+        format: byte
+        type: string
+      crc32cHash:
+        description: gdata
+        format: uint32
+        type: integer
+      inline:
+        description: gdata
+        format: byte
+        type: string
+      length:
+        description: gdata
+        format: int64
+        type: string
+      md5Hash:
+        description: gdata
+        format: byte
+        type: string
+      objectId:
+        $ref: '#/definitions/GdataObjectId'
+        description: gdata
+      path:
+        description: gdata
+        type: string
+      referenceType:
+        description: gdata
+        enum:
+          - PATH
+          - BLOB_REF
+          - INLINE
+          - BIGSTORE_REF
+          - COSMO_BINARY_REFERENCE
+        type: string
+      sha1Hash:
+        description: gdata
+        format: byte
+        type: string
+    type: object
+  GdataContentTypeInfo:
+    description: gdata
+    properties:
+      bestGuess:
+        description: gdata
+        type: string
+      fromBytes:
+        description: gdata
+        type: string
+      fromFileName:
+        description: gdata
+        type: string
+      fromHeader:
+        description: gdata
+        type: string
+      fromUrlPath:
+        description: gdata
+        type: string
+    type: object
+  GdataDiffChecksumsResponse:
+    description: gdata
+    properties:
+      checksumsLocation:
+        $ref: '#/definitions/GdataCompositeMedia'
+        description: gdata
+      chunkSizeBytes:
+        description: gdata
+        format: int64
+        type: string
+      objectLocation:
+        $ref: '#/definitions/GdataCompositeMedia'
+        description: gdata
+      objectSizeBytes:
+        description: gdata
+        format: int64
+        type: string
+      objectVersion:
+        description: gdata
+        type: string
+    type: object
+  GdataDiffDownloadResponse:
+    description: gdata
+    properties:
+      objectLocation:
+        $ref: '#/definitions/GdataCompositeMedia'
+        description: gdata
+    type: object
+  GdataDiffUploadRequest:
+    description: gdata
+    properties:
+      checksumsInfo:
+        $ref: '#/definitions/GdataCompositeMedia'
+        description: gdata
+      objectInfo:
+        $ref: '#/definitions/GdataCompositeMedia'
+        description: gdata
+      objectVersion:
+        description: gdata
+        type: string
+    type: object
+  GdataDiffUploadResponse:
+    description: gdata
+    properties:
+      objectVersion:
+        description: gdata
+        type: string
+      originalObject:
+        $ref: '#/definitions/GdataCompositeMedia'
+        description: gdata
+    type: object
+  GdataDiffVersionResponse:
+    description: gdata
+    properties:
+      objectSizeBytes:
+        description: gdata
+        format: int64
+        type: string
+      objectVersion:
+        description: gdata
+        type: string
+    type: object
+  GdataDownloadParameters:
+    description: gdata
+    properties:
+      allowGzipCompression:
+        description: gdata
+        type: boolean
+      ignoreRange:
+        description: gdata
+        type: boolean
+    type: object
+  GdataMedia:
+    description: gdata
+    properties:
+      algorithm:
+        description: gdata
+        type: string
+      bigstoreObjectRef:
+        description: gdata
+        format: byte
+        type: string
+      blobRef:
+        description: gdata
+        format: byte
+        type: string
+      blobstore2Info:
+        $ref: '#/definitions/GdataBlobstore2Info'
+        description: gdata
+      compositeMedia:
+        description: gdata
+        items:
+          $ref: '#/definitions/GdataCompositeMedia'
+        type: array
+      contentType:
+        description: gdata
+        type: string
+      contentTypeInfo:
+        $ref: '#/definitions/GdataContentTypeInfo'
+        description: gdata
+      cosmoBinaryReference:
+        description: gdata
+        format: byte
+        type: string
+      crc32cHash:
+        description: gdata
+        format: uint32
+        type: integer
+      diffChecksumsResponse:
+        $ref: '#/definitions/GdataDiffChecksumsResponse'
+        description: gdata
+      diffDownloadResponse:
+        $ref: '#/definitions/GdataDiffDownloadResponse'
+        description: gdata
+      diffUploadRequest:
+        $ref: '#/definitions/GdataDiffUploadRequest'
+        description: gdata
+      diffUploadResponse:
+        $ref: '#/definitions/GdataDiffUploadResponse'
+        description: gdata
+      diffVersionResponse:
+        $ref: '#/definitions/GdataDiffVersionResponse'
+        description: gdata
+      downloadParameters:
+        $ref: '#/definitions/GdataDownloadParameters'
+        description: gdata
+      filename:
+        description: gdata
+        type: string
+      hash:
+        description: gdata
+        type: string
+      hashVerified:
+        description: gdata
+        type: boolean
+      inline:
+        description: gdata
+        format: byte
+        type: string
+      isPotentialRetry:
+        description: gdata
+        type: boolean
+      length:
+        description: gdata
+        format: int64
+        type: string
+      md5Hash:
+        description: gdata
+        format: byte
+        type: string
+      mediaId:
+        description: gdata
+        format: byte
+        type: string
+      objectId:
+        $ref: '#/definitions/GdataObjectId'
+        description: gdata
+      path:
+        description: gdata
+        type: string
+      referenceType:
+        description: gdata
+        enum:
+          - PATH
+          - BLOB_REF
+          - INLINE
+          - GET_MEDIA
+          - COMPOSITE_MEDIA
+          - BIGSTORE_REF
+          - DIFF_VERSION_RESPONSE
+          - DIFF_CHECKSUMS_RESPONSE
+          - DIFF_DOWNLOAD_RESPONSE
+          - DIFF_UPLOAD_REQUEST
+          - DIFF_UPLOAD_RESPONSE
+          - COSMO_BINARY_REFERENCE
+          - ARBITRARY_BYTES
+        type: string
+      sha1Hash:
+        description: gdata
+        format: byte
+        type: string
+      sha256Hash:
+        description: gdata
+        format: byte
+        type: string
+      timestamp:
+        description: gdata
+        format: uint64
+        type: string
+      token:
+        description: gdata
+        type: string
+    type: object
+  GdataObjectId:
+    description: gdata
+    properties:
+      bucketName:
+        description: gdata
+        type: string
+      generation:
+        description: gdata
+        format: int64
+        type: string
+      objectName:
+        description: gdata
+        type: string
+    type: object
   Job:
     description: A job creating reports of a specific type.
     properties:
@@ -587,13 +885,6 @@ definitions:
         items:
           $ref: '#/definitions/Report'
         type: array
-    type: object
-  Media:
-    description: Media resource.
-    properties:
-      resourceName:
-        description: Name of the media resource.
-        type: string
     type: object
   Report:
     description: |-

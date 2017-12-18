@@ -3225,7 +3225,9 @@ definitions:
               allow_unregistered_calls: true
     properties:
       allowUnregisteredCalls:
-        description: 'True, if the method allows unregistered calls; false otherwise.'
+        description: |-
+          If true, the selected method allows unregistered calls, e.g. calls
+          that don't identify any user or application.
         type: boolean
       selector:
         description: |-
@@ -3236,10 +3238,10 @@ definitions:
         type: string
       skipServiceControl:
         description: |-
-          True, if the method should skip service control. If so, no control plane
-          feature (like quota and billing) will be enabled.
-          This flag is used by ESP to allow some Endpoints customers to bypass
-          Google internal checks.
+          If true, the selected method should skip service control and the control
+          plane features, such as quota and billing, will not be available.
+          This flag is used by Google Cloud Endpoints to bypass checks for internal
+          methods, such as service health check methods.
         type: boolean
     type: object
   Visibility:

@@ -1440,6 +1440,43 @@ paths:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
+  '/{merchantId}/orders/{orderId}/setLineItemMetadata':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets (overrides) merchant provided annotations on the line item.
+      operationId: content.orders.setlineitemmetadata
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersSetLineItemMetadataRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersSetLineItemMetadataResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
   '/{merchantId}/orders/{orderId}/shipLineItems':
     parameters:
       - $ref: '#/parameters/alt'
@@ -1472,6 +1509,43 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/OrdersShipLineItemsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/updateLineItemShippingDetails':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Updates ship by and delivery by dates for a line item.
+      operationId: content.orders.updatelineitemshippingdetails
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersUpdateLineItemShippingDetailsRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersUpdateLineItemShippingDetailsResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
@@ -3278,6 +3352,11 @@ definitions:
     type: object
   OrderLineItem:
     properties:
+      annotations:
+        description: Annotations that are attached to the line item.
+        items:
+          $ref: '#/definitions/OrderMerchantProvidedAnnotation'
+        type: array
       cancellations:
         description: Cancellations of the line item.
         items:
@@ -3431,6 +3510,15 @@ definitions:
         description: Minimum transit time.
         format: uint32
         type: integer
+    type: object
+  OrderMerchantProvidedAnnotation:
+    properties:
+      key:
+        description: Key for additional merchant provided (as key-value pairs) annotation about the line item.
+        type: string
+      value:
+        description: Value for additional merchant provided (as key-value pairs) annotation about the line item.
+        type: string
     type: object
   OrderPaymentMethod:
     properties:
@@ -3754,9 +3842,15 @@ definitions:
       returnLineItem:
         $ref: '#/definitions/OrdersCustomBatchRequestEntryReturnLineItem'
         description: Required for returnLineItem method.
+      setLineItemMetadata:
+        $ref: '#/definitions/OrdersCustomBatchRequestEntrySetLineItemMetadata'
+        description: Required for setLineItemMetadata method.
       shipLineItems:
         $ref: '#/definitions/OrdersCustomBatchRequestEntryShipLineItems'
         description: Required for shipLineItems method.
+      updateLineItemShippingDetails:
+        $ref: '#/definitions/OrdersCustomBatchRequestEntryUpdateLineItemShippingDetails'
+        description: Required for updateLineItemShippingDate method.
       updateShipment:
         $ref: '#/definitions/OrdersCustomBatchRequestEntryUpdateShipment'
         description: Required for updateShipment method.
@@ -3835,6 +3929,19 @@ definitions:
         description: The explanation of the reason.
         type: string
     type: object
+  OrdersCustomBatchRequestEntrySetLineItemMetadata:
+    properties:
+      annotations:
+        items:
+          $ref: '#/definitions/OrderMerchantProvidedAnnotation'
+        type: array
+      lineItemId:
+        description: The ID of the line item to set metadata. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to set metadata. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+    type: object
   OrdersCustomBatchRequestEntryShipLineItems:
     properties:
       carrier:
@@ -3867,6 +3974,21 @@ definitions:
         type: string
       trackingId:
         description: The tracking id for the shipment.
+        type: string
+    type: object
+  OrdersCustomBatchRequestEntryUpdateLineItemShippingDetails:
+    properties:
+      deliverByDate:
+        description: 'Updated delivery by date, in ISO 8601 format. If not specified only ship by date is updated.'
+        type: string
+      lineItemId:
+        description: The ID of the line item to set metadata. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to set metadata. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      shipByDate:
+        description: 'Updated ship by date, in ISO 8601 format. If not specified only deliver by date is updated.'
         type: string
     type: object
   OrdersCustomBatchRequestEntryUpdateShipment:
@@ -4013,6 +4135,32 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersReturnLineItemResponse".'
         type: string
     type: object
+  OrdersSetLineItemMetadataRequest:
+    properties:
+      annotations:
+        items:
+          $ref: '#/definitions/OrderMerchantProvidedAnnotation'
+        type: array
+      lineItemId:
+        description: The ID of the line item to set metadata. Either lineItemId or productId is required.
+        type: string
+      operationId:
+        description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to set metadata. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+    type: object
+  OrdersSetLineItemMetadataResponse:
+    properties:
+      executionStatus:
+        description: The status of the execution.
+        type: string
+      kind:
+        default: 'content#ordersSetLineItemMetadataResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersSetLineItemMetadataResponse".'
+        type: string
+    type: object
   OrdersShipLineItemsRequest:
     properties:
       carrier:
@@ -4046,6 +4194,34 @@ definitions:
       kind:
         default: 'content#ordersShipLineItemsResponse'
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersShipLineItemsResponse".'
+        type: string
+    type: object
+  OrdersUpdateLineItemShippingDetailsRequest:
+    properties:
+      deliverByDate:
+        description: 'Updated delivery by date, in ISO 8601 format. If not specified only ship by date is updated.'
+        type: string
+      lineItemId:
+        description: The ID of the line item to set metadata. Either lineItemId or productId is required.
+        type: string
+      operationId:
+        description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to set metadata. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      shipByDate:
+        description: 'Updated ship by date, in ISO 8601 format. If not specified only deliver by date is updated.'
+        type: string
+    type: object
+  OrdersUpdateLineItemShippingDetailsResponse:
+    properties:
+      executionStatus:
+        description: The status of the execution.
+        type: string
+      kind:
+        default: 'content#ordersUpdateLineItemShippingDetailsResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersUpdateLineItemShippingDetailsResponse".'
         type: string
     type: object
   OrdersUpdateMerchantOrderIdRequest:

@@ -641,10 +641,10 @@ paths:
         - projects
   '/v1beta2/{name}':
     delete:
-      description: 'Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn''t support this method, it returns google.rpc.Code.UNIMPLEMENTED.'
-      operationId: dataproc.projects.regions.operations.delete
+      description: Deletes a workflow template. It does not cancel in-progress workflows.
+      operationId: dataproc.projects.locations.workflowTemplates.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: 'Required. The "resource name" of the workflow template, as described in https://cloud.google.com/apis/design/resource_names of the form projects/{project_id}/regions/{region}/workflowTemplates/{template_id}'
           in: path
           name: name
           required: true
@@ -665,10 +665,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: dataproc.projects.regions.operations.get
+      description: Retrieves the latest workflow template.Can retrieve previously instantiated template by specifying optional version parameter.
+      operationId: dataproc.projects.locations.workflowTemplates.get
       parameters:
-        - description: The name of the operation resource.
+        - description: 'Required. The "resource name" of the workflow template, as described in https://cloud.google.com/apis/design/resource_names of the form projects/{project_id}/regions/{region}/workflowTemplates/{template_id}'
           in: path
           name: name
           required: true
@@ -682,7 +682,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/WorkflowTemplate'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -704,7 +704,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     put:
       description: Updates (replaces) workflow template. The updated template must contain version that matches the current server version.
-      operationId: dataproc.projects.regions.workflowTemplates.update
+      operationId: dataproc.projects.locations.workflowTemplates.update
       parameters:
         - in: body
           name: body
@@ -778,7 +778,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Instantiates a template and begins execution.The returned Operation can be used to track execution of workflow by polling google.cloud.dataproc.v1beta2.OperationService.GetOperation. The Operation will complete when entire workflow is finished.The running workflow can be aborted via google.cloud.dataproc.v1beta2.OperationService.CancelOperation.The google.cloud.dataproc.v1beta2.Operation.metadata will always be google.cloud.dataproc.v1beta2.WorkflowMetadata.The google.cloud.dataproc.v1beta2.Operation.result will always be google.protobuf.Empty.
-      operationId: dataproc.projects.regions.workflowTemplates.instantiate
+      operationId: dataproc.projects.locations.workflowTemplates.instantiate
       parameters:
         - in: body
           name: body
@@ -803,7 +803,7 @@ paths:
   '/v1beta2/{parent}/workflowTemplates':
     get:
       description: Lists workflows that match the specified filter in the request.
-      operationId: dataproc.projects.regions.workflowTemplates.list
+      operationId: dataproc.projects.locations.workflowTemplates.list
       parameters:
         - description: Optional. The maximum number of results to return in each response.
           in: query
@@ -845,7 +845,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates new workflow template.
-      operationId: dataproc.projects.regions.workflowTemplates.create
+      operationId: dataproc.projects.locations.workflowTemplates.create
       parameters:
         - in: body
           name: body
@@ -1226,6 +1226,9 @@ definitions:
         description: Optional. Size in GB of the boot disk (default is 500GB).
         format: int32
         type: integer
+      bootDiskType:
+        description: 'Optional. Type of the boot disk (default is ''pd-standard''). Valid values: ''pd-ssd'', ''pd-standard'''
+        type: string
       numLocalSsds:
         description: 'Optional. Number of attached SSDs, from 0 to 4 (default is 0). If SSDs are not attached, the boot disk is used to store runtime logs and HDFS (https://hadoop.apache.org/docs/r1.2.1/hdfs_user_guide.html) data. If one or more SSDs are attached, this runtime bulk data is spread across them, and the boot disk contains only basic config and installed binaries.'
         format: int32
@@ -1395,6 +1398,9 @@ definitions:
       managedGroupConfig:
         $ref: '#/definitions/ManagedGroupConfig'
         description: Output-only. The config for Google Compute Engine Instance Group Manager that manages this group. This is only used for preemptible instance groups.
+      minCpuPlatform:
+        description: 'Optional. Specifies the minimum cpu platform for the Instance Group. Examples: * https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform'
+        type: string
       numInstances:
         description: 'Optional. The number of VM instances in the instance group. For master instance groups, must be set to 1.'
         format: int32
@@ -1487,7 +1493,7 @@ definitions:
         type: string
     type: object
   JobScheduling:
-    description: 'Job scheduling options.Beta Feature: These options are available for testing purposes only. They may be changed before final release.'
+    description: Job scheduling options.
     properties:
       maxFailuresPerHour:
         description: Optional. Maximum number of times per hour a driver may be restarted as a result of driver terminating with non-zero code before job is reported failed.A job may be reported as thrashing if driver exits with non-zero code 4 times within 10 minute window.Maximum value is 10.

@@ -641,6 +641,15 @@ definitions:
         items:
           $ref: '#/definitions/RoboDirective'
         type: array
+      startingIntents:
+        description: |-
+          The intents used to launch the app for the crawl.
+          If none are provided, then the main launcher activity is launched.
+          If some are provided, then only those provided are launched (the main
+          launcher activity must be provided explicitly).
+        items:
+          $ref: '#/definitions/RoboStartingIntent'
+        type: array
     type: object
   AndroidRuntimeConfiguration:
     description: Configuration that can be selected at the time a test is run.
@@ -909,6 +918,10 @@ definitions:
           Required
         type: string
     type: object
+  LauncherActivityIntent:
+    description: Specifies an intent that starts the main launcher activity.
+    properties: {}
+    type: object
   Locale:
     description: A location/region designation for language.
     properties:
@@ -1051,6 +1064,35 @@ definitions:
           Reference doc:
           https://developer.android.com/guide/topics/resources/accessing-resources.html
           Required
+        type: string
+    type: object
+  RoboStartingIntent:
+    description: Message for specifying the start activities to crawl
+    properties:
+      launcherActivity:
+        $ref: '#/definitions/LauncherActivityIntent'
+      startActivity:
+        $ref: '#/definitions/StartActivityIntent'
+    type: object
+  StartActivityIntent:
+    description: 'A starting intent specified by an action, uri, and categories.'
+    properties:
+      action:
+        description: |-
+          Action name.
+          Required for START_ACTIVITY.
+        type: string
+      categories:
+        description: |-
+          Intent categories to set on the intent.
+          Optional.
+        items:
+          type: string
+        type: array
+      uri:
+        description: |-
+          URI for the action.
+          Optional.
         type: string
     type: object
   TestDetails:

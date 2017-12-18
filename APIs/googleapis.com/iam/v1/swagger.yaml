@@ -704,6 +704,9 @@ paths:
       operationId: iam.organizations.roles.list
       parameters:
         - description: Optional limit on the number of roles to include in the response.
+          enum:
+            - BASIC
+            - FULL
           in: query
           name: pageSize
           type: integer

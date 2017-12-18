@@ -162,10 +162,10 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v3/{name}':
     delete:
-      description: Deletes an existing group.
-      operationId: monitoring.projects.groups.delete
+      description: Deletes a metric descriptor. Only user-created custom metrics can be deleted.
+      operationId: monitoring.projects.metricDescriptors.delete
       parameters:
-        - description: 'The group to delete. The format is "projects/{project_id_or_number}/groups/{group_id}".'
+        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example of {metric_id} is: "custom.googleapis.com/my_test_metric".'
           in: path
           name: name
           required: true
@@ -184,10 +184,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a single group.
-      operationId: monitoring.projects.groups.get
+      description: Gets a single metric descriptor. This method does not require a Stackdriver account.
+      operationId: monitoring.projects.metricDescriptors.get
       parameters:
-        - description: 'The group to retrieve. The format is "projects/{project_id_or_number}/groups/{group_id}".'
+        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example value of {metric_id} is "compute.googleapis.com/instance/disk/read_bytes_count".'
           in: path
           name: name
           required: true
@@ -197,7 +197,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Group'
+            $ref: '#/definitions/MetricDescriptor'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1391,6 +1391,24 @@ definitions:
         description: 'Required. The monitored resource type. For example, the type "cloudsql_database" represents databases in Google Cloud SQL. The maximum length of this value is 256 characters.'
         type: string
     type: object
+  MonitoredResourceMetadata:
+    description: 'Auxiliary metadata for a MonitoredResource object. MonitoredResource objects contain the minimum set of information to uniquely identify a monitored resource instance. There is some other useful auxiliary metadata. Google Stackdriver Monitoring & Logging uses an ingestion pipeline to extract metadata for cloud resources of all types , and stores the metadata in this message.'
+    properties:
+      systemLabels:
+        additionalProperties:
+          description: Properties of the object.
+        description: |
+          Output only. Values for predefined system metadata labels. System labels are a kind of metadata extracted by Google Stackdriver. Stackdriver determines what system labels are useful and how to obtain their values. Some examples: "machine_image", "vpc", "subnet_id", "security_group", "name", etc. System label values can be only strings, Boolean values, or a list of strings. For example:
+          { "name": "my-test-instance",
+            "security_group": ["a", "b", "c"],
+            "spot_instance": false }
+        type: object
+      userLabels:
+        additionalProperties:
+          type: string
+        description: Output only. A map of user-defined metadata labels.
+        type: object
+    type: object
   Option:
     description: 'A protocol buffer option, which can be attached to a message, field, enumeration, etc.'
     properties:
@@ -1495,6 +1513,9 @@ definitions:
   TimeSeries:
     description: A collection of data points that describes the time-varying values of a metric. A time series is identified by a combination of a fully-specified monitored resource and a fully-specified metric. This type is used for both listing and creating time series.
     properties:
+      metadata:
+        $ref: '#/definitions/MonitoredResourceMetadata'
+        description: 'Output only. The associated monitored resource metadata. When reading a a timeseries, this field will include metadata labels that are explicitly named in the reduction. When creating a timeseries, this field is ignored.'
       metric:
         $ref: '#/definitions/Metric'
         description: The associated metric. A fully-specified metric used to identify the time series.
@@ -1598,7 +1619,7 @@ definitions:
           $ref: '#/definitions/InternalChecker'
         type: array
       isInternal:
-        description: Denotes whether this check is a check that egresses from InternalCheckers.
+        description: Denotes whether this is a check that egresses from InternalCheckers.
         type: boolean
       monitoredResource:
         $ref: '#/definitions/MonitoredResource'

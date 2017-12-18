@@ -106,7 +106,7 @@ paths:
       operationId: drive.about.get
       parameters:
         - default: true
-          description: 'When calculating the number of remaining change IDs, whether to include public files the user has opened and shared files. When set to false, this counts only change IDs for owned files and any shared or public files that the user has explicitly added to a folder they own.'
+          description: 'Whether to count changes outside the My Drive hierarchy. When set to false, changes to files such as those in the Application Data folder or shared files which have not been added to My Drive will be omitted from the maxChangeIdCount.'
           in: query
           name: includeSubscribed
           type: boolean
@@ -242,7 +242,7 @@ paths:
           name: includeDeleted
           type: boolean
         - default: true
-          description: 'Whether to include public files the user has opened and shared files. When set to false, the list only includes owned files plus any shared or public files the user has explicitly added to a folder they own.'
+          description: 'Whether to include changes outside the My Drive hierarchy in the result. When set to false, changes to files such as those in the Application Data folder or shared files which have not been added to My Drive will be omitted from the result.'
           in: query
           name: includeSubscribed
           type: boolean
@@ -265,7 +265,7 @@ paths:
           in: query
           name: spaces
           type: string
-        - description: Change ID to start listing changes from.
+        - description: Deprecated - use pageToken instead.
           in: query
           name: startChangeId
           type: string
@@ -380,7 +380,7 @@ paths:
           name: includeDeleted
           type: boolean
         - default: true
-          description: 'Whether to include public files the user has opened and shared files. When set to false, the list only includes owned files plus any shared or public files the user has explicitly added to a folder they own.'
+          description: 'Whether to include changes outside the My Drive hierarchy in the result. When set to false, changes to files such as those in the Application Data folder or shared files which have not been added to My Drive will be omitted from the result.'
           in: query
           name: includeSubscribed
           type: boolean
@@ -407,7 +407,7 @@ paths:
           in: query
           name: spaces
           type: string
-        - description: Change ID to start listing changes from.
+        - description: Deprecated - use pageToken instead.
           in: query
           name: startChangeId
           type: string
@@ -446,7 +446,7 @@ paths:
         - changes
   '/changes/{changeId}':
     get:
-      description: Gets a specific change.
+      description: Deprecated - Use changes.getStartPageToken and changes.list to retrieve recent changes.
       operationId: drive.changes.get
       parameters:
         - description: The ID of the change.
@@ -904,7 +904,7 @@ paths:
           name: removeParents
           type: string
         - default: false
-          description: Whether to set the modified date with the supplied modified date.
+          description: 'Whether to set the modified date using the value supplied in the request body. Setting this field to true is equivalent to modifiedDateBehavior=fromBodyOrNow, and false is equivalent to modifiedDateBehavior=now. To prevent any changes to the modified date set modifiedDateBehavior=noChange.'
           in: query
           name: setModifiedDate
           type: boolean
@@ -1010,7 +1010,7 @@ paths:
           name: removeParents
           type: string
         - default: false
-          description: Whether to set the modified date with the supplied modified date.
+          description: 'Whether to set the modified date using the value supplied in the request body. Setting this field to true is equivalent to modifiedDateBehavior=fromBodyOrNow, and false is equivalent to modifiedDateBehavior=now. To prevent any changes to the modified date set modifiedDateBehavior=noChange.'
           in: query
           name: setModifiedDate
           type: boolean
@@ -1811,7 +1811,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/Permission'
-        - description: A custom message to include in notification emails.
+        - description: A plain text custom message to include in notification emails.
           in: query
           name: emailMessage
           type: string
