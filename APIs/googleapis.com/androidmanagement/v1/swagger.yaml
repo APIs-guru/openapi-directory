@@ -1650,6 +1650,9 @@ definitions:
   StatusReportingSettings:
     description: Settings controlling the behavior of status reports.
     properties:
+      deviceSettingsEnabled:
+        description: Whether device settings reporting is enabled.
+        type: boolean
       displayInfoEnabled:
         description: Whether displays reporting is enabled.
         type: boolean

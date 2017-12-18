@@ -224,6 +224,12 @@ definitions:
         description: 'The time the product was purchased, in milliseconds since the epoch (Jan 1, 1970).'
         format: int64
         type: string
+      purchaseType:
+        description: |-
+          The type of purchase of the inapp product. This field is only set if this purchase was not made using the standard in-app billing flow. Possible values are:  
+          - Test (i.e. purchased from a license testing account)
+        format: int32
+        type: integer
     type: object
   SubscriptionPurchase:
     description: A SubscriptionPurchase resource indicates the status of a user's subscription purchase.

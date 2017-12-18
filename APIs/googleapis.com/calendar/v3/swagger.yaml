@@ -620,6 +620,12 @@ paths:
           name: calendarId
           required: true
           type: string
+        - description: Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the CreateConferenceRequest. The default is 0.
+          in: query
+          maximum: 1
+          minimum: 0
+          name: conferenceDataVersion
+          type: integer
         - description: 'The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.'
           in: query
           minimum: 1
@@ -665,6 +671,12 @@ paths:
           name: calendarId
           required: true
           type: string
+        - description: Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the CreateConferenceRequest. The default is 0.
+          in: query
+          maximum: 1
+          minimum: 0
+          name: conferenceDataVersion
+          type: integer
         - description: Whether API client performing operation supports event attachments. Optional. The default is False.
           in: query
           name: supportsAttachments
@@ -935,6 +947,12 @@ paths:
           name: calendarId
           required: true
           type: string
+        - description: Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the CreateConferenceRequest. The default is 0.
+          in: query
+          maximum: 1
+          minimum: 0
+          name: conferenceDataVersion
+          type: integer
         - description: Event identifier.
           in: path
           name: eventId
@@ -980,6 +998,12 @@ paths:
           name: calendarId
           required: true
           type: string
+        - description: Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the CreateConferenceRequest. The default is 0.
+          in: query
+          maximum: 1
+          minimum: 0
+          name: conferenceDataVersion
+          type: integer
         - description: Event identifier.
           in: path
           name: eventId
@@ -1629,6 +1653,9 @@ definitions:
     type: object
   Calendar:
     properties:
+      conferenceProperties:
+        $ref: '#/definitions/ConferenceProperties'
+        description: 'Conferencing properties for this calendar, for example what types of conferences are allowed.'
       description:
         description: Description of the calendar. Optional.
         type: string
@@ -1689,6 +1716,9 @@ definitions:
       colorId:
         description: The color of the calendar. This is an ID referring to an entry in the calendar section of the colors definition (see the colors endpoint). This property is superseded by the backgroundColor and foregroundColor properties and can be ignored when using these properties. Optional.
         type: string
+      conferenceProperties:
+        $ref: '#/definitions/ConferenceProperties'
+        description: 'Conferencing properties for this calendar, for example what types of conferences are allowed.'
       defaultReminders:
         description: The default reminders that the authenticated user has for this calendar.
         items:
@@ -1836,6 +1866,166 @@ definitions:
         format: date-time
         type: string
     type: object
+  ConferenceData:
+    properties:
+      conferenceId:
+        description: |-
+          The ID of the conference.
+          Can be used by developers to keep track of conferences, should not be displayed to users.
+          Values for solution types:  
+          - "eventHangout": unset
+          - "eventNamedHangout": the name of the Hangout.
+          - "hangoutsMeet": the 10-letter meeting code, for example "aaa-bbbb-ccc".  Optional.
+        type: string
+      conferenceSolution:
+        $ref: '#/definitions/ConferenceSolution'
+        description: |-
+          The conference solution, such as Hangouts or Hangouts Meet.
+          Unset for a conference with failed create request.
+          Either conferenceSolution and at least one entryPoint, or createRequest is required.
+      createRequest:
+        $ref: '#/definitions/CreateConferenceRequest'
+        description: |-
+          A request to generate a new conference and attach it to the event. The data is generated asynchronously. To see whether the data is present check the status field.
+          Either conferenceSolution and at least one entryPoint, or createRequest is required.
+      entryPoints:
+        description: |-
+          Information about individual conference entry points, such as URLs or phone numbers.
+          All of them must belong to the same conference.
+          Either conferenceSolution and at least one entryPoint, or createRequest is required.
+        items:
+          $ref: '#/definitions/EntryPoint'
+        type: array
+      signature:
+        description: |-
+          The signature of the conference data.
+          Genereated on server side. Must be preserved while copying the conference data between events, otherwise the conference data will not be copied.
+          Unset for a conference with failed create request.
+          Optional for a conference with a pending create request.
+        type: string
+    type: object
+  ConferenceProperties:
+    properties:
+      allowedConferenceSolutionTypes:
+        description: |-
+          The types of conference solutions that are supported for this calendar.
+          The possible values are:  
+          - "eventHangout" 
+          - "eventNamedHangout" 
+          - "hangoutsMeet"  Optional.
+        items:
+          type: string
+        type: array
+    type: object
+  ConferenceRequestStatus:
+    properties:
+      statusCode:
+        description: |-
+          The current status of the conference create request. Read-only.
+          The possible values are:  
+          - "pending": the conference create request is still being processed.
+          - "success": the conference create request succeeded, the entry points are populated.
+          - "failure": the conference create request failed, there are no entry points.
+        type: string
+    type: object
+  ConferenceSolution:
+    properties:
+      iconUri:
+        description: The user-visible icon for this solution. Read-only.
+        type: string
+      key:
+        $ref: '#/definitions/ConferenceSolutionKey'
+        description: The key which can uniquely identify the conference solution for this event.
+      name:
+        description: The user-visible name of this solution. Not localized. Read-only.
+        type: string
+    type: object
+  ConferenceSolutionKey:
+    properties:
+      type:
+        description: |-
+          The conference solution type.
+          If a client encounters an unfamiliar or empty type, it should still be able to display the entry points. However, it should disallow modifications.
+          The possible values are:  
+          - "eventHangout" 
+          - "eventNamedHangout" 
+          - "hangoutsMeet"
+        type: string
+    type: object
+  CreateConferenceRequest:
+    properties:
+      conferenceSolutionKey:
+        $ref: '#/definitions/ConferenceSolutionKey'
+        description: 'The conference solution, such as Hangouts or Hangouts Meet.'
+      requestId:
+        description: |-
+          The client-generated unique ID for this request.
+          Clients should regenerate this ID for every new request. If an ID provided is the same as for the previous request, the request is ignored.
+        type: string
+      status:
+        $ref: '#/definitions/ConferenceRequestStatus'
+        description: The status of the conference create request.
+    type: object
+  EntryPoint:
+    properties:
+      accessCode:
+        description: |-
+          The Access Code to access the conference. The maximum length is 128 characters.
+          When creating new conference data, populate only the subset of {meetingCode, accessCode, passcode, password, pin} fields that match the terminology that the conference provider uses. Only the populated fields should be displayed.
+          Optional.
+        type: string
+      entryPointType:
+        description: |-
+          The type of the conference entry point.
+          Possible values are:  
+          - "video" - joining a conference over HTTP. A conference can have zero or one video entry point.
+          - "phone" - joining a conference by dialing a phone number. A conference can have zero or more phone entry points.
+          - "sip" - joining a conference over SIP. A conference can have zero or one sip entry point.
+          - "more" - further conference joining instructions, for example additional phone numbers. A conference can have zero or one more entry point. A conference with only a more entry point is not a valid conference.
+        type: string
+      label:
+        description: |-
+          The label for the URI.Visible to end users. Not localized. The maximum length is 512 characters.
+          Examples:  
+          - for video: meet.google.com/aaa-bbbb-ccc
+          - for phone: +1 123 268 2601
+          - for sip: sip:12345678@myprovider.com
+          - for more: should not be filled  
+          Optional.
+        type: string
+      meetingCode:
+        description: |-
+          The Meeting Code to access the conference. The maximum length is 128 characters.
+          When creating new conference data, populate only the subset of {meetingCode, accessCode, passcode, password, pin} fields that match the terminology that the conference provider uses. Only the populated fields should be displayed.
+          Optional.
+        type: string
+      passcode:
+        description: |-
+          The Passcode to access the conference. The maximum length is 128 characters.
+          When creating new conference data, populate only the subset of {meetingCode, accessCode, passcode, password, pin} fields that match the terminology that the conference provider uses. Only the populated fields should be displayed.
+        type: string
+      password:
+        description: |-
+          The Password to access the conference. The maximum length is 128 characters.
+          When creating new conference data, populate only the subset of {meetingCode, accessCode, passcode, password, pin} fields that match the terminology that the conference provider uses. Only the populated fields should be displayed.
+          Optional.
+        type: string
+      pin:
+        description: |-
+          The PIN to access the conference. The maximum length is 128 characters.
+          When creating new conference data, populate only the subset of {meetingCode, accessCode, passcode, password, pin} fields that match the terminology that the conference provider uses. Only the populated fields should be displayed.
+          Optional.
+        type: string
+      uri:
+        description: |-
+          The "URI" of the entry point. The maximum length is 1300 characters.
+          Format:  
+          - for video, http: or https: schema is required.
+          - for phone, tel: schema is required. The URI should include the entire dial sequence (e.g., tel:+12345678900,,,123456789;1234).
+          - for sip, sip: schema is required, e.g., sip:12345678@myprovider.com.
+          - for more, http: or https: schema is required.
+        type: string
+    type: object
   Error:
     properties:
       domain:
@@ -1876,6 +2066,9 @@ definitions:
       colorId:
         description: The color of the event. This is an ID referring to an entry in the event section of the colors definition (see the  colors endpoint). Optional.
         type: string
+      conferenceData:
+        $ref: '#/definitions/ConferenceData'
+        description: 'The conference-related information, such as details of a Hangouts Meet conference. To create new conference details use the createRequest field.'
       created:
         description: Creation time of the event (as a RFC3339 timestamp). Read-only.
         format: date-time

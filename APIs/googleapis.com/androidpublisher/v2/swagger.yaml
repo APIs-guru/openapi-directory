@@ -2635,6 +2635,12 @@ definitions:
         description: 'The time the product was purchased, in milliseconds since the epoch (Jan 1, 1970).'
         format: int64
         type: string
+      purchaseType:
+        description: |-
+          The type of purchase of the inapp product. This field is only set if this purchase was not made using the standard in-app billing flow. Possible values are:  
+          - Test (i.e. purchased from a license testing account)
+        format: int32
+        type: integer
     type: object
   Prorate:
     properties:
@@ -2727,7 +2733,8 @@ definitions:
           The reason why a subscription was cancelled or is not auto-renewing. Possible values are:  
           - User cancelled the subscription 
           - Subscription was cancelled by the system, for example because of a billing problem 
-          - Subscription was replaced with a new subscription
+          - Subscription was replaced with a new subscription 
+          - Subscription was cancelled by the developer
         format: int32
         type: integer
       countryCode:
@@ -2743,6 +2750,12 @@ definitions:
       kind:
         default: 'androidpublisher#subscriptionPurchase'
         description: This kind represents a subscriptionPurchase object in the androidpublisher service.
+        type: string
+      linkedPurchaseToken:
+        description: |-
+          The purchase token of the originating purchase if this subscription is one of the following:  
+          - Re-signup of a cancelled but non-lapsed subscription 
+          - Upgrade/downgrade from a previous subscription  For example, suppose a user originally signs up and you receive purchase token X, then the user cancels and goes through the resignup flow and you receive purchase token Y. If you call this API with purchase token Y, this field will be set to X. If you call this API with purchase token X, this field will not be set. If user upgrade his subscription after the first resignup. You receive purchase token Z. If you call this API with purchase token Z, this field will be set to Y.
         type: string
       orderId:
         description: The order id of the latest recurring order associated with the purchase of the subscription.
@@ -2762,6 +2775,12 @@ definitions:
       priceCurrencyCode:
         description: 'ISO 4217 currency code for the subscription price. For example, if the price is specified in British pounds sterling, price_currency_code is "GBP".'
         type: string
+      purchaseType:
+        description: |-
+          The type of purchase of the subscription. This field is only set if this purchase was not made using the standard in-app billing flow. Possible values are:  
+          - Test (i.e. purchased from a license testing account)
+        format: int32
+        type: integer
       startTimeMillis:
         description: 'Time at which the subscription was granted, in milliseconds since the Epoch.'
         format: int64

@@ -1761,7 +1761,7 @@ definitions:
     description: 'Automatic scaling is based on request rate, response latencies, and other application metrics.'
     properties:
       coolDownPeriod:
-        description: 'Amount of time that the Autoscaler (https://cloud.google.com/compute/docs/autoscaler/) should wait between changes to the number of virtual machines. Only applicable for VM runtimes.'
+        description: 'Amount of time that the Autoscaler (https://cloud.google.com/compute/docs/autoscaler/) should wait between changes to the number of virtual machines. Only applicable in the App Engine flexible environment.'
         format: google-duration
         type: string
       cpuUtilization:
@@ -1903,7 +1903,7 @@ definitions:
         description: 'The zip file for this deployment, if this is a zip deployment.'
     type: object
   DiskUtilization:
-    description: Target scaling by disk usage. Only applicable for VM runtimes.
+    description: Target scaling by disk usage. Only applicable in the App Engine flexible environment.
     properties:
       targetReadBytesPerSecond:
         description: Target bytes read per second.
@@ -2338,15 +2338,15 @@ definitions:
         type: integer
     type: object
   Network:
-    description: Extra network settings. Only applicable for App Engine flexible environment versions
+    description: Extra network settings. Only applicable in the App Engine flexible environment.
     properties:
       forwardedPorts:
-        description: 'List of ports, or port pairs, to forward from the virtual machine to the application container. Only applicable for App Engine flexible environment versions.'
+        description: 'List of ports, or port pairs, to forward from the virtual machine to the application container. Only applicable in the App Engine flexible environment.'
         items:
           type: string
         type: array
       instanceTag:
-        description: Tag to apply to the VM instance during creation. Only applicable for for App Engine flexible environment versions.
+        description: Tag to apply to the VM instance during creation. for Only applicable in the App Engine flexible environment.
         type: string
       name:
         description: 'Google Compute Engine network where the virtual machines are created. Specify the short name, not the resource path.Defaults to default.'
@@ -2360,7 +2360,7 @@ definitions:
         type: string
     type: object
   NetworkUtilization:
-    description: Target scaling by network usage. Only applicable for VM runtimes.
+    description: Target scaling by network usage. Only applicable in the App Engine flexible environment.
     properties:
       targetReceivedBytesPerSecond:
         description: Target bytes received per second.
@@ -2569,7 +2569,7 @@ definitions:
     properties: {}
     type: object
   RequestUtilization:
-    description: Target scaling by request utilization. Only applicable for VM runtimes.
+    description: Target scaling by request utilization. Only applicable in the App Engine flexible environment.
     properties:
       targetConcurrentRequests:
         description: Target number of concurrent requests.
@@ -2840,7 +2840,7 @@ definitions:
         $ref: '#/definitions/Deployment'
         description: Code and application artifacts that make up this version.Only returned in GET requests if view=FULL is set.
       diskUsageBytes:
-        description: Total size in bytes of all the files that are included in this version and curerntly hosted on the App Engine disk.@OutputOnly
+        description: Total size in bytes of all the files that are included in this version and currently hosted on the App Engine disk.@OutputOnly
         format: int64
         type: string
       endpointsApiService:
@@ -2866,7 +2866,7 @@ definitions:
         type: array
       healthCheck:
         $ref: '#/definitions/HealthCheck'
-        description: Configures health checking for VM instances. Unhealthy instances are stopped and replaced with new instances. Only applicable for VM runtimes.Only returned in GET requests if view=FULL is set.
+        description: Configures health checking for VM instances. Unhealthy instances are stopped and replaced with new instances. Only applicable in the App Engine flexible environment.Only returned in GET requests if view=FULL is set.
       id:
         description: 'Relative name of the version within the service. Example: v1. Version names can contain only lowercase letters, numbers, or hyphens. Reserved names: "default", "latest", and any name with the prefix "ah-".'
         type: string
@@ -2907,7 +2907,7 @@ definitions:
         type: string
       network:
         $ref: '#/definitions/Network'
-        description: Extra network settings. Only applicable for App Engine flexible environment versions.
+        description: Extra network settings. Only applicable in the App Engine flexible environment.
       nobuildFilesRegex:
         description: Files that match this pattern will not be built into this version. Only applicable for Go runtimes.Only returned in GET requests if view=FULL is set.
         type: string
@@ -2941,7 +2941,7 @@ definitions:
         type: boolean
     type: object
   Volume:
-    description: Volumes mounted within the app container. Only applicable for VM runtimes.
+    description: Volumes mounted within the app container. Only applicable in the App Engine flexible environment.
     properties:
       name:
         description: Unique name for the volume.

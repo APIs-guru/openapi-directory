@@ -605,17 +605,8 @@ paths:
             type: string
           name: messageTypes
           type: array
-        - description: Page size. The default page size is the maximum value of 1000 results.
-          in: query
-          name: pageSize
-          type: integer
         - collectionFormat: multi
-          description: |-
-            Pagination token, which can be used to request a specific page
-            of `ListTransferLogsRequest` list results. For multiple-page
-            results, `ListTransferLogsResponse` outputs
-            a `next_page` token, which can be used as the
-            `page_token` value to request the next page of list results.
+          description: Page size. The default page size is the maximum value of 1000 results.
           in: query
           items:
             enum:
@@ -624,6 +615,15 @@ paths:
               - WARNING
               - ERROR
             type: string
+          name: pageSize
+          type: integer
+        - description: |-
+            Pagination token, which can be used to request a specific page
+            of `ListTransferLogsRequest` list results. For multiple-page
+            results, `ListTransferLogsResponse` outputs
+            a `next_page` token, which can be used as the
+            `page_token` value to request the next page of list results.
+          in: query
           name: pageToken
           type: string
         - description: |-
@@ -787,7 +787,7 @@ definitions:
           for the data source.
         type: boolean
       minimumScheduleInterval:
-        description: The minimum interval between two consecutive scheduled runs.
+        description: The minimum interval for scheduler to schedule runs.
         format: google-duration
         type: string
       name:
@@ -1239,7 +1239,7 @@ definitions:
   TransferRun:
     description: |-
       Represents a data transfer run.
-      Next id: 25
+      Next id: 27
     properties:
       dataSourceId:
         description: Output only. Data source id.

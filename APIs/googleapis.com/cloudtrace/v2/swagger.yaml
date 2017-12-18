@@ -115,7 +115,7 @@ parameters:
 tags:
   - name: projects
 paths:
-  '/v2/{name}/spans':
+  '/v2/{name}':
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -132,7 +132,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new span.
-      operationId: cloudtrace.projects.traces.spans.create
+      operationId: cloudtrace.projects.traces.spans.createSpan
       parameters:
         - in: body
           name: body

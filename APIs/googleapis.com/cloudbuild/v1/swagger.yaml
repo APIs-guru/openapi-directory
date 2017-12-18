@@ -789,6 +789,18 @@ definitions:
           Default time is ten minutes.
         format: google-duration
         type: string
+      timing:
+        additionalProperties:
+          $ref: '#/definitions/TimeSpan'
+        description: |-
+          Stores timing information for phases of the build.
+          Valid keys are:
+          - BUILD: time to execute all build steps
+          - PUSH: time to push all specified images.
+          - FETCHSOURCE: time to fetch source.
+          If the build does not specify source, or does not specify images,
+          these keys will not be included.
+        type: object
     type: object
   BuildOperationMetadata:
     description: Metadata for build operations.
@@ -911,6 +923,9 @@ definitions:
         items:
           type: string
         type: array
+      timing:
+        $ref: '#/definitions/TimeSpan'
+        description: Stores timing information for executing this build step.
       volumes:
         description: |-
           List of volumes to mount into the build step.
@@ -992,6 +1007,9 @@ definitions:
           Name used to push the container image to Google Container Registry, as
           presented to `docker push`.
         type: string
+      pushTiming:
+        $ref: '#/definitions/TimeSpan'
+        description: Stores timing information for pushing the specified image.
     type: object
   CancelBuildRequest:
     description: Request to cancel an ongoing build.
@@ -1321,6 +1339,18 @@ definitions:
 
           This object must be a gzipped archive file (.tar.gz) containing source to
           build.
+        type: string
+    type: object
+  TimeSpan:
+    description: Stores start and end times for a build execution phase.
+    properties:
+      endTime:
+        description: End of time span.
+        format: google-datetime
+        type: string
+      startTime:
+        description: Start of time span.
+        format: google-datetime
         type: string
     type: object
   Volume:

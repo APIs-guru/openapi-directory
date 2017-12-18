@@ -1307,6 +1307,172 @@ paths:
             - 'https://www.googleapis.com/auth/admin.directory.notifications'
       tags:
         - notifications
+  '/customer/{customer}/resources/buildings':
+    get:
+      description: Retrieves a list of buildings for an account.
+      operationId: directory.resources.buildings.list
+      parameters:
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Buildings'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+      tags:
+        - resources
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Inserts a building.
+      operationId: directory.resources.buildings.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Building'
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Building'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+  '/customer/{customer}/resources/buildings/{buildingId}':
+    delete:
+      description: Deletes a building.
+      operationId: directory.resources.buildings.delete
+      parameters:
+        - description: The ID of the building to delete.
+          in: path
+          name: buildingId
+          required: true
+          type: string
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+    get:
+      description: Retrieves a building.
+      operationId: directory.resources.buildings.get
+      parameters:
+        - description: The unique ID of the building to retrieve.
+          in: path
+          name: buildingId
+          required: true
+          type: string
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Building'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+      tags:
+        - resources
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates a building. This method supports patch semantics.
+      operationId: directory.resources.buildings.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Building'
+        - description: The ID of the building to update.
+          in: path
+          name: buildingId
+          required: true
+          type: string
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Building'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+    put:
+      description: Updates a building.
+      operationId: directory.resources.buildings.update
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Building'
+        - description: The ID of the building to update.
+          in: path
+          name: buildingId
+          required: true
+          type: string
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Building'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
   '/customer/{customer}/resources/calendars':
     get:
       description: Retrieves a list of calendar resources for an account.
@@ -1323,9 +1489,17 @@ paths:
           minimum: 1
           name: maxResults
           type: integer
+        - description: 'Field(s) to sort results by in either ascending or descending order. Supported fields include resourceId, resourceName, capacity, buildingId, and floorName. If no order is specified, defaults to ascending. Should be of the form "field [asc|desc], field [asc|desc], ...". For example buildingId, capacity desc would return results sorted first by buildingId in ascending order then by capacity in descending order.'
+          in: query
+          name: orderBy
+          type: string
         - description: Token to specify the next page in the list.
           in: query
           name: pageToken
+          type: string
+        - description: 'String query used to filter results. Should be of the form "field operator value" where field can be any of supported fields and operators can be any of supported operations. Operators include ''='' for exact match and '':'' for prefix match where applicable. For prefix match, the value should always be followed by a *.'
+          in: query
+          name: query
           type: string
       responses:
         '200':
@@ -1484,6 +1658,211 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/CalendarResource'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+  '/customer/{customer}/resources/features':
+    get:
+      description: Retrieves a list of features for an account.
+      operationId: directory.resources.features.list
+      parameters:
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+        - description: Token to specify the next page in the list.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Features'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+      tags:
+        - resources
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Inserts a feature.
+      operationId: directory.resources.features.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Feature'
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Feature'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+  '/customer/{customer}/resources/features/{featureKey}':
+    delete:
+      description: Deletes a feature.
+      operationId: directory.resources.features.delete
+      parameters:
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+        - description: The unique ID of the feature to delete.
+          in: path
+          name: featureKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+    get:
+      description: Retrieves a feature.
+      operationId: directory.resources.features.get
+      parameters:
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+        - description: The unique ID of the feature to retrieve.
+          in: path
+          name: featureKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Feature'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+      tags:
+        - resources
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates a feature. This method supports patch semantics.
+      operationId: directory.resources.features.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Feature'
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+        - description: The unique ID of the feature to update.
+          in: path
+          name: featureKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Feature'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+    put:
+      description: Updates a feature.
+      operationId: directory.resources.features.update
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Feature'
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+        - description: The unique ID of the feature to update.
+          in: path
+          name: featureKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Feature'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+  '/customer/{customer}/resources/features/{oldName}/rename':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Renames a feature.
+      operationId: directory.resources.features.rename
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/FeatureRename'
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          type: string
+        - description: The unique ID of the feature to rename.
+          in: path
+          name: oldName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
@@ -3397,6 +3776,65 @@ definitions:
         description: 'The type of the API resource. This is always admin#directory#aspList.'
         type: string
     type: object
+  Building:
+    description: JSON template for Building object in Directory API.
+    properties:
+      buildingId:
+        description: Unique identifier for the building. The maximum length is 100 characters.
+        type: string
+      buildingName:
+        description: 'The building name as seen by users in Calendar. Must be unique for the customer. For example, "NYC-CHEL". The maximum length is 100 characters.'
+        type: string
+      coordinates:
+        $ref: '#/definitions/BuildingCoordinates'
+        description: 'The geographic coordinates of the center of the building, expressed as latitude and longitude in decimal degrees.'
+      description:
+        description: 'A brief description of the building. For example, "Chelsea Market".'
+        type: string
+      etags:
+        description: ETag of the resource.
+        type: string
+      floorNames:
+        description: 'The display names for all floors in this building. The floors are expected to be sorted in ascending order, from lowest floor to highest floor. For example, ["B2", "B1", "L", "1", "2", "2M", "3", "PH"] Must contain at least one entry.'
+        items:
+          type: string
+        type: array
+      kind:
+        default: 'admin#directory#resources#buildings#Building'
+        description: Kind of resource this is.
+        type: string
+    type: object
+  BuildingCoordinates:
+    description: JSON template for coordinates of a building in Directory API.
+    properties:
+      latitude:
+        description: Latitude in decimal degrees.
+        format: double
+        type: number
+      longitude:
+        description: Longitude in decimal degrees.
+        format: double
+        type: number
+    type: object
+  Buildings:
+    description: JSON template for Building List Response object in Directory API.
+    properties:
+      buildings:
+        description: The Buildings in this page of results.
+        items:
+          $ref: '#/definitions/Building'
+        type: array
+      etag:
+        description: ETag of the resource.
+        type: string
+      kind:
+        default: 'admin#directory#resources#buildings#buildingsList'
+        description: Kind of resource this is.
+        type: string
+      nextPageToken:
+        description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+        type: string
+    type: object
   CalendarResource:
     description: JSON template for Calendar Resource object in Directory API.
     properties:
@@ -3428,19 +3866,19 @@ definitions:
         description: The category of the calendar resource. Either CONFERENCE_ROOM or OTHER. Legacy data is set to CATEGORY_UNKNOWN.
         type: string
       resourceDescription:
-        description: 'Description of the resource, visible only to admins. The brief description of the calendar resource.'
+        description: 'Description of the resource, visible only to admins.'
         type: string
       resourceEmail:
-        description: The read-only email ID for the calendar resource. Generated as part of creating a new calendar resource. The read-only email for the calendar resource. Generated as part of creating a new calendar resource.
+        description: The read-only email for the calendar resource. Generated as part of creating a new calendar resource.
         type: string
       resourceId:
         description: The unique ID for the calendar resource.
         type: string
       resourceName:
-        description: 'The name of the calendar resource. For example, "Training Room 1A". The name of the calendar resource. For example, Training Room 1A'
+        description: 'The name of the calendar resource. For example, "Training Room 1A".'
         type: string
       resourceType:
-        description: 'The type of the calendar resource, intended for non-room resources. The type of the calendar resource. Used for grouping resources in the calendar user interface.'
+        description: 'The type of the calendar resource, intended for non-room resources.'
         type: string
       userVisibleDescription:
         description: 'Description of the resource, visible to users and admins.'
@@ -3622,6 +4060,21 @@ definitions:
         description: Final date the device will be supported (Read-only)
         format: date-time
         type: string
+      tpmVersionInfo:
+        properties:
+          family:
+            type: string
+          firmwareVersion:
+            type: string
+          manufacturer:
+            type: string
+          specLevel:
+            type: string
+          tpmModel:
+            type: string
+          vendorSpecific:
+            type: string
+        type: object
       willAutoRenew:
         description: Will Chromebook auto renew after support end date (Read-only)
         type: boolean
@@ -3831,6 +4284,32 @@ definitions:
     properties:
       feature:
         $ref: '#/definitions/Feature'
+    type: object
+  FeatureRename:
+    description: JSON request template for renaming a feature.
+    properties:
+      newName:
+        description: New name of the feature.
+        type: string
+    type: object
+  Features:
+    description: JSON template for Feature List Response object in Directory API.
+    properties:
+      etag:
+        description: ETag of the resource.
+        type: string
+      features:
+        description: The Features in this page of results.
+        items:
+          $ref: '#/definitions/Feature'
+        type: array
+      kind:
+        default: 'admin#directory#resources#features#featuresList'
+        description: Kind of resource this is.
+        type: string
+      nextPageToken:
+        description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+        type: string
     type: object
   Group:
     description: JSON template for Group resource in Directory API.
