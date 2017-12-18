@@ -201,6 +201,20 @@ definitions:
           type: string
         readOnly: true
         type: array
+  ResourceSkuRestrictionInfo:
+    properties:
+      locations:
+        description: Locations where the SKU is restricted
+        items:
+          type: string
+        readOnly: true
+        type: array
+      zones:
+        description: List of availability zones where the SKU is restricted.
+        items:
+          type: string
+        readOnly: true
+        type: array
   ResourceSkuRestrictions:
     description: Describes scaling information of a SKU.
     properties:
@@ -214,6 +228,10 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: ResourceSkuRestrictionsReasonCode
+      restrictionInfo:
+        $ref: '#/definitions/ResourceSkuRestrictionInfo'
+        description: The information about the restriction where the SKU cannot be used.
+        readOnly: true
       type:
         description: The type of restrictions.
         enum:

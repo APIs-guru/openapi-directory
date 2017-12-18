@@ -2,7 +2,6 @@ swagger: '2.0'
 schemes:
   - https
 host: management.azure.com
-x-hasEquivalentPaths: true
 info:
   description: The Compute Management Client.
   title: ComputeManagementClient
@@ -15,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/compute/resource-manager/Microsoft.Compute/2015-06-15/compute.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: compute
   x-tags:
@@ -76,7 +74,8 @@ paths:
       description: Gets a list of virtual machine extension image types.
       operationId: VirtualMachineExtensionImages_ListTypes
       parameters:
-        - in: path
+        - description: The name of a supported Azure region.
+          in: path
           name: location
           required: true
           type: string
@@ -100,7 +99,8 @@ paths:
       description: Gets a list of virtual machine extension image versions.
       operationId: VirtualMachineExtensionImages_ListVersions
       parameters:
-        - in: path
+        - description: The name of a supported Azure region.
+          in: path
           name: location
           required: true
           type: string
@@ -143,7 +143,8 @@ paths:
       description: Gets a virtual machine extension image.
       operationId: VirtualMachineExtensionImages_Get
       parameters:
-        - in: path
+        - description: The name of a supported Azure region.
+          in: path
           name: location
           required: true
           type: string
@@ -459,6 +460,36 @@ paths:
             $ref: '#/definitions/AvailabilitySet'
       tags:
         - AvailabilitySets
+    put:
+      description: Create or update an availability set.
+      operationId: AvailabilitySets_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the availability set.
+          in: path
+          name: availabilitySetName
+          required: true
+          type: string
+          x-ms-client-name: name
+        - description: Parameters supplied to the Create Availability Set operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/AvailabilitySet'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AvailabilitySet'
+      tags:
+        - AvailabilitySets
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/vmSizes':
     get:
       description: Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set.
@@ -484,36 +515,6 @@ paths:
       tags:
         - AvailabilitySets
       x-ms-pageable: {}
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}':
-    put:
-      description: Create or update an availability set.
-      operationId: AvailabilitySets_CreateOrUpdate
-      parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the availability set.
-          in: path
-          name: name
-          required: true
-          type: string
-        - description: Parameters supplied to the Create Availability Set operation.
-          in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/AvailabilitySet'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/AvailabilitySet'
-      tags:
-        - AvailabilitySets
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets':
     get:
       description: Gets a list of all VM scale sets under a resource group.
@@ -535,41 +536,6 @@ paths:
         - VirtualMachineScaleSets
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{name}':
-    put:
-      description: Create or update a VM scale set.
-      operationId: VirtualMachineScaleSets_CreateOrUpdate
-      parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the VM scale set to create or update.
-          in: path
-          name: name
-          required: true
-          type: string
-        - description: The scale set object.
-          in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/VirtualMachineScaleSet'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/VirtualMachineScaleSet'
-        '201':
-          description: Created
-          schema:
-            $ref: '#/definitions/VirtualMachineScaleSet'
-      tags:
-        - VirtualMachineScaleSets
-      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines':
     get:
       description: Gets a list of all virtual machines in a VM scale sets.
@@ -664,6 +630,41 @@ paths:
             $ref: '#/definitions/VirtualMachineScaleSet'
       tags:
         - VirtualMachineScaleSets
+    put:
+      description: Create or update a VM scale set.
+      operationId: VirtualMachineScaleSets_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the VM scale set to create or update.
+          in: path
+          name: vmScaleSetName
+          required: true
+          type: string
+          x-ms-client-name: name
+        - description: The scale set object.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/VirtualMachineScaleSet'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/VirtualMachineScaleSet'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/VirtualMachineScaleSet'
+      tags:
+        - VirtualMachineScaleSets
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/deallocate':
     post:
       description: Deallocates specific virtual machines in a VM scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set deallocates.
@@ -1632,7 +1633,7 @@ paths:
       x-ms-pageable: {}
 definitions:
   AdditionalUnattendContent:
-    description: 'Additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is a applied.'
+    description: 'Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied.'
     properties:
       componentName:
         description: 'The component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup.'
@@ -1643,18 +1644,18 @@ definitions:
           modelAsString: false
           name: ComponentNames
       content:
-        description: XML formatted content that is added to the unattend.xml file in the specified pass and component. The XML must be less than 4 KB and must include the root element for the setting or feature that is being inserted.
+        description: Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component. The XML must be less than 4KB and must include the root element for the setting or feature that is being inserted.
         type: string
       passName:
-        description: 'The pass name. Currently, the only allowable value is oobeSystem.'
+        description: 'The pass name. Currently, the only allowable value is OobeSystem.'
         enum:
-          - oobeSystem
+          - OobeSystem
         type: string
         x-ms-enum:
           modelAsString: false
           name: PassNames
       settingName:
-        description: 'Setting name (e.g. FirstLogonCommands, AutoLogon )'
+        description: 'Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon.'
         enum:
           - AutoLogon
           - FirstLogonCommands
@@ -1703,7 +1704,7 @@ definitions:
   AvailabilitySet:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: Create or update availability set parameters.
+    description: 'Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.'
     properties:
       properties:
         $ref: '#/definitions/AvailabilitySetProperties'
@@ -1739,13 +1740,13 @@ definitions:
           $ref: '#/definitions/SubResource'
         type: array
   BootDiagnostics:
-    description: Describes Boot Diagnostics.
+    description: 'Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view the output of your console log. <br><br> For both Windows and Linux virtual machines, Azure also enables you to see a screenshot of the VM from the hypervisor.'
     properties:
       enabled:
         description: Whether boot diagnostics should be enabled on the Virtual Machine.
         type: boolean
       storageUri:
-        description: URI of the storage account to use for placing the console output and screenshot.
+        description: Uri of the storage account to use for placing the console output and screenshot.
         type: string
   BootDiagnosticsInstanceView:
     description: The instance view of a virtual machine boot diagnostics.
@@ -1757,7 +1758,7 @@ definitions:
         description: The Linux serial console log blob Uri.
         type: string
   Caching:
-    description: The caching type.
+    description: 'Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**'
     enum:
       - None
       - ReadOnly
@@ -1773,11 +1774,11 @@ definitions:
         description: Operation output data (raw JSON)
         type: object
   CreateOption:
-    description: The create option.
+    description: 'Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
     enum:
-      - fromImage
-      - empty
-      - attach
+      - FromImage
+      - Empty
+      - Attach
     type: string
     x-ms-enum:
       modelAsString: false
@@ -1787,19 +1788,19 @@ definitions:
     properties:
       caching:
         $ref: '#/definitions/Caching'
-        description: The caching type.
+        description: 'Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**'
       createOption:
         $ref: '#/definitions/CreateOption'
-        description: The create option.
+        description: 'Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
       diskSizeGB:
-        description: 'The initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks.'
+        description: Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB
         format: int32
         type: integer
       image:
         $ref: '#/definitions/VirtualHardDisk'
-        description: 'The source user image virtual hard disk. This virtual hard disk will be copied before using it to attach to the virtual machine. If SourceImage is provided, the destination virtual hard disk must not exist.'
+        description: 'The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist.'
       lun:
-        description: The logical unit number.
+        description: Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         format: int32
         type: integer
       name:
@@ -1817,28 +1818,28 @@ definitions:
     description: Contains the data disk images information.
     properties:
       lun:
-        description: The LUN number for a data disk. This value is used to identify data disk image inside the VMImage and therefore it must be unique for each data disk.
+        description: Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         format: int32
         readOnly: true
         type: integer
   DiagnosticsProfile:
-    description: Describes a diagnostics profile.
+    description: 'Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15.'
     properties:
       bootDiagnostics:
         $ref: '#/definitions/BootDiagnostics'
-        description: Boot Diagnostics is a debugging feature which allows the user to view console output and/or a screenshot of the virtual machine from the hypervisor.
+        description: 'Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view the output of your console log. <br><br> For both Windows and Linux virtual machines, Azure also enables you to see a screenshot of the VM from the hypervisor.'
   DiskEncryptionSettings:
     description: Describes a Encryption Settings for a Disk
     properties:
       diskEncryptionKey:
         $ref: '#/definitions/KeyVaultSecretReference'
-        description: The disk encryption key which is a Key Vault Secret.
+        description: 'Specifies the location of the disk encryption key, which is a Key Vault Secret.'
       enabled:
         description: Specifies whether disk encryption should be enabled on the virtual machine.
         type: boolean
       keyEncryptionKey:
         $ref: '#/definitions/KeyVaultKeyReference'
-        description: The key encryption key which is Key Vault Key.
+        description: Specifies the location of the key encryption key in Key Vault.
     required:
       - diskEncryptionKey
   DiskInstanceView:
@@ -1853,10 +1854,10 @@ definitions:
           $ref: '#/definitions/InstanceViewStatus'
         type: array
   HardwareProfile:
-    description: Describes a hardware profile.
+    description: Specifies the hardware settings for the virtual machine.
     properties:
       vmSize:
-        description: The virtual machine size name.
+        description: 'Specifies the size of the virtual machine. For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> The available VM sizes depend on region and availability set. For a list of available sizes use these APIs:  <br><br> [List all available virtual machine sizes in an availability set](virtualmachines-list-sizes-availability-set.md) <br><br> [List all available virtual machine sizes in a region](virtualmachines-list-sizes-region.md) <br><br> [List all available virtual machine sizes for resizing](virtualmachines-list-sizes-for-resizing.md)'
         enum:
           - Basic_A0
           - Basic_A1
@@ -1915,10 +1916,10 @@ definitions:
           modelAsString: true
           name: VirtualMachineSizeTypes
   ImageReference:
-    description: The image reference.
+    description: 'Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations.'
     properties:
       offer:
-        description: The image offer.
+        description: Specifies the offer of the platform image or marketplace image used to create the virtual machine.
         type: string
       publisher:
         description: The image publisher.
@@ -1927,7 +1928,7 @@ definitions:
         description: The image SKU.
         type: string
       version:
-        description: 'The image version. The allowed formats are Major.Minor.Build or ''latest''. Major, Minor and Build are decimal numbers. Specify ''latest'' to use the latest version of the image.'
+        description: 'Specifies the version of the platform image or marketplace image used to create the virtual machine. The allowed formats are Major.Minor.Build or ''latest''. Major, Minor, and Build are decimal numbers. Specify ''latest'' to use the latest version of an image available at deploy time. Even if you use ''latest'', the VM image will not automatically update after deploy time even if a new version becomes available.'
         type: string
   InnerError:
     description: Inner error details.
@@ -1968,7 +1969,7 @@ definitions:
     description: Describes a reference to Key Vault Key
     properties:
       keyUrl:
-        description: The URL referencing a key in a Key Vault.
+        description: The URL referencing a key encryption key in Key Vault.
         type: string
       sourceVault:
         $ref: '#/definitions/SubResource'
@@ -1989,14 +1990,14 @@ definitions:
       - secretUrl
       - sourceVault
   LinuxConfiguration:
-    description: Describes Windows configuration of the OS Profile.
+    description: 'Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) <br><br> For running non-endorsed distributions, see [Information for Non-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).'
     properties:
       disablePasswordAuthentication:
         description: Specifies whether password authentication should be disabled.
         type: boolean
       ssh:
         $ref: '#/definitions/SshConfiguration'
-        description: The SSH configuration for linux VMs.
+        description: Specifies the ssh key configuration for a Linux OS.
   ListUsagesResult:
     description: The List Usages operation response.
     properties:
@@ -2020,37 +2021,37 @@ definitions:
         description: Specifies the primary network interface in case the virtual machine has more than 1 network interface.
         type: boolean
   NetworkProfile:
-    description: Describes a network profile.
+    description: Specifies the network interfaces of the virtual machine.
     properties:
       networkInterfaces:
-        description: Specifies the list of resource IDs for the network interfaces associated with the virtual machine.
+        description: Specifies the list of resource Ids for the network interfaces associated with the virtual machine.
         items:
           $ref: '#/definitions/NetworkInterfaceReference'
         type: array
   OSDisk:
-    description: Describes an Operating System disk.
+    description: 'Specifies information about the operating system disk used by the virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).'
     properties:
       caching:
         $ref: '#/definitions/Caching'
-        description: The caching type.
+        description: 'Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**'
       createOption:
         $ref: '#/definitions/CreateOption'
-        description: The create option.
+        description: 'Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
       diskSizeGB:
-        description: 'The initial disk size, in GB, for blank data disks, and the new desired size for resizing existing OS and data disks.'
+        description: Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB
         format: int32
         type: integer
       encryptionSettings:
         $ref: '#/definitions/DiskEncryptionSettings'
-        description: The disk encryption settings.
+        description: 'Specifies the encryption settings for the OS Disk. <br><br> Minimum api-version: 2015-06-15'
       image:
         $ref: '#/definitions/VirtualHardDisk'
-        description: 'The source user image virtual hard disk. The virtual hard disk will be copied before using it to attach to the virtual machine. If SourceImage is provided, the destination virtual hard disk must not exist.'
+        description: 'The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist.'
       name:
         description: The disk name.
         type: string
       osType:
-        description: The Operating System type.
+        description: 'This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. <br><br> Possible values are: <br><br> **Windows** <br><br> **Linux**'
         enum:
           - Windows
           - Linux
@@ -2080,31 +2081,31 @@ definitions:
     required:
       - operatingSystem
   OSProfile:
-    description: Describes an OS profile.
+    description: Specifies the operating system settings for the virtual machine.
     properties:
       adminPassword:
-        description: Specifies the password of the administrator account.
+        description: 'Specifies the password of the administrator account. <br><br> **Minimum-length (Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\W_]) <br><br> **Disallowed values:** "abc@123", "P@$$w0rd", "P@ssw0rd", "P@ssword123", "Pa$$word", "pass@word1", "Password!", "Password1", "Password22", "iloveyou!" <br><br> For resetting the password, see [How to reset the Remote Desktop service or its login password in a Windows VM](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-reset-rdp?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> For resetting root password, see [Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-vmaccess-extension?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#reset-root-password)'
         type: string
       adminUsername:
-        description: Specifies the name of the administrator account.
+        description: 'Specifies the name of the administrator account. <br><br> **Windows-only restriction:** Cannot end in "." <br><br> **Disallowed values:** "administrator", "admin", "user", "user1", "test", "user2", "test1", "user3", "admin1", "1", "123", "a", "actuser", "adm", "admin2", "aspnet", "backup", "console", "david", "guest", "john", "owner", "root", "server", "sql", "support", "support_388945a0", "sys", "test2", "test3", "user4", "user5". <br><br> **Minimum-length (Linux):** 1  character <br><br> **Max-length (Linux):** 64 characters <br><br> **Max-length (Windows):** 20 characters  <br><br><li> For root access to the Linux VM, see [Using root privileges on Linux virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-use-root-privileges?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)<br><li> For a list of built-in system users on Linux that should not be used in this field, see [Selecting User Names for Linux on Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-usernames?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)'
         type: string
       computerName:
-        description: Specifies the host OS name of the virtual machine.
+        description: 'Specifies the host OS name of the virtual machine. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions).'
         type: string
       customData:
-        description: Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes
+        description: 'Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. <br><br> For using cloud-init for your VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)'
         type: string
       linuxConfiguration:
         $ref: '#/definitions/LinuxConfiguration'
-        description: The Linux configuration of the OS profile.
+        description: 'Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) <br><br> For running non-endorsed distributions, see [Information for Non-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).'
       secrets:
-        description: The list of certificates for addition to the VM.
+        description: Specifies set of certificates that should be installed onto the virtual machine.
         items:
           $ref: '#/definitions/VaultSecretGroup'
         type: array
       windowsConfiguration:
         $ref: '#/definitions/WindowsConfiguration'
-        description: The Windows configuration of the OS profile.
+        description: Specifies Windows operating system settings on the virtual machine.
   OperationStatusResponse:
     description: Operation status response
     properties:
@@ -2131,13 +2132,13 @@ definitions:
         readOnly: true
         type: string
   Plan:
-    description: Plan for the resource.
+    description: 'Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.'
     properties:
       name:
         description: The plan ID.
         type: string
       product:
-        description: The offer ID.
+        description: Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element.
         type: string
       promotionCode:
         description: The promotion code.
@@ -2152,7 +2153,7 @@ definitions:
         description: The plan ID.
         type: string
       product:
-        description: The product ID.
+        description: Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element.
         type: string
       publisher:
         description: The publisher ID.
@@ -2191,14 +2192,14 @@ definitions:
     description: Describes a virtual machine scale set sku.
     properties:
       capacity:
-        description: The sku capacity.
+        description: Specifies the number of virtual machines in the scale set.
         format: int64
         type: integer
       name:
         description: The sku name.
         type: string
       tier:
-        description: The sku tier.
+        description: 'Specifies the tier of virtual machines in a scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br /> **Basic**'
         type: string
   SshConfiguration:
     description: SSH configuration for Linux based VMs running on Azure
@@ -2212,27 +2213,26 @@ definitions:
     description: Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.
     properties:
       keyData:
-        description: Certificate public key used to authenticate to the VM through SSH. The certificate must be in Pem format with or without headers.
+        description: 'SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).'
         type: string
       path:
-        description: 'Specifies the full path on the created VM where SSH public key is stored. If the file already exists, the specified key is appended to the file.'
+        description: 'Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys'
         type: string
   StorageProfile:
-    description: Describes a storage profile.
+    description: Specifies the storage settings for the virtual machine disks.
     properties:
       dataDisks:
-        description: The data disks.
+        description: 'Specifies the parameters that are used to add a data disk to a virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).'
         items:
           $ref: '#/definitions/DataDisk'
         type: array
       imageReference:
         $ref: '#/definitions/ImageReference'
-        description: The image reference.
+        description: 'Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations.'
       osDisk:
         $ref: '#/definitions/OSDisk'
-        description: The OS disk.
+        description: 'Specifies information about the operating system disk used by the virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).'
   SubResource:
-    description: A subresource
     properties:
       id:
         description: Resource Id
@@ -2242,7 +2242,7 @@ definitions:
     description: Describes an upgrade policy - automatic or manual.
     properties:
       mode:
-        description: The upgrade mode.
+        description: 'Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are  automatically updated at the same time.'
         enum:
           - Automatic
           - Manual
@@ -2290,17 +2290,17 @@ definitions:
     description: 'Describes a single certificate reference in a Key Vault, and where the certificate should reside on the VM.'
     properties:
       certificateStore:
-        description: 'The Certificate store in LocalMachine to add the certificate to on Windows, leave empty on Linux.'
+        description: 'For Windows VMs, specifies the certificate store on the Virtual Machine to which the certificate should be added. The specified certificate store is implicitly in the LocalMachine account. <br><br>For Linux VMs, the certificate file is placed under the /var/lib/waagent directory, with the file name <UppercaseThumbprint>.crt for the X509 certificate file and <UppercaseThumbpring>.prv for private key. Both of these files are .pem formatted.'
         type: string
       certificateUrl:
-        description: The URL referencing a secret in a Key Vault which contains a properly formatted certificate.
+        description: 'This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  "data":"<Base64-encoded-certificate>",<br>  "dataType":"pfx",<br>  "password":"<pfx-file-password>"<br>}'
         type: string
   VaultSecretGroup:
     description: Describes a set of certificates which are all in the same Key Vault.
     properties:
       sourceVault:
         $ref: '#/definitions/SubResource'
-        description: The Relative URL of the Key Vault containing all of the certificates in VaultCertificates.
+        description: The relative URL of the Key Vault containing all of the certificates in VaultCertificates.
       vaultCertificates:
         description: The list of key vault references in SourceVault which contain certificates.
         items:
@@ -2310,7 +2310,7 @@ definitions:
     description: Describes the uri of a disk.
     properties:
       uri:
-        description: The virtual hard disk's URI. Must be a valid URI to a virtual hard disk.
+        description: Specifies the virtual hard disk's uri.
         type: string
   VirtualMachine:
     allOf:
@@ -2319,7 +2319,7 @@ definitions:
     properties:
       plan:
         $ref: '#/definitions/Plan'
-        description: The purchase plan when deploying virtual machine from VM Marketplace images.
+        description: 'Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.'
       properties:
         $ref: '#/definitions/VirtualMachineProperties'
         x-ms-client-flatten: true
@@ -2390,10 +2390,10 @@ definitions:
         $ref: '#/definitions/InstanceViewStatus'
         description: The extension handler status.
       type:
-        description: Full type of the extension handler which includes both publisher and type.
+        description: Specifies the type of the extension; an example is "CustomScriptExtension".
         type: string
       typeHandlerVersion:
-        description: The type version of the extension handler.
+        description: Specifies the version of the script handler.
         type: string
   VirtualMachineExtensionImage:
     allOf:
@@ -2445,16 +2445,16 @@ definitions:
           $ref: '#/definitions/InstanceViewStatus'
         type: array
       type:
-        description: The full type of the extension handler which includes both publisher and type.
+        description: Specifies the type of the extension; an example is "CustomScriptExtension".
         type: string
       typeHandlerVersion:
-        description: The type version of the extension handler.
+        description: Specifies the version of the script handler.
         type: string
   VirtualMachineExtensionProperties:
     description: Describes the properties of a Virtual Machine Extension.
     properties:
       autoUpgradeMinorVersion:
-        description: Whether the extension handler should be automatically upgraded across minor versions.
+        description: 'Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.'
         type: boolean
       forceUpdateTag:
         description: How the extension handler should be forced to update even if the extension configuration has not changed.
@@ -2463,7 +2463,7 @@ definitions:
         $ref: '#/definitions/VirtualMachineExtensionInstanceView'
         description: The virtual machine extension instance view.
       protectedSettings:
-        description: Json formatted protected settings for the extension.
+        description: The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
         type: object
       provisioningState:
         description: 'The provisioning state, which only appears in the response.'
@@ -2476,10 +2476,10 @@ definitions:
         description: Json formatted public settings for the extension.
         type: object
       type:
-        description: The type of the extension handler.
+        description: Specifies the type of the extension; an example is "CustomScriptExtension".
         type: string
       typeHandlerVersion:
-        description: The type version of the extension handler.
+        description: Specifies the version of the script handler.
         type: string
   VirtualMachineImage:
     allOf:
@@ -2517,7 +2517,7 @@ definitions:
       tags:
         additionalProperties:
           type: string
-        description: The tags attached to the resource.
+        description: 'Specifies the tags that are assigned to the virtual machine. For more information about using tags, see [Using tags to organize your Azure resources](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags.md).'
         type: object
     required:
       - name
@@ -2527,7 +2527,7 @@ definitions:
     properties:
       bootDiagnostics:
         $ref: '#/definitions/BootDiagnosticsInstanceView'
-        description: The boot diagnostics.
+        description: 'Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view the output of your console log. <br><br> For both Windows and Linux virtual machines, Azure also enables you to see a screenshot of the VM from the hypervisor.'
       disks:
         description: The virtual machine disk information.
         items:
@@ -2573,33 +2573,33 @@ definitions:
     properties:
       availabilitySet:
         $ref: '#/definitions/SubResource'
-        description: The reference Id of the availability set to which the virtual machine belongs.
+        description: 'Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.'
       diagnosticsProfile:
         $ref: '#/definitions/DiagnosticsProfile'
-        description: The diagnostics profile.
+        description: 'Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15.'
       hardwareProfile:
         $ref: '#/definitions/HardwareProfile'
-        description: The hardware profile.
+        description: Specifies the hardware settings for the virtual machine.
       instanceView:
         $ref: '#/definitions/VirtualMachineInstanceView'
         description: The virtual machine instance view.
         readOnly: true
       licenseType:
-        description: Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system.
+        description: 'Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. <br><br> Possible values are: <br><br> Windows_Client <br><br> Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15'
         type: string
       networkProfile:
         $ref: '#/definitions/NetworkProfile'
-        description: The network profile.
+        description: Specifies the network interfaces of the virtual machine.
       osProfile:
         $ref: '#/definitions/OSProfile'
-        description: The OS profile.
+        description: Specifies the operating system settings for the virtual machine.
       provisioningState:
         description: 'The provisioning state, which only appears in the response.'
         readOnly: true
         type: string
       storageProfile:
         $ref: '#/definitions/StorageProfile'
-        description: The storage profile.
+        description: Specifies the storage settings for the virtual machine disks.
   VirtualMachineScaleSet:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -2780,10 +2780,10 @@ definitions:
     properties:
       caching:
         $ref: '#/definitions/Caching'
-        description: The caching type.
+        description: 'Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**'
       createOption:
         $ref: '#/definitions/CreateOption'
-        description: The create option.
+        description: 'Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
       image:
         $ref: '#/definitions/VirtualHardDisk'
         description: 'The Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist.'
@@ -2791,7 +2791,7 @@ definitions:
         description: The disk name.
         type: string
       osType:
-        description: The Operating System type.
+        description: 'This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. <br><br> Possible values are: <br><br> **Windows** <br><br> **Linux**'
         enum:
           - Windows
           - Linux
@@ -2811,13 +2811,13 @@ definitions:
     description: Describes a virtual machine scale set OS profile.
     properties:
       adminPassword:
-        description: The admin user password.
+        description: 'Specifies the password of the administrator account. <br><br> **Minimum-length (Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\W_]) <br><br> **Disallowed values:** "abc@123", "P@$$w0rd", "P@ssw0rd", "P@ssword123", "Pa$$word", "pass@word1", "Password!", "Password1", "Password22", "iloveyou!" <br><br> For resetting the password, see [How to reset the Remote Desktop service or its login password in a Windows VM](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-reset-rdp?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> For resetting root password, see [Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-vmaccess-extension?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#reset-root-password)'
         type: string
       adminUsername:
-        description: The admin user name.
+        description: 'Specifies the name of the administrator account. <br><br> **Windows-only restriction:** Cannot end in "." <br><br> **Disallowed values:** "administrator", "admin", "user", "user1", "test", "user2", "test1", "user3", "admin1", "1", "123", "a", "actuser", "adm", "admin2", "aspnet", "backup", "console", "david", "guest", "john", "owner", "root", "server", "sql", "support", "support_388945a0", "sys", "test2", "test3", "user4", "user5". <br><br> **Minimum-length (Linux):** 1  character <br><br> **Max-length (Linux):** 64 characters <br><br> **Max-length (Windows):** 20 characters  <br><br><li> For root access to the Linux VM, see [Using root privileges on Linux virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-use-root-privileges?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)<br><li> For a list of built-in system users on Linux that should not be used in this field, see [Selecting User Names for Linux on Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-usernames?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)'
         type: string
       computerNamePrefix:
-        description: The computer name prefix.
+        description: Specifies the computer name prefix for all of the virtual machines in the scale set. Computer name prefixes must be 1 to 15 characters long.
         type: string
       customData:
         description: A base-64 encoded string of custom data.
@@ -2853,7 +2853,7 @@ definitions:
     properties:
       capacity:
         $ref: '#/definitions/VirtualMachineScaleSetSkuCapacity'
-        description: Available scaling information.
+        description: Specifies the number of virtual machines in the scale set.
         readOnly: true
       resourceType:
         description: The type of resource the sku applies to.
@@ -2911,7 +2911,7 @@ definitions:
         type: string
       plan:
         $ref: '#/definitions/Plan'
-        description: The purchase plan when deploying virtual machine from VM Marketplace images.
+        description: 'Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.'
       properties:
         $ref: '#/definitions/VirtualMachineScaleSetVMProperties'
         x-ms-client-flatten: true
@@ -2942,7 +2942,7 @@ definitions:
     description: Specifies a list of virtual machine instance IDs from the VM scale set.
     properties:
       instanceIds:
-        description: The virtual machine scale set instance ids.
+        description: The virtual machine scale set instance ids. Omitting the virtual machine scale set instance ids will result in the operation being performed on all virtual machines in the virtual machine scale set.
         items:
           type: string
         type: array
@@ -2961,7 +2961,7 @@ definitions:
     properties:
       bootDiagnostics:
         $ref: '#/definitions/BootDiagnosticsInstanceView'
-        description: The boot diagnostics.
+        description: 'Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view the output of your console log. <br><br> For both Windows and Linux virtual machines, Azure also enables you to see a screenshot of the VM from the hypervisor.'
       disks:
         description: The disks information.
         items:
@@ -3019,13 +3019,13 @@ definitions:
     properties:
       availabilitySet:
         $ref: '#/definitions/SubResource'
-        description: The reference Id of the availability set to which this virtual machine belongs.
+        description: 'Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.'
       diagnosticsProfile:
         $ref: '#/definitions/DiagnosticsProfile'
-        description: The diagnostics profile.
+        description: 'Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15.'
       hardwareProfile:
         $ref: '#/definitions/HardwareProfile'
-        description: The hardware profile.
+        description: Specifies the hardware settings for the virtual machine.
       instanceView:
         $ref: '#/definitions/VirtualMachineInstanceView'
         description: The virtual machine instance view.
@@ -3035,20 +3035,20 @@ definitions:
         readOnly: true
         type: boolean
       licenseType:
-        description: 'The license type, which is for bring your own license scenario.'
+        description: 'Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. <br><br> Possible values are: <br><br> Windows_Client <br><br> Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15'
         type: string
       networkProfile:
         $ref: '#/definitions/NetworkProfile'
-        description: The network profile.
+        description: Specifies the network interfaces of the virtual machine.
       osProfile:
         $ref: '#/definitions/OSProfile'
-        description: The OS profile.
+        description: Specifies the operating system settings for the virtual machine.
       provisioningState:
         description: 'The provisioning state, which only appears in the response.'
         type: string
       storageProfile:
         $ref: '#/definitions/StorageProfile'
-        description: The storage profile.
+        description: Specifies the storage settings for the virtual machine disks.
   VirtualMachineSize:
     description: Describes the properties of a VM size.
     properties:
@@ -3107,10 +3107,10 @@ definitions:
     description: Describes Protocol and thumbprint of Windows Remote Management listener
     properties:
       certificateUrl:
-        description: The Certificate URL in KMS for Https listeners. Should be null for Http listeners.
+        description: 'This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  "data":"<Base64-encoded-certificate>",<br>  "dataType":"pfx",<br>  "password":"<pfx-file-password>"<br>}'
         type: string
       protocol:
-        description: The Protocol used by the WinRM listener. Http and Https are supported.
+        description: 'Specifies the protocol of listener. <br><br> Possible values are: <br>**http** <br><br> **https**'
         enum:
           - Http
           - Https
@@ -3119,22 +3119,22 @@ definitions:
           modelAsString: false
           name: ProtocolTypes
   WindowsConfiguration:
-    description: Describes Windows Configuration of the OS Profile.
+    description: Specifies Windows operating system settings on the virtual machine.
     properties:
       additionalUnattendContent:
-        description: Additional base-64 encoded XML formatted information that can be included in the Unattend.xml file.
+        description: 'Specifies additional base-64 encoded XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup.'
         items:
           $ref: '#/definitions/AdditionalUnattendContent'
         type: array
       enableAutomaticUpdates:
-        description: Indicates whether Windows updates are automatically installed on the VM.
+        description: Indicates whether virtual machine is enabled for automatic updates.
         type: boolean
       provisionVMAgent:
-        description: 'Indicates whether the virtual machine agent should be provisioned on the Virtual Machine. If not specified, then the default behavior is to set it to true.'
+        description: 'Indicates whether virtual machine agent should be provisioned on the virtual machine. <br><br> When this property is not specified in the request body, default behavior is to set it to true.  This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.'
         type: boolean
       timeZone:
-        description: The time zone of the VM
+        description: Specifies the time zone of the virtual machine. e.g. "Pacific Standard Time"
         type: string
       winRM:
         $ref: '#/definitions/WinRMConfiguration'
-        description: The Windows Remote Management configuration of the VM
+        description: Specifies the Windows Remote Management listeners. This enables remote Windows PowerShell.

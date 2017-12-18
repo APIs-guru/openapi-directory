@@ -15,7 +15,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/batch/resource-manager/Microsoft.Batch/2017-09-01/BatchManagement.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: batch-BatchManagement
   x-tags:
@@ -3455,7 +3454,7 @@ definitions:
         description: 'If omitted, the default value is Requeue.'
         title: Determines what to do with a node and its running task(s) if the pool size is decreasing.
       resizeTimeout:
-        description: 'The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).'
+        description: 'The default value is 15 minutes. Timeout values use ISO 8601 format. For example, use PT10M for 10 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).'
         format: duration
         title: The timeout for allocation of compute nodes to the pool.
         type: string

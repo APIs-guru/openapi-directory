@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/compute/resource-manager/Microsoft.ContainerService/2017-01-31/containerService.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: compute-containerService
   x-tags:
@@ -64,6 +63,68 @@ paths:
       summary: Gets a list of container services in the specified subscription.
       tags:
         - ContainerServices
+      x-ms-examples:
+        List Container Services:
+          parameters:
+            api-version: '2017-01-31'
+            subscriptionId: subid1
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid1/resourceGroups/RG1/providers/Microsoft.ContainerService/containerServices/acs1
+                    location: location1
+                    name: acs1
+                    properties:
+                      agentPoolProfiles:
+                        - count: 3
+                          dnsPrefix: acs1-rg1-e240e5agent
+                          fqdn: acs1-rg1-e240e5agent.location1.cloudapp.azure.com
+                          name: agentpool0
+                          vmSize: Standard_D2_v2
+                      diagnosticsProfile:
+                        vmDiagnostics:
+                          enabled: true
+                          storageUri: 'https://mjwjtrv73stvgdiag0.blob.core.windows.net/'
+                      linuxProfile:
+                        adminUsername: azureuser
+                        ssh:
+                          publicKeys:
+                            - keyData: |
+                                ssh-rsa AAAAB3NzaC1y...+0vNzo1FAdQ== user@hostname.local
+                      masterProfile:
+                        count: 1
+                        dnsPrefix: acs1-rg1-e240e5mgmt
+                        fqdn: acs1-rg1-e240e5mgmt.location1.cloudapp.azure.com
+                      orchestratorProfile:
+                        orchestratorType: DCOS
+                      provisioningState: Succeeded
+                    type: Microsoft.ContainerService/ContainerServices
+                  - id: /subscriptions/subid1/resourceGroups/RG1/providers/Microsoft.ContainerService/containerServices/acs2
+                    location: location1
+                    name: acs2
+                    properties:
+                      agentPoolProfiles:
+                        - count: 3
+                          dnsPrefix: acs2-rg1-e240e5agent
+                          name: agentpool0
+                          vmSize: Standard_D2_v2
+                      diagnosticsProfile:
+                        vmDiagnostics:
+                          enabled: true
+                      linuxProfile:
+                        adminUsername: azureuser
+                        ssh:
+                          publicKeys:
+                            - keyData: |
+                                ssh-rsa AAAAB3NzaC1y...+0vNzo1FAdQ== user@hostname.local
+                      masterProfile:
+                        count: 1
+                        dnsPrefix: acs2-rg1-e240e5mgmt
+                      orchestratorProfile:
+                        orchestratorType: DCOS
+                      provisioningState: Creating
+                    type: Microsoft.ContainerService/ContainerServices
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/containerServices':
@@ -86,6 +147,69 @@ paths:
       summary: Gets a list of container services in the specified resource group.
       tags:
         - ContainerService
+      x-ms-examples:
+        List Container Services by Resource Group:
+          parameters:
+            api-version: '2017-01-31'
+            resourceGroupName: rg1
+            subscriptionId: subid1
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid1/resourceGroups/RG1/providers/Microsoft.ContainerService/containerServices/acs1
+                    location: location1
+                    name: acs1
+                    properties:
+                      agentPoolProfiles:
+                        - count: 3
+                          dnsPrefix: acs1-rg1-e240e5agent
+                          fqdn: acs1-rg1-e240e5agent.location1.cloudapp.azure.com
+                          name: agentpool0
+                          vmSize: Standard_D2_v2
+                      diagnosticsProfile:
+                        vmDiagnostics:
+                          enabled: true
+                          storageUri: 'https://mjwjtrv73stvgdiag0.blob.core.windows.net/'
+                      linuxProfile:
+                        adminUsername: azureuser
+                        ssh:
+                          publicKeys:
+                            - keyData: |
+                                ssh-rsa AAAAB3NzaC1y...+0vNzo1FAdQ== user@hostname.local
+                      masterProfile:
+                        count: 1
+                        dnsPrefix: acs1-rg1-e240e5mgmt
+                        fqdn: acs1-rg1-e240e5mgmt.location1.cloudapp.azure.com
+                      orchestratorProfile:
+                        orchestratorType: DCOS
+                      provisioningState: Succeeded
+                    type: Microsoft.ContainerService/ContainerServices
+                  - id: /subscriptions/subid1/resourceGroups/RG1/providers/Microsoft.ContainerService/containerServices/acs2
+                    location: location1
+                    name: acs2
+                    properties:
+                      agentPoolProfiles:
+                        - count: 3
+                          dnsPrefix: acs2-rg1-e240e5agent
+                          name: agentpool0
+                          vmSize: Standard_D2_v2
+                      diagnosticsProfile:
+                        vmDiagnostics:
+                          enabled: true
+                      linuxProfile:
+                        adminUsername: azureuser
+                        ssh:
+                          publicKeys:
+                            - keyData: |
+                                ssh-rsa AAAAB3NzaC1y...+0vNzo1FAdQ== user@hostname.local
+                      masterProfile:
+                        count: 1
+                        dnsPrefix: acs2-rg1-e240e5mgmt
+                      orchestratorProfile:
+                        orchestratorType: DCOS
+                      provisioningState: Creating
+                    type: Microsoft.ContainerService/ContainerServices
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/containerServices/{containerServiceName}':
@@ -113,6 +237,16 @@ paths:
       summary: Deletes the specified container service.
       tags:
         - ContainerService
+      x-ms-examples:
+        Delete Container Service:
+          parameters:
+            api-version: '2017-01-31'
+            containerServiceName: acs1
+            resourceGroupName: rg1
+            subscriptionId: subid1
+          responses:
+            '202': {}
+            '204': {}
       x-ms-long-running-operation: true
     get:
       description: 'Gets the properties of the specified container service in the specified subscription and resource group. The operation returns the properties including state, orchestrator, number of masters and agents, and FQDNs of masters and agents. '
@@ -138,6 +272,44 @@ paths:
       summary: Gets the properties of the specified container service.
       tags:
         - ContainerService
+      x-ms-examples:
+        Get Container Service:
+          parameters:
+            api-version: '2017-01-31'
+            containerServiceName: acs1
+            resourceGroupName: rg1
+            subscriptionId: subid1
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.ContainerService/containerServices/acs1
+                location: location1
+                name: acs1
+                properties:
+                  agentPoolProfiles:
+                    - count: 3
+                      dnsPrefix: acs1-rg1-e240e5agent
+                      fqdn: acs1-rg1-e240e5agent.location1.cloudapp.azure.com
+                      name: agentpool0
+                      vmSize: Standard_D2_v2
+                  diagnosticsProfile:
+                    vmDiagnostics:
+                      enabled: true
+                      storageUri: 'https://mjwjtrv73stvgdiag0.blob.core.windows.net/'
+                  linuxProfile:
+                    adminUsername: azureuser
+                    ssh:
+                      publicKeys:
+                        - keyData: |
+                            ssh-rsa AAAAB3NzaC1y...+0vNzo1FAdQ== user@hostname.local
+                  masterProfile:
+                    count: 1
+                    dnsPrefix: acs1-rg1-e240e5mgmt
+                    fqdn: acs1-rg1-e240e5mgmt.location1.cloudapp.azure.com
+                  orchestratorProfile:
+                    orchestratorType: DCOS
+                  provisioningState: Succeeded
+                type: Microsoft.ContainerService/ContainerServices
     put:
       description: 'Creates or updates a container service with the specified configuration of orchestrator, masters, and agents.'
       operationId: ContainerServices_CreateOrUpdate
@@ -176,6 +348,106 @@ paths:
       summary: Creates or updates a container service.
       tags:
         - ContainerServices
+      x-ms-examples:
+        Create/Update Container Service:
+          parameters:
+            api-version: '2017-01-31'
+            containerServiceName: acs1
+            parameters:
+              location: location1
+            resourceGroupName: rg1
+            subscriptionId: subid1
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.ContainerService/containerServices/acs1
+                location: location1
+                name: acs1
+                properties:
+                  agentPoolProfiles:
+                    - count: 3
+                      dnsPrefix: acs1-rg1-e240e5agent
+                      fqdn: acs1-rg1-e240e5agent.location1.cloudapp.azure.com
+                      name: agentpool0
+                      vmSize: Standard_D2_v2
+                  diagnosticsProfile:
+                    vmDiagnostics:
+                      enabled: true
+                      storageUri: 'https://mjwjtrv73stvgdiag0.blob.core.windows.net/'
+                  linuxProfile:
+                    adminUsername: azureuser
+                    ssh:
+                      publicKeys:
+                        - keyData: |
+                            ssh-rsa AAAAB3NzaC1y...+0vNzo1FAdQ== user@hostname.local
+                  masterProfile:
+                    count: 1
+                    dnsPrefix: acs1-rg1-e240e5mgmt
+                    fqdn: acs1-rg1-e240e5mgmt.location1.cloudapp.azure.com
+                  orchestratorProfile:
+                    orchestratorType: DCOS
+                  provisioningState: Creating
+                type: Microsoft.ContainerService/ContainerServices
+            '201':
+              body:
+                id: /subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.ContainerService/containerServices/acs1
+                location: location1
+                name: acs1
+                properties:
+                  agentPoolProfiles:
+                    - count: 3
+                      dnsPrefix: acs1-rg1-e240e5agent
+                      fqdn: acs1-rg1-e240e5agent.location1.cloudapp.azure.com
+                      name: agentpool0
+                      vmSize: Standard_D2_v2
+                  diagnosticsProfile:
+                    vmDiagnostics:
+                      enabled: true
+                      storageUri: 'https://mjwjtrv73stvgdiag0.blob.core.windows.net/'
+                  linuxProfile:
+                    adminUsername: azureuser
+                    ssh:
+                      publicKeys:
+                        - keyData: |
+                            ssh-rsa AAAAB3NzaC1y...+0vNzo1FAdQ== user@hostname.local
+                  masterProfile:
+                    count: 1
+                    dnsPrefix: acs1-rg1-e240e5mgmt
+                    fqdn: acs1-rg1-e240e5mgmt.location1.cloudapp.azure.com
+                  orchestratorProfile:
+                    orchestratorType: DCOS
+                  provisioningState: Creating
+                type: Microsoft.ContainerService/ContainerServices
+            '202':
+              body:
+                id: /subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.ContainerService/containerServices/acs1
+                location: location1
+                name: acs1
+                properties:
+                  agentPoolProfiles:
+                    - count: 3
+                      dnsPrefix: acs1-rg1-e240e5agent
+                      fqdn: acs1-rg1-e240e5agent.location1.cloudapp.azure.com
+                      name: agentpool0
+                      vmSize: Standard_D2_v2
+                  diagnosticsProfile:
+                    vmDiagnostics:
+                      enabled: true
+                      storageUri: 'https://mjwjtrv73stvgdiag0.blob.core.windows.net/'
+                  linuxProfile:
+                    adminUsername: azureuser
+                    ssh:
+                      publicKeys:
+                        - keyData: |
+                            ssh-rsa AAAAB3NzaC1y...+0vNzo1FAdQ== user@hostname.local
+                  masterProfile:
+                    count: 1
+                    dnsPrefix: acs1-rg1-e240e5mgmt
+                    fqdn: acs1-rg1-e240e5mgmt.location1.cloudapp.azure.com
+                  orchestratorProfile:
+                    orchestratorType: DCOS
+                  provisioningState: Creating
+                type: Microsoft.ContainerService/ContainerServices
       x-ms-long-running-operation: true
 definitions:
   ContainerService:

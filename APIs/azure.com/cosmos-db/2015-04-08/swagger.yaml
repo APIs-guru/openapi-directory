@@ -50,6 +50,30 @@ parameters:
     name: api-version
     required: true
     type: string
+  collectionRidParameter:
+    description: Cosmos DB collection rid.
+    in: path
+    name: collectionRid
+    required: true
+    type: string
+  databaseRidParameter:
+    description: Cosmos DB database rid.
+    in: path
+    name: databaseRid
+    required: true
+    type: string
+  filterParameter:
+    description: 'An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.'
+    in: query
+    name: $filter
+    required: true
+    type: string
+  regionParameter:
+    description: 'Cosmos DB region, with spaces between words and each word capitalized.'
+    in: path
+    name: region
+    required: true
+    type: string
   resourceGroupNameParameter:
     description: Name of an Azure resource group.
     in: path
@@ -65,6 +89,12 @@ parameters:
     in: path
     name: subscriptionId
     required: true
+    type: string
+  usageFilterParameter:
+    description: 'An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).'
+    in: query
+    name: $filter
+    required: false
     type: string
 paths:
   '/providers/Microsoft.DocumentDB/databaseAccountNames/{accountName}':
@@ -492,6 +522,272 @@ paths:
                 tags: {}
                 type: Microsoft.DocumentDB/databaseAccounts
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/metricDefinitions':
+    get:
+      description: Retrieves metric defintions for the given collection.
+      operationId: Collection_ListMetricDefinitions
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/databaseRidParameter'
+        - $ref: '#/parameters/collectionRidParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The metric definitions for the collection were retrieved successfully.
+          schema:
+            $ref: '#/definitions/MetricDefinitionsListResult'
+      x-ms-examples:
+        CosmosDBCollectionGetMetricDefinitions:
+          parameters:
+            accountName: ddb1
+            api-version: '2015-04-08'
+            collectionRid: collectionRid
+            databaseRid: databaseRid
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - metricAvailabilities:
+                      - retention: P2D
+                        timeGrain: PT5M
+                      - retention: P14D
+                        timeGrain: PT1H
+                      - retention: P60D
+                        timeGrain: P1D
+                    name:
+                      localizedValue: Total Requests
+                      value: Total Requests
+                    primaryAggregationType: Total
+                    resourceUri: /subscriptions/subId/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1
+                    unit: Count
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/metrics':
+    get:
+      description: Retrieves the metrics determined by the given filter for the given database account and collection.
+      operationId: Collection_ListMetrics
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/databaseRidParameter'
+        - $ref: '#/parameters/collectionRidParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/filterParameter'
+      responses:
+        '200':
+          description: The metrics for the database account were retrieved successfully.
+          schema:
+            $ref: '#/definitions/MetricListResult'
+      x-ms-examples:
+        CosmosDBCollectionGetMetrics:
+          parameters:
+            $filter: '$filter=(name.value eq ''Total Requests'') and timeGrain eq duration''PT5M'' and startTime eq ''2017-11-19T23:53:55.2780000Z'' and endTime eq ''2017-11-20T00:13:55.2780000Z'
+            accountName: ddb1
+            api-version: '2015-04-08'
+            collectionRid: collectionRid
+            databaseRid: databaseRid
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - endTime: '2017-11-20T00:13:55.2780000Z'
+                    metricValues:
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-19T23:53:55.2780000Z'
+                        total: 0
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-19T23:58:55.2780000Z'
+                        total: 0
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-20T00:03:55.2780000Z'
+                        total: 0
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-20T00:08:55.2780000Z'
+                        total: 0
+                    name:
+                      localizedValue: Total Requests
+                      value: Total Requests
+                    startTime: '2017-11-19T23:53:55.2780000Z'
+                    timeGrain: PT5M
+                    unit: Count
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/usages':
+    get:
+      description: Retrieves the usages (most recent storage data) for the given collection.
+      operationId: Collection_ListUsages
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/databaseRidParameter'
+        - $ref: '#/parameters/collectionRidParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/usageFilterParameter'
+      responses:
+        '200':
+          description: The usages for the collection were retrieved successfully.
+          schema:
+            $ref: '#/definitions/UsagesResult'
+      x-ms-examples:
+        CosmosDBCollectionGetUsages:
+          parameters:
+            $filter: $filter=name.value eq 'Storage'
+            accountName: ddb1
+            api-version: '2015-04-08'
+            collectionRid: collectionRid
+            databaseRid: databaseRid
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - currentValue: 0
+                    limit: 10737418240
+                    name:
+                      localizedValue: Storage
+                      value: Storage
+                    quotaPeriod: P1D
+                    unit: Bytes
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/metricDefinitions':
+    get:
+      description: Retrieves metric defintions for the given database.
+      operationId: Database_ListMetricDefinitions
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/databaseRidParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The metric definitions for the database were retrieved successfully.
+          schema:
+            $ref: '#/definitions/MetricDefinitionsListResult'
+      x-ms-examples:
+        CosmosDBDatabaseGetMetricDefinitions:
+          parameters:
+            accountName: ddb1
+            api-version: '2015-04-08'
+            databaseRid: databaseRid
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - metricAvailabilities:
+                      - retention: P2D
+                        timeGrain: PT5M
+                      - retention: P14D
+                        timeGrain: PT1H
+                      - retention: P60D
+                        timeGrain: P1D
+                    name:
+                      localizedValue: Total Requests
+                      value: Total Requests
+                    primaryAggregationType: Total
+                    resourceUri: /subscriptions/subId/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1
+                    unit: Count
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/metrics':
+    get:
+      description: Retrieves the metrics determined by the given filter for the given database account and database.
+      operationId: Database_ListMetrics
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/databaseRidParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/filterParameter'
+      responses:
+        '200':
+          description: The metrics for the database account were retrieved successfully.
+          schema:
+            $ref: '#/definitions/MetricListResult'
+      x-ms-examples:
+        CosmosDBDatabaseGetMetrics:
+          parameters:
+            $filter: '$filter=(name.value eq ''Total Requests'') and timeGrain eq duration''PT5M'' and startTime eq ''2017-11-19T23:53:55.2780000Z'' and endTime eq ''2017-11-20T00:13:55.2780000Z'
+            accountName: ddb1
+            api-version: '2015-04-08'
+            databaseRid: rid
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - endTime: '2017-11-20T00:13:55.2780000Z'
+                    metricValues:
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-19T23:53:55.2780000Z'
+                        total: 0
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-19T23:58:55.2780000Z'
+                        total: 0
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-20T00:03:55.2780000Z'
+                        total: 0
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-20T00:08:55.2780000Z'
+                        total: 0
+                    name:
+                      localizedValue: Total Requests
+                      value: Total Requests
+                    startTime: '2017-11-19T23:53:55.2780000Z'
+                    timeGrain: PT5M
+                    unit: Count
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/usages':
+    get:
+      description: Retrieves the usages (most recent data) for the given database.
+      operationId: Database_ListUsages
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/databaseRidParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/usageFilterParameter'
+      responses:
+        '200':
+          description: The usages for the database were retrieved successfully.
+          schema:
+            $ref: '#/definitions/UsagesResult'
+      x-ms-examples:
+        CosmosDBDatabaseGetUsages:
+          parameters:
+            $filter: $filter=name.value eq 'Storage'
+            accountName: ddb1
+            api-version: '2015-04-08'
+            databaseRid: databaseRid
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - currentValue: 0
+                    limit: 10737418240
+                    name:
+                      localizedValue: Storage
+                      value: Storage
+                    quotaPeriod: P1D
+                    unit: Bytes
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/failoverPriorityChange':
     post:
       description: Changes the failover priority for the Azure Cosmos DB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.
@@ -594,6 +890,96 @@ paths:
                   primaryReadonlyMasterKey: primaryReadonlyMasterKey
                   secondaryReadonlyMasterKey: secondaryReadonlyMasterKey
                 secondaryMasterKey: secondaryMasterKey
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/metricDefinitions':
+    get:
+      description: Retrieves metric defintions for the given database account.
+      operationId: DatabaseAccounts_ListMetricDefinitions
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The metric definitions for the database account were retrieved successfully.
+          schema:
+            $ref: '#/definitions/MetricDefinitionsListResult'
+      x-ms-examples:
+        CosmosDBDatabaseAccountGetMetricDefinitions:
+          parameters:
+            accountName: ddb1
+            api-version: '2015-04-08'
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - metricAvailabilities:
+                      - retention: P2D
+                        timeGrain: PT5M
+                      - retention: P14D
+                        timeGrain: PT1H
+                      - retention: P60D
+                        timeGrain: P1D
+                    name:
+                      localizedValue: Total Requests
+                      value: Total Requests
+                    primaryAggregationType: Total
+                    resourceUri: /subscriptions/subId/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1
+                    unit: Count
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/metrics':
+    get:
+      description: Retrieves the metrics determined by the given filter for the given database account.
+      operationId: DatabaseAccounts_ListMetrics
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/filterParameter'
+      responses:
+        '200':
+          description: The metrics for the database account were retrieved successfully.
+          schema:
+            $ref: '#/definitions/MetricListResult'
+      x-ms-examples:
+        CosmosDBDatabaseAccountGetMetrics:
+          parameters:
+            $filter: '$filter=(name.value eq ''Total Requests'') and timeGrain eq duration''PT5M'' and startTime eq ''2017-11-19T23:53:55.2780000Z'' and endTime eq ''2017-11-20T00:13:55.2780000Z'
+            accountName: ddb1
+            api-version: '2015-04-08'
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - endTime: '2017-11-20T00:13:55.2780000Z'
+                    metricValues:
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-19T23:53:55.2780000Z'
+                        total: 0
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-19T23:58:55.2780000Z'
+                        total: 0
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-20T00:03:55.2780000Z'
+                        total: 0
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-20T00:08:55.2780000Z'
+                        total: 0
+                    name:
+                      localizedValue: Total Requests
+                      value: Total Requests
+                    startTime: '2017-11-19T23:53:55.2780000Z'
+                    timeGrain: PT5M
+                    unit: Count
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/readonlykeys':
     get:
       description: Lists the read-only access keys for the specified Azure Cosmos DB database account.
@@ -653,6 +1039,152 @@ paths:
             '200': {}
             '202': {}
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/region/{region}/databases/{databaseRid}/collections/{collectionRid}/metrics':
+    get:
+      description: 'Retrieves the metrics determined by the given filter for the given database account, collection and region.'
+      operationId: CollectionRegion_ListMetrics
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/regionParameter'
+        - $ref: '#/parameters/databaseRidParameter'
+        - $ref: '#/parameters/collectionRidParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/filterParameter'
+      responses:
+        '200':
+          description: The metrics for the database account were retrieved successfully.
+          schema:
+            $ref: '#/definitions/MetricListResult'
+      x-ms-examples:
+        CosmosDBRegionCollectionGetMetrics:
+          parameters:
+            $filter: '$filter=(name.value eq ''Total Requests'') and timeGrain eq duration''PT5M'' and startTime eq ''2017-11-19T23:53:55.2780000Z'' and endTime eq ''2017-11-20T00:13:55.2780000Z'
+            accountName: ddb1
+            api-version: '2015-04-08'
+            collectionRid: collectionRid
+            databaseRid: databaseRid
+            region: North Europe
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - endTime: '2017-11-20T00:13:55.2780000Z'
+                    metricValues:
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-19T23:53:55.2780000Z'
+                        total: 0
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-19T23:58:55.2780000Z'
+                        total: 0
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-20T00:03:55.2780000Z'
+                        total: 0
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-20T00:08:55.2780000Z'
+                        total: 0
+                    name:
+                      localizedValue: Total Requests
+                      value: Total Requests
+                    startTime: '2017-11-19T23:53:55.2780000Z'
+                    timeGrain: PT5M
+                    unit: Count
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/region/{region}/metrics':
+    get:
+      description: Retrieves the metrics determined by the given filter for the given database account and region.
+      operationId: DatabaseAccountRegion_ListMetrics
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/regionParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/filterParameter'
+      responses:
+        '200':
+          description: The metrics for the database account were retrieved successfully.
+          schema:
+            $ref: '#/definitions/MetricListResult'
+      x-ms-examples:
+        CosmosDBDatabaseAccountRegionGetMetrics:
+          parameters:
+            $filter: '$filter=(name.value eq ''Total Requests'') and timeGrain eq duration''PT5M'' and startTime eq ''2017-11-19T23:53:55.2780000Z'' and endTime eq ''2017-11-20T00:13:55.2780000Z'
+            accountName: ddb1
+            api-version: '2015-04-08'
+            region: North Europe
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - endTime: '2017-11-20T00:13:55.2780000Z'
+                    metricValues:
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-19T23:53:55.2780000Z'
+                        total: 0
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-19T23:58:55.2780000Z'
+                        total: 0
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-20T00:03:55.2780000Z'
+                        total: 0
+                      - _count: 0
+                        average: 0
+                        timestamp: '2017-11-20T00:08:55.2780000Z'
+                        total: 0
+                    name:
+                      localizedValue: Total Requests
+                      value: Total Requests
+                    startTime: '2017-11-19T23:53:55.2780000Z'
+                    timeGrain: PT5M
+                    unit: Count
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/usages':
+    get:
+      description: Retrieves the usages (most recent data) for the given database account.
+      operationId: DatabaseAccounts_ListUsages
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/usageFilterParameter'
+      responses:
+        '200':
+          description: The usages for the database account were retrieved successfully.
+          schema:
+            $ref: '#/definitions/UsagesResult'
+      x-ms-examples:
+        CosmosDBDatabaseAccountGetUsages:
+          parameters:
+            $filter: $filter=name.value eq 'Storage'
+            accountName: ddb1
+            api-version: '2015-04-08'
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - currentValue: 0
+                    limit: 10737418240
+                    name:
+                      localizedValue: Storage
+                      value: Storage
+                    quotaPeriod: P1D
+                    unit: Bytes
 definitions:
   ConsistencyPolicy:
     description: The consistency policy for the Cosmos DB database account.
@@ -923,6 +1455,143 @@ definitions:
       provisioningState:
         $ref: '#/definitions/ProvisioningState'
     type: object
+  Metric:
+    description: Metric data
+    properties:
+      endTime:
+        description: The end time for the metric (ISO-8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      metricValues:
+        description: The metric values for the specified time window and timestep.
+        items:
+          $ref: '#/definitions/MetricValue'
+        readOnly: true
+        type: array
+      name:
+        $ref: '#/definitions/MetricName'
+        description: The name information for the metric.
+        readOnly: true
+      startTime:
+        description: The start time for the metric (ISO-8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      timeGrain:
+        description: The time grain to be used to summarize the metric values.
+        readOnly: true
+        type: string
+      unit:
+        $ref: '#/definitions/UnitType'
+        description: The unit of the metric.
+  MetricAvailability:
+    description: The availability of the metric.
+    properties:
+      retention:
+        description: The retention for the metric values.
+        readOnly: true
+        type: string
+      timeGrain:
+        description: The time grain to be used to summarize the metric values.
+        readOnly: true
+        type: string
+  MetricDefinition:
+    description: The definition of a metric.
+    properties:
+      metricAvailabilities:
+        description: The list of metric availabilities for the account.
+        items:
+          $ref: '#/definitions/MetricAvailability'
+        readOnly: true
+        type: array
+      name:
+        $ref: '#/definitions/MetricName'
+        description: The name information for the metric.
+        readOnly: true
+      primaryAggregationType:
+        description: The primary aggregation type of the metric.
+        enum:
+          - None
+          - Average
+          - Total
+          - Minimimum
+          - Maximum
+          - Last
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: PrimaryAggregationType
+      resourceUri:
+        description: The resource uri of the database.
+        readOnly: true
+        type: string
+      unit:
+        $ref: '#/definitions/UnitType'
+        description: The unit of the metric.
+  MetricDefinitionsListResult:
+    description: The response to a list metric definitions request.
+    properties:
+      value:
+        description: The list of metric definitions for the account.
+        items:
+          $ref: '#/definitions/MetricDefinition'
+        readOnly: true
+        type: array
+  MetricListResult:
+    description: The response to a list metrics request.
+    properties:
+      value:
+        description: The list of metrics for the account.
+        items:
+          $ref: '#/definitions/Metric'
+        readOnly: true
+        type: array
+  MetricName:
+    description: A metric name.
+    properties:
+      localizedValue:
+        description: The friendly name of the metric.
+        readOnly: true
+        type: string
+      value:
+        description: The name of the metric.
+        readOnly: true
+        type: string
+  MetricValue:
+    description: Represents metrics values.
+    properties:
+      _count:
+        description: The number of values for the metric.
+        format: int32
+        readOnly: true
+        type: number
+      average:
+        description: The average value of the metric.
+        format: double
+        readOnly: true
+        type: number
+      maximum:
+        description: The max value of the metric.
+        format: double
+        readOnly: true
+        type: number
+      minimum:
+        description: The min value of the metric.
+        format: double
+        readOnly: true
+        type: number
+      timestamp:
+        description: The metric timestamp (ISO-8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      total:
+        description: The total value of the metric.
+        format: double
+        readOnly: true
+        type: number
   Operation:
     description: REST API operation
     properties:
@@ -989,3 +1658,49 @@ definitions:
       type: string
     description: Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.
     type: object
+  UnitType:
+    description: The unit of the metric.
+    enum:
+      - Count
+      - Bytes
+      - Seconds
+      - Percent
+      - CountPerSecond
+      - BytesPerSecond
+      - Milliseconds
+    readOnly: true
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: UnitType
+  Usage:
+    description: The usage data for a usage request.
+    properties:
+      currentValue:
+        description: Current value for this metric
+        readOnly: true
+        type: integer
+      limit:
+        description: Maximum value for this metric
+        readOnly: true
+        type: integer
+      name:
+        $ref: '#/definitions/MetricName'
+        description: The name information for the metric.
+        readOnly: true
+      quotaPeriod:
+        description: The quota period used to summarize the usage values.
+        readOnly: true
+        type: string
+      unit:
+        $ref: '#/definitions/UnitType'
+        description: The unit of the metric.
+  UsagesResult:
+    description: The response to a list usage request.
+    properties:
+      value:
+        description: The list of usages for the database. A usage is a point in time metric
+        items:
+          $ref: '#/definitions/Usage'
+        readOnly: true
+        type: array

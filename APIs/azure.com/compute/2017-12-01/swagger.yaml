@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/compute/resource-manager/Microsoft.Compute/2017-12-01/compute.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: compute
   x-tags:
@@ -860,6 +859,7 @@ paths:
                     networkInterfaceConfigurations:
                       - name: '{vmss-name}'
                         properties:
+                          enableIPForwarding: true
                           ipConfigurations:
                             - name: '{vmss-name}'
                               properties:
@@ -905,6 +905,7 @@ paths:
                             dnsSettings:
                               dnsServers: []
                             enableAcceleratedNetworking: false
+                            enableIPForwarding: true
                             ipConfigurations:
                               - name: '{vmss-name}'
                                 properties:
@@ -946,6 +947,7 @@ paths:
                     networkInterfaceConfigurations:
                       - name: '{vmss-name}'
                         properties:
+                          enableIPForwarding: true
                           ipConfigurations:
                             - name: '{vmss-name}'
                               properties:
@@ -1000,6 +1002,7 @@ paths:
                             dnsSettings:
                               dnsServers: []
                             enableAcceleratedNetworking: false
+                            enableIPForwarding: true
                             ipConfigurations:
                               - name: '{vmss-name}'
                                 properties:
@@ -1045,6 +1048,7 @@ paths:
                     networkInterfaceConfigurations:
                       - name: '{vmss-name}'
                         properties:
+                          enableIPForwarding: true
                           ipConfigurations:
                             - name: '{vmss-name}'
                               properties:
@@ -1091,6 +1095,7 @@ paths:
                             dnsSettings:
                               dnsServers: []
                             enableAcceleratedNetworking: false
+                            enableIPForwarding: true
                             ipConfigurations:
                               - name: '{vmss-name}'
                                 properties:
@@ -1135,6 +1140,7 @@ paths:
                     networkInterfaceConfigurations:
                       - name: '{vmss-name}'
                         properties:
+                          enableIPForwarding: true
                           ipConfigurations:
                             - name: '{vmss-name}'
                               properties:
@@ -1188,6 +1194,7 @@ paths:
                             dnsSettings:
                               dnsServers: []
                             enableAcceleratedNetworking: false
+                            enableIPForwarding: true
                             ipConfigurations:
                               - name: '{vmss-name}'
                                 properties:
@@ -1232,6 +1239,7 @@ paths:
                     networkInterfaceConfigurations:
                       - name: '{vmss-name}'
                         properties:
+                          enableIPForwarding: true
                           ipConfigurations:
                             - name: '{vmss-name}'
                               properties:
@@ -1283,6 +1291,7 @@ paths:
                             dnsSettings:
                               dnsServers: []
                             enableAcceleratedNetworking: false
+                            enableIPForwarding: true
                             ipConfigurations:
                               - name: '{vmss-name}'
                                 properties:
@@ -1329,6 +1338,7 @@ paths:
                     networkInterfaceConfigurations:
                       - name: '{vmss-name}'
                         properties:
+                          enableIPForwarding: true
                           ipConfigurations:
                             - name: '{vmss-name}'
                               properties:
@@ -1382,6 +1392,7 @@ paths:
                             dnsSettings:
                               dnsServers: []
                             enableAcceleratedNetworking: false
+                            enableIPForwarding: true
                             ipConfigurations:
                               - name: '{vmss-name}'
                                 properties:
@@ -1434,6 +1445,7 @@ paths:
                     networkInterfaceConfigurations:
                       - name: '{vmss-name}'
                         properties:
+                          enableIPForwarding: true
                           ipConfigurations:
                             - name: '{vmss-name}'
                               properties:
@@ -1487,6 +1499,7 @@ paths:
                             dnsSettings:
                               dnsServers: []
                             enableAcceleratedNetworking: false
+                            enableIPForwarding: true
                             ipConfigurations:
                               - name: '{vmss-name}'
                                 properties:
@@ -1531,6 +1544,7 @@ paths:
                     networkInterfaceConfigurations:
                       - name: '{vmss-name}'
                         properties:
+                          enableIPForwarding: true
                           ipConfigurations:
                             - name: '{vmss-name}'
                               properties:
@@ -1587,6 +1601,7 @@ paths:
                             dnsSettings:
                               dnsServers: []
                             enableAcceleratedNetworking: false
+                            enableIPForwarding: true
                             ipConfigurations:
                               - name: '{vmss-name}'
                                 properties:
@@ -1644,6 +1659,7 @@ paths:
                     networkInterfaceConfigurations:
                       - name: '{vmss-name}'
                         properties:
+                          enableIPForwarding: true
                           ipConfigurations:
                             - name: '{vmss-name}'
                               properties:
@@ -1693,6 +1709,7 @@ paths:
                             dnsSettings:
                               dnsServers: []
                             enableAcceleratedNetworking: false
+                            enableIPForwarding: true
                             ipConfigurations:
                               - name: '{vmss-name}'
                                 properties:
@@ -1737,6 +1754,7 @@ paths:
                     networkInterfaceConfigurations:
                       - name: '{vmss-name}'
                         properties:
+                          enableIPForwarding: true
                           ipConfigurations:
                             - name: '{vmss-name}'
                               properties:
@@ -1786,6 +1804,7 @@ paths:
                             dnsSettings:
                               dnsServers: []
                             enableAcceleratedNetworking: false
+                            enableIPForwarding: true
                             ipConfigurations:
                               - name: '{vmss-name}'
                                 properties:
@@ -1830,6 +1849,7 @@ paths:
                     networkInterfaceConfigurations:
                       - name: '{vmss-name}'
                         properties:
+                          enableIPForwarding: true
                           ipConfigurations:
                             - name: '{vmss-name}'
                               properties:
@@ -1884,6 +1904,7 @@ paths:
                             dnsSettings:
                               dnsServers: []
                             enableAcceleratedNetworking: false
+                            enableIPForwarding: true
                             ipConfigurations:
                               - name: '{vmss-name}'
                                 properties:
@@ -5663,18 +5684,26 @@ definitions:
   VirtualMachineIdentity:
     description: Identity for the virtual machine.
     properties:
+      identityIds:
+        description: 'The list of user identities associated with the Virtual Machine. The user identity references will be ARM resource ids in the form: ''/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/identities/{identityName}''.'
+        items:
+          type: string
+        type: array
       principalId:
-        description: The principal id of virtual machine identity.
+        description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
         readOnly: true
         type: string
       tenantId:
-        description: The tenant id associated with the virtual machine.
+        description: The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
         readOnly: true
         type: string
       type:
-        description: 'The type of identity used for the virtual machine. Currently, the only supported type is ''SystemAssigned'', which implicitly creates an identity.'
+        description: 'The type of identity used for the virtual machine. The type ''SystemAssigned, UserAssigned'' includes both an implicitly created identity and a set of user assigned identities. The type ''None'' will remove any identities from the virtual machine.'
         enum:
           - SystemAssigned
+          - UserAssigned
+          - 'SystemAssigned, UserAssigned'
+          - None
         type: string
         x-ms-enum:
           modelAsString: false
@@ -5967,18 +5996,26 @@ definitions:
   VirtualMachineScaleSetIdentity:
     description: Identity for the virtual machine scale set.
     properties:
+      identityIds:
+        description: 'The list of user identities associated with the virtual machine scale set. The user identity references will be ARM resource ids in the form: ''/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/identities/{identityName}''.'
+        items:
+          type: string
+        type: array
       principalId:
-        description: The principal id of virtual machine scale set identity.
+        description: The principal id of virtual machine scale set identity. This property will only be provided for a system assigned identity.
         readOnly: true
         type: string
       tenantId:
-        description: The tenant id associated with the virtual machine scale set.
+        description: The tenant id associated with the virtual machine scale set. This property will only be provided for a system assigned identity.
         readOnly: true
         type: string
       type:
-        description: 'The type of identity used for the virtual machine scale set. Currently, the only supported type is ''SystemAssigned'', which implicitly creates an identity.'
+        description: 'The type of identity used for the virtual machine scale set. The type ''SystemAssigned, UserAssigned'' includes both an implicitly created identity and a set of user assigned identities. The type ''None'' will remove any identities from the virtual machine scale set.'
         enum:
           - SystemAssigned
+          - UserAssigned
+          - 'SystemAssigned, UserAssigned'
+          - None
         type: string
         x-ms-enum:
           modelAsString: false
@@ -6084,6 +6121,9 @@ definitions:
         description: The dns settings to be applied on the network interfaces.
       enableAcceleratedNetworking:
         description: Specifies whether the network interface is accelerated networking-enabled.
+        type: boolean
+      enableIPForwarding:
+        description: Whether IP forwarding enabled on this NIC.
         type: boolean
       ipConfigurations:
         description: Specifies the IP configurations of the network interface.
@@ -6361,6 +6401,9 @@ definitions:
         description: The dns settings to be applied on the network interfaces.
       enableAcceleratedNetworking:
         description: Specifies whether the network interface is accelerated networking-enabled.
+        type: boolean
+      enableIPForwarding:
+        description: Whether IP forwarding enabled on this NIC.
         type: boolean
       ipConfigurations:
         description: The virtual machine scale set IP Configuration.

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/machinelearningcompute/resource-manager/Microsoft.MachineLearningCompute/2017-08-01-preview/machineLearningCompute.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: machinelearningcompute-machineLearningCompute
   x-tags:
@@ -48,6 +47,13 @@ parameters:
     pattern: '^[a-zA-Z][-\w\._\(\)]+[a-zA-Z0-9]$'
     required: true
     type: string
+    x-ms-parameter-location: method
+  DeleteAllParameter:
+    description: 'If true, deletes all resources associated with this cluster.'
+    in: query
+    name: deleteAll
+    required: false
+    type: boolean
     x-ms-parameter-location: method
   ResourceGroupNameParameter:
     description: Name of the resource group in which the cluster is located.
@@ -381,6 +387,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
         - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/DeleteAllParameter'
       responses:
         '202':
           description: 'The delete request was accepted and will complete asynchronously. The know the progress of the delete operation do a GET call on the URI in the Location header. For more information about Asynchronous Operations, see https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-async-operations.'
@@ -1297,13 +1304,13 @@ definitions:
     description: SSL configuration. If configured data-plane calls to user services will be exposed over SSL only.
     properties:
       cert:
-        description: The SSL cert data in PEM format encoded as base64 string
+        description: The SSL cert data in PEM format.
         type: string
       cname:
         description: The CName of the certificate.
         type: string
       key:
-        description: The SSL key data in PEM format encoded as base64 string. This is not returned in response of GET/PUT on the resource. To see this please call listKeys API.
+        description: The SSL key data in PEM format. This is not returned in response of GET/PUT on the resource. To see this please call listKeys API.
         type: string
       status:
         default: Enabled

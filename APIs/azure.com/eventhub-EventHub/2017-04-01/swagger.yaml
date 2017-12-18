@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/eventhub/resource-manager/Microsoft.EventHub/2017-04-01/EventHub.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: eventhub-EventHub
   x-tags:
@@ -2267,13 +2266,13 @@ paths:
             alias: sdk-DisasterRecovery-3814
             api-version: '2017-04-01'
             namespaceName: sdk-Namespace-8859
-            resourceGroupName: ardsouzatestRG
-            subscriptionId: 5f750a97-50d9-4e36-8081-c9ee4c0210d4
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: exampleSubscriptionId
           responses:
             '200':
               body:
                 value:
-                  - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/ardsouzatestRG/providers/Microsoft.EventHub/namespaces/sdk-Namespace-8859/disasterRecoveryConfig/sdk-DisasterRecovery-3814
+                  - id: /subscriptions/exampleSubscriptionId/resourceGroups/exampleResourceGroup/providers/Microsoft.EventHub/namespaces/sdk-Namespace-8859/disasterRecoveryConfig/sdk-DisasterRecovery-3814
                     name: sdk-DisasterRecovery-3814
                     properties:
                       partnerNamespace: sdk-Namespace-37
@@ -2283,6 +2282,48 @@ paths:
                     type: Microsoft.EventHub/Namespaces/DisasterRecoveryConfig
       x-ms-pageable:
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/CheckNameAvailability':
+    post:
+      description: Check the give Namespace name availability.
+      operationId: DisasterRecoveryConfigs_CheckNameAvailability
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - description: Parameters to check availability of the given Alias name
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CheckNameAvailabilityParameter'
+      responses:
+        '200':
+          description: check availability returned successfully.
+          schema:
+            $ref: '#/definitions/CheckNameAvailabilityResult'
+        default:
+          description: Eventhub error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - DisasterRecoveryConfigs
+      x-ms-examples:
+        NamespacesCheckNameAvailability:
+          parameters:
+            api-version: '2017-04-01'
+            namespaceName: sdk-Namespace-9080
+            parameters:
+              properties:
+                name: sdk-DisasterRecovery-9474
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: exampleSubscriptionId
+          responses:
+            '200':
+              body:
+                message: ''
+                nameAvailable: true
+                reason: None
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}':
     delete:
       description: Deletes an Alias(Disaster Recovery configuration)
@@ -2308,8 +2349,8 @@ paths:
             alias: sdk-DisasterRecovery-3814
             api-version: '2017-04-01'
             namespaceName: sdk-Namespace-5849
-            resourceGroupName: SouthCentralUS
-            subscriptionId: 5f750a97-50d9-4e36-8081-c9ee4c0210d4
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: exampleSubscriptionId
           responses:
             '200': {}
     get:
@@ -2338,12 +2379,12 @@ paths:
             alias: sdk-DisasterRecovery-3814
             api-version: '2017-04-01'
             namespaceName: sdk-Namespace-8859
-            resourceGroupName: ardsouzatestRG
-            subscriptionId: 5f750a97-50d9-4e36-8081-c9ee4c0210d4
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: exampleSubscriptionId
           responses:
             '200':
               body:
-                id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/ardsouzatestRG/providers/Microsoft.EventHub/namespaces/sdk-Namespace-37/disasterRecoveryConfig/sdk-DisasterRecovery-3814
+                id: /subscriptions/exampleSubscriptionId/resourceGroups/exampleResourceGroup/providers/Microsoft.EventHub/namespaces/sdk-Namespace-37/disasterRecoveryConfig/sdk-DisasterRecovery-3814
                 name: sdk-DisasterRecovery-3814
                 properties:
                   partnerNamespace: sdk-Namespace-8859
@@ -2388,12 +2429,12 @@ paths:
             parameters:
               properties:
                 partnerNamespace: sdk-Namespace-37
-            resourceGroupName: ardsouzatestRG
-            subscriptionId: 5f750a97-50d9-4e36-8081-c9ee4c0210d4
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: exampleSubscriptionId
           responses:
             '200':
               body:
-                id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/ardsouzatestRG/providers/Microsoft.EventHub/namespaces/sdk-Namespace-8859/disasterRecoveryConfig/sdk-DisasterRecovery-3814
+                id: /subscriptions/exampleResourceGroup/resourceGroups/exampleResourceGroup/providers/Microsoft.EventHub/namespaces/sdk-Namespace-8859/disasterRecoveryConfig/sdk-DisasterRecovery-3814
                 name: sdk-DisasterRecovery-3814
                 properties:
                   partnerNamespace: sdk-Namespace-37
@@ -2402,6 +2443,155 @@ paths:
                   type: MetadataReplication
                 type: Microsoft.EventHub/Namespaces/DisasterRecoveryConfig
             '201': {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules':
+    get:
+      description: Gets a list of authorization rules for a Namespace.
+      operationId: DisasterRecoveryConfigs_ListAuthorizationRules
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/aliasNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace AuthorizationRule successfully returned.
+          schema:
+            $ref: '#/definitions/AuthorizationRuleListResult'
+        default:
+          description: Eventhub error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - DisasterRecoveryConfigs
+      x-ms-examples:
+        ListAuthorizationRules:
+          parameters:
+            alias: sdk-DisasterRecovery-4047
+            api-version: '2017-04-01'
+            namespaceName: sdk-Namespace-9080
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: exampleSubscriptionId
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/exampleSubscriptionId/resourceGroups/exampleResourceGroup/providers/Microsoft.EventHub/namespaces/sdk-Namespace-9080/disasterRecoveryConfigs/sdk-DisasterRecovery-4047/AuthorizationRules/RootManageSharedAccessKey
+                    location: South Central US
+                    name: RootManageSharedAccessKey
+                    properties:
+                      rights:
+                        - Listen
+                        - Manage
+                        - Send
+                    type: Microsoft.EventHub/Namespaces/AuthorizationRules
+                  - id: /subscriptions/exampleSubscriptionId/resourceGroups/exampleResourceGroup/providers/Microsoft.EventHub/namespaces/sdk-Namespace-9080/disasterRecoveryConfigs/sdk-DisasterRecovery-4047/AuthorizationRules/sdk-Authrules-1067
+                    location: South Central US
+                    name: sdk-Authrules-1067
+                    properties:
+                      rights:
+                        - Listen
+                        - Send
+                    type: Microsoft.EventHub/Namespaces/AuthorizationRules
+                  - id: /subscriptions/exampleSubscriptionId/resourceGroups/exampleResourceGroup/providers/Microsoft.EventHub/namespaces/sdk-Namespace-9080/disasterRecoveryConfigs/sdk-DisasterRecovery-4047/AuthorizationRules/sdk-Authrules-1684
+                    location: South Central US
+                    name: sdk-Authrules-1684
+                    properties:
+                      rights:
+                        - Listen
+                        - Send
+                    type: Microsoft.EventHub/Namespaces/AuthorizationRules
+                  - id: /subscriptions/exampleSubscriptionId/resourceGroups/exampleResourceGroup/providers/Microsoft.EventHub/namespaces/sdk-Namespace-9080/disasterRecoveryConfigs/sdk-DisasterRecovery-4047/AuthorizationRules/sdk-Authrules-4879
+                    location: South Central US
+                    name: sdk-Authrules-4879
+                    properties:
+                      rights:
+                        - Listen
+                        - Send
+                    type: Microsoft.EventHub/Namespaces/AuthorizationRules
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules/{authorizationRuleName}':
+    get:
+      description: Gets an AuthorizationRule for a Namespace by rule name.
+      operationId: DisasterRecoveryConfigs_GetAuthorizationRule
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/aliasNameParameter'
+        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Alias Namespace AuthorizationRule returned successfully.
+          schema:
+            $ref: '#/definitions/AuthorizationRule'
+        default:
+          description: Eventhub error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - DisasterRecoveryConfigs
+      x-ms-examples:
+        NameSpaceAutorizationRuleGet:
+          parameters:
+            alias: sdk-DisasterRecovery-4879
+            api-version: '2017-04-01'
+            authorizationRuleName: sdk-Authrules-4879
+            namespaceName: sdk-Namespace-9080
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: exampleSubscriptionId
+          responses:
+            '200':
+              body:
+                id: /subscriptions/exampleSubscriptionId/resourceGroups/exampleResourceGroup/providers/Microsoft.EventHub/namespaces/sdk-Namespace-9080/disasterRecoveryConfigs/sdk-DisasterRecovery-4047/AuthorizationRules/sdk-Authrules-4879
+                location: South Central US
+                name: sdk-Authrules-4879
+                properties:
+                  rights:
+                    - Listen
+                    - Send
+                type: Microsoft.EventHub/Namespaces/AuthorizationRules
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules/{authorizationRuleName}/listKeys':
+    post:
+      description: Gets the primary and secondary connection strings for the Namespace.
+      operationId: DisasterRecoveryConfigs_ListKeys
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/aliasNameParameter'
+        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Connection strings returned successfully.
+          schema:
+            $ref: '#/definitions/AccessKeys'
+        default:
+          description: Eventhub error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - DisasterRecoveryConfigs
+      x-ms-examples:
+        NameSpaceAuthorizationRuleListKey:
+          parameters:
+            alias: sdk-DisasterRecovery-4047
+            api-version: '2017-04-01'
+            authorizationRuleName: sdk-Authrules-1746
+            namespaceName: sdk-Namespace-2702
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: exampleSubscriptionId
+          responses:
+            '200':
+              body:
+                aliasPrimaryConnectionString: 'Endpoint=sb://sdk-disasterrecovery-4047.servicebus.windows-int.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=############################################'
+                aliasSecondaryConnectionString: 'Endpoint=sb://sdk-disasterrecovery-4047.servicebus.windows-int.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=############################################'
+                keyName: sdk-Authrules-1746
+                primaryKey: '############################################'
+                secondaryKey: '############################################'
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/breakPairing':
     post:
       description: This operation disables the Disaster Recovery and stops replicating changes from primary to secondary namespaces
@@ -2427,8 +2617,8 @@ paths:
             alias: sdk-DisasterRecovery-3814
             api-version: '2017-04-01'
             namespaceName: sdk-Namespace-8859
-            resourceGroupName: ardsouzatestRG
-            subscriptionId: 5f750a97-50d9-4e36-8081-c9ee4c0210d4
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: exampleSubscriptionId
           responses:
             '200': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover':
@@ -2456,8 +2646,8 @@ paths:
             alias: sdk-DisasterRecovery-3814
             api-version: '2017-04-01'
             namespaceName: sdk-Namespace-8859
-            resourceGroupName: ardsouzatestRG
-            subscriptionId: 5f750a97-50d9-4e36-8081-c9ee4c0210d4
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: exampleSubscriptionId
           responses:
             '200': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs':
@@ -3146,8 +3336,11 @@ definitions:
       properties:
         description: Properties required to the Create Or Update Alias(Disaster Recovery configurations)
         properties:
+          alternateName:
+            description: Alternate name specified when alias and namespace names are same.
+            type: string
           partnerNamespace:
-            description: 'Primary/Secondary eventhub namespace name, which is part of GEO DR pairning'
+            description: 'ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairning'
             type: string
           provisioningState:
             description: Provisioning state of the Alias(Disaster Recovery configuration) - possible values 'Accepted' or 'Succeeded' or 'Failed'
@@ -3415,13 +3608,11 @@ definitions:
           messageRetentionInDays:
             description: 'Number of days to retain the events for this Event Hub, value should be 1 to 7 days'
             format: int64
-            maximum: 7
             minimum: 1
             type: integer
           partitionCount:
             description: 'Number of partitions created for the Event Hub, allowed values are from 1 to 32 partitions.'
             format: int64
-            maximum: 32
             minimum: 1
             type: integer
           partitionIds:
