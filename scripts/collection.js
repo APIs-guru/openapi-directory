@@ -841,10 +841,12 @@ function fixSpec(swagger, errors) {
           newValue = value.replace('#/definitions/','');
         }
         else {
-          console.warn(value);
-          let ptr = value.replace('#/definitions/','');
-          swagger.definitions[ptr] = { type: 'object' };
-          fixed = true;
+          if (value.startsWith('#')) {
+            console.warn(value);
+            let ptr = value.replace('#/definitions/','');
+            swagger.definitions[ptr] = { type: 'object' };
+            fixed = true;
+          }
         }
         break;
       case 'DUPLICATE_OPERATIONID':
@@ -857,7 +859,7 @@ function fixSpec(swagger, errors) {
           if (_.find(operationIds,function(e){
             return e === value;
           })) return undefined
-          else return value;
+          else return (value ? value : undefined);
         });
         fixed = true;
         break;
