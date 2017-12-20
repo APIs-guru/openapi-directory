@@ -148,7 +148,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     head:
       operationId: DescribeObject
-      description: Gets the header for an object at the specified path.
+      description: Gets the headers for an object at the specified path.
       responses:
         '200':
           description: Success
@@ -330,7 +330,7 @@ definitions:
     properties:
       Body:
         $ref: '#/definitions/PayloadBlob'
-        description: '<p>The path to the file outside of the container. The file name can include or omit an extension. </p> <p>Example 1: If the file is stored on a remote server that has been mounted to the workstation on which the REST API command is being run, the path could be the absolute path <code> \mount\assets\mlaw.avi</code> or the relative path <code>..\..\mount\assets\movies\premium\mlaw.avi</code>.</p> <p>Example 2: If the file is stored on a remote server that is not mounted, the path could be <code>https:\\192.0.2.15\movies\premium\mlaw.avi</code>.</p>'
+        description: 'The bytes of the object. '
   InternalServerError:
     type: object
     properties:
@@ -417,7 +417,7 @@ definitions:
     properties:
       Body:
         $ref: '#/definitions/PayloadBlob'
-        description: '<p>The path to the file outside of the container. The file name can include or omit an extension. </p> <p>Example 1: If the file is stored on a remote server that has been mounted to the workstation on which the REST API command is being run, the path could be the absolute path <code> \mount\assets\mlaw.avi</code> or the relative path <code>..\..\mount\assets\movies\premium\mlaw.avi</code>.</p> <p>Example 2: If the file is stored on a remote server that is not mounted, the path could be <code>https:\\192.0.2.15\movies\premium\mlaw.avi</code>.</p>'
+        description: 'The bytes to be stored. '
   PutObjectResponse:
     type: object
     properties:
