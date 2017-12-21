@@ -1207,6 +1207,147 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/otaUpdates/{otaUpdateId}':
+    post:
+      operationId: CreateOTAUpdate
+      description: Creates an AWS IoT OTAUpdate on a target group of things or groups.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateOTAUpdateResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '485':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '486':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateOTAUpdateRequest'
+        - name: otaUpdateId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteOTAUpdate
+      description: Delete an OTA update.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteOTAUpdateResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteOTAUpdateRequest'
+        - name: otaUpdateId
+          in: path
+          type: string
+          required: true
+    get:
+      operationId: GetOTAUpdate
+      description: Gets an OTA update.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetOTAUpdateResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetOTAUpdateRequest'
+        - name: otaUpdateId
+          in: path
+          type: string
+          required: true
   '/policies/{policyName}':
     post:
       operationId: CreatePolicy
@@ -1637,6 +1778,193 @@ paths:
           schema:
             $ref: '#/definitions/UpdateRoleAliasRequest'
         - name: roleAlias
+          in: path
+          type: string
+          required: true
+  '/streams/{streamId}':
+    post:
+      operationId: CreateStream
+      description: 'Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files associated with a stream. The total size of a file associated with the stream cannot exceed more than 2 MB. The stream will be created with version 0. If a stream is created with the same streamID as a stream that existed and was deleted within last 90 days, we will resurrect that old stream by incrementing the version by 1.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateStreamResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateStreamRequest'
+        - name: streamId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteStream
+      description: Deletes a stream.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteStreamResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: DeleteConflictException
+          schema:
+            $ref: '#/definitions/DeleteConflictException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteStreamRequest'
+        - name: streamId
+          in: path
+          type: string
+          required: true
+    get:
+      operationId: DescribeStream
+      description: Gets information about a stream.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeStreamResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeStreamRequest'
+        - name: streamId
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: UpdateStream
+      description: Updates an existing stream. The stream version will be incremented by one.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateStreamResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateStreamRequest'
+        - name: streamId
           in: path
           type: string
           required: true
@@ -3976,6 +4304,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /otaUpdates:
+    get:
+      operationId: ListOTAUpdates
+      description: Lists OTA updates.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListOTAUpdatesResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListOTAUpdatesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /certificates-out-going:
     get:
       operationId: ListOutgoingCertificates
@@ -4248,6 +4621,51 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListRoleAliasesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /streams:
+    get:
+      operationId: ListStreams
+      description: Lists all of the streams in your AWS account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListStreamsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListStreamsRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5340,6 +5758,15 @@ definitions:
   AddThingToThingGroupResponse:
     type: object
     properties: {}
+  AdditionalParameterMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Key'
+        value:
+          $ref: '#/definitions/Value'
   AlarmName:
     type: string
   AllowAutoRegistration:
@@ -5423,6 +5850,15 @@ definitions:
           $ref: '#/definitions/AttributeName'
         value:
           $ref: '#/definitions/AttributeValue'
+  AttributesMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Key'
+        value:
+          $ref: '#/definitions/Value'
   AuthDecision:
     type: string
     enum:
@@ -5533,6 +5969,10 @@ definitions:
     type: string
     pattern: '[0-9]{12}'
   AwsArn:
+    type: string
+  AwsIotJobArn:
+    type: string
+  AwsIotJobId:
     type: string
   AwsIotSqlVersion:
     type: string
@@ -5689,6 +6129,8 @@ definitions:
     pattern: '(0x)?[a-fA-F0-9]+'
     minLength: 64
     maxLength: 64
+  CertificateName:
+    type: string
   CertificatePem:
     type: string
     description: The PEM of a certificate.
@@ -5781,6 +6223,41 @@ definitions:
         $ref: '#/definitions/MetricTimestamp'
         description: 'An optional <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp">Unix timestamp</a>.'
     description: Describes an action that captures a CloudWatch metric.
+  Code:
+    type: string
+  CodeSigning:
+    type: object
+    properties:
+      awsSignerJobId:
+        $ref: '#/definitions/SigningJobId'
+        description: The ID of the AWSSignerJob which was created to sign the file.
+      customCodeSigning:
+        $ref: '#/definitions/CustomCodeSigning'
+        description: A custom method for code signing a file.
+    description: Describes the method to use when code signing a file.
+  CodeSigningCertificateChain:
+    type: object
+    properties:
+      stream:
+        $ref: '#/definitions/Stream'
+        description: A stream of the certificate chain files.
+      certificateName:
+        $ref: '#/definitions/CertificateName'
+        description: The name of the certificate.
+      inlineDocument:
+        $ref: '#/definitions/InlineDocument'
+        description: A base64 encoded binary representation of the code signing certificate chain.
+    description: Describes the certificate chain being used when code signing a file.
+  CodeSigningSignature:
+    type: object
+    properties:
+      stream:
+        $ref: '#/definitions/Stream'
+        description: A stream of the code signing signature.
+      inlineDocument:
+        $ref: '#/definitions/Signature'
+        description: A base64 encoded binary representation of the code signing signature.
+    description: Describes the signature for a file.
   CognitoIdentityPoolId:
     type: string
   Comment:
@@ -5913,6 +6390,49 @@ definitions:
         $ref: '#/definitions/KeyPair'
         description: The generated key pair.
     description: The output of the CreateKeysAndCertificate operation.
+  CreateOTAUpdateRequest:
+    type: object
+    required:
+      - targets
+      - files
+      - roleArn
+    properties:
+      description:
+        $ref: '#/definitions/OTAUpdateDescription'
+        description: The description of the OTA update.
+      targets:
+        $ref: '#/definitions/Targets'
+        description: The targeted devices to receive OTA updates.
+      targetSelection:
+        $ref: '#/definitions/TargetSelection'
+        description: 'Specifies whether the update will continue to run (CONTINUOUS), or will be complete after all the things specified as targets have completed the update (SNAPSHOT). If continuous, the update may also be run on a thing when a change is detected in a target. For example, an update will run on a thing when the thing is added to a target group, even after the update was completed by all things originally in the group. Valid values: CONTINUOUS | SNAPSHOT.'
+      files:
+        $ref: '#/definitions/OTAUpdateFiles'
+        description: The files to be streamed by the OTA update.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The IAM role that allows access to the AWS IoT Jobs service.
+      additionalParameters:
+        $ref: '#/definitions/AdditionalParameterMap'
+        description: A list of additional OTA update parameters which are name-value pairs.
+  CreateOTAUpdateResponse:
+    type: object
+    properties:
+      otaUpdateId:
+        $ref: '#/definitions/OTAUpdateId'
+        description: The OTA update ID.
+      awsIotJobId:
+        $ref: '#/definitions/AwsIotJobId'
+        description: The AWS IoT job ID associated with the OTA update.
+      otaUpdateArn:
+        $ref: '#/definitions/OTAUpdateArn'
+        description: The OTA update ARN.
+      awsIotJobArn:
+        $ref: '#/definitions/AwsIotJobArn'
+        description: The AWS IoT job ARN associated with the OTA update.
+      otaUpdateStatus:
+        $ref: '#/definitions/OTAUpdateStatus'
+        description: The OTA update status.
   CreatePolicyRequest:
     type: object
     required:
@@ -5983,6 +6503,36 @@ definitions:
       roleAliasArn:
         $ref: '#/definitions/RoleAliasArn'
         description: The role alias ARN.
+  CreateStreamRequest:
+    type: object
+    required:
+      - files
+      - roleArn
+    properties:
+      description:
+        $ref: '#/definitions/StreamDescription'
+        description: A description of the stream.
+      files:
+        $ref: '#/definitions/StreamFiles'
+        description: The files to stream.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: An IAM role that allows the IoT service principal assumes to access your S3 files.
+  CreateStreamResponse:
+    type: object
+    properties:
+      streamId:
+        $ref: '#/definitions/StreamId'
+        description: The stream ID.
+      streamArn:
+        $ref: '#/definitions/StreamArn'
+        description: The stream ARN.
+      description:
+        $ref: '#/definitions/StreamDescription'
+        description: A description of the stream.
+      streamVersion:
+        $ref: '#/definitions/StreamVersion'
+        description: The version of the stream.
   CreateThingGroupRequest:
     type: object
     properties:
@@ -6066,6 +6616,22 @@ definitions:
     type: integer
     minimum: 900
     maximum: 3600
+  CustomCodeSigning:
+    type: object
+    properties:
+      signature:
+        $ref: '#/definitions/CodeSigningSignature'
+        description: The signature for the file.
+      certificateChain:
+        $ref: '#/definitions/CodeSigningCertificateChain'
+        description: The certificate chain.
+      hashAlgorithm:
+        $ref: '#/definitions/HashAlgorithm'
+        description: The hash algorithm used to code sign the file.
+      signatureAlgorithm:
+        $ref: '#/definitions/SignatureAlgorithm'
+        description: The signature algorithm used to code sign the file.
+    description: Describes a custom method used to code sign a file.
   DateType:
     type: string
     format: date-time
@@ -6094,6 +6660,12 @@ definitions:
         $ref: '#/definitions/errorMessage'
         description: The message for the exception.
     description: You can't delete the resource because it is attached to one or more resources.
+  DeleteOTAUpdateRequest:
+    type: object
+    properties: {}
+  DeleteOTAUpdateResponse:
+    type: object
+    properties: {}
   DeletePolicyRequest:
     type: object
     properties: {}
@@ -6114,6 +6686,12 @@ definitions:
     type: object
     properties: {}
   DeleteRoleAliasResponse:
+    type: object
+    properties: {}
+  DeleteStreamRequest:
+    type: object
+    properties: {}
+  DeleteStreamResponse:
     type: object
     properties: {}
   DeleteThingGroupRequest:
@@ -6285,6 +6863,15 @@ definitions:
       roleAliasDescription:
         $ref: '#/definitions/RoleAliasDescription'
         description: The role alias description.
+  DescribeStreamRequest:
+    type: object
+    properties: {}
+  DescribeStreamResponse:
+    type: object
+    properties:
+      streamInfo:
+        $ref: '#/definitions/StreamInfo'
+        description: Information about the stream.
   DescribeThingGroupRequest:
     type: object
     properties: {}
@@ -6567,6 +7154,16 @@ definitions:
     type: string
   EndpointType:
     type: string
+  ErrorInfo:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/Code'
+        description: The error code.
+      message:
+        $ref: '#/definitions/OTAUpdateErrorMessage'
+        description: The error message.
+    description: Error information.
   ErrorMessage:
     type: string
     maxLength: 2048
@@ -6605,6 +7202,12 @@ definitions:
     description: Information that explicitly denies authorization.
   FailedThings:
     type: integer
+  FileId:
+    type: integer
+    minimum: 0
+    maximum: 255
+  FileName:
+    type: string
   FirehoseAction:
     type: object
     required:
@@ -6681,6 +7284,15 @@ definitions:
         $ref: '#/definitions/LogLevel'
         description: The logging level.
     description: The output from the GetLoggingOptions operation.
+  GetOTAUpdateRequest:
+    type: object
+    properties: {}
+  GetOTAUpdateResponse:
+    type: object
+    properties:
+      otaUpdateInfo:
+        $ref: '#/definitions/OTAUpdateInfo'
+        description: The OTA update info.
   GetPolicyRequest:
     type: object
     properties: {}
@@ -6774,6 +7386,8 @@ definitions:
         $ref: '#/definitions/ThingGroupArn'
         description: The group ARN.
     description: The name and ARN of a group.
+  HashAlgorithm:
+    type: string
   HashKeyField:
     type: string
   HashKeyValue:
@@ -6810,6 +7424,8 @@ definitions:
       - ACTIVE
       - BUILDING
       - REBUILDING
+  InlineDocument:
+    type: string
   InternalException:
     type: object
     properties:
@@ -7268,6 +7884,18 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token for the next set of results, or <b>null</b> if there are no additional results.'
+  ListOTAUpdatesRequest:
+    type: object
+    properties: {}
+  ListOTAUpdatesResponse:
+    type: object
+    properties:
+      otaUpdates:
+        $ref: '#/definitions/OTAUpdatesSummary'
+        description: A list of OTA update jobs.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: A token to use to get the next set of results.
   ListOutgoingCertificatesRequest:
     type: object
     properties: {}
@@ -7361,6 +7989,18 @@ definitions:
       nextMarker:
         $ref: '#/definitions/Marker'
         description: A marker used to get the next set of results.
+  ListStreamsRequest:
+    type: object
+    properties: {}
+  ListStreamsResponse:
+    type: object
+    properties:
+      streams:
+        $ref: '#/definitions/StreamsSummary'
+        description: A list of streams.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: A token used to get the next set of results.
   ListTargetsForPolicyRequest:
     type: object
     properties: {}
@@ -7568,6 +8208,10 @@ definitions:
     type: integer
     minimum: 1
     maximum: 1000
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 250
   Message:
     type: string
     maxLength: 128
@@ -7600,6 +8244,113 @@ definitions:
       message:
         $ref: '#/definitions/errorMessage'
     description: The resource is not configured.
+  OTAUpdateArn:
+    type: string
+  OTAUpdateDescription:
+    type: string
+    pattern: '[^\p{C}]+'
+    maxLength: 2028
+  OTAUpdateErrorMessage:
+    type: string
+  OTAUpdateFile:
+    type: object
+    properties:
+      fileName:
+        $ref: '#/definitions/FileName'
+        description: The name of the file.
+      fileVersion:
+        $ref: '#/definitions/OTAUpdateFileVersion'
+        description: The file version.
+      fileSource:
+        $ref: '#/definitions/Stream'
+        description: The source of the file.
+      codeSigning:
+        $ref: '#/definitions/CodeSigning'
+        description: The code signing method of the file.
+      attributes:
+        $ref: '#/definitions/AttributesMap'
+        description: A list of name/attribute pairs.
+    description: Describes a file to be associated with an OTA update.
+  OTAUpdateFileVersion:
+    type: string
+  OTAUpdateFiles:
+    type: array
+    items:
+      $ref: '#/definitions/OTAUpdateFile'
+    minItems: 1
+    maxItems: 10
+  OTAUpdateId:
+    type: string
+    pattern: '[a-zA-Z0-9_-]+'
+    minLength: 1
+    maxLength: 128
+  OTAUpdateInfo:
+    type: object
+    properties:
+      otaUpdateId:
+        $ref: '#/definitions/OTAUpdateId'
+        description: The OTA update ID.
+      otaUpdateArn:
+        $ref: '#/definitions/OTAUpdateArn'
+        description: The OTA update ARN.
+      creationDate:
+        $ref: '#/definitions/DateType'
+        description: The date when the OTA update was created.
+      lastModifiedDate:
+        $ref: '#/definitions/DateType'
+        description: The date when the OTA update was last updated.
+      description:
+        $ref: '#/definitions/OTAUpdateDescription'
+        description: A description of the OTA update.
+      targets:
+        $ref: '#/definitions/Targets'
+        description: The targets of the OTA update.
+      targetSelection:
+        $ref: '#/definitions/TargetSelection'
+        description: 'Specifies whether the OTA update will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the OTA update (SNAPSHOT). If continuous, the OTA update may also be run on a thing when a change is detected in a target. For example, an OTA update will run on a thing when the thing is added to a target group, even after the OTA update was completed by all things originally in the group. '
+      otaUpdateFiles:
+        $ref: '#/definitions/OTAUpdateFiles'
+        description: A list of files associated with the OTA update.
+      otaUpdateStatus:
+        $ref: '#/definitions/OTAUpdateStatus'
+        description: The status of the OTA update.
+      awsIotJobId:
+        $ref: '#/definitions/AwsIotJobId'
+        description: The AWS IoT job ID associated with the OTA update.
+      awsIotJobArn:
+        $ref: '#/definitions/AwsIotJobArn'
+        description: The AWS IoT job ARN associated with the OTA update.
+      errorInfo:
+        $ref: '#/definitions/ErrorInfo'
+        description: Error information associated with the OTA update.
+      additionalParameters:
+        $ref: '#/definitions/AdditionalParameterMap'
+        description: A collection of name/value pairs
+    description: Information about an OTA update.
+  OTAUpdateStatus:
+    type: string
+    enum:
+      - CREATE_PENDING
+      - CREATE_IN_PROGRESS
+      - CREATE_COMPLETE
+      - CREATE_FAILED
+  OTAUpdateSummary:
+    type: object
+    properties:
+      otaUpdateId:
+        $ref: '#/definitions/OTAUpdateId'
+        description: The OTA update ID.
+      otaUpdateArn:
+        $ref: '#/definitions/OTAUpdateArn'
+        description: The OTA update ARN.
+      creationDate:
+        $ref: '#/definitions/DateType'
+        description: The date when the OTA update was created.
+    description: An OTA update summary.
+  OTAUpdatesSummary:
+    type: array
+    items:
+      $ref: '#/definitions/OTAUpdateSummary'
   OptionalVersion:
     type: integer
   OutgoingCertificate:
@@ -8069,6 +8820,9 @@ definitions:
         $ref: '#/definitions/CannedAccessControlList'
         description: 'The Amazon S3 canned ACL that controls access to the object identified by the object key. For more information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl">S3 canned ACLs</a>.'
     description: Describes an action to write data to an Amazon S3 bucket.
+  S3Bucket:
+    type: string
+    minLength: 1
   S3FileUrl:
     type: string
     maxLength: 65535
@@ -8076,6 +8830,27 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/S3FileUrl'
+  S3Key:
+    type: string
+    minLength: 1
+  S3Location:
+    type: object
+    required:
+      - bucket
+      - key
+    properties:
+      bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: The S3 bucket that contains the file to stream.
+      key:
+        $ref: '#/definitions/S3Key'
+        description: The name of the file within the S3 bucket to stream.
+      version:
+        $ref: '#/definitions/S3Version'
+        description: The file version.
+    description: The location in S3 the contains the files to stream.
+  S3Version:
+    type: string
   SQL:
     type: string
   SalesforceAction:
@@ -8200,6 +8975,12 @@ definitions:
       disableAllLogs:
         $ref: '#/definitions/DisableAllLogs'
         description: 'Set to true to disable all logs, otherwise set to false.'
+  Signature:
+    type: string
+  SignatureAlgorithm:
+    type: string
+  SigningJobId:
+    type: string
   SkyfallMaxResults:
     type: integer
     minimum: 1
@@ -8287,11 +9068,102 @@ definitions:
   StopThingRegistrationTaskResponse:
     type: object
     properties: {}
+  Stream:
+    type: object
+    properties:
+      streamId:
+        $ref: '#/definitions/StreamId'
+        description: The stream ID.
+      fileId:
+        $ref: '#/definitions/FileId'
+        description: The ID of a file associated with a stream.
+    description: Describes a group of files that can be streamed.
+  StreamArn:
+    type: string
+  StreamDescription:
+    type: string
+    pattern: '[^\p{C}]+'
+    maxLength: 2028
+  StreamFile:
+    type: object
+    properties:
+      fileId:
+        $ref: '#/definitions/FileId'
+        description: The file ID.
+      s3Location:
+        $ref: '#/definitions/S3Location'
+        description: The location of the file in S3.
+    description: Represents a file to stream.
+  StreamFiles:
+    type: array
+    items:
+      $ref: '#/definitions/StreamFile'
+    minItems: 1
+    maxItems: 10
+  StreamId:
+    type: string
+    pattern: '[a-zA-Z0-9_-]+'
+    minLength: 1
+    maxLength: 128
+  StreamInfo:
+    type: object
+    properties:
+      streamId:
+        $ref: '#/definitions/StreamId'
+        description: The stream ID.
+      streamArn:
+        $ref: '#/definitions/StreamArn'
+        description: The stream ARN.
+      streamVersion:
+        $ref: '#/definitions/StreamVersion'
+        description: The stream version.
+      description:
+        $ref: '#/definitions/StreamDescription'
+        description: The description of the stream.
+      files:
+        $ref: '#/definitions/StreamFiles'
+        description: The files to stream.
+      createdAt:
+        $ref: '#/definitions/DateType'
+        description: The date when the stream was created.
+      lastUpdatedAt:
+        $ref: '#/definitions/DateType'
+        description: The date when the stream was last updated.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: An IAM role AWS IoT assumes to access your S3 files.
+    description: Information about a stream.
   StreamName:
     type: string
+  StreamSummary:
+    type: object
+    properties:
+      streamId:
+        $ref: '#/definitions/StreamId'
+        description: The stream ID.
+      streamArn:
+        $ref: '#/definitions/StreamArn'
+        description: The stream ARN.
+      streamVersion:
+        $ref: '#/definitions/StreamVersion'
+        description: The stream version.
+      description:
+        $ref: '#/definitions/StreamDescription'
+        description: A description of the stream.
+    description: A summary of a stream.
+  StreamVersion:
+    type: integer
+    minimum: 0
+    maximum: 65535
+  StreamsSummary:
+    type: array
+    items:
+      $ref: '#/definitions/StreamSummary'
   SucceededThings:
     type: integer
   TableName:
+    type: string
+  Target:
     type: string
   TargetArn:
     type: string
@@ -8300,6 +9172,11 @@ definitions:
     enum:
       - CONTINUOUS
       - SNAPSHOT
+  Targets:
+    type: array
+    items:
+      $ref: '#/definitions/Target'
+    minItems: 1
   TaskId:
     type: string
     maxLength: 40
@@ -8775,6 +9652,33 @@ definitions:
       roleAliasArn:
         $ref: '#/definitions/RoleAliasArn'
         description: The role alias ARN.
+  UpdateStreamRequest:
+    type: object
+    properties:
+      description:
+        $ref: '#/definitions/StreamDescription'
+        description: The description of the stream.
+      files:
+        $ref: '#/definitions/StreamFiles'
+        description: The files associated with the stream.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: An IAM role that allows the IoT service principal assumes to access your S3 files.
+  UpdateStreamResponse:
+    type: object
+    properties:
+      streamId:
+        $ref: '#/definitions/StreamId'
+        description: The stream ID.
+      streamArn:
+        $ref: '#/definitions/StreamArn'
+        description: The stream ARN.
+      description:
+        $ref: '#/definitions/StreamDescription'
+        description: A description of the stream.
+      streamVersion:
+        $ref: '#/definitions/StreamVersion'
+        description: The stream version.
   UpdateThingGroupRequest:
     type: object
     required:

@@ -2297,6 +2297,14 @@ definitions:
       - 'AWS::AutoScaling::ScalingPolicy'
       - 'AWS::AutoScaling::ScheduledAction'
       - 'AWS::CodeBuild::Project'
+      - 'AWS::WAF::RateBasedRule'
+      - 'AWS::WAF::Rule'
+      - 'AWS::WAF::WebACL'
+      - 'AWS::WAFRegional::RateBasedRule'
+      - 'AWS::WAFRegional::Rule'
+      - 'AWS::WAFRegional::WebACL'
+      - 'AWS::CloudFront::Distribution'
+      - 'AWS::CloudFront::StreamingDistribution'
   ResourceTypeList:
     type: array
     items:
