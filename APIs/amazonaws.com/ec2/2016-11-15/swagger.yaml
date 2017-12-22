@@ -6532,7 +6532,7 @@ paths:
   '/#ReplaceNetworkAclAssociation':
     post:
       operationId: ReplaceNetworkAclAssociation
-      description: 'Changes which network ACL a subnet is associated with. By default when you create a subnet, it''s automatically associated with the default network ACL. For more information about network ACLs, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.'
+      description: '<p>Changes which network ACL a subnet is associated with. By default when you create a subnet, it''s automatically associated with the default network ACL. For more information about network ACLs, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>This is an idempotent operation.</p>'
       responses:
         '200':
           description: Success
@@ -7283,6 +7283,9 @@ definitions:
       PrivateIpAddress:
         $ref: '#/definitions/String'
         description: The private IP address associated with the Elastic IP address.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: Any tags assigned to the Elastic IP address.
     description: Describes an Elastic IP address.
   AddressList:
     type: array
@@ -12560,7 +12563,7 @@ definitions:
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       Filters:
         $ref: '#/definitions/FilterList'
-        description: <p>One or more filters.</p> <ul> <li> <p> <code>customer-account-id</code> - The AWS account number of the owner of the endpoint.</p> </li> <li> <p> <code>endpoint-connection-state</code> - The state of the endpoint (<code>PendingAcceptance</code> | <code>Pending</code> | <code>Available</code> | <code>Deleting</code> | <code>Deleted</code> | <code>Rejected</code> | <code>Failed</code>).</p> </li> <li> <p> <code>vpc-endpoint-id</code> - The ID of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-service-id</code> - The ID of the service.</p> </li> </ul>
+        description: <p>One or more filters.</p> <ul> <li> <p> <code>service-id</code> - The ID of the service.</p> </li> <li> <p> <code>vpc-endpoint-owner</code> - The AWS account number of the owner of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> | <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> | <code>rejected</code> | <code>failed</code>).</p> </li> <li> <p> <code>vpc-endpoint-id</code> - The ID of the endpoint.</p> </li> </ul>
       MaxResults:
         $ref: '#/definitions/Integer'
         description: 'The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000; if <code>MaxResults</code> is given a value larger than 1000, only 1000 results are returned.'
@@ -12587,7 +12590,7 @@ definitions:
         description: The IDs of one or more services.
       Filters:
         $ref: '#/definitions/FilterList'
-        description: <p>One or more filters.</p> <ul> <li> <p> <code>service-name</code> - The ARN of the service.</p> </li> <li> <p> <code>vpc-endpoint-service-id</code> - The ID of the service.</p> </li> <li> <p> <code>vpc-endpoint-service-state</code> - The state of the service (<code>Pending</code> | <code>Available</code> | <code>Deleting</code> | <code>Deleted</code> | <code>Failed</code>). </p> </li> </ul>
+        description: <p>One or more filters.</p> <ul> <li> <p> <code>service-name</code> - The name of the service.</p> </li> <li> <p> <code>service-id</code> - The ID of the service.</p> </li> <li> <p> <code>service-state</code> - The state of the service (<code>Pending</code> | <code>Available</code> | <code>Deleting</code> | <code>Deleted</code> | <code>Failed</code>). </p> </li> </ul>
       MaxResults:
         $ref: '#/definitions/Integer'
         description: 'The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000; if <code>MaxResults</code> is given a value larger than 1000, only 1000 results are returned.'
@@ -15446,7 +15449,7 @@ definitions:
         description: '[EC2-VPC only] One or more IPv6 ranges.'
       PrefixListIds:
         $ref: '#/definitions/PrefixListIdList'
-        description: '(Valid for <a>AuthorizeSecurityGroupEgress</a>, <a>RevokeSecurityGroupEgress</a> and <a>DescribeSecurityGroups</a> only) One or more prefix list IDs for an AWS service. In an <a>AuthorizeSecurityGroupEgress</a> request, this is the AWS service that you want to access through a VPC endpoint from instances associated with the security group.'
+        description: '(EC2-VPC only; valid for <a>AuthorizeSecurityGroupEgress</a>, <a>RevokeSecurityGroupEgress</a> and <a>DescribeSecurityGroups</a> only) One or more prefix list IDs for an AWS service. In an <a>AuthorizeSecurityGroupEgress</a> request, this is the AWS service that you want to access through a VPC endpoint from instances associated with the security group.'
       ToPort:
         $ref: '#/definitions/Integer'
         description: 'The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of <code>-1</code> indicates all ICMP/ICMPv6 codes for the specified ICMP type. If you specify all ICMP/ICMPv6 types, you must specify all codes.'
@@ -17408,7 +17411,7 @@ definitions:
       PrefixListId:
         $ref: '#/definitions/String'
         description: The ID of the prefix.
-    description: The ID of the prefix.
+    description: '[EC2-VPC only] The ID of the prefix.'
   PrefixListIdList:
     type: array
     items:

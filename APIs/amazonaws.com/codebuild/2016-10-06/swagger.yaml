@@ -1068,6 +1068,9 @@ definitions:
       description:
         $ref: '#/definitions/String'
         description: The description of the Docker image.
+      versions:
+        $ref: '#/definitions/ImageVersions'
+        description: A list of environment image versions.
     description: Information about a Docker image that is managed by AWS CodeBuild.
   EnvironmentImages:
     type: array
@@ -1130,6 +1133,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/EnvironmentVariable'
+  ImageVersions:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   InvalidInputException:
     type: object
     properties: {}
@@ -1330,7 +1337,7 @@ definitions:
         description: Information about a webhook in GitHub that connects repository events to a build project in AWS CodeBuild.
       vpcConfig:
         $ref: '#/definitions/VpcConfig'
-        description: 'If your AWS CodeBuild project accesses resources in an Amazon VPC, you provide this parameter that identifies the VPC ID and the list of security group IDs and subnet IDs. The security groups and subnets must belong to the same VPC. You must provide at least one security group and one subnet ID.'
+        description: Information about the VPC configuration that AWS CodeBuild will access.
       badge:
         $ref: '#/definitions/ProjectBadge'
         description: Information about the build badge for the build project.
@@ -1635,7 +1642,7 @@ definitions:
       securityGroupIds:
         $ref: '#/definitions/SecurityGroupIds'
         description: A list of one or more security groups IDs in your Amazon VPC.
-    description: 'If your AWS CodeBuild project accesses resources in an Amazon VPC, you provide this parameter that identifies the VPC ID and the list of security group IDs and subnet IDs. The security groups and subnets must belong to the same VPC. You must provide at least one security group and one subnet ID.'
+    description: Information about the VPC configuration that AWS CodeBuild will access.
   Webhook:
     type: object
     properties:
