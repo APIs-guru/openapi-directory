@@ -185,7 +185,7 @@ paths:
   '/#CreateModel':
     post:
       operationId: CreateModel
-      description: '<p>Creates a model in Amazon SageMaker. In the request, you name the model and describe one or more containers. For each container, you specify the docker image containing inference code, artifacts (from prior training), and custom environment map that the inference code uses when you deploy the model into production. </p> <p>Use this API to create a model only if you want to use Amazon SageMaker hosting services. To host your model, you create an endpoint configuration with the <code>CreateEndpointConfig</code> API, and then create an endpoint with the <code>CreateEndpoint</code> API. </p> <p>Amazon SageMaker then deploys all of the containers that you defined for the model in the hosting environment. </p> <p>In the <code>CreateModel</code> request, you must define at least one container with the <code>PrimaryContainer</code> parameter. You can optionally specify additional containers with the <code>SupplementalContainers</code> parameter. </p> <p>In the request, you also provide an IAM role that Amazon SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other AWS resources, you grant necessary permissions via this role.</p>'
+      description: '<p>Creates a model in Amazon SageMaker. In the request, you name the model and describe one or more containers. For each container, you specify the docker image containing inference code, artifacts (from prior training), and custom environment map that the inference code uses when you deploy the model into production. </p> <p>Use this API to create a model only if you want to use Amazon SageMaker hosting services. To host your model, you create an endpoint configuration with the <code>CreateEndpointConfig</code> API, and then create an endpoint with the <code>CreateEndpoint</code> API. </p> <p>Amazon SageMaker then deploys all of the containers that you defined for the model in the hosting environment. </p> <p>In the <code>CreateModel</code> request, you must define a container with the <code>PrimaryContainer</code> parameter. </p> <p>In the request, you also provide an IAM role that Amazon SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other AWS resources, you grant necessary permissions via this role.</p>'
       responses:
         '200':
           description: Success
@@ -840,7 +840,7 @@ paths:
   '/#StartNotebookInstance':
     post:
       operationId: StartNotebookInstance
-      description: 'Launches an ML compute instance with the latest version of the libraries and attaches your ML storage volume. After configuring the notebook instance, Amazon SageMaker sets the notebook instance status to <code>InService</code>. A notebook instance''s status must be <code>InService</code> (is this same as "Running" in the console?) before you can connect to your Jupyter notebook. '
+      description: 'Launches an ML compute instance with the latest version of the libraries and attaches your ML storage volume. After configuring the notebook instance, Amazon SageMaker sets the notebook instance status to <code>InService</code>. A notebook instance''s status must be <code>InService</code> before you can connect to your Jupyter notebook. '
       responses:
         '200':
           description: Success
@@ -1086,11 +1086,6 @@ definitions:
         $ref: '#/definitions/EnvironmentMap'
         description: 'The environment variables to set in the Docker container. Each key and value in the <code>Environment</code> string to string map can have length of up to 1024. We support up to 16 entries in the map. '
     description: 'Describes the container, as part of model definition.'
-  ContainerDefinitionList:
-    type: array
-    items:
-      $ref: '#/definitions/ContainerDefinition'
-    maxItems: 5
   ContainerHostname:
     type: string
     pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
@@ -1157,9 +1152,6 @@ definitions:
       PrimaryContainer:
         $ref: '#/definitions/ContainerDefinition'
         description: 'The location of the primary docker image containing inference code, associated artifacts, and custom environment map that the inference code uses when the model is deployed into production. '
-      SupplementalContainers:
-        $ref: '#/definitions/ContainerDefinitionList'
-        description: The additional optional containers to deploy.
       ExecutionRoleArn:
         $ref: '#/definitions/RoleArn'
         description: 'The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker can assume to access model artifacts and docker image for deployment on ML compute instances. Deploying on ML compute instances is part of model hosting. For more information, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">Amazon SageMaker Roles</a>. '
@@ -1413,7 +1405,6 @@ definitions:
     required:
       - ModelName
       - PrimaryContainer
-      - SupplementalContainers
       - ExecutionRoleArn
       - CreationTime
       - ModelArn
@@ -1424,9 +1415,6 @@ definitions:
       PrimaryContainer:
         $ref: '#/definitions/ContainerDefinition'
         description: 'The location of the primary inference code, associated artifacts, and custom environment map that the inference code uses when it is deployed in production. '
-      SupplementalContainers:
-        $ref: '#/definitions/ContainerDefinitionList'
-        description: The description of additional optional containers that you defined when creating the model.
       ExecutionRoleArn:
         $ref: '#/definitions/RoleArn'
         description: The Amazon Resource Name (ARN) of the IAM role that you specified for the model.
