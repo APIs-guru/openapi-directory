@@ -15,7 +15,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/automation/resource-manager/Microsoft.Automation/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/automation/resource-manager/Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: automation-softwareUpdateConfigurationMachineRun
@@ -43,26 +43,25 @@ paths:
       description: Return list of software update configuration machine runs
       externalDocs:
         url: 'http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations'
-      operationId: softwareUpdateConfigurationMachineRuns_List
+      operationId: SoftwareUpdateConfigurationMachineRuns_List
       parameters:
-        - description: subscription id for tenant issuing the request.
-          format: uuid
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
           required: true
           type: string
-        - description: The name of the resource group within user's subscription.
+        - description: The resource group name.
           in: path
           name: resourceGroupName
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the automation account.
-          format: uuid
           in: path
           name: automationAccountName
           required: true
           type: string
-        - description: The API version.
+        - description: Client Api Version.
           in: query
           name: api-version
           required: true
@@ -70,6 +69,11 @@ paths:
         - description: Identifies this specific client request.
           in: header
           name: clientRequestId
+          required: false
+          type: string
+        - description: 'The filter to apply on the operation. You can use the following filters: ''properties/osType'', ''properties/status'', ''properties/startTime'', and ''properties/softwareUpdateConfiguration/name'''
+          in: query
+          name: $filter
           required: false
           type: string
         - description: number of entries you skip before returning results
@@ -80,11 +84,6 @@ paths:
         - description: Maximum number of entries returned in the results collection
           in: query
           name: $top
-          required: false
-          type: string
-        - description: 'The filter to apply on the operation. You can use the following filters: ''properties/osType'', ''properties/status'', ''properties/startTime'', and ''properties/softwareUpdateConfiguration/name'''
-          in: query
-          name: $filter
           required: false
           type: string
       responses:
@@ -302,21 +301,20 @@ paths:
       description: Get a single software update configuration machine run by Id.
       externalDocs:
         url: 'http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations'
-      operationId: softwareUpdateConfigurationMachineRuns_GetById
+      operationId: SoftwareUpdateConfigurationMachineRuns_GetById
       parameters:
-        - description: subscription id for tenant issuing the request.
-          format: uuid
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
           required: true
           type: string
-        - description: The name of the resource group within user's subscription.
+        - description: The resource group name.
           in: path
           name: resourceGroupName
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the automation account.
-          format: uuid
           in: path
           name: automationAccountName
           required: true
@@ -327,7 +325,7 @@ paths:
           name: softwareUpdateConfigurationMachineRunId
           required: true
           type: string
-        - description: The API version.
+        - description: Client Api Version.
           in: query
           name: api-version
           required: true

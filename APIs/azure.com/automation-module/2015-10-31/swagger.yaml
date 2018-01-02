@@ -11,7 +11,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/automation/resource-manager/Microsoft.Automation/2015-10-31/module.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/automation/resource-manager/Microsoft.Automation/stable/2015-10-31/module.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: automation-module
@@ -22,6 +22,17 @@ consumes:
   - application/json
 produces:
   - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
 parameters: {}
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules':
@@ -37,7 +48,6 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
-          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -379,7 +389,6 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
-          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -439,7 +448,6 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
-          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -631,7 +639,6 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
-          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -838,7 +845,6 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
-          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -1220,7 +1226,6 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
-          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -1496,7 +1501,6 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
-          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -1989,7 +1993,6 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
-          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -2061,7 +2064,6 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
-          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName
@@ -2133,7 +2135,6 @@ paths:
           pattern: '^[-\w\._]+$'
           required: true
           type: string
-          x-ms-parameter-location: method
         - description: The automation account name.
           in: path
           name: automationAccountName

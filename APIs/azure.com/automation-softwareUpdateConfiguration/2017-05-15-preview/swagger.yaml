@@ -15,7 +15,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/automation/resource-manager/Microsoft.Automation/2017-05-15-preview/softwareUpdateConfiguration.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/automation/resource-manager/Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfiguration.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: automation-softwareUpdateConfiguration
@@ -43,26 +43,25 @@ paths:
       description: Get all software update configurations for the account.
       externalDocs:
         url: 'http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations'
-      operationId: softwareUpdateConfigurations_List
+      operationId: SoftwareUpdateConfigurations_List
       parameters:
-        - description: subscription id for tenant issuing the request.
-          format: uuid
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
           required: true
           type: string
-        - description: The name of the resource group within user's subscription.
+        - description: The resource group name.
           in: path
           name: resourceGroupName
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the automation account.
-          format: uuid
           in: path
           name: automationAccountName
           required: true
           type: string
-        - description: The API version.
+        - description: Client Api Version.
           in: query
           name: api-version
           required: true
@@ -271,21 +270,20 @@ paths:
       description: delete a specific software update configuration.
       externalDocs:
         url: 'http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations'
-      operationId: softwareUpdateConfigurations_Delete
+      operationId: SoftwareUpdateConfigurations_Delete
       parameters:
-        - description: subscription id for tenant issuing the request.
-          format: uuid
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
           required: true
           type: string
-        - description: The name of the resource group within user's subscription.
+        - description: The resource group name.
           in: path
           name: resourceGroupName
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the automation account.
-          format: uuid
           in: path
           name: automationAccountName
           required: true
@@ -295,7 +293,7 @@ paths:
           name: softwareUpdateConfigurationName
           required: true
           type: string
-        - description: The API version.
+        - description: Client Api Version.
           in: query
           name: api-version
           required: true
@@ -333,21 +331,20 @@ paths:
       description: Get a single software update configuration by name.
       externalDocs:
         url: 'http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations'
-      operationId: softwareUpdateConfigurations_GetByName
+      operationId: SoftwareUpdateConfigurations_GetByName
       parameters:
-        - description: subscription id for tenant issuing the request.
-          format: uuid
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
           required: true
           type: string
-        - description: The name of the resource group within user's subscription.
+        - description: The resource group name.
           in: path
           name: resourceGroupName
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the automation account.
-          format: uuid
           in: path
           name: automationAccountName
           required: true
@@ -357,7 +354,7 @@ paths:
           name: softwareUpdateConfigurationName
           required: true
           type: string
-        - description: The API version.
+        - description: Client Api Version.
           in: query
           name: api-version
           required: true
@@ -516,7 +513,6 @@ paths:
                         type: string
                   updateConfiguration:
                     description: Update specifc properties of the software update configuration.
-                    discriminator: operatingSystem
                     properties:
                       azureVirtualMachines:
                         description: List of azure resource Ids for azure virtual machines targeted by the software update configuration.
@@ -538,14 +534,12 @@ paths:
                             type: array
                           includedPackageClassifications:
                             description: Update classifications included in the software update configuration.
-                            items:
-                              enum:
-                                - Unclassified
-                                - Critical
-                                - Security
-                                - Other
-                              type: string
-                            type: array
+                            enum:
+                              - Unclassified
+                              - Critical
+                              - Security
+                              - Other
+                            type: string
                             x-ms-enum:
                               modelAsString: true
                               name: LinuxUpdateClasses
@@ -574,28 +568,28 @@ paths:
                               type: string
                             type: array
                           includedUpdateClassifications:
-                            description: Update classification included in the software update configuration.
-                            items:
-                              enum:
-                                - Unclassified
-                                - Critical
-                                - Security
-                                - UpdateRollup
-                                - FeaturePack
-                                - ServicePack
-                                - Definition
-                                - Tools
-                                - Updates
-                              type: string
-                              x-ms-enum:
-                                modelAsString: true
-                                name: WindowsUpdateClasses
+                            description: Update classification included in the software update configuration. A comma separated string with required values
+                            enum:
+                              - Unclassified
+                              - Critical
+                              - Security
+                              - UpdateRollup
+                              - FeaturePack
+                              - ServicePack
+                              - Definition
+                              - Tools
+                              - Updates
+                            type: string
+                            x-ms-enum:
+                              modelAsString: true
+                              name: WindowsUpdateClasses
                         type: object
                     required:
                       - operatingSystem
                     type: object
                 required:
                   - updateConfiguration
+                  - scheduleInfo
               type:
                 description: Resource type
                 readOnly: true
@@ -668,21 +662,20 @@ paths:
       description: Create a new software update configuration with the name given in the URI.
       externalDocs:
         url: 'http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations'
-      operationId: softwareUpdateConfigurations_Create
+      operationId: SoftwareUpdateConfigurations_Create
       parameters:
-        - description: subscription id for tenant issuing the request.
-          format: uuid
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
           required: true
           type: string
-        - description: The name of the resource group within user's subscription.
+        - description: The resource group name.
           in: path
           name: resourceGroupName
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the automation account.
-          format: uuid
           in: path
           name: automationAccountName
           required: true
@@ -692,7 +685,7 @@ paths:
           name: softwareUpdateConfigurationName
           required: true
           type: string
-        - description: The API version.
+        - description: Client Api Version.
           in: query
           name: api-version
           required: true
@@ -852,7 +845,6 @@ paths:
                         type: string
                   updateConfiguration:
                     description: Update specifc properties of the software update configuration.
-                    discriminator: operatingSystem
                     properties:
                       azureVirtualMachines:
                         description: List of azure resource Ids for azure virtual machines targeted by the software update configuration.
@@ -874,14 +866,12 @@ paths:
                             type: array
                           includedPackageClassifications:
                             description: Update classifications included in the software update configuration.
-                            items:
-                              enum:
-                                - Unclassified
-                                - Critical
-                                - Security
-                                - Other
-                              type: string
-                            type: array
+                            enum:
+                              - Unclassified
+                              - Critical
+                              - Security
+                              - Other
+                            type: string
                             x-ms-enum:
                               modelAsString: true
                               name: LinuxUpdateClasses
@@ -910,28 +900,28 @@ paths:
                               type: string
                             type: array
                           includedUpdateClassifications:
-                            description: Update classification included in the software update configuration.
-                            items:
-                              enum:
-                                - Unclassified
-                                - Critical
-                                - Security
-                                - UpdateRollup
-                                - FeaturePack
-                                - ServicePack
-                                - Definition
-                                - Tools
-                                - Updates
-                              type: string
-                              x-ms-enum:
-                                modelAsString: true
-                                name: WindowsUpdateClasses
+                            description: Update classification included in the software update configuration. A comma separated string with required values
+                            enum:
+                              - Unclassified
+                              - Critical
+                              - Security
+                              - UpdateRollup
+                              - FeaturePack
+                              - ServicePack
+                              - Definition
+                              - Tools
+                              - Updates
+                            type: string
+                            x-ms-enum:
+                              modelAsString: true
+                              name: WindowsUpdateClasses
                         type: object
                     required:
                       - operatingSystem
                     type: object
                 required:
                   - updateConfiguration
+                  - scheduleInfo
               type:
                 description: Resource type
                 readOnly: true
@@ -1089,7 +1079,6 @@ paths:
                         type: string
                   updateConfiguration:
                     description: Update specifc properties of the software update configuration.
-                    discriminator: operatingSystem
                     properties:
                       azureVirtualMachines:
                         description: List of azure resource Ids for azure virtual machines targeted by the software update configuration.
@@ -1111,14 +1100,12 @@ paths:
                             type: array
                           includedPackageClassifications:
                             description: Update classifications included in the software update configuration.
-                            items:
-                              enum:
-                                - Unclassified
-                                - Critical
-                                - Security
-                                - Other
-                              type: string
-                            type: array
+                            enum:
+                              - Unclassified
+                              - Critical
+                              - Security
+                              - Other
+                            type: string
                             x-ms-enum:
                               modelAsString: true
                               name: LinuxUpdateClasses
@@ -1147,28 +1134,28 @@ paths:
                               type: string
                             type: array
                           includedUpdateClassifications:
-                            description: Update classification included in the software update configuration.
-                            items:
-                              enum:
-                                - Unclassified
-                                - Critical
-                                - Security
-                                - UpdateRollup
-                                - FeaturePack
-                                - ServicePack
-                                - Definition
-                                - Tools
-                                - Updates
-                              type: string
-                              x-ms-enum:
-                                modelAsString: true
-                                name: WindowsUpdateClasses
+                            description: Update classification included in the software update configuration. A comma separated string with required values
+                            enum:
+                              - Unclassified
+                              - Critical
+                              - Security
+                              - UpdateRollup
+                              - FeaturePack
+                              - ServicePack
+                              - Definition
+                              - Tools
+                              - Updates
+                            type: string
+                            x-ms-enum:
+                              modelAsString: true
+                              name: WindowsUpdateClasses
                         type: object
                     required:
                       - operatingSystem
                     type: object
                 required:
                   - updateConfiguration
+                  - scheduleInfo
               type:
                 description: Resource type
                 readOnly: true
@@ -1325,7 +1312,6 @@ paths:
                         type: string
                   updateConfiguration:
                     description: Update specifc properties of the software update configuration.
-                    discriminator: operatingSystem
                     properties:
                       azureVirtualMachines:
                         description: List of azure resource Ids for azure virtual machines targeted by the software update configuration.
@@ -1347,14 +1333,12 @@ paths:
                             type: array
                           includedPackageClassifications:
                             description: Update classifications included in the software update configuration.
-                            items:
-                              enum:
-                                - Unclassified
-                                - Critical
-                                - Security
-                                - Other
-                              type: string
-                            type: array
+                            enum:
+                              - Unclassified
+                              - Critical
+                              - Security
+                              - Other
+                            type: string
                             x-ms-enum:
                               modelAsString: true
                               name: LinuxUpdateClasses
@@ -1383,28 +1367,28 @@ paths:
                               type: string
                             type: array
                           includedUpdateClassifications:
-                            description: Update classification included in the software update configuration.
-                            items:
-                              enum:
-                                - Unclassified
-                                - Critical
-                                - Security
-                                - UpdateRollup
-                                - FeaturePack
-                                - ServicePack
-                                - Definition
-                                - Tools
-                                - Updates
-                              type: string
-                              x-ms-enum:
-                                modelAsString: true
-                                name: WindowsUpdateClasses
+                            description: Update classification included in the software update configuration. A comma separated string with required values
+                            enum:
+                              - Unclassified
+                              - Critical
+                              - Security
+                              - UpdateRollup
+                              - FeaturePack
+                              - ServicePack
+                              - Definition
+                              - Tools
+                              - Updates
+                            type: string
+                            x-ms-enum:
+                              modelAsString: true
+                              name: WindowsUpdateClasses
                         type: object
                     required:
                       - operatingSystem
                     type: object
                 required:
                   - updateConfiguration
+                  - scheduleInfo
               type:
                 description: Resource type
                 readOnly: true

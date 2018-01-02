@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/graphrbac/data-plane/1.6/graphrbac.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/graphrbac/data-plane/stable/1.6/graphrbac.json'
       version: '2.0'
   x-providerName: windows.net
   x-serviceName: graphrbac
@@ -994,6 +994,8 @@ paths:
         - User
 definitions:
   AADObject:
+    additionalProperties:
+      type: object
     description: The properties of an Active Directory object.
     properties:
       appId:
@@ -1066,7 +1068,10 @@ definitions:
       userType:
         description: The user type of the object.
         type: string
+    type: object
   ADGroup:
+    additionalProperties:
+      type: object
     allOf:
       - $ref: '#/definitions/DirectoryObject'
     description: Active Directory group information.
@@ -1080,8 +1085,11 @@ definitions:
       securityEnabled:
         description: Whether the group is security-enable.
         type: boolean
+    type: object
     x-ms-discriminator-value: Group
   Application:
+    additionalProperties:
+      type: object
     allOf:
       - $ref: '#/definitions/DirectoryObject'
     description: Active Directory application information.
@@ -1116,7 +1124,10 @@ definitions:
         items:
           type: string
         type: array
+    type: object
   ApplicationAddOwnerParameters:
+    additionalProperties:
+      type: object
     description: Request parameters for adding a owner to an application.
     properties:
       url:
@@ -1124,7 +1135,10 @@ definitions:
         type: string
     required:
       - url
+    type: object
   ApplicationCreateParameters:
+    additionalProperties:
+      type: object
     description: Request parameters for creating a new application.
     properties:
       availableToOtherTenants:
@@ -1168,6 +1182,7 @@ definitions:
       - availableToOtherTenants
       - displayName
       - identifierUris
+    type: object
   ApplicationListResult:
     description: Application list operation result.
     properties:
@@ -1179,7 +1194,10 @@ definitions:
         items:
           $ref: '#/definitions/Application'
         type: array
+    type: object
   ApplicationUpdateParameters:
+    additionalProperties:
+      type: object
     description: Request parameters for updating an existing application.
     properties:
       availableToOtherTenants:
@@ -1219,7 +1237,10 @@ definitions:
         items:
           $ref: '#/definitions/RequiredResourceAccess'
         type: array
+    type: object
   CheckGroupMembershipParameters:
+    additionalProperties:
+      type: object
     description: Request parameters for IsMemberOf API call.
     properties:
       groupId:
@@ -1231,12 +1252,16 @@ definitions:
     required:
       - groupId
       - memberId
+    type: object
   CheckGroupMembershipResult:
+    additionalProperties:
+      type: object
     description: Server response for IsMemberOf API call
     properties:
       value:
         description: 'True if the specified user, group, contact, or service principal has either direct or transitive membership in the specified group; otherwise, false.'
         type: boolean
+    type: object
   DirectoryObject:
     description: Represents an Azure Active Directory object.
     discriminator: objectType
@@ -1254,6 +1279,7 @@ definitions:
         description: The object type.
         readOnly: true
         type: string
+    type: object
   DirectoryObjectListResult:
     description: DirectoryObject list operation result.
     properties:
@@ -1262,7 +1288,10 @@ definitions:
         items:
           $ref: '#/definitions/DirectoryObject'
         type: array
+    type: object
   Domain:
+    additionalProperties:
+      type: object
     description: Active Directory Domain information.
     properties:
       authenticationType:
@@ -1282,6 +1311,7 @@ definitions:
         type: string
     required:
       - name
+    type: object
   DomainListResult:
     description: Server response for Get tenant domains API call.
     properties:
@@ -1290,6 +1320,7 @@ definitions:
         items:
           $ref: '#/definitions/Domain'
         type: array
+    type: object
   ErrorMessage:
     description: Active Directory error message.
     properties:
@@ -1297,7 +1328,10 @@ definitions:
         description: Error message value.
         type: string
         x-ms-client-name: message
+    type: object
   GetObjectsParameters:
+    additionalProperties:
+      type: object
     description: Request parameters for the GetObjectsByObjectIds API.
     properties:
       includeDirectoryObjectReferences:
@@ -1315,6 +1349,7 @@ definitions:
         type: array
     required:
       - includeDirectoryObjectReferences
+    type: object
   GetObjectsResult:
     description: The response to an Active Directory object inquiry API request.
     properties:
@@ -1326,6 +1361,7 @@ definitions:
         items:
           $ref: '#/definitions/AADObject'
         type: array
+    type: object
   GraphError:
     description: Active Directory error information.
     properties:
@@ -1334,7 +1370,10 @@ definitions:
         description: A Graph API error.
         type: object
         x-ms-client-flatten: true
+    type: object
   GroupAddMemberParameters:
+    additionalProperties:
+      type: object
     description: Request parameters for adding a member to a group.
     properties:
       url:
@@ -1342,7 +1381,10 @@ definitions:
         type: string
     required:
       - url
+    type: object
   GroupCreateParameters:
+    additionalProperties:
+      type: object
     description: Request parameters for creating a new group.
     properties:
       displayName:
@@ -1366,7 +1408,10 @@ definitions:
       - mailEnabled
       - mailNickname
       - securityEnabled
+    type: object
   GroupGetMemberGroupsParameters:
+    additionalProperties:
+      type: object
     description: Request parameters for GetMemberGroups API call.
     properties:
       securityEnabledOnly:
@@ -1374,6 +1419,7 @@ definitions:
         type: boolean
     required:
       - securityEnabledOnly
+    type: object
   GroupGetMemberGroupsResult:
     description: Server response for GetMemberGroups API call.
     properties:
@@ -1382,6 +1428,7 @@ definitions:
         items:
           type: string
         type: array
+    type: object
   GroupListResult:
     description: Server response for Get tenant groups API call
     properties:
@@ -1393,7 +1440,10 @@ definitions:
         items:
           $ref: '#/definitions/ADGroup'
         type: array
+    type: object
   KeyCredential:
+    additionalProperties:
+      type: object
     description: Active Directory Key Credential information.
     properties:
       endDate:
@@ -1416,6 +1466,7 @@ definitions:
       value:
         description: Key value.
         type: string
+    type: object
   KeyCredentialListResult:
     description: KeyCredential list operation result.
     properties:
@@ -1424,6 +1475,7 @@ definitions:
         items:
           $ref: '#/definitions/KeyCredential'
         type: array
+    type: object
   KeyCredentialsUpdateParameters:
     description: Request parameters for a KeyCredentials update operation
     properties:
@@ -1434,6 +1486,7 @@ definitions:
         type: array
     required:
       - value
+    type: object
   OdataError:
     description: Active Directory OData error information.
     properties:
@@ -1445,7 +1498,10 @@ definitions:
         description: Error Message.
         type: object
         x-ms-client-flatten: true
+    type: object
   PasswordCredential:
+    additionalProperties:
+      type: object
     description: Active Directory Password Credential information.
     properties:
       endDate:
@@ -1462,6 +1518,7 @@ definitions:
       value:
         description: Key value.
         type: string
+    type: object
   PasswordCredentialListResult:
     description: PasswordCredential list operation result.
     properties:
@@ -1470,6 +1527,7 @@ definitions:
         items:
           $ref: '#/definitions/PasswordCredential'
         type: array
+    type: object
   PasswordCredentialsUpdateParameters:
     description: Request parameters for a PasswordCredentials update operation.
     properties:
@@ -1480,7 +1538,10 @@ definitions:
         type: array
     required:
       - value
+    type: object
   PasswordProfile:
+    additionalProperties:
+      type: object
     description: The password profile associated with a user.
     properties:
       forceChangePasswordNextLogin:
@@ -1491,7 +1552,10 @@ definitions:
         type: string
     required:
       - password
+    type: object
   RequiredResourceAccess:
+    additionalProperties:
+      type: object
     description: Specifies the set of OAuth 2.0 permission scopes and app roles under the specified resource that an application requires access to. The specified OAuth 2.0 permission scopes may be requested by client applications (through the requiredResourceAccess collection) when calling a resource application. The requiredResourceAccess property of the Application entity is a collection of ReqiredResourceAccess.
     properties:
       resourceAccess:
@@ -1504,7 +1568,10 @@ definitions:
         type: string
     required:
       - resourceAccess
+    type: object
   ResourceAccess:
+    additionalProperties:
+      type: object
     description: Specifies an OAuth 2.0 permission scope or an app role that an application requires. The resourceAccess property of the RequiredResourceAccess type is a collection of ResourceAccess.
     properties:
       id:
@@ -1515,7 +1582,10 @@ definitions:
         type: string
     required:
       - id
+    type: object
   ServicePrincipal:
+    additionalProperties:
+      type: object
     allOf:
       - $ref: '#/definitions/DirectoryObject'
     description: Active Directory service principal information.
@@ -1531,7 +1601,10 @@ definitions:
         items:
           type: string
         type: array
+    type: object
   ServicePrincipalCreateParameters:
+    additionalProperties:
+      type: object
     description: Request parameters for creating a new service principal.
     properties:
       accountEnabled:
@@ -1553,6 +1626,7 @@ definitions:
     required:
       - appId
       - accountEnabled
+    type: object
   ServicePrincipalListResult:
     description: Server response for get tenant service principals API call.
     properties:
@@ -1564,7 +1638,10 @@ definitions:
         items:
           $ref: '#/definitions/ServicePrincipal'
         type: array
+    type: object
   SignInName:
+    additionalProperties:
+      type: object
     description: Contains information about a sign-in name of a local account user in an Azure Active Directory B2C tenant.
     properties:
       type:
@@ -1573,7 +1650,10 @@ definitions:
       value:
         description: 'The sign-in used by the local account. Must be unique across the company/tenant. For example, ''johnc@example.com''.'
         type: string
+    type: object
   User:
+    additionalProperties:
+      type: object
     allOf:
       - $ref: '#/definitions/DirectoryObject'
     description: Active Directory user information.
@@ -1619,7 +1699,10 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: UserType
+    type: object
   UserBase:
+    additionalProperties:
+      type: object
     properties:
       givenName:
         description: The given name for the user.
@@ -1642,7 +1725,10 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: UserType
+    type: object
   UserCreateParameters:
+    additionalProperties:
+      type: object
     allOf:
       - $ref: '#/definitions/UserBase'
     description: Request parameters for creating a new work or school account user.
@@ -1671,7 +1757,10 @@ definitions:
       - passwordProfile
       - userPrincipalName
       - mailNickname
+    type: object
   UserGetMemberGroupsParameters:
+    additionalProperties:
+      type: object
     description: Request parameters for GetMemberGroups API call.
     properties:
       securityEnabledOnly:
@@ -1679,6 +1768,7 @@ definitions:
         type: boolean
     required:
       - securityEnabledOnly
+    type: object
   UserGetMemberGroupsResult:
     description: Server response for GetMemberGroups API call.
     properties:
@@ -1687,6 +1777,7 @@ definitions:
         items:
           type: string
         type: array
+    type: object
   UserListResult:
     description: Server response for Get tenant users API call.
     properties:
@@ -1698,7 +1789,10 @@ definitions:
         items:
           $ref: '#/definitions/User'
         type: array
+    type: object
   UserUpdateParameters:
+    additionalProperties:
+      type: object
     allOf:
       - $ref: '#/definitions/UserBase'
     description: Request parameters for updating an existing work or school account user.
@@ -1718,6 +1812,7 @@ definitions:
       userPrincipalName:
         description: The user principal name (someuser@contoso.com). It must contain one of the verified domains for the tenant.
         type: string
+    type: object
 x-ms-paths:
   '/{tenantID}/{nextLink}?Applications_ListNext':
     get:
