@@ -313,9 +313,11 @@ function validatePreferred(specs) {
   _.each(specs, function (swagger) {
     var id = util.getApiId(swagger);
     var version = swagger.info.version;
+    var spath = util.getSwaggerPath(swagger);
     preferred[id] = preferred[id] || {};
     preferred[id][swagger.info.version] = swagger.info['x-preferred'];
-    assert(Object.keys(swagger.paths).length>0, `"${id}" "${version}" has no paths`);
+    //assert(Object.keys(swagger.paths).length>0, `"${id}" "${version}" has no paths`);
+    assert(Object.keys(swagger.paths).length>0, `"${spath}" has no paths`);
   });
 
   _.each(preferred, function (versions, id) {
@@ -841,8 +843,8 @@ function fixSpec(swagger, errors) {
           newValue = value.replace('#/definitions/','');
         }
         else {
-          if (value.startsWith('#')) {
-            console.warn(value);
+          if (value.startsWith('#/definitions/')) {
+            console.warn(error.code,value);
             let ptr = value.replace('#/definitions/','');
             swagger.definitions[ptr] = { type: 'object' };
             fixed = true;
