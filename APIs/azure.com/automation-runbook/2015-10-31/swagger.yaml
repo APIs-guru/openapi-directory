@@ -75,203 +75,7 @@ paths:
               value:
                 description: Gets or sets a list of runbooks.
                 items:
-                  allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource Id
-                          readOnly: true
-                          type: string
-                        location:
-                          description: Resource location
-                          type: string
-                        name:
-                          description: Resource name
-                          readOnly: true
-                          type: string
-                        tags:
-                          additionalProperties:
-                            type: string
-                          description: Resource tags
-                          type: object
-                        type:
-                          description: Resource type
-                          readOnly: true
-                          type: string
-                      required:
-                        - location
-                      x-ms-azure-resource: true
-                  description: Definition of the runbook type.
-                  properties:
-                    etag:
-                      description: Gets or sets the etag of the resource.
-                      type: string
-                    properties:
-                      description: Definition of the runbook property type.
-                      properties:
-                        creationTime:
-                          description: Gets or sets the creation time.
-                          format: date-time
-                          type: string
-                        description:
-                          description: Gets or sets the description.
-                          type: string
-                        draft:
-                          description: Definition of the runbook type.
-                          properties:
-                            creationTime:
-                              description: Gets or sets the creation time of the runbook draft.
-                              format: date-time
-                              type: string
-                            draftContentLink:
-                              description: Definition of the content link.
-                              properties:
-                                contentHash:
-                                  description: Definition of the runbook property type.
-                                  properties:
-                                    algorithm:
-                                      description: Gets or sets the content hash algorithm used to hash the content.
-                                      type: string
-                                    value:
-                                      description: Gets or sets expected hash value of the content.
-                                      type: string
-                                  required:
-                                    - algorithm
-                                    - value
-                                uri:
-                                  description: Gets or sets the uri of the runbook content.
-                                  type: string
-                                version:
-                                  description: Gets or sets the version of the content.
-                                  type: string
-                            inEdit:
-                              description: Gets or sets whether runbook is in edit mode.
-                              type: boolean
-                            lastModifiedTime:
-                              description: Gets or sets the last modified time of the runbook draft.
-                              format: date-time
-                              type: string
-                            outputTypes:
-                              description: Gets or sets the runbook output types.
-                              items:
-                                type: string
-                              type: array
-                            parameters:
-                              additionalProperties:
-                                description: Definition of the runbook parameter type.
-                                properties:
-                                  defaultValue:
-                                    description: Gets or sets the default value of parameter.
-                                    type: string
-                                  isMandatory:
-                                    description: Gets or sets a Boolean value to indicate whether the parameter is madatory or not.
-                                    type: boolean
-                                  position:
-                                    description: Get or sets the position of the parameter.
-                                    format: int32
-                                    type: integer
-                                  type:
-                                    description: Gets or sets the type of the parameter.
-                                    type: string
-                              description: Gets or sets the runbook draft parameters.
-                              type: object
-                        jobCount:
-                          description: Gets or sets the job count of the runbook.
-                          format: int32
-                          type: integer
-                        lastModifiedBy:
-                          description: Gets or sets the last modified by.
-                          type: string
-                        lastModifiedTime:
-                          description: Gets or sets the last modified time.
-                          format: date-time
-                          type: string
-                        logActivityTrace:
-                          description: Gets or sets the option to log activity trace of the runbook.
-                          format: int32
-                          type: integer
-                        logProgress:
-                          description: Gets or sets progress log option.
-                          type: boolean
-                        logVerbose:
-                          description: Gets or sets verbose log option.
-                          type: boolean
-                        outputTypes:
-                          description: Gets or sets the runbook output types.
-                          items:
-                            type: string
-                          type: array
-                        parameters:
-                          additionalProperties:
-                            description: Definition of the runbook parameter type.
-                            properties:
-                              defaultValue:
-                                description: Gets or sets the default value of parameter.
-                                type: string
-                              isMandatory:
-                                description: Gets or sets a Boolean value to indicate whether the parameter is madatory or not.
-                                type: boolean
-                              position:
-                                description: Get or sets the position of the parameter.
-                                format: int32
-                                type: integer
-                              type:
-                                description: Gets or sets the type of the parameter.
-                                type: string
-                          description: Gets or sets the runbook parameters.
-                          type: object
-                        provisioningState:
-                          description: Gets or sets the provisioning state of the runbook.
-                          enum:
-                            - Succeeded
-                          type: string
-                          x-ms-enum:
-                            modelAsString: false
-                            name: RunbookProvisioningState
-                        publishContentLink:
-                          description: Definition of the content link.
-                          properties:
-                            contentHash:
-                              description: Definition of the runbook property type.
-                              properties:
-                                algorithm:
-                                  description: Gets or sets the content hash algorithm used to hash the content.
-                                  type: string
-                                value:
-                                  description: Gets or sets expected hash value of the content.
-                                  type: string
-                              required:
-                                - algorithm
-                                - value
-                            uri:
-                              description: Gets or sets the uri of the runbook content.
-                              type: string
-                            version:
-                              description: Gets or sets the version of the content.
-                              type: string
-                        runbookType:
-                          description: Gets or sets the type of the runbook.
-                          enum:
-                            - Script
-                            - Graph
-                            - PowerShellWorkflow
-                            - PowerShell
-                            - GraphPowerShellWorkflow
-                            - GraphPowerShell
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: RunbookTypeEnum
-                        state:
-                          description: Gets or sets the state of the runbook.
-                          enum:
-                            - New
-                            - Edit
-                            - Published
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: RunbookState
+                  $ref: '#/definitions/Runbook'
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -434,202 +238,16 @@ paths:
           description: OK
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
-                  location:
-                    description: Resource location
-                    type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Resource tags
-                    type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Definition of the runbook type.
             properties:
               etag:
                 description: Gets or sets the etag of the resource.
                 type: string
               properties:
-                description: Definition of the runbook property type.
-                properties:
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  draft:
-                    description: Definition of the runbook type.
-                    properties:
-                      creationTime:
-                        description: Gets or sets the creation time of the runbook draft.
-                        format: date-time
-                        type: string
-                      draftContentLink:
-                        description: Definition of the content link.
-                        properties:
-                          contentHash:
-                            description: Definition of the runbook property type.
-                            properties:
-                              algorithm:
-                                description: Gets or sets the content hash algorithm used to hash the content.
-                                type: string
-                              value:
-                                description: Gets or sets expected hash value of the content.
-                                type: string
-                            required:
-                              - algorithm
-                              - value
-                          uri:
-                            description: Gets or sets the uri of the runbook content.
-                            type: string
-                          version:
-                            description: Gets or sets the version of the content.
-                            type: string
-                      inEdit:
-                        description: Gets or sets whether runbook is in edit mode.
-                        type: boolean
-                      lastModifiedTime:
-                        description: Gets or sets the last modified time of the runbook draft.
-                        format: date-time
-                        type: string
-                      outputTypes:
-                        description: Gets or sets the runbook output types.
-                        items:
-                          type: string
-                        type: array
-                      parameters:
-                        additionalProperties:
-                          description: Definition of the runbook parameter type.
-                          properties:
-                            defaultValue:
-                              description: Gets or sets the default value of parameter.
-                              type: string
-                            isMandatory:
-                              description: Gets or sets a Boolean value to indicate whether the parameter is madatory or not.
-                              type: boolean
-                            position:
-                              description: Get or sets the position of the parameter.
-                              format: int32
-                              type: integer
-                            type:
-                              description: Gets or sets the type of the parameter.
-                              type: string
-                        description: Gets or sets the runbook draft parameters.
-                        type: object
-                  jobCount:
-                    description: Gets or sets the job count of the runbook.
-                    format: int32
-                    type: integer
-                  lastModifiedBy:
-                    description: Gets or sets the last modified by.
-                    type: string
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                  logActivityTrace:
-                    description: Gets or sets the option to log activity trace of the runbook.
-                    format: int32
-                    type: integer
-                  logProgress:
-                    description: Gets or sets progress log option.
-                    type: boolean
-                  logVerbose:
-                    description: Gets or sets verbose log option.
-                    type: boolean
-                  outputTypes:
-                    description: Gets or sets the runbook output types.
-                    items:
-                      type: string
-                    type: array
-                  parameters:
-                    additionalProperties:
-                      description: Definition of the runbook parameter type.
-                      properties:
-                        defaultValue:
-                          description: Gets or sets the default value of parameter.
-                          type: string
-                        isMandatory:
-                          description: Gets or sets a Boolean value to indicate whether the parameter is madatory or not.
-                          type: boolean
-                        position:
-                          description: Get or sets the position of the parameter.
-                          format: int32
-                          type: integer
-                        type:
-                          description: Gets or sets the type of the parameter.
-                          type: string
-                    description: Gets or sets the runbook parameters.
-                    type: object
-                  provisioningState:
-                    description: Gets or sets the provisioning state of the runbook.
-                    enum:
-                      - Succeeded
-                    type: string
-                    x-ms-enum:
-                      modelAsString: false
-                      name: RunbookProvisioningState
-                  publishContentLink:
-                    description: Definition of the content link.
-                    properties:
-                      contentHash:
-                        description: Definition of the runbook property type.
-                        properties:
-                          algorithm:
-                            description: Gets or sets the content hash algorithm used to hash the content.
-                            type: string
-                          value:
-                            description: Gets or sets expected hash value of the content.
-                            type: string
-                        required:
-                          - algorithm
-                          - value
-                      uri:
-                        description: Gets or sets the uri of the runbook content.
-                        type: string
-                      version:
-                        description: Gets or sets the version of the content.
-                        type: string
-                  runbookType:
-                    description: Gets or sets the type of the runbook.
-                    enum:
-                      - Script
-                      - Graph
-                      - PowerShellWorkflow
-                      - PowerShell
-                      - GraphPowerShellWorkflow
-                      - GraphPowerShell
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: RunbookTypeEnum
-                  state:
-                    description: Gets or sets the state of the runbook.
-                    enum:
-                      - New
-                      - Edit
-                      - Published
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: RunbookState
+                $ref: '#/definitions/RunbookProperties'
+                description: Gets or sets the runbook properties.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -715,21 +333,9 @@ paths:
                 description: Gets or sets the name of the resource.
                 type: string
               properties:
-                description: The parameters supplied to the update runbook properties.
-                properties:
-                  description:
-                    description: Gets or sets the description of the runbook.
-                    type: string
-                  logActivityTrace:
-                    description: Gets or sets the activity-level tracing options of the runbook.
-                    format: int32
-                    type: integer
-                  logProgress:
-                    description: Gets or sets progress log option.
-                    type: boolean
-                  logVerbose:
-                    description: Gets or sets verbose log option.
-                    type: boolean
+                $ref: '#/definitions/RunbookUpdateProperties'
+                description: Gets or sets the runbook update properties.
+                x-ms-client-flatten: true
               tags:
                 additionalProperties:
                   type: string
@@ -750,202 +356,16 @@ paths:
           description: OK
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
-                  location:
-                    description: Resource location
-                    type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Resource tags
-                    type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Definition of the runbook type.
             properties:
               etag:
                 description: Gets or sets the etag of the resource.
                 type: string
               properties:
-                description: Definition of the runbook property type.
-                properties:
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  draft:
-                    description: Definition of the runbook type.
-                    properties:
-                      creationTime:
-                        description: Gets or sets the creation time of the runbook draft.
-                        format: date-time
-                        type: string
-                      draftContentLink:
-                        description: Definition of the content link.
-                        properties:
-                          contentHash:
-                            description: Definition of the runbook property type.
-                            properties:
-                              algorithm:
-                                description: Gets or sets the content hash algorithm used to hash the content.
-                                type: string
-                              value:
-                                description: Gets or sets expected hash value of the content.
-                                type: string
-                            required:
-                              - algorithm
-                              - value
-                          uri:
-                            description: Gets or sets the uri of the runbook content.
-                            type: string
-                          version:
-                            description: Gets or sets the version of the content.
-                            type: string
-                      inEdit:
-                        description: Gets or sets whether runbook is in edit mode.
-                        type: boolean
-                      lastModifiedTime:
-                        description: Gets or sets the last modified time of the runbook draft.
-                        format: date-time
-                        type: string
-                      outputTypes:
-                        description: Gets or sets the runbook output types.
-                        items:
-                          type: string
-                        type: array
-                      parameters:
-                        additionalProperties:
-                          description: Definition of the runbook parameter type.
-                          properties:
-                            defaultValue:
-                              description: Gets or sets the default value of parameter.
-                              type: string
-                            isMandatory:
-                              description: Gets or sets a Boolean value to indicate whether the parameter is madatory or not.
-                              type: boolean
-                            position:
-                              description: Get or sets the position of the parameter.
-                              format: int32
-                              type: integer
-                            type:
-                              description: Gets or sets the type of the parameter.
-                              type: string
-                        description: Gets or sets the runbook draft parameters.
-                        type: object
-                  jobCount:
-                    description: Gets or sets the job count of the runbook.
-                    format: int32
-                    type: integer
-                  lastModifiedBy:
-                    description: Gets or sets the last modified by.
-                    type: string
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                  logActivityTrace:
-                    description: Gets or sets the option to log activity trace of the runbook.
-                    format: int32
-                    type: integer
-                  logProgress:
-                    description: Gets or sets progress log option.
-                    type: boolean
-                  logVerbose:
-                    description: Gets or sets verbose log option.
-                    type: boolean
-                  outputTypes:
-                    description: Gets or sets the runbook output types.
-                    items:
-                      type: string
-                    type: array
-                  parameters:
-                    additionalProperties:
-                      description: Definition of the runbook parameter type.
-                      properties:
-                        defaultValue:
-                          description: Gets or sets the default value of parameter.
-                          type: string
-                        isMandatory:
-                          description: Gets or sets a Boolean value to indicate whether the parameter is madatory or not.
-                          type: boolean
-                        position:
-                          description: Get or sets the position of the parameter.
-                          format: int32
-                          type: integer
-                        type:
-                          description: Gets or sets the type of the parameter.
-                          type: string
-                    description: Gets or sets the runbook parameters.
-                    type: object
-                  provisioningState:
-                    description: Gets or sets the provisioning state of the runbook.
-                    enum:
-                      - Succeeded
-                    type: string
-                    x-ms-enum:
-                      modelAsString: false
-                      name: RunbookProvisioningState
-                  publishContentLink:
-                    description: Definition of the content link.
-                    properties:
-                      contentHash:
-                        description: Definition of the runbook property type.
-                        properties:
-                          algorithm:
-                            description: Gets or sets the content hash algorithm used to hash the content.
-                            type: string
-                          value:
-                            description: Gets or sets expected hash value of the content.
-                            type: string
-                        required:
-                          - algorithm
-                          - value
-                      uri:
-                        description: Gets or sets the uri of the runbook content.
-                        type: string
-                      version:
-                        description: Gets or sets the version of the content.
-                        type: string
-                  runbookType:
-                    description: Gets or sets the type of the runbook.
-                    enum:
-                      - Script
-                      - Graph
-                      - PowerShellWorkflow
-                      - PowerShell
-                      - GraphPowerShellWorkflow
-                      - GraphPowerShell
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: RunbookTypeEnum
-                  state:
-                    description: Gets or sets the state of the runbook.
-                    enum:
-                      - New
-                      - Edit
-                      - Published
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: RunbookState
+                $ref: '#/definitions/RunbookProperties'
+                description: Gets or sets the runbook properties.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1040,116 +460,9 @@ paths:
                 description: Gets or sets the name of the resource.
                 type: string
               properties:
-                description: The parameters supplied to the create or update runbook properties.
-                properties:
-                  description:
-                    description: Gets or sets the description of the runbook.
-                    type: string
-                  draft:
-                    description: Definition of the runbook type.
-                    properties:
-                      creationTime:
-                        description: Gets or sets the creation time of the runbook draft.
-                        format: date-time
-                        type: string
-                      draftContentLink:
-                        description: Definition of the content link.
-                        properties:
-                          contentHash:
-                            description: Definition of the runbook property type.
-                            properties:
-                              algorithm:
-                                description: Gets or sets the content hash algorithm used to hash the content.
-                                type: string
-                              value:
-                                description: Gets or sets expected hash value of the content.
-                                type: string
-                            required:
-                              - algorithm
-                              - value
-                          uri:
-                            description: Gets or sets the uri of the runbook content.
-                            type: string
-                          version:
-                            description: Gets or sets the version of the content.
-                            type: string
-                      inEdit:
-                        description: Gets or sets whether runbook is in edit mode.
-                        type: boolean
-                      lastModifiedTime:
-                        description: Gets or sets the last modified time of the runbook draft.
-                        format: date-time
-                        type: string
-                      outputTypes:
-                        description: Gets or sets the runbook output types.
-                        items:
-                          type: string
-                        type: array
-                      parameters:
-                        additionalProperties:
-                          description: Definition of the runbook parameter type.
-                          properties:
-                            defaultValue:
-                              description: Gets or sets the default value of parameter.
-                              type: string
-                            isMandatory:
-                              description: Gets or sets a Boolean value to indicate whether the parameter is madatory or not.
-                              type: boolean
-                            position:
-                              description: Get or sets the position of the parameter.
-                              format: int32
-                              type: integer
-                            type:
-                              description: Gets or sets the type of the parameter.
-                              type: string
-                        description: Gets or sets the runbook draft parameters.
-                        type: object
-                  logActivityTrace:
-                    description: Gets or sets the activity-level tracing options of the runbook.
-                    format: int32
-                    type: integer
-                  logProgress:
-                    description: Gets or sets progress log option.
-                    type: boolean
-                  logVerbose:
-                    description: Gets or sets verbose log option.
-                    type: boolean
-                  publishContentLink:
-                    description: Definition of the content link.
-                    properties:
-                      contentHash:
-                        description: Definition of the runbook property type.
-                        properties:
-                          algorithm:
-                            description: Gets or sets the content hash algorithm used to hash the content.
-                            type: string
-                          value:
-                            description: Gets or sets expected hash value of the content.
-                            type: string
-                        required:
-                          - algorithm
-                          - value
-                      uri:
-                        description: Gets or sets the uri of the runbook content.
-                        type: string
-                      version:
-                        description: Gets or sets the version of the content.
-                        type: string
-                  runbookType:
-                    description: Gets or sets the type of the runbook.
-                    enum:
-                      - Script
-                      - Graph
-                      - PowerShellWorkflow
-                      - PowerShell
-                      - GraphPowerShellWorkflow
-                      - GraphPowerShell
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: RunbookTypeEnum
-                required:
-                  - runbookType
+                $ref: '#/definitions/RunbookCreateOrUpdateProperties'
+                description: Gets or sets runbook create or update properties.
+                x-ms-client-flatten: true
               tags:
                 additionalProperties:
                   type: string
@@ -1377,26 +690,8 @@ paths:
                 format: date-time
                 type: string
               draftContentLink:
-                description: Definition of the content link.
-                properties:
-                  contentHash:
-                    description: Definition of the runbook property type.
-                    properties:
-                      algorithm:
-                        description: Gets or sets the content hash algorithm used to hash the content.
-                        type: string
-                      value:
-                        description: Gets or sets expected hash value of the content.
-                        type: string
-                    required:
-                      - algorithm
-                      - value
-                  uri:
-                    description: Gets or sets the uri of the runbook content.
-                    type: string
-                  version:
-                    description: Gets or sets the version of the content.
-                    type: string
+                $ref: '#/definitions/ContentLink'
+                description: Gets or sets the draft runbook content link.
               inEdit:
                 description: Gets or sets whether runbook is in edit mode.
                 type: boolean
@@ -1411,21 +706,7 @@ paths:
                 type: array
               parameters:
                 additionalProperties:
-                  description: Definition of the runbook parameter type.
-                  properties:
-                    defaultValue:
-                      description: Gets or sets the default value of parameter.
-                      type: string
-                    isMandatory:
-                      description: Gets or sets a Boolean value to indicate whether the parameter is madatory or not.
-                      type: boolean
-                    position:
-                      description: Get or sets the position of the parameter.
-                      format: int32
-                      type: integer
-                    type:
-                      description: Gets or sets the type of the parameter.
-                      type: string
+                  $ref: '#/definitions/RunbookParameter'
                 description: Gets or sets the runbook draft parameters.
                 type: object
         default:
@@ -1651,202 +932,16 @@ paths:
           description: OK
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
-                  location:
-                    description: Resource location
-                    type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Resource tags
-                    type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Definition of the runbook type.
             properties:
               etag:
                 description: Gets or sets the etag of the resource.
                 type: string
               properties:
-                description: Definition of the runbook property type.
-                properties:
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  draft:
-                    description: Definition of the runbook type.
-                    properties:
-                      creationTime:
-                        description: Gets or sets the creation time of the runbook draft.
-                        format: date-time
-                        type: string
-                      draftContentLink:
-                        description: Definition of the content link.
-                        properties:
-                          contentHash:
-                            description: Definition of the runbook property type.
-                            properties:
-                              algorithm:
-                                description: Gets or sets the content hash algorithm used to hash the content.
-                                type: string
-                              value:
-                                description: Gets or sets expected hash value of the content.
-                                type: string
-                            required:
-                              - algorithm
-                              - value
-                          uri:
-                            description: Gets or sets the uri of the runbook content.
-                            type: string
-                          version:
-                            description: Gets or sets the version of the content.
-                            type: string
-                      inEdit:
-                        description: Gets or sets whether runbook is in edit mode.
-                        type: boolean
-                      lastModifiedTime:
-                        description: Gets or sets the last modified time of the runbook draft.
-                        format: date-time
-                        type: string
-                      outputTypes:
-                        description: Gets or sets the runbook output types.
-                        items:
-                          type: string
-                        type: array
-                      parameters:
-                        additionalProperties:
-                          description: Definition of the runbook parameter type.
-                          properties:
-                            defaultValue:
-                              description: Gets or sets the default value of parameter.
-                              type: string
-                            isMandatory:
-                              description: Gets or sets a Boolean value to indicate whether the parameter is madatory or not.
-                              type: boolean
-                            position:
-                              description: Get or sets the position of the parameter.
-                              format: int32
-                              type: integer
-                            type:
-                              description: Gets or sets the type of the parameter.
-                              type: string
-                        description: Gets or sets the runbook draft parameters.
-                        type: object
-                  jobCount:
-                    description: Gets or sets the job count of the runbook.
-                    format: int32
-                    type: integer
-                  lastModifiedBy:
-                    description: Gets or sets the last modified by.
-                    type: string
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                  logActivityTrace:
-                    description: Gets or sets the option to log activity trace of the runbook.
-                    format: int32
-                    type: integer
-                  logProgress:
-                    description: Gets or sets progress log option.
-                    type: boolean
-                  logVerbose:
-                    description: Gets or sets verbose log option.
-                    type: boolean
-                  outputTypes:
-                    description: Gets or sets the runbook output types.
-                    items:
-                      type: string
-                    type: array
-                  parameters:
-                    additionalProperties:
-                      description: Definition of the runbook parameter type.
-                      properties:
-                        defaultValue:
-                          description: Gets or sets the default value of parameter.
-                          type: string
-                        isMandatory:
-                          description: Gets or sets a Boolean value to indicate whether the parameter is madatory or not.
-                          type: boolean
-                        position:
-                          description: Get or sets the position of the parameter.
-                          format: int32
-                          type: integer
-                        type:
-                          description: Gets or sets the type of the parameter.
-                          type: string
-                    description: Gets or sets the runbook parameters.
-                    type: object
-                  provisioningState:
-                    description: Gets or sets the provisioning state of the runbook.
-                    enum:
-                      - Succeeded
-                    type: string
-                    x-ms-enum:
-                      modelAsString: false
-                      name: RunbookProvisioningState
-                  publishContentLink:
-                    description: Definition of the content link.
-                    properties:
-                      contentHash:
-                        description: Definition of the runbook property type.
-                        properties:
-                          algorithm:
-                            description: Gets or sets the content hash algorithm used to hash the content.
-                            type: string
-                          value:
-                            description: Gets or sets expected hash value of the content.
-                            type: string
-                        required:
-                          - algorithm
-                          - value
-                      uri:
-                        description: Gets or sets the uri of the runbook content.
-                        type: string
-                      version:
-                        description: Gets or sets the version of the content.
-                        type: string
-                  runbookType:
-                    description: Gets or sets the type of the runbook.
-                    enum:
-                      - Script
-                      - Graph
-                      - PowerShellWorkflow
-                      - PowerShell
-                      - GraphPowerShellWorkflow
-                      - GraphPowerShell
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: RunbookTypeEnum
-                  state:
-                    description: Gets or sets the state of the runbook.
-                    enum:
-                      - New
-                      - Edit
-                      - Published
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: RunbookState
+                $ref: '#/definitions/RunbookProperties'
+                description: Gets or sets the runbook properties.
+                x-ms-client-flatten: true
         '202':
           description: Accepted and  the operation will complete asynchronously.
         default:
@@ -2224,47 +1319,7 @@ paths:
               value:
                 description: A list of job streams.
                 items:
-                  description: Definition of the job stream.
-                  properties:
-                    id:
-                      description: Gets or sets the id of the resource.
-                      type: string
-                    properties:
-                      description: Definition of the job stream.
-                      properties:
-                        jobStreamId:
-                          description: Gets or sets the id of the job stream.
-                          type: string
-                        streamText:
-                          description: Gets or sets the stream text.
-                          type: string
-                        streamType:
-                          description: Gets or sets the stream type.
-                          enum:
-                            - Progress
-                            - Output
-                            - Warning
-                            - Error
-                            - Debug
-                            - Verbose
-                            - Any
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: JobStreamType
-                        summary:
-                          description: Gets or sets the summary.
-                          type: string
-                        time:
-                          description: Gets or sets the creation time of the job.
-                          format: date-time
-                          type: string
-                        value:
-                          additionalProperties:
-                            type: object
-                          description: Gets or sets the values of the job stream.
-                          type: object
-                      x-ms-client-flatten: true
+                  $ref: './definitions.json#/definitions/JobStream'
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -2330,40 +1385,8 @@ paths:
                 description: Gets or sets the id of the resource.
                 type: string
               properties:
-                description: Definition of the job stream.
-                properties:
-                  jobStreamId:
-                    description: Gets or sets the id of the job stream.
-                    type: string
-                  streamText:
-                    description: Gets or sets the stream text.
-                    type: string
-                  streamType:
-                    description: Gets or sets the stream type.
-                    enum:
-                      - Progress
-                      - Output
-                      - Warning
-                      - Error
-                      - Debug
-                      - Verbose
-                      - Any
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: JobStreamType
-                  summary:
-                    description: Gets or sets the summary.
-                    type: string
-                  time:
-                    description: Gets or sets the creation time of the job.
-                    format: date-time
-                    type: string
-                  value:
-                    additionalProperties:
-                      type: object
-                    description: Gets or sets the values of the job stream.
-                    type: object
+                $ref: './definitions.json#/definitions/JobStreamProperties'
+                description: Gets or sets the id of the job stream.
                 x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.

@@ -76,30 +76,7 @@ paths:
               scriptActions:
                 description: The list of run time script actions.
                 items:
-                  description: Describes a script action on a running cluster.
-                  properties:
-                    applicationName:
-                      description: 'The application name of the script action, if any.'
-                      readOnly: true
-                      type: string
-                    name:
-                      description: The name of the script action.
-                      type: string
-                    parameters:
-                      description: The parameters for the script
-                      type: string
-                    roles:
-                      description: The list of roles where script will be executed.
-                      items:
-                        type: string
-                      type: array
-                    uri:
-                      description: The URI to the script.
-                      type: string
-                  required:
-                    - name
-                    - uri
-                    - roles
+                  $ref: '#/definitions/RuntimeScriptAction'
                 type: array
             required:
               - persistOnSuccess
@@ -305,30 +282,7 @@ paths:
           description: OK response definition.
           schema:
             allOf:
-              - description: Describes a script action on a running cluster.
-                properties:
-                  applicationName:
-                    description: 'The application name of the script action, if any.'
-                    readOnly: true
-                    type: string
-                  name:
-                    description: The name of the script action.
-                    type: string
-                  parameters:
-                    description: The parameters for the script
-                    type: string
-                  roles:
-                    description: The list of roles where script will be executed.
-                    items:
-                      type: string
-                    type: array
-                  uri:
-                    description: The URI to the script.
-                    type: string
-                required:
-                  - name
-                  - uri
-                  - roles
+              - $ref: '#/definitions/RuntimeScriptAction'
               - properties:
                   debugInformation:
                     description: The script action execution debug information.
@@ -341,17 +295,7 @@ paths:
                   executionSummary:
                     description: The summary of script action execution result.
                     items:
-                      description: The execution summary of a script action.
-                      properties:
-                        instanceCount:
-                          description: The instance count for a given script action execution status.
-                          format: int32
-                          readOnly: true
-                          type: integer
-                        status:
-                          description: The status of script action execution.
-                          readOnly: true
-                          type: string
+                      $ref: '#/definitions/ScriptActionExecutionSummary'
                     readOnly: true
                     type: array
                   operation:
@@ -449,30 +393,7 @@ definitions:
         description: The list of persisted script action details for the cluster.
         items:
           allOf:
-            - description: Describes a script action on a running cluster.
-              properties:
-                applicationName:
-                  description: 'The application name of the script action, if any.'
-                  readOnly: true
-                  type: string
-                name:
-                  description: The name of the script action.
-                  type: string
-                parameters:
-                  description: The parameters for the script
-                  type: string
-                roles:
-                  description: The list of roles where script will be executed.
-                  items:
-                    type: string
-                  type: array
-                uri:
-                  description: The URI to the script.
-                  type: string
-              required:
-                - name
-                - uri
-                - roles
+            - $ref: '#/definitions/RuntimeScriptAction'
             - properties:
                 debugInformation:
                   description: The script action execution debug information.
@@ -485,17 +406,7 @@ definitions:
                 executionSummary:
                   description: The summary of script action execution result.
                   items:
-                    description: The execution summary of a script action.
-                    properties:
-                      instanceCount:
-                        description: The instance count for a given script action execution status.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      status:
-                        description: The status of script action execution.
-                        readOnly: true
-                        type: string
+                    $ref: '#/definitions/ScriptActionExecutionSummary'
                   readOnly: true
                   type: array
                 operation:
@@ -545,30 +456,7 @@ definitions:
         description: The list of persisted script action details for the cluster.
         items:
           allOf:
-            - description: Describes a script action on a running cluster.
-              properties:
-                applicationName:
-                  description: 'The application name of the script action, if any.'
-                  readOnly: true
-                  type: string
-                name:
-                  description: The name of the script action.
-                  type: string
-                parameters:
-                  description: The parameters for the script
-                  type: string
-                roles:
-                  description: The list of roles where script will be executed.
-                  items:
-                    type: string
-                  type: array
-                uri:
-                  description: The URI to the script.
-                  type: string
-              required:
-                - name
-                - uri
-                - roles
+            - $ref: '#/definitions/RuntimeScriptAction'
             - properties:
                 debugInformation:
                   description: The script action execution debug information.
@@ -581,17 +469,7 @@ definitions:
                 executionSummary:
                   description: The summary of script action execution result.
                   items:
-                    description: The execution summary of a script action.
-                    properties:
-                      instanceCount:
-                        description: The instance count for a given script action execution status.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      status:
-                        description: The status of script action execution.
-                        readOnly: true
-                        type: string
+                    $ref: '#/definitions/ScriptActionExecutionSummary'
                   readOnly: true
                   type: array
                 operation:
@@ -645,30 +523,7 @@ definitions:
         description: The list of persisted script action details for the cluster.
         items:
           allOf:
-            - description: Describes a script action on a running cluster.
-              properties:
-                applicationName:
-                  description: 'The application name of the script action, if any.'
-                  readOnly: true
-                  type: string
-                name:
-                  description: The name of the script action.
-                  type: string
-                parameters:
-                  description: The parameters for the script
-                  type: string
-                roles:
-                  description: The list of roles where script will be executed.
-                  items:
-                    type: string
-                  type: array
-                uri:
-                  description: The URI to the script.
-                  type: string
-              required:
-                - name
-                - uri
-                - roles
+            - $ref: '#/definitions/RuntimeScriptAction'
             - properties:
                 debugInformation:
                   description: The script action execution debug information.
@@ -681,17 +536,7 @@ definitions:
                 executionSummary:
                   description: The summary of script action execution result.
                   items:
-                    description: The execution summary of a script action.
-                    properties:
-                      instanceCount:
-                        description: The instance count for a given script action execution status.
-                        format: int32
-                        readOnly: true
-                        type: integer
-                      status:
-                        description: The status of script action execution.
-                        readOnly: true
-                        type: string
+                    $ref: '#/definitions/ScriptActionExecutionSummary'
                   readOnly: true
                   type: array
                 operation:

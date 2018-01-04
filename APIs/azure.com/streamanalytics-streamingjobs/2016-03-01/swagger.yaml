@@ -1413,94 +1413,23 @@ definitions:
         description: A list of one or more functions for the streaming job. The name property for each function is required when specifying this property in a PUT request. This property cannot be modify via a PATCH operation. You must use the PATCH API available for the individual transformation.
         items:
           allOf:
-            - description: The base sub-resource model definition.
-              properties:
-                id:
-                  description: Resource Id
-                  readOnly: true
-                  type: string
-                name:
-                  description: Resource name
-                  type: string
-                type:
-                  description: Resource type
-                  readOnly: true
-                  type: string
-              x-ms-azure-resource: true
+            - $ref: '#/definitions/SubResource'
           description: 'A function object, containing all information associated with the named function. All functions are contained under a streaming job.'
           properties:
             properties:
+              $ref: '#/definitions/FunctionProperties'
               description: The properties that are associated with a function.
-              discriminator: type
-              properties:
-                etag:
-                  description: The current entity tag for the function. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency.
-                  readOnly: true
-                  type: string
-                type:
-                  description: Indicates the type of function.
-                  type: string
         type: array
       inputs:
         description: A list of one or more inputs to the streaming job. The name property for each input is required when specifying this property in a PUT request. This property cannot be modify via a PATCH operation. You must use the PATCH API available for the individual input.
         items:
           allOf:
-            - description: The base sub-resource model definition.
-              properties:
-                id:
-                  description: Resource Id
-                  readOnly: true
-                  type: string
-                name:
-                  description: Resource name
-                  type: string
-                type:
-                  description: Resource type
-                  readOnly: true
-                  type: string
-              x-ms-azure-resource: true
+            - $ref: '#/definitions/SubResource'
           description: 'An input object, containing all information associated with the named input. All inputs are contained under a streaming job.'
           properties:
             properties:
-              description: The properties that are associated with an input.
-              discriminator: type
-              properties:
-                diagnostics:
-                  description: 'Describes conditions applicable to the Input, Output, or the job overall, that warrant customer attention.'
-                  properties:
-                    conditions:
-                      description: 'A collection of zero or more conditions applicable to the resource, or to the job overall, that warrant customer attention.'
-                      items:
-                        description: 'Condition applicable to the resource, or to the job overall, that warrant customer attention.'
-                        properties:
-                          code:
-                            description: The opaque diagnostic code.
-                            readOnly: true
-                            type: string
-                          message:
-                            description: The human-readable message describing the condition in detail. Localized in the Accept-Language of the client request.
-                            readOnly: true
-                            type: string
-                          since:
-                            description: The UTC timestamp of when the condition started. Customers should be able to find a corresponding event in the ops log around this time.
-                            readOnly: true
-                            type: string
-                      readOnly: true
-                      type: array
-                etag:
-                  description: The current entity tag for the input. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency.
-                  readOnly: true
-                  type: string
-                serialization:
-                  description: Describes how data from an input is serialized or how data is serialized when written to an output.
-                  discriminator: type
-                  properties:
-                    type:
-                      description: Indicates the type of serialization that the input or output uses. Required on PUT (CreateOrReplace) requests.
-                      type: string
-                type:
-                  description: Indicates whether the input is a source of reference data or stream data. Required on PUT (CreateOrReplace) requests.
-                  type: string
+              $ref: '#/definitions/InputProperties'
+              description: The properties that are associated with an input. Required on PUT (CreateOrReplace) requests.
         type: array
       jobId:
         description: A GUID uniquely identifying the streaming job. This GUID is generated upon creation of the streaming job.
@@ -1529,65 +1458,13 @@ definitions:
         description: A list of one or more outputs for the streaming job. The name property for each output is required when specifying this property in a PUT request. This property cannot be modify via a PATCH operation. You must use the PATCH API available for the individual output.
         items:
           allOf:
-            - description: The base sub-resource model definition.
-              properties:
-                id:
-                  description: Resource Id
-                  readOnly: true
-                  type: string
-                name:
-                  description: Resource name
-                  type: string
-                type:
-                  description: Resource type
-                  readOnly: true
-                  type: string
-              x-ms-azure-resource: true
+            - $ref: '#/definitions/SubResource'
           description: 'An output object, containing all information associated with the named output. All outputs are contained under a streaming job.'
           properties:
             properties:
-              description: The properties that are associated with an output.
-              properties:
-                datasource:
-                  description: Describes the data source that output will be written to.
-                  discriminator: type
-                  properties:
-                    type:
-                      description: Indicates the type of data source output will be written to. Required on PUT (CreateOrReplace) requests.
-                      type: string
-                diagnostics:
-                  description: 'Describes conditions applicable to the Input, Output, or the job overall, that warrant customer attention.'
-                  properties:
-                    conditions:
-                      description: 'A collection of zero or more conditions applicable to the resource, or to the job overall, that warrant customer attention.'
-                      items:
-                        description: 'Condition applicable to the resource, or to the job overall, that warrant customer attention.'
-                        properties:
-                          code:
-                            description: The opaque diagnostic code.
-                            readOnly: true
-                            type: string
-                          message:
-                            description: The human-readable message describing the condition in detail. Localized in the Accept-Language of the client request.
-                            readOnly: true
-                            type: string
-                          since:
-                            description: The UTC timestamp of when the condition started. Customers should be able to find a corresponding event in the ops log around this time.
-                            readOnly: true
-                            type: string
-                      readOnly: true
-                      type: array
-                etag:
-                  description: The current entity tag for the output. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency.
-                  readOnly: true
-                  type: string
-                serialization:
-                  description: Describes how data from an input is serialized or how data is serialized when written to an output.
-                  discriminator: type
-                  properties:
-                    type:
-                      description: Indicates the type of serialization that the input or output uses. Required on PUT (CreateOrReplace) requests.
-                      type: string
+              $ref: '#/definitions/OutputProperties'
+              description: The properties that are associated with an output. Required on PUT (CreateOrReplace) requests.
+              x-ms-client-flatten: true
         type: array
       provisioningState:
         description: Describes the provisioning status of the streaming job.
@@ -1598,33 +1475,10 @@ definitions:
         description: Describes the SKU of the streaming job. Required on PUT (CreateOrReplace) requests.
       transformation:
         allOf:
-          - description: The base sub-resource model definition.
-            properties:
-              id:
-                description: Resource Id
-                readOnly: true
-                type: string
-              name:
-                description: Resource name
-                type: string
-              type:
-                description: Resource type
-                readOnly: true
-                type: string
-            x-ms-azure-resource: true
+          - $ref: '#/definitions/SubResource'
         description: 'A transformation object, containing all information associated with the named transformation. All transformations are contained under a streaming job.'
         properties:
           properties:
-            description: The properties that are associated with a transformation.
-            properties:
-              etag:
-                description: The current entity tag for the transformation. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency.
-                readOnly: true
-                type: string
-              query:
-                description: 'Specifies the query that will be run in the streaming job. You can learn more about the Stream Analytics Query Language (SAQL) here: https://msdn.microsoft.com/library/azure/dn834998 . Required on PUT (CreateOrReplace) requests.'
-                type: string
-              streamingUnits:
-                description: Specifies the number of streaming units that the streaming job uses.
-                format: int32
-                type: integer
+            $ref: '#/definitions/TransformationProperties'
+            description: The properties that are associated with a transformation. Required on PUT (CreateOrReplace) requests.
+            x-ms-client-flatten: true

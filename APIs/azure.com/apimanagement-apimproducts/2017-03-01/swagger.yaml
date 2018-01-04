@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2017-03-01/apimproducts.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimproducts
   x-tags:
@@ -126,17 +125,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -242,17 +231,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -321,17 +300,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -414,17 +383,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -501,17 +460,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -621,107 +570,7 @@ paths:
               value:
                 description: Page values.
                 items:
-                  allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource ID.
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource name.
-                          readOnly: true
-                          type: string
-                        type:
-                          description: Resource type for API Management resource.
-                          readOnly: true
-                          type: string
-                      x-ms-azure-resource: true
-                  description: API details.
-                  properties:
-                    properties:
-                      allOf:
-                        - description: API base contract details.
-                          properties:
-                            apiRevision:
-                              description: 'Describes the Revision of the Api. If no value is provided, default revision 1 is created'
-                              maxLength: 100
-                              minLength: 1
-                              type: string
-                            authenticationSettings:
-                              description: API Authentication Settings.
-                              properties:
-                                oAuth2:
-                                  description: API OAuth2 Authentication settings details.
-                                  properties:
-                                    authorizationServerId:
-                                      description: OAuth authorization server identifier.
-                                      type: string
-                                    scope:
-                                      description: operations scope.
-                                      type: string
-                            description:
-                              description: Description of the API. May include HTML formatting tags.
-                              type: string
-                            isCurrent:
-                              description: Indicates if API revision is current api revision.
-                              type: boolean
-                            isOnline:
-                              description: Indicates if API revision is accessible via the gateway.
-                              type: boolean
-                            subscriptionKeyParameterNames:
-                              description: Subscription key parameter names details.
-                              example:
-                                subscriptionKeyParameterNames:
-                                  header: customHeaderParameterName
-                                  query: customQueryParameterName
-                              properties:
-                                header:
-                                  description: Subscription key header name.
-                                  type: string
-                                query:
-                                  description: Subscription key query string parameter name.
-                                  type: string
-                            type:
-                              description: Type of API.
-                              enum:
-                                - http
-                                - soap
-                              type: string
-                              x-ms-client-name: ApiType
-                              x-ms-enum:
-                                modelAsString: true
-                                name: ApiType
-                      description: Api Entity Properties
-                      properties:
-                        displayName:
-                          description: API name.
-                          maxLength: 300
-                          minLength: 1
-                          type: string
-                        path:
-                          description: Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API.
-                          maxLength: 400
-                          minLength: 0
-                          type: string
-                        protocols:
-                          description: Describes on which protocols the operations in this API can be invoked.
-                          items:
-                            enum:
-                              - http
-                              - https
-                            type: string
-                            x-ms-enum:
-                              modelAsString: false
-                              name: Protocol
-                          type: array
-                        serviceUrl:
-                          description: Absolute URL of the backend service implementing this API.
-                          maxLength: 2000
-                          minLength: 1
-                          type: string
-                      required:
-                        - path
+                  $ref: '#/definitions/ApiContract'
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -734,17 +583,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -833,17 +672,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -924,88 +753,9 @@ paths:
             description: API details.
             properties:
               properties:
-                allOf:
-                  - description: API base contract details.
-                    properties:
-                      apiRevision:
-                        description: 'Describes the Revision of the Api. If no value is provided, default revision 1 is created'
-                        maxLength: 100
-                        minLength: 1
-                        type: string
-                      authenticationSettings:
-                        description: API Authentication Settings.
-                        properties:
-                          oAuth2:
-                            description: API OAuth2 Authentication settings details.
-                            properties:
-                              authorizationServerId:
-                                description: OAuth authorization server identifier.
-                                type: string
-                              scope:
-                                description: operations scope.
-                                type: string
-                      description:
-                        description: Description of the API. May include HTML formatting tags.
-                        type: string
-                      isCurrent:
-                        description: Indicates if API revision is current api revision.
-                        type: boolean
-                      isOnline:
-                        description: Indicates if API revision is accessible via the gateway.
-                        type: boolean
-                      subscriptionKeyParameterNames:
-                        description: Subscription key parameter names details.
-                        example:
-                          subscriptionKeyParameterNames:
-                            header: customHeaderParameterName
-                            query: customQueryParameterName
-                        properties:
-                          header:
-                            description: Subscription key header name.
-                            type: string
-                          query:
-                            description: Subscription key query string parameter name.
-                            type: string
-                      type:
-                        description: Type of API.
-                        enum:
-                          - http
-                          - soap
-                        type: string
-                        x-ms-client-name: ApiType
-                        x-ms-enum:
-                          modelAsString: true
-                          name: ApiType
-                description: Api Entity Properties
-                properties:
-                  displayName:
-                    description: API name.
-                    maxLength: 300
-                    minLength: 1
-                    type: string
-                  path:
-                    description: Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API.
-                    maxLength: 400
-                    minLength: 0
-                    type: string
-                  protocols:
-                    description: Describes on which protocols the operations in this API can be invoked.
-                    items:
-                      enum:
-                        - http
-                        - https
-                      type: string
-                      x-ms-enum:
-                        modelAsString: false
-                        name: Protocol
-                    type: array
-                  serviceUrl:
-                    description: Absolute URL of the backend service implementing this API.
-                    maxLength: 2000
-                    minLength: 1
-                    type: string
-                required:
-                  - path
+                $ref: '#/definitions/ApiContractProperties'
+                description: Api entity contract properties.
+                x-ms-client-flatten: true
         '201':
           description: The API was successfully added to the product.
           schema:
@@ -1028,88 +778,9 @@ paths:
             description: API details.
             properties:
               properties:
-                allOf:
-                  - description: API base contract details.
-                    properties:
-                      apiRevision:
-                        description: 'Describes the Revision of the Api. If no value is provided, default revision 1 is created'
-                        maxLength: 100
-                        minLength: 1
-                        type: string
-                      authenticationSettings:
-                        description: API Authentication Settings.
-                        properties:
-                          oAuth2:
-                            description: API OAuth2 Authentication settings details.
-                            properties:
-                              authorizationServerId:
-                                description: OAuth authorization server identifier.
-                                type: string
-                              scope:
-                                description: operations scope.
-                                type: string
-                      description:
-                        description: Description of the API. May include HTML formatting tags.
-                        type: string
-                      isCurrent:
-                        description: Indicates if API revision is current api revision.
-                        type: boolean
-                      isOnline:
-                        description: Indicates if API revision is accessible via the gateway.
-                        type: boolean
-                      subscriptionKeyParameterNames:
-                        description: Subscription key parameter names details.
-                        example:
-                          subscriptionKeyParameterNames:
-                            header: customHeaderParameterName
-                            query: customQueryParameterName
-                        properties:
-                          header:
-                            description: Subscription key header name.
-                            type: string
-                          query:
-                            description: Subscription key query string parameter name.
-                            type: string
-                      type:
-                        description: Type of API.
-                        enum:
-                          - http
-                          - soap
-                        type: string
-                        x-ms-client-name: ApiType
-                        x-ms-enum:
-                          modelAsString: true
-                          name: ApiType
-                description: Api Entity Properties
-                properties:
-                  displayName:
-                    description: API name.
-                    maxLength: 300
-                    minLength: 1
-                    type: string
-                  path:
-                    description: Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API.
-                    maxLength: 400
-                    minLength: 0
-                    type: string
-                  protocols:
-                    description: Describes on which protocols the operations in this API can be invoked.
-                    items:
-                      enum:
-                        - http
-                        - https
-                      type: string
-                      x-ms-enum:
-                        modelAsString: false
-                        name: Protocol
-                    type: array
-                  serviceUrl:
-                    description: Absolute URL of the backend service implementing this API.
-                    maxLength: 2000
-                    minLength: 1
-                    type: string
-                required:
-                  - path
+                $ref: '#/definitions/ApiContractProperties'
+                description: Api entity contract properties.
+                x-ms-client-flatten: true
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1121,17 +792,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -1252,55 +913,7 @@ paths:
               value:
                 description: Page values.
                 items:
-                  allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource ID.
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource name.
-                          readOnly: true
-                          type: string
-                        type:
-                          description: Resource type for API Management resource.
-                          readOnly: true
-                          type: string
-                      x-ms-azure-resource: true
-                  description: Contract details.
-                  properties:
-                    properties:
-                      description: Developer group.
-                      properties:
-                        builtIn:
-                          description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
-                          readOnly: true
-                          type: boolean
-                        description:
-                          description: Group description. Can contain HTML formatting tags.
-                          maxLength: 1000
-                          type: string
-                        displayName:
-                          description: Group name.
-                          maxLength: 300
-                          minLength: 1
-                          type: string
-                        externalId:
-                          description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
-                          type: string
-                        type:
-                          description: Group type.
-                          enum:
-                            - custom
-                            - system
-                            - external
-                          type: string
-                          x-ms-enum:
-                            modelAsString: false
-                            name: GroupType
-                      required:
-                        - displayName
+                  $ref: '#/definitions/GroupContract'
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -1313,17 +926,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -1424,17 +1027,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -1515,36 +1108,9 @@ paths:
             description: Contract details.
             properties:
               properties:
-                description: Developer group.
-                properties:
-                  builtIn:
-                    description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
-                    readOnly: true
-                    type: boolean
-                  description:
-                    description: Group description. Can contain HTML formatting tags.
-                    maxLength: 1000
-                    type: string
-                  displayName:
-                    description: Group name.
-                    maxLength: 300
-                    minLength: 1
-                    type: string
-                  externalId:
-                    description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
-                    type: string
-                  type:
-                    description: Group type.
-                    enum:
-                      - custom
-                      - system
-                      - external
-                    type: string
-                    x-ms-enum:
-                      modelAsString: false
-                      name: GroupType
-                required:
-                  - displayName
+                $ref: '#/definitions/GroupContractProperties'
+                description: Group entity contract properties.
+                x-ms-client-flatten: true
         '201':
           description: The group was successfully associated with the product.
           schema:
@@ -1567,36 +1133,9 @@ paths:
             description: Contract details.
             properties:
               properties:
-                description: Developer group.
-                properties:
-                  builtIn:
-                    description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
-                    readOnly: true
-                    type: boolean
-                  description:
-                    description: Group description. Can contain HTML formatting tags.
-                    maxLength: 1000
-                    type: string
-                  displayName:
-                    description: Group name.
-                    maxLength: 300
-                    minLength: 1
-                    type: string
-                  externalId:
-                    description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
-                    type: string
-                  type:
-                    description: Group type.
-                    enum:
-                      - custom
-                      - system
-                      - external
-                    type: string
-                    x-ms-enum:
-                      modelAsString: false
-                      name: GroupType
-                required:
-                  - displayName
+                $ref: '#/definitions/GroupContractProperties'
+                description: Group entity contract properties.
+                x-ms-client-flatten: true
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1608,17 +1147,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -1702,32 +1231,7 @@ paths:
               value:
                 description: Policy Contract value.
                 items:
-                  allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource ID.
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource name.
-                          readOnly: true
-                          type: string
-                        type:
-                          description: Resource type for API Management resource.
-                          readOnly: true
-                          type: string
-                      x-ms-azure-resource: true
-                  description: Policy Contract details.
-                  properties:
-                    properties:
-                      description: Policy contract Properties.
-                      properties:
-                        policyContent:
-                          description: Json escaped Xml Encoded contents of the Policy.
-                          type: string
-                      required:
-                        - policyContent
+                  $ref: '#/definitions/PolicyContract'
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -1740,17 +1244,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -1836,17 +1330,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -1915,31 +1399,13 @@ paths:
               type: string
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name.
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type for API Management resource.
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Policy Contract details.
             properties:
               properties:
-                description: Policy contract Properties.
-                properties:
-                  policyContent:
-                    description: Json escaped Xml Encoded contents of the Policy.
-                    type: string
-                required:
-                  - policyContent
+                $ref: '#/definitions/PolicyContractProperties'
+                description: Properties of the Policy.
+                x-ms-client-flatten: true
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1951,17 +1417,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -2022,31 +1478,13 @@ paths:
           required: true
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name.
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type for API Management resource.
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Policy Contract details.
             properties:
               properties:
-                description: Policy contract Properties.
-                properties:
-                  policyContent:
-                    description: Json escaped Xml Encoded contents of the Policy.
-                    type: string
-                required:
-                  - policyContent
+                $ref: '#/definitions/PolicyContractProperties'
+                description: Properties of the Policy.
+                x-ms-client-flatten: true
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -2062,60 +1500,24 @@ paths:
           description: Product policy configuration of the tenant was successfully updated.
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name.
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type for API Management resource.
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Policy Contract details.
             properties:
               properties:
-                description: Policy contract Properties.
-                properties:
-                  policyContent:
-                    description: Json escaped Xml Encoded contents of the Policy.
-                    type: string
-                required:
-                  - policyContent
+                $ref: '#/definitions/PolicyContractProperties'
+                description: Properties of the Policy.
+                x-ms-client-flatten: true
         '201':
           description: Product policy configuration was successfully created.
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource ID.
-                    readOnly: true
-                    type: string
-                  name:
-                    description: Resource name.
-                    readOnly: true
-                    type: string
-                  type:
-                    description: Resource type for API Management resource.
-                    readOnly: true
-                    type: string
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Policy Contract details.
             properties:
               properties:
-                description: Policy contract Properties.
-                properties:
-                  policyContent:
-                    description: Json escaped Xml Encoded contents of the Policy.
-                    type: string
-                required:
-                  - policyContent
+                $ref: '#/definitions/PolicyContractProperties'
+                description: Properties of the Policy.
+                x-ms-client-flatten: true
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -2127,17 +1529,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -2243,96 +1635,7 @@ paths:
               value:
                 description: Page values.
                 items:
-                  allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource ID.
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Resource name.
-                          readOnly: true
-                          type: string
-                        type:
-                          description: Resource type for API Management resource.
-                          readOnly: true
-                          type: string
-                      x-ms-azure-resource: true
-                  description: Subscription details.
-                  properties:
-                    properties:
-                      description: Subscription details.
-                      properties:
-                        createdDate:
-                          description: |
-                            Subscription creation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                        displayName:
-                          description: 'The name of the subscription, or null if the subscription has no name.'
-                          maxLength: 100
-                          minLength: 0
-                          type: string
-                        endDate:
-                          description: |
-                            Date when subscription was cancelled or expired. The setting is for audit purposes only and the subscription is not automatically cancelled. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-                          format: date-time
-                          type: string
-                        expirationDate:
-                          description: |
-                            Subscription expiration date. The setting is for audit purposes only and the subscription is not automatically expired. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-                          format: date-time
-                          type: string
-                        notificationDate:
-                          description: |
-                            Upcoming subscription expiration notification date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-                          format: date-time
-                          type: string
-                        primaryKey:
-                          description: Subscription primary key.
-                          maxLength: 256
-                          minLength: 1
-                          type: string
-                        productId:
-                          description: 'The product resource identifier of the subscribed product. The value is a valid relative URL in the format of /products/{productId} where {productId} is a product identifier.'
-                          type: string
-                        secondaryKey:
-                          description: Subscription secondary key.
-                          maxLength: 256
-                          minLength: 1
-                          type: string
-                        startDate:
-                          description: |
-                            Subscription activation date. The setting is for audit purposes only and the subscription is not automatically activated. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-                          format: date-time
-                          type: string
-                        state:
-                          description: 'Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.'
-                          enum:
-                            - suspended
-                            - active
-                            - expired
-                            - submitted
-                            - rejected
-                            - cancelled
-                          type: string
-                          x-ms-enum:
-                            modelAsString: false
-                            name: SubscriptionState
-                        stateComment:
-                          description: Optional subscription comment added by an administrator.
-                          type: string
-                        userId:
-                          description: 'The user resource identifier of the subscription owner. The value is a valid relative URL in the format of /users/{uid} where {uid} is a user identifier.'
-                          type: string
-                      required:
-                        - userId
-                        - productId
-                        - state
-                        - primaryKey
-                        - secondaryKey
+                  $ref: '#/definitions/SubscriptionContract'
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -2345,17 +1648,7 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
+                  $ref: '#/definitions/ErrorFieldContract'
                 type: array
               message:
                 description: Human-readable representation of the error.

@@ -80,87 +80,7 @@ paths:
               value:
                 description: Gets or sets a list of Dsc Compilation jobs.
                 items:
-                  description: Definition of the Dsc Compilation job.
-                  properties:
-                    id:
-                      description: Gets the id of the resource.
-                      readOnly: true
-                      type: string
-                    properties:
-                      description: Definition of Dsc Compilation job properties.
-                      properties:
-                        configuration:
-                          description: The Dsc configuration property associated with the entity.
-                          properties:
-                            name:
-                              description: Gets or sets the name of the Dsc configuration.
-                              type: string
-                        creationTime:
-                          description: Gets the creation time of the job.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                        endTime:
-                          description: Gets the end time of the job.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                        exception:
-                          description: Gets the exception of the job.
-                          readOnly: true
-                          type: string
-                        jobId:
-                          description: Gets the id of the job.
-                          format: uuid
-                          readOnly: true
-                          type: string
-                        lastModifiedTime:
-                          description: Gets the last modified time of the job.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                        lastStatusModifiedTime:
-                          description: Gets the last status modified time of the job.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                        parameters:
-                          additionalProperties:
-                            type: string
-                          description: Gets or sets the parameters of the job.
-                          type: object
-                        startTime:
-                          description: Gets the start time of the job.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                        startedBy:
-                          description: Gets the compilation job started by.
-                          readOnly: true
-                          type: string
-                        status:
-                          description: Gets or sets the status of the job.
-                          enum:
-                            - New
-                            - Activating
-                            - Running
-                            - Completed
-                            - Failed
-                            - Stopped
-                            - Blocked
-                            - Suspended
-                            - Disconnected
-                            - Suspending
-                            - Stopping
-                            - Resuming
-                            - Removing
-                          type: string
-                          x-ms-enum:
-                            modelAsString: true
-                            name: JobStatus
-                        statusDetails:
-                          description: Gets or sets the status details of the job.
-                          type: string
+                  $ref: '#/definitions/DscCompilationJob'
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -223,80 +143,9 @@ paths:
                 readOnly: true
                 type: string
               properties:
-                description: Definition of Dsc Compilation job properties.
-                properties:
-                  configuration:
-                    description: The Dsc configuration property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the Dsc configuration.
-                        type: string
-                  creationTime:
-                    description: Gets the creation time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  endTime:
-                    description: Gets the end time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  exception:
-                    description: Gets the exception of the job.
-                    readOnly: true
-                    type: string
-                  jobId:
-                    description: Gets the id of the job.
-                    format: uuid
-                    readOnly: true
-                    type: string
-                  lastModifiedTime:
-                    description: Gets the last modified time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  lastStatusModifiedTime:
-                    description: Gets the last status modified time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the parameters of the job.
-                    type: object
-                  startTime:
-                    description: Gets the start time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  startedBy:
-                    description: Gets the compilation job started by.
-                    readOnly: true
-                    type: string
-                  status:
-                    description: Gets or sets the status of the job.
-                    enum:
-                      - New
-                      - Activating
-                      - Running
-                      - Completed
-                      - Failed
-                      - Stopped
-                      - Blocked
-                      - Suspended
-                      - Disconnected
-                      - Suspending
-                      - Stopping
-                      - Resuming
-                      - Removing
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: JobStatus
-                  statusDetails:
-                    description: Gets or sets the status details of the job.
-                    type: string
+                $ref: '#/definitions/DscCompilationJobProperties'
+                description: Gets or sets the properties of the Dsc Compilation job.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -348,24 +197,9 @@ paths:
                 description: Gets or sets name of the resource.
                 type: string
               properties:
-                description: The parameters supplied to the create compilation job operation.
-                properties:
-                  configuration:
-                    description: The Dsc configuration property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the Dsc configuration.
-                        type: string
-                  newNodeConfigurationBuildVersionRequired:
-                    description: If a new build version of NodeConfiguration is required.
-                    type: boolean
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the parameters of the job.
-                    type: object
-                required:
-                  - configuration
+                $ref: '#/definitions/DscCompilationJobCreateProperties'
+                description: Gets or sets the list of compilation job properties.
+                x-ms-client-flatten: true
               tags:
                 additionalProperties:
                   type: string
@@ -394,80 +228,9 @@ paths:
                 readOnly: true
                 type: string
               properties:
-                description: Definition of Dsc Compilation job properties.
-                properties:
-                  configuration:
-                    description: The Dsc configuration property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the Dsc configuration.
-                        type: string
-                  creationTime:
-                    description: Gets the creation time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  endTime:
-                    description: Gets the end time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  exception:
-                    description: Gets the exception of the job.
-                    readOnly: true
-                    type: string
-                  jobId:
-                    description: Gets the id of the job.
-                    format: uuid
-                    readOnly: true
-                    type: string
-                  lastModifiedTime:
-                    description: Gets the last modified time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  lastStatusModifiedTime:
-                    description: Gets the last status modified time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the parameters of the job.
-                    type: object
-                  startTime:
-                    description: Gets the start time of the job.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  startedBy:
-                    description: Gets the compilation job started by.
-                    readOnly: true
-                    type: string
-                  status:
-                    description: Gets or sets the status of the job.
-                    enum:
-                      - New
-                      - Activating
-                      - Running
-                      - Completed
-                      - Failed
-                      - Stopped
-                      - Blocked
-                      - Suspended
-                      - Disconnected
-                      - Suspending
-                      - Stopping
-                      - Resuming
-                      - Removing
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: JobStatus
-                  statusDetails:
-                    description: Gets or sets the status details of the job.
-                    type: string
+                $ref: '#/definitions/DscCompilationJobProperties'
+                description: Gets or sets the properties of the Dsc Compilation job.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -564,40 +327,8 @@ paths:
                 description: Gets or sets the id of the resource.
                 type: string
               properties:
-                description: Definition of the job stream.
-                properties:
-                  jobStreamId:
-                    description: Gets or sets the id of the job stream.
-                    type: string
-                  streamText:
-                    description: Gets or sets the stream text.
-                    type: string
-                  streamType:
-                    description: Gets or sets the stream type.
-                    enum:
-                      - Progress
-                      - Output
-                      - Warning
-                      - Error
-                      - Debug
-                      - Verbose
-                      - Any
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: JobStreamType
-                  summary:
-                    description: Gets or sets the summary.
-                    type: string
-                  time:
-                    description: Gets or sets the creation time of the job.
-                    format: date-time
-                    type: string
-                  value:
-                    additionalProperties:
-                      type: object
-                    description: Gets or sets the values of the job stream.
-                    type: object
+                $ref: './definitions.json#/definitions/JobStreamProperties'
+                description: Gets or sets the id of the job stream.
                 x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.

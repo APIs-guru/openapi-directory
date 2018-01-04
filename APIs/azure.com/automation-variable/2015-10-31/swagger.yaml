@@ -75,34 +75,7 @@ paths:
               value:
                 description: Gets or sets a list of variables.
                 items:
-                  description: Definition of the varible.
-                  properties:
-                    id:
-                      description: Gets or sets the id of the resource.
-                      type: string
-                    name:
-                      description: Gets or sets the name of the variable.
-                      type: string
-                    properties:
-                      description: Definition of the varible properties
-                      properties:
-                        creationTime:
-                          description: Gets or sets the creation time.
-                          format: date-time
-                          type: string
-                        description:
-                          description: Gets or sets the description.
-                          type: string
-                        isEncrypted:
-                          description: Gets or sets the encrypted flag of the variable.
-                          type: boolean
-                        lastModifiedTime:
-                          description: Gets or sets the last modified time.
-                          format: date-time
-                          type: string
-                        value:
-                          description: Gets or sets the value of the variable.
-                          type: string
+                  $ref: '#/definitions/Variable'
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -1134,25 +1107,9 @@ paths:
                 description: Gets or sets the name of the variable.
                 type: string
               properties:
-                description: Definition of the varible properties
-                properties:
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  isEncrypted:
-                    description: Gets or sets the encrypted flag of the variable.
-                    type: boolean
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                  value:
-                    description: Gets or sets the value of the variable.
-                    type: string
+                $ref: '#/definitions/VariableProperties'
+                description: Gets or sets the properties of the variable.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1218,14 +1175,9 @@ paths:
                 description: Gets or sets the name of the variable.
                 type: string
               properties:
-                description: The properties of the update variable
-                properties:
-                  description:
-                    description: Gets or sets the description of the variable.
-                    type: string
-                  value:
-                    description: Gets or sets the value of the variable.
-                    type: string
+                $ref: '#/definitions/VariableUpdateProperties'
+                description: Gets or sets the value of the variable.
+                x-ms-client-flatten: true
             required:
               - name
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
@@ -1251,25 +1203,9 @@ paths:
                 description: Gets or sets the name of the variable.
                 type: string
               properties:
-                description: Definition of the varible properties
-                properties:
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  isEncrypted:
-                    description: Gets or sets the encrypted flag of the variable.
-                    type: boolean
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                  value:
-                    description: Gets or sets the value of the variable.
-                    type: string
+                $ref: '#/definitions/VariableProperties'
+                description: Gets or sets the properties of the variable.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1341,17 +1277,9 @@ paths:
                 description: Gets or sets the name of the variable.
                 type: string
               properties:
-                description: The properties of the create variable operation.
-                properties:
-                  description:
-                    description: Gets or sets the description of the variable.
-                    type: string
-                  isEncrypted:
-                    description: Gets or sets the encrypted flag of the variable.
-                    type: boolean
-                  value:
-                    description: Gets or sets the value of the variable.
-                    type: string
+                $ref: '#/definitions/VariableCreateOrUpdateProperties'
+                description: Gets or sets the properties of the variable.
+                x-ms-client-flatten: true
             required:
               - name
               - properties
@@ -1378,25 +1306,9 @@ paths:
                 description: Gets or sets the name of the variable.
                 type: string
               properties:
-                description: Definition of the varible properties
-                properties:
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  isEncrypted:
-                    description: Gets or sets the encrypted flag of the variable.
-                    type: boolean
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                  value:
-                    description: Gets or sets the value of the variable.
-                    type: string
+                $ref: '#/definitions/VariableProperties'
+                description: Gets or sets the properties of the variable.
+                x-ms-client-flatten: true
         '201':
           description: Created
           schema:
@@ -1409,25 +1321,9 @@ paths:
                 description: Gets or sets the name of the variable.
                 type: string
               properties:
-                description: Definition of the varible properties
-                properties:
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  isEncrypted:
-                    description: Gets or sets the encrypted flag of the variable.
-                    type: boolean
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                  value:
-                    description: Gets or sets the value of the variable.
-                    type: string
+                $ref: '#/definitions/VariableProperties'
+                description: Gets or sets the properties of the variable.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:

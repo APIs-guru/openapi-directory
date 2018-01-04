@@ -80,57 +80,7 @@ paths:
               value:
                 description: Gets or sets a list of webhooks.
                 items:
-                  description: Definition of the webhook type.
-                  properties:
-                    id:
-                      description: Gets or sets the id of the resource.
-                      type: string
-                    name:
-                      description: Gets or sets the name of the webhook.
-                      type: string
-                    properties:
-                      description: Definition of the webhook properties
-                      properties:
-                        creationTime:
-                          description: Gets or sets the creation time.
-                          format: date-time
-                          type: string
-                        description:
-                          description: Gets or sets the description.
-                          type: string
-                        expiryTime:
-                          description: Gets or sets the expiry time.
-                          format: date-time
-                          type: string
-                        isEnabled:
-                          default: false
-                          description: Gets or sets the value of the enabled flag of the webhook.
-                          type: boolean
-                        lastInvokedTime:
-                          description: Gets or sets the last invoked time.
-                          format: date-time
-                          type: string
-                        lastModifiedTime:
-                          description: Gets or sets the last modified time.
-                          format: date-time
-                          type: string
-                        parameters:
-                          additionalProperties:
-                            type: string
-                          description: Gets or sets the parameters of the job that is created when the webhook calls the runbook it is associated with.
-                          type: object
-                        runOn:
-                          description: Gets or sets the name of the hybrid worker group the webhook job will run on.
-                          type: string
-                        runbook:
-                          description: The runbook property associated with the entity.
-                          properties:
-                            name:
-                              description: Gets or sets the name of the runbook.
-                              type: string
-                        uri:
-                          description: Gets or sets the webhook uri.
-                          type: string
+                  $ref: '#/definitions/Webhook'
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -326,48 +276,9 @@ paths:
                 description: Gets or sets the name of the webhook.
                 type: string
               properties:
-                description: Definition of the webhook properties
-                properties:
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  expiryTime:
-                    description: Gets or sets the expiry time.
-                    format: date-time
-                    type: string
-                  isEnabled:
-                    default: false
-                    description: Gets or sets the value of the enabled flag of the webhook.
-                    type: boolean
-                  lastInvokedTime:
-                    description: Gets or sets the last invoked time.
-                    format: date-time
-                    type: string
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the parameters of the job that is created when the webhook calls the runbook it is associated with.
-                    type: object
-                  runOn:
-                    description: Gets or sets the name of the hybrid worker group the webhook job will run on.
-                    type: string
-                  runbook:
-                    description: The runbook property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the runbook.
-                        type: string
-                  uri:
-                    description: Gets or sets the webhook uri.
-                    type: string
+                $ref: '#/definitions/WebhookProperties'
+                description: Gets or sets the webhook properties.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -441,22 +352,9 @@ paths:
                 description: Gets or sets the name of the webhook.
                 type: string
               properties:
-                description: The properties of the update webhook.
-                properties:
-                  description:
-                    description: Gets or sets the description of the webhook.
-                    type: string
-                  isEnabled:
-                    description: Gets or sets the value of the enabled flag of webhook.
-                    type: boolean
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the parameters of the job.
-                    type: object
-                  runOn:
-                    description: Gets or sets the name of the hybrid worker group the webhook job will run on.
-                    type: string
+                $ref: '#/definitions/WebhookUpdateProperties'
+                description: Gets or sets the value of the webhook.
+                x-ms-client-flatten: true
             required:
               - name
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
@@ -482,48 +380,9 @@ paths:
                 description: Gets or sets the name of the webhook.
                 type: string
               properties:
-                description: Definition of the webhook properties
-                properties:
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  expiryTime:
-                    description: Gets or sets the expiry time.
-                    format: date-time
-                    type: string
-                  isEnabled:
-                    default: false
-                    description: Gets or sets the value of the enabled flag of the webhook.
-                    type: boolean
-                  lastInvokedTime:
-                    description: Gets or sets the last invoked time.
-                    format: date-time
-                    type: string
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the parameters of the job that is created when the webhook calls the runbook it is associated with.
-                    type: object
-                  runOn:
-                    description: Gets or sets the name of the hybrid worker group the webhook job will run on.
-                    type: string
-                  runbook:
-                    description: The runbook property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the runbook.
-                        type: string
-                  uri:
-                    description: Gets or sets the webhook uri.
-                    type: string
+                $ref: '#/definitions/WebhookProperties'
+                description: Gets or sets the webhook properties.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -602,32 +461,9 @@ paths:
                 description: Gets or sets the name of the webhook.
                 type: string
               properties:
-                description: The properties of the create webhook operation.
-                properties:
-                  expiryTime:
-                    description: Gets or sets the expiry time.
-                    format: date-time
-                    type: string
-                  isEnabled:
-                    description: Gets or sets the value of the enabled flag of webhook.
-                    type: boolean
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the parameters of the job.
-                    type: object
-                  runOn:
-                    description: Gets or sets the name of the hybrid worker group the webhook job will run on.
-                    type: string
-                  runbook:
-                    description: The runbook property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the runbook.
-                        type: string
-                  uri:
-                    description: Gets or sets the uri.
-                    type: string
+                $ref: '#/definitions/WebhookCreateOrUpdateProperties'
+                description: Gets or sets the properties of the webhook.
+                x-ms-client-flatten: true
             required:
               - name
               - properties
@@ -654,48 +490,9 @@ paths:
                 description: Gets or sets the name of the webhook.
                 type: string
               properties:
-                description: Definition of the webhook properties
-                properties:
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  expiryTime:
-                    description: Gets or sets the expiry time.
-                    format: date-time
-                    type: string
-                  isEnabled:
-                    default: false
-                    description: Gets or sets the value of the enabled flag of the webhook.
-                    type: boolean
-                  lastInvokedTime:
-                    description: Gets or sets the last invoked time.
-                    format: date-time
-                    type: string
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the parameters of the job that is created when the webhook calls the runbook it is associated with.
-                    type: object
-                  runOn:
-                    description: Gets or sets the name of the hybrid worker group the webhook job will run on.
-                    type: string
-                  runbook:
-                    description: The runbook property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the runbook.
-                        type: string
-                  uri:
-                    description: Gets or sets the webhook uri.
-                    type: string
+                $ref: '#/definitions/WebhookProperties'
+                description: Gets or sets the webhook properties.
+                x-ms-client-flatten: true
         '201':
           description: Created
           schema:
@@ -708,48 +505,9 @@ paths:
                 description: Gets or sets the name of the webhook.
                 type: string
               properties:
-                description: Definition of the webhook properties
-                properties:
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  expiryTime:
-                    description: Gets or sets the expiry time.
-                    format: date-time
-                    type: string
-                  isEnabled:
-                    default: false
-                    description: Gets or sets the value of the enabled flag of the webhook.
-                    type: boolean
-                  lastInvokedTime:
-                    description: Gets or sets the last invoked time.
-                    format: date-time
-                    type: string
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the parameters of the job that is created when the webhook calls the runbook it is associated with.
-                    type: object
-                  runOn:
-                    description: Gets or sets the name of the hybrid worker group the webhook job will run on.
-                    type: string
-                  runbook:
-                    description: The runbook property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the runbook.
-                        type: string
-                  uri:
-                    description: Gets or sets the webhook uri.
-                    type: string
+                $ref: '#/definitions/WebhookProperties'
+                description: Gets or sets the webhook properties.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:

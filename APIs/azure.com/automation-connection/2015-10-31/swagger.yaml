@@ -75,44 +75,7 @@ paths:
               value:
                 description: Gets or sets a list of connection.
                 items:
-                  description: Definition of the connection.
-                  properties:
-                    id:
-                      description: Gets the id of the resource.
-                      readOnly: true
-                      type: string
-                    name:
-                      description: Gets the name of the connection.
-                      readOnly: true
-                      type: string
-                    properties:
-                      description: Definition of the connection properties.
-                      properties:
-                        connectionType:
-                          description: The connection type property associated with the entity.
-                          properties:
-                            name:
-                              description: Gets or sets the name of the connection type.
-                              type: string
-                        creationTime:
-                          description: Gets the creation time.
-                          format: date-time
-                          readOnly: true
-                          type: string
-                        description:
-                          description: Gets or sets the description.
-                          type: string
-                        fieldDefinitionValues:
-                          additionalProperties:
-                            type: string
-                          description: Gets the field definition values of the connection.
-                          readOnly: true
-                          type: object
-                        lastModifiedTime:
-                          description: Gets the last modified time.
-                          format: date-time
-                          readOnly: true
-                          type: string
+                  $ref: '#/definitions/Connection'
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -1796,33 +1759,9 @@ paths:
                 readOnly: true
                 type: string
               properties:
-                description: Definition of the connection properties.
-                properties:
-                  connectionType:
-                    description: The connection type property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the connection type.
-                        type: string
-                  creationTime:
-                    description: Gets the creation time.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  fieldDefinitionValues:
-                    additionalProperties:
-                      type: string
-                    description: Gets the field definition values of the connection.
-                    readOnly: true
-                    type: object
-                  lastModifiedTime:
-                    description: Gets the last modified time.
-                    format: date-time
-                    readOnly: true
-                    type: string
+                $ref: '#/definitions/ConnectionProperties'
+                description: Gets or sets the properties of the connection.
+                x-ms-client-flatten: true
         '204':
           description: No Content
         default:
@@ -1897,33 +1836,9 @@ paths:
                 readOnly: true
                 type: string
               properties:
-                description: Definition of the connection properties.
-                properties:
-                  connectionType:
-                    description: The connection type property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the connection type.
-                        type: string
-                  creationTime:
-                    description: Gets the creation time.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  fieldDefinitionValues:
-                    additionalProperties:
-                      type: string
-                    description: Gets the field definition values of the connection.
-                    readOnly: true
-                    type: object
-                  lastModifiedTime:
-                    description: Gets the last modified time.
-                    format: date-time
-                    readOnly: true
-                    type: string
+                $ref: '#/definitions/ConnectionProperties'
+                description: Gets or sets the properties of the connection.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1994,16 +1909,9 @@ paths:
                 description: Gets or sets the name of the connection.
                 type: string
               properties:
-                description: The properties of the update connection operation.
-                properties:
-                  description:
-                    description: Gets or sets the description of the connection.
-                    type: string
-                  fieldDefinitionValues:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the field definition values of the connection.
-                    type: object
+                $ref: '#/definitions/ConnectionUpdateProperties'
+                description: Gets or sets the properties of the connection.
+                x-ms-client-flatten: true
             required:
               - properties
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
@@ -2031,33 +1939,9 @@ paths:
                 readOnly: true
                 type: string
               properties:
-                description: Definition of the connection properties.
-                properties:
-                  connectionType:
-                    description: The connection type property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the connection type.
-                        type: string
-                  creationTime:
-                    description: Gets the creation time.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  fieldDefinitionValues:
-                    additionalProperties:
-                      type: string
-                    description: Gets the field definition values of the connection.
-                    readOnly: true
-                    type: object
-                  lastModifiedTime:
-                    description: Gets the last modified time.
-                    format: date-time
-                    readOnly: true
-                    type: string
+                $ref: '#/definitions/ConnectionProperties'
+                description: Gets or sets the properties of the connection.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -2135,24 +2019,9 @@ paths:
                 description: Gets or sets the name of the connection.
                 type: string
               properties:
-                description: The properties of the create connection properties
-                properties:
-                  connectionType:
-                    description: The connection type property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the connection type.
-                        type: string
-                  description:
-                    description: Gets or sets the description of the connection.
-                    type: string
-                  fieldDefinitionValues:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the field definition properties of the connection.
-                    type: object
-                required:
-                  - connectionType
+                $ref: '#/definitions/ConnectionCreateOrUpdateProperties'
+                description: Gets or sets the properties of the connection.
+                x-ms-client-flatten: true
             required:
               - name
               - properties
@@ -2181,33 +2050,9 @@ paths:
                 readOnly: true
                 type: string
               properties:
-                description: Definition of the connection properties.
-                properties:
-                  connectionType:
-                    description: The connection type property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the connection type.
-                        type: string
-                  creationTime:
-                    description: Gets the creation time.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  fieldDefinitionValues:
-                    additionalProperties:
-                      type: string
-                    description: Gets the field definition values of the connection.
-                    readOnly: true
-                    type: object
-                  lastModifiedTime:
-                    description: Gets the last modified time.
-                    format: date-time
-                    readOnly: true
-                    type: string
+                $ref: '#/definitions/ConnectionProperties'
+                description: Gets or sets the properties of the connection.
+                x-ms-client-flatten: true
         '201':
           description: Created
           schema:
@@ -2222,33 +2067,9 @@ paths:
                 readOnly: true
                 type: string
               properties:
-                description: Definition of the connection properties.
-                properties:
-                  connectionType:
-                    description: The connection type property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the connection type.
-                        type: string
-                  creationTime:
-                    description: Gets the creation time.
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  fieldDefinitionValues:
-                    additionalProperties:
-                      type: string
-                    description: Gets the field definition values of the connection.
-                    readOnly: true
-                    type: object
-                  lastModifiedTime:
-                    description: Gets the last modified time.
-                    format: date-time
-                    readOnly: true
-                    type: string
+                $ref: '#/definitions/ConnectionProperties'
+                description: Gets or sets the properties of the connection.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:

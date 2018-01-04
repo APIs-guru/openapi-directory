@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/network/resource-manager/Microsoft.Network/stable/2017-03-01/routeTable.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-routeTable
   x-tags:
@@ -319,31 +318,8 @@ definitions:
         description: The name of the resource that is unique within a resource group. This name can be used to access the resource.
         type: string
       properties:
-        description: Route resource
-        properties:
-          addressPrefix:
-            description: The destination CIDR to which the route applies.
-            type: string
-          nextHopIpAddress:
-            description: The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance.
-            type: string
-          nextHopType:
-            description: 'The type of Azure hop the packet should be sent to. Possible values are: ''VirtualNetworkGateway'', ''VnetLocal'', ''Internet'', ''VirtualAppliance'', and ''None'''
-            enum:
-              - VirtualNetworkGateway
-              - VnetLocal
-              - Internet
-              - VirtualAppliance
-              - None
-            type: string
-            x-ms-enum:
-              modelAsString: true
-              name: RouteNextHopType
-          provisioningState:
-            description: 'The provisioning state of the resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
-            type: string
-        required:
-          - nextHopType
+        $ref: '#/definitions/RoutePropertiesFormat'
+        x-ms-client-flatten: true
   RouteListResult:
     description: Response for the ListRoute API service call
     properties:
@@ -432,13 +408,18 @@ definitions:
       routes:
         description: Collection of routes contained within a route table.
         items:
+          $ref: '#/definitions/Route'
+        type: array
+      subnets:
+        description: A collection of references to subnets.
+        items:
           allOf:
             - properties:
                 id:
                   description: Resource ID.
                   type: string
               x-ms-azure-resource: true
-          description: Route resource
+          description: Subnet in a virtual network resource.
           properties:
             etag:
               description: A unique read-only string that changes whenever the resource is updated.
@@ -447,35 +428,7 @@ definitions:
               description: The name of the resource that is unique within a resource group. This name can be used to access the resource.
               type: string
             properties:
-              description: Route resource
-              properties:
-                addressPrefix:
-                  description: The destination CIDR to which the route applies.
-                  type: string
-                nextHopIpAddress:
-                  description: The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance.
-                  type: string
-                nextHopType:
-                  description: 'The type of Azure hop the packet should be sent to. Possible values are: ''VirtualNetworkGateway'', ''VnetLocal'', ''Internet'', ''VirtualAppliance'', and ''None'''
-                  enum:
-                    - VirtualNetworkGateway
-                    - VnetLocal
-                    - Internet
-                    - VirtualAppliance
-                    - None
-                  type: string
-                  x-ms-enum:
-                    modelAsString: true
-                    name: RouteNextHopType
-                provisioningState:
-                  description: 'The provisioning state of the resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
-                  type: string
-              required:
-                - nextHopType
-        type: array
-      subnets:
-        description: A collection of references to subnets.
-        items:
-          $ref: './virtualNetwork.json#/definitions/Subnet'
+              $ref: '#/definitions/SubnetPropertiesFormat'
+              x-ms-client-flatten: true
         readOnly: true
         type: array

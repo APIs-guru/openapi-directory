@@ -80,28 +80,7 @@ paths:
               value:
                 description: Gets or sets a list of Dsc node configurations.
                 items:
-                  description: Definition of the dsc node configuration.
-                  properties:
-                    configuration:
-                      description: The Dsc configuration property associated with the entity.
-                      properties:
-                        name:
-                          description: Gets or sets the name of the Dsc configuration.
-                          type: string
-                    creationTime:
-                      description: Gets or sets creation time.
-                      format: date-time
-                      type: string
-                    id:
-                      description: Gets or sets the id of the resource.
-                      type: string
-                    lastModifiedTime:
-                      description: Gets or sets the last modified time.
-                      format: date-time
-                      type: string
-                    name:
-                      description: Gets or sets the node configuration name.
-                      type: string
+                  $ref: '#/definitions/DscNodeConfiguration'
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -236,11 +215,8 @@ paths:
             description: Definition of the dsc node configuration.
             properties:
               configuration:
-                description: The Dsc configuration property associated with the entity.
-                properties:
-                  name:
-                    description: Gets or sets the name of the Dsc configuration.
-                    type: string
+                $ref: '#/definitions/DscConfigurationAssociationProperty'
+                description: Gets or sets the configuration of the node.
               creationTime:
                 description: Gets or sets creation time.
                 format: date-time
@@ -317,11 +293,8 @@ paths:
             description: The parameters supplied to the create or update node configuration operation.
             properties:
               configuration:
-                description: The Dsc configuration property associated with the entity.
-                properties:
-                  name:
-                    description: Gets or sets the name of the Dsc configuration.
-                    type: string
+                $ref: '#/definitions/DscConfigurationAssociationProperty'
+                description: Gets or sets the configuration of the node.
               name:
                 description: Gets or sets the type of the parameter.
                 type: string
@@ -329,35 +302,8 @@ paths:
                 description: If a new build version of NodeConfiguration is required.
                 type: boolean
               source:
-                description: Definition of the content source.
-                properties:
-                  hash:
-                    description: Definition of the runbook property type.
-                    properties:
-                      algorithm:
-                        description: Gets or sets the content hash algorithm used to hash the content.
-                        type: string
-                      value:
-                        description: Gets or sets expected hash value of the content.
-                        type: string
-                    required:
-                      - algorithm
-                      - value
-                  type:
-                    description: Gets or sets the content source type.
-                    enum:
-                      - embeddedContent
-                      - uri
-                    type: string
-                    x-ms-enum:
-                      modelAsString: true
-                      name: ContentSourceType
-                  value:
-                    description: Gets or sets the value of the content. This is based on the content source type.
-                    type: string
-                  version:
-                    description: Gets or sets the version of the content.
-                    type: string
+                $ref: '#/definitions/ContentSource'
+                description: Gets or sets the source.
             required:
               - source
               - name
@@ -379,11 +325,8 @@ paths:
             description: Definition of the dsc node configuration.
             properties:
               configuration:
-                description: The Dsc configuration property associated with the entity.
-                properties:
-                  name:
-                    description: Gets or sets the name of the Dsc configuration.
-                    type: string
+                $ref: '#/definitions/DscConfigurationAssociationProperty'
+                description: Gets or sets the configuration of the node.
               creationTime:
                 description: Gets or sets creation time.
                 format: date-time
@@ -404,11 +347,8 @@ paths:
             description: Definition of the dsc node configuration.
             properties:
               configuration:
-                description: The Dsc configuration property associated with the entity.
-                properties:
-                  name:
-                    description: Gets or sets the name of the Dsc configuration.
-                    type: string
+                $ref: '#/definitions/DscConfigurationAssociationProperty'
+                description: Gets or sets the configuration of the node.
               creationTime:
                 description: Gets or sets creation time.
                 format: date-time

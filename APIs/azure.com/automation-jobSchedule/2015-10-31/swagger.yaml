@@ -75,37 +75,7 @@ paths:
               value:
                 description: Gets or sets a list of job schedules.
                 items:
-                  description: Definition of the job schedule.
-                  properties:
-                    id:
-                      description: Gets or sets the id of the resource.
-                      type: string
-                    properties:
-                      description: Definition of job schedule parameters.
-                      properties:
-                        jobScheduleId:
-                          description: Gets or sets the id of job schedule.
-                          type: string
-                        parameters:
-                          additionalProperties:
-                            type: string
-                          description: Gets or sets the parameters of the job schedule.
-                          type: object
-                        runOn:
-                          description: Gets or sets the hybrid worker group that the scheduled job should run on.
-                          type: string
-                        runbook:
-                          description: The runbook property associated with the entity.
-                          properties:
-                            name:
-                              description: Gets or sets the name of the runbook.
-                              type: string
-                        schedule:
-                          description: The schedule property associated with the entity.
-                          properties:
-                            name:
-                              description: Gets or sets the name of the schedule.
-                              type: string
+                  $ref: '#/definitions/JobSchedule'
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -266,31 +236,9 @@ paths:
                 description: Gets or sets the id of the resource.
                 type: string
               properties:
-                description: Definition of job schedule parameters.
-                properties:
-                  jobScheduleId:
-                    description: Gets or sets the id of job schedule.
-                    type: string
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the parameters of the job schedule.
-                    type: object
-                  runOn:
-                    description: Gets or sets the hybrid worker group that the scheduled job should run on.
-                    type: string
-                  runbook:
-                    description: The runbook property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the runbook.
-                        type: string
-                  schedule:
-                    description: The schedule property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the schedule.
-                        type: string
+                $ref: '#/definitions/JobScheduleProperties'
+                description: Gets or sets the properties of the job schedule.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -359,31 +307,9 @@ paths:
             description: The parameters supplied to the create job schedule operation.
             properties:
               properties:
-                description: The parameters supplied to the create job schedule operation.
-                properties:
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets a list of job properties.
-                    type: object
-                  runOn:
-                    description: Gets or sets the hybrid worker group that the scheduled job should run on.
-                    type: string
-                  runbook:
-                    description: The runbook property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the runbook.
-                        type: string
-                  schedule:
-                    description: The schedule property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the schedule.
-                        type: string
-                required:
-                  - schedule
-                  - runbook
+                $ref: '#/definitions/JobScheduleCreateProperties'
+                description: Gets or sets the list of job schedule properties.
+                x-ms-client-flatten: true
             required:
               - properties
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
@@ -406,31 +332,9 @@ paths:
                 description: Gets or sets the id of the resource.
                 type: string
               properties:
-                description: Definition of job schedule parameters.
-                properties:
-                  jobScheduleId:
-                    description: Gets or sets the id of job schedule.
-                    type: string
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: Gets or sets the parameters of the job schedule.
-                    type: object
-                  runOn:
-                    description: Gets or sets the hybrid worker group that the scheduled job should run on.
-                    type: string
-                  runbook:
-                    description: The runbook property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the runbook.
-                        type: string
-                  schedule:
-                    description: The schedule property associated with the entity.
-                    properties:
-                      name:
-                        description: Gets or sets the name of the schedule.
-                        type: string
+                $ref: '#/definitions/JobScheduleProperties'
+                description: Gets or sets the properties of the job schedule.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:

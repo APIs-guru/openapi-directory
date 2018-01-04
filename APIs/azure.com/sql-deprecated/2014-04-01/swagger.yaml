@@ -145,23 +145,7 @@ definitions:
         description: The list of transparent data encryption configurations.
         items:
           allOf:
-            - allOf:
-                - description: ARM resource.
-                  properties:
-                    id:
-                      description: Resource ID.
-                      readOnly: true
-                      type: string
-                    name:
-                      description: Resource name.
-                      readOnly: true
-                      type: string
-                    type:
-                      description: Resource type.
-                      readOnly: true
-                      type: string
-                  x-ms-azure-resource: true
-              description: ARM proxy resource.
+            - $ref: '#/definitions/ProxyResource'
           description: Represents a database transparent data encryption configuration.
           properties:
             location:
@@ -169,14 +153,7 @@ definitions:
               readOnly: true
               type: string
             properties:
-              description: Represents the properties of a database transparent data encryption.
-              properties:
-                status:
-                  description: The status of the database transparent data encryption.
-                  enum:
-                    - Enabled
-                    - Disabled
-                  type: string
-                  x-ms-enum:
-                    name: TransparentDataEncryptionStatus
+              $ref: '#/definitions/TransparentDataEncryptionProperties'
+              description: Represents the properties of the resource.
+              x-ms-client-flatten: true
         type: array

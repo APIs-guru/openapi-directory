@@ -75,118 +75,7 @@ paths:
               value:
                 description: Gets or sets a list of modules.
                 items:
-                  allOf:
-                    - description: The Resource definition.
-                      properties:
-                        id:
-                          description: Resource Id
-                          readOnly: true
-                          type: string
-                        location:
-                          description: Resource location
-                          type: string
-                        name:
-                          description: Resource name
-                          readOnly: true
-                          type: string
-                        tags:
-                          additionalProperties:
-                            type: string
-                          description: Resource tags
-                          type: object
-                        type:
-                          description: Resource type
-                          readOnly: true
-                          type: string
-                      required:
-                        - location
-                      x-ms-azure-resource: true
-                  description: Definition of the module type.
-                  properties:
-                    etag:
-                      description: Gets or sets the etag of the resource.
-                      type: string
-                    properties:
-                      description: Definition of the module property type.
-                      properties:
-                        activityCount:
-                          description: Gets or sets the activity count of the module.
-                          format: int32
-                          type: integer
-                        contentLink:
-                          description: Definition of the content link.
-                          properties:
-                            contentHash:
-                              description: Definition of the runbook property type.
-                              properties:
-                                algorithm:
-                                  description: Gets or sets the content hash algorithm used to hash the content.
-                                  type: string
-                                value:
-                                  description: Gets or sets expected hash value of the content.
-                                  type: string
-                              required:
-                                - algorithm
-                                - value
-                            uri:
-                              description: Gets or sets the uri of the runbook content.
-                              type: string
-                            version:
-                              description: Gets or sets the version of the content.
-                              type: string
-                        creationTime:
-                          description: Gets or sets the creation time.
-                          format: date-time
-                          type: string
-                        description:
-                          description: Gets or sets the description.
-                          type: string
-                        error:
-                          description: Definition of the module error info type.
-                          properties:
-                            code:
-                              description: Gets or sets the error code.
-                              type: string
-                            message:
-                              description: Gets or sets the error message.
-                              type: string
-                        isGlobal:
-                          description: Gets or sets the isGlobal flag of the module.
-                          type: boolean
-                        lastModifiedTime:
-                          description: Gets or sets the last modified time.
-                          format: date-time
-                          type: string
-                        provisioningState:
-                          description: Gets or sets the provisioning state of the module.
-                          enum:
-                            - Created
-                            - Creating
-                            - StartingImportModuleRunbook
-                            - RunningImportModuleRunbook
-                            - ContentRetrieved
-                            - ContentDownloaded
-                            - ContentValidated
-                            - ConnectionTypeImported
-                            - ContentStored
-                            - ModuleDataStored
-                            - ActivitiesStored
-                            - ModuleImportRunbookComplete
-                            - Succeeded
-                            - Failed
-                            - Cancelled
-                            - Updating
-                          type: string
-                          x-ms-enum:
-                            modelAsString: false
-                            name: ModuleProvisioningState
-                        sizeInBytes:
-                          description: Gets or sets the size in bytes of the module.
-                          format: int64
-                          type: integer
-                        version:
-                          description: Gets or sets the version of the module.
-                          type: string
+                  $ref: '#/definitions/Module'
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -473,117 +362,16 @@ paths:
           description: OK
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
-                  location:
-                    description: Resource location
-                    type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Resource tags
-                    type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Definition of the module type.
             properties:
               etag:
                 description: Gets or sets the etag of the resource.
                 type: string
               properties:
-                description: Definition of the module property type.
-                properties:
-                  activityCount:
-                    description: Gets or sets the activity count of the module.
-                    format: int32
-                    type: integer
-                  contentLink:
-                    description: Definition of the content link.
-                    properties:
-                      contentHash:
-                        description: Definition of the runbook property type.
-                        properties:
-                          algorithm:
-                            description: Gets or sets the content hash algorithm used to hash the content.
-                            type: string
-                          value:
-                            description: Gets or sets expected hash value of the content.
-                            type: string
-                        required:
-                          - algorithm
-                          - value
-                      uri:
-                        description: Gets or sets the uri of the runbook content.
-                        type: string
-                      version:
-                        description: Gets or sets the version of the content.
-                        type: string
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  error:
-                    description: Definition of the module error info type.
-                    properties:
-                      code:
-                        description: Gets or sets the error code.
-                        type: string
-                      message:
-                        description: Gets or sets the error message.
-                        type: string
-                  isGlobal:
-                    description: Gets or sets the isGlobal flag of the module.
-                    type: boolean
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                  provisioningState:
-                    description: Gets or sets the provisioning state of the module.
-                    enum:
-                      - Created
-                      - Creating
-                      - StartingImportModuleRunbook
-                      - RunningImportModuleRunbook
-                      - ContentRetrieved
-                      - ContentDownloaded
-                      - ContentValidated
-                      - ConnectionTypeImported
-                      - ContentStored
-                      - ModuleDataStored
-                      - ActivitiesStored
-                      - ModuleImportRunbookComplete
-                      - Succeeded
-                      - Failed
-                      - Cancelled
-                      - Updating
-                    type: string
-                    x-ms-enum:
-                      modelAsString: false
-                      name: ModuleProvisioningState
-                  sizeInBytes:
-                    description: Gets or sets the size in bytes of the module.
-                    format: int64
-                    type: integer
-                  version:
-                    description: Gets or sets the version of the module.
-                    type: string
+                $ref: '#/definitions/ModuleProperties'
+                description: Gets or sets the module properties.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -663,29 +451,9 @@ paths:
                 description: Gets or sets name of the resource.
                 type: string
               properties:
-                description: The parameters supplied to the update properties.
-                properties:
-                  contentLink:
-                    description: Definition of the content link.
-                    properties:
-                      contentHash:
-                        description: Definition of the runbook property type.
-                        properties:
-                          algorithm:
-                            description: Gets or sets the content hash algorithm used to hash the content.
-                            type: string
-                          value:
-                            description: Gets or sets expected hash value of the content.
-                            type: string
-                        required:
-                          - algorithm
-                          - value
-                      uri:
-                        description: Gets or sets the uri of the runbook content.
-                        type: string
-                      version:
-                        description: Gets or sets the version of the content.
-                        type: string
+                $ref: '#/definitions/ModuleUpdateProperties'
+                description: Gets or sets the module update properties.
+                x-ms-client-flatten: true
               tags:
                 additionalProperties:
                   type: string
@@ -708,117 +476,16 @@ paths:
           description: OK
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
-                  location:
-                    description: Resource location
-                    type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Resource tags
-                    type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Definition of the module type.
             properties:
               etag:
                 description: Gets or sets the etag of the resource.
                 type: string
               properties:
-                description: Definition of the module property type.
-                properties:
-                  activityCount:
-                    description: Gets or sets the activity count of the module.
-                    format: int32
-                    type: integer
-                  contentLink:
-                    description: Definition of the content link.
-                    properties:
-                      contentHash:
-                        description: Definition of the runbook property type.
-                        properties:
-                          algorithm:
-                            description: Gets or sets the content hash algorithm used to hash the content.
-                            type: string
-                          value:
-                            description: Gets or sets expected hash value of the content.
-                            type: string
-                        required:
-                          - algorithm
-                          - value
-                      uri:
-                        description: Gets or sets the uri of the runbook content.
-                        type: string
-                      version:
-                        description: Gets or sets the version of the content.
-                        type: string
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  error:
-                    description: Definition of the module error info type.
-                    properties:
-                      code:
-                        description: Gets or sets the error code.
-                        type: string
-                      message:
-                        description: Gets or sets the error message.
-                        type: string
-                  isGlobal:
-                    description: Gets or sets the isGlobal flag of the module.
-                    type: boolean
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                  provisioningState:
-                    description: Gets or sets the provisioning state of the module.
-                    enum:
-                      - Created
-                      - Creating
-                      - StartingImportModuleRunbook
-                      - RunningImportModuleRunbook
-                      - ContentRetrieved
-                      - ContentDownloaded
-                      - ContentValidated
-                      - ConnectionTypeImported
-                      - ContentStored
-                      - ModuleDataStored
-                      - ActivitiesStored
-                      - ModuleImportRunbookComplete
-                      - Succeeded
-                      - Failed
-                      - Cancelled
-                      - Updating
-                    type: string
-                    x-ms-enum:
-                      modelAsString: false
-                      name: ModuleProvisioningState
-                  sizeInBytes:
-                    description: Gets or sets the size in bytes of the module.
-                    format: int64
-                    type: integer
-                  version:
-                    description: Gets or sets the version of the module.
-                    type: string
+                $ref: '#/definitions/ModuleProperties'
+                description: Gets or sets the module properties.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -869,31 +536,9 @@ paths:
                 description: Gets or sets name of the resource.
                 type: string
               properties:
-                description: The parameters supplied to the create or update module properties.
-                properties:
-                  contentLink:
-                    description: Definition of the content link.
-                    properties:
-                      contentHash:
-                        description: Definition of the runbook property type.
-                        properties:
-                          algorithm:
-                            description: Gets or sets the content hash algorithm used to hash the content.
-                            type: string
-                          value:
-                            description: Gets or sets expected hash value of the content.
-                            type: string
-                        required:
-                          - algorithm
-                          - value
-                      uri:
-                        description: Gets or sets the uri of the runbook content.
-                        type: string
-                      version:
-                        description: Gets or sets the version of the content.
-                        type: string
-                required:
-                  - contentLink
+                $ref: '#/definitions/ModuleCreateOrUpdateProperties'
+                description: Gets or sets the module create properties.
+                x-ms-client-flatten: true
               tags:
                 additionalProperties:
                   type: string
@@ -916,232 +561,30 @@ paths:
           description: OK
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
-                  location:
-                    description: Resource location
-                    type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Resource tags
-                    type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Definition of the module type.
             properties:
               etag:
                 description: Gets or sets the etag of the resource.
                 type: string
               properties:
-                description: Definition of the module property type.
-                properties:
-                  activityCount:
-                    description: Gets or sets the activity count of the module.
-                    format: int32
-                    type: integer
-                  contentLink:
-                    description: Definition of the content link.
-                    properties:
-                      contentHash:
-                        description: Definition of the runbook property type.
-                        properties:
-                          algorithm:
-                            description: Gets or sets the content hash algorithm used to hash the content.
-                            type: string
-                          value:
-                            description: Gets or sets expected hash value of the content.
-                            type: string
-                        required:
-                          - algorithm
-                          - value
-                      uri:
-                        description: Gets or sets the uri of the runbook content.
-                        type: string
-                      version:
-                        description: Gets or sets the version of the content.
-                        type: string
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  error:
-                    description: Definition of the module error info type.
-                    properties:
-                      code:
-                        description: Gets or sets the error code.
-                        type: string
-                      message:
-                        description: Gets or sets the error message.
-                        type: string
-                  isGlobal:
-                    description: Gets or sets the isGlobal flag of the module.
-                    type: boolean
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                  provisioningState:
-                    description: Gets or sets the provisioning state of the module.
-                    enum:
-                      - Created
-                      - Creating
-                      - StartingImportModuleRunbook
-                      - RunningImportModuleRunbook
-                      - ContentRetrieved
-                      - ContentDownloaded
-                      - ContentValidated
-                      - ConnectionTypeImported
-                      - ContentStored
-                      - ModuleDataStored
-                      - ActivitiesStored
-                      - ModuleImportRunbookComplete
-                      - Succeeded
-                      - Failed
-                      - Cancelled
-                      - Updating
-                    type: string
-                    x-ms-enum:
-                      modelAsString: false
-                      name: ModuleProvisioningState
-                  sizeInBytes:
-                    description: Gets or sets the size in bytes of the module.
-                    format: int64
-                    type: integer
-                  version:
-                    description: Gets or sets the version of the module.
-                    type: string
+                $ref: '#/definitions/ModuleProperties'
+                description: Gets or sets the module properties.
+                x-ms-client-flatten: true
         '201':
           description: Created
           schema:
             allOf:
-              - description: The Resource definition.
-                properties:
-                  id:
-                    description: Resource Id
-                    readOnly: true
-                    type: string
-                  location:
-                    description: Resource location
-                    type: string
-                  name:
-                    description: Resource name
-                    readOnly: true
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: Resource tags
-                    type: object
-                  type:
-                    description: Resource type
-                    readOnly: true
-                    type: string
-                required:
-                  - location
-                x-ms-azure-resource: true
+              - $ref: '#/definitions/Resource'
             description: Definition of the module type.
             properties:
               etag:
                 description: Gets or sets the etag of the resource.
                 type: string
               properties:
-                description: Definition of the module property type.
-                properties:
-                  activityCount:
-                    description: Gets or sets the activity count of the module.
-                    format: int32
-                    type: integer
-                  contentLink:
-                    description: Definition of the content link.
-                    properties:
-                      contentHash:
-                        description: Definition of the runbook property type.
-                        properties:
-                          algorithm:
-                            description: Gets or sets the content hash algorithm used to hash the content.
-                            type: string
-                          value:
-                            description: Gets or sets expected hash value of the content.
-                            type: string
-                        required:
-                          - algorithm
-                          - value
-                      uri:
-                        description: Gets or sets the uri of the runbook content.
-                        type: string
-                      version:
-                        description: Gets or sets the version of the content.
-                        type: string
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  error:
-                    description: Definition of the module error info type.
-                    properties:
-                      code:
-                        description: Gets or sets the error code.
-                        type: string
-                      message:
-                        description: Gets or sets the error message.
-                        type: string
-                  isGlobal:
-                    description: Gets or sets the isGlobal flag of the module.
-                    type: boolean
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                  provisioningState:
-                    description: Gets or sets the provisioning state of the module.
-                    enum:
-                      - Created
-                      - Creating
-                      - StartingImportModuleRunbook
-                      - RunningImportModuleRunbook
-                      - ContentRetrieved
-                      - ContentDownloaded
-                      - ContentValidated
-                      - ConnectionTypeImported
-                      - ContentStored
-                      - ModuleDataStored
-                      - ActivitiesStored
-                      - ModuleImportRunbookComplete
-                      - Succeeded
-                      - Failed
-                      - Cancelled
-                      - Updating
-                    type: string
-                    x-ms-enum:
-                      modelAsString: false
-                      name: ModuleProvisioningState
-                  sizeInBytes:
-                    description: Gets or sets the size in bytes of the module.
-                    format: int64
-                    type: integer
-                  version:
-                    description: Gets or sets the version of the module.
-                    type: string
+                $ref: '#/definitions/ModuleProperties'
+                description: Gets or sets the module properties.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1258,83 +701,7 @@ paths:
               value:
                 description: Gets or sets a list of activities.
                 items:
-                  description: Definition of the activity.
-                  properties:
-                    id:
-                      description: Gets or sets the id of the resource.
-                      type: string
-                    name:
-                      description: Gets the name of the activity.
-                      readOnly: true
-                      type: string
-                    properties:
-                      description: Properties of the activity.
-                      properties:
-                        creationTime:
-                          description: Gets or sets the creation time.
-                          format: date-time
-                          type: string
-                        definition:
-                          description: Gets or sets the user name of the activity.
-                          type: string
-                        description:
-                          description: Gets or sets the description.
-                          type: string
-                        lastModifiedTime:
-                          description: Gets or sets the last modified time.
-                          format: date-time
-                          type: string
-                        outputTypes:
-                          description: Gets or sets the output types of the activity.
-                          items:
-                            description: Definition of the activity output type.
-                            properties:
-                              name:
-                                description: Gets or sets the name of the activity output type.
-                                type: string
-                              type:
-                                description: Gets or sets the type of the activity output type.
-                                type: string
-                          type: array
-                        parameterSets:
-                          description: Gets or sets the parameter sets of the activity.
-                          items:
-                            description: Definition of the activity parameter set.
-                            properties:
-                              name:
-                                description: Gets or sets the name of the activity parameter set.
-                                type: string
-                              parameters:
-                                description: Gets or sets the parameters of the activity parameter set.
-                                items:
-                                  description: Definition of the activity parameter.
-                                  properties:
-                                    isDynamic:
-                                      description: Gets or sets a Boolean value that indicates true if the parameter is dynamic.
-                                      type: boolean
-                                    isMandatory:
-                                      description: 'Gets or sets a Boolean value that indicates true if the parameter is required. If the value is false, the parameter is optional.'
-                                      type: boolean
-                                    name:
-                                      description: Gets or sets the name of the activity parameter.
-                                      type: string
-                                    position:
-                                      description: Gets or sets the position of the activity parameter.
-                                      type: boolean
-                                    type:
-                                      description: Gets or sets the type of the activity parameter.
-                                      type: string
-                                    valueFromPipeline:
-                                      description: Gets or sets a Boolean value that indicates true if the parameter can take values from the incoming pipeline objects. This setting is used if the cmdlet must access the complete input object. false indicates that the parameter cannot take values from the complete input object.
-                                      type: boolean
-                                    valueFromPipelineByPropertyName:
-                                      description: 'Gets or sets a Boolean value that indicates true if the parameter can be filled from a property of the incoming pipeline object that has the same name as this parameter. false indicates that the parameter cannot be filled from the incoming pipeline object property with the same name. '
-                                      type: boolean
-                                    valueFromRemainingArguments:
-                                      description: Gets or sets a Boolean value that indicates true if the cmdlet parameter accepts all the remaining command-line arguments that are associated with this parameter in the form of an array. false if the cmdlet parameter does not accept all the remaining argument values.
-                                      type: boolean
-                                type: array
-                          type: array
+                  $ref: '#/definitions/Activity'
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -1540,73 +907,9 @@ paths:
                 readOnly: true
                 type: string
               properties:
-                description: Properties of the activity.
-                properties:
-                  creationTime:
-                    description: Gets or sets the creation time.
-                    format: date-time
-                    type: string
-                  definition:
-                    description: Gets or sets the user name of the activity.
-                    type: string
-                  description:
-                    description: Gets or sets the description.
-                    type: string
-                  lastModifiedTime:
-                    description: Gets or sets the last modified time.
-                    format: date-time
-                    type: string
-                  outputTypes:
-                    description: Gets or sets the output types of the activity.
-                    items:
-                      description: Definition of the activity output type.
-                      properties:
-                        name:
-                          description: Gets or sets the name of the activity output type.
-                          type: string
-                        type:
-                          description: Gets or sets the type of the activity output type.
-                          type: string
-                    type: array
-                  parameterSets:
-                    description: Gets or sets the parameter sets of the activity.
-                    items:
-                      description: Definition of the activity parameter set.
-                      properties:
-                        name:
-                          description: Gets or sets the name of the activity parameter set.
-                          type: string
-                        parameters:
-                          description: Gets or sets the parameters of the activity parameter set.
-                          items:
-                            description: Definition of the activity parameter.
-                            properties:
-                              isDynamic:
-                                description: Gets or sets a Boolean value that indicates true if the parameter is dynamic.
-                                type: boolean
-                              isMandatory:
-                                description: 'Gets or sets a Boolean value that indicates true if the parameter is required. If the value is false, the parameter is optional.'
-                                type: boolean
-                              name:
-                                description: Gets or sets the name of the activity parameter.
-                                type: string
-                              position:
-                                description: Gets or sets the position of the activity parameter.
-                                type: boolean
-                              type:
-                                description: Gets or sets the type of the activity parameter.
-                                type: string
-                              valueFromPipeline:
-                                description: Gets or sets a Boolean value that indicates true if the parameter can take values from the incoming pipeline objects. This setting is used if the cmdlet must access the complete input object. false indicates that the parameter cannot take values from the complete input object.
-                                type: boolean
-                              valueFromPipelineByPropertyName:
-                                description: 'Gets or sets a Boolean value that indicates true if the parameter can be filled from a property of the incoming pipeline object that has the same name as this parameter. false indicates that the parameter cannot be filled from the incoming pipeline object property with the same name. '
-                                type: boolean
-                              valueFromRemainingArguments:
-                                description: Gets or sets a Boolean value that indicates true if the cmdlet parameter accepts all the remaining command-line arguments that are associated with this parameter in the form of an array. false if the cmdlet parameter does not accept all the remaining argument values.
-                                type: boolean
-                          type: array
-                    type: array
+                $ref: '#/definitions/ActivityProperties'
+                description: Gets or sets the properties of the activity.
+                x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -2027,14 +1330,7 @@ paths:
               value:
                 description: Gets or sets a list of fields.
                 items:
-                  description: Information about a field of a type.
-                  properties:
-                    name:
-                      description: Gets or sets the name of the field.
-                      type: string
-                    type:
-                      description: Gets or sets the type of the field.
-                      type: string
+                  $ref: '#/definitions/TypeField'
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -2098,14 +1394,7 @@ paths:
               value:
                 description: Gets or sets a list of fields.
                 items:
-                  description: Information about a field of a type.
-                  properties:
-                    name:
-                      description: Gets or sets the name of the field.
-                      type: string
-                    type:
-                      description: Gets or sets the type of the field.
-                      type: string
+                  $ref: '#/definitions/TypeField'
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -2164,14 +1453,7 @@ paths:
               value:
                 description: Gets or sets a list of fields.
                 items:
-                  description: Information about a field of a type.
-                  properties:
-                    name:
-                      description: Gets or sets the name of the field.
-                      type: string
-                    type:
-                      description: Gets or sets the type of the field.
-                      type: string
+                  $ref: '#/definitions/TypeField'
                 type: array
         default:
           description: Automation error response describing why the operation failed.

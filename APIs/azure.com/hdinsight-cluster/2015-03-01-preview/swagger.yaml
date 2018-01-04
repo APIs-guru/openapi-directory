@@ -1281,26 +1281,8 @@ definitions:
         description: The Linux operation systems profile.
         properties:
           linuxOperatingSystemProfile:
-            description: 'The ssh username, password, and ssh public key.'
-            properties:
-              password:
-                description: The password.
-                type: string
-              sshProfile:
-                description: The list of SSH public keys.
-                properties:
-                  publicKeys:
-                    description: The list of SSH public keys.
-                    items:
-                      description: The SSH public key for the cluster nodes.
-                      properties:
-                        certificateData:
-                          description: The certificate for SSH.
-                          type: string
-                    type: array
-              username:
-                description: The username.
-                type: string
+            $ref: '#/definitions/LinuxOperatingSystemProfile'
+            description: The Linux OS profile.
       scriptActions:
         description: The list of script actions on the role.
         items:

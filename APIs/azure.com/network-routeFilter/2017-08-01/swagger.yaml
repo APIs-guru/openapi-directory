@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/network/resource-manager/Microsoft.Network/stable/2017-08-01/routeFilter.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-routeFilter
   x-tags:
@@ -822,7 +821,25 @@ definitions:
       peerings:
         description: A collection of references to express route circuit peerings.
         items:
-          $ref: './expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering'
+          allOf:
+            - description: Reference to another subresource.
+              properties:
+                id:
+                  description: Resource ID.
+                  type: string
+              x-ms-azure-resource: true
+          description: Peering in an ExpressRouteCircuit resource.
+          properties:
+            etag:
+              description: A unique read-only string that changes whenever the resource is updated.
+              readOnly: true
+              type: string
+            name:
+              description: Gets name of the resource that is unique within a resource group. This name can be used to access the resource.
+              type: string
+            properties:
+              $ref: '#/definitions/ExpressRouteCircuitPeeringPropertiesFormat'
+              x-ms-client-flatten: true
         type: array
       provisioningState:
         description: 'The provisioning state of the resource. Possible values are: ''Updating'', ''Deleting'', ''Succeeded'' and ''Failed''.'
@@ -831,63 +848,7 @@ definitions:
       rules:
         description: Collection of RouteFilterRules contained within a route filter.
         items:
-          allOf:
-            - description: Reference to another subresource.
-              properties:
-                id:
-                  description: Resource ID.
-                  type: string
-              x-ms-azure-resource: true
-          description: Route Filter Rule Resource
-          properties:
-            etag:
-              description: A unique read-only string that changes whenever the resource is updated.
-              readOnly: true
-              type: string
-            location:
-              description: Resource location.
-              type: string
-            name:
-              description: The name of the resource that is unique within a resource group. This name can be used to access the resource.
-              type: string
-            properties:
-              description: Route Filter Rule Resource
-              properties:
-                access:
-                  description: 'The access type of the rule. Valid values are: ''Allow'', ''Deny'''
-                  enum:
-                    - Allow
-                    - Deny
-                  type: string
-                  x-ms-enum:
-                    modelAsString: true
-                    name: Access
-                communities:
-                  description: 'The collection for bgp community values to filter on. e.g. [''12076:5010'',''12076:5020'']'
-                  items:
-                    type: string
-                  type: array
-                provisioningState:
-                  description: 'The provisioning state of the resource. Possible values are: ''Updating'', ''Deleting'', ''Succeeded'' and ''Failed''.'
-                  readOnly: true
-                  type: string
-                routeFilterRuleType:
-                  description: 'The rule type of the rule. Valid value is: ''Community'''
-                  enum:
-                    - Community
-                  type: string
-                  x-ms-enum:
-                    modelAsString: true
-                    name: RouteFilterRuleType
-              required:
-                - access
-                - routeFilterRuleType
-                - communities
-            tags:
-              additionalProperties:
-                type: string
-              description: Resource tags.
-              type: object
+          $ref: '#/definitions/RouteFilterRule'
         type: array
   RouteFilterRule:
     allOf:
@@ -910,38 +871,8 @@ definitions:
         description: The name of the resource that is unique within a resource group. This name can be used to access the resource.
         type: string
       properties:
-        description: Route Filter Rule Resource
-        properties:
-          access:
-            description: 'The access type of the rule. Valid values are: ''Allow'', ''Deny'''
-            enum:
-              - Allow
-              - Deny
-            type: string
-            x-ms-enum:
-              modelAsString: true
-              name: Access
-          communities:
-            description: 'The collection for bgp community values to filter on. e.g. [''12076:5010'',''12076:5020'']'
-            items:
-              type: string
-            type: array
-          provisioningState:
-            description: 'The provisioning state of the resource. Possible values are: ''Updating'', ''Deleting'', ''Succeeded'' and ''Failed''.'
-            readOnly: true
-            type: string
-          routeFilterRuleType:
-            description: 'The rule type of the rule. Valid value is: ''Community'''
-            enum:
-              - Community
-            type: string
-            x-ms-enum:
-              modelAsString: true
-              name: RouteFilterRuleType
-        required:
-          - access
-          - routeFilterRuleType
-          - communities
+        $ref: '#/definitions/RouteFilterRulePropertiesFormat'
+        x-ms-client-flatten: true
       tags:
         additionalProperties:
           type: string
