@@ -9,6 +9,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Spanner
   version: v1
   x-apiClientRegistration:
@@ -32,12 +36,22 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/spanner.admin': Administer your Spanner databases
       'https://www.googleapis.com/auth/spanner.data': View and manage the contents of your Spanner databases
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/spanner.admin': Administer your Spanner databases
+      'https://www.googleapis.com/auth/spanner.data': View and manage the contents of your Spanner databases
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -137,7 +151,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -177,7 +195,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -224,7 +246,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -274,7 +300,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
@@ -333,16 +363,24 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
   '/v1/{name}':
     delete:
-      description: 'Ends a session, releasing server resources associated with it.'
-      operationId: spanner.projects.instances.databases.sessions.delete
+      description: |-
+        Deletes a long-running operation. This method indicates that the client is
+        no longer interested in the operation result. It does not cancel the
+        operation. If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: spanner.projects.instances.operations.delete
       parameters:
-        - description: Required. The name of the session to delete.
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
@@ -356,18 +394,22 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spanner.data'
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
     get:
       description: |-
-        Gets a session. Returns `NOT_FOUND` if the session does not exist.
-        This is mainly useful for determining whether a session is still
-        alive.
-      operationId: spanner.projects.instances.databases.sessions.get
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: spanner.projects.instances.operations.get
       parameters:
-        - description: Required. The name of the session to retrieve.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -377,12 +419,16 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Session'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spanner.data'
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
     parameters:
@@ -465,7 +511,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -496,7 +546,7 @@ paths:
         the operation is not deleted; instead, it becomes an operation with
         an Operation.error value with a google.rpc.Status.code of 1,
         corresponding to `Code.CANCELLED`.
-      operationId: spanner.projects.instances.databases.operations.cancel
+      operationId: spanner.projects.instances.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
           in: path
@@ -512,7 +562,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -550,7 +604,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -600,7 +658,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -639,7 +701,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -714,7 +780,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -790,7 +860,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -836,7 +910,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -882,7 +960,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -929,7 +1011,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
@@ -974,7 +1060,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
@@ -1023,7 +1113,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
@@ -1075,7 +1169,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
@@ -1121,7 +1219,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
@@ -1175,7 +1277,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
@@ -1224,7 +1330,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
@@ -1270,7 +1380,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects

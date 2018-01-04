@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Builds container images in the cloud.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Cloud Container Builder
   version: v1
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -148,6 +160,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -190,6 +204,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/builds/{id}':
@@ -218,6 +234,8 @@ paths:
             $ref: '#/definitions/Build'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -275,6 +293,8 @@ paths:
             $ref: '#/definitions/Build'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -346,6 +366,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/triggers':
@@ -368,6 +390,8 @@ paths:
             $ref: '#/definitions/ListBuildTriggersResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -409,6 +433,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/triggers/{triggerId}':
@@ -437,6 +463,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
@@ -463,6 +491,8 @@ paths:
             $ref: '#/definitions/BuildTrigger'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -509,6 +539,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{projectId}/triggers/{triggerId}:run':
@@ -552,6 +584,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}':
@@ -575,6 +609,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - operations
@@ -638,6 +674,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - operations

@@ -10,6 +10,10 @@ info:
     url: 'https://google.com'
   description: |
     Publishes 360 photos to Google Maps, along with position, orientation, and connectivity metadata. Apps can offer an interface for positioning, connecting, and uploading user-generated Street View images.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Street View Publish
   version: v1
   x-apiClientRegistration:
@@ -33,10 +37,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/streetviewpublish': Publish and manage your 360 photos on Google Street View
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/streetviewpublish': Publish and manage your 360 photos on Google Street View
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -169,6 +181,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/streetviewpublish'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/streetviewpublish'
       tags:
         - photo
   '/v1/photo/{id}':
@@ -259,6 +273,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/streetviewpublish'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/streetviewpublish'
       tags:
         - photo
   '/v1/photo/{photoId}':
@@ -285,6 +301,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/streetviewpublish'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/streetviewpublish'
       tags:
         - photo
@@ -324,6 +342,8 @@ paths:
             $ref: '#/definitions/Photo'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/streetviewpublish'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/streetviewpublish'
       tags:
         - photo
@@ -391,6 +411,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/streetviewpublish'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/streetviewpublish'
       tags:
         - photo
   /v1/photos:
@@ -444,6 +466,8 @@ paths:
             $ref: '#/definitions/ListPhotosResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/streetviewpublish'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/streetviewpublish'
       tags:
         - photos
@@ -508,6 +532,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/streetviewpublish'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/streetviewpublish'
       tags:
         - photos
   '/v1/photos:batchGet':
@@ -557,6 +583,8 @@ paths:
             $ref: '#/definitions/BatchGetPhotosResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/streetviewpublish'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/streetviewpublish'
       tags:
         - photos
@@ -631,6 +659,8 @@ paths:
             $ref: '#/definitions/BatchUpdatePhotosResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/streetviewpublish'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/streetviewpublish'
       tags:
         - photos

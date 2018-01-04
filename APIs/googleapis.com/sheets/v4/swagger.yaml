@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Reads and writes Google Sheets.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Sheets
   version: v4
   x-apiClientRegistration:
@@ -31,7 +35,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
@@ -39,6 +43,18 @@ securityDefinitions:
       'https://www.googleapis.com/auth/drive.readonly': View the files in your Google Drive
       'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
       'https://www.googleapis.com/auth/spreadsheets.readonly': View your Google Spreadsheets
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
+      'https://www.googleapis.com/auth/drive.file': View and manage Google Drive files and folders that you have opened or created with this app
+      'https://www.googleapis.com/auth/drive.readonly': View the files in your Google Drive
+      'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
+      'https://www.googleapis.com/auth/spreadsheets.readonly': View your Google Spreadsheets
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -150,9 +166,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -208,13 +230,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spreadsheets'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets.readonly'
       tags:
         - spreadsheets
@@ -258,9 +290,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -319,9 +357,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -368,9 +412,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -435,13 +485,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spreadsheets'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets.readonly'
       tags:
         - spreadsheets
@@ -527,9 +587,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -633,9 +699,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -684,9 +756,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -730,9 +808,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -777,9 +861,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -846,13 +936,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spreadsheets'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets.readonly'
       tags:
         - spreadsheets
@@ -910,9 +1010,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -956,9 +1062,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -1002,9 +1114,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -1063,9 +1181,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -1127,9 +1251,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -1457,6 +1587,15 @@ definitions:
       For example, if charting stock prices over time, multiple series may exist,
       one for the "Open Price", "High Price", "Low Price" and "Close Price".
     properties:
+      lineStyle:
+        $ref: '#/definitions/LineStyle'
+        description: |-
+          The line style of this series. Valid only if the
+          chartType is AREA,
+          LINE, or SCATTER.
+          COMBO charts are also supported if the
+          series chart type is
+          AREA or LINE.
       series:
         $ref: '#/definitions/ChartData'
         description: The data being visualized in this chart series.
@@ -2435,6 +2574,9 @@ definitions:
         description: |-
           The title text position.
           This field is optional.
+      waterfallChart:
+        $ref: '#/definitions/WaterfallChartSpec'
+        description: A waterfall chart specification.
     type: object
   ClearBasicFilterRequest:
     description: 'Clears the basic filter, if any exists on the sheet.'
@@ -3678,6 +3820,27 @@ definitions:
         description: |-
           When iterative calculation is enabled, the maximum number of calculation
           rounds to perform.
+        format: int32
+        type: integer
+    type: object
+  LineStyle:
+    description: Properties that describe the style of a line.
+    properties:
+      type:
+        description: The dash type of the line.
+        enum:
+          - LINE_DASH_TYPE_UNSPECIFIED
+          - INVISIBLE
+          - CUSTOM
+          - SOLID
+          - DOTTED
+          - MEDIUM_DASHED
+          - MEDIUM_DASHED_DOTTED
+          - LONG_DASHED
+          - LONG_DASHED_DOTTED
+        type: string
+      width:
+        description: 'The thickness of the line, in px.'
         format: int32
         type: integer
     type: object
@@ -5234,4 +5397,74 @@ definitions:
           items: {}
           type: array
         type: array
+    type: object
+  WaterfallChartColumnStyle:
+    description: Styles for a waterfall chart column.
+    properties:
+      color:
+        $ref: '#/definitions/Color'
+        description: The color of the column.
+      label:
+        description: The label of the column's legend.
+        type: string
+    type: object
+  WaterfallChartDomain:
+    description: The domain of a waterfall chart.
+    properties:
+      data:
+        $ref: '#/definitions/ChartData'
+        description: The data of the WaterfallChartDomain.
+      reversed:
+        description: True to reverse the order of the domain values (horizontal axis).
+        type: boolean
+    type: object
+  WaterfallChartSeries:
+    description: A single series of data for a waterfall chart.
+    properties:
+      data:
+        $ref: '#/definitions/ChartData'
+        description: The data being visualized in this series.
+      hideTrailingSubtotal:
+        description: |-
+          True to hide the subtotal column from the end of the series. By default,
+          a subtotal column will appear at the end of each series. Setting this
+          field to true will hide that subtotal column for this series.
+        type: boolean
+      negativeColumnsStyle:
+        $ref: '#/definitions/WaterfallChartColumnStyle'
+        description: Styles for all columns in this series with negative values.
+      positiveColumnsStyle:
+        $ref: '#/definitions/WaterfallChartColumnStyle'
+        description: Styles for all columns in this series with positive values.
+      subtotalColumnsStyle:
+        $ref: '#/definitions/WaterfallChartColumnStyle'
+        description: Styles for all subtotal columns in this series.
+    type: object
+  WaterfallChartSpec:
+    description: A waterfall chart.
+    properties:
+      connectorLineStyle:
+        $ref: '#/definitions/LineStyle'
+        description: The line style for the connector lines.
+      domain:
+        $ref: '#/definitions/WaterfallChartDomain'
+        description: The domain data (horizontal axis) for the waterfall chart.
+      firstValueIsTotal:
+        description: True to interpret the first value as a total.
+        type: boolean
+      hideConnectorLines:
+        description: True to hide connector lines between columns.
+        type: boolean
+      series:
+        description: The data this waterfall chart is visualizing.
+        items:
+          $ref: '#/definitions/WaterfallChartSeries'
+        type: array
+      stackedType:
+        description: The stacked type.
+        enum:
+          - WATERFALL_STACKED_TYPE_UNSPECIFIED
+          - STACKED
+          - SEQUENTIAL
+        type: string
     type: object

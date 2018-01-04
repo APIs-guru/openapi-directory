@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Google Service Management allows service producers to publish their services on Google Cloud Platform so that they can be discovered and used by service consumers.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Service Management
   version: v1
   x-apiClientRegistration:
@@ -31,13 +35,24 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/service.management': Manage your Google API service configuration
       'https://www.googleapis.com/auth/service.management.readonly': View your Google API service configuration
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/service.management': Manage your Google API service configuration
+      'https://www.googleapis.com/auth/service.management.readonly': View your Google API service configuration
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -170,7 +185,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - operations
@@ -233,11 +252,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/service.management'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management.readonly'
       tags:
         - services
@@ -275,7 +302,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
@@ -305,7 +336,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
@@ -330,11 +365,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/service.management'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management.readonly'
       tags:
         - services
@@ -385,11 +428,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/service.management'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management.readonly'
       tags:
         - services
@@ -437,11 +488,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/service.management'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management.readonly'
       tags:
         - services
@@ -486,7 +545,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
@@ -524,11 +587,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/service.management'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management.readonly'
       tags:
         - services
@@ -593,7 +664,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
@@ -639,11 +714,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/service.management'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management.readonly'
       tags:
         - services
@@ -694,7 +777,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
@@ -723,11 +810,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/service.management'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management.readonly'
       tags:
         - services
@@ -788,7 +883,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
@@ -836,7 +935,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
@@ -880,7 +983,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
@@ -926,7 +1033,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
@@ -952,7 +1063,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - operations
@@ -1012,11 +1127,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/service.management'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management.readonly'
       tags:
         - services
@@ -1061,7 +1184,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
@@ -1111,11 +1238,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/service.management'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management.readonly'
       tags:
         - services
@@ -4340,7 +4475,9 @@ definitions:
               allow_unregistered_calls: true
     properties:
       allowUnregisteredCalls:
-        description: 'True, if the method allows unregistered calls; false otherwise.'
+        description: |-
+          If true, the selected method allows unregistered calls, e.g. calls
+          that don't identify any user or application.
         type: boolean
       selector:
         description: |-
@@ -4351,10 +4488,10 @@ definitions:
         type: string
       skipServiceControl:
         description: |-
-          True, if the method should skip service control. If so, no control plane
-          feature (like quota and billing) will be enabled.
-          This flag is used by ESP to allow some Endpoints customers to bypass
-          Google internal checks.
+          If true, the selected method should skip service control and the control
+          plane features, such as quota and billing, will not be available.
+          This flag is used by Google Cloud Endpoints to bypass checks for internal
+          methods, such as service health check methods.
         type: boolean
     type: object
   Visibility:

@@ -9,6 +9,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: API for managing lightweight user-provided functions executed in response to events.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Cloud Functions
   version: v1
   x-apiClientRegistration:
@@ -30,10 +34,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -154,6 +166,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - operations
     parameters:
@@ -212,6 +226,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}':
@@ -236,13 +252,18 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
-      description: Returns a function with the given name from the requested project.
-      operationId: cloudfunctions.projects.locations.functions.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: cloudfunctions.operations.get
       parameters:
-        - description: The name of the function which details should be obtained.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -252,12 +273,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/CloudFunction'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -300,6 +323,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}/locations':
@@ -332,6 +357,8 @@ paths:
             $ref: '#/definitions/ListLocationsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -388,6 +415,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:generateDownloadUrl':
@@ -434,6 +463,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{parent}/functions':
@@ -470,6 +501,8 @@ paths:
             $ref: '#/definitions/ListFunctionsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -542,6 +575,8 @@ paths:
             $ref: '#/definitions/GenerateUploadUrlResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects

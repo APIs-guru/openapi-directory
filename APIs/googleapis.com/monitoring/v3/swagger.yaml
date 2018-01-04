@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Manages your Stackdriver Monitoring data and configurations. Most projects must be associated with a Stackdriver account, with a few exceptions as noted on the individual method pages.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Stackdriver Monitoring
   version: v3
   x-apiClientRegistration:
@@ -31,13 +35,24 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/monitoring': View and write monitoring data for all of your Google and third-party Cloud and API projects
       'https://www.googleapis.com/auth/monitoring.read': View monitoring data for all of your Google Cloud and third-party projects
       'https://www.googleapis.com/auth/monitoring.write': Publish metric data to your Google Cloud projects
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/monitoring': View and write monitoring data for all of your Google and third-party Cloud and API projects
+      'https://www.googleapis.com/auth/monitoring.read': View monitoring data for all of your Google Cloud and third-party projects
+      'https://www.googleapis.com/auth/monitoring.write': Publish metric data to your Google Cloud projects
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -140,9 +155,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - uptimeCheckIps
@@ -162,10 +183,10 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v3/{name}':
     delete:
-      description: Deletes a metric descriptor. Only user-created custom metrics can be deleted.
-      operationId: monitoring.projects.metricDescriptors.delete
+      description: Deletes an existing group.
+      operationId: monitoring.projects.groups.delete
       parameters:
-        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example of {metric_id} is: "custom.googleapis.com/my_test_metric".'
+        - description: 'The group to delete. The format is "projects/{project_id_or_number}/groups/{group_id}".'
           in: path
           name: name
           required: true
@@ -179,15 +200,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
     get:
-      description: Gets a single metric descriptor. This method does not require a Stackdriver account.
-      operationId: monitoring.projects.metricDescriptors.get
+      description: Gets a single group.
+      operationId: monitoring.projects.groups.get
       parameters:
-        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example value of {metric_id} is "compute.googleapis.com/instance/disk/read_bytes_count".'
+        - description: 'The group to retrieve. The format is "projects/{project_id_or_number}/groups/{group_id}".'
           in: path
           name: name
           required: true
@@ -197,15 +222,23 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/MetricDescriptor'
+            $ref: '#/definitions/Group'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -249,7 +282,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
@@ -279,7 +316,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
@@ -320,9 +361,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -365,9 +412,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - projects
@@ -411,7 +464,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
@@ -456,9 +513,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - projects
@@ -509,11 +572,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -553,9 +624,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -592,11 +669,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -718,9 +803,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - projects
@@ -760,9 +851,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -793,9 +890,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - projects
@@ -835,7 +938,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects

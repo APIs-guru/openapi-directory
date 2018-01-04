@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'The Deployment Manager API allows users to declaratively configure, deploy and run complex solutions on the Google Cloud Platform.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Cloud Deployment Manager Alpha
   version: alpha
   x-apiClientRegistration:
@@ -29,13 +33,24 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/ndev.cloudman': View and manage your Google Cloud Platform management resources and deployment status information
       'https://www.googleapis.com/auth/ndev.cloudman.readonly': View your Google Cloud Platform management resources and deployment status information
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/ndev.cloudman': View and manage your Google Cloud Platform management resources and deployment status information
+      'https://www.googleapis.com/auth/ndev.cloudman.readonly': View your Google Cloud Platform management resources and deployment status information
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -136,11 +151,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - compositeTypes
@@ -173,7 +196,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - compositeTypes
@@ -200,7 +227,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - compositeTypes
@@ -226,11 +257,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - compositeTypes
@@ -268,7 +307,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - compositeTypes
@@ -298,7 +341,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - compositeTypes
@@ -352,11 +399,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - deployments
@@ -393,7 +448,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - deployments
@@ -428,7 +487,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - deployments
@@ -454,11 +517,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - deployments
@@ -517,7 +588,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - deployments
@@ -568,7 +643,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - deployments
@@ -607,7 +686,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - deployments
@@ -666,11 +749,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - manifests
@@ -710,11 +801,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - manifests
@@ -781,11 +880,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - resources
@@ -825,11 +932,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - resources
@@ -876,7 +991,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - deployments
@@ -903,7 +1022,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - deployments
@@ -950,7 +1073,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - deployments
@@ -989,7 +1116,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - deployments
@@ -1043,11 +1174,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - operations
@@ -1082,11 +1221,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - operations
@@ -1148,11 +1295,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - typeProviders
@@ -1185,7 +1340,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - typeProviders
@@ -1212,7 +1371,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - typeProviders
@@ -1238,11 +1401,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - typeProviders
@@ -1280,7 +1451,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - typeProviders
@@ -1310,7 +1485,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - typeProviders
@@ -1369,11 +1548,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - typeProviders
@@ -1413,11 +1600,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - typeProviders
@@ -1479,11 +1674,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - types
@@ -1516,7 +1719,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - types
@@ -1543,7 +1750,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - types
@@ -1569,11 +1780,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - types
@@ -1611,7 +1830,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - types
@@ -1641,7 +1864,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - types
@@ -1752,6 +1979,9 @@ definitions:
       collection:
         description: The collection that identifies this resource within its service.
         type: string
+      methodMap:
+        $ref: '#/definitions/MethodMap'
+        description: Custom verb method mappings to support unordered list API mappings.
       options:
         $ref: '#/definitions/Options'
         description: The options to apply to this resource-level override
@@ -2148,6 +2378,25 @@ definitions:
         type: array
       nextPageToken:
         description: Output only. A token used to continue a truncated list request.
+        type: string
+    type: object
+  MethodMap:
+    description: Deployment Manager will call these methods during the events of creation/deletion/update/get/setIamPolicy
+    properties:
+      create:
+        description: The action identifier for the create method to be used for this collection
+        type: string
+      delete:
+        description: The action identifier for the delete method to be used for this collection
+        type: string
+      get:
+        description: The action identifier for the get method to be used for this collection
+        type: string
+      setIamPolicy:
+        description: The action identifier for the setIamPolicy method to be used for this collection
+        type: string
+      update:
+        description: The action identifier for the update method to be used for this collection
         type: string
     type: object
   Operation:

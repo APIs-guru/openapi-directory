@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: TPU API provides customers with access to Google TPU technology.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud TPU
   version: v1alpha1
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -115,37 +127,10 @@ tags:
 paths:
   '/v1alpha1/{name}':
     delete:
-      description: |-
-        Deletes a long-running operation. This method indicates that the client is
-        no longer interested in the operation result. It does not cancel the
-        operation. If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: tpu.projects.locations.operations.delete
+      description: Deletes a node.
+      operationId: tpu.projects.locations.nodes.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Empty'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-    get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: tpu.projects.locations.operations.get
-      parameters:
-        - description: The name of the operation resource.
+        - description: The resource name.
           in: path
           name: name
           required: true
@@ -158,6 +143,30 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    get:
+      description: Gets the details of a node.
+      operationId: tpu.projects.locations.nodes.get
+      parameters:
+        - description: The resource name.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Node'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -205,6 +214,8 @@ paths:
             $ref: '#/definitions/ListLocationsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -262,6 +273,8 @@ paths:
             $ref: '#/definitions/ListOperationsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -322,6 +335,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1alpha1/{name}:reimage':
@@ -360,6 +375,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -400,6 +417,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1alpha1/{parent}/nodes':
@@ -428,6 +447,8 @@ paths:
             $ref: '#/definitions/ListNodesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -470,6 +491,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -582,18 +605,26 @@ definitions:
         type: string
       createTime:
         description: |-
-          The time when the node was created.
           Output only.
+          The time when the node was created.
         format: google-datetime
         type: string
       description:
         description: The user-supplied description of the TPU. Maximum of 512 characters.
         type: string
+      health:
+        description: The health status of the TPU node.
+        enum:
+          - HEALTH_UNSPECIFIED
+          - HEALTHY
+          - UNHEALTHY
+          - TIMEOUT
+        type: string
       healthDescription:
         description: |-
+          Output only.
           If this field is populated, it contains a description of why the TPU Node
           is unhealthy.
-          Output only.
         type: string
       ipAddress:
         description: |-
@@ -602,7 +633,9 @@ definitions:
           The network address for the TPU Node as visible to GCE instances.
         type: string
       name:
-        description: The immutable name of the TPU
+        description: |-
+          Output only.
+          The immutable name of the TPU
         type: string
       network:
         description: |-
@@ -626,16 +659,16 @@ definitions:
         type: string
       serviceAccount:
         description: |-
+          Output only.
           The service account used to run the tensor flow services within the node.
           To share resources, including Google Cloud Storage data, with the
           Tensorflow job running in the Node, this account must have permissions to
           that data.
-          Output only.
         type: string
       state:
         description: |-
-          The current state for the TPU Node.
           Output only.
+          The current state for the TPU Node.
         enum:
           - STATE_UNSPECIFIED
           - CREATING

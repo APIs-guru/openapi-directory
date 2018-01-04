@@ -9,6 +9,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Transfers data from external data sources to a Google Cloud Storage bucket or between Google Cloud Storage buckets.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Storage Transfer
   version: v1
   x-apiClientRegistration:
@@ -32,10 +36,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -147,6 +159,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - googleServiceAccounts
     parameters:
@@ -196,6 +210,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - transferJobs
     parameters:
@@ -228,6 +244,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - transferJobs
   '/v1/{jobName}':
@@ -256,6 +274,8 @@ paths:
             $ref: '#/definitions/TransferJob'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - transferJobs
@@ -300,6 +320,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - transferJobs
   '/v1/{name}':
@@ -320,6 +342,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - transferOperations
@@ -362,6 +386,8 @@ paths:
             $ref: '#/definitions/ListOperationsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - transferOperations
@@ -412,6 +438,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - transferOperations
   '/v1/{name}:pause':
@@ -453,6 +481,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - transferOperations
   '/v1/{name}:resume':
@@ -493,6 +523,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - transferOperations

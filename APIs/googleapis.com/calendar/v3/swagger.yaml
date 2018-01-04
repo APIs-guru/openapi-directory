@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Manipulates events and other calendar data.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Calendar
   version: v3
   x-apiClientRegistration:
@@ -31,11 +35,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/calendar': Manage your calendars
       'https://www.googleapis.com/auth/calendar.readonly': View your calendars
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/calendar': Manage your calendars
+      'https://www.googleapis.com/auth/calendar.readonly': View your calendars
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -112,6 +125,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendars
   '/calendars/{calendarId}':
@@ -129,6 +144,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendars
@@ -149,7 +166,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - calendars
@@ -182,6 +203,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendars
     put:
@@ -204,6 +227,8 @@ paths:
             $ref: '#/definitions/Calendar'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendars
@@ -246,6 +271,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - acl
     parameters:
@@ -280,6 +307,8 @@ paths:
             $ref: '#/definitions/AclRule'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - acl
@@ -334,6 +363,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - acl
   '/calendars/{calendarId}/acl/{ruleId}':
@@ -356,6 +387,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - acl
@@ -381,7 +414,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - acl
@@ -423,6 +460,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - acl
     put:
@@ -455,6 +494,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - acl
   '/calendars/{calendarId}/clear':
@@ -480,6 +521,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendars
@@ -595,7 +638,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - events
@@ -620,7 +667,7 @@ paths:
           name: calendarId
           required: true
           type: string
-        - description: Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the CreateConferenceRequest. The default is 0.
+        - description: Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the createRequest field of conferenceData. The default is 0.
           in: query
           maximum: 1
           minimum: 0
@@ -647,6 +694,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - events
   '/calendars/{calendarId}/events/import':
@@ -671,7 +720,7 @@ paths:
           name: calendarId
           required: true
           type: string
-        - description: Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the CreateConferenceRequest. The default is 0.
+        - description: Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the createRequest field of conferenceData. The default is 0.
           in: query
           maximum: 1
           minimum: 0
@@ -688,6 +737,8 @@ paths:
             $ref: '#/definitions/Event'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - events
@@ -725,6 +776,8 @@ paths:
             $ref: '#/definitions/Event'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - events
@@ -852,7 +905,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - events
@@ -880,6 +937,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - events
@@ -918,7 +977,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - events
@@ -947,7 +1010,7 @@ paths:
           name: calendarId
           required: true
           type: string
-        - description: Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the CreateConferenceRequest. The default is 0.
+        - description: Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the createRequest field of conferenceData. The default is 0.
           in: query
           maximum: 1
           minimum: 0
@@ -979,6 +1042,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - events
     put:
@@ -998,7 +1063,7 @@ paths:
           name: calendarId
           required: true
           type: string
-        - description: Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the CreateConferenceRequest. The default is 0.
+        - description: Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the createRequest field of conferenceData. The default is 0.
           in: query
           maximum: 1
           minimum: 0
@@ -1029,6 +1094,8 @@ paths:
             $ref: '#/definitions/Event'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - events
@@ -1093,7 +1160,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - events
@@ -1145,6 +1216,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - events
   /channels/stop:
@@ -1170,7 +1243,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - channels
@@ -1186,7 +1263,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - colors
@@ -1223,7 +1304,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - freebusy
@@ -1275,7 +1360,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - calendarList
@@ -1306,6 +1395,8 @@ paths:
             $ref: '#/definitions/CalendarListEntry'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendarList
@@ -1369,7 +1460,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - calendarList
@@ -1388,6 +1483,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendarList
@@ -1408,7 +1505,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - calendarList
@@ -1445,6 +1546,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendarList
     put:
@@ -1471,6 +1574,8 @@ paths:
             $ref: '#/definitions/CalendarListEntry'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendarList
@@ -1504,7 +1609,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - settings
@@ -1558,7 +1667,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - settings
@@ -1580,7 +1693,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - settings
@@ -1896,6 +2013,9 @@ definitions:
         items:
           $ref: '#/definitions/EntryPoint'
         type: array
+      notes:
+        description: 'Additional notes (such as instructions from the domain administrator, legal notices) to display to the user. Can contain HTML. The maximum length is 2048 characters. Optional.'
+        type: string
       signature:
         description: |-
           The signature of the conference data.
@@ -1947,9 +2067,9 @@ definitions:
           The conference solution type.
           If a client encounters an unfamiliar or empty type, it should still be able to display the entry points. However, it should disallow modifications.
           The possible values are:  
-          - "eventHangout" 
-          - "eventNamedHangout" 
-          - "hangoutsMeet"
+          - "eventHangout" for Hangouts for consumers (http://hangouts.google.com)
+          - "eventNamedHangout" for Classic Hangouts for GSuite users (http://hangouts.google.com)
+          - "hangoutsMeet" for Hangouts Meet (http://meet.google.com)
         type: string
     type: object
   CreateConferenceRequest:
@@ -2068,7 +2188,7 @@ definitions:
         type: string
       conferenceData:
         $ref: '#/definitions/ConferenceData'
-        description: 'The conference-related information, such as details of a Hangouts Meet conference. To create new conference details use the createRequest field.'
+        description: 'The conference-related information, such as details of a Hangouts Meet conference. To create new conference details use the createRequest field. To persist your changes, remember to set the conferenceDataVersion request parameter to 1 for all event modification requests.'
       created:
         description: Creation time of the event (as a RFC3339 timestamp). Read-only.
         format: date-time

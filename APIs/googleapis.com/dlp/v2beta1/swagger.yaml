@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'The Google Data Loss Prevention API provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: DLP
   version: v2beta1
   x-apiClientRegistration:
@@ -23,7 +27,7 @@ info:
       format: google
       url: 'https://dlp.googleapis.com/$discovery/rest?version=v2beta1'
       version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: dlp
 externalDocs:
@@ -31,10 +35,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -152,6 +164,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - content
   '/v2beta1/content:inspect':
@@ -186,6 +200,8 @@ paths:
             $ref: '#/definitions/GooglePrivacyDlpV2beta1InspectContentResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - content
@@ -222,6 +238,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - content
   '/v2beta1/dataSource:analyze':
@@ -256,6 +274,8 @@ paths:
             $ref: '#/definitions/GoogleLongrunningOperation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - dataSource
@@ -292,6 +312,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - inspect
   /v2beta1/rootCategories:
@@ -313,6 +335,8 @@ paths:
             $ref: '#/definitions/GooglePrivacyDlpV2beta1ListRootCategoriesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - rootCategories
@@ -356,6 +380,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - rootCategories
     parameters:
@@ -375,7 +401,7 @@ paths:
   '/v2beta1/{name}':
     delete:
       description: This method is not supported and the server returns `UNIMPLEMENTED`.
-      operationId: dlp.riskAnalysis.operations.delete
+      operationId: dlp.inspect.operations.delete
       parameters:
         - description: The name of the operation resource to be deleted.
           in: path
@@ -391,14 +417,16 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - riskAnalysis
+        - inspect
     get:
       description: |-
         Gets the latest state of a long-running operation.  Clients can use this
         method to poll the operation result at intervals as recommended by the API
         service.
-      operationId: dlp.riskAnalysis.operations.get
+      operationId: dlp.inspect.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
@@ -414,8 +442,10 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - riskAnalysis
+        - inspect
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -478,6 +508,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - inspect
     parameters:
@@ -511,7 +543,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Cancels an operation. Use the `inspect.operations.get` to check whether the cancellation succeeded or the operation completed despite cancellation.
-      operationId: dlp.riskAnalysis.operations.cancel
+      operationId: dlp.inspect.operations.cancel
       parameters:
         - in: body
           name: body
@@ -531,8 +563,10 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - riskAnalysis
+        - inspect
 definitions:
   GoogleLongrunningCancelOperationRequest:
     description: The request message for Operations.CancelOperation.
@@ -2298,7 +2332,8 @@ definitions:
       These types of transformations are
       those that perform pseudonymization, thereby producing a "surrogate" as
       output. This should be used in conjunction with a field on the
-      transformation such as `surrogate_info_type`.
+      transformation such as `surrogate_info_type`. This custom info type does
+      not support the use of `detection_rules`.
     properties: {}
     type: object
   GooglePrivacyDlpV2beta1Table:
@@ -2362,15 +2397,19 @@ definitions:
         type: string
     type: object
   GooglePrivacyDlpV2beta1TransformationSummary:
-    description: Summary of a single tranformation.
+    description: |-
+      Summary of a single tranformation.
+      Only one of 'transformation', 'field_transformation', or 'record_suppress'
+      will be set.
     properties:
       field:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
         description: Set if the transformation was limited to a specific FieldId.
       fieldTransformations:
         description: |-
-          The field transformation that was applied. This list will contain
-          multiple only in the case of errors.
+          The field transformation that was applied.
+          If multiple field transformations are requested for a single field,
+          this list will contain all of them; otherwise, only one is supplied.
         items:
           $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldTransformation'
         type: array
@@ -2387,6 +2426,10 @@ definitions:
       transformation:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1PrimitiveTransformation'
         description: The specific transformation these stats apply to.
+      transformedBytes:
+        description: Total size in bytes that were transformed in some way.
+        format: int64
+        type: string
     type: object
   GooglePrivacyDlpV2beta1TransientCryptoKey:
     description: |-
@@ -2414,7 +2457,13 @@ definitions:
         type: string
     type: object
   GooglePrivacyDlpV2beta1Value:
-    description: Set of primitive values supported by the system.
+    description: |-
+      Set of primitive values supported by the system.
+      Note that for the purposes of inspection or transformation, the number
+      of bytes considered to comprise a 'Value' is based on its representation
+      as a UTF-8 encoded string. For example, if 'integer_value' is set to
+      123456789, the number of bytes would be counted as 9, even though an
+      int64 only holds up to 8 bytes of data.
     properties:
       booleanValue:
         type: boolean

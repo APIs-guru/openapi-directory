@@ -7,6 +7,10 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Cloud Firestore
   version: v1beta1
   x-apiClientRegistration:
@@ -30,11 +34,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/datastore': View and manage your Google Cloud Datastore data
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/datastore': View and manage your Google Cloud Datastore data
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -158,7 +171,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -201,7 +218,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -244,7 +265,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -287,7 +312,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -330,7 +359,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -374,14 +407,18 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
   '/v1beta1/{name}':
     delete:
-      description: Deletes a document.
-      operationId: firestore.projects.databases.documents.delete
+      description: Deletes an index.
+      operationId: firestore.projects.databases.indexes.delete
       parameters:
         - description: |-
             When set to `true`, the target document must exist.
@@ -396,8 +433,8 @@ paths:
           name: currentDocument.updateTime
           type: string
         - description: |-
-            The resource name of the Document to delete. In the format:
-            `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+            The index name. For example:
+            `projects/{project_id}/databases/{database_id}/indexes/{index_id}`
           in: path
           name: name
           required: true
@@ -411,13 +448,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
     get:
-      description: Gets a single document.
-      operationId: firestore.projects.databases.documents.get
+      description: Gets an index.
+      operationId: firestore.projects.databases.indexes.get
       parameters:
         - collectionFormat: multi
           description: |-
@@ -429,8 +470,8 @@ paths:
           name: mask.fieldPaths
           type: array
         - description: |-
-            The resource name of the Document to get. In the format:
-            `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+            The name of the index. For example:
+            `projects/{project_id}/databases/{database_id}/indexes/{index_id}`
           in: path
           name: name
           required: true
@@ -450,11 +491,15 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Document'
+            $ref: '#/definitions/Index'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -526,7 +571,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -562,7 +611,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -617,7 +670,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -695,7 +752,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -759,7 +820,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -804,7 +869,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -851,7 +920,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects

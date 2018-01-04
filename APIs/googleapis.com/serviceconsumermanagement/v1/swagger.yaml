@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Provides management methods for configuring service producer resources on Google Cloud.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Service Consumer Management
   version: v1
   x-apiClientRegistration:
@@ -29,11 +33,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/service.management': Manage your Google API service configuration
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/service.management': Manage your Google API service configuration
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -118,13 +131,12 @@ paths:
   '/v1/{name}':
     delete:
       description: |-
-        Deletes a long-running operation. This method indicates that the client is
-        no longer interested in the operation result. It does not cancel the
-        operation. If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: serviceconsumermanagement.operations.delete
+        Delete tenancy unit.  Before the tenancy unit is deleted, there should be
+        no tenant resource in it.
+        Operation<response: Empty>.
+      operationId: serviceconsumermanagement.services.tenancyUnits.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: Name of the tenancy unit to be deleted.
           in: path
           name: name
           required: true
@@ -134,14 +146,18 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/service.management'
       tags:
-        - operations
+        - services
     get:
       description: |-
         Gets the latest state of a long-running operation.  Clients can use this
@@ -163,7 +179,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - operations
@@ -228,7 +248,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - operations
@@ -276,6 +300,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - services
   '/v1/{parent}/tenancyUnits':
@@ -322,6 +348,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - services
     parameters:
@@ -366,6 +394,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - services
   '/v1/{parent}:addProject':
@@ -409,6 +439,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - services
@@ -471,6 +503,8 @@ paths:
             $ref: '#/definitions/SearchTenancyUnitsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - services

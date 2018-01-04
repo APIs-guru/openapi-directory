@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Manages identity and access control for Google Cloud Platform resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Identity and Access Management (IAM)
   version: v1
   x-apiClientRegistration:
@@ -31,10 +35,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -151,6 +163,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - permissions
   /v1/roles:
@@ -192,6 +206,8 @@ paths:
             $ref: '#/definitions/ListRolesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - roles
@@ -243,6 +259,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - roles
   '/v1/{name}':
@@ -278,6 +296,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - organizations
     get:
@@ -311,6 +331,8 @@ paths:
             $ref: '#/definitions/Role'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - organizations
@@ -358,6 +380,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - organizations
     put:
@@ -395,6 +419,8 @@ paths:
             $ref: '#/definitions/ServiceAccount'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -436,6 +462,8 @@ paths:
             $ref: '#/definitions/ListServiceAccountKeysResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -482,6 +510,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}/serviceAccounts':
@@ -518,6 +548,8 @@ paths:
             $ref: '#/definitions/ListServiceAccountsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -560,6 +592,8 @@ paths:
             $ref: '#/definitions/ServiceAccount'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -604,6 +638,8 @@ paths:
             $ref: '#/definitions/SignBlobResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -654,6 +690,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:undelete':
@@ -696,6 +734,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - organizations
   '/v1/{parent}/roles':
@@ -704,9 +744,6 @@ paths:
       operationId: iam.organizations.roles.list
       parameters:
         - description: Optional limit on the number of roles to include in the response.
-          enum:
-            - BASIC
-            - FULL
           in: query
           name: pageSize
           type: integer
@@ -742,6 +779,8 @@ paths:
             $ref: '#/definitions/ListRolesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - organizations
@@ -784,6 +823,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - organizations
   '/v1/{resource}:getIamPolicy':
@@ -822,6 +863,8 @@ paths:
             $ref: '#/definitions/Policy'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -866,6 +909,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{resource}:testIamPermissions':
@@ -908,6 +953,8 @@ paths:
             $ref: '#/definitions/TestIamPermissionsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -974,13 +1021,6 @@ definitions:
           - ADD
           - REMOVE
         type: string
-      condition:
-        $ref: '#/definitions/Expr'
-        description: |-
-          The condition that is associated with this binding.
-          This field is GOOGLE_INTERNAL.
-          This field is not logged in IAM side because it's only for audit logging.
-          Optional
       member:
         description: |-
           A single identity requesting access for a Cloud Platform resource.
@@ -1016,7 +1056,6 @@ definitions:
           - KEY_ALG_UNSPECIFIED
           - KEY_ALG_RSA_1024
           - KEY_ALG_RSA_2048
-          - KEY_ALG_GCS_SYMMETRIC_HMAC
         type: string
       privateKeyType:
         description: |-
@@ -1057,39 +1096,6 @@ definitions:
 
       The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
-    type: object
-  Expr:
-    description: |-
-      Represents an expression text. Example:
-
-          title: "User account presence"
-          description: "Determines whether the request has a user account"
-          expression: "size(request.user) > 0"
-    properties:
-      description:
-        description: |-
-          An optional description of the expression. This is a longer text which
-          describes the expression, e.g. when hovered over it in a UI.
-        type: string
-      expression:
-        description: |-
-          Textual representation of an expression in
-          Common Expression Language syntax.
-
-          The application context of the containing message determines which
-          well-known feature set of CEL is supported.
-        type: string
-      location:
-        description: |-
-          An optional string indicating the location of the expression for error
-          reporting, e.g. a file name and a position in the file.
-        type: string
-      title:
-        description: |-
-          An optional title for the expression, i.e. a short string describing
-          its purpose. This can be used e.g. in UIs which allow to enter the
-          expression.
-        type: string
     type: object
   ListRolesResponse:
     description: The response containing the roles defined under a resource.
@@ -1432,7 +1438,6 @@ definitions:
           - KEY_ALG_UNSPECIFIED
           - KEY_ALG_RSA_1024
           - KEY_ALG_RSA_2048
-          - KEY_ALG_GCS_SYMMETRIC_HMAC
         type: string
       name:
         description: |-

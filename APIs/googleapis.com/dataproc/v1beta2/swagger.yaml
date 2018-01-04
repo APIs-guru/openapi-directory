@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Manages Hadoop-based clusters and jobs on Google Cloud Platform.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Cloud Dataproc
   version: v1beta2
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -148,6 +160,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -190,6 +204,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1beta2/projects/{projectId}/regions/{region}/clusters/{clusterName}':
@@ -224,6 +240,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
@@ -252,6 +270,8 @@ paths:
             $ref: '#/definitions/Cluster'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -325,6 +345,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1beta2/projects/{projectId}/regions/{region}/clusters/{clusterName}:diagnose':
@@ -372,6 +394,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -422,6 +446,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -466,6 +492,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
@@ -494,6 +522,8 @@ paths:
             $ref: '#/definitions/Job'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -546,6 +576,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1beta2/projects/{projectId}/regions/{region}/jobs/{jobId}:cancel':
@@ -594,6 +626,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1beta2/projects/{projectId}/regions/{region}/jobs:submit':
@@ -637,6 +671,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1beta2/{name}':
@@ -662,6 +698,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
@@ -685,6 +723,8 @@ paths:
             $ref: '#/definitions/WorkflowTemplate'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -724,6 +764,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1beta2/{name}:cancel':
@@ -758,6 +800,8 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -798,6 +842,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1beta2/{parent}/workflowTemplates':
@@ -826,6 +872,8 @@ paths:
             $ref: '#/definitions/ListWorkflowTemplatesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -865,6 +913,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1beta2/{resource}:getIamPolicy':
@@ -885,6 +935,8 @@ paths:
             $ref: '#/definitions/Policy'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -939,6 +991,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1beta2/{resource}:testIamPermissions':
@@ -977,6 +1031,8 @@ paths:
             $ref: '#/definitions/TestIamPermissionsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -1022,7 +1078,7 @@ definitions:
         description: Required. The cluster name. Cluster names within a project must be unique. Names of deleted clusters can be reused.
         type: string
       clusterUuid:
-        description: Output-only. A cluster UUID (Unique Universal Identifier). Cloud Dataproc generates this value when it creates the cluster.
+        description: Output only. A cluster UUID (Unique Universal Identifier). Cloud Dataproc generates this value when it creates the cluster.
         type: string
       config:
         $ref: '#/definitions/ClusterConfig'
@@ -1040,9 +1096,9 @@ definitions:
         type: string
       status:
         $ref: '#/definitions/ClusterStatus'
-        description: Output-only. Cluster status.
+        description: Output only. Cluster status.
       statusHistory:
-        description: Output-only. The previous cluster status.
+        description: Output only. The previous cluster status.
         items:
           $ref: '#/definitions/ClusterStatus'
         type: array
@@ -1101,6 +1157,7 @@ definitions:
         type: object
     type: object
   ClusterOperation:
+    description: The cluster operation triggered by a workflow.
     properties:
       done:
         description: Output only. Indicates the operation is done.
@@ -1116,32 +1173,32 @@ definitions:
     description: Metadata describing the operation.
     properties:
       clusterName:
-        description: Output-only. Name of the cluster for the operation.
+        description: Output only. Name of the cluster for the operation.
         type: string
       clusterUuid:
-        description: Output-only. Cluster UUID for the operation.
+        description: Output only. Cluster UUID for the operation.
         type: string
       description:
-        description: Output-only. Short description of operation.
+        description: Output only. Short description of operation.
         type: string
       labels:
         additionalProperties:
           type: string
-        description: Output-only. Labels associated with the operation
+        description: Output only. Labels associated with the operation
         type: object
       operationType:
-        description: Output-only. The operation type.
+        description: Output only. The operation type.
         type: string
       status:
         $ref: '#/definitions/ClusterOperationStatus'
-        description: Output-only. Current operation status.
+        description: Output only. Current operation status.
       statusHistory:
-        description: Output-only. The previous operation status.
+        description: Output only. The previous operation status.
         items:
           $ref: '#/definitions/ClusterOperationStatus'
         type: array
       warnings:
-        description: Output-only. Errors encountered during operation execution.
+        description: Output only. Errors encountered during operation execution.
         items:
           type: string
         type: array
@@ -1150,13 +1207,13 @@ definitions:
     description: The status of the operation.
     properties:
       details:
-        description: Output-only.A message containing any operation metadata details.
+        description: Output only. A message containing any operation metadata details.
         type: string
       innerState:
-        description: Output-only. A message containing the detailed operation state.
+        description: Output only. A message containing the detailed operation state.
         type: string
       state:
-        description: Output-only. A message containing the operation state.
+        description: Output only. A message containing the operation state.
         enum:
           - UNKNOWN
           - PENDING
@@ -1164,7 +1221,7 @@ definitions:
           - DONE
         type: string
       stateStartTime:
-        description: Output-only. The time this state was entered.
+        description: Output only. The time this state was entered.
         format: google-datetime
         type: string
     type: object
@@ -1184,10 +1241,10 @@ definitions:
     description: The status of a cluster and its instances.
     properties:
       detail:
-        description: Output-only. Optional details of cluster's state.
+        description: Output only. Optional details of cluster's state.
         type: string
       state:
-        description: Output-only. The cluster's state.
+        description: Output only. The cluster's state.
         enum:
           - UNKNOWN
           - CREATING
@@ -1197,11 +1254,11 @@ definitions:
           - UPDATING
         type: string
       stateStartTime:
-        description: Output-only. Time when this state was entered.
+        description: Output only. Time when this state was entered.
         format: google-datetime
         type: string
       substate:
-        description: Output-only. Additional state information that includes status reported by the agent.
+        description: Output only. Additional state information that includes status reported by the agent.
         enum:
           - UNSPECIFIED
           - UNHEALTHY
@@ -1216,7 +1273,7 @@ definitions:
     description: The location of diagnostic output.
     properties:
       outputUri:
-        description: Output-only. The Google Cloud Storage URI of the diagnostic output. The output report is a plain text file with a summary of collected diagnostics.
+        description: Output only. The Google Cloud Storage URI of the diagnostic output. The output report is a plain text file with a summary of collected diagnostics.
         type: string
     type: object
   DiskConfig:
@@ -1378,7 +1435,7 @@ definitions:
         $ref: '#/definitions/DiskConfig'
         description: Optional. Disk option config settings.
       imageUri:
-        description: Output-only. The Google Compute Engine image resource used for cluster instances. Inferred from SoftwareConfig.image_version.
+        description: Output only. The Google Compute Engine image resource used for cluster instances. Inferred from SoftwareConfig.image_version.
         type: string
       instanceNames:
         description: 'Optional. The list of instance names. Cloud Dataproc derives the names from cluster_name, num_instances, and the instance group if not set by user (recommended practice is to let Cloud Dataproc derive the name).'
@@ -1397,9 +1454,9 @@ definitions:
         type: string
       managedGroupConfig:
         $ref: '#/definitions/ManagedGroupConfig'
-        description: Output-only. The config for Google Compute Engine Instance Group Manager that manages this group. This is only used for preemptible instance groups.
+        description: Output only. The config for Google Compute Engine Instance Group Manager that manages this group. This is only used for preemptible instance groups.
       minCpuPlatform:
-        description: 'Optional. Specifies the minimum cpu platform for the Instance Group. Examples: * https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform'
+        description: Optional. Specifies the minimum cpu platform for the Instance Group. See Cloud Dataproc&rarr;Minimum CPU Platform.
         type: string
       numInstances:
         description: 'Optional. The number of VM instances in the instance group. For master instance groups, must be set to 1.'
@@ -1421,10 +1478,10 @@ definitions:
     description: A Cloud Dataproc job resource.
     properties:
       driverControlFilesUri:
-        description: 'Output-only. If present, the location of miscellaneous control files which may be used as part of job setup and handling. If not present, control files may be placed in the same location as driver_output_uri.'
+        description: 'Output only. If present, the location of miscellaneous control files which may be used as part of job setup and handling. If not present, control files may be placed in the same location as driver_output_uri.'
         type: string
       driverOutputResourceUri:
-        description: Output-only. A URI pointing to the location of the stdout of the job's driver program.
+        description: Output only. A URI pointing to the location of the stdout of the job's driver program.
         type: string
       hadoopJob:
         $ref: '#/definitions/HadoopJob'
@@ -1460,14 +1517,14 @@ definitions:
         description: Job is a SparkSql job.
       status:
         $ref: '#/definitions/JobStatus'
-        description: Output-only. The job status. Additional application-specific status information may be contained in the <code>type_job</code> and <code>yarn_applications</code> fields.
+        description: Output only. The job status. Additional application-specific status information may be contained in the <code>type_job</code> and <code>yarn_applications</code> fields.
       statusHistory:
-        description: Output-only. The previous job status.
+        description: Output only. The previous job status.
         items:
           $ref: '#/definitions/JobStatus'
         type: array
       yarnApplications:
-        description: 'Output-only. The collection of YARN applications spun up by this job.Beta Feature: This report is available for testing purposes only. It may be changed before final release.'
+        description: 'Output only. The collection of YARN applications spun up by this job.Beta Feature: This report is available for testing purposes only. It may be changed before final release.'
         items:
           $ref: '#/definitions/YarnApplication'
         type: array
@@ -1479,7 +1536,7 @@ definitions:
         description: Required. The name of the cluster where the job will be submitted.
         type: string
       clusterUuid:
-        description: Output-only. A cluster UUID generated by the Cloud Dataproc service when the job is submitted.
+        description: Output only. A cluster UUID generated by the Cloud Dataproc service when the job is submitted.
         type: string
     type: object
   JobReference:
@@ -1504,10 +1561,10 @@ definitions:
     description: Cloud Dataproc job status.
     properties:
       details:
-        description: 'Output-only. Optional job state details, such as an error description if the state is <code>ERROR</code>.'
+        description: 'Output only. Optional job state details, such as an error description if the state is <code>ERROR</code>.'
         type: string
       state:
-        description: Output-only. A state message specifying the overall job state.
+        description: Output only. A state message specifying the overall job state.
         enum:
           - STATE_UNSPECIFIED
           - PENDING
@@ -1521,11 +1578,11 @@ definitions:
           - ATTEMPT_FAILURE
         type: string
       stateStartTime:
-        description: Output-only. The time when this state was entered.
+        description: Output only. The time when this state was entered.
         format: google-datetime
         type: string
       substate:
-        description: 'Output-only. Additional state information, which includes status reported by the agent.'
+        description: 'Output only. Additional state information, which includes status reported by the agent.'
         enum:
           - UNSPECIFIED
           - SUBMITTED
@@ -1553,19 +1610,19 @@ definitions:
     description: The list of all clusters in a project.
     properties:
       clusters:
-        description: Output-only. The clusters in the project.
+        description: Output only. The clusters in the project.
         items:
           $ref: '#/definitions/Cluster'
         type: array
       nextPageToken:
-        description: 'Output-only. This token is included in the response if there are more results to fetch. To fetch additional results, provide this value as the page_token in a subsequent <code>ListClustersRequest</code>.'
+        description: 'Output only. This token is included in the response if there are more results to fetch. To fetch additional results, provide this value as the page_token in a subsequent <code>ListClustersRequest</code>.'
         type: string
     type: object
   ListJobsResponse:
     description: A list of jobs in a project.
     properties:
       jobs:
-        description: Output-only. Jobs list.
+        description: Output only. Jobs list.
         items:
           $ref: '#/definitions/Job'
         type: array
@@ -1635,10 +1692,10 @@ definitions:
     description: Specifies the resources used to actively manage an instance group.
     properties:
       instanceGroupManagerName:
-        description: Output-only. The name of the Instance Group Manager for this group.
+        description: Output only. The name of the Instance Group Manager for this group.
         type: string
       instanceTemplateName:
-        description: Output-only. The name of the Instance Template used for the Managed Instance Group.
+        description: Output only. The name of the Instance Template used for the Managed Instance Group.
         type: string
     type: object
   NodeInitializationAction:
@@ -1676,6 +1733,7 @@ definitions:
         type: object
     type: object
   OrderedJob:
+    description: A job executed by the workflow.
     properties:
       hadoopJob:
         $ref: '#/definitions/HadoopJob'
@@ -1763,7 +1821,7 @@ definitions:
           }
         ]
       }
-      For a description of IAM and its features, see the IAM developer's guide (https://cloud.google.com/iam).
+      For a description of IAM and its features, see the IAM developer's guide (https://cloud.google.com/iam/docs).
     properties:
       bindings:
         description: Associates a list of members to a role. bindings with no members will result in an error.
@@ -1775,7 +1833,7 @@ definitions:
         format: byte
         type: string
       version:
-        description: Version of the Policy. The default version is 0.
+        description: Deprecated.
         format: int32
         type: integer
     type: object
