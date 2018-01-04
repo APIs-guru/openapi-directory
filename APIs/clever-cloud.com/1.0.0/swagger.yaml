@@ -405,6 +405,60 @@ paths:
       tags:
         - all
         - logs
+  '/logs/{appId}/drains':
+    get:
+      description: Fetch the logs drains for a given application
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        default:
+          description: <No description>
+      tags:
+        - all
+        - logs
+    post:
+      description: Add a log drain for a given application
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        default:
+          description: <No description>
+      tags:
+        - all
+        - logs
+  '/logs/{appId}/drains/:idOrUrl':
+    delete:
+      description: Delete the logs drain by id or url for a given application
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        default:
+          description: <No description>
+      tags:
+        - all
+        - logs
+    get:
+      description: Fetch the logs drain by id or url for a given application
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        default:
+          description: <No description>
+      tags:
+        - all
+        - logs
   /newsfeeds/blog:
     get:
       operationId: getNewsfeedsBlog
@@ -900,6 +954,8 @@ paths:
       responses:
         '200':
           description: createOrganisation
+          schema:
+            $ref: '#/definitions/Organisation'
       tags:
         - all
         - organisations
@@ -951,6 +1007,8 @@ paths:
       responses:
         '200':
           description: editOrganisation
+          schema:
+            $ref: '#/definitions/Organisation'
       tags:
         - all
         - organisations
@@ -991,6 +1049,8 @@ paths:
       responses:
         '200':
           description: createProvider
+          schema:
+            $ref: '#/definitions/Provider'
       tags:
         - all
         - organisations
@@ -1037,6 +1097,8 @@ paths:
       responses:
         '200':
           description: updateProviderInfos
+          schema:
+            $ref: '#/definitions/Provider'
       tags:
         - all
         - organisations
@@ -1085,6 +1147,8 @@ paths:
       responses:
         '200':
           description: addProviderFeature
+          schema:
+            $ref: '#/definitions/Feature'
       tags:
         - all
         - organisations
@@ -1155,6 +1219,8 @@ paths:
       responses:
         '200':
           description: addProviderPlan
+          schema:
+            $ref: '#/definitions/Plan'
       tags:
         - all
         - organisations
@@ -1230,6 +1296,8 @@ paths:
       responses:
         '200':
           description: editProviderPlan
+          schema:
+            $ref: '#/definitions/Plan'
       tags:
         - all
         - organisations
@@ -1390,6 +1458,8 @@ paths:
       responses:
         '200':
           description: provisionAddon
+          schema:
+            $ref: '#/definitions/Addon'
       tags:
         - all
         - addons
@@ -1475,6 +1545,8 @@ paths:
       responses:
         '200':
           description: Update addon information
+          schema:
+            $ref: '#/definitions/Addon'
       tags:
         - all
         - addons
@@ -1552,6 +1624,8 @@ paths:
       responses:
         '200':
           description: Update plan of an add-on.
+          schema:
+            $ref: '#/definitions/Plan'
       tags:
         - all
         - addons
@@ -1690,6 +1764,8 @@ paths:
       responses:
         '200':
           description: addApplication
+          schema:
+            $ref: '#/definitions/Application'
       tags:
         - all
         - applications
@@ -1756,6 +1832,8 @@ paths:
       responses:
         '200':
           description: editApplication
+          schema:
+            $ref: '#/definitions/Application'
       tags:
         - all
         - applications
@@ -1916,6 +1994,28 @@ paths:
           schema:
             items:
               $ref: '#/definitions/Application'
+            type: array
+      tags:
+        - all
+        - applications
+        - organisations
+  '/organisations/{id}/applications/{appId}/dependencies/env':
+    get:
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Get env variables defined by application dependencies
+          schema:
+            items:
+              $ref: '#/definitions/LinkedAppEnv'
             type: array
       tags:
         - all
@@ -2102,6 +2202,8 @@ paths:
       responses:
         '200':
           description: editApplicationEnvironment
+          schema:
+            $ref: '#/definitions/ListEnv'
       tags:
         - all
         - applications
@@ -2154,6 +2256,8 @@ paths:
       responses:
         '200':
           description: editApplicationEnv
+          schema:
+            $ref: '#/definitions/ListEnv'
       tags:
         - all
         - applications
@@ -2189,6 +2293,8 @@ paths:
       responses:
         default:
           description: updateExposedEnv
+          schema:
+            $ref: '#/definitions/ListEnv'
       tags:
         - all
         - applications
@@ -2839,6 +2945,20 @@ paths:
         - all
         - organisations
         - payments
+  '/organisations/{id}/payments/billings/unpaid':
+    get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: getUnpaidInvoices
+      tags:
+        - all
+        - organisations
+        - payments
   '/organisations/{id}/payments/billings/{bid}':
     delete:
       operationId: deleteOrganisationsIdPaymentsBillingsBid
@@ -3013,6 +3133,34 @@ paths:
       responses:
         default:
           description: deletePaymentMethod
+      tags:
+        - all
+        - organisations
+        - payments
+  '/organisations/{id}/payments/monthlyinvoice':
+    get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: getMonthlyInvoice
+      tags:
+        - all
+        - organisations
+        - payments
+  '/organisations/{id}/payments/monthlyinvoice/maxcredit':
+    put:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: setMaxCreditsPerMonth
       tags:
         - all
         - organisations
@@ -3871,6 +4019,24 @@ paths:
           schema:
             items:
               $ref: '#/definitions/Application'
+            type: array
+      tags:
+        - all
+        - applications
+        - self
+  '/self/applications/{appId}/dependencies/env':
+    get:
+      parameters:
+        - in: path
+          name: appId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Get env variables defined by application dependencies
+          schema:
+            items:
+              $ref: '#/definitions/LinkedAppEnv'
             type: array
       tags:
         - all
@@ -4889,6 +5055,24 @@ paths:
         - all
         - payments
         - self
+  /self/payments/monthlyinvoice:
+    get:
+      responses:
+        default:
+          description: getMonthlyInvoice
+      tags:
+        - all
+        - payments
+        - self
+  /self/payments/monthlyinvoice/maxcredit:
+    put:
+      responses:
+        default:
+          description: setMaxCreditsPerMonth
+      tags:
+        - all
+        - payments
+        - self
   /self/payments/recurring:
     delete:
       operationId: deleteSelfPaymentsRecurring
@@ -5589,8 +5773,7 @@ definitions:
       variant:
         $ref: '#/definitions/Variant'
       version:
-        format: int32
-        type: integer
+        type: string
     required:
       - defaultEnv
       - flavors
@@ -5617,6 +5800,21 @@ definitions:
       - fingerprint
       - key
       - name
+    type: object
+  LinkedAppEnv:
+    properties:
+      app_id:
+        type: string
+      app_name:
+        type: string
+      env:
+        items:
+          $ref: '#/definitions/WannabeEnv'
+        type: array
+    required:
+      - app_id
+      - app_name
+      - env
     type: object
   ListEnv:
     properties:
@@ -5691,9 +5889,14 @@ definitions:
     type: object
   PaymentData:
     properties:
+      deviceData:
+        type: string
       token:
         type: string
       type:
+        enum:
+          - NEW_CARD
+          - EXISTING_CARD
         type: string
     required:
       - token
@@ -6205,15 +6408,19 @@ definitions:
       homogeneous:
         default: false
         type: boolean
-      instance:
-        $ref: '#/definitions/Instance'
+      instanceType:
+        type: string
+      instanceVariant:
+        type: string
+      instanceVersion:
+        type: string
       maxFlavor:
-        $ref: '#/definitions/Flavor'
+        type: string
       maxInstances:
         format: int32
         type: integer
       minFlavor:
-        $ref: '#/definitions/Flavor'
+        type: string
       minInstances:
         format: int32
         type: integer
@@ -6243,7 +6450,6 @@ definitions:
     required:
       - deploy
       - enabled
-      - instance
       - maxInstances
       - minInstances
       - name

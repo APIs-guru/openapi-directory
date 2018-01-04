@@ -3,6 +3,7 @@ schemes:
   - https
 host: visagecloud.com
 basePath: /
+x-hasEquivalentPaths: true
 info:
   contact:
     email: office@visagecloud.com
@@ -539,7 +540,7 @@ paths:
       summary: Retrieve a complete analysis object including both detection and recognition information
       tags:
         - Analysis
-  /rest/v1.1/analytics/audience:
+  /rest/v1.1/analytics/presence/timeseries:
     post:
       consumes:
         - application/json
@@ -575,9 +576,9 @@ paths:
           name: endDateTime
           required: false
           type: string
-        - default: 86400
+        - default: 3600
           description: step
-          format: int32
+          format: int64
           in: query
           name: step
           required: false
@@ -605,10 +606,10 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: 'Show audience (based on number of occurences of each person) breakdown per declared attribute (age, gender).'
+      summary: 'Show audience (based on number of occurrences of each person) breakdown per declared attribute (age, gender).'
       tags:
         - Analytics for presence and audience
-  /rest/v1.1/analytics/presence:
+  /rest/v1.1/analytics/presence/total:
     post:
       consumes:
         - application/json
@@ -630,7 +631,7 @@ paths:
           items:
             type: string
           name: streamIds
-          required: false
+          required: true
           type: array
         - description: startDateTime
           format: date-time
@@ -644,13 +645,6 @@ paths:
           name: endDateTime
           required: false
           type: string
-        - default: 86400
-          description: step
-          format: int32
-          in: query
-          name: step
-          required: false
-          type: integer
         - collectionFormat: multi
           description: attributes
           in: query
@@ -984,6 +978,22 @@ paths:
           name: evictable
           required: false
           type: boolean
+        - collectionFormat: multi
+          description: The newly declared purposes of the collection
+          enum:
+            - FEATURES
+            - LANDMARKS
+            - ATTRIBUTES
+          in: formData
+          items:
+            enum:
+              - FEATURES
+              - LANDMARKS
+              - ATTRIBUTES
+            type: string
+          name: purposes
+          required: false
+          type: array
       produces:
         - application/json
       responses:
@@ -1143,6 +1153,22 @@ paths:
           name: evictable
           required: false
           type: boolean
+        - collectionFormat: multi
+          description: The newly declared purposes of the collection
+          enum:
+            - FEATURES
+            - LANDMARKS
+            - ATTRIBUTES
+          in: query
+          items:
+            enum:
+              - FEATURES
+              - LANDMARKS
+              - ATTRIBUTES
+            type: string
+          name: purposes
+          required: false
+          type: array
       produces:
         - application/json
       responses:
@@ -1574,6 +1600,7 @@ paths:
     delete:
       consumes:
         - application/json
+      deprecated: true
       operationId: removeClassificationAttributesFromProfileUsingDELETE
       parameters:
         - description: The accessKey provided by VisageCloud
@@ -1615,6 +1642,7 @@ paths:
     get:
       consumes:
         - application/json
+      deprecated: true
       operationId: getClassificationAttributesFromProfileUsingGET
       parameters:
         - description: The accessKey provided by VisageCloud
@@ -1656,6 +1684,7 @@ paths:
     put:
       consumes:
         - application/json
+      deprecated: true
       operationId: mapClassificationAttributesToProfileUsingPUT
       parameters:
         - description: The accessKey provided by VisageCloud
@@ -2077,6 +2106,75 @@ paths:
       summary: Retrieves a profile
       tags:
         - Profile
+    patch:
+      consumes:
+        - application/x-www-form-urlencoded
+      operationId: updateProfileUsingPATCH
+      parameters:
+        - description: The accessKey provided by VisageCloud
+          in: query
+          name: accessKey
+          required: true
+          type: string
+        - description: The secretKey or readOnlyKey provided by VisageCloud
+          in: query
+          name: secretKey
+          required: true
+          type: string
+        - description: The id of the profile that will be updated
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Uniquely identified collection that can store multiple profiles
+          in: query
+          name: collectionId
+          required: true
+          type: string
+        - description: External reference to additional information you don’t want to share with VisageCloud
+          in: query
+          name: externalId
+          required: false
+          type: string
+        - description: Human-readable label for the profile
+          in: query
+          name: screenName
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: Allows you to do finer filtering in face recognition
+          in: query
+          items:
+            type: string
+          name: labels
+          required: false
+          type: array
+        - description: 'Comma separated key:value classification attributes'
+          in: query
+          name: classificationAttributes
+          required: false
+          type: string
+        - description: 'Comma separated key:value details of profile'
+          in: query
+          name: details
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestResponse'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: Update an existing profile with a given id
+      tags:
+        - Profile
   /rest/v1.1/stream/all:
     get:
       consumes:
@@ -2393,42 +2491,6 @@ paths:
       tags:
         - Stream
   /rest/v1.1/stream/stream:
-    delete:
-      consumes:
-        - application/json
-      operationId: removeStreamUsingDELETE
-      parameters:
-        - description: The accessKey provided by VisageCloud
-          in: query
-          name: accessKey
-          required: true
-          type: string
-        - description: The secretKey provided by VisageCloud
-          in: query
-          name: secretKey
-          required: true
-          type: string
-        - description: The id of the stream that will be removed
-          in: query
-          name: streamId
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/RestResponse'
-        '204':
-          description: No Content
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-      summary: Delete existing stream
-      tags:
-        - Stream
     post:
       consumes:
         - application/json
@@ -2543,6 +2605,79 @@ paths:
       tags:
         - Stream
   '/rest/v1.1/stream/{id}':
+    delete:
+      consumes:
+        - application/json
+      operationId: removeStreamUsingDELETE
+      parameters:
+        - description: The accessKey provided by VisageCloud
+          in: query
+          name: accessKey
+          required: true
+          type: string
+        - description: The secretKey provided by VisageCloud
+          in: query
+          name: secretKey
+          required: true
+          type: string
+        - description: The id of the stream that will be removed
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestResponse'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: Delete existing stream
+      tags:
+        - Stream
+  '/rest/v1.1/stream/{streamId}':
+    get:
+      consumes:
+        - application/json
+      operationId: getStreamUsingGET
+      parameters:
+        - description: The accessKey provided by VisageCloud
+          in: query
+          name: accessKey
+          required: true
+          type: string
+        - description: The secretKey provided by VisageCloud
+          in: query
+          name: secretKey
+          required: true
+          type: string
+        - description: The id of the stream for which the data will be retrieved
+          in: path
+          name: streamId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get an existing stream with a given ID
+      tags:
+        - Stream
     patch:
       consumes:
         - application/x-www-form-urlencoded
@@ -2556,6 +2691,11 @@ paths:
         - description: The secretKey provided by VisageCloud
           in: query
           name: secretKey
+          required: true
+          type: string
+        - description: The id of the stream that will be updated
+          in: path
+          name: streamId
           required: true
           type: string
         - default: 605000
@@ -2596,10 +2736,6 @@ paths:
           name: storeAttendanceFrames
           required: false
           type: boolean
-        - in: path
-          name: id
-          required: true
-          type: string
       produces:
         - application/json
       responses:

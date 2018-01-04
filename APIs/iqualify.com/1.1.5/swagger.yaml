@@ -29,6 +29,12 @@ parameters:
     name: channelId
     required: true
     type: string
+  externalCourseId:
+    description: external course's id
+    in: path
+    name: externalCourseId
+    required: true
+    type: string
   groupId:
     description: Assessment group id
     in: path
@@ -63,6 +69,73 @@ paths:
       summary: List supported endpoints URLs
       tags:
         - API info
+  /course-mappings:
+    get:
+      description: Returns all the course mappings
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Course Mappings
+          schema:
+            additionalProperties:
+              type: string
+            title: course mappings
+            type: object
+      summary: Find course mappings
+      tags:
+        - course mappings
+  '/course-mappings/{offeringId}':
+    get:
+      parameters:
+        - $ref: '#/parameters/offeringId'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Course Mapping
+          schema:
+            items:
+              type: string
+            type: array
+      summary: Finds course mappings by offering id
+      tags:
+        - course mappings
+  '/course-mappings/{offeringId}/{externalCourseId}':
+    delete:
+      description: Removes the course mapping between the offering and the external course id
+      parameters:
+        - $ref: '#/parameters/offeringId'
+        - $ref: '#/parameters/externalCourseId'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Course Mapping
+          schema:
+            items:
+              type: string
+            type: array
+      summary: Remove course mapping
+      tags:
+        - course mappings
+    put:
+      description: Creates a mapping between the offering and the external course id
+      parameters:
+        - $ref: '#/parameters/offeringId'
+        - $ref: '#/parameters/externalCourseId'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Course Mapping
+          schema:
+            items:
+              type: string
+            type: array
+      summary: Add course mapping
+      tags:
+        - course mappings
   /courses:
     get:
       description: Responds with courses that can be activated (made to an offering).
@@ -77,6 +150,134 @@ paths:
             title: Courses
             type: array
       summary: Find courses
+      tags:
+        - courses
+  '/courses/{contentId}':
+    get:
+      parameters:
+        - description: The content Id
+          in: path
+          name: contentId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Course detail
+          schema:
+            $ref: '#/definitions/CourseMetaResponse'
+      summary: Find course by content id
+      tags:
+        - courses
+  '/courses/{contentId}/metadata/category':
+    put:
+      parameters:
+        - description: The content Id
+          in: path
+          name: contentId
+          required: true
+          type: string
+        - in: body
+          name: category
+          required: true
+          schema:
+            additionalProperties: false
+            properties:
+              category:
+                type: string
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Course detail
+          schema:
+            $ref: '#/definitions/CourseMetaResponse'
+      summary: Update course category
+      tags:
+        - courses
+  '/courses/{contentId}/metadata/level':
+    put:
+      parameters:
+        - description: The content Id
+          in: path
+          name: contentId
+          required: true
+          type: string
+        - in: body
+          name: level
+          required: true
+          schema:
+            additionalProperties: false
+            properties:
+              level:
+                type: string
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Course detail
+          schema:
+            $ref: '#/definitions/CourseMetaResponse'
+      summary: Update course level
+      tags:
+        - courses
+  '/courses/{contentId}/metadata/tags':
+    put:
+      parameters:
+        - description: The content Id
+          in: path
+          name: contentId
+          required: true
+          type: string
+        - in: body
+          name: tags
+          required: true
+          schema:
+            additionalProperties: false
+            properties:
+              tags:
+                items:
+                  type: string
+                type: array
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Course detail
+          schema:
+            $ref: '#/definitions/CourseMetaResponse'
+      summary: Update course tags
+      tags:
+        - courses
+  '/courses/{contentId}/metadata/topic':
+    put:
+      parameters:
+        - description: The content Id
+          in: path
+          name: contentId
+          required: true
+          type: string
+        - in: body
+          name: topic
+          required: true
+          schema:
+            additionalProperties: false
+            properties:
+              topic:
+                type: string
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Course detail
+          schema:
+            $ref: '#/definitions/CourseMetaResponse'
+      summary: Update course topic
       tags:
         - courses
   /offerings:
@@ -109,7 +310,7 @@ paths:
         '201':
           description: offering created
           schema:
-            $ref: '#/definitions/OfferingResponse'
+            $ref: '#/definitions/OfferingMetadataResponse'
       summary: Create offering
       tags:
         - offerings
@@ -172,7 +373,7 @@ paths:
         '200':
           description: offering
           schema:
-            $ref: '#/definitions/OfferingResponse'
+            $ref: '#/definitions/OfferingMetadataResponse'
       summary: Find offering by id
       tags:
         - offerings
@@ -191,7 +392,7 @@ paths:
         '200':
           description: offering updated
           schema:
-            $ref: '#/definitions/OfferingResponse'
+            $ref: '#/definitions/OfferingMetadataResponse'
       summary: Update offering
       tags:
         - offerings
@@ -638,6 +839,104 @@ paths:
       summary: Remove a learner from an assessment group
       tags:
         - assessment groups
+  '/offerings/{offeringId}/metadata/category':
+    put:
+      description: Updates the offering category metadata.
+      parameters:
+        - $ref: '#/parameters/offeringId'
+        - in: body
+          name: category
+          required: true
+          schema:
+            additionalProperties: false
+            properties:
+              category:
+                type: string
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: offering updated
+          schema:
+            $ref: '#/definitions/OfferingMetadataResponse'
+      summary: Update offering category metadata
+      tags:
+        - offerings
+  '/offerings/{offeringId}/metadata/level':
+    put:
+      description: Updates the offering level metadata.
+      parameters:
+        - $ref: '#/parameters/offeringId'
+        - in: body
+          name: level
+          required: true
+          schema:
+            additionalProperties: false
+            properties:
+              level:
+                type: string
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: offering updated
+          schema:
+            $ref: '#/definitions/OfferingMetadataResponse'
+      summary: Update offering level metadata
+      tags:
+        - offerings
+  '/offerings/{offeringId}/metadata/tags':
+    put:
+      description: Updates the offering tags metadata.
+      parameters:
+        - $ref: '#/parameters/offeringId'
+        - in: body
+          name: tags
+          required: true
+          schema:
+            additionalProperties: false
+            properties:
+              tags:
+                items:
+                  type: string
+                type: array
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: offering updated
+          schema:
+            $ref: '#/definitions/OfferingMetadataResponse'
+      summary: Update offering tags metadata
+      tags:
+        - offerings
+  '/offerings/{offeringId}/metadata/topic':
+    put:
+      description: Updates the offering topic metadata.
+      parameters:
+        - $ref: '#/parameters/offeringId'
+        - in: body
+          name: topic
+          required: true
+          schema:
+            additionalProperties: false
+            properties:
+              topic:
+                type: string
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: offering updated
+          schema:
+            $ref: '#/definitions/OfferingMetadataResponse'
+      summary: Update offering topic metadata
+      tags:
+        - offerings
   '/offerings/{offeringId}/study-plan':
     put:
       consumes:
@@ -795,14 +1094,14 @@ paths:
       summary: Add learners to be evaluated by the peer evaluator.
       tags:
         - offering users
-  '/offerings/{offeringId}/users/{markerId}/marks':
+  '/offerings/{offeringId}/users/{markerEmail}/marks':
     delete:
       description: Remove learners from marker's list.
       parameters:
         - $ref: '#/parameters/offeringId'
-        - description: marker's id
+        - description: marker's email
           in: path
-          name: markerId
+          name: markerEmail
           required: true
           type: string
         - description: array of learners e-mails
@@ -830,9 +1129,9 @@ paths:
       description: Get learners marked by the marker.
       parameters:
         - $ref: '#/parameters/offeringId'
-        - description: marker's id
+        - description: marker's email
           in: path
-          name: markerId
+          name: markerEmail
           required: true
           type: string
       produces:
@@ -852,9 +1151,9 @@ paths:
       description: Add learners to be marked by the marker.
       parameters:
         - $ref: '#/parameters/offeringId'
-        - description: marker's id
+        - description: marker's email
           in: path
-          name: markerId
+          name: markerEmail
           required: true
           type: string
         - description: array of learners e-mails
@@ -1207,6 +1506,20 @@ definitions:
         $ref: '#/definitions/Moderation'
       postId:
         type: string
+  CourseMetaResponse:
+    properties:
+      coverImageUrl:
+        type: string
+      createdAt:
+        format: date-time
+        type: string
+      id:
+        type: string
+      metadata:
+        $ref: '#/definitions/PortfolioMetadata'
+      name:
+        type: string
+    title: Course
   CourseResponse:
     properties:
       coverImageUrl:
@@ -1352,6 +1665,8 @@ definitions:
         type: string
       isReadonly:
         type: boolean
+      metadata:
+        $ref: '#/definitions/PortfolioMetadata'
       name:
         minLength: 1
         type: string
@@ -1363,6 +1678,41 @@ definitions:
         type: string
       version:
         description: 'Content version, if not specified, the most recent version is used.'
+        minLength: 1
+        type: string
+  OfferingMetadataResponse:
+    properties:
+      contentId:
+        minLength: 1
+        type: string
+      coverImageUrl:
+        minLength: 1
+        type: string
+      description:
+        minLength: 1
+        type: string
+      earlyCloseOffDate:
+        format: date-time
+        type: string
+      end:
+        format: date-time
+        type: string
+      id:
+        type: string
+      isReadonly:
+        type: boolean
+      metadata:
+        $ref: '#/definitions/PortfolioMetadata'
+      name:
+        minLength: 1
+        type: string
+      start:
+        format: date-time
+        type: string
+      trailerVideoUrl:
+        minLength: 1
+        type: string
+      version:
         minLength: 1
         type: string
   OfferingProgressRow:
@@ -1478,6 +1828,20 @@ definitions:
         type: string
       profile:
         $ref: '#/definitions/UserProfile'
+  PortfolioMetadata:
+    additionalProperties: false
+    properties:
+      category:
+        type: string
+      level:
+        type: string
+      tags:
+        items:
+          type: string
+        type: array
+      topic:
+        type: string
+    type: object
   Post:
     properties:
       attachments:

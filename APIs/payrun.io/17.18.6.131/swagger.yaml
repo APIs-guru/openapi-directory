@@ -8,7 +8,7 @@ info:
     x-twitter: PayRun_io
   description: 'Open, scableable, transparent payroll API.'
   title: PayRun.IO
-  version: 17.18.6.112
+  version: 17.18.6.131
   x-apisguru-categories:
     - financial
   x-logo:
@@ -6938,7 +6938,7 @@ paths:
           name: PayScheduleKey
           required: true
           type: string
-        - description: The tax year. E.g. 2016 = 2016/17 year.
+        - description: The tax year. E.g. 2017 = 2017/18 year.
           format: integer
           in: query
           name: TaxYear
@@ -7003,7 +7003,7 @@ paths:
           name: PayScheduleKey
           required: true
           type: string
-        - description: The tax year. E.g. 2016 = 2016/17 year.
+        - description: The tax year. E.g. 2017 = 2017/18 year.
           format: integer
           in: query
           name: TaxYear
@@ -7068,7 +7068,7 @@ paths:
           name: PayScheduleKey
           required: true
           type: string
-        - description: The tax year. E.g. 2016 = 2016/17 year.
+        - description: The tax year. E.g. 2017 = 2017/18 year.
           format: integer
           in: query
           name: TaxYear
@@ -7128,7 +7128,7 @@ paths:
           name: EmployerKey
           required: true
           type: string
-        - description: The tax year. E.g. 2016 = 2016/17 year.
+        - description: The tax year. E.g. 2017 = 2017/18 year.
           format: integer
           in: query
           name: TaxYear
@@ -7182,7 +7182,7 @@ paths:
           name: EmployerKey
           required: true
           type: string
-        - description: The tax year. E.g. 2016 = 2016/17 year.
+        - description: The tax year. E.g. 2017 = 2017/18 year.
           format: integer
           in: query
           name: TaxYear
@@ -7289,7 +7289,7 @@ paths:
           name: EmployerKey
           required: true
           type: string
-        - description: The tax year. E.g. 2016 = 2016/17 year.
+        - description: The tax year. E.g. 2017 = 2017/18 year.
           format: integer
           in: query
           name: TaxYear
@@ -7348,7 +7348,7 @@ paths:
           name: EmployerKey
           required: true
           type: string
-        - description: The tax year. E.g. 2016 = 2016/17 year.
+        - description: The tax year. E.g. 2017 = 2017/18 year.
           format: integer
           in: query
           name: TaxYear
@@ -7602,6 +7602,16 @@ paths:
       description: Transforms the report data into a speicifed output format based on the report transform definition.
       operationId: GetReportTransform
       parameters:
+        - description: The url encoded uri to the report path including query string parameters.
+          in: query
+          name: ReportDataUri
+          required: true
+          type: string
+        - description: The transform definition unique key. E.g. P45-Pdf
+          in: query
+          name: TransformDefinitionKey
+          required: true
+          type: string
         - default: Auto
           description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
           format: string

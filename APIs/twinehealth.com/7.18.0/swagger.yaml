@@ -2555,6 +2555,15 @@ definitions:
     properties:
       data:
         $ref: '#/definitions/PatientCreateResource'
+      meta:
+        properties:
+          ignore_duplicates:
+            default: false
+            description: |
+              If `true`, patients with any conflicting identifiers (same `system` and `value`) will be ignored.
+              Useful for gracefully skipping duplicates after errors occur during bulk create.
+            type: boolean
+        type: object
     required:
       - data
     type: object
@@ -4459,6 +4468,10 @@ definitions:
         type: string
       system:
         type: string
+      unique:
+        default: true
+        description: 'If `true`, the combination of system and value must be global unique among all patients and coaches in Twine.'
+        type: boolean
       value:
         type: string
     required:

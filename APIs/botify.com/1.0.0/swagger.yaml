@@ -813,11 +813,11 @@ paths:
       description: Executes a query and returns a paginated response
       operationId: getUrls
       parameters:
-        - description: Urls query
+        - description: Query
           in: body
-          name: UrlsQuery
+          name: Query
           schema:
-            $ref: '#/definitions/UrlsQuery'
+            $ref: '#/definitions/Query'
         - default: current
           description: Analysis context
           enum:
@@ -890,11 +890,11 @@ paths:
       description: Query aggregator. It accepts multiple queries and dispatches them on ES or BQ.
       operationId: getUrlsAggs
       parameters:
-        - description: UrlsAggs queries
+        - description: AggsQueries
           in: body
-          name: UrlsAggsQueries
+          name: AggsQueries
           schema:
-            $ref: '#/definitions/UrlsAggsQueries'
+            $ref: '#/definitions/AggsQueries'
         - default: current
           description: Analysis context
           enum:
@@ -1074,11 +1074,11 @@ paths:
       description: Creates a new UrlExport object and starts a task that will export the results into a csv. Returns the model id that manages the task
       operationId: createUrlsExport
       parameters:
-        - description: Urls query
+        - description: Query
           in: body
-          name: UrlsQuery
+          name: Query
           schema:
-            $ref: '#/definitions/UrlsQuery'
+            $ref: '#/definitions/Query'
         - default: current
           description: Analysis context
           enum:
@@ -1200,11 +1200,11 @@ paths:
       description: Return most frequent segments (= suggested patterns in the previous version) for a Botify Query.
       operationId: getUrlsSuggestedFilters
       parameters:
-        - description: UrlsAggs query
+        - description: AggsQuery
           in: body
-          name: UrlsAggsQuery
+          name: AggsQuery
           schema:
-            $ref: '#/definitions/UrlsAggsQuery'
+            $ref: '#/definitions/AggsQuery'
         - default: current
           description: Analysis context
           enum:
@@ -1218,7 +1218,7 @@ paths:
         '201':
           description: Successful operation
           schema:
-            $ref: '#/definitions/UrlsAggsQuery'
+            $ref: '#/definitions/AggsQuery'
         default:
           description: error payload
           schema:
@@ -1427,11 +1427,11 @@ paths:
       description: Project Query aggregator. It accepts multiple queries that will be executed on all completed analyses in the project
       operationId: getProjectUrlsAggs
       parameters:
-        - description: UrlsAggs queries
+        - description: AggsQueries
           in: body
-          name: UrlsAggsQueries
+          name: AggsQueries
           schema:
-            $ref: '#/definitions/UrlsAggsQueries'
+            $ref: '#/definitions/AggsQueries'
         - default: current
           description: Analyses context
           enum:
@@ -1540,6 +1540,20 @@ definitions:
         type: integer
     required:
       - status
+    type: object
+  AggsQueries:
+    items:
+      $ref: '#/definitions/AggsQuery'
+    type: array
+  AggsQuery:
+    description: AggsQuery
+    properties:
+      aggs:
+        items:
+          type: object
+        type: array
+      filters:
+        type: object
     type: object
   AnalysesUpdateLaunch:
     description: Launch Analyses Updates
@@ -1900,7 +1914,7 @@ definitions:
         minimum: 0
         type: integer
       query:
-        $ref: '#/definitions/UrlsQuery'
+        $ref: '#/definitions/Query'
       results:
         readOnly: true
         type: string
@@ -2401,6 +2415,20 @@ definitions:
     required:
       - projects
     type: object
+  Query:
+    description: Query
+    properties:
+      fields:
+        items:
+          type: string
+        type: array
+      filters:
+        type: object
+      sort:
+        items:
+          type: string
+        type: array
+    type: object
   RewritingRule:
     properties:
       ignore_case:
@@ -2525,34 +2553,6 @@ definitions:
     type: object
   UrlHTML:
     properties: {}
-    type: object
-  UrlsAggsQueries:
-    items:
-      $ref: '#/definitions/UrlsAggsQuery'
-    type: array
-  UrlsAggsQuery:
-    description: UrlsAggs query
-    properties:
-      aggs:
-        items:
-          type: object
-        type: array
-      filters:
-        type: object
-    type: object
-  UrlsQuery:
-    description: Urls query
-    properties:
-      fields:
-        items:
-          type: string
-        type: array
-      filters:
-        type: object
-      sort:
-        items:
-          type: string
-        type: array
     type: object
   User:
     properties:

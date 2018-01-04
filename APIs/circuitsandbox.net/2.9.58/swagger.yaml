@@ -9,7 +9,7 @@ info:
 
     [Learn more about the Circuit Development Community](https://www.circuit.com/web/developers/home)
   title: REST API Version 2
-  version: 2.9.55
+  version: 2.9.58
   x-apisguru-categories:
     - messaging
   x-logo:
@@ -1014,7 +1014,7 @@ paths:
           type: string
         - description: 'The actual content of the item, is mandatory unless an attachment is added'
           in: formData
-          maxLength: 2048
+          maxLength: 16384
           name: content
           required: false
           type: string
@@ -1156,7 +1156,7 @@ paths:
           type: string
         - description: The actual content of the item
           in: formData
-          maxLength: 2048
+          maxLength: 16384
           name: content
           required: false
           type: string
@@ -1218,7 +1218,7 @@ paths:
           type: string
         - description: The actual content of the item
           in: formData
-          maxLength: 2048
+          maxLength: 16384
           name: content
           required: false
           type: string

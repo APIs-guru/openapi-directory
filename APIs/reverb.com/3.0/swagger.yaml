@@ -825,6 +825,11 @@ paths:
               description:
                 description: Product description. Please keep formatting to a minimum.
                 type: string
+              exclusive_channel:
+                description: 'Currently for users of seller sites only, this allows you to have a listing available only to your seller site by setting this to ''seller_site'''
+                enum:
+                  - seller_site
+                type: string
               finish:
                 description: 'Finish, e.g. ''Sunburst'''
                 type: string
@@ -1422,6 +1427,11 @@ paths:
                 type: object
               description:
                 description: Product description. Please keep formatting to a minimum.
+                type: string
+              exclusive_channel:
+                description: 'Currently for users of seller sites only, this allows you to have a listing available only to your seller site by setting this to ''seller_site'''
+                enum:
+                  - seller_site
                 type: string
               finish:
                 description: 'Finish, e.g. ''Sunburst'''

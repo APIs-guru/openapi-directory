@@ -4539,7 +4539,6 @@ definitions:
           $ref: '#/definitions/Contact'
         type: array
       useCustomFields:
-        default: false
         description: 'A flag to indicate how to define property names for contacts. If true, uses the field and property names exactly as defined. If false will assign custom properties and fields to A, B, C, etc'
         type: boolean
     type: object
@@ -4547,7 +4546,6 @@ definitions:
     description: Request object for adding new Do-Not-Contact records to account.
     properties:
       call:
-        default: false
         description: 'If set to true add all given numbers to Do-Not-Call list. Default value: true'
         type: boolean
       numbers:
@@ -4559,7 +4557,6 @@ definitions:
         description: 'A list of new contact objects which need to be added. Default value: Api V2'
         type: string
       text:
-        default: false
         description: 'If set to true add all given numbers to Do-Not-Text list. Default value: true'
         type: boolean
     type: object
@@ -4567,7 +4564,6 @@ definitions:
     description: An object represents API user in CallFire system. Use /me/api/credentials endpoint to manage API users on your account
     properties:
       enabled:
-        default: false
         description: Is credential enabled
         type: boolean
       id:
@@ -4587,26 +4583,15 @@ definitions:
         type: string
     type: object
   ApiCredentialPage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/ApiCredential'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/ApiCredential'
-        type: array
-      limit:
-        description: '~'
-        format: int64
-        type: integer
-      offset:
-        description: '~'
-        format: int64
-        type: integer
-      totalCount:
-        description: '~'
-        format: int64
-        type: integer
-    type: object
   Batch:
     description: A batch represents a group of contacts which can be dialed or texted via call/text broadcast
     properties:
@@ -4620,7 +4605,6 @@ definitions:
         readOnly: true
         type: integer
       enabled:
-        default: false
         description: An enabled batch. If batch is disabled its contacts remain undialed/untexted
         type: boolean
       id:
@@ -4651,26 +4635,15 @@ definitions:
         type: string
     type: object
   BatchPage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/Batch'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/Batch'
-        type: array
-      limit:
-        description: '~'
-        format: int64
-        type: integer
-      offset:
-        description: '~'
-        format: int64
-        type: integer
-      totalCount:
-        description: '~'
-        format: int64
-        type: integer
-    type: object
   BatchRequest:
     description: Request object is used for adding new batch to an existing broadcast
     properties:
@@ -4687,7 +4660,6 @@ definitions:
           $ref: '#/definitions/Recipient'
         type: array
       scrubDuplicates:
-        default: false
         description: Removes duplicate recipients from batch if true
         type: boolean
     type: object
@@ -4721,7 +4693,6 @@ definitions:
     description: Represents a call action sent or received by Callfire platform
     properties:
       agentCall:
-        default: false
         description: An internal call to an agent
         readOnly: true
         type: boolean
@@ -4776,7 +4747,6 @@ definitions:
         format: int64
         type: integer
       inbound:
-        default: false
         description: Is action inbound
         type: boolean
       labels:
@@ -4870,7 +4840,6 @@ definitions:
           $ref: '#/definitions/Recipient'
         type: array
       resumeNextDay:
-        default: false
         description: If true resumes the unfinished campaign to the next day
         type: boolean
       retryConfig:
@@ -4902,26 +4871,15 @@ definitions:
         type: string
     type: object
   CallBroadcastPage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/CallBroadcast'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/CallBroadcast'
-        type: array
-      limit:
-        description: '~'
-        format: int64
-        type: integer
-      offset:
-        description: '~'
-        format: int64
-        type: integer
-      totalCount:
-        description: '~'
-        format: int64
-        type: integer
-    type: object
   CallBroadcastSounds:
     description: A set of sounds assigned to a voice broadcast to play according to an answering machine configuration. You can add the existing sounds from the account's sound library or to provide a text which will be converted into a speech. There are four sound options available for a Voice Broadcast campaign
     properties:
@@ -5097,35 +5055,25 @@ definitions:
         type: string
     type: object
   CallList:
+    allOf:
+      - $ref: '#/definitions/ItemList'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/Call'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/Call'
-        type: array
-    type: object
   CallPage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/Call'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/Call'
-        type: array
-      limit:
-        description: '~'
-        format: int64
-        type: integer
-      offset:
-        description: '~'
-        format: int64
-        type: integer
-      totalCount:
-        description: '~'
-        format: int64
-        type: integer
-    type: object
   CallRecipient:
     description: 'Recipient of a campaign action. Can be a phone number, contact, or contact list with attributes added to action. It is required to specify one of this values'
     properties:
@@ -5314,14 +5262,15 @@ definitions:
         type: string
     type: object
   CallRecordingList:
+    allOf:
+      - $ref: '#/definitions/ItemList'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/CallRecording'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/CallRecording'
-        type: array
-    type: object
   CallTrackingConfig:
     description: 'Call tracking configuration allows you track incoming calls, analyze, respond to customers using sms or voice replies. For more information see [call tracking page](https://www.callfire.com/products/call-tracking)'
     properties:
@@ -5337,11 +5286,9 @@ definitions:
         format: int64
         type: integer
       recorded:
-        default: false
         description: Records all inbound calls
         type: boolean
       screen:
-        default: false
         description: Screens the incoming calls
         type: boolean
       transferNumbers:
@@ -5350,7 +5297,6 @@ definitions:
           type: string
         type: array
       voicemail:
-        default: false
         description: Enables voicemail if call is not transferred
         type: boolean
       voicemailSoundId:
@@ -5398,7 +5344,6 @@ definitions:
         readOnly: true
         type: integer
       duplicate:
-        default: false
         description: True if the same sound file exists in a sound library of account
         readOnly: true
         type: boolean
@@ -5428,31 +5373,19 @@ definitions:
         type: string
     type: object
   CampaignSoundPage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/CampaignSound'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/CampaignSound'
-        type: array
-      limit:
-        description: '~'
-        format: int64
-        type: integer
-      offset:
-        description: '~'
-        format: int64
-        type: integer
-      totalCount:
-        description: '~'
-        format: int64
-        type: integer
-    type: object
   Contact:
     description: Represents a contact in CallFire platform. Contains info about the people you want to contact. It allows you to store a user-defined properties for each contact
     properties:
       deleted:
-        default: false
         description: 'A deleted contact, deleted contacts are hidden from search results'
         type: boolean
       externalId:
@@ -5548,47 +5481,25 @@ definitions:
         type: string
     type: object
   ContactListPage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/ContactList'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/ContactList'
-        type: array
-      limit:
-        description: '~'
-        format: int64
-        type: integer
-      offset:
-        description: '~'
-        format: int64
-        type: integer
-      totalCount:
-        description: '~'
-        format: int64
-        type: integer
-    type: object
   ContactPage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/Contact'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/Contact'
-        type: array
-      limit:
-        description: '~'
-        format: int64
-        type: integer
-      offset:
-        description: '~'
-        format: int64
-        type: integer
-      totalCount:
-        description: '~'
-        format: int64
-        type: integer
-    type: object
   CreateContactListRequest:
     description: A request object is used to create a contact list from one of available contact sources
     properties:
@@ -5615,7 +5526,6 @@ definitions:
         description: A name of a contact list
         type: string
       useCustomFields:
-        default: false
         description: 'A flag to indicate how to define property names for contacts. If true, uses the field and property names exactly as defined. If false will assign custom properties and fields to A, B, C, etc'
         type: boolean
     type: object
@@ -5661,7 +5571,6 @@ definitions:
     description: Represents an opted out contact
     properties:
       call:
-        default: false
         description: A number on Do-Not-Call list
         type: boolean
       campaignId:
@@ -5681,31 +5590,19 @@ definitions:
         description: The name of DNC source (can be the name of DNC list that user uploads to CallFire)
         type: string
       text:
-        default: false
         description: A number on Do-Not-Text list
         type: boolean
     type: object
   DoNotContactPage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/DoNotContact'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/DoNotContact'
-        type: array
-      limit:
-        description: '~'
-        format: int64
-        type: integer
-      offset:
-        description: '~'
-        format: int64
-        type: integer
-      totalCount:
-        description: '~'
-        format: int64
-        type: integer
-    type: object
   ErrorResponse:
     description: Error response containing error info
     properties:
@@ -5800,7 +5697,6 @@ definitions:
     description: Represents a lease object for a given keyword
     properties:
       autoRenew:
-        default: false
         description: Enables the auto renewal of a keyword lease at the end of each billing cycle
         type: boolean
       keyword:
@@ -5827,26 +5723,15 @@ definitions:
         type: string
     type: object
   KeywordLeasePage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/KeywordLease'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/KeywordLease'
-        type: array
-      limit:
-        description: '~'
-        format: int64
-        type: integer
-      offset:
-        description: '~'
-        format: int64
-        type: integer
-      totalCount:
-        description: '~'
-        format: int64
-        type: integer
-    type: object
   KeywordList:
     allOf:
       - $ref: '#/definitions/ItemList'
@@ -5910,7 +5795,6 @@ definitions:
         format: int32
         type: integer
       enabled:
-        default: false
         description: A restriction enabled
         type: boolean
       endHour:
@@ -5975,7 +5859,6 @@ definitions:
         $ref: '#/definitions/Region'
         description: '~'
       tollFree:
-        default: false
         description: '~'
         type: boolean
     type: object
@@ -5999,31 +5882,19 @@ definitions:
         type: string
     type: object
   NumberConfigPage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/NumberConfig'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/NumberConfig'
-        type: array
-      limit:
-        description: '~'
-        format: int64
-        type: integer
-      offset:
-        description: '~'
-        format: int64
-        type: integer
-      totalCount:
-        description: '~'
-        format: int64
-        type: integer
-    type: object
   NumberLease:
     description: Represents a lease object for a given phone number
     properties:
       autoRenew:
-        default: false
         description: Enables the auto renewal of number lease at end of each billing cycle
         type: boolean
       callFeatureStatus:
@@ -6076,31 +5947,19 @@ definitions:
         readOnly: true
         type: string
       tollFree:
-        default: false
         description: A  toll-free number
         type: boolean
     type: object
   NumberLeasePage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/NumberLease'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/NumberLease'
-        type: array
-      limit:
-        description: '~'
-        format: int64
-        type: integer
-      offset:
-        description: '~'
-        format: int64
-        type: integer
-      totalCount:
-        description: '~'
-        format: int64
-        type: integer
-    type: object
   NumberList:
     allOf:
       - $ref: '#/definitions/ItemList'
@@ -6206,6 +6065,28 @@ definitions:
         description: A five-digit Zip code of requested numbers
         type: string
     type: object
+  Page:
+    description: 'Represents a page with results returned by query operation. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.'
+    properties:
+      items:
+        description: A list of returned items
+        items:
+          properties: {}
+          type: object
+        type: array
+      limit:
+        description: A maximum number of returned items. If items.size() < limit assume no more items
+        format: int64
+        type: integer
+      offset:
+        description: An offset from a start of paging source
+        format: int64
+        type: integer
+      totalCount:
+        description: Total count of available results. -1 if unknown
+        format: int64
+        type: integer
+    type: object
   QuestionResponse:
     description: 'Object represents the question and client''s answer, used in cloud call center / IVR campaign'
     properties:
@@ -6272,26 +6153,15 @@ definitions:
         type: string
     type: object
   RegionPage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/Region'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/Region'
-        type: array
-      limit:
-        description: '~'
-        format: int64
-        type: integer
-      offset:
-        description: '~'
-        format: int64
-        type: integer
-      totalCount:
-        description: '~'
-        format: int64
-        type: integer
-    type: object
   ResourceId:
     description: An id of a resource
     properties:
@@ -6445,7 +6315,6 @@ definitions:
         format: int64
         type: integer
       inbound:
-        default: false
         description: An action inbound
         type: boolean
       labels:
@@ -6512,26 +6381,15 @@ definitions:
         type: string
     type: object
   TextAutoReplyPage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/TextAutoReply'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/TextAutoReply'
-        type: array
-      limit:
-        description: '~'
-        format: int64
-        type: integer
-      offset:
-        description: '~'
-        format: int64
-        type: integer
-      totalCount:
-        description: '~'
-        format: int64
-        type: integer
-    type: object
   TextBroadcast:
     description: 'A text campaign allows you to send a text message to a number of recipients. It supports scheduling, retry logic and pattern-based messages'
     properties:
@@ -6584,7 +6442,6 @@ definitions:
           $ref: '#/definitions/TextRecipient'
         type: array
       resumeNextDay:
-        default: false
         description: '~'
         type: boolean
       schedules:
@@ -6610,26 +6467,15 @@ definitions:
         type: string
     type: object
   TextBroadcastPage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/TextBroadcast'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/TextBroadcast'
-        type: array
-      limit:
-        description: '~'
-        format: int64
-        type: integer
-      offset:
-        description: '~'
-        format: int64
-        type: integer
-      totalCount:
-        description: '~'
-        format: int64
-        type: integer
-    type: object
   TextBroadcastStatsDto:
     description: '~'
     properties:
@@ -6680,26 +6526,15 @@ definitions:
         type: object
     description: '~'
   TextPage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/Text'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/Text'
-        type: array
-      limit:
-        description: '~'
-        format: int64
-        type: integer
-      offset:
-        description: '~'
-        format: int64
-        type: integer
-      totalCount:
-        description: '~'
-        format: int64
-        type: integer
-    type: object
   TextRecipient:
     description: A recipient of a text message. You should provide either phone number or contact id of existing contact
     properties:
@@ -6819,7 +6654,6 @@ definitions:
         readOnly: true
         type: integer
       enabled:
-        default: false
         description: A parameter which allows the webhook to send requests to unknown ssl endpoints (ssl certificate verification is disabled)
         type: boolean
       events:
@@ -6842,7 +6676,6 @@ definitions:
         description: A name of a webhook
         type: string
       nonStrictSsl:
-        default: false
         description: A parameter which allows the webhook to send requests to unknown ssl endpoints (ssl certificate verification is disabled)
         type: boolean
       resource:
@@ -6852,7 +6685,6 @@ definitions:
         description: 'Webhook secret token which is used as a signing key to HmacSHA1 hash of json payload which is returned in ''X-CallFire-Signature'' header. This header can be used to verify callback POST is coming from CallFire. See [security guide](https://developers.callfire.com/security-guide.html)'
         type: string
       singleUse:
-        default: false
         description: If true is set then webhook triggers only once. Afterwards the webhook will be deleted
         type: boolean
       updatedAt:
@@ -6862,26 +6694,15 @@ definitions:
         type: integer
     type: object
   WebhookPage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/Webhook'
+            type: array
+        type: object
     description: '~'
-    properties:
-      items:
-        description: '~'
-        items:
-          $ref: '#/definitions/Webhook'
-        type: array
-      limit:
-        description: '~'
-        format: int64
-        type: integer
-      offset:
-        description: '~'
-        format: int64
-        type: integer
-      totalCount:
-        description: '~'
-        format: int64
-        type: integer
-    type: object
   WebhookResource:
     description: 'WebhookResource describes a resource and a list of supported events, once event is triggered Callfire performs an HTTP POST request to a client''s endpoint'
     properties:

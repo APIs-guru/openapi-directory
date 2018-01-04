@@ -5,7 +5,7 @@ host: api.beezup.com
 basePath: /v2
 info:
   contact:
-    email: support@beezup.com
+    email: help@beezup.com
   description: |
     # The REST API of BeezUP system
     ## Overview
@@ -483,15 +483,15 @@ tags:
   - description: All statitics operations
     name: Analytics - Statistics
     x-displayName: Statistics
-  - description: All rules operations. Rules are automatic optimisations based on report filters.
-    name: Analytics - Rules
-    x-displayName: Rules
-  - description: All reports operations
-    name: Analytics - Reports
-    x-displayName: Reports
   - description: All optmisations operations
     name: Analytics - Optimisations
     x-displayName: Optimisations
+  - description: All reports operations
+    name: Analytics - Reports
+    x-displayName: Reports
+  - description: All rules operations. Rules are automatic optimisations based on report filters
+    name: Analytics - Rules
+    x-displayName: Rules
 paths:
   /public/channels/:
     get:
@@ -741,8 +741,8 @@ paths:
   /user/analytics/tracking/status:
     get:
       description: |
-        Your clicks and orders are eventually consistent. \
-        This operation indicates you at which date the projections are.
+        Clicks and orders are eventually consistent. \
+        This operation gets the current global state of projections.
       operationId: GetTrackingStatus
       responses:
         '200':
@@ -753,7 +753,7 @@ paths:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
-      summary: Display the synchronization status of the clicks and orders
+      summary: Get the global synchronization status of clicks and orders
       tags:
         - Analytics - Tracking
   '/user/analytics/{storeId}':
@@ -998,7 +998,7 @@ paths:
         - api_key: []
       summary: Get the report by category
       tags:
-        - Analytics - Reports
+        - Analytics - Statistics
   '/user/analytics/{storeId}/reports/bychannel':
     post:
       description: Get the report by channel
@@ -1025,7 +1025,7 @@ paths:
         - api_key: []
       summary: Get the report by channel
       tags:
-        - Analytics - Reports
+        - Analytics - Statistics
   '/user/analytics/{storeId}/reports/byday':
     post:
       description: Get the report by day
@@ -1052,7 +1052,7 @@ paths:
         - api_key: []
       summary: Get the report by day
       tags:
-        - Analytics - Reports
+        - Analytics - Statistics
   '/user/analytics/{storeId}/reports/byproduct':
     post:
       description: Get the report by product
@@ -1079,7 +1079,7 @@ paths:
         - api_key: []
       summary: Get the report by product
       tags:
-        - Analytics - Reports
+        - Analytics - Statistics
   '/user/analytics/{storeId}/reports/filters':
     get:
       operationId: GetReportFilters
@@ -1517,7 +1517,7 @@ paths:
       parameters:
         - $ref: '#/parameters/storeIdOnlyGeneralParameters'
         - default: 100
-          description: The click's count you want to get
+          description: The amount of clicks to retrieve
           in: query
           maximum: 100
           minimum: 5
@@ -1526,7 +1526,7 @@ paths:
           type: integer
       responses:
         '200':
-          description: Clicks information
+          description: Click list
           schema:
             $ref: '#/definitions/trackedClicks'
         '404':
@@ -1535,7 +1535,7 @@ paths:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
-      summary: Get the latest clicks tracked
+      summary: Get the latest tracked clicks
       tags:
         - Analytics - Tracking
   '/user/analytics/{storeId}/tracking/externalorders':
@@ -1544,7 +1544,7 @@ paths:
       parameters:
         - $ref: '#/parameters/storeIdOnlyGeneralParameters'
         - default: 100
-          description: The external order's count you want to get
+          description: The amount of external orders to retrieve
           in: query
           maximum: 100
           minimum: 5
@@ -1564,7 +1564,7 @@ paths:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
-      summary: Get the latest external orders tracked
+      summary: Get the latest tracked external orders
       tags:
         - Analytics - Tracking
   '/user/analytics/{storeId}/tracking/orders':
@@ -1573,7 +1573,7 @@ paths:
       parameters:
         - $ref: '#/parameters/storeIdOnlyGeneralParameters'
         - default: 100
-          description: The order's count you want to get
+          description: The amount of orders to retrieve
           in: query
           maximum: 100
           minimum: 5
@@ -1593,14 +1593,14 @@ paths:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
-      summary: Get the latest orders tracked
+      summary: Get the latest tracked orders
       tags:
         - Analytics - Tracking
   '/user/analytics/{storeId}/tracking/status':
     get:
       description: |
-        Your clicks and orders are eventually consistent. \
-        This operation indicates you at which date the projections are for this store.
+        Clicks and orders are eventually consistent. \
+        This operation gets the current state of projections for a store.
       operationId: GetStoreTrackingStatus
       parameters:
         - $ref: '#/parameters/storeIdOnlyGeneralParameters'
@@ -1615,7 +1615,7 @@ paths:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
-      summary: Get store tracking synchronization status
+      summary: Get the synchronization status of clicks and orders of a store
       tags:
         - Analytics - Tracking
   /user/catalogs/:
@@ -5160,7 +5160,7 @@ paths:
       deprecated: false
       description: |
         The purpose of this operation is to reduce the bandwith usage by getting just the meta information about the order (ETag, Last-Modified) with the body.
-        This could be useful 
+        This could be useful
       operationId: HeadOrder
       parameters:
         - $ref: '#/parameters/marketplaceTechnicalCodeParameter'
@@ -5344,7 +5344,7 @@ paths:
         '409':
           description: |
             Already processing a change request for this Order.\
-            Please refresh your clients Order information and retry later. 
+            Please refresh your clients Order information and retry later.
           headers:
             Retry-After:
               description: Indicates the duration in seconds to wait to be able to make this request again
@@ -6364,6 +6364,13 @@ definitions:
       - channelId
       - storeId
     type: object
+  additionalProductColumnFilters:
+    additionalProperties:
+      $ref: '#/definitions/productColumnFilter'
+    description: |
+      Describes a filter on a product's column.
+      The key is the column identifier of your catalog or a custom column.
+    type: object
   address:
     description: Your address
     example: 21 jump street
@@ -6391,7 +6398,7 @@ definitions:
     example: '2'
     type: string
   analyticsIndex:
-    description: The analytics API operation index.
+    description: The Analytics API operation index.
     properties:
       links:
         $ref: '#/definitions/analyticsIndexLinks'
@@ -6416,11 +6423,27 @@ definitions:
     type: object
   analyticsIndexLovLinks:
     properties:
+      numericProductColumnFilterOperatorNameLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      performanceIndicatorFilterOperatorNameLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      performanceIndicatorFormulaOperatorNameLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
       performanceIndicatorFormulaParameterTypeLov:
         $ref: '#/definitions/BeezUP.Common.LOVLink3'
-      performanceIndicatorLov:
+      performanceIndicatorTypeForReportsByCategoryLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      performanceIndicatorTypeForReportsByChannelLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      performanceIndicatorTypeForReportsByProductLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      performanceIndicatorTypeLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      productColumnFilterOperatorNameLov:
         $ref: '#/definitions/BeezUP.Common.LOVLink3'
       storeOptimisationRuleExecutionStatusLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      stringProductColumnFilterOperatorNameLov:
         $ref: '#/definitions/BeezUP.Common.LOVLink3'
     type: object
   analyticsStoreIndex:
@@ -6434,6 +6457,8 @@ definitions:
     properties:
       optimise:
         $ref: '#/definitions/links.OptimiseLink'
+      optimiseAll:
+        $ref: '#/definitions/links.OptimiseAllLink'
       optimiseByCategory:
         $ref: '#/definitions/links.OptimiseByCategoryLink'
       optimiseByChannel:
@@ -7162,7 +7187,7 @@ definitions:
         type: object
   channelCatalogCategoryConfiguration:
     description: |
-      Represent a mapping between a catalog category path and a channel category path. 
+      Represent a mapping between a catalog category path and a channel category path.
       The cost on this mapping can be applied.
     properties:
       autoMapNewSubCategories:
@@ -9613,13 +9638,8 @@ definitions:
           Do not export "out of stock" products. Note: this option is not taken into account by the counter.
         example: true
         type: boolean
-      useBid:
-        description: Activate bidding for this channel
-        example: false
-        type: boolean
     required:
       - acceptToPublishInfo
-      - useBid
       - doNotExportOutOfStockProducts
       - activeBeezUPTracking
     type: object
@@ -9667,6 +9687,8 @@ definitions:
         description: Search for existing products or not. If null you will received both.
         example: true
         type: boolean
+      orderbyCatalogColumnId:
+        $ref: '#/definitions/BeezUP.Common.CatalogColumnId'
       pageNumber:
         $ref: '#/definitions/BeezUP.Common.PageNumber'
       pageSize:
@@ -9684,6 +9706,10 @@ definitions:
         description: Search for products containing this title
         example: Frigo
         type: string
+      withoutSubCategories:
+        description: 'Do not retrieve sub categories. By default, this value is set to false'
+        example: false
+        type: boolean
     required:
       - pageNumber
       - pageSize
@@ -10439,6 +10465,7 @@ definitions:
             If-Match:
               in: header
               required: true
+              type: string
               value: '"ca071a4580129f932a03971968ffef69"'
             request:
               in: body
@@ -10793,7 +10820,7 @@ definitions:
               in: header
               required: true
               schema: string
-              type: array
+              type: â€‹array
             request:
               in: body
               required: false
@@ -11187,14 +11214,14 @@ definitions:
                     - Bedroom
                 channelId: 2dc136a7-0d3d-4cc9-a825-a28a42c53e28
                 endPeriodUtcDate: '2006-12-20T00:00:00Z'
-                indicatorFilters:
-                  - indicator: Cost
-                    operatorName: Equals
+                performanceIndicatorFilters:
+                  - operatorName: Equals
+                    performanceIndicator: Cost
                     value: 10.42
-                productFilters:
-                  additionalProductFilters:
+                productColumnFilters:
+                  additionalProductColumnFilters:
                     - columnId: 672644c7-5bd0-4e25-88c1-1f732bda5e4c
-                      operatorName: GreaterTo
+                      operatorName: NumericGreaterTo
                       values:
                         - 100
                   sku: M1234
@@ -11261,16 +11288,16 @@ definitions:
                     - Bedroom
                 channelId: 2dc136a7-0d3d-4cc9-a825-a28a42c53e28
                 endPeriodUtcDate: '2006-12-20T00:00:00Z'
-                indicatorFilters:
-                  - indicator: Cost
-                    operatorName: Equals
-                    value: 10.42
                 pageNumber: 1
                 pageSize: 100
-                productFilters:
-                  additionalProductFilters:
+                performanceIndicatorFilters:
+                  - operatorName: Equals
+                    performanceIndicator: Cost
+                    value: 10.42
+                productColumnFilters:
+                  additionalProductColumnFilters:
                     - columnId: 672644c7-5bd0-4e25-88c1-1f732bda5e4c
-                      operatorName: GreaterTo
+                      operatorName: NumericGreaterTo
                       values:
                         - 100
                   sku: M1234
@@ -11842,12 +11869,12 @@ definitions:
     type: string
   optimiseAllRequest:
     allOf:
-      - $ref: '#/definitions/reportFilterCommonParameters'
+      - $ref: '#/definitions/orderedReportFilterCommonParameters'
       - properties:
+          productColumnFilters:
+            $ref: '#/definitions/productColumnFilters'
           productColumnsToDisplay:
             $ref: '#/definitions/productColumnsToDisplay'
-          productFilters:
-            $ref: '#/definitions/BeezUP.Common.ProductFilters'
           productState:
             $ref: '#/definitions/productStateFilter'
           reportType:
@@ -11859,16 +11886,6 @@ definitions:
     allOf:
       - $ref: '#/definitions/optimiseAllRequest'
       - $ref: '#/definitions/paginationRequestParameters'
-      - properties:
-          productFilters:
-            $ref: '#/definitions/BeezUP.Common.ProductFilters'
-          productState:
-            $ref: '#/definitions/productStateFilter'
-          reportType:
-            $ref: '#/definitions/reportType'
-        required:
-          - reportType
-        type: object
   order:
     allOf:
       - $ref: '#/definitions/orderHeader'
@@ -12062,6 +12079,13 @@ definitions:
           - orderItems
           - transitionLinks
         type: object
+  orderByDirection:
+    description: Indicate which direction to order results by
+    enum:
+      - Ascending
+      - Descending
+    example: Ascending
+    type: string
   orderExportationReporting:
     description: Represent the reporting of the Order report exportations
     properties:
@@ -12456,7 +12480,7 @@ definitions:
   orderListFull:
     description: |
       The order list with all information we have from the orders and its items.\
-      The paginationResult properties can be null if the list is empty. 
+      The paginationResult properties can be null if the list is empty.
     properties:
       links:
         $ref: '#/definitions/orderListFullLinks'
@@ -12482,7 +12506,7 @@ definitions:
   orderListLight:
     description: |
       The order list with minimum information we have from the orders.\
-      The paginationResult properties can be null if the list is empty. 
+      The paginationResult properties can be null if the list is empty.
     properties:
       links:
         $ref: '#/definitions/orderListLightLinks'
@@ -12556,7 +12580,7 @@ definitions:
         description: |
           The begin period you want to make the search. \
           The period MUST not be greater than 30 days.
-          The begin period MUST be lower than the end period. 
+          The begin period MUST be lower than the end period.
         example: '2017-03-01T13:10:01Z'
         format: date-time
         type: string
@@ -12566,7 +12590,7 @@ definitions:
         description: |
           The end period of you search. \
           The period MUST not be greater than 30 days. \
-          The end period MUST be greater than the begin period. 
+          The end period MUST be greater than the begin period.
           The end period MUST be lower to the current date.
         example: '2017-04-01T13:10:01Z'
         format: date-time
@@ -12635,6 +12659,7 @@ definitions:
           If-Match:
             in: header
             required: true
+            type: string
             value: '"ca071a4580129f932a03971968ffef69"'
           request:
             in: body
@@ -12676,6 +12701,7 @@ definitions:
           If-Match:
             in: header
             required: true
+            type: string
             value: '"ca071a4580129f932a03971968ffef69"'
           request:
             in: body
@@ -12715,6 +12741,16 @@ definitions:
     description: The order merchant identifier
     example: MyOrderMerchantId
     type: string
+  orderedReportFilterCommonParameters:
+    allOf:
+      - $ref: '#/definitions/reportFilterCommonParameters'
+      - properties:
+          orderBy:
+            $ref: '#/definitions/performanceIndicatorType'
+          orderByDirection:
+            $ref: '#/definitions/orderByDirection'
+        type: object
+    description: Contains common filter parameters with Order By functionnality
   pageNumber:
     default: 1
     description: Indicates the page number
@@ -12748,6 +12784,29 @@ definitions:
       - CreditNote
       - Loss
       - OnlinePayment
+    type: string
+  performanceIndicatorFilter:
+    properties:
+      operatorName:
+        $ref: '#/definitions/performanceIndicatorFilterOperatorName'
+      performanceIndicator:
+        $ref: '#/definitions/performanceIndicatorType'
+      value:
+        description: Indicates the filter value to apply on this indicator
+        example: 10.42
+        type: number
+    required:
+      - performanceIndicator
+      - operatorName
+      - value
+    type: object
+  performanceIndicatorFilterOperatorName:
+    description: Indicates the operator you want to apply on this indicator
+    enum:
+      - Equals
+      - GreaterTo
+      - LowerTo
+    example: Equals
     type: string
   performanceIndicatorFormula:
     description: The KPI formula
@@ -12792,16 +12851,17 @@ definitions:
   performanceIndicatorType:
     description: Indicate on which indicator or value you want to make your formula
     enum:
-      - Cost
-      - TotalSales
-      - Margin
-      - OrderCount
       - ClickCount
-      - ROI
+      - Cost
+      - OrderCount
       - ProductCount
       - SoldProductCount
       - DisabledProductCount
       - EnabledProductCount
+      - TotalSales
+      - Margin
+      - ROI
+      - PerformanceIndicator
     example: Cost
     type: string
   personalInfo:
@@ -12890,6 +12950,52 @@ definitions:
       - categoryId
       - values
       - exists
+  productColumnFilter:
+    example:
+      672644c7-5bd0-4e25-88c1-1f732bda5e4c:
+        operatorName: NumericGreaterTo
+        values:
+          - '100'
+    properties:
+      operatorName:
+        $ref: '#/definitions/productColumnFilterOperatorName'
+      values:
+        description: |
+          Must be null if the operator is "IsNull" or "IsNotNull".
+          Can contains multiple value in case of "InList" operator. Otherwise a single value is expected.
+        example:
+          - My value
+        items:
+          type: string
+        type: array
+    required:
+      - operatorName
+    type: object
+  productColumnFilterOperatorName:
+    description: Indicate the operator you want to apply on the columnId
+    enum:
+      - Equals
+      - Contains
+      - InList
+      - IsNull
+      - IsNotNull
+      - NumericEquals
+      - NumericGreaterTo
+      - NumericLowerTo
+    type: string
+  productColumnFilters:
+    properties:
+      additionalProductColumnFilters:
+        $ref: '#/definitions/additionalProductColumnFilters'
+      sku:
+        description: The product sku filter
+        example: M1234
+        type: string
+      title:
+        description: The product title filter
+        example: RefrigÃ©rateur
+        type: string
+    type: object
   productColumnsToDisplay:
     example:
       - 4b460e31-3d1f-4117-922d-b159a64ec1d2
@@ -13003,7 +13109,7 @@ definitions:
   productSetVisibilityCriteriaLogicType:
     description: |
       Indicate how you want to combine the filters:
-      * funnel: You will get the products which meet at least one of the product set criterion. The criteria are applied in the following order: 
+      * funnel: You will get the products which meet at least one of the product set criterion. The criteria are applied in the following order:
         - categorization
         - exclusion filters
         - deactivations
@@ -13422,7 +13528,7 @@ definitions:
     type: object
   reportByCategoryRequest:
     allOf:
-      - $ref: '#/definitions/reportFilterCommonParameters'
+      - $ref: '#/definitions/orderedReportFilterCommonParameters'
       - $ref: '#/definitions/paginationRequestParameters'
   reportByCategoryResponse:
     properties:
@@ -13509,7 +13615,7 @@ definitions:
     type: object
   reportByChannelRequest:
     allOf:
-      - $ref: '#/definitions/reportFilterCommonParameters'
+      - $ref: '#/definitions/orderedReportFilterCommonParameters'
       - $ref: '#/definitions/paginationRequestParameters'
   reportByChannelResponse:
     properties:
@@ -13567,7 +13673,7 @@ definitions:
         example: 101
         type: integer
       cost:
-        description: The cost  for this day and all channels
+        description: The cost for this day and all channels
         example: 10.42
         type: number
       margin:
@@ -13656,7 +13762,7 @@ definitions:
       advancedFilters:
         $ref: '#/definitions/reportAdvancedFilters'
       beginPeriodUtcDate:
-        description: The begin date period you want to get the report
+        description: The begin date of the period for the report
         example: '2006-11-20T00:00:00Z'
         format: date
         type: string
@@ -13670,7 +13776,7 @@ definitions:
           $ref: '#/definitions/BeezUP.Common.ChannelId'
         type: array
       endPeriodUtcDate:
-        description: The end date period you want to get the report.
+        description: The end date of the period for the report
         example: '2006-12-20T00:00:00Z'
         format: date
         type: string
@@ -13791,13 +13897,13 @@ definitions:
     type: object
   reportByProductRequest:
     allOf:
-      - $ref: '#/definitions/reportFilterCommonParameters'
+      - $ref: '#/definitions/orderedReportFilterCommonParameters'
       - $ref: '#/definitions/paginationRequestParameters'
       - properties:
+          productColumnFilters:
+            $ref: '#/definitions/productColumnFilters'
           productColumnsToDisplay:
             $ref: '#/definitions/productColumnsToDisplay'
-          productFilters:
-            $ref: '#/definitions/BeezUP.Common.ProductFilters'
           productState:
             $ref: '#/definitions/productStateFilter'
         required:
@@ -13863,13 +13969,13 @@ definitions:
         example: '2006-12-20T00:00:00Z'
         format: date-time
         type: string
-      indicatorFilters:
+      performanceIndicatorFilters:
         example:
           - indicator: Cost
             operatorName: Equals
             value: 10.42
         items:
-          $ref: '#/definitions/reportIndicatorFilter'
+          $ref: '#/definitions/performanceIndicatorFilter'
         type: array
       periodType:
         $ref: '#/definitions/reportFilterPeriodType'
@@ -13931,10 +14037,10 @@ definitions:
     allOf:
       - $ref: '#/definitions/reportFilterCommonParameters'
       - properties:
+          productColumnFilters:
+            $ref: '#/definitions/productColumnFilters'
           productColumnsToDisplay:
             $ref: '#/definitions/productColumnsToDisplay'
-          productFilters:
-            $ref: '#/definitions/BeezUP.Common.ProductFilters'
           productState:
             $ref: '#/definitions/productStateFilter'
           reportType:
@@ -13966,29 +14072,6 @@ definitions:
       - self
       - save
     type: object
-  reportIndicatorFilter:
-    properties:
-      indicator:
-        $ref: '#/definitions/performanceIndicatorType'
-      operatorName:
-        $ref: '#/definitions/reportIndicatorFilterOperatorName'
-      value:
-        description: Indicates the filter value to apply on this indicator
-        example: 10.42
-        type: number
-    required:
-      - indicator
-      - operatorName
-      - value
-    type: object
-  reportIndicatorFilterOperatorName:
-    description: Indicates the operator you want to apply on this indicator
-    enum:
-      - Equals
-      - GreaterTo
-      - LowerTo
-    example: Equals
-    type: string
   reportType:
     description: The report type
     enum:
@@ -14451,7 +14534,7 @@ definitions:
       - self
     type: object
   startManualImportRequest:
-    description: The message request start a manual importation process.  Indicate the way to handle duplicate product. Can be null if you want to reuse the configuration of the previous importation succeed.
+    description: The message request start a manual importation process. Indicate the way to handle duplicate product. Can be null if you want to reuse the configuration of the previous importation succeed.
     properties:
       duplicateProductSkuConfiguration:
         $ref: '#/definitions/duplicateProductValueConfiguration'
@@ -14691,17 +14774,17 @@ definitions:
   storeTrackingStatus:
     properties:
       clickSynchronizationUtcDate:
-        description: The utc date of the latest click synchronized
+        description: The utc date of the latest synchronized click
         example: '2016-08-29T09:12:33.001Z'
         format: date-time
         type: string
       marketplaceOrderSynchonizationUtcDate:
-        description: The utc date of the latest marketplace order synchronized
+        description: The utc date of the latest synchronized marketplace order
         example: '2016-08-29T09:12:33.001Z'
         format: date-time
         type: string
       orderSynchonizationUtcDate:
-        description: The utc date of the latest order synchronized
+        description: The utc date of the latest synchronized order
         example: '2016-08-29T09:12:33.001Z'
         format: date-time
         type: string
@@ -14736,7 +14819,7 @@ definitions:
       channel:
         $ref: '#/definitions/BeezUP.Common.ChannelBasicInfo'
       ipAddress:
-        description: The user's IP address related to this click
+        description: The user IP address related to the click
         example: 127.0.0.1
         type: string
       product:
@@ -14770,11 +14853,11 @@ definitions:
         example: My_Order_Merchant_Id
         type: string
       paymentValidated:
-        description: Indicate if the payment of this external order has been validated or not.
+        description: Indicate if the payment of this external order has been validated or not
         example: false
         type: boolean
       products:
-        description: Can be null. the product list related to this external order.
+        description: Can be null. The product list related of the external order
         example:
           - margin: '9.66'
             merchantOrderId: My_Merchant_Order_Id
@@ -14788,16 +14871,16 @@ definitions:
           $ref: '#/definitions/trackedExternalOrderProduct'
         type: array
       totalAmount:
-        description: The total amount related to the external order.
+        description: The total amount of the external order
         example: 101.42
         type: number
       utcDate:
-        description: The utc date of the external order.
+        description: The utc date of the external order
         example: '2016-08-29T09:12:33.001Z'
         format: date-time
         type: string
       visitorId:
-        description: Can be null. The visitor identifier related to this external order
+        description: Can be null. The visitor identifier of the external order
         example: A_VISITOR_ID
         type: string
     required:
@@ -14810,7 +14893,7 @@ definitions:
   trackedExternalOrderProduct:
     properties:
       margin:
-        description: Indicate the product's margin related to this order. This property is voluntarily a string because the value could be an invalid one
+        description: The product's margin for the external order. This property is voluntarily a string because the value could be an invalid one
         example: '9.66'
         type: string
       productActive:
@@ -14828,7 +14911,7 @@ definitions:
         format: uri
         type: string
       productSku:
-        description: The product sku received related to the external order.
+        description: The product sku received for the external order
         example: something
         type: string
       productTitle:
@@ -14836,11 +14919,11 @@ definitions:
         example: Something great
         type: string
       quantity:
-        description: Indicate the product's quantity ordered. This property is voluntarily a string because the value could be an invalid one
+        description: The quantity of this product for the external order. This property is voluntarily a string because the value could be an invalid one
         example: '1.00'
         type: string
       unitPrice:
-        description: The product's unit price related to this external order. This property is voluntarily a string because the value could be an invalid one.
+        description: The product's unit price for the external order. This property is voluntarily a string because the value could be an invalid one.
         example: '101.42'
         type: string
     required:
@@ -14866,11 +14949,11 @@ definitions:
         example: My_Merchant_Order_Id
         type: string
       paymentValidated:
-        description: Indicate if the payment of this order has been validated or not.
+        description: Indicate if the payment of this order has been validated or not
         example: false
         type: boolean
       products:
-        description: the product list related to this order.
+        description: The product list of this order
         example:
           - margin: 9.66
             productActive: true
@@ -14884,11 +14967,11 @@ definitions:
           $ref: '#/definitions/trackedOrderProduct'
         type: array
       totalAmount:
-        description: The total amount related to the order.
+        description: The total amount of the order
         example: 101.42
         type: number
       utcDate:
-        description: The utc date of the order.
+        description: The utc date of the order
         example: '2016-08-29T09:12:33.001Z'
         format: date-time
         type: string
@@ -14906,15 +14989,15 @@ definitions:
       - $ref: '#/definitions/BeezUP.Common.ProductBasicInfo'
       - properties:
           margin:
-            description: Indicate the product's margin related to this order.
+            description: The product's margin for the order
             example: 9.66
             type: number
           quantity:
-            description: Indicate the product's quantity ordered.
+            description: The quantity of this product for the order
             example: 1
             type: number
           unitPrice:
-            description: The product's unit price related to this order
+            description: The product's unit price for the order
             example: 101.42
             type: number
         required:
@@ -14934,17 +15017,17 @@ definitions:
   trackingStatus:
     properties:
       clickSynchronizationUtcDate:
-        description: The utc date of the latest click synchronized
+        description: The utc date of the latest synchronized click
         example: '2016-08-29T09:12:33.001Z'
         format: date-time
         type: string
       marketplaceOrderSynchonizationUtcDate:
-        description: The utc date of the latest marketplace order synchronized
+        description: The utc date of the latest synchronized marketplace order
         example: '2016-08-29T09:12:33.001Z'
         format: date-time
         type: string
       orderSynchonizationUtcDate:
-        description: The utc date of the latest order synchronized
+        description: The utc date of the latest synchronized order
         example: '2016-08-29T09:12:33.001Z'
         format: date-time
         type: string
@@ -15120,6 +15203,7 @@ x-beezup-api-ops:
   apiName: V2PublicSecurity
   appRoot: BeezUP.Customer.WebService
   comment: |
+    Changing contact email support to help
     No change. Just server side generation.
   namespace: BeezUP.Customer.WebService
   repo: Customer
@@ -15187,6 +15271,6 @@ x-tagGroups:
       - Analytics - Global
       - Analytics - Tracking
       - Analytics - Statistics
-      - Analytics - Rules
-      - Analytics - Reports
       - Analytics - Optimisations
+      - Analytics - Reports
+      - Analytics - Rules

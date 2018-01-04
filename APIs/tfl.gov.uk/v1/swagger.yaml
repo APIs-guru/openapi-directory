@@ -995,6 +995,11 @@ paths:
           name: id
           required: true
           type: string
+        - description: 'If the national-rail line is requested, this flag will filter the national rail stations so that only those operated by TfL are returned'
+          in: query
+          name: tflOperatedNationalRailStationsOnly
+          required: false
+          type: boolean
       produces:
         - application/json
         - text/json

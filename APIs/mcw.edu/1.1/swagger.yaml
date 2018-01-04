@@ -9,7 +9,7 @@ info:
     name: Rat Genome Database
     url: 'http://rgd.mcw.edu'
     x-twitter: medicalcollege
-  description: The RGD REST API provides programmatic access to information and annotation stored in Rat Genome Database
+  description: The RGD REST API provides programmatic access to information and annotation stored in the Rat Genome Database
   license:
     name: Creative Commons
     url: 'https://creativecommons.org/licenses/by/4.0/legalcode'
@@ -30,20 +30,31 @@ consumes:
 produces:
   - '*/*'
 tags:
-  - description: Stats Web Service
-    name: stats-web-service
+  - name: Pathway
   - description: Strain Web Service
     name: strain-web-service
   - description: Phenotype Web Service
     name: phenotype-web-service
   - description: Pathway Web Service
     name: pathway-web-service
+  - name: QTL
+  - name: Phenotype
+  - description: NIH Data Commons
+    name: NIHdatacommons
+  - description: Alliance of Genome Resources
+    name: AGR
+  - description: Stats Web Service
+    name: stats-web-service
+  - name: Annotation
+  - name: Gene
+  - name: Lookup
   - description: QTL Web Service
     name: qtl-web-service
   - description: Annotation Web Service
     name: annotation-web-service
   - description: Lookup Web Service
     name: lookup-web-service
+  - name: Rat Strain
   - description: Gene Web Service
     name: gene-web-service
 paths:
@@ -72,7 +83,7 @@ paths:
           description: Not Found
       summary: Returns a list ontology term accession IDs annotated to an rgd object
       tags:
-        - annotation-web-service
+        - Annotation
   '/annotations/count/{accId}/{includeChildren}':
     get:
       operationId: getAnnotationCountByAccIdUsingGET
@@ -101,7 +112,7 @@ paths:
           description: Not Found
       summary: Returns annotation count for ontology accession ID
       tags:
-        - annotation-web-service
+        - Annotation
   '/annotations/count/{accId}/{speciesTypeKey}/{includeChildren}':
     get:
       operationId: getAnnotationCountByAccIdAndSpeciesUsingGET
@@ -136,7 +147,7 @@ paths:
           description: Not Found
       summary: Returns annotation count for ontology accession ID and speicies
       tags:
-        - annotation-web-service
+        - Annotation
   '/annotations/count/{accId}/{speciesTypeKey}/{includeChildren}/{objectType}':
     get:
       operationId: getAnnotationCountByAccIdAndObjectTypeUsingGET
@@ -177,7 +188,7 @@ paths:
           description: Not Found
       summary: Returns annotation count for ontology accession ID and object type
       tags:
-        - annotation-web-service
+        - Annotation
   '/annotations/reference/{refRgdId}':
     get:
       operationId: getAnnotsByRefrerenceUsingGET
@@ -203,7 +214,7 @@ paths:
           description: Not Found
       summary: Returns a list of annotations for a reference
       tags:
-        - annotation-web-service
+        - Annotation
   '/annotations/rgdId/{rgdId}':
     get:
       operationId: getAnnotationsByRgdIdUsingGET
@@ -229,7 +240,7 @@ paths:
           description: Not Found
       summary: Returns a list of annotations by RGD ID
       tags:
-        - annotation-web-service
+        - Annotation
   '/annotations/rgdId/{rgdId}/{ontologyPrefix}':
     get:
       operationId: getAnnotationsByRgdIdAndOntologyUsingGET
@@ -260,7 +271,7 @@ paths:
           description: Not Found
       summary: Returns a list of annotations by RGD ID and ontology prefix
       tags:
-        - annotation-web-service
+        - Annotation
   '/annotations/{accId}/{rgdId}':
     get:
       operationId: getAnnotationsByAccIdAndRgdIdUsingGET
@@ -291,7 +302,7 @@ paths:
           description: Not Found
       summary: Returns a list of annotations by RGD ID and ontology term accession ID
       tags:
-        - annotation-web-service
+        - Annotation
   '/annotations/{accId}/{speciesTypeKey}/{includeChildren}':
     get:
       operationId: getAnnotationsUsingGET
@@ -327,7 +338,7 @@ paths:
           description: Not Found
       summary: Returns a list annotations for an ontology term or a term and it's children
       tags:
-        - annotation-web-service
+        - Annotation
   '/genes/affyId/{affyId}/{speciesTypeKey}':
     get:
       operationId: getGenesByAffyIdUsingGET
@@ -358,7 +369,7 @@ paths:
           description: Not Found
       summary: Return a list of genes for an affymetrix ID
       tags:
-        - gene-web-service
+        - Gene
   '/genes/alias/{aliasSymbol}/{speciesTypeKey}':
     get:
       operationId: getGenesByAliasSymbolUsingGET
@@ -389,7 +400,7 @@ paths:
           description: Not Found
       summary: Return a list of genes for an alias and species
       tags:
-        - gene-web-service
+        - Gene
   '/genes/allele/{rgdId}':
     get:
       operationId: getGeneAllelesUsingGET
@@ -415,7 +426,7 @@ paths:
           description: Not Found
       summary: Return a list of gene alleles
       tags:
-        - gene-web-service
+        - Gene
   '/genes/annotation/{accId}/{speciesTypeKey}':
     get:
       operationId: getGenesAnnotatedUsingGET
@@ -446,7 +457,7 @@ paths:
           description: Not Found
       summary: Return a list of genes annotated to an ontology term
       tags:
-        - gene-web-service
+        - Gene
   '/genes/keyword/{keyword}/{speciesTypeKey}':
     get:
       operationId: getGenesByKeywordUsingGET
@@ -477,7 +488,7 @@ paths:
           description: Not Found
       summary: Return a list of genes by keyword and species type key
       tags:
-        - gene-web-service
+        - Gene
   '/genes/map/{mapKey}':
     get:
       operationId: getGeneByMapKeyUsingGET
@@ -503,7 +514,7 @@ paths:
           description: Not Found
       summary: Return a list of all genes with position information for an assembly
       tags:
-        - gene-web-service
+        - Gene
   '/genes/ortholog/{rgdId}':
     get:
       operationId: getGeneOrthologsUsingGET
@@ -529,7 +540,7 @@ paths:
           description: Not Found
       summary: Return a list of gene orthologs
       tags:
-        - gene-web-service
+        - Gene
   '/genes/species/{speciesTypeKey}':
     get:
       operationId: getGenesBySpeciesUsingGET
@@ -555,7 +566,7 @@ paths:
           description: Not Found
       summary: Return a list of all genes for a species in RGD
       tags:
-        - gene-web-service
+        - Gene
   '/genes/{chr}/{start}/{stop}/{mapKey}':
     get:
       operationId: getGenesByPositionUsingGET
@@ -598,7 +609,7 @@ paths:
           description: Not Found
       summary: Return a list of genes position and map key
       tags:
-        - gene-web-service
+        - Gene
   '/genes/{rgdId}':
     get:
       operationId: getGeneByRgdIdUsingGET
@@ -622,7 +633,7 @@ paths:
           description: Not Found
       summary: Get a gene record by RGD ID
       tags:
-        - gene-web-service
+        - Gene
   '/genes/{symbol}/{speciesTypeKey}':
     get:
       operationId: getGeneBySymbolUsingGET
@@ -651,7 +662,7 @@ paths:
           description: Not Found
       summary: Get a gene record by symbol and species type key
       tags:
-        - gene-web-service
+        - Gene
   /lookup/geneTypes:
     get:
       operationId: getGeneTypesUsingGET
@@ -670,7 +681,7 @@ paths:
           description: Not Found
       summary: Returns a list of gene types avialable in RGD
       tags:
-        - lookup-web-service
+        - Lookup
   '/lookup/maps/{speciesTypeKey}':
     get:
       operationId: getMapsUsingGET
@@ -696,7 +707,7 @@ paths:
           description: Not Found
       summary: Return a list assembly maps for a species
       tags:
-        - lookup-web-service
+        - Lookup
   /lookup/speciesTypeKeys:
     get:
       operationId: getSpeciesTypesUsingGET
@@ -713,7 +724,7 @@ paths:
           description: Not Found
       summary: Return a Map of species type keys available in RGD
       tags:
-        - lookup-web-service
+        - Lookup
   '/pathways/diagrams/search/{searchString}':
     get:
       operationId: searchPathwaysUsingGET
@@ -738,7 +749,7 @@ paths:
           description: Not Found
       summary: Return a list of pathways based on search term
       tags:
-        - pathway-web-service
+        - Pathway
   '/pathways/diagramsForCategory/{category}':
     get:
       operationId: getPathwaysWithDiagramsForCategoryUsingGET
@@ -763,7 +774,7 @@ paths:
           description: Not Found
       summary: Return a list of pathways based on category provided
       tags:
-        - pathway-web-service
+        - Pathway
   '/phenotype/phenominer/chart/{speciesTypeKey}/{termString}':
     get:
       operationId: getChartInfoUsingGET
@@ -794,7 +805,7 @@ paths:
           description: Not Found
       summary: Return a list of pathways based on search term and species type.  3=rat 4=chinchilla
       tags:
-        - phenotype-web-service
+        - Phenotype
   '/qtls/{chr}/{start}/{stop}/{mapKey}':
     get:
       operationId: getQtlListByPositionUsingGET
@@ -837,7 +848,7 @@ paths:
           description: Not Found
       summary: Returns a list QTL for given position and assembly map
       tags:
-        - qtl-web-service
+        - QTL
   '/qtls/{rgdId}':
     get:
       operationId: getQTLByRgdIdUsingGET
@@ -861,7 +872,7 @@ paths:
           description: Not Found
       summary: Return a QTL for provided RGD ID
       tags:
-        - qtl-web-service
+        - QTL
   '/stats/count/activeObject/{speciesTypeKey}/{dateYYYYMMDD}':
     get:
       operationId: getActiveObjectCountUsingGET
@@ -890,9 +901,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getActiveObjectCount
+      summary: 'Count of active objects by type, for specified species and date'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/count/geneType/{speciesTypeKey}/{dateYYYYMMDD}':
     get:
       operationId: getGeneTypeCountUsingGET
@@ -921,9 +932,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getGeneTypeCount
+      summary: 'Count of gene types, for specified species and date'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/count/objectStatus/{speciesTypeKey}/{dateYYYYMMDD}':
     get:
       operationId: getObjectStatusCountUsingGET
@@ -952,9 +963,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getObjectStatusCount
+      summary: 'Count of objects with given status, for specified species and date'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/count/objectWithRefSeq/{speciesTypeKey}/{dateYYYYMMDD}':
     get:
       operationId: getObjectsWithRefSeqCountUsingGET
@@ -983,9 +994,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getObjectsWithRefSeqCount
+      summary: 'Count of objects with reference sequence(s), by object type, for specified species and date'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/count/objectWithReference/{speciesTypeKey}/{dateYYYYMMDD}':
     get:
       operationId: getObjectsWithReferenceCountUsingGET
@@ -1014,9 +1025,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getObjectsWithReferenceCount
+      summary: 'Count of objects with reference, by object type, for specified species and date'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/count/objectWithXdb/{speciesTypeKey}/{objectKey}/{dateYYYYMMDD}':
     get:
       operationId: getObjectsWithXDBsCountUsingGET
@@ -1051,9 +1062,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getObjectsWithXDBsCount
+      summary: 'Count of objects with external database ids, by database id, for specified species, object type and date'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/count/proteinInteraction/{speciesTypeKey}/{dateYYYYMMDD}':
     get:
       operationId: getProteinInteractionCountUsingGET
@@ -1082,9 +1093,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getProteinInteractionCount
+      summary: 'Count of protein interactions, for specified species and date'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/count/qtlInheritanceType/{speciesTypeKey}/{dateYYYYMMDD}':
     get:
       operationId: getQtlInheritanceTypeCountUsingGET
@@ -1113,9 +1124,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getQtlInheritanceTypeCount
+      summary: 'Count of strains, by qtl inheritance type, for specified species and date'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/count/retiredObject/{speciesTypeKey}/{dateYYYYMMDD}':
     get:
       operationId: getRetiredObjectCountUsingGET
@@ -1144,9 +1155,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getRetiredObjectCount
+      summary: 'Count of retired objects by type, for specified species and date'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/count/strainType/{speciesTypeKey}/{dateYYYYMMDD}':
     get:
       operationId: getStrainTypeCountUsingGET
@@ -1175,9 +1186,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getStrainTypeCount
+      summary: 'Count of strain types, for specified species and date'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/count/withdrawnObject/{speciesTypeKey}/{dateYYYYMMDD}':
     get:
       operationId: getWithdrawnObjectCountUsingGET
@@ -1206,9 +1217,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getWithdrawnObjectCount
+      summary: 'Count of withdrawn objects by type, for specified species and date'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/count/xdb/{speciesTypeKey}/{dateYYYYMMDD}':
     get:
       operationId: getXdbsCountUsingGET
@@ -1237,9 +1248,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getXdbsCount
+      summary: 'Count of external database ids, for specied species and date'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/diff/activeObject/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
     get:
       operationId: getActiveObjectDiffUsingGET
@@ -1273,9 +1284,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getActiveObjectDiff
+      summary: 'Count difference of active objects, by type, for specified species and date range'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/diff/geneType/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
     get:
       operationId: getGeneTypeDiffUsingGET
@@ -1309,9 +1320,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getGeneTypeDiff
+      summary: 'Count difference of gene types, for specified species and date range'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/diff/objectStatus/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
     get:
       operationId: getObjectStatusDiffUsingGET
@@ -1345,9 +1356,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getObjectStatusDiff
+      summary: 'Count difference of objects with given status, for specified species and date range'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/diff/objectWithRefSeq/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
     get:
       operationId: getObjectsWithRefSeqDiffUsingGET
@@ -1381,9 +1392,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getObjectsWithRefSeqDiff
+      summary: 'Count difference of objects with reference sequence(s), by object type, for specified species and date range'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/diff/objectWithReference/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
     get:
       operationId: getObjectsWithReferenceDiffUsingGET
@@ -1417,9 +1428,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getObjectsWithReferenceDiff
+      summary: 'Count difference of objects with reference, by object type, for specified species and date range'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/diff/objectWithXdb/{speciesTypeKey}/{objectKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
     get:
       operationId: getObjectsWithXDBsDiffUsingGET
@@ -1459,9 +1470,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getObjectsWithXDBsDiff
+      summary: 'Count difference of objects with external database ids, by database id, for specified species, object type and date range'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/diff/proteinInteraction/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
     get:
       operationId: getProteinInteractionDiffUsingGET
@@ -1495,9 +1506,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getProteinInteractionDiff
+      summary: 'Count difference of protein interactions, for specified species and date range'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/diff/qtlInheritanceType/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
     get:
       operationId: getQtlInheritanceTypeDiffUsingGET
@@ -1531,9 +1542,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getQtlInheritanceTypeDiff
+      summary: 'Count difference of strains, by qtl inheritance type, for specified species and date range'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/diff/retiredObject/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
     get:
       operationId: getRetiredObjectDiffUsingGET
@@ -1567,9 +1578,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getRetiredObjectDiff
+      summary: 'Count difference of retired objects, by type, for specified species and date range'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/diff/strainType/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
     get:
       operationId: getStrainTypeDiffUsingGET
@@ -1603,9 +1614,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getStrainTypeDiff
+      summary: 'Count difference of strain types, for specified species and date range'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/diff/withdrawnObject/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
     get:
       operationId: getWithdrawnObjectDiffUsingGET
@@ -1639,9 +1650,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getWithdrawnObjectDiff
+      summary: 'Count difference of withdrawn objects, by type, for specified species and date range'
       tags:
-        - stats-web-service
+        - Statistics
   '/stats/diff/xdb/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}':
     get:
       operationId: getXdbsDiffUsingGET
@@ -1675,9 +1686,40 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getXdbsDiff
+      summary: 'Count difference of external database ids, for specified species and date range'
       tags:
-        - stats-web-service
+        - Statistics
+  '/stats/term/{accId}/{filterAccId}':
+    get:
+      operationId: getTermStatsUsingGET
+      parameters:
+        - description: accId
+          in: path
+          name: accId
+          required: true
+          type: string
+        - description: filterAccId
+          in: path
+          name: filterAccId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              format: int32
+              type: integer
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: getTermStats
+      tags:
+        - Statistics
   /strains/all:
     get:
       operationId: getAllStrainsUsingGET
@@ -1696,7 +1738,7 @@ paths:
           description: Not Found
       summary: Return all active strains in RGD
       tags:
-        - strain-web-service
+        - Rat Strain
   '/strains/{chr}/{start}/{stop}/{mapKey}':
     get:
       operationId: getStrainsByPositionUsingGET
@@ -1737,9 +1779,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: getStrainsByPosition
+      summary: Return all active strains by position
       tags:
-        - strain-web-service
+        - Rat Strain
   '/strains/{rgdId}':
     get:
       operationId: getStrainByRgdIdUsingGET
@@ -1763,7 +1805,7 @@ paths:
           description: Not Found
       summary: Return a strain by RGD ID
       tags:
-        - strain-web-service
+        - Rat Strain
 definitions:
   Annotation:
     properties:
@@ -1865,13 +1907,9 @@ definitions:
         type: string
       description:
         type: string
-      history:
-        type: string
       key:
         format: int32
         type: integer
-      length:
-        type: string
       methodKey:
         format: int32
         type: integer
@@ -1890,6 +1928,8 @@ definitions:
       speciesTypeKey:
         format: int32
         type: integer
+      ucscAssemblyId:
+        type: string
       unit:
         type: string
       version:

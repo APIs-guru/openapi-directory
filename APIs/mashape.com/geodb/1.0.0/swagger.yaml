@@ -182,10 +182,10 @@ paths:
           name: cityId
           required: true
           type: integer
-        - description: Distance to this city
+        - description: Distance from this city
           format: int32
           in: query
-          name: toCityId
+          name: fromCityId
           required: true
           type: integer
         - default: MI
@@ -301,6 +301,11 @@ paths:
       description: 'Find countries, filtering by optional criteria. If no criteria are set, you will get back all known countries.'
       operationId: getCountriesUsingGET
       parameters:
+        - description: Only countries whose names start with this prefix
+          in: query
+          name: namePrefix
+          required: false
+          type: string
         - description: Only countries supporting this currency
           in: query
           name: currencyCode
@@ -367,6 +372,11 @@ paths:
           in: path
           name: countryCode
           required: true
+          type: string
+        - description: Only regions whose names start with this prefix
+          in: query
+          name: namePrefix
+          required: false
           type: string
         - default: 10
           description: The maximum number of results to retrieve

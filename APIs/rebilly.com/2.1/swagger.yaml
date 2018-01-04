@@ -6900,7 +6900,7 @@ paths:
         - lang: PHP
           source: |
             try {
-                $client->websites()->delete('websiteId');
+                $client->resetPasswordTokens()->delete('token');
             } catch (ServerException $e) {
                 echo $e->getMessage();
             }
@@ -11637,6 +11637,7 @@ definitions:
       - Alipay
       - AIB
       - AstroPay Card
+      - Ipay Options
       - B+S
       - Bank of America
       - Bank of Moscow
@@ -11749,6 +11750,25 @@ definitions:
         type: string
     required:
       - method
+    type: object
+  AmountRestrictions:
+    properties:
+      currency:
+        description: Currency (three letter ISO 4217 code)
+        type: string
+      max:
+        description: The maximum amount allowed
+        format: double
+        minimum: 0
+        type: number
+      min:
+        description: The minimum amount allowed
+        format: double
+        minimum: 0
+        type: number
+    required:
+      - currency
+      - min
     type: object
   ApiKey:
     description: API secret Key.
@@ -13401,8 +13421,9 @@ definitions:
         items:
           - $ref: '#/definitions/SelfLink'
           - $ref: '#/definitions/FileDownloadLink'
+          - $ref: '#/definitions/SignedLinkLink'
           - $ref: '#/definitions/PermalinkLink'
-        minItems: 2
+        minItems: 3
         readOnly: true
         type: array
       createdTime:
@@ -13423,6 +13444,9 @@ definitions:
         allOf:
           - $ref: '#/definitions/ResourceId'
         readOnly: true
+      isPublic:
+        description: 'Is the file available publicly (without authentication). If true, the permalink in the _links section contains the public URL.'
+        type: boolean
       mime:
         description: The mime type
         enum:
@@ -13605,6 +13629,11 @@ definitions:
         type: array
       acquirerName:
         $ref: '#/definitions/AcquirerName'
+      amountRestrictions:
+        description: Set restrictions on allowed amounts per currency
+        items:
+          $ref: '#/definitions/AmountRestrictions'
+        type: array
       cityField:
         description: The gateway account's city field (also known as line 2 descriptor)
         type: string
@@ -13758,6 +13787,7 @@ definitions:
       - iCheque
       - Ilixium
       - Intuit
+      - IpayOptions
       - JetPay
       - Jeton
       - Moneris
@@ -14233,6 +14263,28 @@ definitions:
         type: string
     readOnly: true
     type: object
+  IpayOptions:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            description: Ipay Options credentials object
+            properties:
+              rcode:
+                description: Ipay Options rcode
+                format: password
+                type: string
+              sid:
+                description: Ipay Options website ID
+                type: string
+            required:
+              - sid
+              - rcode
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Ipay Options config
   ItemsLink:
     allOf:
       - $ref: '#/definitions/NewLink'
@@ -16318,6 +16370,18 @@ definitions:
         description: The shipping zone updated time
     required:
       - name
+    type: object
+  SignedLinkLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - signedLink
+        type: string
+    required:
+      - rel
     type: object
   Signin:
     properties:

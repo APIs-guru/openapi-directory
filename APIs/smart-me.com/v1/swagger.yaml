@@ -671,6 +671,50 @@ paths:
       summary: "Gets all (last) values of a device\r\n            The first Value found before the given Date is returned."
       tags:
         - ValuesInPast
+  '/api/ValuesInPastMultiple/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: ValuesInPastMultiple_Get
+      parameters:
+        - description: The ID of the device
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The date when the first value should start
+          format: date-time
+          in: query
+          name: startDate
+          required: true
+          type: string
+        - description: The date when the last value should start
+          format: date-time
+          in: query
+          name: endDate
+          required: true
+          type: string
+        - description: The interval in minutes betwenn the values. 0 means as fast as possible. Only 1000 values can be get in one call.
+          format: int32
+          in: query
+          name: interval
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ValuesData'
+            type: array
+      summary: Gets multiple values of a device. This call needs a smart-me professional licence.
+      tags:
+        - ValuesInPastMultiple
   /api/VirtualBillingMeterActive:
     get:
       consumes: []
