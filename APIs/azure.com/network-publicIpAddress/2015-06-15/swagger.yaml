@@ -178,6 +178,8 @@ paths:
         - PublicIPAddresses
       x-ms-long-running-operation: true
 definitions:
+  IPConfigurationPropertiesFormat:
+    type: object
   PublicIPAddress:
     allOf:
       - description: Azure resource manager resource properties.

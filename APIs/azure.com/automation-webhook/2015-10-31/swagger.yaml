@@ -113,14 +113,10 @@ paths:
                       creationTime: '2017-03-29T22:18:14.6651862+00:00'
                       expiryTime: '2018-03-29T22:18:13.7002872+00:00'
                       isEnabled: true
-                      lastInvokedTime: null
                       lastModifiedBy: ''
                       lastModifiedTime: '2017-03-29T22:18:14.6651862+00:00'
-                      parameters: null
-                      runOn: null
                       runbook:
                         name: TestRunbook
-                      uri: null
               headers: {}
       x-ms-pageable:
         nextLinkName: nextLink
@@ -310,11 +306,8 @@ paths:
                   creationTime: '2017-03-29T22:18:14.6651862+00:00'
                   expiryTime: '2018-03-29T22:18:13.7002872+00:00'
                   isEnabled: true
-                  lastInvokedTime: null
                   lastModifiedBy: ''
                   lastModifiedTime: '2017-03-29T22:18:14.6651862+00:00'
-                  parameters: null
-                  runOn: null
                   runbook:
                     name: TestRunbook
                   uri: ''
@@ -419,11 +412,8 @@ paths:
                   creationTime: '2017-03-30T21:52:01.272378+00:00'
                   expiryTime: '2018-03-30T23:03:14.5752078+00:00'
                   isEnabled: false
-                  lastInvokedTime: null
                   lastModifiedBy: ''
                   lastModifiedTime: '2017-03-30T23:03:14.9069441+00:00'
-                  parameters: null
-                  runOn: null
                   runbook:
                     name: TestRunbook
                   uri: ''
@@ -547,11 +537,8 @@ paths:
                   creationTime: '2017-03-29T22:18:14.6651862+00:00'
                   expiryTime: '2018-03-29T22:18:13.7002872+00:00'
                   isEnabled: true
-                  lastInvokedTime: null
                   lastModifiedBy: ''
                   lastModifiedTime: '2017-03-29T22:18:14.6651862+00:00'
-                  parameters: null
-                  runOn: null
                   runbook:
                     name: TestRunbook
                   uri: ''
@@ -564,13 +551,18 @@ paths:
                   creationTime: '2017-03-29T22:18:14.6651862+00:00'
                   expiryTime: '2018-03-29T22:18:13.7002872+00:00'
                   isEnabled: true
-                  lastInvokedTime: null
                   lastModifiedBy: ''
                   lastModifiedTime: '2017-03-29T22:18:14.6651862+00:00'
-                  parameters: null
-                  runOn: null
                   runbook:
                     name: TestRunbook
                   uri: ''
               headers: {}
-definitions: {}
+definitions:
+  Webhook:
+    type: object
+  WebhookCreateOrUpdateProperties:
+    type: object
+  WebhookProperties:
+    type: object
+  WebhookUpdateProperties:
+    type: object

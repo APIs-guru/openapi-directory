@@ -781,6 +781,8 @@ definitions:
               - description: 'Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4.'
                 value: clientCredentials
         type: array
+  ErrorFieldContract:
+    type: object
   TokenBodyParameterContract:
     description: OAuth acquire token request body parameter (www-url-form-encoded).
     properties:

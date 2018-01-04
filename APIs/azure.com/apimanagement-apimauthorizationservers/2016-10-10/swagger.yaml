@@ -364,6 +364,8 @@ definitions:
         items:
           $ref: '#/definitions/OAuth2AuthorizationServerContract'
         type: array
+  ErrorFieldContract:
+    type: object
   OAuth2AuthorizationServerContract:
     description: External OAuth authorization server settings.
     properties:

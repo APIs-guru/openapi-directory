@@ -1280,6 +1280,8 @@ definitions:
     properties:
       oAuth2:
         $ref: '#/definitions/OAuth2AuthenticationSettingsContract'
+  ErrorFieldContract:
+    type: object
   OAuth2AuthenticationSettingsContract:
     description: API OAuth2 Authentication settings details.
     properties:
@@ -1404,6 +1406,8 @@ definitions:
     required:
       - name
       - type
+  ProductContract:
+    type: object
   RepresentationContract:
     description: Operation request/response representation details.
     properties:

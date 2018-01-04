@@ -429,6 +429,8 @@ definitions:
           description: The execution details of a script action.
         readOnly: true
         type: array
+  RuntimeScriptAction:
+    type: object
   ScriptAction:
     description: Describes a script action on role on the cluster.
     properties:
@@ -492,6 +494,8 @@ definitions:
           description: The execution details of a script action.
         readOnly: true
         type: array
+  ScriptActionExecutionSummary:
+    type: object
   ScriptActionPersistedGetResponseSpec:
     description: The persisted script action for cluster.
     properties:

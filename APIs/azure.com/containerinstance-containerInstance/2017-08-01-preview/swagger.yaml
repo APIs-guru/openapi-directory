@@ -77,14 +77,11 @@ paths:
                       containers:
                         - name: demo1
                           properties:
-                            command: null
                             environmentVariables: []
                             image: nginx
-                            instanceView: null
                             ports:
                               - port: 80
                             resources:
-                              limits: null
                               requests:
                                 cpu: 1
                                 memoryInGb: 1.5
@@ -93,8 +90,7 @@ paths:
                                 name: volume1
                                 readOnly: false
                       imageRegistryCredentials:
-                        - password: null
-                          server: azcloudconsoleregistry.azurecr.io
+                        - server: azcloudconsoleregistry.azurecr.io
                           username: azcloudconsoleregistry
                       ipAddress:
                         ip: 10.0.0.1
@@ -103,17 +99,12 @@ paths:
                             protocol: TCP
                       osType: Linux
                       provisioningState: Succeeded
-                      restartPolicy: null
-                      state: null
                       volumes:
                         - azureFile:
-                            readOnly: null
                             shareName: share1
-                            storageAccountKey: null
                             storageAccountName: stroage1
                           name: volume1
                     resourceGroup: demo
-                    tags: null
                     type: Microsoft.ContainerInstance/containerGroups
       x-ms-pageable:
         nextLinkName: nextLink
@@ -152,14 +143,11 @@ paths:
                       containers:
                         - name: demo1
                           properties:
-                            command: null
                             environmentVariables: []
                             image: nginx
-                            instanceView: null
                             ports:
                               - port: 80
                             resources:
-                              limits: null
                               requests:
                                 cpu: 1
                                 memoryInGb: 1.5
@@ -168,8 +156,7 @@ paths:
                                 name: volume1
                                 readOnly: false
                       imageRegistryCredentials:
-                        - password: null
-                          server: azcloudconsoleregistry.azurecr.io
+                        - server: azcloudconsoleregistry.azurecr.io
                           username: azcloudconsoleregistry
                       ipAddress:
                         ip: 10.0.0.1
@@ -178,17 +165,12 @@ paths:
                             protocol: TCP
                       osType: Linux
                       provisioningState: Succeeded
-                      restartPolicy: null
-                      state: null
                       volumes:
                         - azureFile:
-                            readOnly: null
                             shareName: share1
-                            storageAccountKey: null
                             storageAccountName: stroage1
                           name: volume1
                     resourceGroup: demo
-                    tags: null
                     type: Microsoft.ContainerInstance/containerGroups
       x-ms-pageable:
         nextLinkName: nextLink
@@ -265,14 +247,11 @@ paths:
                   containers:
                     - name: demo1
                       properties:
-                        command: null
                         environmentVariables: []
                         image: nginx
-                        instanceView: null
                         ports:
                           - port: 80
                         resources:
-                          limits: null
                           requests:
                             cpu: 1
                             memoryInGb: 1.5
@@ -281,8 +260,7 @@ paths:
                             name: volume1
                             readOnly: false
                   imageRegistryCredentials:
-                    - password: null
-                      server: azcloudconsoleregistry.azurecr.io
+                    - server: azcloudconsoleregistry.azurecr.io
                       username: azcloudconsoleregistry
                   ipAddress:
                     ip: 10.0.0.1
@@ -291,17 +269,12 @@ paths:
                         protocol: TCP
                   osType: Linux
                   provisioningState: Succeeded
-                  restartPolicy: null
-                  state: null
                   volumes:
                     - azureFile:
-                        readOnly: null
                         shareName: share1
-                        storageAccountKey: null
                         storageAccountName: stroage1
                       name: volume1
                 resourceGroup: demo
-                tags: null
                 type: Microsoft.ContainerInstance/containerGroups
     put:
       description: Create or update container groups with specified configurations.
@@ -347,27 +320,19 @@ paths:
                 containers:
                   - name: demo1
                     properties:
-                      command: null
                       environmentVariables: []
                       image: nginx
                       instanceView: {}
                       ports:
                         - port: 80
                       resources:
-                        limits: null
                         requests:
                           cpu: 1
                           memoryInGb: 1.5
-                      volumeMounts: null
-                imageRegistryCredentials: null
                 ipAddress:
                   type: Public
                 osType: Linux
-                provisioningState: null
-                restartPolicy: null
-                state: null
               resourceGroup: demo
-              tags: null
               type: Microsoft.ContainerInstance/containerGroups
             containerGroupName: demo1
             resourceGroupName: demo
@@ -382,19 +347,14 @@ paths:
                   containers:
                     - name: demo1
                       properties:
-                        command: null
                         environmentVariables: []
                         image: nginx
-                        instanceView: null
                         ports:
                           - port: 80
                         resources:
-                          limits: null
                           requests:
                             cpu: 1
                             memoryInGb: 1.5
-                        volumeMounts: null
-                  imageRegistryCredentials: null
                   ipAddress:
                     ip: 10.0.0.1
                     ports:
@@ -402,11 +362,7 @@ paths:
                         protocol: TCP
                   osType: Linux
                   provisioningState: Succeeded
-                  restartPolicy: null
-                  state: null
-                  volumes: null
                 resourceGroup: demo
-                tags: null
                 type: Microsoft.ContainerInstance/containerGroups
             '201':
               body:
@@ -417,19 +373,14 @@ paths:
                   containers:
                     - name: demo1
                       properties:
-                        command: null
                         environmentVariables: []
                         image: nginx
-                        instanceView: null
                         ports:
                           - port: 80
                         resources:
-                          limits: null
                           requests:
                             cpu: 1
                             memoryInGb: 1.5
-                        volumeMounts: null
-                  imageRegistryCredentials: null
                   ipAddress:
                     ip: 10.0.0.1
                     ports:
@@ -437,11 +388,7 @@ paths:
                         protocol: TCP
                   osType: Linux
                   provisioningState: Succeeded
-                  restartPolicy: null
-                  state: null
-                  volumes: null
                 resourceGroup: demo
-                tags: null
                 type: Microsoft.ContainerInstance/containerGroups
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/logs':
     get:

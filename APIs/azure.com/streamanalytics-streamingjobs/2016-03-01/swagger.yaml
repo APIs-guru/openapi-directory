@@ -1253,6 +1253,10 @@ definitions:
     x-ms-enum:
       modelAsString: true
       name: EventsOutOfOrderPolicy
+  FunctionProperties:
+    type: object
+  InputProperties:
+    type: object
   Operation:
     description: A Stream Analytics REST API operation
     properties:
@@ -1303,6 +1307,8 @@ definitions:
     x-ms-enum:
       modelAsString: true
       name: OutputErrorPolicy
+  OutputProperties:
+    type: object
   OutputStartMode:
     description: 'Value may be JobStartTime, CustomTime, or LastOutputEventTime to indicate whether the starting point of the output event stream should start whenever the job is started, start at a custom user time stamp specified via the outputStartTime property, or start from the last event output time.'
     enum:
@@ -1482,3 +1488,7 @@ definitions:
             $ref: '#/definitions/TransformationProperties'
             description: The properties that are associated with a transformation. Required on PUT (CreateOrReplace) requests.
             x-ms-client-flatten: true
+  SubResource:
+    type: object
+  TransformationProperties:
+    type: object

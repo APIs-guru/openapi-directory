@@ -746,6 +746,10 @@ definitions:
         description: Name of the App Service Environment.
         type: string
     type: object
+  NameValuePair:
+    type: object
+  NetworkAccessControlEntry:
+    type: object
   PremierAddOnOffer:
     allOf:
       - description: Azure proxy only resource. This resource is not tracked by Azure Resource Manager.
@@ -830,6 +834,8 @@ definitions:
         type: array
     required:
       - value
+    type: object
+  ProxyOnlyResource:
     type: object
   ResourceNameAvailability:
     description: Information regarding availbility of a resource name.
@@ -947,6 +953,8 @@ definitions:
     required:
       - value
     type: object
+  StampCapacity:
+    type: object
   ValidateProperties:
     description: App properties used for validation.
     properties:
@@ -1018,6 +1026,10 @@ definitions:
       message:
         description: Validation error message.
         type: string
+    type: object
+  VirtualIPMapping:
+    type: object
+  VirtualNetworkProfile:
     type: object
   VnetParameters:
     allOf:
@@ -1122,4 +1134,6 @@ definitions:
             description: The name of the test that failed.
             type: string
         x-ms-client-flatten: true
+    type: object
+  WorkerPool:
     type: object

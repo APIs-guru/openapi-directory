@@ -138,6 +138,8 @@ definitions:
         items:
           properties: {}
         type: array
+  ProxyResource:
+    type: object
   TransparentDataEncryptionListResult:
     description: Represents the response to a list transparent data encryption configurations request.
     properties:
@@ -157,3 +159,5 @@ definitions:
               description: Represents the properties of the resource.
               x-ms-client-flatten: true
         type: array
+  TransparentDataEncryptionProperties:
+    type: object

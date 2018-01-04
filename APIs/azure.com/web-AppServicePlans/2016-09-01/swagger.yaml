@@ -2317,6 +2317,8 @@ paths:
       tags:
         - AppServicePlans
 definitions:
+  AppServicePlan:
+    type: object
   AppServicePlanPatchResource:
     allOf:
       - description: Azure proxy only resource. This resource is not tracked by Azure Resource Manager.
@@ -2444,6 +2446,10 @@ definitions:
           - name
         x-ms-client-flatten: true
     type: object
+  CsmUsageQuota:
+    type: object
+  HostingEnvironmentProfile:
+    type: object
   HybridConnectionCollection:
     description: Collection of hostname bindings.
     properties:
@@ -2536,6 +2542,10 @@ definitions:
             type: integer
         x-ms-client-flatten: true
     type: object
+  ProxyOnlyResource:
+    type: object
+  Resource:
+    type: object
   ResourceCollection:
     description: Collection of resources.
     properties:
@@ -2549,4 +2559,14 @@ definitions:
         type: array
     required:
       - value
+    type: object
+  ResourceMetric:
+    type: object
+  ResourceMetricDefinition:
+    type: object
+  Site:
+    type: object
+  SkuDescription:
+    type: object
+  VnetRoute:
     type: object

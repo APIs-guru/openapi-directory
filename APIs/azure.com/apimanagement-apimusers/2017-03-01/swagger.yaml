@@ -983,12 +983,20 @@ paths:
               body:
                 value: 57f2af53bb17172280f44057&201705131039&***************************/tJVExvjA==
 definitions:
+  ErrorFieldContract:
+    type: object
   GenerateSsoUrlResult:
     description: Generate SSO Url operations response details.
     properties:
       value:
         description: Redirect Url containing the SSO URL value.
         type: string
+  GroupContract:
+    type: object
+  GroupContractProperties:
+    type: object
+  SubscriptionContract:
+    type: object
   UserCollection:
     description: Paged Users list representation.
     properties:

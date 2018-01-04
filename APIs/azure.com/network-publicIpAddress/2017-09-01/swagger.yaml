@@ -477,6 +477,8 @@ paths:
                 type: Microsoft.Network/publicIPAddresses
       x-ms-long-running-operation: true
 definitions:
+  IPConfigurationPropertiesFormat:
+    type: object
   PublicIPAddress:
     allOf:
       - description: Common resource representation.

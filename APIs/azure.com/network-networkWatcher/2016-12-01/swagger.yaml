@@ -1071,6 +1071,8 @@ definitions:
         $ref: '#/definitions/NetworkInterfaceAssociation'
       subnetAssociation:
         $ref: '#/definitions/SubnetAssociation'
+  SecurityRulePropertiesFormat:
+    type: object
   SubnetAssociation:
     description: Network interface and its custom security rules.
     properties:

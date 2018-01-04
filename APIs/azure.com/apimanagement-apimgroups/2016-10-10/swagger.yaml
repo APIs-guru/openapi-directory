@@ -639,6 +639,8 @@ paths:
       tags:
         - GroupUsers
 definitions:
+  ErrorFieldContract:
+    type: object
   GroupCollection:
     description: Paged Group list representation.
     properties:
@@ -741,3 +743,5 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: GroupTypeContract
+  UserContract:
+    type: object

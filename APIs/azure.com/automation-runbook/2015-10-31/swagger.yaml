@@ -290,7 +290,6 @@ paths:
                   parameters: {}
                   provisioningState: Succeeded
                   runbookType: PowerShellWorkflow
-                  serviceManagementTags: null
                   state: Published
                 tags:
                   tag01: value01
@@ -418,7 +417,6 @@ paths:
                 parameters: {}
                 provisioningState: Succeeded
                 runbookType: PowerShellWorkflow
-                serviceManagementTags: null
                 state: Published
               tags:
                 tag01: value01
@@ -546,7 +544,6 @@ paths:
                   parameters: {}
                   provisioningState: Succeeded
                   runbookType: PowerShellWorkflow
-                  serviceManagementTags: null
                   state: Published
                 tags:
                   tag01: value01
@@ -572,7 +569,6 @@ paths:
                   parameters: {}
                   provisioningState: Succeeded
                   runbookType: PowerShellWorkflow
-                  serviceManagementTags: null
                   state: Published
                 tags:
                   tag01: value01
@@ -751,7 +747,6 @@ paths:
                   parameters: {}
                   provisioningState: Succeeded
                   runbookType: PowerShellWorkflow
-                  serviceManagementTags: null
                   state: Published
                 tags:
                   tag01: value01
@@ -1571,4 +1566,18 @@ paths:
           responses:
             '200': {}
             '400': {}
-definitions: {}
+definitions:
+  ContentLink:
+    type: object
+  Resource:
+    type: object
+  Runbook:
+    type: object
+  RunbookCreateOrUpdateProperties:
+    type: object
+  RunbookParameter:
+    type: object
+  RunbookProperties:
+    type: object
+  RunbookUpdateProperties:
+    type: object

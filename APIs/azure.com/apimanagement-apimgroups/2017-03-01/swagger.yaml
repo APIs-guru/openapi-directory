@@ -847,6 +847,8 @@ paths:
                   state: active
                 type: Microsoft.ApiManagement/service/groups/users
 definitions:
+  ErrorFieldContract:
+    type: object
   GroupCollection:
     description: Paged Group list representation.
     properties:
@@ -976,3 +978,7 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: GroupType
+  UserContract:
+    type: object
+  UserContractProperties:
+    type: object

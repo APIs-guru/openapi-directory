@@ -1683,6 +1683,20 @@ paths:
       x-ms-pageable:
         nextLinkName: nextLink
 definitions:
+  ApiContract:
+    type: object
+  ApiContractProperties:
+    type: object
+  ErrorFieldContract:
+    type: object
+  GroupContract:
+    type: object
+  GroupContractProperties:
+    type: object
+  PolicyContract:
+    type: object
+  PolicyContractProperties:
+    type: object
   ProductCollection:
     description: Paged Products list representation.
     properties:
@@ -1776,3 +1790,7 @@ definitions:
         maxLength: 300
         minLength: 1
         type: string
+  Resource:
+    type: object
+  SubscriptionContract:
+    type: object

@@ -1683,6 +1683,8 @@ definitions:
             type: string
     description: The properties that are associated with a blob output.
     properties: {}
+  DiagnosticCondition:
+    type: object
   DocumentDbOutputDataSource:
     allOf:
       - $ref: '#/definitions/OutputDataSource'
@@ -1714,6 +1716,8 @@ definitions:
       partitionKey:
         description: 'The name of the field in output events used to specify the key for partitioning output across collections. If ''collectionNamePattern'' contains the {partition} token, this property is required to be specified.'
         type: string
+  ErrorResponse:
+    type: object
   EventHubOutputDataSource:
     allOf:
       - $ref: '#/definitions/OutputDataSource'
@@ -1832,6 +1836,8 @@ definitions:
       table:
         description: The name of the Power BI table under the specified dataset. Required on PUT (CreateOrReplace) requests.
         type: string
+  ServiceBusDataSourceProperties:
+    type: object
   ServiceBusQueueOutputDataSource:
     allOf:
       - $ref: '#/definitions/OutputDataSource'
@@ -1898,6 +1904,8 @@ definitions:
       topicName:
         description: The name of the Service Bus Topic. Required on PUT (CreateOrReplace) requests.
         type: string
+  StorageAccount:
+    type: object
   SubResource:
     description: The base sub-resource model definition.
     properties:

@@ -873,7 +873,6 @@ paths:
           responses:
             '200':
               body:
-                etag: null
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9
                 location: East US 2
                 name: myAutomationAccount9
@@ -882,8 +881,6 @@ paths:
                   lastModifiedBy: myEmailId@microsoft.com
                   lastModifiedTime: '2017-03-26T01:13:43.267+00:00'
                   sku:
-                    capacity: null
-                    family: null
                     name: Free
                   state: Ok
                 tags: {}
@@ -985,7 +982,6 @@ paths:
           responses:
             '200':
               body:
-                etag: null
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9
                 location: East US 2
                 name: myAutomationAccount9
@@ -994,8 +990,6 @@ paths:
                   lastModifiedBy: myEmailId@microsoft.com
                   lastModifiedTime: '2017-03-26T01:13:43.267+00:00'
                   sku:
-                    capacity: null
-                    family: null
                     name: Free
                   state: Ok
                 tags: {}
@@ -1109,7 +1103,6 @@ paths:
           responses:
             '200':
               body:
-                etag: null
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9
                 location: East US 2
                 name: ContoseAutomationAccount
@@ -1118,8 +1111,6 @@ paths:
                   lastModifiedBy: myEmaild@microsoft.com
                   lastModifiedTime: '2017-03-28T18:21:15.187+00:00'
                   sku:
-                    capacity: null
-                    family: null
                     name: Free
                   state: Ok
                 tags: {}
@@ -1127,7 +1118,6 @@ paths:
               headers: {}
             '201':
               body:
-                etag: null
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9
                 location: East US 2
                 name: myAutomationAccount9
@@ -1136,8 +1126,6 @@ paths:
                   lastModifiedBy: myEmailId@microsoft.com
                   lastModifiedTime: '2017-03-26T01:13:43.267+00:00'
                   sku:
-                    capacity: null
-                    family: null
                     name: Free
                   state: Ok
                 tags: {}
@@ -1366,4 +1354,20 @@ paths:
                     unit: Count
               headers: {}
       x-ms-pageable: {}
-definitions: {}
+definitions:
+  AutomationAccount:
+    type: object
+  AutomationAccountCreateOrUpdateProperties:
+    type: object
+  AutomationAccountProperties:
+    type: object
+  AutomationAccountUpdateProperties:
+    type: object
+  Operation:
+    type: object
+  Resource:
+    type: object
+  Statistics:
+    type: object
+  Usage:
+    type: object

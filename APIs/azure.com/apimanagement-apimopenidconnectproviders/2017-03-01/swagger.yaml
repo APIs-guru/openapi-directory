@@ -449,6 +449,8 @@ paths:
                   metadataEndpoint: 'https://oidprovider-template3.net'
                 type: Microsoft.ApiManagement/service/openidconnectproviders
 definitions:
+  ErrorFieldContract:
+    type: object
   OpenIdConnectProviderCollection:
     description: Paged OpenIdProviders list representation.
     properties:

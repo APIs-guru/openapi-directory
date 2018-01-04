@@ -1102,6 +1102,12 @@ paths:
       x-ms-pageable:
         nextLinkName: nextLink
 definitions:
+  ApiContract:
+    type: object
+  ErrorFieldContract:
+    type: object
+  GroupContract:
+    type: object
   ProductCollection:
     description: Paged Products list representation.
     properties:
@@ -1195,3 +1201,5 @@ definitions:
       terms:
         description: Product terms and conditions. Developer will have to accept these terms before he's allowed to call product API.
         type: string
+  SubscriptionContract:
+    type: object
