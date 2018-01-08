@@ -1689,6 +1689,8 @@ definitions:
     type: string
     minLength: 1
     maxLength: 300
+  ArnCount:
+    type: integer
   AssessmentRulesPackageArnList:
     type: array
     items:
@@ -2001,6 +2003,7 @@ definitions:
       - durationInSeconds
       - rulesPackageArns
       - userAttributesForFindings
+      - assessmentRunCount
       - createdAt
     properties:
       arn:
@@ -2021,6 +2024,12 @@ definitions:
       userAttributesForFindings:
         $ref: '#/definitions/UserAttributeList'
         description: The user-defined attributes that are assigned to every generated finding from the assessment run that uses this assessment template.
+      lastAssessmentRunArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the most recent assessment run associated with this assessment template. This value exists only when the value of assessmentRunCount is greater than zero.
+      assessmentRunCount:
+        $ref: '#/definitions/ArnCount'
+        description: The number of existing assessment runs associated with this assessment template. This value can be zero or a positive integer.
       createdAt:
         $ref: '#/definitions/Timestamp'
         description: The time at which the assessment template is created.
@@ -2358,6 +2367,7 @@ definitions:
       assessmentTemplates:
         - name: ExampleAssessmentTemplate
           arn: 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw'
+          assessmentRunCount: 0
           assessmentTargetArn: 'arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq'
           createdAt: '1458074191.844'
           durationInSeconds: 3600
