@@ -2216,6 +2216,9 @@ definitions:
       VpcSettings:
         $ref: '#/definitions/DirectoryVpcSettings'
         description: Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.
+      Edition:
+        $ref: '#/definitions/DirectoryEdition'
+        description: 'AWS Microsoft AD is available in two editions: Standard and Enterprise. Enterprise is the default.'
     description: Creates a Microsoft AD in the AWS cloud.
   CreateMicrosoftADResult:
     type: object
@@ -2572,6 +2575,9 @@ definitions:
       Size:
         $ref: '#/definitions/DirectorySize'
         description: The directory size.
+      Edition:
+        $ref: '#/definitions/DirectoryEdition'
+        description: The edition associated with this directory.
       Alias:
         $ref: '#/definitions/AliasName'
         description: 'The alias for the directory. If no alias has been created for the directory, the alias is the directory identifier, such as <code>d-XXXXXXXXXX</code>.'
@@ -2623,6 +2629,11 @@ definitions:
     description: A list of directory descriptions.
     items:
       $ref: '#/definitions/DirectoryDescription'
+  DirectoryEdition:
+    type: string
+    enum:
+      - Enterprise
+      - Standard
   DirectoryId:
     type: string
     pattern: '^d-[0-9a-f]{10}$'
@@ -2733,7 +2744,7 @@ definitions:
         description: The identifiers of the subnets for the directory servers.
       SecurityGroupId:
         $ref: '#/definitions/SecurityGroupId'
-        description: 'The security group identifier for the directory. If the directory was created before 8/1/2014, this is the identifier of the directory members security group that was created when the directory was created. If the directory was created after this date, this value is null.'
+        description: The domain controller security group identifier for the directory.
       AvailabilityZones:
         $ref: '#/definitions/AvailabilityZones'
         description: The list of Availability Zones that the directory is in.

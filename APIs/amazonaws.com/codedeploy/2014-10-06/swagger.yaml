@@ -111,22 +111,26 @@ paths:
           schema:
             $ref: '#/definitions/InstanceNameRequiredException'
         '481':
+          description: InvalidInstanceNameException
+          schema:
+            $ref: '#/definitions/InvalidInstanceNameException'
+        '482':
           description: TagRequiredException
           schema:
             $ref: '#/definitions/TagRequiredException'
-        '482':
+        '483':
           description: InvalidTagException
           schema:
             $ref: '#/definitions/InvalidTagException'
-        '483':
+        '484':
           description: TagLimitExceededException
           schema:
             $ref: '#/definitions/TagLimitExceededException'
-        '484':
+        '485':
           description: InstanceLimitExceededException
           schema:
             $ref: '#/definitions/InstanceLimitExceededException'
-        '485':
+        '486':
           description: InstanceNotRegisteredException
           schema:
             $ref: '#/definitions/InstanceNotRegisteredException'
@@ -904,6 +908,51 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteDeploymentGroupInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteGitHubAccountToken':
+    post:
+      operationId: DeleteGitHubAccountToken
+      description: Deletes a GitHub account connection.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteGitHubAccountTokenOutput'
+        '480':
+          description: GitHubAccountTokenNameRequiredException
+          schema:
+            $ref: '#/definitions/GitHubAccountTokenNameRequiredException'
+        '481':
+          description: GitHubAccountTokenDoesNotExistException
+          schema:
+            $ref: '#/definitions/GitHubAccountTokenDoesNotExistException'
+        '482':
+          description: InvalidGitHubAccountTokenNameException
+          schema:
+            $ref: '#/definitions/InvalidGitHubAccountTokenNameException'
+        '483':
+          description: ResourceValidationException
+          schema:
+            $ref: '#/definitions/ResourceValidationException'
+        '484':
+          description: OperationNotSupportedException
+          schema:
+            $ref: '#/definitions/OperationNotSupportedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteGitHubAccountTokenInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1818,22 +1867,26 @@ paths:
           schema:
             $ref: '#/definitions/InstanceNameRequiredException'
         '481':
+          description: InvalidInstanceNameException
+          schema:
+            $ref: '#/definitions/InvalidInstanceNameException'
+        '482':
           description: TagRequiredException
           schema:
             $ref: '#/definitions/TagRequiredException'
-        '482':
+        '483':
           description: InvalidTagException
           schema:
             $ref: '#/definitions/InvalidTagException'
-        '483':
+        '484':
           description: TagLimitExceededException
           schema:
             $ref: '#/definitions/TagLimitExceededException'
-        '484':
+        '485':
           description: InstanceLimitExceededException
           schema:
             $ref: '#/definitions/InstanceLimitExceededException'
-        '485':
+        '486':
           description: InstanceNotRegisteredException
           schema:
             $ref: '#/definitions/InstanceNotRegisteredException'
@@ -2452,7 +2505,6 @@ definitions:
     type: object
     required:
       - deploymentConfigName
-      - minimumHealthyHosts
     properties:
       deploymentConfigName:
         $ref: '#/definitions/DeploymentConfigName'
@@ -2615,6 +2667,20 @@ definitions:
         $ref: '#/definitions/AutoScalingGroupList'
         description: 'If the output contains no data, and the corresponding deployment group contained at least one Auto Scaling group, AWS CodeDeploy successfully removed all corresponding Auto Scaling lifecycle event hooks from the Amazon EC2 instances in the Auto Scaling group. If the output contains data, AWS CodeDeploy could not remove some Auto Scaling lifecycle event hooks from the Amazon EC2 instances in the Auto Scaling group.'
     description: Represents the output of a DeleteDeploymentGroup operation.
+  DeleteGitHubAccountTokenInput:
+    type: object
+    properties:
+      tokenName:
+        $ref: '#/definitions/GitHubAccountTokenName'
+        description: The name of the GitHub account connection to delete.
+    description: Represents the input of a DeleteGitHubAccount operation.
+  DeleteGitHubAccountTokenOutput:
+    type: object
+    properties:
+      tokenName:
+        $ref: '#/definitions/GitHubAccountTokenName'
+        description: The name of the GitHub account connection that was deleted.
+    description: Represents the output of a DeleteGitHubAccountToken operation.
   DeploymentAlreadyCompletedException:
     type: object
     properties: {}
@@ -3249,6 +3315,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/GitHubAccountTokenName'
+  GitHubAccountTokenNameRequiredException:
+    type: object
+    properties: {}
+    description: The call is missing a required GitHub account connection name.
   GitHubLocation:
     type: object
     properties:
