@@ -1,0 +1,658 @@
+swagger: '2.0'
+info:
+  version: '2018-01-06'
+  x-release: v4
+  title: AWS Auto Scaling Plans
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: autoscaling-plans
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/autoscaling-plans-2018-01-06.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/autoscaling/'
+host: autoscaling.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: CreateScalingPlan
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateScalingPlanResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: ConcurrentUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentUpdateException'
+        '483':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateScalingPlanRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteScalingPlan':
+    post:
+      operationId: DeleteScalingPlan
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteScalingPlanResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: ObjectNotFoundException
+          schema:
+            $ref: '#/definitions/ObjectNotFoundException'
+        '482':
+          description: ConcurrentUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentUpdateException'
+        '483':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteScalingPlanRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeScalingPlanResources':
+    post:
+      operationId: DescribeScalingPlanResources
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeScalingPlanResourcesResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '482':
+          description: ConcurrentUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentUpdateException'
+        '483':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeScalingPlanResourcesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeScalingPlans':
+    post:
+      operationId: DescribeScalingPlans
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeScalingPlansResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '482':
+          description: ConcurrentUpdateException
+          schema:
+            $ref: '#/definitions/ConcurrentUpdateException'
+        '483':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeScalingPlansRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  ApplicationSource:
+    type: object
+    properties:
+      CloudFormationStackARN:
+        $ref: '#/definitions/XmlString'
+  ApplicationSources:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationSource'
+  ConcurrentUpdateException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+  Cooldown:
+    type: integer
+  CreateScalingPlanRequest:
+    type: object
+    required:
+      - ScalingPlanName
+      - ApplicationSource
+      - ScalingInstructions
+    properties:
+      ScalingPlanName:
+        $ref: '#/definitions/ScalingPlanName'
+      ApplicationSource:
+        $ref: '#/definitions/ApplicationSource'
+      ScalingInstructions:
+        $ref: '#/definitions/ScalingInstructions'
+  CreateScalingPlanResponse:
+    type: object
+    required:
+      - ScalingPlanVersion
+    properties:
+      ScalingPlanVersion:
+        $ref: '#/definitions/ScalingPlanVersion'
+  CustomizedScalingMetricSpecification:
+    type: object
+    required:
+      - MetricName
+      - Namespace
+      - Statistic
+    properties:
+      MetricName:
+        $ref: '#/definitions/MetricName'
+      Namespace:
+        $ref: '#/definitions/MetricNamespace'
+      Dimensions:
+        $ref: '#/definitions/MetricDimensions'
+      Statistic:
+        $ref: '#/definitions/MetricStatistic'
+      Unit:
+        $ref: '#/definitions/MetricUnit'
+  DeleteScalingPlanRequest:
+    type: object
+    required:
+      - ScalingPlanName
+      - ScalingPlanVersion
+    properties:
+      ScalingPlanName:
+        $ref: '#/definitions/ScalingPlanName'
+      ScalingPlanVersion:
+        $ref: '#/definitions/ScalingPlanVersion'
+  DeleteScalingPlanResponse:
+    type: object
+    properties: {}
+  DescribeScalingPlanResourcesRequest:
+    type: object
+    required:
+      - ScalingPlanName
+      - ScalingPlanVersion
+    properties:
+      ScalingPlanName:
+        $ref: '#/definitions/ScalingPlanName'
+      ScalingPlanVersion:
+        $ref: '#/definitions/ScalingPlanVersion'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+  DescribeScalingPlanResourcesResponse:
+    type: object
+    properties:
+      ScalingPlanResources:
+        $ref: '#/definitions/ScalingPlanResources'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+  DescribeScalingPlansRequest:
+    type: object
+    properties:
+      ScalingPlanNames:
+        $ref: '#/definitions/ScalingPlanNames'
+      ScalingPlanVersion:
+        $ref: '#/definitions/ScalingPlanVersion'
+      ApplicationSources:
+        $ref: '#/definitions/ApplicationSources'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+  DescribeScalingPlansResponse:
+    type: object
+    properties:
+      ScalingPlans:
+        $ref: '#/definitions/ScalingPlans'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+  DisableScaleIn:
+    type: boolean
+  ErrorMessage:
+    type: string
+  InternalServiceException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+  InvalidNextTokenException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+  LimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+  MaxResults:
+    type: integer
+  MetricDimension:
+    type: object
+    required:
+      - Name
+      - Value
+    properties:
+      Name:
+        $ref: '#/definitions/MetricDimensionName'
+      Value:
+        $ref: '#/definitions/MetricDimensionValue'
+  MetricDimensionName:
+    type: string
+  MetricDimensionValue:
+    type: string
+  MetricDimensions:
+    type: array
+    items:
+      $ref: '#/definitions/MetricDimension'
+  MetricName:
+    type: string
+  MetricNamespace:
+    type: string
+  MetricScale:
+    type: number
+    format: double
+  MetricStatistic:
+    type: string
+    enum:
+      - Average
+      - Minimum
+      - Maximum
+      - SampleCount
+      - Sum
+  MetricUnit:
+    type: string
+  NextToken:
+    type: string
+  ObjectNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+  PolicyName:
+    type: string
+    pattern: '\p{Print}+'
+    minLength: 1
+    maxLength: 256
+  PolicyType:
+    type: string
+    enum:
+      - TargetTrackingScaling
+  PredefinedScalingMetricSpecification:
+    type: object
+    required:
+      - PredefinedScalingMetricType
+    properties:
+      PredefinedScalingMetricType:
+        $ref: '#/definitions/ScalingMetricType'
+      ResourceLabel:
+        $ref: '#/definitions/ResourceLabel'
+  ResourceCapacity:
+    type: integer
+  ResourceIdMaxLen1600:
+    type: string
+    minLength: 1
+    maxLength: 1600
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  ResourceLabel:
+    type: string
+    minLength: 1
+    maxLength: 1023
+  ScalableDimension:
+    type: string
+    enum:
+      - 'autoscaling:autoScalingGroup:DesiredCapacity'
+      - 'ecs:service:DesiredCount'
+      - 'ec2:spot-fleet-request:TargetCapacity'
+      - 'rds:cluster:ReadReplicaCount'
+      - 'dynamodb:table:ReadCapacityUnits'
+      - 'dynamodb:table:WriteCapacityUnits'
+      - 'dynamodb:index:ReadCapacityUnits'
+      - 'dynamodb:index:WriteCapacityUnits'
+  ScalingInstruction:
+    type: object
+    required:
+      - ServiceNamespace
+      - ResourceId
+      - ScalableDimension
+      - MinCapacity
+      - MaxCapacity
+      - TargetTrackingConfigurations
+    properties:
+      ServiceNamespace:
+        $ref: '#/definitions/ServiceNamespace'
+      ResourceId:
+        $ref: '#/definitions/ResourceIdMaxLen1600'
+      ScalableDimension:
+        $ref: '#/definitions/ScalableDimension'
+      MinCapacity:
+        $ref: '#/definitions/ResourceCapacity'
+      MaxCapacity:
+        $ref: '#/definitions/ResourceCapacity'
+      TargetTrackingConfigurations:
+        $ref: '#/definitions/TargetTrackingConfigurations'
+  ScalingInstructions:
+    type: array
+    items:
+      $ref: '#/definitions/ScalingInstruction'
+  ScalingMetricType:
+    type: string
+    enum:
+      - ASGAverageCPUUtilization
+      - ASGAverageNetworkIn
+      - ASGAverageNetworkOut
+      - DynamoDBReadCapacityUtilization
+      - DynamoDBWriteCapacityUtilization
+      - ECSServiceAverageCPUUtilization
+      - ECSServiceAverageMemoryUtilization
+      - ALBRequestCountPerTarget
+      - RDSReaderAverageCPUUtilization
+      - RDSReaderAverageDatabaseConnections
+      - EC2SpotFleetRequestAverageCPUUtilization
+      - EC2SpotFleetRequestAverageNetworkIn
+      - EC2SpotFleetRequestAverageNetworkOut
+  ScalingPlan:
+    type: object
+    required:
+      - ScalingPlanName
+      - ScalingPlanVersion
+      - ApplicationSource
+      - ScalingInstructions
+      - StatusCode
+    properties:
+      ScalingPlanName:
+        $ref: '#/definitions/ScalingPlanName'
+      ScalingPlanVersion:
+        $ref: '#/definitions/ScalingPlanVersion'
+      ApplicationSource:
+        $ref: '#/definitions/ApplicationSource'
+      ScalingInstructions:
+        $ref: '#/definitions/ScalingInstructions'
+      StatusCode:
+        $ref: '#/definitions/ScalingPlanStatusCode'
+      StatusMessage:
+        $ref: '#/definitions/XmlString'
+      CreationTime:
+        $ref: '#/definitions/TimestampType'
+  ScalingPlanName:
+    type: string
+    pattern: '[\p{Print}&&[^|]]+'
+    minLength: 1
+    maxLength: 128
+  ScalingPlanNames:
+    type: array
+    items:
+      $ref: '#/definitions/ScalingPlanName'
+  ScalingPlanResource:
+    type: object
+    required:
+      - ScalingPlanName
+      - ScalingPlanVersion
+      - ServiceNamespace
+      - ResourceId
+      - ScalableDimension
+      - ScalingStatusCode
+    properties:
+      ScalingPlanName:
+        $ref: '#/definitions/ScalingPlanName'
+      ScalingPlanVersion:
+        $ref: '#/definitions/ScalingPlanVersion'
+      ServiceNamespace:
+        $ref: '#/definitions/ServiceNamespace'
+      ResourceId:
+        $ref: '#/definitions/ResourceIdMaxLen1600'
+      ScalableDimension:
+        $ref: '#/definitions/ScalableDimension'
+      ScalingPolicies:
+        $ref: '#/definitions/ScalingPolicies'
+      ScalingStatusCode:
+        $ref: '#/definitions/ScalingStatusCode'
+      ScalingStatusMessage:
+        $ref: '#/definitions/XmlString'
+  ScalingPlanResources:
+    type: array
+    items:
+      $ref: '#/definitions/ScalingPlanResource'
+  ScalingPlanStatusCode:
+    type: string
+    enum:
+      - Active
+      - ActiveWithProblems
+      - CreationInProgress
+      - CreationFailed
+      - DeletionInProgress
+      - DeletionFailed
+  ScalingPlanVersion:
+    type: integer
+  ScalingPlans:
+    type: array
+    items:
+      $ref: '#/definitions/ScalingPlan'
+  ScalingPolicies:
+    type: array
+    items:
+      $ref: '#/definitions/ScalingPolicy'
+  ScalingPolicy:
+    type: object
+    required:
+      - PolicyName
+      - PolicyType
+    properties:
+      PolicyName:
+        $ref: '#/definitions/PolicyName'
+      PolicyType:
+        $ref: '#/definitions/PolicyType'
+      TargetTrackingConfiguration:
+        $ref: '#/definitions/TargetTrackingConfiguration'
+  ScalingStatusCode:
+    type: string
+    enum:
+      - Inactive
+      - PartiallyActive
+      - Active
+  ServiceNamespace:
+    type: string
+    enum:
+      - autoscaling
+      - ecs
+      - ec2
+      - rds
+      - dynamodb
+  TargetTrackingConfiguration:
+    type: object
+    required:
+      - TargetValue
+    properties:
+      PredefinedScalingMetricSpecification:
+        $ref: '#/definitions/PredefinedScalingMetricSpecification'
+      CustomizedScalingMetricSpecification:
+        $ref: '#/definitions/CustomizedScalingMetricSpecification'
+      TargetValue:
+        $ref: '#/definitions/MetricScale'
+      DisableScaleIn:
+        $ref: '#/definitions/DisableScaleIn'
+      ScaleOutCooldown:
+        $ref: '#/definitions/Cooldown'
+      ScaleInCooldown:
+        $ref: '#/definitions/Cooldown'
+      EstimatedInstanceWarmup:
+        $ref: '#/definitions/Cooldown'
+  TargetTrackingConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/TargetTrackingConfiguration'
+  TimestampType:
+    type: string
+    format: date-time
+  ValidationException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+  XmlString:
+    type: string
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'

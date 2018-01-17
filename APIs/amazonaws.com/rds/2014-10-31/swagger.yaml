@@ -4286,6 +4286,16 @@ definitions:
         $ref: '#/definitions/String'
         description: The description of the character set.
     description: ' This data type is used as a response element in the action <a>DescribeDBEngineVersions</a>. '
+  CloudwatchLogsExportConfiguration:
+    type: object
+    properties:
+      EnableLogTypes:
+        $ref: '#/definitions/LogTypeList'
+        description: The list of log types to enable.
+      DisableLogTypes:
+        $ref: '#/definitions/LogTypeList'
+        description: The list of log types to disable.
+    description: The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.
   CopyDBClusterParameterGroupMessage:
     type: object
     required:
@@ -4678,6 +4688,9 @@ definitions:
       PerformanceInsightsKMSKeyId:
         $ref: '#/definitions/String'
         description: 'The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.'
+      EnableCloudwatchLogsExports:
+        $ref: '#/definitions/LogTypeList'
+        description: The list of log types that need to be enabled for exporting to CloudWatch Logs.
     description: <p/>
   CreateDBInstanceReadReplicaMessage:
     type: object
@@ -4702,7 +4715,7 @@ definitions:
         description: '<p>The port number that the DB instance uses for connections.</p> <p>Default: Inherits from the source DB instance</p> <p>Valid Values: <code>1150-65535</code> </p>'
       MultiAZ:
         $ref: '#/definitions/BooleanOptional'
-        description: 'Specifies whether the read replica is in a Multi-AZ deployment. '
+        description: <p>Specifies whether the read replica is in a Multi-AZ deployment. </p> <p>You can create a Read Replica as a Multi-AZ DB instance. RDS creates a standby of your replica in another Availability Zone for failover support for the replica. Creating your Read Replica as a Multi-AZ DB instance is independent of whether the source database is a Multi-AZ DB instance. </p> <note> <p>Currently PostgreSQL Read Replicas can only be created as single-AZ DB instances.</p> </note>
       AutoMinorVersionUpgrade:
         $ref: '#/definitions/BooleanOptional'
         description: '<p>Indicates that minor engine upgrades are applied automatically to the Read Replica during the maintenance window.</p> <p>Default: Inherits from the source DB instance</p>'
@@ -4747,6 +4760,9 @@ definitions:
       PerformanceInsightsKMSKeyId:
         $ref: '#/definitions/String'
         description: 'The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.'
+      EnableCloudwatchLogsExports:
+        $ref: '#/definitions/LogTypeList'
+        description: The list of logs that the new DB instance is to export to CloudWatch Logs.
       SourceRegion:
         $ref: '#/definitions/String'
         description: The ID of the region that contains the source for the read replica.
@@ -5294,6 +5310,12 @@ definitions:
       SupportedTimezones:
         $ref: '#/definitions/SupportedTimezonesList'
         description: 'A list of the time zones supported by this engine for the <code>Timezone</code> parameter of the <code>CreateDBInstance</code> action. '
+      ExportableLogTypes:
+        $ref: '#/definitions/LogTypeList'
+        description: The types of logs that the database engine has available for export to CloudWatch Logs.
+      SupportsLogExportsToCloudwatchLogs:
+        $ref: '#/definitions/Boolean'
+        description: A value that indicates whether the engine version supports exporting the log types specified by ExportableLogTypes to CloudWatch Logs.
     description: ' This data type is used as a response element in the action <a>DescribeDBEngineVersions</a>. '
   DBEngineVersionList:
     type: array
@@ -5465,6 +5487,9 @@ definitions:
       PerformanceInsightsKMSKeyId:
         $ref: '#/definitions/String'
         description: 'The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.'
+      EnabledCloudwatchLogsExports:
+        $ref: '#/definitions/LogTypeList'
+        description: A list of log types that this DB instance is configured to export to CloudWatch Logs.
     description: <p>Contains the details of an Amazon RDS DB instance. </p> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action. </p>
   DBInstanceAlreadyExistsFault:
     type: object
@@ -6975,6 +7000,10 @@ definitions:
         $ref: '#/definitions/FilterList'
         description: This parameter is not currently supported.
     description: <p/>
+  LogTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   Long:
     type: integer
   ModifyDBClusterMessage:
@@ -7171,6 +7200,9 @@ definitions:
       PerformanceInsightsKMSKeyId:
         $ref: '#/definitions/String'
         description: 'The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.'
+      CloudwatchLogsExportConfiguration:
+        $ref: '#/definitions/CloudwatchLogsExportConfiguration'
+        description: The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.
     description: <p/>
   ModifyDBInstanceResult:
     type: object
@@ -7707,6 +7739,16 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Parameter'
+  PendingCloudwatchLogsExports:
+    type: object
+    properties:
+      LogTypesToEnable:
+        $ref: '#/definitions/LogTypeList'
+        description: 'Log types that are in the process of being deactivated. After they are deactivated, these log types aren''t exported to CloudWatch Logs.'
+      LogTypesToDisable:
+        $ref: '#/definitions/LogTypeList'
+        description: 'Log types that are in the process of being enabled. After they are enabled, these log types are exported to CloudWatch Logs.'
+    description: 'A list of the log types whose configuration is still pending. In other words, these log types are in the process of being activated or deactivated.'
   PendingMaintenanceAction:
     type: object
     properties:
@@ -7789,6 +7831,8 @@ definitions:
       DBSubnetGroupName:
         $ref: '#/definitions/String'
         description: 'The new DB subnet group for the DB instance. '
+      PendingCloudwatchLogsExports:
+        $ref: '#/definitions/PendingCloudwatchLogsExports'
     description: ' This data type is used as a response element in the <a>ModifyDBInstance</a> action. '
   PointInTimeRestoreNotEnabledFault:
     type: object
@@ -8389,6 +8433,9 @@ definitions:
       EnableIAMDatabaseAuthentication:
         $ref: '#/definitions/BooleanOptional'
         description: '<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>You can enable IAM database authentication for the following database engines</p> <ul> <li> <p>For MySQL 5.6, minor version 5.6.34 or higher</p> </li> <li> <p>For MySQL 5.7, minor version 5.7.16 or higher</p> </li> <li> <p>Aurora 5.6 or higher.</p> </li> </ul> <p>Default: <code>false</code> </p>'
+      EnableCloudwatchLogsExports:
+        $ref: '#/definitions/LogTypeList'
+        description: The list of logs that the restored DB instance is to export to CloudWatch Logs.
     description: <p/>
   RestoreDBInstanceFromDBSnapshotResult:
     type: object
@@ -8520,6 +8567,9 @@ definitions:
       PerformanceInsightsKMSKeyId:
         $ref: '#/definitions/String'
         description: 'The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), the KMS key identifier, or the KMS key alias for the KMS encryption key. '
+      EnableCloudwatchLogsExports:
+        $ref: '#/definitions/LogTypeList'
+        description: The list of logs that the restored DB instance is to export to CloudWatch Logs.
   RestoreDBInstanceFromS3Result:
     type: object
     properties:
@@ -8533,7 +8583,7 @@ definitions:
     properties:
       SourceDBInstanceIdentifier:
         $ref: '#/definitions/String'
-        description: '<p>The identifier of the source DB instance from which to restore.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing DBInstance.</p> </li> </ul>'
+        description: '<p>The identifier of the source DB instance from which to restore.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing DB instance.</p> </li> </ul>'
       TargetDBInstanceIdentifier:
         $ref: '#/definitions/String'
         description: '<p>The name of the new DB instance to be created.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens</p> </li> </ul>'
@@ -8602,6 +8652,9 @@ definitions:
       EnableIAMDatabaseAuthentication:
         $ref: '#/definitions/BooleanOptional'
         description: '<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>You can enable IAM database authentication for the following database engines</p> <ul> <li> <p>For MySQL 5.6, minor version 5.6.34 or higher</p> </li> <li> <p>For MySQL 5.7, minor version 5.7.16 or higher</p> </li> <li> <p>Aurora 5.6 or higher.</p> </li> </ul> <p>Default: <code>false</code> </p>'
+      EnableCloudwatchLogsExports:
+        $ref: '#/definitions/LogTypeList'
+        description: The list of logs that the restored DB instance is to export to CloudWatch Logs.
     description: <p/>
   RestoreDBInstanceToPointInTimeResult:
     type: object
