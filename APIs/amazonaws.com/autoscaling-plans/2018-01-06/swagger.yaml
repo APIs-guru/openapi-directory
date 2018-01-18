@@ -3,6 +3,7 @@ info:
   version: '2018-01-06'
   x-release: v4
   title: AWS Auto Scaling Plans
+  description: '<p>Use AWS Auto Scaling to quickly discover all the scalable AWS resources for your application and configure dynamic scaling for your scalable resources.</p> <p>To get started, create a scaling plan with a set of instructions used to configure dynamic scaling for the scalable resources in your application. AWS Auto Scaling creates target tracking scaling policies for the scalable resources in your scaling plan. Target tracking scaling policies adjust the capacity of your scalable resource as required to maintain resource utilization at the target value that you specified.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -101,7 +102,7 @@ paths:
   /:
     post:
       operationId: CreateScalingPlan
-      description: ''
+      description: <p>Creates a scaling plan.</p> <p>A scaling plan contains a set of instructions used to configure dynamic scaling for the scalable resources in your application. AWS Auto Scaling creates target tracking scaling policies based on the scaling instructions in your scaling plan.</p>
       responses:
         '200':
           description: Success
@@ -142,7 +143,7 @@ paths:
   '/#DeleteScalingPlan':
     post:
       operationId: DeleteScalingPlan
-      description: ''
+      description: Deletes the specified scaling plan.
       responses:
         '200':
           description: Success
@@ -183,7 +184,7 @@ paths:
   '/#DescribeScalingPlanResources':
     post:
       operationId: DescribeScalingPlanResources
-      description: ''
+      description: Describes the scalable resources in the specified scaling plan.
       responses:
         '200':
           description: Success
@@ -224,7 +225,7 @@ paths:
   '/#DescribeScalingPlans':
     post:
       operationId: DescribeScalingPlans
-      description: ''
+      description: Describes the specified scaling plans or all of your scaling plans.
       responses:
         '200':
           description: Success
@@ -268,6 +269,8 @@ definitions:
     properties:
       CloudFormationStackARN:
         $ref: '#/definitions/XmlString'
+        description: The Amazon Resource Name (ARN) of a CloudFormation stack.
+    description: Represents an application source.
   ApplicationSources:
     type: array
     items:
@@ -277,6 +280,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/ErrorMessage'
+    description: 'Concurrent updates caused an exception, for example, if you request an update to a scaling plan that already has a pending update.'
   Cooldown:
     type: integer
   CreateScalingPlanRequest:
@@ -288,10 +292,13 @@ definitions:
     properties:
       ScalingPlanName:
         $ref: '#/definitions/ScalingPlanName'
+        description: The name of the scaling plan.
       ApplicationSource:
         $ref: '#/definitions/ApplicationSource'
+        description: The source for the application.
       ScalingInstructions:
         $ref: '#/definitions/ScalingInstructions'
+        description: The scaling instructions.
   CreateScalingPlanResponse:
     type: object
     required:
@@ -299,6 +306,7 @@ definitions:
     properties:
       ScalingPlanVersion:
         $ref: '#/definitions/ScalingPlanVersion'
+        description: The version of the scaling plan. This value is always 1.
   CustomizedScalingMetricSpecification:
     type: object
     required:
@@ -308,14 +316,20 @@ definitions:
     properties:
       MetricName:
         $ref: '#/definitions/MetricName'
+        description: The name of the metric.
       Namespace:
         $ref: '#/definitions/MetricNamespace'
+        description: The namespace of the metric.
       Dimensions:
         $ref: '#/definitions/MetricDimensions'
+        description: The dimensions of the metric.
       Statistic:
         $ref: '#/definitions/MetricStatistic'
+        description: The statistic of the metric.
       Unit:
         $ref: '#/definitions/MetricUnit'
+        description: The unit of the metric.
+    description: Represents a customized metric for a target tracking policy.
   DeleteScalingPlanRequest:
     type: object
     required:
@@ -324,8 +338,10 @@ definitions:
     properties:
       ScalingPlanName:
         $ref: '#/definitions/ScalingPlanName'
+        description: The name of the scaling plan.
       ScalingPlanVersion:
         $ref: '#/definitions/ScalingPlanVersion'
+        description: The version of the scaling plan.
   DeleteScalingPlanResponse:
     type: object
     properties: {}
@@ -337,39 +353,52 @@ definitions:
     properties:
       ScalingPlanName:
         $ref: '#/definitions/ScalingPlanName'
+        description: The name of the scaling plan.
       ScalingPlanVersion:
         $ref: '#/definitions/ScalingPlanVersion'
+        description: The version of the scaling plan.
       MaxResults:
         $ref: '#/definitions/MaxResults'
+        description: The maximum number of scalable resources to return. This value can be between 1 and 50. The default value is 50.
       NextToken:
         $ref: '#/definitions/NextToken'
+        description: The token for the next set of results.
   DescribeScalingPlanResourcesResponse:
     type: object
     properties:
       ScalingPlanResources:
         $ref: '#/definitions/ScalingPlanResources'
+        description: Information about the scalable resources.
       NextToken:
         $ref: '#/definitions/NextToken'
+        description: The token required to get the next set of results. This value is <code>null</code> if there are no more results to return.
   DescribeScalingPlansRequest:
     type: object
     properties:
       ScalingPlanNames:
         $ref: '#/definitions/ScalingPlanNames'
+        description: 'The names of the scaling plans (up to 10). If you specify application sources, you cannot specify scaling plan names.'
       ScalingPlanVersion:
         $ref: '#/definitions/ScalingPlanVersion'
+        description: 'The version of the scaling plan. If you specify a scaling plan version, you must also specify a scaling plan name.'
       ApplicationSources:
         $ref: '#/definitions/ApplicationSources'
+        description: 'The sources for the applications (up to 10). If you specify scaling plan names, you cannot specify application sources.'
       MaxResults:
         $ref: '#/definitions/MaxResults'
+        description: The maximum number of scalable resources to return. This value can be between 1 and 50. The default value is 50.
       NextToken:
         $ref: '#/definitions/NextToken'
+        description: The token for the next set of results.
   DescribeScalingPlansResponse:
     type: object
     properties:
       ScalingPlans:
         $ref: '#/definitions/ScalingPlans'
+        description: Information about the scaling plans.
       NextToken:
         $ref: '#/definitions/NextToken'
+        description: The token required to get the next set of results. This value is <code>null</code> if there are no more results to return.
   DisableScaleIn:
     type: boolean
   ErrorMessage:
@@ -379,16 +408,19 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/ErrorMessage'
+    description: The service encountered an internal error.
   InvalidNextTokenException:
     type: object
     properties:
       Message:
         $ref: '#/definitions/ErrorMessage'
+    description: The token provided is not valid.
   LimitExceededException:
     type: object
     properties:
       Message:
         $ref: '#/definitions/ErrorMessage'
+    description: Your account exceeded a limit. This exception is thrown when a per-account resource limit is exceeded.
   MaxResults:
     type: integer
   MetricDimension:
@@ -399,8 +431,11 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/MetricDimensionName'
+        description: The name of the dimension.
       Value:
         $ref: '#/definitions/MetricDimensionValue'
+        description: The value of the dimension.
+    description: Represents a dimension for a customized metric.
   MetricDimensionName:
     type: string
   MetricDimensionValue:
@@ -433,6 +468,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/ErrorMessage'
+    description: The specified object could not be found.
   PolicyName:
     type: string
     pattern: '\p{Print}+'
@@ -449,8 +485,11 @@ definitions:
     properties:
       PredefinedScalingMetricType:
         $ref: '#/definitions/ScalingMetricType'
+        description: 'The metric type. The <code>ALBRequestCountPerTarget</code> metric type applies only to Auto Scaling groups, Sport Fleet requests, and ECS services.'
       ResourceLabel:
         $ref: '#/definitions/ResourceLabel'
+        description: '<p>Identifies the resource associated with the metric type. You can''t specify a resource label unless the metric type is <code>ALBRequestCountPerTarget</code> and there is a target group attached to the Auto Scaling group, Spot Fleet request, or ECS service.</p> <p>The format is app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;, where:</p> <ul> <li> <p>app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the final portion of the load balancer ARN</p> </li> <li> <p>targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is the final portion of the target group ARN.</p> </li> </ul>'
+    description: Represents a predefined metric for a target tracking policy.
   ResourceCapacity:
     type: integer
   ResourceIdMaxLen1600:
@@ -485,16 +524,23 @@ definitions:
     properties:
       ServiceNamespace:
         $ref: '#/definitions/ServiceNamespace'
+        description: The namespace of the AWS service.
       ResourceId:
         $ref: '#/definitions/ResourceIdMaxLen1600'
+        description: '<p>The ID of the resource. This string consists of the resource type and unique identifier.</p> <ul> <li> <p>Auto Scaling group - The resource type is <code>autoScalingGroup</code> and the unique identifier is the name of the Auto Scaling group. Example: <code>autoScalingGroup/my-asg</code>.</p> </li> <li> <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name and service name. Example: <code>service/default/sample-webapp</code>.</p> </li> <li> <p>Spot fleet request - The resource type is <code>spot-fleet-request</code> and the unique identifier is the Spot fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p> </li> <li> <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the resource ID. Example: <code>table/my-table</code>.</p> </li> <li> <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the resource ID. Example: <code>table/my-table/index/my-table-index</code>.</p> </li> <li> <p>Aurora DB cluster - The resource type is <code>cluster</code> and the unique identifier is the cluster name. Example: <code>cluster:my-db-cluster</code>.</p> </li> </ul>'
       ScalableDimension:
         $ref: '#/definitions/ScalableDimension'
+        description: '<p>The scalable dimension associated with the resource.</p> <ul> <li> <p> <code>autoscaling:autoScalingGroup:DesiredCapacity</code> - The desired capacity of an Auto Scaling group.</p> </li> <li> <p> <code>ecs:service:DesiredCount</code> - The desired task count of an ECS service.</p> </li> <li> <p> <code>ec2:spot-fleet-request:TargetCapacity</code> - The target capacity of a Spot fleet request.</p> </li> <li> <p> <code>dynamodb:table:ReadCapacityUnits</code> - The provisioned read capacity for a DynamoDB table.</p> </li> <li> <p> <code>dynamodb:table:WriteCapacityUnits</code> - The provisioned write capacity for a DynamoDB table.</p> </li> <li> <p> <code>dynamodb:index:ReadCapacityUnits</code> - The provisioned read capacity for a DynamoDB global secondary index.</p> </li> <li> <p> <code>dynamodb:index:WriteCapacityUnits</code> - The provisioned write capacity for a DynamoDB global secondary index.</p> </li> <li> <p> <code>rds:cluster:ReadReplicaCount</code> - The count of Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible edition.</p> </li> </ul>'
       MinCapacity:
         $ref: '#/definitions/ResourceCapacity'
+        description: The minimum value to scale to in response to a scale in event.
       MaxCapacity:
         $ref: '#/definitions/ResourceCapacity'
+        description: The maximum value to scale to in response to a scale out event.
       TargetTrackingConfigurations:
         $ref: '#/definitions/TargetTrackingConfigurations'
+        description: The target tracking scaling policies (up to 10).
+    description: Specifies the scaling configuration for a scalable resource.
   ScalingInstructions:
     type: array
     items:
@@ -526,18 +572,26 @@ definitions:
     properties:
       ScalingPlanName:
         $ref: '#/definitions/ScalingPlanName'
+        description: The name of the scaling plan.
       ScalingPlanVersion:
         $ref: '#/definitions/ScalingPlanVersion'
+        description: The version of the scaling plan.
       ApplicationSource:
         $ref: '#/definitions/ApplicationSource'
+        description: The application source.
       ScalingInstructions:
         $ref: '#/definitions/ScalingInstructions'
+        description: The scaling instructions.
       StatusCode:
         $ref: '#/definitions/ScalingPlanStatusCode'
+        description: '<p>The status of the scaling plan.</p> <ul> <li> <p> <code>Active</code> - The scaling plan is active.</p> </li> <li> <p> <code>ActiveWithProblems</code> - The scaling plan is active, but the scaling configuration for one or more resources could not be applied.</p> </li> <li> <p> <code>CreationInProgress</code> - The scaling plan is being created.</p> </li> <li> <p> <code>CreationFailed</code> - The scaling plan could not be created.</p> </li> <li> <p> <code>DeletionInProgress</code> - The scaling plan is being deleted.</p> </li> <li> <p> <code>DeletionFailed</code> - The scaling plan could not be deleted.</p> </li> </ul>'
       StatusMessage:
         $ref: '#/definitions/XmlString'
+        description: A simple message about the current status of the scaling plan.
       CreationTime:
         $ref: '#/definitions/TimestampType'
+        description: The Unix timestamp when the scaling plan was created.
+    description: Represents a scaling plan.
   ScalingPlanName:
     type: string
     pattern: '[\p{Print}&&[^|]]+'
@@ -559,20 +613,29 @@ definitions:
     properties:
       ScalingPlanName:
         $ref: '#/definitions/ScalingPlanName'
+        description: The name of the scaling plan.
       ScalingPlanVersion:
         $ref: '#/definitions/ScalingPlanVersion'
+        description: The version of the scaling plan.
       ServiceNamespace:
         $ref: '#/definitions/ServiceNamespace'
+        description: The namespace of the AWS service.
       ResourceId:
         $ref: '#/definitions/ResourceIdMaxLen1600'
+        description: '<p>The ID of the resource. This string consists of the resource type and unique identifier.</p> <ul> <li> <p>Auto Scaling group - The resource type is <code>autoScalingGroup</code> and the unique identifier is the name of the Auto Scaling group. Example: <code>autoScalingGroup/my-asg</code>.</p> </li> <li> <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name and service name. Example: <code>service/default/sample-webapp</code>.</p> </li> <li> <p>Spot fleet request - The resource type is <code>spot-fleet-request</code> and the unique identifier is the Spot fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p> </li> <li> <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the resource ID. Example: <code>table/my-table</code>.</p> </li> <li> <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the resource ID. Example: <code>table/my-table/index/my-table-index</code>.</p> </li> <li> <p>Aurora DB cluster - The resource type is <code>cluster</code> and the unique identifier is the cluster name. Example: <code>cluster:my-db-cluster</code>.</p> </li> </ul>'
       ScalableDimension:
         $ref: '#/definitions/ScalableDimension'
+        description: '<p>The scalable dimension for the resource.</p> <ul> <li> <p> <code>autoscaling:autoScalingGroup:DesiredCapacity</code> - The desired capacity of an Auto Scaling group.</p> </li> <li> <p> <code>ecs:service:DesiredCount</code> - The desired task count of an ECS service.</p> </li> <li> <p> <code>ec2:spot-fleet-request:TargetCapacity</code> - The target capacity of a Spot fleet request.</p> </li> <li> <p> <code>dynamodb:table:ReadCapacityUnits</code> - The provisioned read capacity for a DynamoDB table.</p> </li> <li> <p> <code>dynamodb:table:WriteCapacityUnits</code> - The provisioned write capacity for a DynamoDB table.</p> </li> <li> <p> <code>dynamodb:index:ReadCapacityUnits</code> - The provisioned read capacity for a DynamoDB global secondary index.</p> </li> <li> <p> <code>dynamodb:index:WriteCapacityUnits</code> - The provisioned write capacity for a DynamoDB global secondary index.</p> </li> <li> <p> <code>rds:cluster:ReadReplicaCount</code> - The count of Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible edition.</p> </li> </ul>'
       ScalingPolicies:
         $ref: '#/definitions/ScalingPolicies'
+        description: The scaling policies.
       ScalingStatusCode:
         $ref: '#/definitions/ScalingStatusCode'
+        description: <p>The scaling status of the resource.</p> <ul> <li> <p> <code>Active</code> - The scaling configuration is active.</p> </li> <li> <p> <code>Inactive</code> - The scaling configuration is not active because the scaling plan is being created or the scaling configuration could not be applied. Check the status message for more information.</p> </li> <li> <p> <code>PartiallyActive</code> - The scaling configuration is partially active because the scaling plan is being created or deleted or the scaling configuration could not be fully applied. Check the status message for more information.</p> </li> </ul>
       ScalingStatusMessage:
         $ref: '#/definitions/XmlString'
+        description: A simple message about the current scaling status of the resource.
+    description: Represents a scalable resource.
   ScalingPlanResources:
     type: array
     items:
@@ -604,10 +667,14 @@ definitions:
     properties:
       PolicyName:
         $ref: '#/definitions/PolicyName'
+        description: The name of the scaling policy.
       PolicyType:
         $ref: '#/definitions/PolicyType'
+        description: The type of scaling policy.
       TargetTrackingConfiguration:
         $ref: '#/definitions/TargetTrackingConfiguration'
+        description: The target tracking scaling policy.
+    description: Represents a scaling policy.
   ScalingStatusCode:
     type: string
     enum:
@@ -629,18 +696,26 @@ definitions:
     properties:
       PredefinedScalingMetricSpecification:
         $ref: '#/definitions/PredefinedScalingMetricSpecification'
+        description: A predefined metric.
       CustomizedScalingMetricSpecification:
         $ref: '#/definitions/CustomizedScalingMetricSpecification'
+        description: A customized metric.
       TargetValue:
         $ref: '#/definitions/MetricScale'
+        description: The target value for the metric. The range is 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).
       DisableScaleIn:
         $ref: '#/definitions/DisableScaleIn'
+        description: 'Indicates whether scale in by the target tracking policy is disabled. If the value is <code>true</code>, scale in is disabled and the target tracking policy won''t remove capacity from the scalable resource. Otherwise, scale in is enabled and the target tracking policy can remove capacity from the scalable resource. The default value is <code>false</code>.'
       ScaleOutCooldown:
         $ref: '#/definitions/Cooldown'
+        description: '<p>The amount of time, in seconds, after a scale out activity completes before another scale out activity can start. This value is not used if the scalable resource is an Auto Scaling group.</p> <p>While the cooldown period is in effect, the capacity that has been added by the previous scale out event that initiated the cooldown is calculated as part of the desired capacity for the next scale out. The intention is to continuously (but not excessively) scale out.</p>'
       ScaleInCooldown:
         $ref: '#/definitions/Cooldown'
+        description: '<p>The amount of time, in seconds, after a scale in activity completes before another scale in activity can start. This value is not used if the scalable resource is an Auto Scaling group.</p> <p>The cooldown period is used to block subsequent scale in requests until it has expired. The intention is to scale in conservatively to protect your application''s availability. However, if another alarm triggers a scale out policy during the cooldown period after a scale-in, AWS Auto Scaling scales out your scalable target immediately.</p>'
       EstimatedInstanceWarmup:
         $ref: '#/definitions/Cooldown'
+        description: 'The estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics. This value is used only if the resource is an Auto Scaling group.'
+    description: Represents a target tracking scaling policy.
   TargetTrackingConfigurations:
     type: array
     items:
@@ -653,6 +728,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/ErrorMessage'
+    description: An exception was thrown for a validation issue. Review the parameters provided.
   XmlString:
     type: string
     x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'

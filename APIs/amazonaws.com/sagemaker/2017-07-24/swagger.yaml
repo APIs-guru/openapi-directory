@@ -946,7 +946,7 @@ paths:
   '/#UpdateEndpointWeightsAndCapacities':
     post:
       operationId: UpdateEndpointWeightsAndCapacities
-      description: 'Updates variant weight, capacity, or both of one or more variants associated with an endpoint. This operation updates weight, capacity, or both for the previously provisioned endpoint. When it receives the request, Amazon SageMaker sets the endpoint status to <code>Updating</code>. After updating the endpoint, it sets the status to <code>InService</code>. To check the status of an endpoint, use the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html">DescribeEndpoint</a> API. '
+      description: 'Updates variant weight of one or more variants associated with an existing endpoint, or capacity of one variant associated with an existing endpoint. When it receives the request, Amazon SageMaker sets the endpoint status to <code>Updating</code>. After updating the endpoint, it sets the status to <code>InService</code>. To check the status of an endpoint, use the <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html">DescribeEndpoint</a> API. '
       responses:
         '200':
           description: Success
@@ -1108,6 +1108,9 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: 'An array of key-value pairs. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. '
+      KmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.
   CreateEndpointConfigOutput:
     type: object
     required:
@@ -1347,6 +1350,9 @@ definitions:
       ProductionVariants:
         $ref: '#/definitions/ProductionVariantList'
         description: 'An array of <code>ProductionVariant</code> objects, one for each model that you want to host at this endpoint.'
+      KmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it on the ML storage volume attached to the instance.
       CreationTime:
         $ref: '#/definitions/Timestamp'
         description: A timestamp that shows when the endpoint configuration was created.
@@ -2183,6 +2189,9 @@ definitions:
       VolumeSizeInGB:
         $ref: '#/definitions/VolumeSizeInGB'
         description: '<p>The size of the ML storage volume that you want to provision. </p> <p>ML storage volumes store model artifacts and incremental states. Training algorithms might also use the ML storage volume for scratch space. If you want to store the training data in the ML storage volume, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. </p> <p>You must specify sufficient ML storage for your scenario. </p> <note> <p> Amazon SageMaker supports only the General Purpose SSD (gp2) ML storage volume type. </p> </note>'
+      VolumeKmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the training job.
     description: 'Describes the resources, including ML compute instances and ML storage volumes, to use for model training. '
   ResourceInUse:
     type: object
