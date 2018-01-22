@@ -219,7 +219,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -287,7 +297,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -384,7 +404,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -462,7 +492,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -781,8 +821,6 @@ definitions:
               - description: 'Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4.'
                 value: clientCredentials
         type: array
-  ErrorFieldContract:
-    type: object
   TokenBodyParameterContract:
     description: OAuth acquire token request body parameter (www-url-form-encoded).
     properties:

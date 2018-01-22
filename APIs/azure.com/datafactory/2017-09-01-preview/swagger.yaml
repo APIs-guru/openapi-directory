@@ -1464,7 +1464,43 @@ paths:
               nodes:
                 description: Integration runtime node monitoring data.
                 items:
-                  $ref: '#/definitions/IntegrationRuntimeNodeMonitoringData'
+                  additionalProperties:
+                    type: object
+                  description: Monitoring data for integration runtime node.
+                  properties:
+                    availableMemoryInMB:
+                      description: Available memory (MB) on the integration runtime node.
+                      readOnly: true
+                      type: integer
+                    concurrentJobsLimit:
+                      description: Maximum concurrent jobs on the integration runtime node.
+                      readOnly: true
+                      type: integer
+                    concurrentJobsRunning:
+                      description: The number of jobs currently running on the integration runtime node.
+                      readOnly: true
+                      type: integer
+                    cpuUtilization:
+                      description: CPU percentage on the integration runtime node.
+                      readOnly: true
+                      type: number
+                    maxConcurrentJobs:
+                      description: The maximum concurrent jobs in this integration runtime.
+                      readOnly: true
+                      type: integer
+                    nodeName:
+                      description: Name of the integration runtime node.
+                      readOnly: true
+                      type: string
+                    receivedBytes:
+                      description: Received bytes on the integration runtime node.
+                      readOnly: true
+                      type: number
+                    sentBytes:
+                      description: Sent bytes on the integration runtime node.
+                      readOnly: true
+                      type: number
+                  type: object
                 type: array
             type: object
         default:
@@ -3536,8 +3572,6 @@ paths:
       x-ms-pageable:
         nextLinkName: nextLink
 definitions:
-  Activity:
-    type: object
   ActivityRun:
     additionalProperties:
       type: object
@@ -3701,7 +3735,27 @@ definitions:
               - referenceName
           parameters:
             additionalProperties:
-              $ref: '#/definitions/ParameterSpecification'
+              description: Definition of a single parameter for an entity.
+              properties:
+                defaultValue:
+                  description: Default value of parameter.
+                  type: object
+                type:
+                  description: Parameter type.
+                  enum:
+                    - Object
+                    - String
+                    - Int
+                    - Float
+                    - Bool
+                    - Array
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: ParameterType
+              required:
+                - type
+              type: object
             description: Definition of all parameters for an entity.
             type: object
           structure:
@@ -3845,14 +3899,14 @@ definitions:
     required:
       - value
     type: object
-  IntegrationRuntimeNodeMonitoringData:
-    type: object
   IntegrationRuntimeReference:
     description: Integration runtime reference type.
     properties:
       parameters:
-        $ref: '#/definitions/ParameterValueSpecification'
-        description: Arguments for integration runtime.
+        additionalProperties:
+          type: object
+        description: An object mapping parameter names to argument values.
+        type: object
       referenceName:
         description: Reference integration runtime name.
         type: string
@@ -3879,15 +3933,19 @@ definitions:
             description: Integration runtime description.
             type: string
           type:
-            $ref: '#/definitions/IntegrationRuntimeType'
-            description: Type of integration runtime.
+            description: The type of integration runtime.
+            enum:
+              - Managed
+              - SelfHosted
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: IntegrationRuntimeType
         required:
           - type
         type: object
     required:
       - properties
-  IntegrationRuntimeState:
-    type: object
   IntegrationRuntimeStatusListResponse:
     description: A list of integration runtime status.
     properties:
@@ -3915,18 +3973,39 @@ definitions:
         description: Integration runtime status.
         discriminator: type
         properties:
-          state:
-            $ref: '#/definitions/IntegrationRuntimeState'
-            description: The state of integration runtime.
+          dataFactoryName:
+            description: The data factory name which the integration runtime belong to.
             readOnly: true
+            type: string
+          state:
+            description: The state of integration runtime.
+            enum:
+              - Initial
+              - Stopped
+              - Started
+              - Starting
+              - Stopping
+              - NeedRegistration
+              - Online
+              - Limited
+              - Offline
+            readOnly: true
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: IntegrationRuntimeState
           type:
-            $ref: '#/definitions/IntegrationRuntimeType'
-            description: Type of integration runtime.
+            description: The type of integration runtime.
+            enum:
+              - Managed
+              - SelfHosted
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: IntegrationRuntimeType
         type: object
     required:
       - properties
-  IntegrationRuntimeType:
-    type: object
   LinkedServiceListResponse:
     description: A list of linked service resources.
     properties:
@@ -3970,8 +4049,10 @@ definitions:
             description: Integration runtime reference type.
             properties:
               parameters:
-                $ref: '#/definitions/ParameterValueSpecification'
-                description: Arguments for integration runtime.
+                additionalProperties:
+                  type: object
+                description: An object mapping parameter names to argument values.
+                type: object
               referenceName:
                 description: Reference integration runtime name.
                 type: string
@@ -4114,7 +4195,27 @@ definitions:
     type: object
   ParameterDefinitionSpecification:
     additionalProperties:
-      $ref: '#/definitions/ParameterSpecification'
+      description: Definition of a single parameter for an entity.
+      properties:
+        defaultValue:
+          description: Default value of parameter.
+          type: object
+        type:
+          description: Parameter type.
+          enum:
+            - Object
+            - String
+            - Int
+            - Float
+            - Bool
+            - Array
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: ParameterType
+      required:
+        - type
+      type: object
     description: Definition of all parameters for an entity.
     type: object
   ParameterSpecification:
@@ -4188,7 +4289,52 @@ definitions:
           activities:
             description: List of activities in pipeline.
             items:
-              $ref: '#/definitions/Activity'
+              additionalProperties:
+                type: object
+              description: A pipeline activity.
+              discriminator: type
+              properties:
+                dependsOn:
+                  description: Activity depends on condition.
+                  items:
+                    additionalProperties:
+                      type: object
+                    description: Activity dependency information.
+                    properties:
+                      activity:
+                        description: Activity name.
+                        type: string
+                      dependencyConditions:
+                        description: Match-Condition for the dependency.
+                        items:
+                          enum:
+                            - Succeeded
+                            - Failed
+                            - Skipped
+                            - Completed
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: DependencyCondition
+                        type: array
+                    required:
+                      - activity
+                      - dependencyConditions
+                    type: object
+                  type: array
+                description:
+                  description: Activity description.
+                  type: string
+                name:
+                  description: Activity name.
+                  type: string
+                type:
+                  description: Type of activity.
+                  type: string
+              required:
+                - name
+                - type
+              type: object
             type: array
           concurrency:
             description: The max number of concurrent runs for the pipeline.
@@ -4199,7 +4345,27 @@ definitions:
             type: string
           parameters:
             additionalProperties:
-              $ref: '#/definitions/ParameterSpecification'
+              description: Definition of a single parameter for an entity.
+              properties:
+                defaultValue:
+                  description: Default value of parameter.
+                  type: object
+                type:
+                  description: Parameter type.
+                  enum:
+                    - Object
+                    - String
+                    - Int
+                    - Float
+                    - Bool
+                    - Array
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: ParameterType
+              required:
+                - type
+              type: object
             description: Definition of all parameters for an entity.
             type: object
         type: object
@@ -4478,9 +4644,15 @@ definitions:
             description: Trigger description.
             type: string
           runtimeState:
-            $ref: '#/definitions/TriggerRuntimeState'
-            description: Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the Trigger.
-            readOnly: true
+            description: Enumerates possible state of Triggers.
+            enum:
+              - Started
+              - Stopped
+              - Disabled
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: TriggerRuntimeState
           type:
             description: Trigger type.
             type: string
@@ -4552,8 +4724,6 @@ definitions:
         type: array
     required:
       - value
-    type: object
-  TriggerRuntimeState:
     type: object
   UpdateIntegrationRuntimeNodeRequest:
     description: Update integration runtime node request.

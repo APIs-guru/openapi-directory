@@ -166,7 +166,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -182,7 +192,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -239,7 +259,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -301,7 +331,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -317,7 +357,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -376,7 +426,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -460,7 +520,50 @@ paths:
               value:
                 description: Page values.
                 items:
-                  $ref: '#/definitions/UserContract'
+                  description: User profile.
+                  properties:
+                    email:
+                      description: Email address.
+                      type: string
+                    firstName:
+                      description: First name.
+                      type: string
+                    id:
+                      description: User identifier path.
+                      type: string
+                    identities:
+                      description: Collection of user identities.
+                      items:
+                        description: User identity details.
+                        properties:
+                          id:
+                            description: Identifier value within provider.
+                            type: string
+                          provider:
+                            description: Identity provider name.
+                            type: string
+                      readOnly: true
+                      type: array
+                    lastName:
+                      description: Last name.
+                      type: string
+                    note:
+                      description: Administrator's note about given user.
+                      type: string
+                    registrationDate:
+                      description: |
+                        Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                      format: date-time
+                      type: string
+                    state:
+                      description: User state.
+                      enum:
+                        - Active
+                        - Blocked
+                      type: string
+                      x-ms-enum:
+                        modelAsString: false
+                        name: UserStateContract
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -473,7 +576,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -537,7 +650,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -553,7 +676,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -615,7 +748,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -631,7 +774,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -639,8 +792,6 @@ paths:
       tags:
         - GroupUsers
 definitions:
-  ErrorFieldContract:
-    type: object
   GroupCollection:
     description: Paged Group list representation.
     properties:
@@ -743,5 +894,3 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: GroupTypeContract
-  UserContract:
-    type: object

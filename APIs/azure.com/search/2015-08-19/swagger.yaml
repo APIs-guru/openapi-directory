@@ -22,10 +22,8 @@ info:
     - Microsoft
 consumes:
   - application/json
-  - text/json
 produces:
   - application/json
-  - text/json
 securityDefinitions:
   azure_auth:
     authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
@@ -77,6 +75,20 @@ parameters:
     required: true
     type: string
 paths:
+  /providers/Microsoft.Search/operations:
+    get:
+      description: Lists all of the available REST API operations of the Microsoft.Search provider.
+      operationId: Operations_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Success. The response describes the list of operations.
+          schema:
+            $ref: '#/definitions/OperationListResult'
+      tags:
+        - Operations
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/providers/Microsoft.Search/checkNameAvailability':
     post:
       description: 'Checks whether or not the given Search service name is available for use. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net).'
@@ -97,11 +109,6 @@ paths:
       responses:
         '200':
           description: 'The name check completed. The response contains details of whether the name is valid and available. If the name is invalid, the response also contains a message explaining why not.'
-          examples:
-            application/json:
-              message: ''
-              nameAvailable: false
-              reason: AlreadyExists
           schema:
             $ref: '#/definitions/CheckNameAvailabilityOutput'
         default:
@@ -110,6 +117,20 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - Services
+      x-ms-examples:
+        SearchCheckNameAvailability:
+          parameters:
+            api-version: '2015-08-19'
+            checkNameAvailabilityInput:
+              name: mysearchservice
+              type: searchServices
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                message: ''
+                nameAvailable: false
+                reason: AlreadyExists
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices':
     get:
       description: Gets a list of all Search services in the given resource group.
@@ -124,39 +145,6 @@ paths:
       responses:
         '200':
           description: The operation succeeded. The response contains the list of all Search service definitions for the given resource group.
-          examples:
-            application/json:
-              value:
-                - id: /subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/your-service-name-here
-                  location: westus
-                  name: your-service-name-here
-                  properties:
-                    hostingMode: default
-                    partitionCount: 1
-                    provisioningState: succeeded
-                    replicaCount: 3
-                    status: running
-                    statusDetails: ''
-                  sku:
-                    name: standard
-                  tags:
-                    app-name: My e-commerce app
-                  type: Microsoft.Search/searchServices
-                - id: /subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/your-second-service-name-here
-                  location: eastus
-                  name: your-second-service-name-here
-                  properties:
-                    hostingMode: default
-                    partitionCount: 1
-                    provisioningState: succeeded
-                    replicaCount: 1
-                    status: running
-                    statusDetails: ''
-                  sku:
-                    name: basic
-                  tags:
-                    app-name: My e-commerce app
-                  type: Microsoft.Search/searchServices
           schema:
             $ref: '#/definitions/SearchServiceListResult'
         default:
@@ -165,6 +153,46 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - Services
+      x-ms-examples:
+        SearchListServicesByResourceGroup:
+          parameters:
+            api-version: '2015-08-19'
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice
+                    location: westus
+                    name: mysearchservice
+                    properties:
+                      hostingMode: default
+                      partitionCount: 1
+                      provisioningState: succeeded
+                      replicaCount: 3
+                      status: running
+                      statusDetails: ''
+                    sku:
+                      name: standard
+                    tags:
+                      app-name: My e-commerce app
+                    type: Microsoft.Search/searchServices
+                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice2
+                    location: eastus
+                    name: mysearchservice2
+                    properties:
+                      hostingMode: default
+                      partitionCount: 1
+                      provisioningState: succeeded
+                      replicaCount: 1
+                      status: running
+                      statusDetails: ''
+                    sku:
+                      name: basic
+                    tags:
+                      app-name: My e-commerce app
+                    type: Microsoft.Search/searchServices
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}':
     delete:
@@ -191,6 +219,17 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - Services
+      x-ms-examples:
+        SearchDeleteService:
+          parameters:
+            api-version: '2015-08-19'
+            resourceGroupName: rg1
+            searchServiceName: mysearchservice
+            subscriptionId: subid
+          responses:
+            '200': {}
+            '204': {}
+            '404': {}
     get:
       description: Gets the Search service with the given name in the given resource group.
       externalDocs:
@@ -205,23 +244,6 @@ paths:
       responses:
         '200':
           description: 'The Search service definition was successfully retrieved and is in the response. If you are polling for the completion of a provisioning or scale operation, you can check its status via the provisioningState property.'
-          examples:
-            application/json:
-              id: /subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/your-service-name-here
-              location: westus
-              name: your-service-name-here
-              properties:
-                hostingMode: default
-                partitionCount: 1
-                provisioningState: succeeded
-                replicaCount: 3
-                status: running
-                statusDetails: ''
-              sku:
-                name: standard
-              tags:
-                app-name: My e-commerce app
-              type: Microsoft.Search/searchServices
           schema:
             $ref: '#/definitions/SearchService'
         default:
@@ -230,6 +252,94 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - Services
+      x-ms-examples:
+        SearchGetService:
+          parameters:
+            api-version: '2015-08-19'
+            resourceGroupName: rg1
+            searchServiceName: mysearchservice
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice
+                location: westus
+                name: mysearchservice
+                properties:
+                  hostingMode: default
+                  partitionCount: 1
+                  provisioningState: succeeded
+                  replicaCount: 3
+                  status: running
+                  statusDetails: ''
+                sku:
+                  name: standard
+                tags:
+                  app-name: My e-commerce app
+                type: Microsoft.Search/searchServices
+    patch:
+      description: Updates an existing Search service in the given resource group.
+      externalDocs:
+        url: 'https://aka.ms/search-manage'
+      operationId: Services_Update
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - description: The name of the Azure Search service to update.
+          in: path
+          name: searchServiceName
+          required: true
+          type: string
+        - description: The definition of the Search service to update.
+          in: body
+          name: service
+          required: true
+          schema:
+            $ref: '#/definitions/SearchService'
+        - $ref: '#/parameters/ClientRequestIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: 'The existing service definition was successfully updated. If you changed the number of replicas or partitions, the scale operation will happen asynchronously. You can periodically get your service definition and monitor progress via the provisioningState property.'
+          schema:
+            $ref: '#/definitions/SearchService'
+        default:
+          description: 'HTTP 400 (Bad Request): The given service definition is invalid or you attempted to change a property that is immutable; See the error code and message in the response for details. HTTP 404 (Not Found): The subscription or resource group could not be found. HTTP 409 (Conflict): The specified subscription is disabled.'
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Services
+      x-ms-examples:
+        SearchUpdateService:
+          parameters:
+            api-version: '2015-08-19'
+            resourceGroupName: rg1
+            searchServiceName: mysearchservice
+            service:
+              properties:
+                replicaCount: 2
+              tags:
+                app-name: My e-commerce app
+                new-tag: Adding a new tag
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice
+                location: westus
+                name: mysearchservice
+                properties:
+                  hostingMode: default
+                  partitionCount: 1
+                  provisioningState: provisioning
+                  replicaCount: 3
+                  status: provisioning
+                  statusDetails: ''
+                sku:
+                  name: standard
+                tags:
+                  app-name: My e-commerce app
+                type: Microsoft.Search/searchServices
     put:
       description: 'Creates or updates a Search service in the given resource group. If the Search service already exists, all properties will be updated with the given values.'
       externalDocs:
@@ -254,44 +364,10 @@ paths:
       responses:
         '200':
           description: 'The existing service definition was successfully updated. If you changed the number of replicas or partitions, the scale operation will happen asynchronously. You can periodically get your service definition and monitor progress via the provisioningState property.'
-          examples:
-            application/json:
-              id: /subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/your-service-name-here
-              location: westus
-              name: your-service-name-here
-              properties:
-                hostingMode: default
-                partitionCount: 1
-                provisioningState: provisioning
-                replicaCount: 3
-                status: provisioning
-                statusDetails: ''
-              sku:
-                name: standard
-              tags:
-                app-name: My e-commerce app
-              type: Microsoft.Search/searchServices
           schema:
             $ref: '#/definitions/SearchService'
         '201':
           description: 'If you requested creation of a free Search service, the service is now provisioned and ready to use, subject to DNS propagation delay. For other SKU types, provisioning happens asynchronously. You can periodically get your service definition and monitor progress via the provisioningState property.'
-          examples:
-            application/json:
-              id: /subscriptions/<your subscription ID here>/resourceGroups/Default-ResourceGroup/providers/Microsoft.Search/searchServices/your-service-name-here
-              location: westus
-              name: your-service-name-here
-              properties:
-                hostingMode: default
-                partitionCount: 1
-                provisioningState: provisioning
-                replicaCount: 3
-                status: provisioning
-                statusDetails: ''
-              sku:
-                name: standard
-              tags:
-                app-name: My e-commerce app
-              type: Microsoft.Search/searchServices
           schema:
             $ref: '#/definitions/SearchService'
         default:
@@ -300,6 +376,58 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - Services
+      x-ms-examples:
+        SearchCreateOrUpdateService:
+          parameters:
+            api-version: '2015-08-19'
+            resourceGroupName: rg1
+            searchServiceName: mysearchservice
+            service:
+              location: westus
+              properties:
+                hostingMode: default
+                partitionCount: 1
+                replicaCount: 3
+              sku:
+                name: standard
+              tags:
+                app-name: My e-commerce app
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice
+                location: westus
+                name: mysearchservice
+                properties:
+                  hostingMode: default
+                  partitionCount: 1
+                  provisioningState: provisioning
+                  replicaCount: 3
+                  status: provisioning
+                  statusDetails: ''
+                sku:
+                  name: standard
+                tags:
+                  app-name: My e-commerce app
+                type: Microsoft.Search/searchServices
+            '201':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice
+                location: westus
+                name: mysearchservice
+                properties:
+                  hostingMode: default
+                  partitionCount: 1
+                  provisioningState: provisioning
+                  replicaCount: 3
+                  status: provisioning
+                  statusDetails: ''
+                sku:
+                  name: standard
+                tags:
+                  app-name: My e-commerce app
+                type: Microsoft.Search/searchServices
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/createQueryKey/{name}':
     post:
@@ -321,10 +449,6 @@ paths:
       responses:
         '200':
           description: The query key was successfully created and is in the response. You can use the query key as the value of the 'api-key' parameter in the Azure Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.
-          examples:
-            application/json:
-              key: <a query API key>
-              name: Query key for browser-based clients
           schema:
             $ref: '#/definitions/QueryKey'
         default:
@@ -333,6 +457,19 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - QueryKeys
+      x-ms-examples:
+        SearchCreateQueryKey:
+          parameters:
+            api-version: '2015-08-19'
+            name: Query key for browser-based clients
+            resourceGroupName: rg1
+            searchServiceName: mysearchservice
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                key: <a query API key>
+                name: Query key for browser-based clients
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/deleteQueryKey/{key}':
     delete:
       description: 'Deletes the specified query key. Unlike admin keys, query keys are not regenerated. The process for regenerating a query key is to delete and then recreate it.'
@@ -363,6 +500,18 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - QueryKeys
+      x-ms-examples:
+        SearchDeleteQueryKey:
+          parameters:
+            api-version: '2015-08-19'
+            key: <a query API key>
+            resourceGroupName: rg1
+            searchServiceName: mysearchservice
+            subscriptionId: subid
+          responses:
+            '200': {}
+            '204': {}
+            '404': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/listAdminKeys':
     post:
       description: Gets the primary and secondary admin API keys for the specified Azure Search service.
@@ -378,10 +527,6 @@ paths:
       responses:
         '200':
           description: 'The admin keys were successfully retrieved and are in the response. You can use either the primary or secondary key as the value of the ''api-key'' parameter in the Azure Search Service REST API or SDK to perform any operations on your Search service, including privileged operations. Privileged operations include managing resources like indexes and data sources as well as uploading, modifying, or deleting data in your indexes.'
-          examples:
-            application/json:
-              primaryKey: <your primary admin API key>
-              secondaryKey: <your secondary admin API key>
           schema:
             $ref: '#/definitions/AdminKeyResult'
         default:
@@ -390,6 +535,18 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - AdminKeys
+      x-ms-examples:
+        SearchGetAdminKeys:
+          parameters:
+            api-version: '2015-08-19'
+            resourceGroupName: rg1
+            searchServiceName: mysearchservice
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                primaryKey: <your primary admin API key>
+                secondaryKey: <your secondary admin API key>
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/listQueryKeys':
     get:
       description: Returns the list of query API keys for the given Azure Search service.
@@ -405,13 +562,6 @@ paths:
       responses:
         '200':
           description: All query keys for the given Search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in the Azure Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.
-          examples:
-            application/json:
-              value:
-                - key: <a query API key>
-                  name: Query key for browser-based clients
-                - key: <another query API key>
-                  name: Query key for mobile clients
           schema:
             $ref: '#/definitions/ListQueryKeysResult'
         default:
@@ -420,6 +570,21 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - QueryKeys
+      x-ms-examples:
+        SearchListQueryKeysBySearchService:
+          parameters:
+            api-version: '2015-08-19'
+            resourceGroupName: rg1
+            searchServiceName: mysearchservice
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - key: <a query API key>
+                    name: Query key for browser-based clients
+                  - key: <another query API key>
+                    name: Query key for mobile clients
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/regenerateAdminKey/{keyKind}':
     post:
@@ -447,10 +612,6 @@ paths:
       responses:
         '200':
           description: 'The specified admin key was successfully regenerated. Both admin keys are included in the response, including the newly-regenerated key.'
-          examples:
-            application/json:
-              primaryKey: <your primary admin API key>
-              secondaryKey: <your secondary admin API key>
           schema:
             $ref: '#/definitions/AdminKeyResult'
         default:
@@ -459,6 +620,19 @@ paths:
             $ref: '#/definitions/CloudError'
       tags:
         - AdminKeys
+      x-ms-examples:
+        SearchRegenerateAdminKey:
+          parameters:
+            api-version: '2015-08-19'
+            keyKind: primary
+            resourceGroupName: rg1
+            searchServiceName: mysearchservice
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                primaryKey: <your primary admin API key>
+                secondaryKey: <your secondary admin API key>
 definitions:
   AdminKeyResult:
     description: Response containing the primary and secondary admin API keys for a given Azure Search service.
@@ -473,9 +647,6 @@ definitions:
         type: string
   CheckNameAvailabilityInput:
     description: Input of check name availability API.
-    example:
-      name: your-service-name-here
-      type: searchServices
     properties:
       name:
         description: 'The Search service name to validate. Search service names must only contain lowercase letters, digits or dashes, cannot use dash as the first two or last one characters, cannot contain consecutive dashes, and must be between 2 and 60 characters in length.'
@@ -520,6 +691,7 @@ definitions:
     properties:
       error:
         $ref: '#/definitions/CloudErrorBody'
+        description: Describes a particular API error with an error code and a message.
     type: object
     x-ms-external: true
   CloudErrorBody:
@@ -551,6 +723,47 @@ definitions:
         readOnly: true
         type: array
     x-ms-external: true
+  Operation:
+    description: Describes a REST API operation.
+    properties:
+      display:
+        description: The object that describes the operation.
+        properties:
+          description:
+            description: The friendly name of the operation.
+            readOnly: true
+            type: string
+          operation:
+            description: 'The operation type: read, write, delete, listKeys/action, etc.'
+            readOnly: true
+            type: string
+          provider:
+            description: The friendly name of the resource provider.
+            readOnly: true
+            type: string
+          resource:
+            description: The resource type on which the operation is performed.
+            readOnly: true
+            type: string
+        readOnly: true
+      name:
+        description: 'The name of the operation. This name is of the form {provider}/{resource}/{operation}.'
+        readOnly: true
+        type: string
+    type: object
+  OperationListResult:
+    description: The result of the request to list REST API operations. It contains a list of operations and a URL  to get the next set of results.
+    properties:
+      nextLink:
+        description: 'The URL to get the next set of operation list results, if any.'
+        readOnly: true
+        type: string
+      value:
+        description: The list of operations supported by the resource provider.
+        items:
+          $ref: '#/definitions/Operation'
+        readOnly: true
+        type: array
   QueryKey:
     description: Describes an API key for a given Azure Search service that has permissions for query operations only.
     properties:
@@ -572,7 +785,7 @@ definitions:
         readOnly: true
         type: string
       location:
-        description: 'The geographic location of the resource. This must be one of the supported and registered Azure Geo Regions (for example, West US, East US, Southeast Asia, and so forth).'
+        description: 'The geographic location of the resource. This must be one of the supported and registered Azure Geo Regions (for example, West US, East US, Southeast Asia, and so forth). This property is required when creating a new resource.'
         externalDocs:
           url: 'https://aka.ms/search-rp-info'
         type: string
@@ -594,23 +807,11 @@ definitions:
         description: The resource type.
         readOnly: true
         type: string
-    required:
-      - location
     x-ms-azure-resource: true
   SearchService:
     allOf:
       - $ref: '#/definitions/Resource'
     description: Describes an Azure Search service and its current state.
-    example:
-      location: westus
-      properties:
-        hostingMode: default
-        partitionCount: 1
-        replicaCount: 3
-      sku:
-        name: standard
-      tags:
-        app-name: My e-commerce app
     properties:
       properties:
         $ref: '#/definitions/SearchServiceProperties'
@@ -618,11 +819,9 @@ definitions:
         x-ms-client-flatten: true
       sku:
         $ref: '#/definitions/Sku'
-        description: 'The SKU of the Search Service, which determines price tier and capacity limits.'
+        description: 'The SKU of the Search Service, which determines price tier and capacity limits. This property is required when creating a new Search Service.'
         externalDocs:
           url: 'https://azure.microsoft.com/documentation/articles/search-sku-tier/'
-    required:
-      - sku
   SearchServiceListResult:
     description: Response containing a list of Azure Search services.
     properties:

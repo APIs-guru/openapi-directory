@@ -2526,6 +2526,45 @@ paths:
             $ref: '#/definitions/VirtualMachineScaleSetVM'
       tags:
         - VirtualMachineScaleSetVMs
+    put:
+      description: Updates a virtual machine of a VM scale set.
+      operationId: VirtualMachineScaleSetVMs_Update
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the VM scale set where the extension should be create or updated.
+          in: path
+          name: vmScaleSetName
+          required: true
+          type: string
+        - description: The instance ID of the virtual machine.
+          in: path
+          name: instanceId
+          required: true
+          type: string
+        - description: Parameters supplied to the Update Virtual Machine Scale Sets VM operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/VirtualMachineScaleSetVM'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/VirtualMachineScaleSetVM'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/VirtualMachineScaleSetVM'
+      tags:
+        - VirtualMachineScaleSetVMs
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/deallocate':
     post:
       description: Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.
@@ -6657,6 +6696,15 @@ definitions:
       osProfile:
         $ref: '#/definitions/VirtualMachineScaleSetOSProfile'
         description: Specifies the operating system settings for the virtual machines in the scale set.
+      priority:
+        description: 'Specifies the priority for the virtual machines in the scale set. <br><br>Minimum api-version: 2017-10-30-preview'
+        enum:
+          - Regular
+          - Low
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: VirtualMachinePriorityTypes
       storageProfile:
         $ref: '#/definitions/VirtualMachineScaleSetStorageProfile'
         description: Specifies the storage settings for the virtual machine disks.

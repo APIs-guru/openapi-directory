@@ -25,7 +25,7 @@ consumes:
 produces:
   - application/json
 securityDefinitions:
-  oauth2:
+  azure_auth:
     authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
     description: OAuth2 Implicit Grant
     flow: implicit
@@ -33,7 +33,7 @@ securityDefinitions:
       user_impersonation: Access Microsoft Azure
     type: oauth2
 security:
-  - oauth2:
+  - azure_auth:
       - user_impersonation
 parameters:
   api-version:
@@ -64,6 +64,24 @@ parameters:
     required: true
     type: string
 paths:
+  /providers/Microsoft.DevTestLab/operations:
+    get:
+      description: Result of the request to list REST API operations
+      operationId: ProviderOperations_List
+      parameters:
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ProviderOperationResult'
+      security:
+        - azure_auth:
+            - user_impersonation
+      tags:
+        - ProviderOperations
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.DevTestLab/labs':
     get:
       description: List labs in a subscription.
@@ -102,7 +120,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Labs
@@ -132,7 +150,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Operations
@@ -174,7 +192,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - GlobalSchedules
@@ -220,7 +238,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Labs
@@ -271,7 +289,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - ArtifactSources
@@ -327,7 +345,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - ArmTemplates
@@ -372,7 +390,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - ArmTemplates
@@ -425,7 +443,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Artifacts
@@ -470,7 +488,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Artifacts
@@ -513,7 +531,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Artifacts
@@ -545,7 +563,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - ArtifactSources
@@ -581,7 +599,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - ArtifactSources
@@ -618,7 +636,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - ArtifactSources
@@ -659,7 +677,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - ArtifactSources
@@ -696,7 +714,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Costs
@@ -737,7 +755,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Costs
@@ -785,7 +803,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - CustomImages
@@ -820,7 +838,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - CustomImages
@@ -857,7 +875,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - CustomImages
@@ -898,7 +916,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - CustomImages
@@ -947,7 +965,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Formulas
@@ -982,7 +1000,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Formulas
@@ -1018,7 +1036,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Formulas
@@ -1059,7 +1077,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Formulas
@@ -1108,7 +1126,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - GalleryImages
@@ -1159,7 +1177,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - NotificationChannels
@@ -1194,7 +1212,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - NotificationChannels
@@ -1230,7 +1248,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - NotificationChannels
@@ -1267,7 +1285,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - NotificationChannels
@@ -1308,7 +1326,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - NotificationChannels
@@ -1344,7 +1362,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - NotificationChannels
@@ -1382,7 +1400,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - PolicySets
@@ -1435,7 +1453,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Policies
@@ -1475,7 +1493,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Policies
@@ -1516,7 +1534,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Policies
@@ -1558,7 +1576,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Policies
@@ -1604,7 +1622,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Policies
@@ -1652,7 +1670,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Schedules
@@ -1687,7 +1705,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Schedules
@@ -1723,7 +1741,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Schedules
@@ -1760,7 +1778,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Schedules
@@ -1801,7 +1819,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Schedules
@@ -1833,7 +1851,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Schedules
@@ -1866,7 +1884,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Schedules
@@ -1911,7 +1929,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - ServiceRunners
@@ -1946,7 +1964,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - ServiceRunners
@@ -1977,7 +1995,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - ServiceRunners
@@ -2018,7 +2036,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - ServiceRunners
@@ -2066,7 +2084,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Users
@@ -2101,7 +2119,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Users
@@ -2138,7 +2156,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Users
@@ -2175,7 +2193,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Users
@@ -2216,7 +2234,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Users
@@ -2269,7 +2287,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Disks
@@ -2309,7 +2327,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Disks
@@ -2351,7 +2369,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Disks
@@ -2397,7 +2415,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Disks
@@ -2441,7 +2459,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Disks
@@ -2485,7 +2503,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Disks
@@ -2539,7 +2557,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Environments
@@ -2579,7 +2597,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Environments
@@ -2621,7 +2639,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Environments
@@ -2667,7 +2685,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Environments
@@ -2721,7 +2739,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Secrets
@@ -2761,7 +2779,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Secrets
@@ -2802,7 +2820,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Secrets
@@ -2848,7 +2866,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Secrets
@@ -2896,7 +2914,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualMachines
@@ -2931,7 +2949,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualMachines
@@ -2968,7 +2986,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualMachines
@@ -3005,7 +3023,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualMachines
@@ -3046,7 +3064,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualMachines
@@ -3085,7 +3103,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualMachines
@@ -3124,7 +3142,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualMachines
@@ -3157,7 +3175,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualMachines
@@ -3196,7 +3214,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualMachines
@@ -3229,7 +3247,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualMachines
@@ -3261,7 +3279,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualMachines
@@ -3294,7 +3312,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualMachines
@@ -3348,7 +3366,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualMachineSchedules
@@ -3388,7 +3406,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualMachineSchedules
@@ -3429,7 +3447,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualMachineSchedules
@@ -3471,7 +3489,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualMachineSchedules
@@ -3517,7 +3535,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualMachineSchedules
@@ -3554,7 +3572,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualMachineSchedules
@@ -3603,7 +3621,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualNetworks
@@ -3638,7 +3656,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualNetworks
@@ -3675,7 +3693,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualNetworks
@@ -3712,7 +3730,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualNetworks
@@ -3753,7 +3771,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - VirtualNetworks
@@ -3781,7 +3799,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Labs
@@ -3813,7 +3831,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Labs
@@ -3845,7 +3863,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Labs
@@ -3881,7 +3899,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Labs
@@ -3909,7 +3927,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Labs
@@ -3943,7 +3961,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Labs
@@ -3977,7 +3995,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Labs
@@ -4011,7 +4029,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Labs
@@ -4038,7 +4056,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - Labs
@@ -4083,7 +4101,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - GlobalSchedules
@@ -4113,7 +4131,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - GlobalSchedules
@@ -4144,7 +4162,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - GlobalSchedules
@@ -4176,7 +4194,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - GlobalSchedules
@@ -4212,7 +4230,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - GlobalSchedules
@@ -4239,7 +4257,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - GlobalSchedules
@@ -4273,7 +4291,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudError'
       security:
-        - oauth2:
+        - azure_auth:
             - user_impersonation
       tags:
         - GlobalSchedules
@@ -4848,9 +4866,6 @@ definitions:
   CostThresholdProperties:
     description: Properties of a cost threshold item.
     properties:
-      NotificationSent:
-        description: Indicates the datetime when notifications were last sent for this threshold.
-        type: string
       displayOnChart:
         description: Indicates whether this threshold will be displayed on cost charts.
         enum:
@@ -4860,6 +4875,9 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: CostThresholdStatus
+      notificationSent:
+        description: Indicates the datetime when notifications were last sent for this threshold.
+        type: string
       percentageThreshold:
         $ref: '#/definitions/PercentageCostThresholdProperties'
         description: The value of the percentage cost threshold.
@@ -5370,7 +5388,7 @@ definitions:
         type: integer
     type: object
   IdentityProperties:
-    description: IdentityProperties
+    description: Properties of a managed identity
     properties:
       clientSecretUrl:
         description: The client secret URL of the identity.
@@ -6224,6 +6242,32 @@ definitions:
         description: The error message of the operation error.
         type: string
     type: object
+  OperationMetadata:
+    description: The REST API operation supported by DevTestLab ResourceProvider.
+    properties:
+      display:
+        $ref: '#/definitions/OperationMetadataDisplay'
+        description: The object that describes the operations
+      name:
+        description: 'Operation name: {provider}/{resource}/{operation}'
+        type: string
+    type: object
+  OperationMetadataDisplay:
+    description: The object that describes the operations
+    properties:
+      description:
+        description: Friendly name of the operation
+        type: string
+      operation:
+        description: 'Operation type: read, write, delete, listKeys/action, etc.'
+        type: string
+      provider:
+        description: Friendly name of the resource provider
+        type: string
+      resource:
+        description: Resource type on which the operation is performed.
+        type: string
+    type: object
   OperationResult:
     description: An Operation Result
     properties:
@@ -6497,6 +6541,19 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: TransportProtocol
+    type: object
+  ProviderOperationResult:
+    description: Result of the request to list REST API operations
+    properties:
+      nextLink:
+        description: URL to get the next set of operation list results if there are any.
+        readOnly: true
+        type: string
+      value:
+        description: List of operations supported by the resource provider.
+        items:
+          $ref: '#/definitions/OperationMetadata'
+        type: array
     type: object
   Resource:
     description: An Azure resource.

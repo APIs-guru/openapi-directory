@@ -638,9 +638,16 @@ paths:
             description: 'Describes the status of the test operation along with error information, if applicable.'
             properties:
               error:
-                $ref: '#/definitions/ErrorResponse'
                 description: Describes the error that occurred.
-                readOnly: true
+                properties:
+                  code:
+                    description: Error code associated with the error that occurred.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Describes the error in detail.
+                    readOnly: true
+                    type: string
               status:
                 description: The status of the test operation.
                 readOnly: true
@@ -762,8 +769,6 @@ definitions:
       name:
         description: The name of the output column.
         type: string
-  ErrorResponse:
-    type: object
   Function:
     allOf:
       - $ref: '#/definitions/SubResource'

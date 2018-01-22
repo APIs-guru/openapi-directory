@@ -75,11 +75,96 @@ paths:
             properties:
               nextLink:
                 description: Link to next page of resources.
+                readOnly: true
                 type: string
               value:
                 description: Collection of resources.
                 items:
-                  $ref: '#/definitions/CsmOperationDescription'
+                  description: Description of an operation available for Microsoft.Web resource provider.
+                  properties:
+                    display:
+                      description: Meta data about operation used for display in portal.
+                      properties:
+                        description:
+                          type: string
+                        operation:
+                          type: string
+                        provider:
+                          type: string
+                        resource:
+                          type: string
+                      type: object
+                    name:
+                      type: string
+                    origin:
+                      type: string
+                    properties:
+                      description: Properties available for a Microsoft.Web resource provider operation.
+                      properties:
+                        serviceSpecification:
+                          description: Resource metrics service provided by Microsoft.Insights resource provider.
+                          properties:
+                            metricSpecifications:
+                              items:
+                                description: Definition of a single resource metric.
+                                properties:
+                                  aggregationType:
+                                    type: string
+                                  availabilities:
+                                    items:
+                                      description: Retention policy of a resource metric.
+                                      properties:
+                                        blobDuration:
+                                          type: string
+                                        timeGrain:
+                                          type: string
+                                      type: object
+                                    type: array
+                                  category:
+                                    type: string
+                                  dimensions:
+                                    items:
+                                      description: |-
+                                        Dimension of a resource metric. For e.g. instance specific HTTP requests for a web app, 
+                                        where instance name is dimension of the metric HTTP request
+                                      properties:
+                                        displayName:
+                                          type: string
+                                        internalName:
+                                          type: string
+                                        name:
+                                          type: string
+                                        toBeExportedForShoebox:
+                                          type: boolean
+                                      type: object
+                                    type: array
+                                  displayDescription:
+                                    type: string
+                                  displayName:
+                                    type: string
+                                  enableRegionalMdmAccount:
+                                    type: boolean
+                                  fillGapWithZero:
+                                    type: boolean
+                                  isInternal:
+                                    type: boolean
+                                  metricFilterPattern:
+                                    type: string
+                                  name:
+                                    type: string
+                                  sourceMdmAccount:
+                                    type: string
+                                  sourceMdmNamespace:
+                                    type: string
+                                  supportsInstanceLevelAggregation:
+                                    type: boolean
+                                  unit:
+                                    type: string
+                                type: object
+                              type: array
+                          type: object
+                      type: object
+                  type: object
                 type: array
             required:
               - value
@@ -4017,6 +4102,4 @@ paths:
       summary: Get available application frameworks and their versions
       tags:
         - Provider
-definitions:
-  CsmOperationDescription:
-    type: object
+definitions: {}

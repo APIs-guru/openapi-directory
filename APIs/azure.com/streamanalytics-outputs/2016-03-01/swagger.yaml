@@ -1524,9 +1524,16 @@ paths:
             description: 'Describes the status of the test operation along with error information, if applicable.'
             properties:
               error:
-                $ref: '#/definitions/ErrorResponse'
                 description: Describes the error that occurred.
-                readOnly: true
+                properties:
+                  code:
+                    description: Error code associated with the error that occurred.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Describes the error in detail.
+                    readOnly: true
+                    type: string
               status:
                 description: The status of the test operation.
                 readOnly: true
@@ -1676,15 +1683,20 @@ definitions:
           storageAccounts:
             description: A list of one or more Azure Storage accounts. Required on PUT (CreateOrReplace) requests.
             items:
-              $ref: '#/definitions/StorageAccount'
+              description: The properties that are associated with an Azure Storage account
+              properties:
+                accountKey:
+                  description: The account key for the Azure Storage account. Required on PUT (CreateOrReplace) requests.
+                  type: string
+                accountName:
+                  description: The name of the Azure Storage account. Required on PUT (CreateOrReplace) requests.
+                  type: string
             type: array
           timeFormat:
             description: 'The time format. Wherever {time} appears in pathPattern, the value of this property is used as the time format instead.'
             type: string
     description: The properties that are associated with a blob output.
     properties: {}
-  DiagnosticCondition:
-    type: object
   DocumentDbOutputDataSource:
     allOf:
       - $ref: '#/definitions/OutputDataSource'
@@ -1716,8 +1728,6 @@ definitions:
       partitionKey:
         description: 'The name of the field in output events used to specify the key for partitioning output across collections. If ''collectionNamePattern'' contains the {partition} token, this property is required to be specified.'
         type: string
-  ErrorResponse:
-    type: object
   EventHubOutputDataSource:
     allOf:
       - $ref: '#/definitions/OutputDataSource'
@@ -1731,7 +1741,17 @@ definitions:
   EventHubOutputDataSourceProperties:
     allOf:
       - allOf:
-          - $ref: '#/definitions/ServiceBusDataSourceProperties'
+          - description: 'The common properties that are associated with Service Bus data sources (Queues, Topics, Event Hubs, etc.).'
+            properties:
+              serviceBusNamespace:
+                description: 'The namespace that is associated with the desired Event Hub, Service Bus Queue, Service Bus Topic, etc. Required on PUT (CreateOrReplace) requests.'
+                type: string
+              sharedAccessPolicyKey:
+                description: The shared access policy key for the specified shared access policy. Required on PUT (CreateOrReplace) requests.
+                type: string
+              sharedAccessPolicyName:
+                description: 'The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc. Required on PUT (CreateOrReplace) requests.'
+                type: string
         description: The common properties that are associated with Event Hub data sources.
         properties:
           eventHubName:
@@ -1795,7 +1815,20 @@ definitions:
           conditions:
             description: 'A collection of zero or more conditions applicable to the resource, or to the job overall, that warrant customer attention.'
             items:
-              $ref: '#/definitions/DiagnosticCondition'
+              description: 'Condition applicable to the resource, or to the job overall, that warrant customer attention.'
+              properties:
+                code:
+                  description: The opaque diagnostic code.
+                  readOnly: true
+                  type: string
+                message:
+                  description: The human-readable message describing the condition in detail. Localized in the Accept-Language of the client request.
+                  readOnly: true
+                  type: string
+                since:
+                  description: The UTC timestamp of when the condition started. Customers should be able to find a corresponding event in the ops log around this time.
+                  readOnly: true
+                  type: string
             readOnly: true
             type: array
       etag:
@@ -1836,8 +1869,6 @@ definitions:
       table:
         description: The name of the Power BI table under the specified dataset. Required on PUT (CreateOrReplace) requests.
         type: string
-  ServiceBusDataSourceProperties:
-    type: object
   ServiceBusQueueOutputDataSource:
     allOf:
       - $ref: '#/definitions/OutputDataSource'
@@ -1904,8 +1935,6 @@ definitions:
       topicName:
         description: The name of the Service Bus Topic. Required on PUT (CreateOrReplace) requests.
         type: string
-  StorageAccount:
-    type: object
   SubResource:
     description: The base sub-resource model definition.
     properties:

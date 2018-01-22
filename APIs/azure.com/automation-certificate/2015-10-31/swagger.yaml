@@ -75,7 +75,45 @@ paths:
               value:
                 description: Gets or sets a list of certificates.
                 items:
-                  $ref: '#/definitions/Certificate'
+                  description: Definition of the certificate.
+                  properties:
+                    id:
+                      description: Gets the id of the resource.
+                      readOnly: true
+                      type: string
+                    name:
+                      description: Gets the name of the certificate.
+                      readOnly: true
+                      type: string
+                    properties:
+                      description: Properties of the certificate.
+                      properties:
+                        creationTime:
+                          description: Gets the creation time.
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        description:
+                          description: Gets or sets the description.
+                          type: string
+                        expiryTime:
+                          description: Gets the expiry time of the certificate.
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        isExportable:
+                          description: Gets the is exportable flag of the certificate.
+                          readOnly: true
+                          type: boolean
+                        lastModifiedTime:
+                          description: Gets the last modified time.
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        thumbprint:
+                          description: Gets the thumbprint of the certificate.
+                          readOnly: true
+                          type: string
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -221,9 +259,34 @@ paths:
                 readOnly: true
                 type: string
               properties:
-                $ref: '#/definitions/CertificateProperties'
-                description: Gets or sets the properties of the certificate.
-                x-ms-client-flatten: true
+                description: Properties of the certificate.
+                properties:
+                  creationTime:
+                    description: Gets the creation time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  description:
+                    description: Gets or sets the description.
+                    type: string
+                  expiryTime:
+                    description: Gets the expiry time of the certificate.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  isExportable:
+                    description: Gets the is exportable flag of the certificate.
+                    readOnly: true
+                    type: boolean
+                  lastModifiedTime:
+                    description: Gets the last modified time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  thumbprint:
+                    description: Gets the thumbprint of the certificate.
+                    readOnly: true
+                    type: string
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -292,9 +355,11 @@ paths:
                 description: Gets or sets the name of the certificate.
                 type: string
               properties:
-                $ref: '#/definitions/CertificateUpdateProperties'
-                description: Gets or sets the properties of the certificate.
-                x-ms-client-flatten: true
+                description: The properties of the update certificate operation
+                properties:
+                  description:
+                    description: Gets or sets the description of the certificate.
+                    type: string
             required:
               - name
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
@@ -322,9 +387,34 @@ paths:
                 readOnly: true
                 type: string
               properties:
-                $ref: '#/definitions/CertificateProperties'
-                description: Gets or sets the properties of the certificate.
-                x-ms-client-flatten: true
+                description: Properties of the certificate.
+                properties:
+                  creationTime:
+                    description: Gets the creation time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  description:
+                    description: Gets or sets the description.
+                    type: string
+                  expiryTime:
+                    description: Gets the expiry time of the certificate.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  isExportable:
+                    description: Gets the is exportable flag of the certificate.
+                    readOnly: true
+                    type: boolean
+                  lastModifiedTime:
+                    description: Gets the last modified time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  thumbprint:
+                    description: Gets the thumbprint of the certificate.
+                    readOnly: true
+                    type: string
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -397,9 +487,22 @@ paths:
                 description: Gets or sets the name of the certificate.
                 type: string
               properties:
-                $ref: '#/definitions/CertificateCreateOrUpdateProperties'
-                description: Gets or sets the properties of the certificate.
-                x-ms-client-flatten: true
+                description: The properties of the create certificate operation.
+                properties:
+                  base64Value:
+                    description: Gets or sets the base64 encoded value of the certificate.
+                    type: string
+                  description:
+                    description: Gets or sets the description of the certificate.
+                    type: string
+                  isExportable:
+                    description: Gets or sets the is exportable flag of the certificate.
+                    type: boolean
+                  thumbprint:
+                    description: Gets or sets the thumbprint of the certificate.
+                    type: string
+                required:
+                  - base64Value
             required:
               - name
               - properties
@@ -428,9 +531,34 @@ paths:
                 readOnly: true
                 type: string
               properties:
-                $ref: '#/definitions/CertificateProperties'
-                description: Gets or sets the properties of the certificate.
-                x-ms-client-flatten: true
+                description: Properties of the certificate.
+                properties:
+                  creationTime:
+                    description: Gets the creation time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  description:
+                    description: Gets or sets the description.
+                    type: string
+                  expiryTime:
+                    description: Gets the expiry time of the certificate.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  isExportable:
+                    description: Gets the is exportable flag of the certificate.
+                    readOnly: true
+                    type: boolean
+                  lastModifiedTime:
+                    description: Gets the last modified time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  thumbprint:
+                    description: Gets the thumbprint of the certificate.
+                    readOnly: true
+                    type: string
         '201':
           description: Created
           schema:
@@ -445,9 +573,34 @@ paths:
                 readOnly: true
                 type: string
               properties:
-                $ref: '#/definitions/CertificateProperties'
-                description: Gets or sets the properties of the certificate.
-                x-ms-client-flatten: true
+                description: Properties of the certificate.
+                properties:
+                  creationTime:
+                    description: Gets the creation time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  description:
+                    description: Gets or sets the description.
+                    type: string
+                  expiryTime:
+                    description: Gets the expiry time of the certificate.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  isExportable:
+                    description: Gets the is exportable flag of the certificate.
+                    readOnly: true
+                    type: boolean
+                  lastModifiedTime:
+                    description: Gets the last modified time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  thumbprint:
+                    description: Gets the thumbprint of the certificate.
+                    readOnly: true
+                    type: string
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -502,12 +655,4 @@ paths:
                   lastModifiedTime: '2017-03-29T17:26:43.337+00:00'
                   thumbprint: thumbprint of cert
               headers: {}
-definitions:
-  Certificate:
-    type: object
-  CertificateCreateOrUpdateProperties:
-    type: object
-  CertificateProperties:
-    type: object
-  CertificateUpdateProperties:
-    type: object
+definitions: {}

@@ -68,7 +68,24 @@ paths:
           description: OK
           schema:
             allOf:
-              - $ref: '#/definitions/ProxyOnlyResource'
+              - description: Azure proxy only resource. This resource is not tracked by Azure Resource Manager.
+                properties:
+                  id:
+                    description: Resource Id.
+                    readOnly: true
+                    type: string
+                  kind:
+                    description: Kind of resource.
+                    type: string
+                  name:
+                    description: Resource Name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
             description: User crendentials used for publishing activity.
             properties:
               properties:
@@ -108,7 +125,24 @@ paths:
           required: true
           schema:
             allOf:
-              - $ref: '#/definitions/ProxyOnlyResource'
+              - description: Azure proxy only resource. This resource is not tracked by Azure Resource Manager.
+                properties:
+                  id:
+                    description: Resource Id.
+                    readOnly: true
+                    type: string
+                  kind:
+                    description: Kind of resource.
+                    type: string
+                  name:
+                    description: Resource Name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
             description: User crendentials used for publishing activity.
             properties:
               properties:
@@ -143,7 +177,24 @@ paths:
           description: OK
           schema:
             allOf:
-              - $ref: '#/definitions/ProxyOnlyResource'
+              - description: Azure proxy only resource. This resource is not tracked by Azure Resource Manager.
+                properties:
+                  id:
+                    description: Resource Id.
+                    readOnly: true
+                    type: string
+                  kind:
+                    description: Kind of resource.
+                    type: string
+                  name:
+                    description: Resource Name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
             description: User crendentials used for publishing activity.
             properties:
               properties:
@@ -292,6 +343,73 @@ paths:
           schema:
             $ref: '#/definitions/GeoRegionCollection'
       summary: Get a list of available geographical regions.
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Web/listSitesAssignedToHostName':
+    post:
+      description: List all apps that are assigned to a hostname.
+      operationId: ListSiteIdentifiersAssignedToHostName
+      parameters:
+        - description: Hostname information.
+          in: body
+          name: nameIdentifier
+          required: true
+          schema:
+            description: Identifies an object.
+            properties:
+              name:
+                description: Name of the object.
+                type: string
+            type: object
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: Collection of identifiers.
+            properties:
+              nextLink:
+                description: Link to next page of resources.
+                readOnly: true
+                type: string
+              value:
+                description: Collection of resources.
+                items:
+                  allOf:
+                    - description: Azure proxy only resource. This resource is not tracked by Azure Resource Manager.
+                      properties:
+                        id:
+                          description: Resource Id.
+                          readOnly: true
+                          type: string
+                        kind:
+                          description: Kind of resource.
+                          type: string
+                        name:
+                          description: Resource Name.
+                          readOnly: true
+                          type: string
+                        type:
+                          description: Resource type.
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
+                  description: A domain specific resource identifier.
+                  properties:
+                    properties:
+                      description: Identifier resource specific properties
+                      properties:
+                        id:
+                          description: String representation of the identity.
+                          type: string
+                      x-ms-client-flatten: true
+                  type: object
+                type: array
+            required:
+              - value
+            type: object
+      summary: List all apps that are assigned to a hostname.
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Web/premieraddonoffers':
@@ -457,7 +575,15 @@ definitions:
             clusterSettings:
               description: Custom settings for changing the behavior of the App Service Environment.
               items:
-                $ref: '#/definitions/NameValuePair'
+                description: Name value pair.
+                properties:
+                  name:
+                    description: Pair name.
+                    type: string
+                  value:
+                    description: Pair value.
+                    type: string
+                type: object
               type: array
             databaseEdition:
               description: 'Edition of the metadata database for the App Service Environment, e.g. "Standard".'
@@ -483,7 +609,66 @@ definitions:
             environmentCapacities:
               description: 'Current total, used, and available worker capacities.'
               items:
-                $ref: '#/definitions/StampCapacity'
+                description: Stamp capacity information.
+                properties:
+                  availableCapacity:
+                    description: 'Available capacity (# of machines, bytes of storage etc...).'
+                    format: int64
+                    type: integer
+                  computeMode:
+                    description: Shared/dedicated workers.
+                    enum:
+                      - Shared
+                      - Dedicated
+                      - Dynamic
+                    type: string
+                    x-ms-enum:
+                      modelAsString: false
+                      name: ComputeModeOptions
+                  excludeFromCapacityAllocation:
+                    description: |-
+                      If <code>true</code>, it includes basic apps.
+                      Basic apps are not used for capacity allocation.
+                    type: boolean
+                  isApplicableForAllComputeModes:
+                    description: '<code>true</code> if capacity is applicable for all apps; otherwise, <code>false</code>.'
+                    type: boolean
+                  name:
+                    description: Name of the stamp.
+                    type: string
+                  siteMode:
+                    description: Shared or Dedicated.
+                    type: string
+                  totalCapacity:
+                    description: 'Total capacity (# of machines, bytes of storage etc...).'
+                    format: int64
+                    type: integer
+                  unit:
+                    description: Name of the unit.
+                    type: string
+                  workerSize:
+                    description: Size of the machines.
+                    enum:
+                      - Default
+                      - Small
+                      - Medium
+                      - Large
+                      - D1
+                      - D2
+                      - D3
+                    type: string
+                    x-ms-enum:
+                      modelAsString: false
+                      name: WorkerSizeOptions
+                  workerSizeId:
+                    description: |-
+                      Size ID of machines: 
+                      0 - Small
+                      1 - Medium
+                      2 - Large
+                    format: int32
+                    type: integer
+                type: object
               readOnly: true
               type: array
             environmentIsHealthy:
@@ -541,7 +726,28 @@ definitions:
             networkAccessControlList:
               description: Access control list for controlling traffic to the App Service Environment.
               items:
-                $ref: '#/definitions/NetworkAccessControlEntry'
+                description: Network access control entry.
+                properties:
+                  action:
+                    description: Action object.
+                    enum:
+                      - Permit
+                      - Deny
+                    type: string
+                    x-ms-enum:
+                      modelAsString: false
+                      name: AccessControlEntryAction
+                  description:
+                    description: Description of network access control entry.
+                    type: string
+                  order:
+                    description: Order of precedence.
+                    format: int32
+                    type: integer
+                  remoteSubnet:
+                    description: Remote subnet.
+                    type: string
+                type: object
               type: array
             provisioningState:
               description: Provisioning state of the App Service Environment.
@@ -594,12 +800,43 @@ definitions:
             vipMappings:
               description: Description of IP SSL mapping for the App Service Environment.
               items:
-                $ref: '#/definitions/VirtualIPMapping'
+                description: Virtual IP mapping.
+                properties:
+                  inUse:
+                    description: Is virtual IP mapping in use.
+                    type: boolean
+                  internalHttpPort:
+                    description: Internal HTTP port.
+                    format: int32
+                    type: integer
+                  internalHttpsPort:
+                    description: Internal HTTPS port.
+                    format: int32
+                    type: integer
+                  virtualIP:
+                    description: Virtual IP address.
+                    type: string
+                type: object
               readOnly: true
               type: array
             virtualNetwork:
-              $ref: '#/definitions/VirtualNetworkProfile'
-              description: Description of the Virtual Network.
+              description: Specification for using a Virtual Network.
+              properties:
+                id:
+                  description: Resource id of the Virtual Network.
+                  type: string
+                name:
+                  description: Name of the Virtual Network (read-only).
+                  readOnly: true
+                  type: string
+                subnet:
+                  description: Subnet within the Virtual Network.
+                  type: string
+                type:
+                  description: Resource type of the Virtual Network (read-only).
+                  readOnly: true
+                  type: string
+              type: object
             vnetName:
               description: Name of the Virtual Network for the App Service Environment.
               type: string
@@ -612,7 +849,36 @@ definitions:
             workerPools:
               description: 'Description of worker pools with worker size IDs, VM sizes, and number of workers in each pool.'
               items:
-                $ref: '#/definitions/WorkerPool'
+                description: Worker pool of an App Service Environment.
+                properties:
+                  computeMode:
+                    description: Shared or dedicated app hosting.
+                    enum:
+                      - Shared
+                      - Dedicated
+                      - Dynamic
+                    type: string
+                    x-ms-enum:
+                      modelAsString: false
+                      name: ComputeModeOptions
+                  instanceNames:
+                    description: Names of all instances in the worker pool (read only).
+                    items:
+                      type: string
+                    readOnly: true
+                    type: array
+                  workerCount:
+                    description: Number of instances in the worker pool.
+                    format: int32
+                    type: integer
+                  workerSize:
+                    description: VM size of the worker pool instances.
+                    type: string
+                  workerSizeId:
+                    description: Worker size ID for referencing this worker pool.
+                    format: int32
+                    type: integer
+                type: object
               type: array
           required:
             - name
@@ -671,6 +937,7 @@ definitions:
     properties:
       nextLink:
         description: Link to next page of resources.
+        readOnly: true
         type: string
       value:
         description: Collection of resources.
@@ -745,10 +1012,6 @@ definitions:
       name:
         description: Name of the App Service Environment.
         type: string
-    type: object
-  NameValuePair:
-    type: object
-  NetworkAccessControlEntry:
     type: object
   PremierAddOnOffer:
     allOf:
@@ -826,6 +1089,7 @@ definitions:
     properties:
       nextLink:
         description: Link to next page of resources.
+        readOnly: true
         type: string
       value:
         description: Collection of resources.
@@ -834,8 +1098,6 @@ definitions:
         type: array
     required:
       - value
-    type: object
-  ProxyOnlyResource:
     type: object
   ResourceNameAvailability:
     description: Information regarding availbility of a resource name.
@@ -944,6 +1206,7 @@ definitions:
     properties:
       nextLink:
         description: Link to next page of resources.
+        readOnly: true
         type: string
       value:
         description: Collection of resources.
@@ -952,8 +1215,6 @@ definitions:
         type: array
     required:
       - value
-    type: object
-  StampCapacity:
     type: object
   ValidateProperties:
     description: App properties used for validation.
@@ -1026,10 +1287,6 @@ definitions:
       message:
         description: Validation error message.
         type: string
-    type: object
-  VirtualIPMapping:
-    type: object
-  VirtualNetworkProfile:
     type: object
   VnetParameters:
     allOf:
@@ -1134,6 +1391,4 @@ definitions:
             description: The name of the test that failed.
             type: string
         x-ms-client-flatten: true
-    type: object
-  WorkerPool:
     type: object

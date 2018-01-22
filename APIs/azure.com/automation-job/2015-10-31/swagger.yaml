@@ -80,7 +80,81 @@ paths:
               value:
                 description: Gets or sets a list of jobs.
                 items:
-                  $ref: './definitions.json#/definitions/Job'
+                  description: Definition of the job.
+                  properties:
+                    id:
+                      description: Gets or sets the id of the resource.
+                      type: string
+                    properties:
+                      description: Definition of job properties.
+                      properties:
+                        creationTime:
+                          description: Gets or sets the creation time of the job.
+                          format: date-time
+                          type: string
+                        endTime:
+                          description: Gets or sets the end time of the job.
+                          format: date-time
+                          type: string
+                        exception:
+                          description: Gets or sets the exception of the job.
+                          type: string
+                        jobId:
+                          description: Gets or sets the id of the job.
+                          format: uuid
+                          type: string
+                        lastModifiedTime:
+                          description: Gets or sets the last modified time of the job.
+                          format: date-time
+                          type: string
+                        lastStatusModifiedTime:
+                          description: Gets or sets the last status modified time of the job.
+                          format: date-time
+                          type: string
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: Gets or sets the parameters of the job.
+                          type: object
+                        runOn:
+                          description: Gets or sets the runOn which specifies the group name where the job is to be executed.
+                          type: string
+                        runbook:
+                          description: The runbook property associated with the entity.
+                          properties:
+                            name:
+                              description: Gets or sets the name of the runbook.
+                              type: string
+                        startTime:
+                          description: Gets or sets the start time of the job.
+                          format: date-time
+                          type: string
+                        startedBy:
+                          description: Gets or sets the job started by.
+                          type: string
+                        status:
+                          description: Gets or sets the status of the job.
+                          enum:
+                            - New
+                            - Activating
+                            - Running
+                            - Completed
+                            - Failed
+                            - Stopped
+                            - Blocked
+                            - Suspended
+                            - Disconnected
+                            - Suspending
+                            - Stopping
+                            - Resuming
+                            - Removing
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: JobStatus
+                        statusDetails:
+                          description: Gets or sets the status details of the job.
+                          type: string
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -320,9 +394,75 @@ paths:
                 description: Gets or sets the id of the resource.
                 type: string
               properties:
-                $ref: './definitions.json#/definitions/JobProperties'
-                description: Gets or sets the properties of the job.
-                x-ms-client-flatten: true
+                description: Definition of job properties.
+                properties:
+                  creationTime:
+                    description: Gets or sets the creation time of the job.
+                    format: date-time
+                    type: string
+                  endTime:
+                    description: Gets or sets the end time of the job.
+                    format: date-time
+                    type: string
+                  exception:
+                    description: Gets or sets the exception of the job.
+                    type: string
+                  jobId:
+                    description: Gets or sets the id of the job.
+                    format: uuid
+                    type: string
+                  lastModifiedTime:
+                    description: Gets or sets the last modified time of the job.
+                    format: date-time
+                    type: string
+                  lastStatusModifiedTime:
+                    description: Gets or sets the last status modified time of the job.
+                    format: date-time
+                    type: string
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: Gets or sets the parameters of the job.
+                    type: object
+                  runOn:
+                    description: Gets or sets the runOn which specifies the group name where the job is to be executed.
+                    type: string
+                  runbook:
+                    description: The runbook property associated with the entity.
+                    properties:
+                      name:
+                        description: Gets or sets the name of the runbook.
+                        type: string
+                  startTime:
+                    description: Gets or sets the start time of the job.
+                    format: date-time
+                    type: string
+                  startedBy:
+                    description: Gets or sets the job started by.
+                    type: string
+                  status:
+                    description: Gets or sets the status of the job.
+                    enum:
+                      - New
+                      - Activating
+                      - Running
+                      - Completed
+                      - Failed
+                      - Stopped
+                      - Blocked
+                      - Suspended
+                      - Disconnected
+                      - Suspending
+                      - Stopping
+                      - Resuming
+                      - Removing
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: JobStatus
+                  statusDetails:
+                    description: Gets or sets the status details of the job.
+                    type: string
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -374,9 +514,24 @@ paths:
                 description: Gets or sets name of the resource.
                 type: string
               properties:
-                $ref: './definitions.json#/definitions/JobCreateProperties'
-                description: Gets or sets the list of job properties.
-                x-ms-client-flatten: true
+                description: The parameters supplied to the create job operation.
+                properties:
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: Gets or sets the parameters of the job.
+                    type: object
+                  runOn:
+                    description: Gets or sets the runOn which specifies the group name where the job is to be executed.
+                    type: string
+                  runbook:
+                    description: The runbook property associated with the entity.
+                    properties:
+                      name:
+                        description: Gets or sets the name of the runbook.
+                        type: string
+                required:
+                  - runbook
               tags:
                 additionalProperties:
                   type: string
@@ -404,9 +559,75 @@ paths:
                 description: Gets or sets the id of the resource.
                 type: string
               properties:
-                $ref: './definitions.json#/definitions/JobProperties'
-                description: Gets or sets the properties of the job.
-                x-ms-client-flatten: true
+                description: Definition of job properties.
+                properties:
+                  creationTime:
+                    description: Gets or sets the creation time of the job.
+                    format: date-time
+                    type: string
+                  endTime:
+                    description: Gets or sets the end time of the job.
+                    format: date-time
+                    type: string
+                  exception:
+                    description: Gets or sets the exception of the job.
+                    type: string
+                  jobId:
+                    description: Gets or sets the id of the job.
+                    format: uuid
+                    type: string
+                  lastModifiedTime:
+                    description: Gets or sets the last modified time of the job.
+                    format: date-time
+                    type: string
+                  lastStatusModifiedTime:
+                    description: Gets or sets the last status modified time of the job.
+                    format: date-time
+                    type: string
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: Gets or sets the parameters of the job.
+                    type: object
+                  runOn:
+                    description: Gets or sets the runOn which specifies the group name where the job is to be executed.
+                    type: string
+                  runbook:
+                    description: The runbook property associated with the entity.
+                    properties:
+                      name:
+                        description: Gets or sets the name of the runbook.
+                        type: string
+                  startTime:
+                    description: Gets or sets the start time of the job.
+                    format: date-time
+                    type: string
+                  startedBy:
+                    description: Gets or sets the job started by.
+                    type: string
+                  status:
+                    description: Gets or sets the status of the job.
+                    enum:
+                      - New
+                      - Activating
+                      - Running
+                      - Completed
+                      - Failed
+                      - Stopped
+                      - Blocked
+                      - Suspended
+                      - Disconnected
+                      - Suspending
+                      - Stopping
+                      - Resuming
+                      - Removing
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: JobStatus
+                  statusDetails:
+                    description: Gets or sets the status details of the job.
+                    type: string
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -763,7 +984,47 @@ paths:
               value:
                 description: A list of job streams.
                 items:
-                  $ref: './definitions.json#/definitions/JobStream'
+                  description: Definition of the job stream.
+                  properties:
+                    id:
+                      description: Gets or sets the id of the resource.
+                      type: string
+                    properties:
+                      description: Definition of the job stream.
+                      properties:
+                        jobStreamId:
+                          description: Gets or sets the id of the job stream.
+                          type: string
+                        streamText:
+                          description: Gets or sets the stream text.
+                          type: string
+                        streamType:
+                          description: Gets or sets the stream type.
+                          enum:
+                            - Progress
+                            - Output
+                            - Warning
+                            - Error
+                            - Debug
+                            - Verbose
+                            - Any
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: JobStreamType
+                        summary:
+                          description: Gets or sets the summary.
+                          type: string
+                        time:
+                          description: Gets or sets the creation time of the job.
+                          format: date-time
+                          type: string
+                        value:
+                          additionalProperties:
+                            type: object
+                          description: Gets or sets the values of the job stream.
+                          type: object
+                      x-ms-client-flatten: true
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -829,8 +1090,40 @@ paths:
                 description: Gets or sets the id of the resource.
                 type: string
               properties:
-                $ref: './definitions.json#/definitions/JobStreamProperties'
-                description: Gets or sets the id of the job stream.
+                description: Definition of the job stream.
+                properties:
+                  jobStreamId:
+                    description: Gets or sets the id of the job stream.
+                    type: string
+                  streamText:
+                    description: Gets or sets the stream text.
+                    type: string
+                  streamType:
+                    description: Gets or sets the stream type.
+                    enum:
+                      - Progress
+                      - Output
+                      - Warning
+                      - Error
+                      - Debug
+                      - Verbose
+                      - Any
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: JobStreamType
+                  summary:
+                    description: Gets or sets the summary.
+                    type: string
+                  time:
+                    description: Gets or sets the creation time of the job.
+                    format: date-time
+                    type: string
+                  value:
+                    additionalProperties:
+                      type: object
+                    description: Gets or sets the values of the job stream.
+                    type: object
                 x-ms-client-flatten: true
         default:
           description: Automation error response describing why the operation failed.

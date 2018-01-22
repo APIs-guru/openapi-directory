@@ -54,7 +54,24 @@ paths:
               value:
                 description: List of Automation operations supported by the Automation resource provider.
                 items:
-                  $ref: '#/definitions/Operation'
+                  description: Automation REST API operation
+                  properties:
+                    display:
+                      description: 'Provider, Resource and Operation values'
+                      properties:
+                        operation:
+                          description: 'Operation type: Read, write, delete, etc.'
+                          type: string
+                        provider:
+                          description: 'Service provider: Microsoft.Automation'
+                          type: string
+                        resource:
+                          description: 'Resource on which the operation is performed: Runbooks, Jobs etc.'
+                          type: string
+                    name:
+                      description: 'Operation name: {provider}/{resource}/{operation}'
+                      type: string
+                  type: object
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -98,7 +115,88 @@ paths:
               value:
                 description: Gets or sets list of accounts.
                 items:
-                  $ref: '#/definitions/AutomationAccount'
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource Id
+                          readOnly: true
+                          type: string
+                        location:
+                          description: Resource location
+                          type: string
+                        name:
+                          description: Resource name
+                          readOnly: true
+                          type: string
+                        tags:
+                          additionalProperties:
+                            type: string
+                          description: Resource tags
+                          type: object
+                        type:
+                          description: Resource type
+                          readOnly: true
+                          type: string
+                      required:
+                        - location
+                      x-ms-azure-resource: true
+                  description: Definition of the automation account type.
+                  properties:
+                    etag:
+                      description: Gets or sets the etag of the resource.
+                      type: string
+                    properties:
+                      description: Definition of the account property.
+                      properties:
+                        creationTime:
+                          description: Gets the creation time.
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        description:
+                          description: Gets or sets the description.
+                          type: string
+                        lastModifiedBy:
+                          description: Gets or sets the last modified by.
+                          type: string
+                        lastModifiedTime:
+                          description: Gets the last modified time.
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        sku:
+                          description: The account SKU.
+                          properties:
+                            capacity:
+                              description: Gets or sets the SKU capacity.
+                              format: int32
+                              type: integer
+                            family:
+                              description: Gets or sets the SKU family.
+                              type: string
+                            name:
+                              description: Gets or sets the SKU name of the account.
+                              enum:
+                                - Free
+                                - Basic
+                              type: string
+                              x-ms-enum:
+                                modelAsString: true
+                                name: SkuNameEnum
+                          required:
+                            - name
+                        state:
+                          description: Gets status of account.
+                          enum:
+                            - Ok
+                            - Unavailable
+                            - Suspended
+                          readOnly: true
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: AutomationAccountState
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -631,7 +729,88 @@ paths:
               value:
                 description: Gets or sets list of accounts.
                 items:
-                  $ref: '#/definitions/AutomationAccount'
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource Id
+                          readOnly: true
+                          type: string
+                        location:
+                          description: Resource location
+                          type: string
+                        name:
+                          description: Resource name
+                          readOnly: true
+                          type: string
+                        tags:
+                          additionalProperties:
+                            type: string
+                          description: Resource tags
+                          type: object
+                        type:
+                          description: Resource type
+                          readOnly: true
+                          type: string
+                      required:
+                        - location
+                      x-ms-azure-resource: true
+                  description: Definition of the automation account type.
+                  properties:
+                    etag:
+                      description: Gets or sets the etag of the resource.
+                      type: string
+                    properties:
+                      description: Definition of the account property.
+                      properties:
+                        creationTime:
+                          description: Gets the creation time.
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        description:
+                          description: Gets or sets the description.
+                          type: string
+                        lastModifiedBy:
+                          description: Gets or sets the last modified by.
+                          type: string
+                        lastModifiedTime:
+                          description: Gets the last modified time.
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        sku:
+                          description: The account SKU.
+                          properties:
+                            capacity:
+                              description: Gets or sets the SKU capacity.
+                              format: int32
+                              type: integer
+                            family:
+                              description: Gets or sets the SKU family.
+                              type: string
+                            name:
+                              description: Gets or sets the SKU name of the account.
+                              enum:
+                                - Free
+                                - Basic
+                              type: string
+                              x-ms-enum:
+                                modelAsString: true
+                                name: SkuNameEnum
+                          required:
+                            - name
+                        state:
+                          description: Gets status of account.
+                          enum:
+                            - Ok
+                            - Unavailable
+                            - Suspended
+                          readOnly: true
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: AutomationAccountState
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -839,16 +1018,87 @@ paths:
           description: OK
           schema:
             allOf:
-              - $ref: '#/definitions/Resource'
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource Id
+                    readOnly: true
+                    type: string
+                  location:
+                    description: Resource location
+                    type: string
+                  name:
+                    description: Resource name
+                    readOnly: true
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Resource tags
+                    type: object
+                  type:
+                    description: Resource type
+                    readOnly: true
+                    type: string
+                required:
+                  - location
+                x-ms-azure-resource: true
             description: Definition of the automation account type.
             properties:
               etag:
                 description: Gets or sets the etag of the resource.
                 type: string
               properties:
-                $ref: '#/definitions/AutomationAccountProperties'
-                description: Gets or sets the automation account properties.
-                x-ms-client-flatten: true
+                description: Definition of the account property.
+                properties:
+                  creationTime:
+                    description: Gets the creation time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  description:
+                    description: Gets or sets the description.
+                    type: string
+                  lastModifiedBy:
+                    description: Gets or sets the last modified by.
+                    type: string
+                  lastModifiedTime:
+                    description: Gets the last modified time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  sku:
+                    description: The account SKU.
+                    properties:
+                      capacity:
+                        description: Gets or sets the SKU capacity.
+                        format: int32
+                        type: integer
+                      family:
+                        description: Gets or sets the SKU family.
+                        type: string
+                      name:
+                        description: Gets or sets the SKU name of the account.
+                        enum:
+                          - Free
+                          - Basic
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: SkuNameEnum
+                    required:
+                      - name
+                  state:
+                    description: Gets status of account.
+                    enum:
+                      - Ok
+                      - Unavailable
+                      - Suspended
+                    readOnly: true
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: AutomationAccountState
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -917,9 +1167,29 @@ paths:
                 description: Gets or sets the name of the resource.
                 type: string
               properties:
-                $ref: '#/definitions/AutomationAccountUpdateProperties'
-                description: Gets or sets account update properties.
-                x-ms-client-flatten: true
+                description: The parameters supplied to the update account properties.
+                properties:
+                  sku:
+                    description: The account SKU.
+                    properties:
+                      capacity:
+                        description: Gets or sets the SKU capacity.
+                        format: int32
+                        type: integer
+                      family:
+                        description: Gets or sets the SKU family.
+                        type: string
+                      name:
+                        description: Gets or sets the SKU name of the account.
+                        enum:
+                          - Free
+                          - Basic
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: SkuNameEnum
+                    required:
+                      - name
               tags:
                 additionalProperties:
                   type: string
@@ -942,16 +1212,87 @@ paths:
           description: OK
           schema:
             allOf:
-              - $ref: '#/definitions/Resource'
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource Id
+                    readOnly: true
+                    type: string
+                  location:
+                    description: Resource location
+                    type: string
+                  name:
+                    description: Resource name
+                    readOnly: true
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Resource tags
+                    type: object
+                  type:
+                    description: Resource type
+                    readOnly: true
+                    type: string
+                required:
+                  - location
+                x-ms-azure-resource: true
             description: Definition of the automation account type.
             properties:
               etag:
                 description: Gets or sets the etag of the resource.
                 type: string
               properties:
-                $ref: '#/definitions/AutomationAccountProperties'
-                description: Gets or sets the automation account properties.
-                x-ms-client-flatten: true
+                description: Definition of the account property.
+                properties:
+                  creationTime:
+                    description: Gets the creation time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  description:
+                    description: Gets or sets the description.
+                    type: string
+                  lastModifiedBy:
+                    description: Gets or sets the last modified by.
+                    type: string
+                  lastModifiedTime:
+                    description: Gets the last modified time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  sku:
+                    description: The account SKU.
+                    properties:
+                      capacity:
+                        description: Gets or sets the SKU capacity.
+                        format: int32
+                        type: integer
+                      family:
+                        description: Gets or sets the SKU family.
+                        type: string
+                      name:
+                        description: Gets or sets the SKU name of the account.
+                        enum:
+                          - Free
+                          - Basic
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: SkuNameEnum
+                    required:
+                      - name
+                  state:
+                    description: Gets status of account.
+                    enum:
+                      - Ok
+                      - Unavailable
+                      - Suspended
+                    readOnly: true
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: AutomationAccountState
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1026,9 +1367,29 @@ paths:
                 description: Gets or sets name of the resource.
                 type: string
               properties:
-                $ref: '#/definitions/AutomationAccountCreateOrUpdateProperties'
-                description: Gets or sets account create or update properties.
-                x-ms-client-flatten: true
+                description: The parameters supplied to the create or update account properties.
+                properties:
+                  sku:
+                    description: The account SKU.
+                    properties:
+                      capacity:
+                        description: Gets or sets the SKU capacity.
+                        format: int32
+                        type: integer
+                      family:
+                        description: Gets or sets the SKU family.
+                        type: string
+                      name:
+                        description: Gets or sets the SKU name of the account.
+                        enum:
+                          - Free
+                          - Basic
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: SkuNameEnum
+                    required:
+                      - name
               tags:
                 additionalProperties:
                   type: string
@@ -1049,30 +1410,172 @@ paths:
           description: OK
           schema:
             allOf:
-              - $ref: '#/definitions/Resource'
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource Id
+                    readOnly: true
+                    type: string
+                  location:
+                    description: Resource location
+                    type: string
+                  name:
+                    description: Resource name
+                    readOnly: true
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Resource tags
+                    type: object
+                  type:
+                    description: Resource type
+                    readOnly: true
+                    type: string
+                required:
+                  - location
+                x-ms-azure-resource: true
             description: Definition of the automation account type.
             properties:
               etag:
                 description: Gets or sets the etag of the resource.
                 type: string
               properties:
-                $ref: '#/definitions/AutomationAccountProperties'
-                description: Gets or sets the automation account properties.
-                x-ms-client-flatten: true
+                description: Definition of the account property.
+                properties:
+                  creationTime:
+                    description: Gets the creation time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  description:
+                    description: Gets or sets the description.
+                    type: string
+                  lastModifiedBy:
+                    description: Gets or sets the last modified by.
+                    type: string
+                  lastModifiedTime:
+                    description: Gets the last modified time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  sku:
+                    description: The account SKU.
+                    properties:
+                      capacity:
+                        description: Gets or sets the SKU capacity.
+                        format: int32
+                        type: integer
+                      family:
+                        description: Gets or sets the SKU family.
+                        type: string
+                      name:
+                        description: Gets or sets the SKU name of the account.
+                        enum:
+                          - Free
+                          - Basic
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: SkuNameEnum
+                    required:
+                      - name
+                  state:
+                    description: Gets status of account.
+                    enum:
+                      - Ok
+                      - Unavailable
+                      - Suspended
+                    readOnly: true
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: AutomationAccountState
         '201':
           description: Created
           schema:
             allOf:
-              - $ref: '#/definitions/Resource'
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource Id
+                    readOnly: true
+                    type: string
+                  location:
+                    description: Resource location
+                    type: string
+                  name:
+                    description: Resource name
+                    readOnly: true
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Resource tags
+                    type: object
+                  type:
+                    description: Resource type
+                    readOnly: true
+                    type: string
+                required:
+                  - location
+                x-ms-azure-resource: true
             description: Definition of the automation account type.
             properties:
               etag:
                 description: Gets or sets the etag of the resource.
                 type: string
               properties:
-                $ref: '#/definitions/AutomationAccountProperties'
-                description: Gets or sets the automation account properties.
-                x-ms-client-flatten: true
+                description: Definition of the account property.
+                properties:
+                  creationTime:
+                    description: Gets the creation time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  description:
+                    description: Gets or sets the description.
+                    type: string
+                  lastModifiedBy:
+                    description: Gets or sets the last modified by.
+                    type: string
+                  lastModifiedTime:
+                    description: Gets the last modified time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  sku:
+                    description: The account SKU.
+                    properties:
+                      capacity:
+                        description: Gets or sets the SKU capacity.
+                        format: int32
+                        type: integer
+                      family:
+                        description: Gets or sets the SKU family.
+                        type: string
+                      name:
+                        description: Gets or sets the SKU name of the account.
+                        enum:
+                          - Free
+                          - Basic
+                        type: string
+                        x-ms-enum:
+                          modelAsString: true
+                          name: SkuNameEnum
+                    required:
+                      - name
+                  state:
+                    description: Gets status of account.
+                    enum:
+                      - Ok
+                      - Unavailable
+                      - Suspended
+                    readOnly: true
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: AutomationAccountState
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -1173,7 +1676,31 @@ paths:
               value:
                 description: Gets or sets a list of statistics.
                 items:
-                  $ref: '#/definitions/Statistics'
+                  description: Definition of the statistic.
+                  properties:
+                    counterProperty:
+                      description: Gets the property value of the statistic.
+                      readOnly: true
+                      type: string
+                    counterValue:
+                      description: Gets the value of the statistic.
+                      format: int64
+                      readOnly: true
+                      type: integer
+                    endTime:
+                      description: Gets the endTime of the statistic.
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    id:
+                      description: Gets the id.
+                      readOnly: true
+                      type: string
+                    startTime:
+                      description: Gets the startTime of the statistic.
+                      format: date-time
+                      readOnly: true
+                      type: string
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -1304,7 +1831,34 @@ paths:
               value:
                 description: Gets or sets usage.
                 items:
-                  $ref: '#/definitions/Usage'
+                  description: Definition of Usage.
+                  properties:
+                    currentValue:
+                      description: Gets or sets the current usage value.
+                      format: double
+                      type: number
+                    id:
+                      description: Gets or sets the id of the resource.
+                      type: string
+                    limit:
+                      description: Gets or sets max limit. -1 for unlimited
+                      format: int64
+                      type: integer
+                    name:
+                      description: Definition of usage counter name.
+                      properties:
+                        localizedValue:
+                          description: Gets or sets the localized usage counter name.
+                          type: string
+                        value:
+                          description: Gets or sets the usage counter name.
+                          type: string
+                    throttleStatus:
+                      description: Gets or sets the throttle status.
+                      type: string
+                    unit:
+                      description: Gets or sets the usage unit name.
+                      type: string
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -1354,20 +1908,4 @@ paths:
                     unit: Count
               headers: {}
       x-ms-pageable: {}
-definitions:
-  AutomationAccount:
-    type: object
-  AutomationAccountCreateOrUpdateProperties:
-    type: object
-  AutomationAccountProperties:
-    type: object
-  AutomationAccountUpdateProperties:
-    type: object
-  Operation:
-    type: object
-  Resource:
-    type: object
-  Statistics:
-    type: object
-  Usage:
-    type: object
+definitions: {}

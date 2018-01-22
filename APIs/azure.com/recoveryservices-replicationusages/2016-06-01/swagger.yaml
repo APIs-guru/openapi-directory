@@ -78,6 +78,31 @@ paths:
             $ref: '#/definitions/ReplicationUsageList'
       tags:
         - ReplicationUsages
+      x-ms-examples:
+        Gets Replication usages of vault:
+          parameters:
+            api-version: '2016-06-01'
+            resourceGroupName: avrai7517RG1
+            subscriptionId: 6808dbbc-98c7-431f-a1b1-9580902423b7
+            vaultName: avrai7517Vault1
+          responses:
+            '200':
+              body:
+                value:
+                  - jobsSummary:
+                      failedJobs: 0
+                      inProgressJobs: 0
+                      suspendedJobs: 0
+                    monitoringSummary:
+                      deprecatedProviderCount: 0
+                      eventsCount: 0
+                      supportedProviderCount: 0
+                      unHealthyProviderCount: 0
+                      unHealthyVmCount: 0
+                      unsupportedProviderCount: 0
+                    protectedItemCount: 2
+                    recoveryPlanCount: 1
+                    registeredServersCount: 2
       x-ms-pageable: {}
 definitions:
   JobsSummary:

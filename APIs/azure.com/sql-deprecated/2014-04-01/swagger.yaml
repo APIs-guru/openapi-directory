@@ -138,8 +138,6 @@ definitions:
         items:
           properties: {}
         type: array
-  ProxyResource:
-    type: object
   TransparentDataEncryptionListResult:
     description: Represents the response to a list transparent data encryption configurations request.
     properties:
@@ -147,7 +145,23 @@ definitions:
         description: The list of transparent data encryption configurations.
         items:
           allOf:
-            - $ref: '#/definitions/ProxyResource'
+            - allOf:
+                - description: ARM resource.
+                  properties:
+                    id:
+                      description: Resource ID.
+                      readOnly: true
+                      type: string
+                    name:
+                      description: Resource name.
+                      readOnly: true
+                      type: string
+                    type:
+                      description: Resource type.
+                      readOnly: true
+                      type: string
+                  x-ms-azure-resource: true
+              description: ARM proxy resource.
           description: Represents a database transparent data encryption configuration.
           properties:
             location:
@@ -155,9 +169,14 @@ definitions:
               readOnly: true
               type: string
             properties:
-              $ref: '#/definitions/TransparentDataEncryptionProperties'
-              description: Represents the properties of the resource.
-              x-ms-client-flatten: true
+              description: Represents the properties of a database transparent data encryption.
+              properties:
+                status:
+                  description: The status of the database transparent data encryption.
+                  enum:
+                    - Enabled
+                    - Disabled
+                  type: string
+                  x-ms-enum:
+                    name: TransparentDataEncryptionStatus
         type: array
-  TransparentDataEncryptionProperties:
-    type: object

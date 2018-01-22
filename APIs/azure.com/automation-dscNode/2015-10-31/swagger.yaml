@@ -79,8 +79,14 @@ paths:
                 description: Gets or sets the id.
                 type: string
               keys:
-                $ref: '#/definitions/AgentRegistrationKeys'
-                description: Gets or sets the agent registration keys.
+                description: Definition of the agent registration keys.
+                properties:
+                  primary:
+                    description: Gets or sets the primary key.
+                    type: string
+                  secondary:
+                    description: Gets or sets the secondary key.
+                    type: string
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -168,8 +174,14 @@ paths:
                 description: Gets or sets the id.
                 type: string
               keys:
-                $ref: '#/definitions/AgentRegistrationKeys'
-                description: Gets or sets the agent registration keys.
+                description: Definition of the agent registration keys.
+                properties:
+                  primary:
+                    description: Gets or sets the primary key.
+                    type: string
+                  secondary:
+                    description: Gets or sets the secondary key.
+                    type: string
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -229,7 +241,75 @@ paths:
               value:
                 description: Gets or sets a list of dsc nodes.
                 items:
-                  $ref: '#/definitions/DscNode'
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource Id
+                          readOnly: true
+                          type: string
+                        location:
+                          description: Resource location
+                          type: string
+                        name:
+                          description: Resource name
+                          readOnly: true
+                          type: string
+                        tags:
+                          additionalProperties:
+                            type: string
+                          description: Resource tags
+                          type: object
+                        type:
+                          description: Resource type
+                          readOnly: true
+                          type: string
+                      required:
+                        - location
+                      x-ms-azure-resource: true
+                  description: Definition of the dsc node type.
+                  properties:
+                    accountId:
+                      description: Gets or sets the account id of the node.
+                      type: string
+                    etag:
+                      description: Gets or sets the etag of the resource.
+                      type: string
+                    extensionHandler:
+                      description: Gets or sets the list of extensionHandler properties for a Node.
+                      items:
+                        description: The dsc extensionHandler property associated with the node
+                        properties:
+                          name:
+                            description: Gets or sets the name of the extension handler.
+                            type: string
+                          version:
+                            description: Gets or sets the version of the extension handler.
+                            type: string
+                      type: array
+                    ip:
+                      description: Gets or sets the ip of the node.
+                      type: string
+                    lastSeen:
+                      description: Gets or sets the last seen time of the node.
+                      format: date-time
+                      type: string
+                    nodeConfiguration:
+                      description: The dsc nodeconfiguration property associated with the entity.
+                      properties:
+                        name:
+                          description: Gets or sets the name of the dsc nodeconfiguration.
+                          type: string
+                    nodeId:
+                      description: Gets or sets the node id.
+                      type: string
+                    registrationTime:
+                      description: Gets or sets the registration time of the node.
+                      format: date-time
+                      type: string
+                    status:
+                      description: Gets or sets the status of the node.
+                      type: string
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -306,7 +386,31 @@ paths:
           description: OK
           schema:
             allOf:
-              - $ref: '#/definitions/Resource'
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource Id
+                    readOnly: true
+                    type: string
+                  location:
+                    description: Resource location
+                    type: string
+                  name:
+                    description: Resource name
+                    readOnly: true
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Resource tags
+                    type: object
+                  type:
+                    description: Resource type
+                    readOnly: true
+                    type: string
+                required:
+                  - location
+                x-ms-azure-resource: true
             description: Definition of the dsc node type.
             properties:
               accountId:
@@ -318,7 +422,14 @@ paths:
               extensionHandler:
                 description: Gets or sets the list of extensionHandler properties for a Node.
                 items:
-                  $ref: '#/definitions/DscNodeExtensionHandlerAssociationProperty'
+                  description: The dsc extensionHandler property associated with the node
+                  properties:
+                    name:
+                      description: Gets or sets the name of the extension handler.
+                      type: string
+                    version:
+                      description: Gets or sets the version of the extension handler.
+                      type: string
                 type: array
               ip:
                 description: Gets or sets the ip of the node.
@@ -328,8 +439,11 @@ paths:
                 format: date-time
                 type: string
               nodeConfiguration:
-                $ref: '#/definitions/DscNodeConfigurationAssociationProperty'
-                description: Gets or sets the configuration of the node.
+                description: The dsc nodeconfiguration property associated with the entity.
+                properties:
+                  name:
+                    description: Gets or sets the name of the dsc nodeconfiguration.
+                    type: string
               nodeId:
                 description: Gets or sets the node id.
                 type: string
@@ -391,7 +505,31 @@ paths:
           description: OK
           schema:
             allOf:
-              - $ref: '#/definitions/Resource'
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource Id
+                    readOnly: true
+                    type: string
+                  location:
+                    description: Resource location
+                    type: string
+                  name:
+                    description: Resource name
+                    readOnly: true
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Resource tags
+                    type: object
+                  type:
+                    description: Resource type
+                    readOnly: true
+                    type: string
+                required:
+                  - location
+                x-ms-azure-resource: true
             description: Definition of the dsc node type.
             properties:
               accountId:
@@ -403,7 +541,14 @@ paths:
               extensionHandler:
                 description: Gets or sets the list of extensionHandler properties for a Node.
                 items:
-                  $ref: '#/definitions/DscNodeExtensionHandlerAssociationProperty'
+                  description: The dsc extensionHandler property associated with the node
+                  properties:
+                    name:
+                      description: Gets or sets the name of the extension handler.
+                      type: string
+                    version:
+                      description: Gets or sets the version of the extension handler.
+                      type: string
                 type: array
               ip:
                 description: Gets or sets the ip of the node.
@@ -413,8 +558,11 @@ paths:
                 format: date-time
                 type: string
               nodeConfiguration:
-                $ref: '#/definitions/DscNodeConfigurationAssociationProperty'
-                description: Gets or sets the configuration of the node.
+                description: The dsc nodeconfiguration property associated with the entity.
+                properties:
+                  name:
+                    description: Gets or sets the name of the dsc nodeconfiguration.
+                    type: string
               nodeId:
                 description: Gets or sets the node id.
                 type: string
@@ -490,8 +638,11 @@ paths:
             description: The parameters supplied to the update dsc node operation.
             properties:
               nodeConfiguration:
-                $ref: '#/definitions/DscNodeConfigurationAssociationProperty'
-                description: Gets or sets the configuration of the node.
+                description: The dsc nodeconfiguration property associated with the entity.
+                properties:
+                  name:
+                    description: Gets or sets the name of the dsc nodeconfiguration.
+                    type: string
               nodeId:
                 description: Gets or sets the id of the dsc node.
                 type: string
@@ -510,7 +661,31 @@ paths:
           description: OK
           schema:
             allOf:
-              - $ref: '#/definitions/Resource'
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource Id
+                    readOnly: true
+                    type: string
+                  location:
+                    description: Resource location
+                    type: string
+                  name:
+                    description: Resource name
+                    readOnly: true
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Resource tags
+                    type: object
+                  type:
+                    description: Resource type
+                    readOnly: true
+                    type: string
+                required:
+                  - location
+                x-ms-azure-resource: true
             description: Definition of the dsc node type.
             properties:
               accountId:
@@ -522,7 +697,14 @@ paths:
               extensionHandler:
                 description: Gets or sets the list of extensionHandler properties for a Node.
                 items:
-                  $ref: '#/definitions/DscNodeExtensionHandlerAssociationProperty'
+                  description: The dsc extensionHandler property associated with the node
+                  properties:
+                    name:
+                      description: Gets or sets the name of the extension handler.
+                      type: string
+                    version:
+                      description: Gets or sets the version of the extension handler.
+                      type: string
                 type: array
               ip:
                 description: Gets or sets the ip of the node.
@@ -532,8 +714,11 @@ paths:
                 format: date-time
                 type: string
               nodeConfiguration:
-                $ref: '#/definitions/DscNodeConfigurationAssociationProperty'
-                description: Gets or sets the configuration of the node.
+                description: The dsc nodeconfiguration property associated with the entity.
+                properties:
+                  name:
+                    description: Gets or sets the name of the dsc nodeconfiguration.
+                    type: string
               nodeId:
                 description: Gets or sets the node id.
                 type: string
@@ -632,7 +817,158 @@ paths:
               value:
                 description: Gets or sets a list of dsc node reports.
                 items:
-                  $ref: '#/definitions/DscNodeReport'
+                  description: Definition of the dsc node report type.
+                  properties:
+                    configurationVersion:
+                      description: Gets or sets the configurationVersion of the node report.
+                      type: string
+                    endTime:
+                      description: Gets or sets the end time of the node report.
+                      format: date-time
+                      type: string
+                    errors:
+                      description: Gets or sets the errors for the node report.
+                      items:
+                        description: Definition of the dsc node report error type.
+                        properties:
+                          errorCode:
+                            description: Gets or sets the error code.
+                            type: string
+                          errorDetails:
+                            description: Gets or sets the error details.
+                            type: string
+                          errorMessage:
+                            description: Gets or sets the error message.
+                            type: string
+                          errorSource:
+                            description: Gets or sets the source of the error.
+                            type: string
+                          locale:
+                            description: Gets or sets the locale of the error.
+                            type: string
+                          resourceId:
+                            description: Gets or sets the resource ID which generated the error.
+                            type: string
+                      type: array
+                    hostName:
+                      description: Gets or sets the hostname of the node that sent the report.
+                      type: string
+                    iPV4Addresses:
+                      description: Gets or sets the IPv4 address of the node that sent the report.
+                      items:
+                        type: string
+                      type: array
+                    iPV6Addresses:
+                      description: Gets or sets the IPv6 address of the node that sent the report.
+                      items:
+                        type: string
+                      type: array
+                    id:
+                      description: Gets or sets the id.
+                      type: string
+                    lastModifiedTime:
+                      description: Gets or sets the lastModifiedTime of the node report.
+                      format: date-time
+                      type: string
+                    metaConfiguration:
+                      description: Definition of the DSC Meta Configuration.
+                      properties:
+                        actionAfterReboot:
+                          description: Gets or sets the ActionAfterReboot value of the meta configuration.
+                          type: string
+                        allowModuleOverwrite:
+                          description: Gets or sets the AllowModuleOverwrite value of the meta configuration.
+                          type: boolean
+                        certificateId:
+                          description: Gets or sets the CertificateId value of the meta configuration.
+                          type: string
+                        configurationMode:
+                          description: Gets or sets the ConfigurationMode value of the meta configuration.
+                          type: string
+                        configurationModeFrequencyMins:
+                          description: Gets or sets the ConfigurationModeFrequencyMins value of the meta configuration.
+                          format: int32
+                          type: integer
+                        rebootNodeIfNeeded:
+                          description: Gets or sets the RebootNodeIfNeeded value of the meta configuration.
+                          type: boolean
+                        refreshFrequencyMins:
+                          description: Gets or sets the RefreshFrequencyMins value of the meta configuration.
+                          format: int32
+                          type: integer
+                    numberOfResources:
+                      description: Gets or sets the number of resource in the node report.
+                      format: int32
+                      type: integer
+                    rawErrors:
+                      description: Gets or sets the unparsed errors for the node report.
+                      type: string
+                    rebootRequested:
+                      description: Gets or sets the rebootRequested of the node report.
+                      type: string
+                    refreshMode:
+                      description: Gets or sets the refreshMode of the node report.
+                      type: string
+                    reportFormatVersion:
+                      description: Gets or sets the reportFormatVersion of the node report.
+                      type: string
+                    reportId:
+                      description: Gets or sets the id of the node report.
+                      type: string
+                    resources:
+                      description: Gets or sets the resource for the node report.
+                      items:
+                        description: Definition of the DSC Report Resource.
+                        properties:
+                          dependsOn:
+                            description: Gets or sets the Resource Navigation values for resources the resource depends on.
+                            items:
+                              description: Navigation for DSC Report Resource.
+                              properties:
+                                resourceId:
+                                  description: Gets or sets the ID of the resource to navigate to.
+                                  type: string
+                            type: array
+                          durationInSeconds:
+                            description: Gets or sets the duration in seconds for the resource.
+                            format: double
+                            type: number
+                          error:
+                            description: Gets or sets the error of the resource.
+                            type: string
+                          moduleName:
+                            description: Gets or sets the module name of the resource.
+                            type: string
+                          moduleVersion:
+                            description: Gets or sets the module version of the resource.
+                            type: string
+                          resourceId:
+                            description: Gets or sets the ID of the resource.
+                            type: string
+                          resourceName:
+                            description: Gets or sets the name of the resource.
+                            type: string
+                          sourceInfo:
+                            description: Gets or sets the source info of the resource.
+                            type: string
+                          startDate:
+                            description: Gets or sets the start date of the resource.
+                            format: date-time
+                            type: string
+                          status:
+                            description: Gets or sets the status of the resource.
+                            type: string
+                      type: array
+                    startTime:
+                      description: Gets or sets the start time of the node report.
+                      format: date-time
+                      type: string
+                    status:
+                      description: Gets or sets the status of the node report.
+                      type: string
+                    type:
+                      description: Gets or sets the type of the node report.
+                      type: string
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -916,7 +1252,26 @@ paths:
               errors:
                 description: Gets or sets the errors for the node report.
                 items:
-                  $ref: '#/definitions/DscReportError'
+                  description: Definition of the dsc node report error type.
+                  properties:
+                    errorCode:
+                      description: Gets or sets the error code.
+                      type: string
+                    errorDetails:
+                      description: Gets or sets the error details.
+                      type: string
+                    errorMessage:
+                      description: Gets or sets the error message.
+                      type: string
+                    errorSource:
+                      description: Gets or sets the source of the error.
+                      type: string
+                    locale:
+                      description: Gets or sets the locale of the error.
+                      type: string
+                    resourceId:
+                      description: Gets or sets the resource ID which generated the error.
+                      type: string
                 type: array
               hostName:
                 description: Gets or sets the hostname of the node that sent the report.
@@ -939,8 +1294,31 @@ paths:
                 format: date-time
                 type: string
               metaConfiguration:
-                $ref: '#/definitions/DscMetaConfiguration'
-                description: Gets or sets the metaConfiguration of the node at the time of the report.
+                description: Definition of the DSC Meta Configuration.
+                properties:
+                  actionAfterReboot:
+                    description: Gets or sets the ActionAfterReboot value of the meta configuration.
+                    type: string
+                  allowModuleOverwrite:
+                    description: Gets or sets the AllowModuleOverwrite value of the meta configuration.
+                    type: boolean
+                  certificateId:
+                    description: Gets or sets the CertificateId value of the meta configuration.
+                    type: string
+                  configurationMode:
+                    description: Gets or sets the ConfigurationMode value of the meta configuration.
+                    type: string
+                  configurationModeFrequencyMins:
+                    description: Gets or sets the ConfigurationModeFrequencyMins value of the meta configuration.
+                    format: int32
+                    type: integer
+                  rebootNodeIfNeeded:
+                    description: Gets or sets the RebootNodeIfNeeded value of the meta configuration.
+                    type: boolean
+                  refreshFrequencyMins:
+                    description: Gets or sets the RefreshFrequencyMins value of the meta configuration.
+                    format: int32
+                    type: integer
               numberOfResources:
                 description: Gets or sets the number of resource in the node report.
                 format: int32
@@ -963,7 +1341,46 @@ paths:
               resources:
                 description: Gets or sets the resource for the node report.
                 items:
-                  $ref: '#/definitions/DscReportResource'
+                  description: Definition of the DSC Report Resource.
+                  properties:
+                    dependsOn:
+                      description: Gets or sets the Resource Navigation values for resources the resource depends on.
+                      items:
+                        description: Navigation for DSC Report Resource.
+                        properties:
+                          resourceId:
+                            description: Gets or sets the ID of the resource to navigate to.
+                            type: string
+                      type: array
+                    durationInSeconds:
+                      description: Gets or sets the duration in seconds for the resource.
+                      format: double
+                      type: number
+                    error:
+                      description: Gets or sets the error of the resource.
+                      type: string
+                    moduleName:
+                      description: Gets or sets the module name of the resource.
+                      type: string
+                    moduleVersion:
+                      description: Gets or sets the module version of the resource.
+                      type: string
+                    resourceId:
+                      description: Gets or sets the ID of the resource.
+                      type: string
+                    resourceName:
+                      description: Gets or sets the name of the resource.
+                      type: string
+                    sourceInfo:
+                      description: Gets or sets the source info of the resource.
+                      type: string
+                    startDate:
+                      description: Gets or sets the start date of the resource.
+                      format: date-time
+                      type: string
+                    status:
+                      description: Gets or sets the status of the resource.
+                      type: string
                 type: array
               startTime:
                 description: Gets or sets the start time of the node report.
@@ -1313,22 +1730,4 @@ paths:
                     status: Compliant
                     type: Consistency
               headers: {}
-definitions:
-  AgentRegistrationKeys:
-    type: object
-  DscMetaConfiguration:
-    type: object
-  DscNode:
-    type: object
-  DscNodeConfigurationAssociationProperty:
-    type: object
-  DscNodeExtensionHandlerAssociationProperty:
-    type: object
-  DscNodeReport:
-    type: object
-  DscReportError:
-    type: object
-  DscReportResource:
-    type: object
-  Resource:
-    type: object
+definitions: {}

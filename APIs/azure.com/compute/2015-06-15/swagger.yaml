@@ -2002,6 +2002,9 @@ definitions:
   ListUsagesResult:
     description: The List Usages operation response.
     properties:
+      nextLink:
+        description: The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information.
+        type: string
       value:
         description: The list of compute resource usages.
         items:
@@ -2717,6 +2720,9 @@ definitions:
   VirtualMachineScaleSetListResult:
     description: The List Virtual Machine operation response.
     properties:
+      nextLink:
+        description: The URI to fetch the next page of virtual machine scale sets. Call ListNext() with this to fetch the next page of virtual machine scale sets.
+        type: string
       value:
         description: The list of virtual machine scale sets.
         items:
@@ -2725,6 +2731,9 @@ definitions:
   VirtualMachineScaleSetListSkusResult:
     description: The Virtual Machine Scale Set List Skus operation response.
     properties:
+      nextLink:
+        description: The URI to fetch the next page of skus available for the virtual machine scale set. Call ListNext() with this to fetch the next page of skus available for the virtual machine scale set.
+        type: string
       value:
         description: The list of skus available for the virtual machine scale set.
         items:
@@ -2995,6 +3004,9 @@ definitions:
   VirtualMachineScaleSetVMListResult:
     description: The List Virtual Machine Scale Set VMs operation response.
     properties:
+      nextLink:
+        description: The URI to fetch the next page of virtual machine scale sets VMs. Call ListNext() with this to fetch the next page of virtual machine scale sets VMs.
+        type: string
       value:
         description: The list of virtual machine scale sets VMs.
         items:

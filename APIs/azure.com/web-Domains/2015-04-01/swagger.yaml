@@ -400,6 +400,44 @@ paths:
       summary: Creates an ownership identifier for a domain or updates identifier details for an existing identifer
       tags:
         - Domains
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/renew':
+    post:
+      description: Renew a domain.
+      operationId: Domains_Renew
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Name of the domain.
+          in: path
+          name: domainName
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Domain renewal was successful.
+        '202':
+          description: Domain renewal in progress.
+        '204':
+          description: Domain does not exist.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Renew a domain.
+      tags:
+        - Domains
+      x-ms-examples:
+        Renew an App Service Domain:
+          parameters:
+            api-version: '2015-04-01'
+            domainName: example.com
+            resourceGroupName: RG
+            subscriptionId: 3dddfa4f-cedf-4dc0-ba29-b6d1a69ab545
+          responses:
+            '200': {}
+            '202': {}
+            '204': {}
 definitions:
   Address:
     description: Address information for domain registration.
@@ -677,6 +715,7 @@ definitions:
     properties:
       nextLink:
         description: Link to next page of resources.
+        readOnly: true
         type: string
       value:
         description: Collection of resources.
@@ -737,6 +776,7 @@ definitions:
     properties:
       nextLink:
         description: Link to next page of resources.
+        readOnly: true
         type: string
       value:
         description: Collection of resources.
@@ -949,6 +989,15 @@ definitions:
         format: int32
         type: integer
     type: object
+  ErrorResponse:
+    description: Error Response.
+    properties:
+      code:
+        description: Error code.
+        type: string
+      message:
+        description: Error message indicating why the operation failed.
+        type: string
   HostName:
     description: Details of a hostname derived from a domain.
     properties:
@@ -996,6 +1045,7 @@ definitions:
     properties:
       nextLink:
         description: Link to next page of resources.
+        readOnly: true
         type: string
       value:
         description: Collection of resources.

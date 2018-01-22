@@ -125,7 +125,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -190,7 +200,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -206,7 +226,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -263,7 +293,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -325,7 +365,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -341,7 +391,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -400,7 +460,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -455,7 +525,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -535,7 +615,42 @@ paths:
               value:
                 description: Page values.
                 items:
-                  $ref: '#/definitions/GroupContract'
+                  description: Developer group.
+                  properties:
+                    builtIn:
+                      description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
+                      readOnly: true
+                      type: boolean
+                    description:
+                      description: Group description. Can contain HTML formatting tags.
+                      maxLength: 1000
+                      type: string
+                    externalId:
+                      description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
+                      readOnly: true
+                      type: string
+                    id:
+                      description: 'Uniquely identifies the group within the current API Management service instance. The value is a valid relative URL in the format of /groups/{groupid} where {groupid} is a group identifier.'
+                      readOnly: true
+                      type: string
+                    name:
+                      description: Group name.
+                      maxLength: 300
+                      minLength: 1
+                      type: string
+                    type:
+                      description: Group type.
+                      enum:
+                        - Custom
+                        - System
+                        - External
+                      readOnly: true
+                      type: string
+                      x-ms-enum:
+                        modelAsString: false
+                        name: GroupTypeContract
+                  required:
+                    - name
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -548,7 +663,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -605,7 +730,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -688,7 +823,75 @@ paths:
               value:
                 description: Page values.
                 items:
-                  $ref: '#/definitions/SubscriptionContract'
+                  description: Subscription details.
+                  properties:
+                    createdDate:
+                      description: |
+                        Subscription creation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    endDate:
+                      description: |
+                        Date when subscription was cancelled or expired. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                      format: date-time
+                      type: string
+                    expirationDate:
+                      description: |
+                        Subscription expiration date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                      format: date-time
+                      type: string
+                    id:
+                      description: 'Uniquely identifies the subscription within the current API Management service instance. The value is a valid relative URL in the format of /subscriptions/{sid} where {sid} is a subscription identifier.'
+                      readOnly: true
+                      type: string
+                    name:
+                      description: 'The name of the subscription, or null if the subscription has no name.'
+                      maxLength: 100
+                      minLength: 0
+                      type: string
+                    notificationDate:
+                      description: |
+                        Upcoming subscription expiration notification date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                      format: date-time
+                      type: string
+                    primaryKey:
+                      description: Subscription primary key.
+                      maxLength: 256
+                      minLength: 1
+                      type: string
+                    productId:
+                      description: 'The product resource identifier of the subscribed product. The value is a valid relative URL in the format of /products/{productId} where {productId} is a product identifier.'
+                      type: string
+                    secondaryKey:
+                      description: Subscription secondary key.
+                      maxLength: 256
+                      minLength: 1
+                      type: string
+                    startDate:
+                      description: |
+                        Subscription activation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                      format: date-time
+                      type: string
+                    state:
+                      description: 'Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.'
+                      enum:
+                        - Suspended
+                        - Active
+                        - Expired
+                        - Submitted
+                        - Rejected
+                        - Cancelled
+                      type: string
+                      x-ms-enum:
+                        modelAsString: false
+                        name: SubscriptionStateContract
+                    stateComment:
+                      description: Optional subscription comment added by an administrator.
+                      type: string
+                    userId:
+                      description: 'The user resource identifier of the subscription owner. The value is a valid relative URL in the format of /users/{uid} where {uid} is a user identifier.'
+                      type: string
                 type: array
         default:
           description: Error response describing why the operation failed.
@@ -701,7 +904,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -765,7 +978,17 @@ paths:
               details:
                 description: 'The list of invalid fields send in request, in case of validation error.'
                 items:
-                  $ref: '#/definitions/ErrorFieldContract'
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
                 type: array
               message:
                 description: Human-readable representation of the error.
@@ -788,18 +1011,12 @@ paths:
               body:
                 value: 57f2af53bb17172280f44057&201705131039&***************************/tJVExvjA==
 definitions:
-  ErrorFieldContract:
-    type: object
   GenerateSsoUrlResult:
     description: Generate SSO Url operations response details.
     properties:
       value:
         description: Redirect Url containing the SSO URL value.
         type: string
-  GroupContract:
-    type: object
-  SubscriptionContract:
-    type: object
   UserCollection:
     description: Paged Users list representation.
     properties:

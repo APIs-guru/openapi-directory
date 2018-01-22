@@ -1296,8 +1296,6 @@ definitions:
       properties:
         $ref: '#/definitions/AccessPolicyMutableProperties'
         x-ms-client-flatten: true
-    required:
-      - properties
   AzureEventSourceProperties:
     allOf:
       - $ref: '#/definitions/EventSourceCommonProperties'

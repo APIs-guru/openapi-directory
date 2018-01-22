@@ -98,7 +98,95 @@ paths:
               value:
                 description: outer object returned when listing all software update configuration machine runs
                 items:
-                  $ref: './definitions.json#/definitions/softwareUpdateConfigurationMachineRun'
+                  description: Software update configuration machine run model.
+                  properties:
+                    id:
+                      description: Resource Id of the software update configuration machine run
+                      readOnly: true
+                      type: string
+                    name:
+                      description: Name of the software update configuration machine run
+                      readOnly: true
+                      type: string
+                    properties:
+                      description: Software update configuration machine run properties.
+                      properties:
+                        configuredDuration:
+                          description: configured duration for the software update configuration run.
+                          readOnly: true
+                          type: string
+                        correlationId:
+                          description: correlation id of the software update configuration machine run
+                          format: uuid
+                          readOnly: true
+                          type: string
+                        createdBy:
+                          description: 'createdBy property, which only appears in the response.'
+                          readOnly: true
+                          type: string
+                        creationTime:
+                          description: 'Creation time of theresource, which only appears in the response.'
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        endTime:
+                          description: End time of the software update configuration machine run.
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        job:
+                          description: Software update configuration machine run job navigation properties.
+                          properties:
+                            id:
+                              description: Id of the job associated with the software update configuration run
+                              readOnly: true
+                              type: string
+                          type: object
+                        lastModifiedBy:
+                          description: 'lastModifiedBy property, which only appears in the response.'
+                          readOnly: true
+                          type: string
+                        lastModifiedTime:
+                          description: 'Last time resource was modified, which only appears in the response.'
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        osType:
+                          description: Operating system target of the software update configuration triggered this run
+                          readOnly: true
+                          type: string
+                        softwareUpdateConfiguration:
+                          description: Software update configuration Run Navigation model.
+                          properties:
+                            name:
+                              description: Name of the software update configuration triggered the software update configuration run
+                              readOnly: true
+                              type: string
+                          type: object
+                        sourceComputerId:
+                          description: source computer id of the software update configuration machine run
+                          format: uuid
+                          readOnly: true
+                          type: string
+                        startTime:
+                          description: Start time of the software update configuration machine run.
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        status:
+                          description: Status of the software update configuration machine run.
+                          readOnly: true
+                          type: string
+                        targetComputer:
+                          description: name of the updated computer
+                          readOnly: true
+                          type: string
+                        targetComputerType:
+                          description: type of the updated computer.
+                          readOnly: true
+                          type: string
+                  type: object
+                  x-ms-azure-resource: false
                 type: array
         '404':
           description: 'Resource group, or account doesn''t exist.'
@@ -262,9 +350,82 @@ paths:
                 readOnly: true
                 type: string
               properties:
-                $ref: '#/definitions/updateConfigurationMachineRunProperties'
                 description: Software update configuration machine run properties.
-                x-ms-client-flatten: true
+                properties:
+                  configuredDuration:
+                    description: configured duration for the software update configuration run.
+                    readOnly: true
+                    type: string
+                  correlationId:
+                    description: correlation id of the software update configuration machine run
+                    format: uuid
+                    readOnly: true
+                    type: string
+                  createdBy:
+                    description: 'createdBy property, which only appears in the response.'
+                    readOnly: true
+                    type: string
+                  creationTime:
+                    description: 'Creation time of theresource, which only appears in the response.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  endTime:
+                    description: End time of the software update configuration machine run.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  job:
+                    description: Software update configuration machine run job navigation properties.
+                    properties:
+                      id:
+                        description: Id of the job associated with the software update configuration run
+                        readOnly: true
+                        type: string
+                    type: object
+                  lastModifiedBy:
+                    description: 'lastModifiedBy property, which only appears in the response.'
+                    readOnly: true
+                    type: string
+                  lastModifiedTime:
+                    description: 'Last time resource was modified, which only appears in the response.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  osType:
+                    description: Operating system target of the software update configuration triggered this run
+                    readOnly: true
+                    type: string
+                  softwareUpdateConfiguration:
+                    description: Software update configuration Run Navigation model.
+                    properties:
+                      name:
+                        description: Name of the software update configuration triggered the software update configuration run
+                        readOnly: true
+                        type: string
+                    type: object
+                  sourceComputerId:
+                    description: source computer id of the software update configuration machine run
+                    format: uuid
+                    readOnly: true
+                    type: string
+                  startTime:
+                    description: Start time of the software update configuration machine run.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  status:
+                    description: Status of the software update configuration machine run.
+                    readOnly: true
+                    type: string
+                  targetComputer:
+                    description: name of the updated computer
+                    readOnly: true
+                    type: string
+                  targetComputerType:
+                    description: type of the updated computer.
+                    readOnly: true
+                    type: string
             type: object
             x-ms-azure-resource: false
         '404':
@@ -304,6 +465,3 @@ paths:
             '404':
               code: NotFound
               message: '{"Message":"Could not find the account. SubscriptionId: 51766542-3ed7-4a72-a187-0c8ab644ddab AccountName: myaccount"}'
-definitions:
-  updateConfigurationMachineRunProperties:
-    type: object

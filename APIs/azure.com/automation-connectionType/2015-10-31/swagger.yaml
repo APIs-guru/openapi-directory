@@ -75,7 +75,52 @@ paths:
               value:
                 description: Gets or sets a list of connection types.
                 items:
-                  $ref: '#/definitions/ConnectionType'
+                  description: Definition of the connection type.
+                  properties:
+                    id:
+                      description: Gets the id of the resource.
+                      readOnly: true
+                      type: string
+                    name:
+                      description: Gets the name of the connection type.
+                      readOnly: true
+                      type: string
+                    properties:
+                      description: Properties of the connection type.
+                      properties:
+                        creationTime:
+                          description: Gets the creation time.
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        description:
+                          description: Gets or sets the description.
+                          type: string
+                        fieldDefinitions:
+                          additionalProperties:
+                            description: Definition of the connection fields.
+                            properties:
+                              isEncrypted:
+                                description: Gets or sets the isEncrypted flag of the connection field definition.
+                                type: boolean
+                              isOptional:
+                                description: Gets or sets the isOptional flag of the connection field definition.
+                                type: boolean
+                              type:
+                                description: Gets or sets the type of the connection field definition.
+                                type: string
+                            required:
+                              - type
+                          description: Gets the field definitions of the connection type.
+                          readOnly: true
+                          type: object
+                        isGlobal:
+                          description: Gets or sets a Boolean value to indicate if the connection type is global.
+                          type: boolean
+                        lastModifiedTime:
+                          description: Gets or sets the last modified time.
+                          format: date-time
+                          type: string
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -3647,9 +3692,41 @@ paths:
                 readOnly: true
                 type: string
               properties:
-                $ref: '#/definitions/ConnectionTypeProperties'
-                description: Gets or sets the properties of the connection type.
-                x-ms-client-flatten: true
+                description: Properties of the connection type.
+                properties:
+                  creationTime:
+                    description: Gets the creation time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  description:
+                    description: Gets or sets the description.
+                    type: string
+                  fieldDefinitions:
+                    additionalProperties:
+                      description: Definition of the connection fields.
+                      properties:
+                        isEncrypted:
+                          description: Gets or sets the isEncrypted flag of the connection field definition.
+                          type: boolean
+                        isOptional:
+                          description: Gets or sets the isOptional flag of the connection field definition.
+                          type: boolean
+                        type:
+                          description: Gets or sets the type of the connection field definition.
+                          type: string
+                      required:
+                        - type
+                    description: Gets the field definitions of the connection type.
+                    readOnly: true
+                    type: object
+                  isGlobal:
+                    description: Gets or sets a Boolean value to indicate if the connection type is global.
+                    type: boolean
+                  lastModifiedTime:
+                    description: Gets or sets the last modified time.
+                    format: date-time
+                    type: string
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -3728,9 +3805,30 @@ paths:
                 description: Gets or sets the name of the connection type.
                 type: string
               properties:
-                $ref: '#/definitions/ConnectionTypeCreateOrUpdateProperties'
-                description: Gets or sets the value of the connection type.
-                x-ms-client-flatten: true
+                description: The properties of the create connection type.
+                properties:
+                  fieldDefinitions:
+                    additionalProperties:
+                      description: Definition of the connection fields.
+                      properties:
+                        isEncrypted:
+                          description: Gets or sets the isEncrypted flag of the connection field definition.
+                          type: boolean
+                        isOptional:
+                          description: Gets or sets the isOptional flag of the connection field definition.
+                          type: boolean
+                        type:
+                          description: Gets or sets the type of the connection field definition.
+                          type: string
+                      required:
+                        - type
+                    description: Gets or sets the field definitions of the connection type.
+                    type: object
+                  isGlobal:
+                    description: Gets or sets a Boolean value to indicate if the connection type is global.
+                    type: boolean
+                required:
+                  - fieldDefinitions
             required:
               - name
               - properties
@@ -3759,9 +3857,41 @@ paths:
                 readOnly: true
                 type: string
               properties:
-                $ref: '#/definitions/ConnectionTypeProperties'
-                description: Gets or sets the properties of the connection type.
-                x-ms-client-flatten: true
+                description: Properties of the connection type.
+                properties:
+                  creationTime:
+                    description: Gets the creation time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  description:
+                    description: Gets or sets the description.
+                    type: string
+                  fieldDefinitions:
+                    additionalProperties:
+                      description: Definition of the connection fields.
+                      properties:
+                        isEncrypted:
+                          description: Gets or sets the isEncrypted flag of the connection field definition.
+                          type: boolean
+                        isOptional:
+                          description: Gets or sets the isOptional flag of the connection field definition.
+                          type: boolean
+                        type:
+                          description: Gets or sets the type of the connection field definition.
+                          type: string
+                      required:
+                        - type
+                    description: Gets the field definitions of the connection type.
+                    readOnly: true
+                    type: object
+                  isGlobal:
+                    description: Gets or sets a Boolean value to indicate if the connection type is global.
+                    type: boolean
+                  lastModifiedTime:
+                    description: Gets or sets the last modified time.
+                    format: date-time
+                    type: string
         '409':
           description: Conflict
           schema:
@@ -3776,9 +3906,41 @@ paths:
                 readOnly: true
                 type: string
               properties:
-                $ref: '#/definitions/ConnectionTypeProperties'
-                description: Gets or sets the properties of the connection type.
-                x-ms-client-flatten: true
+                description: Properties of the connection type.
+                properties:
+                  creationTime:
+                    description: Gets the creation time.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  description:
+                    description: Gets or sets the description.
+                    type: string
+                  fieldDefinitions:
+                    additionalProperties:
+                      description: Definition of the connection fields.
+                      properties:
+                        isEncrypted:
+                          description: Gets or sets the isEncrypted flag of the connection field definition.
+                          type: boolean
+                        isOptional:
+                          description: Gets or sets the isOptional flag of the connection field definition.
+                          type: boolean
+                        type:
+                          description: Gets or sets the type of the connection field definition.
+                          type: string
+                      required:
+                        - type
+                    description: Gets the field definitions of the connection type.
+                    readOnly: true
+                    type: object
+                  isGlobal:
+                    description: Gets or sets a Boolean value to indicate if the connection type is global.
+                    type: boolean
+                  lastModifiedTime:
+                    description: Gets or sets the last modified time.
+                    format: date-time
+                    type: string
         default:
           description: Automation error response describing why the operation failed.
           schema:
@@ -3842,10 +4004,4 @@ paths:
                   lastModifiedTime: '2017-03-27T03:47:53.433+00:00'
               headers: {}
             '409': {}
-definitions:
-  ConnectionType:
-    type: object
-  ConnectionTypeCreateOrUpdateProperties:
-    type: object
-  ConnectionTypeProperties:
-    type: object
+definitions: {}

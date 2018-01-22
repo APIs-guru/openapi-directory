@@ -75,7 +75,36 @@ paths:
               value:
                 description: Gets or sets a list of hybrid runbook worker groups.
                 items:
-                  $ref: '#/definitions/HybridRunbookWorkerGroup'
+                  description: Definition of hybrid runbook worker group.
+                  properties:
+                    credential:
+                      description: Definition of runas credential to use for hybrid worker.
+                      properties:
+                        name:
+                          description: Gets or sets the name of the credential.
+                          type: string
+                    hybridRunbookWorkers:
+                      description: Gets or sets the list of hybrid runbook workers.
+                      items:
+                        description: Definition of hybrid runbook worker.
+                        properties:
+                          ip:
+                            description: Gets or sets the assigned machine IP address.
+                            type: string
+                          name:
+                            description: Gets or sets the worker machine name.
+                            type: string
+                          registrationTime:
+                            description: Gets or sets the registration time of the worker machine.
+                            format: date-time
+                            type: string
+                      type: array
+                    id:
+                      description: Gets or sets the id of the resource.
+                      type: string
+                    name:
+                      description: Gets or sets the name of the group.
+                      type: string
                 type: array
         default:
           description: Automation error response describing why the operation failed.
@@ -213,12 +242,26 @@ paths:
             description: Definition of hybrid runbook worker group.
             properties:
               credential:
-                $ref: '#/definitions/RunAsCredentialAssociationProperty'
-                description: Sets the credential of a worker group.
+                description: Definition of runas credential to use for hybrid worker.
+                properties:
+                  name:
+                    description: Gets or sets the name of the credential.
+                    type: string
               hybridRunbookWorkers:
                 description: Gets or sets the list of hybrid runbook workers.
                 items:
-                  $ref: '#/definitions/HybridRunbookWorker'
+                  description: Definition of hybrid runbook worker.
+                  properties:
+                    ip:
+                      description: Gets or sets the assigned machine IP address.
+                      type: string
+                    name:
+                      description: Gets or sets the worker machine name.
+                      type: string
+                    registrationTime:
+                      description: Gets or sets the registration time of the worker machine.
+                      format: date-time
+                      type: string
                 type: array
               id:
                 description: Gets or sets the id of the resource.
@@ -290,8 +333,11 @@ paths:
             description: Parameters supplied to the update operation.
             properties:
               credential:
-                $ref: '#/definitions/RunAsCredentialAssociationProperty'
-                description: Sets the credential of a worker group.
+                description: Definition of runas credential to use for hybrid worker.
+                properties:
+                  name:
+                    description: Gets or sets the name of the credential.
+                    type: string
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -309,12 +355,26 @@ paths:
             description: Definition of hybrid runbook worker group.
             properties:
               credential:
-                $ref: '#/definitions/RunAsCredentialAssociationProperty'
-                description: Sets the credential of a worker group.
+                description: Definition of runas credential to use for hybrid worker.
+                properties:
+                  name:
+                    description: Gets or sets the name of the credential.
+                    type: string
               hybridRunbookWorkers:
                 description: Gets or sets the list of hybrid runbook workers.
                 items:
-                  $ref: '#/definitions/HybridRunbookWorker'
+                  description: Definition of hybrid runbook worker.
+                  properties:
+                    ip:
+                      description: Gets or sets the assigned machine IP address.
+                      type: string
+                    name:
+                      description: Gets or sets the worker machine name.
+                      type: string
+                    registrationTime:
+                      description: Gets or sets the registration time of the worker machine.
+                      format: date-time
+                      type: string
                 type: array
               id:
                 description: Gets or sets the id of the resource.
@@ -336,10 +396,4 @@ paths:
             type: object
       tags:
         - HybridRunbookWorkerGroup
-definitions:
-  HybridRunbookWorker:
-    type: object
-  HybridRunbookWorkerGroup:
-    type: object
-  RunAsCredentialAssociationProperty:
-    type: object
+definitions: {}
