@@ -831,11 +831,12 @@ definitions:
         additionalProperties:
           $ref: '#/definitions/TimeSpan'
         description: |-
-          Stores timing information for phases of the build.
-          Valid keys are:
-          - BUILD: time to execute all build steps
-          - PUSH: time to push all specified images.
-          - FETCHSOURCE: time to fetch source.
+          Stores timing information for phases of the build. Valid keys are:
+
+          * BUILD: time to execute all build steps
+          * PUSH: time to push all specified images.
+          * FETCHSOURCE: time to fetch source.
+
           If the build does not specify source, or does not specify images,
           these keys will not be included.
         type: object
@@ -870,7 +871,7 @@ definitions:
           - STREAM_OFF
         type: string
       machineType:
-        description: GCE VM size to run the build on.
+        description: Compute Engine machine type on which to run the build.
         enum:
           - UNSPECIFIED
           - N1_HIGHCPU_8

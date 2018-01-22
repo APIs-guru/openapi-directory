@@ -718,6 +718,7 @@ paths:
             - REDUCE_STDDEV
             - REDUCE_COUNT
             - REDUCE_COUNT_TRUE
+            - REDUCE_COUNT_FALSE
             - REDUCE_FRACTION_TRUE
             - REDUCE_PERCENTILE_99
             - REDUCE_PERCENTILE_95
@@ -747,11 +748,13 @@ paths:
             - ALIGN_SUM
             - ALIGN_STDDEV
             - ALIGN_COUNT_TRUE
+            - ALIGN_COUNT_FALSE
             - ALIGN_FRACTION_TRUE
             - ALIGN_PERCENTILE_99
             - ALIGN_PERCENTILE_95
             - ALIGN_PERCENTILE_50
             - ALIGN_PERCENTILE_05
+            - ALIGN_PERCENT_CHANGE
           in: query
           name: aggregation.perSeriesAligner
           type: string
@@ -776,7 +779,7 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: 'Specifies the order in which the points of the time series should be returned. By default, results are not ordered. Currently, this field must be left blank.'
+        - description: 'Unsupported: must be left blank. The points in each time series are returned in reverse time order.'
           in: query
           name: orderBy
           type: string
@@ -1635,7 +1638,7 @@ definitions:
           - CUMULATIVE
         type: string
       points:
-        description: 'The data points of this time series. When listing time series, the order of the points is specified by the list method.When creating a time series, this field must contain exactly one point and the point''s type must be the same as the value type of the associated metric. If the associated metric''s descriptor must be auto-created, then the value type of the descriptor is determined by the point''s type, which must be BOOL, INT64, DOUBLE, or DISTRIBUTION.'
+        description: 'The data points of this time series. When listing time series, points are returned in reverse time order.When creating a time series, this field must contain exactly one point and the point''s type must be the same as the value type of the associated metric. If the associated metric''s descriptor must be auto-created, then the value type of the descriptor is determined by the point''s type, which must be BOOL, INT64, DOUBLE, or DISTRIBUTION.'
         items:
           $ref: '#/definitions/Point'
         type: array

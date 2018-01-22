@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Manages product items, inventory, and Merchant Center accounts for Google Shopping.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Content API for Shopping
   version: v2sandbox
   x-apiClientRegistration:
@@ -31,10 +35,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/content': Manage your product listings and accounts for Google Shopping
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/content': Manage your product listings and accounts for Google Shopping
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -103,6 +115,8 @@ paths:
             $ref: '#/definitions/OrdersCustomBatchResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -174,6 +188,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
     parameters:
@@ -206,6 +222,8 @@ paths:
             $ref: '#/definitions/Order'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -252,6 +270,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/orders/{orderId}/cancel':
@@ -288,6 +308,8 @@ paths:
             $ref: '#/definitions/OrdersCancelResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -326,6 +348,47 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/inStoreRefundLineItem':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Notifies that item return and refund was handled directly in store.
+      operationId: content.orders.instorerefundlineitem
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersInStoreRefundLineItemRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersInStoreRefundLineItemResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/orders/{orderId}/refund':
@@ -362,6 +425,47 @@ paths:
             $ref: '#/definitions/OrdersRefundResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/rejectReturnLineItem':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Rejects return on an line item.
+      operationId: content.orders.rejectreturnlineitem
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersRejectReturnLineItemRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersRejectReturnLineItemResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -400,6 +504,47 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/returnRefundLineItem':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns and refunds a line item. Note that this method can only be called on fully shipped orders.
+      operationId: content.orders.returnrefundlineitem
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersReturnRefundLineItemRequest'
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersReturnRefundLineItemResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/orders/{orderId}/setLineItemMetadata':
@@ -436,6 +581,8 @@ paths:
             $ref: '#/definitions/OrdersSetLineItemMetadataResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -474,6 +621,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/orders/{orderId}/updateLineItemShippingDetails':
@@ -510,6 +659,8 @@ paths:
             $ref: '#/definitions/OrdersUpdateLineItemShippingDetailsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -548,6 +699,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/orders/{orderId}/updateShipment':
@@ -585,6 +738,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/ordersbymerchantid/{merchantOrderId}':
@@ -609,6 +764,8 @@ paths:
             $ref: '#/definitions/OrdersGetByMerchantOrderIdResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -650,6 +807,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/testorders/{orderId}/advance':
@@ -683,6 +842,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
   '/{merchantId}/testordertemplates/{templateName}':
@@ -712,6 +873,8 @@ paths:
             $ref: '#/definitions/OrdersGetTestOrderTemplateResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orders
@@ -1371,6 +1534,9 @@ definitions:
       cancelLineItem:
         $ref: '#/definitions/OrdersCustomBatchRequestEntryCancelLineItem'
         description: Required for cancelLineItem method.
+      inStoreRefundLineItem:
+        $ref: '#/definitions/OrdersCustomBatchRequestEntryInStoreRefundLineItem'
+        description: Required for inStoreReturnLineItem method.
       merchantId:
         description: The ID of the managing account.
         format: uint64
@@ -1390,9 +1556,15 @@ definitions:
       refund:
         $ref: '#/definitions/OrdersCustomBatchRequestEntryRefund'
         description: Required for refund method.
+      rejectReturnLineItem:
+        $ref: '#/definitions/OrdersCustomBatchRequestEntryRejectReturnLineItem'
+        description: Required for rejectReturnLineItem method.
       returnLineItem:
         $ref: '#/definitions/OrdersCustomBatchRequestEntryReturnLineItem'
         description: Required for returnLineItem method.
+      returnRefundLineItem:
+        $ref: '#/definitions/OrdersCustomBatchRequestEntryReturnRefundLineItem'
+        description: Required for returnRefundLineItem method.
       setLineItemMetadata:
         $ref: '#/definitions/OrdersCustomBatchRequestEntrySetLineItemMetadata'
         description: Required for setLineItemMetadata method.
@@ -1443,6 +1615,31 @@ definitions:
         description: The explanation of the reason.
         type: string
     type: object
+  OrdersCustomBatchRequestEntryInStoreRefundLineItem:
+    properties:
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: The amount that is refunded. Required.
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax. Required.
+      lineItemId:
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      quantity:
+        description: The quantity to return and refund.
+        format: uint32
+        type: integer
+      reason:
+        description: The reason for the return.
+        type: string
+      reasonText:
+        description: The explanation of the reason.
+        type: string
+    type: object
   OrdersCustomBatchRequestEntryRefund:
     properties:
       amount:
@@ -1461,6 +1658,25 @@ definitions:
         description: The explanation of the reason.
         type: string
     type: object
+  OrdersCustomBatchRequestEntryRejectReturnLineItem:
+    properties:
+      lineItemId:
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      quantity:
+        description: The quantity to return and refund.
+        format: uint32
+        type: integer
+      reason:
+        description: The reason for the return.
+        type: string
+      reasonText:
+        description: The explanation of the reason.
+        type: string
+    type: object
   OrdersCustomBatchRequestEntryReturnLineItem:
     properties:
       lineItemId:
@@ -1471,6 +1687,31 @@ definitions:
         type: string
       quantity:
         description: The quantity to return.
+        format: uint32
+        type: integer
+      reason:
+        description: The reason for the return.
+        type: string
+      reasonText:
+        description: The explanation of the reason.
+        type: string
+    type: object
+  OrdersCustomBatchRequestEntryReturnRefundLineItem:
+    properties:
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: 'The amount that is refunded. Optional, but if filled then both amountPretax and amountTax must be set.'
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax.
+      lineItemId:
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      quantity:
+        description: The quantity to return and refund.
         format: uint32
         type: integer
       reason:
@@ -1609,6 +1850,44 @@ definitions:
         $ref: '#/definitions/TestOrder'
         description: The requested test order template.
     type: object
+  OrdersInStoreRefundLineItemRequest:
+    properties:
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: The amount that is refunded. Required.
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax. Required.
+      lineItemId:
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      operationId:
+        description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      quantity:
+        description: The quantity to return and refund.
+        format: uint32
+        type: integer
+      reason:
+        description: The reason for the return.
+        type: string
+      reasonText:
+        description: The explanation of the reason.
+        type: string
+    type: object
+  OrdersInStoreRefundLineItemResponse:
+    properties:
+      executionStatus:
+        description: The status of the execution.
+        type: string
+      kind:
+        default: 'content#ordersInStoreRefundLineItemResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersInStoreRefundLineItemResponse".'
+        type: string
+    type: object
   OrdersListResponse:
     properties:
       kind:
@@ -1654,6 +1933,38 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersRefundResponse".'
         type: string
     type: object
+  OrdersRejectReturnLineItemRequest:
+    properties:
+      lineItemId:
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      operationId:
+        description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      quantity:
+        description: The quantity to return and refund.
+        format: uint32
+        type: integer
+      reason:
+        description: The reason for the return.
+        type: string
+      reasonText:
+        description: The explanation of the reason.
+        type: string
+    type: object
+  OrdersRejectReturnLineItemResponse:
+    properties:
+      executionStatus:
+        description: The status of the execution.
+        type: string
+      kind:
+        default: 'content#ordersRejectReturnLineItemResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersRejectReturnLineItemResponse".'
+        type: string
+    type: object
   OrdersReturnLineItemRequest:
     properties:
       lineItemId:
@@ -1684,6 +1995,44 @@ definitions:
       kind:
         default: 'content#ordersReturnLineItemResponse'
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersReturnLineItemResponse".'
+        type: string
+    type: object
+  OrdersReturnRefundLineItemRequest:
+    properties:
+      amountPretax:
+        $ref: '#/definitions/Price'
+        description: 'The amount that is refunded. Optional, but if filled then both amountPretax and amountTax must be set.'
+      amountTax:
+        $ref: '#/definitions/Price'
+        description: Tax amount that correspond to refund amount in amountPretax.
+      lineItemId:
+        description: The ID of the line item to return. Either lineItemId or productId is required.
+        type: string
+      operationId:
+        description: The ID of the operation. Unique across all operations for a given order.
+        type: string
+      productId:
+        description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
+        type: string
+      quantity:
+        description: The quantity to return and refund.
+        format: uint32
+        type: integer
+      reason:
+        description: The reason for the return.
+        type: string
+      reasonText:
+        description: The explanation of the reason.
+        type: string
+    type: object
+  OrdersReturnRefundLineItemResponse:
+    properties:
+      executionStatus:
+        description: The status of the execution.
+        type: string
+      kind:
+        default: 'content#ordersReturnRefundLineItemResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersReturnRefundLineItemResponse".'
         type: string
     type: object
   OrdersSetLineItemMetadataRequest:

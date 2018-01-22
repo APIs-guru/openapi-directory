@@ -1558,7 +1558,7 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: '[Experimental] The labels associated with this job. You can use these to organize and group your jobs. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and each label in the list must have a different key.'
+        description: 'The labels associated with this job. You can use these to organize and group your jobs. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and each label in the list must have a different key.'
         type: object
       load:
         $ref: '#/definitions/JobConfigurationLoad'
@@ -2233,7 +2233,7 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: '[Experimental] The labels associated with this table. You can use these to organize and group your tables. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and each label in the list must have a different key.'
+        description: 'The labels associated with this table. You can use these to organize and group your tables. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and each label in the list must have a different key.'
         type: object
       lastModifiedTime:
         description: '[Output-only] The time when this table was last modified, in milliseconds since the epoch.'
@@ -2409,7 +2409,7 @@ definitions:
             labels:
               additionalProperties:
                 type: string
-              description: '[Experimental] The labels associated with this table. You can use these to organize and group your tables.'
+              description: The labels associated with this table. You can use these to organize and group your tables.
               type: object
             tableReference:
               $ref: '#/definitions/TableReference'

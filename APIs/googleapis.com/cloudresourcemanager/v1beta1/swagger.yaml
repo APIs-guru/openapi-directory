@@ -566,6 +566,9 @@ paths:
       description: |-
         Returns the IAM access control policy for the specified Project.
         Permission is denied if the policy or the resource does not exist.
+
+        For additional information about resource structure and identification,
+        see [Resource Names](/apis/design/resource_names).
       operationId: cloudresourcemanager.projects.getIamPolicy
       parameters:
         - in: body
@@ -1314,7 +1317,7 @@ definitions:
           }
 
       For a description of IAM and its features, see the
-      [IAM developer's guide](https://cloud.google.com/iam).
+      [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:
       auditConfigs:
         description: Specifies cloud audit logging configuration for this policy.
@@ -1343,7 +1346,7 @@ definitions:
         format: byte
         type: string
       version:
-        description: Version of the `Policy`. The default version is 0.
+        description: Deprecated.
         format: int32
         type: integer
     type: object

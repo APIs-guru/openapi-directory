@@ -375,7 +375,7 @@ definitions:
       Google Compute Engine.
     properties:
       name:
-        description: The primary email address that uniquely identifies the user.
+        description: A unique user ID.
         type: string
       posixAccounts:
         description: The list of POSIX accounts associated with the user.
@@ -387,11 +387,6 @@ definitions:
           $ref: '#/definitions/SshPublicKey'
         description: A map from SSH public key fingerprint to the associated key object.
         type: object
-      suspended:
-        description: |-
-          Indicates if the user is suspended. A suspended user cannot log in but
-          their profile information is retained.
-        type: boolean
     type: object
   PosixAccount:
     description: The POSIX account information associated with a Google account.

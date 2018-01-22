@@ -3515,6 +3515,9 @@ definitions:
       deviceId:
         description: The Android ID of the device. This field will always be present.
         type: string
+      dpcPackageName:
+        description: Policy app on the device.
+        type: string
       managementType:
         description: |-
           Identifies the extent to which the device is controlled by an Android EMM in various deployment configurations.
@@ -3670,7 +3673,7 @@ definitions:
         description: The content rating for this app.
         type: string
       description:
-        description: 'A localized promotional description, if available.'
+        description: 'The localized promotional description, if available.'
         type: string
       detailsUrl:
         description: A link to the (consumer) Google Play details page for the product.
@@ -3686,7 +3689,7 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#product".'
         type: string
       lastUpdatedTimestampMillis:
-        description: The time (in milliseconds since epoch) when application was last published. (Timestamp is approximate within 7 days of actual publish time.)
+        description: 'The approximate time (within 7 days) the app was last published, expressed in milliseconds since epoch.'
         format: int64
         type: string
       minAndroidSdkVersion:
@@ -3694,7 +3697,7 @@ definitions:
         format: int32
         type: integer
       permissions:
-        description: The permissions required for this app.
+        description: A list of permissions required by the app.
         items:
           $ref: '#/definitions/ProductPermission'
         type: array

@@ -5408,6 +5408,30 @@ definitions:
         description: The label of the column's legend.
         type: string
     type: object
+  WaterfallChartCustomSubtotal:
+    description: A custom subtotal column for a waterfall chart series.
+    properties:
+      dataIsSubtotal:
+        description: |-
+          True if the data point at subtotal_index is the subtotal. If false,
+          the subtotal will be computed and appear after the data point.
+        type: boolean
+      label:
+        description: A label for the subtotal column.
+        type: string
+      subtotalIndex:
+        description: |-
+          The 0-based index of a data point within the series. If
+          data_is_subtotal is true, the data point at this index is the
+          subtotal. Otherwise, the subtotal appears after the data point with
+          this index. A series can have multiple subtotals at arbitrary indices,
+          but subtotals do not affect the indices of the data points. For
+          example, if a series has 3 data points, their indices will always be 0,
+          1, and 2, regardless of how many subtotals exist on the series or what
+          data points they are associated with.
+        format: int32
+        type: integer
+    type: object
   WaterfallChartDomain:
     description: The domain of a waterfall chart.
     properties:
@@ -5421,6 +5445,14 @@ definitions:
   WaterfallChartSeries:
     description: A single series of data for a waterfall chart.
     properties:
+      customSubtotals:
+        description: |-
+          Custom subtotal columns appearing in this series. The order in which
+          subtotals are defined is not significant. Only one subtotal may be
+          defined for each data point.
+        items:
+          $ref: '#/definitions/WaterfallChartCustomSubtotal'
+        type: array
       data:
         $ref: '#/definitions/ChartData'
         description: The data being visualized in this series.

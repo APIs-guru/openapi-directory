@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Lets you access a cloud hosted machine learning service that makes it easy to build smart apps
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Prediction
   version: v1.2
   x-apiClientRegistration:
@@ -31,13 +35,24 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
       'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
       'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
       'https://www.googleapis.com/auth/prediction': Manage your data in the Google Prediction API
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
+      'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
+      'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
+      'https://www.googleapis.com/auth/prediction': Manage your data in the Google Prediction API
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -96,15 +111,15 @@ paths:
       description: Submit input and request an output against a hosted model
       operationId: prediction.hostedmodels.predict
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Input'
         - description: The name of a hosted model
           in: path
           name: hostedModelName
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Input'
       responses:
         '200':
           description: Successful response
@@ -112,6 +127,8 @@ paths:
             $ref: '#/definitions/Output'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/prediction'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/prediction'
       tags:
         - hostedmodels
@@ -128,14 +145,14 @@ paths:
       description: Begin training your model
       operationId: prediction.training.insert
       parameters:
-        - description: mybucket/mydata resource in Google Storage
-          in: query
-          name: data
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Training'
+        - description: mybucket/mydata resource in Google Storage
+          in: query
+          name: data
+          type: string
       responses:
         '200':
           description: Successful response
@@ -144,11 +161,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/prediction'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/prediction'
       tags:
         - training
@@ -167,6 +192,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/prediction'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/prediction'
       tags:
         - training
@@ -187,6 +214,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/prediction'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/prediction'
       tags:
         - training
     parameters:
@@ -201,15 +230,15 @@ paths:
       description: Add new data to a trained model
       operationId: prediction.training.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Update'
         - description: mybucket/mydata resource in Google Storage
           in: path
           name: data
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Update'
       responses:
         '200':
           description: Successful response
@@ -217,6 +246,8 @@ paths:
             $ref: '#/definitions/Training'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/prediction'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/prediction'
       tags:
         - training
@@ -233,15 +264,15 @@ paths:
       description: Submit data and request a prediction
       operationId: prediction.predict
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Input'
         - description: mybucket%2Fmydata resource in Google Storage
           in: path
           name: data
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Input'
       responses:
         '200':
           description: Successful response
@@ -249,6 +280,8 @@ paths:
             $ref: '#/definitions/Output'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/prediction'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/prediction'
 definitions:
   Input:

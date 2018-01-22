@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Creates and manages users and groups for accessing Google Compute Engine virtual machines.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud User Accounts
   version: alpha
   x-apiClientRegistration:
@@ -29,13 +33,24 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/cloud.useraccounts': Manage your Google Cloud User Accounts
       'https://www.googleapis.com/auth/cloud.useraccounts.readonly': View your Google Cloud User Accounts
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud.useraccounts': Manage your Google Cloud User Accounts
+      'https://www.googleapis.com/auth/cloud.useraccounts.readonly': View your Google Cloud User Accounts
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -88,11 +103,6 @@ paths:
       description: Retrieves the list of groups contained within the specified project.
       operationId: clouduseraccounts.groups.list
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: |-
             Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
 
@@ -126,6 +136,11 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -134,11 +149,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - groups
@@ -154,15 +177,15 @@ paths:
       description: Creates a Group resource in the specified project using the data included in the request.
       operationId: clouduseraccounts.groups.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Group'
         - description: Project ID for this request.
           in: path
           name: project
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Group'
       responses:
         '200':
           description: Successful response
@@ -171,7 +194,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
       tags:
         - groups
@@ -180,14 +207,14 @@ paths:
       description: Deletes the specified Group resource.
       operationId: clouduseraccounts.groups.delete
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the Group resource to delete.
           in: path
           name: groupName
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -198,7 +225,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
       tags:
         - groups
@@ -206,14 +237,14 @@ paths:
       description: Returns the specified Group resource.
       operationId: clouduseraccounts.groups.get
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the Group resource to return.
           in: path
           name: groupName
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -224,11 +255,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - groups
@@ -253,20 +292,20 @@ paths:
       description: Adds users to the specified group.
       operationId: clouduseraccounts.groups.addMember
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GroupsAddMemberRequest'
         - description: Name of the group for this request.
           in: path
           name: groupName
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GroupsAddMemberRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -275,7 +314,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
       tags:
         - groups
@@ -292,20 +335,20 @@ paths:
       description: Removes users from the specified group.
       operationId: clouduseraccounts.groups.removeMember
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GroupsRemoveMemberRequest'
         - description: Name of the group for this request.
           in: path
           name: groupName
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GroupsRemoveMemberRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -314,7 +357,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
       tags:
         - groups
@@ -341,11 +388,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - groups
@@ -370,6 +425,10 @@ paths:
       description: Sets the access control policy on the specified resource. Replaces any existing policy.
       operationId: clouduseraccounts.groups.setIamPolicy
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Policy'
         - description: Project ID for this request.
           in: path
           name: project
@@ -380,10 +439,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Policy'
       responses:
         '200':
           description: Successful response
@@ -392,11 +447,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - groups
@@ -413,6 +476,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: clouduseraccounts.groups.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -423,10 +490,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -435,11 +498,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - groups
@@ -448,11 +519,6 @@ paths:
       description: Retrieves the list of operation resources contained within the specified project.
       operationId: clouduseraccounts.globalAccountsOperations.list
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: |-
             Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
 
@@ -486,6 +552,11 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -494,11 +565,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - globalAccountsOperations
@@ -515,14 +594,14 @@ paths:
       description: Deletes the specified operation resource.
       operationId: clouduseraccounts.globalAccountsOperations.delete
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the Operations resource to delete.
           in: path
           name: operation
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -531,7 +610,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
       tags:
         - globalAccountsOperations
@@ -539,14 +622,14 @@ paths:
       description: Retrieves the specified operation resource.
       operationId: clouduseraccounts.globalAccountsOperations.get
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: Name of the Operations resource to return.
           in: path
           name: operation
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
           required: true
           type: string
       responses:
@@ -557,11 +640,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - globalAccountsOperations
@@ -578,11 +669,6 @@ paths:
       description: Retrieves a list of users contained within the specified project.
       operationId: clouduseraccounts.users.list
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: |-
             Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
 
@@ -616,6 +702,11 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -624,11 +715,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - users
@@ -644,15 +743,15 @@ paths:
       description: Creates a User resource in the specified project using the data included in the request.
       operationId: clouduseraccounts.users.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/User'
         - description: Project ID for this request.
           in: path
           name: project
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/User'
       responses:
         '200':
           description: Successful response
@@ -661,7 +760,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
       tags:
         - users
@@ -688,11 +791,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - users
@@ -717,6 +828,10 @@ paths:
       description: Sets the access control policy on the specified resource. Replaces any existing policy.
       operationId: clouduseraccounts.users.setIamPolicy
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Policy'
         - description: Project ID for this request.
           in: path
           name: project
@@ -727,10 +842,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Policy'
       responses:
         '200':
           description: Successful response
@@ -739,11 +850,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - users
@@ -760,6 +879,10 @@ paths:
       description: Returns permissions that a caller has on the specified resource.
       operationId: clouduseraccounts.users.testIamPermissions
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
         - description: Project ID for this request.
           in: path
           name: project
@@ -770,10 +893,6 @@ paths:
           name: resource
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
       responses:
         '200':
           description: Successful response
@@ -782,11 +901,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - users
@@ -813,7 +940,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
       tags:
         - users
@@ -839,11 +970,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - users
@@ -868,6 +1007,10 @@ paths:
       description: Adds a public key to the specified User resource with the data included in the request.
       operationId: clouduseraccounts.users.addPublicKey
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PublicKey'
         - description: Project ID for this request.
           in: path
           name: project
@@ -878,10 +1021,6 @@ paths:
           name: user
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PublicKey'
       responses:
         '200':
           description: Successful response
@@ -890,7 +1029,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
       tags:
         - users
@@ -907,6 +1050,11 @@ paths:
       description: Removes the specified public key from the user.
       operationId: clouduseraccounts.users.removePublicKey
       parameters:
+        - description: 'The fingerprint of the public key to delete. Public keys are identified by their fingerprint, which is defined by RFC4716 to be the MD5 digest of the public key.'
+          in: query
+          name: fingerprint
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
@@ -917,11 +1065,6 @@ paths:
           name: user
           required: true
           type: string
-        - description: 'The fingerprint of the public key to delete. Public keys are identified by their fingerprint, which is defined by RFC4716 to be the MD5 digest of the public key.'
-          in: query
-          name: fingerprint
-          required: true
-          type: string
       responses:
         '200':
           description: Successful response
@@ -930,7 +1073,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
       tags:
         - users
@@ -947,21 +1094,6 @@ paths:
       description: Returns a list of authorized public keys for a specific user account.
       operationId: clouduseraccounts.linux.getAuthorizedKeysView
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
-        - description: The user account for which you want to get a list of authorized public keys.
-          in: path
-          name: user
-          required: true
-          type: string
         - description: The fully-qualified URL of the virtual machine requesting the view.
           in: query
           name: instance
@@ -971,6 +1103,21 @@ paths:
           in: query
           name: login
           type: boolean
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The user account for which you want to get a list of authorized public keys.
+          in: path
+          name: user
+          required: true
+          type: string
+        - description: Name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -979,11 +1126,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - linux
@@ -1000,21 +1155,6 @@ paths:
       description: Retrieves a list of user accounts for an instance within a specific project.
       operationId: clouduseraccounts.linux.getLinuxAccountViews
       parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
-        - description: The fully-qualified URL of the virtual machine requesting the views.
-          in: query
-          name: instance
-          required: true
-          type: string
         - description: |-
             Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
 
@@ -1027,6 +1167,11 @@ paths:
             The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
+          type: string
+        - description: The fully-qualified URL of the virtual machine requesting the views.
+          in: query
+          name: instance
+          required: true
           type: string
         - default: 500
           description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
@@ -1048,6 +1193,16 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1056,11 +1211,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud.useraccounts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - linux

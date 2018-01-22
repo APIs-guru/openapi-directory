@@ -1059,8 +1059,9 @@ definitions:
         type: string
       privateKeyType:
         description: |-
-          The output format of the private key. `GOOGLE_CREDENTIALS_FILE` is the
-          default output format.
+          The output format of the private key. The default value is
+          `TYPE_GOOGLE_CREDENTIALS_FILE`, which is the Google Credentials File
+          format.
         enum:
           - TYPE_UNSPECIFIED
           - TYPE_PKCS12_FILE
@@ -1198,7 +1199,7 @@ definitions:
           }
 
       For a description of IAM and its features, see the
-      [IAM developer's guide](https://cloud.google.com/iam).
+      [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:
       bindings:
         description: |-
@@ -1222,7 +1223,7 @@ definitions:
         format: byte
         type: string
       version:
-        description: Version of the `Policy`. The default version is 0.
+        description: Deprecated.
         format: int32
         type: integer
     type: object

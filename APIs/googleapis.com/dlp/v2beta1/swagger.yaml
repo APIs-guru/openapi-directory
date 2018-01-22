@@ -401,7 +401,7 @@ paths:
   '/v2beta1/{name}':
     delete:
       description: This method is not supported and the server returns `UNIMPLEMENTED`.
-      operationId: dlp.inspect.operations.delete
+      operationId: dlp.riskAnalysis.operations.delete
       parameters:
         - description: The name of the operation resource to be deleted.
           in: path
@@ -420,13 +420,13 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - inspect
+        - riskAnalysis
     get:
       description: |-
         Gets the latest state of a long-running operation.  Clients can use this
         method to poll the operation result at intervals as recommended by the API
         service.
-      operationId: dlp.inspect.operations.get
+      operationId: dlp.riskAnalysis.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
@@ -445,7 +445,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - inspect
+        - riskAnalysis
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -543,7 +543,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Cancels an operation. Use the `inspect.operations.get` to check whether the cancellation succeeded or the operation completed despite cancellation.
-      operationId: dlp.inspect.operations.cancel
+      operationId: dlp.riskAnalysis.operations.cancel
       parameters:
         - in: body
           name: body
@@ -566,7 +566,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - inspect
+        - riskAnalysis
 definitions:
   GoogleLongrunningCancelOperationRequest:
     description: The request message for Operations.CancelOperation.
@@ -1273,7 +1273,7 @@ definitions:
         type: string
     type: object
   GooglePrivacyDlpV2beta1Finding:
-    description: Container structure describing a single finding within a string or image.
+    description: Represents a piece of potentially sensitive content.
     properties:
       createTime:
         description: Timestamp when finding was detected.
@@ -1281,9 +1281,11 @@ definitions:
         type: string
       infoType:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoType'
-        description: The specific type of info the string might be.
+        description: |-
+          The type of content that might have been found.
+          Provided if requested by the `InspectConfig`.
       likelihood:
-        description: Estimate of how likely it is that the info_type is correct.
+        description: Estimate of how likely it is that the `info_type` is correct.
         enum:
           - LIKELIHOOD_UNSPECIFIED
           - VERY_UNLIKELY
@@ -1294,9 +1296,12 @@ definitions:
         type: string
       location:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1Location'
-        description: Location of the info found.
+        description: Where the content was found.
       quote:
-        description: The specific string that may be potentially sensitive info.
+        description: |-
+          The content that was found. Even if the content is not textual, it
+          may be converted to a textual representation here.
+          Provided if requested by the `InspectConfig`.
         type: string
     type: object
   GooglePrivacyDlpV2beta1FixedSizeBucketingConfig:
@@ -1914,30 +1919,47 @@ definitions:
         type: array
     type: object
   GooglePrivacyDlpV2beta1Location:
-    description: Specifies the location of a finding within its source item.
+    description: Specifies the location of the finding.
     properties:
       byteRange:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1Range'
-        description: Zero-based byte offsets within a content item.
+        description: |-
+          Zero-based byte offsets delimiting the finding.
+          These are relative to the finding's containing element.
+          Note that when the content is not textual, this references
+          the UTF-8 encoded textual representation of the content.
+          Omitted if content is an image.
       codepointRange:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1Range'
         description: |-
-          Character offsets within a content item, included when content type
-          is a text. Default charset assumed to be UTF-8.
+          Unicode character offsets delimiting the finding.
+          These are relative to the finding's containing element.
+          Provided when the content is text.
       fieldId:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
-        description: Field id of the field containing the finding.
+        description: |-
+          The pointer to the property or cell that contained the finding.
+          Provided when the finding's containing element is a cell in a table
+          or a property of storage object.
       imageBoxes:
-        description: Location within an image's pixels.
+        description: |-
+          The area within the image that contained the finding.
+          Provided when the content is an image.
         items:
           $ref: '#/definitions/GooglePrivacyDlpV2beta1ImageLocation'
         type: array
       recordKey:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1RecordKey'
-        description: Key of the finding.
+        description: |-
+          The pointer to the record in storage that contained the field the
+          finding was found in.
+          Provided when the finding's containing element is a property
+          of a storage object.
       tableLocation:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1TableLocation'
-        description: Location within a `ContentItem.Table`.
+        description: |-
+          The pointer to the row of the table that contained the finding.
+          Provided when the finding's containing element is a cell of a table.
     type: object
   GooglePrivacyDlpV2beta1NumericalStatsConfig:
     description: |-
@@ -2349,7 +2371,7 @@ definitions:
         type: array
     type: object
   GooglePrivacyDlpV2beta1TableLocation:
-    description: Location of a finding within a `ContentItem.Table`.
+    description: Location of a finding within a table.
     properties:
       rowIndex:
         description: The zero-based index of the row where the finding is located.

@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: '[Deprecated. Please use compute.instanceGroupManagers.update method. replicapoolupdater API will be disabled after December 30th, 2016] Updates groups of Compute Engine instances.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Compute Engine Instance Group Updater
   version: v1beta1
   x-apiClientRegistration:
@@ -31,13 +35,24 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/replicapool': View and manage replica pools
       'https://www.googleapis.com/auth/replicapool.readonly': View replica pools
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/replicapool': View and manage replica pools
+      'https://www.googleapis.com/auth/replicapool.readonly': View replica pools
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -88,16 +103,6 @@ paths:
       description: Retrieves the list of Operation resources contained within the specified zone.
       operationId: replicapoolupdater.zoneOperations.list
       parameters:
-        - description: Name of the project scoping this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Name of the zone scoping this request.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: Optional. Filter expression for filtering listed resources.
           in: query
           name: filter
@@ -113,6 +118,16 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: Name of the project scoping this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the zone scoping this request.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -121,7 +136,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - zoneOperations
@@ -138,6 +157,11 @@ paths:
       description: Retrieves the specified zone-specific operation resource.
       operationId: replicapoolupdater.zoneOperations.get
       parameters:
+        - description: Name of the operation resource to return.
+          in: path
+          name: operation
+          required: true
+          type: string
         - description: Name of the project scoping this request.
           in: path
           name: project
@@ -148,11 +172,6 @@ paths:
           name: zone
           required: true
           type: string
-        - description: Name of the operation resource to return.
-          in: path
-          name: operation
-          required: true
-          type: string
       responses:
         '200':
           description: Successful response
@@ -161,7 +180,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - zoneOperations
@@ -178,16 +201,6 @@ paths:
       description: 'Lists recent updates for a given managed instance group, in reverse chronological order and paginated format.'
       operationId: replicapoolupdater.rollingUpdates.list
       parameters:
-        - description: The Google Developers Console project name.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The name of the zone in which the update's target resides.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: Optional. Filter expression for filtering listed resources.
           in: query
           name: filter
@@ -203,6 +216,16 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: The Google Developers Console project name.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone in which the update's target resides.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -211,11 +234,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/replicapool'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool.readonly'
       tags:
         - rollingUpdates
@@ -231,6 +262,10 @@ paths:
       description: Inserts and starts a new update.
       operationId: replicapoolupdater.rollingUpdates.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RollingUpdate'
         - description: The Google Developers Console project name.
           in: path
           name: project
@@ -241,10 +276,6 @@ paths:
           name: zone
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RollingUpdate'
       responses:
         '200':
           description: Successful response
@@ -253,7 +284,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - rollingUpdates
@@ -267,14 +302,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the zone in which the update's target resides.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: The name of the update.
           in: path
           name: rollingUpdate
+          required: true
+          type: string
+        - description: The name of the zone in which the update's target resides.
+          in: path
+          name: zone
           required: true
           type: string
       responses:
@@ -285,11 +320,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/replicapool'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool.readonly'
       tags:
         - rollingUpdates
@@ -319,14 +362,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the zone in which the update's target resides.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: The name of the update.
           in: path
           name: rollingUpdate
+          required: true
+          type: string
+        - description: The name of the zone in which the update's target resides.
+          in: path
+          name: zone
           required: true
           type: string
       responses:
@@ -337,7 +380,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - rollingUpdates
@@ -346,21 +393,6 @@ paths:
       description: Lists the current status for each instance within a given update.
       operationId: replicapoolupdater.rollingUpdates.listInstanceUpdates
       parameters:
-        - description: The Google Developers Console project name.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The name of the zone in which the update's target resides.
-          in: path
-          name: zone
-          required: true
-          type: string
-        - description: The name of the update.
-          in: path
-          name: rollingUpdate
-          required: true
-          type: string
         - description: Optional. Filter expression for filtering listed resources.
           in: query
           name: filter
@@ -376,6 +408,21 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: The Google Developers Console project name.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the update.
+          in: path
+          name: rollingUpdate
+          required: true
+          type: string
+        - description: The name of the zone in which the update's target resides.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -384,11 +431,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/replicapool'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool.readonly'
       tags:
         - rollingUpdates
@@ -418,14 +473,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the zone in which the update's target resides.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: The name of the update.
           in: path
           name: rollingUpdate
+          required: true
+          type: string
+        - description: The name of the zone in which the update's target resides.
+          in: path
+          name: zone
           required: true
           type: string
       responses:
@@ -436,7 +491,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - rollingUpdates
@@ -458,14 +517,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the zone in which the update's target resides.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: The name of the update.
           in: path
           name: rollingUpdate
+          required: true
+          type: string
+        - description: The name of the zone in which the update's target resides.
+          in: path
+          name: zone
           required: true
           type: string
       responses:
@@ -476,7 +535,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - rollingUpdates
@@ -498,14 +561,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the zone in which the update's target resides.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: The name of the update.
           in: path
           name: rollingUpdate
+          required: true
+          type: string
+        - description: The name of the zone in which the update's target resides.
+          in: path
+          name: zone
           required: true
           type: string
       responses:
@@ -516,7 +579,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - rollingUpdates

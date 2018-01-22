@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Verifies ownership of websites or domains with Google.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Site Verification
   version: v1
   x-apiClientRegistration:
@@ -31,11 +35,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/siteverification': Manage the list of sites and domains you control
       'https://www.googleapis.com/auth/siteverification.verify_only': Manage your new site verifications with Google
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/siteverification': Manage the list of sites and domains you control
+      'https://www.googleapis.com/auth/siteverification.verify_only': Manage your new site verifications with Google
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -105,7 +118,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/siteverification'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/siteverification'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/siteverification.verify_only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/siteverification.verify_only'
       tags:
         - webResource
@@ -121,6 +138,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/siteverification'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/siteverification'
       tags:
         - webResource
     parameters:
@@ -135,15 +154,15 @@ paths:
       description: Attempt verification of a website or domain.
       operationId: siteVerification.webResource.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SiteVerificationWebResourceResource'
         - description: The method to use for verifying a site or domain.
           in: query
           name: verificationMethod
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SiteVerificationWebResourceResource'
       responses:
         '200':
           description: Successful response
@@ -152,7 +171,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/siteverification'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/siteverification'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/siteverification.verify_only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/siteverification.verify_only'
       tags:
         - webResource
@@ -171,6 +194,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/siteverification'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/siteverification'
       tags:
         - webResource
@@ -191,6 +216,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/siteverification'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/siteverification'
       tags:
         - webResource
     parameters:
@@ -205,15 +232,15 @@ paths:
       description: Modify the list of owners for your website or domain. This method supports patch semantics.
       operationId: siteVerification.webResource.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SiteVerificationWebResourceResource'
         - description: The id of a verified site or domain.
           in: path
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SiteVerificationWebResourceResource'
       responses:
         '200':
           description: Successful response
@@ -222,21 +249,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/siteverification'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/siteverification'
       tags:
         - webResource
     put:
       description: Modify the list of owners for your website or domain.
       operationId: siteVerification.webResource.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SiteVerificationWebResourceResource'
         - description: The id of a verified site or domain.
           in: path
           name: id
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SiteVerificationWebResourceResource'
       responses:
         '200':
           description: Successful response
@@ -244,6 +273,8 @@ paths:
             $ref: '#/definitions/SiteVerificationWebResourceResource'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/siteverification'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/siteverification'
       tags:
         - webResource

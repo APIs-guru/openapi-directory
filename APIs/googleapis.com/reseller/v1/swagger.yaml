@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Creates and manages your customers and their subscriptions.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Enterprise Apps Reseller
   version: v1
   x-apiClientRegistration:
@@ -31,11 +35,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/apps.order': Manage users on your domain
       'https://www.googleapis.com/auth/apps.order.readonly': Manage users on your domain
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/apps.order': Manage users on your domain
+      'https://www.googleapis.com/auth/apps.order.readonly': Manage users on your domain
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -95,14 +108,14 @@ paths:
       description: Order a new customer's account.
       operationId: reseller.customers.insert
       parameters:
-        - description: 'The customerAuthToken query string is required when creating a resold account that transfers a direct customer''s subscription or transfers another reseller customer''s subscription to your reseller management. This is a hexadecimal authentication token needed to complete the subscription transfer. For more information, see the administrator help center.'
-          in: query
-          name: customerAuthToken
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Customer'
+        - description: 'The customerAuthToken query string is required when creating a resold account that transfers a direct customer''s subscription or transfers another reseller customer''s subscription to your reseller management. This is a hexadecimal authentication token needed to complete the subscription transfer. For more information, see the administrator help center.'
+          in: query
+          name: customerAuthToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -110,6 +123,8 @@ paths:
             $ref: '#/definitions/Customer'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - customers
@@ -131,7 +146,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order.readonly'
       tags:
         - customers
@@ -147,15 +166,15 @@ paths:
       description: Update a customer account's settings. This method supports patch semantics.
       operationId: reseller.customers.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Customer'
         - description: 'Either the customer''s primary domain name or the customer''s unique identifier. If using the domain name, we do not recommend using a customerId as a key for persistent data. If the domain name for a customerId is changed, the Google system automatically updates.'
           in: path
           name: customerId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Customer'
       responses:
         '200':
           description: Successful response
@@ -164,21 +183,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - customers
     put:
       description: Update a customer account's settings.
       operationId: reseller.customers.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Customer'
         - description: 'Either the customer''s primary domain name or the customer''s unique identifier. If using the domain name, we do not recommend using a customerId as a key for persistent data. If the domain name for a customerId is changed, the Google system automatically updates.'
           in: path
           name: customerId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Customer'
       responses:
         '200':
           description: Successful response
@@ -186,6 +207,8 @@ paths:
             $ref: '#/definitions/Customer'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - customers
@@ -202,19 +225,19 @@ paths:
       description: Create or transfer a subscription.
       operationId: reseller.subscriptions.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Subscription'
+        - description: 'The customerAuthToken query string is required when creating a resold account that transfers a direct customer''s subscription or transfers another reseller customer''s subscription to your reseller management. This is a hexadecimal authentication token needed to complete the subscription transfer. For more information, see the administrator help center.'
+          in: query
+          name: customerAuthToken
+          type: string
         - description: 'Either the customer''s primary domain name or the customer''s unique identifier. If using the domain name, we do not recommend using a customerId as a key for persistent data. If the domain name for a customerId is changed, the Google system automatically updates.'
           in: path
           name: customerId
           required: true
           type: string
-        - description: 'The customerAuthToken query string is required when creating a resold account that transfers a direct customer''s subscription or transfers another reseller customer''s subscription to your reseller management. This is a hexadecimal authentication token needed to complete the subscription transfer. For more information, see the administrator help center.'
-          in: query
-          name: customerAuthToken
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Subscription'
       responses:
         '200':
           description: Successful response
@@ -222,6 +245,8 @@ paths:
             $ref: '#/definitions/Subscription'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - subscriptions
@@ -235,11 +260,6 @@ paths:
           name: customerId
           required: true
           type: string
-        - description: 'This is a required property. The subscriptionId is the subscription identifier and is unique for each customer. Since a subscriptionId changes when a subscription is updated, we recommend to not use this ID as a key for persistent data. And the subscriptionId can be found using the retrieve all reseller subscriptions method.'
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
         - description: 'The deletionType query string enables the cancellation, downgrade, or suspension of a subscription.'
           enum:
             - cancel
@@ -250,11 +270,18 @@ paths:
           name: deletionType
           required: true
           type: string
+        - description: 'This is a required property. The subscriptionId is the subscription identifier and is unique for each customer. Since a subscriptionId changes when a subscription is updated, we recommend to not use this ID as a key for persistent data. And the subscriptionId can be found using the retrieve all reseller subscriptions method.'
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - subscriptions
@@ -280,7 +307,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order.readonly'
       tags:
         - subscriptions
@@ -323,6 +354,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - subscriptions
   '/customers/{customerId}/subscriptions/{subscriptionId}/changePlan':
@@ -338,6 +371,10 @@ paths:
       description: Update a subscription plan. Use this method to update a plan for a 30-day trial or a flexible plan subscription to an annual commitment plan with monthly or yearly payments.
       operationId: reseller.subscriptions.changePlan
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ChangePlanRequest'
         - description: 'Either the customer''s primary domain name or the customer''s unique identifier. If using the domain name, we do not recommend using a customerId as a key for persistent data. If the domain name for a customerId is changed, the Google system automatically updates.'
           in: path
           name: customerId
@@ -348,10 +385,6 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ChangePlanRequest'
       responses:
         '200':
           description: Successful response
@@ -359,6 +392,8 @@ paths:
             $ref: '#/definitions/Subscription'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - subscriptions
@@ -375,6 +410,10 @@ paths:
       description: Update a user license's renewal settings. This is applicable for accounts with annual commitment plans only.
       operationId: reseller.subscriptions.changeRenewalSettings
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RenewalSettings'
         - description: 'Either the customer''s primary domain name or the customer''s unique identifier. If using the domain name, we do not recommend using a customerId as a key for persistent data. If the domain name for a customerId is changed, the Google system automatically updates.'
           in: path
           name: customerId
@@ -385,10 +424,6 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RenewalSettings'
       responses:
         '200':
           description: Successful response
@@ -396,6 +431,8 @@ paths:
             $ref: '#/definitions/Subscription'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - subscriptions
@@ -412,6 +449,10 @@ paths:
       description: Update a subscription's user license settings.
       operationId: reseller.subscriptions.changeSeats
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Seats'
         - description: 'Either the customer''s primary domain name or the customer''s unique identifier. If using the domain name, we do not recommend using a customerId as a key for persistent data. If the domain name for a customerId is changed, the Google system automatically updates.'
           in: path
           name: customerId
@@ -422,10 +463,6 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Seats'
       responses:
         '200':
           description: Successful response
@@ -433,6 +470,8 @@ paths:
             $ref: '#/definitions/Subscription'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - subscriptions
@@ -467,6 +506,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - subscriptions
   '/customers/{customerId}/subscriptions/{subscriptionId}/suspend':
@@ -500,6 +541,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - subscriptions
   /resellernotify/getwatchdetails:
@@ -514,7 +557,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order.readonly'
       tags:
         - resellernotify
@@ -551,6 +598,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - resellernotify
   /resellernotify/unregister:
@@ -577,6 +626,8 @@ paths:
             $ref: '#/definitions/ResellernotifyResource'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order'
       tags:
         - resellernotify
@@ -618,7 +669,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.order'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.order'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.order.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.order.readonly'
       tags:
         - subscriptions

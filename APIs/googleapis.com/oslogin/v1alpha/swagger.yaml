@@ -375,10 +375,10 @@ definitions:
       Google Compute Engine.
     properties:
       name:
-        description: A unique user ID for identifying the user.
+        description: A unique user ID.
         type: string
       posixAccounts:
-        description: The list of POSIX accounts associated with the Directory API user.
+        description: The list of POSIX accounts associated with the user.
         items:
           $ref: '#/definitions/PosixAccount'
         type: array
@@ -387,9 +387,6 @@ definitions:
           $ref: '#/definitions/SshPublicKey'
         description: A map from SSH public key fingerprint to the associated key object.
         type: object
-      suspended:
-        description: Indicates if the user is suspended.
-        type: boolean
     type: object
   PosixAccount:
     description: The POSIX account information associated with a Google account.

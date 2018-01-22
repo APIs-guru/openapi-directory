@@ -438,9 +438,7 @@ paths:
         on the URI `/v1/media/{+name}?alt=media`.
       operationId: youtubereporting.media.download
       parameters:
-        - description: |-
-            Name of the media that is being downloaded.  See
-            ReadRequest.resource_name.
+        - description: Name of the media that is being downloaded.
           in: path
           name: resourceName
           required: true
@@ -783,6 +781,7 @@ definitions:
         format: byte
         type: string
       isPotentialRetry:
+        default: true
         description: gdata
         type: boolean
       length:

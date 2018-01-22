@@ -31,7 +31,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: script
 externalDocs:
-  url: 'https://developers.google.com/apps-script/execution/rest/v1/scripts/run'
+  url: 'https://developers.google.com/apps-script/api/'
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -145,8 +145,668 @@ parameters:
     name: upload_protocol
     type: string
 tags:
+  - name: processes
+  - name: projects
   - name: scripts
 paths:
+  /v1/processes:
+    get:
+      description: |-
+        List information about processes made by or on behalf of a user,
+        such as process type and current status.
+      operationId: script.processes.list
+      parameters:
+        - description: |-
+            The maximum number of returned processes per page of results. Defaults to
+            50.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            The token for continuing a previous list request on the next page. This
+            should be set to the value of `nextPageToken` from a previous response.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Optional field used to limit returned processes to those originating from
+            projects with a specific deployment ID.
+          in: query
+          name: userProcessFilter.deploymentId
+          type: string
+        - description: |-
+            Optional field used to limit returned processes to those that completed
+            on or before the given timestamp.
+          in: query
+          name: userProcessFilter.endTime
+          type: string
+        - description: |-
+            Optional field used to limit returned processes to those originating from
+            a script function with the given function name.
+          in: query
+          name: userProcessFilter.functionName
+          type: string
+        - description: |-
+            Optional field used to limit returned processes to those originating from
+            projects with a specific project name.
+          in: query
+          name: userProcessFilter.projectName
+          type: string
+        - description: |-
+            Optional field used to limit returned processes to those originating from
+            projects with a specific script ID.
+          in: query
+          name: userProcessFilter.scriptId
+          type: string
+        - description: |-
+            Optional field used to limit returned processes to those that were
+            started on or after the given timestamp.
+          in: query
+          name: userProcessFilter.startTime
+          type: string
+        - collectionFormat: multi
+          description: |-
+            Optional field used to limit returned processes to those having one of
+            the specified process statuses.
+          in: query
+          items:
+            enum:
+              - PROCESS_STATUS_UNSPECIFIED
+              - RUNNING
+              - PAUSED
+              - COMPLETED
+              - CANCELED
+              - FAILED
+              - TIMED_OUT
+              - UNKNOWN
+            type: string
+          name: userProcessFilter.statuses
+          type: array
+        - collectionFormat: multi
+          description: |-
+            Optional field used to limit returned processes to those having one of
+            the specified process types.
+          in: query
+          items:
+            enum:
+              - PROCESS_TYPE_UNSPECIFIED
+              - ADD_ON
+              - EXECUTION_API
+              - TIME_DRIVEN
+              - TRIGGER
+              - WEBAPP
+              - EDITOR
+            type: string
+          name: userProcessFilter.types
+          type: array
+        - collectionFormat: multi
+          description: |-
+            Optional field used to limit returned processes to those having one of
+            the specified user access levels.
+          in: query
+          items:
+            enum:
+              - USER_ACCESS_LEVEL_UNSPECIFIED
+              - NONE
+              - READ
+              - WRITE
+              - OWNER
+            type: string
+          name: userProcessFilter.userAccessLevels
+          type: array
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListUserProcessesResponse'
+      tags:
+        - processes
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/processes:listScriptProcesses':
+    get:
+      description: |-
+        List information about a script's executed processes, such as process type
+        and current status.
+      operationId: script.processes.listScriptProcesses
+      parameters:
+        - description: |-
+            The maximum number of returned processes per page of results. Defaults to
+            50.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            The token for continuing a previous list request on the next page. This
+            should be set to the value of `nextPageToken` from a previous response.
+          in: query
+          name: pageToken
+          type: string
+        - description: The script ID of the project whose processes are listed.
+          in: query
+          name: scriptId
+          type: string
+        - description: |-
+            Optional field used to limit returned processes to those originating from
+            projects with a specific deployment ID.
+          in: query
+          name: scriptProcessFilter.deploymentId
+          type: string
+        - description: |-
+            Optional field used to limit returned processes to those that completed
+            on or before the given timestamp.
+          in: query
+          name: scriptProcessFilter.endTime
+          type: string
+        - description: |-
+            Optional field used to limit returned processes to those originating from
+            a script function with the given function name.
+          in: query
+          name: scriptProcessFilter.functionName
+          type: string
+        - description: |-
+            Optional field used to limit returned processes to those that were
+            started on or after the given timestamp.
+          in: query
+          name: scriptProcessFilter.startTime
+          type: string
+        - collectionFormat: multi
+          description: |-
+            Optional field used to limit returned processes to those having one of
+            the specified process statuses.
+          in: query
+          items:
+            enum:
+              - PROCESS_STATUS_UNSPECIFIED
+              - RUNNING
+              - PAUSED
+              - COMPLETED
+              - CANCELED
+              - FAILED
+              - TIMED_OUT
+              - UNKNOWN
+            type: string
+          name: scriptProcessFilter.statuses
+          type: array
+        - collectionFormat: multi
+          description: |-
+            Optional field used to limit returned processes to those having one of
+            the specified process types.
+          in: query
+          items:
+            enum:
+              - PROCESS_TYPE_UNSPECIFIED
+              - ADD_ON
+              - EXECUTION_API
+              - TIME_DRIVEN
+              - TRIGGER
+              - WEBAPP
+              - EDITOR
+            type: string
+          name: scriptProcessFilter.types
+          type: array
+        - collectionFormat: multi
+          description: |-
+            Optional field used to limit returned processes to those having one of
+            the specified user access levels.
+          in: query
+          items:
+            enum:
+              - USER_ACCESS_LEVEL_UNSPECIFIED
+              - NONE
+              - READ
+              - WRITE
+              - OWNER
+            type: string
+          name: scriptProcessFilter.userAccessLevels
+          type: array
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListScriptProcessesResponse'
+      tags:
+        - processes
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  /v1/projects:
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Creates a new, empty script project with no script files and a base
+        manifest file.
+      operationId: script.projects.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateProjectRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Project'
+      tags:
+        - projects
+  '/v1/projects/{scriptId}':
+    get:
+      description: Gets a script project's metadata.
+      operationId: script.projects.get
+      parameters:
+        - description: The script project's Drive ID.
+          in: path
+          name: scriptId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Project'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/projects/{scriptId}/content':
+    get:
+      description: |-
+        Gets the content of the script project, including the code source and
+        metadata for each script file.
+      operationId: script.projects.getContent
+      parameters:
+        - description: The script project's Drive ID.
+          in: path
+          name: scriptId
+          required: true
+          type: string
+        - description: |-
+            The version number of the project to retrieve. If not provided, the
+            project's HEAD version is returned.
+          in: query
+          name: versionNumber
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Content'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    put:
+      description: |-
+        Updates the content of the specified script project.
+        This content is stored as the HEAD version, and is used when the script is
+        executed as a trigger, in the script editor, in add-on preview mode, or as
+        a web app or Apps Script API in development mode. This clears all the
+        existing files in the project.
+      operationId: script.projects.updateContent
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Content'
+        - description: The script project's Drive ID.
+          in: path
+          name: scriptId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Content'
+      tags:
+        - projects
+  '/v1/projects/{scriptId}/deployments':
+    get:
+      description: Lists the deployments of an Apps Script project.
+      operationId: script.projects.deployments.list
+      parameters:
+        - description: The maximum number of deployments on each returned page. Defaults to 50.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            The token for continuing a previous list request on the next page. This
+            should be set to the value of `nextPageToken` from a previous response.
+          in: query
+          name: pageToken
+          type: string
+        - description: The script project's Drive ID.
+          in: path
+          name: scriptId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListDeploymentsResponse'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates a deployment of an Apps Script project.
+      operationId: script.projects.deployments.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DeploymentConfig'
+        - description: The script project's Drive ID.
+          in: path
+          name: scriptId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Deployment'
+      tags:
+        - projects
+  '/v1/projects/{scriptId}/deployments/{deploymentId}':
+    delete:
+      description: Deletes a deployment of an Apps Script project.
+      operationId: script.projects.deployments.delete
+      parameters:
+        - description: The deployment ID to be undeployed.
+          in: path
+          name: deploymentId
+          required: true
+          type: string
+        - description: The script project's Drive ID.
+          in: path
+          name: scriptId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      tags:
+        - projects
+    get:
+      description: Gets a deployment of an Apps Script project.
+      operationId: script.projects.deployments.get
+      parameters:
+        - description: The deployment ID.
+          in: path
+          name: deploymentId
+          required: true
+          type: string
+        - description: The script project's Drive ID.
+          in: path
+          name: scriptId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Deployment'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    put:
+      description: Updates a deployment of an Apps Script project.
+      operationId: script.projects.deployments.update
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UpdateDeploymentRequest'
+        - description: The deployment ID for this deployment.
+          in: path
+          name: deploymentId
+          required: true
+          type: string
+        - description: The script project's Drive ID.
+          in: path
+          name: scriptId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Deployment'
+      tags:
+        - projects
+  '/v1/projects/{scriptId}/metrics':
+    get:
+      description: |-
+        Get metrics data for scripts, such as number of executions and
+        active users.
+      operationId: script.projects.getMetrics
+      parameters:
+        - description: Optional field indicating a specific deployment to retrieve metrics from.
+          in: query
+          name: metricsFilter.deploymentId
+          type: string
+        - description: Required field indicating what granularity of metrics are returned.
+          enum:
+            - UNSPECIFIED_GRANULARITY
+            - WEEKLY
+            - DAILY
+          in: query
+          name: metricsGranularity
+          type: string
+        - description: Required field indicating the script to get metrics for.
+          in: path
+          name: scriptId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Metrics'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/projects/{scriptId}/versions':
+    get:
+      description: List the versions of a script project.
+      operationId: script.projects.versions.list
+      parameters:
+        - description: The maximum number of versions on each returned page. Defaults to 50.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            The token for continuing a previous list request on the next page. This
+            should be set to the value of `nextPageToken` from a previous response.
+          in: query
+          name: pageToken
+          type: string
+        - description: The script project's Drive ID.
+          in: path
+          name: scriptId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListVersionsResponse'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Creates a new immutable version using the current code, with a unique
+        version number.
+      operationId: script.projects.versions.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Version'
+        - description: The script project's Drive ID.
+          in: path
+          name: scriptId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Version'
+      tags:
+        - projects
+  '/v1/projects/{scriptId}/versions/{versionNumber}':
+    get:
+      description: Gets a version of a script project.
+      operationId: script.projects.versions.get
+      parameters:
+        - description: The script project's Drive ID.
+          in: path
+          name: scriptId
+          required: true
+          type: string
+        - description: The version number.
+          in: path
+          name: versionNumber
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Version'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/scripts/{scriptId}:run':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -239,6 +899,111 @@ paths:
       tags:
         - scripts
 definitions:
+  Content:
+    description: The Content resource.
+    properties:
+      files:
+        description: |-
+          The list of script project files.
+          One of the files is a script manifest; it must be named "appsscript",
+          must have type of JSON, and include the manifest configurations for the
+          project.
+        items:
+          $ref: '#/definitions/File'
+        type: array
+      scriptId:
+        description: The script project's Drive ID.
+        type: string
+    type: object
+  CreateProjectRequest:
+    description: Request to create a script project.
+    properties:
+      parentId:
+        description: |-
+          The Drive ID of a parent file that the created script project is bound to.
+          This is usually the ID of a Google Doc, Google Sheet, Google Form, or
+          Google Slides file. If not set, a standalone script project is created.
+        type: string
+      title:
+        description: The title for the project.
+        type: string
+    type: object
+  Deployment:
+    description: Representation of a single script deployment.
+    properties:
+      deploymentConfig:
+        $ref: '#/definitions/DeploymentConfig'
+        description: The deployment configuration.
+      deploymentId:
+        description: The deployment ID for this deployment.
+        type: string
+      entryPoints:
+        description: The deployment's entry points.
+        items:
+          $ref: '#/definitions/EntryPoint'
+        type: array
+      functionSet:
+        $ref: '#/definitions/GoogleAppsScriptTypeFunctionSet'
+        description: Script's defined set of functions.
+      scopeSet:
+        $ref: '#/definitions/GoogleAppsScriptTypeScopeSet'
+        description: Set of scopes required by the deployment.
+      updateTime:
+        description: Last modified date time stamp.
+        format: google-datetime
+        type: string
+    type: object
+  DeploymentConfig:
+    description: Metadata the defines how a deployment is configured.
+    properties:
+      description:
+        description: The description for this deployment.
+        type: string
+      manifestFileName:
+        description: The manifest file name for this deployment.
+        type: string
+      scriptId:
+        description: The script project's Drive ID.
+        type: string
+      versionNumber:
+        description: The version number on which this deployment is based.
+        format: int32
+        type: integer
+    type: object
+  Empty:
+    description: |-
+      A generic empty message that you can re-use to avoid defining duplicated
+      empty messages in your APIs. A typical example is to use it as the request
+      or the response type of an API method. For instance:
+
+          service Foo {
+            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+          }
+
+      The JSON representation for `Empty` is empty JSON object `{}`.
+    properties: {}
+    type: object
+  EntryPoint:
+    description: A configuration that defines how a deployment is accessed externally.
+    properties:
+      addOn:
+        $ref: '#/definitions/GoogleAppsScriptTypeAddOnEntryPoint'
+        description: Add-on properties.
+      entryPointType:
+        description: The type of the entry point.
+        enum:
+          - ENTRY_POINT_TYPE_UNSPECIFIED
+          - WEB_APP
+          - EXECUTION_API
+          - ADD_ON
+        type: string
+      executionApi:
+        $ref: '#/definitions/GoogleAppsScriptTypeExecutionApiEntryPoint'
+        description: An entry point specification for Apps Script API execution calls.
+      webApp:
+        $ref: '#/definitions/GoogleAppsScriptTypeWebAppEntryPoint'
+        description: An entry point specification for web apps.
+    type: object
   ExecutionError:
     description: |-
       An object that provides information about the nature of an error resulting
@@ -324,6 +1089,338 @@ definitions:
           they can only return primitive types such as a `string`, `number`, `array`,
           `object`, or `boolean`.
     type: object
+  File:
+    description: |-
+      An individual file within a script project.
+      A file is a third-party source code created by one or more
+      developers. It can be a server-side JS code, HTML, or a
+      configuration file. Each script project can contain multiple files.
+    properties:
+      createTime:
+        description: |-
+          Creation date timestamp.
+          This read-only field is only visible to users who have WRITER
+          permission for the script project.
+        format: google-datetime
+        type: string
+      functionSet:
+        $ref: '#/definitions/GoogleAppsScriptTypeFunctionSet'
+        description: 'The defined set of functions in the script file, if any.'
+      lastModifyUser:
+        $ref: '#/definitions/GoogleAppsScriptTypeUser'
+        description: |-
+          The user who modified the file most recently.
+          This read-only field is only visible to users who have WRITER
+          permission for the script project.
+      name:
+        description: |-
+          The name of the file. The file extension is not part of the file
+          name, which can be identified from the type field.
+        type: string
+      source:
+        description: The file content.
+        type: string
+      type:
+        description: The type of the file.
+        enum:
+          - ENUM_TYPE_UNSPECIFIED
+          - SERVER_JS
+          - HTML
+          - JSON
+        type: string
+      updateTime:
+        description: |-
+          Last modified date timestamp.
+          This read-only field is only visible to users who have WRITER
+          permission for the script project.
+        format: google-datetime
+        type: string
+    type: object
+  GoogleAppsScriptTypeAddOnEntryPoint:
+    description: An add-on entry point.
+    properties:
+      addOnType:
+        description: The add-on's required list of supported container types.
+        enum:
+          - UNKNOWN_ADDON_TYPE
+          - GMAIL
+          - DATA_STUDIO
+        type: string
+      description:
+        description: The add-on's optional description.
+        type: string
+      helpUrl:
+        description: The add-on's optional help URL.
+        type: string
+      postInstallTipUrl:
+        description: The add-on's required post install tip URL.
+        type: string
+      reportIssueUrl:
+        description: The add-on's optional report issue URL.
+        type: string
+      title:
+        description: The add-on's required title.
+        type: string
+    type: object
+  GoogleAppsScriptTypeExecutionApiConfig:
+    description: API executable entry point configuration.
+    properties:
+      access:
+        description: Who has permission to run the API executable.
+        enum:
+          - UNKNOWN_ACCESS
+          - MYSELF
+          - DOMAIN
+          - ANYONE
+          - ANYONE_ANONYMOUS
+        type: string
+    type: object
+  GoogleAppsScriptTypeExecutionApiEntryPoint:
+    description: An API executable entry point.
+    properties:
+      entryPointConfig:
+        $ref: '#/definitions/GoogleAppsScriptTypeExecutionApiConfig'
+        description: The entry point's configuration.
+    type: object
+  GoogleAppsScriptTypeFunction:
+    description: Represents a function in a script project.
+    properties:
+      name:
+        description: The function name in the script project.
+        type: string
+    type: object
+  GoogleAppsScriptTypeFunctionSet:
+    description: A set of functions. No duplicates are permitted.
+    properties:
+      values:
+        description: A list of functions composing the set.
+        items:
+          $ref: '#/definitions/GoogleAppsScriptTypeFunction'
+        type: array
+    type: object
+  GoogleAppsScriptTypeProcess:
+    description: |-
+      Representation of a single script process execution that was started from
+      the script editor, a trigger, an application, or using the Apps Script API.
+      This is distinct from the `Operation`
+      resource, which only represents exeuctions started via the Apps Script API.
+    properties:
+      duration:
+        description: Duration the execution spent executing.
+        format: google-duration
+        type: string
+      executingUser:
+        description: User-facing name for the user executing the script.
+        type: string
+      functionName:
+        description: Name of the function the started the execution.
+        type: string
+      processStatus:
+        description: The executions status.
+        enum:
+          - PROCESS_STATUS_UNSPECIFIED
+          - RUNNING
+          - PAUSED
+          - COMPLETED
+          - CANCELED
+          - FAILED
+          - TIMED_OUT
+          - UNKNOWN
+        type: string
+      processType:
+        description: The executions type.
+        enum:
+          - PROCESS_TYPE_UNSPECIFIED
+          - ADD_ON
+          - EXECUTION_API
+          - TIME_DRIVEN
+          - TRIGGER
+          - WEBAPP
+          - EDITOR
+        type: string
+      projectName:
+        description: Name of the script being executed.
+        type: string
+      startTime:
+        description: Time the execution started.
+        format: google-datetime
+        type: string
+      userAccessLevel:
+        description: The executing users access level to the script.
+        enum:
+          - USER_ACCESS_LEVEL_UNSPECIFIED
+          - NONE
+          - READ
+          - WRITE
+          - OWNER
+        type: string
+    type: object
+  GoogleAppsScriptTypeScope:
+    description: Represents an authorization scope.
+    properties:
+      authorizer:
+        description: Who authorized the scope.
+        enum:
+          - SCOPE_AUTHORIZER_UNSPECIFIED
+          - AUTHORIZED_BY_DEVELOPER
+          - AUTHORIZED_BY_END_USER
+        type: string
+      name:
+        description: The scope's identifying string.
+        type: string
+    type: object
+  GoogleAppsScriptTypeScopeSet:
+    description: A set of scopes. No duplicates are permitted.
+    properties:
+      values:
+        description: List of scope values in the set.
+        items:
+          $ref: '#/definitions/GoogleAppsScriptTypeScope'
+        type: array
+    type: object
+  GoogleAppsScriptTypeUser:
+    description: A simple user profile resource.
+    properties:
+      domain:
+        description: The user's domain.
+        type: string
+      email:
+        description: The user's identifying email address.
+        type: string
+      name:
+        description: The user's display name.
+        type: string
+      photoUrl:
+        description: The user's photo.
+        type: string
+    type: object
+  GoogleAppsScriptTypeWebAppConfig:
+    description: Web app entry point configuration.
+    properties:
+      access:
+        description: Who has permission to run the web app.
+        enum:
+          - UNKNOWN_ACCESS
+          - MYSELF
+          - DOMAIN
+          - ANYONE
+          - ANYONE_ANONYMOUS
+        type: string
+      executeAs:
+        description: Who to execute the web app as.
+        enum:
+          - UNKNOWN_EXECUTE_AS
+          - USER_ACCESSING
+          - USER_DEPLOYING
+        type: string
+    type: object
+  GoogleAppsScriptTypeWebAppEntryPoint:
+    description: A web application entry point.
+    properties:
+      entryPointConfig:
+        $ref: '#/definitions/GoogleAppsScriptTypeWebAppConfig'
+        description: The entry point's configuration.
+      url:
+        description: The URL for the web application.
+        type: string
+    type: object
+  ListDeploymentsResponse:
+    description: Response with the list of deployments for the specified Apps Script project.
+    properties:
+      deployments:
+        description: The list of deployments.
+        items:
+          $ref: '#/definitions/Deployment'
+        type: array
+      nextPageToken:
+        description: |-
+          The token that can be used in the next call to get the next page of
+          results.
+        type: string
+    type: object
+  ListScriptProcessesResponse:
+    description: |-
+      Response with the list of
+      Process resources.
+    properties:
+      nextPageToken:
+        description: |-
+          Token for the next page of results. If empty, there are no more pages
+          remaining.
+        type: string
+      processes:
+        description: List of processes matching request parameters.
+        items:
+          $ref: '#/definitions/GoogleAppsScriptTypeProcess'
+        type: array
+    type: object
+  ListUserProcessesResponse:
+    description: |-
+      Response with the list of
+      Process resources.
+    properties:
+      nextPageToken:
+        description: |-
+          Token for the next page of results. If empty, there are no more pages
+          remaining.
+        type: string
+      processes:
+        description: List of processes matching request parameters.
+        items:
+          $ref: '#/definitions/GoogleAppsScriptTypeProcess'
+        type: array
+    type: object
+  ListVersionsResponse:
+    description: Response with the list of the versions for the specified script project.
+    properties:
+      nextPageToken:
+        description: |-
+          The token use to fetch the next page of records. if not exist in the
+          response, that means no more versions to list.
+        type: string
+      versions:
+        description: The list of versions.
+        items:
+          $ref: '#/definitions/Version'
+        type: array
+    type: object
+  Metrics:
+    description: |-
+      Resource containing usage stats for a given script, based on the supplied
+      filter and mask present in the request.
+    properties:
+      activeUsers:
+        description: Number of active users.
+        items:
+          $ref: '#/definitions/MetricsValue'
+        type: array
+      failedExecutions:
+        description: Number of failed executions.
+        items:
+          $ref: '#/definitions/MetricsValue'
+        type: array
+      totalExecutions:
+        description: Number of total executions.
+        items:
+          $ref: '#/definitions/MetricsValue'
+        type: array
+    type: object
+  MetricsValue:
+    description: Metrics value that holds number of executions counted.
+    properties:
+      endTime:
+        description: Required field indicating the end time of the interval.
+        format: google-datetime
+        type: string
+      startTime:
+        description: Required field indicating the start time of the interval.
+        format: google-datetime
+        type: string
+      value:
+        description: Indicates the number of executions counted.
+        format: uint64
+        type: string
+    type: object
   Operation:
     description: |-
       A representation of a execution of an Apps Script function that is started using run. The execution response does not arrive until the function finishes executing. The maximum execution runtime is listed in the [Apps Script quotas guide](/apps-script/guides/services/quotas#current_limitations). <p>After the execution is started, it can have one of four outcomes:</p> <ul> <li> If the script function returns successfully, the
@@ -358,6 +1455,36 @@ definitions:
         description: 'If the script function returns successfully, this field contains an ExecutionResponse object with the function''s return value.'
         type: object
     type: object
+  Project:
+    description: The script project resource.
+    properties:
+      createTime:
+        description: When the script was created.
+        format: google-datetime
+        type: string
+      creator:
+        $ref: '#/definitions/GoogleAppsScriptTypeUser'
+        description: User who originally created the script.
+      lastModifyUser:
+        $ref: '#/definitions/GoogleAppsScriptTypeUser'
+        description: User who last modified the script.
+      parentId:
+        description: |-
+          The parent's Drive ID that the script will be attached to. This is usually
+          the ID of a Google Document or Google Sheet. This filed is optional, and
+          if not set, a stand-alone script will be created.
+        type: string
+      scriptId:
+        description: The script project's Drive ID.
+        type: string
+      title:
+        description: The title for the project.
+        type: string
+      updateTime:
+        description: When the script was last updated.
+        format: google-datetime
+        type: string
+    type: object
   ScriptStackTraceElement:
     description: A stack trace through the script that shows where the execution failed.
     properties:
@@ -386,4 +1513,34 @@ definitions:
       message:
         description: 'A developer-facing error message, which is in English. Any user-facing error message is localized and sent in the [google.rpc.Status.details](google.rpc.Status.details) field, or localized by the client.'
         type: string
+    type: object
+  UpdateDeploymentRequest:
+    description: Request with deployment information to update an existing deployment.
+    properties:
+      deploymentConfig:
+        $ref: '#/definitions/DeploymentConfig'
+        description: The deployment configuration.
+    type: object
+  Version:
+    description: |-
+      A resource representing a script project version. A version is a "snapshot"
+      of a script project and is similar to a read-only branched release. When
+      creating deployments, the version to use must be specified.
+    properties:
+      createTime:
+        description: When the version was created.
+        format: google-datetime
+        type: string
+      description:
+        description: The description for this version.
+        type: string
+      scriptId:
+        description: The script project's Drive ID.
+        type: string
+      versionNumber:
+        description: |-
+          The incremental ID that is created by Apps Script when a version is
+          created. This is system assigned number and is immutable once created.
+        format: int32
+        type: integer
     type: object

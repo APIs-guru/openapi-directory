@@ -5166,7 +5166,7 @@ paths:
         - instanceTemplates
   '/{project}/global/instanceTemplates/{instanceTemplate}':
     delete:
-      description: 'Deletes the specified instance template. If you delete an instance template that is being referenced from another instance group, the instance group will not be able to create or recreate virtual machine instances. Deleting an instance template is permanent and cannot be undone.'
+      description: Deletes the specified instance template. Deleting an instance template is permanent and cannot be undone. It's not possible to delete templates which are in use by an instance group.
       operationId: compute.instanceTemplates.delete
       parameters:
         - description: The name of the instance template to delete.
@@ -5622,6 +5622,49 @@ paths:
             The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
           in: query
           name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - interconnects
+  '/{project}/global/interconnects/{resource}/setLabels':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Sets the labels on an Interconnect. To learn more about labels, read the Labeling Resources documentation.'
+      operationId: compute.interconnects.setLabels
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GlobalSetLabelsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
           type: string
       responses:
         '200':
@@ -13021,6 +13064,63 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/interconnectAttachments/{resource}/setLabels':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Sets the labels on an InterconnectAttachment. To learn more about labels, read the Labeling Resources documentation.'
+      operationId: compute.interconnectAttachments.setLabels
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionSetLabelsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - interconnectAttachments
   '/{project}/regions/{region}/interconnectAttachments/{resource}/testIamPermissions':
     parameters:
       - $ref: '#/parameters/alt'
@@ -20406,7 +20506,7 @@ definitions:
         format: int32
         type: integer
       acceleratorType:
-        description: Full or partial URL of the accelerator type resource to expose to this instance.
+        description: 'Full or partial URL of the accelerator type resource to attach to this instance. If you are creating an instance template, specify only the accelerator name.'
         type: string
     type: object
   AcceleratorType:
@@ -20970,6 +21070,11 @@ definitions:
           If you do not provide an encryption key, then the disk will be encrypted using an automatically generated key and you do not need to provide a key to use the disk later.
 
           Instance templates do not store customer-supplied encryption keys, so you cannot use your own keys to encrypt disks in a managed instance group.
+      guestOsFeatures:
+        description: A list of features to enable on the guest operating system. Applicable only for bootable images. Read  Enabling guest operating system features to see a list of available options.
+        items:
+          $ref: '#/definitions/GuestOsFeature'
+        type: array
       index:
         description: '[Output Only] A zero-based index to this disk, where 0 is reserved for the boot disk. If you have many disks attached to an instance, each disk would have a unique index number.'
         format: int32
@@ -21046,6 +21151,11 @@ definitions:
           - projects/project/zones/zone/diskTypes/diskType 
           - zones/zone/diskTypes/diskType  Note that for InstanceTemplate, this is the name of the disk type, not URL.
         type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to this disk. These can be later modified by the disks.setLabels method. This field is only applicable for persistent disks.
+        type: object
       sourceImage:
         description: |-
           The source image to create this disk. When creating a new instance, one of initializeParams.sourceImage or disks.source is required except for local SSD.
@@ -22493,6 +22603,11 @@ definitions:
           Customer-supplied encryption keys do not protect access to metadata of the disk.
 
           If you do not provide an encryption key when creating the disk, then the disk will be encrypted using an automatically generated key and you do not need to provide a key to use the disk later.
+      guestOsFeatures:
+        description: A list of features to enable on the guest operating system. Applicable only for bootable images. Read  Enabling guest operating system features to see a list of available options.
+        items:
+          $ref: '#/definitions/GuestOsFeature'
+        type: array
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
         format: uint64
@@ -22688,6 +22803,9 @@ definitions:
       autoDelete:
         description: Specifies whether the disk will be auto-deleted when the instance is deleted (but not when the disk is detached from the instance).
         type: boolean
+      customImage:
+        description: The custom source image to be used to restore this disk when instantiating this instance template.
+        type: string
       deviceName:
         description: Specifies the device name of the disk to which the configurations apply to.
         type: string
@@ -22696,14 +22814,11 @@ definitions:
         enum:
           - ATTACH_READ_ONLY
           - BLANK
+          - CUSTOM_IMAGE
           - DEFAULT
           - DO_NOT_INCLUDE
-          - IMAGE_URL
           - SOURCE_IMAGE
           - SOURCE_IMAGE_FAMILY
-        type: string
-      sourceImage:
-        description: The custom source image to be used to restore this disk when instantiating this instance template.
         type: string
     type: object
   DiskList:
@@ -24280,6 +24395,20 @@ definitions:
         description: The customer-supplied encryption key of the source image. Required if the source image is protected by a customer-supplied encryption key.
       sourceImageId:
         description: '[Output Only] The ID value of the image used to create this image. This value may be used to determine whether the image was taken from the current or a previous instance of a given image name.'
+        type: string
+      sourceSnapshot:
+        description: |-
+          URL of the source snapshot used to create this image. This can be a full or valid partial URL. You must provide exactly one of:  
+          - this property, or  
+          - the sourceImage property, or  
+          - the rawDisk.source property, or  
+          - the sourceDisk property   in order to create an image.
+        type: string
+      sourceSnapshotEncryptionKey:
+        $ref: '#/definitions/CustomerEncryptionKey'
+        description: The customer-supplied encryption key of the source snapshot. Required if the source snapshot is protected by a customer-supplied encryption key.
+      sourceSnapshotId:
+        description: '[Output Only] The ID value of the snapshot used to create this image. This value may be used to determine whether the snapshot was taken from the current or a previous instance of a given snapshot name.'
         type: string
       sourceType:
         default: RAW
@@ -25897,6 +26026,18 @@ definitions:
         default: 'compute#interconnect'
         description: '[Output Only] Type of the resource. Always compute#interconnect for interconnects.'
         type: string
+      labelFingerprint:
+        description: |-
+          A fingerprint for the labels being applied to this Interconnect, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels.
+
+          To see the latest fingerprint, make a get() request to retrieve an Interconnect.
+        format: byte
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to this Interconnect resource. These can be later modified by the setLabels method. Each label key/value must comply with RFC1035. Label values may be empty.
+        type: object
       linkType:
         description: 'Type of link requested. This field indicates speed of each of the links in the bundle, not the entire bundle. Only 10G per link is allowed for a dedicated interconnect. Options: Ethernet_10G_LR'
         enum:
@@ -25962,6 +26103,18 @@ definitions:
         default: 'compute#interconnectAttachment'
         description: '[Output Only] Type of the resource. Always compute#interconnectAttachment for interconnect attachments.'
         type: string
+      labelFingerprint:
+        description: |-
+          A fingerprint for the labels being applied to this InterconnectAttachment, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels.
+
+          To see the latest fingerprint, make a get() request to retrieve an InterconnectAttachment.
+        format: byte
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to this InterconnectAttachment resource. These can be later modified by the setLabels method. Each label key/value must comply with RFC1035. Label values may be empty.
+        type: object
       name:
         description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
@@ -27688,7 +27841,7 @@ definitions:
         type: integer
     type: object
   Project:
-    description: 'A Project resource. Projects can only be created in the Google Cloud Platform Console. Unless marked otherwise, values can only be modified in the console. (== resource_for v1.projects ==) (== resource_for beta.projects ==)'
+    description: 'A Project resource. For an overview of projects, see  Cloud Platform Resource Hierarchy. (== resource_for v1.projects ==) (== resource_for beta.projects ==)'
     properties:
       commonInstanceMetadata:
         $ref: '#/definitions/Metadata'

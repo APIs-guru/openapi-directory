@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: The Replica Pool API allows users to declaratively provision and manage groups of Google Compute Engine instances based on a common template.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Replica Pool
   version: v1beta1
   x-apiClientRegistration:
@@ -31,7 +35,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
@@ -40,6 +44,19 @@ securityDefinitions:
       'https://www.googleapis.com/auth/ndev.cloudman.readonly': View your Google Cloud Platform management resources and deployment status information
       'https://www.googleapis.com/auth/replicapool': View and manage replica pools
       'https://www.googleapis.com/auth/replicapool.readonly': View replica pools
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/ndev.cloudman': View and manage your Google Cloud Platform management resources and deployment status information
+      'https://www.googleapis.com/auth/ndev.cloudman.readonly': View your Google Cloud Platform management resources and deployment status information
+      'https://www.googleapis.com/auth/replicapool': View and manage replica pools
+      'https://www.googleapis.com/auth/replicapool.readonly': View replica pools
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -90,16 +107,6 @@ paths:
       description: List all replica pools.
       operationId: replicapool.pools.list
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: projectName
-          required: true
-          type: string
-        - description: The zone for this replica pool.
-          in: path
-          name: zone
-          required: true
-          type: string
         - default: 500
           description: 'Maximum count of results to be returned. Acceptable values are 0 to 100, inclusive. (Default: 50)'
           in: query
@@ -111,6 +118,16 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: The project ID for this request.
+          in: path
+          name: projectName
+          required: true
+          type: string
+        - description: The zone for this replica pool.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -119,15 +136,27 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/replicapool'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool.readonly'
       tags:
         - pools
@@ -143,6 +172,10 @@ paths:
       description: Inserts a new replica pool.
       operationId: replicapool.pools.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Pool'
         - description: The project ID for this replica pool.
           in: path
           name: projectName
@@ -153,10 +186,6 @@ paths:
           name: zone
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Pool'
       responses:
         '200':
           description: Successful response
@@ -165,9 +194,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - pools
@@ -176,6 +211,11 @@ paths:
       description: Gets information about a single replica pool.
       operationId: replicapool.pools.get
       parameters:
+        - description: The name of the replica pool for this request.
+          in: path
+          name: poolName
+          required: true
+          type: string
         - description: The project ID for this replica pool.
           in: path
           name: projectName
@@ -186,11 +226,6 @@ paths:
           name: zone
           required: true
           type: string
-        - description: The name of the replica pool for this request.
-          in: path
-          name: poolName
-          required: true
-          type: string
       responses:
         '200':
           description: Successful response
@@ -199,15 +234,27 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/replicapool'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool.readonly'
       tags:
         - pools
@@ -223,6 +270,15 @@ paths:
       description: Deletes a replica pool.
       operationId: replicapool.pools.delete
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PoolsDeleteRequest'
+        - description: The name of the replica pool for this request.
+          in: path
+          name: poolName
+          required: true
+          type: string
         - description: The project ID for this replica pool.
           in: path
           name: projectName
@@ -233,24 +289,21 @@ paths:
           name: zone
           required: true
           type: string
-        - description: The name of the replica pool for this request.
-          in: path
-          name: poolName
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PoolsDeleteRequest'
       responses:
         '200':
           description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - pools
@@ -259,21 +312,6 @@ paths:
       description: Lists all replicas in a pool.
       operationId: replicapool.replicas.list
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: projectName
-          required: true
-          type: string
-        - description: The zone where the replica pool lives.
-          in: path
-          name: zone
-          required: true
-          type: string
-        - description: The replica pool name for this request.
-          in: path
-          name: poolName
-          required: true
-          type: string
         - default: 500
           description: 'Maximum count of results to be returned. Acceptable values are 0 to 100, inclusive. (Default: 50)'
           in: query
@@ -285,6 +323,21 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: The replica pool name for this request.
+          in: path
+          name: poolName
+          required: true
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: projectName
+          required: true
+          type: string
+        - description: The zone where the replica pool lives.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -293,15 +346,27 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/replicapool'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool.readonly'
       tags:
         - replicas
@@ -318,24 +383,24 @@ paths:
       description: Gets information about a specific replica.
       operationId: replicapool.replicas.get
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: projectName
-          required: true
-          type: string
-        - description: The zone where the replica lives.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: The replica pool name for this request.
           in: path
           name: poolName
           required: true
           type: string
+        - description: The project ID for this request.
+          in: path
+          name: projectName
+          required: true
+          type: string
         - description: The name of the replica for this request.
           in: path
           name: replicaName
+          required: true
+          type: string
+        - description: The zone where the replica lives.
+          in: path
+          name: zone
           required: true
           type: string
       responses:
@@ -346,15 +411,27 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/replicapool'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool.readonly'
       tags:
         - replicas
@@ -370,19 +447,18 @@ paths:
       description: Deletes a replica from the pool.
       operationId: replicapool.replicas.delete
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: projectName
-          required: true
-          type: string
-        - description: The zone where the replica lives.
-          in: path
-          name: zone
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReplicasDeleteRequest'
         - description: The replica pool name for this request.
           in: path
           name: poolName
+          required: true
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: projectName
           required: true
           type: string
         - description: The name of the replica for this request.
@@ -390,10 +466,11 @@ paths:
           name: replicaName
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ReplicasDeleteRequest'
+        - description: The zone where the replica lives.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -402,9 +479,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - replicas
@@ -421,24 +504,24 @@ paths:
       description: Restarts a replica in a pool.
       operationId: replicapool.replicas.restart
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: projectName
-          required: true
-          type: string
-        - description: The zone where the replica lives.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: The replica pool name for this request.
           in: path
           name: poolName
           required: true
           type: string
+        - description: The project ID for this request.
+          in: path
+          name: projectName
+          required: true
+          type: string
         - description: The name of the replica for this request.
           in: path
           name: replicaName
+          required: true
+          type: string
+        - description: The zone where the replica lives.
+          in: path
+          name: zone
           required: true
           type: string
       responses:
@@ -449,9 +532,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - replicas
@@ -468,6 +557,15 @@ paths:
       description: 'Resize a pool. This is an asynchronous operation, and multiple overlapping resize requests can be made. Replica Pools will use the information from the last resize request.'
       operationId: replicapool.pools.resize
       parameters:
+        - description: 'The desired number of replicas to resize to. If this number is larger than the existing number of replicas, new replicas will be added. If the number is smaller, then existing replicas will be deleted.'
+          in: query
+          name: numReplicas
+          type: integer
+        - description: The name of the replica pool for this request.
+          in: path
+          name: poolName
+          required: true
+          type: string
         - description: The project ID for this replica pool.
           in: path
           name: projectName
@@ -478,15 +576,6 @@ paths:
           name: zone
           required: true
           type: string
-        - description: The name of the replica pool for this request.
-          in: path
-          name: poolName
-          required: true
-          type: string
-        - description: 'The desired number of replicas to resize to. If this number is larger than the existing number of replicas, new replicas will be added. If the number is smaller, then existing replicas will be deleted.'
-          in: query
-          name: numReplicas
-          type: integer
       responses:
         '200':
           description: Successful response
@@ -495,9 +584,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - pools
@@ -514,6 +609,15 @@ paths:
       description: Update the template used by the pool.
       operationId: replicapool.pools.updatetemplate
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Template'
+        - description: The name of the replica pool for this request.
+          in: path
+          name: poolName
+          required: true
+          type: string
         - description: The project ID for this replica pool.
           in: path
           name: projectName
@@ -524,24 +628,21 @@ paths:
           name: zone
           required: true
           type: string
-        - description: The name of the replica pool for this request.
-          in: path
-          name: poolName
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Template'
       responses:
         '200':
           description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/replicapool'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/replicapool'
       tags:
         - pools

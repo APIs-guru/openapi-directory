@@ -3798,6 +3798,11 @@ definitions:
   RuntimeEnvironment:
     description: The environment values to set at runtime.
     properties:
+      additionalExperiments:
+        description: Additional experiment flags for the job.
+        items:
+          type: string
+        type: array
       bypassTempDirValidation:
         description: |-
           Whether to bypass the safety checks for the job's temporary directory.

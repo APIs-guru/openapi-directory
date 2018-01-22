@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: The Resource View API allows users to create and manage logical sets of Google Compute Engine instances.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Resource Views
   version: v1beta1
   x-apiClientRegistration:
@@ -31,7 +35,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
@@ -40,6 +44,19 @@ securityDefinitions:
       'https://www.googleapis.com/auth/compute.readonly': View your Google Compute Engine resources
       'https://www.googleapis.com/auth/ndev.cloudman': View and manage your Google Cloud Platform management resources and deployment status information
       'https://www.googleapis.com/auth/ndev.cloudman.readonly': View your Google Cloud Platform management resources and deployment status information
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/compute': View and manage your Google Compute Engine resources
+      'https://www.googleapis.com/auth/compute.readonly': View your Google Compute Engine resources
+      'https://www.googleapis.com/auth/ndev.cloudman': View and manage your Google Cloud Platform management resources and deployment status information
+      'https://www.googleapis.com/auth/ndev.cloudman.readonly': View your Google Cloud Platform management resources and deployment status information
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -90,16 +107,6 @@ paths:
       description: List resource views.
       operationId: resourceviews.regionViews.list
       parameters:
-        - description: The project name of the resource view.
-          in: path
-          name: projectName
-          required: true
-          type: string
-        - description: The region name of the resource view.
-          in: path
-          name: region
-          required: true
-          type: string
         - default: 5000
           description: 'Maximum count of results to be returned. Acceptable values are 0 to 5000, inclusive. (Default: 5000)'
           in: query
@@ -111,6 +118,16 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: The project name of the resource view.
+          in: path
+          name: projectName
+          required: true
+          type: string
+        - description: The region name of the resource view.
+          in: path
+          name: region
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -119,15 +136,27 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - regionViews
@@ -143,6 +172,10 @@ paths:
       description: Create a resource view.
       operationId: resourceviews.regionViews.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ResourceView'
         - description: The project name of the resource view.
           in: path
           name: projectName
@@ -153,10 +186,6 @@ paths:
           name: region
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ResourceView'
       responses:
         '200':
           description: Successful response
@@ -165,9 +194,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - regionViews
@@ -197,9 +232,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - regionViews
@@ -230,15 +271,27 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - regionViews
@@ -263,6 +316,10 @@ paths:
       description: Add resources to the view.
       operationId: resourceviews.regionViews.addresources
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionViewsAddResourcesRequest'
         - description: The project name of the resource view.
           in: path
           name: projectName
@@ -278,19 +335,21 @@ paths:
           name: resourceViewName
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RegionViewsAddResourcesRequest'
       responses:
         '200':
           description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - regionViews
@@ -307,6 +366,10 @@ paths:
       description: Remove resources from the view.
       operationId: resourceviews.regionViews.removeresources
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionViewsRemoveResourcesRequest'
         - description: The project name of the resource view.
           in: path
           name: projectName
@@ -322,19 +385,21 @@ paths:
           name: resourceViewName
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RegionViewsRemoveResourcesRequest'
       responses:
         '200':
           description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - regionViews
@@ -351,6 +416,17 @@ paths:
       description: List the resources in the view.
       operationId: resourceviews.regionViews.listresources
       parameters:
+        - default: 5000
+          description: 'Maximum count of results to be returned. Acceptable values are 0 to 5000, inclusive. (Default: 5000)'
+          in: query
+          maximum: 5000
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.
+          in: query
+          name: pageToken
+          type: string
         - description: The project name of the resource view.
           in: path
           name: projectName
@@ -366,6 +442,43 @@ paths:
           name: resourceViewName
           required: true
           type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RegionViewsListResourcesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+      tags:
+        - regionViews
+  '/{projectName}/zones/{zone}/resourceViews':
+    get:
+      description: List resource views.
+      operationId: resourceviews.zoneViews.list
+      parameters:
         - default: 5000
           description: 'Maximum count of results to be returned. Acceptable values are 0 to 5000, inclusive. (Default: 5000)'
           in: query
@@ -377,31 +490,6 @@ paths:
           in: query
           name: pageToken
           type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/RegionViewsListResourcesResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
-      tags:
-        - regionViews
-  '/{projectName}/zones/{zone}/resourceViews':
-    get:
-      description: List resource views.
-      operationId: resourceviews.zoneViews.list
-      parameters:
         - description: The project name of the resource view.
           in: path
           name: projectName
@@ -412,17 +500,6 @@ paths:
           name: zone
           required: true
           type: string
-        - default: 5000
-          description: 'Maximum count of results to be returned. Acceptable values are 0 to 5000, inclusive. (Default: 5000)'
-          in: query
-          maximum: 5000
-          minimum: 0
-          name: maxResults
-          type: integer
-        - description: Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.
-          in: query
-          name: pageToken
-          type: string
       responses:
         '200':
           description: Successful response
@@ -431,15 +508,27 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - zoneViews
@@ -455,6 +544,10 @@ paths:
       description: Create a resource view.
       operationId: resourceviews.zoneViews.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ResourceView'
         - description: The project name of the resource view.
           in: path
           name: projectName
@@ -465,10 +558,6 @@ paths:
           name: zone
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ResourceView'
       responses:
         '200':
           description: Successful response
@@ -477,9 +566,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - zoneViews
@@ -493,14 +588,14 @@ paths:
           name: projectName
           required: true
           type: string
-        - description: The zone name of the resource view.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: The name of the resource view.
           in: path
           name: resourceViewName
+          required: true
+          type: string
+        - description: The zone name of the resource view.
+          in: path
+          name: zone
           required: true
           type: string
       responses:
@@ -509,9 +604,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - zoneViews
@@ -524,14 +625,14 @@ paths:
           name: projectName
           required: true
           type: string
-        - description: The zone name of the resource view.
-          in: path
-          name: zone
-          required: true
-          type: string
         - description: The name of the resource view.
           in: path
           name: resourceViewName
+          required: true
+          type: string
+        - description: The zone name of the resource view.
+          in: path
+          name: zone
           required: true
           type: string
       responses:
@@ -542,15 +643,27 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - zoneViews
@@ -575,14 +688,13 @@ paths:
       description: Add resources to the view.
       operationId: resourceviews.zoneViews.addresources
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ZoneViewsAddResourcesRequest'
         - description: The project name of the resource view.
           in: path
           name: projectName
-          required: true
-          type: string
-        - description: The zone name of the resource view.
-          in: path
-          name: zone
           required: true
           type: string
         - description: The name of the resource view.
@@ -590,19 +702,26 @@ paths:
           name: resourceViewName
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ZoneViewsAddResourcesRequest'
+        - description: The zone name of the resource view.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - zoneViews
@@ -619,14 +738,13 @@ paths:
       description: Remove resources from the view.
       operationId: resourceviews.zoneViews.removeresources
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ZoneViewsRemoveResourcesRequest'
         - description: The project name of the resource view.
           in: path
           name: projectName
-          required: true
-          type: string
-        - description: The zone name of the resource view.
-          in: path
-          name: zone
           required: true
           type: string
         - description: The name of the resource view.
@@ -634,19 +752,26 @@ paths:
           name: resourceViewName
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ZoneViewsRemoveResourcesRequest'
+        - description: The zone name of the resource view.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
       tags:
         - zoneViews
@@ -663,21 +788,6 @@ paths:
       description: List the resources of the resource view.
       operationId: resourceviews.zoneViews.listresources
       parameters:
-        - description: The project name of the resource view.
-          in: path
-          name: projectName
-          required: true
-          type: string
-        - description: The zone name of the resource view.
-          in: path
-          name: zone
-          required: true
-          type: string
-        - description: The name of the resource view.
-          in: path
-          name: resourceViewName
-          required: true
-          type: string
         - default: 5000
           description: 'Maximum count of results to be returned. Acceptable values are 0 to 5000, inclusive. (Default: 5000)'
           in: query
@@ -689,6 +799,21 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: The project name of the resource view.
+          in: path
+          name: projectName
+          required: true
+          type: string
+        - description: The name of the resource view.
+          in: path
+          name: resourceViewName
+          required: true
+          type: string
+        - description: The zone name of the resource view.
+          in: path
+          name: zone
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -697,15 +822,27 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - zoneViews

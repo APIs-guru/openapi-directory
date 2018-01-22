@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: API for working with Fusion Tables data.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Fusion Tables
   version: v2
   x-apiClientRegistration:
@@ -31,11 +35,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/fusiontables': Manage your Fusion Tables
       'https://www.googleapis.com/auth/fusiontables.readonly': View your Fusion Tables
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/fusiontables': Manage your Fusion Tables
+      'https://www.googleapis.com/auth/fusiontables.readonly': View your Fusion Tables
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -120,7 +133,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables.readonly'
       tags:
         - query
@@ -173,7 +190,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables.readonly'
       tags:
         - query
@@ -199,7 +220,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables.readonly'
       tags:
         - table
@@ -226,6 +251,8 @@ paths:
             $ref: '#/definitions/Table'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - table
@@ -265,6 +292,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - table
   '/tables/{tableId}':
@@ -282,6 +311,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - table
@@ -302,7 +333,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables.readonly'
       tags:
         - table
@@ -339,6 +374,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - table
     put:
@@ -365,6 +402,8 @@ paths:
             $ref: '#/definitions/Table'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - table
@@ -395,7 +434,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables.readonly'
       tags:
         - column
@@ -428,6 +471,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - column
   '/tables/{tableId}/columns/{columnId}':
@@ -450,6 +495,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - column
@@ -475,7 +522,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables.readonly'
       tags:
         - column
@@ -513,6 +564,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - column
     put:
@@ -540,6 +593,8 @@ paths:
             $ref: '#/definitions/Column'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - column
@@ -573,7 +628,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables.readonly'
       tags:
         - table
@@ -625,6 +684,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - table
   '/tables/{tableId}/refetch':
@@ -652,6 +713,8 @@ paths:
             $ref: '#/definitions/Task'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - table
@@ -703,6 +766,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - table
   '/tables/{tableId}/styles':
@@ -732,7 +797,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables.readonly'
       tags:
         - style
@@ -765,6 +834,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - style
   '/tables/{tableId}/styles/{styleId}':
@@ -787,6 +858,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - style
@@ -812,7 +885,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables.readonly'
       tags:
         - style
@@ -850,6 +927,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - style
     put:
@@ -877,6 +956,8 @@ paths:
             $ref: '#/definitions/StyleSetting'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - style
@@ -911,7 +992,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables.readonly'
       tags:
         - task
@@ -944,6 +1029,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - task
     get:
@@ -968,7 +1055,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables.readonly'
       tags:
         - task
@@ -1007,7 +1098,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables.readonly'
       tags:
         - template
@@ -1040,6 +1135,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - template
   '/tables/{tableId}/templates/{templateId}':
@@ -1062,6 +1159,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - template
@@ -1087,7 +1186,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables.readonly'
       tags:
         - template
@@ -1125,6 +1228,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - template
     put:
@@ -1152,6 +1257,8 @@ paths:
             $ref: '#/definitions/Template'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fusiontables'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fusiontables'
       tags:
         - template

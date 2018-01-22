@@ -790,7 +790,7 @@ definitions:
         description: Required. The cluster name. Cluster names within a project must be unique. Names of deleted clusters can be reused.
         type: string
       clusterUuid:
-        description: Output-only. A cluster UUID (Unique Universal Identifier). Cloud Dataproc generates this value when it creates the cluster.
+        description: Output only. A cluster UUID (Unique Universal Identifier). Cloud Dataproc generates this value when it creates the cluster.
         type: string
       config:
         $ref: '#/definitions/ClusterConfig'
@@ -808,9 +808,9 @@ definitions:
         type: string
       status:
         $ref: '#/definitions/ClusterStatus'
-        description: Output-only. Cluster status.
+        description: Output only. Cluster status.
       statusHistory:
-        description: Output-only. The previous cluster status.
+        description: Output only. The previous cluster status.
         items:
           $ref: '#/definitions/ClusterStatus'
         type: array
@@ -869,32 +869,32 @@ definitions:
     description: Metadata describing the operation.
     properties:
       clusterName:
-        description: Output-only. Name of the cluster for the operation.
+        description: Output only. Name of the cluster for the operation.
         type: string
       clusterUuid:
-        description: Output-only. Cluster UUID for the operation.
+        description: Output only. Cluster UUID for the operation.
         type: string
       description:
-        description: Output-only. Short description of operation.
+        description: Output only. Short description of operation.
         type: string
       labels:
         additionalProperties:
           type: string
-        description: Output-only. Labels associated with the operation
+        description: Output only. Labels associated with the operation
         type: object
       operationType:
-        description: Output-only. The operation type.
+        description: Output only. The operation type.
         type: string
       status:
         $ref: '#/definitions/ClusterOperationStatus'
-        description: Output-only. Current operation status.
+        description: Output only. Current operation status.
       statusHistory:
-        description: Output-only. The previous operation status.
+        description: Output only. The previous operation status.
         items:
           $ref: '#/definitions/ClusterOperationStatus'
         type: array
       warnings:
-        description: Output-only. Errors encountered during operation execution.
+        description: Output only. Errors encountered during operation execution.
         items:
           type: string
         type: array
@@ -903,13 +903,13 @@ definitions:
     description: The status of the operation.
     properties:
       details:
-        description: Output-only.A message containing any operation metadata details.
+        description: Output only. A message containing any operation metadata details.
         type: string
       innerState:
-        description: Output-only. A message containing the detailed operation state.
+        description: Output only. A message containing the detailed operation state.
         type: string
       state:
-        description: Output-only. A message containing the operation state.
+        description: Output only. A message containing the operation state.
         enum:
           - UNKNOWN
           - PENDING
@@ -917,7 +917,7 @@ definitions:
           - DONE
         type: string
       stateStartTime:
-        description: Output-only. The time this state was entered.
+        description: Output only. The time this state was entered.
         format: google-datetime
         type: string
     type: object
@@ -925,10 +925,10 @@ definitions:
     description: The status of a cluster and its instances.
     properties:
       detail:
-        description: Output-only. Optional details of cluster's state.
+        description: Output only. Optional details of cluster's state.
         type: string
       state:
-        description: Output-only. The cluster's state.
+        description: Output only. The cluster's state.
         enum:
           - UNKNOWN
           - CREATING
@@ -938,11 +938,11 @@ definitions:
           - UPDATING
         type: string
       stateStartTime:
-        description: Output-only. Time when this state was entered.
+        description: Output only. Time when this state was entered.
         format: google-datetime
         type: string
       substate:
-        description: Output-only. Additional state information that includes status reported by the agent.
+        description: Output only. Additional state information that includes status reported by the agent.
         enum:
           - UNSPECIFIED
           - UNHEALTHY
@@ -957,7 +957,7 @@ definitions:
     description: The location of diagnostic output.
     properties:
       outputUri:
-        description: Output-only. The Google Cloud Storage URI of the diagnostic output. The output report is a plain text file with a summary of collected diagnostics.
+        description: Output only. The Google Cloud Storage URI of the diagnostic output. The output report is a plain text file with a summary of collected diagnostics.
         type: string
     type: object
   DiskConfig:
@@ -1116,7 +1116,7 @@ definitions:
         $ref: '#/definitions/DiskConfig'
         description: Optional. Disk option config settings.
       imageUri:
-        description: Output-only. The Google Compute Engine image resource used for cluster instances. Inferred from SoftwareConfig.image_version.
+        description: Output only. The Google Compute Engine image resource used for cluster instances. Inferred from SoftwareConfig.image_version.
         type: string
       instanceNames:
         description: 'Optional. The list of instance names. Cloud Dataproc derives the names from cluster_name, num_instances, and the instance group if not set by user (recommended practice is to let Cloud Dataproc derive the name).'
@@ -1135,7 +1135,7 @@ definitions:
         type: string
       managedGroupConfig:
         $ref: '#/definitions/ManagedGroupConfig'
-        description: Output-only. The config for Google Compute Engine Instance Group Manager that manages this group. This is only used for preemptible instance groups.
+        description: Output only. The config for Google Compute Engine Instance Group Manager that manages this group. This is only used for preemptible instance groups.
       numInstances:
         description: 'Optional. The number of VM instances in the instance group. For master instance groups, must be set to 1.'
         format: int32
@@ -1145,10 +1145,10 @@ definitions:
     description: A Cloud Dataproc job resource.
     properties:
       driverControlFilesUri:
-        description: 'Output-only. If present, the location of miscellaneous control files which may be used as part of job setup and handling. If not present, control files may be placed in the same location as driver_output_uri.'
+        description: 'Output only. If present, the location of miscellaneous control files which may be used as part of job setup and handling. If not present, control files may be placed in the same location as driver_output_uri.'
         type: string
       driverOutputResourceUri:
-        description: Output-only. A URI pointing to the location of the stdout of the job's driver program.
+        description: Output only. A URI pointing to the location of the stdout of the job's driver program.
         type: string
       hadoopJob:
         $ref: '#/definitions/HadoopJob'
@@ -1184,14 +1184,14 @@ definitions:
         description: Job is a SparkSql job.
       status:
         $ref: '#/definitions/JobStatus'
-        description: Output-only. The job status. Additional application-specific status information may be contained in the <code>type_job</code> and <code>yarn_applications</code> fields.
+        description: Output only. The job status. Additional application-specific status information may be contained in the <code>type_job</code> and <code>yarn_applications</code> fields.
       statusHistory:
-        description: Output-only. The previous job status.
+        description: Output only. The previous job status.
         items:
           $ref: '#/definitions/JobStatus'
         type: array
       yarnApplications:
-        description: 'Output-only. The collection of YARN applications spun up by this job.Beta Feature: This report is available for testing purposes only. It may be changed before final release.'
+        description: 'Output only. The collection of YARN applications spun up by this job.Beta Feature: This report is available for testing purposes only. It may be changed before final release.'
         items:
           $ref: '#/definitions/YarnApplication'
         type: array
@@ -1203,7 +1203,7 @@ definitions:
         description: Required. The name of the cluster where the job will be submitted.
         type: string
       clusterUuid:
-        description: Output-only. A cluster UUID generated by the Cloud Dataproc service when the job is submitted.
+        description: Output only. A cluster UUID generated by the Cloud Dataproc service when the job is submitted.
         type: string
     type: object
   JobReference:
@@ -1228,10 +1228,10 @@ definitions:
     description: Cloud Dataproc job status.
     properties:
       details:
-        description: 'Output-only. Optional job state details, such as an error description if the state is <code>ERROR</code>.'
+        description: 'Output only. Optional job state details, such as an error description if the state is <code>ERROR</code>.'
         type: string
       state:
-        description: Output-only. A state message specifying the overall job state.
+        description: Output only. A state message specifying the overall job state.
         enum:
           - STATE_UNSPECIFIED
           - PENDING
@@ -1245,11 +1245,11 @@ definitions:
           - ATTEMPT_FAILURE
         type: string
       stateStartTime:
-        description: Output-only. The time when this state was entered.
+        description: Output only. The time when this state was entered.
         format: google-datetime
         type: string
       substate:
-        description: 'Output-only. Additional state information, which includes status reported by the agent.'
+        description: 'Output only. Additional state information, which includes status reported by the agent.'
         enum:
           - UNSPECIFIED
           - SUBMITTED
@@ -1261,19 +1261,19 @@ definitions:
     description: The list of all clusters in a project.
     properties:
       clusters:
-        description: Output-only. The clusters in the project.
+        description: Output only. The clusters in the project.
         items:
           $ref: '#/definitions/Cluster'
         type: array
       nextPageToken:
-        description: 'Output-only. This token is included in the response if there are more results to fetch. To fetch additional results, provide this value as the page_token in a subsequent ListClustersRequest.'
+        description: 'Output only. This token is included in the response if there are more results to fetch. To fetch additional results, provide this value as the page_token in a subsequent ListClustersRequest.'
         type: string
     type: object
   ListJobsResponse:
     description: A list of jobs in a project.
     properties:
       jobs:
-        description: Output-only. Jobs list.
+        description: Output only. Jobs list.
         items:
           $ref: '#/definitions/Job'
         type: array
@@ -1316,10 +1316,10 @@ definitions:
     description: Specifies the resources used to actively manage an instance group.
     properties:
       instanceGroupManagerName:
-        description: Output-only. The name of the Instance Group Manager for this group.
+        description: Output only. The name of the Instance Group Manager for this group.
         type: string
       instanceTemplateName:
-        description: Output-only. The name of the Instance Template used for the Managed Instance Group.
+        description: Output only. The name of the Instance Template used for the Managed Instance Group.
         type: string
     type: object
   NodeInitializationAction:

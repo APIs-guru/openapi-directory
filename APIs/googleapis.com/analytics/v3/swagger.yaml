@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Views and manages your Google Analytics data.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Analytics
   version: v3
   x-apiClientRegistration:
@@ -31,7 +35,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/analytics': View and manage your Google Analytics data
@@ -40,6 +44,19 @@ securityDefinitions:
       'https://www.googleapis.com/auth/analytics.manage.users.readonly': View Google Analytics user permissions
       'https://www.googleapis.com/auth/analytics.provision': Create a new Google Analytics account along with its default property and view
       'https://www.googleapis.com/auth/analytics.readonly': View your Google Analytics data
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/analytics': View and manage your Google Analytics data
+      'https://www.googleapis.com/auth/analytics.edit': Edit Google Analytics management entities
+      'https://www.googleapis.com/auth/analytics.manage.users': Manage Google Analytics Account users by email address
+      'https://www.googleapis.com/auth/analytics.manage.users.readonly': View Google Analytics user permissions
+      'https://www.googleapis.com/auth/analytics.provision': Create a new Google Analytics account along with its default property and view
+      'https://www.googleapis.com/auth/analytics.readonly': View your Google Analytics data
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -92,33 +109,23 @@ paths:
       description: Returns Analytics data for a view (profile).
       operationId: analytics.data.ga.get
       parameters:
-        - description: 'Unique table ID for retrieving Analytics data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.'
+        - description: 'A comma-separated list of Analytics dimensions. E.g., ''ga:browser,ga:city''.'
           in: query
-          name: ids
-          required: true
-          type: string
-        - description: 'Start date for fetching Analytics data. Requests can specify a start date formatted as YYYY-MM-DD, or as a relative date (e.g., today, yesterday, or 7daysAgo). The default value is 7daysAgo.'
-          in: query
-          name: start-date
-          required: true
+          name: dimensions
           type: string
         - description: 'End date for fetching Analytics data. Request can should specify an end date formatted as YYYY-MM-DD, or as a relative date (e.g., today, yesterday, or 7daysAgo). The default value is yesterday.'
           in: query
           name: end-date
           required: true
           type: string
-        - description: 'A comma-separated list of Analytics metrics. E.g., ''ga:sessions,ga:pageviews''. At least one metric must be specified.'
-          in: query
-          name: metrics
-          required: true
-          type: string
-        - description: 'A comma-separated list of Analytics dimensions. E.g., ''ga:browser,ga:city''.'
-          in: query
-          name: dimensions
-          type: string
         - description: A comma-separated list of dimension or metric filters to be applied to Analytics data.
           in: query
           name: filters
+          type: string
+        - description: 'Unique table ID for retrieving Analytics data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.'
+          in: query
+          name: ids
+          required: true
           type: string
         - description: 'The response will include empty rows if this parameter is set to true, the default is true'
           in: query
@@ -128,6 +135,11 @@ paths:
           in: query
           name: max-results
           type: integer
+        - description: 'A comma-separated list of Analytics metrics. E.g., ''ga:sessions,ga:pageviews''. At least one metric must be specified.'
+          in: query
+          name: metrics
+          required: true
+          type: string
         - description: The selected format for the response. Default format is JSON.
           enum:
             - dataTable
@@ -151,6 +163,11 @@ paths:
           in: query
           name: sort
           type: string
+        - description: 'Start date for fetching Analytics data. Requests can specify a start date formatted as YYYY-MM-DD, or as a relative date (e.g., today, yesterday, or 7daysAgo). The default value is 7daysAgo.'
+          in: query
+          name: start-date
+          required: true
+          type: string
         - description: An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
           in: query
           minimum: 1
@@ -164,7 +181,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - data
@@ -181,38 +202,33 @@ paths:
       description: Returns Analytics Multi-Channel Funnels data for a view (profile).
       operationId: analytics.data.mcf.get
       parameters:
-        - description: 'Unique table ID for retrieving Analytics data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.'
+        - description: 'A comma-separated list of Multi-Channel Funnels dimensions. E.g., ''mcf:source,mcf:medium''.'
           in: query
-          name: ids
-          required: true
-          type: string
-        - description: 'Start date for fetching Analytics data. Requests can specify a start date formatted as YYYY-MM-DD, or as a relative date (e.g., today, yesterday, or 7daysAgo). The default value is 7daysAgo.'
-          in: query
-          name: start-date
-          required: true
+          name: dimensions
           type: string
         - description: 'End date for fetching Analytics data. Requests can specify a start date formatted as YYYY-MM-DD, or as a relative date (e.g., today, yesterday, or 7daysAgo). The default value is 7daysAgo.'
           in: query
           name: end-date
           required: true
           type: string
-        - description: 'A comma-separated list of Multi-Channel Funnels metrics. E.g., ''mcf:totalConversions,mcf:totalConversionValue''. At least one metric must be specified.'
-          in: query
-          name: metrics
-          required: true
-          type: string
-        - description: 'A comma-separated list of Multi-Channel Funnels dimensions. E.g., ''mcf:source,mcf:medium''.'
-          in: query
-          name: dimensions
-          type: string
         - description: A comma-separated list of dimension or metric filters to be applied to the Analytics data.
           in: query
           name: filters
+          type: string
+        - description: 'Unique table ID for retrieving Analytics data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.'
+          in: query
+          name: ids
+          required: true
           type: string
         - description: The maximum number of entries to include in this feed.
           in: query
           name: max-results
           type: integer
+        - description: 'A comma-separated list of Multi-Channel Funnels metrics. E.g., ''mcf:totalConversions,mcf:totalConversionValue''. At least one metric must be specified.'
+          in: query
+          name: metrics
+          required: true
+          type: string
         - description: The desired sampling level.
           enum:
             - DEFAULT
@@ -224,6 +240,11 @@ paths:
         - description: A comma-separated list of dimensions or metrics that determine the sort order for the Analytics data.
           in: query
           name: sort
+          type: string
+        - description: 'Start date for fetching Analytics data. Requests can specify a start date formatted as YYYY-MM-DD, or as a relative date (e.g., today, yesterday, or 7daysAgo). The default value is 7daysAgo.'
+          in: query
+          name: start-date
+          required: true
           type: string
         - description: An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
           in: query
@@ -238,7 +259,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - data
@@ -255,16 +280,6 @@ paths:
       description: Returns real time data for a view (profile).
       operationId: analytics.data.realtime.get
       parameters:
-        - description: 'Unique table ID for retrieving real time data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.'
-          in: query
-          name: ids
-          required: true
-          type: string
-        - description: 'A comma-separated list of real time metrics. E.g., ''rt:activeUsers''. At least one metric must be specified.'
-          in: query
-          name: metrics
-          required: true
-          type: string
         - description: 'A comma-separated list of real time dimensions. E.g., ''rt:medium,rt:city''.'
           in: query
           name: dimensions
@@ -273,10 +288,20 @@ paths:
           in: query
           name: filters
           type: string
+        - description: 'Unique table ID for retrieving real time data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.'
+          in: query
+          name: ids
+          required: true
+          type: string
         - description: The maximum number of entries to include in this feed.
           in: query
           name: max-results
           type: integer
+        - description: 'A comma-separated list of real time metrics. E.g., ''rt:activeUsers''. At least one metric must be specified.'
+          in: query
+          name: metrics
+          required: true
+          type: string
         - description: A comma-separated list of dimensions or metrics that determine the sort order for real time data.
           in: query
           name: sort
@@ -289,7 +314,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - data
@@ -323,7 +352,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -357,9 +390,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -398,7 +437,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.manage.users'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.manage.users.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.manage.users.readonly'
       tags:
         - management
@@ -431,6 +474,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.manage.users'
       tags:
         - management
   '/management/accounts/{accountId}/entityUserLinks/{linkId}':
@@ -454,6 +499,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.manage.users'
       tags:
         - management
     parameters:
@@ -473,15 +520,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EntityUserLink'
         - description: Link ID to update the account-user link for.
           in: path
           name: linkId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EntityUserLink'
       responses:
         '200':
           description: Successful response
@@ -489,6 +536,8 @@ paths:
             $ref: '#/definitions/EntityUserLink'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.manage.users'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
       tags:
         - management
@@ -519,7 +568,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -552,6 +605,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
   '/management/accounts/{accountId}/filters/{filterId}':
@@ -577,6 +632,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
     get:
@@ -601,7 +658,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -622,15 +683,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Filter'
         - description: ID of the filter to be updated.
           in: path
           name: filterId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Filter'
       responses:
         '200':
           description: Successful response
@@ -638,6 +699,8 @@ paths:
             $ref: '#/definitions/Filter'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -650,15 +713,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Filter'
         - description: ID of the filter to be updated.
           in: path
           name: filterId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Filter'
       responses:
         '200':
           description: Successful response
@@ -666,6 +729,8 @@ paths:
             $ref: '#/definitions/Filter'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -696,9 +761,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -731,6 +802,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
   '/management/accounts/{accountId}/webproperties/{webPropertyId}':
@@ -756,7 +829,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -777,15 +854,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Webproperty'
         - description: Web property ID
           in: path
           name: webPropertyId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Webproperty'
       responses:
         '200':
           description: Successful response
@@ -793,6 +870,8 @@ paths:
             $ref: '#/definitions/Webproperty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -805,15 +884,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Webproperty'
         - description: Web property ID
           in: path
           name: webPropertyId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Webproperty'
       responses:
         '200':
           description: Successful response
@@ -821,6 +900,8 @@ paths:
             $ref: '#/definitions/Webproperty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -834,11 +915,6 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property Id for the custom data sources to retrieve.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: The maximum number of custom data sources to include in this response.
           in: query
           minimum: 1
@@ -849,6 +925,11 @@ paths:
           minimum: 1
           name: start-index
           type: integer
+        - description: Web property Id for the custom data sources to retrieve.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -857,9 +938,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -889,27 +976,31 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property Id for the uploads to be deleted.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AnalyticsDataimportDeleteUploadDataRequest'
         - description: Custom data source Id for the uploads to be deleted.
           in: path
           name: customDataSourceId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AnalyticsDataimportDeleteUploadDataRequest'
+        - description: Web property Id for the uploads to be deleted.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -921,11 +1012,6 @@ paths:
         - description: Account Id for the uploads to retrieve.
           in: path
           name: accountId
-          required: true
-          type: string
-        - description: Web property Id for the uploads to retrieve.
-          in: path
-          name: webPropertyId
           required: true
           type: string
         - description: Custom data source Id for uploads to retrieve.
@@ -943,6 +1029,11 @@ paths:
           minimum: 1
           name: start-index
           type: integer
+        - description: Web property Id for the uploads to retrieve.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -951,9 +1042,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -976,14 +1073,14 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property UA-string associated with the upload.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: Custom data source Id to which the data being uploaded belongs.
           in: path
           name: customDataSourceId
+          required: true
+          type: string
+        - description: Web property UA-string associated with the upload.
+          in: path
+          name: webPropertyId
           required: true
           type: string
       responses:
@@ -994,7 +1091,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1008,11 +1109,6 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property Id for the upload to retrieve.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: Custom data source Id for upload to retrieve.
           in: path
           name: customDataSourceId
@@ -1023,6 +1119,11 @@ paths:
           name: uploadId
           required: true
           type: string
+        - description: Web property Id for the upload to retrieve.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1031,9 +1132,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -1055,11 +1162,6 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID for the custom dimensions to retrieve.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: The maximum number of custom dimensions to include in this response.
           in: query
           name: max-results
@@ -1069,6 +1171,11 @@ paths:
           minimum: 1
           name: start-index
           type: integer
+        - description: Web property ID for the custom dimensions to retrieve.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1077,7 +1184,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -1098,15 +1209,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CustomDimension'
         - description: Web property ID for the custom dimension to create.
           in: path
           name: webPropertyId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CustomDimension'
       responses:
         '200':
           description: Successful response
@@ -1114,6 +1225,8 @@ paths:
             $ref: '#/definitions/CustomDimension'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1127,14 +1240,14 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID for the custom dimension to retrieve.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: The ID of the custom dimension to retrieve.
           in: path
           name: customDimensionId
+          required: true
+          type: string
+        - description: Web property ID for the custom dimension to retrieve.
+          in: path
+          name: webPropertyId
           required: true
           type: string
       responses:
@@ -1145,7 +1258,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -1166,11 +1283,10 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID for the custom dimension to update.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CustomDimension'
         - description: Custom dimension ID for the custom dimension to update.
           in: path
           name: customDimensionId
@@ -1181,10 +1297,11 @@ paths:
           in: query
           name: ignoreCustomDataSourceLinks
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CustomDimension'
+        - description: Web property ID for the custom dimension to update.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1192,6 +1309,8 @@ paths:
             $ref: '#/definitions/CustomDimension'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1204,11 +1323,10 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID for the custom dimension to update.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CustomDimension'
         - description: Custom dimension ID for the custom dimension to update.
           in: path
           name: customDimensionId
@@ -1219,10 +1337,11 @@ paths:
           in: query
           name: ignoreCustomDataSourceLinks
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CustomDimension'
+        - description: Web property ID for the custom dimension to update.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1230,6 +1349,8 @@ paths:
             $ref: '#/definitions/CustomDimension'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1243,11 +1364,6 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID for the custom metrics to retrieve.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: The maximum number of custom metrics to include in this response.
           in: query
           name: max-results
@@ -1257,6 +1373,11 @@ paths:
           minimum: 1
           name: start-index
           type: integer
+        - description: Web property ID for the custom metrics to retrieve.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1265,7 +1386,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -1286,15 +1411,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CustomMetric'
         - description: Web property ID for the custom dimension to create.
           in: path
           name: webPropertyId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CustomMetric'
       responses:
         '200':
           description: Successful response
@@ -1302,6 +1427,8 @@ paths:
             $ref: '#/definitions/CustomMetric'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1315,14 +1442,14 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID for the custom metric to retrieve.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: The ID of the custom metric to retrieve.
           in: path
           name: customMetricId
+          required: true
+          type: string
+        - description: Web property ID for the custom metric to retrieve.
+          in: path
+          name: webPropertyId
           required: true
           type: string
       responses:
@@ -1333,7 +1460,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -1354,11 +1485,10 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID for the custom metric to update.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CustomMetric'
         - description: Custom metric ID for the custom metric to update.
           in: path
           name: customMetricId
@@ -1369,10 +1499,11 @@ paths:
           in: query
           name: ignoreCustomDataSourceLinks
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CustomMetric'
+        - description: Web property ID for the custom metric to update.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1380,6 +1511,8 @@ paths:
             $ref: '#/definitions/CustomMetric'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1392,11 +1525,10 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID for the custom metric to update.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CustomMetric'
         - description: Custom metric ID for the custom metric to update.
           in: path
           name: customMetricId
@@ -1407,10 +1539,11 @@ paths:
           in: query
           name: ignoreCustomDataSourceLinks
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CustomMetric'
+        - description: Web property ID for the custom metric to update.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1418,6 +1551,8 @@ paths:
             $ref: '#/definitions/CustomMetric'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1431,11 +1566,6 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to retrieve the AdWords links for.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: The maximum number of webProperty-AdWords links to include in this response.
           in: query
           name: max-results
@@ -1445,6 +1575,11 @@ paths:
           minimum: 1
           name: start-index
           type: integer
+        - description: Web property ID to retrieve the AdWords links for.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1453,7 +1588,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -1474,15 +1613,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EntityAdWordsLink'
         - description: Web property ID to create the link for.
           in: path
           name: webPropertyId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EntityAdWordsLink'
       responses:
         '200':
           description: Successful response
@@ -1490,6 +1629,8 @@ paths:
             $ref: '#/definitions/EntityAdWordsLink'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1503,14 +1644,14 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to delete the AdWords link for.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: Web property AdWords link ID.
           in: path
           name: webPropertyAdWordsLinkId
+          required: true
+          type: string
+        - description: Web property ID to delete the AdWords link for.
+          in: path
+          name: webPropertyId
           required: true
           type: string
       responses:
@@ -1518,6 +1659,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1530,14 +1673,14 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to retrieve the AdWords link for.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: Web property-AdWords link ID.
           in: path
           name: webPropertyAdWordsLinkId
+          required: true
+          type: string
+        - description: Web property ID to retrieve the AdWords link for.
+          in: path
+          name: webPropertyId
           required: true
           type: string
       responses:
@@ -1548,7 +1691,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -1569,20 +1716,20 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to retrieve the AdWords link for.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EntityAdWordsLink'
         - description: Web property-AdWords link ID.
           in: path
           name: webPropertyAdWordsLinkId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EntityAdWordsLink'
+        - description: Web property ID to retrieve the AdWords link for.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1590,6 +1737,8 @@ paths:
             $ref: '#/definitions/EntityAdWordsLink'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1602,20 +1751,20 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to retrieve the AdWords link for.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EntityAdWordsLink'
         - description: Web property-AdWords link ID.
           in: path
           name: webPropertyAdWordsLinkId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EntityAdWordsLink'
+        - description: Web property ID to retrieve the AdWords link for.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1623,6 +1772,8 @@ paths:
             $ref: '#/definitions/EntityAdWordsLink'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1636,11 +1787,6 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: 'Web Property ID for the webProperty-user links to retrieve. Can either be a specific web property ID or ''~all'', which refers to all the web properties that user has access to.'
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: The maximum number of webProperty-user Links to include in this response.
           in: query
           name: max-results
@@ -1650,6 +1796,11 @@ paths:
           minimum: 1
           name: start-index
           type: integer
+        - description: 'Web Property ID for the webProperty-user links to retrieve. Can either be a specific web property ID or ''~all'', which refers to all the web properties that user has access to.'
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1658,7 +1809,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.manage.users'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.manage.users.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.manage.users.readonly'
       tags:
         - management
@@ -1679,15 +1834,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EntityUserLink'
         - description: Web Property ID to create the user link for.
           in: path
           name: webPropertyId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EntityUserLink'
       responses:
         '200':
           description: Successful response
@@ -1695,6 +1850,8 @@ paths:
             $ref: '#/definitions/EntityUserLink'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.manage.users'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
       tags:
         - management
@@ -1708,14 +1865,14 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web Property ID to delete the user link for.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: Link ID to delete the user link for.
           in: path
           name: linkId
+          required: true
+          type: string
+        - description: Web Property ID to delete the user link for.
+          in: path
+          name: webPropertyId
           required: true
           type: string
       responses:
@@ -1723,6 +1880,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.manage.users'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
       tags:
         - management
@@ -1743,20 +1902,20 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to update the account-user link for.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EntityUserLink'
         - description: Link ID to update the account-user link for.
           in: path
           name: linkId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EntityUserLink'
+        - description: Web property ID to update the account-user link for.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1764,6 +1923,8 @@ paths:
             $ref: '#/definitions/EntityUserLink'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.manage.users'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
       tags:
         - management
@@ -1777,11 +1938,6 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: 'Web property ID for the views (profiles) to retrieve. Can either be a specific web property ID or ''~all'', which refers to all the web properties to which the user has access.'
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: The maximum number of views (profiles) to include in this response.
           in: query
           name: max-results
@@ -1791,6 +1947,11 @@ paths:
           minimum: 1
           name: start-index
           type: integer
+        - description: 'Web property ID for the views (profiles) to retrieve. Can either be a specific web property ID or ''~all'', which refers to all the web properties to which the user has access.'
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1799,9 +1960,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -1822,15 +1989,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Profile'
         - description: Web property ID to create the view (profile) for.
           in: path
           name: webPropertyId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Profile'
       responses:
         '200':
           description: Successful response
@@ -1838,6 +2005,8 @@ paths:
             $ref: '#/definitions/Profile'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1851,14 +2020,14 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to delete the view (profile) for.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: ID of the view (profile) to be deleted.
           in: path
           name: profileId
+          required: true
+          type: string
+        - description: Web property ID to delete the view (profile) for.
+          in: path
+          name: webPropertyId
           required: true
           type: string
       responses:
@@ -1866,6 +2035,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1878,14 +2049,14 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to retrieve the view (profile) for.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: View (Profile) ID to retrieve the view (profile) for.
           in: path
           name: profileId
+          required: true
+          type: string
+        - description: Web property ID to retrieve the view (profile) for.
+          in: path
+          name: webPropertyId
           required: true
           type: string
       responses:
@@ -1896,7 +2067,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -1917,20 +2092,20 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to which the view (profile) belongs
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Profile'
         - description: ID of the view (profile) to be updated.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Profile'
+        - description: Web property ID to which the view (profile) belongs
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1938,6 +2113,8 @@ paths:
             $ref: '#/definitions/Profile'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1950,20 +2127,20 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to which the view (profile) belongs
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Profile'
         - description: ID of the view (profile) to be updated.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Profile'
+        - description: Web property ID to which the view (profile) belongs
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1971,6 +2148,8 @@ paths:
             $ref: '#/definitions/Profile'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -1984,25 +2163,25 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: 'Web Property ID which the given view (profile) belongs to. Can either be a specific web property ID or ''~all'', which refers to all the web properties that user has access to.'
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - description: The maximum number of profile-user links to include in this response.
+          in: query
+          name: max-results
+          type: integer
         - description: 'View (Profile) ID to retrieve the profile-user links for. Can either be a specific profile ID or ''~all'', which refers to all the profiles that user has access to.'
           in: path
           name: profileId
           required: true
           type: string
-        - description: The maximum number of profile-user links to include in this response.
-          in: query
-          name: max-results
-          type: integer
         - description: An index of the first profile-user link to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
           in: query
           minimum: 1
           name: start-index
           type: integer
+        - description: 'Web Property ID which the given view (profile) belongs to. Can either be a specific web property ID or ''~all'', which refers to all the web properties that user has access to.'
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2011,7 +2190,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.manage.users'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.manage.users.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.manage.users.readonly'
       tags:
         - management
@@ -2032,20 +2215,20 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web Property ID to create the user link for.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EntityUserLink'
         - description: View (Profile) ID to create the user link for.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EntityUserLink'
+        - description: Web Property ID to create the user link for.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2053,6 +2236,8 @@ paths:
             $ref: '#/definitions/EntityUserLink'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.manage.users'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
       tags:
         - management
@@ -2066,9 +2251,9 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web Property ID to delete the user link for.
+        - description: Link ID to delete the user link for.
           in: path
-          name: webPropertyId
+          name: linkId
           required: true
           type: string
         - description: View (Profile) ID to delete the user link for.
@@ -2076,9 +2261,9 @@ paths:
           name: profileId
           required: true
           type: string
-        - description: Link ID to delete the user link for.
+        - description: Web Property ID to delete the user link for.
           in: path
-          name: linkId
+          name: webPropertyId
           required: true
           type: string
       responses:
@@ -2086,6 +2271,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.manage.users'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
       tags:
         - management
@@ -2106,9 +2293,13 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web Property ID to update the user link for.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EntityUserLink'
+        - description: Link ID to update the user link for.
           in: path
-          name: webPropertyId
+          name: linkId
           required: true
           type: string
         - description: View (Profile ID) to update the user link for.
@@ -2116,15 +2307,11 @@ paths:
           name: profileId
           required: true
           type: string
-        - description: Link ID to update the user link for.
+        - description: Web Property ID to update the user link for.
           in: path
-          name: linkId
+          name: webPropertyId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EntityUserLink'
       responses:
         '200':
           description: Successful response
@@ -2132,6 +2319,8 @@ paths:
             $ref: '#/definitions/EntityUserLink'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.manage.users'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.manage.users'
       tags:
         - management
@@ -2145,25 +2334,25 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to retrieve experiments for.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - description: The maximum number of experiments to include in this response.
+          in: query
+          name: max-results
+          type: integer
         - description: View (Profile) ID to retrieve experiments for.
           in: path
           name: profileId
           required: true
           type: string
-        - description: The maximum number of experiments to include in this response.
-          in: query
-          name: max-results
-          type: integer
         - description: An index of the first experiment to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
           in: query
           minimum: 1
           name: start-index
           type: integer
+        - description: Web property ID to retrieve experiments for.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2172,9 +2361,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -2195,20 +2390,20 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to create the experiment for.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Experiment'
         - description: View (Profile) ID to create the experiment for.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Experiment'
+        - description: Web property ID to create the experiment for.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2217,7 +2412,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2231,9 +2430,9 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to which the experiment belongs
+        - description: ID of the experiment to delete
           in: path
-          name: webPropertyId
+          name: experimentId
           required: true
           type: string
         - description: View (Profile) ID to which the experiment belongs
@@ -2241,9 +2440,9 @@ paths:
           name: profileId
           required: true
           type: string
-        - description: ID of the experiment to delete
+        - description: Web property ID to which the experiment belongs
           in: path
-          name: experimentId
+          name: webPropertyId
           required: true
           type: string
       responses:
@@ -2252,7 +2451,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2265,9 +2468,9 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to retrieve the experiment for.
+        - description: Experiment ID to retrieve the experiment for.
           in: path
-          name: webPropertyId
+          name: experimentId
           required: true
           type: string
         - description: View (Profile) ID to retrieve the experiment for.
@@ -2275,9 +2478,9 @@ paths:
           name: profileId
           required: true
           type: string
-        - description: Experiment ID to retrieve the experiment for.
+        - description: Web property ID to retrieve the experiment for.
           in: path
-          name: experimentId
+          name: webPropertyId
           required: true
           type: string
       responses:
@@ -2288,9 +2491,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -2311,9 +2520,13 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID of the experiment to update.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Experiment'
+        - description: Experiment ID of the experiment to update.
           in: path
-          name: webPropertyId
+          name: experimentId
           required: true
           type: string
         - description: View (Profile) ID of the experiment to update.
@@ -2321,15 +2534,11 @@ paths:
           name: profileId
           required: true
           type: string
-        - description: Experiment ID of the experiment to update.
+        - description: Web property ID of the experiment to update.
           in: path
-          name: experimentId
+          name: webPropertyId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Experiment'
       responses:
         '200':
           description: Successful response
@@ -2338,7 +2547,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2351,9 +2564,13 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID of the experiment to update.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Experiment'
+        - description: Experiment ID of the experiment to update.
           in: path
-          name: webPropertyId
+          name: experimentId
           required: true
           type: string
         - description: View (Profile) ID of the experiment to update.
@@ -2361,15 +2578,11 @@ paths:
           name: profileId
           required: true
           type: string
-        - description: Experiment ID of the experiment to update.
+        - description: Web property ID of the experiment to update.
           in: path
-          name: experimentId
+          name: webPropertyId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Experiment'
       responses:
         '200':
           description: Successful response
@@ -2378,7 +2591,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2392,25 +2609,25 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: 'Web property ID to retrieve goals for. Can either be a specific web property ID or ''~all'', which refers to all the web properties that user has access to.'
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - description: The maximum number of goals to include in this response.
+          in: query
+          name: max-results
+          type: integer
         - description: 'View (Profile) ID to retrieve goals for. Can either be a specific view (profile) ID or ''~all'', which refers to all the views (profiles) that user has access to.'
           in: path
           name: profileId
           required: true
           type: string
-        - description: The maximum number of goals to include in this response.
-          in: query
-          name: max-results
-          type: integer
         - description: An index of the first goal to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
           in: query
           minimum: 1
           name: start-index
           type: integer
+        - description: 'Web property ID to retrieve goals for. Can either be a specific web property ID or ''~all'', which refers to all the web properties that user has access to.'
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2419,9 +2636,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -2442,20 +2665,20 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to create the goal for.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Goal'
         - description: View (Profile) ID to create the goal for.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Goal'
+        - description: Web property ID to create the goal for.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2463,6 +2686,8 @@ paths:
             $ref: '#/definitions/Goal'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2476,9 +2701,9 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to retrieve the goal for.
+        - description: Goal ID to retrieve the goal for.
           in: path
-          name: webPropertyId
+          name: goalId
           required: true
           type: string
         - description: View (Profile) ID to retrieve the goal for.
@@ -2486,9 +2711,9 @@ paths:
           name: profileId
           required: true
           type: string
-        - description: Goal ID to retrieve the goal for.
+        - description: Web property ID to retrieve the goal for.
           in: path
-          name: goalId
+          name: webPropertyId
           required: true
           type: string
       responses:
@@ -2499,7 +2724,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -2520,9 +2749,13 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to update the goal.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Goal'
+        - description: Index of the goal to be updated.
           in: path
-          name: webPropertyId
+          name: goalId
           required: true
           type: string
         - description: View (Profile) ID to update the goal.
@@ -2530,15 +2763,11 @@ paths:
           name: profileId
           required: true
           type: string
-        - description: Index of the goal to be updated.
+        - description: Web property ID to update the goal.
           in: path
-          name: goalId
+          name: webPropertyId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Goal'
       responses:
         '200':
           description: Successful response
@@ -2546,6 +2775,8 @@ paths:
             $ref: '#/definitions/Goal'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2558,9 +2789,13 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to update the goal.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Goal'
+        - description: Index of the goal to be updated.
           in: path
-          name: webPropertyId
+          name: goalId
           required: true
           type: string
         - description: View (Profile) ID to update the goal.
@@ -2568,15 +2803,11 @@ paths:
           name: profileId
           required: true
           type: string
-        - description: Index of the goal to be updated.
+        - description: Web property ID to update the goal.
           in: path
-          name: goalId
+          name: webPropertyId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Goal'
       responses:
         '200':
           description: Successful response
@@ -2584,6 +2815,8 @@ paths:
             $ref: '#/definitions/Goal'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2597,25 +2830,25 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: 'Web property Id for profile filter links for. Can either be a specific web property ID or ''~all'', which refers to all the web properties that user has access to.'
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - description: The maximum number of profile filter links to include in this response.
+          in: query
+          name: max-results
+          type: integer
         - description: 'Profile ID to retrieve filter links for. Can either be a specific profile ID or ''~all'', which refers to all the profiles that user has access to.'
           in: path
           name: profileId
           required: true
           type: string
-        - description: The maximum number of profile filter links to include in this response.
-          in: query
-          name: max-results
-          type: integer
         - description: An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
           in: query
           minimum: 1
           name: start-index
           type: integer
+        - description: 'Web property Id for profile filter links for. Can either be a specific web property ID or ''~all'', which refers to all the web properties that user has access to.'
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2624,7 +2857,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -2645,20 +2882,20 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property Id to create profile filter link for.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ProfileFilterLink'
         - description: Profile ID to create filter link for.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ProfileFilterLink'
+        - description: Web property Id to create profile filter link for.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2666,6 +2903,8 @@ paths:
             $ref: '#/definitions/ProfileFilterLink'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2679,9 +2918,9 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property Id to which the profile filter link belongs.
+        - description: ID of the profile filter link to delete.
           in: path
-          name: webPropertyId
+          name: linkId
           required: true
           type: string
         - description: Profile ID to which the filter link belongs.
@@ -2689,9 +2928,9 @@ paths:
           name: profileId
           required: true
           type: string
-        - description: ID of the profile filter link to delete.
+        - description: Web property Id to which the profile filter link belongs.
           in: path
-          name: linkId
+          name: webPropertyId
           required: true
           type: string
       responses:
@@ -2699,6 +2938,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2711,9 +2952,9 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property Id to retrieve profile filter link for.
+        - description: ID of the profile filter link.
           in: path
-          name: webPropertyId
+          name: linkId
           required: true
           type: string
         - description: Profile ID to retrieve filter link for.
@@ -2721,9 +2962,9 @@ paths:
           name: profileId
           required: true
           type: string
-        - description: ID of the profile filter link.
+        - description: Web property Id to retrieve profile filter link for.
           in: path
-          name: linkId
+          name: webPropertyId
           required: true
           type: string
       responses:
@@ -2734,7 +2975,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -2755,9 +3000,13 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property Id to which profile filter link belongs
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ProfileFilterLink'
+        - description: ID of the profile filter link to be updated.
           in: path
-          name: webPropertyId
+          name: linkId
           required: true
           type: string
         - description: Profile ID to which filter link belongs
@@ -2765,15 +3014,11 @@ paths:
           name: profileId
           required: true
           type: string
-        - description: ID of the profile filter link to be updated.
+        - description: Web property Id to which profile filter link belongs
           in: path
-          name: linkId
+          name: webPropertyId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ProfileFilterLink'
       responses:
         '200':
           description: Successful response
@@ -2781,6 +3026,8 @@ paths:
             $ref: '#/definitions/ProfileFilterLink'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2793,9 +3040,13 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property Id to which profile filter link belongs
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ProfileFilterLink'
+        - description: ID of the profile filter link to be updated.
           in: path
-          name: webPropertyId
+          name: linkId
           required: true
           type: string
         - description: Profile ID to which filter link belongs
@@ -2803,15 +3054,11 @@ paths:
           name: profileId
           required: true
           type: string
-        - description: ID of the profile filter link to be updated.
+        - description: Web property Id to which profile filter link belongs
           in: path
-          name: linkId
+          name: webPropertyId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ProfileFilterLink'
       responses:
         '200':
           description: Successful response
@@ -2819,6 +3066,8 @@ paths:
             $ref: '#/definitions/ProfileFilterLink'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2832,25 +3081,25 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: 'Web property ID to retrieve unsampled reports for. Must be a specific web property ID, ~all is not supported.'
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - description: The maximum number of unsampled reports to include in this response.
+          in: query
+          name: max-results
+          type: integer
         - description: 'View (Profile) ID to retrieve unsampled reports for. Must be a specific view (profile) ID, ~all is not supported.'
           in: path
           name: profileId
           required: true
           type: string
-        - description: The maximum number of unsampled reports to include in this response.
-          in: query
-          name: max-results
-          type: integer
         - description: An index of the first unsampled report to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
           in: query
           minimum: 1
           name: start-index
           type: integer
+        - description: 'Web property ID to retrieve unsampled reports for. Must be a specific web property ID, ~all is not supported.'
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2859,9 +3108,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -2882,20 +3137,20 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to create the unsampled report for.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UnsampledReport'
         - description: View (Profile) ID to create the unsampled report for.
           in: path
           name: profileId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UnsampledReport'
+        - description: Web property ID to create the unsampled report for.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2904,7 +3159,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2918,11 +3177,6 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to delete the unsampled reports for.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: View (Profile) ID to delete the unsampled report for.
           in: path
           name: profileId
@@ -2933,11 +3187,18 @@ paths:
           name: unsampledReportId
           required: true
           type: string
+        - description: Web property ID to delete the unsampled reports for.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -2950,11 +3211,6 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Web property ID to retrieve unsampled reports for.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: View (Profile) ID to retrieve unsampled report for.
           in: path
           name: profileId
@@ -2965,6 +3221,11 @@ paths:
           name: unsampledReportId
           required: true
           type: string
+        - description: Web property ID to retrieve unsampled reports for.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2973,9 +3234,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -2997,11 +3264,6 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: The web property ID of the remarketing audiences to retrieve.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: The maximum number of remarketing audiences to include in this response.
           in: query
           name: max-results
@@ -3015,6 +3277,11 @@ paths:
           in: query
           name: type
           type: string
+        - description: The web property ID of the remarketing audiences to retrieve.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3023,7 +3290,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -3044,15 +3315,15 @@ paths:
           name: accountId
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingAudience'
         - description: Web property ID for which to create the remarketing audience.
           in: path
           name: webPropertyId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RemarketingAudience'
       responses:
         '200':
           description: Successful response
@@ -3060,6 +3331,8 @@ paths:
             $ref: '#/definitions/RemarketingAudience'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -3089,6 +3362,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
     get:
@@ -3100,14 +3375,14 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: The web property ID of the remarketing audience to retrieve.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: The ID of the remarketing audience to retrieve.
           in: path
           name: remarketingAudienceId
+          required: true
+          type: string
+        - description: The web property ID of the remarketing audience to retrieve.
+          in: path
+          name: webPropertyId
           required: true
           type: string
       responses:
@@ -3118,7 +3393,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -3139,20 +3418,20 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: The web property ID of the remarketing audience to update.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingAudience'
         - description: The ID of the remarketing audience to update.
           in: path
           name: remarketingAudienceId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RemarketingAudience'
+        - description: The web property ID of the remarketing audience to update.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3160,6 +3439,8 @@ paths:
             $ref: '#/definitions/RemarketingAudience'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -3172,20 +3453,20 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: The web property ID of the remarketing audience to update.
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingAudience'
         - description: The ID of the remarketing audience to update.
           in: path
           name: remarketingAudienceId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RemarketingAudience'
+        - description: The web property ID of the remarketing audience to update.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -3193,6 +3474,8 @@ paths:
             $ref: '#/definitions/RemarketingAudience'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.edit'
       tags:
         - management
@@ -3218,9 +3501,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -3250,9 +3539,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics.edit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.edit'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - metadata
@@ -3264,6 +3559,35 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  /provisioning/createAccount:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Provision account.
+      operationId: analytics.provisioning.createAccountTree
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AccountTreeRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccountTreeResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.provision'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics.provision'
+      tags:
+        - provisioning
   /provisioning/createAccountTicket:
     parameters:
       - $ref: '#/parameters/alt'
@@ -3288,6 +3612,8 @@ paths:
             $ref: '#/definitions/AccountTicket'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.provision'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.provision'
       tags:
         - provisioning
@@ -3433,6 +3759,71 @@ definitions:
       redirectUri:
         description: Redirect URI where the user will be sent after accepting Terms of Service. Must be configured in APIs console as a callback URL.
         type: string
+      webproperty:
+        $ref: '#/definitions/Webproperty'
+        description: Web property for the account.
+    type: object
+  AccountTreeRequest:
+    description: 'JSON template for an Analytics account tree requests. The account tree request is used in the provisioning api to create an account, property, and view (profile). It contains the basic information required to make these fields.'
+    properties:
+      accountName:
+        type: string
+      accountSettings:
+        properties:
+          admobReporting:
+            type: boolean
+          sharingWithGoogleAnySales:
+            type: boolean
+          sharingWithGoogleProducts:
+            type: boolean
+          sharingWithGoogleSales:
+            type: boolean
+          sharingWithGoogleSupport:
+            type: boolean
+          sharingWithOthers:
+            type: boolean
+        type: object
+      kind:
+        default: 'analytics#accountTreeRequest'
+        description: Resource type for account ticket.
+        type: string
+      profileName:
+        type: string
+      timezone:
+        type: string
+      webpropertyName:
+        type: string
+      websiteUrl:
+        type: string
+    type: object
+  AccountTreeResponse:
+    description: 'JSON template for an Analytics account tree response. The account tree response is used in the provisioning api to return the result of creating an account, property, and view (profile).'
+    properties:
+      account:
+        $ref: '#/definitions/Account'
+        description: The account created.
+      accountSettings:
+        properties:
+          admobReporting:
+            type: boolean
+          sharingWithGoogleAnySales:
+            type: boolean
+          sharingWithGoogleProducts:
+            type: boolean
+          sharingWithGoogleSales:
+            type: boolean
+          sharingWithGoogleSupport:
+            type: boolean
+          sharingWithOthers:
+            type: boolean
+        type: object
+      kind:
+        default: 'analytics#accountTreeResponse'
+        description: Resource type for account ticket.
+        type: string
+      profile:
+        $ref: '#/definitions/Profile'
+        description: View (Profile) for the account.
       webproperty:
         $ref: '#/definitions/Webproperty'
         description: Web property for the account.

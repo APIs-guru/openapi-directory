@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Creates and conducts surveys, lists the surveys that an authenticated user owns, and retrieves survey results and information about specified surveys.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Surveys
   version: v2
   x-apiClientRegistration:
@@ -27,12 +31,22 @@ info:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/surveys': View and manage your surveys and results
       'https://www.googleapis.com/auth/surveys.readonly': View your surveys and survey results
       'https://www.googleapis.com/auth/userinfo.email': View your email address
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/surveys': View and manage your surveys and results
+      'https://www.googleapis.com/auth/surveys.readonly': View your surveys and survey results
+      'https://www.googleapis.com/auth/userinfo.email': View your email address
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -101,9 +115,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/surveys'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
             - 'https://www.googleapis.com/auth/surveys.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/surveys.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - mobileapppanels
@@ -133,9 +153,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/surveys'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
             - 'https://www.googleapis.com/auth/surveys.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/surveys.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - mobileapppanels
@@ -151,15 +177,15 @@ paths:
       description: Updates a MobileAppPanel. Currently the only property that can be updated is the owners property.
       operationId: surveys.mobileapppanels.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/MobileAppPanel'
         - description: External URL ID for the panel.
           in: path
           name: panelId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/MobileAppPanel'
       responses:
         '200':
           description: Successful response
@@ -168,7 +194,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/surveys'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - mobileapppanels
@@ -194,9 +224,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/surveys'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
             - 'https://www.googleapis.com/auth/surveys.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/surveys.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - surveys
@@ -224,7 +260,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/surveys'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - surveys
@@ -241,14 +281,14 @@ paths:
       description: Begins running a survey.
       operationId: surveys.surveys.start
       parameters:
-        - in: path
-          name: resourceId
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/SurveysStartRequest'
+        - in: path
+          name: resourceId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -257,7 +297,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/surveys'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - surveys
@@ -286,7 +330,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/surveys'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - surveys
@@ -308,7 +356,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/surveys'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - surveys
@@ -329,9 +381,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/surveys'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
             - 'https://www.googleapis.com/auth/surveys.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/surveys.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - surveys
@@ -347,15 +405,15 @@ paths:
       description: Updates a survey. Currently the only property that can be updated is the owners property.
       operationId: surveys.surveys.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Survey'
         - description: External URL ID for the survey.
           in: path
           name: surveyUrlId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Survey'
       responses:
         '200':
           description: Successful response
@@ -364,7 +422,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/surveys'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - surveys
@@ -373,15 +435,15 @@ paths:
       description: Retrieves any survey results that have been produced so far. Results are formatted as an Excel file. You must add "?alt=media" to the URL as an argument to get results.
       operationId: surveys.results.get
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ResultsGetRequest'
         - description: External URL ID for the survey.
           in: path
           name: surveyUrlId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ResultsGetRequest'
       responses:
         '200':
           description: Successful response
@@ -390,9 +452,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/surveys'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/surveys'
         - Oauth2:
             - 'https://www.googleapis.com/auth/surveys.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/surveys.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - results

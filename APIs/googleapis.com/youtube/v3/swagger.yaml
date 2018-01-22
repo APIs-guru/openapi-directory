@@ -9,6 +9,10 @@ info:
     url: 'https://google.com'
     x-twitter: youtube
   description: 'Supports core YouTube features, such as uploading videos, creating and managing playlists, searching for content, and much more.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: YouTube Data
   version: v3
   x-apiClientRegistration:
@@ -32,7 +36,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/youtube': Manage your YouTube account
@@ -41,6 +45,19 @@ securityDefinitions:
       'https://www.googleapis.com/auth/youtube.upload': Manage your YouTube videos
       'https://www.googleapis.com/auth/youtubepartner': View and manage your assets and associated content on YouTube
       'https://www.googleapis.com/auth/youtubepartner-channel-audit': View private information of your YouTube channel relevant during the audit process with a YouTube partner
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/youtube': Manage your YouTube account
+      'https://www.googleapis.com/auth/youtube.force-ssl': Manage your YouTube account
+      'https://www.googleapis.com/auth/youtube.readonly': View your YouTube account
+      'https://www.googleapis.com/auth/youtube.upload': Manage your YouTube videos
+      'https://www.googleapis.com/auth/youtubepartner': View and manage your assets and associated content on YouTube
+      'https://www.googleapis.com/auth/youtubepartner-channel-audit': View private information of your YouTube channel relevant during the audit process with a YouTube partner
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -167,9 +184,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
       tags:
         - activities
@@ -205,7 +228,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - activities
@@ -236,7 +263,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - captions
@@ -277,7 +308,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - captions
@@ -331,7 +366,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - captions
@@ -377,7 +416,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - captions
@@ -422,7 +465,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - captions
@@ -479,9 +526,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.upload'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.upload'
       tags:
         - channelBanners
@@ -508,9 +561,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - channelSections
@@ -557,11 +616,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - channelSections
@@ -613,9 +680,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - channelSections
@@ -650,9 +723,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - channelSections
@@ -726,13 +805,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtubepartner'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner-channel-audit'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner-channel-audit'
       tags:
         - channels
@@ -774,9 +863,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - channels
@@ -868,6 +963,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - commentThreads
     parameters:
@@ -899,6 +996,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - commentThreads
     put:
@@ -922,6 +1021,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - commentThreads
   /comments:
@@ -939,6 +1040,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - comments
@@ -995,6 +1098,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - comments
     parameters:
@@ -1026,6 +1131,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - comments
     put:
@@ -1048,6 +1155,8 @@ paths:
             $ref: '#/definitions/Comment'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - comments
@@ -1074,6 +1183,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - comments
@@ -1118,6 +1229,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - comments
   /fanFundingEvents:
@@ -1156,9 +1269,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
       tags:
         - fanFundingEvents
@@ -1201,11 +1320,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - guideCategories
@@ -1240,11 +1367,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - i18nLanguages
@@ -1279,11 +1414,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - i18nRegions
@@ -1327,7 +1470,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - liveBroadcasts
@@ -1401,9 +1548,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
       tags:
         - liveBroadcasts
@@ -1455,7 +1608,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - liveBroadcasts
@@ -1501,7 +1658,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - liveBroadcasts
@@ -1556,7 +1717,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - liveBroadcasts
@@ -1624,7 +1789,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - liveBroadcasts
@@ -1684,7 +1853,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - liveBroadcasts
@@ -1704,7 +1877,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - liveChatBans
@@ -1737,7 +1914,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - liveChatBans
@@ -1757,7 +1938,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - liveChatMessages
@@ -1807,9 +1992,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
       tags:
         - liveChatMessages
@@ -1842,7 +2033,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - liveChatMessages
@@ -1862,7 +2057,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - liveChatModerators
@@ -1899,9 +2098,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
       tags:
         - liveChatModerators
@@ -1934,7 +2139,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - liveChatModerators
@@ -1970,7 +2179,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - liveStreams
@@ -2026,9 +2239,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
       tags:
         - liveStreams
@@ -2080,7 +2299,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - liveStreams
@@ -2126,7 +2349,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - liveStreams
@@ -2153,9 +2380,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - playlistItems
@@ -2209,11 +2442,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - playlistItems
@@ -2253,9 +2494,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - playlistItems
@@ -2290,9 +2537,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - playlistItems
@@ -2319,9 +2572,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - playlists
@@ -2388,11 +2647,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - playlists
@@ -2441,9 +2708,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - playlists
@@ -2478,9 +2751,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - playlists
@@ -2695,11 +2974,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - search
@@ -2748,9 +3035,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
       tags:
         - sponsors
@@ -2778,9 +3071,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - subscriptions
@@ -2864,11 +3163,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - subscriptions
@@ -2901,9 +3208,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - subscriptions
@@ -2943,9 +3256,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
       tags:
         - superChatEvents
@@ -2994,11 +3313,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.upload'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.upload'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - thumbnails
@@ -3025,9 +3352,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.readonly'
       tags:
         - videoAbuseReportReasons
@@ -3070,11 +3403,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - videoCategories
@@ -3109,9 +3450,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - videos
@@ -3208,11 +3555,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - videos
@@ -3375,11 +3730,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.upload'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.upload'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - videos
@@ -3416,9 +3779,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - videos
@@ -3447,9 +3816,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - videos
@@ -3494,9 +3869,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - videos
@@ -3530,9 +3911,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - videos
@@ -3575,11 +3962,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.upload'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.upload'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - watermarks
@@ -3614,9 +4009,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtubepartner'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - watermarks

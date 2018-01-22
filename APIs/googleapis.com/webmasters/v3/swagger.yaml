@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: View Google Search Console data for your verified sites.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Search Console
   version: v3
   x-apiClientRegistration:
@@ -31,11 +35,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/webmasters': View and manage Search Console data for your verified sites
       'https://www.googleapis.com/auth/webmasters.readonly': View Search Console data for your verified sites
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/webmasters': View and manage Search Console data for your verified sites
+      'https://www.googleapis.com/auth/webmasters.readonly': View Search Console data for your verified sites
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -96,7 +109,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/webmasters'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/webmasters.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/webmasters.readonly'
       tags:
         - sites
@@ -124,6 +141,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/webmasters'
       tags:
         - sites
     get:
@@ -143,7 +162,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/webmasters'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/webmasters.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/webmasters.readonly'
       tags:
         - sites
@@ -170,6 +193,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/webmasters'
       tags:
         - sites
   '/sites/{siteUrl}/searchAnalytics/query':
@@ -188,15 +213,15 @@ paths:
         When date is one of the group by values, any days without data are omitted from the result list. If you need to know which days have data, issue a broad date range query grouped by date for any metric, and see which day rows are returned.
       operationId: webmasters.searchanalytics.query
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SearchAnalyticsQueryRequest'
         - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
           in: path
           name: siteUrl
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SearchAnalyticsQueryRequest'
       responses:
         '200':
           description: Successful response
@@ -205,7 +230,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/webmasters'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/webmasters.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/webmasters.readonly'
       tags:
         - searchanalytics
@@ -231,7 +260,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/webmasters'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/webmasters.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/webmasters.readonly'
       tags:
         - sitemaps
@@ -248,14 +281,14 @@ paths:
       description: Deletes a sitemap from this site.
       operationId: webmasters.sitemaps.delete
       parameters:
-        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
-          in: path
-          name: siteUrl
-          required: true
-          type: string
         - description: 'The URL of the actual sitemap. For example: http://www.example.com/sitemap.xml'
           in: path
           name: feedpath
+          required: true
+          type: string
+        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
+          in: path
+          name: siteUrl
           required: true
           type: string
       responses:
@@ -264,20 +297,22 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/webmasters'
       tags:
         - sitemaps
     get:
       description: Retrieves information about a specific sitemap.
       operationId: webmasters.sitemaps.get
       parameters:
-        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
-          in: path
-          name: siteUrl
-          required: true
-          type: string
         - description: 'The URL of the actual sitemap. For example: http://www.example.com/sitemap.xml'
           in: path
           name: feedpath
+          required: true
+          type: string
+        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
+          in: path
+          name: siteUrl
           required: true
           type: string
       responses:
@@ -288,7 +323,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/webmasters'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/webmasters.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/webmasters.readonly'
       tags:
         - sitemaps
@@ -304,14 +343,14 @@ paths:
       description: Submits a sitemap for a site.
       operationId: webmasters.sitemaps.submit
       parameters:
-        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
-          in: path
-          name: siteUrl
-          required: true
-          type: string
         - description: 'The URL of the sitemap to add. For example: http://www.example.com/sitemap.xml'
           in: path
           name: feedpath
+          required: true
+          type: string
+        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
+          in: path
+          name: siteUrl
           required: true
           type: string
       responses:
@@ -320,6 +359,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/webmasters'
       tags:
         - sitemaps
   '/sites/{siteUrl}/urlCrawlErrorsCounts/query':
@@ -327,11 +368,6 @@ paths:
       description: Retrieves a time series of the number of URL crawl errors per error category and platform.
       operationId: webmasters.urlcrawlerrorscounts.query
       parameters:
-        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
-          in: path
-          name: siteUrl
-          required: true
-          type: string
         - description: 'The crawl error category. For example: serverError. If not specified, returns results for all categories.'
           enum:
             - authPermissions
@@ -359,6 +395,11 @@ paths:
           in: query
           name: platform
           type: string
+        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
+          in: path
+          name: siteUrl
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -367,7 +408,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/webmasters'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/webmasters.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/webmasters.readonly'
       tags:
         - urlcrawlerrorscounts
@@ -384,11 +429,6 @@ paths:
       description: Lists a site's sample URLs for the specified crawl error category and platform.
       operationId: webmasters.urlcrawlerrorssamples.list
       parameters:
-        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
-          in: path
-          name: siteUrl
-          required: true
-          type: string
         - description: 'The crawl error category. For example: authPermissions'
           enum:
             - authPermissions
@@ -413,6 +453,11 @@ paths:
           name: platform
           required: true
           type: string
+        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
+          in: path
+          name: siteUrl
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -421,7 +466,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/webmasters'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/webmasters.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/webmasters.readonly'
       tags:
         - urlcrawlerrorssamples
@@ -438,16 +487,6 @@ paths:
       description: 'Marks the provided site''s sample URL as fixed, and removes it from the samples list.'
       operationId: webmasters.urlcrawlerrorssamples.markAsFixed
       parameters:
-        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
-          in: path
-          name: siteUrl
-          required: true
-          type: string
-        - description: "The relative path (without the site) of the sample URL. It must be one of the URLs returned by list(). For example, for the URL https://www.example.com/pagename\_on the site https://www.example.com/, the url value is\_pagename"
-          in: path
-          name: url
-          required: true
-          type: string
         - description: 'The crawl error category. For example: authPermissions'
           enum:
             - authPermissions
@@ -470,6 +509,16 @@ paths:
             - web
           in: query
           name: platform
+          required: true
+          type: string
+        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
+          in: path
+          name: siteUrl
+          required: true
+          type: string
+        - description: "The relative path (without the site) of the sample URL. It must be one of the URLs returned by list(). For example, for the URL https://www.example.com/pagename\_on the site https://www.example.com/, the url value is\_pagename"
+          in: path
+          name: url
           required: true
           type: string
       responses:
@@ -478,22 +527,14 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/webmasters'
       tags:
         - urlcrawlerrorssamples
     get:
       description: Retrieves details about crawl errors for a site's sample URL.
       operationId: webmasters.urlcrawlerrorssamples.get
       parameters:
-        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
-          in: path
-          name: siteUrl
-          required: true
-          type: string
-        - description: "The relative path (without the site) of the sample URL. It must be one of the URLs returned by list(). For example, for the URL https://www.example.com/pagename\_on the site https://www.example.com/, the url value is\_pagename"
-          in: path
-          name: url
-          required: true
-          type: string
         - description: 'The crawl error category. For example: authPermissions'
           enum:
             - authPermissions
@@ -516,6 +557,16 @@ paths:
             - web
           in: query
           name: platform
+          required: true
+          type: string
+        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
+          in: path
+          name: siteUrl
+          required: true
+          type: string
+        - description: "The relative path (without the site) of the sample URL. It must be one of the URLs returned by list(). For example, for the URL https://www.example.com/pagename\_on the site https://www.example.com/, the url value is\_pagename"
+          in: path
+          name: url
           required: true
           type: string
       responses:
@@ -526,7 +577,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/webmasters'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/webmasters.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/webmasters.readonly'
       tags:
         - urlcrawlerrorssamples

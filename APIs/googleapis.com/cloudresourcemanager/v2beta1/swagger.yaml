@@ -164,7 +164,7 @@ paths:
         - description: |-
             Controls whether Folders in the
             DELETE_REQUESTED
-            state should be returned.
+            state should be returned. Defaults to false. This field is optional.
           in: query
           name: showDeleted
           type: boolean
@@ -1023,7 +1023,7 @@ definitions:
           }
 
       For a description of IAM and its features, see the
-      [IAM developer's guide](https://cloud.google.com/iam).
+      [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:
       auditConfigs:
         description: Specifies cloud audit logging configuration for this policy.
@@ -1052,7 +1052,7 @@ definitions:
         format: byte
         type: string
       version:
-        description: Version of the `Policy`. The default version is 0.
+        description: Deprecated.
         format: int32
         type: integer
     type: object

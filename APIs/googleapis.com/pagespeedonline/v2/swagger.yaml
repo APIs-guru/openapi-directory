@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Analyzes the performance of a web page and provides tailored suggestions to make that page faster.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: PageSpeed Insights
   version: v2
   x-apiClientRegistration:
@@ -76,11 +80,6 @@ paths:
       description: 'Runs PageSpeed analysis on the page at the specified URL, and returns PageSpeed scores, a list of suggestions to make that page faster, and other information.'
       operationId: pagespeedonline.pagespeedapi.runpagespeed
       parameters:
-        - description: The URL to fetch and analyze
-          in: query
-          name: url
-          required: true
-          type: string
         - default: false
           description: Indicates if third party resources should be filtered out before PageSpeed analysis.
           in: query
@@ -108,6 +107,11 @@ paths:
             - mobile
           in: query
           name: strategy
+          type: string
+        - description: The URL to fetch and analyze
+          in: query
+          name: url
+          required: true
           type: string
       responses:
         '200':
@@ -233,6 +237,9 @@ definitions:
     type: object
   Result:
     properties:
+      captchaResult:
+        description: The captcha verify result
+        type: string
       formattedResults:
         description: Localized PageSpeed results. Contains a ruleResults entry for each PageSpeed rule instantiated and run by the server.
         properties:

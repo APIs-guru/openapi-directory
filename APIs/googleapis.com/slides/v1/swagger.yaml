@@ -2522,6 +2522,11 @@ definitions:
       updateLineProperties:
         $ref: '#/definitions/UpdateLinePropertiesRequest'
         description: Updates the properties of a Line.
+      updatePageElementAltText:
+        $ref: '#/definitions/UpdatePageElementAltTextRequest'
+        description: |-
+          Updates the alt text title and/or description of a
+          page element.
       updatePageElementTransform:
         $ref: '#/definitions/UpdatePageElementTransformRequest'
         description: Updates the transform of a page element.
@@ -3626,6 +3631,29 @@ definitions:
         description: The line properties to update.
       objectId:
         description: The object ID of the line the update is applied to.
+        type: string
+    type: object
+  UpdatePageElementAltTextRequest:
+    description: |-
+      Updates the alt text title and/or description of a
+      page element.
+    properties:
+      description:
+        description: |-
+          The updated alt text description of the page element. If unset the existing
+          value will be maintained. The description is exposed to screen readers
+          and other accessibility interfaces. Only use human readable values related
+          to the content of the page element.
+        type: string
+      objectId:
+        description: The object ID of the page element the updates are applied to.
+        type: string
+      title:
+        description: |-
+          The updated alt text title of the page element. If unset the
+          existing value will be maintained. The title is exposed to screen readers
+          and other accessibility interfaces. Only use human readable values related
+          to the content of the page element.
         type: string
     type: object
   UpdatePageElementTransformRequest:

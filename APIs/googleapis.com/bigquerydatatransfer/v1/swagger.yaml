@@ -1306,7 +1306,7 @@ definitions:
         description: Output only. Data source id.
         type: string
       destinationDatasetId:
-        description: The BigQuery target dataset id.
+        description: Output only. The BigQuery target dataset id.
         type: string
       endTime:
         description: |-
@@ -1327,7 +1327,7 @@ definitions:
       params:
         additionalProperties:
           description: Properties of the object.
-        description: Data transfer specific parameters.
+        description: Output only. Data transfer specific parameters.
         type: object
       runTime:
         description: |-

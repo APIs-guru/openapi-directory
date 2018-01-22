@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Lets you manage your tasks and task lists.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Tasks
   version: v1
   x-apiClientRegistration:
@@ -31,11 +35,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/tasks': Manage your tasks
       'https://www.googleapis.com/auth/tasks.readonly': View your tasks
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/tasks': Manage your tasks
+      'https://www.googleapis.com/auth/tasks.readonly': View your tasks
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -105,6 +118,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasks
   '/lists/{tasklist}/tasks':
@@ -112,11 +127,6 @@ paths:
       description: Returns all tasks in the specified task list.
       operationId: tasks.tasks.list
       parameters:
-        - description: Task list identifier.
-          in: path
-          name: tasklist
-          required: true
-          type: string
         - description: Upper bound for a task's completion date (as a RFC 3339 timestamp) to filter by. Optional. The default is not to filter by completion date.
           in: query
           name: completedMax
@@ -153,6 +163,11 @@ paths:
           in: query
           name: showHidden
           type: boolean
+        - description: Task list identifier.
+          in: path
+          name: tasklist
+          required: true
+          type: string
         - description: Lower bound for a task's last modification time (as a RFC 3339 timestamp) to filter by. Optional. The default is not to filter by last modification time.
           in: query
           name: updatedMin
@@ -165,7 +180,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tasks'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tasks.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tasks.readonly'
       tags:
         - tasks
@@ -181,11 +200,10 @@ paths:
       description: Creates a new task on the specified task list.
       operationId: tasks.tasks.insert
       parameters:
-        - description: Task list identifier.
-          in: path
-          name: tasklist
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Task'
         - description: 'Parent task identifier. If the task is created at the top level, this parameter is omitted. Optional.'
           in: query
           name: parent
@@ -194,10 +212,11 @@ paths:
           in: query
           name: previous
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Task'
+        - description: Task list identifier.
+          in: path
+          name: tasklist
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -205,6 +224,8 @@ paths:
             $ref: '#/definitions/Task'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tasks'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasks
@@ -213,14 +234,14 @@ paths:
       description: Deletes the specified task from the task list.
       operationId: tasks.tasks.delete
       parameters:
-        - description: Task list identifier.
-          in: path
-          name: tasklist
-          required: true
-          type: string
         - description: Task identifier.
           in: path
           name: task
+          required: true
+          type: string
+        - description: Task list identifier.
+          in: path
+          name: tasklist
           required: true
           type: string
       responses:
@@ -229,20 +250,22 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasks
     get:
       description: Returns the specified task.
       operationId: tasks.tasks.get
       parameters:
-        - description: Task list identifier.
-          in: path
-          name: tasklist
-          required: true
-          type: string
         - description: Task identifier.
           in: path
           name: task
+          required: true
+          type: string
+        - description: Task list identifier.
+          in: path
+          name: tasklist
           required: true
           type: string
       responses:
@@ -253,7 +276,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tasks'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tasks.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tasks.readonly'
       tags:
         - tasks
@@ -269,20 +296,20 @@ paths:
       description: Updates the specified task. This method supports patch semantics.
       operationId: tasks.tasks.patch
       parameters:
-        - description: Task list identifier.
-          in: path
-          name: tasklist
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Task'
         - description: Task identifier.
           in: path
           name: task
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Task'
+        - description: Task list identifier.
+          in: path
+          name: tasklist
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -291,26 +318,28 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasks
     put:
       description: Updates the specified task.
       operationId: tasks.tasks.update
       parameters:
-        - description: Task list identifier.
-          in: path
-          name: tasklist
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Task'
         - description: Task identifier.
           in: path
           name: task
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Task'
+        - description: Task list identifier.
+          in: path
+          name: tasklist
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -318,6 +347,8 @@ paths:
             $ref: '#/definitions/Task'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tasks'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasks
@@ -334,16 +365,6 @@ paths:
       description: Moves the specified task to another position in the task list. This can include putting it as a child task under a new parent and/or move it to a different position among its sibling tasks.
       operationId: tasks.tasks.move
       parameters:
-        - description: Task list identifier.
-          in: path
-          name: tasklist
-          required: true
-          type: string
-        - description: Task identifier.
-          in: path
-          name: task
-          required: true
-          type: string
         - description: 'New parent task identifier. If the task is moved to the top level, this parameter is omitted. Optional.'
           in: query
           name: parent
@@ -352,6 +373,16 @@ paths:
           in: query
           name: previous
           type: string
+        - description: Task identifier.
+          in: path
+          name: task
+          required: true
+          type: string
+        - description: Task list identifier.
+          in: path
+          name: tasklist
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -359,6 +390,8 @@ paths:
             $ref: '#/definitions/Task'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tasks'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasks
@@ -383,7 +416,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tasks'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tasks.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tasks.readonly'
       tags:
         - tasklists
@@ -411,6 +448,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasklists
   '/users/@me/lists/{tasklist}':
@@ -428,6 +467,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tasks'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasklists
@@ -448,7 +489,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tasks'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tasks.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tasks.readonly'
       tags:
         - tasklists
@@ -464,15 +509,15 @@ paths:
       description: Updates the authenticated user's specified task list. This method supports patch semantics.
       operationId: tasks.tasklists.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TaskList'
         - description: Task list identifier.
           in: path
           name: tasklist
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TaskList'
       responses:
         '200':
           description: Successful response
@@ -481,21 +526,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasklists
     put:
       description: Updates the authenticated user's specified task list.
       operationId: tasks.tasklists.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TaskList'
         - description: Task list identifier.
           in: path
           name: tasklist
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TaskList'
       responses:
         '200':
           description: Successful response
@@ -503,6 +550,8 @@ paths:
             $ref: '#/definitions/TaskList'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/tasks'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasklists

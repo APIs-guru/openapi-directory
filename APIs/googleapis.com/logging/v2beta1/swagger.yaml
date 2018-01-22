@@ -284,7 +284,7 @@ paths:
   '/v2beta1/{logName}':
     delete:
       description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
-      operationId: logging.organizations.logs.delete
+      operationId: logging.billingAccounts.logs.delete
       parameters:
         - description: |-
             Required. The resource name of the log to delete:
@@ -313,7 +313,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -451,7 +451,7 @@ paths:
   '/v2beta1/{parent}/logs':
     get:
       description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
-      operationId: logging.organizations.logs.list
+      operationId: logging.billingAccounts.logs.list
       parameters:
         - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
           in: query
@@ -495,7 +495,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - organizations
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -1545,6 +1545,9 @@ definitions:
   WriteLogEntriesRequest:
     description: The parameters to WriteLogEntries.
     properties:
+      dryRun:
+        description: 'Optional. If true, the request should expect normal response, but the entries won''t be persisted nor exported. Useful for checking whether the logging API endpoints are working properly before sending valuable data.'
+        type: boolean
       entries:
         description: 'Required. The log entries to send to Stackdriver Logging. The order of log entries in this list does not matter. Values supplied in this method''s log_name, resource, and labels fields are copied into those log entries in this list that do not include values for their corresponding fields. For more information, see the LogEntry type.If the timestamp or insert_id fields are missing in log entries, then this method supplies the current time or a unique identifier, respectively. The supplied values are chosen so that, among the log entries that did not supply their own values, the entries earlier in the list will sort before the entries later in the list. See the entries.list method.Log entries with timestamps that are more than the logs retention period in the past or more than 24 hours in the future will not be available when calling entries.list. However, those log entries can still be exported with LogSinks.To improve throughput and to avoid exceeding the quota limit for calls to entries.write, you should try to include several log entries in this list, rather than calling this method for each individual log entry.'
         items:

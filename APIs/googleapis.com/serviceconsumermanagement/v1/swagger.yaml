@@ -131,12 +131,13 @@ paths:
   '/v1/{name}':
     delete:
       description: |-
-        Delete tenancy unit.  Before the tenancy unit is deleted, there should be
-        no tenant resource in it.
-        Operation<response: Empty>.
-      operationId: serviceconsumermanagement.services.tenancyUnits.delete
+        Deletes a long-running operation. This method indicates that the client is
+        no longer interested in the operation result. It does not cancel the
+        operation. If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: serviceconsumermanagement.operations.delete
       parameters:
-        - description: Name of the tenancy unit to be deleted.
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
@@ -146,7 +147,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/Empty'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -157,7 +158,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
-        - services
+        - operations
     get:
       description: |-
         Gets the latest state of a long-running operation.  Clients can use this
@@ -416,6 +417,7 @@ paths:
     post:
       description: |-
         Add a new tenant project to the tenancy unit.
+        There can be at most 512 tenant projects in a tenancy units.
         If there are previously failed AddTenantProject calls, you might need to
         call RemoveTenantProject first to clean them before you can make another
         AddTenantProject with the same tag.
@@ -1665,14 +1667,6 @@ definitions:
         type: string
       put:
         description: Used for updating a resource.
-        type: string
-      responseBody:
-        description: |-
-          The name of the response field whose value is mapped to the HTTP body of
-          response. Other response fields are ignored. This field is optional. When
-          not set, the response message will be used as HTTP body of response.
-          NOTE: the referred field must be not a repeated field and must be present
-          at the top-level of response message type.
         type: string
       restCollection:
         description: |-
@@ -3083,7 +3077,9 @@ definitions:
           For example 'serviceconsumermanagement.googleapis.com'.
         type: string
       tenantResources:
-        description: Resources constituting the tenancy unit.
+        description: |-
+          Resources constituting the tenancy unit.
+          There can be at most 512 tenant resources in a tenancy units.
         items:
           $ref: '#/definitions/TenantResource'
         type: array

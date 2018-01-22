@@ -38,7 +38,7 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/cloud_debugger': Manage cloud debugger
+      'https://www.googleapis.com/auth/cloud_debugger': Use Stackdriver Debugger
     type: oauth2
   Oauth2c:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -46,7 +46,7 @@ securityDefinitions:
     flow: accessCode
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/cloud_debugger': Manage cloud debugger
+      'https://www.googleapis.com/auth/cloud_debugger': Use Stackdriver Debugger
     tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
@@ -787,8 +787,6 @@ definitions:
         description: |-
           References to the locations and revisions of the source code used in the
           deployed application.
-
-          NOTE: this field is experimental and can be ignored.
         items:
           $ref: '#/definitions/ExtendedSourceContext'
         type: array

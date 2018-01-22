@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Accesses a Google App Engine Pull Task Queue over REST.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: TaskQueue
   version: v1beta2
   x-apiClientRegistration:
@@ -31,11 +35,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/taskqueue': Manage your Tasks and Taskqueues
       'https://www.googleapis.com/auth/taskqueue.consumer': Consume Tasks from your Taskqueues
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/taskqueue': Manage your Tasks and Taskqueues
+      'https://www.googleapis.com/auth/taskqueue.consumer': Consume Tasks from your Taskqueues
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -86,6 +99,10 @@ paths:
       description: Get detailed information about a TaskQueue.
       operationId: taskqueue.taskqueues.get
       parameters:
+        - description: Whether to get stats. Optional.
+          in: query
+          name: getStats
+          type: boolean
         - description: The project under which the queue lies.
           in: path
           name: project
@@ -96,10 +113,6 @@ paths:
           name: taskqueue
           required: true
           type: string
-        - description: Whether to get stats. Optional.
-          in: query
-          name: getStats
-          type: boolean
       responses:
         '200':
           description: Successful response
@@ -108,7 +121,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/taskqueue'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/taskqueue'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/taskqueue.consumer'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/taskqueue.consumer'
       tags:
         - taskqueues
@@ -143,7 +160,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/taskqueue'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/taskqueue'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/taskqueue.consumer'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/taskqueue.consumer'
       tags:
         - tasks
@@ -159,6 +180,10 @@ paths:
       description: Insert a new task in a TaskQueue
       operationId: taskqueue.tasks.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Task'
         - description: The project under which the queue lies
           in: path
           name: project
@@ -169,10 +194,6 @@ paths:
           name: taskqueue
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Task'
       responses:
         '200':
           description: Successful response
@@ -181,7 +202,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/taskqueue'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/taskqueue'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/taskqueue.consumer'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/taskqueue.consumer'
       tags:
         - tasks
@@ -198,33 +223,33 @@ paths:
       description: Lease 1 or more tasks from a TaskQueue.
       operationId: taskqueue.tasks.lease
       parameters:
-        - description: The project under which the queue lies.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The taskqueue to lease a task from.
-          in: path
-          name: taskqueue
-          required: true
-          type: string
-        - description: The number of tasks to lease.
+        - description: 'When true, all returned tasks will have the same tag'
           in: query
-          name: numTasks
-          required: true
-          type: integer
+          name: groupByTag
+          type: boolean
         - description: The lease in seconds.
           in: query
           name: leaseSecs
           required: true
           type: integer
-        - description: 'When true, all returned tasks will have the same tag'
+        - description: The number of tasks to lease.
           in: query
-          name: groupByTag
-          type: boolean
+          name: numTasks
+          required: true
+          type: integer
+        - description: The project under which the queue lies.
+          in: path
+          name: project
+          required: true
+          type: string
         - description: 'The tag allowed for tasks in the response. Must only be specified if group_by_tag is true. If group_by_tag is true and tag is not specified the tag will be that of the oldest task by eta, i.e. the first available tag'
           in: query
           name: tag
+          type: string
+        - description: The taskqueue to lease a task from.
+          in: path
+          name: taskqueue
+          required: true
           type: string
       responses:
         '200':
@@ -234,7 +259,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/taskqueue'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/taskqueue'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/taskqueue.consumer'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/taskqueue.consumer'
       tags:
         - tasks
@@ -248,14 +277,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: The taskqueue to delete a task from.
-          in: path
-          name: taskqueue
-          required: true
-          type: string
         - description: The id of the task to delete.
           in: path
           name: task
+          required: true
+          type: string
+        - description: The taskqueue to delete a task from.
+          in: path
+          name: taskqueue
           required: true
           type: string
       responses:
@@ -264,7 +293,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/taskqueue'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/taskqueue'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/taskqueue.consumer'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/taskqueue.consumer'
       tags:
         - tasks
@@ -277,14 +310,14 @@ paths:
           name: project
           required: true
           type: string
-        - description: The taskqueue in which the task belongs.
-          in: path
-          name: taskqueue
-          required: true
-          type: string
         - description: The task to get properties of.
           in: path
           name: task
+          required: true
+          type: string
+        - description: The taskqueue in which the task belongs.
+          in: path
+          name: taskqueue
           required: true
           type: string
       responses:
@@ -295,7 +328,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/taskqueue'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/taskqueue'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/taskqueue.consumer'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/taskqueue.consumer'
       tags:
         - tasks
@@ -311,28 +348,28 @@ paths:
       description: Update tasks that are leased out of a TaskQueue. This method supports patch semantics.
       operationId: taskqueue.tasks.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Task'
+        - description: The new lease in seconds.
+          in: query
+          name: newLeaseSeconds
+          required: true
+          type: integer
         - description: The project under which the queue lies.
           in: path
           name: project
           required: true
           type: string
         - in: path
-          name: taskqueue
-          required: true
-          type: string
-        - in: path
           name: task
           required: true
           type: string
-        - description: The new lease in seconds.
-          in: query
-          name: newLeaseSeconds
+        - in: path
+          name: taskqueue
           required: true
-          type: integer
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Task'
+          type: string
       responses:
         '200':
           description: Successful response
@@ -341,7 +378,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/taskqueue'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/taskqueue'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/taskqueue.consumer'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/taskqueue.consumer'
       tags:
         - tasks
@@ -349,28 +390,28 @@ paths:
       description: Update tasks that are leased out of a TaskQueue.
       operationId: taskqueue.tasks.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Task'
+        - description: The new lease in seconds.
+          in: query
+          name: newLeaseSeconds
+          required: true
+          type: integer
         - description: The project under which the queue lies.
           in: path
           name: project
           required: true
           type: string
         - in: path
-          name: taskqueue
-          required: true
-          type: string
-        - in: path
           name: task
           required: true
           type: string
-        - description: The new lease in seconds.
-          in: query
-          name: newLeaseSeconds
+        - in: path
+          name: taskqueue
           required: true
-          type: integer
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Task'
+          type: string
       responses:
         '200':
           description: Successful response
@@ -379,7 +420,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/taskqueue'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/taskqueue'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/taskqueue.consumer'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/taskqueue.consumer'
       tags:
         - tasks

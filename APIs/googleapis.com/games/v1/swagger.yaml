@@ -114,10 +114,6 @@ paths:
       description: Lists all the achievement definitions for your application.
       operationId: games.achievementDefinitions.list
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -173,10 +169,6 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/AchievementUpdateMultipleRequest'
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
       responses:
         '200':
           description: Successful response
@@ -210,10 +202,6 @@ paths:
           in: path
           name: achievementId
           required: true
-          type: string
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
           type: string
         - description: A randomly generated numeric ID for each request specified by the caller. This number is used at the server to ensure that the request is handled correctly across retries.
           in: query
@@ -259,10 +247,6 @@ paths:
           name: achievementId
           required: true
           type: string
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
       responses:
         '200':
           description: Successful response
@@ -296,10 +280,6 @@ paths:
           in: path
           name: achievementId
           required: true
-          type: string
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
           type: string
         - description: The minimum value to set the steps to.
           in: query
@@ -341,10 +321,6 @@ paths:
           name: achievementId
           required: true
           type: string
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
       responses:
         '200':
           description: Successful response
@@ -373,11 +349,6 @@ paths:
     post:
       description: Indicate that the the currently authenticated user is playing your application.
       operationId: games.applications.played
-      parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
       responses:
         '200':
           description: Successful response
@@ -401,10 +372,6 @@ paths:
           in: path
           name: applicationId
           required: true
-          type: string
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
           type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
@@ -452,10 +419,6 @@ paths:
           name: applicationId
           required: true
           type: string
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
       responses:
         '200':
           description: Successful response
@@ -485,10 +448,6 @@ paths:
       description: Returns a list of the event definitions in this application.
       operationId: games.events.listDefinitions
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -532,10 +491,6 @@ paths:
       description: Returns a list showing the current progress on events in this application for the currently authenticated user.
       operationId: games.events.listByPlayer
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -582,10 +537,6 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/EventRecordRequest'
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -611,10 +562,6 @@ paths:
       description: Lists all the leaderboard metadata for your application.
       operationId: games.leaderboards.list
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -670,10 +617,6 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/PlayerScoreSubmissionList'
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -699,10 +642,6 @@ paths:
       description: Retrieves the metadata of the leaderboard with the given ID.
       operationId: games.leaderboards.get
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -749,10 +688,6 @@ paths:
       description: Submits a score to the specified leaderboard.
       operationId: games.scores.submit
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -800,10 +735,6 @@ paths:
           in: path
           name: collection
           required: true
-          type: string
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
           type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
@@ -871,10 +802,6 @@ paths:
           name: collection
           required: true
           type: string
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -939,11 +866,6 @@ paths:
     get:
       description: Return the metagame configuration data for the calling application.
       operationId: games.metagame.getMetagameConfig
-      parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
       responses:
         '200':
           description: Successful response
@@ -982,10 +904,6 @@ paths:
           in: path
           name: collection
           required: true
-          type: string
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
           type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
@@ -1030,10 +948,6 @@ paths:
       description: 'Retrieves the Player resource with the given ID. To retrieve the player for the currently authenticated user, set playerId to me.'
       operationId: games.players.get
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -1072,10 +986,6 @@ paths:
       description: Lists the progress for all your application's achievements for the currently authenticated player.
       operationId: games.achievements.list
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -1140,10 +1050,6 @@ paths:
           name: collection
           required: true
           type: string
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -1194,10 +1100,6 @@ paths:
         NOTE: You cannot ask for 'ALL' leaderboards and 'ALL' timeSpans in the same request; only one parameter may be set to 'ALL'.
       operationId: games.scores.get
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: 'The types of ranks to return. If the parameter is omitted, no ranks will be returned.'
           enum:
             - ALL
@@ -1269,10 +1171,6 @@ paths:
       description: Get a list of quests for your application and the currently authenticated player.
       operationId: games.quests.list
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -1321,10 +1219,6 @@ paths:
       description: Retrieves a list of snapshots created by your application for the player corresponding to the player ID.
       operationId: games.snapshots.list
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -1389,10 +1283,6 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/PushToken'
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
       responses:
         '200':
           description: Successful response
@@ -1424,10 +1314,6 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/PushTokenId'
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
       responses:
         '200':
           description: Successful response
@@ -1455,10 +1341,6 @@ paths:
       description: Indicates that the currently authorized user will participate in the quest.
       operationId: games.quests.accept
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -1497,10 +1379,6 @@ paths:
       description: Report that a reward for the milestone corresponding to milestoneId for the quest corresponding to questId has been claimed by the currently authorized user.
       operationId: games.questMilestones.claim
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The ID of the milestone.
           in: path
           name: milestoneId
@@ -1546,10 +1424,6 @@ paths:
           name: clientRevision
           required: true
           type: string
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
       responses:
         '200':
           description: Successful response
@@ -1579,10 +1453,6 @@ paths:
       description: Returns invitations to join rooms.
       operationId: games.rooms.list
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -1638,10 +1508,6 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/RoomCreateRequest'
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -1667,10 +1533,6 @@ paths:
       description: Get the data for a room.
       operationId: games.rooms.get
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -1717,10 +1579,6 @@ paths:
       description: Decline an invitation to join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
       operationId: games.rooms.decline
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -1759,10 +1617,6 @@ paths:
       description: Dismiss an invitation to join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
       operationId: games.rooms.dismiss
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The ID of the room.
           in: path
           name: roomId
@@ -1799,10 +1653,6 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/RoomJoinRequest'
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -1845,10 +1695,6 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/RoomLeaveRequest'
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -1891,10 +1737,6 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/RoomP2PStatuses'
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -1925,10 +1767,6 @@ paths:
       description: Retrieves the metadata for a given snapshot ID.
       operationId: games.snapshots.get
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -1971,10 +1809,6 @@ paths:
       description: Returns turn-based matches the player is or was involved in.
       operationId: games.turnBasedMatches.list
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: True if match data should be returned in the response. Note that not all data will necessarily be returned if include_match_data is true; the server may decide to only return data for some of the matches to limit download size for the client. The remainder of the data for these matches will be retrievable on request.
           in: query
           name: includeMatchData
@@ -2040,10 +1874,6 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/TurnBasedMatchCreateRequest'
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -2069,10 +1899,6 @@ paths:
       description: 'Returns turn-based matches the player is or was involved in that changed since the last sync call, with the least recent changes coming first. Matches that should be removed from the local cache will have a status of MATCH_DELETED.'
       operationId: games.turnBasedMatches.sync
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: True if match data should be returned in the response. Note that not all data will necessarily be returned if include_match_data is true; the server may decide to only return data for some of the matches to limit download size for the client. The remainder of the data for these matches will be retrievable on request.
           in: query
           name: includeMatchData
@@ -2126,10 +1952,6 @@ paths:
       description: Get the data for a turn-based match.
       operationId: games.turnBasedMatches.get
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: Get match data along with metadata.
           in: query
           name: includeMatchData
@@ -2180,10 +2002,6 @@ paths:
       description: Cancel a turn-based match.
       operationId: games.turnBasedMatches.cancel
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The ID of the match.
           in: path
           name: matchId
@@ -2216,10 +2034,6 @@ paths:
       description: Decline an invitation to play a turn-based match.
       operationId: games.turnBasedMatches.decline
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -2258,10 +2072,6 @@ paths:
       description: Dismiss a turn-based match from the match list. The match will no longer show up in the list and will not generate notifications.
       operationId: games.turnBasedMatches.dismiss
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The ID of the match.
           in: path
           name: matchId
@@ -2298,10 +2108,6 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/TurnBasedMatchResults'
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -2340,10 +2146,6 @@ paths:
       description: Join a turn-based match.
       operationId: games.turnBasedMatches.join
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -2382,10 +2184,6 @@ paths:
       description: 'Leave a turn-based match when it is not the current player''s turn, without canceling the match.'
       operationId: games.turnBasedMatches.leave
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -2424,10 +2222,6 @@ paths:
       description: 'Leave a turn-based match during the current player''s turn, without canceling the match.'
       operationId: games.turnBasedMatches.leaveTurn
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -2475,10 +2269,6 @@ paths:
       description: 'Create a rematch of a match that was previously completed, with the same participants. This can be called by only one player on a match still in their list; the player must have called Finish first. Returns the newly created match; it will be the caller''s turn.'
       operationId: games.turnBasedMatches.rematch
       parameters:
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language
@@ -2525,10 +2315,6 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/TurnBasedMatchTurn'
-        - description: The last-seen mutation timestamp.
-          in: query
-          name: consistencyToken
-          type: string
         - description: The preferred language to use for strings returned by this method.
           in: query
           name: language

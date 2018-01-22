@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Views and manages your Google Analytics data.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Analytics
   version: v2.4
   x-apiClientRegistration:
@@ -31,11 +35,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/analytics': View and manage your Google Analytics data
       'https://www.googleapis.com/auth/analytics.readonly': View your Google Analytics data
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/analytics': View and manage your Google Analytics data
+      'https://www.googleapis.com/auth/analytics.readonly': View your Google Analytics data
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -86,38 +99,33 @@ paths:
       description: Returns Analytics report data for a view (profile).
       operationId: analytics.data.get
       parameters:
-        - description: 'Unique table ID for retrieving report data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.'
+        - description: 'A comma-separated list of Analytics dimensions. E.g., ''ga:browser,ga:city''.'
           in: query
-          name: ids
-          required: true
-          type: string
-        - description: Start date for fetching report data. All requests should specify a start date formatted as YYYY-MM-DD.
-          in: query
-          name: start-date
-          required: true
+          name: dimensions
           type: string
         - description: End date for fetching report data. All requests should specify an end date formatted as YYYY-MM-DD.
           in: query
           name: end-date
           required: true
           type: string
-        - description: 'A comma-separated list of Analytics metrics. E.g., ''ga:sessions,ga:pageviews''. At least one metric must be specified to retrieve a valid Analytics report.'
-          in: query
-          name: metrics
-          required: true
-          type: string
-        - description: 'A comma-separated list of Analytics dimensions. E.g., ''ga:browser,ga:city''.'
-          in: query
-          name: dimensions
-          type: string
         - description: A comma-separated list of dimension or metric filters to be applied to the report data.
           in: query
           name: filters
+          type: string
+        - description: 'Unique table ID for retrieving report data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.'
+          in: query
+          name: ids
+          required: true
           type: string
         - description: The maximum number of entries to include in this feed.
           in: query
           name: max-results
           type: integer
+        - description: 'A comma-separated list of Analytics metrics. E.g., ''ga:sessions,ga:pageviews''. At least one metric must be specified to retrieve a valid Analytics report.'
+          in: query
+          name: metrics
+          required: true
+          type: string
         - description: An Analytics advanced segment to be applied to the report data.
           in: query
           name: segment
@@ -125,6 +133,11 @@ paths:
         - description: A comma-separated list of dimensions or metrics that determine the sort order for the report data.
           in: query
           name: sort
+          type: string
+        - description: Start date for fetching report data. All requests should specify a start date formatted as YYYY-MM-DD.
+          in: query
+          name: start-date
+          required: true
           type: string
         - description: An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
           in: query
@@ -137,7 +150,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - data
@@ -169,7 +186,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -206,7 +227,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -228,11 +253,6 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: 'Web property ID for the views (profiles) to retrieve. Can either be a specific web property ID or ''~all'', which refers to all the web properties to which the user has access.'
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
         - description: The maximum number of views (profiles) to include in this response.
           in: query
           name: max-results
@@ -242,13 +262,22 @@ paths:
           minimum: 1
           name: start-index
           type: integer
+        - description: 'Web property ID for the views (profiles) to retrieve. Can either be a specific web property ID or ''~all'', which refers to all the web properties to which the user has access.'
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -270,32 +299,36 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: 'Web property ID to retrieve goals for. Can either be a specific web property ID or ''~all'', which refers to all the web properties that user has access to.'
-          in: path
-          name: webPropertyId
-          required: true
-          type: string
+        - description: The maximum number of goals to include in this response.
+          in: query
+          name: max-results
+          type: integer
         - description: 'View (Profile) ID to retrieve goals for. Can either be a specific view (profile) ID or ''~all'', which refers to all the views (profiles) that user has access to.'
           in: path
           name: profileId
           required: true
           type: string
-        - description: The maximum number of goals to include in this response.
-          in: query
-          name: max-results
-          type: integer
         - description: An index of the first goal to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
           in: query
           minimum: 1
           name: start-index
           type: integer
+        - description: 'Web property ID to retrieve goals for. Can either be a specific web property ID or ''~all'', which refers to all the web properties that user has access to.'
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -327,7 +360,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management

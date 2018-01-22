@@ -290,6 +290,7 @@ paths:
             * events
             * genders
             * imClients
+            * interests
             * locales
             * memberships
             * metadata
@@ -603,6 +604,7 @@ paths:
             * events
             * genders
             * imClients
+            * interests
             * locales
             * memberships
             * metadata
@@ -631,7 +633,9 @@ paths:
           type: string
         - description: |-
             Whether the response should include a sync token, which can be used to get
-            all changes since the last request.
+            all changes since the last request. For subsequent sync requests use the
+            `sync_token` param instead. Initial sync requests that specify
+            `request_sync_token` have an additional rate limit.
           in: query
           name: requestSyncToken
           type: boolean
@@ -652,8 +656,9 @@ paths:
           name: sortOrder
           type: string
         - description: |-
-            A sync token, returned by a previous call to `people.connections.list`.
+            A sync token returned by a previous call to `people.connections.list`.
             Only resources changed since the sync token was created will be returned.
+            Sync requests that specify `sync_token` have an additional rate limit.
           in: query
           name: syncToken
           type: string
@@ -821,6 +826,7 @@ paths:
             * events
             * genders
             * imClients
+            * interests
             * locales
             * names
             * nicknames
@@ -1274,9 +1280,7 @@ definitions:
         type: string
     type: object
   Interest:
-    description: |-
-      One of the person's interests.
-      **DEPRECATED** (Message will not be returned.)
+    description: One of the person's interests.
     properties:
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -1597,9 +1601,7 @@ definitions:
           $ref: '#/definitions/ImClient'
         type: array
       interests:
-        description: |-
-          The person's interests.
-          **DEPRECATED** (No values will be returned.)
+        description: The person's interests.
         items:
           $ref: '#/definitions/Interest'
         type: array

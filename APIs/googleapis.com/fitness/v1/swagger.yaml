@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Stores and accesses user data in the fitness store from apps on any platform.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Fitness
   version: v1
   x-apiClientRegistration:
@@ -29,7 +33,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/fitness.activity.read': View your activity information in Google Fit
@@ -50,6 +54,31 @@ securityDefinitions:
       'https://www.googleapis.com/auth/fitness.oxygen_saturation.write': View and store oxygen saturation data in Google Fit
       'https://www.googleapis.com/auth/fitness.reproductive_health.read': View reproductive health data in Google Fit
       'https://www.googleapis.com/auth/fitness.reproductive_health.write': View and store reproductive health data in Google Fit
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/fitness.activity.read': View your activity information in Google Fit
+      'https://www.googleapis.com/auth/fitness.activity.write': View and store your activity information in Google Fit
+      'https://www.googleapis.com/auth/fitness.blood_glucose.read': View blood glucose data in Google Fit
+      'https://www.googleapis.com/auth/fitness.blood_glucose.write': View and store blood glucose data in Google Fit
+      'https://www.googleapis.com/auth/fitness.blood_pressure.read': View blood pressure data in Google Fit
+      'https://www.googleapis.com/auth/fitness.blood_pressure.write': View and store blood pressure data in Google Fit
+      'https://www.googleapis.com/auth/fitness.body.read': View body sensor information in Google Fit
+      'https://www.googleapis.com/auth/fitness.body.write': View and store body sensor data in Google Fit
+      'https://www.googleapis.com/auth/fitness.body_temperature.read': View body temperature data in Google Fit
+      'https://www.googleapis.com/auth/fitness.body_temperature.write': View and store body temperature data in Google Fit
+      'https://www.googleapis.com/auth/fitness.location.read': View your stored location data in Google Fit
+      'https://www.googleapis.com/auth/fitness.location.write': View and store your location data in Google Fit
+      'https://www.googleapis.com/auth/fitness.nutrition.read': View nutrition information in Google Fit
+      'https://www.googleapis.com/auth/fitness.nutrition.write': View and store nutrition information in Google Fit
+      'https://www.googleapis.com/auth/fitness.oxygen_saturation.read': View oxygen saturation data in Google Fit
+      'https://www.googleapis.com/auth/fitness.oxygen_saturation.write': View and store oxygen saturation data in Google Fit
+      'https://www.googleapis.com/auth/fitness.reproductive_health.read': View reproductive health data in Google Fit
+      'https://www.googleapis.com/auth/fitness.reproductive_health.write': View and store reproductive health data in Google Fit
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -99,11 +128,6 @@ paths:
       description: 'Lists all data sources that are visible to the developer, using the OAuth scopes provided. The list is not exhaustive; the user may have private data sources that are only visible to other developers, or calls using other scopes.'
       operationId: fitness.users.dataSources.list
       parameters:
-        - description: List data sources for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
-          in: path
-          name: userId
-          required: true
-          type: string
         - collectionFormat: multi
           description: 'The names of data types to include in the list. If not specified, all data sources will be returned.'
           in: query
@@ -111,6 +135,11 @@ paths:
             type: string
           name: dataTypeName
           type: array
+        - description: List data sources for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -119,39 +148,75 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.activity.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.activity.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.blood_glucose.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.blood_pressure.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.body.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.body.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body_temperature.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.location.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.location.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.location.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.reproductive_health.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
@@ -167,15 +232,15 @@ paths:
       description: 'Creates a new data source that is unique across all data sources belonging to this user. The data stream ID field can be omitted and will be generated by the server with the correct format. The data stream ID is an ordered combination of some fields from the data source. In addition to the data source fields reflected into the data source ID, the developer project number that is authenticated when creating the data source is included. This developer project number is obfuscated when read by any other developer reading public data types.'
       operationId: fitness.users.dataSources.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DataSource'
         - description: Create the data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
           in: path
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DataSource'
       responses:
         '200':
           description: Successful response
@@ -184,21 +249,39 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.body.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.location.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.location.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
@@ -207,14 +290,14 @@ paths:
       description: Deletes the specified data source. The request will fail if the data source contains any data points.
       operationId: fitness.users.dataSources.delete
       parameters:
-        - description: Retrieve a data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
-          in: path
-          name: userId
-          required: true
-          type: string
         - description: The data stream ID of the data source to delete.
           in: path
           name: dataSourceId
+          required: true
+          type: string
+        - description: Retrieve a data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
+          in: path
+          name: userId
           required: true
           type: string
       responses:
@@ -225,21 +308,39 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.body.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.location.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.location.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
@@ -247,14 +348,14 @@ paths:
       description: Returns the specified data source.
       operationId: fitness.users.dataSources.get
       parameters:
-        - description: Retrieve a data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
-          in: path
-          name: userId
-          required: true
-          type: string
         - description: The data stream ID of the data source to retrieve.
           in: path
           name: dataSourceId
+          required: true
+          type: string
+        - description: Retrieve a data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
+          in: path
+          name: userId
           required: true
           type: string
       responses:
@@ -265,39 +366,75 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.activity.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.activity.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.blood_glucose.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.blood_pressure.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.body.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.body.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body_temperature.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.location.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.location.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.location.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.reproductive_health.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
@@ -316,20 +453,20 @@ paths:
         Data sources are identified by their dataStreamId. This method supports patch semantics.
       operationId: fitness.users.dataSources.patch
       parameters:
-        - description: Update the data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
-          in: path
-          name: userId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DataSource'
         - description: The data stream ID of the data source to update.
           in: path
           name: dataSourceId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DataSource'
+        - description: Update the data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -338,21 +475,39 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.body.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.location.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.location.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
@@ -363,20 +518,20 @@ paths:
         Data sources are identified by their dataStreamId.
       operationId: fitness.users.dataSources.update
       parameters:
-        - description: Update the data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
-          in: path
-          name: userId
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DataSource'
         - description: The data stream ID of the data source to update.
           in: path
           name: dataSourceId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DataSource'
+        - description: Update the data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -385,21 +540,39 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.body.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.location.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.location.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
@@ -434,39 +607,75 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.activity.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.activity.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.blood_glucose.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.blood_pressure.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.body.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.body.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body_temperature.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.location.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.location.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.location.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.reproductive_health.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
@@ -483,10 +692,9 @@ paths:
       description: 'Performs an inclusive delete of all data points whose start and end times have any overlap with the time range specified by the dataset ID. For most data types, the entire data point will be deleted. For data types where the time span represents a consistent value (such as com.google.activity.segment), and a data point straddles either end point of the dataset, only the overlapping portion of the data point will be deleted.'
       operationId: fitness.users.dataSources.datasets.delete
       parameters:
-        - description: Delete a dataset for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
-          in: path
-          name: userId
-          required: true
+        - description: The client's current time in milliseconds since epoch.
+          in: query
+          name: currentTimeMillis
           type: string
         - description: The data stream ID of the data source that created the dataset.
           in: path
@@ -498,13 +706,14 @@ paths:
           name: datasetId
           required: true
           type: string
-        - description: The client's current time in milliseconds since epoch.
-          in: query
-          name: currentTimeMillis
-          type: string
         - description: When the operation was performed on the client.
           in: query
           name: modifiedTimeMillis
+          type: string
+        - description: Delete a dataset for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
+          in: path
+          name: userId
+          required: true
           type: string
       responses:
         '200':
@@ -512,21 +721,39 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.body.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.location.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.location.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
@@ -534,11 +761,6 @@ paths:
       description: 'Returns a dataset containing all data points whose start and end times overlap with the specified range of the dataset minimum start time and maximum end time. Specifically, any data point whose start time is less than or equal to the dataset end time and whose end time is greater than or equal to the dataset start time.'
       operationId: fitness.users.dataSources.datasets.get
       parameters:
-        - description: Retrieve a dataset for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
-          in: path
-          name: userId
-          required: true
-          type: string
         - description: The data stream ID of the data source that created the dataset.
           in: path
           name: dataSourceId
@@ -557,6 +779,11 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: Retrieve a dataset for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -565,39 +792,75 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.activity.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.activity.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.blood_glucose.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.blood_pressure.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.body.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.body.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body_temperature.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.location.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.location.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.location.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.reproductive_health.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
@@ -613,10 +876,13 @@ paths:
       description: Adds data points to a dataset. The dataset need not be previously created. All points within the given dataset will be returned with subsquent calls to retrieve this dataset. Data points can belong to more than one dataset. This method does not use patch semantics.
       operationId: fitness.users.dataSources.datasets.patch
       parameters:
-        - description: Patch a dataset for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
-          in: path
-          name: userId
-          required: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Dataset'
+        - description: The client's current time in milliseconds since epoch. Note that the minStartTimeNs and maxEndTimeNs properties in the request body are in nanoseconds instead of milliseconds.
+          in: query
+          name: currentTimeMillis
           type: string
         - description: The data stream ID of the data source that created the dataset.
           in: path
@@ -628,14 +894,11 @@ paths:
           name: datasetId
           required: true
           type: string
-        - description: The client's current time in milliseconds since epoch. Note that the minStartTimeNs and maxEndTimeNs properties in the request body are in nanoseconds instead of milliseconds.
-          in: query
-          name: currentTimeMillis
+        - description: Patch a dataset for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
+          in: path
+          name: userId
+          required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Dataset'
       responses:
         '200':
           description: Successful response
@@ -644,21 +907,39 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.body.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.location.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.location.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
@@ -675,15 +956,15 @@ paths:
       description: Aggregates data of a certain type or stream into buckets divided by a given type of boundary. Multiple data sets of multiple types and from multiple sources can be aggreated into exactly one bucket type per request.
       operationId: fitness.users.dataset.aggregate
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AggregateRequest'
         - description: Aggregate data for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
           in: path
           name: userId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AggregateRequest'
       responses:
         '200':
           description: Successful response
@@ -692,39 +973,75 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.activity.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.activity.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.blood_glucose.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.blood_pressure.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.body.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.body.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body_temperature.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.location.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.location.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.location.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.reproductive_health.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
@@ -733,11 +1050,6 @@ paths:
       description: Lists sessions previously created.
       operationId: fitness.users.sessions.list
       parameters:
-        - description: List sessions for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
-          in: path
-          name: userId
-          required: true
-          type: string
         - description: An RFC3339 timestamp. Only sessions ending between the start and end times will be included in the response.
           in: query
           name: endTime
@@ -754,6 +1066,11 @@ paths:
           in: query
           name: startTime
           type: string
+        - description: List sessions for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
+          in: path
+          name: userId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -762,39 +1079,75 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.activity.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.activity.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.activity.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.blood_glucose.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.blood_glucose.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.blood_pressure.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.blood_pressure.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.body.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.body.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.body_temperature.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.body_temperature.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.location.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.location.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.location.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.nutrition.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.nutrition.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.oxygen_saturation.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.reproductive_health.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.read'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.reproductive_health.write'
       tags:
         - users
@@ -811,25 +1164,27 @@ paths:
       description: Deletes a session specified by the given session ID.
       operationId: fitness.users.sessions.delete
       parameters:
-        - description: Delete a session for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
-          in: path
-          name: userId
-          required: true
+        - description: The client's current time in milliseconds since epoch.
+          in: query
+          name: currentTimeMillis
           type: string
         - description: The ID of the session to be deleted.
           in: path
           name: sessionId
           required: true
           type: string
-        - description: The client's current time in milliseconds since epoch.
-          in: query
-          name: currentTimeMillis
+        - description: Delete a session for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
+          in: path
+          name: userId
+          required: true
           type: string
       responses:
         '200':
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.activity.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
       tags:
         - users
@@ -845,24 +1200,24 @@ paths:
       description: Updates or insert a given session.
       operationId: fitness.users.sessions.update
       parameters:
-        - description: Create sessions for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
-          in: path
-          name: userId
-          required: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Session'
+        - description: The client's current time in milliseconds since epoch.
+          in: query
+          name: currentTimeMillis
           type: string
         - description: The ID of the session to be created.
           in: path
           name: sessionId
           required: true
           type: string
-        - description: The client's current time in milliseconds since epoch.
-          in: query
-          name: currentTimeMillis
+        - description: Create sessions for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
+          in: path
+          name: userId
+          required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Session'
       responses:
         '200':
           description: Successful response
@@ -870,6 +1225,8 @@ paths:
             $ref: '#/definitions/Session'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.activity.write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/fitness.activity.write'
       tags:
         - users

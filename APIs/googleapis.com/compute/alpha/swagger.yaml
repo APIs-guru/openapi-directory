@@ -5832,7 +5832,7 @@ paths:
         - instanceTemplates
   '/{project}/global/instanceTemplates/{instanceTemplate}':
     delete:
-      description: 'Deletes the specified instance template. If you delete an instance template that is being referenced from another instance group, the instance group will not be able to create or recreate virtual machine instances. Deleting an instance template is permanent and cannot be undone.'
+      description: Deletes the specified instance template. Deleting an instance template is permanent and cannot be undone. It's not possible to delete templates which are in use by an instance group.
       operationId: compute.instanceTemplates.delete
       parameters:
         - description: The name of the instance template to delete.
@@ -25037,7 +25037,7 @@ definitions:
         format: int32
         type: integer
       acceleratorType:
-        description: Full or partial URL of the accelerator type resource to expose to this instance.
+        description: 'Full or partial URL of the accelerator type resource to attach to this instance. If you are creating an instance template, specify only the accelerator name.'
         type: string
     type: object
   AcceleratorType:
@@ -25721,6 +25721,11 @@ definitions:
           - projects/project/zones/zone/diskTypes/diskType 
           - zones/zone/diskTypes/diskType  Note that for InstanceTemplate, this is the name of the disk type, not URL.
         type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to this disk. These can be later modified by the disks.setLabels method. This field is only applicable for persistent disks.
+        type: object
       sourceImage:
         description: |-
           The source image to create this disk. When creating a new instance, one of initializeParams.sourceImage or disks.source is required except for local SSD.
@@ -27522,6 +27527,9 @@ definitions:
       autoDelete:
         description: Specifies whether the disk will be auto-deleted when the instance is deleted (but not when the disk is detached from the instance).
         type: boolean
+      customImage:
+        description: The custom source image to be used to restore this disk when instantiating this instance template.
+        type: string
       deviceName:
         description: Specifies the device name of the disk to which the configurations apply to.
         type: string
@@ -27530,14 +27538,11 @@ definitions:
         enum:
           - ATTACH_READ_ONLY
           - BLANK
+          - CUSTOM_IMAGE
           - DEFAULT
           - DO_NOT_INCLUDE
-          - IMAGE_URL
           - SOURCE_IMAGE
           - SOURCE_IMAGE_FAMILY
-        type: string
-      sourceImage:
-        description: The custom source image to be used to restore this disk when instantiating this instance template.
         type: string
     type: object
   DiskList:
@@ -29989,6 +29994,10 @@ definitions:
         items:
           $ref: '#/definitions/NetworkInterface'
         type: array
+      preservedStateSizeGb:
+        description: Total amount of preserved state for SUSPENDED instances. Read-only in the api.
+        format: int64
+        type: string
       scheduling:
         $ref: '#/definitions/Scheduling'
         description: Sets the scheduling options for this instance.
@@ -33191,9 +33200,22 @@ definitions:
     description: Overrides of stateful properties for a given instance
     properties:
       disks:
-        description: Disk overrides defined for this instance
+        description: 'Disk overrides defined for this instance. According to documentation the maximum number of disks attached to an instance is 128: https://cloud.google.com/compute/docs/disks/ However, compute API defines the limit at 140, so this is what we check.'
         items:
           $ref: '#/definitions/ManagedInstanceOverrideDiskOverride'
+        type: array
+      metadata:
+        description: Metadata overrides defined for this instance. TODO(b/69785416) validate the total length is <9 KB
+        items:
+          properties:
+            key:
+              description: 'Key for the metadata entry. Keys must conform to the following regexp: [a-zA-Z0-9-_]+, and be less than 128 bytes in length. This is reflected as part of a URL in the metadata server. Additionally, to avoid ambiguity, keys must not conflict with any other metadata keys for the project.'
+              pattern: '[a-zA-Z0-9-_]{1,128}'
+              type: string
+            value:
+              description: 'Value for the metadata entry. These are free-form strings, and only have meaning as interpreted by the image running in the instance. The only restriction placed on values is that their size must be less than or equal to 262144 bytes (256 KiB).'
+              type: string
+          type: object
         type: array
       origin:
         description: '[Output Only] Indicates where does the override come from.'
@@ -34291,7 +34313,7 @@ definitions:
         type: integer
     type: object
   Project:
-    description: 'A Project resource. Projects can only be created in the Google Cloud Platform Console. Unless marked otherwise, values can only be modified in the console. (== resource_for v1.projects ==) (== resource_for beta.projects ==)'
+    description: 'A Project resource. For an overview of projects, see  Cloud Platform Resource Hierarchy. (== resource_for v1.projects ==) (== resource_for beta.projects ==)'
     properties:
       commonInstanceMetadata:
         $ref: '#/definitions/Metadata'
@@ -36384,6 +36406,9 @@ definitions:
       description:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
+      expiryTime:
+        description: '[Output Only] Expiry time of the certificate. RFC3339'
+        type: string
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
         format: uint64
@@ -36392,6 +36417,9 @@ definitions:
         default: 'compute#sslCertificate'
         description: '[Output Only] Type of the resource. Always compute#sslCertificate for SSL certificates.'
         type: string
+      managed:
+        $ref: '#/definitions/SslCertificateManagedSslCertificate'
+        description: Configuration and status of a managed SSL certificate.
       name:
         description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
@@ -36401,6 +36429,21 @@ definitions:
         type: string
       selfLink:
         description: '[Output only] Server-defined URL for the resource.'
+        type: string
+      selfManaged:
+        $ref: '#/definitions/SslCertificateSelfManagedSslCertificate'
+        description: Configuration and status of a self-managed SSL certificate.
+      subjectAlternativeNames:
+        description: '[Output Only] Domains associated with the certificate via Subject Alternative Name.'
+        items:
+          type: string
+        type: array
+      type:
+        description: '(Optional) Specifies the type of SSL certificate, either "SELF_MANAGED" or "MANAGED". If not specified, the certificate is self-managed and the fields certificate and private_key are used.'
+        enum:
+          - MANAGED
+          - SELF_MANAGED
+          - TYPE_UNKNOWN
         type: string
     type: object
   SslCertificateList:
@@ -36472,6 +36515,47 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  SslCertificateManagedSslCertificate:
+    description: Configuration and status of a managed SSL certificate.
+    properties:
+      domainStatus:
+        additionalProperties:
+          enum:
+            - ACTIVE
+            - DOMAIN_STATUS_UNKNOWN
+            - FAILED_CAA_FORBIDDEN
+            - FAILED_NOT_VISIBLE
+            - FAILED_RATE_LIMITED
+            - PROVISIONING
+          type: string
+        description: '[Output only] Detailed statuses of the domains specified for managed certificate resource.'
+        type: object
+      domains:
+        description: The domains for which a managed SSL certificate will be generated. Currently only single-domain certs are supported.
+        items:
+          type: string
+        type: array
+      status:
+        description: '[Output only] Status of the managed certificate resource.'
+        enum:
+          - ACTIVE
+          - PROVISIONING
+          - PROVISIONING_FAILED
+          - PROVISIONING_FAILED_PERMANENTLY
+          - RENEWAL_FAILED
+          - STATUS_UNKNOWN
+        type: string
+    type: object
+  SslCertificateSelfManagedSslCertificate:
+    description: Configuration and status of a self-managed SSL certificate..
+    properties:
+      certificate:
+        description: A local certificate file. The certificate must be in PEM format. The certificate chain must be no greater than 5 certs long. The chain must include at least one intermediate cert.
+        type: string
+      privateKey:
+        description: A write-only private key in PEM format. Only insert requests will include this field.
+        type: string
     type: object
   SslPoliciesList:
     properties:
