@@ -263,6 +263,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#BatchDeleteTableVersion':
+    post:
+      operationId: BatchDeleteTableVersion
+      description: Deletes a specified batch of versions of a table.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchDeleteTableVersionResponse'
+        '480':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchDeleteTableVersionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#BatchGetPartition':
     post:
       operationId: BatchGetPartition
@@ -399,6 +440,10 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '483':
+          description: ResourceNumberLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceNumberLimitExceededException'
       parameters:
         - name: body
           in: body
@@ -828,6 +873,10 @@ paths:
           description: OperationTimeoutException
           schema:
             $ref: '#/definitions/OperationTimeoutException'
+        '485':
+          description: ResourceNumberLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceNumberLimitExceededException'
       parameters:
         - name: body
           in: body
@@ -1142,6 +1191,47 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteTableRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTableVersion':
+    post:
+      operationId: DeleteTableVersion
+      description: Deletes a specified version of a table.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteTableVersionResponse'
+        '480':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteTableVersionRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2128,6 +2218,47 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetTableRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetTableVersion':
+    post:
+      operationId: GetTableVersion
+      description: Retrieves a specified version of a table.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetTableVersionResponse'
+        '480':
+          description: EntityNotFoundException
+          schema:
+            $ref: '#/definitions/EntityNotFoundException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: InternalServiceException
+          schema:
+            $ref: '#/definitions/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          schema:
+            $ref: '#/definitions/OperationTimeoutException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetTableVersionRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3174,6 +3305,10 @@ paths:
           description: ConcurrentModificationException
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
+        '485':
+          description: ResourceNumberLimitExceededException
+          schema:
+            $ref: '#/definitions/ResourceNumberLimitExceededException'
       parameters:
         - name: body
           in: body
@@ -3400,7 +3535,7 @@ definitions:
         description: 'The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.'
       DatabaseName:
         $ref: '#/definitions/NameString'
-        description: The name of the catalog database where the tables to delete reside.
+        description: 'The name of the catalog database where the tables to delete reside. For Hive compatibility, this name is entirely lowercase.'
       TablesToDelete:
         $ref: '#/definitions/BatchDeleteTableNameList'
         description: A list of the table to delete.
@@ -3410,6 +3545,37 @@ definitions:
       Errors:
         $ref: '#/definitions/TableErrors'
         description: A list of errors encountered in attempting to delete the specified tables.
+  BatchDeleteTableVersionList:
+    type: array
+    items:
+      $ref: '#/definitions/VersionString'
+    minItems: 0
+    maxItems: 100
+  BatchDeleteTableVersionRequest:
+    type: object
+    required:
+      - DatabaseName
+      - TableName
+      - VersionIds
+    properties:
+      CatalogId:
+        $ref: '#/definitions/CatalogIdString'
+        description: 'The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.'
+      DatabaseName:
+        $ref: '#/definitions/NameString'
+        description: 'The database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.'
+      TableName:
+        $ref: '#/definitions/NameString'
+        description: 'The name of the table. For Hive compatibility, this name is entirely lowercase.'
+      VersionIds:
+        $ref: '#/definitions/BatchDeleteTableVersionList'
+        description: A list of the IDs of versions to be deleted.
+  BatchDeleteTableVersionResponse:
+    type: object
+    properties:
+      Errors:
+        $ref: '#/definitions/TableVersionErrors'
+        description: A list of errors encountered while trying to delete the specified table versions.
   BatchGetPartitionRequest:
     type: object
     required:
@@ -3503,6 +3669,8 @@ definitions:
     items:
       $ref: '#/definitions/BatchStopJobRunSuccessfulSubmission'
   Boolean:
+    type: boolean
+  BooleanNullable:
     type: boolean
   BooleanValue:
     type: boolean
@@ -3735,6 +3903,10 @@ definitions:
     description: Defines a connection to a data source.
   ConnectionInput:
     type: object
+    required:
+      - Name
+      - ConnectionType
+      - ConnectionProperties
     properties:
       Name:
         $ref: '#/definitions/NameString'
@@ -4205,7 +4377,7 @@ definitions:
         description: 'The ID of the Data Catalog in which to create the <code>Table</code>. If none is supplied, the AWS account ID is used by default.'
       DatabaseName:
         $ref: '#/definitions/NameString'
-        description: The catalog database in which to create the new table.
+        description: 'The catalog database in which to create the new table. For Hive compatibility, this name is entirely lowercase.'
       TableInput:
         $ref: '#/definitions/TableInput'
         description: The <code>TableInput</code> object that defines the metadata table to create in the catalog.
@@ -4299,7 +4471,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: Name of the database.
+        description: 'Name of the database. For Hive compatibility, this is folded to lowercase when it is stored.'
       Description:
         $ref: '#/definitions/DescriptionString'
         description: Description of the database.
@@ -4320,7 +4492,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: Name of the database.
+        description: 'Name of the database. For Hive compatibility, this is folded to lowercase when it is stored.'
       Description:
         $ref: '#/definitions/DescriptionString'
         description: Description of the database
@@ -4330,7 +4502,7 @@ definitions:
       Parameters:
         $ref: '#/definitions/ParametersMap'
         description: A list of key-value pairs that define parameters and properties of the database.
-    description: The structure used to create or updata a database.
+    description: The structure used to create or update a database.
   DatabaseList:
     type: array
     items:
@@ -4395,7 +4567,7 @@ definitions:
         description: 'The ID of the Data Catalog in which the database resides. If none is supplied, the AWS account ID is used by default.'
       Name:
         $ref: '#/definitions/NameString'
-        description: The name of the Database to delete.
+        description: 'The name of the Database to delete. For Hive compatibility, this must be all lowercase.'
   DeleteDatabaseResponse:
     type: object
     properties: {}
@@ -4457,11 +4629,33 @@ definitions:
         description: 'The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.'
       DatabaseName:
         $ref: '#/definitions/NameString'
-        description: The name of the catalog database in which the table resides.
+        description: 'The name of the catalog database in which the table resides. For Hive compatibility, this name is entirely lowercase.'
       Name:
         $ref: '#/definitions/NameString'
-        description: The name of the table to be deleted.
+        description: 'The name of the table to be deleted. For Hive compatibility, this name is entirely lowercase.'
   DeleteTableResponse:
+    type: object
+    properties: {}
+  DeleteTableVersionRequest:
+    type: object
+    required:
+      - DatabaseName
+      - TableName
+      - VersionId
+    properties:
+      CatalogId:
+        $ref: '#/definitions/CatalogIdString'
+        description: 'The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.'
+      DatabaseName:
+        $ref: '#/definitions/NameString'
+        description: 'The database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.'
+      TableName:
+        $ref: '#/definitions/NameString'
+        description: 'The name of the table. For Hive compatibility, this name is entirely lowercase.'
+      VersionId:
+        $ref: '#/definitions/VersionString'
+        description: The ID of the table version to be deleted.
+  DeleteTableVersionResponse:
     type: object
     properties: {}
   DeleteTriggerRequest:
@@ -4793,7 +4987,7 @@ definitions:
         description: 'The ID of the Data Catalog in which the database resides. If none is supplied, the AWS account ID is used by default.'
       Name:
         $ref: '#/definitions/NameString'
-        description: The name of the database to retrieve.
+        description: 'The name of the database to retrieve. For Hive compatibility, this should be all lowercase.'
   GetDatabaseResponse:
     type: object
     properties:
@@ -5070,16 +5264,40 @@ definitions:
         description: 'The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.'
       DatabaseName:
         $ref: '#/definitions/NameString'
-        description: The name of the database in the catalog in which the table resides.
+        description: 'The name of the database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.'
       Name:
         $ref: '#/definitions/NameString'
-        description: The name of the table for which to retrieve the definition.
+        description: 'The name of the table for which to retrieve the definition. For Hive compatibility, this name is entirely lowercase.'
   GetTableResponse:
     type: object
     properties:
       Table:
         $ref: '#/definitions/Table'
         description: The <code>Table</code> object that defines the specified table.
+  GetTableVersionRequest:
+    type: object
+    required:
+      - DatabaseName
+      - TableName
+    properties:
+      CatalogId:
+        $ref: '#/definitions/CatalogIdString'
+        description: 'The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.'
+      DatabaseName:
+        $ref: '#/definitions/NameString'
+        description: 'The database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.'
+      TableName:
+        $ref: '#/definitions/NameString'
+        description: 'The name of the table. For Hive compatibility, this name is entirely lowercase.'
+      VersionId:
+        $ref: '#/definitions/VersionString'
+        description: The ID value of the table version to be retrieved.
+  GetTableVersionResponse:
+    type: object
+    properties:
+      TableVersion:
+        $ref: '#/definitions/TableVersion'
+        description: The requested table version.
   GetTableVersionsList:
     type: array
     items:
@@ -5095,10 +5313,10 @@ definitions:
         description: 'The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.'
       DatabaseName:
         $ref: '#/definitions/NameString'
-        description: The database in the catalog in which the table resides.
+        description: 'The database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.'
       TableName:
         $ref: '#/definitions/NameString'
-        description: The name of the table.
+        description: 'The name of the table. For Hive compatibility, this name is entirely lowercase.'
       NextToken:
         $ref: '#/definitions/Token'
         description: 'A continuation token, if this is not the first call.'
@@ -5124,7 +5342,7 @@ definitions:
         description: 'The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.'
       DatabaseName:
         $ref: '#/definitions/NameString'
-        description: The database in the catalog whose tables to list.
+        description: 'The database in the catalog whose tables to list. For Hive compatibility, this name is entirely lowercase.'
       Expression:
         $ref: '#/definitions/FilterString'
         description: 'A regular expression pattern. If present, only those tables whose names match the pattern are returned.'
@@ -5674,7 +5892,7 @@ definitions:
           $ref: '#/definitions/ParametersMapValue'
   ParametersMapValue:
     type: string
-    maxLength: 51200
+    maxLength: 512000
   Partition:
     type: object
     properties:
@@ -5772,7 +5990,7 @@ definitions:
         description: The security group ID list used by the connection.
       AvailabilityZone:
         $ref: '#/definitions/NameString'
-        description: The connection's availability zone.
+        description: The connection's availability zone. This field is deprecated and has no effect.
     description: Specifies the physical requirements for a connection.
   Predecessor:
     type: object
@@ -6121,10 +6339,10 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: Name of the table.
+        description: 'Name of the table. For Hive compatibility, this must be entirely lowercase.'
       DatabaseName:
         $ref: '#/definitions/NameString'
-        description: Name of the metadata database where the table metadata resides.
+        description: 'Name of the metadata database where the table metadata resides. For Hive compatibility, this must be all lowercase.'
       Description:
         $ref: '#/definitions/DescriptionString'
         description: Description of the table.
@@ -6173,7 +6391,7 @@ definitions:
     properties:
       TableName:
         $ref: '#/definitions/NameString'
-        description: Name of the table.
+        description: 'Name of the table. For Hive compatibility, this must be entirely lowercase.'
       ErrorDetail:
         $ref: '#/definitions/ErrorDetail'
         description: Detail about the error.
@@ -6189,7 +6407,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/NameString'
-        description: Name of the table.
+        description: 'Name of the table. For Hive compatibility, this is folded to lowercase when it is stored.'
       Description:
         $ref: '#/definitions/DescriptionString'
         description: Description of the table.
@@ -6247,6 +6465,23 @@ definitions:
         $ref: '#/definitions/VersionString'
         description: The ID value that identifies this table version.
     description: Specifies a version of a table.
+  TableVersionError:
+    type: object
+    properties:
+      TableName:
+        $ref: '#/definitions/NameString'
+        description: The name of the table in question.
+      VersionId:
+        $ref: '#/definitions/VersionString'
+        description: The ID value of the version in question.
+      ErrorDetail:
+        $ref: '#/definitions/ErrorDetail'
+        description: Detail about the error.
+    description: An error record for table-version operations.
+  TableVersionErrors:
+    type: array
+    items:
+      $ref: '#/definitions/TableVersionError'
   Timestamp:
     type: string
     format: date-time
@@ -6430,7 +6665,7 @@ definitions:
         description: 'The ID of the Data Catalog in which the metadata database resides. If none is supplied, the AWS account ID is used by default.'
       Name:
         $ref: '#/definitions/NameString'
-        description: The name of the metadata database to update in the catalog.
+        description: 'The name of the database to update in the catalog. For Hive compatibility, this is folded to lowercase.'
       DatabaseInput:
         $ref: '#/definitions/DatabaseInput'
         description: A <code>DatabaseInput</code> object specifying the new definition of the metadata database in the catalog.
@@ -6530,10 +6765,13 @@ definitions:
         description: 'The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.'
       DatabaseName:
         $ref: '#/definitions/NameString'
-        description: The name of the catalog database in which the table resides.
+        description: 'The name of the catalog database in which the table resides. For Hive compatibility, this name is entirely lowercase.'
       TableInput:
         $ref: '#/definitions/TableInput'
         description: An updated <code>TableInput</code> object to define the metadata table in the catalog.
+      SkipArchive:
+        $ref: '#/definitions/BooleanNullable'
+        description: 'By default, <code>UpdateTable</code> always creates an archived version of the table before updating it. If <code>skipArchive</code> is set to true, however, <code>UpdateTable</code> does not create the archived version.'
   UpdateTableResponse:
     type: object
     properties: {}
@@ -6669,7 +6907,7 @@ definitions:
     x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
   ViewTextString:
     type: string
-    maxLength: 2048
+    maxLength: 409600
   XMLClassifier:
     type: object
     required:
