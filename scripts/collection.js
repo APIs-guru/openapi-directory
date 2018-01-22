@@ -846,7 +846,7 @@ function fixSpec(swagger, errors) {
           if (value.startsWith('#/definitions/')) {
             console.warn(error.code,value);
             let ptr = value.replace('#/definitions/','');
-            swagger.definitions[ptr] = { type: 'object' };
+            swagger.definitions[ptr] = { };
             fixed = true;
           }
         }
