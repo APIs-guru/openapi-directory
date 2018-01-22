@@ -30,7 +30,7 @@ info:
     * [Changelog](https://flat.io/developers/docs/api/changelog.html)
   termsOfService: 'https://flat.io/legal'
   title: Flat
-  version: 2.5.0
+  version: 2.5.1
   x-apisguru-categories:
     - media
     - collaboration
@@ -3951,7 +3951,7 @@ definitions:
         type: string
       username:
         description: Username of the new account
-        pattern: '^[A-Za-z0-9-_.]+$'
+        pattern: '^[A-Za-z0-9\-_.]+$'
         type: string
     required:
       - username

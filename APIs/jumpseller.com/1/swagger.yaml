@@ -624,6 +624,28 @@ paths:
       summary: Create a new Customer.
       tags:
         - Customers
+  '/customers/email/{email}.json':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Email of the Customer
+          in: path
+          name: email
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Customer'
+        '404':
+          description: Customer Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieve a single Customer.
+      tags:
+        - Customers
   '/customers/{id}.json':
     delete:
       parameters:
@@ -2791,6 +2813,14 @@ definitions:
         items:
           $ref: '#/definitions/OrderProduct'
         type: array
+      shipment_status:
+        description: Shipment Status for Order Fulfillment.
+        enum:
+          - delivered
+          - requested
+          - in_transit
+          - failed
+        type: string
       shipping:
         description: Shipping value for the given Order
         format: float
@@ -2825,13 +2855,13 @@ definitions:
         format: float
         type: number
       tracking_company:
-        description: Company Used for the Shipment.
+        description: Company Used for Order Fulfillment.
         type: string
       tracking_number:
-        description: Tracking Number for the Shipment.
+        description: Tracking Number for Order Fulfillment.
         type: string
       tracking_url:
-        description: URL to track the Shipment.
+        description: Tracking URL for Order Fulfillment.
         type: string
   OrderHistory:
     properties:

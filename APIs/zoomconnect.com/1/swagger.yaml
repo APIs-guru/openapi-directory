@@ -1558,29 +1558,47 @@ paths:
       consumes:
         - multipart/form-data
       deprecated: false
-      description: Send a single audio voice message to one recipient
+      description: 'Send a single audio voice message to one recipient. Note, Content-Type header must be set to multipart/form-data for this request.'
       operationId: single-audio
       parameters:
-        - description: file
+        - description: 'audio file to play, supports MP3 or WAV format'
           in: formData
           name: file
           required: true
           type: file
-        - description: recipientNumber
+        - description: the phone number of the recipient to send to
           in: query
           name: recipientNumber
           required: true
           type: string
-        - description: campaign
+        - description: optional campaign name
           in: query
           name: campaign
           required: false
           type: string
-        - description: dataField
+        - description: optional extra data
           in: query
           name: dataField
           required: false
           type: string
+        - description: optional number of times to retry unanswered call
+          format: int32
+          in: query
+          name: retryCount
+          required: false
+          type: integer
+        - description: optional minimum interval in minutes between retry attempts
+          format: int32
+          in: query
+          name: retryMinimumInterval
+          required: false
+          type: integer
+        - description: optional maximum interval in minutes between retry attempts
+          format: int32
+          in: query
+          name: retryMaximumInterval
+          required: false
+          type: integer
       responses:
         '200':
           description: Description was not specified
@@ -2016,6 +2034,15 @@ definitions:
         type: string
       recipientNumber:
         type: string
+      retryCount:
+        format: int32
+        type: integer
+      retryMaximumInterval:
+        format: int32
+        type: integer
+      retryMinimumInterval:
+        format: int32
+        type: integer
   WebServiceVoiceMessages:
     description: WebServiceVoiceMessages
     properties:

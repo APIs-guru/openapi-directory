@@ -1070,8 +1070,6 @@ definitions:
         type: string
     type: object
   ADGroup:
-    additionalProperties:
-      type: object
     allOf:
       - $ref: '#/definitions/DirectoryObject'
     description: Active Directory group information.
@@ -1088,8 +1086,6 @@ definitions:
     type: object
     x-ms-discriminator-value: Group
   Application:
-    additionalProperties:
-      type: object
     allOf:
       - $ref: '#/definitions/DirectoryObject'
     description: Active Directory application information.
@@ -1263,6 +1259,8 @@ definitions:
         type: boolean
     type: object
   DirectoryObject:
+    additionalProperties:
+      type: object
     description: Represents an Azure Active Directory object.
     discriminator: objectType
     properties:
@@ -1584,8 +1582,6 @@ definitions:
       - id
     type: object
   ServicePrincipal:
-    additionalProperties:
-      type: object
     allOf:
       - $ref: '#/definitions/DirectoryObject'
     description: Active Directory service principal information.
@@ -1652,8 +1648,6 @@ definitions:
         type: string
     type: object
   User:
-    additionalProperties:
-      type: object
     allOf:
       - $ref: '#/definitions/DirectoryObject'
     description: Active Directory user information.
@@ -1727,8 +1721,6 @@ definitions:
           name: UserType
     type: object
   UserCreateParameters:
-    additionalProperties:
-      type: object
     allOf:
       - $ref: '#/definitions/UserBase'
     description: Request parameters for creating a new work or school account user.
@@ -1791,8 +1783,6 @@ definitions:
         type: array
     type: object
   UserUpdateParameters:
-    additionalProperties:
-      type: object
     allOf:
       - $ref: '#/definitions/UserBase'
     description: Request parameters for updating an existing work or school account user.

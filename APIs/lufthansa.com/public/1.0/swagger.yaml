@@ -661,7 +661,7 @@ paths:
           description: ''
           examples: {}
           schema:
-            type: object
+            $ref: '#/definitions/AirportResponse'
       security:
         - auth: []
       summary: Airports
@@ -773,3 +773,100 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
+definitions:
+  Airport:
+    description: Array of all available airports or one airport matching the request.
+    properties:
+      AirportCode:
+        description: '3-letter IATA airport code, e.g. “TXL”.'
+        type: string
+      CityCode:
+        description: '3-letter IATA city code, e.g. “BER”.'
+        type: string
+      CountryCode:
+        description: '2-letter ISO 3166-1 country code, e.g. “DE”.'
+        type: string
+      LocationType:
+        description: ' “Airport”, “RailwayStation” or “BusStation”.'
+        type: string
+      Names:
+        description: Container for airport names.
+        properties:
+          Name:
+            description: 'Array: language specific full name of airport.'
+            items:
+              $ref: '#/definitions/Name'
+            type: array
+        type: object
+      Position:
+        description: Physical location of an airport. This data section is optional and therefore not always present.
+        properties:
+          Coordinate:
+            $ref: '#/definitions/Coordinate'
+        type: object
+      TimeZoneId:
+        description: Time zone name airport is in
+        type: string
+      UtcOffset:
+        description: Hour offset of airport to UTC time zone
+        format: float
+        type: number
+    type: object
+  AirportResource:
+    description: Root element of airport response.
+    properties:
+      Airports:
+        description: Container for airport elements.
+        properties:
+          Airport:
+            $ref: '#/definitions/Airport'
+        type: object
+      Meta:
+        description: Container for meta links.
+        properties:
+          '@Version':
+            type: string
+          Link:
+            description: 'Array: links to resource itself and other related resources.'
+            items:
+              $ref: '#/definitions/Link'
+            type: array
+          TotalCount:
+            format: int32
+            type: integer
+        type: object
+    type: object
+  AirportResponse:
+    properties:
+      AirportResource:
+        $ref: '#/definitions/AirportResource'
+    type: object
+  Coordinate:
+    description: Container for coordinates.
+    properties:
+      Latitude:
+        description: 'Decimal latitude. Range: -90 (South Pole) to +90 (North Pole), e.g. “51.540”.'
+        format: float
+        type: number
+      Longitude:
+        description: 'Decimal longitude. Range: -180 (West of Prime Meridian) to +180 (East of Prime Meridian).'
+        format: float
+        type: number
+    type: object
+  Link:
+    properties:
+      '@Href':
+        description: Link to actual a resource.
+        type: string
+      '@Rel':
+        description: 'Specifying kind of link such as ‘self’ (link that returned this response), ‘alternate’ (link that points to another resource) or ‘related’ (link that points to related resource).'
+        type: string
+    type: object
+  Name:
+    description: 2-letter ISO 639-1 language code for the corresponding item.
+    properties:
+      $:
+        type: string
+      '@LanguageCode':
+        type: string
+    type: object

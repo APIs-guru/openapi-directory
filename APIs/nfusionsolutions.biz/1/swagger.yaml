@@ -402,6 +402,11 @@ paths:
           name: currency
           required: false
           type: string
+        - description: "optional - unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
+          in: query
+          name: unitofmeasure
+          required: false
+          type: string
         - description: <b>REQUIRED</b> - auth token
           in: query
           name: token
@@ -445,6 +450,11 @@ paths:
         - description: 'optional - currency for pricing, defaults to USD'
           in: query
           name: currency
+          required: false
+          type: string
+        - description: "optional - unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
+          in: query
+          name: unitofmeasure
           required: false
           type: string
         - description: "optional - aggregation interval. Composed of an optional integer value (which defaults to 1 when not specified), \r\nfollowed by a type string which must be one of the following values:\r\ny=year,\r\nm=month,\r\nw=week,\r\nd=day,\r\nh=hour,\r\nmi=minute\r\n\r\nFor example, a yearly interval can be specified as \"y\" and 6 month interval as \"6m\". \r\n\r\nIf not specified the interval parameter default is 1 Day."
@@ -512,6 +522,11 @@ paths:
         - description: 'optional - currency for pricing, defaults to USD'
           in: query
           name: currency
+          required: false
+          type: string
+        - description: "optional - unit of meaure, defaults to troy ounces. allowed values are:\r\nmg=milligram\r\ng=gram\r\nkg=kilogram\r\ngr=grain\r\noz=ounce\r\ntoz=troy ounce\r\nct=carat\r\ndwt=pennyweight"
+          in: query
+          name: unitofmeasure
           required: false
           type: string
         - description: <b>REQUIRED</b> - auth token

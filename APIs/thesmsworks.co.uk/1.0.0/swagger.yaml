@@ -249,6 +249,30 @@ paths:
       tags:
         - messages
     x-swagger-router-controller: message-client
+  /messages/inbox:
+    post:
+      description: Get unread uncoming messages matching your search criteria
+      operationId: getInboxMessages
+      parameters:
+        - in: body
+          name: query
+          required: true
+          schema:
+            $ref: '#/definitions/Query'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/MessagesResponse'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/ExtendedErrorModel'
+      security:
+        - JWT: []
+      tags:
+        - messages
+    x-swagger-router-controller: message-client
   '/messages/schedule/{messageid}':
     delete:
       description: Cancels a scheduled SMS message
@@ -303,21 +327,15 @@ paths:
     x-swagger-router-controller: message-client
   /swagger:
     x-swagger-pipe: swagger_raw
-  /utils/hello:
+  /utils/test:
     get:
-      description: Returns 'Hello' to the caller
-      operationId: hello
-      parameters:
-        - description: The name of the person to whom to say hello
-          in: query
-          name: name
-          required: false
-          type: string
+      description: Returns the customer ID to the caller
+      operationId: test
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/HelloWorldResponse'
+            $ref: '#/definitions/TestResponse'
         default:
           description: Error
           schema:
@@ -398,12 +416,6 @@ definitions:
         required:
           - errorCode
         type: object
-  HelloWorldResponse:
-    properties:
-      message:
-        type: string
-    required:
-      - message
   Login:
     description: authorisation object
     properties:
@@ -461,6 +473,9 @@ definitions:
       destination:
         example: 447777777777
         type: number
+      id:
+        example: 123456789
+        type: string
       keyword:
         example: SOLO
         type: string
@@ -510,7 +525,7 @@ definitions:
     description: search parameters for querying the message database
     properties:
       destination:
-        description: The phone number of the recipient
+        description: The phone number of the recipient. Start UK numbers with 44 and drop the leading 0.
         example: 447777777777
         type: string
       from:
@@ -570,6 +585,12 @@ definitions:
       - messageid
       - status
       - credits
+  TestResponse:
+    properties:
+      message:
+        type: string
+    required:
+      - message
   TokenResponse:
     properties:
       token:

@@ -455,6 +455,33 @@ paths:
           name: type
           required: false
           type: array
+        - collectionFormat: multi
+          description: |
+            Request listings by a specific property sub type.
+
+            *NOTE* not all sub type filters are available for all vendors.
+          enum:
+            - apartment
+            - boatslip
+            - singlefamilyresidence
+            - deededparking
+            - cabin
+            - condominium
+            - duplex
+            - manufacturedhome
+            - ownyourown
+            - quadruplex
+            - stockcooperative
+            - townhouse
+            - timeshare
+            - triplex
+            - manufacturedonland
+          in: query
+          items:
+            type: string
+          name: subtype
+          required: false
+          type: array
         - description: |
             Filter the listings returned by an agent ID.  Note, the
             Agent ID is provided by your MLS.
@@ -1326,6 +1353,8 @@ definitions:
       occupantName:
         type: string
       occupantType:
+        type: string
+      ownerName:
         type: string
       parking:
         $ref: '#/definitions/Parking'

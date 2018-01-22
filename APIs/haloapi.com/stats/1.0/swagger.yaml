@@ -582,7 +582,7 @@ paths:
   '/h5/custom/matches/{matchId}':
     get:
       description: |
-        <p>Retrieves detailed statistics for a Match with the Custom Game Mode. Games with the Custom Game Mode are played on Xbox Live Servers. For games played with on Local Servers, use the "Halo 5 - Match Result - Custom Local" Endpoint.</p>
+        <p>Retrieves detailed statistics for a Match with the Custom Game Mode. Games with the Custom Game Mode are played on Xbox Live Servers. For games played on Local Servers, use the "Halo 5 - Match Result - Custom Local" Endpoint.</p>
         <br />
         <h4>Changelog</h4>
         <div class="panel-body">
@@ -753,35 +753,13 @@ paths:
   '/h5/customlocal/matches/{matchId}':
     get:
       description: |
-        <p>Retrieves detailed statistics for a Match with the Custom Game Mode. Games with the Custom Game Mode are played on Xbox Live Servers. For games played with on Local Servers, use the "Halo 5 - Match Result - Custom Local" Endpoint.</p>
+        <p>Retrieves detailed statistics for a Match with the Custom Local Game Mode. Games with the Custom Local Game Mode are played on Local Servers. For games played on Xbox Live Servers, use the "Halo 5 - Match Result - Custom" Endpoint.</p>
         <br />
         <h4>Changelog</h4>
         <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
-                <li>Added Game Mode clarifications to the Endpoint description.</li>
-                <li>Added documentation for "PresentInMatch".</li>
-            </ul>
-        </div>
-        <div class="panel-body">
-            <p><strong>February 21, 2017:</strong></p>
-            <ul>
-                <li>Renamed Endpoint from "Post-Game Carnage Report: Custom" to "Halo 5 - Match Result - Custom".</li>
-                <li>Removed "{title}" Request Parameter.</li>
-                <li>Updated the documentation for "GameVariantResourceId" and "MapVariantResourceId" to reference the UGC API.</li>
-            </ul>
-        </div>
-        <div class="panel-body">
-            <p><strong>May 16, 2016:</strong></p>
-            <ul>
-                <li>Documented HTTP 503 Response Code.</li>
-            </ul>
-        </div>
-        <div class="panel-body">
-            <p><strong>April 20, 2016:</strong></p>
-            <ul>
-                <li>Added documentation for the "GameVariantResourceId", "MapVariantResourceId", and "PlayerScore" fields.</li>
-                <li>Updated the documentation for the "MapVariantId" and "GameVariantId" fields with the recommendation of using the "MapVariantResourceId" and "GameVariantResourceId" fields, respectively.</li>
+                <li>Added Endpoint.</li>
             </ul>
         </div>
       operationId: Halo 5 - Match Result - Custom Local
@@ -1142,7 +1120,7 @@ paths:
     get:
       description: |
         <p>Retrieves a list of Matches that the Player has participated in and which have completed processing. If the Player is currently in a match, it is not returned in this API.</p>
-        <p>This endpoint will return games played on Local Servers with the Custom Local Game Mode for games that occurred or after December 22, 2017.</p>
+        <p>This endpoint will include games played on Local Servers with the Custom Local Game Mode for games that occurred or after December 22, 2017.</p>
         <br />
         <h4>Changelog</h4>
         <div class="panel-body">
@@ -2757,20 +2735,13 @@ paths:
   /h5/servicerecords/customlocal:
     get:
       description: |
-        <p>Retrieves Service Records for the Custom Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode. Games with the Custom Game Mode are played on Xbox Live Servers. For games played on Local Servers, use the "Halo 5 - Player Service Records - Custom Local" Endpoint.</p>
+        <p>Retrieves Service Records for the Custom Local Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode. Games with the Custom Local Game Mode are played on Local Servers. For games played on Xbox Live Servers, use the "Halo 5 - Player Service Records - Custom" Endpoint. A player's Custom Local Service Record summarizes games played on or after December 22, 2017.</p>
         <br />
         <h4>Changelog</h4>
         <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
-                <li>Added Game Mode clarifications to the Endpoint description.</li>
-            </ul>
-        </div>
-        <div class="panel-body">
-            <p><strong>February 21, 2017:</strong></p>
-            <ul>
-                <li>Renamed Endpoint from "Service Record: Custom" to "Halo 5 - Player Service Records - Custom".</li>
-                <li>Removed "{title}" Request Parameter.</li>
+                <li>Added Endpoint.</li>
             </ul>
         </div>
       operationId: Halo 5 - Player Service Records - Custom Local
@@ -3366,7 +3337,7 @@ paths:
   '/h5pc/custom/matches/{matchId}':
     get:
       description: |
-        <p>Retrieves detailed statistics for a Match with the Custom Game Mode. Games with the Custom Game Mode are played on Xbox Live Servers. For games played with on Local Servers, use the "Halo 5 - Match Result - Custom Local" Endpoint.</p>
+        <p>Retrieves detailed statistics for a Match with the Custom Game Mode. Games with the Custom Game Mode are played on Xbox Live Servers. For games played on Local Servers, use the "Halo 5 - Match Result - Custom Local" Endpoint.</p>
         <br />
         <h4>Changelog</h4>
         <div class="panel-body">
@@ -3538,7 +3509,7 @@ paths:
     get:
       description: |
         <p>Retrieves a list of Matches that the Player has participated in and which have completed processing. If the Player is currently in a match, it is not returned in this API.</p>
-        <p>This endpoint will return games played on Local Servers with the Custom Local Game Mode for games that occurred or after December 22, 2017.</p>
+        <p>This endpoint will include games played on Local Servers with the Custom Local Game Mode for games that occurred or after December 22, 2017.</p>
         <br />
         <h4>Changelog</h4>
         <div class="panel-body">

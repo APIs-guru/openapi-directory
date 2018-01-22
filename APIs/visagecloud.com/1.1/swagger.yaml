@@ -30,8 +30,6 @@ tags:
     name: Analytics for presence and audience
   - description: Manages Streams
     name: Stream
-  - description: Count individuals from streams or collections
-    name: Counting
   - description: Performs image-recognition related operations
     name: Analysis
   - description: Create classifiers on existing faces
@@ -540,11 +538,114 @@ paths:
       summary: Retrieve a complete analysis object including both detection and recognition information
       tags:
         - Analysis
+  /rest/v1.1/analytics/counting:
+    post:
+      consumes:
+        - application/json
+      operationId: counterUsingPOST
+      parameters:
+        - description: The accessKey provided by VisageCloud
+          in: query
+          name: accessKey
+          required: true
+          type: string
+        - description: The secretKey or readOnlyKey provided by VisageCloud
+          in: query
+          name: secretKey
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: Collection ids
+          in: query
+          items:
+            type: string
+          name: collectionIds
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: Stream Ids
+          in: query
+          items:
+            type: string
+          name: streamIds
+          required: false
+          type: array
+        - description: startDateTime
+          format: date-time
+          in: query
+          name: startDateTime
+          required: false
+          type: string
+        - description: endDateTime
+          format: date-time
+          in: query
+          name: endDateTime
+          required: false
+          type: string
+        - default: 3600000
+          description: visitDuration
+          format: int64
+          in: query
+          name: visitDuration
+          required: false
+          type: integer
+        - default: 1
+          description: maxIterations
+          format: int32
+          in: query
+          name: maxIterations
+          required: false
+          type: integer
+        - default: 1
+          description: maxBatchIterations
+          format: int32
+          in: query
+          name: maxBatchIterations
+          required: false
+          type: integer
+        - default: 5
+          description: minNeighborsMergedPerIteration
+          format: int32
+          in: query
+          name: minNeighborsMergedPerIteration
+          required: false
+          type: integer
+        - default: 1
+          description: mergingStep
+          format: double
+          in: query
+          name: mergingStep
+          required: false
+          type: number
+        - default: false
+          description: shuffling
+          in: query
+          name: shuffling
+          required: false
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Count individuals in streams or collections
+      tags:
+        - Analytics for presence and audience
   /rest/v1.1/analytics/presence/timeseries:
     post:
       consumes:
         - application/json
-      operationId: audienceUsingPOST
+      operationId: presenceTimeseriesUsingPOST
       parameters:
         - description: The accessKey provided by VisageCloud
           in: query
@@ -613,7 +714,7 @@ paths:
     post:
       consumes:
         - application/json
-      operationId: presenceUsingPOST
+      operationId: presenceTotalUsingPOST
       parameters:
         - description: The accessKey provided by VisageCloud
           in: query
@@ -1507,95 +1608,6 @@ paths:
       summary: Gets all the profiles associated to a collection
       tags:
         - Collection
-  /rest/v1.1/counting/count:
-    post:
-      consumes:
-        - application/json
-      operationId: counterUsingPOST
-      parameters:
-        - description: The accessKey provided by VisageCloud
-          in: query
-          name: accessKey
-          required: true
-          type: string
-        - description: The secretKey or readOnlyKey provided by VisageCloud
-          in: query
-          name: secretKey
-          required: true
-          type: string
-        - collectionFormat: multi
-          description: Collection ids
-          in: query
-          items:
-            type: string
-          name: collectionIds
-          required: false
-          type: array
-        - collectionFormat: multi
-          description: Stream Ids
-          in: query
-          items:
-            type: string
-          name: streamIds
-          required: false
-          type: array
-        - description: startDateTime
-          format: date-time
-          in: query
-          name: startDateTime
-          required: false
-          type: string
-        - description: endDateTime
-          format: date-time
-          in: query
-          name: endDateTime
-          required: false
-          type: string
-        - default: 25
-          description: maxIterations
-          format: int32
-          in: query
-          name: maxIterations
-          required: false
-          type: integer
-        - default: 3
-          description: minNeighborsMergedPerIteration
-          format: int32
-          in: query
-          name: minNeighborsMergedPerIteration
-          required: false
-          type: integer
-        - default: 0.15
-          description: mergingStep
-          format: double
-          in: query
-          name: mergingStep
-          required: false
-          type: number
-        - default: false
-          description: shuffling
-          in: query
-          name: shuffling
-          required: false
-          type: boolean
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/RestResponse'
-        '201':
-          description: Created
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-      summary: Count individuals in streams or collections
-      tags:
-        - Counting
   /rest/v1.1/profile/classificationAttributes:
     delete:
       consumes:

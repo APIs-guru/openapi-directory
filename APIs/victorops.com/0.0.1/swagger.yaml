@@ -169,6 +169,13 @@ parameters:
     required: true
     schema:
       $ref: '#/definitions/RemoveTeamMemberPayload'
+  rerouteBody:
+    description: The reroute rules
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/RerouteCollection'
   step:
     default: 0
     description: Step of escalation policy (3 max)
@@ -384,6 +391,22 @@ paths:
         '500':
           $ref: '#/responses/500'
       summary: Resolve all incidents for which a user was paged.
+      tags:
+        - Incidents
+  /api-public/v1/incidents/reroute:
+    post:
+      description: |
+        Reroute one or more incidents to one or more users and/or escalation policies
+      parameters:
+        - $ref: '#/parameters/apiId'
+        - $ref: '#/parameters/apiKey'
+        - $ref: '#/parameters/rerouteBody'
+      responses:
+        '200':
+          description: The created reroute object
+          schema:
+            $ref: '#/definitions/RerouteStatusResponse'
+      summary: Reroute one or more incidents to one or more new routable destinations.
       tags:
         - Incidents
   /api-public/v1/incidents/resolve:
@@ -2574,6 +2597,67 @@ definitions:
         type: string
     required:
       - replacement
+    type: object
+  Reroute:
+    properties:
+      incidentNumber:
+        type: string
+      targets:
+        items:
+          $ref: '#/definitions/IncidentTarget'
+        type: array
+    required:
+      - incidentNumber
+      - targets
+    type: object
+  RerouteCollection:
+    properties:
+      reroutes:
+        items:
+          $ref: '#/definitions/Reroute'
+        type: array
+      userName:
+        type: string
+    required:
+      - userName
+      - reroutes
+    type: object
+  RerouteStatus:
+    properties:
+      incidentNumber:
+        type: string
+      message:
+        type: string
+      success:
+        type: boolean
+      targetStatus:
+        items:
+          $ref: '#/definitions/RerouteTargetStatus'
+        type: array
+    required:
+      - incidentNumber
+      - success
+      - targetStatus
+    type: object
+  RerouteStatusResponse:
+    properties:
+      statuses:
+        items:
+          $ref: '#/definitions/RerouteStatus'
+        type: array
+    type: object
+  RerouteTargetStatus:
+    properties:
+      message:
+        type: string
+      slug:
+        description: User name or escalation policy slug
+        type: string
+      success:
+        type: boolean
+    required:
+      - slug
+      - success
     type: object
   RoutingKeyInfo:
     description: Routing keys contain the following fields

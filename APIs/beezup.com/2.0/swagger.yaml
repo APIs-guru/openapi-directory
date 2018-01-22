@@ -4631,15 +4631,25 @@ paths:
         - User - List of Values - LOV
   /user/marketplaces/channelcatalogs/:
     get:
-      operationId: GetMarketplaceAccountStores
+      operationId: GetMarketplaceChannelCatalogs
+      parameters:
+        - description: The StoreId to filter by
+          format: guid
+          in: query
+          name: storeId
+          required: false
+          type: string
+          x-example: 04730364-9826-4ff3-92e4-51fccd02bf10
       responses:
         '200':
           description: Marketplace channel catalog list
           schema:
             $ref: '#/definitions/marketplaceChannelCatalogList'
+        '404':
+          description: Store not found
       security:
         - api_key: []
-      summary: Get  you marketplace channel catalog list
+      summary: Get your marketplace channel catalog list
       tags:
         - Marketplaces - Channel catalogs - Global
   '/user/marketplaces/channelcatalogs/publications/{marketplaceTechnicalCode}/{accountId}/history':
@@ -4726,7 +4736,7 @@ paths:
           schema:
             $ref: '#/definitions/channelCatalogMarketplaceProperties'
         '404':
-          description: Requested channel catalog or authorization for current user not found
+          description: Marketplace channel Catalog not found
         '503':
           $ref: '#/responses/processingResponse'
         default:
@@ -4752,7 +4762,7 @@ paths:
           schema:
             $ref: '#/definitions/channelCatalogMarketplaceSettings'
         '404':
-          description: Requested channel catalog or authorization for current user not found
+          description: Marketplace channel catalog not found
         '503':
           $ref: '#/responses/processingResponse'
         default:
@@ -4782,13 +4792,13 @@ paths:
             $ref: '#/definitions/setChannelCatalogMarketplaceSettingsRequest'
       responses:
         '204':
-          description: Successfully saved channel catalog settings
+          description: Successfully saved channel catalog marketplace settings
         '400':
-          description: One or more channel catalog property keys or values are invalid for requested channel catalog. See response for details.
+          description: One or more channel catalog marketplace property keys or values are invalid for requested marketplace channel catalog. See response for details.
           schema:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
-          description: Requested channel catalog or authorization for current user not found
+          description: Marketplace channel catalog not found
         '503':
           $ref: '#/responses/processingResponse'
         default:
@@ -10774,17 +10784,17 @@ definitions:
       - example:
           href: /v2/user/customer
           method: GET
-  links.GetMarketplaceAccountStoresLink:
-    allOf:
-      - $ref: '#/definitions/BeezUP.Common.Link3'
-      - example:
-          href: /v2/user/marketplaces/channelcatalogs
   links.GetMarketplaceAccountsSynchronizationLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
       - example:
           href: /v2/user/marketplaces/orders/status
           method: GET
+  links.GetMarketplaceChannelCatalogsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/marketplaces/channelcatalogs
   links.GetOrderExportationsLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -11719,7 +11729,7 @@ definitions:
   marketplaceChannelCatalogListLinks:
     properties:
       self:
-        $ref: '#/definitions/links.GetMarketplaceAccountStoresLink'
+        $ref: '#/definitions/links.GetMarketplaceChannelCatalogsLink'
     required:
       - self
     type: object
@@ -12564,7 +12574,7 @@ definitions:
   orderListRequestWithoutPagination:
     properties:
       accountIds:
-        description: Account id list
+        description: Account Id list
         example:
           - 12345
         items:
@@ -12621,6 +12631,11 @@ definitions:
           - MyOrderId1234
         items:
           $ref: '#/definitions/order_MerchantOrderId'
+        type: array
+      storeIds:
+        description: Store Id list
+        items:
+          $ref: '#/definitions/BeezUP.Common.StoreId'
         type: array
     required:
       - dateSearchType
@@ -13459,12 +13474,16 @@ definitions:
     type: object
   reportByCategory:
     properties:
+      allProductCount:
+        description: The product count for this category. This includes all the products that have been imported and can still have associated clicks and orders.
+        example: 101
+        type: integer
       catalogCategoryId:
         $ref: '#/definitions/BeezUP.Common.CatalogCategoryId'
       catalogCategoryPath:
         $ref: '#/definitions/BeezUP.Common.CatalogCategoryPath'
       catalogProductCount:
-        description: The catalog product count related to this category
+        description: The catalog product count for this category. This includes all products that are still present in your imported catalog.
         example: 101
         type: integer
       clickCount:
@@ -13476,7 +13495,7 @@ definitions:
         example: 12.42
         type: number
       enabledProductCount:
-        description: The enabled product count for this category
+        description: The enabled product count for this category. This includes all products that are still present in your imported catalog and have not been disabled via the optimisation feature.
         example: 101
         type: integer
       links:
@@ -13502,13 +13521,14 @@ definitions:
         example: 2
         type: integer
       totalSales:
-        description: The total sales related to this category
+        description: The total sales for this category
         example: 234.42
         type: number
     required:
       - catalogCategoryId
-      - enabledProductCount
+      - allProductCount
       - catalogProductCount
+      - enabledProductCount
       - clickCount
       - cost
       - orderCount
@@ -13589,13 +13609,13 @@ definitions:
         example: 2
         type: integer
       totalSales:
-        description: The total sales related to this channel
+        description: The total sales for this channel
         example: 234.42
         type: number
     required:
       - channel
-      - enabledProductCount
       - catalogProductCount
+      - enabledProductCount
       - clickCount
       - cost
       - orderCount
@@ -13697,7 +13717,7 @@ definitions:
         example: 2
         type: integer
       totalSales:
-        description: The total sales related to this day and all channels
+        description: The total sales for this day and all channels
         example: 234.42
         type: number
     required:
@@ -13743,7 +13763,7 @@ definitions:
         example: 2
         type: integer
       totalSales:
-        description: The total sales related to this day and this channel
+        description: The total sales for this day and this channel
         example: 234.42
         type: number
     required:
@@ -13846,7 +13866,7 @@ definitions:
         example: 2
         type: integer
       totalSales:
-        description: The total sales related to this product
+        description: The total sales for this product
         example: 234.42
         type: number
     required:
@@ -14819,7 +14839,7 @@ definitions:
       channel:
         $ref: '#/definitions/BeezUP.Common.ChannelBasicInfo'
       ipAddress:
-        description: The user IP address related to the click
+        description: The user IP address for the click
         example: 127.0.0.1
         type: string
       product:
@@ -14857,7 +14877,7 @@ definitions:
         example: false
         type: boolean
       products:
-        description: Can be null. The product list related of the external order
+        description: Can be null. The product list included in the external order
         example:
           - margin: '9.66'
             merchantOrderId: My_Merchant_Order_Id

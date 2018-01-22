@@ -1510,6 +1510,62 @@ paths:
       tags:
         - Pageviews data
       x-monitor: false
+  '/metrics/pageviews/top-by-country/{project}/{access}/{year}/{month}':
+    get:
+      description: |
+        Lists the pageviews to this project, split by country of origin for a given month.
+        Because of privacy reasons, pageviews are given in a bucketed format, and countries
+        with less than 100 views do not get reported.
+        Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
+        - Rate limit: 100 req/s
+        - License: Data accessible via this endpoint is available under the
+          [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
+      parameters:
+        - description: |
+            If you want to filter by project, use the domain of any Wikimedia project,
+            for example 'en.wikipedia.org', 'www.mediawiki.org' or 'commons.wikimedia.org'.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |
+            If you want to filter by access method, use one of desktop, mobile-app or mobile-web.
+            If you are interested in pageviews regardless of access method, use all-access.
+          enum:
+            - all-access
+            - desktop
+            - mobile-app
+            - mobile-web
+          in: path
+          name: access
+          required: true
+          type: string
+        - description: 'The year of the date for which to retrieve top countries, in YYYY format.'
+          in: path
+          name: year
+          required: true
+          type: string
+        - description: |
+            The month of the date for which to retrieve top countries, in MM format.
+          in: path
+          name: month
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The list of top countries by pageviews in the project
+          schema:
+            $ref: '#/definitions/by-country'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      summary: Get pageviews by country and access method.
+      tags:
+        - Pageviews data
+      x-monitor: false
   '/metrics/pageviews/top/{project}/{access}/{year}/{month}/{day}':
     get:
       description: |
@@ -1977,6 +2033,32 @@ definitions:
                     type: string
               type: array
         type: array
+  by-country:
+    properties:
+      items:
+        items:
+          properties:
+            access:
+              type: string
+            countries:
+              items:
+                properties:
+                  country:
+                    type: string
+                  rank:
+                    format: int32
+                    type: integer
+                  views:
+                    format: int64
+                    type: integer
+              type: array
+            month:
+              type: string
+            project:
+              type: string
+            year:
+              type: string
+        type: array
   cx_dict:
     properties:
       source:
@@ -2258,7 +2340,17 @@ definitions:
             access:
               type: string
             articles:
-              type: string
+              items:
+                properties:
+                  article:
+                    type: string
+                  rank:
+                    format: int32
+                    type: integer
+                  views:
+                    format: int64
+                    type: integer
+              type: array
             day:
               type: string
             month:

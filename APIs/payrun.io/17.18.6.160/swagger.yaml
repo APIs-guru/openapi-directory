@@ -8,7 +8,7 @@ info:
     x-twitter: PayRun_io
   description: 'Open, scableable, transparent payroll API.'
   title: PayRun.IO
-  version: 17.18.6.131
+  version: 17.18.6.160
   x-apisguru-categories:
     - financial
   x-logo:
@@ -647,6 +647,295 @@ paths:
       summary: Updates the Employee
       tags:
         - Employee
+  '/Employer/{EmployerId}/Employee/{EmployeeId}/AEAssessment/{AEAssessmentId}':
+    delete:
+      description: Deletes an existing auto enrolment assessment for the employee. Used to remove historical assessments
+      operationId: DeleteAEAssessment
+      parameters:
+        - description: The employer's unique identifier. E.g ER001
+          in: path
+          name: EmployerId
+          required: true
+          type: string
+        - description: The employee's unique identifier. E.g EE001
+          in: path
+          name: EmployeeId
+          required: true
+          type: string
+        - description: The auto enrolment assessment unique identifier. E.g. AE001
+          in: path
+          name: AEAssessmentId
+          required: true
+          type: string
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No Content
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Delete auto enrolment assessment
+      tags:
+        - AEAssessment
+    get:
+      description: Gets the auto enrolment assessment from the specified employee
+      operationId: GetAEAssessmentFromEmployee
+      parameters:
+        - description: The employer's unique identifier. E.g ER001
+          in: path
+          name: EmployerId
+          required: true
+          type: string
+        - description: The employee's unique identifier. E.g EE001
+          in: path
+          name: EmployeeId
+          required: true
+          type: string
+        - description: The auto enrolment assessment unique identifier. E.g. AE001
+          in: path
+          name: AEAssessmentId
+          required: true
+          type: string
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The a e assessment object.
+          schema:
+            $ref: '#/definitions/AEAssessment'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Get the auto enrolment assessment
+      tags:
+        - AEAssessment
+        - Employee
+    put:
+      description: Creates a new auto enrolment assessment for the employee. Used to insert historical assessments
+      operationId: PutNewAEAssessment
+      parameters:
+        - description: The employer's unique identifier. E.g ER001
+          in: path
+          name: EmployerId
+          required: true
+          type: string
+        - description: The employee's unique identifier. E.g EE001
+          in: path
+          name: EmployeeId
+          required: true
+          type: string
+        - description: The auto enrolment assessment unique identifier. E.g. AE001
+          in: path
+          name: AEAssessmentId
+          required: true
+          type: string
+        - description: The auto enrolment assessment object.
+          in: body
+          name: AEAssessment
+          required: true
+          schema:
+            $ref: '#/definitions/AEAssessment'
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The a e assessment object.
+          schema:
+            $ref: '#/definitions/AEAssessment'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Insert new auto enrolment assessment
+      tags:
+        - AEAssessment
+  '/Employer/{EmployerId}/Employee/{EmployeeId}/AEAssessments':
+    get:
+      description: Gets all auto enrolment assessments from the specified employee
+      operationId: GetAEAssessmentsFromEmployee
+      parameters:
+        - description: The employer's unique identifier. E.g ER001
+          in: path
+          name: EmployerId
+          required: true
+          type: string
+        - description: The employee's unique identifier. E.g EE001
+          in: path
+          name: EmployeeId
+          required: true
+          type: string
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The link collection object.
+          schema:
+            $ref: '#/definitions/LinkCollection'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Get the auto enrolment assessments
+      tags:
+        - AEAssessment
+        - Employee
+    post:
+      description: Creates a new auto enrolment assessment for the employee. Used to insert historical assessments
+      operationId: PostNewAEAssessment
+      parameters:
+        - description: The employer's unique identifier. E.g ER001
+          in: path
+          name: EmployerId
+          required: true
+          type: string
+        - description: The employee's unique identifier. E.g EE001
+          in: path
+          name: EmployeeId
+          required: true
+          type: string
+        - description: The auto enrolment assessment object.
+          in: body
+          name: AEAssessment
+          required: true
+          schema:
+            $ref: '#/definitions/AEAssessment'
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The link object.
+          schema:
+            $ref: '#/definitions/Link'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Insert new auto enrolment assessment
+      tags:
+        - AEAssessment
   '/Employer/{EmployerId}/Employee/{EmployeeId}/Commentaries':
     get:
       description: Get links to all commentaries for the specified employee.
@@ -3397,6 +3686,65 @@ paths:
       tags:
         - PayRun
         - PaySchedule
+  '/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRun/{PayRunId}/AEAssessments':
+    get:
+      description: Gets all auto enrolment assessments from the specified pay run
+      operationId: GetAEAssessmentsFromPayRun
+      parameters:
+        - description: The employer's unique identifier. E.g ER001
+          in: path
+          name: EmployerId
+          required: true
+          type: string
+        - description: The pay schedule's unique identifier. E.g SCH001
+          in: path
+          name: PayScheduleId
+          required: true
+          type: string
+        - description: The pay run's unique identifier. E.g. PR001
+          in: path
+          name: PayRunId
+          required: true
+          type: string
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The link collection object.
+          schema:
+            $ref: '#/definitions/LinkCollection'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Get the auto enrolment assessments
+      tags:
+        - AEAssessment
+        - PayRun
   '/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRun/{PayRunId}/Employee/{EmployeeId}':
     delete:
       description: Delete pay run results for a single employee
@@ -12450,6 +12798,81 @@ paths:
       tags:
         - Reports
 definitions:
+  AEAssessment:
+    properties:
+      AEAssessment:
+        properties:
+          Age:
+            description: The a e assessment's age
+            format: int32
+            title: Age
+            type: integer
+          AssessmentCode:
+            description: The a e assessment's assessment code
+            enum:
+              - Excluded
+              - EligibleJobHolder
+              - NonEligibleJobHolder
+              - EntitledWorker
+            title: AssessmentCode
+            type: string
+          AssessmentDate:
+            description: The a e assessment's assessment date
+            format: date
+            title: AssessmentDate
+            type: string
+          AssessmentEvent:
+            description: The a e assessment's assessment event
+            enum:
+              - NonEnrolmentEvent
+              - AutomaticEnrolment
+              - OptIn
+              - VoluntaryJoiner
+              - ContractualEnrolment
+            title: AssessmentEvent
+            type: string
+          AssessmentOverride:
+            description: The a e assessment's assessment override
+            enum:
+              - None
+              - OptOut
+              - OptIn
+              - VoluntaryJoiner
+              - ContractualPension
+              - CeasedMembership
+              - Leaver
+              - Excluded
+            title: AssessmentOverride
+            type: string
+          AssessmentResult:
+            description: The a e assessment's assessment result
+            enum:
+              - Inconclusive
+              - NoChange
+              - Enrol
+              - Exit
+            title: AssessmentResult
+            type: string
+          QualifyingEarnings:
+            description: The a e assessment's qualifying earnings
+            format: double
+            title: QualifyingEarnings
+            type: number
+          StatePensionAge:
+            description: The a e assessment's state pension age
+            format: int32
+            title: StatePensionAge
+            type: integer
+          StatePensionDate:
+            description: The a e assessment's state pension date
+            format: date
+            title: StatePensionDate
+            type: string
+        title: AEAssessment
+        type: object
+    type: object
+    xml:
+      name: AEAssessment
   Commentary:
     properties:
       Commentary:
@@ -12601,6 +13024,29 @@ definitions:
     properties:
       Employee:
         properties:
+          AEAssessmentOverride:
+            description: The employee's a e assessment override
+            enum:
+              - None
+              - OptOut
+              - OptIn
+              - VoluntaryJoiner
+              - ContractualPension
+              - CeasedMembership
+              - Leaver
+              - Excluded
+            title: AEAssessmentOverride
+            type: string
+          AEAssessmentOverrideDate:
+            description: The employee's a e assessment override date
+            format: date
+            title: AEAssessmentOverrideDate
+            type: string
+          AEPostponementDate:
+            description: The employee's a e postponement date
+            format: date
+            title: AEPostponementDate
+            type: string
           Address:
             description: The employee's address
             properties:
@@ -12852,6 +13298,7 @@ definitions:
               - P45YtdTaxRule
               - YtdInstructionRule
               - TaxCodeRegionChangeRule
+              - AutoEnrolmentStatusChangeRule
             title: RuleExclusions
             type: string
           Seconded:
@@ -12945,6 +13392,88 @@ definitions:
             format: double
             title: ApprenticeshipLevyAllowance
             type: number
+          AutoEnrolment:
+            description: The employer's auto enrolment
+            properties:
+              Pension:
+                description: The employer auto enrolment's pension
+                properties:
+                  '@href':
+                    description: The link's href
+                    title: '@href'
+                    type: string
+                  '@rel':
+                    description: The link's target type
+                    title: '@rel'
+                    type: string
+                  '@title':
+                    description: The link's title
+                    title: '@title'
+                    type: string
+                title: Pension
+                type: object
+              PostponementDate:
+                description: The employer auto enrolment's postponement date
+                format: date
+                title: PostponementDate
+                type: string
+              PrimaryEmail:
+                description: The employer auto enrolment's primary email
+                title: PrimaryEmail
+                type: string
+              PrimaryFirstName:
+                description: The employer auto enrolment's primary first name
+                title: PrimaryFirstName
+                type: string
+              PrimaryJobTitle:
+                description: The employer auto enrolment's primary job title
+                title: PrimaryJobTitle
+                type: string
+              PrimaryLastName:
+                description: The employer auto enrolment's primary last name
+                title: PrimaryLastName
+                type: string
+              PrimaryTelephone:
+                description: The employer auto enrolment's primary telephone
+                title: PrimaryTelephone
+                type: string
+              ReEnrolmentDayOffset:
+                description: The employer auto enrolment's re enrolment day offset
+                format: int32
+                title: ReEnrolmentDayOffset
+                type: integer
+              ReEnrolmentMonthOffset:
+                description: The employer auto enrolment's re enrolment month offset
+                format: int32
+                title: ReEnrolmentMonthOffset
+                type: integer
+              SecondaryEmail:
+                description: The employer auto enrolment's secondary email
+                title: SecondaryEmail
+                type: string
+              SecondaryFirstName:
+                description: The employer auto enrolment's secondary first name
+                title: SecondaryFirstName
+                type: string
+              SecondaryJobTitle:
+                description: The employer auto enrolment's secondary job title
+                title: SecondaryJobTitle
+                type: string
+              SecondaryLastName:
+                description: The employer auto enrolment's secondary last name
+                title: SecondaryLastName
+                type: string
+              SecondaryTelephone:
+                description: The employer auto enrolment's secondary telephone
+                title: SecondaryTelephone
+                type: string
+              StagingDate:
+                description: The employer auto enrolment's staging date
+                format: date
+                title: StagingDate
+                type: string
+            title: AutoEnrolment
+            type: object
           BacsServiceUserNumber:
             description: The employer's bacs service user number
             title: BacsServiceUserNumber
@@ -13083,6 +13612,7 @@ definitions:
               - P45YtdTaxRule
               - YtdInstructionRule
               - TaxCodeRegionChangeRule
+              - AutoEnrolmentStatusChangeRule
             title: RuleExclusions
             type: string
           Territory:
@@ -13609,6 +14139,10 @@ definitions:
     properties:
       Pension:
         properties:
+          AECompatible:
+            description: The pension's a e compatible
+            title: AECompatible
+            type: boolean
           Code:
             description: The pension's code
             title: Code
@@ -13652,6 +14186,17 @@ definitions:
             format: double
             title: LowerThreshold
             type: number
+          ProRataMethod:
+            description: The pension's pro rata method
+            enum:
+              - NotSet
+              - Annual260Days
+              - Annual365Days
+              - AnnualQualifyingDays
+              - DaysPerCalenderMonth
+              - DaysPerTaxPeriod
+            title: ProRataMethod
+            type: string
           ProviderEmployerRef:
             description: The pension's provider employer ref
             title: ProviderEmployerRef
@@ -13665,6 +14210,10 @@ definitions:
             format: int32
             title: Revision
             type: integer
+          SalarySacrifice:
+            description: The pension's salary sacrifice
+            title: SalarySacrifice
+            type: boolean
           SchemeName:
             description: The pension's scheme name
             title: SchemeName
@@ -13687,6 +14236,10 @@ definitions:
             format: double
             title: UpperThreshold
             type: number
+          UseAEThresholds:
+            description: The pension's use a e thresholds
+            title: UseAEThresholds
+            type: boolean
         title: Pension
         type: object
     type: object

@@ -142,6 +142,8 @@ tags:
     name: type/blogentry
   - description: Search API for 'Bookmarks' entry type
     name: type/bookmarks
+  - description: Search API for 'Boulder Consulting' entry type
+    name: type/boulder_consulting
   - description: Search API for 'Boulder County Voter Details' entry type
     name: type/boulder_county_voter_details
   - description: Search API for 'Calendar' entry type
@@ -152,8 +154,6 @@ tags:
     name: type/cdm_grid
   - description: Search API for 'Development Review Case' entry type
     name: type/community_case
-  - description: Search API for 'Data Hub' entry type
-    name: type/community_datahub
   - description: Search API for 'Facility' entry type
     name: type/community_resource
   - description: Search API for 'Contact List' entry type
@@ -3001,6 +3001,168 @@ paths:
       summary: Search API for 'Bookmarks' entry type
       tags:
         - type/bookmarks
+  /repository/search/type/boulder_consulting:
+    get:
+      description: API to search for entries of type Boulder Consulting
+      operationId: search_boulder_consulting
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Fund
+          in: query
+          name: search.db_boulder_consulting.fund
+          required: false
+          type: string
+        - description: Department
+          in: query
+          name: search.db_boulder_consulting.department
+          required: false
+          type: string
+        - description: Organization
+          in: query
+          name: search.db_boulder_consulting.organization
+          required: false
+          type: string
+        - description: Object
+          in: query
+          name: search.db_boulder_consulting.object
+          required: false
+          type: string
+        - description: Project
+          in: query
+          name: search.db_boulder_consulting.project
+          required: false
+          type: string
+        - description: Account Description
+          in: query
+          name: search.db_boulder_consulting.account_description
+          required: false
+          type: string
+        - description: Date
+          in: query
+          name: search.db_boulder_consulting.date
+          required: false
+          type: string
+        - description: Amount
+          format: double
+          in: query
+          name: search.db_boulder_consulting.amount
+          required: false
+          type: number
+        - description: Vendor Name
+          in: query
+          name: search.db_boulder_consulting.vendor_name
+          required: false
+          type: string
+        - description: Comment
+          in: query
+          name: search.db_boulder_consulting.comment
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Boulder Consulting' entry type
+      tags:
+        - type/boulder_consulting
   /repository/search/type/boulder_county_voter_details:
     get:
       description: API to search for entries of type Boulder County Voter Details
@@ -3666,117 +3828,6 @@ paths:
       summary: Search API for 'Development Review Case' entry type
       tags:
         - type/community_case
-  /repository/search/type/community_datahub:
-    get:
-      description: API to search for entries of type Data Hub
-      operationId: search_community_datahub
-      parameters:
-        - description: Search text
-          in: query
-          name: text
-          required: false
-          type: string
-        - description: Search name
-          in: query
-          name: name
-          required: false
-          type: string
-        - description: Search description
-          in: query
-          name: description
-          required: false
-          type: string
-        - description: From date
-          format: date-time
-          in: query
-          name: fromdate
-          required: false
-          type: string
-        - description: To date
-          format: date-time
-          in: query
-          name: todate
-          required: false
-          type: string
-        - description: Archive create date from
-          format: date-time
-          in: query
-          name: createdate.from
-          required: false
-          type: string
-        - description: Archive create date to
-          format: date-time
-          in: query
-          name: createdate.to
-          required: false
-          type: string
-        - description: Archive change date from
-          format: date-time
-          in: query
-          name: changedate.from
-          required: false
-          type: string
-        - description: Archive change date to
-          format: date-time
-          in: query
-          name: changedate.to
-          required: false
-          type: string
-        - description: Parent entry
-          in: query
-          name: group
-          required: false
-          type: string
-        - description: File suffix
-          in: query
-          name: filesuffix
-          required: false
-          type: string
-        - description: Northern bounds of search
-          format: float
-          in: query
-          name: maxlatitude
-          required: false
-          type: number
-        - description: Western bounds of search
-          format: float
-          in: query
-          name: minlongitude
-          required: false
-          type: number
-        - description: Southern bounds of search
-          format: float
-          in: query
-          name: minlatitude
-          required: false
-          type: number
-        - description: Eastern bounds of search
-          format: float
-          in: query
-          name: maxlongitude
-          required: false
-          type: number
-        - description: Max number of results
-          in: query
-          name: max
-          required: false
-          type: integer
-        - description: Number to skip
-          in: query
-          name: skip
-          required: false
-          type: integer
-      produces:
-        - application/json
-        - application/xml
-        - text/plain
-        - text/html
-      responses:
-        '200':
-          description: No response was specified
-      summary: Search API for 'Data Hub' entry type
-      tags:
-        - type/community_datahub
   /repository/search/type/community_resource:
     get:
       description: API to search for entries of type Facility

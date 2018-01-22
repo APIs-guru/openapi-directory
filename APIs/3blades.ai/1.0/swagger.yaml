@@ -1178,23 +1178,6 @@ paths:
       summary: Retrieve account's API key
       tags:
         - users
-  '/v1/users/{user}/api-key/reset/':
-    post:
-      operationId: users_api-key_reset
-      parameters:
-        - description: User unique identifier expressed as UUID or username.
-          in: path
-          name: user
-          required: true
-          type: string
-      responses:
-        '201':
-          description: Reset Api Key
-        '400':
-          description: Invalid data supplied
-      summary: Reset a user's API key
-      tags:
-        - users
   '/v1/users/{user}/avatar/':
     delete:
       operationId: user_avatar_delete

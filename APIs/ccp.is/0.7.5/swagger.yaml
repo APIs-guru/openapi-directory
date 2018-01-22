@@ -6,7 +6,7 @@ basePath: /latest
 info:
   description: An OpenAPI for EVE Online
   title: EVE Swagger Interface
-  version: 0.7.3
+  version: 0.7.5
   x-apisguru-categories:
     - media
   x-logo:
@@ -2379,7 +2379,7 @@ paths:
           name: response
           required: true
           schema:
-            description: response schema
+            description: response object
             properties:
               response:
                 description: response string
@@ -2392,6 +2392,7 @@ paths:
             required:
               - response
             title: put_characters_character_id_calendar_event_id_response
+            type: object
         - $ref: '#/parameters/token'
         - $ref: '#/parameters/user_agent'
         - $ref: '#/parameters/X-User-Agent'
@@ -3349,6 +3350,7 @@ paths:
       parameters:
         - $ref: '#/parameters/character_id'
         - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
         - $ref: '#/parameters/token'
         - $ref: '#/parameters/user_agent'
         - $ref: '#/parameters/X-User-Agent'
@@ -3387,6 +3389,11 @@ paths:
             Last-Modified:
               description: RFC7231 formatted datetime string
               type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
           schema:
             description: 200 ok array
             items:
@@ -3516,7 +3523,7 @@ paths:
                   type: string
                 volume:
                   description: Volume of items in the contract
-                  format: float
+                  format: double
                   title: get_characters_character_id_contracts_volume
                   type: number
               required:
@@ -3533,7 +3540,7 @@ paths:
                 - date_expired
               title: get_characters_character_id_contracts_200_ok
               type: object
-            maxItems: 10000
+            maxItems: 1000
             title: get_characters_character_id_contracts_ok
             type: array
         '403':
@@ -5338,7 +5345,7 @@ paths:
           name: mail
           required: true
           schema:
-            description: mail schema
+            description: mail object
             properties:
               approved_cost:
                 default: 0
@@ -5389,6 +5396,7 @@ paths:
               - subject
               - body
             title: post_characters_character_id_mail_mail
+            type: object
         - $ref: '#/parameters/token'
         - $ref: '#/parameters/user_agent'
         - $ref: '#/parameters/X-User-Agent'
@@ -6138,9 +6146,17 @@ paths:
                 description: For 33 corp!
                 graphics:
                   - color: -1
-                    graphic: gallente.1_1
+                    graphic: caldari.1_1
                     layer: 0
                     part: 1
+                  - color: -330271
+                    graphic: caldari.1_2
+                    layer: 1
+                    part: 1
+                  - color: -1
+                    graphic: compass.1_2
+                    layer: 0
+                    part: 2
                 issuer_id: 2112000002
                 medal_id: 3
                 reason: Thanks!
@@ -6205,7 +6221,8 @@ paths:
                       - graphic
                     title: get_characters_character_id_medals_graphic
                     type: object
-                  maxItems: 10
+                  maxItems: 9
+                  minItems: 3
                   title: get_characters_character_id_medals_graphics
                   type: array
                 issuer_id:
@@ -13075,11 +13092,12 @@ paths:
         Alternate route: `/v1/corporations/{corporation_id}/contracts/`
 
         ---
-        This route is cached for up to 3600 seconds
+        This route is cached for up to 300 seconds
       operationId: get_corporations_corporation_id_contracts
       parameters:
         - $ref: '#/parameters/corporation_id'
         - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
         - $ref: '#/parameters/token'
         - $ref: '#/parameters/user_agent'
         - $ref: '#/parameters/X-User-Agent'
@@ -13116,6 +13134,11 @@ paths:
             Last-Modified:
               description: RFC7231 formatted datetime string
               type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
           schema:
             description: 200 ok array
             items:
@@ -13245,7 +13268,7 @@ paths:
                   type: string
                 volume:
                   description: Volume of items in the contract
-                  format: float
+                  format: double
                   title: get_corporations_corporation_id_contracts_volume
                   type: number
               required:
@@ -13262,7 +13285,7 @@ paths:
                 - date_expired
               title: get_corporations_corporation_id_contracts_200_ok
               type: object
-            maxItems: 10000
+            maxItems: 1000
             title: get_corporations_corporation_id_contracts_ok
             type: array
         '403':
@@ -13289,7 +13312,7 @@ paths:
         - dev
         - legacy
         - v1
-      x-cached-seconds: 3600
+      x-cached-seconds: 300
       x-required-roles: []
   '/corporations/{corporation_id}/contracts/{contract_id}/bids/':
     get:
@@ -16800,7 +16823,6 @@ paths:
       parameters:
         - $ref: '#/parameters/corporation_id'
         - $ref: '#/parameters/datasource'
-        - $ref: '#/parameters/page'
         - description: An EVE starbase (POS) ID
           format: int64
           in: path
@@ -16842,11 +16864,6 @@ paths:
             Last-Modified:
               description: RFC7231 formatted datetime string
               type: string
-            X-Pages:
-              default: 1
-              description: Maximum page number
-              format: int32
-              type: integer
           schema:
             description: 200 ok object
             properties:
@@ -21490,7 +21507,7 @@ paths:
             application/json:
               - cost_indices:
                   - activity: invention
-                    cost_index: 0.00480411064973412
+                    cost_index: 0.0048
                 solar_system_id: 30011392
           headers:
             Cache-Control:
@@ -21692,7 +21709,7 @@ paths:
         Alternate route: `/v1/killmails/{killmail_id}/{killmail_hash}/`
 
         ---
-        This route is cached for up to 3600 seconds
+        This route is cached for up to 1209600 seconds
       operationId: get_killmails_killmail_id_killmail_hash
       parameters:
         - $ref: '#/parameters/datasource'
@@ -22026,7 +22043,7 @@ paths:
         - dev
         - legacy
         - v1
-      x-cached-seconds: 3600
+      x-cached-seconds: 1209600
   '/loyalty/stores/{corporation_id}/offers/':
     get:
       description: |-
@@ -22052,7 +22069,8 @@ paths:
           description: A list of offers
           examples:
             application/json:
-              - isk_cost: 0
+              - ak_cost: 35000
+                isk_cost: 0
                 lp_cost: 100
                 offer_id: 1
                 quantity: 1
@@ -22081,11 +22099,16 @@ paths:
             items:
               description: 200 ok object
               properties:
-                isk_cost:
-                  description: isk_cost number
+                ak_cost:
+                  description: Analysis kredit cost
                   format: int32
+                  title: get_loyalty_stores_corporation_id_offers_ak_cost
+                  type: integer
+                isk_cost:
+                  description: isk_cost integer
+                  format: int64
                   title: get_loyalty_stores_corporation_id_offers_isk_cost
-                  type: number
+                  type: integer
                 lp_cost:
                   description: lp_cost integer
                   format: int32
@@ -22141,6 +22164,20 @@ paths:
             maxItems: 10000
             title: get_loyalty_stores_corporation_id_offers_ok
             type: array
+        '404':
+          description: No loyalty point store found for the provided corporation
+          examples:
+            application/json:
+              error: Not found message
+          schema:
+            description: Not found
+            properties:
+              error:
+                description: Not found message
+                title: get_loyalty_stores_corporation_id_offers_404_not_found
+                type: string
+            title: get_loyalty_stores_corporation_id_offers_not_found
+            type: object
         '500':
           description: Internal server error
           examples:

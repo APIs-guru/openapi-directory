@@ -43,6 +43,8 @@ tags:
     name: Call Data Records
   - description: Call Management
     name: Calls
+  - description: Caller ID Information
+    name: Caller IDs
   - description: Custom Field Management
     name: Custom Fields
   - description: Email Management
@@ -57,6 +59,8 @@ tags:
     name: People
   - description: Person Stage Management
     name: Person Stages
+  - description: Recording Settings Information
+    name: Recording Settings
   - description: Success Management
     name: Successes
   - description: Team Template Management
@@ -87,6 +91,11 @@ paths:
           name: updated_at
           required: false
           type: array
+        - description: Domain of the accounts to fetch. Domains are unique and lowercase
+          in: query
+          name: domain
+          required: false
+          type: string
         - description: 'Key to sort on, must be one of: created_at, updated_at, last_contacted_at. Defaults to updated_at'
           in: query
           name: sort_by
@@ -1317,6 +1326,16 @@ paths:
           name: associated_with_id
           required: false
           type: integer
+        - description: |
+            Equality filters that are applied to the updated_at field. A single filter can be used by itself or combined with other filters to create a range.
+            ---CUSTOM---
+            {"type":"object","keys":[{"name":"gt","type":"iso8601 string","description":"Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"gte","type":"iso8601 string","description":"Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lt","type":"iso8601 string","description":"Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lte","type":"iso8601 string","description":"Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."}]}
+          in: query
+          items:
+            type: string
+          name: updated_at
+          required: false
+          type: array
         - description: 'IDs of notes to fetch. If a record can''t be found, that record won''t be returned and your request will be successful'
           in: query
           items:
@@ -1989,6 +2008,47 @@ paths:
       summary: Update a person stage
       tags:
         - Person Stages
+  /v2/phone_numbers/caller_ids.json:
+    get:
+      description: |
+        Each entry is a possible caller ID match for the number. Multiple
+        entries may be returned if the phone number is present on more than one
+        person in the system.  Phone number should be in E.164 format.
+      parameters:
+        - description: E.164 Phone Number
+          in: query
+          name: phone_number
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/CallerId'
+            type: array
+      summary: List caller ids
+      tags:
+        - Caller IDs
+  '/v2/phone_numbers/recording_settings/{id}.json':
+    get:
+      description: |
+        Fetches the recording status for a given phone number, based on Do Not Record and Recording Governance for your team.
+        Phone number should be in E.164 format.
+      parameters:
+        - description: E.164 Phone Number
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RecordingSetting'
+      summary: Fetch recording setting
+      tags:
+        - Recording Settings
   /v2/successes.json:
     get:
       description: |
@@ -2167,7 +2227,7 @@ definitions:
     properties:
       archived_at:
         description: 'Datetime of when the Account was archived, if archived'
-        example: '2017-12-06T14:22:15.745243-08:00'
+        example: '2018-01-18T19:32:53.894306-05:00'
         format: date
         type: string
       city:
@@ -2198,7 +2258,7 @@ definitions:
           people: 15
       created_at:
         description: Datetime of when the Account was created
-        example: '2017-12-06T14:22:15.745166-08:00'
+        example: '2018-01-18T19:32:53.894221-05:00'
         format: date
         type: string
       creator:
@@ -2251,7 +2311,7 @@ definitions:
         type: string
       last_contacted_at:
         description: Datetime this Account was last contacted
-        example: '2017-12-06T14:22:15.745776-08:00'
+        example: '2018-01-18T19:32:53.894906-05:00'
         format: date
         type: string
       last_contacted_by:
@@ -2330,7 +2390,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the Account was last updated
-        example: '2017-12-06T14:22:15.745216-08:00'
+        example: '2018-01-18T19:32:53.894268-05:00'
         format: date
         type: string
       website:
@@ -2353,7 +2413,7 @@ definitions:
           id: 3
       archived_at:
         description: 'Datetime of when the cadence was archived, if archived'
-        example: '2017-12-06T14:22:15.738334-08:00'
+        example: '2018-01-18T19:32:53.887524-05:00'
         format: date
         type: string
       bounced_stage:
@@ -2370,7 +2430,7 @@ definitions:
           target_daily_people: 10
       created_at:
         description: Datetime of when the cadence was created
-        example: '2017-12-06T14:22:15.738254-08:00'
+        example: '2018-01-18T19:32:53.887441-05:00'
         format: date
         type: string
       creator:
@@ -2435,7 +2495,7 @@ definitions:
         type: boolean
       updated_at:
         description: Datetime of when the cadence was last updated
-        example: '2017-12-06T14:22:15.738306-08:00'
+        example: '2018-01-18T19:32:53.887490-05:00'
         format: date
         type: string
   CadenceCounts:
@@ -2452,7 +2512,7 @@ definitions:
     properties:
       added_at:
         description: Datetime of when the person was last added to this cadence
-        example: '2017-12-06T14:22:15.755480-08:00'
+        example: '2018-01-18T19:32:53.905847-05:00'
         format: date
         type: string
       cadence:
@@ -2473,7 +2533,7 @@ definitions:
           views: 10
       created_at:
         description: Datetime of when the person was first added to this cadence
-        example: '2017-12-06T14:22:15.755530-08:00'
+        example: '2018-01-18T19:32:53.905904-05:00'
         format: date
         type: string
       current_state:
@@ -2516,7 +2576,7 @@ definitions:
         type: boolean
       updated_at:
         description: Datetime of when the record was last updated
-        example: '2017-12-06T14:22:15.755555-08:00'
+        example: '2018-01-18T19:32:53.905935-05:00'
         format: date
         type: string
       user:
@@ -2566,7 +2626,7 @@ definitions:
           id: 1
       created_at:
         description: Datetime of when the call was created
-        example: '2017-12-06T14:22:15.849570-08:00'
+        example: '2018-01-18T19:32:54.016201-05:00'
         format: date
         type: string
       crm_activity:
@@ -2611,7 +2671,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the call was last updated
-        example: '2017-12-06T14:22:15.849627-08:00'
+        example: '2018-01-18T19:32:54.016246-05:00'
         format: date
         type: string
       user:
@@ -2630,7 +2690,7 @@ definitions:
           id: 1
       created_at:
         description: Datetime of when the call was created
-        example: '2017-12-06T14:22:15.763539-08:00'
+        example: '2018-01-18T19:32:53.914278-05:00'
         format: date
         type: string
       direction:
@@ -2661,7 +2721,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the call was last updated
-        example: '2017-12-06T14:22:15.763587-08:00'
+        example: '2018-01-18T19:32:53.914323-05:00'
         format: date
         type: string
       user:
@@ -2670,6 +2730,26 @@ definitions:
         example:
           _href: 'https://api.salesloft.com/v2/users/2'
           id: 2
+  CallerId:
+    properties:
+      account_name:
+        description: The account of the person calling
+        example: Bunty Soap Company
+        type: string
+      display_name:
+        description: The name of the person calling
+        example: Frank Galikanokus
+        type: string
+      person:
+        $ref: '#/definitions/EmbeddedResource'
+        description: The person calling
+        example:
+          _href: 'https://api.salesloft.com/v2/people/1'
+          id: 1
+      title:
+        description: The title of the person calling
+        example: Transportation Coordinator
+        type: string
   CrmActivity:
     properties:
       activity_type:
@@ -2678,7 +2758,7 @@ definitions:
         type: string
       created_at:
         description: Datetime of when the crm activity was created
-        example: '2017-12-06T14:22:15.776480-08:00'
+        example: '2018-01-18T19:32:53.919249-05:00'
         format: date
         type: string
       crm_id:
@@ -2713,7 +2793,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the crm activity was last updated
-        example: '2017-12-06T14:22:15.776528-08:00'
+        example: '2018-01-18T19:32:53.919291-05:00'
         format: date
         type: string
       user:
@@ -2726,7 +2806,7 @@ definitions:
     properties:
       created_at:
         description: Datetime of when the Custom Field was created
-        example: '2017-12-06T14:22:15.781579-08:00'
+        example: '2018-01-18T19:32:53.926442-05:00'
         format: date
         type: string
       field_type:
@@ -2743,7 +2823,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the Custom Field was last updated
-        example: '2017-12-06T14:22:15.781616-08:00'
+        example: '2018-01-18T19:32:53.926505-05:00'
         format: date
         type: string
   Email:
@@ -2773,7 +2853,7 @@ definitions:
           views: 3
       created_at:
         description: Datetime of when the email was created
-        example: '2017-12-06T14:22:15.856172-08:00'
+        example: '2018-01-18T19:32:54.022852-05:00'
         format: date
         type: string
       crm_activity:
@@ -2809,12 +2889,12 @@ definitions:
         type: string
       send_after:
         description: 'When this email will be sent, or null if already sent'
-        example: '2017-12-06T14:22:15.867886-08:00'
+        example: '2018-01-18T19:32:54.035922-05:00'
         format: date
         type: string
       sent_at:
         description: 'When this email was sent, or null if it was not sent'
-        example: '2017-12-06T14:22:15.867930-08:00'
+        example: '2018-01-18T19:32:54.035971-05:00'
         format: date
         type: string
       status:
@@ -2823,7 +2903,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the email was last updated
-        example: '2017-12-06T14:22:15.856238-08:00'
+        example: '2018-01-18T19:32:54.022910-05:00'
         format: date
         type: string
       user:
@@ -2866,7 +2946,7 @@ definitions:
     properties:
       archived_at:
         description: 'Datetime of when the email template was archived, if archived'
-        example: '2017-12-06T14:22:15.834560-08:00'
+        example: '2018-01-18T19:32:54.004913-05:00'
         format: date
         type: string
       body:
@@ -2892,7 +2972,7 @@ definitions:
           views: 3
       created_at:
         description: Datetime of when the email template was created
-        example: '2017-12-06T14:22:15.834393-08:00'
+        example: '2018-01-18T19:32:54.004785-05:00'
         format: date
         type: string
       id:
@@ -2901,7 +2981,7 @@ definitions:
         type: integer
       last_used_at:
         description: Datetime of when the email template was last used
-        example: '2017-12-06T14:22:15.834521-08:00'
+        example: '2018-01-18T19:32:54.004886-05:00'
         format: date
         type: string
       open_tracking_enabled:
@@ -2934,7 +3014,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the email template was last updated
-        example: '2017-12-06T14:22:15.834475-08:00'
+        example: '2018-01-18T19:32:54.004859-05:00'
         format: date
         type: string
   EmailTemplateCounts:
@@ -2983,7 +3063,7 @@ definitions:
     properties:
       created_at:
         description: Datetime of when the import was created
-        example: '2017-12-06T14:22:15.788654-08:00'
+        example: '2018-01-18T19:32:53.953902-05:00'
         format: date
         type: string
       current_people_count:
@@ -3004,7 +3084,7 @@ definitions:
         type: string
       updated_at:
         description: 'Datetime of when the import was last updated, ignoring relationship changes'
-        example: '2017-12-06T14:22:15.788741-08:00'
+        example: '2018-01-18T19:32:53.953981-05:00'
         format: date
         type: string
   Note:
@@ -3027,7 +3107,7 @@ definitions:
         type: string
       created_at:
         description: Datetime of when the note was created
-        example: '2017-12-06T14:22:15.797312-08:00'
+        example: '2018-01-18T19:32:53.962834-05:00'
         format: date
         type: string
       id:
@@ -3036,7 +3116,7 @@ definitions:
         type: integer
       updated_at:
         description: Datetime of when the note was last updated
-        example: '2017-12-06T14:22:15.797391-08:00'
+        example: '2018-01-18T19:32:53.962884-05:00'
         format: date
         type: string
       user:
@@ -3077,7 +3157,7 @@ definitions:
           emails_viewed: 2
       created_at:
         description: Datetime of when the person was created
-        example: '2017-12-06T14:22:15.806203-08:00'
+        example: '2018-01-18T19:32:53.973708-05:00'
         format: date
         type: string
       crm_id:
@@ -3130,7 +3210,7 @@ definitions:
           id: 1
       last_contacted_at:
         description: Last datetime this person was contacted
-        example: '2017-12-06T14:22:15.806274-08:00'
+        example: '2018-01-18T19:32:53.973804-05:00'
         format: date
         type: string
       last_contacted_by:
@@ -3149,7 +3229,7 @@ definitions:
         type: string
       last_replied_at:
         description: Last datetime this person replied to an email
-        example: '2017-12-06T14:22:15.806300-08:00'
+        example: '2018-01-18T19:32:53.973835-05:00'
         format: date
         type: string
       linkedin_url:
@@ -3234,7 +3314,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the person was last updated
-        example: '2017-12-06T14:22:15.806248-08:00'
+        example: '2018-01-18T19:32:53.973769-05:00'
         format: date
         type: string
       work_city:
@@ -3279,7 +3359,7 @@ definitions:
     properties:
       created_at:
         description: Datetime of when the Person Stage was created
-        example: '2017-12-06T14:22:15.816267-08:00'
+        example: '2018-01-18T19:32:53.985989-05:00'
         format: date
         type: string
       id:
@@ -3292,9 +3372,15 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the Person Stage was last updated
-        example: '2017-12-06T14:22:15.816315-08:00'
+        example: '2018-01-18T19:32:53.986040-05:00'
         format: date
         type: string
+  RecordingSetting:
+    properties:
+      recording_default:
+        description: Whether this phone number should record by default
+        example: true
+        type: boolean
   Success:
     properties:
       counts:
@@ -3306,7 +3392,7 @@ definitions:
           total_other_touches: 3
       created_at:
         description: Datetime of when the success was created
-        example: '2017-12-06T14:22:15.827703-08:00'
+        example: '2018-01-18T19:32:53.998501-05:00'
         format: date
         type: string
       id:
@@ -3338,17 +3424,17 @@ definitions:
           id: 1
       succeeded_at:
         description: Datetime of when the success was recorded
-        example: '2017-12-06T14:22:15.827797-08:00'
+        example: '2018-01-18T19:32:53.998592-05:00'
         format: date
         type: string
       success_window_started_at:
         description: 'Datetime of when this person was first worked, leading up to the success'
-        example: '2017-12-06T14:22:15.827832-08:00'
+        example: '2018-01-18T19:32:53.998622-05:00'
         format: date
         type: string
       updated_at:
         description: Datetime of when the success was last updated
-        example: '2017-12-06T14:22:15.827760-08:00'
+        example: '2018-01-18T19:32:53.998557-05:00'
         format: date
         type: string
       user:
@@ -3387,7 +3473,7 @@ definitions:
         type: boolean
       created_at:
         description: Datetime of when the team was created
-        example: '2017-12-06T14:22:15.733192-08:00'
+        example: '2018-01-18T19:32:53.883367-05:00'
         format: date
         type: string
       custom_tracking_domain:
@@ -3445,14 +3531,14 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the team was last updated
-        example: '2017-12-06T14:22:15.733242-08:00'
+        example: '2018-01-18T19:32:53.883409-05:00'
         format: date
         type: string
   TeamTemplate:
     properties:
       archived_at:
         description: 'Datetime of when the team template was archived, if archived'
-        example: '2017-12-06T14:22:15.842432-08:00'
+        example: '2018-01-18T19:32:54.010152-05:00'
         format: date
         type: string
       body:
@@ -3474,7 +3560,7 @@ definitions:
           views: 3
       created_at:
         description: Datetime of when the team template was created
-        example: '2017-12-06T14:22:15.842315-08:00'
+        example: '2018-01-18T19:32:54.010066-05:00'
         format: date
         type: string
       id:
@@ -3483,7 +3569,7 @@ definitions:
         type: string
       last_modified_at:
         description: Datetime of when the team template was last modified
-        example: '2017-12-06T14:22:15.842466-08:00'
+        example: '2018-01-18T19:32:54.010180-05:00'
         format: date
         type: string
       last_modified_user:
@@ -3494,7 +3580,7 @@ definitions:
           id: 1
       last_used_at:
         description: Datetime of when the team template was last used
-        example: '2017-12-06T14:22:15.842404-08:00'
+        example: '2018-01-18T19:32:54.010127-05:00'
         format: date
         type: string
       open_tracking_enabled:
@@ -3511,7 +3597,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the team template was last updated
-        example: '2017-12-06T14:22:15.842371-08:00'
+        example: '2018-01-18T19:32:54.010102-05:00'
         format: date
         type: string
   TeamTemplateCounts:
@@ -3552,7 +3638,7 @@ definitions:
         type: boolean
       created_at:
         description: Datetime of when the user was created
-        example: '2017-12-06T14:22:15.727157-08:00'
+        example: '2018-01-18T19:32:53.878128-05:00'
         format: date
         type: string
       crm_connected:
@@ -3654,6 +3740,6 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the user was last updated
-        example: '2017-12-06T14:22:15.727227-08:00'
+        example: '2018-01-18T19:32:53.878232-05:00'
         format: date
         type: string
