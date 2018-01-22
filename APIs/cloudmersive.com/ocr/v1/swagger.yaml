@@ -1,0 +1,59 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.cloudmersive.com
+info:
+  title: ocrapi
+  version: v1
+  x-apisguru-categories:
+    - text
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://cloudmersive.com/images/servers.jpeg'
+  x-origin:
+    - format: swagger
+      url: 'https://api.cloudmersive.com/ocr/docs/v1/swagger'
+      version: '2.0'
+  x-providerName: cloudmersive.com
+  x-serviceName: ocr
+consumes:
+  - multipart/form-data
+produces:
+  - application/json
+  - text/json
+  - application/xml
+  - text/xml
+securityDefinitions:
+  Apikey:
+    description: API Key Authentication
+    in: header
+    name: Apikey
+    type: apiKey
+paths:
+  /ocr/image/toText:
+    post:
+      operationId: ImageOcr_Post
+      parameters:
+        - description: 'Image file to perform OCR on.  Common file formats such as PNG, JPEG are supported.'
+          in: formData
+          name: imageFile
+          required: true
+          type: file
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ImageToTextResponse'
+      summary: 'Converts an uploaded image in common formats such as JPEG, PNG into text via Optical Character Recognition.'
+      tags:
+        - ImageOcr
+definitions:
+  ImageToTextResponse:
+    description: Response from an OCR to text operation.  Includes the confience rating and converted text result.
+    properties:
+      MeanConfidenceLevel:
+        format: float
+        type: number
+      TextResult:
+        type: string
+    type: object
