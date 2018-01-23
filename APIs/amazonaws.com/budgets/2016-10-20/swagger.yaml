@@ -738,6 +738,12 @@ definitions:
       IncludeSupport:
         $ref: '#/definitions/NullableBoolean'
         description: A boolean value whether to include support costs in the cost budget.
+      IncludeDiscount:
+        $ref: '#/definitions/NullableBoolean'
+        description: A boolean value whether to include discounts in the cost budget.
+      UseAmortized:
+        $ref: '#/definitions/NullableBoolean'
+        description: A boolean value whether to include amortized costs in the cost budget.
     description: This includes the options for getting the cost of a budget.
   CreateBudgetRequest:
     type: object
