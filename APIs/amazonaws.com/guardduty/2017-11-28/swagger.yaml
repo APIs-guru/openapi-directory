@@ -1421,6 +1421,22 @@ definitions:
   AcceptInvitationResponse:
     type: object
     properties: {}
+  AccessKeyDetails:
+    type: object
+    properties:
+      AccessKeyId:
+        $ref: '#/definitions/__string'
+        description: Access key ID of the user.
+      PrincipalId:
+        $ref: '#/definitions/__string'
+        description: The principal ID of the user.
+      UserName:
+        $ref: '#/definitions/__string'
+        description: The name of the user.
+      UserType:
+        $ref: '#/definitions/__string'
+        description: The type of the user.
+    description: The IAM access key details (IAM user information) of a user that engaged in the activity that prompted GuardDuty to generate a finding.
   AccountDetail:
     type: object
     properties:
@@ -2426,6 +2442,8 @@ definitions:
   Resource:
     type: object
     properties:
+      AccessKeyDetails:
+        $ref: '#/definitions/AccessKeyDetails'
       InstanceDetails:
         $ref: '#/definitions/InstanceDetails'
       ResourceType:

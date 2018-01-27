@@ -637,10 +637,14 @@ paths:
           schema:
             $ref: '#/definitions/BadGatewayException'
         '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '485':
           description: GatewayTimeoutException
           schema:
             $ref: '#/definitions/GatewayTimeoutException'
-        '485':
+        '486':
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
@@ -1495,6 +1499,8 @@ definitions:
       InputAttachments:
         $ref: '#/definitions/ListOfInputAttachment'
         description: List of input attachments for channel.
+      InputSpecification:
+        $ref: '#/definitions/InputSpecification'
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel. (user-mutable)
@@ -1557,6 +1563,8 @@ definitions:
       InputAttachments:
         $ref: '#/definitions/ListOfInputAttachment'
         description: List of input attachments for channel.
+      InputSpecification:
+        $ref: '#/definitions/InputSpecification'
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel. (user-mutable)
@@ -1585,6 +1593,9 @@ definitions:
       InputAttachments:
         $ref: '#/definitions/ListOfInputAttachment'
         description: List of input attachments for channel.
+      InputSpecification:
+        $ref: '#/definitions/InputSpecification'
+        description: 'Specification of input for this channel (max. bitrate, resolution, codec, etc.)'
       Name:
         $ref: '#/definitions/__string'
         description: Name of channel.
@@ -1610,6 +1621,9 @@ definitions:
       InputAttachments:
         $ref: '#/definitions/ListOfInputAttachment'
         description: List of input attachments for channel.
+      InputSpecification:
+        $ref: '#/definitions/InputSpecification'
+        description: 'Specification of input for this channel (max. bitrate, resolution, codec, etc.)'
       Name:
         $ref: '#/definitions/__string'
         description: Name of channel.
@@ -1642,10 +1656,7 @@ definitions:
     properties:
       Destinations:
         $ref: '#/definitions/ListOfInputDestinationRequest'
-        description: |
-          settings required for PUSH-type inputs; one per redundancy group.
-          Only one of sources and destinations can be specified.
-          Note: there are currently no settings required for PUSH-type inputs
+        description: Destination settings for PUSH type inputs.
       InputSecurityGroups:
         $ref: '#/definitions/ListOf__string'
         description: A list of security groups referenced by IDs to attach to the input.
@@ -1656,12 +1667,13 @@ definitions:
         $ref: '#/definitions/__string'
         description: |
           Unique identifier of the request to ensure the request is handled
-          exactly once in case of retries
+          exactly once in case of retries.
       Sources:
         $ref: '#/definitions/ListOfInputSourceRequest'
         description: |
-          settings required for PULL-type inputs; one per redundancy group
-          Only one of sources and destinations can be specified
+          The source URLs for a PULL-type input. Every PULL type input needs
+          exactly two source URLs for redundancy.
+          Only specify sources for PULL type Inputs. Leave Destinations empty.
       Type:
         $ref: '#/definitions/InputType'
     description: Placeholder documentation for CreateInput
@@ -1670,10 +1682,7 @@ definitions:
     properties:
       Destinations:
         $ref: '#/definitions/ListOfInputDestinationRequest'
-        description: |
-          settings required for PUSH-type inputs; one per redundancy group.
-          Only one of sources and destinations can be specified.
-          Note: there are currently no settings required for PUSH-type inputs
+        description: Destination settings for PUSH type inputs.
       InputSecurityGroups:
         $ref: '#/definitions/ListOf__string'
         description: A list of security groups referenced by IDs to attach to the input.
@@ -1684,12 +1693,13 @@ definitions:
         $ref: '#/definitions/__string'
         description: |
           Unique identifier of the request to ensure the request is handled
-          exactly once in case of retries
+          exactly once in case of retries.
       Sources:
         $ref: '#/definitions/ListOfInputSourceRequest'
         description: |
-          settings required for PULL-type inputs; one per redundancy group
-          Only one of sources and destinations can be specified
+          The source URLs for a PULL-type input. Every PULL type input needs
+          exactly two source URLs for redundancy.
+          Only specify sources for PULL type Inputs. Leave Destinations empty.
       Type:
         $ref: '#/definitions/InputType'
     description: The name of the input
@@ -1751,6 +1761,8 @@ definitions:
       InputAttachments:
         $ref: '#/definitions/ListOfInputAttachment'
         description: List of input attachments for channel.
+      InputSpecification:
+        $ref: '#/definitions/InputSpecification'
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel. (user-mutable)
@@ -1806,6 +1818,8 @@ definitions:
       InputAttachments:
         $ref: '#/definitions/ListOfInputAttachment'
         description: List of input attachments for channel.
+      InputSpecification:
+        $ref: '#/definitions/InputSpecification'
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel. (user-mutable)
@@ -1827,25 +1841,25 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: 'Unique ARN of input (generated, immutable)'
+        description: 'The Unique ARN of the input (generated, immutable).'
       AttachedChannels:
         $ref: '#/definitions/ListOf__string'
-        description: List of channel IDs that that input is attached to (currently an input can only be attached to one channel)
+        description: A list of channel IDs that that input is attached to (currently an input can only be attached to one channel).
       Destinations:
         $ref: '#/definitions/ListOfInputDestination'
-        description: List of destinations of input (PULL-type)
+        description: A list of the destinations of the input (PUSH-type).
       Id:
         $ref: '#/definitions/__string'
-        description: 'generated ID of input (unique for user account, immutable)'
+        description: 'The generated ID of the input (unique for user account, immutable).'
       Name:
         $ref: '#/definitions/__string'
-        description: user-assigned name (mutable)
+        description: The user-assigned name (This is a mutable value).
       SecurityGroups:
         $ref: '#/definitions/ListOf__string'
-        description: List of IDs for all the security groups attached to the input.
+        description: A list of IDs for all the security groups attached to the input.
       Sources:
         $ref: '#/definitions/ListOfInputSource'
-        description: List of sources of input (PULL-type)
+        description: A list of the sources of the input (PULL-type).
       State:
         $ref: '#/definitions/InputState'
       Type:
@@ -2724,7 +2738,7 @@ definitions:
         description: Parameters that control interactions with the CDN.
       IndexNSegments:
         $ref: '#/definitions/__integer'
-        description: 'Number of segments to keep in the playlist (.m3u8) file. mode must be "vod" for this setting to have an effect, and this number should be less than or equal to keepSegments.'
+        description: 'If mode is "live", the number of segments to retain in the manifest (.m3u8) file. This number must be less than or equal to keepSegments. If mode is "vod", this parameter has no effect.'
       InputLossAction:
         $ref: '#/definitions/InputLossActionForHlsOut'
         description: Parameter that control output group behavior on input loss.
@@ -2736,7 +2750,7 @@ definitions:
         description: 'For use with encryptionType. The IV (Initialization Vector) is a 128-bit number used in conjunction with the key for encrypting blocks. If this setting is "followsSegmentNumber", it will cause the IV to change every segment (to match the segment number). If this is set to "explicit", you must enter a constantIv value.'
       KeepSegments:
         $ref: '#/definitions/__integer'
-        description: Number of segments to retain in the destination directory. mode must be "live" for this setting to have an effect.
+        description: 'If mode is "live", the number of TS segments to retain in the destination directory. If mode is "vod", this parameter has no effect.'
       KeyFormat:
         $ref: '#/definitions/__string'
         description: 'The value specifies how the key is represented in the resource identified by the URI.  If parameter is absent, an implicit value of "identity" is used.  A reverse DNS string can also be given.'
@@ -2757,7 +2771,10 @@ definitions:
         description: 'When set, minimumSegmentLength is enforced by looking ahead and back within the specified range for a nearby avail and extending the segment size if needed.'
       Mode:
         $ref: '#/definitions/HlsMode'
-        description: 'If set to "vod", keeps and indexes all segments starting with the first segment.  If set to "live" segments will age out and only the last keepSegments number of segments will be retained.'
+        description: |-
+          If "vod", all segments are indexed and kept permanently in the destination and manifest. If "live", only the number segments specified in keepSegments and indexNSegments are kept; newer segments replace older segments, which may prevent players from rewinding all the way to the beginning of the event.
+
+          VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, converting it to a "VOD" type manifest on completion of the stream.
       OutputSelection:
         $ref: '#/definitions/HlsOutputSelection'
         description: Generates the .m3u8 playlist file for this HLS output group. The segmentsOnly option will output segments without the .m3u8 file.
@@ -2950,25 +2967,25 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: 'Unique ARN of input (generated, immutable)'
+        description: 'The Unique ARN of the input (generated, immutable).'
       AttachedChannels:
         $ref: '#/definitions/ListOf__string'
-        description: List of channel IDs that that input is attached to (currently an input can only be attached to one channel)
+        description: A list of channel IDs that that input is attached to (currently an input can only be attached to one channel).
       Destinations:
         $ref: '#/definitions/ListOfInputDestination'
-        description: List of destinations of input (PULL-type)
+        description: A list of the destinations of the input (PUSH-type).
       Id:
         $ref: '#/definitions/__string'
-        description: 'generated ID of input (unique for user account, immutable)'
+        description: 'The generated ID of the input (unique for user account, immutable).'
       Name:
         $ref: '#/definitions/__string'
-        description: user-assigned name (mutable)
+        description: The user-assigned name (This is a mutable value).
       SecurityGroups:
         $ref: '#/definitions/ListOf__string'
-        description: List of IDs for all the security groups attached to the input.
+        description: A list of IDs for all the security groups attached to the input.
       Sources:
         $ref: '#/definitions/ListOfInputSource'
-        description: List of sources of input (PULL-type)
+        description: A list of the sources of the input (PULL-type).
       State:
         $ref: '#/definitions/InputState'
       Type:
@@ -2994,6 +3011,13 @@ definitions:
         $ref: '#/definitions/__integer'
         description: The index of the input channel used as a source.
     description: Placeholder documentation for InputChannelLevel
+  InputCodec:
+    type: string
+    enum:
+      - MPEG2
+      - AVC
+      - HEVC
+    description: codec in increasing order of complexity
   InputDeblockFilter:
     type: string
     enum:
@@ -3012,17 +3036,17 @@ definitions:
       Ip:
         $ref: '#/definitions/__string'
         description: |
-          system-generated static IP address of endpoint.
-          Remains fixed for the lifetime of the input
+          The system-generated static IP address of endpoint.
+          It remains fixed for the lifetime of the input.
       Port:
         $ref: '#/definitions/__string'
-        description: port for input
+        description: The port number for the input.
       Url:
         $ref: '#/definitions/__string'
         description: |
           This represents the endpoint that the customer stream will be
           pushed to.
-    description: Settings for a PUSH type input
+    description: The settings for a PUSH type input.
   InputDestinationRequest:
     type: object
     properties:
@@ -3031,7 +3055,7 @@ definitions:
         description: |
           A unique name for the location the RTMP stream is being pushed
           to.
-    description: Endpoint settings for a PUSH type input
+    description: Endpoint settings for a PUSH type input.
   InputFilter:
     type: string
     enum:
@@ -3096,6 +3120,21 @@ definitions:
       - COLOR
       - SLATE
     description: Placeholder documentation for InputLossImageType
+  InputMaximumBitrate:
+    type: string
+    enum:
+      - MAX_10_MBPS
+      - MAX_20_MBPS
+      - MAX_50_MBPS
+    description: Maximum input bitrate in megabits per second. Bitrates up to 50 Mbps are supported currently.
+  InputResolution:
+    type: string
+    enum:
+      - SD
+      - HD
+      - UHD
+    description: |
+      Input resolution based on lines of vertical resolution in the input; SD is less than 720 lines, HD is 720 to 1080 lines, UHD is greater than 1080 lines
   InputSecurityGroup:
     type: object
     properties:
@@ -3156,7 +3195,7 @@ definitions:
     properties:
       PasswordParam:
         $ref: '#/definitions/__string'
-        description: key used to extract the password from EC2 Parameter store
+        description: The key used to extract the password from EC2 Parameter store.
       Url:
         $ref: '#/definitions/__string'
         description: |
@@ -3164,8 +3203,8 @@ definitions:
           pulled from.
       Username:
         $ref: '#/definitions/__string'
-        description: username for input source
-    description: Settings for a PULL type input
+        description: The username for the input source.
+    description: The settings for a PULL type input.
   InputSourceEndBehavior:
     type: string
     enum:
@@ -3177,7 +3216,7 @@ definitions:
     properties:
       PasswordParam:
         $ref: '#/definitions/__string'
-        description: key used to extract the password from EC2 Parameter store
+        description: The key used to extract the password from EC2 Parameter store.
       Url:
         $ref: '#/definitions/__string'
         description: |
@@ -3185,8 +3224,21 @@ definitions:
           pulled from.
       Username:
         $ref: '#/definitions/__string'
-        description: username for input source
-    description: Settings for for a PULL type input
+        description: The username for the input source.
+    description: Settings for for a PULL type input.
+  InputSpecification:
+    type: object
+    properties:
+      Codec:
+        $ref: '#/definitions/InputCodec'
+        description: Input codec
+      MaximumBitrate:
+        $ref: '#/definitions/InputMaximumBitrate'
+        description: 'Maximum input bitrate, categorized coarsely'
+      Resolution:
+        $ref: '#/definitions/InputResolution'
+        description: 'Input resolution, categorized coarsely'
+    description: Placeholder documentation for InputSpecification
   InputState:
     type: string
     enum:
@@ -3612,7 +3664,7 @@ definitions:
         description: 'Controls placement of EBP on Audio PIDs. If set to videoAndAudioPids, EBP markers will be placed on the video PID and all audio PIDs.  If set to videoPid, EBP markers will be placed on only the video PID.'
       EcmPid:
         $ref: '#/definitions/__string'
-        description: Packet Identifier (PID) for ECM in the transport stream. Only enabled when Simulcrypt is enabled. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
+        description: This field is unused and deprecated.
       EsRateInPes:
         $ref: '#/definitions/M2tsEsRateInPes'
         description: Include or exclude the ES Rate field in the PES header.
@@ -3723,7 +3775,7 @@ definitions:
         description: 'Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values.'
       EcmPid:
         $ref: '#/definitions/__string'
-        description: 'ThePlatform-protected transport streams using ''microsoft'' as Target Client include an ECM stream. This ECM stream contains the size, IV, and PTS of every sample in the transport stream.  This stream PID is specified here. This PID has no effect on non ThePlatform-protected streams.'
+        description: This parameter is unused and deprecated.
       PatInterval:
         $ref: '#/definitions/__integer'
         description: The number of milliseconds between instances of this table in the output transport stream. A value of \"0\" writes out the PMT once per segment file.
@@ -4183,6 +4235,8 @@ definitions:
       InputAttachments:
         $ref: '#/definitions/ListOfInputAttachment'
         description: List of input attachments for channel.
+      InputSpecification:
+        $ref: '#/definitions/InputSpecification'
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel. (user-mutable)
@@ -4232,6 +4286,8 @@ definitions:
       InputAttachments:
         $ref: '#/definitions/ListOfInputAttachment'
         description: List of input attachments for channel.
+      InputSpecification:
+        $ref: '#/definitions/InputSpecification'
       Name:
         $ref: '#/definitions/__string'
         description: The name of the channel. (user-mutable)

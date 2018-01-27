@@ -1452,7 +1452,10 @@ definitions:
         description: The room ARN of a device.
       DeviceStatus:
         $ref: '#/definitions/DeviceStatus'
-        description: The status of a device.
+        description: 'The status of a device. If the status is not READY, check the DeviceStatusInfo for details.'
+      DeviceStatusInfo:
+        $ref: '#/definitions/DeviceStatusInfo'
+        description: Detailed information about a device's status.
     description: A device with attributes.
   DeviceData:
     type: object
@@ -1484,6 +1487,9 @@ definitions:
       RoomName:
         $ref: '#/definitions/RoomName'
         description: The name of the room associated with a device.
+      DeviceStatusInfo:
+        $ref: '#/definitions/DeviceStatusInfo'
+        description: Detailed information about a device's status.
     description: Device attributes.
   DeviceDataList:
     type: array
@@ -1503,6 +1509,29 @@ definitions:
       - READY
       - PENDING
       - WAS_OFFLINE
+  DeviceStatusDetail:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/DeviceStatusDetailCode'
+        description: The device status detail code.
+    description: Details of a device’s status.
+  DeviceStatusDetailCode:
+    type: string
+    enum:
+      - DEVICE_SOFTWARE_UPDATE_NEEDED
+      - DEVICE_WAS_OFFLINE
+  DeviceStatusDetails:
+    type: array
+    items:
+      $ref: '#/definitions/DeviceStatusDetail'
+  DeviceStatusInfo:
+    type: object
+    properties:
+      DeviceStatusDetails:
+        $ref: '#/definitions/DeviceStatusDetails'
+        description: One or more device status detail descriptions.
+    description: Detailed information about a device's status.
   DeviceType:
     type: string
     pattern: '[a-zA-Z0-9]{1,200}'
@@ -1968,7 +1997,7 @@ definitions:
         description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
       Filters:
         $ref: '#/definitions/FilterList'
-        description: 'The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber, and UnassociatedOnly.'
+        description: 'The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, and UnassociatedOnly.'
       SortCriteria:
         $ref: '#/definitions/SortList'
         description: 'The sort order to use in listing the specified set of devices. Supported sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, and DeviceSerialNumber.'
