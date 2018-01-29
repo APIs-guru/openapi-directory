@@ -113,14 +113,16 @@ tags:
 paths:
   /v1/customers:
     get:
-      description: List the user's customer accounts.
+      description: Lists the user's customer accounts.
       operationId: androiddeviceprovisioning.customers.list
       parameters:
-        - description: The maximum number of items to return.
+        - description: |-
+            The maximum number of customers to show in a page of results.
+            A number between 1 and 1000 (inclusive).
           in: query
           name: pageSize
           type: integer
-        - description: 'The next_page_token value returned from a previous List request, if any.'
+        - description: A token specifying which result page to return.
           in: query
           name: pageToken
           type: string
@@ -498,13 +500,10 @@ paths:
       tags:
         - customers
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: androiddeviceprovisioning.operations.get
+      description: Get a device.
+      operationId: androiddeviceprovisioning.partners.devices.get
       parameters:
-        - description: The name of the operation resource.
+        - description: 'Resource name in `partners/[PARTNER_ID]/devices/[DEVICE_ID]`.'
           in: path
           name: name
           required: true
@@ -514,9 +513,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/Device'
       tags:
-        - operations
+        - partners
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -1048,14 +1047,14 @@ definitions:
     description: Response message for listing my customers.
     properties:
       customers:
-        description: Customers the current user can act as.
+        description: The customer accounts the calling user is a member of.
         items:
           $ref: '#/definitions/Company'
         type: array
       nextPageToken:
         description: |-
-          Token to retrieve the next page of results, or empty if there are no
-          more results in the list.
+          A token used to access the next page of results. Omitted if no further
+          results are available.
         type: string
     type: object
   CustomerListDevicesResponse:

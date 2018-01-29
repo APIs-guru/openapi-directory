@@ -43,7 +43,7 @@ parameters:
     required: true
     type: string
   DiskNameParameter:
-    description: The name of the disk within the given subscription and resource group.
+    description: 'The name of the managed disk that is being created. The name can''t be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The maximum name length is 80 characters.'
     in: path
     name: diskName
     required: true
@@ -57,7 +57,7 @@ parameters:
     type: string
     x-ms-parameter-location: method
   SnapshotNameParameter:
-    description: The name of the snapshot within the given subscription and resource group.
+    description: 'The name of the snapshot that is being created. The name can''t be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The max name length is 80 characters.'
     in: path
     name: snapshotName
     required: true
@@ -84,6 +84,78 @@ paths:
             $ref: '#/definitions/DiskList'
       tags:
         - Disks
+      x-ms-examples:
+        List all managed disks in a subscription.:
+          parameters:
+            api-version: '2017-03-30'
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                nextLink: 'http://disksvchost:99/subscriptions/{subscriptionId}/providers/Microsoft.Compute/disks?$skiptoken={token}/Subscriptions/{subscriptionId}/ResourceGroups/myResourceGroup/Disks/myManagedDisk'
+                value:
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk1'
+                    location: westus
+                    name: myManagedDisk1
+                    properties:
+                      creationData:
+                        createOption: Copy
+                        sourceResourceId: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk1'
+                      diskSizeGB: 200
+                      encryptionSettings:
+                        diskEncryptionKey:
+                          secretUrl: 'https://myvmvault.vault-int.azure-int.net/secrets/{secret}'
+                          sourceVault:
+                            id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                        enabled: true
+                        keyEncryptionKey:
+                          keyUrl: 'https://myvmvault.vault-int.azure-int.net/keys/{key}'
+                          sourceVault:
+                            id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                      osType: Windows
+                      provisioningState: Succeeded
+                      timeCreated: '2016-12-28T04:41:35.9278721+00:00'
+                    tags:
+                      department: Development
+                      project: ManagedDisks
+                    type: Microsoft.Compute/disks
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk2'
+                    location: westus
+                    name: myManagedDisk2
+                    properties:
+                      creationData:
+                        createOption: Empty
+                      diskSizeGB: 10
+                      osType: Windows
+                      provisioningState: Succeeded
+                      timeCreated: '2016-12-28T04:41:36.872242+00:00'
+                    type: Microsoft.Compute/disks
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk3'
+                    location: westus
+                    name: myManagedDisk3
+                    properties:
+                      creationData:
+                        createOption: FromImage
+                        imageReference:
+                          id: '/Subscriptions/{subscriptionId}/Providers/Microsoft.Compute/Locations/uswest/Publishers/Microsoft/ArtifactTypes/VMImage/Offers/{offer}'
+                      diskSizeGB: 200
+                      encryptionSettings:
+                        diskEncryptionKey:
+                          secretUrl: 'https://myvmvault.vault-int.azure-int.net/secrets/{secret}'
+                          sourceVault:
+                            id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                        enabled: true
+                        keyEncryptionKey:
+                          keyUrl: 'https://myvmvault.vault-int.azure-int.net/keys/{key}'
+                          sourceVault:
+                            id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                      osType: Windows
+                      provisioningState: Succeeded
+                      timeCreated: '2016-12-28T04:41:36.3973934+00:00'
+                    tags:
+                      department: Development
+                      project: ManagedDisks
+                    type: Microsoft.Compute/disks
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/snapshots':
@@ -100,6 +172,66 @@ paths:
             $ref: '#/definitions/SnapshotList'
       tags:
         - Snapshots
+      x-ms-examples:
+        List all snapshots in a subscription.:
+          parameters:
+            api-version: '2017-03-30'
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                value:
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1'
+                    location: westus
+                    name: mySnapshot1
+                    properties:
+                      creationData:
+                        createOption: Copy
+                        sourceResourceId: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot'
+                      diskSizeGB: 200
+                      encryptionSettings:
+                        diskEncryptionKey:
+                          secretUrl: 'https://myvmvault.vault-int.azure-int.net/secrets/{secret}'
+                          sourceVault:
+                            id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                        enabled: true
+                        keyEncryptionKey:
+                          keyUrl: 'https://myvmvault.vault-int.azure-int.net/keys/{key}'
+                          sourceVault:
+                            id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                      osType: Windows
+                      provisioningState: Succeeded
+                      timeCreated: '2016-12-28T04:47:30.6630569+00:00'
+                    tags:
+                      department: Development
+                      project: Snapshots
+                    type: Microsoft.Compute/snapshots
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2'
+                    location: westus
+                    name: mySnapshot2
+                    properties:
+                      creationData:
+                        createOption: Import
+                        sourceUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+                        storageAccountId: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/myStorageAccount'
+                      diskSizeGB: 200
+                      encryptionSettings:
+                        diskEncryptionKey:
+                          secretUrl: 'https://myvmvault.vault-int.azure-int.net/secrets/{secret}'
+                          sourceVault:
+                            id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                        enabled: true
+                        keyEncryptionKey:
+                          keyUrl: 'https://myvmvault.vault-int.azure-int.net/keys/{key}'
+                          sourceVault:
+                            id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                      osType: Windows
+                      provisioningState: Succeeded
+                      timeCreated: '2016-12-28T04:47:30.3247198+00:00'
+                    tags:
+                      department: Development
+                      project: Snapshots
+                    type: Microsoft.Compute/snapshots
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks':
@@ -117,6 +249,79 @@ paths:
             $ref: '#/definitions/DiskList'
       tags:
         - Disks
+      x-ms-examples:
+        List all managed disks in a resource group.:
+          parameters:
+            api-version: '2017-03-30'
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                nextLink: 'http://disksvchost:99/subscriptions/{subscriptionId}/providers/Microsoft.Compute/disks?$skiptoken={token}/Subscriptions/{subscriptionId}/ResourceGroups/myResourceGroup/Disks/myManagedDisk'
+                value:
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                    location: westus
+                    name: myManagedDisk
+                    properties:
+                      creationData:
+                        createOption: Copy
+                        sourceResourceId: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                      diskSizeGB: 200
+                      encryptionSettings:
+                        diskEncryptionKey:
+                          secretUrl: 'https://myvmvault.vault-int.azure-int.net/secrets/{secret}'
+                          sourceVault:
+                            id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                        enabled: true
+                        keyEncryptionKey:
+                          keyUrl: 'https://myvmvault.vault-int.azure-int.net/keys/{key}'
+                          sourceVault:
+                            id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                      osType: Windows
+                      provisioningState: Succeeded
+                      timeCreated: '2016-12-28T04:41:35.9278721+00:00'
+                    tags:
+                      department: Development
+                      project: ManagedDisks
+                    type: Microsoft.Compute/disks
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                    location: westus
+                    name: myManagedDisk
+                    properties:
+                      creationData:
+                        createOption: Empty
+                      diskSizeGB: 10
+                      osType: Windows
+                      provisioningState: Succeeded
+                      timeCreated: '2016-12-28T04:41:36.872242+00:00'
+                    type: Microsoft.Compute/disks
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                    location: westus
+                    name: myManagedDisk
+                    properties:
+                      creationData:
+                        createOption: FromImage
+                        imageReference:
+                          id: '/Subscriptions/{subscriptionId}/Providers/Microsoft.Compute/Locations/uswest/Publishers/Microsoft/ArtifactTypes/VMImage/Offers/{offer}'
+                      diskSizeGB: 200
+                      encryptionSettings:
+                        diskEncryptionKey:
+                          secretUrl: 'https://myvmvault.vault-int.azure-int.net/secrets/{secret}'
+                          sourceVault:
+                            id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                        enabled: true
+                        keyEncryptionKey:
+                          keyUrl: 'https://myvmvault.vault-int.azure-int.net/keys/{key}'
+                          sourceVault:
+                            id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                      osType: Windows
+                      provisioningState: Succeeded
+                      timeCreated: '2016-12-28T04:41:36.3973934+00:00'
+                    tags:
+                      department: Development
+                      project: ManagedDisks
+                    type: Microsoft.Compute/disks
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}':
@@ -155,6 +360,43 @@ paths:
             $ref: '#/definitions/Disk'
       tags:
         - Disks
+      x-ms-examples:
+        Get information about a managed disk.:
+          parameters:
+            api-version: '2017-03-30'
+            diskName: myManagedDisk
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                location: westus
+                managedBy: /subscriptions/123caaa-123v-v211-a49f-f88ccac5bf88/resourceGroups/ResourceGroupName/providers/Microsoft.Compute/virtualMachines/TestVM414689371c88843d65ec
+                name: myManagedDisk
+                properties:
+                  creationData:
+                    createOption: Empty
+                  diskSizeGB: 10
+                  encryptionSettings:
+                    diskEncryptionKey:
+                      secretUrl: 'https://myvmvault.vault-int.azure-int.net/secrets/{secret}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                    enabled: true
+                    keyEncryptionKey:
+                      keyUrl: 'https://myvmvault.vault-int.azure-int.net/keys/{key}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                  osType: Windows
+                  provisioningState: Succeeded
+                  timeCreated: '2016-12-28T04:41:35.079872+00:00'
+                sku:
+                  name: Standard_LRS
+                tags:
+                  department: Development
+                  project: ManagedDisks
+                type: Microsoft.Compute/disks
     patch:
       description: Updates (patches) a disk.
       operationId: Disks_Update
@@ -206,6 +448,151 @@ paths:
             $ref: '#/definitions/Disk'
       tags:
         - Disks
+      x-ms-examples:
+        Create a managed disk by copying a snapshot.:
+          parameters:
+            api-version: '2017-03-30'
+            disk:
+              location: West US
+              name: myDisk
+              properties:
+                creationData:
+                  createOption: Copy
+                  sourceResourceId: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot'
+            diskName: myDisk
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '202':
+              body:
+                location: West US
+                name: myDisk
+                properties:
+                  creationData:
+                    createOption: Copy
+                    sourceResourceId: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot'
+                  provisioningState: Updating
+        Create a managed disk by importing an unmanaged blob from a different subscription.:
+          parameters:
+            api-version: '2017-03-30'
+            disk:
+              location: West US
+              name: myDisk
+              properties:
+                creationData:
+                  createOption: Import
+                  sourceUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+                  storageAccountId: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/myStorageAccount'
+            diskName: myDisk
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '202':
+              body:
+                location: West US
+                name: myDisk
+                properties:
+                  creationData:
+                    createOption: Import
+                    sourceUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+                    storageAccountId: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/myStorageAccount'
+                  provisioningState: Updating
+        Create a managed disk by importing an unmanaged blob from the same subscription.:
+          parameters:
+            api-version: '2017-03-30'
+            disk:
+              location: West US
+              name: myDisk
+              properties:
+                creationData:
+                  createOption: Import
+                  sourceUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+            diskName: myDisk
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '202':
+              body:
+                location: West US
+                name: myDisk
+                properties:
+                  creationData:
+                    createOption: Import
+                    sourceUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+                  provisioningState: Updating
+        Create a managed disk from a platform image.:
+          parameters:
+            api-version: '2017-03-30'
+            disk:
+              location: West US
+              name: myDisk
+              properties:
+                creationData:
+                  createOption: FromImage
+                  imageReference:
+                    id: '/Subscriptions/{subscriptionId}/Providers/Microsoft.Compute/Locations/uswest/Publishers/Microsoft/ArtifactTypes/VMImage/Offers/{offer}'
+                osType: Windows
+            diskName: myDisk
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '202':
+              body:
+                location: West US
+                name: myDisk
+                properties:
+                  creationData:
+                    createOption: FromImage
+                    imageReference:
+                      id: '/Subscriptions/{subscriptionId}/Providers/Microsoft.Compute/Locations/uswest/Publishers/Microsoft/ArtifactTypes/VMImage/Offers/{offer}'
+                  osType: Windows
+                  provisioningState: Updating
+        Create a managed disk from an existing managed disk in the same or different subscription.:
+          parameters:
+            api-version: '2017-03-30'
+            disk:
+              location: West US
+              name: myDisk2
+              properties:
+                creationData:
+                  createOption: Copy
+                  sourceResourceId: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk1'
+            diskName: myDisk2
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '202':
+              body:
+                location: West US
+                name: myDisk2
+                properties:
+                  creationData:
+                    createOption: Copy
+                    sourceResourceId: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk1'
+                  provisioningState: Updating
+        Create an empty managed disk.:
+          parameters:
+            api-version: '2017-03-30'
+            disk:
+              location: West US
+              name: myDisk
+              properties:
+                creationData:
+                  createOption: Empty
+                diskSizeGB: 200
+            diskName: myDisk
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '202':
+              body:
+                location: West US
+                name: myDisk
+                properties:
+                  creationData:
+                    createOption: Empty
+                  diskSizeGB: 200
+                  provisioningState: Updating
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}/beginGetAccess':
     post:
@@ -266,6 +653,41 @@ paths:
             $ref: '#/definitions/SnapshotList'
       tags:
         - Snapshots
+      x-ms-examples:
+        List all snapshots in a resource group.:
+          parameters:
+            api-version: '2017-03-30'
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                value:
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot'
+                    location: westus
+                    name: mySnapshot
+                    properties:
+                      creationData:
+                        createOption: Copy
+                        sourceResourceId: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot'
+                      diskSizeGB: 200
+                      encryptionSettings:
+                        diskEncryptionKey:
+                          secretUrl: 'https://myvmvault.vault-int.azure-int.net/secrets/{secret}'
+                          sourceVault:
+                            id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                        enabled: true
+                        keyEncryptionKey:
+                          keyUrl: 'https://myvmvault.vault-int.azure-int.net/keys/{key}'
+                          sourceVault:
+                            id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                      osType: Windows
+                      provisioningState: Succeeded
+                      timeCreated: '2016-12-28T04:41:35.9278721+00:00'
+                    tags:
+                      department: Development
+                      project: Snapshots
+                    type: Microsoft.Compute/snapshots
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}':
@@ -304,6 +726,40 @@ paths:
             $ref: '#/definitions/Snapshot'
       tags:
         - Snapshots
+      x-ms-examples:
+        Get information about a snapshot.:
+          parameters:
+            api-version: '2017-03-30'
+            resourceGroupName: myResourceGroup
+            snapshotName: mySnapshot
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot'
+                location: westus
+                name: mySnapshot
+                properties:
+                  creationData:
+                    createOption: Empty
+                  diskSizeGB: 100
+                  encryptionSettings:
+                    diskEncryptionKey:
+                      secretUrl: 'https://myvmvault.vault-int.azure-int.net/secrets/{secret}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                    enabled: true
+                    keyEncryptionKey:
+                      keyUrl: 'https://myvmvault.vault-int.azure-int.net/keys/{key}'
+                      sourceVault:
+                        id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault'
+                  osType: Windows
+                  provisioningState: Succeeded
+                  timeCreated: '2016-12-28T04:41:35.079872+00:00'
+                tags:
+                  department: Development
+                  project: Snapshots
+                type: Microsoft.Compute/snapshots
     patch:
       description: Updates (patches) a snapshot.
       operationId: Snapshots_Update
@@ -355,6 +811,78 @@ paths:
             $ref: '#/definitions/Snapshot'
       tags:
         - Snapshots
+      x-ms-examples:
+        Create a snapshot by importing an unmanaged blob from a different subscription.:
+          parameters:
+            api-version: '2017-03-30'
+            resourceGroupName: myResourceGroup
+            snapshot:
+              location: West US
+              name: mySnapshot1
+              properties:
+                creationData:
+                  createOption: Import
+                  sourceUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+                  storageAccountId: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/myStorageAccount'
+            snapshotName: mySnapshot1
+            subscriptionId: '{subscription-id}'
+          responses:
+            '202':
+              body:
+                location: West US
+                name: mySnapshot1
+                properties:
+                  creationData:
+                    createOption: Import
+                    sourceUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+                    storageAccountId: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/myStorageAccount'
+                  provisioningState: Updating
+        Create a snapshot by importing an unmanaged blob from the same subscription.:
+          parameters:
+            api-version: '2017-03-30'
+            resourceGroupName: myResourceGroup
+            snapshot:
+              location: West US
+              name: mySnapshot1
+              properties:
+                creationData:
+                  createOption: Import
+                  sourceUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+            snapshotName: mySnapshot1
+            subscriptionId: '{subscription-id}'
+          responses:
+            '202':
+              body:
+                location: West US
+                name: mySnapshot1
+                properties:
+                  creationData:
+                    createOption: Import
+                    sourceUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+                  provisioningState: Updating
+        Create a snapshot from an existing snapshot in the same or a different subscription.:
+          parameters:
+            api-version: '2017-03-30'
+            resourceGroupName: myResourceGroup
+            snapshot:
+              location: West US
+              name: mySnapshot2
+              properties:
+                creationData:
+                  createOption: Copy
+                  sourceResourceId: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1'
+            snapshotName: mySnapshot2
+            subscriptionId: '{subscription-id}'
+          responses:
+            '202':
+              body:
+                location: West US
+                name: mySnapshot2
+                properties:
+                  creationData:
+                    createOption: Copy
+                    sourceResourceId: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1'
+                  provisioningState: Updating
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}/beginGetAccess':
     post:

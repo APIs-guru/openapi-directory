@@ -159,10 +159,10 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeAnalytics/locations/{location}/capability':
     get:
-      description: Gets subscription-level properties and limits for Data Lake Analytics specified by Resource location.
+      description: Gets subscription-level properties and limits for Data Lake Analytics specified by resource location.
       operationId: Locations_GetCapability
       parameters:
-        - description: The Resource location without whitespace.
+        - description: The resource location without whitespace.
           in: path
           name: location
           required: true
@@ -171,7 +171,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Successfully retrieved the subscription-level properties and limits for Data Lake Analytics specified by Resource location.
+          description: Successfully retrieved the subscription-level properties and limits for Data Lake Analytics specified by resource location.
           schema:
             $ref: '#/definitions/CapabilityInformation'
         '404':
@@ -179,7 +179,7 @@ paths:
       tags:
         - Locations
       x-ms-examples:
-        Gets subscription-level properties and limits for Data Lake Analytics specified by Resource location:
+        Gets subscription-level properties and limits for Data Lake Analytics specified by resource location:
           parameters:
             api-version: '2016-11-01'
             location: EastUS2
@@ -198,7 +198,7 @@ paths:
       description: Checks whether the specified account name is available or taken.
       operationId: Account_CheckNameAvailability
       parameters:
-        - description: The Resource location without whitespace.
+        - description: The resource location without whitespace.
           in: path
           name: location
           required: true
@@ -1597,7 +1597,7 @@ paths:
           name: parameters
           required: false
           schema:
-            $ref: '#/definitions/ComputePolicy'
+            $ref: '#/definitions/UpdateComputePolicyParameters'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -1652,7 +1652,7 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/ComputePolicyCreateOrUpdateParameters'
+            $ref: '#/definitions/CreateOrUpdateComputePolicyParameters'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -1893,7 +1893,7 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/FirewallRule'
+            $ref: '#/definitions/CreateOrUpdateFirewallRuleParameters'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -1927,40 +1927,82 @@ paths:
                 type: test_type
 definitions:
   AddDataLakeStoreParameters:
-    description: Additional Data Lake Store parameters.
+    description: The parameters used to add a new Data Lake Store account.
     properties:
       properties:
-        $ref: '#/definitions/DataLakeStoreAccountInfoProperties'
-        description: the properties for the Data Lake Store account being added.
+        $ref: '#/definitions/AddDataLakeStoreProperties'
+        description: The Data Lake Store account properties to use when adding a new Data Lake Store account.
         x-ms-client-flatten: true
+  AddDataLakeStoreProperties:
+    description: The Data Lake Store account properties to use when adding a new Data Lake Store account.
+    properties:
+      suffix:
+        description: The optional suffix for the Data Lake Store account.
+        type: string
+  AddDataLakeStoreWithAccountParameters:
+    description: The parameters used to add a new Data Lake Store account while creating a new Data Lake Analytics account.
+    properties:
+      name:
+        description: The unique name of the Data Lake Store account to add.
+        type: string
+      properties:
+        $ref: '#/definitions/AddDataLakeStoreProperties'
+        description: The Data Lake Store account properties to use when adding a new Data Lake Store account.
+        x-ms-client-flatten: true
+    required:
+      - name
   AddStorageAccountParameters:
-    description: Storage account parameters for a storage account being added to a Data Lake Analytics account.
+    description: The parameters used to add a new Azure Storage account.
     properties:
       properties:
-        $ref: '#/definitions/StorageAccountProperties'
-        description: the properties for the Azure Storage account being added.
+        $ref: '#/definitions/AddStorageAccountProperties'
+        description: The Azure Storage account properties to use when adding a new Azure Storage account.
         x-ms-client-flatten: true
     required:
       - properties
+  AddStorageAccountProperties:
+    description: The Azure Storage account properties to use when adding a new Azure Storage account.
+    properties:
+      accessKey:
+        description: The access key associated with this Azure Storage account that will be used to connect to it.
+        type: string
+      suffix:
+        description: The optional suffix for the storage account.
+        type: string
+    required:
+      - accessKey
+  AddStorageAccountWithAccountParameters:
+    description: The parameters used to add a new Azure Storage account while creating a new Data Lake Analytics account.
+    properties:
+      name:
+        description: The unique name of the Azure Storage account to add.
+        type: string
+      properties:
+        $ref: '#/definitions/AddStorageAccountProperties'
+        description: The Azure Storage account properties to use when adding a new Azure Storage account.
+        x-ms-client-flatten: true
+    required:
+      - name
+      - properties
   CapabilityInformation:
-    description: Subscription-level properties and limits for Data Lake Analytics
+    description: Subscription-level properties and limits for Data Lake Analytics.
     properties:
       accountCount:
-        description: the current number of accounts under this subscription.
+        description: The current number of accounts under this subscription.
         format: int32
         readOnly: true
         type: integer
       maxAccountCount:
-        description: the maximum supported number of accounts under this subscription.
+        description: The maximum supported number of accounts under this subscription.
         format: int32
         readOnly: true
         type: integer
       migrationState:
-        description: the Boolean value of true or false to indicate the maintenance state.
+        description: The Boolean value of true or false to indicate the maintenance state.
         readOnly: true
         type: boolean
       state:
-        description: the subscription state.
+        description: The subscription state.
         enum:
           - Registered
           - Suspended
@@ -1973,18 +2015,18 @@ definitions:
           modelAsString: true
           name: SubscriptionState
       subscriptionId:
-        description: the subscription credentials that uniquely identifies the subscription.
+        description: The subscription credentials that uniquely identifies the subscription.
         format: uuid
         readOnly: true
         type: string
   CheckNameAvailabilityParameters:
-    description: Data Lake Analytics account name availability check parameters
+    description: Data Lake Analytics account name availability check parameters.
     properties:
       name:
-        description: the Data Lake Analytics name to check availability for.
+        description: The Data Lake Analytics name to check availability for.
         type: string
       type:
-        description: 'the Resource type. Note: This should not be set by the user, as the constant value is Microsoft.DataLakeAnalytics/accounts'
+        description: 'The resource type. Note: This should not be set by the user, as the constant value is Microsoft.DataLakeAnalytics/accounts'
         enum:
           - Microsoft.DataLakeAnalytics/accounts
         type: string
@@ -1992,63 +2034,41 @@ definitions:
       - name
       - type
   ComputePolicy:
-    description: The parameters used to create a new compute policy.
+    allOf:
+      - $ref: '#/definitions/SubResource'
+    description: Data Lake Analytics compute policy information.
     properties:
-      name:
-        description: The name of the compute policy
-        readOnly: true
-        type: string
       properties:
         $ref: '#/definitions/ComputePolicyProperties'
-        description: The compute policy properties
+        description: The compute policy properties.
         x-ms-client-flatten: true
-  ComputePolicyAccountCreateParameters:
-    description: The parameters used to create a new compute policy.
-    properties:
-      name:
-        description: The unique name of the policy to create
-        type: string
-      properties:
-        $ref: '#/definitions/ComputePolicyPropertiesCreateParameters'
-        description: The policy properties to use when creating a new compute policy
-        x-ms-client-flatten: true
-    required:
-      - name
-      - properties
-  ComputePolicyCreateOrUpdateParameters:
-    description: The parameters used to create a new compute policy.
-    properties:
-      properties:
-        $ref: '#/definitions/ComputePolicyPropertiesCreateParameters'
-        description: The policy properties to use when creating a new compute policy
-        x-ms-client-flatten: true
-    required:
-      - properties
   ComputePolicyListResult:
     description: The list of compute policies in the account.
     properties:
       nextLink:
-        description: the link (url) to the next page of results.
+        description: The link (url) to the next page of results.
         readOnly: true
         type: string
       value:
-        description: the results of the list operation
+        description: The results of the list operation.
         items:
           $ref: '#/definitions/ComputePolicy'
         readOnly: true
         type: array
   ComputePolicyProperties:
-    description: The compute policy properties to use when creating a new compute policy
+    description: The compute policy properties.
     properties:
       maxDegreeOfParallelismPerJob:
         description: The maximum degree of parallelism per job this user can use to submit jobs.
         format: int32
         minimum: 1
+        readOnly: true
         type: integer
       minPriorityPerJob:
         description: The minimum priority per job this user can use to submit jobs.
         format: int32
         minimum: 1
+        readOnly: true
         type: integer
       objectId:
         description: The AAD object identifier for the entity to create a policy for.
@@ -2066,8 +2086,43 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: AADObjectType
-  ComputePolicyPropertiesCreateParameters:
-    description: The compute policy properties to use when creating a new compute policy
+  CreateComputePolicyWithAccountParameters:
+    description: The parameters used to create a new compute policy while creating a new Data Lake Analytics account.
+    properties:
+      name:
+        description: The unique name of the compute policy to create.
+        type: string
+      properties:
+        $ref: '#/definitions/CreateOrUpdateComputePolicyProperties'
+        description: The compute policy properties to use when creating a new compute policy.
+        x-ms-client-flatten: true
+    required:
+      - name
+      - properties
+  CreateFirewallRuleWithAccountParameters:
+    description: The parameters used to create a new firewall rule while creating a new Data Lake Analytics account.
+    properties:
+      name:
+        description: The unique name of the firewall rule to create.
+        type: string
+      properties:
+        $ref: '#/definitions/CreateOrUpdateFirewallRuleProperties'
+        description: The firewall rule properties to use when creating a new firewall rule.
+        x-ms-client-flatten: true
+    required:
+      - name
+      - properties
+  CreateOrUpdateComputePolicyParameters:
+    description: The parameters used to create a new compute policy.
+    properties:
+      properties:
+        $ref: '#/definitions/CreateOrUpdateComputePolicyProperties'
+        description: The compute policy properties to use when creating a new compute policy.
+        x-ms-client-flatten: true
+    required:
+      - properties
+  CreateOrUpdateComputePolicyProperties:
+    description: The compute policy properties to use when creating a new compute policy.
     properties:
       maxDegreeOfParallelismPerJob:
         description: 'The maximum degree of parallelism per job this user can use to submit jobs. This property, the min priority per job property, or both must be passed.'
@@ -2096,6 +2151,27 @@ definitions:
     required:
       - objectId
       - objectType
+  CreateOrUpdateFirewallRuleParameters:
+    description: The parameters used to create a new firewall rule.
+    properties:
+      properties:
+        $ref: '#/definitions/CreateOrUpdateFirewallRuleProperties'
+        description: The firewall rule properties to use when creating a new firewall rule.
+        x-ms-client-flatten: true
+    required:
+      - properties
+  CreateOrUpdateFirewallRuleProperties:
+    description: The firewall rule properties to use when creating a new firewall rule.
+    properties:
+      endIpAddress:
+        description: The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        type: string
+      startIpAddress:
+        description: The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        type: string
+    required:
+      - startIpAddress
+      - endIpAddress
   DataLakeAnalyticsAccount:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -2122,11 +2198,11 @@ definitions:
     description: Data Lake Account list information.
     properties:
       nextLink:
-        description: the link (url) to the next page of results.
+        description: The link (url) to the next page of results.
         readOnly: true
         type: string
       value:
-        description: the results of the list operation
+        description: The results of the list operation.
         items:
           $ref: '#/definitions/DataLakeStoreAccountInfo'
         readOnly: true
@@ -2135,11 +2211,11 @@ definitions:
     description: DataLakeAnalytics Account list information.
     properties:
       nextLink:
-        description: the link (url) to the next page of results.
+        description: The link (url) to the next page of results.
         readOnly: true
         type: string
       value:
-        description: the results of the list operation
+        description: The results of the list operation.
         items:
           $ref: '#/definitions/DataLakeAnalyticsAccountBasic'
         readOnly: true
@@ -2148,11 +2224,11 @@ definitions:
     description: Azure Storage Account list information.
     properties:
       nextLink:
-        description: the link (url) to the next page of results.
+        description: The link (url) to the next page of results.
         readOnly: true
         type: string
       value:
-        description: the results of the list operation
+        description: The results of the list operation.
         items:
           $ref: '#/definitions/StorageAccountInfo'
         readOnly: true
@@ -2163,12 +2239,12 @@ definitions:
     description: The account specific properties that are associated with an underlying Data Lake Analytics account. Returned only when retrieving a specific account.
     properties:
       computePolicies:
-        description: the list of compute policies to create in this account.
+        description: The list of compute policies associated with this account.
         items:
-          $ref: '#/definitions/ComputePolicyAccountCreateParameters'
+          $ref: '#/definitions/CreateComputePolicyWithAccountParameters'
         type: array
       currentTier:
-        description: the commitment tier in use for the current month.
+        description: The commitment tier in use for the current month.
         enum:
           - Consumption
           - Commitment_100AUHours
@@ -2185,12 +2261,12 @@ definitions:
           modelAsString: false
           name: TierType
       dataLakeStoreAccounts:
-        description: the list of Data Lake storage accounts associated with this account.
+        description: The list of Data Lake Store accounts associated with this account.
         items:
-          $ref: '#/definitions/DataLakeStoreAccountInfo'
+          $ref: '#/definitions/AddDataLakeStoreWithAccountParameters'
         type: array
       defaultDataLakeStoreAccount:
-        description: the default data lake storage account associated with this Data Lake Analytics account.
+        description: The default data lake storage account associated with this Data Lake Analytics account.
         type: string
       firewallAllowAzureIps:
         description: 'The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced.'
@@ -2204,7 +2280,7 @@ definitions:
       firewallRules:
         description: The list of firewall rules associated with this Data Lake Analytics account.
         items:
-          $ref: '#/definitions/FirewallRule'
+          $ref: '#/definitions/CreateFirewallRuleWithAccountParameters'
         type: array
       firewallState:
         description: The current state of the IP address firewall for this Data Lake Analytics account.
@@ -2217,28 +2293,28 @@ definitions:
           name: FirewallState
       maxDegreeOfParallelism:
         default: 30
-        description: the maximum supported degree of parallelism for this account.
+        description: The maximum supported degree of parallelism for this account.
         format: int32
         minimum: 1
         type: integer
       maxDegreeOfParallelismPerJob:
-        description: the maximum supported degree of parallelism per job for this account.
+        description: The maximum supported degree of parallelism per job for this account.
         format: int32
         minimum: 1
         type: integer
       maxJobCount:
         default: 3
-        description: the maximum supported jobs running under the account at the same time.
+        description: The maximum supported jobs running under the account at the same time.
         format: int32
         minimum: 1
         type: integer
       minPriorityPerJob:
-        description: the minimum supported priority per job for this account.
+        description: The minimum supported priority per job for this account.
         format: int32
         minimum: 1
         type: integer
       newTier:
-        description: the commitment tier for the next month.
+        description: The commitment tier for the next month.
         enum:
           - Consumption
           - Commitment_100AUHours
@@ -2255,23 +2331,23 @@ definitions:
           name: TierType
       queryStoreRetention:
         default: 30
-        description: the number of days that job metadata is retained.
+        description: The number of days that job metadata is retained.
         format: int32
         maximum: 180
         minimum: 1
         type: integer
       storageAccounts:
-        description: the list of Azure Blob storage accounts associated with this account.
+        description: The list of Azure Blob storage accounts associated with this account.
         items:
-          $ref: '#/definitions/StorageAccountInfo'
+          $ref: '#/definitions/AddStorageAccountWithAccountParameters'
         type: array
       systemMaxDegreeOfParallelism:
-        description: 'the system defined maximum supported degree of parallelism for this account, which restricts the maximum value of parallelism the user can set for the account.'
+        description: 'The system defined maximum supported degree of parallelism for this account, which restricts the maximum value of parallelism the user can set for the account.'
         format: int32
         readOnly: true
         type: integer
       systemMaxJobCount:
-        description: 'the system defined maximum supported jobs running under the account at the same time, which restricts the maximum number of running jobs the user can set for the account.'
+        description: 'The system defined maximum supported jobs running under the account at the same time, which restricts the maximum number of running jobs the user can set for the account.'
         format: int32
         readOnly: true
         type: integer
@@ -2287,21 +2363,21 @@ definitions:
         readOnly: true
         type: string
       creationTime:
-        description: the account creation time.
+        description: The account creation time.
         format: date-time
         readOnly: true
         type: string
       endpoint:
-        description: the full CName endpoint for this account.
+        description: The full CName endpoint for this account.
         readOnly: true
         type: string
       lastModifiedTime:
-        description: the account last modified time.
+        description: The account last modified time.
         format: date-time
         readOnly: true
         type: string
       provisioningState:
-        description: the provisioning status of the Data Lake Analytics account.
+        description: The provisioning status of the Data Lake Analytics account.
         enum:
           - Failed
           - Creating
@@ -2320,7 +2396,7 @@ definitions:
           modelAsString: false
           name: DataLakeAnalyticsAccountStatus
       state:
-        description: the state of the Data Lake Analytics account.
+        description: The state of the Data Lake Analytics account.
         enum:
           - Active
           - Suspended
@@ -2345,11 +2421,11 @@ definitions:
     description: Data Lake Analytics firewall rule list information.
     properties:
       nextLink:
-        description: the link (url) to the next page of results.
+        description: The link (url) to the next page of results.
         readOnly: true
         type: string
       value:
-        description: the results of the list operation
+        description: The results of the list operation.
         items:
           $ref: '#/definitions/FirewallRule'
         readOnly: true
@@ -2361,42 +2437,40 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/DataLakeStoreAccountInfoProperties'
-        description: the properties associated with this Data Lake Store account.
+        description: The Data Lake Store account properties.
         x-ms-client-flatten: true
   DataLakeStoreAccountInfoProperties:
-    description: Data Lake Store account properties information.
+    description: The Data Lake Store account properties.
     properties:
       suffix:
-        description: the optional suffix for the Data Lake Store account.
+        description: The optional suffix for the Data Lake Store account.
+        readOnly: true
         type: string
   FirewallRule:
     allOf:
-      - $ref: '#/definitions/OptionalSubResource'
-    description: Data Lake Analytics firewall rule information
+      - $ref: '#/definitions/SubResource'
+    description: Data Lake Analytics firewall rule information.
     properties:
       properties:
         $ref: '#/definitions/FirewallRuleProperties'
-        description: the properties of the firewall rule.
+        description: The firewall rule properties.
         x-ms-client-flatten: true
-    required:
-      - properties
   FirewallRuleProperties:
-    description: Data Lake Analytics firewall rule properties information
+    description: The firewall rule properties.
     properties:
       endIpAddress:
-        description: the end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        description: The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        readOnly: true
         type: string
       startIpAddress:
-        description: the start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        description: The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        readOnly: true
         type: string
-    required:
-      - startIpAddress
-      - endIpAddress
   ListSasTokensResult:
     description: 'The SAS response that contains the storage account, container and associated SAS token for connection use.'
     properties:
       nextLink:
-        description: the link (url) to the next page of results.
+        description: The link (url) to the next page of results.
         readOnly: true
         type: string
       value:
@@ -2408,42 +2482,42 @@ definitions:
     description: The list of blob containers associated with the storage account attached to the Data Lake Analytics account.
     properties:
       nextLink:
-        description: the link (url) to the next page of results.
+        description: The link (url) to the next page of results.
         readOnly: true
         type: string
       value:
-        description: the results of the list operation
+        description: The results of the list operation.
         items:
           $ref: '#/definitions/StorageContainer'
         readOnly: true
         type: array
   NameAvailabilityInformation:
-    description: Data Lake Analytics account name availability result information
+    description: Data Lake Analytics account name availability result information.
     properties:
       message:
-        description: 'the message describing why the Data Lake Analytics account name is not available, if nameAvailable is false.'
+        description: 'The message describing why the Data Lake Analytics account name is not available, if nameAvailable is false.'
         readOnly: true
         type: string
       nameAvailable:
-        description: the Boolean value of true or false to indicate whether the Data Lake Analytics account name is available or not.
+        description: The Boolean value of true or false to indicate whether the Data Lake Analytics account name is available or not.
         readOnly: true
         type: boolean
       reason:
-        description: 'the reason why the Data Lake Analytics account name is not available, if nameAvailable is false.'
+        description: 'The reason why the Data Lake Analytics account name is not available, if nameAvailable is false.'
         readOnly: true
         type: string
   Operation:
-    description: An available operation for Data Lake Analytics
+    description: An available operation for Data Lake Analytics.
     properties:
       display:
         $ref: '#/definitions/OperationDisplay'
-        description: the display information for the operation.
+        description: The display information for the operation.
       name:
-        description: the name of the operation.
+        description: The name of the operation.
         readOnly: true
         type: string
       origin:
-        description: the intended executor of the operation.
+        description: The intended executor of the operation.
         enum:
           - user
           - system
@@ -2454,51 +2528,37 @@ definitions:
           modelAsString: true
           name: OperationOrigin
   OperationDisplay:
-    description: The display information for a particular operation
+    description: The display information for a particular operation.
     properties:
       description:
-        description: a friendly description of the operation.
+        description: A friendly description of the operation.
         readOnly: true
         type: string
       operation:
-        description: a friendly name of the operation.
+        description: A friendly name of the operation.
         readOnly: true
         type: string
       provider:
-        description: the Resource provider of the operation.
+        description: The resource provider of the operation.
         readOnly: true
         type: string
       resource:
-        description: the Resource type of the operation.
+        description: The resource type of the operation.
         readOnly: true
         type: string
   OperationListResult:
-    description: The list of available operations for Data Lake Analytics
+    description: The list of available operations for Data Lake Analytics.
     properties:
       nextLink:
-        description: the link (url) to the next page of results.
+        description: The link (url) to the next page of results.
         readOnly: true
         type: string
       value:
-        description: the results of the list operation.
+        description: The results of the list operation.
         items:
           $ref: '#/definitions/Operation'
         readOnly: true
         type: array
-  OptionalSubResource:
-    description: The Resource model definition for a nested resource with no required properties.
-    properties:
-      id:
-        description: Resource Id
-        readOnly: true
-        type: string
-      name:
-        description: Resource name
-        type: string
-      type:
-        description: Resource type
-        readOnly: true
-        type: string
   Resource:
     description: The Resource model definition.
     properties:
@@ -2529,7 +2589,7 @@ definitions:
     description: SAS token information.
     properties:
       accessToken:
-        description: the access token for the associated Azure Storage Container.
+        description: The access token for the associated Azure Storage Container.
         readOnly: true
         type: string
   StorageAccountInfo:
@@ -2539,51 +2599,45 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/StorageAccountProperties'
-        description: the properties associated with this storage account.
+        description: The Azure Storage account properties.
         x-ms-client-flatten: true
-    required:
-      - properties
   StorageAccountProperties:
-    description: Azure Storage account properties information.
+    description: The Azure Storage account properties.
     properties:
-      accessKey:
-        description: the access key associated with this Azure Storage account that will be used to connect to it.
-        type: string
       suffix:
-        description: the optional suffix for the storage account.
+        description: The optional suffix for the storage account.
+        readOnly: true
         type: string
-    required:
-      - accessKey
   StorageContainer:
     description: Azure Storage blob container information.
     properties:
       id:
-        description: the unique identifier of the blob container.
+        description: The unique identifier of the blob container.
         readOnly: true
         type: string
       name:
-        description: the name of the blob container.
+        description: The name of the blob container.
         readOnly: true
         type: string
       properties:
         $ref: '#/definitions/StorageContainerProperties'
-        description: the properties of the blob container.
+        description: The properties of the blob container.
         readOnly: true
         x-ms-client-flatten: true
       type:
-        description: the type of the blob container.
+        description: The type of the blob container.
         readOnly: true
         type: string
   StorageContainerProperties:
     description: Azure Storage blob container properties information.
     properties:
       lastModifiedTime:
-        description: the last modified time of the blob container.
+        description: The last modified time of the blob container.
         format: date-time
         readOnly: true
         type: string
   SubResource:
-    description: The Sub Resource model definition.
+    description: The Resource model definition for a nested resource.
     properties:
       id:
         description: Resource Id
@@ -2591,20 +2645,71 @@ definitions:
         type: string
       name:
         description: Resource name
+        readOnly: true
         type: string
       type:
         description: Resource type
         readOnly: true
         type: string
+    x-ms-azure-resource: true
+  UpdateComputePolicyParameters:
+    description: The parameters used to update a compute policy.
+    properties:
+      properties:
+        $ref: '#/definitions/UpdateComputePolicyProperties'
+        description: The compute policy properties to use when updating a compute policy.
+        x-ms-client-flatten: true
+  UpdateComputePolicyProperties:
+    description: The compute policy properties to use when updating a compute policy.
+    properties:
+      maxDegreeOfParallelismPerJob:
+        description: 'The maximum degree of parallelism per job this user can use to submit jobs. This property, the min priority per job property, or both must be passed.'
+        format: int32
+        minimum: 1
+        type: integer
+      minPriorityPerJob:
+        description: 'The minimum priority per job this user can use to submit jobs. This property, the max degree of parallelism per job property, or both must be passed.'
+        format: int32
+        minimum: 1
+        type: integer
+      objectId:
+        description: The AAD object identifier for the entity to create a policy for.
+        format: uuid
+        type: string
+      objectType:
+        description: The type of AAD object the object identifier refers to.
+        enum:
+          - User
+          - Group
+          - ServicePrincipal
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: AADObjectType
+  UpdateComputePolicyWithAccountParameters:
+    description: The parameters used to update a compute policy while updating a Data Lake Analytics account.
+    properties:
+      name:
+        description: The unique name of the compute policy to update.
+        type: string
+      properties:
+        $ref: '#/definitions/UpdateComputePolicyProperties'
+        description: The compute policy properties to use when updating a compute policy.
+        x-ms-client-flatten: true
     required:
       - name
   UpdateDataLakeAnalyticsAccountProperties:
-    description: The properties to update that are associated with an underlying Data Lake Analytics account to.
+    description: The properties to update that are associated with an underlying Data Lake Analytics account.
     properties:
       computePolicies:
-        description: the list of existing compute policies to update in this account.
+        description: The list of compute policies associated with this account.
         items:
-          $ref: '#/definitions/ComputePolicy'
+          $ref: '#/definitions/UpdateComputePolicyWithAccountParameters'
+        type: array
+      dataLakeStoreAccounts:
+        description: The list of Data Lake Store accounts associated with this account.
+        items:
+          $ref: '#/definitions/UpdateDataLakeStoreWithAccountParameters'
         type: array
       firewallAllowAzureIps:
         description: 'The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced.'
@@ -2618,7 +2723,7 @@ definitions:
       firewallRules:
         description: The list of firewall rules associated with this Data Lake Analytics account.
         items:
-          $ref: '#/definitions/FirewallRule'
+          $ref: '#/definitions/UpdateFirewallRuleWithAccountParameters'
         type: array
       firewallState:
         description: The current state of the IP address firewall for this Data Lake Analytics account.
@@ -2630,27 +2735,27 @@ definitions:
           modelAsString: false
           name: FirewallState
       maxDegreeOfParallelism:
-        description: the maximum supported degree of parallelism for this account.
+        description: The maximum supported degree of parallelism for this account.
         format: int32
         minimum: 1
         type: integer
       maxDegreeOfParallelismPerJob:
-        description: the maximum supported degree of parallelism per job for this account.
+        description: The maximum supported degree of parallelism per job for this account.
         format: int32
         minimum: 1
         type: integer
       maxJobCount:
-        description: the maximum supported jobs running under the account at the same time.
+        description: The maximum supported jobs running under the account at the same time.
         format: int32
         minimum: 1
         type: integer
       minPriorityPerJob:
-        description: the minimum supported priority per job for this account.
+        description: The minimum supported priority per job for this account.
         format: int32
         minimum: 1
         type: integer
       newTier:
-        description: the commitment tier to use for next month.
+        description: The commitment tier to use for next month.
         enum:
           - Consumption
           - Commitment_100AUHours
@@ -2666,40 +2771,87 @@ definitions:
           modelAsString: false
           name: TierType
       queryStoreRetention:
-        description: the number of days that job metadata is retained.
+        description: The number of days that job metadata is retained.
         format: int32
         maximum: 180
         minimum: 1
         type: integer
+      storageAccounts:
+        description: The list of Azure Blob storage accounts associated with this account.
+        items:
+          $ref: '#/definitions/UpdateStorageAccountWithAccountParameters'
+        type: array
+  UpdateDataLakeStoreProperties:
+    description: The Data Lake Store account properties to use when updating a Data Lake Store account.
+    properties:
+      suffix:
+        description: The optional suffix for the Data Lake Store account.
+        type: string
+  UpdateDataLakeStoreWithAccountParameters:
+    description: The parameters used to update a Data Lake Store account while updating a Data Lake Analytics account.
+    properties:
+      name:
+        description: The unique name of the Data Lake Store account to update.
+        type: string
+      properties:
+        $ref: '#/definitions/UpdateDataLakeStoreProperties'
+        description: The Data Lake Store account properties to use when updating a Data Lake Store account.
+        x-ms-client-flatten: true
+    required:
+      - name
   UpdateFirewallRuleParameters:
-    description: Data Lake Analytics firewall rule update parameters
+    description: The parameters used to update a firewall rule.
     properties:
       properties:
         $ref: '#/definitions/UpdateFirewallRuleProperties'
-        description: the properties of the firewall rule to update.
+        description: The firewall rule properties to use when updating a firewall rule.
         x-ms-client-flatten: true
   UpdateFirewallRuleProperties:
-    description: Data Lake Analytics firewall rule properties information
+    description: The firewall rule properties to use when updating a firewall rule.
     properties:
       endIpAddress:
-        description: the end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        description: The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
         type: string
       startIpAddress:
-        description: the start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        description: The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
         type: string
+  UpdateFirewallRuleWithAccountParameters:
+    description: The parameters used to update a firewall rule while updating a Data Lake Analytics account.
+    properties:
+      name:
+        description: The unique name of the firewall rule to update.
+        type: string
+      properties:
+        $ref: '#/definitions/UpdateFirewallRuleProperties'
+        description: The firewall rule properties to use when updating a firewall rule.
+        x-ms-client-flatten: true
+    required:
+      - name
   UpdateStorageAccountParameters:
-    description: Storage account parameters for a storage account being updated in a Data Lake Analytics account.
+    description: The parameters used to update an Azure Storage account.
     properties:
       properties:
         $ref: '#/definitions/UpdateStorageAccountProperties'
-        description: the properties for the Azure Storage account being updated.
+        description: The Azure Storage account properties to use when updating an Azure Storage account.
         x-ms-client-flatten: true
   UpdateStorageAccountProperties:
-    description: Azure Storage account properties information to update.
+    description: The Azure Storage account properties to use when updating an Azure Storage account.
     properties:
       accessKey:
-        description: the updated access key associated with this Azure Storage account that will be used to connect to it.
+        description: The updated access key associated with this Azure Storage account that will be used to connect to it.
         type: string
       suffix:
-        description: the optional suffix for the storage account.
+        description: The optional suffix for the storage account.
         type: string
+  UpdateStorageAccountWithAccountParameters:
+    description: The parameters used to update an Azure Storage account while updating a Data Lake Analytics account.
+    properties:
+      name:
+        description: The unique name of the Azure Storage account to update.
+        type: string
+      properties:
+        $ref: '#/definitions/UpdateStorageAccountProperties'
+        description: The Azure Storage account properties to use when updating an Azure Storage account.
+        x-ms-client-flatten: true
+    required:
+      - name

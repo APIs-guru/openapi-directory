@@ -125,11 +125,49 @@ parameters:
     name: upload_protocol
     type: string
 tags:
+  - name: iamPolicies
   - name: organizations
   - name: permissions
   - name: projects
   - name: roles
 paths:
+  '/v1/iamPolicies:queryAuditableServices':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Returns a list of services that support service level audit logging
+        configuration for the given resource.
+      operationId: iam.iamPolicies.queryAuditableServices
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/QueryAuditableServicesRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/QueryAuditableServicesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - iamPolicies
   '/v1/permissions:queryTestablePermissions':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -969,6 +1007,15 @@ definitions:
         $ref: '#/definitions/PolicyDelta'
         description: Policy delta between the original policy and the newly set policy.
     type: object
+  AuditableService:
+    description: Contains information about an auditable service.
+    properties:
+      name:
+        description: |-
+          Public name of the service.
+          For example, the service name for Cloud IAM is 'iam.googleapis.com'.
+        type: string
+    type: object
   Binding:
     description: Associates `members` with a `role`.
     properties:
@@ -1139,6 +1186,9 @@ definitions:
   Permission:
     description: A permission which can be included by a role.
     properties:
+      apiDisabled:
+        description: The service API associated with the permission is not enabled.
+        type: boolean
       customRolesSupportLevel:
         description: The current custom role support level.
         enum:
@@ -1234,6 +1284,28 @@ definitions:
         description: The delta for Bindings between two policies.
         items:
           $ref: '#/definitions/BindingDelta'
+        type: array
+    type: object
+  QueryAuditableServicesRequest:
+    description: A request to get the list of auditable services for a resource.
+    properties:
+      fullResourceName:
+        description: |-
+          Required. The full resource name to query from the list of auditable
+          services.
+
+          The name follows the Google Cloud Platform resource format.
+          For example, a Cloud Platform project with id `my-project` will be named
+          `//cloudresourcemanager.googleapis.com/projects/my-project`.
+        type: string
+    type: object
+  QueryAuditableServicesResponse:
+    description: A response containing a list of auditable services for a resource.
+    properties:
+      services:
+        description: The auditable services for a resource.
+        items:
+          $ref: '#/definitions/AuditableService'
         type: array
     type: object
   QueryGrantableRolesRequest:

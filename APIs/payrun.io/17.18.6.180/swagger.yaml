@@ -8,7 +8,7 @@ info:
     x-twitter: PayRun_io
   description: 'Open, scableable, transparent payroll API.'
   title: PayRun.IO
-  version: 17.18.6.160
+  version: 17.18.6.180
   x-apisguru-categories:
     - financial
   x-logo:
@@ -3864,6 +3864,7 @@ paths:
       summary: Get employees from the pay run
       tags:
         - Employee
+        - PayRun
   '/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRun/{PayRunId}/ReportLines':
     get:
       description: Returns all report lines associated with the specified pay run
@@ -6384,6 +6385,48 @@ paths:
       tags:
         - Healthcheck
   /Jobs/Dps:
+    get:
+      description: Gets all the DPS jobs
+      operationId: GetDpsJobs
+      parameters:
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The link collection object.
+          schema:
+            $ref: '#/definitions/LinkCollection'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Get all DPS jobs
+      tags:
+        - Jobs
     post:
       description: Creates the new DPS job to the queue and returns the job info
       operationId: PostNewDpsJob
@@ -6619,6 +6662,48 @@ paths:
       tags:
         - Jobs
   /Jobs/PayRuns:
+    get:
+      description: Gets all the pay run jobs
+      operationId: GetPayRunJobs
+      parameters:
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The link collection object.
+          schema:
+            $ref: '#/definitions/LinkCollection'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Get all PayRun jobs
+      tags:
+        - Jobs
     post:
       description: Creates the new pay run job to the queue and returns the job info
       operationId: PostNewPayRunJob
@@ -6854,6 +6939,48 @@ paths:
       tags:
         - Jobs
   /Jobs/Rti:
+    get:
+      description: Gets all the RTI jobs
+      operationId: GetRtiJobs
+      parameters:
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The link collection object.
+          schema:
+            $ref: '#/definitions/LinkCollection'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Get all RTI jobs
+      tags:
+        - Jobs
     post:
       description: Creates the new RTI job to the queue and returns the job info
       operationId: PostNewRtiJob
@@ -7589,6 +7716,11 @@ paths:
           name: EmployeeKey
           required: true
           type: string
+        - description: The transform definition unique key. E.g. P45-Pdf
+          in: query
+          name: TransformDefinitionKey
+          required: false
+          type: string
         - default: Auto
           description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
           format: string
@@ -7646,6 +7778,11 @@ paths:
         - description: 'A comma separated list of the employee codes. E.g. EMP001,EMP002'
           in: query
           name: EmployeeCodes
+          required: false
+          type: string
+        - description: The transform definition unique key. E.g. P45-Pdf
+          in: query
+          name: TransformDefinitionKey
           required: false
           type: string
         - default: Auto
@@ -7749,6 +7886,65 @@ paths:
           schema:
             $ref: '#/definitions/ErrorModel'
       summary: Runs the payslip report
+      tags:
+        - Reports
+  /Report/PENLIABILITY/run:
+    get:
+      description: Returns the result of the executed pension liability report for the given query parameters
+      operationId: GetPensionLiabilityReportOutput
+      parameters:
+        - description: The employer unique key. E.g. ER001
+          in: query
+          name: EmployerKey
+          required: true
+          type: string
+        - description: The tax year. E.g. 2017 = 2017/18 year.
+          format: integer
+          in: query
+          name: TaxYear
+          required: true
+          type: string
+        - description: The pension scheme unique key. E.g. PENSCH001
+          in: query
+          name: PensionKey
+          required: true
+          type: string
+        - default: Auto
+          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          format: string
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - default: default
+          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          format: string
+          in: header
+          name: Api-Version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The result of the pension liability report execution
+          schema:
+            type: file
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Runs the pension liability report
       tags:
         - Reports
   '/Report/{ReportDefinitionId}':
@@ -7943,101 +8139,6 @@ paths:
           schema:
             $ref: '#/definitions/ErrorModel'
       summary: Runs the specified report definition
-      tags:
-        - Reports
-  /ReportTransform:
-    get:
-      description: Transforms the report data into a speicifed output format based on the report transform definition.
-      operationId: GetReportTransform
-      parameters:
-        - description: The url encoded uri to the report path including query string parameters.
-          in: query
-          name: ReportDataUri
-          required: true
-          type: string
-        - description: The transform definition unique key. E.g. P45-Pdf
-          in: query
-          name: TransformDefinitionKey
-          required: true
-          type: string
-        - default: Auto
-          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
-          format: string
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - default: default
-          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
-          format: string
-          in: header
-          name: Api-Version
-          required: true
-          type: string
-      responses:
-        '200':
-          description: The result of the transform execution
-          schema:
-            type: file
-        '400':
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/ErrorModel'
-        '401':
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/ErrorModel'
-        '404':
-          description: Not Found
-          schema:
-            $ref: '#/definitions/ErrorModel'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      summary: Transforms the report into new output format.
-      tags:
-        - Reports
-    post:
-      description: Transforms the report data into a speicifed output format based on the report transform definition.
-      operationId: PostReportTransform
-      parameters:
-        - default: Auto
-          description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
-          format: string
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - default: default
-          description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
-          format: string
-          in: header
-          name: Api-Version
-          required: true
-          type: string
-      responses:
-        '200':
-          description: The result of the transform execution
-          schema:
-            type: file
-        '400':
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/ErrorModel'
-        '401':
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/ErrorModel'
-        '404':
-          description: Not Found
-          schema:
-            $ref: '#/definitions/ErrorModel'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorModel'
-      summary: Transforms the report into new output format.
       tags:
         - Reports
   /Reports:
@@ -13711,6 +13812,10 @@ definitions:
               - Failed
               - OnHold
             title: JobStatus
+            type: string
+          JobType:
+            description: The job info's job type
+            title: JobType
             type: string
           LastUpdated:
             description: The job info's last updated

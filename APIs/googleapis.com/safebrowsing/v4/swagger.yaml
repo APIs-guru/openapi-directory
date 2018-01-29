@@ -374,6 +374,11 @@ definitions:
   Constraints:
     description: The constraints for this update.
     properties:
+      language:
+        description: |-
+          Requests the lists for a specific language. Expects ISO 639 alpha-2
+          format.
+        type: string
       maxDatabaseEntries:
         description: |-
           Sets the maximum number of entries that the client is willing to have

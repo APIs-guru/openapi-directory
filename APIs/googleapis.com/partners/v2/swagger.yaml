@@ -110,7 +110,6 @@ tags:
   - name: analytics
   - name: clientMessages
   - name: companies
-  - name: exams
   - name: leads
   - name: offers
   - name: userEvents
@@ -658,86 +657,6 @@ paths:
             $ref: '#/definitions/CreateLeadResponse'
       tags:
         - companies
-  '/v2/exams/{examType}/token':
-    get:
-      description: Gets an Exam Token for a Partner's user to take an exam in the Exams System
-      operationId: partners.exams.getToken
-      parameters:
-        - description: The exam type we are requesting a token for.
-          enum:
-            - CERTIFICATION_EXAM_TYPE_UNSPECIFIED
-            - CET_ADWORDS_FUNDAMENTALS
-            - CET_ADWORDS_ADVANCED_SEARCH
-            - CET_ADWORDS_ADVANCED_DISPLAY
-            - CET_VIDEO_ADS
-            - CET_DOUBLECLICK
-            - CET_ANALYTICS
-            - CET_SHOPPING
-            - CET_MOBILE
-            - CET_DIGITAL_SALES
-            - CET_MOBILE_SITES
-          in: path
-          name: examType
-          required: true
-          type: string
-        - collectionFormat: multi
-          description: Experiment IDs the current request belongs to.
-          in: query
-          items:
-            type: string
-          name: requestMetadata.experimentIds
-          type: array
-        - description: Locale to use for the current request.
-          in: query
-          name: requestMetadata.locale
-          type: string
-        - description: Google Partners session ID.
-          in: query
-          name: requestMetadata.partnersSessionId
-          type: string
-        - description: |-
-            Identifier to indicate where the traffic comes from.
-            An identifier has multiple letters created by a team which redirected the
-            traffic to us.
-          in: query
-          name: requestMetadata.trafficSource.trafficSourceId
-          type: string
-        - description: |-
-            Second level identifier to indicate where the traffic comes from.
-            An identifier has multiple letters created by a team which redirected the
-            traffic to us.
-          in: query
-          name: requestMetadata.trafficSource.trafficSubId
-          type: string
-        - description: IP address to use instead of the user's geo-located IP address.
-          in: query
-          name: requestMetadata.userOverrides.ipAddress
-          type: string
-        - description: Logged-in user ID to impersonate instead of the user's ID.
-          in: query
-          name: requestMetadata.userOverrides.userId
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ExamToken'
-      tags:
-        - exams
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
   /v2/leads:
     get:
       description: |-
@@ -2123,32 +2042,6 @@ definitions:
       warning:
         description: Whether this exam is in the state of warning.
         type: boolean
-    type: object
-  ExamToken:
-    description: A token that allows a user to take an exam.
-    properties:
-      examId:
-        description: The id of the exam the token is for.
-        format: int64
-        type: string
-      examType:
-        description: The type of the exam the token belongs to.
-        enum:
-          - CERTIFICATION_EXAM_TYPE_UNSPECIFIED
-          - CET_ADWORDS_FUNDAMENTALS
-          - CET_ADWORDS_ADVANCED_SEARCH
-          - CET_ADWORDS_ADVANCED_DISPLAY
-          - CET_VIDEO_ADS
-          - CET_DOUBLECLICK
-          - CET_ANALYTICS
-          - CET_SHOPPING
-          - CET_MOBILE
-          - CET_DIGITAL_SALES
-          - CET_MOBILE_SITES
-        type: string
-      token:
-        description: 'The token, only present if the user has access to the exam.'
-        type: string
     type: object
   GetCompanyResponse:
     description: Response message for GetCompany.

@@ -1703,7 +1703,7 @@ definitions:
     description: |-
       Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs.
 
-      If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditConfig are exempted.
+      If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditLogConfig are exempted.
 
       Example Policy with multiple AuditConfigs:
 
@@ -1780,7 +1780,7 @@ definitions:
     properties:
       condition:
         $ref: '#/definitions/Expr'
-        description: 'The condition that is associated with this binding. NOTE: an unsatisfied condition will not allow user access via current binding. Different bindings, including their conditions, are examined independently. This field is GOOGLE_INTERNAL.'
+        description: 'The condition that is associated with this binding. NOTE: an unsatisfied condition will not allow user access via current binding. Different bindings, including their conditions, are examined independently. This field is only visible as GOOGLE_INTERNAL or CONDITION_TRUSTED_TESTER.'
       members:
         description: |-
           Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:
@@ -2228,7 +2228,7 @@ definitions:
         format: int32
         type: integer
       region:
-        description: '[Output Only] The URL of the region where the operation resides. Only available when performing regional operations.'
+        description: '[Output Only] The URL of the region where the operation resides. Only available when performing regional operations. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -2279,7 +2279,7 @@ definitions:
           type: object
         type: array
       zone:
-        description: '[Output Only] The URL of the zone where the operation resides. Only available when performing per-zone operations.'
+        description: '[Output Only] The URL of the zone where the operation resides. Only available when performing per-zone operations. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
     type: object
   OperationsListResponse:
@@ -2321,7 +2321,7 @@ definitions:
 
       { "bindings": [ { "role": "roles/owner", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@appspot.gserviceaccount.com", ] }, { "role": "roles/viewer", "members": ["user:sean@example.com"] } ] }
 
-      For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam).
+      For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:
       auditConfigs:
         description: Specifies cloud audit logging configuration for this policy.
@@ -2349,7 +2349,7 @@ definitions:
           $ref: '#/definitions/Rule'
         type: array
       version:
-        description: Version of the `Policy`. The default version is 0.
+        description: Deprecated.
         format: int32
         type: integer
     type: object

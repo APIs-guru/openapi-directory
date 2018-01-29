@@ -1929,6 +1929,11 @@ definitions:
       cpuUtilization:
         $ref: '#/definitions/CpuUtilization'
         description: Target scaling by CPU usage.
+      customMetrics:
+        description: Target scaling by user-provided metrics.
+        items:
+          $ref: '#/definitions/CustomMetric'
+        type: array
       diskUtilization:
         $ref: '#/definitions/DiskUtilization'
         description: Target scaling by disk usage.
@@ -2060,6 +2065,27 @@ definitions:
       cloudBuildId:
         description: The Cloud Build ID if one was created as part of the version create. @OutputOnly
         type: string
+    type: object
+  CustomMetric:
+    description: Allows autoscaling based on Stackdriver metrics.
+    properties:
+      filter:
+        description: Allows filtering on the metric's fields.
+        type: string
+      metricName:
+        description: The name of the metric.
+        type: string
+      singleInstanceAssignment:
+        description: May be used instead of target_utilization when an instance can handle a specific amount of work/resources and the metric value is equal to the current amount of work remaining. The autoscaler will try to keep the number of instances equal to the metric value divided by single_instance_assignment.
+        format: double
+        type: number
+      targetType:
+        description: 'The type of the metric. Must be a string representing a Stackdriver metric type e.g. GAGUE, DELTA_PER_SECOND, etc.'
+        type: string
+      targetUtilization:
+        description: The target value for the metric.
+        format: double
+        type: number
     type: object
   DebugInstanceRequest:
     description: Request message for Instances.DebugInstance.

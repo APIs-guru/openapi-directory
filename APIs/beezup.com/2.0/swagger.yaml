@@ -4834,6 +4834,13 @@ paths:
       deprecated: false
       operationId: GetAutomaticTransitions
       parameters:
+        - description: The StoreId to filter by
+          format: guid
+          in: query
+          name: storeId
+          required: false
+          type: string
+          x-example: 04730364-9826-4ff3-92e4-51fccd02bf10
         - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
         '200':
@@ -4842,6 +4849,10 @@ paths:
             $ref: '#/definitions/automaticTransitionInfoList'
         '304':
           $ref: '#/responses/304_NotModified'
+        '404':
+          description: Requested Store could not be found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -5111,6 +5122,13 @@ paths:
       deprecated: false
       operationId: GetMarketplaceAccountsSynchronization
       parameters:
+        - description: The StoreId to filter by
+          format: guid
+          in: query
+          name: storeId
+          required: false
+          type: string
+          x-example: 04730364-9826-4ff3-92e4-51fccd02bf10
         - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
         '200':
@@ -5119,6 +5137,10 @@ paths:
             $ref: '#/definitions/accountSynchronizationList'
         '304':
           $ref: '#/responses/304_NotModified'
+        '404':
+          description: Requested Store could not be found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -5386,7 +5408,7 @@ definitions:
           - 100
     properties:
       operatorName:
-        $ref: '#/definitions/BeezUP.Common.ProductFilterOperatorName'
+        $ref: '#/definitions/BeezUP.Common.ProductColumnFilterOperatorName'
       values:
         description: |
           Must be null if the operator is "IsNull" or "IsNotNull".
@@ -6056,17 +6078,10 @@ definitions:
       - productTitle
       - productExists
     type: object
-  BeezUP.Common.ProductFilterOperatorName:
+  BeezUP.Common.ProductColumnFilterOperatorName:
     description: Indicate the operator you want to make on the columnId
-    enum:
-      - Equals
-      - Contains
-      - GreaterTo
-      - LowerTo
-      - InList
-      - IsNull
-      - IsNotNull
     type: string
+    x-lov: ProductColumnFilterOperatorName
   BeezUP.Common.ProductFilters:
     properties:
       additionalProductFilters:
@@ -14572,6 +14587,8 @@ definitions:
         example: '2017-04-01T22:30:00Z'
         format: date-time
         type: string
+      currencyCode:
+        $ref: '#/definitions/BeezUP.Common.CurrencyCode'
       links:
         $ref: '#/definitions/storeLinks'
       name:
@@ -14600,6 +14617,7 @@ definitions:
       - name
       - url
       - countryIsoCodeAlpha3
+      - currencyCode
       - userRole
       - status
       - ownerUserId

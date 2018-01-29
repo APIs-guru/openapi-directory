@@ -363,6 +363,22 @@ paths:
       summary: Retrieve a list of country codes with corresponding subregions
       tags:
         - countries
+  /csps:
+    get:
+      description: Returns a set of comparison shopping pages based on the current params
+      responses:
+        default:
+          description: Unexpected error
+      summary: Returns a set of comparison shopping pages based on the current params
+      tags:
+        - csps
+  /csps/categories:
+    get:
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - csps
   '/curated_sets/{slug}':
     get:
       parameters:

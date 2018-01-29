@@ -672,8 +672,6 @@ paths:
                   type: string
                 description: Gets or sets the tags attached to the resource.
                 type: object
-            required:
-              - properties
         - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
@@ -814,6 +812,39 @@ paths:
             type: object
       tags:
         - Module
+      x-ms-examples:
+        Update a module:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: MyAutomationAccount
+            moduleName: MyModule
+            parameters:
+              properties:
+                contentLink:
+                  contentHash:
+                    algorithm: sha265
+                    value: 07E108A962B81DD9C9BAA89BB47C0F6EE52B29E83758B07795E408D258B2B87A
+                  uri: 'https://teststorage.blob.core.windows.net/mycontainer/MyModule.zip'
+                  version: 1.0.0.0
+            resourceGroupName: rg
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/MyAutomationAccount/modules/MyModule
+                location: East US 2
+                name: MyModule
+                properties:
+                  activityCount: 0
+                  creationTime: '2017-03-29T15:41:47.003+00:00'
+                  error: {}
+                  isGlobal: false
+                  lastModifiedTime: '2017-03-29T15:42:10.567+00:00'
+                  provisioningState: Creating
+                  sizeInBytes: 0
+                tags: {}
+                type: Microsoft.Automation/AutomationAccounts/Modules
+              headers: {}
     put:
       description: Create or Update the module identified by module name.
       externalDocs:
@@ -1997,6 +2028,26 @@ paths:
             type: object
       tags:
         - ObjectDataTypes
+      x-ms-examples:
+        Get a list of fields of a given type:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: MyAutomationAccount
+            moduleName: MyModule
+            resourceGroupName: rg
+            subscriptionId: subid
+            typeName: MyCustomType
+          responses:
+            '200':
+              body:
+                value:
+                  - name: Name
+                    type: System.String
+                  - name: Id
+                    type: System.Integer
+                  - name: Details
+                    type: MyModule.AnotherCustomType
+              headers: {}
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}/types/{typeName}/fields':
     get:
@@ -2068,6 +2119,26 @@ paths:
             type: object
       tags:
         - TypeFields
+      x-ms-examples:
+        Get a list of fields of a given type:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: MyAutomationAccount
+            moduleName: MyModule
+            resourceGroupName: rg
+            subscriptionId: subid
+            typeName: MyCustomType
+          responses:
+            '200':
+              body:
+                value:
+                  - name: Name
+                    type: System.String
+                  - name: Id
+                    type: System.Integer
+                  - name: Details
+                    type: MyModule.AnotherCustomType
+              headers: {}
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/objectDataTypes/{typeName}/fields':
     get:
@@ -2134,5 +2205,24 @@ paths:
             type: object
       tags:
         - ObjectDataTypes
+      x-ms-examples:
+        Get a list of fields of a given type across all accessible modules:
+          parameters:
+            api-version: '2015-10-31'
+            automationAccountName: MyAutomationAccount
+            resourceGroupName: rg
+            subscriptionId: subid
+            typeName: MyCustomType
+          responses:
+            '200':
+              body:
+                value:
+                  - name: Name
+                    type: System.String
+                  - name: Id
+                    type: System.Integer
+                  - name: Details
+                    type: MyModule.AnotherCustomType
+              headers: {}
       x-ms-pageable: {}
 definitions: {}

@@ -678,7 +678,7 @@ paths:
   '/v1beta2/{name}':
     delete:
       description: Deletes a workflow template. It does not cancel in-progress workflows.
-      operationId: dataproc.projects.locations.workflowTemplates.delete
+      operationId: dataproc.projects.regions.workflowTemplates.delete
       parameters:
         - description: 'Required. The "resource name" of the workflow template, as described in https://cloud.google.com/apis/design/resource_names of the form projects/{project_id}/regions/{region}/workflowTemplates/{template_id}'
           in: path
@@ -704,7 +704,7 @@ paths:
         - projects
     get:
       description: Retrieves the latest workflow template.Can retrieve previously instantiated template by specifying optional version parameter.
-      operationId: dataproc.projects.locations.workflowTemplates.get
+      operationId: dataproc.projects.regions.workflowTemplates.get
       parameters:
         - description: 'Required. The "resource name" of the workflow template, as described in https://cloud.google.com/apis/design/resource_names of the form projects/{project_id}/regions/{region}/workflowTemplates/{template_id}'
           in: path
@@ -744,7 +744,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     put:
       description: Updates (replaces) workflow template. The updated template must contain version that matches the current server version.
-      operationId: dataproc.projects.locations.workflowTemplates.update
+      operationId: dataproc.projects.regions.workflowTemplates.update
       parameters:
         - in: body
           name: body
@@ -821,8 +821,8 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Instantiates a template and begins execution.The returned Operation can be used to track execution of workflow by polling google.cloud.dataproc.v1beta2.OperationService.GetOperation. The Operation will complete when entire workflow is finished.The running workflow can be aborted via google.cloud.dataproc.v1beta2.OperationService.CancelOperation.The google.cloud.dataproc.v1beta2.Operation.metadata will always be google.cloud.dataproc.v1beta2.WorkflowMetadata.The google.cloud.dataproc.v1beta2.Operation.result will always be google.protobuf.Empty.
-      operationId: dataproc.projects.locations.workflowTemplates.instantiate
+      description: 'Instantiates a template and begins execution.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata.On successful completion, Operation.response will be Empty.'
+      operationId: dataproc.projects.regions.workflowTemplates.instantiate
       parameters:
         - in: body
           name: body
@@ -849,7 +849,7 @@ paths:
   '/v1beta2/{parent}/workflowTemplates':
     get:
       description: Lists workflows that match the specified filter in the request.
-      operationId: dataproc.projects.locations.workflowTemplates.list
+      operationId: dataproc.projects.regions.workflowTemplates.list
       parameters:
         - description: Optional. The maximum number of results to return in each response.
           in: query
@@ -893,7 +893,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates new workflow template.
-      operationId: dataproc.projects.locations.workflowTemplates.create
+      operationId: dataproc.projects.regions.workflowTemplates.create
       parameters:
         - in: body
           name: body
@@ -933,8 +933,8 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: 'Instantiates a template and begins execution.This method is equivalent to executing the sequence CreateWorkflowTemplate, InstantiateWorkflowTemplate, DeleteWorkflowTemplate.The returned Operation can be used to track execution of workflow by polling google.cloud.dataproc.v1beta2.OperationService.GetOperation. The Operation will complete when entire workflow is finished.The running workflow can be aborted via google.cloud.dataproc.v1beta2.OperationService.CancelOperation.The google.cloud.dataproc.v1beta2.Operation.metadata will always be google.cloud.dataproc.v1beta2.WorkflowMetadata.The google.cloud.dataproc.v1beta2.Operation.result will always be google.protobuf.Empty.'
-      operationId: dataproc.projects.locations.workflowTemplates.instantiateInline
+      description: 'Instantiates a template and begins execution.This method is equivalent to executing the sequence CreateWorkflowTemplate, InstantiateWorkflowTemplate, DeleteWorkflowTemplate.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata.On successful completion, Operation.response will be Empty.'
+      operationId: dataproc.projects.regions.workflowTemplates.instantiateInline
       parameters:
         - in: body
           name: body
@@ -1329,7 +1329,7 @@ definitions:
         format: int32
         type: integer
       bootDiskType:
-        description: 'Optional. Type of the boot disk (default is ''pd-standard''). Valid values: ''pd-ssd'', ''pd-standard'''
+        description: 'Optional. Type of the boot disk (default is "pd-standard"). Valid values: "pd-ssd" (Persistent Disk Solid State Drive) or "pd-standard" (Persistent Disk Hard Disk Drive).'
         type: string
       numLocalSsds:
         description: 'Optional. Number of attached SSDs, from 0 to 4 (default is 0). If SSDs are not attached, the boot disk is used to store runtime logs and HDFS (https://hadoop.apache.org/docs/r1.2.1/hdfs_user_guide.html) data. If one or more SSDs are attached, this runtime bulk data is spread across them, and the boot disk contains only basic config and installed binaries.'

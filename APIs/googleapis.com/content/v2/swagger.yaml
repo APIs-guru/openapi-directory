@@ -2269,6 +2269,36 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{merchantId}/supportedHolidays':
+    get:
+      description: Retrieves supported holidays for an account.
+      operationId: content.shippingsettings.getsupportedholidays
+      parameters:
+        - description: The ID of the account for which to retrieve the supported holidays.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ShippingsettingsGetSupportedHolidaysResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - shippingsettings
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{merchantId}/testorders':
     parameters:
       - $ref: '#/parameters/alt'
@@ -3212,6 +3242,11 @@ definitions:
     type: object
   DeliveryTime:
     properties:
+      holidayCutoffs:
+        description: 'Holiday cutoff definitions. If configured, they specify order cutoff times for holiday-specific shipping.'
+        items:
+          $ref: '#/definitions/HolidayCutoff'
+        type: array
       maxTransitTimeInDays:
         description: 'Maximum number of business days that is spent in transit. 0 means same day delivery, 1 means next day delivery. Must be greater than or equal to minTransitTimeInDays. Required.'
         format: uint32
@@ -3278,6 +3313,47 @@ definitions:
         items:
           $ref: '#/definitions/Weight'
         type: array
+    type: object
+  HolidayCutoff:
+    properties:
+      deadlineDate:
+        description: 'Date of the order deadline, in ISO 8601 format. E.g. "2016-11-29" for 29th November 2016. Required.'
+        type: string
+      deadlineHour:
+        description: 'Hour of the day on the deadline date until which the order has to be placed to qualify for the delivery guarantee. Possible values are: 0 (midnight), 1, ..., 12 (noon), 13, ..., 23. Required.'
+        format: uint32
+        type: integer
+      deadlineTimezone:
+        description: Timezone identifier for the deadline hour. A list of identifiers can be found in  the AdWords API documentation. E.g. "Europe/Zurich". Required.
+        type: string
+      holidayId:
+        description: Unique identifier for the holiday. Required.
+        type: string
+      visibleFromDate:
+        description: Date on which the deadline will become visible to consumers in ISO 8601 format. E.g. "2016-10-31" for 31st October 2016. Required.
+        type: string
+    type: object
+  HolidaysHoliday:
+    properties:
+      countryCode:
+        description: 'The CLDR territory code of the country in which the holiday is available. E.g. "US", "DE", "GB". A holiday cutoff can only be configured in a shipping settings service with matching delivery country. Always present.'
+        type: string
+      date:
+        description: 'Date of the holiday, in ISO 8601 format. E.g. "2016-12-25" for Christmas 2016. Always present.'
+        type: string
+      deliveryGuaranteeDate:
+        description: 'Date on which the order has to arrive at the customer''s, in ISO 8601 format. E.g. "2016-12-24" for 24th December 2016. Always present.'
+        type: string
+      deliveryGuaranteeHour:
+        description: 'Hour of the day in the delivery location''s timezone on the guaranteed delivery date by which the order has to arrive at the customer''s. Possible values are: 0 (midnight), 1, ..., 12 (noon), 13, ..., 23. Always present.'
+        format: uint64
+        type: string
+      id:
+        description: Unique identifier for the holiday to be used when configuring holiday cutoffs. Always present.
+        type: string
+      type:
+        description: The holiday type. Always present.
+        type: string
     type: object
   Installment:
     properties:
@@ -5118,6 +5194,11 @@ definitions:
       googleExpirationDate:
         description: 'Date on which the item expires in Google Shopping, in ISO 8601 format.'
         type: string
+      itemLevelIssues:
+        description: A list of all issues associated with the product.
+        items:
+          $ref: '#/definitions/ProductStatusItemLevelIssue'
+        type: array
       kind:
         default: 'content#productStatus'
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#productStatus".'
@@ -5167,6 +5248,9 @@ definitions:
     type: object
   ProductStatusDestinationStatus:
     properties:
+      approvalPending:
+        description: Whether the approval status might change due to further processing.
+        type: boolean
       approvalStatus:
         description: The destination's approval status.
         type: string
@@ -5174,7 +5258,25 @@ definitions:
         description: The name of the destination
         type: string
       intention:
-        description: 'Whether the destination is required, excluded, selected by default or should be validated.'
+        description: Provided for backward compatibility only. Always set to "required".
+        type: string
+    type: object
+  ProductStatusItemLevelIssue:
+    properties:
+      attributeName:
+        description: 'The attribute''s name, if the issue is caused by a single attribute.'
+        type: string
+      code:
+        description: The error code of the issue.
+        type: string
+      destination:
+        description: The destination the issue applies to.
+        type: string
+      resolution:
+        description: Whether the issue can be resolved by the merchant.
+        type: string
+      servability:
+        description: How this issue affects serving of the offer.
         type: string
     type: object
   ProductTax:
@@ -5508,6 +5610,18 @@ definitions:
       kind:
         default: 'content#shippingsettingsGetSupportedCarriersResponse'
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#shippingsettingsGetSupportedCarriersResponse".'
+        type: string
+    type: object
+  ShippingsettingsGetSupportedHolidaysResponse:
+    properties:
+      holidays:
+        description: A list of holidays applicable for delivery guarantees. May be empty.
+        items:
+          $ref: '#/definitions/HolidaysHoliday'
+        type: array
+      kind:
+        default: 'content#shippingsettingsGetSupportedHolidaysResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#shippingsettingsGetSupportedHolidaysResponse".'
         type: string
     type: object
   ShippingsettingsListResponse:

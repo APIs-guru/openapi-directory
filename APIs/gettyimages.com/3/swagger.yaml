@@ -2454,6 +2454,117 @@ paths:
       summary: Search for creative images only
       tags:
         - Search
+  /v3/search/images/creative/by-image:
+    get:
+      consumes: []
+      deprecated: false
+      description: "Allows searching for similar creative images by passing the URL to an existing image.\r\n\r\nBefore calling the search by image endpoint, an image must be uploaded to a specific AWS S3 bucket. The bucket name is `search-by-image.s3.amazonaws.com`.\r\nFor example, using cURL:\r\n```sh\r\ncurl -i -X PUT https://search-by-image.s3.amazonaws.com/my-test-image.jpg -H \"Content-Type: image/jpeg\" --data-binary \"@testimage.jpg\"\r\n```\r\n\r\nUploads can be overwritten if the names are the same, so using a prefix like the API Key, application name or company name would help keep that\r\nfrom happening.\r\n\r\nOnce the image has been uploaded, use the full URL in the `image_url` parameter, e.g. `image_url=https://search-by-image.s3.amazonaws.com/my-test-image.jpg`.\r\n\r\nSubsequent searches for the same image can be executed using the `image_fingerprint` that is returned by the inital search.\r\n"
+      operationId: Search_GetCreativeImagesByUrl
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: Specifies fields to return. Defaults to 'summary_set'.
+          in: query
+          items:
+            enum:
+              - allowed_use
+              - alternative_ids
+              - artist
+              - asset_family
+              - call_for_image
+              - caption
+              - collection_code
+              - collection_id
+              - collection_name
+              - color_type
+              - comp
+              - copyright
+              - date_camera_shot
+              - date_created
+              - date_submitted
+              - detail_set
+              - display_set
+              - graphical_style
+              - id
+              - keywords
+              - largest_downloads
+              - license_model
+              - max_dimensions
+              - orientation
+              - prestige
+              - preview
+              - product_types
+              - quality_rank
+              - referral_destinations
+              - summary_set
+              - thumb
+              - title
+              - uri_oembed
+            type: string
+          name: fields
+          required: false
+          type: array
+        - description: Specifies the fingerprint of the image to use in the search.
+          in: query
+          name: image_fingerprint
+          required: false
+          type: string
+        - description: Specifies the location of the image to use in the search.
+          in: query
+          name: image_url
+          required: false
+          type: string
+        - description: Request results starting at a page number (default is 1).
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Request number of images to return in each page.
+          format: int32
+          in: query
+          name: page_size
+          required: false
+          type: integer
+        - collectionFormat: multi
+          description: Filter images to those having product types from the selected list.
+          in: query
+          items:
+            enum:
+              - easyaccess
+              - imagepack
+              - premiumaccess
+              - royaltyfreesubscription
+            type: string
+          name: product_types
+          required: false
+          type: array
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/System.Object'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: AuthorizationTokenRequired
+        '403':
+          description: UnauthorizedDisplaySize
+      summary: Search for creative images based on url
+      tags:
+        - Search
   /v3/search/images/editorial:
     get:
       consumes: []

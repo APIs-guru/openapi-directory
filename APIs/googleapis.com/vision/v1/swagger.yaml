@@ -295,6 +295,10 @@ definitions:
                   1----0
 
             and the vertice order will still be (0, 1, 2, 3).
+      confidence:
+        description: 'Confidence of the OCR results on the block. Range [0, 1].'
+        format: float
+        type: number
       paragraphs:
         description: List of paragraphs in this block (if this blocks is of type text).
         items:
@@ -761,6 +765,12 @@ definitions:
           `TEXT_DETECTION`, `DOCUMENT_TEXT_DETECTION`, or `CROP_HINTS`.
         format: int32
         type: integer
+      model:
+        description: |-
+          Model to use for the feature.
+          Supported values: "builtin/stable" (the default if unset) and
+          "builtin/latest".
+        type: string
       type:
         description: The feature type.
         enum:
@@ -816,6 +826,9 @@ definitions:
       latLongRect:
         $ref: '#/definitions/LatLongRect'
         description: lat/long rectangle that specifies the location of the image.
+      webDetectionParams:
+        $ref: '#/definitions/WebDetectionParams'
+        description: Parameters for web detection.
     type: object
   ImageProperties:
     description: 'Stores image properties, such as dominant colors.'
@@ -945,6 +958,10 @@ definitions:
         items:
           $ref: '#/definitions/Block'
         type: array
+      confidence:
+        description: 'Confidence of the OCR results on the page. Range [0, 1].'
+        format: float
+        type: number
       height:
         description: Page height in pixels.
         format: int32
@@ -978,6 +995,10 @@ definitions:
                |    |
                1----0
             and the vertice order will still be (0, 1, 2, 3).
+      confidence:
+        description: 'Confidence of the OCR results for the paragraph. Range [0, 1].'
+        format: float
+        type: number
       property:
         $ref: '#/definitions/TextProperty'
         description: Additional information detected for the paragraph.
@@ -1041,6 +1062,20 @@ definitions:
         type: string
       medical:
         description: Likelihood that this is a medical image.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      racy:
+        description: |-
+          Likelihood that the request image contains racy content. Racy content may
+          include (but is not limited to) skimpy or sheer clothing, strategically
+          covered nudity, lewd or provocative poses, or close-ups of sensitive
+          body areas.
         enum:
           - UNKNOWN
           - VERY_UNLIKELY
@@ -1169,6 +1204,10 @@ definitions:
                |    |
                1----0
             and the vertice order will still be (0, 1, 2, 3).
+      confidence:
+        description: 'Confidence of the OCR results for the symbol. Range [0, 1].'
+        format: float
+        type: number
       property:
         $ref: '#/definitions/TextProperty'
         description: Additional information detected for the symbol.
@@ -1224,6 +1263,11 @@ definitions:
   WebDetection:
     description: Relevant information for the image from the Internet.
     properties:
+      bestGuessLabels:
+        description: Best guess text labels for the request image.
+        items:
+          $ref: '#/definitions/WebLabel'
+        type: array
       fullMatchingImages:
         description: |-
           Fully matching images from the Internet.
@@ -1255,6 +1299,13 @@ definitions:
           $ref: '#/definitions/WebEntity'
         type: array
     type: object
+  WebDetectionParams:
+    description: Parameters for web detection request.
+    properties:
+      includeGeoResults:
+        description: Whether to include results derived from the geo information in the image.
+        type: boolean
+    type: object
   WebEntity:
     description: Entity deduced from similar images on the Internet.
     properties:
@@ -1282,9 +1333,41 @@ definitions:
         description: The result image URL.
         type: string
     type: object
+  WebLabel:
+    description: Label to provide extra metadata for the web detection.
+    properties:
+      label:
+        description: Label for extra metadata.
+        type: string
+      languageCode:
+        description: |-
+          The BCP-47 language code for `label`, such as "en-US" or "sr-Latn".
+          For more information, see
+          http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+        type: string
+    type: object
   WebPage:
     description: Metadata for web pages.
     properties:
+      fullMatchingImages:
+        description: |-
+          Fully matching images on the page.
+          Can include resized copies of the query image.
+        items:
+          $ref: '#/definitions/WebImage'
+        type: array
+      pageTitle:
+        description: 'Title for the web page, may contain HTML markups.'
+        type: string
+      partialMatchingImages:
+        description: |-
+          Partial matching images on the page.
+          Those images are similar enough to share some key-point features. For
+          example an original image will likely have partial matching for its
+          crops.
+        items:
+          $ref: '#/definitions/WebImage'
+        type: array
       score:
         description: (Deprecated) Overall relevancy score for the web page.
         format: float
@@ -1314,6 +1397,10 @@ definitions:
                |    |
                1----0
             and the vertice order will still be (0, 1, 2, 3).
+      confidence:
+        description: 'Confidence of the OCR results for the word. Range [0, 1].'
+        format: float
+        type: number
       property:
         $ref: '#/definitions/TextProperty'
         description: Additional information detected for the word.

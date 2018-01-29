@@ -127,39 +127,10 @@ tags:
 paths:
   '/v1alpha1/{name}':
     delete:
-      description: |-
-        Deletes a long-running operation. This method indicates that the client is
-        no longer interested in the operation result. It does not cancel the
-        operation. If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: tpu.projects.locations.operations.delete
+      description: Deletes a node.
+      operationId: tpu.projects.locations.nodes.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Empty'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-    get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: tpu.projects.locations.operations.get
-      parameters:
-        - description: The name of the operation resource.
+        - description: The resource name.
           in: path
           name: name
           required: true
@@ -170,6 +141,28 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    get:
+      description: Gets TensorFlow Version.
+      operationId: tpu.projects.locations.tensorflowVersions.get
+      parameters:
+        - description: The resource name.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TensorFlowVersion'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -362,7 +355,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Reimage a node's OS.
+      description: Reimages a node's OS.
       operationId: tpu.projects.locations.nodes.reimage
       parameters:
         - in: body
@@ -410,6 +403,88 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/ResetNodeRequest'
+        - description: The resource name.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1alpha1/{name}:start':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Starts a node.
+      operationId: tpu.projects.locations.nodes.start
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StartNodeRequest'
+        - description: The resource name.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1alpha1/{name}:stop':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Stops a node.
+      operationId: tpu.projects.locations.nodes.stop
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StopNodeRequest'
         - description: The resource name.
           in: path
           name: name
@@ -503,6 +578,59 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1alpha1/{parent}/tensorflowVersions':
+    get:
+      description: Lists TensorFlow versions supported by this API.
+      operationId: tpu.projects.locations.tensorflowVersions.list
+      parameters:
+        - description: List filter.
+          in: query
+          name: filter
+          type: string
+        - description: Sort results.
+          in: query
+          name: orderBy
+          type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'The next_page_token value returned from a previous List request, if any.'
+          in: query
+          name: pageToken
+          type: string
+        - description: The parent resource name.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListTensorFlowVersionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
 definitions:
   Empty:
     description: |-
@@ -553,6 +681,18 @@ definitions:
           $ref: '#/definitions/Operation'
         type: array
     type: object
+  ListTensorFlowVersionsResponse:
+    description: Response for ListTensorFlowVersions.
+    properties:
+      nextPageToken:
+        description: The next page token or empty if none.
+        type: string
+      tensorflowVersions:
+        description: The listed nodes.
+        items:
+          $ref: '#/definitions/TensorFlowVersion'
+        type: array
+    type: object
   Location:
     description: A resource that represents Google Cloud Platform location.
     properties:
@@ -601,13 +741,14 @@ definitions:
         type: string
       cidrBlock:
         description: |-
-          The CIDR block that the TPU node will use when selecting //an IP address.
-          This CIDR block must be a /29 block; the GCE networks API forbids a smaller
-          block, and using a larger block would be wasteful (a node can only consume
-          one IP address). Errors will occur if the CIDR block has already been used
-          for a currently existing TPU node, the CIDR block conflicts with any
-          subnetworks in the user's provided network, or the provided network is
-          peered with another network that is using that CIDR block.
+          The CIDR block that the TPU node will use when selecting an IP address.
+          This CIDR block must be a /29 block; the Compute Engine networks API
+          forbids a smaller block, and using a larger block would be wasteful (a
+          node can only consume one IP address). Errors will occur if the CIDR block
+          has already been used for a currently existing TPU node, the CIDR block
+          conflicts with any subnetworks in the user's provided network, or the
+          provided network is peered with another network that is using that CIDR
+          block.
           Required.
         type: string
       createTime:
@@ -637,8 +778,14 @@ definitions:
         description: |-
           Output only.
           DEPRECATED! Use network_endpoints instead.
-          The network address for the TPU Node as visible to GCE instances.
+          The network address for the TPU Node as visible to Compute Engine
+          instances.
         type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Resource labels to represent user-provided metadata.
+        type: object
       name:
         description: |-
           Output only.
@@ -647,8 +794,8 @@ definitions:
       network:
         description: |-
           The name of a network they wish to peer the TPU node to. It must be a
-          preexisting GCE network inside of the project on which this API has been
-          activated. If none is provided, "default" will be used.
+          preexisting Compute Engine network inside of the project on which this API
+          has been activated. If none is provided, "default" will be used.
         type: string
       networkEndpoints:
         description: |-
@@ -662,7 +809,7 @@ definitions:
         description: |-
           Output only.
           DEPRECATED! Use network_endpoints instead.
-          The network port for the TPU Node as visible to GCE instances.
+          The network port for the TPU Node as visible to Compute Engine instances.
         type: string
       serviceAccount:
         description: |-
@@ -776,6 +923,10 @@ definitions:
     description: Request for ResetNode.
     properties: {}
     type: object
+  StartNodeRequest:
+    description: Request for StartNode.
+    properties: {}
+    type: object
   Status:
     description: |-
       The `Status` type defines a logical error model that is suitable for different
@@ -849,5 +1000,19 @@ definitions:
           A developer-facing error message, which should be in English. Any
           user-facing error message should be localized and sent in the
           google.rpc.Status.details field, or localized by the client.
+        type: string
+    type: object
+  StopNodeRequest:
+    description: Request for StopNode.
+    properties: {}
+    type: object
+  TensorFlowVersion:
+    description: A tensorflow version that a Node can be configured with.
+    properties:
+      name:
+        description: The resource name.
+        type: string
+      version:
+        description: the tensorflow version.
         type: string
     type: object

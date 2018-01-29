@@ -498,7 +498,41 @@ paths:
       tags:
         - Loggers
       x-ms-examples:
-        ApiManagementCreateLogger:
+        ApiManagementCreateAILogger:
+          parameters:
+            api-version: '2017-03-01'
+            loggerid: loggerId
+            parameters:
+              properties:
+                credentials:
+                  instrumentationKey: 11................a1
+                description: adding a new logger
+                loggerType: applicationInsights
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/loggerId
+                name: loggerId
+                properties:
+                  credentials:
+                    instrumentationKey: '{{5a.......2a}}'
+                  isBuffered: false
+                  loggerType: applicationInsights
+                type: Microsoft.ApiManagement/service/loggers
+            '201':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/loggers/loggerId
+                name: loggerId
+                properties:
+                  credentials:
+                    instrumentationKey: '{{5a.......2a}}'
+                  isBuffered: false
+                  loggerType: applicationInsights
+                type: Microsoft.ApiManagement/service/loggers
+        ApiManagementCreateEHLogger:
           parameters:
             api-version: '2017-03-01'
             loggerid: loggerId
@@ -582,7 +616,9 @@ definitions:
       credentials:
         additionalProperties:
           type: string
-        description: The name and SendRule connection string of the event hub.
+        description: |-
+          The name and SendRule connection string of the event hub for azureEventHub logger.
+          Instrumentation key for applicationInsights logger.
         example:
           connectionString: 'Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=...'
           name: apim
@@ -598,6 +634,7 @@ definitions:
         description: Logger type.
         enum:
           - azureEventHub
+          - applicationInsights
         type: string
         x-ms-enum:
           modelAsString: true
@@ -605,6 +642,8 @@ definitions:
           values:
             - description: Azure Event Hub as log destination.
               value: azureEventHub
+            - description: Azure Application Insights as log destination.
+              value: applicationInsights
     required:
       - loggerType
       - credentials
@@ -633,6 +672,7 @@ definitions:
         description: Logger type.
         enum:
           - azureEventHub
+          - applicationInsights
         type: string
         x-ms-enum:
           modelAsString: true
@@ -640,3 +680,5 @@ definitions:
           values:
             - description: Azure Event Hub as log destination.
               value: azureEventHub
+            - description: Azure Application Insights as log destination.
+              value: applicationInsights

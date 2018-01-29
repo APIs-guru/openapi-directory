@@ -63,6 +63,37 @@ paths:
             $ref: '#/definitions/ImageListResult'
       tags:
         - Images
+      x-ms-examples:
+        List all virtual machine images in a subscription.:
+          parameters:
+            api-version: 2016-04-30-preview
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                value:
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images/myImage'
+                    location: West US
+                    name: myImage
+                    properties:
+                      provisioningState: created
+                      storageProfile:
+                        dataDisks:
+                          - blobUri: 'https://mystorageaccount.blob.core.windows.net/dataimages/dataimage.vhd'
+                            lun: 1
+                            managedDisk:
+                              id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk2'
+                            snapshot:
+                              id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2'
+                        osDisk:
+                          blobUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+                          managedDisk:
+                            id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk1'
+                          osState: Generalized
+                          osType: Windows
+                          snapshot:
+                            id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1'
+                    type: Microsoft.Compute/images
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers':
@@ -551,6 +582,38 @@ paths:
             $ref: '#/definitions/ImageListResult'
       tags:
         - Images
+      x-ms-examples:
+        List all virtual machine images in a resource group.:
+          parameters:
+            api-version: 2016-04-30-preview
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                value:
+                  - id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images/myImage'
+                    location: West US
+                    name: myImage
+                    properties:
+                      provisioningState: created
+                      storageProfile:
+                        dataDisks:
+                          - blobUri: 'https://mystorageaccount.blob.core.windows.net/dataimages/dataimage.vhd'
+                            lun: 1
+                            managedDisk:
+                              id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk2'
+                            snapshot:
+                              id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2'
+                        osDisk:
+                          blobUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+                          managedDisk:
+                            id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk1'
+                          osState: Generalized
+                          osType: Windows
+                          snapshot:
+                            id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1'
+                    type: Microsoft.Compute/images
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}':
@@ -610,6 +673,39 @@ paths:
             $ref: '#/definitions/Image'
       tags:
         - Images
+      x-ms-examples:
+        Get information about a virtual machine image.:
+          parameters:
+            api-version: 2016-04-30-preview
+            imageName: myImage
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images/myImage'
+                location: West US
+                name: myImage
+                properties:
+                  provisioningState: created
+                  storageProfile:
+                    dataDisks:
+                      - blobUri: 'https://mystorageaccount.blob.core.windows.net/dataimages/dataimage.vhd'
+                        lun: 1
+                        managedDisk:
+                          id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk2'
+                        snapshot:
+                          id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2'
+                    osDisk:
+                      blobUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+                      diskSizeGB: 20
+                      managedDisk:
+                        id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk1'
+                      osState: Generalized
+                      osType: Windows
+                      snapshot:
+                        id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1'
+                type: Microsoft.Compute/images
     put:
       description: Create or update an image.
       operationId: Images_CreateOrUpdate
@@ -643,6 +739,244 @@ paths:
             $ref: '#/definitions/Image'
       tags:
         - Images
+      x-ms-examples:
+        Create a virtual machine image from a blob.:
+          parameters:
+            api-version: 2016-04-30-preview
+            imageName: myImage
+            parameters:
+              location: West US
+              properties:
+                storageProfile:
+                  osDisk:
+                    blobUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+                    osState: Generalized
+                    osType: Linux
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '201':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks: []
+                    osDisk:
+                      blobUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+                      caching: ReadWrite
+                      osState: Generalized
+                      osType: Linux
+                type: Microsoft.Compute/images
+        Create a virtual machine image from a managed disk.:
+          parameters:
+            api-version: 2016-04-30-preview
+            imageName: myImage
+            parameters:
+              location: West US
+              properties:
+                storageProfile:
+                  osDisk:
+                    managedDisk:
+                      id: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                    osState: Generalized
+                    osType: Linux
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '201':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks: []
+                    osDisk:
+                      caching: ReadWrite
+                      managedDisk:
+                        id: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                      osState: Generalized
+                      osType: Linux
+                type: Microsoft.Compute/images
+        Create a virtual machine image from a snapshot.:
+          parameters:
+            api-version: 2016-04-30-preview
+            imageName: myImage
+            parameters:
+              location: West US
+              properties:
+                storageProfile:
+                  osDisk:
+                    osState: Generalized
+                    osType: Linux
+                    snapshot:
+                      id: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot'
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '201':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks: []
+                    osDisk:
+                      caching: ReadWrite
+                      osState: Generalized
+                      osType: Linux
+                      snapshot:
+                        id: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot'
+                type: Microsoft.Compute/images
+        Create a virtual machine image from an existing virtual machine.:
+          parameters:
+            api-version: 2016-04-30-preview
+            imageName: myImage
+            parameters:
+              location: West US
+              properties:
+                sourceVirtualMachine:
+                  id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM'
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '201':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  sourceVirtualMachine:
+                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM'
+                  storageProfile:
+                    dataDisks: []
+                    osDisk:
+                      caching: ReadWrite
+                      managedDisk:
+                        id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myVM_OsDisk_1_6dc293b7d811433196903acf92665022'
+                      osState: Generalized
+                      osType: Linux
+                type: Microsoft.Compute/images
+        Create a virtual machine image that includes a data disk from a blob.:
+          parameters:
+            api-version: 2016-04-30-preview
+            imageName: myImage
+            parameters:
+              location: West US
+              properties:
+                storageProfile:
+                  dataDisks:
+                    - blobUri: 'https://mystorageaccount.blob.core.windows.net/dataimages/dataimage.vhd'
+                      lun: 1
+                  osDisk:
+                    blobUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+                    osState: Generalized
+                    osType: Linux
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '201':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks:
+                      - blobUri: 'https://mystorageaccount.blob.core.windows.net/dataimages/dataimage.vhd'
+                        lun: 1
+                    osDisk:
+                      blobUri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+                      caching: ReadWrite
+                      osState: Generalized
+                      osType: Linux
+                type: Microsoft.Compute/images
+        Create a virtual machine image that includes a data disk from a managed disk.:
+          parameters:
+            api-version: 2016-04-30-preview
+            imageName: myImage
+            parameters:
+              location: West US
+              properties:
+                storageProfile:
+                  dataDisks:
+                    - lun: 1
+                      managedDisk:
+                        id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk2'
+                  osDisk:
+                    managedDisk:
+                      id: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                    osState: Generalized
+                    osType: Linux
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '201':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks:
+                      - lun: 1
+                        managedDisk:
+                          id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk2'
+                    osDisk:
+                      caching: ReadWrite
+                      managedDisk:
+                        id: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk'
+                      osState: Generalized
+                      osType: Linux
+                type: Microsoft.Compute/images
+        Create a virtual machine image that includes a data disk from a snapshot.:
+          parameters:
+            api-version: 2016-04-30-preview
+            imageName: myImage
+            parameters:
+              location: West US
+              properties:
+                storageProfile:
+                  dataDisks:
+                    - lun: 1
+                      snapshot:
+                        id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2'
+                  osDisk:
+                    osState: Generalized
+                    osType: Linux
+                    snapshot:
+                      id: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot'
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '201':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage'
+                location: westus
+                name: myImage
+                properties:
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks:
+                      - lun: 1
+                        snapshot:
+                          id: 'subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2'
+                    osDisk:
+                      caching: ReadWrite
+                      osState: Generalized
+                      osType: Linux
+                      snapshot:
+                        id: 'subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot'
+                type: Microsoft.Compute/images
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets':
     get:

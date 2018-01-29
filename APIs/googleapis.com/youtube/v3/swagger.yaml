@@ -4837,7 +4837,7 @@ definitions:
         type: string
     type: object
   ChannelSnippet:
-    description: 'Basic details about a channel, including title, description and thumbnails. Next available id: 15.'
+    description: 'Basic details about a channel, including title, description and thumbnails.'
     properties:
       country:
         description: The country of the channel.
@@ -7829,7 +7829,7 @@ definitions:
       processingDetails:
         $ref: '#/definitions/VideoProcessingDetails'
         description: |-
-          The processingProgress object encapsulates information about YouTube's progress in processing the uploaded video file. The properties in the object identify the current processing status and an estimate of the time remaining until YouTube finishes processing the video. This part also indicates whether different types of data or content, such as file details or thumbnail images, are available for the video.
+          The processingDetails object encapsulates information about YouTube's progress in processing the uploaded video file. The properties in the object identify the current processing status and an estimate of the time remaining until YouTube finishes processing the video. This part also indicates whether different types of data or content, such as file details or thumbnail images, are available for the video.
 
           The processingProgress object is designed to be polled so that the video uploaded can track the progress that YouTube has made in processing the uploaded video file. This data can only be retrieved by the video owner.
       projectDetails:

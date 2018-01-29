@@ -56,24 +56,35 @@ parameters:
     name: collectionRid
     required: true
     type: string
+    x-ms-parameter-location: method
   databaseRidParameter:
     description: Cosmos DB database rid.
     in: path
     name: databaseRid
     required: true
     type: string
+    x-ms-parameter-location: method
   filterParameter:
     description: 'An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.'
     in: query
     name: $filter
     required: true
     type: string
+    x-ms-parameter-location: method
+  partitionKeyRangeIdParameter:
+    description: Partition Key Range Id for which to get data.
+    in: path
+    name: partitionKeyRangeId
+    required: true
+    type: string
+    x-ms-parameter-location: method
   regionParameter:
     description: 'Cosmos DB region, with spaces between words and each word capitalized.'
     in: path
     name: region
     required: true
     type: string
+    x-ms-parameter-location: method
   resourceGroupNameParameter:
     description: Name of an Azure resource group.
     in: path
@@ -84,18 +95,33 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  sourceRegionParameter:
+    description: 'Source region from which data is written. Cosmos DB region, with spaces between words and each word capitalized.'
+    in: path
+    name: sourceRegion
+    required: true
+    type: string
+    x-ms-parameter-location: method
   subscriptionIdParameter:
     description: Azure subscription ID.
     in: path
     name: subscriptionId
     required: true
     type: string
+  targetRegionParameter:
+    description: 'Target region to which data is written. Cosmos DB region, with spaces between words and each word capitalized.'
+    in: path
+    name: targetRegion
+    required: true
+    type: string
+    x-ms-parameter-location: method
   usageFilterParameter:
     description: 'An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).'
     in: query
     name: $filter
     required: false
     type: string
+    x-ms-parameter-location: method
 paths:
   '/providers/Microsoft.DocumentDB/databaseAccountNames/{accountName}':
     head:
@@ -564,6 +590,7 @@ paths:
                     primaryAggregationType: Total
                     resourceUri: /subscriptions/subId/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1
                     unit: Count
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/metrics':
     get:
       description: Retrieves the metrics determined by the given filter for the given database account and collection.
@@ -620,6 +647,157 @@ paths:
                     timeGrain: PT5M
                     unit: Count
       x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/partitionKeyRangeId/{partitionKeyRangeId}/metrics':
+    get:
+      description: Retrieves the metrics determined by the given filter for the given partition key range id.
+      operationId: PartitionKeyRangeId_ListMetrics
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/databaseRidParameter'
+        - $ref: '#/parameters/collectionRidParameter'
+        - $ref: '#/parameters/partitionKeyRangeIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/filterParameter'
+      responses:
+        '200':
+          description: The partition-level metrics for the partition key range id were retrieved successfully.
+          schema:
+            $ref: '#/definitions/PartitionMetricListResult'
+      x-ms-examples:
+        CosmosDBDatabaseAccountRegionGetMetrics:
+          parameters:
+            $filter: '$filter=(name.value eq ''Max RUs Per Second'') and timeGrain eq duration''PT1M'' and startTime eq ''2017-11-19T23:53:55.2780000Z'' and endTime eq ''2017-11-20T23:58:55.2780000Z'
+            accountName: ddb1
+            api-version: '2015-04-08'
+            collectionRid: collectionRid
+            databaseRid: databaseRid
+            partitionKeyRangeId: '0'
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - endTime: '2017-11-20T23:58:55.2780000Z'
+                    metricValues:
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:53:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:54:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:55:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:56:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:57:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:58:55.2780000Z'
+                    name:
+                      localizedValue: Max RUs Per Second
+                      value: Max RUs Per Second
+                    partitionId: 00000000-0000-0000-0000-000000000000
+                    partitionKeyRangeId: '0'
+                    startTime: '2017-11-19T23:53:55.2780000Z'
+                    timeGrain: PT1M
+                    unit: Count
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/partitions/metrics':
+    get:
+      description: 'Retrieves the metrics determined by the given filter for the given collection, split by partition.'
+      operationId: CollectionPartition_ListMetrics
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/databaseRidParameter'
+        - $ref: '#/parameters/collectionRidParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/filterParameter'
+      responses:
+        '200':
+          description: The partition-level metrics for the collection were retrieved successfully.
+          schema:
+            $ref: '#/definitions/PartitionMetricListResult'
+      x-ms-examples:
+        CosmosDBDatabaseAccountRegionGetMetrics:
+          parameters:
+            $filter: '$filter=(name.value eq ''Max RUs Per Second'') and timeGrain eq duration''PT1M'' and startTime eq ''2017-11-19T23:53:55.2780000Z'' and endTime eq ''2017-11-20T23:58:55.2780000Z'
+            accountName: ddb1
+            api-version: '2015-04-08'
+            collectionRid: collectionRid
+            databaseRid: databaseRid
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - endTime: '2017-11-20T23:58:55.2780000Z'
+                    metricValues:
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:53:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:54:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:55:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:56:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:57:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:58:55.2780000Z'
+                    name:
+                      localizedValue: Max RUs Per Second
+                      value: Max RUs Per Second
+                    partitionId: 00000000-0000-0000-0000-000000000000
+                    partitionKeyRangeId: '0'
+                    startTime: '2017-11-19T23:53:55.2780000Z'
+                    timeGrain: PT1M
+                    unit: Count
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/partitions/usages':
+    get:
+      description: 'Retrieves the usages (most recent storage data) for the given collection, split by partition.'
+      operationId: CollectionPartition_ListUsages
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/databaseRidParameter'
+        - $ref: '#/parameters/collectionRidParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/usageFilterParameter'
+      responses:
+        '200':
+          description: 'The usages for the collection, per partition were retrieved successfully.'
+          schema:
+            $ref: '#/definitions/PartitionUsagesResult'
+      x-ms-examples:
+        CosmosDBCollectionGetUsages:
+          parameters:
+            $filter: $filter=name.value eq 'Partition Storage'
+            accountName: ddb1
+            api-version: '2015-04-08'
+            collectionRid: collectionRid
+            databaseRid: databaseRid
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - currentValue: 0
+                    limit: 10737418240
+                    name:
+                      localizedValue: Storage
+                      value: Storage
+                    partitionId: 00000000-0000-0000-0000-000000000000
+                    partitionKeyRangeId: '0'
+                    quotaPeriod: P1D
+                    unit: Bytes
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/usages':
     get:
       description: Retrieves the usages (most recent storage data) for the given collection.
@@ -658,6 +836,7 @@ paths:
                       value: Storage
                     quotaPeriod: P1D
                     unit: Bytes
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/metricDefinitions':
     get:
       description: Retrieves metric defintions for the given database.
@@ -698,6 +877,7 @@ paths:
                     primaryAggregationType: Total
                     resourceUri: /subscriptions/subId/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1
                     unit: Count
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/metrics':
     get:
       description: Retrieves the metrics determined by the given filter for the given database account and database.
@@ -788,6 +968,7 @@ paths:
                       value: Storage
                     quotaPeriod: P1D
                     unit: Bytes
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/failoverPriorityChange':
     post:
       description: Changes the failover priority for the Azure Cosmos DB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.
@@ -928,6 +1109,7 @@ paths:
                     primaryAggregationType: Total
                     resourceUri: /subscriptions/subId/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1
                     unit: Count
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/metrics':
     get:
       description: Retrieves the metrics determined by the given filter for the given database account.
@@ -979,6 +1161,66 @@ paths:
                     startTime: '2017-11-19T23:53:55.2780000Z'
                     timeGrain: PT5M
                     unit: Count
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/percentile/metrics':
+    get:
+      description: Retrieves the metrics determined by the given filter for the given database account. This url is only for PBS and Replication Latency data
+      operationId: Percentile_ListMetrics
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/filterParameter'
+      responses:
+        '200':
+          description: The percentile metrics for the account were retrieved successfully.
+          schema:
+            $ref: '#/definitions/PercentileMetricListResult'
+      x-ms-examples:
+        CosmosDBDatabaseAccountRegionGetMetrics:
+          parameters:
+            $filter: '$filter=(name.value eq ''Probabilistic Bounded Staleness'') and timeGrain eq duration''PT5M'' and startTime eq ''2017-11-19T23:53:55.2780000Z'' and endTime eq ''2017-11-20T00:13:55.2780000Z'
+            accountName: ddb1
+            api-version: '2015-04-08'
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - endTime: '2017-11-20T00:13:55.2780000Z'
+                    metricValues:
+                      - P10: 1.11
+                        P25: 2.5
+                        P50: 4.34
+                        P75: 5.2
+                        P90: 6.77
+                        P95: 7.1
+                        P99: 8.3
+                        timestamp: '2017-11-19T23:53:55.2780000Z'
+                    name:
+                      localizedValue: Probabilistic Bounded Staleness-S-West Central US-T-East US
+                      value: Probabilistic Bounded Staleness-S-West Central US-T-East US
+                    startTime: '2017-11-19T23:53:55.2780000Z'
+                    timeGrain: PT5M
+                    unit: Milliseconds
+                  - endTime: '2017-11-20T00:13:55.2780000Z'
+                    metricValues:
+                      - P10: 1.11
+                        P25: 2.5
+                        P50: 4.34
+                        P75: 5.2
+                        P90: 6.77
+                        P95: 7.1
+                        P99: 8.3
+                        timestamp: '2017-11-19T23:53:55.2780000Z'
+                    name:
+                      localizedValue: Probabilistic Bounded Staleness-S-West Central US-T-West US
+                      value: Probabilistic Bounded Staleness-S-West Central US-T-West US
+                    startTime: '2017-11-19T23:53:55.2780000Z'
+                    timeGrain: PT5M
+                    unit: Milliseconds
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/readonlykeys':
     get:
@@ -1097,6 +1339,120 @@ paths:
                     timeGrain: PT5M
                     unit: Count
       x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/region/{region}/databases/{databaseRid}/collections/{collectionRid}/partitionKeyRangeId/{partitionKeyRangeId}/metrics':
+    get:
+      description: Retrieves the metrics determined by the given filter for the given partition key range id and region.
+      operationId: PartitionKeyRangeIdRegion_ListMetrics
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/regionParameter'
+        - $ref: '#/parameters/databaseRidParameter'
+        - $ref: '#/parameters/collectionRidParameter'
+        - $ref: '#/parameters/partitionKeyRangeIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/filterParameter'
+      responses:
+        '200':
+          description: The partition-level metrics for the partition key range id and region were retrieved successfully.
+          schema:
+            $ref: '#/definitions/PartitionMetricListResult'
+      x-ms-examples:
+        CosmosDBDatabaseAccountRegionGetMetrics:
+          parameters:
+            $filter: '$filter=(name.value eq ''Max RUs Per Second'') and timeGrain eq duration''PT1M'' and startTime eq ''2017-11-19T23:53:55.2780000Z'' and endTime eq ''2017-11-20T23:58:55.2780000Z'
+            accountName: ddb1
+            api-version: '2015-04-08'
+            collectionRid: collectionRid
+            databaseRid: databaseRid
+            partitionKeyRangeId: '0'
+            region: West US
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - endTime: '2017-11-20T23:58:55.2780000Z'
+                    metricValues:
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:53:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:54:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:55:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:56:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:57:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:58:55.2780000Z'
+                    name:
+                      localizedValue: Max RUs Per Second
+                      value: Max RUs Per Second
+                    partitionId: 00000000-0000-0000-0000-000000000000
+                    partitionKeyRangeId: '0'
+                    startTime: '2017-11-19T23:53:55.2780000Z'
+                    timeGrain: PT1M
+                    unit: Count
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/region/{region}/databases/{databaseRid}/collections/{collectionRid}/partitions/metrics':
+    get:
+      description: 'Retrieves the metrics determined by the given filter for the given collection and region, split by partition.'
+      operationId: CollectionPartitionRegion_ListMetrics
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/regionParameter'
+        - $ref: '#/parameters/databaseRidParameter'
+        - $ref: '#/parameters/collectionRidParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/filterParameter'
+      responses:
+        '200':
+          description: The partition-level metrics for the collection and region were retrieved successfully.
+          schema:
+            $ref: '#/definitions/PartitionMetricListResult'
+      x-ms-examples:
+        CosmosDBDatabaseAccountRegionGetMetrics:
+          parameters:
+            $filter: '$filter=(name.value eq ''Max RUs Per Second'') and timeGrain eq duration''PT1M'' and startTime eq ''2017-11-19T23:53:55.2780000Z'' and endTime eq ''2017-11-20T23:58:55.2780000Z'
+            accountName: ddb1
+            api-version: '2015-04-08'
+            collectionRid: collectionRid
+            databaseRid: databaseRid
+            region: North Europe
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - endTime: '2017-11-20T23:58:55.2780000Z'
+                    metricValues:
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:53:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:54:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:55:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:56:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:57:55.2780000Z'
+                      - maximum: 5
+                        timestamp: '2017-11-19T23:58:55.2780000Z'
+                    name:
+                      localizedValue: Max RUs Per Second
+                      value: Max RUs Per Second
+                    partitionId: 00000000-0000-0000-0000-000000000000
+                    partitionKeyRangeId: '0'
+                    startTime: '2017-11-19T23:53:55.2780000Z'
+                    timeGrain: PT1M
+                    unit: Count
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/region/{region}/metrics':
     get:
       description: Retrieves the metrics determined by the given filter for the given database account and region.
@@ -1151,6 +1507,116 @@ paths:
                     timeGrain: PT5M
                     unit: Count
       x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sourceRegion/{sourceRegion}/targetRegion/{targetRegion}/percentile/metrics':
+    get:
+      description: 'Retrieves the metrics determined by the given filter for the given account, source and target region. This url is only for PBS and Replication Latency data'
+      operationId: PercentileSourceTarget_ListMetrics
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/sourceRegionParameter'
+        - $ref: '#/parameters/targetRegionParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/filterParameter'
+      responses:
+        '200':
+          description: 'The percentile metrics for the account, source and target regions were retrieved successfully.'
+          schema:
+            $ref: '#/definitions/PercentileMetricListResult'
+      x-ms-examples:
+        CosmosDBDatabaseAccountRegionGetMetrics:
+          parameters:
+            $filter: '$filter=(name.value eq ''Probabilistic Bounded Staleness'') and timeGrain eq duration''PT5M'' and startTime eq ''2017-11-19T23:53:55.2780000Z'' and endTime eq ''2017-11-20T00:13:55.2780000Z'
+            accountName: ddb1
+            api-version: '2015-04-08'
+            resourceGroupName: rg1
+            sourceRegion: West Central US
+            subscriptionId: subid
+            targetRegion: East US
+          responses:
+            '200':
+              body:
+                value:
+                  - endTime: '2017-11-20T00:13:55.2780000Z'
+                    metricValues:
+                      - P10: 1.11
+                        P25: 2.5
+                        P50: 4.34
+                        P75: 5.2
+                        P90: 6.77
+                        P95: 7.1
+                        P99: 8.3
+                        timestamp: '2017-11-19T23:53:55.2780000Z'
+                    name:
+                      localizedValue: Probabilistic Bounded Staleness-S-West Central US-T-East US
+                      value: Probabilistic Bounded Staleness-S-West Central US-T-East US
+                    startTime: '2017-11-19T23:53:55.2780000Z'
+                    timeGrain: PT5M
+                    unit: Milliseconds
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/targetRegion/{targetRegion}/percentile/metrics':
+    get:
+      description: Retrieves the metrics determined by the given filter for the given account target region. This url is only for PBS and Replication Latency data
+      operationId: PercentileTarget_ListMetrics
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/accountNameParameter'
+        - $ref: '#/parameters/targetRegionParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/filterParameter'
+      responses:
+        '200':
+          description: The percentile metrics for the account and target regions were retrieved successfully.
+          schema:
+            $ref: '#/definitions/PercentileMetricListResult'
+      x-ms-examples:
+        CosmosDBDatabaseAccountRegionGetMetrics:
+          parameters:
+            $filter: '$filter=(name.value eq ''Probabilistic Bounded Staleness'') and timeGrain eq duration''PT5M'' and startTime eq ''2017-11-19T23:53:55.2780000Z'' and endTime eq ''2017-11-20T00:13:55.2780000Z'
+            accountName: ddb1
+            api-version: '2015-04-08'
+            resourceGroupName: rg1
+            subscriptionId: subid
+            targetRegion: East US
+          responses:
+            '200':
+              body:
+                value:
+                  - endTime: '2017-11-20T00:13:55.2780000Z'
+                    metricValues:
+                      - P10: 1.11
+                        P25: 2.5
+                        P50: 4.34
+                        P75: 5.2
+                        P90: 6.77
+                        P95: 7.1
+                        P99: 8.3
+                        timestamp: '2017-11-19T23:53:55.2780000Z'
+                    name:
+                      localizedValue: Probabilistic Bounded Staleness-S-West Central US-T-East US
+                      value: Probabilistic Bounded Staleness-S-West Central US-T-East US
+                    startTime: '2017-11-19T23:53:55.2780000Z'
+                    timeGrain: PT5M
+                    unit: Milliseconds
+                  - endTime: '2017-11-20T00:13:55.2780000Z'
+                    metricValues:
+                      - P10: 1.11
+                        P25: 2.5
+                        P50: 4.34
+                        P75: 5.2
+                        P90: 6.77
+                        P95: 7.1
+                        P99: 8.3
+                        timestamp: '2017-11-19T23:53:55.2780000Z'
+                    name:
+                      localizedValue: Probabilistic Bounded Staleness-S-West Central US-T-West US
+                      value: Probabilistic Bounded Staleness-S-West US-T-East US
+                    startTime: '2017-11-19T23:53:55.2780000Z'
+                    timeGrain: PT5M
+                    unit: Milliseconds
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/usages':
     get:
       description: Retrieves the usages (most recent data) for the given database account.
@@ -1185,7 +1651,15 @@ paths:
                       value: Storage
                     quotaPeriod: P1D
                     unit: Bytes
+      x-ms-pageable: {}
 definitions:
+  Capability:
+    description: Cosmos DB capability object
+    properties:
+      name:
+        description: Name of the Cosmos DB capability
+        type: string
+    type: object
   ConsistencyPolicy:
     description: The consistency policy for the Cosmos DB database account.
     properties:
@@ -1272,6 +1746,11 @@ definitions:
   DatabaseAccountCreateUpdateProperties:
     description: Properties to create and update Azure Cosmos DB database accounts.
     properties:
+      capabilities:
+        description: List of Cosmos DB capabilities for the account
+        items:
+          $ref: '#/definitions/Capability'
+        type: array
       consistencyPolicy:
         $ref: '#/definitions/ConsistencyPolicy'
         description: The consistency policy for the Cosmos DB account.
@@ -1336,12 +1815,22 @@ definitions:
   DatabaseAccountPatchParameters:
     description: Parameters for patching Azure Cosmos DB database account properties.
     properties:
+      capabilities:
+        description: List of Cosmos DB capabilities for the account
+        items:
+          $ref: '#/definitions/Capability'
+        type: array
       tags:
         $ref: '#/definitions/Tags'
     type: object
   DatabaseAccountProperties:
     description: Properties for the database account.
     properties:
+      capabilities:
+        description: List of Cosmos DB capabilities for the account
+        items:
+          $ref: '#/definitions/Capability'
+        type: array
       consistencyPolicy:
         $ref: '#/definitions/ConsistencyPolicy'
         description: The consistency policy for the Cosmos DB database account.
@@ -1414,6 +1903,8 @@ definitions:
         items:
           $ref: '#/definitions/FailoverPolicy'
         type: array
+    required:
+      - failoverPolicies
   FailoverPolicy:
     description: The failover policy for a given region of a database account.
     properties:
@@ -1625,6 +2116,129 @@ definitions:
         items:
           $ref: '#/definitions/Operation'
         type: array
+  PartitionMetric:
+    allOf:
+      - $ref: '#/definitions/Metric'
+    description: The metric values for a single partition.
+    properties:
+      partitionId:
+        description: The parition id (GUID identifier) of the metric values.
+        readOnly: true
+        type: string
+      partitionKeyRangeId:
+        description: The partition key range id (integer identifier) of the metric values.
+        readOnly: true
+        type: string
+  PartitionMetricListResult:
+    description: The response to a list partition metrics request.
+    properties:
+      value:
+        description: The list of partition-level metrics for the account.
+        items:
+          $ref: '#/definitions/PartitionMetric'
+        readOnly: true
+        type: array
+  PartitionUsage:
+    allOf:
+      - $ref: '#/definitions/Usage'
+    description: The partition level usage data for a usage request.
+    properties:
+      partitionId:
+        description: The parition id (GUID identifier) of the usages.
+        readOnly: true
+        type: string
+      partitionKeyRangeId:
+        description: The partition key range id (integer identifier) of the usages.
+        readOnly: true
+        type: string
+  PartitionUsagesResult:
+    description: The response to a list partition level usage request.
+    properties:
+      value:
+        description: The list of partition-level usages for the database. A usage is a point in time metric
+        items:
+          $ref: '#/definitions/PartitionUsage'
+        readOnly: true
+        type: array
+  PercentileMetric:
+    description: Percentile Metric data
+    properties:
+      endTime:
+        description: The end time for the metric (ISO-8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      metricValues:
+        description: The percentile metric values for the specified time window and timestep.
+        items:
+          $ref: '#/definitions/PercentileMetricValue'
+        readOnly: true
+        type: array
+      name:
+        $ref: '#/definitions/MetricName'
+        description: The name information for the metric.
+        readOnly: true
+      startTime:
+        description: The start time for the metric (ISO-8601 format).
+        format: date-time
+        readOnly: true
+        type: string
+      timeGrain:
+        description: The time grain to be used to summarize the metric values.
+        readOnly: true
+        type: string
+      unit:
+        $ref: '#/definitions/UnitType'
+        description: The unit of the metric.
+  PercentileMetricListResult:
+    description: The response to a list percentile metrics request.
+    properties:
+      value:
+        description: The list of percentile metrics for the account.
+        items:
+          $ref: '#/definitions/PercentileMetric'
+        readOnly: true
+        type: array
+  PercentileMetricValue:
+    allOf:
+      - $ref: '#/definitions/MetricValue'
+    description: Represents percentile metrics values.
+    properties:
+      P10:
+        description: The 10th percentile value for the metric.
+        format: double
+        readOnly: true
+        type: number
+      P25:
+        description: The 25th percentile value for the metric.
+        format: double
+        readOnly: true
+        type: number
+      P50:
+        description: The 50th percentile value for the metric.
+        format: double
+        readOnly: true
+        type: number
+      P75:
+        description: The 75th percentile value for the metric.
+        format: double
+        readOnly: true
+        type: number
+      P90:
+        description: The 90th percentile value for the metric.
+        format: double
+        readOnly: true
+        type: number
+      P95:
+        description: The 95th percentile value for the metric.
+        format: double
+        readOnly: true
+        type: number
+      P99:
+        description: The 99th percentile value for the metric.
+        format: double
+        readOnly: true
+        type: number
   ProvisioningState:
     description: 'The status of the Cosmos DB account at the time the operation was called. The status can be one of following. ''Creating'' – the Cosmos DB account is being created. When an account is in Creating state, only properties that are specified as input for the Create Cosmos DB account operation are returned. ''Succeeded'' – the Cosmos DB account is active for use. ''Updating'' – the Cosmos DB account is being updated. ''Deleting'' – the Cosmos DB account is being deleted. ''Failed'' – the Cosmos DB account failed creation.'
     readOnly: true

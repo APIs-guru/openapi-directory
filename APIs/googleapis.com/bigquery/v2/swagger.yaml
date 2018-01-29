@@ -1886,13 +1886,13 @@ definitions:
           $ref: '#/definitions/ExplainQueryStage'
         type: array
       referencedTables:
-        description: '[Output-only, Experimental] Referenced tables for the job. Queries that reference more than 50 tables will not have a complete list.'
+        description: '[Output-only] Referenced tables for the job. Queries that reference more than 50 tables will not have a complete list.'
         items:
           $ref: '#/definitions/TableReference'
         type: array
       schema:
         $ref: '#/definitions/TableSchema'
-        description: '[Output-only, Experimental] The schema of the results. Present only for successful dry run of non-legacy SQL queries.'
+        description: '[Output-only] The schema of the results. Present only for successful dry run of non-legacy SQL queries.'
       statementType:
         description: '[Output-only, Experimental] The type of query statement, if valid. Possible values (new values might be added in the future): "SELECT": SELECT query. "INSERT": INSERT query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language "UPDATE": UPDATE query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language "DELETE": DELETE query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language "CREATE_TABLE": CREATE [OR REPLACE] TABLE without AS SELECT. "CREATE_TABLE_AS_SELECT": CREATE [OR REPLACE] TABLE ... AS SELECT ... "DROP_TABLE": DROP TABLE query. "CREATE_VIEW": CREATE [OR REPLACE] VIEW ... AS SELECT ... "DROP_VIEW": DROP VIEW query.'
         type: string

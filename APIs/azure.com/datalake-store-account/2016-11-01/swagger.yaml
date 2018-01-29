@@ -159,10 +159,10 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeStore/locations/{location}/capability':
     get:
-      description: Gets subscription-level properties and limits for Data Lake Store specified by Resource location.
+      description: Gets subscription-level properties and limits for Data Lake Store specified by resource location.
       operationId: Locations_GetCapability
       parameters:
-        - description: The Resource location without whitespace.
+        - description: The resource location without whitespace.
           in: path
           name: location
           required: true
@@ -171,7 +171,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Successfully retrieved the subscription-level properties and limits for Data Lake Store specified by Resource location.
+          description: Successfully retrieved the subscription-level properties and limits for Data Lake Store specified by resource location.
           schema:
             $ref: '#/definitions/CapabilityInformation'
         '404':
@@ -179,7 +179,7 @@ paths:
       tags:
         - Locations
       x-ms-examples:
-        Gets subscription-level properties and limits for Data Lake Store specified by Resource location:
+        Gets subscription-level properties and limits for Data Lake Store specified by resource location:
           parameters:
             api-version: '2016-11-01'
             location: EastUS2
@@ -198,7 +198,7 @@ paths:
       description: Checks whether the specified account name is available or taken.
       operationId: Account_CheckNameAvailability
       parameters:
-        - description: The Resource location without whitespace.
+        - description: The resource location without whitespace.
           in: path
           name: location
           required: true
@@ -558,7 +558,7 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/FirewallRule'
+            $ref: '#/definitions/CreateOrUpdateFirewallRuleParameters'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -794,7 +794,7 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/TrustedIdProvider'
+            $ref: '#/definitions/CreateOrUpdateTrustedIdProviderParameters'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -1253,24 +1253,24 @@ paths:
       x-ms-long-running-operation: true
 definitions:
   CapabilityInformation:
-    description: Subscription-level properties and limits for Data Lake Store
+    description: Subscription-level properties and limits for Data Lake Store.
     properties:
       accountCount:
-        description: the current number of accounts under this subscription.
+        description: The current number of accounts under this subscription.
         format: int32
         readOnly: true
         type: integer
       maxAccountCount:
-        description: the maximum supported number of accounts under this subscription.
+        description: The maximum supported number of accounts under this subscription.
         format: int32
         readOnly: true
         type: integer
       migrationState:
-        description: the Boolean value of true or false to indicate the maintenance state.
+        description: The Boolean value of true or false to indicate the maintenance state.
         readOnly: true
         type: boolean
       state:
-        description: the subscription state.
+        description: The subscription state.
         enum:
           - Registered
           - Suspended
@@ -1283,35 +1283,99 @@ definitions:
           modelAsString: true
           name: SubscriptionState
       subscriptionId:
-        description: the subscription credentials that uniquely identifies the subscription.
+        description: The subscription credentials that uniquely identifies the subscription.
         format: uuid
         readOnly: true
         type: string
   CheckNameAvailabilityParameters:
-    description: Data Lake Store account name availability check parameters
+    description: Data Lake Store account name availability check parameters.
     properties:
       name:
-        description: the Data Lake Store name to check availability for.
+        description: The Data Lake Store name to check availability for.
         type: string
       type:
-        description: 'the Resource type. Note: This should not be set by the user, as the constant value is Microsoft.DataLakeStore/accounts'
+        description: 'The resource type. Note: This should not be set by the user, as the constant value is Microsoft.DataLakeStore/accounts'
         enum:
           - Microsoft.DataLakeStore/accounts
         type: string
     required:
       - name
       - type
+  CreateFirewallRuleWithAccountParameters:
+    description: The parameters used to create a new firewall rule while creating a new Data Lake Store account.
+    properties:
+      name:
+        description: The unique name of the firewall rule to create.
+        type: string
+      properties:
+        $ref: '#/definitions/CreateOrUpdateFirewallRuleProperties'
+        description: The firewall rule properties to use when creating a new firewall rule.
+        x-ms-client-flatten: true
+    required:
+      - name
+      - properties
+  CreateOrUpdateFirewallRuleParameters:
+    description: The parameters used to create a new firewall rule.
+    properties:
+      properties:
+        $ref: '#/definitions/CreateOrUpdateFirewallRuleProperties'
+        description: The firewall rule properties to use when creating a new firewall rule.
+        x-ms-client-flatten: true
+    required:
+      - properties
+  CreateOrUpdateFirewallRuleProperties:
+    description: The firewall rule properties to use when creating a new firewall rule.
+    properties:
+      endIpAddress:
+        description: The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        type: string
+      startIpAddress:
+        description: The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        type: string
+    required:
+      - startIpAddress
+      - endIpAddress
+  CreateOrUpdateTrustedIdProviderParameters:
+    description: The parameters used to create a new trusted identity provider.
+    properties:
+      properties:
+        $ref: '#/definitions/CreateOrUpdateTrustedIdProviderProperties'
+        description: The trusted identity provider properties to use when creating a new trusted identity provider.
+        x-ms-client-flatten: true
+    required:
+      - properties
+  CreateOrUpdateTrustedIdProviderProperties:
+    description: The trusted identity provider properties to use when creating a new trusted identity provider.
+    properties:
+      idProvider:
+        description: The URL of this trusted identity provider.
+        type: string
+    required:
+      - idProvider
+  CreateTrustedIdProviderWithAccountParameters:
+    description: The parameters used to create a new trusted identity provider while creating a new Data Lake Store account.
+    properties:
+      name:
+        description: The unique name of the trusted identity provider to create.
+        type: string
+      properties:
+        $ref: '#/definitions/CreateOrUpdateTrustedIdProviderProperties'
+        description: The trusted identity provider properties to use when creating a new trusted identity provider.
+        x-ms-client-flatten: true
+    required:
+      - name
+      - properties
   DataLakeStoreAccount:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: Data Lake Store account information
+    description: Data Lake Store account information.
     properties:
       identity:
         $ref: '#/definitions/EncryptionIdentity'
         description: 'The Key Vault encryption identity, if any.'
       properties:
         $ref: '#/definitions/DataLakeStoreAccountProperties'
-        description: the Data Lake Store account properties.
+        description: The Data Lake Store account properties.
         x-ms-client-flatten: true
   DataLakeStoreAccountBasic:
     allOf:
@@ -1320,17 +1384,17 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/DataLakeStoreAccountPropertiesBasic'
-        description: the basic Data Lake Store account properties.
+        description: The basic Data Lake Store account properties.
         x-ms-client-flatten: true
   DataLakeStoreAccountListResult:
     description: Data Lake Store account list information response.
     properties:
       nextLink:
-        description: the link (url) to the next page of results.
+        description: The link (url) to the next page of results.
         readOnly: true
         type: string
       value:
-        description: the results of the list operation
+        description: The results of the list operation.
         items:
           $ref: '#/definitions/DataLakeStoreAccountBasic'
         readOnly: true
@@ -1338,10 +1402,10 @@ definitions:
   DataLakeStoreAccountProperties:
     allOf:
       - $ref: '#/definitions/DataLakeStoreAccountPropertiesBasic'
-    description: Data Lake Store account properties information
+    description: Data Lake Store account properties information.
     properties:
       currentTier:
-        description: the commitment tier in use for the current month.
+        description: The commitment tier in use for the current month.
         enum:
           - Consumption
           - Commitment_1TB
@@ -1356,13 +1420,13 @@ definitions:
           modelAsString: false
           name: TierType
       defaultGroup:
-        description: the default owner group for all new folders and files created in the Data Lake Store account.
+        description: The default owner group for all new folders and files created in the Data Lake Store account.
         type: string
       encryptionConfig:
         $ref: '#/definitions/EncryptionConfig'
         description: The Key Vault encryption configuration.
       encryptionProvisioningState:
-        description: The current state of encryption provisioning for this Data Lake store account.
+        description: The current state of encryption provisioning for this Data Lake Store account.
         enum:
           - Creating
           - Succeeded
@@ -1372,7 +1436,7 @@ definitions:
           modelAsString: false
           name: EncryptionProvisioningState
       encryptionState:
-        description: The current state of encryption for this Data Lake store account.
+        description: The current state of encryption for this Data Lake Store account.
         enum:
           - Enabled
           - Disabled
@@ -1390,12 +1454,12 @@ definitions:
           modelAsString: false
           name: FirewallAllowAzureIpsState
       firewallRules:
-        description: The list of firewall rules associated with this Data Lake store account.
+        description: The list of firewall rules associated with this Data Lake Store account.
         items:
-          $ref: '#/definitions/FirewallRule'
+          $ref: '#/definitions/CreateFirewallRuleWithAccountParameters'
         type: array
       firewallState:
-        description: The current state of the IP address firewall for this Data Lake store account.
+        description: The current state of the IP address firewall for this Data Lake Store account.
         enum:
           - Enabled
           - Disabled
@@ -1404,7 +1468,7 @@ definitions:
           modelAsString: false
           name: FirewallState
       newTier:
-        description: the commitment tier to use for next month.
+        description: The commitment tier to use for next month.
         enum:
           - Consumption
           - Commitment_1TB
@@ -1418,7 +1482,7 @@ definitions:
           modelAsString: false
           name: TierType
       trustedIdProviderState:
-        description: The current state of the trusted identity provider feature for this Data Lake store account.
+        description: The current state of the trusted identity provider feature for this Data Lake Store account.
         enum:
           - Enabled
           - Disabled
@@ -1427,9 +1491,9 @@ definitions:
           modelAsString: false
           name: TrustedIdProviderState
       trustedIdProviders:
-        description: The list of trusted identity providers associated with this Data Lake store account.
+        description: The list of trusted identity providers associated with this Data Lake Store account.
         items:
-          $ref: '#/definitions/TrustedIdProvider'
+          $ref: '#/definitions/CreateTrustedIdProviderWithAccountParameters'
         type: array
   DataLakeStoreAccountPropertiesBasic:
     description: The basic account specific properties that are associated with an underlying Data Lake Store account.
@@ -1440,21 +1504,21 @@ definitions:
         readOnly: true
         type: string
       creationTime:
-        description: the account creation time.
+        description: The account creation time.
         format: date-time
         readOnly: true
         type: string
       endpoint:
-        description: the full CName endpoint for this account.
+        description: The full CName endpoint for this account.
         readOnly: true
         type: string
       lastModifiedTime:
-        description: the account last modified time.
+        description: The account last modified time.
         format: date-time
         readOnly: true
         type: string
       provisioningState:
-        description: the provisioning status of the Data Lake Store account.
+        description: The provisioning status of the Data Lake Store account.
         enum:
           - Failed
           - Creating
@@ -1473,7 +1537,7 @@ definitions:
           modelAsString: false
           name: DataLakeStoreAccountStatus
       state:
-        description: the state of the Data Lake Store account.
+        description: The state of the Data Lake Store account.
         enum:
           - Active
           - Suspended
@@ -1483,11 +1547,11 @@ definitions:
           modelAsString: false
           name: DataLakeStoreAccountState
   DataLakeStoreAccountUpdateParameters:
-    description: Data Lake Store account information to update
+    description: Data Lake Store account information to update.
     properties:
       properties:
         $ref: '#/definitions/UpdateDataLakeStoreAccountProperties'
-        description: the Data Lake Store account properties to update.
+        description: The Data Lake Store account properties to update.
         x-ms-client-flatten: true
       tags:
         additionalProperties:
@@ -1498,11 +1562,11 @@ definitions:
     description: Data Lake Store firewall rule list information.
     properties:
       nextLink:
-        description: the link (url) to the next page of results.
+        description: The link (url) to the next page of results.
         readOnly: true
         type: string
       value:
-        description: the results of the list operation
+        description: The results of the list operation.
         items:
           $ref: '#/definitions/FirewallRule'
         readOnly: true
@@ -1511,11 +1575,11 @@ definitions:
     description: Data Lake Store trusted identity provider list information.
     properties:
       nextLink:
-        description: the link (url) to the next page of results.
+        description: The link (url) to the next page of results.
         readOnly: true
         type: string
       value:
-        description: the results of the list operation
+        description: The results of the list operation.
         items:
           $ref: '#/definitions/TrustedIdProvider'
         readOnly: true
@@ -1561,43 +1625,40 @@ definitions:
     required:
       - type
   ErrorDetails:
-    description: Data Lake Store error details information
+    description: Data Lake Store error details information.
     properties:
       code:
-        description: the HTTP status code or error code associated with this error
+        description: The HTTP status code or error code associated with this error.
         readOnly: true
         type: string
       message:
-        description: the error message localized based on Accept-Language
+        description: The error message localized based on Accept-Language.
         readOnly: true
         type: string
       target:
-        description: 'the target of the particular error (for example, the name of the property in error).'
+        description: 'The target of the particular error (for example, the name of the property in error).'
         readOnly: true
         type: string
   FirewallRule:
     allOf:
       - $ref: '#/definitions/SubResource'
-    description: Data Lake Store firewall rule information
+    description: Data Lake Store firewall rule information.
     properties:
       properties:
         $ref: '#/definitions/FirewallRuleProperties'
-        description: the properties of the firewall rule.
+        description: The firewall rule properties.
         x-ms-client-flatten: true
-    required:
-      - properties
   FirewallRuleProperties:
-    description: Data Lake Store firewall rule properties information
+    description: The firewall rule properties.
     properties:
       endIpAddress:
-        description: the end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        description: The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        readOnly: true
         type: string
       startIpAddress:
-        description: the start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        description: The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        readOnly: true
         type: string
-    required:
-      - startIpAddress
-      - endIpAddress
   KeyVaultMetaInfo:
     description: Metadata information used by account encryption.
     properties:
@@ -1615,32 +1676,32 @@ definitions:
       - encryptionKeyName
       - encryptionKeyVersion
   NameAvailabilityInformation:
-    description: Data Lake Store account name availability result information
+    description: Data Lake Store account name availability result information.
     properties:
       message:
-        description: 'the message describing why the Data Lake Store account name is not available, if nameAvailable is false.'
+        description: 'The message describing why the Data Lake Store account name is not available, if nameAvailable is false.'
         readOnly: true
         type: string
       nameAvailable:
-        description: the Boolean value of true or false to indicate whether the Data Lake Store account name is available or not.
+        description: The Boolean value of true or false to indicate whether the Data Lake Store account name is available or not.
         readOnly: true
         type: boolean
       reason:
-        description: 'the reason why the Data Lake Store account name is not available, if nameAvailable is false.'
+        description: 'The reason why the Data Lake Store account name is not available, if nameAvailable is false.'
         readOnly: true
         type: string
   Operation:
-    description: An available operation for Data Lake Store
+    description: An available operation for Data Lake Store.
     properties:
       display:
         $ref: '#/definitions/OperationDisplay'
-        description: the display information for the operation.
+        description: The display information for the operation.
       name:
-        description: the name of the operation.
+        description: The name of the operation.
         readOnly: true
         type: string
       origin:
-        description: the intended executor of the operation.
+        description: The intended executor of the operation.
         enum:
           - user
           - system
@@ -1651,33 +1712,33 @@ definitions:
           modelAsString: true
           name: OperationOrigin
   OperationDisplay:
-    description: The display information for a particular operation
+    description: The display information for a particular operation.
     properties:
       description:
-        description: a friendly description of the operation.
+        description: A friendly description of the operation.
         readOnly: true
         type: string
       operation:
-        description: a friendly name of the operation.
+        description: A friendly name of the operation.
         readOnly: true
         type: string
       provider:
-        description: the Resource provider of the operation.
+        description: The resource provider of the operation.
         readOnly: true
         type: string
       resource:
-        description: the Resource type of the operation.
+        description: The resource type of the operation.
         readOnly: true
         type: string
   OperationListResult:
-    description: The list of available operations for Data Lake Store
+    description: The list of available operations for Data Lake Store.
     properties:
       nextLink:
-        description: the link (url) to the next page of results.
+        description: The link (url) to the next page of results.
         readOnly: true
         type: string
       value:
-        description: the results of the list operation.
+        description: The results of the list operation.
         items:
           $ref: '#/definitions/Operation'
         readOnly: true
@@ -1717,35 +1778,34 @@ definitions:
         type: string
       name:
         description: Resource name
+        readOnly: true
         type: string
       type:
         description: Resource type
         readOnly: true
         type: string
+    x-ms-azure-resource: true
   TrustedIdProvider:
     allOf:
       - $ref: '#/definitions/SubResource'
-    description: Data Lake Store Trusted Identity Provider information
+    description: Data Lake Store trusted identity provider information.
     properties:
       properties:
         $ref: '#/definitions/TrustedIdProviderProperties'
-        description: the properties of the trusted identity provider.
+        description: The trusted identity provider properties.
         x-ms-client-flatten: true
-    required:
-      - properties
   TrustedIdProviderProperties:
-    description: Data Lake Store trusted identity provider properties information
+    description: The trusted identity provider properties.
     properties:
       idProvider:
-        description: The URL of this trusted identity provider
+        description: The URL of this trusted identity provider.
+        readOnly: true
         type: string
-    required:
-      - idProvider
   UpdateDataLakeStoreAccountProperties:
     description: Data Lake Store account properties information to be updated.
     properties:
       defaultGroup:
-        description: the default owner group for all new folders and files created in the Data Lake Store account.
+        description: The default owner group for all new folders and files created in the Data Lake Store account.
         type: string
       encryptionConfig:
         $ref: '#/definitions/UpdateEncryptionConfig'
@@ -1759,8 +1819,13 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: FirewallAllowAzureIpsState
+      firewallRules:
+        description: The list of firewall rules associated with this Data Lake Store account.
+        items:
+          $ref: '#/definitions/UpdateFirewallRuleWithAccountParameters'
+        type: array
       firewallState:
-        description: 'The current state of the IP address firewall for this Data Lake store account. Disabling the firewall does not remove existing rules, they will just be ignored until the firewall is re-enabled.'
+        description: 'The current state of the IP address firewall for this Data Lake Store account. Disabling the firewall does not remove existing rules, they will just be ignored until the firewall is re-enabled.'
         enum:
           - Enabled
           - Disabled
@@ -1769,7 +1834,7 @@ definitions:
           modelAsString: false
           name: FirewallState
       newTier:
-        description: the commitment tier to use for next month.
+        description: The commitment tier to use for next month.
         enum:
           - Consumption
           - Commitment_1TB
@@ -1783,7 +1848,7 @@ definitions:
           modelAsString: false
           name: TierType
       trustedIdProviderState:
-        description: 'The current state of the trusted identity provider feature for this Data Lake store account. Disabling trusted identity provider functionality does not remove the providers, they will just be ignored until this feature is re-enabled.'
+        description: 'The current state of the trusted identity provider feature for this Data Lake Store account. Disabling trusted identity provider functionality does not remove the providers, they will just be ignored until this feature is re-enabled.'
         enum:
           - Enabled
           - Disabled
@@ -1791,6 +1856,11 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: TrustedIdProviderState
+      trustedIdProviders:
+        description: The list of trusted identity providers associated with this Data Lake Store account.
+        items:
+          $ref: '#/definitions/UpdateTrustedIdProviderWithAccountParameters'
+        type: array
   UpdateEncryptionConfig:
     description: The encryption configuration used to update a user managed Key Vault key.
     properties:
@@ -1798,21 +1868,33 @@ definitions:
         $ref: '#/definitions/UpdateKeyVaultMetaInfo'
         description: The updated Key Vault key to use in user managed key rotation.
   UpdateFirewallRuleParameters:
-    description: Data Lake Store firewall rule update parameters
+    description: The parameters used to update a firewall rule.
     properties:
       properties:
         $ref: '#/definitions/UpdateFirewallRuleProperties'
-        description: the properties of the firewall rule to update.
+        description: The firewall rule properties to use when updating a firewall rule.
         x-ms-client-flatten: true
   UpdateFirewallRuleProperties:
-    description: Data Lake Store firewall rule properties information
+    description: The firewall rule properties to use when updating a firewall rule.
     properties:
       endIpAddress:
-        description: the end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        description: The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
         type: string
       startIpAddress:
-        description: the start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
+        description: The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol.
         type: string
+  UpdateFirewallRuleWithAccountParameters:
+    description: The parameters used to update a firewall rule while updating a Data Lake Store account.
+    properties:
+      name:
+        description: The unique name of the firewall rule to update.
+        type: string
+      properties:
+        $ref: '#/definitions/UpdateFirewallRuleProperties'
+        description: The firewall rule properties to use when updating a firewall rule.
+        x-ms-client-flatten: true
+    required:
+      - name
   UpdateKeyVaultMetaInfo:
     description: The Key Vault update information used for user managed key rotation.
     properties:
@@ -1820,15 +1902,27 @@ definitions:
         description: The version of the user managed encryption key to update through a key rotation.
         type: string
   UpdateTrustedIdProviderParameters:
-    description: Data Lake Store Trusted Identity Provider update parameters
+    description: The parameters used to update a trusted identity provider.
     properties:
       properties:
         $ref: '#/definitions/UpdateTrustedIdProviderProperties'
-        description: the properties of the trusted identity provider to update.
+        description: The trusted identity provider properties to use when updating a trusted identity provider.
         x-ms-client-flatten: true
   UpdateTrustedIdProviderProperties:
-    description: Data Lake Store trusted identity provider property update information
+    description: The trusted identity provider properties to use when updating a trusted identity provider.
     properties:
       idProvider:
-        description: The URL of this trusted identity provider
+        description: The URL of this trusted identity provider.
         type: string
+  UpdateTrustedIdProviderWithAccountParameters:
+    description: The parameters used to update a trusted identity provider while updating a Data Lake Store account.
+    properties:
+      name:
+        description: The unique name of the trusted identity provider to update.
+        type: string
+      properties:
+        $ref: '#/definitions/UpdateTrustedIdProviderProperties'
+        description: The trusted identity provider properties to use when updating a trusted identity provider.
+        x-ms-client-flatten: true
+    required:
+      - name

@@ -228,8 +228,9 @@ definitions:
     description: The properties of an orchestrator version profile.
     properties:
       orchestrators:
-        $ref: '#/definitions/OrchestratorVersionProfile'
-        description: List of orchstrator version profiles.
+        description: List of orchestrator version profiles.
+        items:
+          $ref: '#/definitions/OrchestratorVersionProfile'
         type: array
     required:
       - orchestrators

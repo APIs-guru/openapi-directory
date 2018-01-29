@@ -1093,7 +1093,7 @@ paths:
       tags:
         - PremiumMessagingRegions
       x-ms-examples:
-        RulesCreateOrUpdate:
+        PremiumMessagingRegionsList:
           parameters:
             api-version: '2017-04-01'
             subscriptionId: 5f750a97-50d9-4e36-8081-c9ee4c0210d4
@@ -1102,204 +1102,154 @@ paths:
               body:
                 value:
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/East US
-                    location: ''
                     name: East US
                     properties:
                       code: East US
                       fullName: East US
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/East US 2
-                    location: ''
                     name: East US 2
                     properties:
                       code: East US 2
                       fullName: East US 2
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/West India
-                    location: ''
                     name: West India
                     properties:
                       code: West India
                       fullName: West India
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/West US
-                    location: ''
                     name: West US
                     properties:
                       code: West US
                       fullName: West US
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/North Central US
-                    location: ''
                     name: North Central US
                     properties:
                       code: North Central US
                       fullName: North Central US
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/UK West
-                    location: ''
                     name: UK West
                     properties:
                       code: UK West
                       fullName: UK West
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/West Central US
-                    location: ''
                     name: West Central US
                     properties:
                       code: West Central US
                       fullName: West Central US
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/Brazil South
-                    location: ''
                     name: Brazil South
                     properties:
                       code: Brazil South
                       fullName: Brazil South
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/Central US
-                    location: ''
                     name: Central US
                     properties:
                       code: Central US
                       fullName: Central US
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/South Central US
-                    location: ''
                     name: South Central US
                     properties:
                       code: South Central US
                       fullName: South Central US
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/West Europe
-                    location: ''
                     name: West Europe
                     properties:
                       code: West Europe
                       fullName: West Europe
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/North Europe
-                    location: ''
                     name: North Europe
                     properties:
                       code: North Europe
                       fullName: North Europe
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/East Asia
-                    location: ''
                     name: East Asia
                     properties:
                       code: East Asia
                       fullName: East Asia
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/South India
-                    location: ''
                     name: South India
                     properties:
                       code: South India
                       fullName: South India
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/UK North
-                    location: ''
                     name: UK North
                     properties:
                       code: UK North
                       fullName: UK North
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/Australia Southeast
-                    location: ''
                     name: Australia Southeast
                     properties:
                       code: Australia Southeast
                       fullName: Australia Southeast
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/Southeast Asia
-                    location: ''
                     name: Southeast Asia
                     properties:
                       code: Southeast Asia
                       fullName: Southeast Asia
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/Japan West
-                    location: ''
                     name: Japan West
                     properties:
                       code: Japan West
                       fullName: Japan West
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/Japan East
-                    location: ''
                     name: Japan East
                     properties:
                       code: Japan East
                       fullName: Japan East
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/UK South
-                    location: ''
                     name: UK South
                     properties:
                       code: UK South
                       fullName: UK South
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/UK South 2
-                    location: ''
                     name: UK South 2
                     properties:
                       code: UK South 2
                       fullName: UK South 2
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/Central India
-                    location: ''
                     name: Central India
                     properties:
                       code: Central India
                       fullName: Central India
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/Canada East
-                    location: ''
                     name: Canada East
                     properties:
                       code: Canada East
                       fullName: Canada East
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/Canada Central
-                    location: ''
                     name: Canada Central
                     properties:
                       code: Canada Central
                       fullName: Canada Central
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/premiumMessagingRegions/Australia East
-                    location: ''
                     name: Australia East
                     properties:
                       code: Australia East
                       fullName: Australia East
-                    tags: ''
                     type: Microsoft.ServiceBus/PremiumMessagingRegions
       x-ms-pageable:
         nextLinkName: nextLink
@@ -1323,7 +1273,7 @@ paths:
       tags:
         - Regions
       x-ms-examples:
-        RulesCreateOrUpdate:
+        RegionsListBySku:
           parameters:
             api-version: '2017-04-01'
             sku: Basic
@@ -1333,244 +1283,184 @@ paths:
               body:
                 value:
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/CentralUS
-                    location: ''
                     name: Central US
                     properties:
                       code: Central US
                       fullName: Central US
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/EastUS
-                    location: ''
                     name: East US
                     properties:
                       code: East US
                       fullName: East US
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/EastUS2
-                    location: ''
                     name: East US 2
                     properties:
                       code: East US 2
                       fullName: East US 2
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/NorthCentralUS
-                    location: ''
                     name: North Central US
                     properties:
                       code: North Central US
                       fullName: North Central US
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/SouthCentralUS
-                    location: ''
                     name: South Central US
                     properties:
                       code: South Central US
                       fullName: South Central US
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/WestUS
-                    location: ''
                     name: West US
                     properties:
                       code: West US
                       fullName: West US
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/WestUS2
-                    location: ''
                     name: West US 2
                     properties:
                       code: West US 2
                       fullName: West US 2
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/WestCentralUS
-                    location: ''
                     name: West Central US
                     properties:
                       code: West Central US
                       fullName: West Central US
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/NorthEurope
-                    location: ''
                     name: North Europe
                     properties:
                       code: North Europe
                       fullName: North Europe
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/WestEurope
-                    location: ''
                     name: West Europe
                     properties:
                       code: West Europe
                       fullName: West Europe
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/EastAsia
-                    location: ''
                     name: East Asia
                     properties:
                       code: East Asia
                       fullName: East Asia
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/SoutheastAsia
-                    location: ''
                     name: Southeast Asia
                     properties:
                       code: Southeast Asia
                       fullName: Southeast Asia
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/BrazilSouth
-                    location: ''
                     name: Brazil South
                     properties:
                       code: Brazil South
                       fullName: Brazil South
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/JapanEast
-                    location: ''
                     name: Japan East
                     properties:
                       code: Japan East
                       fullName: Japan East
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/JapanWest
-                    location: ''
                     name: Japan West
                     properties:
                       code: Japan West
                       fullName: Japan West
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/CentralIndia
-                    location: ''
                     name: Central India
                     properties:
                       code: Central India
                       fullName: Central India
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/SouthIndia
-                    location: ''
                     name: South India
                     properties:
                       code: South India
                       fullName: South India
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/WestIndia
-                    location: ''
                     name: West India
                     properties:
                       code: West India
                       fullName: West India
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/UKSouth2
-                    location: ''
                     name: UK South 2
                     properties:
                       code: UK South 2
                       fullName: UK South 2
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/UKNorth
-                    location: ''
                     name: UK North
                     properties:
                       code: UK North
                       fullName: UK North
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/CanadaCentral
-                    location: ''
                     name: Canada Central
                     properties:
                       code: Canada Central
                       fullName: Canada Central
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/CanadaEast
-                    location: ''
                     name: Canada East
                     properties:
                       code: Canada East
                       fullName: Canada East
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/AustraliaEast
-                    location: ''
                     name: Australia East
                     properties:
                       code: Australia East
                       fullName: Australia East
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/AustraliaSoutheast
-                    location: ''
                     name: Australia Southeast
                     properties:
                       code: Australia Southeast
                       fullName: Australia Southeast
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/UKSouth
-                    location: ''
                     name: UK South
                     properties:
                       code: UK South
                       fullName: UK South
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/UKWest
-                    location: ''
                     name: UK West
                     properties:
                       code: UK West
                       fullName: UK West
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/EASTUS2EUAP
-                    location: ''
                     name: EAST US 2 EUAP
                     properties:
                       code: EAST US 2 EUAP
                       fullName: EAST US 2 EUAP
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/CentralUSEUAP
-                    location: ''
                     name: Central US EUAP
                     properties:
                       code: Central US EUAP
                       fullName: Central US EUAP
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/KoreaCentral
-                    location: ''
                     name: Korea Central
                     properties:
                       code: Korea Central
                       fullName: Korea Central
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
                   - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/providers/Microsoft.ServiceBus/sku/Basic/regions/KoreaSouth
-                    location: ''
                     name: Korea South
                     properties:
                       code: Korea South
                       fullName: Korea South
-                    tags: ''
                     type: Microsoft.ServiceBus/Sku/Regions
       x-ms-pageable:
         nextLinkName: nextLink
@@ -3569,28 +3459,38 @@ paths:
         SubscriptionListByTopic:
           parameters:
             api-version: '2017-04-01'
-            namespaceName: sdk-Namespace-5882
-            resourceGroupName: ArunMonocle
-            subscriptionId: 5f750a97-50d9-4e36-8081-c9ee4c0210d4
-            topicName: sdk-Topics-1804
+            namespaceName: sdk-Namespace-1349
+            resourceGroupName: ResourceGroup
+            subscriptionId: '5{Subscriptionid}'
+            topicName: sdk-Topics-8740
           responses:
             '200':
               body:
                 value:
-                  - id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/ArunMonocle/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-5882/topics/sdk-Topics-1804/subscriptions/sdk-Subscriptions-3670
-                    name: sdk-Subscriptions-3670
+                  - id: /subscriptions/Subscriptionid/resourceGroups/ResourceGroup/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-1349/topics/sdk-Topics-8740/subscriptions/sdk-Subscriptions-2178
+                    name: sdk-Subscriptions-2178
                     properties:
-                      accessedAt: '2017-05-26T21:36:57.2205967Z'
+                      accessedAt: '2018-01-04T18:02:20.5992764Z'
                       autoDeleteOnIdle: P10675199DT2H48M5.4775807S
-                      createdAt: '2017-05-26T21:36:54.8364609Z'
+                      countDetails:
+                        activeMessageCount: 0
+                        deadLetterMessageCount: 0
+                        scheduledMessageCount: 0
+                        transferDeadLetterMessageCount: 0
+                        transferMessageCount: 0
+                      createdAt: '2018-01-04T18:02:20.5992764Z'
+                      deadLetteringOnFilterEvaluationExceptions: true
+                      deadLetteringOnMessageExpiration: true
                       defaultMessageTimeToLive: P10675199DT2H48M5.4775807S
                       enableBatchedOperations: true
+                      forwardDeadLetteredMessagesTo: sdk-Topics-3065
+                      forwardTo: sdk-Topics-3065
                       lockDuration: PT1M
                       maxDeliveryCount: 10
                       messageCount: 0
                       requiresSession: false
                       status: Active
-                      updatedAt: '2017-05-26T21:36:57.2205967Z'
+                      updatedAt: '2018-01-04T18:02:20.5992764Z'
                     type: Microsoft.ServiceBus/Namespaces/Topics/Subscriptions
       x-ms-pageable:
         nextLinkName: nextLink
@@ -3623,8 +3523,8 @@ paths:
           parameters:
             api-version: '2017-04-01'
             namespaceName: sdk-Namespace-5882
-            resourceGroupName: ArunMonocle
-            subscriptionId: 5f750a97-50d9-4e36-8081-c9ee4c0210d4
+            resourceGroupName: ResourceGroup
+            subscriptionId: subscriptionId
             subscriptionName: sdk-Subscriptions-3670
             topicName: sdk-Topics-1804
           responses:
@@ -3657,28 +3557,38 @@ paths:
         SubscriptionGet:
           parameters:
             api-version: '2017-04-01'
-            namespaceName: sdk-Namespace-5882
-            resourceGroupName: ArunMonocle
-            subscriptionId: 5f750a97-50d9-4e36-8081-c9ee4c0210d4
-            subscriptionName: sdk-Subscriptions-3670
-            topicName: sdk-Topics-1804
+            namespaceName: sdk-Namespace-1349
+            resourceGroupName: ResourceGroup
+            subscriptionId: Subscriptionid
+            subscriptionName: sdk-Subscriptions-2178
+            topicName: sdk-Topics-8740
           responses:
             '200':
               body:
-                id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/ArunMonocle/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-5882/topics/sdk-Topics-1804/subscriptions/sdk-Subscriptions-3670
-                name: sdk-Subscriptions-3670
+                id: /subscriptions/Subscriptionid/resourceGroups/ResourceGroup/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-1349/topics/sdk-Topics-8740/subscriptions/sdk-Subscriptions-2178
+                name: sdk-Subscriptions-2178
                 properties:
-                  accessedAt: '2017-05-26T21:36:54.9933256Z'
+                  accessedAt: '2018-01-04T18:02:20.5992764Z'
                   autoDeleteOnIdle: P10675199DT2H48M5.4775807S
-                  createdAt: '2017-05-26T21:36:54.9933256Z'
+                  countDetails:
+                    activeMessageCount: 0
+                    deadLetterMessageCount: 0
+                    scheduledMessageCount: 0
+                    transferDeadLetterMessageCount: 0
+                    transferMessageCount: 0
+                  createdAt: '2018-01-04T18:02:20.5992764Z'
+                  deadLetteringOnFilterEvaluationExceptions: true
+                  deadLetteringOnMessageExpiration: true
                   defaultMessageTimeToLive: P10675199DT2H48M5.4775807S
                   enableBatchedOperations: true
+                  forwardDeadLetteredMessagesTo: sdk-Topics-3065
+                  forwardTo: sdk-Topics-3065
                   lockDuration: PT1M
                   maxDeliveryCount: 10
                   messageCount: 0
                   requiresSession: false
                   status: Active
-                  updatedAt: '2017-05-26T21:36:54.9933256Z'
+                  updatedAt: '2018-01-04T18:02:20.5992764Z'
                 type: Microsoft.ServiceBus/Namespaces/Topics/Subscriptions
     put:
       description: Creates a topic subscription.
@@ -3713,31 +3623,41 @@ paths:
         SubscriptionCreate:
           parameters:
             api-version: '2017-04-01'
-            namespaceName: sdk-Namespace-5882
+            namespaceName: sdk-Namespace-1349
             parameters:
               properties:
                 enableBatchedOperations: true
-            resourceGroupName: ArunMonocle
-            subscriptionId: 5f750a97-50d9-4e36-8081-c9ee4c0210d4
-            subscriptionName: sdk-Subscriptions-3670
-            topicName: sdk-Topics-1804
+            resourceGroupName: ResourceGroup
+            subscriptionId: Subscriptionid
+            subscriptionName: sdk-Subscriptions-2178
+            topicName: sdk-Topics-8740
           responses:
             '200':
               body:
-                id: /subscriptions/5f750a97-50d9-4e36-8081-c9ee4c0210d4/resourceGroups/ArunMonocle/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-5882/topics/sdk-Topics-1804/subscriptions/sdk-Subscriptions-3670
-                name: sdk-Subscriptions-3670
+                id: /subscriptions/Subscriptionid/resourceGroups/ResourceGroup/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-1349/topics/sdk-Topics-8740/subscriptions/sdk-Subscriptions-2178
+                name: sdk-Subscriptions-2178
                 properties:
-                  accessedAt: '2017-05-26T21:36:54.9933256Z'
+                  accessedAt: '2018-01-04T18:02:20.5992764Z'
                   autoDeleteOnIdle: P10675199DT2H48M5.4775807S
-                  createdAt: '2017-05-26T21:36:54.9933256Z'
+                  countDetails:
+                    activeMessageCount: 0
+                    deadLetterMessageCount: 0
+                    scheduledMessageCount: 0
+                    transferDeadLetterMessageCount: 0
+                    transferMessageCount: 0
+                  createdAt: '2018-01-04T18:02:20.5992764Z'
+                  deadLetteringOnFilterEvaluationExceptions: true
+                  deadLetteringOnMessageExpiration: true
                   defaultMessageTimeToLive: P10675199DT2H48M5.4775807S
                   enableBatchedOperations: true
+                  forwardDeadLetteredMessagesTo: sdk-Topics-3065
+                  forwardTo: sdk-Topics-3065
                   lockDuration: PT1M
                   maxDeliveryCount: 10
                   messageCount: 0
                   requiresSession: false
                   status: Active
-                  updatedAt: '2017-05-26T21:36:54.9933256Z'
+                  updatedAt: '2018-01-04T18:02:20.5992764Z'
                 type: Microsoft.ServiceBus/Namespaces/Topics/Subscriptions
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/subscriptions/{subscriptionName}/rules':
     get:
@@ -4683,6 +4603,9 @@ definitions:
         format: date-time
         readOnly: true
         type: string
+      deadLetteringOnFilterEvaluationExceptions:
+        description: Value that indicates whether a subscription has dead letter support on filter evaluation exceptions.
+        type: boolean
       deadLetteringOnMessageExpiration:
         description: Value that indicates whether a subscription has dead letter support when a message expires.
         type: boolean
