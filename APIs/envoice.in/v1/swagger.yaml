@@ -1,0 +1,2053 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.envoice.in
+info:
+  contact:
+    x-twitter: envoicein
+  description: "\r\n[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/78ab8c4ce8421e7e0b43)\r\n<span style='margin-left: 0.5em;'>or</span>\r\n<a href='https://documenter.getpostman.com/view/3559821/7TMBCPS' class='openapi-button' _ngcontent-c6>View Postman docs</a>\r\n\r\n# Tutorial for running the API in postman\r\n\r\nFirst click on \"Run in Postman\" button\r\n![postman - tutorial - 1](/Assets/images/api/postman-tutorial/postman-tutorial-1.png)\r\n\r\nA new page will open.\r\nClick on \"Postman for windows\" to run postman as a desktop app.\r\nMake sure you have already [installed](https://www.getpostman.com/docs/postman/launching_postman/installation_and_updates) Postman.\r\n![postman - tutorial - 2](/Assets/images/api/postman-tutorial/postman-tutorial-2.png)\r\n\r\nIn chrome an alert might show up to set a default app for opening postman links.\r\nClick on \"Open Postman\".\r\n![postman - tutorial - 3](/Assets/images/api/postman-tutorial/postman-tutorial-3.png)\r\n\r\nThe OpenAPI specification will be imported in Postman as a new collection named \"Envoice api\"\r\n![postman - tutorial - 4](/Assets/images/api/postman-tutorial/postman-tutorial-4.png)\r\n\r\nWhen testing be sure to check and modify the environment variables to suit your api key and secret.\r\nThe domain is set to envoice's endpoint so you don't really need to change that.\r\n<sub>\\*Eye button in top right corner </sub>\r\n![postman - tutorial - 5](/Assets/images/api/postman-tutorial/postman-tutorial-5.png)\r\n![postman - tutorial - 6](/Assets/images/api/postman-tutorial/postman-tutorial-6.png)\r\n\r\nYou don't need to change the values of the header parameters, because they will be replaced automatically when you send a request with real values from the environment configured in the previous step.\r\n![postman - tutorial - 7](/Assets/images/api/postman-tutorial/postman-tutorial-7.png)\r\n\r\nModify the example data to suit your needs and send a request.\r\n![postman - tutorial - 8](/Assets/images/api/postman-tutorial/postman-tutorial-8.png)\r\n            "
+  title: API v1.0.0
+  version: v1
+  x-apisguru-categories:
+    - financial
+  x-logo:
+    url: 'https://twitter.com/envoicein/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://www.envoice.in/docs/api/v1/specification'
+      version: '2.0'
+  x-providerName: envoice.in
+securityDefinitions:
+  x-auth-key:
+    description: 'Your account API key. Can be retrieved from your [account settings](/account/settings#api-tab).'
+    in: header
+    name: x-auth-key
+    type: apiKey
+  x-auth-secret:
+    description: 'Your account API secret. Can be retrieved from your [account settings](/account/settings#api-tab). Keep it hidden.'
+    in: header
+    name: x-auth-secret
+    type: apiKey
+paths:
+  /api/client/all:
+    get:
+      consumes: []
+      operationId: ClientApi_All
+      parameters:
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Client'
+            type: array
+      summary: Return all clients for the account
+      tags:
+        - Client
+  /api/client/candelete:
+    get:
+      consumes: []
+      operationId: ClientApi_CanDelete
+      parameters:
+        - format: int32
+          in: query
+          name: id
+          required: true
+          type: integer
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: boolean
+      summary: Check if the provided client can be deleted
+      tags:
+        - Client
+  /api/client/delete:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: ClientApi_Delete
+      parameters:
+        - in: body
+          name: deleteModel
+          required: true
+          schema:
+            $ref: '#/definitions/ClientDeleteModel'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: int32
+            type: integer
+      summary: Delete an existing client
+      tags:
+        - Client
+  /api/client/details:
+    get:
+      consumes: []
+      operationId: ClientApi_Details
+      parameters:
+        - format: int32
+          in: query
+          name: id
+          required: true
+          type: integer
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Client'
+      summary: Return client details. Activities and invoices included.
+      tags:
+        - Client
+  /api/client/new:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: ClientApi_New
+      parameters:
+        - in: body
+          name: client
+          required: true
+          schema:
+            $ref: '#/definitions/Client'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: int32
+            type: integer
+      summary: Create a client
+      tags:
+        - Client
+  /api/client/update:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: ClientApi_Update
+      parameters:
+        - in: body
+          name: client
+          required: true
+          schema:
+            $ref: '#/definitions/Client'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces: []
+      responses:
+        '204':
+          description: No Content
+      summary: Update an existing client
+      tags:
+        - Client
+  /api/general/countries:
+    get:
+      consumes: []
+      operationId: GeneralApi_Countries
+      parameters:
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Country'
+            type: array
+      summary: Return all of the platform supported countries
+      tags:
+        - General
+  /api/general/currencies:
+    get:
+      consumes: []
+      operationId: GeneralApi_Currencies
+      parameters:
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Currency'
+            type: array
+      summary: Return all of the platform supported currencies
+      tags:
+        - General
+  /api/general/uilanguages:
+    get:
+      consumes: []
+      operationId: GeneralApi_UiLanguages
+      parameters:
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/UiLanguage'
+            type: array
+      summary: Return all of the platform supported UI languages
+      tags:
+        - General
+  /api/invoice/all:
+    get:
+      consumes: []
+      operationId: InvoiceApi_All
+      parameters:
+        - format: int32
+          in: query
+          name: queryOptions.page
+          required: false
+          type: integer
+        - format: int32
+          in: query
+          name: queryOptions.pageSize
+          required: false
+          type: integer
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ListResult[Invoice]'
+      summary: Return all invoices for the account
+      tags:
+        - Invoice
+  /api/invoice/changestatus:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: InvoiceApi_ChangeStatus
+      parameters:
+        - in: body
+          name: statusModel
+          required: true
+          schema:
+            $ref: '#/definitions/ChangeStatusModel'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces: []
+      responses:
+        '204':
+          description: No Content
+      summary: Change invoice status
+      tags:
+        - Invoice
+  /api/invoice/delete:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: InvoiceApi_Delete
+      parameters:
+        - in: body
+          name: deleteModel
+          required: true
+          schema:
+            $ref: '#/definitions/InvoiceDeleteModel'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: int32
+            type: integer
+      summary: Delete an existing invoice
+      tags:
+        - Invoice
+  /api/invoice/details:
+    get:
+      consumes: []
+      operationId: InvoiceApi_Details
+      parameters:
+        - description: ''
+          format: int32
+          in: query
+          name: id
+          required: true
+          type: integer
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Invoice'
+      summary: Return invoice data
+      tags:
+        - Invoice
+  /api/invoice/new:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: InvoiceApi_New
+      parameters:
+        - in: body
+          name: invoice
+          required: true
+          schema:
+            $ref: '#/definitions/Invoice'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Invoice'
+      summary: Create an invoice
+      tags:
+        - Invoice
+  /api/invoice/sendtoaccountant:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: InvoiceApi_SendToAccountant
+      parameters:
+        - in: body
+          name: invoice
+          required: true
+          schema:
+            $ref: '#/definitions/Invoice'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: int32
+            type: integer
+      summary: Send the provided invoice to the accountant
+      tags:
+        - Invoice
+  /api/invoice/sendtoclient:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: InvoiceApi_SendToClient
+      parameters:
+        - in: body
+          name: deliveryOptions
+          required: true
+          schema:
+            $ref: '#/definitions/InvoiceDeliveryOptions'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: int32
+            type: integer
+      summary: Send the provided invoice to the client
+      tags:
+        - Invoice
+  /api/invoice/status:
+    get:
+      consumes: []
+      operationId: InvoiceApi_Status
+      parameters:
+        - format: int32
+          in: query
+          name: id
+          required: true
+          type: integer
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            enum:
+              - Draft
+              - Paid
+              - Unpaid
+              - Overdue
+            type: string
+      summary: Retrieve the status of the invoice
+      tags:
+        - Invoice
+  /api/invoice/update:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: InvoiceApi_Update
+      parameters:
+        - in: body
+          name: invoice
+          required: true
+          schema:
+            $ref: '#/definitions/Invoice'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Invoice'
+      summary: Update an existing invoice
+      tags:
+        - Invoice
+  /api/invoice/uri:
+    get:
+      consumes: []
+      operationId: InvoiceApi_Uri
+      parameters:
+        - description: ''
+          format: int32
+          in: query
+          name: id
+          required: true
+          type: integer
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/InvoiceAccessUri'
+      summary: Return the unique url to the client's invoice
+      tags:
+        - Invoice
+  /api/tax/all:
+    get:
+      consumes: []
+      operationId: TaxApi_All
+      parameters:
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Tax'
+            type: array
+      summary: Return all taxes for the account
+      tags:
+        - Tax
+  /api/tax/delete:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: TaxApi_Delete
+      parameters:
+        - in: body
+          name: deleteModel
+          required: true
+          schema:
+            $ref: '#/definitions/TaxDeleteModel'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: int32
+            type: integer
+      summary: Delete an existing tax
+      tags:
+        - Tax
+  /api/tax/new:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: TaxApi_New
+      parameters:
+        - in: body
+          name: tax
+          required: true
+          schema:
+            $ref: '#/definitions/Tax'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: int32
+            type: integer
+      summary: Create a tax
+      tags:
+        - Tax
+  /api/tax/update:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: TaxApi_Update
+      parameters:
+        - in: body
+          name: tax
+          required: true
+          schema:
+            $ref: '#/definitions/Tax'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces: []
+      responses:
+        '204':
+          description: No Content
+      summary: Update an existing tax
+      tags:
+        - Tax
+  /api/worktype/all:
+    get:
+      consumes: []
+      operationId: WorkTypeApi_All
+      parameters:
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/WorkType'
+            type: array
+      summary: Return all work types for the account
+      tags:
+        - WorkType
+  /api/worktype/delete:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: WorkTypeApi_Delete
+      parameters:
+        - in: body
+          name: deleteModel
+          required: true
+          schema:
+            $ref: '#/definitions/WorkTypeDeleteModel'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: int32
+            type: integer
+      summary: Delete an existing work type
+      tags:
+        - WorkType
+  /api/worktype/details:
+    get:
+      consumes: []
+      operationId: WorkTypeApi_Details
+      parameters:
+        - format: int32
+          in: query
+          name: workTypeId
+          required: true
+          type: integer
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WorkType'
+      summary: Returns details for work types by Id
+      tags:
+        - WorkType
+  /api/worktype/new:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: WorkTypeApi_New
+      parameters:
+        - in: body
+          name: workType
+          required: true
+          schema:
+            $ref: '#/definitions/WorkType'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            format: int32
+            type: integer
+      summary: Create a work type
+      tags:
+        - WorkType
+  /api/worktype/update:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - text/html
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: WorkTypeApi_Update
+      parameters:
+        - in: body
+          name: workType
+          required: true
+          schema:
+            $ref: '#/definitions/WorkType'
+        - default: '[authentication key]'
+          description: ''
+          in: header
+          name: x-auth-key
+          required: true
+          type: string
+        - default: '[authentication secret]'
+          description: ''
+          in: header
+          name: x-auth-secret
+          required: true
+          type: string
+      produces: []
+      responses:
+        '204':
+          description: No Content
+      summary: Update an existing work type
+      tags:
+        - WorkType
+definitions:
+  Activity:
+    properties:
+      Id:
+        format: int32
+        type: integer
+      InvoiceId:
+        format: int32
+        type: integer
+      InvoiceNumber:
+        type: string
+      Link:
+        type: string
+      Message:
+        type: string
+      RecommendedArticles:
+        items:
+          $ref: '#/definitions/Article'
+        type: array
+      Type:
+        enum:
+          - Created
+          - Draft
+          - Cloned
+          - SentViaEmail
+          - SentViaSms
+          - SentReminderViaEmail
+          - SentReminderViaSms
+          - Opened
+          - Viewed
+          - Rejected
+          - Updated
+          - Paid
+          - Unpaid
+          - Overdue
+          - NewManualPayment
+          - NewPaymentWithPaypal
+          - NewPaymentWithStripe
+          - NewPaymentWithPayoneer
+          - SentToAccountant
+          - DownloadedAsPdf
+          - MarkAsPaidByTheClient
+          - OpenedAttachment
+          - NewPaymentWithSquare
+          - NewPaymentWithKlikAndPay
+        type: string
+      UserId:
+        format: int32
+        type: integer
+    type: object
+  Article:
+    properties:
+      Activities:
+        items:
+          enum:
+            - Created
+            - Draft
+            - Cloned
+            - SentViaEmail
+            - SentViaSms
+            - SentReminderViaEmail
+            - SentReminderViaSms
+            - Opened
+            - Viewed
+            - Rejected
+            - Updated
+            - Paid
+            - Unpaid
+            - Overdue
+            - NewManualPayment
+            - NewPaymentWithPaypal
+            - NewPaymentWithStripe
+            - SentToAccountant
+            - DownloadedAsPdf
+            - TopPayingCustomers
+            - LessPayingCustomers
+            - TopDueCustomers
+            - TopWorkTypes
+            - OtherProfession
+            - DesignAndCreativeProfession
+            - SoftwareDevelopmentProfession
+            - ContentWritingAndMarketingProfession
+            - AskForFeedback
+            - NoInvoicesInPreviousMonth
+            - UpdatePortfolio
+            - ShareWorkExperience
+            - PlanTheNextWeek
+            - InvoiceStatus
+            - InvoiceActivities
+            - YourCollections
+            - LatestArticles
+            - ShareAnArticle
+            - InvoiceLogo
+            - InvoiceBasicInfo
+            - InvoiceFromInfo
+            - InvoiceToInfo
+            - InvoiceItemsTable
+            - InvoiceTerms
+            - InvoiceNotes
+            - InvoiceStepsBeforeSendingToClient
+            - OpenedAttachment
+            - Freelancers
+            - Consultants
+            - Smes
+            - Enterprise
+          type: string
+        type: array
+      Content:
+        type: string
+      Course:
+        $ref: '#/definitions/Course'
+      CourseId:
+        format: int32
+        type: integer
+      Documents:
+        items:
+          $ref: '#/definitions/ArticleDocument'
+        type: array
+      Id:
+        format: int32
+        type: integer
+      ImageUrl:
+        type: string
+      IsRecommended:
+        type: boolean
+      Level:
+        enum:
+          - Beginner
+          - Competent
+          - Skilled
+          - Specialist
+          - Brand
+        type: string
+      Link:
+        type: string
+      TimeToRead:
+        format: int32
+        type: integer
+      Title:
+        type: string
+      TotalHasHelpedYouVotes:
+        format: int32
+        type: integer
+      TotalHasHelpedYouVotesPercentage:
+        format: int32
+        readOnly: true
+        type: integer
+      TotalHasNotHelpedYouVotes:
+        format: int32
+        type: integer
+    type: object
+  ArticleDocument:
+    properties:
+      ArticleId:
+        format: int32
+        type: integer
+      Extension:
+        type: string
+      Id:
+        format: int32
+        type: integer
+      ImageUrl:
+        type: string
+      Title:
+        type: string
+      Url:
+        type: string
+    type: object
+  ChangeStatusModel:
+    properties:
+      Id:
+        description: Invoice Id
+        format: int32
+        type: integer
+      Status:
+        description: New status of the invoice
+        enum:
+          - Draft
+          - Paid
+          - Unpaid
+          - Overdue
+        type: string
+    type: object
+  Client:
+    properties:
+      Address:
+        type: string
+      CC:
+        type: string
+      ClientCountryId:
+        format: int32
+        type: integer
+      ClientCurrencyId:
+        format: int32
+        type: integer
+      Email:
+        type: string
+      Id:
+        format: int32
+        type: integer
+      Name:
+        type: string
+      PhoneNumber:
+        type: string
+      UiLanguageId:
+        format: int32
+        type: integer
+      UserId:
+        format: int32
+        type: integer
+      Vat:
+        type: string
+    type: object
+  ClientDeleteModel:
+    properties:
+      Id:
+        description: Id of client to be deleted
+        format: int32
+        type: integer
+    type: object
+  Country:
+    properties:
+      Id:
+        format: int32
+        type: integer
+      Name:
+        type: string
+      Value:
+        type: string
+    type: object
+  Course:
+    properties:
+      Articles:
+        items:
+          $ref: '#/definitions/Article'
+        type: array
+      CourseCategory:
+        $ref: '#/definitions/CourseCategory'
+      CourseCategoryId:
+        format: int32
+        type: integer
+      Description:
+        type: string
+      Id:
+        format: int32
+        type: integer
+      ImageUrl:
+        type: string
+      Level:
+        enum:
+          - Beginner
+          - Competent
+          - Skilled
+          - Specialist
+          - Brand
+        type: string
+      Name:
+        type: string
+      TimeToRead:
+        format: int32
+        type: integer
+    type: object
+  CourseCategory:
+    properties:
+      Courses:
+        items:
+          $ref: '#/definitions/Course'
+        type: array
+      IconClass:
+        type: string
+      Id:
+        format: int32
+        type: integer
+      Name:
+        type: string
+    type: object
+  Currency:
+    properties:
+      Id:
+        format: int32
+        type: integer
+      Name:
+        type: string
+      Symbol:
+        type: string
+      Value:
+        type: string
+    type: object
+  ExternalConnection:
+    properties:
+      AccessToken:
+        type: string
+      AccessTokenSecret:
+        type: string
+      Data:
+        type: string
+      ExpiresOn:
+        format: date-time
+        type: string
+      ExternalUserId:
+        type: string
+      ExternalUsername:
+        type: string
+      Id:
+        format: int32
+        type: integer
+      Provider:
+        type: string
+      UserId:
+        format: int32
+        type: integer
+    type: object
+  IErrorInfo:
+    properties:
+      Code:
+        readOnly: true
+        type: string
+      FaultMessage:
+        readOnly: true
+        type: string
+      Group:
+        readOnly: true
+        type: string
+      UserVisibleMessage:
+        readOnly: true
+        type: string
+    type: object
+  Invoice:
+    properties:
+      AccessToken:
+        type: string
+      Activities:
+        items:
+          $ref: '#/definitions/Activity'
+        type: array
+      Attachments:
+        items:
+          $ref: '#/definitions/InvoiceAttachment'
+        type: array
+      ClientId:
+        format: int32
+        type: integer
+      ClonedFromId:
+        format: int32
+        type: integer
+      CurrencyId:
+        format: int32
+        type: integer
+      DiscountAmount:
+        format: double
+        type: number
+      Duedate:
+        format: date-time
+        type: string
+      EnablePartialPayments:
+        type: boolean
+      Id:
+        format: int32
+        type: integer
+      IssuedOn:
+        format: date-time
+        type: string
+      Items:
+        items:
+          $ref: '#/definitions/InvoiceItem'
+        type: array
+      Notes:
+        type: string
+      Number:
+        type: string
+      PaymentGateways:
+        items:
+          $ref: '#/definitions/PaymentGatewayForInvoice'
+        type: array
+      Payments:
+        items:
+          $ref: '#/definitions/Payment'
+        type: array
+      PoNumber:
+        type: string
+      RecurringProfileId:
+        format: int32
+        type: integer
+      Status:
+        enum:
+          - Draft
+          - Paid
+          - Unpaid
+          - Overdue
+        type: string
+      SubTotalAmount:
+        format: double
+        type: number
+      TaxAmount:
+        format: double
+        type: number
+      Terms:
+        type: string
+      TotalAmount:
+        format: double
+        type: number
+      UserId:
+        format: int32
+        type: integer
+    type: object
+  InvoiceAccessUri:
+    properties:
+      Link:
+        type: string
+    type: object
+  InvoiceAttachment:
+    properties:
+      Id:
+        format: int32
+        type: integer
+      InvoiceId:
+        format: int32
+        type: integer
+      Link:
+        type: string
+      ObfuscatedFileName:
+        type: string
+      OriginalFileName:
+        type: string
+      Size:
+        format: int64
+        type: integer
+      Type:
+        enum:
+          - External
+          - Uploaded
+        type: string
+    type: object
+  InvoiceDeleteModel:
+    properties:
+      Id:
+        description: Id of invoice to be deleted
+        format: int32
+        type: integer
+    type: object
+  InvoiceDeliveryOptions:
+    properties:
+      Id:
+        format: int32
+        type: integer
+      InvoiceId:
+        format: int32
+        type: integer
+      Message:
+        type: string
+    type: object
+  InvoiceItem:
+    properties:
+      Cost:
+        format: double
+        type: number
+      Description:
+        type: string
+      DiscountAmount:
+        format: double
+        type: number
+      DiscountPercentage:
+        format: double
+        type: number
+      Id:
+        format: int32
+        type: integer
+      InvoiceId:
+        format: int32
+        type: integer
+      Quantity:
+        format: double
+        type: number
+      SubTotalAmount:
+        format: double
+        type: number
+      TaxAmount:
+        format: double
+        type: number
+      TaxId:
+        format: int32
+        type: integer
+      TaxPercentage:
+        format: double
+        type: number
+      TotalAmount:
+        format: double
+        type: number
+      WorkTypeId:
+        format: int32
+        type: integer
+    type: object
+  'ListResult[Invoice]':
+    properties:
+      Count:
+        format: int32
+        readOnly: true
+        type: integer
+      ErrorMessages:
+        items:
+          $ref: '#/definitions/IErrorInfo'
+        type: array
+      IsFaulted:
+        type: boolean
+      Result:
+        items:
+          $ref: '#/definitions/Invoice'
+        type: array
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  Payment:
+    properties:
+      Amount:
+        format: double
+        type: number
+      Id:
+        format: int32
+        type: integer
+      Invoice:
+        $ref: '#/definitions/Invoice'
+      InvoiceId:
+        format: int32
+        type: integer
+      IsAutomatic:
+        type: boolean
+      Note:
+        type: string
+      PaidOn:
+        format: date-time
+        type: string
+      ReferenceId:
+        type: string
+      Type:
+        enum:
+          - Other
+          - Paypal
+          - Stripe
+          - Payoneer
+          - Bank
+          - Cash
+          - Cheque
+          - Ach
+          - Sepa
+          - Square
+          - KlikAndPay
+        type: string
+    type: object
+  PaymentGateway:
+    properties:
+      CanDisconnect:
+        type: boolean
+      ClientImportUri:
+        type: string
+      ConnectionType:
+        enum:
+          - OAuth
+          - InputFields
+        type: string
+      ExternalConnectionId:
+        format: int32
+        type: integer
+      Fields:
+        items:
+          $ref: '#/definitions/PaymentGatewayInputField'
+        type: array
+      IsConnected:
+        type: boolean
+      IsEnabled:
+        type: boolean
+      MaximumAmount:
+        format: double
+        type: number
+      MinimumAmount:
+        format: double
+        type: number
+      Name:
+        type: string
+      OAuthUri:
+        type: string
+      RefundUri:
+        type: string
+      SupportedCurrencies:
+        items:
+          $ref: '#/definitions/Currency'
+        type: array
+      SupportsClientsImport:
+        type: boolean
+      SupportsRefund:
+        type: boolean
+    type: object
+  PaymentGatewayForInvoice:
+    properties:
+      Id:
+        format: int32
+        type: integer
+      Name:
+        type: string
+    type: object
+  PaymentGatewayInputField:
+    properties:
+      Name:
+        type: string
+      Value:
+        type: string
+    type: object
+  QueryOptions:
+    properties:
+      Page:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+    type: object
+  QueuedInvoice:
+    properties:
+      ClonedFromId:
+        format: int32
+        type: integer
+      Id:
+        format: int32
+        type: integer
+      Invoice:
+        $ref: '#/definitions/Invoice'
+      InvoiceId:
+        format: int32
+        type: integer
+      RecurringProfileId:
+        format: int32
+        type: integer
+      ScheduledFor:
+        format: date-time
+        type: string
+      Status:
+        enum:
+          - Pending
+          - Cancelled
+          - Failed
+          - Processed
+        type: string
+      UserId:
+        format: int32
+        type: integer
+    type: object
+  RecurringProfile:
+    properties:
+      DayOfMonth:
+        format: int32
+        type: integer
+      DayOfWeek:
+        enum:
+          - Sunday
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+        type: string
+      DueDateInDays:
+        format: int32
+        type: integer
+      EndOfRecurrance:
+        format: date-time
+        type: string
+      Id:
+        format: int32
+        type: integer
+      InvoiceId:
+        format: int32
+        type: integer
+      Month:
+        format: int32
+        type: integer
+      RecurrancePattern:
+        enum:
+          - Daily
+          - Weekly
+          - Monthly
+          - Yearly
+        type: string
+      RecurranceValue:
+        format: int32
+        type: integer
+      StartOfRecurrance:
+        format: date-time
+        type: string
+      Status:
+        enum:
+          - Pending
+          - Active
+          - Cancelled
+          - Finished
+        type: string
+      Title:
+        type: string
+    type: object
+  SubscriptionPlan:
+    properties:
+      CancellatedOn:
+        format: date-time
+        type: string
+      CurrencyCode:
+        type: string
+      ExternalIdentifier:
+        type: string
+      HasDuePayment:
+        type: boolean
+      HasDuePaymentSince:
+        format: date-time
+        type: string
+      Id:
+        format: int32
+        type: integer
+      Identifier:
+        type: string
+      IsActive:
+        type: boolean
+      LastPaymentOn:
+        format: date-time
+        type: string
+      MaxClients:
+        format: int32
+        type: integer
+      Name:
+        type: string
+      OrderIdentifier:
+        type: string
+      Price:
+        format: double
+        type: number
+      Recurrence:
+        enum:
+          - Monthly
+          - Yearly
+        type: string
+      SaleId:
+        format: int64
+        type: integer
+      Status:
+        enum:
+          - ActiveTrial
+          - ExpiredTrial
+          - Active
+          - Canceled
+        readOnly: true
+        type: string
+      TrialEndsOn:
+        format: date-time
+        type: string
+      TrialNumberOfDays:
+        format: int32
+        type: integer
+      TrialStartsOn:
+        format: date-time
+        type: string
+      UserId:
+        format: int32
+        type: integer
+      Version:
+        format: int32
+        type: integer
+    type: object
+  Tax:
+    properties:
+      Id:
+        format: int32
+        type: integer
+      Name:
+        type: string
+      Percentage:
+        format: double
+        type: number
+      UserId:
+        format: int32
+        type: integer
+    type: object
+  TaxDeleteModel:
+    properties:
+      Id:
+        description: Id of tax to be deleted
+        format: int32
+        type: integer
+    type: object
+  UiLanguage:
+    properties:
+      Id:
+        format: int32
+        type: integer
+      Name:
+        type: string
+      UiCulture:
+        type: string
+    type: object
+  User:
+    properties:
+      ActionNotificationsLastReadOn:
+        format: date-time
+        type: string
+      Email:
+        type: string
+      ExternalConnections:
+        items:
+          $ref: '#/definitions/ExternalConnection'
+        type: array
+      HasBeenOnboarded:
+        type: boolean
+      Id:
+        format: int32
+        type: integer
+      IsLocked:
+        type: boolean
+      IsVerified:
+        type: boolean
+      KnowledgeNotificationsLastReadOn:
+        format: date-time
+        type: string
+      LastSeenOn:
+        format: date-time
+        type: string
+      Name:
+        type: string
+      Password:
+        type: string
+      PasswordSalt:
+        type: string
+      ReferralPath:
+        type: string
+      ReferredUsers:
+        format: int32
+        type: integer
+      ReferrerKey:
+        type: string
+      Settings:
+        $ref: '#/definitions/UserSettings'
+      SubscriptionPlan:
+        $ref: '#/definitions/SubscriptionPlan'
+      Type:
+        enum:
+          - Anonymous
+          - Customer
+          - SystemAdministrator
+          - Collaborator
+        type: string
+      Username:
+        type: string
+      VerifiedOn:
+        format: date-time
+        type: string
+      YearsOfExperience:
+        enum:
+          - One
+          - OneToThree
+          - ThreeToFive
+          - SixPlus
+        type: string
+    type: object
+  UserSettings:
+    properties:
+      AccountantEmail:
+        type: string
+      Address:
+        type: string
+      ApiKey:
+        type: string
+      ApiSecret:
+        type: string
+      BackgroundImage:
+        type: string
+      Bank:
+        type: string
+      BankAccount:
+        type: string
+      Country:
+        $ref: '#/definitions/Country'
+      CountryId:
+        format: int32
+        type: integer
+      Currency:
+        $ref: '#/definitions/Currency'
+      CurrencyId:
+        format: int32
+        type: integer
+      CurrencySymbol:
+        type: string
+      EnableRecurringInvoicing:
+        type: boolean
+      HasInvoiceLogo:
+        type: boolean
+      Iban:
+        type: string
+      Id:
+        format: int32
+        type: integer
+      PhoneNumber:
+        type: string
+      Profession:
+        enum:
+          - Other
+          - DesignAndCreative
+          - SoftwareDevelopment
+          - ContentWritingAndMarketing
+          - Freelancers
+          - Consultants
+          - Smes
+          - Enterprise
+        type: string
+      ReceiveSmsNotifications:
+        type: boolean
+      ReferralProgram:
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+      SubscribeToProductEmails:
+        type: boolean
+      Swift:
+        type: string
+      Terms:
+        type: string
+      UserId:
+        format: int32
+        type: integer
+      VatNumber:
+        type: string
+      YearsOfExperience:
+        format: int32
+        type: integer
+    type: object
+  WorkType:
+    properties:
+      Id:
+        format: int32
+        type: integer
+      Title:
+        type: string
+      UserId:
+        format: int32
+        type: integer
+    type: object
+  WorkTypeDeleteModel:
+    properties:
+      Id:
+        description: Id of work type to be deleted
+        format: int32
+        type: integer
+    type: object
