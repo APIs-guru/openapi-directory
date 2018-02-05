@@ -983,6 +983,12 @@ paths:
           name: area
           required: false
           type: string
+        - default: true
+          description: Include deprecated fields
+          in: query
+          name: deprecated_fields
+          required: false
+          type: boolean
       responses:
         '200':
           description: Successful operation
@@ -2012,6 +2018,8 @@ definitions:
         items:
           type: string
         type: array
+      deprecated:
+        type: boolean
       group:
         type: string
       id:
@@ -2028,6 +2036,8 @@ definitions:
         items:
           type: string
         type: array
+      settings:
+        type: object
       subtype:
         type: string
       type:
@@ -2405,8 +2415,8 @@ definitions:
       - sitemaps
       - header_settings
     type: object
-  ProjectsSlugs:
-    description: Projects slugs
+  ProjectsPaths:
+    description: Projects paths
     properties:
       projects:
         items:

@@ -2072,15 +2072,9 @@ paths:
           required: false
           type: boolean
         - collectionFormat: multi
-          description: Filter images to those having product types from the selected list.
+          description: "Filter images to those from one of your product types. \r\n                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription. \r\n                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r\n                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r\n                    Product ID can be obtained from the GET /products response."
           in: query
           items:
-            enum:
-              - easyaccess
-              - editorialsubscription
-              - imagepack
-              - premiumaccess
-              - royaltyfreesubscription
             type: string
           name: product_types
           required: false
@@ -2415,15 +2409,9 @@ paths:
           required: false
           type: boolean
         - collectionFormat: multi
-          description: Filter images to those having product types from the selected list.
+          description: "Filter images to those from one of your product types. \r\n                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription. \r\n                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r\n                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r\n                    Product ID can be obtained from the GET /products response."
           in: query
           items:
-            enum:
-              - easyaccess
-              - editorialsubscription
-              - imagepack
-              - premiumaccess
-              - royaltyfreesubscription
             type: string
           name: product_types
           required: false
@@ -2536,14 +2524,9 @@ paths:
           required: false
           type: integer
         - collectionFormat: multi
-          description: Filter images to those having product types from the selected list.
+          description: "Filter images to those from one of your product types. \r\n                    Allowed values are easyaccess, imagepack, premiumaccess and royaltyfreesubscription. \r\n                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r\n                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r\n                    Product ID can be obtained from the GET /products response."
           in: query
           items:
-            enum:
-              - easyaccess
-              - imagepack
-              - premiumaccess
-              - royaltyfreesubscription
             type: string
           name: product_types
           required: false
@@ -2887,15 +2870,9 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: Filter images to those having product types from the selected list.
+          description: "Filter images to those from one of your product types. \r\n                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription. \r\n                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r\n                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r\n                    Product ID can be obtained from the GET /products response."
           in: query
           items:
-            enum:
-              - easyaccess
-              - editorialsubscription
-              - imagepack
-              - premiumaccess
-              - royaltyfreesubscription
             type: string
           name: product_types
           required: false
@@ -3148,15 +3125,9 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: Provides filtering by a list of product types.
+          description: "Filter images to those from one of your product types. \r\n                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription. \r\n                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r\n                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r\n                    Product ID can be obtained from the GET /products response."
           in: query
           items:
-            enum:
-              - easyaccess
-              - editorialsubscription
-              - imagepack
-              - premiumaccess
-              - royaltyfreesubscription
             type: string
           name: product_types
           required: false
@@ -3389,15 +3360,9 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: Allows filtering by a list of product types.
+          description: "Filter images to those from one of your product types. \r\n                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription. \r\n                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r\n                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r\n                    Product ID can be obtained from the GET /products response."
           in: query
           items:
-            enum:
-              - easyaccess
-              - editorialsubscription
-              - imagepack
-              - premiumaccess
-              - royaltyfreesubscription
             type: string
           name: product_types
           required: false
@@ -3632,15 +3597,9 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: Allows filtering by a list of product types.
+          description: "Filter images to those from one of your product types. \r\n                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription. \r\n                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r\n                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r\n                    Product ID can be obtained from the GET /products response."
           in: query
           items:
-            enum:
-              - easyaccess
-              - editorialsubscription
-              - imagepack
-              - premiumaccess
-              - royaltyfreesubscription
             type: string
           name: product_types
           required: false

@@ -2016,6 +2016,9 @@ definitions:
       notes:
         description: 'Additional notes (such as instructions from the domain administrator, legal notices) to display to the user. Can contain HTML. The maximum length is 2048 characters. Optional.'
         type: string
+      parameters:
+        $ref: '#/definitions/ConferenceParameters'
+        description: Additional properties related to a conference. An example would be a solution-specific setting for enabling video streaming.
       signature:
         description: |-
           The signature of the conference data.
@@ -2023,6 +2026,19 @@ definitions:
           Unset for a conference with a failed create request.
           Optional for a conference with a pending create request.
         type: string
+    type: object
+  ConferenceParameters:
+    properties:
+      addOnParameters:
+        $ref: '#/definitions/ConferenceParametersAddOnParameters'
+        description: Additional add-on specific data.
+    type: object
+  ConferenceParametersAddOnParameters:
+    properties:
+      parameters:
+        additionalProperties:
+          type: string
+        type: object
     type: object
   ConferenceProperties:
     properties:

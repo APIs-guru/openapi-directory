@@ -4371,6 +4371,20 @@ paths:
       summary: Enable vacation mode. All listings will be unavailable until vacation mode is turned off.
       tags:
         - shop
+  '/shops/{id}/storefronts':
+    get:
+      description: Get storefront details on a shop.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get storefront details on a shop.
+      tags:
+        - shops
   '/shops/{shop_id}/shipping_profiles':
     get:
       description: List of shipping profiles for your shop

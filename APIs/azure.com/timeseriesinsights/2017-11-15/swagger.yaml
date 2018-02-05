@@ -63,6 +63,13 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  ExpandParameter:
+    description: Setting $expand=status will include the status of the internal services of the environment in the Time Series Insights service.
+    in: query
+    name: $expand
+    required: false
+    type: string
+    x-ms-parameter-location: method
   ReferenceDataSetNameParameter:
     description: The name of the Time Series Insights reference data set associated with the specified environment.
     in: path
@@ -302,6 +309,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
         - $ref: '#/parameters/EnvironmentNameParameter'
+        - $ref: '#/parameters/ExpandParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
@@ -329,8 +337,11 @@ paths:
                 name: env1
                 properties:
                   creationTime: '2017-04-18T19:20:33.2288820Z'
+                  dataAccessFqdn: <dataAccessIdFqdn>
+                  dataAccessId: <dataAccessId>
                   dataRetentionTime: P31D
                   provisioningState: Succeeded
+                  storageLimitExceededBehavior: PurgeOldData
                 sku:
                   capacity: 1
                   name: S1
@@ -1311,6 +1322,7 @@ definitions:
     properties:
       error:
         $ref: '#/definitions/CloudErrorBody'
+        description: Describes a particular API error with an error code and a message.
     type: object
     x-ms-external: true
   CloudErrorBody:
@@ -1323,6 +1335,7 @@ definitions:
         description: Contains nested errors that are related to this error.
         items:
           $ref: '#/definitions/CloudErrorBody'
+          description: Describes a particular API error with an error code and a message.
         type: array
       message:
         description: A message that describes the error in detail and provides debugging information.
@@ -1338,6 +1351,9 @@ definitions:
       location:
         description: The location of the resource.
         type: string
+        x-ms-mutability:
+          - read
+          - create
       tags:
         additionalProperties:
           type: string
@@ -1355,6 +1371,7 @@ definitions:
         x-ms-client-flatten: true
       sku:
         $ref: '#/definitions/Sku'
+        description: 'The sku determines the capacity of the environment, the SLA (in queries-per-minute and total capacity), and the billing rate.'
     required:
       - sku
       - properties
@@ -1411,6 +1428,7 @@ definitions:
         x-ms-client-flatten: true
       sku:
         $ref: '#/definitions/Sku'
+        description: 'The sku determines the capacity of the environment, the SLA (in queries-per-minute and total capacity), and the billing rate.'
   EnvironmentResourceProperties:
     allOf:
       - $ref: '#/definitions/EnvironmentCreationProperties'
@@ -1426,8 +1444,30 @@ definitions:
         format: uuid
         readOnly: true
         type: string
+      status:
+        $ref: '#/definitions/EnvironmentStatus'
+        description: 'An object that represents the status of the environment, and its internal state in the Time Series Insights service.'
     required:
       - dataRetentionTime
+  EnvironmentStateDetails:
+    description: An object that contains the details about an environment's state.
+    properties:
+      code:
+        description: Contains the code that represents the reason of an environment being in a particular state. Can be used to programatically handle specific cases.
+        type: string
+      message:
+        description: A message that describes the state in detail.
+        type: string
+    readOnly: true
+    type: object
+  EnvironmentStatus:
+    description: 'An object that represents the status of the environment, and its internal state in the Time Series Insights service.'
+    properties:
+      ingress:
+        $ref: '#/definitions/IngressEnvironmentStatus'
+        description: An object that represents the status of ingress on an environment.
+    readOnly: true
+    type: object
   EnvironmentUpdateParameters:
     description: Parameters supplied to the Update Environment operation.
     properties:
@@ -1559,6 +1599,7 @@ definitions:
     properties:
       localTimestamp:
         $ref: '#/definitions/LocalTimestamp'
+        description: 'An object that represents the local timestamp property. It contains the format of local timestamp that needs to be used and the corresponding timezone offset information. If a value isn''t specified for localTimestamp, or if null, then the local timestamp will not be ingressed with the events.'
       timestampPropertyName:
         description: 'The event property that will be used as the event source''s timestamp. If a value isn''t specified for timestampPropertyName, or if null or empty-string is specified, the event creation time will be used.'
         type: string
@@ -1586,6 +1627,26 @@ definitions:
           type: string
         description: Key-value pairs of additional properties for the event source.
         type: object
+    type: object
+  IngressEnvironmentStatus:
+    description: An object that represents the status of ingress on an environment.
+    properties:
+      state:
+        description: 'This string represents the state of ingress operations on an environment. It can be "Disabled", "Ready", "Running", "Paused" or "Unknown"'
+        enum:
+          - Disabled
+          - Ready
+          - Running
+          - Paused
+          - Unknown
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: IngressState
+      stateDetails:
+        $ref: '#/definitions/EnvironmentStateDetails'
+        description: An object that contains the details about an environment's state.
+    readOnly: true
     type: object
   IoTHubEventSourceCommonProperties:
     allOf:
@@ -1722,6 +1783,20 @@ definitions:
           $ref: '#/definitions/Operation'
         readOnly: true
         type: array
+  ProvisioningState:
+    description: Provisioning state of the resource.
+    enum:
+      - Accepted
+      - Creating
+      - Updating
+      - Succeeded
+      - Failed
+      - Deleting
+    readOnly: true
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: ProvisioningState
   ReferenceDataSetCreateOrUpdateParameters:
     allOf:
       - $ref: '#/definitions/CreateOrUpdateTrackedResourceProperties'
@@ -1815,19 +1890,8 @@ definitions:
         readOnly: true
         type: string
       provisioningState:
+        $ref: '#/definitions/ProvisioningState'
         description: Provisioning state of the resource.
-        enum:
-          - Accepted
-          - Creating
-          - Updating
-          - Succeeded
-          - Failed
-          - Deleting
-        readOnly: true
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: ProvisioningState
   Sku:
     description: 'The sku determines the capacity of the environment, the SLA (in queries-per-minute and total capacity), and the billing rate.'
     properties:
@@ -1858,6 +1922,9 @@ definitions:
       location:
         description: Resource location
         type: string
+        x-ms-mutability:
+          - read
+          - create
       tags:
         additionalProperties:
           type: string

@@ -183,10 +183,10 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v3/{name}':
     delete:
-      description: Deletes a metric descriptor. Only user-created custom metrics can be deleted.
-      operationId: monitoring.projects.metricDescriptors.delete
+      description: Deletes an uptime check configuration. Note that this method will fail if the uptime check configuration is referenced by an alert policy or other dependent configs that would be rendered invalid by the deletion.
+      operationId: monitoring.projects.uptimeCheckConfigs.delete
       parameters:
-        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example of {metric_id} is: "custom.googleapis.com/my_test_metric".'
+        - description: 'The uptime check configuration to delete. The formatis projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID].'
           in: path
           name: name
           required: true
@@ -209,10 +209,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a single metric descriptor. This method does not require a Stackdriver account.
-      operationId: monitoring.projects.metricDescriptors.get
+      description: Gets a single uptime check configuration.
+      operationId: monitoring.projects.uptimeCheckConfigs.get
       parameters:
-        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example value of {metric_id} is "compute.googleapis.com/instance/disk/read_bytes_count".'
+        - description: 'The uptime check configuration to retrieve. The formatis projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID].'
           in: path
           name: name
           required: true
@@ -222,7 +222,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/MetricDescriptor'
+            $ref: '#/definitions/UptimeCheckConfig'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1250,7 +1250,7 @@ definitions:
       headers:
         additionalProperties:
           type: string
-        description: 'The list of headers to send as part of the uptime check request. If two headers have the same key and different values, they should be entered as a single header, with the value being a comma-separated list of all the desired values as described at https://www.w3.org/Protocols/rfc2616/rfc2616.txt (page 31). Entering two separate headers with the same key in a Create call will cause the first to be overwritten by the second.'
+        description: 'The list of headers to send as part of the uptime check request. If two headers have the same key and different values, they should be entered as a single header, with the value being a comma-separated list of all the desired values as described at https://www.w3.org/Protocols/rfc2616/rfc2616.txt (page 31). Entering two separate headers with the same key in a Create call will cause the first to be overwritten by the second. The maximum number of headers allowed is 100.'
         type: object
       maskHeaders:
         description: 'Boolean specifiying whether to encrypt the header information. Encryption should be specified for any headers related to authentication that you do not wish to be seen when retrieving the configuration. The server will be responsible for encrypting the headers. On Get/List calls, if mask_headers is set to True then the headers will be obscured with ******.'
@@ -1388,6 +1388,10 @@ definitions:
       nextPageToken:
         description: 'This field represents the pagination token to retrieve the next page of results. If the value is empty, it means no further results for the request. To retrieve the next page of results, the value of the next_page_token is passed to the subsequent List method call (in the request message''s page_token field).'
         type: string
+      totalSize:
+        description: 'The total number of uptime check configurations for the project, irrespective of any pagination.'
+        format: int32
+        type: integer
       uptimeCheckConfigs:
         description: The returned uptime check configurations.
         items:

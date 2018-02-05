@@ -141,6 +141,189 @@ paths:
                   StopSendNotificationWhenHitCap: true
                   StopSendNotificationWhenHitThreshold: false
                   WarningThreshold: 90
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/featurecapabilities':
+    get:
+      description: Returns feature capabilites of the application insights component.
+      operationId: ComponentFeatureCapabilities_Get
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceNameParameter'
+      responses:
+        '200':
+          description: An Application Insights component feature capabilities definition.
+          schema:
+            $ref: '#/definitions/ApplicationInsightsComponentFeatureCapabilities'
+      x-ms-examples:
+        ComponentCurrentBillingFeaturesGet:
+          parameters:
+            api-version: '2015-05-01'
+            resourceGroupName: my-resource-group
+            resourceName: my-component
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                AnalyticsIntegration: true
+                ApiAccessLevel: Premium
+                ApplicationMap: true
+                BurstThrottlePolicy: B2
+                DailyCap: 0.0323
+                DailyCapResetTime: 4
+                LiveStreamMetrics: true
+                MultipleStepWebTest: true
+                OpenSchema: true
+                PowerBIIntegration: true
+                ProactiveDetection: false
+                SupportExportData: true
+                ThrottleRate: 0
+                TrackingType: Basic
+                WorkItemIntegration: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/getavailablebillingfeatures':
+    get:
+      description: Returns all available features of the application insights component.
+      operationId: ComponentAvailableFeatures_Get
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceNameParameter'
+      responses:
+        '200':
+          description: An Application Insights component available features definition.
+          schema:
+            $ref: '#/definitions/ApplicationInsightsComponentAvailableFeatures'
+      x-ms-examples:
+        ComponentCurrentBillingFeaturesGet:
+          parameters:
+            api-version: '2015-05-01'
+            resourceGroupName: my-resource-group
+            resourceName: my-component
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                Result:
+                  - Capabilities:
+                      - Description: Number of application hosts
+                        Name: hostnumber
+                        Value: Unlimited
+                      - Description: Included data
+                        MeterId: acf26b15-ee92-440d-9973-9a72d77641aa
+                        MeterRateFrequency: GB/month
+                        Name: includeddata
+                        Value: '1'
+                      - Description: Additional data
+                        MeterId: b90f8b65-6c3e-43fc-9149-bdfc73b6a5b9
+                        MeterRateFrequency: /GB
+                        Name: additionaldata
+                      - Description: Data retention
+                        Name: dataretention
+                        Unit: days
+                        Value: '90'
+                      - Description: Response time monitoring and diagnostics
+                        Name: responsetimemonitoring
+                        Value: Enabled
+                      - Description: Failed requests monitoring and diagnostics
+                        Name: failedrequestsmonitoring
+                        Value: Enabled
+                      - Description: Browser performance
+                        Name: browserperformance
+                        Value: Enabled
+                      - Description: Usage analysis
+                        Name: usageanalysis
+                        Value: Enabled
+                      - Description: Server monitoring
+                        Name: servermonitoring
+                        Value: Enabled
+                      - Description: Alerting and notifications
+                        Name: alertingandnotifications
+                        Value: Enabled
+                      - Description: Daily notification of failed request rate spikes
+                        Name: notificationfailedrequestrate
+                        Value: Enabled
+                      - Description: Telemetry analyzer
+                        Name: telemetryanalyzer
+                        Value: Enabled
+                      - Description: Search and Analytics
+                        Name: searchandanalytics
+                        Value: Enabled
+                      - Description: Web tests (multi-step tests)
+                        MeterId: 0aa0e0e9-3f58-4dcf-9bb0-9db7ae1d5954
+                        MeterRateFrequency: /test (per month)
+                        Name: webtests
+                      - Description: Live stream metrics
+                        Name: livestreammetrics
+                        Value: Enabled
+                      - Description: Application map
+                        Name: applicationmap
+                        Value: Enabled
+                      - Description: Daily notification for many key metrics
+                        Name: dailynotificationforkeymetrics
+                        Value: Enabled
+                      - Description: Work item integration
+                        Name: workitemintegration
+                        Value: Enabled
+                      - Description: API access
+                        Name: apiaccess
+                        Value: Enabled
+                      - Description: Power BI integration
+                        Name: powerbiintegration
+                        Value: Enabled
+                      - Description: Bulk data import
+                        Name: bulkdataimport
+                        Value: Enabled
+                      - Description: Automatic data evaluation
+                        Name: automaticdataevaluation
+                        Value: Enabled
+                      - Description: Analytics integration with Azure dashboards
+                        Name: analyticsintegration
+                        Value: Enabled
+                      - Description: Continuous export
+                        MeterId: 90fa4d31-3ea2-4178-a894-ec4c76c712b2
+                        MeterRateFrequency: /GB
+                        Name: continuousexport
+                        Value: Enabled
+                      - Description: Default daily cap
+                        Name: defaultdailycap
+                        Unit: G
+                        Value: '100'
+                      - Description: Default maximum daily cap
+                        Name: defaultmaxdailycap
+                        Unit: G
+                        Value: '1000'
+                    FeatureName: Basic
+                    IsHidden: true
+                    IsMainFeature: true
+                    MeterId: c9a05f12-4910-4527-a9ec-1db4e4dba60e
+                    MeterRateFrequency: /month
+                    SupportedAddonFeatures: Application Insights Enterprise
+                    Title: Application Insights Basic
+                  - Capabilities:
+                      - Description: Enterprise Included data
+                        MeterId: acf26b15-ee92-440d-9973-9a72d77641aa
+                        MeterRateFrequency: GB/month
+                        Name: enterpriseincludeddata
+                        Value: '0.20'
+                      - Description: Enterprise Additional data
+                        MeterId: 3fedc88a-b68f-4936-bbf0-f290a254388c
+                        MeterRateFrequency: /GB
+                        Name: enterpriseadditionaldata
+                      - Description: Default daily cap
+                        Name: defaultdailycap
+                        Unit: G
+                        Value: '100'
+                      - Description: Default maximum daily cap
+                        Name: defaultmaxdailycap
+                        Unit: G
+                        Value: '1000'
+                    FeatureName: Application Insights Enterprise
+                    IsHidden: false
+                    IsMainFeature: false
+                    MeterId: 222f32c5-a319-4787-b934-5fb95105b2c8
+                    MeterRateFrequency: /node/month
+                    Title: Enterprise
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/quotastatus':
     get:
       description: Returns daily data volume cap (quota) status for an Application Insights component.
@@ -169,6 +352,17 @@ paths:
                 ExpirationTime: '2017-08-10T05:00:00'
                 ShouldBeThrottled: true
 definitions:
+  ApplicationInsightsComponentAvailableFeatures:
+    description: An Application Insights component available features.
+    properties:
+      Result:
+        description: A list of Application Insigths component feature.
+        items:
+          $ref: '#/definitions/ApplicationInsightsComponentFeature'
+          type: object
+        readOnly: true
+        type: array
+    type: object
   ApplicationInsightsComponentBillingFeatures:
     description: An Application Insights component billing features
     properties:
@@ -204,6 +398,145 @@ definitions:
       WarningThreshold:
         description: 'Reserved, not used for now.'
         type: integer
+    type: object
+  ApplicationInsightsComponentFeature:
+    description: An Application Insights component daily data volume cap status
+    properties:
+      Capabilities:
+        description: A list of Application Insigths component feature capability.
+        items:
+          $ref: '#/definitions/ApplicationInsightsComponentFeatureCapability'
+          type: object
+        readOnly: true
+        type: array
+      FeatureName:
+        description: The pricing feature name.
+        readOnly: true
+        type: string
+      IsHidden:
+        description: 'Reserved, not used now.'
+        readOnly: true
+        type: boolean
+      IsMainFeature:
+        description: Whether can apply addon feature on to it.
+        readOnly: true
+        type: boolean
+      MeterId:
+        description: The meter id used for the feature.
+        readOnly: true
+        type: string
+      MeterRateFrequency:
+        description: The meter meter rate for the feature's meter.
+        readOnly: true
+        type: string
+      ResouceId:
+        description: 'Reserved, not used now.'
+        readOnly: true
+        type: string
+      SupportedAddonFeatures:
+        description: The add on features on main feature.
+        readOnly: true
+        type: string
+      Title:
+        description: Desplay name of the feature.
+        readOnly: true
+        type: string
+    type: object
+  ApplicationInsightsComponentFeatureCapabilities:
+    description: An Application Insights component feature capabilities
+    properties:
+      AnalyticsIntegration:
+        description: 'Reserved, not used now.'
+        readOnly: true
+        type: boolean
+      ApiAccessLevel:
+        description: 'Reserved, not used now.'
+        readOnly: true
+        type: string
+      ApplicationMap:
+        description: 'Reserved, not used now.'
+        readOnly: true
+        type: boolean
+      BurstThrottlePolicy:
+        description: 'Reserved, not used now.'
+        readOnly: true
+        type: string
+      DailyCap:
+        description: Daily data volume cap in GB.
+        readOnly: true
+        type: number
+      DailyCapResetTime:
+        description: Daily data volume cap UTC reset hour.
+        readOnly: true
+        type: number
+      LiveStreamMetrics:
+        description: 'Reserved, not used now.'
+        readOnly: true
+        type: boolean
+      MetadataClass:
+        description: 'Reserved, not used now.'
+        readOnly: true
+        type: string
+      MultipleStepWebTest:
+        description: Whether allow to use multiple steps web test feature.
+        readOnly: true
+        type: boolean
+      OpenSchema:
+        description: 'Reserved, not used now.'
+        readOnly: true
+        type: boolean
+      PowerBIIntegration:
+        description: 'Reserved, not used now.'
+        readOnly: true
+        type: boolean
+      ProactiveDetection:
+        description: 'Reserved, not used now.'
+        readOnly: true
+        type: boolean
+      SupportExportData:
+        description: Whether allow to use continuous export feature.
+        readOnly: true
+        type: boolean
+      ThrottleRate:
+        description: 'Reserved, not used now.'
+        readOnly: true
+        type: number
+      TrackingType:
+        description: The applciation insights component used tracking type.
+        readOnly: true
+        type: string
+      WorkItemIntegration:
+        description: Whether allow to use work item integration feature.
+        readOnly: true
+        type: boolean
+    type: object
+  ApplicationInsightsComponentFeatureCapability:
+    description: An Application Insights component feature capability
+    properties:
+      Description:
+        description: The description of the capability.
+        readOnly: true
+        type: string
+      MeterId:
+        description: The meter used for the capability.
+        readOnly: true
+        type: string
+      MeterRateFrequency:
+        description: The meter rate of the meter.
+        readOnly: true
+        type: string
+      Name:
+        description: The name of the capability.
+        readOnly: true
+        type: string
+      Unit:
+        description: The unit of the capability.
+        readOnly: true
+        type: string
+      Value:
+        description: The vaule of the capability.
+        readOnly: true
+        type: string
     type: object
   ApplicationInsightsComponentQuotaStatus:
     description: An Application Insights component daily data volume cap status

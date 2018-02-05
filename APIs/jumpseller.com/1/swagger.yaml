@@ -1926,9 +1926,7 @@ paths:
         '200':
           description: OK
           schema:
-            items:
-              $ref: '#/definitions/ProductOptionValue'
-            type: array
+            $ref: '#/definitions/ProductOptionValue'
         '404':
           description: Product Not Found.
           schema:

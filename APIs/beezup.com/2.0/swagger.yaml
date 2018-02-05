@@ -5031,6 +5031,14 @@ paths:
     post:
       deprecated: false
       operationId: HarvestAll
+      parameters:
+        - description: The StoreId to filter by
+          format: guid
+          in: query
+          name: storeId
+          required: false
+          type: string
+          x-example: 04730364-9826-4ff3-92e4-51fccd02bf10
       responses:
         '202':
           description: Successfully sent harvest request to all marketplaces
@@ -5038,6 +5046,10 @@ paths:
             Retry-After:
               description: Indicates the duration in seconds to wait to be able to make this request again
               type: integer
+        '404':
+          description: Requested Store could not be found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Failed to send harvest request because allowed rate limits have been exceeded
           headers:
@@ -13547,8 +13559,6 @@ definitions:
       - clickCount
       - cost
       - orderCount
-      - roi
-      - margin
       - performanceIndicator
       - totalSales
       - soldProductCount
@@ -13634,8 +13644,6 @@ definitions:
       - clickCount
       - cost
       - orderCount
-      - roi
-      - margin
       - performanceIndicator
       - totalSales
       - soldProductCount
@@ -13891,8 +13899,6 @@ definitions:
       - clickCount
       - cost
       - orderCount
-      - roi
-      - margin
       - performanceIndicator
       - totalSales
       - soldProductCount

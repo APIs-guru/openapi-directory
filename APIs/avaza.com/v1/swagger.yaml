@@ -2277,6 +2277,12 @@ definitions:
     type: object
   ProjectMemberDetails:
     properties:
+      BudgetAmount:
+        format: double
+        type: number
+      CostAmount:
+        format: double
+        type: number
       Email:
         type: string
       Firstname:
@@ -2285,9 +2291,30 @@ definitions:
         type: string
       Lastname:
         type: string
+      RateAmount:
+        format: double
+        type: number
       UserIDFK:
         format: int32
         type: integer
+      canCommentOnTasks:
+        type: boolean
+      canCreateTasks:
+        type: boolean
+      canDeleteTasks:
+        type: boolean
+      canUpdateTasks:
+        type: boolean
+      isMemberDisabled:
+        type: boolean
+      isProjectManager:
+        type: boolean
+      isTimesheetAllowed:
+        type: boolean
+      isTimesheetApprovalRequired:
+        type: boolean
+      isTimesheetApprover:
+        type: boolean
     type: object
   ProjectSectionDetails:
     properties:

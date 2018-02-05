@@ -10741,6 +10741,10 @@ definitions:
           - pending
         readOnly: true
         type: string
+      stickyGatewayAccountId:
+        description: Default Gateway Account ID used for transactions
+        readOnly: true
+        type: string
       token:
         description: PaymentCardToken. Use without any other fields
         type: string
@@ -10760,34 +10764,6 @@ definitions:
         type: string
     required:
       - rel
-    type: object
-  PaymentCardMigrationRequest:
-    properties:
-      fromGatewayAccountId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: An ID of Gateway Account cards should be migrated from
-      paymentCardIds:
-        items:
-          allOf:
-            - $ref: '#/definitions/ResourceId'
-          description: An array of payment card IDs
-        minItems: 1
-        type: array
-      toGatewayAccountId:
-        allOf:
-          - $ref: '#/definitions/ResourceId'
-        description: An ID of Gateway Account cards should be migrated to
-    required:
-      - fromGatewayAccountId
-      - toGatewayAccountId
-      - paymentCardIds
-    type: object
-  PaymentCardMigrationResponse:
-    properties:
-      migratedCards:
-        description: Amount of cards that were successfully migrated
-        type: integer
     type: object
   PaymentInstrument:
     discriminator: method
@@ -12641,6 +12617,10 @@ definitions:
         readOnly: true
         type: boolean
       isRebill:
+        readOnly: true
+        type: boolean
+      isReconciled:
+        description: True if the transaction has been verified with gateway batch data
         readOnly: true
         type: boolean
       isRetry:

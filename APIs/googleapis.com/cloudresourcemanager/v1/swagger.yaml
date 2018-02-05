@@ -894,7 +894,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Clears a `Policy` from a resource.
-      operationId: cloudresourcemanager.folders.clearOrgPolicy
+      operationId: cloudresourcemanager.projects.clearOrgPolicy
       parameters:
         - in: body
           name: body
@@ -917,7 +917,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - folders
+        - projects
   '/v1/{resource}:getEffectiveOrgPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -938,7 +938,7 @@ paths:
         Gets the effective `Policy` on a resource. This is the result of merging
         `Policies` in the resource hierarchy. The returned `Policy` will not have
         an `etag`set because it is a computed `Policy` across multiple resources.
-      operationId: cloudresourcemanager.folders.getEffectiveOrgPolicy
+      operationId: cloudresourcemanager.projects.getEffectiveOrgPolicy
       parameters:
         - in: body
           name: body
@@ -965,7 +965,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - folders
+        - projects
   '/v1/{resource}:getIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1042,7 +1042,7 @@ paths:
         values including `POLICY_TYPE_NOT_SET` for the `policy_type oneof`. The
         `etag` value can be used with `SetOrgPolicy()` to create or update a
         `Policy` during read-modify-write.
-      operationId: cloudresourcemanager.folders.getOrgPolicy
+      operationId: cloudresourcemanager.projects.getOrgPolicy
       parameters:
         - in: body
           name: body
@@ -1069,7 +1069,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - folders
+        - projects
   '/v1/{resource}:listAvailableOrgPolicyConstraints':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1087,7 +1087,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Lists `Constraints` that could be applied on the specified resource.
-      operationId: cloudresourcemanager.folders.listAvailableOrgPolicyConstraints
+      operationId: cloudresourcemanager.projects.listAvailableOrgPolicyConstraints
       parameters:
         - in: body
           name: body
@@ -1114,7 +1114,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - folders
+        - projects
   '/v1/{resource}:listOrgPolicies':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1132,7 +1132,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Lists all the `Policies` set for a particular resource.
-      operationId: cloudresourcemanager.folders.listOrgPolicies
+      operationId: cloudresourcemanager.projects.listOrgPolicies
       parameters:
         - in: body
           name: body
@@ -1159,7 +1159,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - folders
+        - projects
   '/v1/{resource}:setIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1231,7 +1231,7 @@ paths:
 
         Not supplying an `etag` on the request `Policy` results in an unconditional
         write of the `Policy`.
-      operationId: cloudresourcemanager.folders.setOrgPolicy
+      operationId: cloudresourcemanager.projects.setOrgPolicy
       parameters:
         - in: body
           name: body
@@ -1254,7 +1254,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - folders
+        - projects
   '/v1/{resource}:testIamPermissions':
     parameters:
       - $ref: '#/parameters/$.xgafv'

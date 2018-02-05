@@ -3143,6 +3143,9 @@ definitions:
       runtimeApiVersion:
         description: 'The version of the API in the given runtime environment. Please see the app.yaml reference for valid values at https://cloud.google.com/appengine/docs/standard/<language>/config/appref'
         type: string
+      runtimeChannel:
+        description: The channel of the runtime to use. Only available for some runtimes. Defaults to the default channel.
+        type: string
       servingStatus:
         description: Current serving status of this version. Only the versions with a SERVING status create instances and can be billed.SERVING_STATUS_UNSPECIFIED is an invalid value. Defaults to SERVING.
         enum:

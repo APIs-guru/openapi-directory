@@ -374,6 +374,11 @@ definitions:
   Constraints:
     description: The constraints for this update.
     properties:
+      deviceLocation:
+        description: |-
+          A client's physical location, expressed as a ISO 31166-1 alpha-2
+          region code.
+        type: string
       language:
         description: |-
           Requests the lists for a specific language. Expects ISO 639 alpha-2

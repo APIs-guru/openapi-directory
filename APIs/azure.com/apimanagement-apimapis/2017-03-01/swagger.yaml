@@ -46,6 +46,22 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  ApiIdRevParameter:
+    description: API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
+    in: path
+    maxLength: 256
+    minLength: 1
+    name: apiId
+    pattern: '^[^*#&+:<>?]+$'
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  IfMatch:
+    description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+    in: header
+    name: If-Match
+    required: true
+    type: string
   OperationIdParameter:
     description: Operation identifier within an API. Must be unique in the current API Management service instance.
     in: path
@@ -127,9 +143,15 @@ paths:
           name: subscriptionId
           required: true
           type: string
+        - default: false
+          description: Include full ApiVersionSet resource in response
+          in: query
+          name: expandApiVersionSet
+          required: false
+          type: boolean
       responses:
         '200':
-          description: Paged Result reponse of Apis.
+          description: Paged Result response of Apis.
           schema:
             $ref: '#/definitions/ApiCollection'
         default:
@@ -220,7 +242,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ApiIdParameter'
+        - $ref: '#/parameters/ApiIdRevParameter'
         - description: ETag of the API Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -297,7 +319,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ApiIdParameter'
+        - $ref: '#/parameters/ApiIdRevParameter'
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -372,6 +394,83 @@ paths:
                     query: subscription-key
                   type: soap
                 type: Microsoft.ApiManagement/service/apis
+    head:
+      description: Gets the entity state (Etag) version of the API specified by its identifier.
+      operationId: Api_GetEntityTag
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/ApiIdParameter'
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Specified API entity exists and current entity state version is present in the ETag header.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - Apis
+      x-ms-examples:
+        ApiManagementHeadApi:
+          parameters:
+            api-version: '2017-03-01'
+            apiId: 57d1f7558aa04f15146d9d8a
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              headers:
+                etag: AAAAAAAAAAa=
     patch:
       description: Updates the specified API of the API Management service instance.
       operationId: Api_Update
@@ -391,7 +490,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ApiIdParameter'
+        - $ref: '#/parameters/ApiIdRevParameter'
         - description: API Update Contract parameters.
           in: body
           name: parameters
@@ -479,7 +578,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ApiIdParameter'
+        - $ref: '#/parameters/ApiIdRevParameter'
         - description: Create or update parameters.
           in: body
           name: parameters
@@ -779,7 +878,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ApiIdParameter'
+        - $ref: '#/parameters/ApiIdRevParameter'
         - description: |-
             | Field       | Supported operators    | Supported functions               |
             |-------------|------------------------|-----------------------------------|
@@ -922,7 +1021,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ApiIdParameter'
+        - $ref: '#/parameters/ApiIdRevParameter'
         - $ref: '#/parameters/OperationIdParameter'
         - description: ETag of the API Operation Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
@@ -1001,7 +1100,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ApiIdParameter'
+        - $ref: '#/parameters/ApiIdRevParameter'
         - $ref: '#/parameters/OperationIdParameter'
         - description: Version of the API to be used with the client request.
           in: query
@@ -1088,6 +1187,85 @@ paths:
                   templateParameters: []
                   urlTemplate: '/?soapAction=http://tempuri.org/IFazioService/CancelOrder'
                 type: Microsoft.ApiManagement/service/apis/operations
+    head:
+      description: Gets the entity state (Etag) version of the API operation specified by its identifier.
+      operationId: ApiOperation_GetEntityTag
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/ApiIdParameter'
+        - $ref: '#/parameters/OperationIdParameter'
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Specified API operation entity exists and current entity state version is present in the ETag header.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - Operations
+      x-ms-examples:
+        ApiManagementHeadApiOperation:
+          parameters:
+            api-version: '2017-03-01'
+            apiId: 57d2ef278aa04f0888cba3f3
+            operationId: 57d2ef278aa04f0ad01d6cdc
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              headers:
+                etag: AAAAAAAAAAa=
     patch:
       description: Updates the details of the operation in the API specified by its identifier.
       operationId: ApiOperation_Update
@@ -1107,7 +1285,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ApiIdParameter'
+        - $ref: '#/parameters/ApiIdRevParameter'
         - $ref: '#/parameters/OperationIdParameter'
         - description: API Operation Update parameters.
           in: body
@@ -1216,7 +1394,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ApiIdParameter'
+        - $ref: '#/parameters/ApiIdRevParameter'
         - $ref: '#/parameters/OperationIdParameter'
         - description: Create parameters.
           in: body
@@ -1376,7 +1554,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ApiIdParameter'
+        - $ref: '#/parameters/ApiIdRevParameter'
         - $ref: '#/parameters/OperationIdParameter'
         - description: Version of the API to be used with the client request.
           in: query
@@ -1585,7 +1763,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ApiIdParameter'
+        - $ref: '#/parameters/ApiIdRevParameter'
         - $ref: '#/parameters/OperationIdParameter'
         - description: The identifier of the Policy.
           enum:
@@ -1688,6 +1866,97 @@ paths:
                 properties:
                   policyContent: "<policies>\r\n  <inbound>\r\n    <base />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <base />\r\n    <set-header name=\"X-My-Sample\" exists-action=\"override\">\r\n      <value>This is a sample</value>\r\n      <!-- for multiple headers with the same name add additional value elements -->\r\n    </set-header>\r\n    <jsonp callback-parameter-name=\"ProcessResponse\" />\r\n  </outbound>\r\n</policies>"
                 type: Microsoft.ApiManagement/service/apis/operations/policies
+    head:
+      description: Gets the entity state (Etag) version of the API operation policy specified by its identifier.
+      operationId: ApiOperationPolicy_GetEntityTag
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/ApiIdParameter'
+        - $ref: '#/parameters/OperationIdParameter'
+        - description: The identifier of the Policy.
+          enum:
+            - policy
+          in: path
+          name: policyId
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: PolicyIdName
+          x-ms-parameter-location: method
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Specified API operation policy entity exists and current entity state version is present in the ETag header.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - ApiOperationPolicies
+      x-ms-examples:
+        ApiManagementHeadApiOperationPolicy:
+          parameters:
+            api-version: '2017-03-01'
+            apiId: 5600b539c53f5b0062040001
+            operationId: 5600b53ac53f5b0062080006
+            policyId: policy
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              headers:
+                etag: AAAAAAAAAAa=
     put:
       description: Creates or updates policy configuration for the API Operation level.
       operationId: ApiOperationPolicy_CreateOrUpdate
@@ -1707,7 +1976,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ApiIdParameter'
+        - $ref: '#/parameters/ApiIdRevParameter'
         - $ref: '#/parameters/OperationIdParameter'
         - description: The identifier of the Policy.
           enum:
@@ -2022,7 +2291,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ApiIdParameter'
+        - $ref: '#/parameters/ApiIdRevParameter'
         - description: The identifier of the Policy.
           enum:
             - policy
@@ -2111,7 +2380,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ApiIdParameter'
+        - $ref: '#/parameters/ApiIdRevParameter'
         - description: The identifier of the Policy.
           enum:
             - policy
@@ -2212,6 +2481,95 @@ paths:
                 properties:
                   policyContent: "<!--\r\n    IMPORTANT:\r\n    - Policy elements can appear only within the <inbound>, <outbound>, <backend> section elements.\r\n    - Only the <forward-request> policy element can appear within the <backend> section element.\r\n    - To apply a policy to the incoming request (before it is forwarded to the backend service), place a corresponding policy element within the <inbound> section element.\r\n    - To apply a policy to the outgoing response (before it is sent back to the caller), place a corresponding policy element within the <outbound> section element.\r\n    - To add a policy position the cursor at the desired insertion point and click on the round button associated with the policy.\r\n    - To remove a policy, delete the corresponding policy statement from the policy document.\r\n    - Position the <base> element within a section element to inherit all policies from the corresponding section element in the enclosing scope.\r\n    - Remove the <base> element to prevent inheriting policies from the corresponding section element in the enclosing scope.\r\n    - Policies are applied in the order of their appearance, from the top down.\r\n-->\r\n<policies>\r\n  <inbound>\r\n    <quota-by-key calls=\"5\" bandwidth=\"2\" renewal-period=\"&#x9;P3Y6M4DT12H30M5S\" counter-key=\"ba\" />\r\n    <base />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <log-to-eventhub logger-id=\"apimService1\" partition-key=\"@(context.Subscription.Id)\">\r\n@{\r\n\tRandom Random = new Random();\r\n\t\t\t\tconst string Chars = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz \";                \r\n                return string.Join(\",\", DateTime.UtcNow, new string(\r\n                    Enumerable.Repeat(Chars, Random.Next(2150400))\r\n                              .Select(s =&gt; s[Random.Next(s.Length)])\r\n                              .ToArray()));\r\n          }                           \r\n                        </log-to-eventhub>\r\n    <base />\r\n  </outbound>\r\n</policies>"
                 type: Microsoft.ApiManagement/service/apis/policies
+    head:
+      description: Gets the entity state (Etag) version of the API policy specified by its identifier.
+      operationId: ApiPolicy_GetEntityTag
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/ApiIdParameter'
+        - description: The identifier of the Policy.
+          enum:
+            - policy
+          in: path
+          name: policyId
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: PolicyIdName
+          x-ms-parameter-location: method
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Specified API Policy entity exists and current entity state version is present in the ETag header.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - ApiPolicy
+      x-ms-examples:
+        ApiManagementHeadApiPolicy:
+          parameters:
+            api-version: '2017-03-01'
+            apiId: 57d1f7558aa04f15146d9d8a
+            policyId: policy
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              headers:
+                etag: AAAAAAAAAAa=
     put:
       description: Creates or updates policy configuration for the API.
       operationId: ApiPolicy_CreateOrUpdate
@@ -2231,7 +2589,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ApiIdParameter'
+        - $ref: '#/parameters/ApiIdRevParameter'
         - description: The identifier of the Policy.
           enum:
             - policy
@@ -2584,6 +2942,476 @@ paths:
       x-ms-odata: './apimproducts.json#/definitions/ProductContract'
       x-ms-pageable:
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/releases':
+    get:
+      description: Lists all releases of an API. An API release is created when making an API Revision current. Releases are also used to rollback to previous revisions. Results will be paged and can be constrained by the $top and $skip parameters.
+      operationId: ApiRelease_List
+      parameters:
+        - description: |-
+            | Field | Supported operators    | Supported functions                         |
+            |-------|------------------------|---------------------------------------------|
+            | name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            |notes|ge le eq ne gt lt|substringof contains startswith endswith|
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: Number of records to return.
+          format: int32
+          in: query
+          minimum: 1
+          name: $top
+          required: false
+          type: integer
+          x-ms-parameter-location: method
+        - description: Number of records to skip.
+          format: int32
+          in: query
+          minimum: 0
+          name: $skip
+          required: false
+          type: integer
+          x-ms-parameter-location: method
+      responses:
+        '200':
+          description: The operation returns a list of API Releases.
+          schema:
+            $ref: '#/definitions/ApiReleaseCollection'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - Releases
+      x-ms-examples:
+        ApiManagementListApiReleases:
+          parameters:
+            api-version: '2017-03-01'
+            apiId: 57d2ef278aa04f0888cba3f3
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                count: 1
+                value:
+                  - createdDateTime: '2018-01-18T16:01:38.83Z'
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5a5fcc09124a7fa9b89f2f1d/releases/5a610b3175c67153d14c6489
+                    notes: This is the latest release
+                    updatedDateTime: '2018-01-18T16:01:38.83Z'
+              description: ''
+      x-ms-odata: '#/definitions/ApiReleaseContract'
+      x-ms-pageable:
+        nextLinkName: nextLink
+    parameters:
+      - description: The name of the resource group.
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+        x-ms-parameter-location: method
+      - description: The name of the API Management service.
+        in: path
+        maxLength: 50
+        minLength: 1
+        name: serviceName
+        pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+        required: true
+        type: string
+        x-ms-parameter-location: method
+      - $ref: '#/parameters/ApiIdParameter'
+      - description: Version of the API to be used with the client request.
+        in: query
+        name: api-version
+        required: true
+        type: string
+      - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+        in: path
+        name: subscriptionId
+        required: true
+        type: string
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/releases/{releaseId}':
+    delete:
+      description: Deletes the specified release in the API.
+      operationId: ApiRelease_Delete
+      parameters:
+        - $ref: '#/parameters/IfMatch'
+      responses:
+        '204':
+          description: The release was successfully deleted.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - Releases
+      x-ms-examples:
+        ApiManagementDeleteApiRelease:
+          parameters:
+            api-version: '2017-03-01'
+            apiId: 5a5fcc09124a7fa9b89f2f1d
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '204': {}
+    get:
+      description: Returns the details of an API release.
+      operationId: ApiRelease_Get
+      responses:
+        '200':
+          description: The operation returns the details of an API Release.
+          schema:
+            $ref: '#/definitions/ApiReleaseContract'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - Releases
+      x-ms-examples:
+        ApiManagementGetApiRelease:
+          parameters:
+            api-version: '2017-03-01'
+            apiId: 5a5fcc09124a7fa9b89f2f1d
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                apiId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5a5fcc09124a7fa9b89f2f1d
+                notes: This is the latest release
+      x-ms-odata: '#/definitions/ApiReleaseContract'
+    parameters:
+      - description: The name of the resource group.
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+        x-ms-parameter-location: method
+      - description: The name of the API Management service.
+        in: path
+        maxLength: 50
+        minLength: 1
+        name: serviceName
+        pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+        required: true
+        type: string
+        x-ms-parameter-location: method
+      - description: Version of the API to be used with the client request.
+        in: query
+        name: api-version
+        required: true
+        type: string
+      - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+        in: path
+        name: subscriptionId
+        required: true
+        type: string
+      - $ref: '#/parameters/ApiIdParameter'
+      - description: Release identifier within an API. Must be unique in the current API Management service instance.
+        in: path
+        maxLength: 256
+        minLength: 1
+        name: releaseId
+        pattern: '^[^*#&+:<>?]+$'
+        required: true
+        type: string
+    patch:
+      description: Updates the details of the release of the API specified by its identifier.
+      operationId: ApiRelease_Update
+      parameters:
+        - description: API Release Update parameters.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ApiReleaseContract'
+        - $ref: '#/parameters/IfMatch'
+      responses:
+        '204':
+          description: The operation was successfully updated.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - Releases
+      x-ms-examples:
+        ApiManagementUpdateApiRelease:
+          parameters:
+            api-version: '2017-03-01'
+            apiId: 5a5fcc09124a7fa9b89f2f1d
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                notes: Here is an updated revision description
+    put:
+      description: Creates a new Release for the API.
+      operationId: ApiRelease_Create
+      parameters:
+        - description: Create parameters.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ApiReleaseContract'
+      responses:
+        '200':
+          description: Release was successfully updated.
+          schema:
+            $ref: '#/definitions/ApiReleaseContract'
+        '201':
+          description: Release was successfully created.
+          schema:
+            $ref: '#/definitions/ApiReleaseContract'
+        default:
+          description: Error response describing why the release failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - Releases
+      x-ms-examples:
+        ApiManagementCreateApiRelease:
+          parameters:
+            api-version: '2017-03-01'
+            apiId: 5a5fcc09124a7fa9b89f2f1d
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                apiId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5a5fcc09124a7fa9b89f2f1d
+                notes: This is the latest revision
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/revisions':
+    get:
+      description: Lists all revisions of an API.
+      operationId: ApiRevisions_List
+      parameters:
+        - description: Number of records to return.
+          format: int32
+          in: query
+          minimum: 1
+          name: $top
+          required: false
+          type: integer
+          x-ms-parameter-location: method
+        - description: Number of records to skip.
+          format: int32
+          in: query
+          minimum: 0
+          name: $skip
+          required: false
+          type: integer
+          x-ms-parameter-location: method
+      responses:
+        '200':
+          description: The operation returns a list of revision details.
+          schema:
+            $ref: '#/definitions/ApiRevisionCollection'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - Revisions
+      x-ms-examples:
+        ApiManagementListApiRevisions:
+          parameters:
+            api-version: '2017-03-01'
+            apiId: 57d2ef278aa04f0888cba3f3
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                count: 2
+                value:
+                  - apiId: /apis/5a5fcc09124a7fa9b89f2f1d;rev=2
+                    apiRevision: '2'
+                    createdDateTime: '2018-01-18T20:20:20.447Z'
+                    description: Test
+                    isCurrent: false
+                    isOnline: true
+                    privateUrl: /echo/v2;rev=2
+                    updatedDateTime: '2018-01-18T20:20:20.447Z'
+                  - apiId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/5a5fcc09124a7fa9b89f2f1d;rev=1
+                    apiRevision: '1'
+                    createdDateTime: '2018-01-17T22:20:02.313Z'
+                    isCurrent: true
+                    isOnline: true
+                    privateUrl: /echo/v2
+                    updatedDateTime: '2018-01-17T23:32:10.32Z'
+              description: ''
+      x-ms-odata: '#/definitions/ApiRevisionContract'
+      x-ms-pageable:
+        nextLinkName: nextLink
+    parameters:
+      - description: The name of the resource group.
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+        x-ms-parameter-location: method
+      - description: The name of the API Management service.
+        in: path
+        maxLength: 50
+        minLength: 1
+        name: serviceName
+        pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+        required: true
+        type: string
+        x-ms-parameter-location: method
+      - description: Version of the API to be used with the client request.
+        in: query
+        name: api-version
+        required: true
+        type: string
+      - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+        in: path
+        name: subscriptionId
+        required: true
+        type: string
+      - $ref: '#/parameters/ApiIdParameter'
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/schemas':
     get:
       description: Get the schema configuration at the API level.
@@ -2839,6 +3667,85 @@ paths:
                   document:
                     value: "<s:schema elementFormDefault=\"qualified\" targetNamespace=\"http://ws.cdyne.com/WeatherWS/\" xmlns:tns=\"http://ws.cdyne.com/WeatherWS/\" xmlns:s=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://schemas.xmlsoap.org/wsdl/soap12/\" xmlns:mime=\"http://schemas.xmlsoap.org/wsdl/mime/\" xmlns:soap=\"http://schemas.xmlsoap.org/wsdl/soap/\" xmlns:tm=\"http://microsoft.com/wsdl/mime/textMatching/\" xmlns:http=\"http://schemas.xmlsoap.org/wsdl/http/\" xmlns:soapenc=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\" xmlns:apim-wsdltns=\"http://ws.cdyne.com/WeatherWS/\">\r\n  <s:element name=\"GetWeatherInformation\">\r\n    <s:complexType />\r\n  </s:element>\r\n  <s:element name=\"GetWeatherInformationResponse\">\r\n    <s:complexType>\r\n      <s:sequence>\r\n        <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"GetWeatherInformationResult\" type=\"tns:ArrayOfWeatherDescription\" />\r\n      </s:sequence>\r\n    </s:complexType>\r\n  </s:element>\r\n  <s:complexType name=\"ArrayOfWeatherDescription\">\r\n    <s:sequence>\r\n      <s:element minOccurs=\"0\" maxOccurs=\"unbounded\" name=\"WeatherDescription\" type=\"tns:WeatherDescription\" />\r\n    </s:sequence>\r\n  </s:complexType>\r\n  <s:complexType name=\"WeatherDescription\">\r\n    <s:sequence>\r\n      <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"WeatherID\" type=\"s:short\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Description\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"PictureURL\" type=\"s:string\" />\r\n    </s:sequence>\r\n  </s:complexType>\r\n  <s:element name=\"GetCityForecastByZIP\">\r\n    <s:complexType>\r\n      <s:sequence>\r\n        <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"ZIP\" type=\"s:string\" />\r\n      </s:sequence>\r\n    </s:complexType>\r\n  </s:element>\r\n  <s:element name=\"GetCityForecastByZIPResponse\">\r\n    <s:complexType>\r\n      <s:sequence>\r\n        <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"GetCityForecastByZIPResult\" type=\"tns:ForecastReturn\" />\r\n      </s:sequence>\r\n    </s:complexType>\r\n  </s:element>\r\n  <s:complexType name=\"ForecastReturn\">\r\n    <s:sequence>\r\n      <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"Success\" type=\"s:boolean\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"ResponseText\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"State\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"City\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"WeatherStationCity\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"ForecastResult\" type=\"tns:ArrayOfForecast\" />\r\n    </s:sequence>\r\n  </s:complexType>\r\n  <s:complexType name=\"ArrayOfForecast\">\r\n    <s:sequence>\r\n      <s:element minOccurs=\"0\" maxOccurs=\"unbounded\" name=\"Forecast\" nillable=\"true\" type=\"tns:Forecast\" />\r\n    </s:sequence>\r\n  </s:complexType>\r\n  <s:complexType name=\"Forecast\">\r\n    <s:sequence>\r\n      <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"Date\" type=\"s:dateTime\" />\r\n      <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"WeatherID\" type=\"s:short\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Desciption\" type=\"s:string\" />\r\n      <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"Temperatures\" type=\"tns:temp\" />\r\n      <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"ProbabilityOfPrecipiation\" type=\"tns:POP\" />\r\n    </s:sequence>\r\n  </s:complexType>\r\n  <s:complexType name=\"temp\">\r\n    <s:sequence>\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"MorningLow\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"DaytimeHigh\" type=\"s:string\" />\r\n    </s:sequence>\r\n  </s:complexType>\r\n  <s:complexType name=\"POP\">\r\n    <s:sequence>\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Nighttime\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Daytime\" type=\"s:string\" />\r\n    </s:sequence>\r\n  </s:complexType>\r\n  <s:element name=\"GetCityWeatherByZIP\">\r\n    <s:complexType>\r\n      <s:sequence>\r\n        <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"ZIP\" type=\"s:string\" />\r\n      </s:sequence>\r\n    </s:complexType>\r\n  </s:element>\r\n  <s:element name=\"GetCityWeatherByZIPResponse\">\r\n    <s:complexType>\r\n      <s:sequence>\r\n        <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"GetCityWeatherByZIPResult\" type=\"tns:WeatherReturn\" />\r\n      </s:sequence>\r\n    </s:complexType>\r\n  </s:element>\r\n  <s:complexType name=\"WeatherReturn\">\r\n    <s:sequence>\r\n      <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"Success\" type=\"s:boolean\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"ResponseText\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"State\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"City\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"WeatherStationCity\" type=\"s:string\" />\r\n      <s:element minOccurs=\"1\" maxOccurs=\"1\" name=\"WeatherID\" type=\"s:short\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Description\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Temperature\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"RelativeHumidity\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Wind\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Pressure\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Visibility\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"WindChill\" type=\"s:string\" />\r\n      <s:element minOccurs=\"0\" maxOccurs=\"1\" name=\"Remarks\" type=\"s:string\" />\r\n    </s:sequence>\r\n  </s:complexType>\r\n  <s:element name=\"ArrayOfWeatherDescription\" nillable=\"true\" type=\"tns:ArrayOfWeatherDescription\" />\r\n  <s:element name=\"ForecastReturn\" nillable=\"true\" type=\"tns:ForecastReturn\" />\r\n  <s:element name=\"WeatherReturn\" type=\"tns:WeatherReturn\" />\r\n</s:schema>"
                 type: Microsoft.ApiManagement/service/apis/schemas
+    head:
+      description: Gets the entity state (Etag) version of the schema specified by its identifier.
+      operationId: ApiSchema_GetEntityTag
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/ApiIdParameter'
+        - $ref: '#/parameters/SchemaIdParameter'
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Specified schema entity exists and current entity state version is present in the ETag header.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - ApiSchema
+      x-ms-examples:
+        ApiManagementHeadApiSchema:
+          parameters:
+            api-version: '2017-03-01'
+            apiId: 57d1f7558aa04f15146d9d8a
+            resourceGroupName: rg1
+            schemaId: ec12520d-9d48-4e7b-8f39-698ca2ac63f1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              headers:
+                etag: AAAAAAAAAAa=
     put:
       description: Creates or updates schema configuration for the API.
       operationId: ApiSchema_CreateOrUpdate
@@ -2991,6 +3898,8 @@ definitions:
       - $ref: '#/definitions/ApiEntityBaseContract'
     description: Api Entity Properties
     properties:
+      apiVersionSet:
+        $ref: '#/definitions/ApiVersionSetContract'
       displayName:
         description: API name.
         maxLength: 300
@@ -3080,7 +3989,7 @@ definitions:
               value: wadl-xml
             - description: The WADL document is hosted on a publicly accessible internet address.
               value: wadl-link-json
-            - description: The contents are inline and Content Type if a OpenApi 2.0 Document.
+            - description: The contents are inline and Content Type is a OpenApi 2.0 Document.
               value: swagger-json
             - description: The Open Api 2.0 document is hosted on a publicly accessible internet address.
               value: swagger-link-json
@@ -3100,7 +4009,6 @@ definitions:
           wsdlServiceName:
             description: Name of service to import from WSDL
             type: string
-        type: object
   ApiEntityBaseContract:
     description: API base contract details.
     properties:
@@ -3108,6 +4016,13 @@ definitions:
         description: 'Describes the Revision of the Api. If no value is provided, default revision 1 is created'
         maxLength: 100
         minLength: 1
+        type: string
+      apiVersion:
+        description: Indicates the Version identifier of the API if the API is versioned
+        maxLength: 100
+        type: string
+      apiVersionSetId:
+        description: A resource identifier for the related ApiVersionSet.
         type: string
       authenticationSettings:
         $ref: '#/definitions/AuthenticationSettingsContract'
@@ -3117,9 +4032,11 @@ definitions:
         type: string
       isCurrent:
         description: Indicates if API revision is current api revision.
+        readOnly: true
         type: boolean
       isOnline:
         description: Indicates if API revision is accessible via the gateway.
+        readOnly: true
         type: boolean
       subscriptionKeyParameterNames:
         $ref: '#/definitions/SubscriptionKeyParameterNamesContract'
@@ -3140,6 +4057,126 @@ definitions:
       link:
         description: Link to the Storage Blob containing the result of the export operation. The Blob Uri is only valid for 5 minutes.
         type: string
+  ApiReleaseCollection:
+    description: Paged Api Revision list representation.
+    properties:
+      nextLink:
+        description: Next page link if any.
+        type: string
+      value:
+        description: Page values.
+        items:
+          $ref: '#/definitions/ApiReleaseContract'
+        type: array
+  ApiReleaseContract:
+    allOf:
+      - description: The Resource definition.
+        properties:
+          id:
+            description: Resource ID.
+            readOnly: true
+            type: string
+          name:
+            description: Resource name.
+            readOnly: true
+            type: string
+          type:
+            description: Resource type for API Management resource.
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
+    description: Api Release details.
+    properties:
+      properties:
+        $ref: '#/definitions/ApiReleaseContractProperties'
+        description: Properties of the Api Release Contract.
+        x-ms-client-flatten: true
+  ApiReleaseContractProperties:
+    description: API Release details
+    properties:
+      apiId:
+        description: Identifier of the API the release belongs to.
+        type: string
+      createdDate:
+        description: 'The time the API was released. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.'
+        format: date-time
+        readOnly: true
+        type: string
+      notes:
+        description: Release Notes
+        type: string
+      updatedDate:
+        description: The time the API release was updated.
+        format: date-time
+        readOnly: true
+        type: string
+  ApiRevisionCollection:
+    description: Paged Api Revision list representation.
+    properties:
+      nextLink:
+        description: Next page link if any.
+        type: string
+      value:
+        description: Page values.
+        items:
+          $ref: '#/definitions/ApiRevisionContract'
+        type: array
+  ApiRevisionContract:
+    description: Summary of revision metadata.
+    properties:
+      apiId:
+        description: Identifier of the API Revision.
+        readOnly: true
+        type: string
+      apiRevision:
+        description: Revision number of API.
+        maxLength: 100
+        minLength: 1
+        readOnly: true
+        type: string
+      createdDateTime:
+        description: 'The time the API Revision was created. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.'
+        format: date-time
+        readOnly: true
+        type: string
+      description:
+        description: Description of the API Revision.
+        maxLength: 256
+        readOnly: true
+        type: string
+      isCurrent:
+        description: Indicates if API revision is accessible via the gateway.
+        readOnly: true
+        type: boolean
+      isOnline:
+        description: Indicates if API revision is the current api revision.
+        readOnly: true
+        type: boolean
+      privateUrl:
+        description: Gateway URL for accessing the non-current API Revision.
+        readOnly: true
+        type: string
+      updatedDateTime:
+        description: 'The time the API Revision were updated. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.'
+        format: date-time
+        readOnly: true
+        type: string
+  ApiRevisionInfoContract:
+    description: Object used to create an API Revision or Version based on an existing API Revision
+    properties:
+      apiRevisionDescription:
+        description: Description of new API Revision.
+        maxLength: 256
+        type: string
+      apiVersionName:
+        description: Version identifier for the new API Version.
+        maxLength: 100
+        type: string
+      apiVersionSet:
+        $ref: '#/definitions/ApiVersionSetContract'
+      sourceApiId:
+        description: Resource identifier of API to be used to create the revision from.
+        type: string
   ApiUpdateContract:
     description: API update contract details.
     properties:
@@ -3147,6 +4184,28 @@ definitions:
         $ref: '#/definitions/ApiContractUpdateProperties'
         description: Properties of the API entity that can be updated.
         x-ms-client-flatten: true
+  ApiVersionSetContract:
+    description: 'An API Version Set contains the common configuration for a set of API Versions relating '
+    properties:
+      description:
+        description: Description of API Version Set.
+        type: string
+      id:
+        description: Identifier for existing API Version Set. Omit this value to create a new Version Set.
+        type: string
+      versionHeaderName:
+        description: Name of HTTP header parameter that indicates the API Version if versioningScheme is set to `header`.
+        type: string
+      versionQueryName:
+        description: Name of query parameter that indicates the API Version if versioningScheme is set to `query`.
+        type: string
+      versioningScheme:
+        description: An value that determines where the API Version identifer will be located in a HTTP request.
+        enum:
+          - Segment
+          - Query
+          - Header
+        type: string
   AuthenticationSettingsContract:
     description: API Authentication Settings.
     properties:
@@ -3341,8 +4400,6 @@ definitions:
         items:
           $ref: '#/definitions/RepresentationContract'
         type: array
-  Resource:
-    type: object
   ResponseContract:
     description: Operation response details.
     properties:
@@ -3378,7 +4435,21 @@ definitions:
         type: array
   SchemaContract:
     allOf:
-      - $ref: '#/definitions/Resource'
+      - description: The Resource definition.
+        properties:
+          id:
+            description: Resource ID.
+            readOnly: true
+            type: string
+          name:
+            description: Resource name.
+            readOnly: true
+            type: string
+          type:
+            description: Resource type for API Management resource.
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
     description: Schema Contract details.
     properties:
       properties:

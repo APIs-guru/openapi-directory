@@ -420,6 +420,13 @@ definitions:
           - CREATIVE_COMMONS_BY
           - ALL_RIGHTS_RESERVED
         type: string
+      metadata:
+        description: |-
+          Application-defined opaque metadata for this asset. This field is only
+          returned when querying for the signed-in user's own assets, not for public
+          assets. This string is limited to 1K chars. It is up to the creator of
+          the asset to define the format for this string (for example, JSON).
+        type: string
       name:
         description: |-
           The unique identifier for the asset in the form:

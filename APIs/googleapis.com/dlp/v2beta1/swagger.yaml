@@ -401,7 +401,7 @@ paths:
   '/v2beta1/{name}':
     delete:
       description: This method is not supported and the server returns `UNIMPLEMENTED`.
-      operationId: dlp.riskAnalysis.operations.delete
+      operationId: dlp.inspect.operations.delete
       parameters:
         - description: The name of the operation resource to be deleted.
           in: path
@@ -420,13 +420,13 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - riskAnalysis
+        - inspect
     get:
       description: |-
         Gets the latest state of a long-running operation.  Clients can use this
         method to poll the operation result at intervals as recommended by the API
         service.
-      operationId: dlp.riskAnalysis.operations.get
+      operationId: dlp.inspect.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
@@ -445,7 +445,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - riskAnalysis
+        - inspect
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -543,7 +543,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Cancels an operation. Use the `inspect.operations.get` to check whether the cancellation succeeded or the operation completed despite cancellation.
-      operationId: dlp.riskAnalysis.operations.cancel
+      operationId: dlp.inspect.operations.cancel
       parameters:
         - in: body
           name: body
@@ -566,7 +566,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - riskAnalysis
+        - inspect
 definitions:
   GoogleLongrunningCancelOperationRequest:
     description: The request message for Operations.CancelOperation.
@@ -1301,7 +1301,9 @@ definitions:
         description: |-
           The content that was found. Even if the content is not textual, it
           may be converted to a textual representation here.
-          Provided if requested by the `InspectConfig`.
+          Provided if requested by the `InspectConfig` and the finding is
+          less than or equal to 4096 bytes long. If the finding exceeds 4096 bytes
+          in length, the quote may be omitted.
         type: string
     type: object
   GooglePrivacyDlpV2beta1FixedSizeBucketingConfig:

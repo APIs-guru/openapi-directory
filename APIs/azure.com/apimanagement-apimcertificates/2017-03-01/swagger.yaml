@@ -322,6 +322,83 @@ paths:
                   subject: CN=mutual-authcert
                   thumbprint: EBA**********************8594A6
                 type: Microsoft.ApiManagement/service/certificates
+    head:
+      description: Gets the entity state (Etag) version of the certificate specified by its identifier.
+      operationId: Certificate_GetEntityTag
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/CertificateIdParameter'
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Specified certificate entity exists and current entity state version is present in the ETag header.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - Certificates
+      x-ms-examples:
+        ApiManagementHeadCertificate:
+          parameters:
+            api-version: '2017-03-01'
+            certificateId: templateCert1
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              headers:
+                etag: AAAAAAAAAAa=
     put:
       description: Creates or updates the certificate being used for authentication with the backend.
       externalDocs:

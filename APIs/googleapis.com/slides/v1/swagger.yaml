@@ -300,6 +300,8 @@ paths:
       description: |-
         Generates a thumbnail of the latest version of the specified page in the
         presentation and returns a URL to the thumbnail image.
+
+        This request counts as an expensive read request for quota purposes.
       operationId: slides.presentations.pages.getThumbnail
       parameters:
         - description: The object ID of the page whose thumbnail to retrieve.
@@ -2324,6 +2326,23 @@ definitions:
         description: |-
           If set, this request will replace all of the shapes that contain the
           given text.
+      imageReplaceMethod:
+        description: |-
+          The image replace method.
+
+          If you specify both a `replace_method` and an `image_replace_method`, the
+          `image_replace_method` takes precedence.
+
+          If you do not specify a value for `image_replace_method`, but specify a
+          value for `replace_method`, then the specified `replace_method` value is
+          used.
+
+          If you do not specify either, then CENTER_INSIDE is used.
+        enum:
+          - IMAGE_REPLACE_METHOD_UNSPECIFIED
+          - CENTER_INSIDE
+          - CENTER_CROP
+        type: string
       imageUrl:
         description: |-
           The image URL.
@@ -2347,7 +2366,12 @@ definitions:
           type: string
         type: array
       replaceMethod:
-        description: The replace method.
+        description: |-
+          The replace method.
+          Deprecated: use `image_replace_method` instead.
+
+          If you specify both a `replace_method` and an `image_replace_method`, the
+          `image_replace_method` takes precedence.
         enum:
           - CENTER_INSIDE
           - CENTER_CROP

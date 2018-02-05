@@ -3272,7 +3272,7 @@ paths:
       tags:
         - firewalls
     put:
-      description: 'Updates the specified firewall rule with the data included in the request. Using PUT method, can only update following fields of firewall rule: allowed, description, sourceRanges, sourceTags, targetTags.'
+      description: 'Updates the specified firewall rule with the data included in the request. The PUT method can only update the following fields of firewall rule: allowed, description, sourceRanges, sourceTags, targetTags.'
       operationId: compute.firewalls.update
       parameters:
         - in: body
@@ -11064,7 +11064,7 @@ paths:
       description: Gets the most recent health check results for this regional BackendService.
       operationId: compute.regionBackendServices.getHealth
       parameters:
-        - description: Name of the BackendService resource to which the queried instance belongs.
+        - description: Name of the BackendService resource for which to get health.
           in: path
           name: backendService
           required: true
@@ -20541,7 +20541,7 @@ definitions:
         description: '[Output Only] Server-defined fully-qualified URL for this resource.'
         type: string
       zone:
-        description: '[Output Only] The name of the zone where the accelerator type resides, such as us-central1-a.'
+        description: '[Output Only] The name of the zone where the accelerator type resides, such as us-central1-a. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
     type: object
   AcceleratorTypeAggregatedList:
@@ -20817,7 +20817,7 @@ definitions:
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       region:
-        description: '[Output Only] URL of the region where the regional address resides. This field is not applicable to global addresses.'
+        description: '[Output Only] URL of the region where the regional address resides. This field is not applicable to global addresses. You must specify this field as part of the HTTP request URL. You cannot set this field in the request body.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -21143,8 +21143,8 @@ definitions:
       diskType:
         description: |-
           Specifies the disk type to use to create the instance. If not specified, the default is pd-standard, specified using the full URL. For example:
+          https://www.googleapis.com/compute/v1/projects/project/zones/zone/diskTypes/pd-standard
 
-          https://www.googleapis.com/compute/v1/projects/project/zones/zone/diskTypes/pd-standard 
 
           Other values include pd-ssd and local-ssd. If you define this field, you can provide either the full or partial URL. For example, the following are valid values:  
           - https://www.googleapis.com/compute/v1/projects/project/zones/zone/diskTypes/diskType 
@@ -21161,20 +21161,20 @@ definitions:
           The source image to create this disk. When creating a new instance, one of initializeParams.sourceImage or disks.source is required except for local SSD.
 
           To create a disk with one of the public operating system images, specify the image by its family name. For example, specify family/debian-8 to use the latest Debian 8 image:
+          projects/debian-cloud/global/images/family/debian-8
 
-          projects/debian-cloud/global/images/family/debian-8 
 
           Alternatively, use a specific version of a public operating system image:
+          projects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD
 
-          projects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD 
 
           To create a disk with a custom image that you created, specify the image name in the following format:
+          global/images/my-custom-image
 
-          global/images/my-custom-image 
 
           You can also specify a custom image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name:
+          global/images/family/my-image-family
 
-          global/images/family/my-image-family 
 
           If the source image is deleted later, this field will not be set.
         type: string
@@ -21195,7 +21195,7 @@ definitions:
 
       { "audit_configs": [ { "service": "allServices" "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:foo@gmail.com" ] }, { "log_type": "DATA_WRITE", }, { "log_type": "ADMIN_READ", } ] }, { "service": "fooservice.googleapis.com" "audit_log_configs": [ { "log_type": "DATA_READ", }, { "log_type": "DATA_WRITE", "exempted_members": [ "user:bar@gmail.com" ] } ] } ] }
 
-      For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts foo@gmail.com from DATA_READ logging, and bar@gmail.com from DATA_WRITE logging.
+      For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts foo@gmail.com from DATA_READ logging, and bar@gmail.com from DATA_WRITE logging. This message is only visible as GOOGLE_INTERNAL or IAM_AUDIT_CONFIG.
     properties:
       auditLogConfigs:
         description: The configuration for logging of each type of permission.
@@ -21896,7 +21896,7 @@ definitions:
           - UDP
         type: string
       region:
-        description: '[Output Only] URL of the region where the regional backend service resides. This field is not applicable to global backend services.'
+        description: '[Output Only] URL of the region where the regional backend service resides. This field is not applicable to global backend services. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
       securityPolicy:
         description: '[Output Only] The resource URL for the security policy associated with this backend service.'
@@ -22167,7 +22167,7 @@ definitions:
     properties:
       condition:
         $ref: '#/definitions/Expr'
-        description: 'The condition that is associated with this binding. NOTE: an unsatisfied condition will not allow user access via current binding. Different bindings, including their conditions, are examined independently. This field is GOOGLE_INTERNAL.'
+        description: 'The condition that is associated with this binding. NOTE: an unsatisfied condition will not allow user access via current binding. Different bindings, including their conditions, are examined independently. This field is only visible as GOOGLE_INTERNAL or CONDITION_TRUSTED_TESTER.'
       members:
         description: |-
           Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:
@@ -22667,19 +22667,18 @@ definitions:
           The source image used to create this disk. If the source image is deleted, this field will not be set.
 
           To create a disk with one of the public operating system images, specify the image by its family name. For example, specify family/debian-8 to use the latest Debian 8 image:
+          projects/debian-cloud/global/images/family/debian-8
 
-          projects/debian-cloud/global/images/family/debian-8 
 
           Alternatively, use a specific version of a public operating system image:
+          projects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD
 
-          projects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD 
 
           To create a disk with a custom image that you created, specify the image name in the following format:
+          global/images/my-custom-image
 
-          global/images/my-custom-image 
 
           You can also specify a custom image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name:
-
           global/images/family/my-image-family
         type: string
       sourceImageEncryptionKey:
@@ -22724,7 +22723,7 @@ definitions:
           type: string
         type: array
       zone:
-        description: '[Output Only] URL of the zone where the disk resides.'
+        description: '[Output Only] URL of the zone where the disk resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
     type: object
   DiskAggregatedList:
@@ -22943,7 +22942,7 @@ definitions:
         description: '[Output Only] An optional textual description of the valid disk size, such as "10GB-10TB".'
         type: string
       zone:
-        description: '[Output Only] URL of the zone where the disk type resides.'
+        description: '[Output Only] URL of the zone where the disk type resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
     type: object
   DiskTypeAggregatedList:
@@ -23264,7 +23263,7 @@ definitions:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
       denied:
-        description: The list of DENY rules specified by this firewall. Each rule specifies a protocol and port-range tuple that describes a permitted connection.
+        description: The list of DENY rules specified by this firewall. Each rule specifies a protocol and port-range tuple that describes a denied connection.
         items:
           properties:
             IPProtocol:
@@ -23541,7 +23540,6 @@ definitions:
           - TargetTcpProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 1883, 5222 
           - TargetSslProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 1883, 5222 
           - TargetVpnGateway: 500, 4500
-          -
         type: string
       ports:
         description: |-
@@ -23554,7 +23552,7 @@ definitions:
           type: string
         type: array
       region:
-        description: '[Output Only] URL of the region where the regional forwarding rule resides. This field is not applicable to global forwarding rules.'
+        description: '[Output Only] URL of the region where the regional forwarding rule resides. This field is not applicable to global forwarding rules. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -23583,10 +23581,7 @@ definitions:
           If the network specified is in auto subnet mode, this field is optional. However, if the network is in custom subnet mode, a subnetwork must be specified.
         type: string
       target:
-        description: |-
-          The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must live in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object.
-
-          This field is not used for internal load balancing.
+        description: 'The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must live in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object.'
         type: string
     type: object
   ForwardingRuleAggregatedList:
@@ -24545,12 +24540,12 @@ definitions:
       machineType:
         description: |-
           Full or partial URL of the machine type resource to use for this instance, in the format: zones/zone/machineTypes/machine-type. This is provided by the client when the instance is created. For example, the following is a valid partial url to a predefined machine type:
+          zones/us-central1-f/machineTypes/n1-standard-1
 
-          zones/us-central1-f/machineTypes/n1-standard-1 
 
           To create a custom machine type, provide a URL to a machine type in the following format, where CPUS is 1 or an even number up to 32 (2, 4, 6, ... 24, etc), and MEMORY is the total memory for this instance. Memory must be a multiple of 256 MB and must be supplied in MB (e.g. 5 GB of memory is 5120 MB):
+          zones/zone/machineTypes/custom-CPUS-MEMORY
 
-          zones/zone/machineTypes/custom-CPUS-MEMORY 
 
           For example: zones/us-central1-f/machineTypes/custom-4-5120 
 
@@ -24607,7 +24602,7 @@ definitions:
         $ref: '#/definitions/Tags'
         description: A list of tags to apply to this instance. Tags are used to identify valid sources or targets for network firewalls and are specified by the client during instance creation. The tags can be later modified by the setTags method. Each tag within the list must comply with RFC1035.
       zone:
-        description: '[Output Only] URL of the zone where the instance resides.'
+        description: '[Output Only] URL of the zone where the instance resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
     type: object
   InstanceAggregatedList:
@@ -25006,7 +25001,7 @@ definitions:
         format: int32
         type: integer
       verifying:
-        description: '[Output Only] The number of instances in the managed instance group that are being verified. More details regarding verification process are covered in the documentation of ManagedInstance.InstanceAction.VERIFYING enum field.'
+        description: '[Output Only] The number of instances in the managed instance group that are being verified. See the managedInstances[].currentAction property in the listManagedInstances method documentation.'
         format: int32
         type: integer
     type: object
@@ -26129,7 +26124,7 @@ definitions:
         $ref: '#/definitions/InterconnectAttachmentPrivateInfo'
         description: '[Output Only] Information specific to an InterconnectAttachment. This property is populated if the interconnect that this is attached to is of type DEDICATED.'
       region:
-        description: '[Output Only] URL of the region where the regional interconnect attachment resides.'
+        description: '[Output Only] URL of the region where the regional interconnect attachment resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
       router:
         description: URL of the cloud router to be used for dynamic routing. This router must be in the same region as this InterconnectAttachment. The InterconnectAttachment will automatically connect the Interconnect to the network & region within which the Cloud Router is configured.
@@ -27099,7 +27094,8 @@ definitions:
           - DELETING The managed instance group is permanently deleting this instance. 
           - ABANDONING The managed instance group is abandoning this instance. The instance will be removed from the instance group and from any target pools that are associated with this group. 
           - RESTARTING The managed instance group is restarting the instance. 
-          - REFRESHING The managed instance group is applying configuration changes to the instance without stopping it. For example, the group can update the target pool list for an instance without stopping that instance.
+          - REFRESHING The managed instance group is applying configuration changes to the instance without stopping it. For example, the group can update the target pool list for an instance without stopping that instance. 
+          - VERIFYING The managed instance group has created the instance and it is in the process of being verified.
         enum:
           - ABANDONING
           - CREATING
@@ -27484,7 +27480,7 @@ definitions:
         format: int32
         type: integer
       region:
-        description: '[Output Only] The URL of the region where the operation resides. Only available when performing regional operations.'
+        description: '[Output Only] The URL of the region where the operation resides. Only available when performing regional operations. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -27563,7 +27559,7 @@ definitions:
           type: object
         type: array
       zone:
-        description: '[Output Only] The URL of the zone where the operation resides. Only available when performing per-zone operations.'
+        description: '[Output Only] The URL of the zone where the operation resides. Only available when performing per-zone operations. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
     type: object
   OperationAggregatedList:
@@ -27808,10 +27804,10 @@ definitions:
 
       { "bindings": [ { "role": "roles/owner", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@appspot.gserviceaccount.com", ] }, { "role": "roles/viewer", "members": ["user:sean@example.com"] } ] }
 
-      For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam).
+      For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam/docs).
     properties:
       auditConfigs:
-        description: Specifies cloud audit logging configuration for this policy.
+        description: Specifies cloud audit logging configuration for this policy. This field is only visible as GOOGLE_INTERNAL or IAM_AUDIT_CONFIG.
         items:
           $ref: '#/definitions/AuditConfig'
         type: array
@@ -27836,7 +27832,7 @@ definitions:
           $ref: '#/definitions/Rule'
         type: array
       version:
-        description: Version of the `Policy`. The default version is 0.
+        description: Deprecated.
         format: int32
         type: integer
     type: object
@@ -28736,7 +28732,7 @@ definitions:
         description: URI of the network to which this router belongs.
         type: string
       region:
-        description: '[Output Only] URI of the region where the router resides.'
+        description: '[Output Only] URI of the region where the router resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -29876,7 +29872,7 @@ definitions:
         format: byte
         type: string
       gatewayAddress:
-        description: '[Output Only] The gateway address for default routes to reach destination addresses outside this subnetwork. This field can be set only at resource creation time.'
+        description: '[Output Only] The gateway address for default routes to reach destination addresses outside this subnetwork.'
         type: string
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
@@ -30436,7 +30432,7 @@ definitions:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
       zone:
-        description: '[Output Only] URL of the zone where the target instance resides.'
+        description: '[Output Only] URL of the zone where the target instance resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
     type: object
   TargetInstanceAggregatedList:
@@ -31251,7 +31247,7 @@ definitions:
         description: URL of the network to which this VPN gateway is attached. Provided by the client when the VPN gateway is created.
         type: string
       region:
-        description: '[Output Only] URL of the region where the target VPN gateway resides.'
+        description: '[Output Only] URL of the region where the target VPN gateway resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -31551,7 +31547,7 @@ definitions:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
       tests:
-        description: The list of expected URL mappings. Request to update this UrlMap will succeed only if all of the test cases pass.
+        description: The list of expected URL mapping tests. Request to update this UrlMap will succeed only if all of the test cases pass. You can specify a maximum of 100 tests per UrlMap.
         items:
           $ref: '#/definitions/UrlMapTest'
         type: array
@@ -31735,7 +31731,7 @@ definitions:
         description: IP address of the peer VPN gateway. Only IPv4 is supported.
         type: string
       region:
-        description: '[Output Only] URL of the region where the VPN tunnel resides.'
+        description: '[Output Only] URL of the region where the VPN tunnel resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
       remoteTrafficSelector:
         description: 'Remote traffic selectors to use when establishing the VPN tunnel with peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges should be disjoint. Only IPv4 is supported.'
@@ -31771,7 +31767,7 @@ definitions:
           - WAITING_FOR_FULL_CONFIG
         type: string
       targetVpnGateway:
-        description: URL of the VPN gateway with which this VPN tunnel is associated. Provided by the client when the VPN tunnel is created.
+        description: URL of the Target VPN gateway with which this VPN tunnel is associated. Provided by the client when the VPN tunnel is created.
         type: string
     type: object
   VpnTunnelAggregatedList:

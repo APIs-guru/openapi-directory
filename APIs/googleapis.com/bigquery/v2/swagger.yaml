@@ -859,6 +859,10 @@ paths:
           name: jobId
           required: true
           type: string
+        - description: '[Experimental] The geographic location of the job. Required except for US and EU.'
+          in: query
+          name: location
+          type: string
         - description: '[Required] Project ID of the requested job'
           in: path
           name: projectId
@@ -909,6 +913,10 @@ paths:
           in: path
           name: jobId
           required: true
+          type: string
+        - description: '[Experimental] The geographic location of the job. Required except for US and EU.'
+          in: query
+          name: location
           type: string
         - description: '[Required] Project ID of the job to cancel'
           in: path
@@ -982,6 +990,10 @@ paths:
           in: path
           name: jobId
           required: true
+          type: string
+        - description: '[Experimental] The geographic location where the job should run. Required except for US and EU.'
+          in: query
+          name: location
           type: string
         - description: Maximum number of results to read
           in: query
@@ -1243,6 +1255,9 @@ definitions:
                 type: string
               description: The labels associated with this dataset. You can use these to organize and group your datasets.
               type: object
+            location:
+              description: '[Experimental] The geographic location where the data resides.'
+              type: string
           type: object
         type: array
       etag:
@@ -1555,6 +1570,10 @@ definitions:
       extract:
         $ref: '#/definitions/JobConfigurationExtract'
         description: '[Pick one] Configures an extract job.'
+      jobTimeoutMs:
+        description: '[Optional] Job timeout in milliseconds. If this time limit is exceeded, BigQuery may attempt to terminate the job.'
+        format: int64
+        type: string
       labels:
         additionalProperties:
           type: string
@@ -1825,12 +1844,19 @@ definitions:
       jobId:
         description: '[Required] The ID of the job. The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-). The maximum length is 1,024 characters.'
         type: string
+      location:
+        $ref: '#/definitions/Location'
+        description: '[Experimental] The geographic location of the job. Required except for US and EU.'
       projectId:
         description: '[Required] The ID of the project containing this job.'
         type: string
     type: object
   JobStatistics:
     properties:
+      completionRatio:
+        description: '[Experimental] [Output-only] Job progress (0.0 -> 1.0) for LOAD and EXTRACT jobs.'
+        format: double
+        type: number
       creationTime:
         description: '[Output-only] Creation time of this job, in milliseconds since the epoch. This field will be present on all jobs.'
         format: int64
@@ -1971,6 +1997,8 @@ definitions:
     description: Represents a single JSON object.
     type: object
   JsonValue: {}
+  Location:
+    type: string
   ProjectList:
     properties:
       etag:
@@ -2081,6 +2109,9 @@ definitions:
         default: 'bigquery#queryRequest'
         description: The resource type of the request.
         type: string
+      location:
+        $ref: '#/definitions/Location'
+        description: '[Experimental] The geographic location where the job should run. Required except for US and EU.'
       maxResults:
         description: '[Optional] The maximum number of rows of data to return per page of results. Setting this flag to a small value such as 1000 and then paging through results might improve reliability when the query result set is large. In addition to this limit, responses are also limited to 10 MB. By default, there is no maximum row count, and only the byte limit applies.'
         format: uint32
@@ -2164,10 +2195,6 @@ definitions:
         type: integer
       completedInputs:
         description: Total parallel units of work completed by this query.
-        format: int32
-        type: integer
-      completedInputsForActiveStages:
-        description: Total parallel units of work completed by the currently active stages.
         format: int32
         type: integer
       elapsedMs:

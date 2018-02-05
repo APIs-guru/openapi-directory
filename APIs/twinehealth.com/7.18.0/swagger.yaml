@@ -142,7 +142,7 @@ paths:
       tags:
         - action
     patch:
-      description: Updte a health action from a patient's plan.
+      description: Update a health action from a patient's plan.
       operationId: updateAction
       parameters:
         - description: Action identifier
@@ -369,7 +369,59 @@ paths:
       summary: List calendar events
       tags:
         - calendar event
+    post:
+      description: Create a calendar event for a patient. Attribute `all_day` must be set to `true` and `end_at` cannot be set for `plan-check-in` event type.
+      operationId: createCalendarEvent
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateCalendarEventRequest'
+      responses:
+        '201':
+          description: OK
+          schema:
+            $ref: '#/definitions/CreateCalendarEventResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/CreateOrUpdateErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/CreateOrUpdateErrorResponse'
+        '409':
+          description: Invalid Request
+          schema:
+            $ref: '#/definitions/CreateOrUpdateErrorResponse'
+      summary: Create calendar event
+      tags:
+        - calendar event
   '/calendar_event/{id}':
+    delete:
+      description: Delete a calendar event by id
+      operationId: deleteCalendarEvent
+      parameters:
+        - description: Calendar event identifier
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+      summary: Delete a calendar event
+      tags:
+        - calendar event
     get:
       description: Get a calendar event by id
       operationId: fetchCalendarEvent
@@ -393,6 +445,40 @@ paths:
           schema:
             $ref: '#/definitions/FetchErrorResponse'
       summary: Get a calendar event
+      tags:
+        - calendar event
+    patch:
+      description: 'Update a calendar event for a patient. Attribute `all_day` must be true and `end_at` cannot be specified for `plan-check-in` event type. To mark a calendar event as ''completed'', set `completed_at` and `completed_by` to desired values.  To mark a completed calendar event as ''not completed'', set `completed_at` and `completed_by` to `null`.'
+      operationId: updateCalendarEvent
+      parameters:
+        - description: Calendar event identifier
+          in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateCalendarEventRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/UpdateCalendarEventResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/FetchErrorResponse'
+        '409':
+          description: Invalid Request
+          schema:
+            $ref: '#/definitions/CreateOrUpdateErrorResponse'
+      summary: Update a calendar event
       tags:
         - calendar event
   '/coach/{id}':
@@ -2170,8 +2256,10 @@ definitions:
       attributes:
         all_day: true
         attendees:
-          - response_status: accepted
+          - response_status: needsAction
             user: 5a0c8e27a9d454cc150997c9
+          - response_status: needsAction
+            user: 5a0c8e27a9d454cc150997f7
         completed_at: '2017-11-03T06:17:34.652Z'
         completed_by: 5a0c8e27a9d454cc150997c9
         created_at: '2017-10-20T10:59:40.000Z'
@@ -2198,7 +2286,7 @@ definitions:
       attributes:
         properties:
           all_day:
-            description: 'true if the calendar event is an all day event, false otherwise'
+            description: 'True if the calendar event is an all day event, false otherwise. Must be set to true for `plan-check-in` event type. If it is true, then `start_at` and `end_at` must also be set to beginning of day, except `plan-check-in` event type does not need an `end_at` date. If it is false, then `start_at` and `end_at` must be on the same day.'
             type: boolean
           attendees:
             description: List of attendees for the calendar event
@@ -2213,21 +2301,21 @@ definitions:
                     - accepted
                   type: string
                 user:
-                  type: object
+                  type: string
               type: object
             type: array
           completed_at:
-            description: The date and time when the calendar event is marked as completed
+            description: The date and time when the calendar event is marked as completed. Only valid for `plan-check-in` event type.
             example: '2017-11-03T06:17:34.652Z'
             format: ISODate
             type: string
           completed_by:
-            description: The coach who marked the calendar event as completed
+            description: The coach who marked the calendar event as completed. Only valid for `plan-check-in` event type.
             type: object
           description:
             type: string
           end_at:
-            description: The date and time when the calendar event ends
+            description: The date and time when the calendar event ends. Not valid for `plan-check-in` event type.
             example: '2017-11-03T08:00:00.000Z'
             format: ISODate
             type: string
@@ -2243,10 +2331,10 @@ definitions:
             example: America/New_York
             type: string
           title:
-            description: The title of the calendar event
+            description: The title of the calendar event. Must not be empty or null
             type: string
           type:
-            description: The type of calendar event
+            description: The type of calendar event. Immutable after event creation.
             enum:
               - plan-check-in
               - reminder
@@ -2263,9 +2351,6 @@ definitions:
             example: /calendar_event/5a0c8e2aa9d454cc1509a142
             pattern: '/calendar_event/[0-9a-z]+'
             type: string
-        readOnly: true
-        required:
-          - self
         type: object
       relationships:
         properties:
@@ -2285,15 +2370,15 @@ definitions:
                     example: /pub/calendar_event/5a0c8e2aa9d454cc1509a142/owner
                     pattern: '/pub/calendar_event/[0-9a-z]+'
                     type: string
-                readOnly: true
                 type: object
-            readOnly: true
+            required:
+              - data
             type: object
         type: object
       type:
+        enum:
+          - calendar_event
         type: string
-    required:
-      - type
     type: object
   CoachResource:
     properties:
@@ -2461,6 +2546,62 @@ definitions:
         $ref: '#/definitions/CreateOrUpdateMetaResponse'
     required:
       - data
+    type: object
+  CreateCalendarEventRequest:
+    example:
+      data:
+        attributes:
+          all_day: true
+          attendees:
+            - user: 5a0c8e27a9d454cc150997c9
+            - user: 5a0c8e27a9d454cc150997f7
+          start_at: '2018-02-20T00:00:00Z'
+          time_zone: America/New_York
+          title: Plan Check-In
+          type: plan-check-in
+        relationships:
+          owner:
+            data:
+              id: 5a0c8e27a9d454cc150997f7
+              type: patient
+        type: calendar_event
+    properties:
+      data:
+        properties:
+          attributes:
+            allOf:
+              - $ref: '#/definitions/CalendarEventResource/properties/attributes'
+            required:
+              - type
+              - start_at
+              - title
+              - attendees
+          relationships:
+            properties:
+              owner:
+                properties:
+                  data:
+                    $ref: '#/definitions/CalendarEventResource/properties/relationships/properties/owner/properties/data'
+                required:
+                  - data
+                type: object
+            type: object
+          type:
+            $ref: '#/definitions/CalendarEventResource/properties/type'
+        required:
+          - type
+          - attributes
+          - relationships
+        type: object
+    required:
+      - data
+    type: object
+  CreateCalendarEventResponse:
+    properties:
+      data:
+        $ref: '#/definitions/CalendarEventResource'
+      meta:
+        $ref: '#/definitions/CreateOrUpdateMetaResponse'
     type: object
   CreateGroupRequest:
     example:
@@ -3028,8 +3169,6 @@ definitions:
         type: array
       meta:
         $ref: '#/definitions/FetchMetaResponse'
-    required:
-      - data
     type: object
   FetchCalendarEventsResponse:
     properties:
@@ -3049,8 +3188,6 @@ definitions:
         $ref: '#/definitions/CollectionResponseLinks'
       meta:
         $ref: '#/definitions/FetchMetaResponse'
-    required:
-      - data
     type: object
   FetchCoachResponse:
     example:
@@ -4798,9 +4935,6 @@ definitions:
         type: string
       type:
         type: string
-    required:
-      - type
-      - id
     type: object
   RewardEarningFulfillmentResource:
     properties:
@@ -5304,6 +5438,58 @@ definitions:
         $ref: '#/definitions/CreateOrUpdateMetaResponse'
     required:
       - data
+    type: object
+  UpdateCalendarEventRequest:
+    example:
+      data:
+        attributes:
+          all_day: false
+          attendees:
+            - user: 5a0c8e27a9d454cc150997c9
+            - user: 5a0c8e27a9d454cc150997f7
+          completed_at: '2017-11-03T06:17:34.652Z'
+          completed_by: 5a0c8e27a9d454cc150997c9
+          end_at: '2018-02-20T18:00:00Z'
+          start_at: '2018-02-20T14:00:00Z'
+          time_zone: America/New_York
+          title: Telephone Call
+          type: telephone-call
+        id: 42ba7c2da9d45415234345b3
+        relationships:
+          owner:
+            data:
+              id: 5a0c8e27a9d454cc150997f7
+              type: patient
+        type: calendar_event
+    properties:
+      data:
+        properties:
+          attributes:
+            allOf:
+              - $ref: '#/definitions/CalendarEventResource/properties/attributes'
+          id:
+            $ref: '#/definitions/CalendarEventResource/properties/id'
+          relationships:
+            properties:
+              owner:
+                properties:
+                  data:
+                    $ref: '#/definitions/CalendarEventResource/properties/relationships/properties/owner/properties/data'
+                type: object
+            type: object
+          type:
+            $ref: '#/definitions/CalendarEventResource/properties/type'
+        required:
+          - type
+          - id
+        type: object
+    type: object
+  UpdateCalendarEventResponse:
+    properties:
+      data:
+        $ref: '#/definitions/CalendarEventResource'
+      meta:
+        $ref: '#/definitions/CreateOrUpdateMetaResponse'
     type: object
   UpdatePatientPlanSummaryRequest:
     properties:

@@ -37,7 +37,7 @@ security:
       - user_impersonation
 parameters: {}
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byApiId':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byApi':
     get:
       description: Lists report records by API.
       operationId: Reports_ListByApi
@@ -144,7 +144,7 @@ paths:
       x-ms-odata: '#/definitions/ReportRecordContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byGeoId':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byGeo':
     get:
       description: Lists report records by GeoGraphy.
       operationId: Reports_ListByGeo
@@ -236,7 +236,7 @@ paths:
       x-ms-odata: '#/definitions/ReportRecordContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byOperationId':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byOperation':
     get:
       description: Lists report records by API Operations.
       operationId: Reports_ListByOperation
@@ -362,7 +362,7 @@ paths:
       x-ms-odata: '#/definitions/ReportRecordContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byProductId':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byProduct':
     get:
       description: Lists report records by Product.
       operationId: Reports_ListByProduct
@@ -469,7 +469,7 @@ paths:
       x-ms-odata: '#/definitions/ReportRecordContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byRequestId':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byRequest':
     get:
       description: Lists report records by Request.
       operationId: Reports_ListByRequest
@@ -576,7 +576,7 @@ paths:
                     userId: /users/1
       x-ms-odata: '#/definitions/RequestReportRecordContract'
       x-ms-pageable: {}
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/bySubscriptionId':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/bySubscription':
     get:
       description: Lists report records by subscription.
       operationId: Reports_ListBySubscription
@@ -705,7 +705,7 @@ paths:
       x-ms-odata: '#/definitions/ReportRecordContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byTimeId':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byTime':
     get:
       description: Lists report records by Time.
       operationId: Reports_ListByTime
@@ -819,7 +819,7 @@ paths:
       x-ms-odata: '#/definitions/ReportRecordContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byUserId':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byUser':
     get:
       description: Lists report records by User.
       operationId: Reports_ListByUser

@@ -268,6 +268,12 @@ parameters:
     name: userId
     required: true
     type: string
+  WebhookId:
+    description: The webhook ID
+    in: path
+    name: webhookId
+    required: true
+    type: string
   WebinarId:
     description: The webinar ID
     in: path
@@ -331,6 +337,8 @@ tags:
     name: Reports
   - description: Dashboard operations
     name: Dashboards
+  - description: Webhook operations
+    name: Webhooks
   - description: TSP operations
     name: TSP
 paths:
@@ -1221,7 +1229,7 @@ paths:
         - Meetings
   '/meetings/{meetingId}/registrants/status':
     put:
-      description: Update a registrants status for a meeting
+      description: Update a meeting registrant's status
       operationId: meetingRegistrantStatus
       parameters:
         - $ref: '#/parameters/MeetingId'
@@ -3136,6 +3144,141 @@ paths:
       summary: Create a webinar
       tags:
         - Webinars
+  /webhooks:
+    get:
+      description: List webhooks for a account
+      operationId: webhooks
+      parameters: []
+      responses:
+        '200':
+          description: List of Webhook objects returned
+          schema:
+            $ref: '#/definitions/WebhookList'
+        '404':
+          description: Webhook not found
+      summary: List webhooks
+      tags:
+        - Webhooks
+    post:
+      description: Create a webhook for a account
+      operationId: webhookCreate
+      parameters:
+        - description: Webhook
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Webhook'
+      responses:
+        '201':
+          description: Webhook Created
+          headers:
+            Content-Location:
+              description: Location of created Webhook
+              type: string
+          schema:
+            allOf:
+              - properties:
+                  webhook_id:
+                    description: Webhook Id.
+                    type: string
+              - $ref: '#/definitions/Webhook'
+              - properties:
+                  created_at:
+                    description: Webhook create time
+                    format: date-time
+                    type: string
+        '404':
+          description: Account not found
+      summary: Create a webhook
+      tags:
+        - Webhooks
+  /webhooks/options:
+    patch:
+      description: Switch webhook version
+      operationId: webhookSwitch
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              version:
+                enum:
+                  - v1
+                  - v2
+                type: string
+                x-enum-descriptions:
+                  - Version 1
+                  - Version 2
+            required:
+              - version
+      responses:
+        '204':
+          description: Webhook Subscribe version update
+        '404':
+          description: Webhook Subscribe not found
+      summary: Switch webhook version
+      tags:
+        - Webhooks
+  '/webhooks/{webhookId}':
+    delete:
+      description: Delete a webhook
+      operationId: webhookDelete
+      parameters:
+        - $ref: '#/parameters/WebhookId'
+      responses:
+        '204':
+          description: Webhook deleted
+        '404':
+          description: Webhook not found
+      summary: Delete a webhook
+      tags:
+        - Webhooks
+    get:
+      description: Retrieve a webhook
+      operationId: webhook
+      parameters:
+        - $ref: '#/parameters/WebhookId'
+      responses:
+        '200':
+          description: Webhook object returned
+          schema:
+            allOf:
+              - properties:
+                  webhook_id:
+                    description: Webhook Id.
+                    type: string
+              - $ref: '#/definitions/Webhook'
+              - properties:
+                  created_at:
+                    description: Webhook create time
+                    format: date-time
+                    type: string
+        '404':
+          description: Webinar not found
+      summary: Retrieve a webhook
+      tags:
+        - Webhooks
+    patch:
+      description: Update a webhook
+      operationId: webhookUpdate
+      parameters:
+        - $ref: '#/parameters/WebhookId'
+        - description: Webhook
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/WebhookUpdate'
+      responses:
+        '204':
+          description: Webhook Updated
+        '404':
+          description: Webhook not found
+      summary: Update a webhook
+      tags:
+        - Webhooks
   '/webinars/{webinarId}':
     delete:
       description: Delete a webinar
@@ -4129,7 +4272,7 @@ definitions:
       agenda:
         description: Agenda
         type: string
-      create_at:
+      created_at:
         description: Create time
         format: date-time
         type: string
@@ -5516,6 +5659,104 @@ definitions:
         description: Personal meeting room name.
         type: string
     type: object
+  Webhook:
+    description: 'Webhook base object, only available for version 2 webhook'
+    properties:
+      auth_password:
+        description: Webhook auth password.
+        maxLength: 64
+        type: string
+      auth_user:
+        description: Webhook auth user name.
+        maxLength: 128
+        type: string
+      events:
+        description: List of events objects.
+        enum:
+          - meeting_started
+          - meeting_ended
+          - meeting_jbh
+          - meeting_join
+          - recording_completed
+          - participant_joined
+          - participant_left
+        items:
+          type: string
+        type: array
+        x-enum-descriptions:
+          - The meeting has started.
+          - The meeting has ended.
+          - Attendee has joined a meeting before the host.
+          - 'Host hasn’t launched the meeting, attendee is waiting.'
+          - All the Cloud Recordings have completed processing and is available.
+          - Participant has joined the meeting.
+          - Participant has leaved the meeting.
+      url:
+        description: Webhook endpoint
+        maxLength: 256
+        type: string
+    required:
+      - url
+      - auth_user
+      - auth_password
+      - events
+    type: object
+  WebhookList:
+    allOf:
+      - properties:
+          total_records:
+            description: The number of all records available across pages.
+            type: integer
+          webhooks:
+            description: List of Webhook objects.
+            items:
+              allOf:
+                - properties:
+                    webhook_id:
+                      description: Webhook Id.
+                      type: string
+                - $ref: '#/definitions/Webhook'
+            type: array
+    description: List of Webhooks
+    title: Webhook List
+    type: object
+  WebhookUpdate:
+    description: Webhook base object
+    properties:
+      auth_password:
+        description: Webhook auth password.
+        maxLength: 64
+        type: string
+      auth_user:
+        description: Webhook auth user name.
+        maxLength: 128
+        type: string
+      events:
+        description: List of events objects.
+        enum:
+          - meeting_started
+          - meeting_ended
+          - meeting_jbh
+          - meeting_join
+          - recording_completed
+          - participant_joined
+          - participant_left
+        items:
+          type: string
+        type: array
+        x-enum-descriptions:
+          - The meeting has started.
+          - The meeting has ended.
+          - Attendee has joined a meeting before the host.
+          - 'Host hasn’t launched the meeting, attendee is waiting.'
+          - All the Cloud Recordings has completed processing and is available.
+          - Participant has joined the meeting.
+          - Participant has leaved the meeting.
+      url:
+        description: Webhook endpoint.
+        maxLength: 256
+        type: string
+    type: object
   Webinar:
     allOf:
       - $ref: '#/definitions/SessionWebinar'
@@ -5527,7 +5768,7 @@ definitions:
       agenda:
         description: Webinar agenda
         type: string
-      create_at:
+      created_at:
         description: Create time
         format: date-time
         type: string

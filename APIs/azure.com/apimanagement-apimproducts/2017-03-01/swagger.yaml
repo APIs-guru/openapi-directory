@@ -359,6 +359,83 @@ paths:
                   subscriptionRequired: true
                   subscriptionsLimit: 1
                 type: Microsoft.ApiManagement/service/products
+    head:
+      description: Gets the entity state (Etag) version of the product specified by its identifier.
+      operationId: Product_GetEntityTag
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/ProductIdParameter'
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Specified Product entity exists and current entity state version is present in the ETag header.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - Products
+      x-ms-examples:
+        ApiManagementHeadProduct:
+          parameters:
+            api-version: '2017-03-01'
+            productId: unlimited
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              headers:
+                etag: AAAAAAAAAAa=
     patch:
       description: Update product.
       operationId: Product_Update
@@ -648,6 +725,13 @@ paths:
                               maxLength: 100
                               minLength: 1
                               type: string
+                            apiVersion:
+                              description: Indicates the Version identifier of the API if the API is versioned
+                              maxLength: 100
+                              type: string
+                            apiVersionSetId:
+                              description: A resource identifier for the related ApiVersionSet.
+                              type: string
                             authenticationSettings:
                               description: API Authentication Settings.
                               properties:
@@ -665,9 +749,11 @@ paths:
                               type: string
                             isCurrent:
                               description: Indicates if API revision is current api revision.
+                              readOnly: true
                               type: boolean
                             isOnline:
                               description: Indicates if API revision is accessible via the gateway.
+                              readOnly: true
                               type: boolean
                             subscriptionKeyParameterNames:
                               description: Subscription key parameter names details.
@@ -694,6 +780,28 @@ paths:
                                 name: ApiType
                       description: Api Entity Properties
                       properties:
+                        apiVersionSet:
+                          description: 'An API Version Set contains the common configuration for a set of API Versions relating '
+                          properties:
+                            description:
+                              description: Description of API Version Set.
+                              type: string
+                            id:
+                              description: Identifier for existing API Version Set. Omit this value to create a new Version Set.
+                              type: string
+                            versionHeaderName:
+                              description: Name of HTTP header parameter that indicates the API Version if versioningScheme is set to `header`.
+                              type: string
+                            versionQueryName:
+                              description: Name of query parameter that indicates the API Version if versioningScheme is set to `query`.
+                              type: string
+                            versioningScheme:
+                              description: An value that determines where the API Version identifer will be located in a HTTP request.
+                              enum:
+                                - Segment
+                                - Query
+                                - Header
+                              type: string
                         displayName:
                           description: API name.
                           maxLength: 300
@@ -932,6 +1040,13 @@ paths:
                         maxLength: 100
                         minLength: 1
                         type: string
+                      apiVersion:
+                        description: Indicates the Version identifier of the API if the API is versioned
+                        maxLength: 100
+                        type: string
+                      apiVersionSetId:
+                        description: A resource identifier for the related ApiVersionSet.
+                        type: string
                       authenticationSettings:
                         description: API Authentication Settings.
                         properties:
@@ -949,9 +1064,11 @@ paths:
                         type: string
                       isCurrent:
                         description: Indicates if API revision is current api revision.
+                        readOnly: true
                         type: boolean
                       isOnline:
                         description: Indicates if API revision is accessible via the gateway.
+                        readOnly: true
                         type: boolean
                       subscriptionKeyParameterNames:
                         description: Subscription key parameter names details.
@@ -978,6 +1095,28 @@ paths:
                           name: ApiType
                 description: Api Entity Properties
                 properties:
+                  apiVersionSet:
+                    description: 'An API Version Set contains the common configuration for a set of API Versions relating '
+                    properties:
+                      description:
+                        description: Description of API Version Set.
+                        type: string
+                      id:
+                        description: Identifier for existing API Version Set. Omit this value to create a new Version Set.
+                        type: string
+                      versionHeaderName:
+                        description: Name of HTTP header parameter that indicates the API Version if versioningScheme is set to `header`.
+                        type: string
+                      versionQueryName:
+                        description: Name of query parameter that indicates the API Version if versioningScheme is set to `query`.
+                        type: string
+                      versioningScheme:
+                        description: An value that determines where the API Version identifer will be located in a HTTP request.
+                        enum:
+                          - Segment
+                          - Query
+                          - Header
+                        type: string
                   displayName:
                     description: API name.
                     maxLength: 300
@@ -1036,6 +1175,13 @@ paths:
                         maxLength: 100
                         minLength: 1
                         type: string
+                      apiVersion:
+                        description: Indicates the Version identifier of the API if the API is versioned
+                        maxLength: 100
+                        type: string
+                      apiVersionSetId:
+                        description: A resource identifier for the related ApiVersionSet.
+                        type: string
                       authenticationSettings:
                         description: API Authentication Settings.
                         properties:
@@ -1053,9 +1199,11 @@ paths:
                         type: string
                       isCurrent:
                         description: Indicates if API revision is current api revision.
+                        readOnly: true
                         type: boolean
                       isOnline:
                         description: Indicates if API revision is accessible via the gateway.
+                        readOnly: true
                         type: boolean
                       subscriptionKeyParameterNames:
                         description: Subscription key parameter names details.
@@ -1082,6 +1230,28 @@ paths:
                           name: ApiType
                 description: Api Entity Properties
                 properties:
+                  apiVersionSet:
+                    description: 'An API Version Set contains the common configuration for a set of API Versions relating '
+                    properties:
+                      description:
+                        description: Description of API Version Set.
+                        type: string
+                      id:
+                        description: Identifier for existing API Version Set. Omit this value to create a new Version Set.
+                        type: string
+                      versionHeaderName:
+                        description: Name of HTTP header parameter that indicates the API Version if versioningScheme is set to `header`.
+                        type: string
+                      versionQueryName:
+                        description: Name of query parameter that indicates the API Version if versioningScheme is set to `query`.
+                        type: string
+                      versioningScheme:
+                        description: An value that determines where the API Version identifer will be located in a HTTP request.
+                        enum:
+                          - Segment
+                          - Query
+                          - Header
+                        type: string
                   displayName:
                     description: API name.
                     maxLength: 300

@@ -36,10 +36,22 @@ security:
   - azure_auth:
       - user_impersonation
 parameters:
+  AccountNameParameter:
+    description: The name of the Data Lake Store account.
+    in: path
+    name: accountName
+    required: true
+    type: string
   ApiVersionParameter:
     description: Client Api Version.
     in: query
     name: api-version
+    required: true
+    type: string
+  ResourceGroupNameParameter:
+    description: The name of the Azure resource group.
+    in: path
+    name: resourceGroupName
     required: true
     type: string
   SubscriptionIdParameter:
@@ -80,8 +92,9 @@ paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeStore/accounts':
     get:
       description: 'Lists the Data Lake Store accounts within the subscription. The response includes a link to the next page of results, if any.'
-      operationId: Account_List
+      operationId: Accounts_List
       parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
         - description: OData filter. Optional.
           in: query
           name: $filter
@@ -117,14 +130,13 @@ paths:
           required: false
           type: boolean
         - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Successfully retrieved the list of accounts.
           schema:
             $ref: '#/definitions/DataLakeStoreAccountListResult'
       tags:
-        - Account
+        - Accounts
       x-ms-examples:
         Lists the Data Lake Store accounts within the subscription:
           parameters:
@@ -162,13 +174,13 @@ paths:
       description: Gets subscription-level properties and limits for Data Lake Store specified by resource location.
       operationId: Locations_GetCapability
       parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
         - description: The resource location without whitespace.
           in: path
           name: location
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Successfully retrieved the subscription-level properties and limits for Data Lake Store specified by resource location.
@@ -196,8 +208,9 @@ paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeStore/locations/{location}/checkNameAvailability':
     post:
       description: Checks whether the specified account name is available or taken.
-      operationId: Account_CheckNameAvailability
+      operationId: Accounts_CheckNameAvailability
       parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
         - description: The resource location without whitespace.
           in: path
           name: location
@@ -210,14 +223,13 @@ paths:
           schema:
             $ref: '#/definitions/CheckNameAvailabilityParameters'
         - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Successfully retrieved the Data Lake Store account name availability information.
           schema:
             $ref: '#/definitions/NameAvailabilityInformation'
       tags:
-        - Account
+        - Accounts
       x-ms-examples:
         Checks whether the specified account name is available or taken:
           parameters:
@@ -236,13 +248,10 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts':
     get:
       description: 'Lists the Data Lake Store accounts within a specific resource group. The response includes a link to the next page of results, if any.'
-      operationId: Account_ListByResourceGroup
+      operationId: Accounts_ListByResourceGroup
       parameters:
-        - description: The name of the Azure resource group that contains the Data Lake Store account(s).
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
         - description: OData filter. Optional.
           in: query
           name: $filter
@@ -278,14 +287,13 @@ paths:
           required: false
           type: boolean
         - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Successfully retrieved the list of accounts in the specified resource group.
           schema:
             $ref: '#/definitions/DataLakeStoreAccountListResult'
       tags:
-        - Account
+        - Accounts
       x-ms-examples:
         Lists the Data Lake Store accounts within a specific resource group:
           parameters:
@@ -319,528 +327,15 @@ paths:
       x-ms-odata: '#/definitions/DataLakeStoreAccountBasic'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/enableKeyVault':
-    post:
-      description: Attempts to enable a user managed Key Vault for encryption of the specified Data Lake Store account.
-      operationId: Account_EnableKeyVault
-      parameters:
-        - description: The name of the Azure resource group that contains the Data Lake Store account.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the Data Lake Store account to attempt to enable the Key Vault for.
-          in: path
-          name: accountName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: Successfully enabled the user-managed Key Vault settings used for encrypting this Data Lake Store account.
-      tags:
-        - Account
-      x-ms-examples:
-        Attempts to enable a user managed Key Vault for encryption of the specified Data Lake Store account:
-          parameters:
-            accountName: contosoadla
-            api-version: '2016-11-01'
-            resourceGroupName: contosorg
-            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-          responses:
-            '200': {}
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules':
-    get:
-      description: Lists the Data Lake Store firewall rules within the specified Data Lake Store account.
-      operationId: FirewallRules_ListByAccount
-      parameters:
-        - description: The name of the Azure resource group that contains the Data Lake Store account.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the Data Lake Store account from which to get the firewall rules.
-          in: path
-          name: accountName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: Successfully retrieved the list of firewall rules.
-          schema:
-            $ref: '#/definitions/DataLakeStoreFirewallRuleListResult'
-      tags:
-        - FirewallRules
-      x-ms-examples:
-        Lists the Data Lake Store firewall rules within the specified Data Lake Store account:
-          parameters:
-            accountName: contosoadla
-            api-version: '2016-11-01'
-            resourceGroupName: contosorg
-            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-          responses:
-            '200':
-              body:
-                nextLink: 'https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeStore/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>'
-                value:
-                  - id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                    name: test_rule
-                    properties:
-                      endIpAddress: 2.2.2.2
-                      startIpAddress: 1.1.1.1
-                    type: test_type
-      x-ms-pageable:
-        nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules/{firewallRuleName}':
-    delete:
-      description: Deletes the specified firewall rule from the specified Data Lake Store account
-      operationId: FirewallRules_Delete
-      parameters:
-        - description: The name of the Azure resource group that contains the Data Lake Store account.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the Data Lake Store account from which to delete the firewall rule.
-          in: path
-          name: accountName
-          required: true
-          type: string
-        - description: The name of the firewall rule to delete.
-          in: path
-          name: firewallRuleName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: Successfully deleted the specified firewall rule.
-        '204':
-          description: The specified firewall rule does not exist or was already deleted.
-      tags:
-        - FirewallRules
-      x-ms-examples:
-        Deletes the specified firewall rule from the specified Data Lake Store account:
-          parameters:
-            accountName: contosoadla
-            api-version: '2016-11-01'
-            firewallRuleName: test_rule
-            resourceGroupName: contosorg
-            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-          responses:
-            '200': {}
-            '204': {}
-    get:
-      description: Gets the specified Data Lake Store firewall rule.
-      operationId: FirewallRules_Get
-      parameters:
-        - description: The name of the Azure resource group that contains the Data Lake Store account.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the Data Lake Store account from which to get the firewall rule.
-          in: path
-          name: accountName
-          required: true
-          type: string
-        - description: The name of the firewall rule to retrieve.
-          in: path
-          name: firewallRuleName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: Successfully retrieved the firewall rule.
-          schema:
-            $ref: '#/definitions/FirewallRule'
-      tags:
-        - FirewallRules
-      x-ms-examples:
-        Gets the specified Data Lake Store firewall rule:
-          parameters:
-            accountName: contosoadla
-            api-version: '2016-11-01'
-            firewallRuleName: test_rule
-            resourceGroupName: contosorg
-            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-          responses:
-            '200':
-              body:
-                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                name: test_rule
-                properties:
-                  endIpAddress: 2.2.2.2
-                  startIpAddress: 1.1.1.1
-                type: test_type
-    patch:
-      description: Updates the specified firewall rule.
-      operationId: FirewallRules_Update
-      parameters:
-        - description: The name of the Azure resource group that contains the Data Lake Store account.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the Data Lake Store account to which to update the firewall rule.
-          in: path
-          name: accountName
-          required: true
-          type: string
-        - description: The name of the firewall rule to update.
-          in: path
-          name: firewallRuleName
-          required: true
-          type: string
-        - description: Parameters supplied to update the firewall rule.
-          in: body
-          name: parameters
-          required: false
-          schema:
-            $ref: '#/definitions/UpdateFirewallRuleParameters'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: Successfully updated the specified firewall rule.
-          schema:
-            $ref: '#/definitions/FirewallRule'
-      tags:
-        - FirewallRules
-      x-ms-examples:
-        Updates the specified firewall rule:
-          parameters:
-            accountName: contosoadla
-            api-version: '2016-11-01'
-            firewallRuleName: test_rule
-            parameters:
-              properties:
-                endIpAddress: 2.2.2.2
-                startIpAddress: 1.1.1.1
-            resourceGroupName: contosorg
-            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-          responses:
-            '200':
-              body:
-                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                name: test_rule
-                properties:
-                  endIpAddress: 2.2.2.2
-                  startIpAddress: 1.1.1.1
-                type: test_type
-    put:
-      description: 'Creates or updates the specified firewall rule. During update, the firewall rule with the specified name will be replaced with this new firewall rule.'
-      operationId: FirewallRules_CreateOrUpdate
-      parameters:
-        - description: The name of the Azure resource group that contains the Data Lake Store account.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the Data Lake Store account to add or replace the firewall rule.
-          in: path
-          name: accountName
-          required: true
-          type: string
-        - description: The name of the firewall rule to create or update.
-          in: path
-          name: firewallRuleName
-          required: true
-          type: string
-        - description: Parameters supplied to create or update the firewall rule.
-          in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/CreateOrUpdateFirewallRuleParameters'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: Successfully created or updated the specified firewall rule.
-          schema:
-            $ref: '#/definitions/FirewallRule'
-      tags:
-        - FirewallRules
-      x-ms-examples:
-        'Creates or updates the specified firewall rule. During update, the firewall rule with the specified name will be replaced with this new firewall rule':
-          parameters:
-            accountName: contosoadla
-            api-version: '2016-11-01'
-            firewallRuleName: test_rule
-            parameters:
-              name: test_rule
-              properties:
-                endIpAddress: 2.2.2.2
-                startIpAddress: 1.1.1.1
-            resourceGroupName: contosorg
-            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-          responses:
-            '200':
-              body:
-                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                name: test_rule
-                properties:
-                  endIpAddress: 2.2.2.2
-                  startIpAddress: 1.1.1.1
-                type: test_type
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/trustedIdProviders':
-    get:
-      description: Lists the Data Lake Store trusted identity providers within the specified Data Lake Store account.
-      operationId: TrustedIdProviders_ListByAccount
-      parameters:
-        - description: The name of the Azure resource group that contains the Data Lake Store account.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the Data Lake Store account from which to get the trusted identity providers.
-          in: path
-          name: accountName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: Successfully retrieved the list of trusted identity providers.
-          schema:
-            $ref: '#/definitions/DataLakeStoreTrustedIdProviderListResult'
-      tags:
-        - TrustedIdProviders
-      x-ms-examples:
-        Lists the Data Lake Store trusted identity providers within the specified Data Lake Store account:
-          parameters:
-            accountName: contosoadla
-            api-version: '2016-11-01'
-            resourceGroupName: contosorg
-            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-          responses:
-            '200':
-              body:
-                nextLink: 'https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeStore/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>'
-                value:
-                  - id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                    name: test_trusted_id_provider_name
-                    properties:
-                      idProvider: 'https://sts.windows.net/ea9ec534-a3e3-4e45-ad36-3afc5bb291c1'
-                    type: test_type
-      x-ms-pageable:
-        nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/trustedIdProviders/{trustedIdProviderName}':
-    delete:
-      description: Deletes the specified trusted identity provider from the specified Data Lake Store account
-      operationId: TrustedIdProviders_Delete
-      parameters:
-        - description: The name of the Azure resource group that contains the Data Lake Store account.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the Data Lake Store account from which to delete the trusted identity provider.
-          in: path
-          name: accountName
-          required: true
-          type: string
-        - description: The name of the trusted identity provider to delete.
-          in: path
-          name: trustedIdProviderName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: Successfully deleted the specified trusted identity provider details.
-        '204':
-          description: The specified trusted identity provider was not found.
-      tags:
-        - TrustedIdProviders
-      x-ms-examples:
-        Deletes the specified trusted identity provider from the specified Data Lake Store account:
-          parameters:
-            accountName: contosoadla
-            api-version: '2016-11-01'
-            resourceGroupName: contosorg
-            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            trustedIdProviderName: test_trusted_id_provider_name
-          responses:
-            '200': {}
-            '204': {}
-    get:
-      description: Gets the specified Data Lake Store trusted identity provider.
-      operationId: TrustedIdProviders_Get
-      parameters:
-        - description: The name of the Azure resource group that contains the Data Lake Store account.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the Data Lake Store account from which to get the trusted identity provider.
-          in: path
-          name: accountName
-          required: true
-          type: string
-        - description: The name of the trusted identity provider to retrieve.
-          in: path
-          name: trustedIdProviderName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: Successfully retrieved details of the specified trusted identity provider.
-          schema:
-            $ref: '#/definitions/TrustedIdProvider'
-      tags:
-        - TrustedIdProviders
-      x-ms-examples:
-        Gets the specified Data Lake Store trusted identity provider:
-          parameters:
-            accountName: contosoadla
-            api-version: '2016-11-01'
-            resourceGroupName: contosorg
-            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            trustedIdProviderName: test_trusted_id_provider_name
-          responses:
-            '200':
-              body:
-                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                name: test_trusted_id_provider_name
-                properties:
-                  idProvider: 'https://sts.windows.net/ea9ec534-a3e3-4e45-ad36-3afc5bb291c1'
-                type: test_type
-    patch:
-      description: Updates the specified trusted identity provider.
-      operationId: TrustedIdProviders_Update
-      parameters:
-        - description: The name of the Azure resource group that contains the Data Lake Store account.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the Data Lake Store account to which to update the trusted identity provider.
-          in: path
-          name: accountName
-          required: true
-          type: string
-        - description: The name of the trusted identity provider. This is used for differentiation of providers in the account.
-          in: path
-          name: trustedIdProviderName
-          required: true
-          type: string
-        - description: Parameters supplied to update the trusted identity provider.
-          in: body
-          name: parameters
-          required: false
-          schema:
-            $ref: '#/definitions/UpdateTrustedIdProviderParameters'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: Successfully added the trusted identity provider.
-          schema:
-            $ref: '#/definitions/TrustedIdProvider'
-      tags:
-        - TrustedIdProviders
-      x-ms-examples:
-        Updates the specified trusted identity provider:
-          parameters:
-            accountName: contosoadla
-            api-version: '2016-11-01'
-            parameters:
-              properties:
-                idProvider: 'https://sts.windows.net/ea9ec534-a3e3-4e45-ad36-3afc5bb291c1'
-            resourceGroupName: contosorg
-            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            trustedIdProviderName: test_trusted_id_provider_name
-          responses:
-            '200':
-              body:
-                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                name: test_trusted_id_provider_name
-                properties:
-                  idProvider: 'https://sts.windows.net/ea9ec534-a3e3-4e45-ad36-3afc5bb291c1'
-                type: test_type
-    put:
-      description: 'Creates or updates the specified trusted identity provider. During update, the trusted identity provider with the specified name will be replaced with this new provider'
-      operationId: TrustedIdProviders_CreateOrUpdate
-      parameters:
-        - description: The name of the Azure resource group that contains the Data Lake Store account.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the Data Lake Store account to add or replace the trusted identity provider.
-          in: path
-          name: accountName
-          required: true
-          type: string
-        - description: The name of the trusted identity provider. This is used for differentiation of providers in the account.
-          in: path
-          name: trustedIdProviderName
-          required: true
-          type: string
-        - description: Parameters supplied to create or replace the trusted identity provider.
-          in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/CreateOrUpdateTrustedIdProviderParameters'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: Successfully added the trusted identity provider.
-          schema:
-            $ref: '#/definitions/TrustedIdProvider'
-      tags:
-        - TrustedIdProviders
-      x-ms-examples:
-        'Creates or updates the specified trusted identity provider. During update, the trusted identity provider with the specified name will be replaced with this new provider':
-          parameters:
-            accountName: contosoadla
-            api-version: '2016-11-01'
-            parameters:
-              name: test_trusted_id_provider_name
-              properties:
-                idProvider: 'https://sts.windows.net/ea9ec534-a3e3-4e45-ad36-3afc5bb291c1'
-            resourceGroupName: contosorg
-            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-            trustedIdProviderName: test_trusted_id_provider_name
-          responses:
-            '200':
-              body:
-                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                name: test_trusted_id_provider_name
-                properties:
-                  idProvider: 'https://sts.windows.net/ea9ec534-a3e3-4e45-ad36-3afc5bb291c1'
-                type: test_type
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{name}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}':
     delete:
       description: Deletes the specified Data Lake Store account.
-      operationId: Account_Delete
+      operationId: Accounts_Delete
       parameters:
-        - description: The name of the Azure resource group that contains the Data Lake Store account.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the Data Lake Store account to delete.
-          in: path
-          name: name
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: Successfully deleted the specified account.
@@ -849,12 +344,12 @@ paths:
         '204':
           description: The specified account was not found.
       tags:
-        - Account
+        - Accounts
       x-ms-examples:
         Deletes the specified Data Lake Store account:
           parameters:
+            accountName: contosoadla
             api-version: '2016-11-01'
-            name: contosoadla
             resourceGroupName: contosorg
             subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
           responses:
@@ -864,32 +359,24 @@ paths:
       x-ms-long-running-operation: true
     get:
       description: Gets the specified Data Lake Store account.
-      operationId: Account_Get
+      operationId: Accounts_Get
       parameters:
-        - description: The name of the Azure resource group that contains the Data Lake Store account.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the Data Lake Store account to retrieve.
-          in: path
-          name: name
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: Successfully retrieved details of the specified account.
           schema:
             $ref: '#/definitions/DataLakeStoreAccount'
       tags:
-        - Account
+        - Accounts
       x-ms-examples:
         Gets the specified Data Lake Store account:
           parameters:
+            accountName: contosoadla
             api-version: '2016-11-01'
-            name: contosoadla
             resourceGroupName: contosorg
             subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
           responses:
@@ -941,26 +428,18 @@ paths:
                 type: test_type
     patch:
       description: Updates the specified Data Lake Store account information.
-      operationId: Account_Update
+      operationId: Accounts_Update
       parameters:
-        - description: The name of the Azure resource group that contains the Data Lake Store account.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the Data Lake Store account to update.
-          in: path
-          name: name
-          required: true
-          type: string
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
         - description: Parameters supplied to update the Data Lake Store account.
           in: body
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/DataLakeStoreAccountUpdateParameters'
+            $ref: '#/definitions/UpdateDataLakeStoreAccountParameters'
         - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Successfully updated the account details.
@@ -975,12 +454,12 @@ paths:
           schema:
             $ref: '#/definitions/DataLakeStoreAccount'
       tags:
-        - Account
+        - Accounts
       x-ms-examples:
         Updates the specified Data Lake Store account information:
           parameters:
+            accountName: contosoadla
             api-version: '2016-11-01'
-            name: contosoadla
             parameters:
               properties:
                 defaultGroup: test_default_group
@@ -1088,29 +567,67 @@ paths:
                 tags:
                   test_key: test_value
                 type: test_type
+            '202':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                identity:
+                  principalId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                  tenantId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab346
+                  type: SystemAssigned
+                location: test_location
+                name: contosoadla
+                properties:
+                  accountId: 94f4bf5d-78a9-4c31-8aa7-b34d07bad898
+                  creationTime: '2017-04-14T13:21:56.6819037-07:00'
+                  currentTier: Consumption
+                  defaultGroup: test_default_group
+                  encryptionConfig:
+                    keyVaultMetaInfo:
+                      encryptionKeyName: test_encryption_key_name
+                      encryptionKeyVersion: encryption_key_version
+                      keyVaultResourceId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                    type: UserManaged
+                  encryptionProvisioningState: Succeeded
+                  encryptionState: Enabled
+                  endpoint: testadlfs17607.azuredatalakestore.net
+                  firewallAllowAzureIps: Enabled
+                  firewallRules:
+                    - id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                      name: test_rule
+                      properties:
+                        endIpAddress: 2.2.2.2
+                        startIpAddress: 1.1.1.1
+                      type: test_type
+                  firewallState: Enabled
+                  lastModifiedTime: '2017-04-14T13:21:56.6819037-07:00'
+                  newTier: Consumption
+                  provisioningState: Succeeded
+                  state: Active
+                  trustedIdProviderState: Enabled
+                  trustedIdProviders:
+                    - id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                      name: test_trusted_id_provider_name
+                      properties:
+                        idProvider: 'https://sts.windows.net/ea9ec534-a3e3-4e45-ad36-3afc5bb291c1'
+                      type: test_type
+                tags:
+                  test_key: test_value
+                type: test_type
       x-ms-long-running-operation: true
     put:
       description: Creates the specified Data Lake Store account.
-      operationId: Account_Create
+      operationId: Accounts_Create
       parameters:
-        - description: The name of the Azure resource group that contains the Data Lake Store account.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the Data Lake Store account to create.
-          in: path
-          name: name
-          required: true
-          type: string
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
         - description: Parameters supplied to create the Data Lake Store account.
           in: body
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/DataLakeStoreAccount'
+            $ref: '#/definitions/CreateDataLakeStoreAccountParameters'
         - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Successfully created the account.
@@ -1121,12 +638,12 @@ paths:
           schema:
             $ref: '#/definitions/DataLakeStoreAccount'
       tags:
-        - Account
+        - Accounts
       x-ms-examples:
         Creates the specified Data Lake Store account:
           parameters:
+            accountName: contosoadla
             api-version: '2016-11-01'
-            name: contosoadla
             parameters:
               identity:
                 type: SystemAssigned
@@ -1251,6 +768,421 @@ paths:
                   test_key: test_value
                 type: test_type
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/enableKeyVault':
+    post:
+      description: Attempts to enable a user managed Key Vault for encryption of the specified Data Lake Store account.
+      operationId: Accounts_EnableKeyVault
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully enabled the user-managed Key Vault settings used for encrypting this Data Lake Store account.
+      tags:
+        - Accounts
+      x-ms-examples:
+        Attempts to enable a user managed Key Vault for encryption of the specified Data Lake Store account:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200': {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules':
+    get:
+      description: Lists the Data Lake Store firewall rules within the specified Data Lake Store account.
+      operationId: FirewallRules_ListByAccount
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the list of firewall rules.
+          schema:
+            $ref: '#/definitions/FirewallRuleListResult'
+      tags:
+        - FirewallRules
+      x-ms-examples:
+        Lists the Data Lake Store firewall rules within the specified Data Lake Store account:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                nextLink: 'https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeStore/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>'
+                value:
+                  - id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                    name: test_rule
+                    properties:
+                      endIpAddress: 2.2.2.2
+                      startIpAddress: 1.1.1.1
+                    type: test_type
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules/{firewallRuleName}':
+    delete:
+      description: Deletes the specified firewall rule from the specified Data Lake Store account
+      operationId: FirewallRules_Delete
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
+        - description: The name of the firewall rule to delete.
+          in: path
+          name: firewallRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully deleted the specified firewall rule.
+        '204':
+          description: The specified firewall rule does not exist or was already deleted.
+      tags:
+        - FirewallRules
+      x-ms-examples:
+        Deletes the specified firewall rule from the specified Data Lake Store account:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            firewallRuleName: test_rule
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Gets the specified Data Lake Store firewall rule.
+      operationId: FirewallRules_Get
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
+        - description: The name of the firewall rule to retrieve.
+          in: path
+          name: firewallRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the firewall rule.
+          schema:
+            $ref: '#/definitions/FirewallRule'
+      tags:
+        - FirewallRules
+      x-ms-examples:
+        Gets the specified Data Lake Store firewall rule:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            firewallRuleName: test_rule
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                name: test_rule
+                properties:
+                  endIpAddress: 2.2.2.2
+                  startIpAddress: 1.1.1.1
+                type: test_type
+    patch:
+      description: Updates the specified firewall rule.
+      operationId: FirewallRules_Update
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
+        - description: The name of the firewall rule to update.
+          in: path
+          name: firewallRuleName
+          required: true
+          type: string
+        - description: Parameters supplied to update the firewall rule.
+          in: body
+          name: parameters
+          required: false
+          schema:
+            $ref: '#/definitions/UpdateFirewallRuleParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully updated the specified firewall rule.
+          schema:
+            $ref: '#/definitions/FirewallRule'
+      tags:
+        - FirewallRules
+      x-ms-examples:
+        Updates the specified firewall rule:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            firewallRuleName: test_rule
+            parameters:
+              properties:
+                endIpAddress: 2.2.2.2
+                startIpAddress: 1.1.1.1
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                name: test_rule
+                properties:
+                  endIpAddress: 2.2.2.2
+                  startIpAddress: 1.1.1.1
+                type: test_type
+    put:
+      description: 'Creates or updates the specified firewall rule. During update, the firewall rule with the specified name will be replaced with this new firewall rule.'
+      operationId: FirewallRules_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
+        - description: The name of the firewall rule to create or update.
+          in: path
+          name: firewallRuleName
+          required: true
+          type: string
+        - description: Parameters supplied to create or update the firewall rule.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CreateOrUpdateFirewallRuleParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully created or updated the specified firewall rule.
+          schema:
+            $ref: '#/definitions/FirewallRule'
+      tags:
+        - FirewallRules
+      x-ms-examples:
+        'Creates or updates the specified firewall rule. During update, the firewall rule with the specified name will be replaced with this new firewall rule':
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            firewallRuleName: test_rule
+            parameters:
+              properties:
+                endIpAddress: 2.2.2.2
+                startIpAddress: 1.1.1.1
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                name: test_rule
+                properties:
+                  endIpAddress: 2.2.2.2
+                  startIpAddress: 1.1.1.1
+                type: test_type
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/trustedIdProviders':
+    get:
+      description: Lists the Data Lake Store trusted identity providers within the specified Data Lake Store account.
+      operationId: TrustedIdProviders_ListByAccount
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the list of trusted identity providers.
+          schema:
+            $ref: '#/definitions/TrustedIdProviderListResult'
+      tags:
+        - TrustedIdProviders
+      x-ms-examples:
+        Lists the Data Lake Store trusted identity providers within the specified Data Lake Store account:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+          responses:
+            '200':
+              body:
+                nextLink: 'https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeStore/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>'
+                value:
+                  - id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                    name: test_trusted_id_provider_name
+                    properties:
+                      idProvider: 'https://sts.windows.net/ea9ec534-a3e3-4e45-ad36-3afc5bb291c1'
+                    type: test_type
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/trustedIdProviders/{trustedIdProviderName}':
+    delete:
+      description: Deletes the specified trusted identity provider from the specified Data Lake Store account
+      operationId: TrustedIdProviders_Delete
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
+        - description: The name of the trusted identity provider to delete.
+          in: path
+          name: trustedIdProviderName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully deleted the specified trusted identity provider details.
+        '204':
+          description: The specified trusted identity provider was not found.
+      tags:
+        - TrustedIdProviders
+      x-ms-examples:
+        Deletes the specified trusted identity provider from the specified Data Lake Store account:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            trustedIdProviderName: test_trusted_id_provider_name
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Gets the specified Data Lake Store trusted identity provider.
+      operationId: TrustedIdProviders_Get
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
+        - description: The name of the trusted identity provider to retrieve.
+          in: path
+          name: trustedIdProviderName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved details of the specified trusted identity provider.
+          schema:
+            $ref: '#/definitions/TrustedIdProvider'
+      tags:
+        - TrustedIdProviders
+      x-ms-examples:
+        Gets the specified Data Lake Store trusted identity provider:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            trustedIdProviderName: test_trusted_id_provider_name
+          responses:
+            '200':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                name: test_trusted_id_provider_name
+                properties:
+                  idProvider: 'https://sts.windows.net/ea9ec534-a3e3-4e45-ad36-3afc5bb291c1'
+                type: test_type
+    patch:
+      description: Updates the specified trusted identity provider.
+      operationId: TrustedIdProviders_Update
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
+        - description: The name of the trusted identity provider. This is used for differentiation of providers in the account.
+          in: path
+          name: trustedIdProviderName
+          required: true
+          type: string
+        - description: Parameters supplied to update the trusted identity provider.
+          in: body
+          name: parameters
+          required: false
+          schema:
+            $ref: '#/definitions/UpdateTrustedIdProviderParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully added the trusted identity provider.
+          schema:
+            $ref: '#/definitions/TrustedIdProvider'
+      tags:
+        - TrustedIdProviders
+      x-ms-examples:
+        Updates the specified trusted identity provider:
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            parameters:
+              properties:
+                idProvider: 'https://sts.windows.net/ea9ec534-a3e3-4e45-ad36-3afc5bb291c1'
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            trustedIdProviderName: test_trusted_id_provider_name
+          responses:
+            '200':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                name: test_trusted_id_provider_name
+                properties:
+                  idProvider: 'https://sts.windows.net/ea9ec534-a3e3-4e45-ad36-3afc5bb291c1'
+                type: test_type
+    put:
+      description: 'Creates or updates the specified trusted identity provider. During update, the trusted identity provider with the specified name will be replaced with this new provider'
+      operationId: TrustedIdProviders_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AccountNameParameter'
+        - description: The name of the trusted identity provider. This is used for differentiation of providers in the account.
+          in: path
+          name: trustedIdProviderName
+          required: true
+          type: string
+        - description: Parameters supplied to create or replace the trusted identity provider.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CreateOrUpdateTrustedIdProviderParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully added the trusted identity provider.
+          schema:
+            $ref: '#/definitions/TrustedIdProvider'
+      tags:
+        - TrustedIdProviders
+      x-ms-examples:
+        'Creates or updates the specified trusted identity provider. During update, the trusted identity provider with the specified name will be replaced with this new provider':
+          parameters:
+            accountName: contosoadla
+            api-version: '2016-11-01'
+            parameters:
+              properties:
+                idProvider: 'https://sts.windows.net/ea9ec534-a3e3-4e45-ad36-3afc5bb291c1'
+            resourceGroupName: contosorg
+            subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+            trustedIdProviderName: test_trusted_id_provider_name
+          responses:
+            '200':
+              body:
+                id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
+                name: test_trusted_id_provider_name
+                properties:
+                  idProvider: 'https://sts.windows.net/ea9ec534-a3e3-4e45-ad36-3afc5bb291c1'
+                type: test_type
 definitions:
   CapabilityInformation:
     description: Subscription-level properties and limits for Data Lake Store.
@@ -1301,6 +1233,93 @@ definitions:
     required:
       - name
       - type
+  CreateDataLakeStoreAccountParameters:
+    properties:
+      identity:
+        $ref: '#/definitions/EncryptionIdentity'
+        description: 'The Key Vault encryption identity, if any.'
+      location:
+        description: The resource location.
+        type: string
+      properties:
+        $ref: '#/definitions/CreateDataLakeStoreAccountProperties'
+        description: The Data Lake Store account properties to use for creating.
+        x-ms-client-flatten: true
+      tags:
+        additionalProperties:
+          type: string
+        description: The resource tags.
+        type: object
+    required:
+      - location
+  CreateDataLakeStoreAccountProperties:
+    properties:
+      defaultGroup:
+        description: The default owner group for all new folders and files created in the Data Lake Store account.
+        type: string
+      encryptionConfig:
+        $ref: '#/definitions/EncryptionConfig'
+        description: The Key Vault encryption configuration.
+      encryptionState:
+        description: The current state of encryption for this Data Lake Store account.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: EncryptionState
+      firewallAllowAzureIps:
+        description: 'The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced.'
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: FirewallAllowAzureIpsState
+      firewallRules:
+        description: The list of firewall rules associated with this Data Lake Store account.
+        items:
+          $ref: '#/definitions/CreateFirewallRuleWithAccountParameters'
+        type: array
+      firewallState:
+        description: The current state of the IP address firewall for this Data Lake Store account.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: FirewallState
+      newTier:
+        description: The commitment tier to use for next month.
+        enum:
+          - Consumption
+          - Commitment_1TB
+          - Commitment_10TB
+          - Commitment_100TB
+          - Commitment_500TB
+          - Commitment_1PB
+          - Commitment_5PB
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: TierType
+      trustedIdProviderState:
+        description: The current state of the trusted identity provider feature for this Data Lake Store account.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: TrustedIdProviderState
+      trustedIdProviders:
+        description: The list of trusted identity providers associated with this Data Lake Store account.
+        items:
+          $ref: '#/definitions/CreateTrustedIdProviderWithAccountParameters'
+        type: array
   CreateFirewallRuleWithAccountParameters:
     description: The parameters used to create a new firewall rule while creating a new Data Lake Store account.
     properties:
@@ -1373,9 +1392,11 @@ definitions:
       identity:
         $ref: '#/definitions/EncryptionIdentity'
         description: 'The Key Vault encryption identity, if any.'
+        readOnly: true
       properties:
         $ref: '#/definitions/DataLakeStoreAccountProperties'
         description: The Data Lake Store account properties.
+        readOnly: true
         x-ms-client-flatten: true
   DataLakeStoreAccountBasic:
     allOf:
@@ -1385,6 +1406,7 @@ definitions:
       properties:
         $ref: '#/definitions/DataLakeStoreAccountPropertiesBasic'
         description: The basic Data Lake Store account properties.
+        readOnly: true
         x-ms-client-flatten: true
   DataLakeStoreAccountListResult:
     description: Data Lake Store account list information response.
@@ -1421,10 +1443,12 @@ definitions:
           name: TierType
       defaultGroup:
         description: The default owner group for all new folders and files created in the Data Lake Store account.
+        readOnly: true
         type: string
       encryptionConfig:
         $ref: '#/definitions/EncryptionConfig'
         description: The Key Vault encryption configuration.
+        readOnly: true
       encryptionProvisioningState:
         description: The current state of encryption provisioning for this Data Lake Store account.
         enum:
@@ -1440,6 +1464,7 @@ definitions:
         enum:
           - Enabled
           - Disabled
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: false
@@ -1449,6 +1474,7 @@ definitions:
         enum:
           - Enabled
           - Disabled
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: false
@@ -1456,13 +1482,15 @@ definitions:
       firewallRules:
         description: The list of firewall rules associated with this Data Lake Store account.
         items:
-          $ref: '#/definitions/CreateFirewallRuleWithAccountParameters'
+          $ref: '#/definitions/FirewallRule'
+        readOnly: true
         type: array
       firewallState:
         description: The current state of the IP address firewall for this Data Lake Store account.
         enum:
           - Enabled
           - Disabled
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: false
@@ -1477,6 +1505,7 @@ definitions:
           - Commitment_500TB
           - Commitment_1PB
           - Commitment_5PB
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: false
@@ -1486,6 +1515,7 @@ definitions:
         enum:
           - Enabled
           - Disabled
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: false
@@ -1493,7 +1523,8 @@ definitions:
       trustedIdProviders:
         description: The list of trusted identity providers associated with this Data Lake Store account.
         items:
-          $ref: '#/definitions/CreateTrustedIdProviderWithAccountParameters'
+          $ref: '#/definitions/TrustedIdProvider'
+        readOnly: true
         type: array
   DataLakeStoreAccountPropertiesBasic:
     description: The basic account specific properties that are associated with an underlying Data Lake Store account.
@@ -1546,44 +1577,6 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: DataLakeStoreAccountState
-  DataLakeStoreAccountUpdateParameters:
-    description: Data Lake Store account information to update.
-    properties:
-      properties:
-        $ref: '#/definitions/UpdateDataLakeStoreAccountProperties'
-        description: The Data Lake Store account properties to update.
-        x-ms-client-flatten: true
-      tags:
-        additionalProperties:
-          type: string
-        description: Resource tags
-        type: object
-  DataLakeStoreFirewallRuleListResult:
-    description: Data Lake Store firewall rule list information.
-    properties:
-      nextLink:
-        description: The link (url) to the next page of results.
-        readOnly: true
-        type: string
-      value:
-        description: The results of the list operation.
-        items:
-          $ref: '#/definitions/FirewallRule'
-        readOnly: true
-        type: array
-  DataLakeStoreTrustedIdProviderListResult:
-    description: Data Lake Store trusted identity provider list information.
-    properties:
-      nextLink:
-        description: The link (url) to the next page of results.
-        readOnly: true
-        type: string
-      value:
-        description: The results of the list operation.
-        items:
-          $ref: '#/definitions/TrustedIdProvider'
-        readOnly: true
-        type: array
   EncryptionConfig:
     description: The encryption configuration for the account.
     properties:
@@ -1624,21 +1617,6 @@ definitions:
           name: EncryptionIdentityType
     required:
       - type
-  ErrorDetails:
-    description: Data Lake Store error details information.
-    properties:
-      code:
-        description: The HTTP status code or error code associated with this error.
-        readOnly: true
-        type: string
-      message:
-        description: The error message localized based on Accept-Language.
-        readOnly: true
-        type: string
-      target:
-        description: 'The target of the particular error (for example, the name of the property in error).'
-        readOnly: true
-        type: string
   FirewallRule:
     allOf:
       - $ref: '#/definitions/SubResource'
@@ -1647,7 +1625,21 @@ definitions:
       properties:
         $ref: '#/definitions/FirewallRuleProperties'
         description: The firewall rule properties.
+        readOnly: true
         x-ms-client-flatten: true
+  FirewallRuleListResult:
+    description: Data Lake Store firewall rule list information.
+    properties:
+      nextLink:
+        description: The link (url) to the next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: The results of the list operation.
+        items:
+          $ref: '#/definitions/FirewallRule'
+        readOnly: true
+        type: array
   FirewallRuleProperties:
     description: The firewall rule properties.
     properties:
@@ -1744,44 +1736,44 @@ definitions:
         readOnly: true
         type: array
   Resource:
-    description: The Resource model definition.
+    description: The resource model definition.
     properties:
       id:
-        description: Resource Id
+        description: The resource identifier.
         readOnly: true
         type: string
       location:
-        description: Resource location
+        description: The resource location.
+        readOnly: true
         type: string
       name:
-        description: Resource name
+        description: The resource name.
         readOnly: true
         type: string
       tags:
         additionalProperties:
           type: string
-        description: Resource tags
+        description: The resource tags.
+        readOnly: true
         type: object
       type:
-        description: Resource type
+        description: The resource type.
         readOnly: true
         type: string
-    required:
-      - location
     x-ms-azure-resource: true
   SubResource:
-    description: The Resource model definition for a nested resource.
+    description: The resource model definition for a nested resource.
     properties:
       id:
-        description: Resource Id
+        description: The resource identifier.
         readOnly: true
         type: string
       name:
-        description: Resource name
+        description: The resource name.
         readOnly: true
         type: string
       type:
-        description: Resource type
+        description: The resource type.
         readOnly: true
         type: string
     x-ms-azure-resource: true
@@ -1793,7 +1785,21 @@ definitions:
       properties:
         $ref: '#/definitions/TrustedIdProviderProperties'
         description: The trusted identity provider properties.
+        readOnly: true
         x-ms-client-flatten: true
+  TrustedIdProviderListResult:
+    description: Data Lake Store trusted identity provider list information.
+    properties:
+      nextLink:
+        description: The link (url) to the next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: The results of the list operation.
+        items:
+          $ref: '#/definitions/TrustedIdProvider'
+        readOnly: true
+        type: array
   TrustedIdProviderProperties:
     description: The trusted identity provider properties.
     properties:
@@ -1801,6 +1807,18 @@ definitions:
         description: The URL of this trusted identity provider.
         readOnly: true
         type: string
+  UpdateDataLakeStoreAccountParameters:
+    description: Data Lake Store account information to update.
+    properties:
+      properties:
+        $ref: '#/definitions/UpdateDataLakeStoreAccountProperties'
+        description: The Data Lake Store account properties to update.
+        x-ms-client-flatten: true
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags
+        type: object
   UpdateDataLakeStoreAccountProperties:
     description: Data Lake Store account properties information to be updated.
     properties:

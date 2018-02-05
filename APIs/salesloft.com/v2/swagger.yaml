@@ -33,6 +33,10 @@ tags:
     name: Team
   - description: Account Management
     name: Accounts
+  - description: Actions
+    name: Actions
+  - description: Actions - Call Instructions
+    name: Action Details - Call Instructions
   - description: CRM Activity Management
     name: CRM Activities
   - description: Cadence Management
@@ -61,6 +65,8 @@ tags:
     name: Person Stages
   - description: Recording Settings Information
     name: Recording Settings
+  - description: Steps
+    name: Steps
   - description: Success Management
     name: Successes
   - description: Team Template Management
@@ -116,6 +122,11 @@ paths:
           name: page
           required: false
           type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          type: boolean
       responses:
         '200':
           description: Success
@@ -443,6 +454,161 @@ paths:
       summary: Update an existing Account
       tags:
         - Accounts
+  /v2/action_details/call_instructions.json:
+    get:
+      description: |
+        Fetches multiple call instruction records. The records can be filtered, paged, and sorted according to
+        the respective parameters.
+      parameters:
+        - description: IDs of call instructions to fetch.
+          in: query
+          items:
+            type: integer
+          name: ids
+          required: false
+          type: array
+        - description: 'Key to sort on, must be one of: created_at, updated_at. Defaults to updated_at'
+          in: query
+          name: sort_by
+          required: false
+          type: string
+        - description: 'Direction to sort in, must be one of: ASC, DESC. Defaults to DESC'
+          in: query
+          name: sort_direction
+          required: false
+          type: string
+        - description: 'How many records to show per page in the range [1, 100]. Defaults to 25'
+          in: query
+          name: per_page
+          required: false
+          type: integer
+        - description: The current page to fetch results from. Defaults to 1
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/CallInstruction'
+            type: array
+      summary: List call instructions
+      tags:
+        - Action Details - Call Instructions
+  '/v2/action_details/call_instructions/{id}.json':
+    get:
+      description: |
+        Fetches a call instruction, by ID only.
+      parameters:
+        - description: Call instructions ID
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CallInstruction'
+      summary: Fetch a call instructions
+      tags:
+        - Action Details - Call Instructions
+  /v2/actions.json:
+    get:
+      description: |
+        Fetches multiple action records. The records can be filtered, paged, and sorted according to
+        the respective parameters. Only actions that are currently "in_progess" will be returned by
+        this endpoint.
+      parameters:
+        - description: IDs of actions to fetch.
+          in: query
+          items:
+            type: integer
+          name: ids
+          required: false
+          type: array
+        - description: Fetch actions by step ID
+          in: query
+          name: step_id
+          required: false
+          type: integer
+        - description: Filter actions by type
+          in: query
+          name: type
+          required: false
+          type: string
+        - description: |
+            Equality filters that are applied to the due_on field. A single filter can be used by itself or combined with other filters to create a range.
+            ---CUSTOM---
+            {"type":"object","keys":[{"name":"gt","type":"iso8601 string","description":"Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"gte","type":"iso8601 string","description":"Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lt","type":"iso8601 string","description":"Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lte","type":"iso8601 string","description":"Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."}]}
+          in: query
+          items:
+            type: string
+          name: due_on
+          required: false
+          type: array
+        - description: 'Key to sort on, must be one of: created_at, updated_at. Defaults to updated_at'
+          in: query
+          name: sort_by
+          required: false
+          type: string
+        - description: 'Direction to sort in, must be one of: ASC, DESC. Defaults to DESC'
+          in: query
+          name: sort_direction
+          required: false
+          type: string
+        - description: 'How many records to show per page in the range [1, 100]. Defaults to 25'
+          in: query
+          name: per_page
+          required: false
+          type: integer
+        - description: The current page to fetch results from. Defaults to 1
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/Action'
+            type: array
+      summary: List actions
+      tags:
+        - Actions
+  '/v2/actions/{id}.json':
+    get:
+      description: |
+        Fetches an action, by ID only.
+        This endpoint will only return actions that are in_progress or pending_activity.
+        Once an action is complete, the request for that action will return a 404 status code.
+      parameters:
+        - description: Action ID
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Action'
+      summary: Fetch an action
+      tags:
+        - Actions
   /v2/activities/calls.json:
     get:
       description: |
@@ -486,6 +652,11 @@ paths:
           name: page
           required: false
           type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          type: boolean
       responses:
         '200':
           description: Success
@@ -562,6 +733,11 @@ paths:
           name: page
           required: false
           type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          type: boolean
       responses:
         '200':
           description: Success
@@ -645,6 +821,11 @@ paths:
           name: page
           required: false
           type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          type: boolean
       responses:
         '200':
           description: Success
@@ -765,6 +946,11 @@ paths:
           name: page
           required: false
           type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          type: boolean
       responses:
         '200':
           description: Success
@@ -844,6 +1030,11 @@ paths:
           name: page
           required: false
           type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          type: boolean
       responses:
         '200':
           description: Success
@@ -915,6 +1106,11 @@ paths:
           name: page
           required: false
           type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          type: boolean
       responses:
         '200':
           description: Success
@@ -981,6 +1177,11 @@ paths:
           name: page
           required: false
           type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          type: boolean
       responses:
         '200':
           description: Success
@@ -1121,6 +1322,11 @@ paths:
           name: page
           required: false
           type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          type: boolean
       responses:
         '200':
           description: Success
@@ -1188,6 +1394,11 @@ paths:
           name: page
           required: false
           type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          type: boolean
       responses:
         '200':
           description: Success
@@ -1363,6 +1574,11 @@ paths:
           name: page
           required: false
           type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          type: boolean
       responses:
         '200':
           description: Success
@@ -1505,6 +1721,11 @@ paths:
           name: page
           required: false
           type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          type: boolean
       responses:
         '200':
           description: Success
@@ -1925,6 +2146,11 @@ paths:
           name: page
           required: false
           type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          type: boolean
       responses:
         '200':
           description: Success
@@ -2049,6 +2275,87 @@ paths:
       summary: Fetch recording setting
       tags:
         - Recording Settings
+  /v2/steps.json:
+    get:
+      description: |
+        Fetches multiple step records. The records can be filtered, paged, and sorted according to
+        the respective parameters.
+      parameters:
+        - description: IDs of steps to fetch.
+          in: query
+          items:
+            type: integer
+          name: ids
+          required: false
+          type: array
+        - description: Filter by cadence ID
+          in: query
+          name: cadence_id
+          required: false
+          type: integer
+        - description: Filter by step type
+          in: query
+          name: type
+          required: false
+          type: string
+        - description: Filter by whether a step has due actions
+          in: query
+          name: has_due_actions
+          required: false
+          type: boolean
+        - description: 'Key to sort on, must be one of: created_at, updated_at. Defaults to updated_at'
+          in: query
+          name: sort_by
+          required: false
+          type: string
+        - description: 'Direction to sort in, must be one of: ASC, DESC. Defaults to DESC'
+          in: query
+          name: sort_direction
+          required: false
+          type: string
+        - description: 'How many records to show per page in the range [1, 100]. Defaults to 25'
+          in: query
+          name: per_page
+          required: false
+          type: integer
+        - description: The current page to fetch results from. Defaults to 1
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/Step'
+            type: array
+      summary: List steps
+      tags:
+        - Steps
+  '/v2/steps/{id}.json':
+    get:
+      description: |
+        Fetches a step, by ID only.
+      parameters:
+        - description: Step ID
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Step'
+      summary: Fetch a step
+      tags:
+        - Steps
   /v2/successes.json:
     get:
       description: |
@@ -2092,6 +2399,11 @@ paths:
           name: page
           required: false
           type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          type: boolean
       responses:
         '200':
           description: Success
@@ -2161,6 +2473,11 @@ paths:
           name: page
           required: false
           type: integer
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
+          in: query
+          name: include_paging_counts
+          required: false
+          type: boolean
       responses:
         '200':
           description: Success
@@ -2227,7 +2544,7 @@ definitions:
     properties:
       archived_at:
         description: 'Datetime of when the Account was archived, if archived'
-        example: '2018-01-18T19:32:53.894306-05:00'
+        example: '2018-02-01T15:02:39.396392-05:00'
         format: date
         type: string
       city:
@@ -2258,7 +2575,7 @@ definitions:
           people: 15
       created_at:
         description: Datetime of when the Account was created
-        example: '2018-01-18T19:32:53.894221-05:00'
+        example: '2018-02-01T15:02:39.396254-05:00'
         format: date
         type: string
       creator:
@@ -2311,7 +2628,7 @@ definitions:
         type: string
       last_contacted_at:
         description: Datetime this Account was last contacted
-        example: '2018-01-18T19:32:53.894906-05:00'
+        example: '2018-02-01T15:02:39.397020-05:00'
         format: date
         type: string
       last_contacted_by:
@@ -2390,7 +2707,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the Account was last updated
-        example: '2018-01-18T19:32:53.894268-05:00'
+        example: '2018-02-01T15:02:39.396329-05:00'
         format: date
         type: string
       website:
@@ -2403,6 +2720,64 @@ definitions:
         description: Number of people in SalesLoft associated with this Account
         example: 15
         type: integer
+  Action:
+    properties:
+      action_details:
+        $ref: '#/definitions/EmbeddedResource'
+        description: The type specific action details
+        example:
+          _href: 'https://api.salesloft.com/v2/action_details/call_instructions/1'
+          id: 1
+      created_at:
+        description: Datetime of when the Action was created
+        example: '2018-02-01T00:00:00.000000-05:00'
+        format: date
+        type: string
+      due:
+        description: Whether this step is due
+        example: true
+        type: boolean
+      due_on:
+        description: When action is due
+        example: '2018-02-01T15:02:39.560063-05:00'
+        format: date
+        type: string
+      id:
+        description: ID of Action
+        example: 1
+        type: integer
+      person:
+        $ref: '#/definitions/EmbeddedResource'
+        description: The subject of an action
+        example:
+          _href: 'https://api.salesloft.com/v2/people/1'
+          id: 1
+      status:
+        description: |
+          The current state of the person on the cadence. Possible values are:
+
+          in_progress: this action has not been completed
+
+          pending_activity: this action has been acted upon, but the action has not been completed.
+          (i.e. the email is scheduled to send, but has not been delivered yet)
+        example: in_progress
+        type: string
+      type:
+        description: |
+          The type of this action. Valid types are: email, phone, other. New types may be added in the future.
+        example: phone
+        type: string
+      updated_at:
+        description: Datetime of when the Action was last updated
+        example: '2018-02-01T15:02:39.559930-05:00'
+        format: date
+        type: string
+      user:
+        $ref: '#/definitions/EmbeddedResource'
+        description: User assigned to action
+        example:
+          _href: 'https://api.salesloft.com/v2/users/1'
+          id: 1
   Cadence:
     properties:
       added_stage:
@@ -2413,7 +2788,7 @@ definitions:
           id: 3
       archived_at:
         description: 'Datetime of when the cadence was archived, if archived'
-        example: '2018-01-18T19:32:53.887524-05:00'
+        example: '2018-02-01T15:02:39.419122-05:00'
         format: date
         type: string
       bounced_stage:
@@ -2430,7 +2805,7 @@ definitions:
           target_daily_people: 10
       created_at:
         description: Datetime of when the cadence was created
-        example: '2018-01-18T19:32:53.887441-05:00'
+        example: '2018-02-01T15:02:39.419014-05:00'
         format: date
         type: string
       creator:
@@ -2495,7 +2870,7 @@ definitions:
         type: boolean
       updated_at:
         description: Datetime of when the cadence was last updated
-        example: '2018-01-18T19:32:53.887490-05:00'
+        example: '2018-02-01T15:02:39.419082-05:00'
         format: date
         type: string
   CadenceCounts:
@@ -2512,7 +2887,7 @@ definitions:
     properties:
       added_at:
         description: Datetime of when the person was last added to this cadence
-        example: '2018-01-18T19:32:53.905847-05:00'
+        example: '2018-02-01T15:02:39.409933-05:00'
         format: date
         type: string
       cadence:
@@ -2533,7 +2908,7 @@ definitions:
           views: 10
       created_at:
         description: Datetime of when the person was first added to this cadence
-        example: '2018-01-18T19:32:53.905904-05:00'
+        example: '2018-02-01T15:02:39.409985-05:00'
         format: date
         type: string
       current_state:
@@ -2576,7 +2951,7 @@ definitions:
         type: boolean
       updated_at:
         description: Datetime of when the record was last updated
-        example: '2018-01-18T19:32:53.905935-05:00'
+        example: '2018-02-01T15:02:39.410015-05:00'
         format: date
         type: string
       user:
@@ -2626,7 +3001,7 @@ definitions:
           id: 1
       created_at:
         description: Datetime of when the call was created
-        example: '2018-01-18T19:32:54.016201-05:00'
+        example: '2018-02-01T15:02:39.523939-05:00'
         format: date
         type: string
       crm_activity:
@@ -2671,7 +3046,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the call was last updated
-        example: '2018-01-18T19:32:54.016246-05:00'
+        example: '2018-02-01T15:02:39.524003-05:00'
         format: date
         type: string
       user:
@@ -2690,7 +3065,7 @@ definitions:
           id: 1
       created_at:
         description: Datetime of when the call was created
-        example: '2018-01-18T19:32:53.914278-05:00'
+        example: '2018-02-01T15:02:39.425319-05:00'
         format: date
         type: string
       direction:
@@ -2721,7 +3096,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the call was last updated
-        example: '2018-01-18T19:32:53.914323-05:00'
+        example: '2018-02-01T15:02:39.425365-05:00'
         format: date
         type: string
       user:
@@ -2730,6 +3105,26 @@ definitions:
         example:
           _href: 'https://api.salesloft.com/v2/users/2'
           id: 2
+  CallInstruction:
+    properties:
+      created_at:
+        description: Datetime of when the call instructions were created
+        example: '2018-02-01T15:02:39.571365-05:00'
+        format: date
+        type: string
+      id:
+        description: ID of call instructions
+        example: 1
+        type: integer
+      instructions:
+        description: The instructions
+        example: 'Call once, leave voicemail if not answered. Conference conversation.'
+        type: string
+      updated_at:
+        description: Datetime of when the call instructions were last updated
+        example: '2018-02-01T15:02:39.571468-05:00'
+        format: date
+        type: string
   CallerId:
     properties:
       account_name:
@@ -2758,7 +3153,7 @@ definitions:
         type: string
       created_at:
         description: Datetime of when the crm activity was created
-        example: '2018-01-18T19:32:53.919249-05:00'
+        example: '2018-02-01T15:02:39.431249-05:00'
         format: date
         type: string
       crm_id:
@@ -2793,7 +3188,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the crm activity was last updated
-        example: '2018-01-18T19:32:53.919291-05:00'
+        example: '2018-02-01T15:02:39.431293-05:00'
         format: date
         type: string
       user:
@@ -2806,7 +3201,7 @@ definitions:
     properties:
       created_at:
         description: Datetime of when the Custom Field was created
-        example: '2018-01-18T19:32:53.926442-05:00'
+        example: '2018-02-01T15:02:39.436288-05:00'
         format: date
         type: string
       field_type:
@@ -2823,7 +3218,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the Custom Field was last updated
-        example: '2018-01-18T19:32:53.926505-05:00'
+        example: '2018-02-01T15:02:39.436326-05:00'
         format: date
         type: string
   Email:
@@ -2853,7 +3248,7 @@ definitions:
           views: 3
       created_at:
         description: Datetime of when the email was created
-        example: '2018-01-18T19:32:54.022852-05:00'
+        example: '2018-02-01T15:02:39.530887-05:00'
         format: date
         type: string
       crm_activity:
@@ -2889,12 +3284,12 @@ definitions:
         type: string
       send_after:
         description: 'When this email will be sent, or null if already sent'
-        example: '2018-01-18T19:32:54.035922-05:00'
+        example: '2018-02-01T15:02:39.543784-05:00'
         format: date
         type: string
       sent_at:
         description: 'When this email was sent, or null if it was not sent'
-        example: '2018-01-18T19:32:54.035971-05:00'
+        example: '2018-02-01T15:02:39.543843-05:00'
         format: date
         type: string
       status:
@@ -2903,7 +3298,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the email was last updated
-        example: '2018-01-18T19:32:54.022910-05:00'
+        example: '2018-02-01T15:02:39.530975-05:00'
         format: date
         type: string
       user:
@@ -2946,7 +3341,7 @@ definitions:
     properties:
       archived_at:
         description: 'Datetime of when the email template was archived, if archived'
-        example: '2018-01-18T19:32:54.004913-05:00'
+        example: '2018-02-01T15:02:39.443876-05:00'
         format: date
         type: string
       body:
@@ -2972,7 +3367,7 @@ definitions:
           views: 3
       created_at:
         description: Datetime of when the email template was created
-        example: '2018-01-18T19:32:54.004785-05:00'
+        example: '2018-02-01T15:02:39.443757-05:00'
         format: date
         type: string
       id:
@@ -2981,7 +3376,7 @@ definitions:
         type: integer
       last_used_at:
         description: Datetime of when the email template was last used
-        example: '2018-01-18T19:32:54.004886-05:00'
+        example: '2018-02-01T15:02:39.443850-05:00'
         format: date
         type: string
       open_tracking_enabled:
@@ -3014,7 +3409,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the email template was last updated
-        example: '2018-01-18T19:32:54.004859-05:00'
+        example: '2018-02-01T15:02:39.443798-05:00'
         format: date
         type: string
   EmailTemplateCounts:
@@ -3063,7 +3458,7 @@ definitions:
     properties:
       created_at:
         description: Datetime of when the import was created
-        example: '2018-01-18T19:32:53.953902-05:00'
+        example: '2018-02-01T15:02:39.450608-05:00'
         format: date
         type: string
       current_people_count:
@@ -3084,7 +3479,7 @@ definitions:
         type: string
       updated_at:
         description: 'Datetime of when the import was last updated, ignoring relationship changes'
-        example: '2018-01-18T19:32:53.953981-05:00'
+        example: '2018-02-01T15:02:39.450663-05:00'
         format: date
         type: string
   Note:
@@ -3107,7 +3502,7 @@ definitions:
         type: string
       created_at:
         description: Datetime of when the note was created
-        example: '2018-01-18T19:32:53.962834-05:00'
+        example: '2018-02-01T15:02:39.465679-05:00'
         format: date
         type: string
       id:
@@ -3116,7 +3511,7 @@ definitions:
         type: integer
       updated_at:
         description: Datetime of when the note was last updated
-        example: '2018-01-18T19:32:53.962884-05:00'
+        example: '2018-02-01T15:02:39.465758-05:00'
         format: date
         type: string
       user:
@@ -3157,7 +3552,7 @@ definitions:
           emails_viewed: 2
       created_at:
         description: Datetime of when the person was created
-        example: '2018-01-18T19:32:53.973708-05:00'
+        example: '2018-02-01T15:02:39.476041-05:00'
         format: date
         type: string
       crm_id:
@@ -3210,7 +3605,7 @@ definitions:
           id: 1
       last_contacted_at:
         description: Last datetime this person was contacted
-        example: '2018-01-18T19:32:53.973804-05:00'
+        example: '2018-02-01T15:02:39.476168-05:00'
         format: date
         type: string
       last_contacted_by:
@@ -3229,7 +3624,7 @@ definitions:
         type: string
       last_replied_at:
         description: Last datetime this person replied to an email
-        example: '2018-01-18T19:32:53.973835-05:00'
+        example: '2018-02-01T15:02:39.476192-05:00'
         format: date
         type: string
       linkedin_url:
@@ -3314,7 +3709,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the person was last updated
-        example: '2018-01-18T19:32:53.973769-05:00'
+        example: '2018-02-01T15:02:39.476136-05:00'
         format: date
         type: string
       work_city:
@@ -3359,7 +3754,7 @@ definitions:
     properties:
       created_at:
         description: Datetime of when the Person Stage was created
-        example: '2018-01-18T19:32:53.985989-05:00'
+        example: '2018-02-01T15:02:39.490199-05:00'
         format: date
         type: string
       id:
@@ -3372,7 +3767,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the Person Stage was last updated
-        example: '2018-01-18T19:32:53.986040-05:00'
+        example: '2018-02-01T15:02:39.490254-05:00'
         format: date
         type: string
   RecordingSetting:
@@ -3381,6 +3776,55 @@ definitions:
         description: Whether this phone number should record by default
         example: true
         type: boolean
+  Step:
+    properties:
+      cadence:
+        $ref: '#/definitions/EmbeddedResource'
+        description: The cadence of the step
+        example:
+          _href: 'https://api.salesloft.com/v2/cadences/1'
+          id: 1
+      created_at:
+        description: Datetime of when the Step was created
+        example: '2018-02-01T15:02:39.565505-05:00'
+        format: date
+        type: string
+      day:
+        description: Day this step is associated with up
+        example: 1
+        type: integer
+      details:
+        $ref: '#/definitions/EmbeddedResource'
+        description: Details pertaining to the specific step type
+        example:
+          _href: 'https://api.salesloft.com/v2/action_details/call_instructions/1'
+          id: 1
+      disabled:
+        description: Whether this step is currently active
+        example: true
+        type: boolean
+      display_name:
+        description: Display name of the step
+        example: 'Day 1: Step 2 - Phone'
+        type: string
+      id:
+        description: ID of Step
+        example: 1
+        type: integer
+      step_number:
+        description: The number of the step for this day
+        example: 1
+        type: integer
+      type:
+        description: |
+          The type of the action scheduled by this step. Valid types are: email, phone, other. New types may be added in the future.
+        example: phone
+        type: string
+      updated_at:
+        description: Datetime of when the Step was last updated
+        example: '2018-02-01T15:02:39.565572-05:00'
+        format: date
+        type: string
   Success:
     properties:
       counts:
@@ -3392,7 +3836,7 @@ definitions:
           total_other_touches: 3
       created_at:
         description: Datetime of when the success was created
-        example: '2018-01-18T19:32:53.998501-05:00'
+        example: '2018-02-01T15:02:39.500168-05:00'
         format: date
         type: string
       id:
@@ -3424,17 +3868,17 @@ definitions:
           id: 1
       succeeded_at:
         description: Datetime of when the success was recorded
-        example: '2018-01-18T19:32:53.998592-05:00'
+        example: '2018-02-01T15:02:39.500274-05:00'
         format: date
         type: string
       success_window_started_at:
         description: 'Datetime of when this person was first worked, leading up to the success'
-        example: '2018-01-18T19:32:53.998622-05:00'
+        example: '2018-02-01T15:02:39.500302-05:00'
         format: date
         type: string
       updated_at:
         description: Datetime of when the success was last updated
-        example: '2018-01-18T19:32:53.998557-05:00'
+        example: '2018-02-01T15:02:39.500224-05:00'
         format: date
         type: string
       user:
@@ -3473,7 +3917,7 @@ definitions:
         type: boolean
       created_at:
         description: Datetime of when the team was created
-        example: '2018-01-18T19:32:53.883367-05:00'
+        example: '2018-02-01T15:02:39.506235-05:00'
         format: date
         type: string
       custom_tracking_domain:
@@ -3531,14 +3975,14 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the team was last updated
-        example: '2018-01-18T19:32:53.883409-05:00'
+        example: '2018-02-01T15:02:39.506288-05:00'
         format: date
         type: string
   TeamTemplate:
     properties:
       archived_at:
         description: 'Datetime of when the team template was archived, if archived'
-        example: '2018-01-18T19:32:54.010152-05:00'
+        example: '2018-02-01T15:02:39.511488-05:00'
         format: date
         type: string
       body:
@@ -3560,7 +4004,7 @@ definitions:
           views: 3
       created_at:
         description: Datetime of when the team template was created
-        example: '2018-01-18T19:32:54.010066-05:00'
+        example: '2018-02-01T15:02:39.511362-05:00'
         format: date
         type: string
       id:
@@ -3569,7 +4013,7 @@ definitions:
         type: string
       last_modified_at:
         description: Datetime of when the team template was last modified
-        example: '2018-01-18T19:32:54.010180-05:00'
+        example: '2018-02-01T15:02:39.511548-05:00'
         format: date
         type: string
       last_modified_user:
@@ -3580,7 +4024,7 @@ definitions:
           id: 1
       last_used_at:
         description: Datetime of when the team template was last used
-        example: '2018-01-18T19:32:54.010127-05:00'
+        example: '2018-02-01T15:02:39.511464-05:00'
         format: date
         type: string
       open_tracking_enabled:
@@ -3597,7 +4041,7 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the team template was last updated
-        example: '2018-01-18T19:32:54.010102-05:00'
+        example: '2018-02-01T15:02:39.511438-05:00'
         format: date
         type: string
   TeamTemplateCounts:
@@ -3638,7 +4082,7 @@ definitions:
         type: boolean
       created_at:
         description: Datetime of when the user was created
-        example: '2018-01-18T19:32:53.878128-05:00'
+        example: '2018-02-01T15:02:39.460736-05:00'
         format: date
         type: string
       crm_connected:
@@ -3740,6 +4184,6 @@ definitions:
         type: string
       updated_at:
         description: Datetime of when the user was last updated
-        example: '2018-01-18T19:32:53.878232-05:00'
+        example: '2018-02-01T15:02:39.460810-05:00'
         format: date
         type: string

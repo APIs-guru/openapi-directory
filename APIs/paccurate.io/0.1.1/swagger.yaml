@@ -560,12 +560,31 @@ definitions:
                 </li>
               </ul>
             </li>
+            <li>
+              <h3>lock-orientation</h3>
+              <p><b>itemRefId</b> is locked from rotation of its original dimensions, with axes of rotation excepted by <b>freeAxes</b></p>
+              <p><b>"options"</b> contents:</p>
+                 <table>
+                   <tr><th>key</th><th>value</th><th>description</th></tr>
+                   <tr><td>freeAxes</td><td>array</td><td>Array of axis indices to be allowed rotational freedom. E.g., [0] for only yaw allowed, [0,1] for yaw and roll.</td></tr>
+                 </table>
+              <pre>{
+            "operation": "lock-orientation",
+            "itemRefId": 0,
+            "options": {
+              "freeAxes": [0,1]
+            }
+          }</pre>
+
+
+            </li>
           </ul>
         enum:
           - exclude
           - exclude-all
           - pack-as-is
           - irregular
+          - lock-orientation
         type: string
       options:
         description: additional key-value options to pass for rule based on operation type.

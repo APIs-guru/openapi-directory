@@ -44,19 +44,6 @@ securityDefinitions:
 tags:
   - name: user
 paths:
-  /user/active/servers:
-    get:
-      operationId: active_servers
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            $ref: '#/definitions/ApiResponse'
-      security:
-        - apiKey: []
-      summary: '&nbsp; <i class="fa fa-lg fa-unlock-alt"></i>'
-      tags:
-        - user
   /user/active/sessions:
     get:
       operationId: active_sessions
@@ -64,7 +51,7 @@ paths:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/blazemeter\Model\ApiResponse'
       security:
         - apiKey: []
       summary: '&nbsp; <i class="fa fa-lg fa-unlock-alt"></i>'
@@ -79,12 +66,12 @@ paths:
           name: blazemeter\Routing\v4\UserModel5
           required: false
           schema:
-            $ref: '#/definitions/UserModel5'
+            $ref: '#/definitions/blazemeter\Routing\v4\UserModel5'
       responses:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/blazemeter\Model\ApiResponse'
       security:
         - apiKey: []
       summary: '&nbsp; <i class="fa fa-lg fa-unlock-alt"></i>'
@@ -106,7 +93,7 @@ paths:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/blazemeter\Model\ApiResponse'
         '500':
           description: RestException
       security:
@@ -136,7 +123,7 @@ paths:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/blazemeter\Model\ApiResponse'
         '500':
           description: RestException
       security:
@@ -163,7 +150,7 @@ paths:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/blazemeter\Model\ApiResponse'
       security:
         - apiKey: []
       summary: List user private masters&nbsp; <i class="fa fa-lg fa-unlock-alt"></i>
@@ -177,12 +164,12 @@ paths:
           name: blazemeter\Routing\v4\UserModel1
           required: true
           schema:
-            $ref: '#/definitions/UserModel1'
+            $ref: '#/definitions/blazemeter\Routing\v4\UserModel1'
       responses:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/blazemeter\Model\ApiResponse'
         '500':
           description: RestException
       security:
@@ -197,12 +184,12 @@ paths:
           name: blazemeter\Routing\v4\UserModel3
           required: true
           schema:
-            $ref: '#/definitions/UserModel3'
+            $ref: '#/definitions/blazemeter\Routing\v4\UserModel3'
       responses:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/blazemeter\Model\ApiResponse'
         '500':
           description: RestException
       security:
@@ -217,12 +204,12 @@ paths:
           name: blazemeter\Routing\v4\UserModel2
           required: true
           schema:
-            $ref: '#/definitions/UserModel2'
+            $ref: '#/definitions/blazemeter\Routing\v4\UserModel2'
       responses:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/blazemeter\Model\ApiResponse'
         '500':
           description: RestException
       security:
@@ -237,7 +224,7 @@ paths:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/blazemeter\Model\ApiResponse'
       security:
         - apiKey: []
       summary: Get user projects&nbsp; <i class="fa fa-lg fa-unlock-alt"></i>
@@ -271,7 +258,7 @@ paths:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/blazemeter\Model\ApiResponse'
         '500':
           description: RestException
       security:
@@ -287,12 +274,12 @@ paths:
           name: blazemeter\Routing\v4\UserModel4
           required: true
           schema:
-            $ref: '#/definitions/UserModel4'
+            $ref: '#/definitions/blazemeter\Routing\v4\UserModel4'
       responses:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/blazemeter\Model\ApiResponse'
         '500':
           description: RestException
       security:
@@ -316,7 +303,7 @@ paths:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/blazemeter\Model\ApiResponse'
         '500':
           description: RestException
       security:
@@ -410,3 +397,9 @@ definitions:
         items:
           type: string
         type: array
+  blazemeter\Model\ApiResponse: {}
+  blazemeter\Routing\v4\UserModel1: {}
+  blazemeter\Routing\v4\UserModel2: {}
+  blazemeter\Routing\v4\UserModel3: {}
+  blazemeter\Routing\v4\UserModel4: {}
+  blazemeter\Routing\v4\UserModel5: {}

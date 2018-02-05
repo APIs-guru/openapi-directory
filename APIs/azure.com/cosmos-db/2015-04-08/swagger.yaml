@@ -1815,13 +1815,20 @@ definitions:
   DatabaseAccountPatchParameters:
     description: Parameters for patching Azure Cosmos DB database account properties.
     properties:
+      properties:
+        $ref: '#/definitions/DatabaseAccountPatchProperties'
+        x-ms-client-flatten: true
+      tags:
+        $ref: '#/definitions/Tags'
+    type: object
+  DatabaseAccountPatchProperties:
+    description: Properties to update Azure Cosmos DB database accounts.
+    properties:
       capabilities:
         description: List of Cosmos DB capabilities for the account
         items:
           $ref: '#/definitions/Capability'
         type: array
-      tags:
-        $ref: '#/definitions/Tags'
     type: object
   DatabaseAccountProperties:
     description: Properties for the database account.

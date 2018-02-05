@@ -133,6 +133,9 @@ paths:
             - Compilation
             - Video
             - Artbook
+            - Game
+            - Fanmade
+            - Instrumental
             - Other
           in: query
           name: discTypes
@@ -2348,7 +2351,7 @@ paths:
             - WebLinks
           in: query
           name: fields
-          required: true
+          required: false
           type: string
         - enum:
             - Default
@@ -2975,6 +2978,12 @@ paths:
           format: int32
           in: query
           name: userCollectionId
+          required: false
+          type: integer
+        - description: Filter by release event. By default there is no filtering.
+          format: int32
+          in: query
+          name: releaseEventId
           required: false
           type: integer
         - description: Filter by entry status (optional).
@@ -4887,6 +4896,9 @@ paths:
             - Compilation
             - Video
             - Artbook
+            - Game
+            - Fanmade
+            - Instrumental
             - Other
           in: query
           name: albumTypes
@@ -5759,6 +5771,9 @@ definitions:
           - Compilation
           - Video
           - Artbook
+          - Game
+          - Fanmade
+          - Instrumental
           - Other
         type: string
       id:
@@ -5841,6 +5856,9 @@ definitions:
           - Compilation
           - Video
           - Artbook
+          - Game
+          - Fanmade
+          - Instrumental
           - Other
         type: string
       discs:
@@ -6417,6 +6435,9 @@ definitions:
           - Compilation
           - Video
           - Artbook
+          - Game
+          - Fanmade
+          - Instrumental
           - Other
         type: string
       entryType:

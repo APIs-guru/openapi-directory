@@ -1,20 +1,15 @@
 swagger: '2.0'
 schemes:
   - https
-host: api.3blades.ai
+host: api.illumidesk.com
 info:
-  title: 3blades
+  title: IllumiDesk
   version: '1.0'
-  x-apisguru-categories:
-    - open_data
-  x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://avatars3.githubusercontent.com/u/12212444?v=4&s=200'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/3Blades/openapi/master/tbs_swagger.yml'
       version: '2.0'
-  x-providerName: 3blades.ai
+  x-providerName: illumidesk.com
 consumes:
   - application/json
 produces:
@@ -144,7 +139,7 @@ paths:
               profile:
                 avatar_url: 'http://example.com/'
                 bio: I like tests
-                company: 3Blades
+                company: IllumiDesk
                 location: 'Atlanta, GA'
                 timezone: America/New_York
                 url: 'http://about.me/myprofile'
@@ -2943,7 +2938,7 @@ paths:
           description: Collaborator retrieved.
           examples:
             application/json:
-              email: collaborator@3blades.ai
+              email: collaborator@illumidesk.com
               first_name: John
               id: ef4d3a93-ae36-428c-b00f-5805b496ed95
               joined: '2017-07-24T14:54:49.205912Z'
@@ -3323,7 +3318,7 @@ paths:
           description: ProjectFile created
           examples:
             application/json:
-              file: 'http://dev-api.3blades.ai/media/johndoe/79cadd17-5738-4f02-8377-68e67d3eee18/foo'
+              file: 'http://api.illumidesk.com/media/johndoe/79cadd17-5738-4f02-8377-68e67d3eee18/foo'
               id: 592ac8da-dbf5-4654-9127-8df9ba9280a3
               name: myfile
               path: ''
@@ -3395,7 +3390,7 @@ paths:
           description: ProjectFile retrieved
           examples:
             application/json:
-              file: 'http://dev-api.3blades.ai/media/johndoe/79cadd17-5738-4f02-8377-68e67d3eee18/myfile'
+              file: 'http://api.illumidesk.com/media/johndoe/79cadd17-5738-4f02-8377-68e67d3eee18/myfile'
               id: 592ac8da-dbf5-4654-9127-8df9ba9280a3
               name: myfile
               path: ''
@@ -3606,16 +3601,16 @@ paths:
                 type: jupyter
               connected: []
               created_at: '2017-07-24T13:41:57.089722Z'
-              endpoint: 'https://dev-api.3blades.ai/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/endpoint/jupyter/tree'
+              endpoint: 'https://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/endpoint/jupyter/tree'
               host: ''
               id: 768f6eef-d07b-40ce-bce1-0dcce5bfbfc3
               image_name: ''
-              logs_url: 'wss://dev-api.3blades.ai/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/logs/'
+              logs_url: 'wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/logs/'
               name: testPostServer
               server_size: d16e2091-7596-481b-a50f-285812beb98c
               startup_script: ''
               status: Stopped
-              status_url: 'wss://dev-api.3blades.ai/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/status/'
+              status_url: 'wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/status/'
           schema:
             $ref: '#/definitions/Server'
         '400':
@@ -3711,16 +3706,16 @@ paths:
                 type: jupyter
               connected: []
               created_at: '2017-07-24T13:41:57.089722Z'
-              endpoint: 'https://dev-api.3blades.ai/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/endpoint/jupyter/tree'
+              endpoint: 'https://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/endpoint/jupyter/tree'
               host: ''
               id: 768f6eef-d07b-40ce-bce1-0dcce5bfbfc3
               image_name: ''
-              logs_url: 'wss://dev-api.3blades.ai/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/logs/'
+              logs_url: 'wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/logs/'
               name: testPostServer
               server_size: d16e2091-7596-481b-a50f-285812beb98c
               startup_script: ''
               status: Stopped
-              status_url: 'wss://dev-api.3blades.ai/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/status/'
+              status_url: 'wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/status/'
           schema:
             $ref: '#/definitions/Server'
         '404':
@@ -3761,16 +3756,16 @@ paths:
                 type: jupyter
               connected: []
               created_at: '2017-07-24T13:41:57.089722Z'
-              endpoint: 'https://dev-api.3blades.ai/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/endpoint/jupyter/tree'
+              endpoint: 'https://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/endpoint/jupyter/tree'
               host: ''
               id: 768f6eef-d07b-40ce-bce1-0dcce5bfbfc3
               image_name: ''
-              logs_url: 'wss://dev-api.3blades.ai/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/logs/'
+              logs_url: 'wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/logs/'
               name: testPatchServer
               server_size: d16e2091-7596-481b-a50f-285812beb98c
               startup_script: ''
               status: Stopped
-              status_url: 'wss://dev-api.3blades.ai/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/status/'
+              status_url: 'wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/status/'
           schema:
             $ref: '#/definitions/Server'
         '400':
@@ -3815,16 +3810,16 @@ paths:
                 type: jupyter
               connected: []
               created_at: '2017-07-24T13:41:57.089722Z'
-              endpoint: 'https://dev-api.3blades.ai/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/endpoint/jupyter/tree'
+              endpoint: 'https://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/endpoint/jupyter/tree'
               host: ''
               id: 768f6eef-d07b-40ce-bce1-0dcce5bfbfc3
               image_name: ''
-              logs_url: 'wss://dev-api.3blades.ai/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/logs/'
+              logs_url: 'wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/logs/'
               name: testPutServer
               server_size: d16e2091-7596-481b-a50f-285812beb98c
               startup_script: ''
               status: Stopped
-              status_url: 'wss://dev-api.3blades.ai/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/status/'
+              status_url: 'wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/status/'
           schema:
             $ref: '#/definitions/Server'
         '400':

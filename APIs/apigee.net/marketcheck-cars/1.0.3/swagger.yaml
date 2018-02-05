@@ -662,6 +662,12 @@ paths:
           name: debug
           required: false
           type: string
+        - description: To fetch sold vins
+          format: string
+          in: query
+          name: include_sold
+          required: false
+          type: string
       responses:
         '200':
           description: Provides Market Days supply for year make model or trim combination
@@ -1266,12 +1272,21 @@ definitions:
       dom:
         description: Days on Market value for the car based on current and historical listings found in the Marketcheck database for this car
         type: number
+      dom_180:
+        description: Days on Market value for the car based on current and last 6 month listings found in the Marketcheck database for this car
+        type: number
+      dom_active:
+        description: Days on Market value for the car based on current and last 30 days listings found in the Marketcheck database for this car
+        type: number
       exterior_color:
         description: Exterior color of the car
         type: string
       first_seen_at:
         description: Listing first seen at first scraped timestamp
         type: number
+      first_seen_at_date:
+        description: Listing first seen at first scraped date
+        type: string
       heading:
         description: Listing title as displayed on the source website
         type: string
@@ -1281,12 +1296,18 @@ definitions:
       interior_color:
         description: Interior color of the car
         type: string
+      inventory_type:
+        description: Inventory type of car
+        type: string
       is_certified:
         description: Certified car
         type: integer
       last_seen_at:
         description: Listing last seen at (most recent) timestamp
         type: number
+      last_seen_at_date:
+        description: Listing last seen at (most recent) date
+        type: string
       media:
         $ref: '#/definitions/ListingMedia'
         description: Car Media Attributes - main photo link/url and photo links
@@ -1309,8 +1330,17 @@ definitions:
       ref_price_dt:
         description: The date at which the last price was reported online. This is earlier to last_seen_date
         type: integer
+      scraped_at_date:
+        description: Listing first seen at first scraped date
+        type: number
+      seller_type:
+        description: Seller type for the car
+        type: string
       source:
         description: Source domain of the listing
+        type: string
+      stock_no:
+        description: Stock no of the car
         type: string
       vdp_url:
         description: Vehicle Details Page url of the specific car
@@ -1322,12 +1352,24 @@ definitions:
   Build:
     description: Describes the Car specification
     properties:
+      antibrake_sys:
+        description: Antibrake system of the car
+        type: string
+      body_type:
+        description: Body type of the car
+        type: string
+      city_miles:
+        description: City miles of the car
+        type: string
       cylinders:
         description: No of cylinders of the car
         type: number
       doors:
         description: No of doors of the car
         type: number
+      drivetrain:
+        description: Drivetrain of the car
+        type: string
       engine:
         description: Engine of the car
         type: string
@@ -1343,17 +1385,47 @@ definitions:
       engine_size:
         description: Engine size of the car
         type: string
+      fuel_type:
+        description: Fuel type of the car
+        type: string
+      highway_miles:
+        description: Highway miles of the car
+        type: string
+      made_in:
+        description: Made in of the car
+        type: string
       make:
         description: Car Make
         type: string
       model:
         description: Car model
         type: string
+      overall_height:
+        description: Overall height of the car
+        type: string
+      overall_length:
+        description: Overall length of the car
+        type: string
+      overall_width:
+        description: Overall width of the car
+        type: string
+      std_seating:
+        description: Std seating of the car
+        type: string
+      steering_type:
+        description: Steering type of the car
+        type: string
+      tank_size:
+        description: Tank size of the car
+        type: string
       transmission:
         description: Transmission of the car
         type: string
       trim:
         description: Trim of the car
+        type: string
+      vehicle_type:
+        description: Vehicle type of the car
         type: string
       year:
         description: Year of the Car
@@ -1708,19 +1780,40 @@ definitions:
       dom:
         description: Days on Market value for the car based on current and historical listings found in the Marketcheck database for this car
         type: number
+      dom_180:
+        description: Days on Market value for the car based on current and last 6 month listings found in the Marketcheck database for this car
+        type: number
+      dom_active:
+        description: Days on Market value for the car based on current and last 30 days listings found in the Marketcheck database for this car
+        type: number
       extra:
         $ref: '#/definitions/ListingExtraAttributes'
         description: 'Extra attributes for the listing - options, features, seller comments etc'
         type: object
+      first_seen_at:
+        description: Listing first seen at first scraped timestamp
+        type: number
+      first_seen_at_date:
+        description: Listing first seen at first scraped date
+        type: string
       heading:
         description: Listing heading
         type: string
       id:
         description: Unique identifier representing a specific listing from the Marketcheck database
         type: string
+      inventory_type:
+        description: Inventory type of car
+        type: string
       is_certified:
         description: Flag indicating whether the car is Certified
         type: integer
+      last_seen_at:
+        description: Listing last seen at (most recent) timestamp
+        type: number
+      last_seen_at_date:
+        description: Listing last seen at (most recent) date
+        type: string
       media:
         $ref: '#/definitions/ListingMedia'
         description: Car Media Attributes - main photo link/url and photo links
@@ -1733,6 +1826,12 @@ definitions:
         type: string
       price:
         description: Asking price for the car
+        type: string
+      scraped_at_date:
+        description: Listing first seen at first scraped date
+        type: number
+      seller_type:
+        description: Seller type for the car
         type: string
       source:
         description: Source domain of the listing

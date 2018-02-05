@@ -1041,40 +1041,6 @@ paths:
       summary: Send a donation email to the logged-in user (only on request)
       tags:
         - localactivation
-  '/organization/v3/organizations/{orgId}':
-    get:
-      description: 'This endpoint retrieves information about a given organization, based on its numeric ID, which is consistent across all of NPR''s APIs. NPR partners, as defined by this service, include member stations as well as third-party content providers. A successful request will return a document with metadata for the requested organization, including branding assets such as links to the organization’s logo and homepage, if such links are available.'
-      operationId: getOrganizationById
-      parameters:
-        - $ref: '#/parameters/Authorization'
-        - description: The numeric ID of an organization
-          format: int64
-          in: path
-          name: orgId
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: A document describing the organization with the given ID.
-          headers:
-            X-RateLimit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            X-RateLimit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            X-RateLimit-Reset:
-              description: The number of seconds left in the current period
-              type: integer
-          schema:
-            $ref: '#/definitions/OrganizationDocument'
-        '400':
-          $ref: '#/responses/404WithDocument'
-        '500':
-          $ref: '#/responses/500WithDocument'
-      summary: Retrieve metadata for the organization with the given numeric ID.
-      tags:
-        - organizationDataService
   /sponsorship/v2/ads:
     get:
       description: |-
@@ -2155,28 +2121,6 @@ definitions:
             $ref: '#/definitions/CategoryLinks'
             description: An array of links for the category.
     description: An array of a certain category of audio recommendations from a provider
-  OrganizationDocument:
-    allOf:
-      - $ref: '#/definitions/HALDocument'
-      - properties:
-          _links:
-            description: A list of links consisting of logos and external URLs related to this organization.
-            type: object
-          abbreviation:
-            description: Short name of the organization
-            type: string
-          guid:
-            description: Globally unique id for this organization
-            type: string
-          name:
-            description: Full name of the organization
-            type: string
-          orgId:
-            description: Unique id for this organization
-            type: integer
-          tagline:
-            description: Organization tagline
-            type: string
   OrganizationOverviewData:
     properties:
       brand:
