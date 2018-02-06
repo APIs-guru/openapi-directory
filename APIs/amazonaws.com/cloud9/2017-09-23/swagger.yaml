@@ -3,7 +3,7 @@ info:
   version: '2017-09-23'
   x-release: v4
   title: AWS Cloud9
-  description: '<fullname>AWS Cloud9</fullname> <p>AWS Cloud9 is a collection of tools that you can use to code, build, run, test, debug, and release software in the cloud.</p> <p>In the background, these tools are available through development environments running on Amazon Elastic Compute Cloud (Amazon EC2) instances (known as <i>Amazon EC2 environments</i>), your own servers (known as <i>SSH environments</i>), or a combination. This enables you to create and switch between multiple environments, with each environment set up for a specific development project.</p> <p>For more information about AWS Cloud9, see the <i>AWS Cloud9 User Guide</i>.</p> <p>AWS Cloud9 supports these operations:</p> <ul> <li> <p> <code>CreateEnvironmentEC2</code>: Creates an AWS Cloud9 development environment, launches an Amazon EC2 instance, and then hosts the environment on the instance.</p> </li> <li> <p> <code>CreateEnvironmentMembership</code>: Adds an environment member to an environment.</p> </li> <li> <p> <code>DeleteEnvironment</code>: Deletes an environment. If the environment is hosted on an Amazon EC2 instance, also terminates the instance.</p> </li> <li> <p> <code>DeleteEnvironmentMembership</code>: Deletes an environment member from an environment.</p> </li> <li> <p> <code>DescribeEnvironmentMemberships</code>: Gets information about environment members for an environment.</p> </li> <li> <p> <code>DescribeEnvironments</code>: Gets information about environments.</p> </li> <li> <p> <code>DescribeEnvironmentStatus</code>: Gets status information for an environment.</p> </li> <li> <p> <code>ListEnvironments</code>: Gets a list of environment identifiers.</p> </li> <li> <p> <code>UpdateEnvironment</code>: Changes the settings of an existing environment.</p> </li> <li> <p> <code>UpdateEnvironmentMembership</code>: Changes the settings of an existing environment member for an environment.</p> </li> </ul>'
+  description: '<fullname>AWS Cloud9</fullname> <p>AWS Cloud9 is a collection of tools that you can use to code, build, run, test, debug, and release software in the cloud.</p> <p>For more information about AWS Cloud9, see the <a href="https://docs.aws.amazon.com/cloud9/latest/user-guide">AWS Cloud9 User Guide</a>.</p> <p>AWS Cloud9 supports these operations:</p> <ul> <li> <p> <code>CreateEnvironmentEC2</code>: Creates an AWS Cloud9 development environment, launches an Amazon EC2 instance, and then connects from the instance to the environment.</p> </li> <li> <p> <code>CreateEnvironmentMembership</code>: Adds an environment member to an environment.</p> </li> <li> <p> <code>DeleteEnvironment</code>: Deletes an environment. If an Amazon EC2 instance is connected to the environment, also terminates the instance.</p> </li> <li> <p> <code>DeleteEnvironmentMembership</code>: Deletes an environment member from an environment.</p> </li> <li> <p> <code>DescribeEnvironmentMemberships</code>: Gets information about environment members for an environment.</p> </li> <li> <p> <code>DescribeEnvironments</code>: Gets information about environments.</p> </li> <li> <p> <code>DescribeEnvironmentStatus</code>: Gets status information for an environment.</p> </li> <li> <p> <code>ListEnvironments</code>: Gets a list of environment identifiers.</p> </li> <li> <p> <code>UpdateEnvironment</code>: Changes the settings of an existing environment.</p> </li> <li> <p> <code>UpdateEnvironmentMembership</code>: Changes the settings of an existing environment member for an environment.</p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -102,7 +102,7 @@ paths:
   /:
     post:
       operationId: CreateEnvironmentEC2
-      description: 'Creates an AWS Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and then hosts the environment on the instance.'
+      description: 'Creates an AWS Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and then connects from the instance to the environment.'
       responses:
         '200':
           description: Success
@@ -208,7 +208,7 @@ paths:
   '/#DeleteEnvironment':
     post:
       operationId: DeleteEnvironment
-      description: 'Deletes an AWS Cloud9 development environment. If the environment is hosted on an Amazon Elastic Compute Cloud (Amazon EC2) instance, also terminates the instance.'
+      description: 'Deletes an AWS Cloud9 development environment. If an Amazon EC2 instance is connected to the environment, also terminates the instance.'
       responses:
         '200':
           description: Success
@@ -675,6 +675,13 @@ definitions:
     required:
       - name
       - instanceType
+    example:
+      name: my-demo-environment
+      automaticStopTimeMinutes: 60
+      description: This is my demonstration environment.
+      instanceType: t2.micro
+      ownerArn: 'arn:aws:iam::123456789012:user/MyDemoUser'
+      subnetId: subnet-1fab8aEX
     properties:
       name:
         $ref: '#/definitions/EnvironmentName'
@@ -687,7 +694,7 @@ definitions:
         description: '<p>A unique, case-sensitive string that helps AWS Cloud9 to ensure this operation completes no more than one time.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Client Tokens</a> in the <i>Amazon EC2 API Reference</i>.</p>'
       instanceType:
         $ref: '#/definitions/InstanceType'
-        description: 'The type of instance to host the environment on (for example, <code>t2.micro</code>).'
+        description: 'The type of instance to connect to the environment (for example, <code>t2.micro</code>).'
       subnetId:
         $ref: '#/definitions/SubnetId'
         description: The ID of the subnet in Amazon VPC that AWS Cloud9 will use to communicate with the Amazon EC2 instance.
@@ -699,6 +706,8 @@ definitions:
         description: 'The Amazon Resource Name (ARN) of the environment owner. This ARN can be the ARN of any AWS IAM principal. If this value is not specified, the ARN defaults to this environment''s creator.'
   CreateEnvironmentEC2Result:
     type: object
+    example:
+      environmentId: 8d9967e2f0624182b74e7690ad69ebEX
     properties:
       environmentId:
         $ref: '#/definitions/EnvironmentId'
@@ -709,6 +718,10 @@ definitions:
       - environmentId
       - userArn
       - permissions
+    example:
+      environmentId: 8d9967e2f0624182b74e7690ad69ebEX
+      permissions: read-write
+      userArn: 'arn:aws:iam::123456789012:user/AnotherDemoUser'
     properties:
       environmentId:
         $ref: '#/definitions/EnvironmentId'
@@ -721,6 +734,12 @@ definitions:
         description: '<p>The type of environment member permissions you want to associate with this environment member. Available values include:</p> <ul> <li> <p> <code>read-only</code>: Has read-only access to the environment.</p> </li> <li> <p> <code>read-write</code>: Has read-write access to the environment.</p> </li> </ul>'
   CreateEnvironmentMembershipResult:
     type: object
+    example:
+      membership:
+        environmentId: 8d9967e2f0624182b74e7690ad69ebEX
+        permissions: read-write
+        userArn: 'arn:aws:iam::123456789012:user/AnotherDemoUser'
+        userId: AIDAJ3BA6O2FMJWCWXHEX
     properties:
       membership:
         $ref: '#/definitions/EnvironmentMember'
@@ -730,6 +749,9 @@ definitions:
     required:
       - environmentId
       - userArn
+    example:
+      environmentId: 8d9967e2f0624182b74e7690ad69ebEX
+      userArn: 'arn:aws:iam::123456789012:user/AnotherDemoUser'
     properties:
       environmentId:
         $ref: '#/definitions/EnvironmentId'
@@ -739,20 +761,26 @@ definitions:
         description: The Amazon Resource Name (ARN) of the environment member to delete from the environment.
   DeleteEnvironmentMembershipResult:
     type: object
+    example: {}
     properties: {}
   DeleteEnvironmentRequest:
     type: object
     required:
       - environmentId
+    example:
+      environmentId: 8d9967e2f0624182b74e7690ad69ebEX
     properties:
       environmentId:
         $ref: '#/definitions/EnvironmentId'
         description: The ID of the environment to delete.
   DeleteEnvironmentResult:
     type: object
+    example: {}
     properties: {}
   DescribeEnvironmentMembershipsRequest:
     type: object
+    example:
+      userArn: 'arn:aws:iam::123456789012:user/MyDemoUser'
     properties:
       userArn:
         $ref: '#/definitions/UserArn'
@@ -771,6 +799,18 @@ definitions:
         description: The maximum number of environment members to get information about.
   DescribeEnvironmentMembershipsResult:
     type: object
+    example:
+      memberships:
+        - environmentId: 10a75714bd494714929e7f5ec4125aEX
+          lastAccess: '2018-01-19T11:06:13Z'
+          permissions: owner
+          userArn: 'arn:aws:iam::123456789012:user/MyDemoUser'
+          userId: AIDAJNUEDQAQWFELJDLEX
+        - environmentId: 12bfc3cd537f41cb9776f8af5525c9EX
+          lastAccess: '2018-01-19T11:39:19Z'
+          permissions: owner
+          userArn: 'arn:aws:iam::123456789012:user/MyDemoUser'
+          userId: AIDAJNUEDQAQWFELJDLEX
     properties:
       memberships:
         $ref: '#/definitions/EnvironmentMembersList'
@@ -782,12 +822,17 @@ definitions:
     type: object
     required:
       - environmentId
+    example:
+      environmentId: 8d9967e2f0624182b74e7690ad69ebEX
     properties:
       environmentId:
         $ref: '#/definitions/EnvironmentId'
         description: The ID of the environment to get status information about.
   DescribeEnvironmentStatusResult:
     type: object
+    example:
+      message: Environment is ready to use
+      status: ready
     properties:
       status:
         $ref: '#/definitions/EnvironmentStatus'
@@ -799,12 +844,29 @@ definitions:
     type: object
     required:
       - environmentIds
+    example:
+      environmentIds:
+        - 8d9967e2f0624182b74e7690ad69ebEX
+        - 349c86d4579e4e7298d500ff57a6b2EX
     properties:
       environmentIds:
         $ref: '#/definitions/BoundedEnvironmentIdList'
-        description: The IDs of invidividual environments to get information about.
+        description: The IDs of individual environments to get information about.
   DescribeEnvironmentsResult:
     type: object
+    example:
+      environments:
+        - name: my-demo-environment
+          type: ec2
+          arn: 'arn:aws:cloud9:us-east-2:123456789012:environment:8d9967e2f0624182b74e7690ad69ebEX'
+          description: This is my demonstration environment.
+          id: 8d9967e2f0624182b74e7690ad69ebEX
+          ownerArn: 'arn:aws:iam::123456789012:user/MyDemoUser'
+        - name: another-demo-environment
+          type: ssh
+          arn: 'arn:aws:cloud9:us-east-2:123456789012:environment:349c86d4579e4e7298d500ff57a6b2EX'
+          id: 349c86d4579e4e7298d500ff57a6b2EX
+          ownerArn: 'arn:aws:sts::123456789012:assumed-role/AnotherDemoUser/AnotherDemoUser'
     properties:
       environments:
         $ref: '#/definitions/EnvironmentList'
@@ -823,7 +885,7 @@ definitions:
         description: The description for the environment.
       type:
         $ref: '#/definitions/EnvironmentType'
-        description: '<p>The type of environment. Valid values include the following:</p> <ul> <li> <p> <code>ec2</code>: An environment hosted on an Amazon Elastic Compute Cloud (Amazon EC2) instance.</p> </li> <li> <p> <code>ssh</code>: An environment hosted on your own server.</p> </li> </ul>'
+        description: '<p>The type of environment. Valid values include the following:</p> <ul> <li> <p> <code>ec2</code>: An Amazon Elastic Compute Cloud (Amazon EC2) instance connects to the environment.</p> </li> <li> <p> <code>ssh</code>: Your own server connects to the environment.</p> </li> </ul>'
       arn:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the environment.
@@ -906,6 +968,7 @@ definitions:
     description: A service limit was exceeded.
   ListEnvironmentsRequest:
     type: object
+    example: {}
     properties:
       nextToken:
         $ref: '#/definitions/String'
@@ -915,6 +978,10 @@ definitions:
         description: The maximum number of environments to get identifiers for.
   ListEnvironmentsResult:
     type: object
+    example:
+      environmentIds:
+        - 349c86d4579e4e7298d500ff57a6b2EX
+        - 45a3da47af0840f2b0c0824f5ee232EX
     properties:
       nextToken:
         $ref: '#/definitions/String'
@@ -964,6 +1031,10 @@ definitions:
       - environmentId
       - userArn
       - permissions
+    example:
+      environmentId: 8d9967e2f0624182b74e7690ad69ebEX
+      permissions: read-only
+      userArn: 'arn:aws:iam::123456789012:user/AnotherDemoUser'
     properties:
       environmentId:
         $ref: '#/definitions/EnvironmentId'
@@ -976,6 +1047,12 @@ definitions:
         description: '<p>The replacement type of environment member permissions you want to associate with this environment member. Available values include:</p> <ul> <li> <p> <code>read-only</code>: Has read-only access to the environment.</p> </li> <li> <p> <code>read-write</code>: Has read-write access to the environment.</p> </li> </ul>'
   UpdateEnvironmentMembershipResult:
     type: object
+    example:
+      membership:
+        environmentId: 8d9967e2f0624182b74e7690ad69eb31
+        permissions: read-only
+        userArn: 'arn:aws:iam::123456789012:user/AnotherDemoUser'
+        userId: AIDAJ3BA6O2FMJWCWXHEX
     properties:
       membership:
         $ref: '#/definitions/EnvironmentMember'
@@ -984,18 +1061,23 @@ definitions:
     type: object
     required:
       - environmentId
+    example:
+      name: my-changed-demo-environment
+      description: This is my changed demonstration environment.
+      environmentId: 8d9967e2f0624182b74e7690ad69ebEX
     properties:
       environmentId:
         $ref: '#/definitions/EnvironmentId'
         description: The ID of the environment to change settings.
       name:
         $ref: '#/definitions/EnvironmentName'
-        description: Any replacement name for the environment.
+        description: A replacement name for the environment.
       description:
         $ref: '#/definitions/EnvironmentDescription'
         description: Any new or replacement description for the environment.
   UpdateEnvironmentResult:
     type: object
+    example: {}
     properties: {}
   UserArn:
     type: string
