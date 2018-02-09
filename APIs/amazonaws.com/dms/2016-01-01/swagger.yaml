@@ -927,6 +927,49 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeReplicationInstanceTaskLogs':
+    post:
+      operationId: DescribeReplicationInstanceTaskLogs
+      description: Returns information about the task logs for the specified task.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeReplicationInstanceTaskLogsResponse'
+        '480':
+          description: ResourceNotFoundFault
+          schema:
+            $ref: '#/definitions/ResourceNotFoundFault'
+        '481':
+          description: InvalidResourceStateFault
+          schema:
+            $ref: '#/definitions/InvalidResourceStateFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeReplicationInstanceTaskLogsMessage'
+        - name: MaxRecords
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: Marker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeReplicationInstances':
     post:
       operationId: DescribeReplicationInstances
@@ -1186,6 +1229,10 @@ paths:
           description: InvalidCertificateFault
           schema:
             $ref: '#/definitions/InvalidCertificateFault'
+        '482':
+          description: ResourceQuotaExceededFault
+          schema:
+            $ref: '#/definitions/ResourceQuotaExceededFault'
       parameters:
         - name: body
           in: body
@@ -1446,6 +1493,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ModifyReplicationTaskMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RebootReplicationInstance':
+    post:
+      operationId: RebootReplicationInstance
+      description: 'Reboots a replication instance. Rebooting results in a momentary outage, until the replication instance becomes available again.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RebootReplicationInstanceResponse'
+        '480':
+          description: ResourceNotFoundFault
+          schema:
+            $ref: '#/definitions/ResourceNotFoundFault'
+        '481':
+          description: InvalidResourceStateFault
+          schema:
+            $ref: '#/definitions/InvalidResourceStateFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RebootReplicationInstanceMessage'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1871,7 +1951,7 @@ definitions:
         description: The type of endpoint.
       EngineName:
         $ref: '#/definitions/String'
-        description: 'The type of engine for the endpoint. Valid values, depending on the EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB, MONGODB, and SQLSERVER.'
+        description: 'The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.'
       Username:
         $ref: '#/definitions/String'
         description: The user name to be used to login to the endpoint database.
@@ -2630,6 +2710,32 @@ definitions:
         $ref: '#/definitions/RefreshSchemasStatus'
         description: The status of the schema.
     description: <p/>
+  DescribeReplicationInstanceTaskLogsMessage:
+    type: object
+    required:
+      - ReplicationInstanceArn
+    properties:
+      ReplicationInstanceArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the replication instance.
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+      Marker:
+        $ref: '#/definitions/String'
+        description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+  DescribeReplicationInstanceTaskLogsResponse:
+    type: object
+    properties:
+      ReplicationInstanceArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the replication instance.
+      ReplicationInstanceTaskLogs:
+        $ref: '#/definitions/ReplicationInstanceTaskLogsList'
+        description: 'An array of replication task log metadata. Each member of the array contains the replication task name, ARN, and task log size (in bytes).'
+      Marker:
+        $ref: '#/definitions/String'
+        description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
   DescribeReplicationInstancesMessage:
     type: object
     example:
@@ -2856,7 +2962,7 @@ definitions:
         description: The type of endpoint.
       EngineName:
         $ref: '#/definitions/String'
-        description: 'The database engine name. Valid values, depending on the EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB, MONGODB, and SQLSERVER.'
+        description: 'The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.'
       Username:
         $ref: '#/definitions/String'
         description: The user name used to connect to the endpoint.
@@ -3130,7 +3236,7 @@ definitions:
         description: The type of endpoint.
       EngineName:
         $ref: '#/definitions/String'
-        description: 'The type of engine for the endpoint. Valid values, depending on the EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, DYNAMODB, MONGODB, SYBASE, and SQLSERVER.'
+        description: 'The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.'
       Username:
         $ref: '#/definitions/String'
         description: The user name to be used to login to the endpoint database.
@@ -3426,6 +3532,23 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/OrderableReplicationInstance'
+  RebootReplicationInstanceMessage:
+    type: object
+    required:
+      - ReplicationInstanceArn
+    properties:
+      ReplicationInstanceArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the replication instance.
+      ForceFailover:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'If this parameter is <code>true</code>, the reboot is conducted through a Multi-AZ failover. (If the instance isn''t configured for Multi-AZ, then you can''t specify <code>true</code>.)'
+  RebootReplicationInstanceResponse:
+    type: object
+    properties:
+      ReplicationInstance:
+        $ref: '#/definitions/ReplicationInstance'
+        description: 'The replication instance that is being rebooted. '
   RefreshSchemasMessage:
     type: object
     required:
@@ -3599,6 +3722,23 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  ReplicationInstanceTaskLog:
+    type: object
+    properties:
+      ReplicationTaskName:
+        $ref: '#/definitions/String'
+        description: The name of the replication task.
+      ReplicationTaskArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the replication task.
+      ReplicationInstanceTaskLogSize:
+        $ref: '#/definitions/Long'
+        description: 'The size, in bytes, of the replication task log.'
+    description: Contains metadata for a replication instance task log.
+  ReplicationInstanceTaskLogsList:
+    type: array
+    items:
+      $ref: '#/definitions/ReplicationInstanceTaskLog'
   ReplicationPendingModifiedValues:
     type: object
     properties:
@@ -3954,7 +4094,7 @@ definitions:
     properties:
       EngineName:
         $ref: '#/definitions/String'
-        description: 'The database engine name. Valid values, depending on the EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB, MONGODB, and SQLSERVER.'
+        description: 'The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.'
       SupportsCDC:
         $ref: '#/definitions/Boolean'
         description: Indicates if Change Data Capture (CDC) is supported.

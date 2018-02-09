@@ -214,10 +214,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteCorsPolicy':
+    post:
+      operationId: DeleteCorsPolicy
+      description: '<p>Deletes the cross-origin resource sharing (CORS) configuration information that is set for the container.</p> <p>To use this operation, you must have permission to perform the <code>MediaStore:DeleteCorsPolicy</code> action. The container owner has this permission by default and can grant this permission to others.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteCorsPolicyOutput'
+        '480':
+          description: ContainerInUseException
+          schema:
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
+          description: ContainerNotFoundException
+          schema:
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
+          description: CorsPolicyNotFoundException
+          schema:
+            $ref: '#/definitions/CorsPolicyNotFoundException'
+        '483':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteCorsPolicyInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeContainer':
     post:
       operationId: DescribeContainer
-      description: 'Retrieves the properties of the requested container. This returns a single <code>Container</code> object based on <code>ContainerName</code>. To return all <code>Container</code> objects that are associated with a specified AWS account, use <a>ListContainers</a>.'
+      description: 'Retrieves the properties of the requested container. This request is commonly used to retrieve the endpoint of a container. An endpoint is a value assigned by the service when a new container is created. A container''s endpoint does not change after it has been assigned. The <code>DescribeContainer</code> request returns a single <code>Container</code> object based on <code>ContainerName</code>. To return all <code>Container</code> objects that are associated with a specified AWS account, use <a>ListContainers</a>.'
       responses:
         '200':
           description: Success
@@ -278,6 +319,47 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetContainerPolicyInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetCorsPolicy':
+    post:
+      operationId: GetCorsPolicy
+      description: '<p>Returns the cross-origin resource sharing (CORS) configuration information that is set for the container.</p> <p>To use this operation, you must have permission to perform the <code>MediaStore:GetCorsPolicy</code> action. By default, the container owner has this permission and can grant it to others.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCorsPolicyOutput'
+        '480':
+          description: ContainerInUseException
+          schema:
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
+          description: ContainerNotFoundException
+          schema:
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
+          description: CorsPolicyNotFoundException
+          schema:
+            $ref: '#/definitions/CorsPolicyNotFoundException'
+        '483':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCorsPolicyInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -354,13 +436,64 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutCorsPolicy':
+    post:
+      operationId: PutCorsPolicy
+      description: '<p>Sets the cross-origin resource sharing (CORS) configuration on a container so that the container can service cross-origin requests. For example, you might want to enable a request whose origin is http://www.example.com to access your AWS Elemental MediaStore container at my.example.container.com by using the browser''s XMLHttpRequest capability.</p> <p>To enable CORS on a container, you attach a CORS policy to the container. In the CORS policy, you configure rules that identify origins and the HTTP methods that can be executed on your container. The policy can contain up to 398,000 characters. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutCorsPolicyOutput'
+        '480':
+          description: ContainerNotFoundException
+          schema:
+            $ref: '#/definitions/ContainerNotFoundException'
+        '481':
+          description: ContainerInUseException
+          schema:
+            $ref: '#/definitions/ContainerInUseException'
+        '482':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutCorsPolicyInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  AllowedHeaders:
+    type: array
+    items:
+      $ref: '#/definitions/Header'
+    minItems: 0
+    maxItems: 100
+  AllowedMethods:
+    type: array
+    items:
+      $ref: '#/definitions/MethodName'
+  AllowedOrigins:
+    type: array
+    items:
+      $ref: '#/definitions/Origin'
   Container:
     type: object
     properties:
       Endpoint:
         $ref: '#/definitions/Endpoint'
-        description: 'The DNS endpoint of the container. Use from 1 to 255 characters. Use this endpoint to identify this container when sending requests to the data plane. '
+        description: 'The DNS endpoint of the container. Use the endpoint to identify the specific container when sending requests to the data plane. The service assigns this value when the container is created. Once the value has been assigned, it does not change.'
       CreationTime:
         $ref: '#/definitions/TimeStamp'
         description: Unix timestamp.
@@ -417,6 +550,38 @@ definitions:
       - DELETING
     minLength: 1
     maxLength: 16
+  CorsPolicy:
+    type: array
+    description: 'The CORS policy of the container. '
+    items:
+      $ref: '#/definitions/CorsRule'
+    minItems: 1
+    maxItems: 100
+  CorsPolicyNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Could not perform an operation on a policy that does not exist.
+  CorsRule:
+    type: object
+    properties:
+      AllowedOrigins:
+        $ref: '#/definitions/AllowedOrigins'
+        description: '<p>One or more response headers that you want users to be able to access from their applications (for example, from a JavaScript <code>XMLHttpRequest</code> object).</p> <p>Each CORS rule must have at least one <code>AllowedOrigin</code> element. The string value can include only one wildcard character (*), for example, http://*.example.com. Additionally, you can specify only one wildcard character to allow cross-origin access for all origins.</p>'
+      AllowedMethods:
+        $ref: '#/definitions/AllowedMethods'
+        description: <p>Identifies an HTTP method that the origin that is specified in the rule is allowed to execute.</p> <p>Each CORS rule must contain at least one <code>AllowedMethod</code> and one <code>AllowedOrigin</code> element.</p>
+      AllowedHeaders:
+        $ref: '#/definitions/AllowedHeaders'
+        description: <p>Specifies which headers are allowed in a preflight <code>OPTIONS</code> request through the <code>Access-Control-Request-Headers</code> header. Each header name that is specified in <code>Access-Control-Request-Headers</code> must have a corresponding entry in the rule. Only the headers that were requested are sent back. </p> <p>This element can contain only one wildcard character (*).</p>
+      MaxAgeSeconds:
+        $ref: '#/definitions/MaxAgeSeconds'
+        description: <p>The time in seconds that your browser caches the preflight response for the specified resource.</p> <p>A CORS rule can have only one <code>MaxAgeSeconds</code> element.</p>
+      ExposeHeaders:
+        $ref: '#/definitions/ExposeHeaders'
+        description: '<p>One or more headers in the response that you want users to be able to access from their applications (for example, from a JavaScript <code>XMLHttpRequest</code> object).</p> <p>This element is optional for each rule.</p>'
+    description: 'A rule for a CORS policy. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.'
   CreateContainerInput:
     type: object
     required:
@@ -432,7 +597,7 @@ definitions:
     properties:
       Container:
         $ref: '#/definitions/Container'
-        description: '<p>ContainerARN: The Amazon Resource Name (ARN) of the newly created container. The ARN has the following format: arn:aws:&lt;region&gt;:&lt;account that owns this container&gt;:container/&lt;name of container&gt;. For example: arn:aws:mediastore:us-west-2:111122223333:container/movies </p> <p>ContainerName: The container name as specified in the request.</p> <p>CreationTime: Unix timestamp.</p> <p>Status: The status of container creation or deletion. The status is one of the following: <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the service is creating the container, the status is <code>CREATING</code>. When an endpoint is available, the status changes to <code>ACTIVE</code>.</p> <p>The return value does not include the container''s endpoint. To make downstream requests, you must obtain this value by using <a>DescribeContainer</a> or <a>ListContainers</a>.</p>'
+        description: '<p>ContainerARN: The Amazon Resource Name (ARN) of the newly created container. The ARN has the following format: arn:aws:&lt;region&gt;:&lt;account that owns this container&gt;:container/&lt;name of container&gt;. For example: arn:aws:mediastore:us-west-2:111122223333:container/movies </p> <p>ContainerName: The container name as specified in the request.</p> <p>CreationTime: Unix time stamp.</p> <p>Status: The status of container creation or deletion. The status is one of the following: <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the service is creating the container, the status is <code>CREATING</code>. When an endpoint is available, the status changes to <code>ACTIVE</code>.</p> <p>The return value does not include the container''s endpoint. To make downstream requests, you must obtain this value by using <a>DescribeContainer</a> or <a>ListContainers</a>.</p>'
   DeleteContainerInput:
     type: object
     required:
@@ -453,6 +618,17 @@ definitions:
         $ref: '#/definitions/ContainerName'
         description: The name of the container that holds the policy.
   DeleteContainerPolicyOutput:
+    type: object
+    properties: {}
+  DeleteCorsPolicyInput:
+    type: object
+    required:
+      - ContainerName
+    properties:
+      ContainerName:
+        $ref: '#/definitions/ContainerName'
+        description: The name of the container to remove the policy from.
+  DeleteCorsPolicyOutput:
     type: object
     properties: {}
   DescribeContainerInput:
@@ -476,6 +652,12 @@ definitions:
     pattern: '[ \w:\.\?-]+'
     minLength: 1
     maxLength: 255
+  ExposeHeaders:
+    type: array
+    items:
+      $ref: '#/definitions/Header'
+    minItems: 0
+    maxItems: 100
   GetContainerPolicyInput:
     type: object
     required:
@@ -492,6 +674,26 @@ definitions:
       Policy:
         $ref: '#/definitions/ContainerPolicy'
         description: The contents of the access policy.
+  GetCorsPolicyInput:
+    type: object
+    required:
+      - ContainerName
+    properties:
+      ContainerName:
+        $ref: '#/definitions/ContainerName'
+        description: The name of the container that the policy is assigned to.
+  GetCorsPolicyOutput:
+    type: object
+    required:
+      - CorsPolicy
+    properties:
+      CorsPolicy:
+        $ref: '#/definitions/CorsPolicy'
+  Header:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 8192
   InternalServerError:
     type: object
     properties:
@@ -524,6 +726,20 @@ definitions:
       NextToken:
         $ref: '#/definitions/PaginationToken'
         description: ' <code>NextToken</code> is the token to use in the next call to <code>ListContainers</code>. This token is returned only if you included the <code>MaxResults</code> tag in the original command, and only if there are still containers to return. '
+  MaxAgeSeconds:
+    type: integer
+    minimum: 0
+    maximum: 2147483647
+  MethodName:
+    type: string
+    enum:
+      - PUT
+      - GET
+      - DELETE
+      - HEAD
+  Origin:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
   PaginationToken:
     type: string
     pattern: '[0-9A-Za-z=/+]+'
@@ -548,6 +764,21 @@ definitions:
         $ref: '#/definitions/ContainerPolicy'
         description: '<p>The contents of the policy, which includes the following: </p> <ul> <li> <p>One <code>Version</code> tag</p> </li> <li> <p>One <code>Statement</code> tag that contains the standard tags for the policy.</p> </li> </ul>'
   PutContainerPolicyOutput:
+    type: object
+    properties: {}
+  PutCorsPolicyInput:
+    type: object
+    required:
+      - ContainerName
+      - CorsPolicy
+    properties:
+      ContainerName:
+        $ref: '#/definitions/ContainerName'
+        description: The name of the container that you want to assign the CORS policy to.
+      CorsPolicy:
+        $ref: '#/definitions/CorsPolicy'
+        description: 'The CORS policy to apply to the container. '
+  PutCorsPolicyOutput:
     type: object
     properties: {}
   TimeStamp:

@@ -35,6 +35,7 @@ externalDocs:
   url: 'https://aws.amazon.com/medialive/'
 host: medialive.amazonaws.com
 basePath: /
+x-hasEquivalentPaths: true
 schemes:
   - https
   - http
@@ -500,6 +501,52 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeChannelRequest'
+        - name: channelId
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: UpdateChannel
+      description: Updates a channel.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateChannelResponse'
+        '480':
+          description: UnprocessableEntityException
+          schema:
+            $ref: '#/definitions/UnprocessableEntityException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: BadGatewayException
+          schema:
+            $ref: '#/definitions/BadGatewayException'
+        '485':
+          description: GatewayTimeoutException
+          schema:
+            $ref: '#/definitions/GatewayTimeoutException'
+        '486':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateChannelRequest'
         - name: channelId
           in: path
           type: string
@@ -1439,7 +1486,7 @@ definitions:
     properties:
       CaptionChannel:
         $ref: '#/definitions/__integer'
-        description: Channel to insert closed captions.  Each channel mapping must have a unique channel number (maximum of 4)
+        description: The closed caption channel being described by this CaptionLanguageMapping.  Each channel mapping must have a unique channel number (maximum of 4)
       LanguageCode:
         $ref: '#/definitions/__string'
         description: 'Three character ISO 639-2 language code (see http://www.loc.gov/standards/iso639-2)'
@@ -1606,7 +1653,7 @@ definitions:
           creating multiple resources.
       Reserved:
         $ref: '#/definitions/__string'
-        description: Reserved for future use.
+        description: Deprecated field that's only usable by whitelisted customers.
       RoleArn:
         $ref: '#/definitions/__string'
         description: An optional Amazon Resource Name (ARN) of the role to assume when running the Channel.
@@ -1634,7 +1681,7 @@ definitions:
           creating multiple resources.
       Reserved:
         $ref: '#/definitions/__string'
-        description: Reserved for future use.
+        description: Deprecated field that's only usable by whitelisted customers.
       RoleArn:
         $ref: '#/definitions/__string'
         description: An optional Amazon Resource Name (ARN) of the role to assume when running the Channel.
@@ -4401,6 +4448,56 @@ definitions:
         $ref: '#/definitions/ListOfValidationError'
         description: A collection of validation error responses from attempting to create a channel with a bouquet of settings.
     description: Placeholder documentation for UnprocessableEntityException
+  UpdateChannel:
+    type: object
+    properties:
+      Destinations:
+        $ref: '#/definitions/ListOfOutputDestination'
+        description: A list of output destinations for this channel.
+      EncoderSettings:
+        $ref: '#/definitions/EncoderSettings'
+        description: The encoder settings for this channel.
+      InputSpecification:
+        $ref: '#/definitions/InputSpecification'
+        description: 'Specification of input for this channel (max. bitrate, resolution, codec, etc.)'
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the channel.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: An optional Amazon Resource Name (ARN) of the role to assume when running the Channel. If you do not specify this on an update call but the role was previously set that role will be removed.
+    description: Placeholder documentation for UpdateChannel
+  UpdateChannelRequest:
+    type: object
+    properties:
+      Destinations:
+        $ref: '#/definitions/ListOfOutputDestination'
+        description: A list of output destinations for this channel.
+      EncoderSettings:
+        $ref: '#/definitions/EncoderSettings'
+        description: The encoder settings for this channel.
+      InputSpecification:
+        $ref: '#/definitions/InputSpecification'
+        description: 'Specification of input for this channel (max. bitrate, resolution, codec, etc.)'
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the channel.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: An optional Amazon Resource Name (ARN) of the role to assume when running the Channel. If you do not specify this on an update call but the role was previously set that role will be removed.
+    description: A request to update a channel.
+  UpdateChannelResponse:
+    type: object
+    properties:
+      Channel:
+        $ref: '#/definitions/Channel'
+    description: Placeholder documentation for UpdateChannelResponse
+  UpdateChannelResultModel:
+    type: object
+    properties:
+      Channel:
+        $ref: '#/definitions/Channel'
+    description: The updated channel's description.
   ValidationError:
     type: object
     properties:
