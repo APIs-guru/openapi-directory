@@ -1511,26 +1511,30 @@ paths:
         '200':
           description: Success
         '480':
+          description: InvalidArnException
+          schema:
+            $ref: '#/definitions/InvalidArnException'
+        '481':
           description: InvalidGrantTokenException
           schema:
             $ref: '#/definitions/InvalidGrantTokenException'
-        '481':
+        '482':
           description: InvalidGrantIdException
           schema:
             $ref: '#/definitions/InvalidGrantIdException'
-        '482':
+        '483':
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
-        '483':
+        '484':
           description: DependencyTimeoutException
           schema:
             $ref: '#/definitions/DependencyTimeoutException'
-        '484':
+        '485':
           description: KMSInternalException
           schema:
             $ref: '#/definitions/KMSInternalException'
-        '485':
+        '486':
           description: KMSInvalidStateException
           schema:
             $ref: '#/definitions/KMSInvalidStateException'

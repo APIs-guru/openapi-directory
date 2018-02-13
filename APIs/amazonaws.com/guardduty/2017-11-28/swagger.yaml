@@ -1475,6 +1475,9 @@ definitions:
       NetworkConnectionAction:
         $ref: '#/definitions/NetworkConnectionAction'
         description: Information about the NETWORK_CONNECTION action described in this finding.
+      PortProbeAction:
+        $ref: '#/definitions/PortProbeAction'
+        description: Information about the PORT_PROBE action described in this finding.
     description: Information about the activity described in a finding.
   Activate:
     type: boolean
@@ -2191,6 +2194,10 @@ definitions:
         $ref: '#/definitions/Members'
       NextToken:
         $ref: '#/definitions/NextToken'
+  ListOfPortProbeDetail:
+    type: array
+    items:
+      $ref: '#/definitions/PortProbeDetail'
   ListThreatIntelSetsRequest:
     type: object
     properties: {}
@@ -2374,6 +2381,26 @@ definitions:
         $ref: '#/definitions/__string'
         description: Name of the internet provider.
     description: ISP Organization information of the remote IP address.
+  PortProbeAction:
+    type: object
+    properties:
+      Blocked:
+        $ref: '#/definitions/__boolean'
+        description: Port probe blocked information.
+      PortProbeDetails:
+        $ref: '#/definitions/ListOfPortProbeDetail'
+        description: A list of port probe details objects.
+    description: Information about the PORT_PROBE action described in this finding.
+  PortProbeDetail:
+    type: object
+    properties:
+      LocalPortDetails:
+        $ref: '#/definitions/LocalPortDetails'
+        description: Local port information of the connection.
+      RemoteIpDetails:
+        $ref: '#/definitions/RemoteIpDetails'
+        description: Remote IP information of the connection.
+    description: Details about the port probe finding.
   PrivateDnsName:
     type: string
     description: Private DNS name of the EC2 instance.
