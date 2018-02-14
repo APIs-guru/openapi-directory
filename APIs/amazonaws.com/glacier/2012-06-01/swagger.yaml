@@ -1843,7 +1843,7 @@ definitions:
         description: 'The AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS fail if not made by using Secure Sockets Layer (SSL) or Signature Version 4. '
       KMSContext:
         $ref: '#/definitions/string'
-        description: 'Optional. If the encryption type is <code>aws:kms</code>, you can use this value to specify the encryption context for the restore results.'
+        description: 'Optional. If the encryption type is <code>aws:kms</code>, you can use this value to specify the encryption context for the job results.'
     description: 'Contains information about the encryption used to store the job results in Amazon S3. '
   EncryptionType:
     type: string
@@ -2026,7 +2026,7 @@ definitions:
         description: 'The retrieved byte range for archive retrieval jobs in the form <i>StartByteValue</i>-<i>EndByteValue</i>. If no range was specified in the archive retrieval, then the whole archive is retrieved. In this case, <i>StartByteValue</i> equals 0 and <i>EndByteValue</i> equals the size of the archive minus 1. For inventory retrieval or select jobs, this field is null. '
       Tier:
         $ref: '#/definitions/string'
-        description: 'The retrieval option to use for the archive retrieval. Valid values are <code>Expedited</code>, <code>Standard</code>, or <code>Bulk</code>. <code>Standard</code> is the default.'
+        description: 'The tier to use for a select or an archive retrieval. Valid values are <code>Expedited</code>, <code>Standard</code>, or <code>Bulk</code>. <code>Standard</code> is the default.'
       InventoryRetrievalParameters:
         $ref: '#/definitions/InventoryRetrievalJobDescription'
         description: Parameters used for range inventory retrieval.
@@ -2035,7 +2035,7 @@ definitions:
         description: Contains the job output location.
       SelectParameters:
         $ref: '#/definitions/SelectParameters'
-        description: Contains the parameters that define a select job.
+        description: Contains the parameters used for a select.
       OutputLocation:
         $ref: '#/definitions/OutputLocation'
         description: Contains the location where the data from the select job is stored.
@@ -2218,7 +2218,7 @@ definitions:
         description: '<p>The byte range to retrieve for an archive retrieval. in the form "<i>StartByteValue</i>-<i>EndByteValue</i>" If not specified, the whole archive is retrieved. If specified, the byte range must be megabyte (1024*1024) aligned which means that <i>StartByteValue</i> must be divisible by 1 MB and <i>EndByteValue</i> plus 1 must be divisible by 1 MB or be the end of the archive specified as the archive byte size value minus 1. If RetrievalByteRange is not megabyte aligned, this operation returns a 400 response. </p> <p>An error occurs if you specify this field for an inventory retrieval job request.</p>'
       Tier:
         $ref: '#/definitions/string'
-        description: 'The retrieval option to use for a select or archive retrieval job. Valid values are <code>Expedited</code>, <code>Standard</code>, or <code>Bulk</code>. <code>Standard</code> is the default.'
+        description: 'The tier to use for a select or an archive retrieval job. Valid values are <code>Expedited</code>, <code>Standard</code>, or <code>Bulk</code>. <code>Standard</code> is the default.'
       InventoryRetrievalParameters:
         $ref: '#/definitions/InventoryRetrievalJobInput'
         description: Input parameters used for range inventory retrieval.
@@ -2449,7 +2449,7 @@ definitions:
     properties:
       S3:
         $ref: '#/definitions/S3Location'
-        description: Describes an S3 location that will receive the results of the restore request.
+        description: Describes an S3 location that will receive the results of the job request.
     description: Contains information about the location where the select job results are stored.
   OutputSerialization:
     type: object
@@ -2569,28 +2569,28 @@ definitions:
     properties:
       BucketName:
         $ref: '#/definitions/string'
-        description: The name of the bucket where the restore results are stored.
+        description: The name of the Amazon S3 bucket where the job results are stored.
       Prefix:
         $ref: '#/definitions/string'
-        description: The prefix that is prepended to the restore results for this request.
+        description: The prefix that is prepended to the results for this request.
       Encryption:
         $ref: '#/definitions/Encryption'
         description: Contains information about the encryption used to store the job results in Amazon S3.
       CannedACL:
         $ref: '#/definitions/CannedACL'
-        description: The canned ACL to apply to the restore results.
+        description: The canned access control list (ACL) to apply to the job results.
       AccessControlList:
         $ref: '#/definitions/AccessControlPolicyList'
         description: A list of grants that control access to the staged results.
       Tagging:
         $ref: '#/definitions/hashmap'
-        description: The tag-set that is applied to the restore results.
+        description: The tag-set that is applied to the job results.
       UserMetadata:
         $ref: '#/definitions/hashmap'
-        description: A map of metadata to store with the restore results in Amazon S3.
+        description: A map of metadata to store with the job results in Amazon S3.
       StorageClass:
         $ref: '#/definitions/StorageClass'
-        description: The storage class used to store the restore results.
+        description: The storage class used to store the job results.
     description: Contains information about the location in Amazon S3 where the select job results are stored.
   SelectParameters:
     type: object
