@@ -136,6 +136,10 @@ paths:
           description: ApiKeyLimitExceededException
           schema:
             $ref: '#/definitions/ApiKeyLimitExceededException'
+        '487':
+          description: ApiKeyValidityOutOfBoundsException
+          schema:
+            $ref: '#/definitions/ApiKeyValidityOutOfBoundsException'
       parameters:
         - name: body
           in: body
@@ -575,6 +579,52 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: UpdateApiKey
+      description: Updates an API key.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateApiKeyResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '485':
+          description: ApiKeyValidityOutOfBoundsException
+          schema:
+            $ref: '#/definitions/ApiKeyValidityOutOfBoundsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateApiKeyRequest'
+        - name: apiId
+          in: path
+          type: string
+          required: true
+        - name: id
+          in: path
+          type: string
+          required: true
   '/v1/apis/{apiId}/datasources/{name}':
     delete:
       operationId: DeleteDataSource
@@ -1243,7 +1293,7 @@ definitions:
         description: A description of the purpose of the API key.
       expires:
         $ref: '#/definitions/Long'
-        description: The time when the API key expires.
+        description: 'The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour.'
     description: Describes an API key.
   ApiKeyLimitExceededException:
     type: object
@@ -1251,6 +1301,12 @@ definitions:
       message:
         $ref: '#/definitions/String'
     description: The API key exceeded a limit. Try your request again.
+  ApiKeyValidityOutOfBoundsException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+    description: The API key expiration must be set to a value between 1 and 365 days.
   ApiKeys:
     type: array
     items:
@@ -1289,6 +1345,9 @@ definitions:
       description:
         $ref: '#/definitions/String'
         description: A description of the purpose of the API key.
+      expires:
+        $ref: '#/definitions/Long'
+        description: 'The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour. The default value for this parameter is 7 days from creation time.'
   CreateApiKeyResponse:
     type: object
     properties:
@@ -1335,7 +1394,7 @@ definitions:
       - authenticationType
     properties:
       name:
-        $ref: '#/definitions/ResourceName'
+        $ref: '#/definitions/String'
         description: A user-supplied name for the <code>GraphqlApi</code>.
       authenticationType:
         $ref: '#/definitions/AuthenticationType'
@@ -1364,7 +1423,7 @@ definitions:
         description: The name of the data source for which the resolver is being created.
       requestMappingTemplate:
         $ref: '#/definitions/MappingTemplate'
-        description: <p>The mapping template to be used for requests.</p> <p>A resolver use a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p>
+        description: <p>The mapping template to be used for requests.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p>
       responseMappingTemplate:
         $ref: '#/definitions/MappingTemplate'
         description: The mapping template to be used for responses from the data source.
@@ -1406,7 +1465,7 @@ definitions:
         description: The description of the data source.
       type:
         $ref: '#/definitions/DataSourceType'
-        description: The type of the data source.
+        description: '<p>The type of the data source.</p> <ul> <li> <p> <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB table.</p> </li> <li> <p> <b>AMAZON_ELASTICSEARCH</b>: The data source is an Amazon Elasticsearch Service domain.</p> </li> <li> <p> <b>AWS_LAMBDA</b>: The data source is an AWS Lambda function.</p> </li> <li> <p> <b>NONE</b>: There is no data source. This type is used when the required information can be computed on the fly without connecting to a back-end data source.</p> </li> </ul>'
       serviceRoleArn:
         $ref: '#/definitions/String'
         description: The IAM service role ARN for the data source. The system assumes this role when accessing the data source.
@@ -1426,6 +1485,7 @@ definitions:
       - AWS_LAMBDA
       - AMAZON_DYNAMODB
       - AMAZON_ELASTICSEARCH
+      - NONE
   DataSources:
     type: array
     items:
@@ -1784,6 +1844,21 @@ definitions:
       message:
         $ref: '#/definitions/String'
     description: You are not authorized to perform this operation.
+  UpdateApiKeyRequest:
+    type: object
+    properties:
+      description:
+        $ref: '#/definitions/String'
+        description: A description of the purpose of the API key.
+      expires:
+        $ref: '#/definitions/Long'
+        description: The time after which the API key expires. The date is represented as seconds since the epoch.
+  UpdateApiKeyResponse:
+    type: object
+    properties:
+      apiKey:
+        $ref: '#/definitions/ApiKey'
+        description: The API key.
   UpdateDataSourceRequest:
     type: object
     required:
@@ -1819,7 +1894,7 @@ definitions:
       - name
     properties:
       name:
-        $ref: '#/definitions/ResourceName'
+        $ref: '#/definitions/String'
         description: The new name for the <code>GraphqlApi</code> object.
       authenticationType:
         $ref: '#/definitions/AuthenticationType'
@@ -1832,7 +1907,7 @@ definitions:
     properties:
       graphqlApi:
         $ref: '#/definitions/GraphqlApi'
-        description: The udpated <code>GraphqlApi</code> object.
+        description: The updated <code>GraphqlApi</code> object.
   UpdateResolverRequest:
     type: object
     required:
